@@ -1,0 +1,15 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
+/* ==== client */
+
+.output {
+	background-color: $black;
+	color: $white;
+	height:400px;
+	overflow-y: auto;
+}
+
+.user-cmd {
+	color: $gray-500;
+}
+
