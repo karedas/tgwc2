@@ -1,39 +1,54 @@
-/*
-    Copyright (C) 2018  PencilBlue, LLC
-*/
 'use strict';
 
 /**
  * module dependencies.
  */
+
+const log = console.log;
+
 const path = require('path');
 const winston = require('winston');
 const passport = require('passport');
 const chalk = require('chalk');
+
+
+const Convert = require('ansi-to-html');
+const crypto = require('crypto-js');
+
 const dotenv = require('dotenv');
 
-const crypto = require('crypto');
+// Load config file .
+dotenv.load({
+	path: '.env'
+});
+
 const net = require('net');
-const express = require('express');
-const app = express();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const cookieParser = require('cookie-parser');
 
+const http = require('http');
+const app = require('express')();
+const session = require('express-session');
+const server = require('http').createServer(app);  
+const io = require('socket.io')(server);
 
-// initializing express-session middleware
-const Session = require('express-session');
-const SessionStore = require('session-file-store')(Session);
-const session = Session({store: new SessionStore({path: __dirname+'/tmp/sessions'}), secret: 'pass', resave: true, saveUninitialized: true});
+const SQLiteStore = require('connect-sqlite3')(session);
 
-
-const log = console.log;
+app.use(session({
+	store: new SQLiteStore,
+	secret: process.env.SESSION_SECRET,
+	cookie: {secure: true},
+	resave: false,
+	saveUninitialized: true
+}
+));
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({
-	path: '.env'
-});
+
+
+
+let convert = new Convert();
 
 /**
  * Logging configuration.
@@ -41,7 +56,7 @@ dotenv.load({
 let fileLogger = new winston.transports.File({
 	level: 'info',
 	timestamp: true,
-	filename: 'thegateway-api',
+	filename: 'thegateway-ws',
 	dirname: './logs',
 	maxsize: 100*1024*1024,
 	maxFiles: 4,
@@ -63,19 +78,24 @@ var consoleLogger = new winston.transports.Console({
 });
 */
 
-
-/**
- * Start Express server.
- */
-	
-let sio = http.listen(process.env.WS_PORT, () => {
-	SocketServer(sio);
-	log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
-	logger.info('Websocket server listening on port %d', process.env.WS_PORT);
+let db =  require('./models')({
+	storage: process.env.DATABASEPATH,
+	logging: logger.debug
 });
 
 
-function SocketServer(sio) {
+// Create/update Table base on models
+db.sequelize.sync().done(function(err){
+	
+	let sio = server.listen(process.env.WS_PORT, () => {
+		SocketServer(sio, db);
+		log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
+		logger.info('Websocket server listening on port %d', process.env.WS_PORT);
+	});
+	
+});
+
+function SocketServer(sio, db) {
 	// 	// Default game server local port
 
 	let tgaddr = {
@@ -83,14 +103,14 @@ function SocketServer(sio) {
 		port: process.env.TGAPI_TELNET_PORT
 	};
 
-
 	// Handle incoming websocket  connections
-	io.on('connection', (socket) => {
-
-		let session = 1;	
+	sio.on('connection', (socket) => {
 
 		socket.on('oob', function(msg) {
+
 			GetUserFromSession(session, function(err, user) {
+
+				let account_id = ( err != null || user == null ) ? 0 : user.id;
 
 				// Get the request headers
 				let headers =  socket.handshake.headers;
@@ -114,24 +134,31 @@ function SocketServer(sio) {
 
 			});
 
-			// socket.on('disconnect', function() {
-			// 	logger.info('Closing %s', socket.id);
+			socket.on('disconnect', function() {
+				logger.info('Closing %s', socket.id);
 
-			// 	//Disconnect from game server
-			// 	//tgconn.destroy();
-			// });
+				//Disconnect from game server
+				tgconn.destroy();
+			});
 		});
-
-		socket.emit('data', 'ready!\n');
 	});
 
-	function GetUserFromSession(session, done) {
-		done();
-	}
+	function GetUserFromSession(session, done)
+	{
+		console.log(session);
+		console.log(session.passport.user);
 
-	// Get real client IP address from headers
+		try
+		{
+			db.Account.find(session.passport.user).complete(done)
+		}
+		catch(e) {
+			done('Error getting session');
+		}
+	};
+
+// 	// Get real client IP address from headers
 	function GetClientIp(headers) {
-
 		let ipAddress;
 		let forwardedIpsStr = headers['x-forwarded-for'];
 
@@ -151,9 +178,8 @@ function SocketServer(sio) {
 		return ipAddress;
 	}
 
-	// Calculate a code from headers
-	function CalcCodeFromHeaders(headers)
-	{
+// 	// Calculate a code from headers
+	function CalcCodeFromHeaders(headers){
 		let hash = crypto.createHash('md5');
 
 		if(headers['user-agent'])
@@ -177,28 +203,23 @@ function SocketServer(sio) {
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
-			console.log('send to the server');
-			console.log(msg);
-			msg = Buffer.from(msg, 'utf8');
 			tgconn.write(msg +'\n');
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
 			// Copy the data to the client
-			console.log('send to the client');
 			console.log(msg.toString());
-			websocket.emit('data', msg.toString('utf8'));
+			console.log("onCLIENT: ",msg.toString());
+			websocket.emit('data', convert.toHtml(msg.toString()));
 		};
 
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
-			console.log('<<<<<<####################>>>>>');
-			// if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
+			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
 			// Substitute with the copy handler
-			// tgconn.removeListener('data', handshake);
-
+			tgconn.removeListener('data', handshake);
 			tgconn.on('data', sendToClient);
 
 			// Add handler for client->server data
@@ -206,11 +227,11 @@ function SocketServer(sio) {
 
 
 			// Reply to challenge with webclient signature: ip, code
-			// sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
+			sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
-			// } else {
-			// 	sendToClient(msg);
-			// }
+			} else {
+				sendToClient(msg);
+			}
 		}
 
 		tgconn.on('data', handshake);
@@ -218,5 +239,3 @@ function SocketServer(sio) {
 		return tgconn;
 	}
 }
-
-module.exports = http;

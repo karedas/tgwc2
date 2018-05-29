@@ -1,0 +1,78 @@
+<%-
+	require "pathname"
+	require "./#{File.dirname(__FILE__)}/../../config/config"
+	require "./#{File.dirname(__FILE__)}/../../config/utils"
+-%>
+{
+	"uma":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Alisard", "help_url":"<%= url_hash('data/religions/alisard.html') %>" },
+		{ "name":"Ailyssa", "help_url":"<%= url_hash('data/religions/ailyssa.html') %>" },
+		{ "name":"Eztrill", "help_url":"<%= url_hash('data/religions/eztrill.html') %>" },
+		{ "name":"Gweinian", "help_url":"<%= url_hash('data/religions/gweinian.html') %>" },
+		{ "name":"Kehim", "help_url":"<%= url_hash('data/religions/kehim.html') %>" },
+		{ "name":"Rogar", "help_url":"<%= url_hash('data/religions/rogar.html') %>" },
+		{ "name":"Sashir", "help_url":"<%= url_hash('data/religions/sashir.html') %>" },
+		{ "name":"Tolvaas", "help_url":"<%= url_hash('data/religions/tolvaas.html') %>" },
+		{ "name":"Zandora", "help_url":"<%= url_hash('data/religions/zandora.html') %>" }
+	],
+	"ume":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Alisard", "help_url":"<%= url_hash('data/religions/alisard.html') %>" },
+		{ "name":"Eztrill", "help_url":"<%= url_hash('data/religions/eztrill.html') %>" },
+		{ "name":"Kehim", "help_url":"<%= url_hash('data/religions/kehim.html') %>" },
+		{ "name":"Zandora", "help_url":"<%= url_hash('data/religions/zandora.html') %>" }
+	],
+	"eal":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Ailyssa", "help_url":"<%= url_hash('data/religions/ailyssa.html') %>" },
+		{ "name":"Gweinian", "help_url":"<%= url_hash('data/religions/gweinian.html') %>" }
+	],
+	"esi":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Ailyssa", "help_url":"<%= url_hash('data/religions/ailyssa.html') %>" },
+		{ "name":"Gweinian", "help_url":"<%= url_hash('data/religions/gweinian.html') %>" }
+	],
+	"dra":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Eztrill", "help_url":"<%= url_hash('data/religions/eztrill.html') %>" }
+	],
+	"drw":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" }
+	],
+	"meu":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Alisard", "help_url":"<%= url_hash('data/religions/alisard.html') %>" },
+		{ "name":"Ailyssa", "help_url":"<%= url_hash('data/religions/ailyssa.html') %>" },
+		{ "name":"Gweinian", "help_url":"<%= url_hash('data/religions/gweinian.html') %>" },
+		{ "name":"Sashir", "help_url":"<%= url_hash('data/religions/sashir.html') %>" },
+		{ "name":"Zandora", "help_url":"<%= url_hash('data/religions/zandora.html') %>" }
+	],
+	"mel":[
+		{ "name":"Ailyssa", "help_url":"<%= url_hash('data/religions/ailyssa.html') %>" },
+		{ "name":"Gweinian", "help_url":"<%= url_hash('data/religions/gweinian.html') %>" }
+	],
+	"hal":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Eztrill", "help_url":"<%= url_hash('data/religions/eztrill.html') %>" },
+		{ "name":"Kehim", "help_url":"<%= url_hash('data/religions/kehim.html') %>" },
+		{ "name":"Zandora", "help_url":"<%= url_hash('data/religions/zandora.html') %>" }
+	],
+	"nan":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Rogar", "help_url":"<%= url_hash('data/religions/rogar.html') %>" }
+	],
+	"orc":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Tolvaas", "help_url":"<%= url_hash('data/religions/tolvaas.html') %>" }
+	],
+	"gob":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Tolvaas", "help_url":"<%= url_hash('data/religions/tolvaas.html') %>" },
+		{ "name":"Zandora", "help_url":"<%= url_hash('data/religions/zandora.html') %>" }
+	],
+	"els":[
+		{ "name":"Nessuna", "help_url":"<%= url_hash('data/religions/nessuna.html') %>" },
+		{ "name":"Gweinian", "help_url":"<%= url_hash('data/religions/gweinian.html') %>" }
+	]
+}

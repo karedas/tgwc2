@@ -1,0 +1,44 @@
+<%-
+	require "pathname"
+	require "./#{File.dirname(__FILE__)}/../../config/config"
+	require "./#{File.dirname(__FILE__)}/../../config/utils"
+-%>
+{
+	"uma":[
+		{ "name":"aral", "coords":{ "x":143,"y":251 }, "help_url":"<%= url_hash('data/locations/aral.html') %>" },
+		{ "name":"bran", "coords":{ "x":290,"y":230 }, "help_url":"<%= url_hash('data/locations/branator.html') %>" },
+		{ "name":"aird", "coords":{ "x":272,"y":261 }, "help_url":"<%= url_hash('data/locations/airdengard.html') %>" }
+	],
+	"ume":[
+		{ "name":"temperia", "coords":{ "x":45,"y":294 }, "help_url":"<%= url_hash('data/locations/temperia.html') %>" }
+	],
+	"eal":[
+		{ "name":"vinyara", "coords":{ "x":255,"y":180 }, "help_url":"<%= url_hash('data/locations/vinyara.html') %>" }
+
+	],
+	"esi":[
+		{ "name":"vinyara", "coords":{ "x":255,"y":180 }, "help_url":"<%= url_hash('data/locations/vinyara.html') %>" }
+
+	],
+	"dra":[
+		{ "name":"chalal", "coords":{ "x":318,"y":273 }, "help_url":"<%= url_hash('data/locations/chalal.html') %>" }
+	],
+	"drw":[
+		{ "name":"che'el", "coords":{ "x":374,"y":207 }, "help_url":"<%= url_hash('data/locations/cheel.html') %>" }
+	],
+	"hal":[
+		{ "name":"cala", "coords":{ "x":21,"y":325 }, "help_url":"<%= url_hash('data/locations/cala.html') %>" }
+	],
+	"nan":[
+		{ "name":"bran", "coords":{ "x":290,"y":230 }, "help_url":"<%= url_hash('data/locations/branator.html') %>" }
+	],
+	"orc":[
+		{ "name":"dagalur", "coords":{ "x":376,"y":217 }, "help_url":"<%= url_hash('data/locations/dagalur.html') %>" }
+	],
+	"gob":[
+		{ "name":"dagalur", "coords":{ "x":376,"y":217 }, "help_url":"<%= url_hash('data/locations/dagalur.html') %>" }
+	],
+	"els":[
+		{ "name":"vinyara", "coords":{ "x":255,"y":180 }, "help_url":"<%= url_hash('data/locations/vinyara.html') %>" }
+	]
+}

@@ -1,0 +1,207 @@
+/* Output styles */
+.resizabletext {
+	font-family: verdana, tahoma, arial;
+}
+
+.resizabletext a {
+	color:#06F;
+}
+
+.resizabletext a:visited {
+	color:BlueViolet;
+}
+
+
+
+
+/* &g */
+.resizabletext .green {
+	color: Green;
+}
+
+/* &G */
+.resizabletext .lt-green, .resizabletext .paper2 .lt-green {
+	color: LightGreen;
+}
+
+/* &b */
+.resizabletext .black {
+	color: Black;
+}
+
+/* &B */
+.resizabletext .gray {
+  color: Gray;
+ }
+
+/* &r */
+.resizabletext .red {
+	color: Red;
+}
+
+/* &R */
+.resizabletext .lt-red {
+  color: OrangeRed;
+}
+
+/* &l */
+.resizabletext .blue {
+	color: DodgerBlue;
+}
+
+/* &L */
+.resizabletext .lt-blue {
+	color: LightSkyBlue;
+}
+
+/* &m */
+.resizabletext .magenta {
+	color: DarkOrchid;
+}
+
+/* &M */
+.resizabletext .lt-magenta {
+	color: Magenta;
+}
+
+/* &c */
+.resizabletext .cyan {
+	color: DarkCyan;
+}
+
+/* &C */
+.resizabletext .lt-cyan {
+	color: Cyan;
+}
+
+/* &y */
+.resizabletext .brown {
+	color: Peru;
+}
+
+/* &Y */
+.resizabletext .yellow,.resizabletext .paper2 .yellow {
+	color: Yellow;
+}
+
+/* &w */
+.resizabletext .white {
+	color: Gainsboro;
+}
+
+/* &W */
+.resizabletext .lt-white {
+	color: White;
+}
+
+
+
+.resizabletext .default {
+	color: White;
+}
+
+
+.resizabletext .paper .gray, .resizabletext .paper2 .gray {
+	color: #606060;
+}
+
+.resizabletext .paper .lt-red, .resizabletext .paper2 .lt-red {
+	color: #D00000;
+}
+
+.resizabletext .paper .lt-green, .resizabletext .paper2 .lt-green {
+	color: #88FF88;
+}
+
+.resizabletext .paper .lt-blue, .resizabletext .paper2 .lt-blue {
+	color: #0085DA;
+}
+
+.resizabletext .paper .red, .resizabletext .paper2 .red {
+	color: #B00000;
+}
+
+.resizabletext .paper .yellow {
+	color: #E48000;
+}
+
+.resizabletext .paper .brown, .resizabletext .paper2 .brown {
+	color: #914700
+}
+
+.resizabletext .paper .cyan, .resizabletext .paper2 .cyan {
+	color: #008B8B;
+}
+
+.resizabletext .paper .lt-white, .resizabletext .paper2 .lt-white {
+	color: #7A7A7A;
+}
+
+.resizabletext .paper .default, .resizabletext .paper2 .default {
+	color: Black;
+}
+
+.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.booklet.resizabletext {
+	letter-spacing:1px;
+	line-height:150%;
+}
+
+.booklet.resizabletext.xs {
+	font-size: 14px;
+	letter-spacing:1px;
+}
+
+.booklet.resizabletext.s {
+	font-size: 16px;
+	letter-spacing:1px;
+}
+
+.booklet.resizabletext.m {
+	font-size: 18px;
+}
+
+.booklet.resizabletext.l {
+	font-size: 20px;
+}
+
+.booklet.resizabletext.xl {
+	font-size: 22px;
+}
+
+.resizabletext.xs {
+	font-size: 8px;
+}
+
+.resizabletext.s {
+	font-size: 10px;
+}
+
+.resizabletext.m {
+	font-size: 12px;
+}
+
+.resizabletext.l {
+	font-size: 14px;
+}
+
+.resizabletext.xl {
+	font-size: 16px;
+}
+
+.resizabletext.xxl {
+	font-size: 18px;
+}
+
+.resizabletext.xxxl {
+	font-size: 20px;
+}
+
+.hidden {
+	visibility: hidden;
+}

@@ -1,0 +1,4340 @@
+:focus
+{
+	outline: none;
+}
+
+
+.left-column {
+    width: 30%;
+	float: left;
+    text-align: right;
+}
+.right-column {
+    width: 65%;
+    margin-left: 10px;
+    float:left;
+}
+.no-cols {
+	clear:both;
+}
+
+.buttonsarea {
+	height:50px;
+}
+
+
+/* Tables */
+
+table.alternate
+{
+	border-spacing:0 2px;
+}
+
+table.alternate tr:nth-child(even) {
+	background-color: rgba(255, 50, 10, 0.25);
+}
+
+/*
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px; 
+	-khtml-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-khtml-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-khtml-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-khtml-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+*/
+
+.ui-dialog-content
+{
+	overflow:hidden;
+}
+
+.ui-dialog.ui-corner-all,
+.ui-tabs-panel.ui-corner-bottom,
+.ui-dialog-content.ui-corner-all {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px; 
+	-khtml-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-khtml-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-khtml-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-khtml-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+#copyright a
+{
+	color: salmon;
+}
+
+#copyright
+{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: beige;
+    font-size: 11px;
+    font-family: medivalsharp;
+}
+
+/* Works dialog */
+
+#tablecont table
+{
+	font-size:13px;
+}
+
+#tablecont table th
+{
+	cursor: hand;
+	cursor: pointer;
+}
+
+
+
+/* generic dialog */
+/* Select dialog */
+
+#genericdialog .content,
+#selectdialog .content
+{
+	font-family:stonehenge;
+	font-size:15px;
+	margin: 10px 20px 5px 20px;
+}
+
+#genericdialog .buttonsarea,
+#selectdialog .buttonsarea
+{
+	position:absolute;
+	left:0px;
+	right:0px;
+	bottom:0px;
+}
+
+
+/* Info */
+
+#infodialog .content .paper2.content
+{
+	font-family:stonehenge;
+	font-size:15px;
+	width:100%;
+	heighT:100%;
+}
+
+#infodialog .content .inline-img {
+	width:208px;
+	height:178px;
+	position:relative;
+	display:inline-block;
+}
+
+
+
+/* Creation dialog */
+
+#createdialog .irond.content {
+	background: image-url('interface/frame/paper-mm.png');
+	font-family: stonehenge;
+	font-size:15px;
+}
+
+#createdialog .stagearea
+{
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+#createdialog .stagearea table
+{
+	table-layout:fixed;
+}
+
+#createdialog .stagearea td
+{
+	text-align:center;
+	width:92px;
+}
+
+#createdialog .stagearea div
+{
+	margin:auto;
+}
+
+
+#createdialog .scrollingarea
+{
+	position:relative;
+	left:0px;
+	width:7000px;
+	height:412px;
+	color: #542d03;
+}
+
+#createdialog .scrollingarea > .stagepanel
+{
+	width:872px;
+	height:412px;
+	float:left;
+	overflow:hidden;
+	position:relative;
+	visibility:hidden;
+}
+
+#createdialog .buttonsarea
+{
+	margin-top:10px;
+}
+
+
+#createdialog .instagepanel
+{
+	float:left;
+	overflow:hidden;
+}
+
+
+#createdialog .stagepanel > .intro-panel
+{
+	margin-left: 40px;
+	width: 500px;
+}
+
+#createdialog .stagepanel > .intro-img
+{
+	background-image: image-url('interface/creation/fighter.png');
+	width: 250px;
+	height: 300px;
+	margin-top:40px;
+	margin-left:20px;
+}
+
+
+
+#createdialog .races-sel
+{
+	width:200px;
+}
+
+#createdialog .port
+{
+	width:56px;
+	height:64px;
+	border: 1px solid transparent;
+}
+
+#createdialog .port.selected
+{
+	border: 1px solid red;
+}
+
+#createdialog .races-sel
+{
+	width: 330px;
+}
+
+#createdialog .races-sel table
+{
+	table-layout:fixed;
+}
+
+#createdialog .races-sel th
+{
+	text-align:center;
+	font-size:22px;
+}
+
+#createdialog .races-sel td
+{
+	text-align:center;
+}
+
+
+#createdialog .scrolling-race-cont
+{
+	width:220px;
+	height:412px;
+	margin-left:25px;
+	overflow:hidden;
+}
+
+#scrolling-race
+{
+	position:relative;
+}
+
+#createdialog .race-panel
+{
+	width:220px;
+	height:412px;
+}
+
+#createdialog .stagepanel > .race-panel
+{
+	margin-left:20px;
+}
+
+#race-desc
+{
+	margin-left:15px;
+	width:270px;
+	font-size:18px;
+}
+
+.small-race.race-none
+{
+	background: image-url('interface/creation/select-race.png') no-repeat 0px 0px;
+}
+
+.small-race.human_m
+{
+	background: image-url('interface/creation/human_m_title.png') no-repeat 0px 0px;
+}
+
+.small-race.human_f
+{
+	background: image-url('interface/creation/human_f_title.png') no-repeat 0px 0px;
+}
+
+.small-race.dwarf_m
+{
+	background: image-url('interface/creation/dwarf_m_title.png') no-repeat 0px 0px;
+}
+
+.small-race.dwarf_f
+{
+	background: image-url('interface/creation/dwarf_f_title.png') no-repeat 0px 0px;
+}
+
+.small-race.halfling_m
+{
+	background: image-url('interface/creation/halfling_m_title.png') no-repeat 0px 0px;
+}
+
+.small-race.halfling_f
+{
+	background: image-url('interface/creation/halfling_f_title.png') no-repeat 0px 0px;
+}
+
+.small-race.elf_m
+{
+	background: image-url('interface/creation/elf_m_title.png') no-repeat 0px 0px;
+}
+
+.small-race.elf_f
+{
+	background: image-url('interface/creation/elf_f_title.png') no-repeat 0px 0px;
+}
+
+.small-race.goblin_m
+{
+	background: image-url('interface/creation/goblin_m_title.png') no-repeat 0px 0px;
+}
+
+.small-race.goblin_f
+{
+	background: image-url('interface/creation/goblin_f_title.png') no-repeat 0px 0px;
+}
+
+.small-race.orc_m
+{
+	background: image-url('interface/creation/orc_m_title.png') no-repeat 0px 0px;
+}
+
+.small-race.orc_f
+{
+	background: image-url('interface/creation/orc_f_title.png') no-repeat 0px 0px;
+}
+
+
+
+#createdialog .attr-div
+{
+	clear:both;
+	height: 48px;
+}
+
+#createdialog .attr-name
+{
+	margin-left:20px;
+}
+
+
+#createdialog .attr-div > div
+{
+	float:left;
+}
+
+
+#createdialog .stats-panel .attr-points
+{
+	text-align: center;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+.attributes
+{
+	width:42px;
+	height:42px;
+}
+
+.attributes.str
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px 0px;
+}
+
+.attributes.con
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -42px;
+}
+
+.attributes.siz
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -84px;
+}
+
+.attributes.dex
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -126px;
+}
+
+.attributes.spd
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -168px;
+}
+
+.attributes.emp
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -210px;
+}
+
+.attributes.int
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -252px;
+}
+
+.attributes.wil
+{
+	background: image-url('interface/creation/attributes.png') no-repeat 0px -294px;
+}
+
+#attr-desc
+{
+	margin-left: 20px;
+	width:270px;
+	font-size:18px;
+}
+
+#createdialog .stagepanel > .stats-panel
+{
+	margin-left: 40px;
+}
+
+
+#createdialog .stagepanel > .cult-image
+{
+	margin-top:50px;
+	margin-left:30px;
+	width:222px;
+	height:245px;
+	background: image-url('interface/creation/worker.png') no-repeat;
+}
+
+#createdialog .stagepanel > .relig-image
+{
+	margin-left:40px;
+	width:200px;
+	height:200px;
+	background: image-url('interface/creation/godsymbol.png') no-repeat;
+}
+
+
+#createdialog .stagepanel > .map-image
+{
+	margin-left:10px;
+	width:489px;
+	height:408px;
+	background: image-url('interface/creation/map.png') no-repeat;
+	position:relative;
+}
+
+
+
+#createdialog .stagepanel > .ethnic-panel,
+#createdialog .stagepanel > .cult-panel,
+#createdialog .stagepanel > .relig-panel
+{
+	margin-left:40px;
+	font-size: 18px;
+	width:240px;
+	overflow-y: auto;
+	height: 100%;
+}
+
+#ethn-desc,
+#cult-desc,
+#relig-desc
+{
+	margin-left: 20px;
+	width:300px;
+	font-size:16px;
+}
+
+#map-desc
+{
+	margin-left: 20px;
+	width:330px;
+	font-size:18px;
+}
+
+
+#createdialog .access-img
+{
+	background-image: image-url('interface/creation/bard.png');
+	width: 200px;
+	height: 300px;
+	margin-top:40px;
+	margin-left:20px;
+}
+
+
+#createdialog .stagepanel > .access-panel
+{
+	margin-left: 10px;
+	width: 620px;
+}
+
+#createdialog .stagepanel > .access-panel th
+{
+	text-align:right;
+	width: 200px;
+	font-size: 18px;
+}
+
+
+.okko
+{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background-image: image-url('interface/creation/no.png');
+}
+
+.okko.ok
+{
+	background-image: image-url('interface/creation/yes.png');
+}
+
+
+/* Log dialog */
+
+#logdialog .tg-dialog-inner {
+	position: absolute;
+	width: 100%;
+	height: auto;
+	bottom: 45px;
+	top: 0px;
+}
+
+#logdialog .tg-dialog-buttons {
+	position:absolute;
+	bottom:0px;
+}
+
+/* Health status minibar */
+
+.interact {
+	cursor:pointer;
+}
+
+
+#mapsight {
+	background: image-url('interface/map/sight.png') no-repeat 0px 0px;
+	width:32px;
+	height:32px;
+	display:none;
+}
+
+#interactbox {
+	display:none;
+	width:82px;
+	z-index:10000;
+	position:absolute;
+}
+
+.interact-elem {
+	width:64px;
+	height:64px;
+	float:left;
+	color:transparent;
+	display:none;
+	font-family: stonehenge;
+	text-align: center;
+}
+
+.interact-elem.valid {
+	color:white;
+}
+
+.interact-elem.inv-in {
+	background: image-url('interface/interact/elems.png') no-repeat 0px 0px;
+}
+
+.interact-elem.inv-out {
+	background: image-url('interface/interact/elems.png') no-repeat -64px 0px;
+}
+
+.interact-elem.wpn-in {
+	background: image-url('interface/interact/elems.png') no-repeat 0px -64px;
+}
+
+.interact-elem.wpn-out {
+	background: image-url('interface/interact/elems.png') no-repeat -64px -64px;
+}
+
+.interact-elem.eqp-in, .interact-elem.meq-in {
+	background: image-url('interface/interact/elems.png') no-repeat 0px -128px;
+}
+
+.interact-elem.eqp-out, .interact-elem.meq-out {
+	background: image-url('interface/interact/elems.png') no-repeat -64px -128px;
+}
+
+.interact-elem.cmd {
+	background: image-url('interface/interact/cmds.png') no-repeat;
+}
+
+.interact.map {
+	background:image-url('interface/map/look_arrows.png') no-repeat;
+}
+
+.interact.map.n:hover {
+	background-position:0 -64px;
+}
+
+.interact.map.ne:hover {
+	background-position:0 -288px;
+}
+
+.interact.map.e:hover {
+	background-position:0 -160px;
+}
+
+.interact.map.se:hover {
+	background-position:0 -256px;
+}
+
+.interact.map.s:hover {
+	background-position:0 -128px;
+}
+
+.interact.map.so:hover {
+	background-position:0 -224px;
+}
+
+.interact.map.o:hover {
+	background-position:0 -96px;
+}
+
+.interact.map.no:hover {
+	background-position:0 -192px;
+}
+
+.interact.map.here:hover {
+	background-position:0 -32px;
+}
+
+/* Filters */
+.combat-filter {
+	width:48px;
+	height:48px;
+	position:absolute;
+	top:-2px;
+	right:85px;
+	border:none !important;
+}
+
+.combat-filter.f0 {
+	background: image-url('interface/buttons/filters.png') no-repeat 0 0;
+}
+
+.combat-filter.f1 {
+	background: image-url('interface/buttons/filters.png') no-repeat 0 -48px;
+}
+
+.combat-filter.f2 {
+	background: image-url('interface/buttons/filters.png') no-repeat 0 -96px;
+}
+
+.combat-filter.f3 {
+	background: image-url('interface/buttons/filters.png') no-repeat 0 -144px;
+}
+
+
+/* Styles */
+
+.ellipsed {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ui-state-focus {
+	outline:none !important;
+}
+
+/*
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-top, .ui-corner-left, .ui-corner-br, .ui-corner-bl, .ui-corner-tr, .ui-corner-tl {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	-khtml-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-khtml-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-khtml-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-khtml-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+*/
+
+
+
+/* Counter */
+.cnt {
+	color: GoldenRod;
+}
+
+#invdialog .cnt {
+	color: RoyalBlue;
+}
+
+/* Health status minibar */
+.hstat {
+	width: 32px;
+	height: 11px;
+	vertical-align: middle;
+	display: inline-block;
+	margin-right: 5px;
+	background: image-url('interface/status/obj_mob_health.png') no-repeat 0px 0px;
+}
+
+/* Image */
+
+#image-cont
+{
+	background-color:black;
+	width:190px;
+	height:160px;
+}
+
+/* Details */
+
+table.list.compact
+{
+	border-spacing: 0px;
+	table-layout:fixed;
+}
+
+table.list.compact .iconimg
+{
+	margin:0px;
+}
+
+
+table.list.icons_s .iconimg
+{
+	width:16px;
+	height:16px;
+	background-image:image-url('icons/tiles_s.png');
+    position: absolute;
+    top:0px;
+}
+
+table.list.icons_m .iconimg
+{
+	width:24px;
+	height:24px;
+	background-image:image-url('icons/tiles_m.png');
+    position: absolute;
+    top:0px;
+}
+
+table.list.icons_s .iconimg:hover {
+	width:32px;
+	height:32px;
+	background-image:image-url('icons/tiles.png');
+    left: -8px;
+    top: -8px;
+    position:absolute;
+    z-index: 1;
+}
+
+table.list.icons_m .iconimg:hover, {
+	width:32px;
+	height:32px;
+	background-image:image-url('icons/tiles.png');
+    left: -4px;
+    top: -4px;
+    position:absolute;
+    z-index: 1;
+}
+
+.list.container.icons_s tr td:nth-child(2) {
+	width:18px;
+}
+
+.list.container.icons_s tr td:nth-child(2) > div {
+	position:relative;
+	width:18px;
+	height:16px;
+}
+
+
+.list.container.icons_m tr td:nth-child(2) {
+	width:26px;
+}
+
+.list.container.icons_m tr td:nth-child(2) > div {
+	position:relative;
+	width:26px;
+	height:24px;
+}
+
+.list.container tr td:nth-child(2) {
+	padding:0;
+	margin:0;
+	border:0;
+	width:34px;
+}
+
+.list.container tr td:first-child {
+	padding:0;
+	margin:0;
+	border:0;
+	width:17px;
+	max-width:17px;
+}
+
+.expicon {
+	width:17px;
+	height:17px;
+	background: image-url('interface/buttons/arrows.png') no-repeat -40px -40px;
+}
+
+.expicon:hover {
+	background-position:-8px -40px;
+}
+
+.collicon {
+	width:17px;
+	height:17px;
+	background: image-url('interface/buttons/arrows.png') no-repeat -40px -76px;
+}
+
+.collicon:hover {
+	background-position:-8px -76px;
+}
+
+
+#detailsdialog .ui-tabs-nav li {
+	opacity:.7;
+	padding: 0px;
+	position:relative;
+}
+
+#detailsdialog .ui-tabs-nav li.ui-tabs-active {
+	opacity:1;
+	z-index:2;
+}
+
+#detailsdialog .ui-tabs-nav li a {
+	padding: 0px;
+}
+
+#detailsdialog .ui-tabs-nav-container {
+	margin-left:1px;
+}
+
+#detailsdialog .ui-tabs-container
+{
+	position: absolute;
+	top: 38px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+.backslot {
+ 	background-image:image-url('interface/buttons/back_block.png');
+	width:38px;
+	height:38px;
+	padding: 9px 9px 9px 27px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.detailsimage-cont {
+	width: 208px;
+	height: 178px;
+	position: relative;
+	top: -8px;
+	left:50%;
+	margin-left:-104px;
+	display:none;
+}
+
+.detailsimage-cont.floatright {
+	margin: 0px;
+	float: right;
+	left:inherit;
+	right: -8px;
+}
+
+.detailstext {
+	margin:10px;
+}
+
+.room {
+	margin:6px;
+	color:Salmon;
+	font-family:stonehenge;
+	line-height:21px;
+	vertical-align:top;
+	font-size:18px;
+	white-space:nowrap;
+}
+
+.room div {
+	display:inline-block;
+	height:21px;
+	background-image:image-url('interface/buttons/buttons.png');
+}
+
+.room .lts {
+	width:21px;
+	background-position:-398px -516px;
+	margin-right:5px;
+}
+
+.room .rts {
+	width:21px;
+	background-position:-494px -515px;
+	margin-left:5px;
+}
+
+
+/* Inventory */
+
+#invdialog {
+	font-family: stonehenge;
+	overflow:hidden;
+}
+
+#invdialog .tg-dialog-inner {
+	position:absolute;
+	top:0px;
+	bottom:22px;
+	width:100%;
+}
+
+#invdialog .carrywgtcont {
+	color:beige;
+	position:absolute;
+	bottom:20px;
+	height:21px;
+	margin-left: -118px;
+	left: 50%;
+}
+
+#invcont table {
+	padding:10px;
+}
+
+#invcont tr td:first-child {
+	width:17px;
+}
+
+/* Login */
+
+#logindialog .buttonsarea,
+{
+	margin-top:10px;
+}
+
+
+#online {
+	color: beige;
+	position:absolute;
+	top:70px;
+	left:30px;
+}
+
+
+#logindialog a {
+	color: olive;
+	cursor: pointer;
+}
+
+#logindialog .irond.content {
+	background: black image-url('login/black_banners.png') no-repeat 0 0;
+	background-size: auto 100%;
+	font-family: stonehenge;
+	font-size:15px;
+}
+
+#logindialog .loginportrait {
+	width:330px;
+	height:330px;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	border:none;
+	display:none;
+	opacity:0.7;
+}
+
+#loginpanel {
+	position:absolute;
+	top:70px;
+	right:0px;
+	width:480px;
+}
+
+#loginpanel .loginpanel-header {
+	background: image-url('login/scroll_header.png') no-repeat 0 0;
+	background-size: 100% 100%;
+	height: 27px;
+}
+
+#loginpanel .loginpanel-body {
+	background: image-url('login/scroll_body.png') repeat-y 0 0;
+	background-size: 100% 100%;
+	padding:5px 30px;
+}
+
+#loginpanel .loginpanel-footer {
+	background: image-url('login/scroll_footer.png') no-repeat 0 0;
+	background-size: 100% 100%;
+	height: 23px;
+}
+
+#loginpanel .scrolling-viewport
+{
+	overflow:hidden;
+	width:420px;
+	height:440px;
+	position:relative;
+}
+
+#loginpanel .scrollingarea
+{
+/*
+	position:absolute;
+	width:1260px;
+	height:1320px;*/
+	color: #542d03;
+	overflow:hidden;
+}
+
+#loginpanel .scrollingarea > .stagepanel
+{
+	width:420px;
+	height:440px;
+	float:left;
+	overflow:hidden;
+	display:none;
+}
+
+
+#loginpanel h1
+{
+	margin: 0px;
+}
+
+#loginpanel h4
+{
+	margin: 0px;
+}
+
+
+#accountimg
+{
+	float: left;
+	height: 30px;
+	border-radius: 5px;
+	border: black solid 1px;
+	margin: 4px;
+	display:none;
+}
+
+
+#chars-list {
+	max-height:160px;
+	min-height:15px;
+	overflow-y:auto;
+	margin-top:5px;
+	margin-bottom:15px;
+}
+
+
+
+.char-portrait.enabled {
+	opacity:1;
+	cursor: pointer;	
+}
+
+.char-portrait {
+	background: image-url('login/portrait_no_image.png') no-repeat 16px 16px;
+	opacity:0.8;
+	width: 132px;
+	height: 129px;
+	float:left;
+	position: relative;
+	margin: 5px 0px 0px 2px;
+	border: 0;
+	padding: 0;
+}
+
+.char-portrait img {
+	width: 100px;
+	height: 82px;
+	position:absolute;
+	top: 16px;
+	left:16px;
+	visibility: hidden;
+}
+
+.char-portrait-frame {
+	background: image-url('login/portrait_frame.png') no-repeat 0px 0px;
+	width: 132px;
+	height: 129px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-radius: 6px;
+}
+
+.char-portrait.enabled .char-portrait-frame:hover > .char-portrait-name {
+	color: gold;
+}
+
+.char-portrait-name {
+	font-family: stonehenge;
+	color: goldenrod;
+	width: 94px;
+	left: 20px;
+	bottom: 1px;
+	line-height: 29px;
+	text-align: center;
+	position: absolute;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+#newaccount-panel > div,
+#account-panel > form,
+#account-panel > div {
+	margin-top:15px;
+	margin-bottom:5px;
+}
+
+#profile-panel > div
+{
+	display: inline-block;
+}
+
+
+
+#createdialog input[type=text],
+#createdialog input[type=password]
+{
+	font-size:13px;
+	-moz-box-sizing: border-box;
+	box-sizing:border-box;
+}
+
+#loginpanel .loginpanel-body input[type=text],
+#loginpanel .loginpanel-body input[type=password]
+{
+	font-size:13px;
+	-moz-box-sizing: border-box;
+	box-sizing:border-box;
+	width:100%;
+}
+
+
+.networkstatus {
+	height:45px;
+	margin-top:10px;
+}
+
+.networkroll
+{
+	visibility:hidden;
+	background: image-url('login/loading.gif') no-repeat -28px 0px;
+	width:66px;
+	height:43px;
+	float:right;
+	margin-left:10px;
+}
+
+.networkmessage {
+	color: red !important;
+	overflow:hidden;
+}
+
+
+
+/* Health bar */
+
+#enemyicon {
+	margin: 0px;
+	vertical-align: top;
+}
+
+.droppanel {
+	background-image: image-url('interface/status/combat_panel.png');
+	width:286px;
+	height:35px;
+	position:absolute;
+	right:65px;
+	top:35px;
+	display:none;
+	padding:2px 10px 10px 15px;
+}
+
+#combatpanel {
+	right:130px;
+}
+
+.droppanel .meter2 {
+	margin: 7px;
+	vertical-align: bottom;
+}
+
+
+.meter1 {
+	background-image: image-url('interface/status/bar_empty.png');
+	width: 149px;
+	height: 37px;
+}
+
+.meter1 > div {
+	position:relative;
+	top: 9px;
+	left: 10px;
+	width: 129px;
+	height: 20px;
+}
+
+.meter1 > div > span {
+	display:block;
+	background-image: image-url('interface/status/bar_full.png');
+	height:100%;
+	position:relative;
+	overflow:hidden;
+	width:0%;
+}
+
+/* Meter bar */
+
+.meter2 {
+	background-image: image-url('interface/status/bars.png');
+	width: 237px;
+	height: 21px;
+	display:inline-block;
+	position:relative;
+}
+
+.tg-dialog.parch .title-add .meter2 {
+	position:absolute;
+	top:50%;
+	right:0px;
+	margin-top:-10px;
+}
+
+.tg-dialog.parch .title-add .meter2.withtxtbox {
+	margin-top:-20px;	
+}
+
+.tg-dialog.parch .title-add.healthcont {
+	right:150px;
+}
+
+.meter2.withtxtbox {
+	background-position:0px -109px;
+	height:40px;
+}
+
+.meter2 .metertxt {
+	position: absolute;
+	color:beige;
+	top: 50%;
+	margin-top: -7px;
+	width: 100%;
+	font-size:12px;
+	text-align:center;
+	font-family:medievalsharp;
+}
+
+.meter2.withtxtbox .metertxt {
+	top:27px;
+}
+
+.meter2 .barcont {
+	position:absolute;
+	top: 5px;
+	left: 12px;
+	width: 213px;
+	height: 11px;
+}
+
+.meter2 .barcont > span {
+	display:block;
+	background-image: image-url('interface/status/bars.png');
+	position:relative;
+	overflow:hidden;
+	width:0%;
+}
+
+.meter2 .yellow {
+	background-position: 0px -21px;
+	height:100%;
+}
+
+.meter2 .up {
+	height:5px !important;
+}
+
+.meter2 .low {
+	height:6px !important;
+}
+
+.meter2 .yellow {
+	background-position: 0px -21px;
+	height:100%;
+}
+
+.meter2 .yellow.low {
+	background-position: 0px -26px;
+}
+
+.meter2 .red {
+	background-position: 0px -32px;
+	height:100%;
+}
+
+.meter2 .red.low {
+	background-position: 0px -37px;
+}
+
+.meter2 .blue {
+	background-position: 0px -43px;
+	height:100%;
+}
+
+.meter2 .blue.low {
+	background-position: 0px -48px;
+}
+
+.meter2 .dk-green {
+	background-position: 0px -54px;
+	height:100%;
+}
+
+.meter2 .dk-green.low {
+	background-position: 0px -59px;
+}
+
+.meter2 .purple {
+	background-position: 0px -65px;
+	height:100%;
+}
+
+.meter2 .purple.low {
+	background-position: 0px -70px;
+}
+
+
+.meter2 .lt-green {
+	background-position: 0px -76px;
+}
+
+.meter2 .lt-green.low {
+	background-position: 0px -81px;
+}
+
+.meter2 .green {
+	background-position: 0px -87px;
+	height:100%;
+}
+
+.meter2 .green.low {
+	background-position: 0px -92px;
+}
+
+.meter2 .cookie {
+	background-position: 0px -98px;
+	height:100%;
+}
+
+.meter2 .cookie.low {
+	background-position: 0px -103px;
+}
+
+
+
+
+
+
+/* Move bar */
+/*
+#move {
+	position:absolute;
+	top:0px;
+	left:62px;
+}
+*/
+
+/* Sky */
+
+#mapdialog .sky {
+	position: absolute;
+	top:14px;
+	left:37px;
+	width:288px;
+	height:29px;
+}
+
+#mapdialog .sky.img {
+	background-image:image-url('interface/sky/weather_l.png');
+	z-index:-1;
+}
+
+#mapdialog.small .sky {
+	position: absolute;
+	top:14px;
+	left:37px;
+	width:216px;
+	height:22px;
+}
+
+#mapdialog.small .sky.img {
+	background-image:image-url('interface/sky/weather_m.png');
+	z-index:-1;
+}
+
+#mapdialog.tiny .sky {
+	position: absolute;
+	top:14px;
+	left:37px;
+	width:144px;
+	height:23px;
+}
+
+#mapdialog.tiny .sky.img {
+	background-image:image-url('interface/sky/weather_s.png');
+	z-index:-1;
+}
+
+
+/* Map */
+#mapdialog {
+	background:image-url('interface/map/map_normal.png') 0 0 no-repeat;
+	padding:0px;
+	overflow:hidden;
+}
+
+#mapdialog.small {
+	background:image-url('interface/map/map_small.png') 0 0 no-repeat;
+}
+
+#mapdialog.tiny {
+	background:image-url('interface/map/map_tiny.png') 0 0 no-repeat;
+}
+
+#nord {
+	top:25px;
+	left:164px;
+}
+
+#mapdialog.small #nord {
+	top:22px;
+	left:128px;
+}
+
+#mapdialog.tiny #nord {
+	top:20px;
+	left:92px;
+}
+
+
+#est {
+	top:179px;
+	left:319px;
+}
+
+#mapdialog.small #est {
+	top:136px;
+	left:246px;
+}
+
+#mapdialog.tiny #est {
+	top:101px;
+	left:175px;
+}
+
+
+#sud {
+	top:334px;
+	left:164px;
+}
+
+#mapdialog.small #sud {
+	top:255px;
+	left:128px;
+}
+
+#mapdialog.tiny #sud {
+	top:184px;
+	left:92px;
+}
+
+#ovest {
+	top:179px;
+	left:10px;
+}
+
+#mapdialog.small #ovest {
+	top:136px;
+	left:10px;
+}
+
+#mapdialog.tiny #ovest {
+	top:101px;
+	left:10px;
+}
+
+
+#alto {
+	top: 54px;
+	left: 5px;
+}
+
+#mapdialog.small #alto {
+	top: 32px;
+	left: 5px;
+}
+
+#mapdialog.tiny #alto {
+	top:7px;
+	left: 5px;
+}
+
+#basso {
+	top:89px;
+	left: 5px;
+}
+
+#mapdialog.small #basso {
+	top:69px;
+	left: 5px;
+}
+
+#mapdialog.tiny #basso {
+	top:44px;
+	left: 5px;
+}
+
+
+#map {
+	position:absolute;
+	width:288px;
+	height:288px;
+	top:52px;
+	left:37px;
+	background-color:black;
+	z-index:-1;
+}
+
+#mapdialog.small #map {
+	width:216px;
+	height:216px;
+	top:45px;
+}
+
+#mapdialog.tiny #map {
+	width:144px;
+	height:144px;
+	top:46px;
+}
+
+#mapdialog.small #mapcont {
+	width:216px;
+	height:216px;
+}
+
+#mapdialog.tiny #mapcont {
+	width:144px;
+	height:144px;
+}
+
+/*
+.maplayer {
+	position:absolute;
+	width:288px;
+	height:288px;
+	table-layout: fixed;
+	border-spacing: 0px;
+}
+
+.maplayer td, .maplayer tr {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.maplayer td {
+	width:32px;
+	height:32px;
+	background:image-url('icons/tiles.png') no-repeat;
+}
+*/
+
+#mapdialog .mapinteract {
+	position:absolute;
+	width:96px;
+	height:96px;
+	top:148px;
+	left:133px;
+	table-layout: fixed;
+	border-spacing: 0px;
+}
+
+#mapdialog.small .mapinteract {
+	top:106px;
+	left:97px;
+}
+
+#mapdialog.tiny .mapinteract {
+	top:69px;
+	left:61px;
+}
+
+
+.mapinteract td, .mapinteract tr {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.mapinteract td {
+	width:32px;
+	height:32px;
+}
+
+
+.shadowtile {
+	background:image-url('interface/map/shadowtile.png') 0 0 no-repeat;
+}
+
+
+#darkness
+{
+	display:none;
+	width:288px;
+	height:288px;
+	z-index:1;
+	position:absolute;
+}
+
+#rain
+{
+	display:none;
+	width:288px;
+	height:288px;
+	z-index:2;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:image-url('interface/map/rain.png') 0 0 no-repeat;
+}
+
+#snow
+{
+	display:none;
+	width:288px;
+	height:288px;
+	z-index:2;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:image-url('interface/map/snow.png') 0 0 no-repeat;
+}
+
+#fog
+{
+	display:none;
+	width:288px;
+	height:288px;
+	z-index:3;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:image-url('interface/map/fog.png') 0 0 no-repeat;
+}
+
+
+#map.light2 > #darkness
+{
+	display:block;
+	background:image-url('interface/map/shadow1.png') 0 0 no-repeat;
+	top:32px;
+	left:32px;
+}
+
+#map.light2 > #mapl0
+{
+	opacity:0.9;
+}
+
+
+#map.light1 > #darkness
+{
+	display:block;
+	background:image-url('interface/map/shadow2.png') 0 0 no-repeat;
+	top:64px;
+	left:64px;
+}
+
+#map.light1 > #mapl0
+{
+	opacity:0.8;
+}
+
+
+#map.light0 > #darkness
+{
+	display:block;
+	background:image-url('interface/map/shadow3.png') 0 0 no-repeat;
+	top:96px;
+	left:96px;
+}
+
+#map.light0 > #mapl0
+{
+	opacity:0.7;
+}
+
+
+.ui-button.invis {
+	border: none !important;
+	background: none !important;
+	margin: 0 !important;
+}
+
+.ui-widget-content .dirbutton {
+	border: none !important;
+	z-index:1;
+	position:absolute;
+	background:image-url('interface/map/pass_sprite.png') no-repeat 33px 0px;
+	width: 33px;
+	height: 33px;
+	margin: 0px;
+}
+
+/* Textual area */
+#input {
+	background-color: black;
+}
+
+.tg-text-area {
+	background-color:black;
+	color:white;
+}
+
+#output {
+	border-top:0px solid black;
+	border-left:5px solid black;
+	border-right:0px solid black;
+	border-bottom:1px solid black;
+}
+
+#output p {
+	margin:0.5em 0px;
+}
+
+
+#input .inputbox {
+	position:absolute;
+	left:0px;
+	right:60px;
+	bottom: 0px;
+}
+
+#inputline {
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	position:absolute;
+	width:100%;
+	bottom:0px;
+}
+
+#inputline:focus {
+	outline:none;
+}
+
+/* Buttons */
+#inputmodifiers {
+	font-size:10px;
+}
+
+#inputmodifiers .ui-state-default {
+	background:white;
+}
+
+#inputmodifiers .ui-state-active {
+	background:gray;
+	color: white;
+	text-shadow: 0px 0px 5px #fff;
+}
+
+#inputmodifiers .ui-button-text-only .ui-button-text {
+	padding: .1em .3em;
+}
+
+#input .buttonbox {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 60px;
+}
+
+#outputsizebutton {
+	position: absolute;
+	right: 28px;
+	bottom: 1px;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+}
+
+#pausebutton {
+	position: absolute;
+	right: 5px;
+	bottom: 3px;
+	width: 16px;
+	height: 16px;
+	background: transparent;
+	border: none;
+	z-index: 1;
+}
+
+
+.ui-button .ui-icon.ui-icon-custom-pause
+{
+	background: image-url('interface/buttons/pause-icon.png') no-repeat 0 0;
+}
+
+.ui-button .ui-icon.ui-icon-custom-play
+{
+	background: image-url('interface/buttons/play-icon.png') no-repeat 0 0;
+}
+
+#outputsizebutton span {
+	padding: 0px !important;
+	font-size: 0.8em !important;
+	line-height:0px !important;
+}
+
+#desktop {
+	position: fixed;
+	top: 0px;
+	bottom:71px;
+	left:0px;
+	right:0px;
+}
+
+
+#buttonsbar {
+	background-image: image-url('interface/buttons/buttonbar.png');
+	background-repeat:repeat-x;
+	bottom:0px;
+	height: 71px;
+	width:100%;
+	position:fixed;
+	display:none;
+}
+
+body.topdown #desktop {
+	top:66px;
+	bottom:0px;
+}
+
+body.topdown #buttonsbar {
+	top:-6px;
+	bottom:auto;
+}
+
+#buttonsbar > div {
+	margin-top:10px;
+}
+
+.tg-button.left {
+	float:left;
+	margin-left:5px;
+}
+
+.tg-button.right {
+	float:right;
+	margin-right:5px;
+}
+
+.tg-button {
+	background-color:transparent;
+	border: none;
+}
+
+.tg-button.status,
+.tg-button.config,
+.tg-button.inventory,
+.tg-button.log,
+.tg-button.skills,
+.tg-button.coins,
+.tg-button.combat,
+.tg-button.details,
+.tg-button.thegate,
+.tg-button.connected,
+.tg-button.equipment,
+.tg-button.ranged,
+.tg-button.magic,
+.tg-button.info,
+.tg-button.fullscreen
+{
+	background-image: image-url('interface/buttons/buttons_sprite.png') !important;
+	width: 56px;
+	height: 54px;
+}
+
+.tg-button.status {
+	background-position: 0px -54px;
+}
+
+.tg-button.status.ui-state-disabled {
+	background-position: 0px 0px;
+}
+
+.tg-button.status.ui-state-hover {
+	background-position: 0px -108px;
+}
+
+
+.tg-button.config {
+	background-position: -56px -54px;
+}
+
+.tg-button.config.ui-state-disabled {
+	background-position: -56px 0px;
+}
+
+.tg-button.config.ui-state-hover {
+	background-position: -56px -108px;
+}
+
+.tg-button.inventory {
+	background-position: -112px -54px;
+}
+
+.tg-button.inventory.ui-state-disabled {
+	background-position: -112px 0px;
+}
+
+.tg-button.inventory.ui-state-hover {
+	background-position: -112px -108px;
+}
+
+.tg-button.log {
+	background-position: -168px -54px;
+}
+
+.tg-button.log.ui-state-disabled {
+	background-position: -168px 0px;
+}
+
+.tg-button.log.ui-state-hover {
+	background-position: -168px -108px;
+}
+
+.tg-button.skills {
+	background-position: -224px -54px;
+}
+
+.tg-button.skills.ui-state-disabled {
+	background-position: -224px 0px;
+}
+
+.tg-button.skills.ui-state-hover {
+	background-position: -224px -108px;
+}
+
+.tg-button.coins {
+	background-position: -280px -54px;
+}
+
+.tg-button.coins.ui-state-disabled {
+	background-position: -280px 0px;
+}
+
+.tg-button.coins.ui-state-hover {
+	background-position: -280px -108px;
+}
+
+.tg-button.combat {
+	background-position: -336px -54px;
+}
+
+.tg-button.combat.ui-state-disabled {
+	background-position: -336px 0px;
+}
+
+.tg-button.combat.ui-state-hover {
+	background-position: -336px -108px;
+}
+
+.tg-button.details {
+	background-position: -393px -54px;
+}
+
+.tg-button.details.ui-state-disabled {
+	background-position: -393px 0px;
+}
+
+.tg-button.details.ui-state-hover {
+	background-position: -393px -108px;
+}
+
+.tg-button.thegate {
+	background-position: -448px -54px;
+}
+
+.tg-button.thegate.ui-state-disabled {
+	background-position: -448px 0px;
+}
+
+.tg-button.thegate.ui-state-hover {
+	background-position: -448px -108px;
+}
+
+.tg-button.connected {
+	background-position: -504px -54px;
+}
+
+.tg-button.connected.ui-state-disabled {
+	background-position: -504px 0px;
+}
+
+.tg-button.connected.ui-state-hover {
+	background-position: -504px -108px;
+}
+
+.tg-button.equipment {
+	background-position: -560px -54px;
+}
+
+.tg-button.equipment.ui-state-disabled {
+	background-position: -560px 0px;
+}
+
+.tg-button.equipment.ui-state-hover {
+	background-position: -560px -108px;
+}
+
+.tg-button.message {
+	background-position: -616px -54px;
+}
+
+.tg-button.message.ui-state-disabled {
+	background-position: -616px 0px;
+}
+
+.tg-button.message.ui-state-hover {
+	background-position: -616px -108px;
+}
+
+.tg-button.ranged {
+	background-position: -672px -54px;
+}
+
+.tg-button.ranged.ui-state-disabled {
+	background-position: -672px 0px;
+}
+
+.tg-button.ranged.ui-state-hover {
+	background-position: -672px -108px;
+}
+
+.tg-button.magic {
+	background-position: -728px -54px;
+}
+
+.tg-button.magic.ui-state-disabled {
+	background-position: -728px 0px;
+}
+
+.tg-button.magic.ui-state-hover {
+	background-position: -728px -108px;
+}
+
+.tg-button.info {
+	background-position: -784px -54px;
+}
+
+.tg-button.info.ui-state-disabled {
+	background-position: -784px 0px;
+}
+
+.tg-button.info.ui-state-hover {
+	background-position: -784px -108px;
+}
+
+.tg-button.fullscreen {
+	background-position: -840px -54px;
+}
+
+.tg-button.fullscreen.ui-state-disabled {
+	background-position: -840px 0px;
+}
+
+.tg-button.fullscreen.ui-state-hover {
+	background-position: -840px -108px;
+}
+
+
+
+.tg-button.ui-state-disabled {
+	opacity:0.7;
+}
+
+
+
+input[type="radio"].tg-button {
+	display:none;/*
+	position:fixed;
+	top:-100px;*/
+}
+
+input[type="radio"].tg-button + label span {
+	display:inline-block;
+    width:32px;
+    height:32px;
+    vertical-align:middle;
+    margin-right:8px;
+    cursor:pointer;
+    background:image-url('interface/buttons/buttons.png') no-repeat -13px -9px;
+}
+
+input[type="radio"]:enabled:checked.tg-button + label span {
+    background:image-url('interface/buttons/buttons.png') no-repeat -13px -45px;
+}
+
+input[type="radio"]:enabled.tg-button + label span:hover {
+    background:image-url('interface/buttons/buttons.png') no-repeat -48px -9px;
+}
+
+input[type="radio"]:enabled:checked.tg-button + label span:hover {
+    background:image-url('interface/buttons/buttons.png') no-repeat -48px -45px;
+}
+
+input[type="radio"]:disabled:checked.tg-button + label span {
+    background:image-url('interface/buttons/buttons.png') no-repeat -83px -45px;
+}
+
+input[type="radio"]:disabled.tg-button + label span {
+    background:image-url('interface/buttons/buttons.png') no-repeat -83px -9px;
+}
+
+
+
+input[type="checkbox"].tg-button {
+	display:none;/*
+	position:fixed;
+	top:-100px;*/
+}
+
+input[type="checkbox"].tg-button + label span {
+	display:inline-block;
+    width:32px;
+    height:32px;
+    vertical-align:middle;
+    cursor:pointer;
+    background:image-url('interface/buttons/buttons.png') no-repeat -144px -8px;
+}
+
+input[type="checkbox"]:checked.tg-button + label span {
+    background:image-url('interface/buttons/buttons.png') no-repeat -144px -43px;
+}
+
+input[type="checkbox"].tg-button + label span:hover {
+    background:image-url('interface/buttons/buttons.png') no-repeat -189px -8px;
+}
+
+input[type="checkbox"]:checked.tg-button + label span:hover {
+    background:image-url('interface/buttons/buttons.png') no-repeat -189px -43px;
+}
+
+
+
+.tg-tooltip {
+	border: none;
+	color: black;
+	padding: 0px;
+	margin: 0px;
+	background:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+.tg-tooltip .tt-paper {
+	background: image-url('interface/tooltips/banner_right.png') no-repeat 100% 0;
+	height: 46px;
+	padding-right: 15px;
+}
+
+.tg-tooltip .tt-paper em {
+	background: image-url('interface/tooltips/tooltip.png') no-repeat 0 0;
+	height: 46px;
+	padding-right: 10px;
+	display: block;
+	font-family: stonehenge;
+	line-height: 46px;
+}
+
+.tg-tooltip .tt-paper em.tt-norivet {
+	background: image-url('interface/tooltips/tooltip.png') no-repeat 0 0;
+	padding-left: 10px;
+}
+
+.tg-tooltip .tt-paper em.tt-rivet {
+	background: image-url('interface/tooltips/tooltiprivet.png') no-repeat 0 0;
+	padding-left: 45px;
+}
+
+.tg-tooltip .tt-bigbox {
+	background: image-url('interface/equip/panel_large.png') no-repeat 0 0;
+	width:302px;
+	height:66px;
+	border: none;
+	margin: 0px;
+
+	color: beige;
+	font-size: 13px;
+	font-family: medievalsharp;
+	padding:14px 41px 14px 41px;
+}
+
+.tg-tooltip .tt-bigbox .meter2 {
+	position:absolute;
+	top:-10px;
+	left:73px;
+}
+
+.tg-tooltip .tt-smbox {
+	background: image-url('interface/equip/panel_small.png') no-repeat 0 0;
+	width:190px;
+	height:20px;
+	border: none;
+	margin: 0px;
+
+	color: beige;
+	font-size: 13px;
+	padding:14px 41px 21px 41px;
+}
+
+.tg-tooltip .tt-smbox .meter2 {
+	position:absolute;
+	bottom:0px;
+	left:19px;
+}
+
+
+/* Config */
+#configdialog {
+	overflow: hidden;
+}
+
+#configdialog fieldset {
+	margin-top:12px;
+	margin-bottom:12px;
+}
+
+.tg-dialog .ui-tabs-container
+{
+	overflow: auto;
+	position: absolute;
+	top: 55px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+.tg-dialog .ui-tabs {
+	background:none;
+	border:none;
+	font-family: stonehenge;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav {
+	background: none;
+	border:none;
+	padding:0px;
+	font-family: stonehenge;
+}
+
+#configdialog .ui-tabs .ui-tabs-nav-container {
+	margin-top:10px;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav-bg {
+	height:46px;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav-bg-left {
+	background:image-url('interface/tooltips/banner_left.png') no-repeat 0 0;
+	height:46px;
+	width:25px;
+	position:absolute;
+	left:0px;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav-bg-body {
+	background:image-url('interface/tooltips/banner_body.png') repeat-x 0 0;
+	height:46px;
+	position:absolute;
+	left:25px;
+	right:25px;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav-bg-right {
+	background:image-url('interface/tooltips/banner_right.png') no-repeat 0 0;
+	height:46px;
+	width:25px;
+	position:absolute;
+	right:0px;
+}
+
+
+.tg-dialog .ui-tabs-nav li {
+	background-color:transparent;
+	border:none;
+	background-image:none;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+	background:image-url('interface/tooltips/bullet.png') no-repeat 0px;
+	font-weight:bold;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav li.ui-tabs-active.tb-norivet {
+	background:none;
+}
+
+.tg-dialog .ui-tabs .ui-tabs-nav li:focus, .ui-tabs .ui-tabs-nav a:focus {
+	outline:none;
+}
+
+#tab-shortcuts tr {
+	font-size:0.8em;
+}
+
+#tab-shortcuts input {
+	width: 100%;
+}
+
+.sc-col-num {
+	text-align: center;
+	width:7%;
+}
+
+.sc-col-abbr {
+	width:23%;
+}
+
+.sc-col-cmd {
+	width:70%;
+}
+
+
+.tg-slider-background {
+	background: image-url('interface/buttons/buttons.png') no-repeat -358px -443px;
+	width: 240px;
+	height: 28px;
+}
+
+.tg-slider {
+	background-color: transparent;
+	background-image: none;
+	border: none;
+	width: 196px;
+	left: 21px;
+}
+
+.tg-slider .ui-slider-handle {
+	background-image: image-url('interface/buttons/buttons.png');
+	background-color: transparent;
+	background-position: -388px -382px;
+	border: none;
+	width: 24px;
+	height: 36px;
+}
+
+.tg-slider .ui-slider-handle.ui-state-focus {
+	outline:none;
+}
+
+
+/* Map */
+#largemapdialog {
+	padding: 0px;
+	overflow:hidden;
+	position:relative;
+	top:-8px;
+}
+
+#largemapdialog .mapcontainer {
+	position: absolute;
+	top:6px;
+	left:6px;
+	right:6px;
+	bottom:10px;
+}
+
+#largemapviewport {
+	width: 930px;
+	height: 652px;
+	cursor: move;
+	overflow: hidden;
+}
+
+
+
+/* Book */
+#bookdialog {
+	padding: 0px;
+	overflow:hidden;
+	position:relative;
+	top:-8px;
+}
+
+#book {
+	position:absolute;
+	top:11px;
+	left:11px;
+	width:924px;
+	height:660px;
+}
+
+.booklet .b-wrap-left {
+	background-image:image-url('interface/books/page_left.jpg');
+}
+
+.booklet .b-wrap-left > div {
+	padding-right: 20px;
+}
+
+.booklet .b-wrap-right {
+	background-image:image-url('interface/books/page_right.jpg');
+}
+
+.booklet .b-wrap-right > div {
+	padding-left: 20px;
+}
+
+
+.booklet .b-wrap {
+	overflow:auto;
+	font-family: cardinal;
+	font-weight: bold;
+	color: rgb(60,35,17);
+}
+
+.booklet .b-wrap h3 {
+	color: black;
+}
+
+.bookbg {
+	background-image:image-url('interface/books/book.jpg');
+	width:960px;
+	height:681px;
+}
+
+.tg-dialog.book {
+	padding:0px;
+}
+
+
+
+.b-menu {
+	background-image:image-url('interface/books/bookmark.png');
+	width:48px;
+	height:279px;
+	left:430px;
+	top:2px;
+	padding:0;
+	position:absolute;
+}
+
+.b-selector {
+	font-family: flbriosa;
+	font-size:15px;
+}
+
+.b-selector ul {
+	right:36px;
+	width:280px;
+	background-color:goldenrod;
+	border-radius:8px;
+}
+
+.b-selector a {
+	color:black;
+}
+
+.b-selector-page {
+	width:48px;
+	height:120px;
+	margin:0;
+}
+
+.b-selector-chapter {
+	width:48px;
+	height:120px;
+}
+
+.b-current {
+	visibility:hidden;
+}
+
+
+.booklet .b-arrow {
+	background-image:image-url('interface/buttons/buttons.png');
+	width:35px;
+	height:36px;
+	top:auto;
+	bottom:0px;
+}
+
+.booklet .b-arrow-prev {
+	background-position:-557px -14px;
+	left:0px;
+}
+
+.booklet .b-arrow-next {
+	background-position:-595px -14px;
+	right:0px;
+}
+
+.booklet .b-arrow-prev:hover {
+	background-position:-557px -118px;
+}
+
+
+.booklet .b-arrow-next:hover {
+	background-position:-595px -118px;
+}
+
+
+/* Editor */
+#editortextcont
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 70px;
+	right: 0px;
+}
+
+#editortext,
+#desctext
+{
+	width:100%;
+	height:100%;
+	box-sizing: border-box;
+	resize: none;
+	background-color: beige;
+	border: 5px groove #382D1E;
+}
+
+#editorcounter {
+	position: absolute;
+	bottom: 50px;
+	font-size:0.7em;
+}
+
+#editorsave {
+	position: absolute;
+	bottom:0px;
+	right:0px;
+}
+
+#editorcancel {
+	position: absolute;
+	bottom:0px;
+	right:200px;
+}
+
+
+/* Dialogs */
+.dialog {
+	display: none;
+}
+
+.tg-dialog {
+	background-color:transparent;
+	background-image:none;
+	border:none;
+	padding:0px;
+}
+
+
+.tg-dialog.notitle .ui-dialog-titlebar {
+	display: none;
+}
+
+.tg-dialog.noclose .ui-dialog-titlebar-close {
+	display: none;
+}
+
+
+.tg-dialog .ui-dialog-titlebar {
+	background: transparent;
+	border: none;
+	z-index: 2;
+	padding:0px;
+}
+
+.tg-dialog .ui-dialog-titlebar-close {
+	right:40px;
+	width:36px;
+	height:35px;
+	margin:-18px 0 0 0;
+	border:0px;
+	padding:0px;
+	background:none;
+}
+
+.tg-dialog .ui-icon.ui-icon-closethick {
+	background-image: image-url('interface/buttons/buttons.png');
+	background-position: -653px -14px;
+	width:36px;
+	height:35px;
+
+	left:50%;
+	margin-left:-18px;
+	top:50%;
+	margin-top:-18px;
+	position:absolute;
+}
+
+.tg-dialog .ui-dialog-titlebar-close.ui-state-hover .ui-icon.ui-icon-closethick {
+	background-position: -653px -66px;
+}
+
+
+.tg-dialog.styledbuttons .ui-button-text-only,
+.tg-dialog.styledbuttons .ui-button-text-only.ui-state-default,
+.tg-dialog.styledbuttons .ui-button-text-only.ui-state-active
+{
+	border:none;
+	background-color:transparent;
+	font-family: stonehenge;
+	color: beige;
+}
+
+.tg-dialog.styledbuttons .tg-button.xs
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -19px -347px;
+	width:147px;
+	height:48px;
+}
+
+.tg-dialog.styledbuttons .tg-button.xs.centered
+{
+	margin-left:50%;
+	left:-73px;
+}
+
+
+.tg-dialog.styledbuttons .tg-button.s
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -19px -295px;
+	width:186px;
+	height:48px;
+}
+
+.tg-dialog.styledbuttons .tg-button.s.centered
+{
+	margin-left:50%;
+	left:-93px;
+}
+
+
+.tg-dialog.styledbuttons .tg-button.m
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -19px -243px;
+	width:232px;
+	height:48px;
+}
+
+.tg-dialog.styledbuttons .tg-button.m.centered
+{
+	margin-left:50%;
+	left:-116px;
+}
+
+
+.tg-dialog.styledbuttons .tg-button.l
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -19px -189px;
+	width:273px;
+	height:48px;
+}
+
+.tg-dialog.styledbuttons .tg-button.l.centered
+{
+	margin-left:50%;
+	left:-136px;
+}
+
+
+.tg-dialog.styledbuttons .tg-button.xl
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -10px -123px;
+	width:291px;
+	height:62px;
+}
+
+.tg-dialog.styledbuttons .tg-button.xl.centered
+{
+	margin-left:50%;
+	left:-145px;
+}
+
+
+.tg-dialog.styledbuttons .tg-button.tiny .ui-button-text
+{
+	line-height:27px;
+	padding:0px;
+}
+
+.tg-dialog.styledbuttons .tg-button.tiny.s
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -661px -443px;
+	width:78px;
+	height:27px;
+}
+
+.tg-dialog.styledbuttons .tg-button.tiny.s.centered
+{
+	margin-left:50%;
+	left:-39px;
+}
+
+.tg-dialog.styledbuttons .tg-button.tiny.m
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -627px -410px;
+	width:112px;
+	height:27px;
+}
+
+.tg-dialog.styledbuttons .tg-button.tiny.m.centered
+{
+	margin-left:50%;
+	left:-56px;
+}
+
+.tg-dialog.styledbuttons .tg-button.tiny.l
+{
+	background: image-url('interface/buttons/buttons.png') no-repeat -597px -376px;
+	width:142px;
+	height:27px;
+}
+
+.tg-dialog.styledbuttons .tg-button.tiny.l.centered
+{
+	margin-left:50%;
+	left:-71px;
+}
+
+
+.tg-dialog.styledbuttons .tg-button.prev
+{
+	background: image-url('interface/buttons/smallbutton_left_right.png') no-repeat 0px 0px;
+	width:168px;
+	height:48px;
+	padding-left:20px;
+}
+
+.tg-dialog.styledbuttons .tg-button.next
+{
+	background: image-url('interface/buttons/smallbutton_left_right.png') no-repeat -168px 0px;
+	width:168px;
+	height:48px;
+	padding-right:20px;
+}
+
+
+
+.tg-dialog.styledbuttons .ui-button-text-only.ui-state-hover {
+	color:yellow;
+}
+
+
+
+/* Dialog style parchment */
+.tg-dialog.parch .ui-dialog-titlebar {
+	margin:16px 16px 0px 16px;
+}
+
+.tg-dialog.parch .ui-dialog-content {
+	background: image-url('interface/frame/paper-mm.png');
+	margin:0px 16px 16px 16px;
+	padding: 0px;
+	overflow:hidden;
+}
+
+.tg-dialog.parch .title-add {
+	color:beige;
+	position:absolute;
+	right:85px;
+	top:0px;
+	height:100%;
+	z-index:1;
+}
+
+.tg-dialog.parch.noclose .title-add {
+	right:75px;
+}
+
+.tg-dialog.parch .ui-dialog-title {
+	margin:0px;
+	width:100% !important;
+	background-image:image-url('interface/frame/paper-mm.png');
+	font-weight: normal;
+}
+
+.tg-dialog.parch .ui-resizable-n {
+	height:16px;
+	width:auto;
+	left:16px;
+	right:16px;
+	top:0px;
+	background:image-url('interface/frame/paper1-tm.png') repeat-x 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-e {
+	width:16px;
+	height:auto;
+	top:16px;
+	bottom:16px;
+	right: 0px;
+	background:image-url('interface/frame/paper1-mr.png') repeat-y 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-s {
+	height:16px;
+	width:auto;
+	bottom:0px;
+	left:16px;
+	right:16px;
+	background:image-url('interface/frame/paper1-bm.png') repeat-x 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-w {
+	width:16px;
+	height:auto;
+	left: 0px;
+	top:16px;
+	bottom:16px;
+	background:image-url('interface/frame/paper1-ml.png') repeat-y 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-se {
+	width: 16px;
+	height: 16px;
+	right: 0px;
+	bottom: 0px;
+	background:image-url('interface/frame/paper1-br.png') no-repeat 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-sw {
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	bottom: 0px;
+	background:image-url('interface/frame/paper1-bl.png') no-repeat 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-ne {
+	width: 16px;
+	height: 16px;
+	right: 0px;
+	top: 0px;
+	background:image-url('interface/frame/paper1-tr.png') no-repeat 0 0;
+}
+
+.tg-dialog.parch .ui-resizable-nw {
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+	background:image-url('interface/frame/paper1-tl.png') no-repeat 0 0;
+}
+
+
+
+
+
+
+
+/* Dialog style wood */
+.tg-dialog.wood .ui-resizable-n {
+	height:11px;
+	width:auto;
+	left:21px;
+	right:21px;
+	top:0px;
+	background-image:image-url('interface/frame/side_wood_trans_t.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-e {
+	width:11px;
+	height:auto;
+	top:21px;
+	bottom:21px;
+	right: 0px;
+	background-image:image-url('interface/frame/side_wood_trans_r.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-s {
+	height:11px;
+	width:auto;
+	bottom:0px;
+	left:21px;
+	right:21px;
+	background-image:image-url('interface/frame/side_wood_trans_b.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-w {
+	width:11px;
+	height:auto;
+	left: 0px;
+	top:21px;
+	bottom:21px;
+	background-image:image-url('interface/frame/side_wood_trans_l.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-se {
+	width: 21px;
+	height: 21px;
+	right: 0px;
+	bottom: 0px;
+	background-image:image-url('interface/frame/corner_gold_trans_br.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-sw {
+	width: 21px;
+	height: 21px;
+	left: 0px;
+	bottom: 0px;
+	background-image:image-url('interface/frame/corner_gold_trans_bl.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-ne {
+	width: 21px;
+	height: 21px;
+	right: 0px;
+	top: 0px;
+	background-image:image-url('interface/frame/corner_gold_trans_tr.png');
+	background-position:0 0;
+}
+
+.tg-dialog.wood .ui-resizable-nw {
+	width: 21px;
+	height: 21px;
+	left: 0px;
+	top: 0px;
+	background-image:image-url('interface/frame/corner_gold_trans_tl.png');
+	background-position:0 0;
+}
+
+
+
+/* Dialog style iron */
+
+.tg-dialog.irond .ui-resizable-n {
+	height:19px;
+	width:auto;
+	left:25px;
+	right:25px;
+	top:0px;
+	background-image:image-url('interface/frame/iron-double-tm.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-e {
+	width:19px;
+	height:auto;
+	top:25px;
+	bottom:25px;
+	right: 0px;
+	background-image:image-url('interface/frame/iron-double-mr.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-s {
+	height:19px;
+	width:auto;
+	bottom:0px;
+	left:25px;
+	right:25px;
+	background-image:image-url('interface/frame/iron-double-bm.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-w {
+	width:19px;
+	height:auto;
+	left: 0px;
+	top:25px;
+	bottom:25px;
+	background-image:image-url('interface/frame/iron-double-ml.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-se {
+	width: 25px;
+	height: 25px;
+	right: 0px;
+	bottom: 0px;
+	background-image:image-url('interface/frame/iron-double-br.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-sw {
+	width: 25px;
+	height: 25px;
+	left: 0px;
+	bottom: 0px;
+	background-image:image-url('interface/frame/iron-double-bl.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-ne {
+	width: 25px;
+	height: 25px;
+	right: 0px;
+	top: 0px;
+	background-image:image-url('interface/frame/iron-double-tr.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond .ui-resizable-nw {
+	width: 25px;
+	height: 25px;
+	left: 0px;
+	top: 0px;
+	background-image:image-url('interface/frame/iron-double-tl.png');
+	background-position:0 0;
+}
+
+.tg-dialog.irond.ui-resizable > .ui-dialog-content {
+	padding:14px;
+}
+
+
+/* Icons */
+.iconslot {
+ 	background-image: image-url('interface/buttons/buttons.png');
+	width:38px;
+	height:38px;
+	padding:9px;
+	background-position:-33px -482px;
+}
+
+.iconslot.left {
+	float:left;
+}
+
+.iconslot.sm {
+	padding:4px;
+	background-position:-38px -487px;
+}
+
+.iconimg.s {
+	width:16px;
+	height:16px;
+	background-image:image-url('icons/tiles_s.png');
+}
+
+.iconimg.m {
+	width:24px;
+	height:24px;
+	background-image:image-url('icons/tiles_m.png');
+}
+
+.iconimg.v {
+	vertical-align: middle;
+}
+
+.iconimg {
+	width:32px;
+	height:32px;
+	margin:3px;
+	background-image: image-url('icons/tiles.png');
+	display:inline-block;
+}
+
+.dirimg {
+	width:32px;
+	height:32px;
+	margin:3px;
+	background:image-url('interface/map/look_arrows.png') no-repeat;
+	display:inline-block;
+}
+
+.obj .desc, .mob .desc {
+	margin-left: 0.5em;
+}
+
+
+/* Tables */
+
+table {
+	width: 100%;
+}
+
+caption {
+	font-size:1.4em;
+	margin:3px;
+}
+
+th, td {
+	padding:0.1em;
+	padding-right:0.5em;
+	padding-left:0.5em;
+	vertical-align:top;
+	text-align:left;
+}
+
+.list th, .list td, .skills td, .skills th {
+	vertical-align:middle;
+}
+
+.info th, .stats th, .abil th {
+	text-align:right;
+}
+
+.skills .skillsep {
+	padding-top:10px;
+	padding-bottom:5px;
+	height:35px;
+}
+
+table.skills {
+	min-width:250px;
+}
+
+table.abil .title {
+	text-align:center;
+	font-family:stonehenge;
+	font-size:14px;
+	padding-top:10px;
+}
+
+table.abil .bar {
+	text-align:center;
+	width: 250px;
+}
+
+table.abil .level {
+	text-align: left;
+}
+
+table.abil .img {
+	width: 25%;
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+}
+
+/* Frames */
+
+.scrollable {
+	width:100%;
+	height:100%;
+	overflow:auto;
+}
+
+.scrollable-y {
+	width:100%;
+	height:100%;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.frame {
+	border:none;
+	padding:0px;
+	margin:0px;
+	position:absolute;
+}
+
+.frame.corner {
+	width:21px;
+	height:21px;
+}
+
+.frame.horizontal {
+	height:11px;
+	left:21px;
+	right:21px;
+}
+
+.frame.vertical {
+	width:11px;
+	top:21px;
+	bottom:21px;
+}
+
+.corner {
+	background-repeat:no-repeat;
+	/* z-index:1; */
+}
+
+.horizontal {
+	background-repeat:repeat-x;
+	/* z-index:1; */
+}
+
+.vertical {
+	background-repeat:repeat-y;
+	/* z-index:1; */
+}
+
+.top {
+	top:0px;
+}
+
+.right {
+	right:0px;
+}
+
+.left {
+	left:0px;
+}
+
+.bottom {
+	bottom:0px;
+}
+
+.frame.corner.top.left {
+	background-image:image-url('interface/frame/corner_gold_trans_tl.png');
+}
+
+.frame.corner.top.right {
+	background-image:image-url('interface/frame/corner_gold_trans_tr.png');
+}
+
+.frame.corner.bottom.left {
+	background-image:image-url('interface/frame/corner_gold_trans_bl.png');
+}
+
+.frame.corner.bottom.right {
+	background-image:image-url('interface/frame/corner_gold_trans_br.png');
+}
+
+.frame.horizontal.top {
+	background-image:image-url('interface/frame/side_wood_trans_t.png');
+}
+
+.frame.horizontal.bottom {
+	background-image:image-url('interface/frame/side_wood_trans_b.png');
+}
+
+.frame.vertical.left {
+	background-image:image-url('interface/frame/side_wood_trans_l.png');
+}
+
+.frame.vertical.right {
+	background-image:image-url('interface/frame/side_wood_trans_r.png');
+}
+
+.frame.content {
+	color: White;
+	background-color: Black;
+	top:5px;
+	left:5px;
+	right:5px;
+	bottom:5px;
+	overflow:hidden;
+}
+
+.frame.content.bordered {
+	color: White;
+	background-color: Black;
+	top:10px;
+	left:10px;
+	right:10px;
+	bottom:10px;
+	overflow:hidden;
+}
+
+
+/* Paper */
+.paper.frame {
+	position: relative;
+	padding: 35px;
+}
+
+.paper.frame.small {
+	display: inline-block;
+}
+
+.paper
+{
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+}
+
+.paper.corner
+{
+	width: 35px;
+	height: 35px;
+}
+
+.paper.horizontal
+{
+	height: 35px;
+	left: 35px;
+	right: 35px;
+}
+
+.paper.vertical
+{
+	width: 35px;
+	top: 35px;
+	bottom: 35px;
+}
+
+.paper.corner.top.left
+{
+	background-image: image-url('interface/frame/paper-tl.png');
+}
+
+.paper.corner.top.right
+{
+	background-image: image-url('interface/frame/paper-tr.png');
+}
+
+.paper.corner.bottom.left
+{
+	background-image: image-url('interface/frame/paper-bl.png');
+}
+
+.paper.corner.bottom.right
+{
+	background-image: image-url('interface/frame/paper-br.png');
+}
+
+.paper.horizontal.top
+{
+	background-image: image-url('interface/frame/paper-tm.png');
+}
+
+.paper.horizontal.bottom
+{
+	background-image: image-url('interface/frame/paper-bm.png');
+}
+
+.paper.vertical.left
+{
+	background-image: image-url('interface/frame/paper-ml.png');
+}
+
+.paper.vertical.right
+{
+	background-image: image-url('interface/frame/paper-mr.png');
+}
+
+.paper.content
+{
+	color: Black;
+	background-image: image-url('interface/frame/paper-mm.png');
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+/* Paper2 */
+.paper2.frame {
+	position: relative;
+	padding: 33px;
+}
+
+.paper2.frame.small {
+	display: inline-block;
+}
+
+.paper2
+{
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+}
+
+.paper2.corner
+{
+	width: 33px;
+	height: 33px;
+}
+
+.paper2.horizontal
+{
+	height: 33px;
+	left: 33px;
+	right: 33px;
+}
+
+.paper2.vertical
+{
+	width: 33px;
+	top: 33px;
+	bottom: 33px;
+}
+
+.paper2.corner.top.left
+{
+	background-image: image-url('interface/frame/paper2-tl.png');
+}
+
+.paper2.corner.top.right
+{
+	background-image: image-url('interface/frame/paper2-tr.png');
+}
+
+.paper2.corner.bottom.left
+{
+	background-image: image-url('interface/frame/paper2-bl.png');
+}
+
+.paper2.corner.bottom.right
+{
+	background-image: image-url('interface/frame/paper2-br.png');
+}
+
+.paper2.horizontal.top
+{
+	background-image: image-url('interface/frame/paper2-tm.png');
+}
+
+.paper2.horizontal.bottom
+{
+	background-image: image-url('interface/frame/paper2-bm.png');
+}
+
+.paper2.vertical.left
+{
+	background-image: image-url('interface/frame/paper2-ml.png');
+}
+
+.paper2.vertical.right
+{
+	background-image: image-url('interface/frame/paper2-mr.png');
+}
+
+.paper2.content
+{
+	color: Black;
+	background-image: image-url('interface/frame/paper2-mm.png');
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+.paper2 .text {
+	margin-top:20px;
+}
+
+/* Iron */
+.irondframe {
+	position: relative;
+	padding: 19px;
+}
+
+.irondframe.small {
+	display: inline-block;
+}
+
+.irond, .iron
+{
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+}
+
+.irond.corner
+{
+	width: 25px;
+	height: 25px;
+}
+
+.iron.corner
+{
+	width: 20px;
+	height: 20px;
+}
+
+
+.irond.horizontal
+{
+	height: 19px;
+	left: 25px;
+	right: 25px;
+}
+
+.iron.horizontal
+{
+	height: 14px;
+	left: 20px;
+	right: 20px;
+}
+
+.irond.vertical
+{
+	width: 19px;
+	top: 25px;
+	bottom: 25px;
+}
+
+.iron.vertical
+{
+	width: 14px;
+	top: 20px;
+	bottom: 20px;
+}
+
+.irond.corner.top.left
+{
+	background-image: image-url('interface/frame/iron-double-tl.png');
+}
+
+.irond.corner.top.right
+{
+	background-image: image-url('interface/frame/iron-double-tr.png');
+}
+
+.irond.corner.bottom.left
+{
+	background-image: image-url('interface/frame/iron-double-bl.png');
+}
+
+.irond.corner.bottom.right
+{
+	background-image: image-url('interface/frame/iron-double-br.png');
+}
+
+.irond.horizontal.top
+{
+	background-image: image-url('interface/frame/iron-double-tm.png');
+}
+
+.irond.horizontal.bottom
+{
+	background-image: image-url('interface/frame/iron-double-bm.png');
+}
+
+.irond.vertical.left
+{
+	background-image: image-url('interface/frame/iron-double-ml.png');
+}
+
+.irond.vertical.right
+{
+	background-image: image-url('interface/frame/iron-double-mr.png');
+}
+
+.iron.corner.top.left
+{
+	background-image: image-url('interface/frame/iron-single-tl.png');
+}
+
+.iron.corner.top.right
+{
+	background-image: image-url('interface/frame/iron-single-tr.png');
+}
+
+.iron.corner.bottom.left
+{
+	background-image: image-url('interface/frame/iron-single-bl.png');
+}
+
+.iron.corner.bottom.right
+{
+	background-image: image-url('interface/frame/iron-single-br.png');
+}
+
+.iron.horizontal.top
+{
+	background-image: image-url('interface/frame/iron-single-tm.png');
+}
+
+.iron.horizontal.bottom
+{
+	background-image: image-url('interface/frame/iron-single-bm.png');
+}
+
+.iron.vertical.left
+{
+	background-image: image-url('interface/frame/iron-single-ml.png');
+}
+
+.iron.vertical.right
+{
+	background-image: image-url('interface/frame/iron-single-mr.png');
+}
+
+.irond.content
+{
+	overflow: hidden;
+/*
+	color: Black;
+	background-color: black;
+	background-image:image-url('interface/background/knights.jpg');
+*/
+	top:14px;
+	left:14px;
+	right:14px;
+	bottom:14px;
+}
+
+.iron.content
+{
+	overflow: hidden;
+	top:9px;
+	left:9px;
+	right:9px;
+	bottom:9px;
+}
+
+
+/* Banner */
+.banner {
+	white-space:nowrap;
+}
+
+
+.banner.mini {
+	height:45px;
+	color: beige;
+}
+
+.banner.large {
+	height:60px;
+	color: beige;
+}
+
+.banner.parch {
+	height:30px;
+	color: black;
+}
+
+.banner.short {
+	display: inline-block;
+}
+
+.banner.short > div {
+	float:left;
+}
+
+.banner.long > div {
+	position:absolute;
+}
+
+.banner.long > .left {
+	left:0px;
+}
+
+.banner.long > .right {
+	right:0px;
+}
+
+.banner > .content {
+	padding-left:10px;
+	padding-right:10px;
+	font-family:stonehenge;
+	font-weight:normal;
+	letter-spacing:1px;
+}
+
+.banner > .content > .iconslot {
+	margin-left: -10px;
+}
+
+.banner.mini.long > .content {
+	right:31px;
+	left:31px;
+	font-size:20px;
+}
+
+.banner.large.long > .content {
+	right:40px;
+	left:40px;
+	font-size:30px;
+}
+
+.banner.parch.long > .content {
+	right:25px;
+	left:25px;
+	font-size:18px;
+}
+
+
+.banner.mini > .left {
+	width:31px;
+	height:45px;
+	background-image: image-url('interface/banners/end_small.png');
+}
+
+.banner.large > .left {
+	width:40px;
+	height:60px;
+	background-image: image-url('interface/banners/ends.png');
+}
+
+.banner.parch > .left {
+	width:25px;
+	height:30px;
+	background: image-url('interface/tooltips/banner_left.png') no-repeat;
+	background-size:100% 100%;
+}
+
+.banner.mini > .content {
+	height:45px;
+	background-image: image-url('interface/banners/body_small.png');
+	background-repeat: repeat-x;
+	line-height:45px;
+}
+
+.banner.large > .content {
+	height:60px;
+	background-image: image-url('interface/banners/body.png');
+	background-repeat: repeat-x;
+	line-height:60px;
+}
+
+.banner.parch > .content {
+	height:30px;
+	background: image-url('interface/tooltips/banner_body.png') repeat-x;
+	line-height:30px;
+	background-size:100% 100%;
+}
+
+
+
+.banner.mini > .right {
+	width:31px;
+	height:45px;
+	background-image: image-url('interface/banners/end_small.png');
+	background-position:-31px 0px;
+}
+
+.banner.large > .right {
+	width:40px;
+	height:60px;
+	background-image: image-url('interface/banners/ends.png');
+	background-position: -40px 0px;
+}
+
+.banner.parch > .right {
+	width:25px;
+	height:30px;
+	background: image-url('interface/tooltips/banner_right.png') no-repeat;
+	background-size:100% 100%;
+}
+
+
+
+/* Interface elements */
+.checkbox {
+	background-image: image-url('interface/buttons/buttons.png');
+	background-position: -144px -8px;
+	width: 30px;
+	height: 30px;
+}
+
+.checkbox.checked {
+	background-position: -144px -43px;
+}
+
+.checkbox.selected {
+	background-position: -190px -8px;
+}
+
+.checkbox.checked.selected {
+	background-position: -190px -43px;
+}
+
+
+
+/* Equip */
+#equipdialog .tg-dialog-inner {
+	position:absolute;
+	top:0px;
+	bottom:0px;
+	width:100%;
+}
+
+#equipdialog.aslist .tg-dialog-inner {
+	bottom:22px;
+}
+
+#equipdialog .carrywgtcont {
+	color:beige;
+	position:absolute;
+	bottom:30px;
+	right:15px;
+	height:21px;
+}
+
+#equipdialog.aslist .carrywgtcont {
+	bottom:20px;
+	margin-right: -118px;
+	right: 50%;
+}
+
+
+#equipcont table
+{
+	font-family:stonehenge;
+	padding:10px;
+}
+
+.equip-inner ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+}
+
+.equip-inner ul li.eq0 {
+	display:block;
+}
+
+.equip-inner ul li {
+	background-image: image-url('interface/equip/square.png');
+	width:38px;
+	height:38px;
+	padding:9px;
+	display:none;
+	position:absolute;
+}
+
+.equip-inner {
+	position:absolute;
+	top:55px;
+	height:550px;
+	width:308px;
+	background-repeat:no-repeat;
+}
+
+
+.human_m {
+	background-image: image-url('interface/equip/human_m.png');
+}
+.human_m.port {
+	background: image-url('interface/equip/human_m_small.png') no-repeat -7px 2px;
+}
+
+.equip-inner.human_m {
+	left:75px;
+}
+
+.human_f {
+	background-image: image-url('interface/equip/human_f.png');
+}
+.human_f.port {
+	background: image-url('interface/equip/human_f_small.png') no-repeat -20px 2px;
+}
+.equip-inner.human_f {
+	left:30px;
+}
+
+.halfling_m {
+	background-image: image-url('interface/equip/halfling_m.png');
+}
+.halfling_m.port {
+	background: image-url('interface/equip/halfling_m_small.png') no-repeat -22px 2px;
+}
+.equip-inner.halfling_m {
+	left:60px;
+}
+
+
+.halfling_f {
+	background-image: image-url('interface/equip/halfling_f.png');
+}
+.halfling_f.port {
+	background: image-url('interface/equip/halfling_f_small.png') no-repeat -3px 2px;
+}
+.equip-inner.halfling_f {
+	left:85px;
+}
+
+.elf_m {
+	background-image: image-url('interface/equip/elf_m.png');
+}
+.elf_m.port {
+	background: image-url('interface/equip/elf_m_small.png') no-repeat -6px 2px;
+}
+.equip-inner.elf_m {
+	left:80px;
+}
+
+.elf_f {
+	background-image: image-url('interface/equip/elf_f.png');
+}
+.elf_f.port {
+	background: image-url('interface/equip/elf_f_small.png') no-repeat -7px 2px;
+}
+.equip-inner.elf_f {
+	left:65px;
+}
+
+
+.dwarf_m {
+	background-image: image-url('interface/equip/dwarf_m.png');
+}
+.dwarf_m.port {
+	background: image-url('interface/equip/dwarf_m_small.png') no-repeat -34px 2px;
+}
+.equip-inner.dwarf_m {
+	left:55px;
+}
+
+
+.dwarf_f {
+	background-image: image-url('interface/equip/dwarf_f.png');
+}
+.dwarf_f.port {
+	background: image-url('interface/equip/dwarf_f_small.png') no-repeat -28px 2px;
+}
+.equip-inner.dwarf_f {
+	left:50px;
+}
+
+.goblin_m {
+	background-image: image-url('interface/equip/goblin_m.png');
+}
+.goblin_m.port {
+	background: image-url('interface/equip/goblin_m_small.png') no-repeat -34px 2px;
+}
+.equip-inner.goblin_m {
+	left:50px;
+}
+
+.goblin_f {
+	background-image: image-url('interface/equip/goblin_f.png');
+}
+.goblin_f.port {
+	background: image-url('interface/equip/goblin_f_small.png') no-repeat -11px 2px;
+}
+.equip-inner.goblin_f {
+	left:50px;
+}
+
+.orc_m {
+	background-image: image-url('interface/equip/orc_m.png');
+}
+.orc_m.port {
+	background: image-url('interface/equip/orc_m_small.png') no-repeat -28px 2px;
+}
+.equip-inner.orc_m {
+	left:65px;
+}
+
+.orc_f {
+	background-image: image-url('interface/equip/orc_f.png');
+}
+.orc_f.port {
+	background: image-url('interface/equip/orc_f_small.png') no-repeat -20px 2px;
+}
+.equip-inner.orc_f {
+	left:65px;
+}
+
+
+.equip-inner.human_m > .r_finger { top:266px; left:-55px; }
+.equip-inner.human_m > .l_finger { top:261px; left:162px; }
+.equip-inner.human_m > .neck { top:41px; left:103px; }
+.equip-inner.human_m > .body { top:139px; left:35px; }
+.equip-inner.human_m > .head { top:-51px; left:57px; }
+.equip-inner.human_m > .legs { top:318px; left:28px; }
+.equip-inner.human_m > .feet { top:480px; left:-24px; }
+.equip-inner.human_m > .hands { top:309px; left:183px; }
+.equip-inner.human_m > .arms { top:127px; left:165px; }
+.equip-inner.human_m > .around { top:141px; left:-40px; }
+.equip-inner.human_m > .waist { top:256px; left:22px; }
+.equip-inner.human_m > .r_wrist { top:213px; left:-47px; }
+.equip-inner.human_m > .l_wrist { top:215px; left:165px; }
+.equip-inner.human_m > .r_hand { top:308px; left:-32px; }
+.equip-inner.human_m > .l_hand { top:308px; left:130px; }
+.equip-inner.human_m > .back { top:139px; left:89px; }
+.equip-inner.human_m > .r_ear { top:-32px; left:0px; }
+.equip-inner.human_m > .l_ear { top:-33px; left:107px; }
+.equip-inner.human_m > .eyes { top:13px; left:2px; }
+.equip-inner.human_m > .sheath { top:244px; left:70px; }
+.equip-inner.human_m > .belt { top:197px; left:71px; }
+.equip-inner.human_m > .over { top:94px; left:89px; }
+.equip-inner.human_m > .r_shoulder { top:65px; left:-22px; }
+.equip-inner.human_m > .l_shoulder { top:69px; left:145px; }
+.equip-inner.human_m > .tied { top:400px; left:-50px; }
+
+.equip-inner.human_f> .r_finger { top:280px; left:-8px; }
+.equip-inner.human_f> .l_finger { top:187px; left:194px; }
+.equip-inner.human_f> .neck { top:68px; left:58px; }
+.equip-inner.human_f> .body { top:114px; left:78px; }
+.equip-inner.human_f> .head { top:-54px; left:82px; }
+.equip-inner.human_f> .legs { top:268px; left:116px; }
+.equip-inner.human_f> .feet { top:488px; left:50px; }
+.equip-inner.human_f > .hands { top:238px; left:-12px; }
+.equip-inner.human_f > .arms { top:83px; left:225px; }
+.equip-inner.human_f > .around { top:126px; left:-6px; }
+.equip-inner.human_f> .waist { top:165px; left:103px; }
+.equip-inner.human_f > .r_wrist { top:189px; left:-8px; }
+.equip-inner.human_f> .l_wrist { top:143px; left:205px; }
+.equip-inner.human_f> .r_hand { top:321px; left:15px; }
+.equip-inner.human_f> .l_hand { top:232px; left:189px; }
+.equip-inner.human_f> .back { top:130px; left:146px; }
+.equip-inner.human_f> .r_ear { top:-31px; left:32px; }
+.equip-inner.human_f> .l_ear { top:-46px; left:135px; }
+.equip-inner.human_f> .eyes { top:5px; left:138px; }
+.equip-inner.human_f> .sheath { top:283px; left:60px; }
+.equip-inner.human_f> .belt { top:226px; left:140px; }
+.equip-inner.human_f> .over { top:80px; left:122px; }
+.equip-inner.human_f> .r_shoulder { top:73px; left:11px; }
+.equip-inner.human_f> .l_shoulder { top:49px; left:166px; }
+.equip-inner.human_f> .tied { top:380px; left:200px; }
+
+.equip-inner.halfling_m > .r_finger { top:253px; left:11px; }
+.equip-inner.halfling_m > .l_finger { top:209px; left:186px; }
+.equip-inner.halfling_m > .neck { top:65px; left:70px; }
+.equip-inner.halfling_m > .body { top:129px; left:84px; }
+.equip-inner.halfling_m > .head { top:-48px; left:103px; }
+.equip-inner.halfling_m > .legs { top:306px; left:99px; }
+.equip-inner.halfling_m > .feet { top:470px; left:-18px; }
+.equip-inner.halfling_m > .hands { top:253px; left:-31px; }
+.equip-inner.halfling_m > .arms { top:110px; left:196px; }
+.equip-inner.halfling_m > .around { top:102px; left:-42px; }
+.equip-inner.halfling_m > .tied { top:390px; left:200px; }
+.equip-inner.halfling_m > .waist { top:182px; left:66px; }
+.equip-inner.halfling_m > .r_wrist { top:198px; left:-17px; }
+.equip-inner.halfling_m > .l_wrist { top:165px; left:200px; }
+.equip-inner.halfling_m > .r_hand { top:272px; left:51px; }
+.equip-inner.halfling_m > .l_hand { top:251px; left:173px; }
+.equip-inner.halfling_m > .back { top:139px; left:35px; }
+.equip-inner.halfling_m > .r_ear { top:-17px; left:44px; }
+.equip-inner.halfling_m > .l_ear { top:-27px; left:161px; }
+.equip-inner.halfling_m > .eyes { top:12px; left:161px; }
+.equip-inner.halfling_m > .sheath { top:292px; left:164px; }
+.equip-inner.halfling_m > .belt { top:209px; left:112px; }
+.equip-inner.halfling_m > .over { top:100px; left:130px; }
+.equip-inner.halfling_m > .r_shoulder { top:58px; left:11px; }
+.equip-inner.halfling_m > .l_shoulder { top:59px; left:157px; }
+
+.equip-inner.halfling_f > .r_finger { top:208px; left:-62px; }
+.equip-inner.halfling_f > .l_finger { top:211px; left:189px; }
+.equip-inner.halfling_f > .neck { top:55px; left:82px; }
+.equip-inner.halfling_f > .body { top:148px; left:41px; }
+.equip-inner.halfling_f > .head { top:-49px; left:48px; }
+.equip-inner.halfling_f > .legs { top:303px; left:22px; }
+.equip-inner.halfling_f > .tied { top:390px; left:200px; }
+.equip-inner.halfling_f > .hands { top:251px; left:189px; }
+.equip-inner.halfling_f > .arms { top:101px; left:174px; }
+.equip-inner.halfling_f > .around { top:109px; left:-45px; }
+.equip-inner.halfling_f > .waist { top:194px; left:79px; }
+.equip-inner.halfling_f > .r_wrist { top:162px; left:-52px; }
+.equip-inner.halfling_f > .l_wrist { top:165px; left:182px; }
+.equip-inner.halfling_f > .r_hand { top:208px; left:-18px; }
+.equip-inner.halfling_f > .l_hand { top:210px; left:144px; }
+.equip-inner.halfling_f > .back { top:144px; left:90px; }
+.equip-inner.halfling_f > .r_ear { top:-27px; left:-9px; }
+.equip-inner.halfling_f > .l_ear { top:-25px; left:99px; }
+.equip-inner.halfling_f > .eyes { top:16px; left:-15px; }
+.equip-inner.halfling_f > .sheath { top:267px; left:125px; }
+.equip-inner.halfling_f > .belt { top:217px; left:34px; }
+.equip-inner.halfling_f > .over { top:98px; left:82px; }
+.equip-inner.halfling_f > .r_shoulder { top:60px; left:-17px; }
+.equip-inner.halfling_f > .l_shoulder { top:62px; left:127px; }
+.equip-inner.halfling_f > .feet { top:492px; left:-54px; }
+
+.equip-inner.elf_m > .r_finger { top:193px; left:-50px; }
+.equip-inner.elf_m > .l_finger { top:169px; left:180px; }
+.equip-inner.elf_m > .neck { top:54px; left:96px; }
+.equip-inner.elf_m > .body { top:96px; left:40px; }
+.equip-inner.elf_m > .head { top:-53px; left:65px; }
+.equip-inner.elf_m > .legs { top:362px; left:11px; }
+.equip-inner.elf_m > .feet { top:478px; left:66px; }
+.equip-inner.elf_m > .hands { top:150px; left:-53px; }
+.equip-inner.elf_m > .arms { top:107px; left:-28px; }
+.equip-inner.elf_m > .around { top:61px; left:-56px; }
+.equip-inner.elf_m > .waist { top:193px; left:83px; }
+.equip-inner.elf_m > .r_wrist { top:150px; left:9px; }
+.equip-inner.elf_m > .l_wrist { top:152px; left:60px; }
+.equip-inner.elf_m > .r_hand { top:192px; left:-3px; }
+.equip-inner.elf_m > .l_hand { top:169px; left:133px; }
+.equip-inner.elf_m > .back { top:124px; left:132px; }
+.equip-inner.elf_m > .r_ear { top:-22px; left:12px; }
+.equip-inner.elf_m > .l_ear { top:-16px; left:123px; }
+.equip-inner.elf_m > .eyes { top:19px; left:12px; }
+.equip-inner.elf_m > .sheath { top:290px; left:-11px; }
+.equip-inner.elf_m > .belt { top:236px; left:71px; }
+.equip-inner.elf_m > .over { top:95px; left:84px; }
+.equip-inner.elf_m > .r_shoulder { top:62px; left:-8px; }
+.equip-inner.elf_m > .l_shoulder { top:69px; left:136px; }
+.equip-inner.elf_m > .tied { top:390px; left:200px; }
+
+.equip-inner.elf_f > .r_finger { top:264px; left:-46px; }
+.equip-inner.elf_f > .l_finger { top:256px; left:183px; }
+.equip-inner.elf_f > .neck { top:42px; left:92px; }
+.equip-inner.elf_f > .body { top:131px; left:45px; }
+.equip-inner.elf_f > .head { top:-51px; left:58px; }
+.equip-inner.elf_f > .legs { top:336px; left:50px; }
+.equip-inner.elf_f > .feet { top:482px; left:28px; }
+.equip-inner.elf_f > .hands { top:213px; left:180px; }
+.equip-inner.elf_f > .arms { top:129px; left:-24px; }
+.equip-inner.elf_f > .around { top:114px; left:154px; }
+.equip-inner.elf_f > .waist { top:173px; left:45px; }
+.equip-inner.elf_f > .r_wrist { top:186px; left:-33px; }
+.equip-inner.elf_f > .l_wrist { top:169px; left:170px; }
+.equip-inner.elf_f > .r_hand { top:308px; left:-30px; }
+.equip-inner.elf_f > .l_hand { top:301px; left:162px; }
+.equip-inner.elf_f > .back { top:136px; left:90px; }
+.equip-inner.elf_f > .r_ear { top:-40px; left:6px; }
+.equip-inner.elf_f > .l_ear { top:-28px; left:113px; }
+.equip-inner.elf_f > .eyes { top:5px; left:4px; }
+.equip-inner.elf_f > .sheath { top:280px; left:38px; }
+.equip-inner.elf_f > .belt { top:238px; left:40px; }
+.equip-inner.elf_f > .over { top:91px; left:81px; }
+.equip-inner.elf_f > .r_shoulder { top:62px; left:-12px; }
+.equip-inner.elf_f > .l_shoulder { top:63px; left:133px; }
+.equip-inner.elf_f > .tied { top:390px; left:200px; }
+
+.equip-inner.dwarf_m > .r_finger { top:289px; left:-37px; }
+.equip-inner.dwarf_m > .l_finger { top:327px; left:291px; }
+.equip-inner.dwarf_m > .neck { top:67px; left:183px; }
+.equip-inner.dwarf_m > .body { top:149px; left:113px; }
+.equip-inner.dwarf_m > .head { top:-55px; left:124px; }
+.equip-inner.dwarf_m > .legs { top:357px; left:52px; }
+.equip-inner.dwarf_m > .feet { top:487px; left:118px; }
+.equip-inner.dwarf_m > .hands { top:282px; left:299px; }
+.equip-inner.dwarf_m > .arms { top:146px; left:227px; }
+.equip-inner.dwarf_m > .around { top:116px; left:-13px; }
+.equip-inner.dwarf_m > .waist { top:245px; left:60px; }
+.equip-inner.dwarf_m > .r_wrist { top:235px; left:-41px; }
+.equip-inner.dwarf_m > .l_wrist { top:235px; left:303px; }
+.equip-inner.dwarf_m > .r_hand { top:334px; left:-16px; }
+.equip-inner.dwarf_m > .l_hand { top:338px; left:244px; }
+.equip-inner.dwarf_m > .back { top:188px; left:186px; }
+.equip-inner.dwarf_m > .r_ear { top:-14px; left:54px; }
+.equip-inner.dwarf_m > .l_ear { top:-5px; left:210px; }
+.equip-inner.dwarf_m > .eyes { top:29px; left:49px; }
+.equip-inner.dwarf_m > .sheath { top:314px; left:185px; }
+.equip-inner.dwarf_m > .belt { top:266px; left:186px; }
+.equip-inner.dwarf_m > .over { top:114px; left:173px; }
+.equip-inner.dwarf_m > .r_shoulder { top:77px; left:37px; }
+.equip-inner.dwarf_m > .l_shoulder { top:74px; left:235px; }
+.equip-inner.dwarf_m > .tied { top:400px; left:300px; }
+
+.equip-inner.dwarf_f > .r_finger { top:256px; left:-28px; }
+.equip-inner.dwarf_f > .l_finger { top:262px; left:252px; }
+.equip-inner.dwarf_f > .neck { top:93px; left:91px; }
+.equip-inner.dwarf_f > .body { top:147px; left:120px; }
+.equip-inner.dwarf_f > .head { top:-51px; left:109px; }
+.equip-inner.dwarf_f > .legs { top:318px; left:54px; }
+.equip-inner.dwarf_f > .feet { top:461px; left:110px; }
+.equip-inner.dwarf_f > .hands { top:221px; left:246px; }
+.equip-inner.dwarf_f > .arms { top:137px; left:220px; }
+.equip-inner.dwarf_f > .around { top:90px; left:-23px; }
+.equip-inner.dwarf_f > .waist { top:194px; left:89px; }
+.equip-inner.dwarf_f > .r_wrist { top:193px; left:-20px; }
+.equip-inner.dwarf_f > .l_wrist { top:188px; left:206px; }
+.equip-inner.dwarf_f > .r_hand { top:256px; left:15px; }
+.equip-inner.dwarf_f > .l_hand { top:264px; left:209px; }
+.equip-inner.dwarf_f > .back { top:155px; left:44px; }
+.equip-inner.dwarf_f > .r_ear { top:-18px; left:37px; }
+.equip-inner.dwarf_f > .l_ear { top:2px; left:190px; }
+.equip-inner.dwarf_f > .eyes { top:25px; left:33px; }
+.equip-inner.dwarf_f > .sheath { top:313px; left:181px; }
+.equip-inner.dwarf_f > .belt { top:264px; left:154px; }
+.equip-inner.dwarf_f > .over { top:105px; left:159px; }
+.equip-inner.dwarf_f > .r_shoulder { top:72px; left:28px; }
+.equip-inner.dwarf_f > .l_shoulder { top:76px; left:204px; }
+.equip-inner.dwarf_f > .tied { top:400px; left:260px; }
+
+.equip-inner.goblin_m > .r_finger { top:311px; left:-32px; }
+.equip-inner.goblin_m > .l_finger { top:300px; left:282px; }
+.equip-inner.goblin_m > .neck { top:100px; left:106px; }
+.equip-inner.goblin_m > .body { top:145px; left:114px; }
+.equip-inner.goblin_m > .head { top:-52px; left:124px; }
+.equip-inner.goblin_m > .legs { top:299px; left:84px; }
+.equip-inner.goblin_m > .feet { top:470px; left:56px; }
+.equip-inner.goblin_m > .hands { top:256px; left:283px; }
+.equip-inner.goblin_m > .arms { top:138px; left:248px; }
+.equip-inner.goblin_m > .around { top:115px; left:-21px; }
+.equip-inner.goblin_m > .waist { top:200px; left:91px; }
+.equip-inner.goblin_m > .r_wrist { top:224px; left:-49px; }
+.equip-inner.goblin_m > .l_wrist { top:200px; left:277px; }
+.equip-inner.goblin_m > .r_hand { top:342px; left:13px; }
+.equip-inner.goblin_m > .l_hand { top:340px; left:241px; }
+.equip-inner.goblin_m > .back { top:156px; left:59px; }
+.equip-inner.goblin_m > .r_ear { top:-21px; left:61px; }
+.equip-inner.goblin_m > .l_ear { top:-17px; left:184px; }
+.equip-inner.goblin_m > .eyes { top:32px; left:50px; }
+.equip-inner.goblin_m > .sheath { top:277px; left:174px; }
+.equip-inner.goblin_m > .belt { top:230px; left:173px; }
+.equip-inner.goblin_m > .over { top:114px; left:166px; }
+.equip-inner.goblin_m > .r_shoulder { top:78px; left:27px; }
+.equip-inner.goblin_m > .l_shoulder { top:73px; left:210px; }
+.equip-inner.goblin_m > .tied { top:415px; left:280px; }
+
+.equip-inner.goblin_f > .r_finger { top:347px; left:13px; }
+.equip-inner.goblin_f > .l_finger { top:286px; left:133px; }
+.equip-inner.goblin_f > .neck { top:120px; left:61px; }
+.equip-inner.goblin_f > .body { top:166px; left:83px; }
+.equip-inner.goblin_f > .head { top:-49px; left:63px; }
+.equip-inner.goblin_f > .legs { top:328px; left:156px; }
+.equip-inner.goblin_f > .feet { top:484px; left:64px; }
+.equip-inner.goblin_f > .hands { top:302px; left:61px; }
+.equip-inner.goblin_f > .arms { top:159px; left:196px; }
+.equip-inner.goblin_f > .around { top:169px; left:-30px; }
+.equip-inner.goblin_f > .waist { top:219px; left:111px; }
+.equip-inner.goblin_f > .r_wrist { top:287px; left:-15px; }
+.equip-inner.goblin_f > .l_wrist { top:226px; left:201px; }
+.equip-inner.goblin_f > .r_hand { top:383px; left:59px; }
+.equip-inner.goblin_f > .l_hand { top:338px; left:110px; }
+.equip-inner.goblin_f > .back { top:208px; left:44px; }
+.equip-inner.goblin_f > .r_ear { top:41px; left:-29px; }
+.equip-inner.goblin_f > .l_ear { top:23px; left:144px; }
+.equip-inner.goblin_f > .eyes { top:48px; left:19px; }
+.equip-inner.goblin_f > .sheath { top:271px; left:181px; }
+.equip-inner.goblin_f > .belt { top:252px; left:59px; }
+.equip-inner.goblin_f > .over { top:122px; left:107px; }
+.equip-inner.goblin_f > .r_shoulder { top:112px; left:-18px; }
+.equip-inner.goblin_f > .l_shoulder { top:95px; left:154px; }
+.equip-inner.goblin_f > .tied { top:410px; left:250px; }
+
+.equip-inner.orc_m > .r_finger { top:291px; left:-34px; }
+.equip-inner.orc_m > .l_finger { top:246px; left:254px; }
+.equip-inner.orc_m > .neck { top:41px; left:55px; }
+.equip-inner.orc_m > .body { top:117px; left:113px; }
+.equip-inner.orc_m > .head { top:-50px; left:112px; }
+.equip-inner.orc_m > .legs { top:307px; left:162px; }
+.equip-inner.orc_m > .feet { top:481px; left:120px; }
+.equip-inner.orc_m > .hands { top:247px; left:-47px; }
+.equip-inner.orc_m > .arms { top:110px; left:222px; }
+.equip-inner.orc_m > .around { top:106px; left:-42px; }
+.equip-inner.orc_m > .waist { top:181px; left:148px; }
+.equip-inner.orc_m > .r_wrist { top:199px; left:-55px; }
+.equip-inner.orc_m > .l_wrist { top:181px; left:272px; }
+.equip-inner.orc_m > .r_hand { top:306px; left:13px; }
+.equip-inner.orc_m > .l_hand { top:288px; left:219px; }
+.equip-inner.orc_m > .back { top:162px; left:47px; }
+.equip-inner.orc_m > .r_ear { top:-19px; left:53px; }
+.equip-inner.orc_m > .l_ear { top:-11px; left:172px; }
+.equip-inner.orc_m > .eyes { top:40px; left:159px; }
+.equip-inner.orc_m > .sheath { top:277px; left:64px; }
+.equip-inner.orc_m > .belt { top:227px; left:62px; }
+.equip-inner.orc_m > .over { top:93px; left:166px; }
+.equip-inner.orc_m > .r_shoulder { top:58px; left:-1px; }
+.equip-inner.orc_m > .l_shoulder { top:50px; left:206px; }
+.equip-inner.orc_m > .tied { top:410px; left:-40px; }
+
+.equip-inner.orc_f > .r_finger { top:292px; left:-48px; }
+.equip-inner.orc_f > .l_finger { top:331px; left:196px; }
+.equip-inner.orc_f > .neck { top:52px; left:134px; }
+.equip-inner.orc_f > .body { top:90px; left:67px; }
+.equip-inner.orc_f > .head { top:-51px; left:94px; }
+.equip-inner.orc_f > .legs { top:297px; left:93px; }
+.equip-inner.orc_f > .feet { top:473px; left:50px; }
+.equip-inner.orc_f > .hands { top:290px; left:206px; }
+.equip-inner.orc_f > .arms { top:141px; left:202px; }
+.equip-inner.orc_f > .around { top:118px; left:-19px; }
+.equip-inner.orc_f > .waist { top:215px; left:118px; }
+.equip-inner.orc_f > .r_wrist { top:205px; left:-48px; }
+.equip-inner.orc_f > .l_wrist { top:230px; left:216px; }
+.equip-inner.orc_f > .r_hand { top:334px; left:-8px; }
+.equip-inner.orc_f > .l_hand { top:351px; left:152px; }
+.equip-inner.orc_f > .back { top:169px; left:126px; }
+.equip-inner.orc_f > .r_ear { top:-18px; left:34px; }
+.equip-inner.orc_f > .l_ear { top:0px; left:151px; }
+.equip-inner.orc_f > .eyes { top:27px; left:31px; }
+.equip-inner.orc_f > .sheath { top:299px; left:40px; }
+.equip-inner.orc_f > .belt { top:235px; left:41px; }
+.equip-inner.orc_f > .over { top:103px; left:125px; }
+.equip-inner.orc_f > .r_shoulder { top:69px; left:6px; }
+.equip-inner.orc_f > .l_shoulder { top:71px; left:178px; }
+.equip-inner.orc_f > .tied { top:420px; left:-40px; }
