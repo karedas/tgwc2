@@ -19,7 +19,7 @@
 		<meta property="og:title" content="The Gate MUD - Gioco di ruolo online" />
 		<meta property="og:site_name" content="The Gate MUD" />
 		<meta property="og:description" content="The Gate MUD è un gioco di ruolo online gratuito (davvero!) che ti permetterà di vivere straordinarie avventure in un dettagliato mondo virtuale di ambientazione fantasy. Prendendo le parti di un abitante della terra di Ikhari, potrai forgiare la sua storia con le tue gesta!" />
-		<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/play.thegatemud.it/images/logo1.jpg" />
+		<!-- <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/play.thegatemud.it/images/logo1.jpg" /> -->
 		<meta property="og:type" content="game" />
 		<meta property="og:locale" content="it_IT" />
 		<meta property="og:url" content="<%= site_url %>" />
@@ -29,9 +29,13 @@
 		<link rel="shortcut icon" href="assets/icons/tglogo.ico" />
 
 
-		<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.9.0.min.js"></script>
-		<script src="//code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+				integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+				crossorigin="anonymous"></script>
+		<script	src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+				integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+				crossorigin="anonymous"></script>
 
 <!--
 		<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -61,7 +65,8 @@
 		<script src="js/vendor/modernizr.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.slim.js" integrity="sha256-0YA7ixx4+I4GrLichcjWSQHIUSQiI8ojTDqsK7AZ5zU=" crossorigin="anonymous"></script>
-		<script src="<%= url_hash('js/thegateway-client.js') %>"></script>
+		<!-- <script src="<%= url_hash('js/thegateway-client.js') %>"></script> -->
+		<script src="js/thegateway-client.js"></script>
 
 		<title>The Gate</title>
 	</head>

@@ -69,8 +69,9 @@ let db = require('./models')({
 db.sequelize.sync().done(function(err) {
 
 	let app = express();
-	app.set('max_requests_per_ip', 20);
+	
 	app.set('port', process.env.API_PORT);
+	app.set('max_requests_per_ip', 20);
 	app.set('client_url', process.env.CLIENTURL);
 
 	app.enable('trust proxy');
@@ -84,8 +85,8 @@ db.sequelize.sync().done(function(err) {
 	app.use(session({
 		secret: process.env.SESSION_SECRET,
 		store: new SQLiteStore,
-		resave: true,
-		saveUninitialized: true
+		resave: false,
+		saveUninitialized: false
 	}));
 	app.use(passport.initialize());
 	app.use(passport.session());

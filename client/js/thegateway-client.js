@@ -11,13 +11,13 @@ var socket_io_resource = 'socket.io';
 
 // Set to a specific server or ''
 // var media_server_addr = ''
-var media_server_addr = '//play.thegatemud.it'
+var media_server_addr = '//www.tg.it/assets'
 
 
 /* Paths */
 var ws_prefix='/';
 var images_path = media_server_addr+ws_prefix+'images';
-var sounds_path = media_server_addr+ws_prefix+'songs';
+var sounds_path = media_server_addr+ws_prefix+'sounds';
 
 
 
@@ -93,7 +93,7 @@ var max_drop_stack = null;
 var at_drag_stop_func = null;
 
 /* Debug */
-var debug = false;
+var debug = true;
 var directLogin = false;
 
 /* Account verify data */
@@ -1227,7 +1227,7 @@ function accountLogout(success, error)
 	networkActivityMessage("Disconnessione dall'account...");
 	
 	$.ajax({
-		url: 'http://192.168.10.10:3334/api/login',
+		url: '/api/login',
 		type: 'DELETE',
 		contentType: 'application/json; charset=utf-8',
 		dataType: 'json',
@@ -1243,7 +1243,7 @@ function getAccountProfile(success, error)
 	networkActivityMessage("Richiesta profilo...");
 	
 	$.ajax({
-		url: 'http://192.168.10.10:3334/api/profile',
+		url: '/api/profile',
 		contentType: 'application/json; charset=utf-8',
 		dataType: 'json',
 		success: success,
@@ -1432,7 +1432,7 @@ function doUpdateCharacters()
 					enabled_chars_count++;
 			});
 			
-			$('img', cl).load(function () {
+			$('img', cl).on('load', function () {
 				$(this).css('visibility','visible');
 			});
 			
@@ -1849,7 +1849,8 @@ function loginInit()
 		open: function() {
 			fadeOutLoginPortrait();
 			
-			$.getJSON("/serverstat", updateServerStats);
+			
+			// $.getJSON("/serverstat", updateServerStats);
 
 			loginPortraitTimer = setInterval(fadeOutLoginPortrait, 8000);
 			
@@ -3282,11 +3283,13 @@ function renderDetails(info, type)
 
 function detailsInit()
 {
-	$('.detailsimage').error(function () {
-		$(this).closest('.detailsimage-cont').slideUp('fast');
-	}).load(function() {
-		$(this).closest('.detailsimage-cont').slideDown('fast');
-	});
+	$('.detailsimage')
+		.on('error', function () {
+			$(this).closest('.detailsimage-cont').slideUp('fast');
+		})
+		.on('load', function() {
+			$(this).closest('.detailsimage-cont').slideDown('fast');
+		});
 
 	$('#detailsdialog').tabs({
 		/* event: "mouseover", */
@@ -5299,8 +5302,8 @@ function imageInit()
 		stop: saveWindowData
 	});
 	
-	$('#image-cont').error(function() {
-		showImage($(this), 'tglogo.jpg');
+	$('#image-cont').on('error', function() {
+		// showImage($(this), 'tglogo.jpg');
 	});
 }
 
@@ -5666,9 +5669,9 @@ function renderPlayerInfo(info)
 			sendToServer('aggett list');
 		});
 		
-		$('#infoimage').error(function () {
+		$('#infoimage').on('error', function () {
 			$(this).hide();
-		}).load(function () {
+		}).on('load', function () {
 			$(this).show();
 		});
 	}
@@ -6840,7 +6843,7 @@ var login_heroes_assets = [
 
 
 // Starting point
-$(window).load(function () {
+$(document).ready(function(){
 	/*
 	 * REQUIRED ONLY FOR JQ UI 1.10
 	 */
@@ -7286,7 +7289,7 @@ function main()
 	}
 	*/
 
-	directLogin = $(location).attr('href').search('testtg') >= 0;
+	directLogin = $(location).attr('href').search('tg') >= 0;
 
 	
 	var dbg = $(location).attr('href').match(/debug=[^&]+/);
@@ -7406,15 +7409,19 @@ function connectToServer()
 		'force new connection':true,
 		'resource': socket_io_resource
 	});
+	
+
 
 	socket.on('data', handleLoginData);
 
 	socket.on('connect', function() {
+		console.log('CONNECT');
 		networkActivityMessage('Connessione avvenuta!');
 		setConnected();
 	});
 
 	socket.on('connecting', function(t) {
+		console.log('connecting');
 /*
 		if(!debug)
 			_gaq.push(['_trackEvent', 'Connection', 'Transport', t, 0, true]);

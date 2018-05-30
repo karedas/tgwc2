@@ -28,8 +28,28 @@ const cookieParser = require('cookie-parser');
 const http = require('http');
 const app = require('express')();
 const session = require('express-session');
+const sessionSocket = require("express-socket.io-session");
+
+
 const server = require('http').createServer(app);  
-const io = require('socket.io')(server);
+
+
+let socket_transports = [
+	'polling', 
+	'websocket'
+];
+
+
+
+const io = require('socket.io')(server, {
+	transports: socket_transports
+});
+
+// Use shared session middleware for socket.io
+io.use(sessionSocket(session, {
+    autoSave:true
+})); 
+
 
 const SQLiteStore = require('connect-sqlite3')(session);
 
@@ -39,14 +59,15 @@ app.use(session({
 	cookie: {secure: true},
 	resave: false,
 	saveUninitialized: true
-}
-));
+}));
+
+
+
+
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-
-
 
 let convert = new Convert();
 
@@ -78,6 +99,8 @@ var consoleLogger = new winston.transports.Console({
 });
 */
 
+
+
 let db =  require('./models')({
 	storage: process.env.DATABASEPATH,
 	logging: logger.debug
@@ -88,11 +111,11 @@ let db =  require('./models')({
 db.sequelize.sync().done(function(err){
 	
 	let sio = server.listen(process.env.WS_PORT, () => {
+		// var sessionSockets = new SessionSockets(sio, sessionStore, cookieParser);
 		SocketServer(sio, db);
 		log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
 		logger.info('Websocket server listening on port %d', process.env.WS_PORT);
 	});
-	
 });
 
 function SocketServer(sio, db) {
@@ -103,36 +126,75 @@ function SocketServer(sio, db) {
 		port: process.env.TGAPI_TELNET_PORT
 	};
 
+
+		// Environment is set with NODE_ENV
+	// Ex: NODE_ENV=production node thegateway.js
+
+	// Production (default) configuration
+	// sio.configure('production', function() {
+	// 	sio.enable('browser client minification');
+	// 	sio.enable('browser client etag');
+	// 	sio.enable('browser client gzip');
+	// 	sio.set('log level', 1);
+		
+	// 	logger.info('Applying production config');
+	// });
+
+
+
+	// // Generic configuration
+	// sio.configure(function() {
+	// 	logger.info('Applying generic config');
+	// 	sio.set('transports', transports);
+	// });
+
+
+
 	// Handle incoming websocket  connections
 	sio.on('connection', (socket) => {
-
+		console.log('connection');
 		socket.on('oob', function(msg) {
+			// Handle a login request
+			if (msg["itime"])
+			{
+				GetUserFromSession(session, function(err, user) {
+					console.log('GetUserFromSession')
 
-			GetUserFromSession(session, function(err, user) {
+					let account_id = ( err != null || user == null ) ? 0 : user.id;
+					
+					// Get the actual transport type
+					let transport = sio.transports[socket.id].name;
 
-				let account_id = ( err != null || user == null ) ? 0 : user.id;
+					
+					//Calculate coded headers
+					let codeHeaders = CalcCodeFromHeaders(headers);
 
-				// Get the request headers
-				let headers =  socket.handshake.headers;
+					// Get the request headers
+					let headers =  socket.handshake.headers;
 
-				//Calculate coded headers
-				let codeHeaders = CalcCodeFromHeaders(headers);
+					// Get the real client IP address
+					let client_ip = GetClientIp(headers);
 
-				// Get the real client IP address
-				let client_ip = GetClientIp(headers);
+					// Get the 'itime' code value
+					var codeitime = msg["itime"];
 
-				// Get the 'itime' code value
-				var codeitime = '';
+					// Client code
+					var clientcode = codeitime + '-' + codeHeaders;
 
-				// Client code
-				var clientcode = codeitime + '-' + codeHeaders;
+					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, transport, clientcode, account_id);
 
-				logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, clientcode)
-				
-				// Conect to game server
-				let tgconn = ConnectToGameServer(socket, tgaddr, client_ip);
+					// Conect to game server
+					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip);
 
-			});
+					socket.on('disconnect', function() {
+						logger.info('Closing %s', socket.id);
+						
+						// Disconnect from game server
+						tgconn.destroy();
+					});
+
+				});
+			}
 
 			socket.on('disconnect', function() {
 				logger.info('Closing %s', socket.id);
@@ -141,13 +203,14 @@ function SocketServer(sio, db) {
 				tgconn.destroy();
 			});
 		});
+
+		// console.log(socket);
+
+		// socket.emit('data', '&!connmsg{"msg":"ready"}!');
 	});
 
 	function GetUserFromSession(session, done)
 	{
-		console.log(session);
-		console.log(session.passport.user);
-
 		try
 		{
 			db.Account.find(session.passport.user).complete(done)

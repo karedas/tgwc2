@@ -76,6 +76,7 @@ $(OUT_DIR): \
 				$(OUT_DIR)/stylesheets/vendor \
 				$(OUT_DIR)/assets/fonts \
 				$(OUT_DIR)/assets/icons \
+				$(OUT_DIR)/assets/sounds \
 				$(OUT_DIR)/index.html \
 				$(OUT_DIR)/canvas.html
 

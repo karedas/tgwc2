@@ -7,6 +7,7 @@ banEmail.load();
 module.exports = function(logger, app, db, passport, mailer) {
 
 	// logout a user
+
 	app.delete('/api/login',
 		function (req, res) {
 			var user = req.user;
@@ -422,6 +423,10 @@ module.exports = function(logger, app, db, passport, mailer) {
 	app.get('/api/profile',
 		isLoggedIn,
 		function (req, res) {
+
+			console.log("OK");
+			console.log(req, res);
+			
 			var user = req.user;
 			
 			res.json({
