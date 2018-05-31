@@ -138,7 +138,6 @@ function SocketServer(db) {
 
 					socket.on('disconnect', function() {
 						logger.info('Closing %s', socket.id);
-						
 						// Disconnect from game server
 						tgconn.destroy();
 					});
@@ -205,7 +204,7 @@ function SocketServer(db) {
 
 	function ConnectToGameServer(websocket, tgaddr, from_host, code_itime, code_headers, account_id) {
 
-		let tgconn = net.connect(tgaddr.port, tgaddr.host);
+		let tgconn = net.connect({ host:'localhost', port:7890 });
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
@@ -214,15 +213,16 @@ function SocketServer(db) {
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
+			console.log('sendtoclient');
 			// Copy the data to the client
-			console.log(msg.toString());
-			console.log("onCLIENT: ",msg.toString());
 			websocket.emit('data', convert.toHtml(msg.toString()));
 		};
 
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
+			console.log('handshake');
+			
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
 			// Substitute with the copy handler
 			tgconn.removeListener('data', handshake);
