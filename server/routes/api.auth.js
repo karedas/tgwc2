@@ -424,9 +424,6 @@ module.exports = function(logger, app, db, passport, mailer) {
 		isLoggedIn,
 		function (req, res) {
 
-			console.log("OK");
-			console.log(req, res);
-			
 			var user = req.user;
 			
 			res.json({
