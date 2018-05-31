@@ -100,7 +100,6 @@ function SocketServer(db) {
 	
 	// Handle incoming websocket  connections
 	io.on('connection', function(socket) {
-		console.log('connection');
 		
 		socket.on('oob', function(msg) {
 
@@ -119,8 +118,8 @@ function SocketServer(db) {
 //					let transport = io.transports[socket.id].name;
 					
 					//Calculate coded headers
+					
 					let codeHeaders = CalcCodeFromHeaders(headers);
-
 
 					// Get the real client IP address
 					let client_ip = GetClientIp(headers);
@@ -133,7 +132,7 @@ function SocketServer(db) {
 
 					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
 					// Conect to game server
-					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip, codeitime, codeheaders, account_id);
+					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip, codeitime, codeHeaders, account_id);
 
 
 					socket.on('disconnect', function() {
@@ -161,7 +160,6 @@ function SocketServer(db) {
 	function GetUserFromSession(done)
 	{	
 
-		console.log('getuser')
 		try
 		{
 			db.Account.find(session.passport.user).complete(done)
