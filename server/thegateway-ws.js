@@ -213,7 +213,6 @@ function SocketServer(db) {
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
-			console.log('sendtoclient');
 			// Copy the data to the client
 			websocket.emit('data', convert.toHtml(msg.toString()));
 		};
@@ -221,7 +220,6 @@ function SocketServer(db) {
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
-			console.log('handshake');
 			
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
 			// Substitute with the copy handler
