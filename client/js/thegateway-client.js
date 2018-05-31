@@ -5,7 +5,7 @@
 
 	@assets = open('assets_list').map{ |line| line.split }
 -%>
-var ws_server_addr = 'http://';
+var ws_server_addr = 'http://www.tg.it:3333';
 var socket_io_resource = 'socket.io';
 // var socket_io_resource = document.location.pathname.slice(1)+'socket.io';
 
@@ -94,7 +94,7 @@ var at_drag_stop_func = null;
 
 /* Debug */
 var debug = true;
-var directLogin = false;
+var directLogin = true;
 
 /* Account verify data */
 var verify_email, verify_token;
@@ -7407,7 +7407,8 @@ function connectToServer()
 	socket = io.connect(ws_server_addr, {
 		'reconnect': false,
 		'force new connection':true,
-		'resource': socket_io_resource
+		'resource': socket_io_resource,
+		'transports': ['polling']
 	});
 	
 
@@ -7415,13 +7416,11 @@ function connectToServer()
 	socket.on('data', handleLoginData);
 
 	socket.on('connect', function() {
-		console.log('CONNECT');
 		networkActivityMessage('Connessione avvenuta!');
 		setConnected();
 	});
 
 	socket.on('connecting', function(t) {
-		console.log('connecting');
 /*
 		if(!debug)
 			_gaq.push(['_trackEvent', 'Connection', 'Transport', t, 0, true]);
@@ -7512,6 +7511,7 @@ var login_reply_message = {
 
 function handleLoginData(data)
 {
+	console.log(data);	
 	if(data.indexOf("&!connmsg{") == 0) {
 		var end = data.indexOf('}!');
 		var rep = $.parseJSON(data.slice(9, end+1));
@@ -7575,6 +7575,7 @@ function completeHandshake()
 
 function handleServerData(msg)
 {
+	console.log(msg);
 	netdata += msg;
 	var len = netdata.length;
 

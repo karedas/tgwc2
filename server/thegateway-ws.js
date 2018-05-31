@@ -5,34 +5,40 @@
  */
 
 const log = console.log;
-
 const path = require('path');
 const winston = require('winston');
 const passport = require('passport');
 const chalk = require('chalk');
-
-
 const Convert = require('ansi-to-html');
 const crypto = require('crypto-js');
-
-const dotenv = require('dotenv');
-
-// Load config file .
-dotenv.load({
+const dotenv = require('dotenv').load({
 	path: '.env'
-});
+});;
 
 const net = require('net');
-const cookieParser = require('cookie-parser');
 
-const http = require('http');
 const app = require('express')();
-const session = require('express-session');
-const sessionSocket = require("express-socket.io-session");
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const expressSession = require('express-session');
 
 
-const server = require('http').createServer(app);  
 
+const socketSession = require("express-socket.io-session");
+const SQLiteStore = require('connect-sqlite3')(expressSession);
+
+const session = expressSession({
+	store: new SQLiteStore(),
+	secret: "my-secret",
+    resave: true,
+    saveUninitialized: true
+});
+
+
+// Attach session
+
+
+let convert = new Convert();
 
 let socket_transports = [
 	'polling', 
@@ -40,36 +46,6 @@ let socket_transports = [
 ];
 
 
-
-const io = require('socket.io')(server, {
-	transports: socket_transports
-});
-
-// Use shared session middleware for socket.io
-io.use(sessionSocket(session, {
-    autoSave:true
-})); 
-
-
-const SQLiteStore = require('connect-sqlite3')(session);
-
-app.use(session({
-	store: new SQLiteStore,
-	secret: process.env.SESSION_SECRET,
-	cookie: {secure: true},
-	resave: false,
-	saveUninitialized: true
-}));
-
-
-
-
-
-/**
- * Load environment variables from .env file, where API keys and passwords are configured.
- */
-
-let convert = new Convert();
 
 /**
  * Logging configuration.
@@ -91,15 +67,7 @@ let logger = new(winston.Logger)({
 });
 
 
-/*
-var consoleLogger = new winston.transports.Console({
-	colorize: true,
-	level: 'debug',
-	timestamp: true
-});
-*/
-
-
+// start Session DB
 
 let db =  require('./models')({
 	storage: process.env.DATABASEPATH,
@@ -107,11 +75,15 @@ let db =  require('./models')({
 });
 
 
-// Create/update Table base on models
+app.set('trust proxy', 1);
+// Attach session
+app.use(session);
+// Share session with io sockets
+io.use(socketSession(session));
+
+
 db.sequelize.sync().done(function(err){
-	
 	let sio = server.listen(process.env.WS_PORT, () => {
-		// var sessionSockets = new SessionSockets(sio, sessionStore, cookieParser);
 		SocketServer(sio, db);
 		log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
 		logger.info('Websocket server listening on port %d', process.env.WS_PORT);
@@ -125,40 +97,18 @@ function SocketServer(sio, db) {
 		host: process.env.TGAPI_ADDR,
 		port: process.env.TGAPI_TELNET_PORT
 	};
-
-
-		// Environment is set with NODE_ENV
-	// Ex: NODE_ENV=production node thegateway.js
-
-	// Production (default) configuration
-	// sio.configure('production', function() {
-	// 	sio.enable('browser client minification');
-	// 	sio.enable('browser client etag');
-	// 	sio.enable('browser client gzip');
-	// 	sio.set('log level', 1);
-		
-	// 	logger.info('Applying production config');
-	// });
-
-
-
-	// // Generic configuration
-	// sio.configure(function() {
-	// 	logger.info('Applying generic config');
-	// 	sio.set('transports', transports);
-	// });
-
-
-
+	
 	// Handle incoming websocket  connections
 	sio.on('connection', (socket) => {
-		console.log('connection');
+		
 		socket.on('oob', function(msg) {
+
+			console.log('oob');
+			
 			// Handle a login request
 			if (msg["itime"])
 			{
-				GetUserFromSession(session, function(err, user) {
-					console.log('GetUserFromSession')
+				GetUserFromSession(theSession, function(err, user) {
 
 					let account_id = ( err != null || user == null ) ? 0 : user.id;
 					
@@ -204,9 +154,7 @@ function SocketServer(sio, db) {
 			});
 		});
 
-		// console.log(socket);
-
-		// socket.emit('data', '&!connmsg{"msg":"ready"}!');
+		io.emit('data', '&!connmsg{"msg":"ready"}!');
 	});
 
 	function GetUserFromSession(session, done)
