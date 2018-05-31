@@ -10,7 +10,7 @@ const winston = require('winston');
 const passport = require('passport');
 const chalk = require('chalk');
 const Convert = require('ansi-to-html');
-const crypto = require('crypto-js');
+const crypto = require('crypto');
 const dotenv = require('dotenv').load({
 	path: '.env'
 });;
@@ -84,13 +84,13 @@ io.use(socketSession(session));
 
 db.sequelize.sync().done(function(err){
 	let sio = server.listen(process.env.WS_PORT, () => {
-		SocketServer(sio, db);
+		SocketServer(db);
 		log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
 		logger.info('Websocket server listening on port %d', process.env.WS_PORT);
 	});
 });
 
-function SocketServer(sio, db) {
+function SocketServer(db) {
 	// 	// Default game server local port
 
 	let tgaddr = {
@@ -99,28 +99,28 @@ function SocketServer(sio, db) {
 	};
 	
 	// Handle incoming websocket  connections
-	sio.on('connection', (socket) => {
+	io.on('connection', function(socket) {
+		console.log('connection');
 		
 		socket.on('oob', function(msg) {
 
-			console.log('oob');
-			
 			// Handle a login request
 			if (msg["itime"])
 			{
-				GetUserFromSession(theSession, function(err, user) {
+				GetUserFromSession(function(err, user) {
 
 					let account_id = ( err != null || user == null ) ? 0 : user.id;
 					
 					// Get the actual transport type
-					let transport = sio.transports[socket.id].name;
+	
+					// Get the request headers
+					let headers =  socket.handshake.headers;
 
+//					let transport = io.transports[socket.id].name;
 					
 					//Calculate coded headers
 					let codeHeaders = CalcCodeFromHeaders(headers);
 
-					// Get the request headers
-					let headers =  socket.handshake.headers;
 
 					// Get the real client IP address
 					let client_ip = GetClientIp(headers);
@@ -131,10 +131,10 @@ function SocketServer(sio, db) {
 					// Client code
 					var clientcode = codeitime + '-' + codeHeaders;
 
-					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, transport, clientcode, account_id);
-
+					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
 					// Conect to game server
 					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip);
+
 
 					socket.on('disconnect', function() {
 						logger.info('Closing %s', socket.id);
@@ -155,10 +155,13 @@ function SocketServer(sio, db) {
 		});
 
 		io.emit('data', '&!connmsg{"msg":"ready"}!');
+
 	});
 
-	function GetUserFromSession(session, done)
-	{
+	function GetUserFromSession(done)
+	{	
+
+		console.log('getuser')
 		try
 		{
 			db.Account.find(session.passport.user).complete(done)
