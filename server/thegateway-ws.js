@@ -107,6 +107,7 @@ function SocketServer(db) {
 			if (msg["itime"])
 			{
 				GetUserFromSession(function(err, user) {
+					
 
 					let account_id = ( err != null || user == null ) ? 0 : user.id;
 					
@@ -141,16 +142,9 @@ function SocketServer(db) {
 						// Disconnect from game server
 						tgconn.destroy();
 					});
-
 				});
 			}
 
-			socket.on('disconnect', function() {
-				logger.info('Closing %s', socket.id);
-
-				//Disconnect from game server
-				tgconn.destroy();
-			});
 		});
 
 		io.emit('data', '&!connmsg{"msg":"ready"}!');
