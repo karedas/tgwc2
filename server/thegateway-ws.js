@@ -133,7 +133,7 @@ function SocketServer(db) {
 
 					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
 					// Conect to game server
-					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip);
+					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip, codeitime, codeheaders, account_id);
 
 
 					socket.on('disconnect', function() {
@@ -211,7 +211,7 @@ function SocketServer(db) {
 		return hash.digest('hex');
 	}
 
-	function ConnectToGameServer(websocket, tgaddr, client_ip) {
+	function ConnectToGameServer(websocket, tgaddr, from_host, code_itime, code_headers, account_id) {
 
 		let tgconn = net.connect(tgaddr.port, tgaddr.host);
 
