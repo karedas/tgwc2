@@ -6850,7 +6850,7 @@ $(document).ready(function(){
 	 * REQUIRED ONLY FOR JQ UI 1.10
 	 */
 
-	if($.ui.version.split('.')[1] == "10")
+	if($.ui.version.split('.')[1] == "12")
 	{
 		$.extend($.ui.dialog.prototype, {
 			_title: function(title) {
@@ -7517,6 +7517,7 @@ function handleLoginData(data)
 		var rep = $.parseJSON(data.slice(9, end+1));
 
 		if(rep.msg) {
+			console.log(rep.msg);
 			switch(rep.msg) {
 				case 'ready':
 					sendOOB({ itime: client_state.when.toString(16) });
