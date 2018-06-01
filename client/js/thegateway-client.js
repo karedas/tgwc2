@@ -6932,7 +6932,7 @@ $(document).ready(function(){
 			height:500,
 			dialogClass:'tg-dialog styledbuttons parch noclose'
 		});
-		$('#cookieconsentdialog').parent('.tg-dialog').zIndex(10000);
+		$('#cookieconsentdialog').parent('.tg-dialog').css('zIndex', 10000);
 
 	} else {
 		startClient();
