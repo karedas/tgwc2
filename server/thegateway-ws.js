@@ -29,9 +29,9 @@ const SQLiteStore = require('connect-sqlite3')(expressSession);
 
 const session = expressSession({
 	store: new SQLiteStore(),
-	secret: "my-secret",
-    resave: true,
-    saveUninitialized: true
+	secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
 });
 
 
@@ -91,24 +91,17 @@ db.sequelize.sync().done(function(err){
 });
 
 function SocketServer(db) {
-	// 	// Default game server local port
 
-	let tgaddr = {
-		host: process.env.TGAPI_ADDR,
-		port: process.env.TGAPI_TELNET_PORT
-	};
-	
 	// Handle incoming websocket  connections
 	io.on('connection', function(socket) {
 		
 		socket.on('oob', function(msg) {
-
 			// Handle a login request
+			
 			if (msg["itime"])
 			{
+				
 				GetUserFromSession(function(err, user) {
-					
-
 					let account_id = ( err != null || user == null ) ? 0 : user.id;
 					
 					// Get the actual transport type
@@ -133,7 +126,7 @@ function SocketServer(db) {
 
 					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
 					// Conect to game server
-					let tgconn = ConnectToGameServer(socket, tgaddr, client_ip, codeitime, codeHeaders, account_id);
+					let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
 
 
 					socket.on('disconnect', function() {
@@ -166,7 +159,6 @@ function SocketServer(db) {
 	function GetClientIp(headers) {
 		let ipAddress;
 		let forwardedIpsStr = headers['x-forwarded-for'];
-
 		if (forwardedIpsStr) {
 			let forwardedIps = forwardedIpsStr.split(',');
 			ipAddress = forwardedIps[0];
@@ -179,7 +171,6 @@ function SocketServer(db) {
 		if (!ipAddress) {
 			ipAddress = 'unknown';
 		}
-
 		return ipAddress;
 	}
 
@@ -202,10 +193,11 @@ function SocketServer(db) {
 		return hash.digest('hex');
 	}
 
-	function ConnectToGameServer(websocket, tgaddr, from_host, code_itime, code_headers, account_id) {
+	function ConnectToGameServer(websocket, from_host, code_itime, code_headers, account_id) {
 
-		let tgconn = net.connect({ host:'localhost', port:7890 });
+		let tgconn = net.connect({ host: process.env.TGGAMEHOST, port: process.env.TGAPI_TELNET_PORT});
 
+	
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
 			tgconn.write(msg +'\n');
@@ -220,18 +212,16 @@ function SocketServer(db) {
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
-			
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
-			// Substitute with the copy handler
-			tgconn.removeListener('data', handshake);
-			tgconn.on('data', sendToClient);
+				// Substitute with the copy handler
+				tgconn.removeListener('data', handshake);
+				tgconn.on('data', sendToClient);
+				// Add handler for client->server data
+				websocket.on('data', sendToServer);
 
-			// Add handler for client->server data
-			websocket.on('data', sendToServer);
 
-
-			// Reply to challenge with webclient signature: ip, code
-			sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
+				// Reply to challenge with webclient signature: ip, code
+				sendToServer('WEBCLIENT(0.0.0.0,'+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
 			} else {
 				sendToClient(msg);

@@ -6,7 +6,7 @@
 	@assets = open('assets_list').map{ |line| line.split }
 -%>
 
-var ws_server_addr = 'http://www.tg.it:3333';
+var ws_server_addr = 'http://';
 var socket_io_resource = 'socket.io';
 // var socket_io_resource = document.location.pathname.slice(1)+'socket.io';
 
@@ -913,9 +913,10 @@ function sendToServer(text)
 
 function sendOOB(data)
 {
+	
 	if (!connected)
-		return;
-
+	return;
+	
 	socket.emit('oob', data);
 }
 
@@ -7404,15 +7405,15 @@ function connectToServer()
 		return;
 		
 	connectionError = '';
-
+	if(socket) {
+		socket.destroy();
+	}
 	socket = io.connect(ws_server_addr, {
 		'reconnect': false,
 		'force new connection':true,
 		'resource': socket_io_resource,
 		'transports': ['polling']
 	});
-	
-
 
 	socket.on('data', handleLoginData);
 
@@ -7439,7 +7440,6 @@ function connectToServer()
 			networkActivityMessage('Connessione conclusa!');
 	});
 }
-
 
 function performLogin()
 {
