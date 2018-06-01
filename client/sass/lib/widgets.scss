@@ -2634,6 +2634,9 @@ input[type="checkbox"]:checked.tg-button + label span:hover {
 	padding:0px;
 }
 
+.ui-widget.ui-widget-content {
+	border: none;
+}
 
 .tg-dialog.notitle .ui-dialog-titlebar {
 	display: none;
@@ -2687,6 +2690,10 @@ input[type="checkbox"]:checked.tg-button + label span:hover {
 	background-color:transparent;
 	font-family: stonehenge;
 	color: beige;
+}
+
+.tg-button {
+	color: white;
 }
 
 .tg-dialog.styledbuttons .tg-button.xs
