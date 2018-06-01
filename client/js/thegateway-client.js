@@ -7291,7 +7291,7 @@ function main()
 	}
 	*/
 
-	directLogin = $(location).attr('href').search('tg') >= 0;
+	directLogin = $(location).attr('href').search('wcthegate2018test') >= 0;
 
 	
 	var dbg = $(location).attr('href').match(/debug=[^&]+/);
