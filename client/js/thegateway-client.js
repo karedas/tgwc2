@@ -12,7 +12,7 @@ var socket_io_resource = 'socket.io';
 
 // Set to a specific server or ''
 // var media_server_addr = ''
-var media_server_addr = '//www.tg.it/assets'
+var media_server_addr = './assets'
 
 
 /* Paths */
@@ -5305,7 +5305,7 @@ function imageInit()
 	});
 	
 	$('#image-cont').on('error', function() {
-		// showImage($(this), 'tglogo.jpg');
+		 showImage($(this), 'tglogo.jpg');
 	});
 }
 
@@ -7517,7 +7517,6 @@ function handleLoginData(data)
 		var rep = $.parseJSON(data.slice(9, end+1));
 
 		if(rep.msg) {
-			console.log(rep.msg);
 			switch(rep.msg) {
 				case 'ready':
 					sendOOB({ itime: client_state.when.toString(16) });
