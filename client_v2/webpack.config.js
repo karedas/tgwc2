@@ -1,32 +1,34 @@
-// const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 
-module.exports = function(portal = "webclient", paths) {
+module.exports = function (config) {
+    
     var wp = {
         mode: 'development',
 
         // --watch true, --watch false
         watch: false,
         watchOptions: {
-			poll: 1000,
-			aggregateTimeout: 500,
-		},
+            poll: 1000,
+            aggregateTimeout: 500,
+        },
         // set basedir for entry point
-        context: path.resolve(__dirname, paths.src.base + paths.src.js ),
-    
+        context: path.resolve(__dirname, config.src.base + config.src.js),
+
         externals: {
             jquery: "jQuery",
-            $ : "jQuery",
+            $: "jQuery",
         },
-        
+
         entry: {
             // 'evennia': './evennia.js',
             'app': './app.js'
         },
-    
+
         output: {
-            path: path.resolve(__dirname, paths.build.base + paths.build.js),
+            path: path.resolve(__dirname, config.build.base + config.build.js),
             filename: '[name].min.js', //TODO only on build
             libraryTarget: 'umd',
             library: ['TG', '[name]'],
@@ -34,41 +36,42 @@ module.exports = function(portal = "webclient", paths) {
         },
 
         resolve: {
-			modules: [
+            modules: [
                 'node_modules',
-				'./'
-				]
-		},
+                './'
+            ],
+            alias: {
+                modernizr$: path.resolve(__dirname, "./.modernizrrc.js")
+              }
+        },
 
         module: {
-            rules: [{
-                test: /\.(js)$/,
-                loader: 'babel-loader',
-                query: {
-                    babelrc: false,
-                    presets: [
-                        ["env", {
-                            modules: false
-                        }],
-                    ],
-                    compact: false
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: "babel-loader"
+                    }
+                },
+                {
+                    loader: "webpack-modernizr-loader",
+                    test: /\.modernizrrc\.js$/
                 }
-            }, 
-        ]},
-    
-        // plugins: [
-            // new HtmlWebPackPlugin({
-            //     inject: "head",
-            //     minify: false,
-            //     template: "index.html",
-            //     filename: "../index.html"
-            // }),
-        // ],
-    
+            ]
+        },
+
+
+        plugins: [
+            new HtmlWebPackPlugin({
+                inject: "head",
+                minify: false,
+                template: "index.html",
+                filename: "./src/index.html"
+            })
+        ],
+        
         optimization: {
-            runtimeChunk: {
-                name: 'vendor'
-            },
             splitChunks: {
                 cacheGroups: {
                     vendor: {
@@ -82,7 +85,7 @@ module.exports = function(portal = "webclient", paths) {
                 }
             }
         },
-    
+
         stats: {
             modules: false,
             entrypoints: false,
@@ -90,7 +93,7 @@ module.exports = function(portal = "webclient", paths) {
         },
 
         plugins: [
-			new webpack.NoEmitOnErrorsPlugin()
+            new webpack.NoEmitOnErrorsPlugin()
         ]
     }
 

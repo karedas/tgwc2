@@ -394,36 +394,10 @@ module.exports = function(logger, app, db, passport, mailer) {
 			res.json({status:"ok"});
 		});
 
-
-	
-	// unlink facebook account
-	/*
-	app.delete('/api/facebook/link',
-		isLoggedIn,
-		function (req, res) {
-			var user = req.user;
-			if (user.canUnlink())
-			{
-				user.facebook_token = null;
-				
-				user.save().success(function (user) {
-					res.json({status:"ok"});
-				}).failure(function (error) {
-					res.send(500);
-				});
-
-			}
-			else
-			{
-				res.send(409);
-			}
-		});
-	*/	
 	
 	app.get('/api/profile',
 		isLoggedIn,
 		function (req, res) {
-
 			var user = req.user;
 			
 			res.json({

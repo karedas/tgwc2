@@ -9,7 +9,6 @@
 const log = console.log;
 const path = require('path');
 const winston = require('winston');
-const passport = require('passport');
 const chalk = require('chalk');
 const Convert = require('ansi-to-html');
 const crypto = require('crypto');
@@ -46,7 +45,6 @@ let socket_transports = [
 	'polling', 
 	'websocket'
 ];
-
 
 
 /**
@@ -96,24 +94,16 @@ function SocketServer(db) {
 
 	// Handle incoming websocket  connections
 	io.on('connection', function(socket) {
-		
 		socket.on('oob', function(msg) {
 			// Handle a login request
-			
-			if (msg["itime"])
+			if (!msg["itime"])
 			{
 				
 				GetUserFromSession(function(err, user) {
 					let account_id = ( err != null || user == null ) ? 0 : user.id;
 					
-					// Get the actual transport type
-	
 					// Get the request headers
 					let headers =  socket.handshake.headers;
-
-//					let transport = io.transports[socket.id].name;
-					
-					//Calculate coded headers
 					
 					let codeHeaders = CalcCodeFromHeaders(headers);
 
@@ -126,10 +116,9 @@ function SocketServer(db) {
 					// Client code
 					var clientcode = codeitime + '-' + codeHeaders;
 
-					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
+					logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
 					// Conect to game server
 					let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
-
 
 					socket.on('disconnect', function() {
 						logger.info('Closing %s', socket.id);
@@ -213,6 +202,7 @@ function SocketServer(db) {
 
 		// Handshaking server->client handler data handler
 		// This is used only until login
+		console.log(from_host);
 		function handshake(msg) {
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
 				// Substitute with the copy handler

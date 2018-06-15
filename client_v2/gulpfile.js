@@ -7,7 +7,6 @@ const gulp = require('gulp'),
 	exec = require('child_process').exec,
 	concat = require("gulp-concat"),
 	fs = require('fs'),
-	gutil = require('gulp-util'),
 	jsbeautify = require('gulp-jsbeautify'),
 	plumber = require('gulp-plumber'),
 	postcss = require('gulp-postcss'),
@@ -22,51 +21,17 @@ const gulp = require('gulp'),
 	argv = require('yargs').argv,
 	stream = require('merge-stream'),
 	spritesmith = require('gulp.spritesmith'),
-	concatFilenames = require('gulp-concat-filenames'),
+//	concatFilenames = require('gulp-concat-filenames'),
+	fileList = require('gulp-filelist'),
 	webpackStream = require('webpack-stream');
 
 
 const log = console.log;
 
-const paths = {
-	webclient: {
-		src: {
-			base: './src/',
-			scss: 'scss/',
-			js: 'js/',
-			img: 'images/'
-		},
-		build: {
-			base: './public/',
-			css: 'css/',
-			js: 'js/',
-			img: 'images/',
-		}
-	}
-}
-
-
-
-let portal = 'webclient'; //default
-
-if (argv.portal == 'webclient') {
-	portal = argv.portal
-};
-
-let P = paths[portal]; // just short var
-
-
-
-// Configuration files
-const webpack_config = require("./webpack.config.js")(portal, paths[portal], paths.portal);
+// project configuration file
+const config = require('./gulp.config.js')();
 const postcss_config = require("./postcss.config.js")
-
-// const devBuild = ((process.env.NODE_ENV || 'development').trim().toLowerCase() === 'development');
-
-
-
-//Generating sprites based on folder located inside resources/img path. 
-//Adding the suffix @2x before the image extension (.png) will generate a separate sprite for the retina version.
+const webpack_config = require("./webpack.config.js")(config);
 
 //get folders list
 function getFolders(dir) {
@@ -78,7 +43,7 @@ function getFolders(dir) {
 
 function generateSprites(done) {
 
-	let dir = P.src.base + P.src.img + 'sprites/';
+	let dir = config.src.base + config.src.img + 'sprites/';
 	let folders;
 
 	if (fs.existsSync(dir)) {
@@ -97,20 +62,20 @@ function generateSprites(done) {
 					imgName: folders[i] + '_sprite.png',
 					imgPath: '../images/' + folders[i] + '_sprite.png',
 					cssName: "_" + folders[i] + '_sprite.scss',
-					// retinaSrcFilter: P.src.base + P.src.img + folders[i] + '/*@2x.png',
+					// retinaSrcFilter: config.src.base + config.src.img + folders[i] + '/*@2x.png',
 					// retinaImgName: folders[i] + '_sprite_2x.png',
-					// retinaImgPath: P.static_overrides.base + P.static_overrides.img + folders[i] + '_sprite_2x.png',
+					// retinaImgPath: config.static_overrides.base + config.static_overrides.img + folders[i] + '_sprite_2x.png',
 					cssOpts: {
 						functions: false
 					}
 				};
 
 				// generate our spritesheets
-				let sprite = gulp.src(P.src.base + P.src.img + 'sprites/' + folders[i] + '/**/*.{png,jpg,gif}')
+				let sprite = gulp.src(config.src.base + config.src.img + 'sprites/' + folders[i] + '/**/*.{png,jpg,gif}')
 					.pipe(spritesmith(sprite_options));
 
 				// output our images locally
-				imgStream[i] = sprite.img.pipe(gulp.dest(P.static_overrides.base + P.static_overrides.img));
+				imgStream[i] = sprite.img.pipe(gulp.dest(config.static_overrides.base + config.static_overrides.img));
 				cssStream[i] = sprite.css;
 
 				log("	" + chalk.cyan((i + 1)) + " " + sprite_options.imgName);
@@ -121,9 +86,9 @@ function generateSprites(done) {
 			let imgSpriteList = stream(imgStream)
 			let cssSpriteList = stream(cssStream)
 				.pipe(concat('_sprites.scss'))
-				.pipe(gulp.dest(P.src.static + '/images/'));
+				.pipe(gulp.dest(config.src.static + '/images/'));
 
-			gutil.log(chalk.green("Sprites generated correctly"));
+			log(chalk.green("Sprites generated correctly"));
 			return stream(imgStream, cssSpriteList)
 			// }
 		}
@@ -131,43 +96,41 @@ function generateSprites(done) {
 }
 
 function generateAssetsList() {
-	return gulp.src(P.src.base + P.src.img + '**/*.{png,jpg,gif}')
-		.pipe(concatFilenames('assets_list', {
-			root: './'
-		}))
-		.pipe(gulp.dest(P.build.base));
+	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
+		.pipe(fileList('assets_list.json', {relative: true}))
+		.pipe(gulp.dest(config.src.base))
+		.pipe(gulp.dest(config.build.base));
 }
-
 
 // compile javascript with webpack
 function jsCompile(watch) {
 
 	webpack_config.watch = watch;
 	// webpackstream override src and gulp dest
-	return gulp.src(P.src.base + P.src.js + '**/*.js', {
+	return gulp.src(config.src.base + config.src.js + '**/*.js', {
 			base: './'
 		})
 		.pipe(cache('js'))
 		.pipe(plumber())
 		.pipe(webpackStream(webpack_config, webpack))
-		.pipe(gulp.dest(P.build.base + P.build.js))
+		.pipe(gulp.dest(config.build.base + config.build.js))
 		.pipe(debug());
 }
 
 // Watch sass files for changes then compile and upload
 gulp.task('sass-watch', () => {
-	var watcher = gulp.watch(P.src.base + P.src.scss + '**/*.scss', {
+	let watcher = gulp.watch(config.src.base + config.src.scss + '**/*.scss', {
 		interval: 500,
 		usePolling: true
 	}, gulp.series('sass-compile'));
 	watcher.on('all', (event, path) => {
-		console.log('File ' + path + ' was ' + event + ', running tasks...');
+		log('File ' + chalk.yellow(path) + ' was ' + event + ', running tasks...');
 	});
 });
 
 // Compile sass files
 gulp.task('sass-compile', () => {
-	return gulp.src(P.src.base + P.src.scss + '**/*.scss')
+	return gulp.src(config.src.base + config.src.scss + '**/*.scss')
 		// .pipe( sourcemaps.init())
 		.pipe(sass({
 			errLogToConsole: true,
@@ -176,14 +139,37 @@ gulp.task('sass-compile', () => {
 		.pipe(sassUnicode())
 		.pipe(postcss(postcss_config))
 		// .pipe(paths.src.base + 'css' ? sourcemaps.write('./maps'))
-		.pipe(gulp.dest(P.build.base + P.build.css))
+		.pipe(gulp.dest(config.build.base + config.build.css))
 		.pipe(debug());
 });
 
 gulp.task('copy-images', () =>  {
-	return gulp.src(P.src.base + P.src.img + '**/*.{png,jpg,gif}')
-		.pipe(gulp.dest(P.build.base + P.build.img));
+	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
+		.pipe(gulp.dest(config.build.base + config.build.img));
 });
+
+gulp.task('staticfiles-watch', function() { 
+
+	let glob = [config.src.base + '**/*.html', config.src.base + 'assets_list.json'];
+
+	let watcher = gulp.watch( glob , {
+		interval: 500,
+		usePolling: true
+	});
+	watcher.on('all', (event, path) => {
+		log('File ' + chalk.yellow(path) + ' was ' + event + ', running tasks...');
+		return gulp.src(path)
+				.pipe(gulp.dest(config.build.base));
+	});
+  });
+
+
+function copyStaticFiles() {
+	let staticFileGlob = [config.src.base + '**/*.html'];
+	return gulp.src(staticFileGlob)
+		.pipe(gulp.dest(config.build.base));
+}
+
 
 // generate CSS sprite images
 gulp.task('generate-sprites', (done) => {
@@ -191,10 +177,11 @@ gulp.task('generate-sprites', (done) => {
 	return generateSprites(done);
 });
 
-gulp.task('generate-assetsList', (done) => {
+gulp.task('generate-assetslist', (done) => {
 	//waiting stream end
 	return generateAssetsList();
 });
+
 
 //watching js watch and compile on live stream
 gulp.task('js-watch', jsCompile.bind(this, true));
@@ -202,22 +189,25 @@ gulp.task('js-compile', jsCompile.bind(this, false));
 
 // Cleaning build folder
 gulp.task('clean', () => {
-	return del(P.build.base + '**/*', {
+	return del(config.build.base + '**/*', {
 		force: true
+	}).then(() => {
+		log('%s Cleaned public folder', chalk.green('✓'));
 	});
 });
 
 //Task for watching development
-gulp.task('dev', gulp.series('generate-sprites', 'generate-assetsList', 'copy-images', gulp.parallel('sass-watch', 'js-watch')));
+gulp.task('dev', 
+	gulp.series('generate-sprites', 'generate-assetslist', 'copy-images', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
-gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetsList', 'copy-images', 'js-compile', 'sass-compile'));
+gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist' , 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));
 
 
 gulp.task('test', function () {
-	return gulp.src(P.src.base + P.src.img + '**/*.{png,jpg,gif}')
+	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
 		.pipe(concatFilenames('assets_list', {
 			root: './'
 		}))
-		.pipe(gulp.dest(P.build.base));
+		.pipe(gulp.dest(config.build.base));
 });

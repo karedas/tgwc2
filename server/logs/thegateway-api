@@ -723,3 +723,40 @@
 2018-05-31T12:13:43.495Z - info: Express server listening on port 3334
 2018-05-31T12:15:21.711Z - info: Express server listening on port 3334
 2018-05-31T12:15:30.468Z - info: Express server listening on port 3334
+2018-06-13T10:34:08.416Z - info: Express server listening on port 3334
+2018-06-13T10:39:34.667Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:39:49.341Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:45:59.193Z - error: uncaughtException: listen EADDRINUSE :::3334 date=Wed Jun 13 2018 12:45:59 GMT+0200 (CEST), pid=14357, uid=1000, gid=1000, cwd=/home/vagrant/Sites/TG2/tg2_webclient/server, execPath=/usr/bin/node, version=v8.11.2, argv=[/usr/bin/node, /home/vagrant/Sites/TG2/tg2_webclient/server/thegateway-api.js], rss=64528384, heapTotal=38133760, heapUsed=27322536, external=747554, loadavg=[0.171875, 0.06591796875, 0.0166015625], uptime=14919, trace=[column=11, file=util.js, function=Object._errnoException, line=992, method=_errnoException, native=false, column=20, file=util.js, function=_exceptionWithHostPort, line=1014, method=null, native=false, column=14, file=net.js, function=Server.setupListenHandle [as _listen2], line=1355, method=setupListenHandle [as _listen2], native=false, column=12, file=net.js, function=listenInCluster, line=1396, method=null, native=false, column=7, file=net.js, function=Server.listen, line=1480, method=listen, native=false, column=25, file=/home/vagrant/Sites/TG2/tg2_webclient/server/thegateway-api.js, function=null, line=110, method=null, native=false, column=23, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/util.js, function=tryCatcher, line=16, method=null, native=false, column=31, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js, function=Promise._settlePromiseFromHandler, line=512, method=_settlePromiseFromHandler, native=false, column=18, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js, function=Promise._settlePromise, line=569, method=_settlePromise, native=false, column=10, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js, function=Promise._settlePromise0, line=614, method=_settlePromise0, native=false, column=18, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js, function=Promise._settlePromises, line=693, method=_settlePromises, native=false, column=16, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/async.js, function=Async._drainQueue, line=133, method=_drainQueue, native=false, column=10, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/async.js, function=Async._drainQueues, line=143, method=_drainQueues, native=false, column=14, file=/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/async.js, function=Immediate.Async.drainQueues [as _onImmediate], line=17, method=drainQueues [as _onImmediate], native=false, column=20, file=timers.js, function=runCallback, line=810, method=null, native=false, column=5, file=timers.js, function=tryOnImmediate, line=768, method=null, native=false, column=5, file=timers.js, function=processImmediate [as _immediateCallback], line=745, method=null, native=false], stack=[Error: listen EADDRINUSE :::3334,     at Object._errnoException (util.js:992:11),     at _exceptionWithHostPort (util.js:1014:20),     at Server.setupListenHandle [as _listen2] (net.js:1355:14),     at listenInCluster (net.js:1396:12),     at Server.listen (net.js:1480:7),     at /home/vagrant/Sites/TG2/tg2_webclient/server/thegateway-api.js:110:25,     at tryCatcher (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/util.js:16:23),     at Promise._settlePromiseFromHandler (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js:512:31),     at Promise._settlePromise (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js:569:18),     at Promise._settlePromise0 (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js:614:10),     at Promise._settlePromises (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/promise.js:693:18),     at Async._drainQueue (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/async.js:133:16),     at Async._drainQueues (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/async.js:143:10),     at Immediate.Async.drainQueues [as _onImmediate] (/home/vagrant/Sites/TG2/tg2_webclient/server/node_modules/bluebird/js/release/async.js:17:14),     at runCallback (timers.js:810:20),     at tryOnImmediate (timers.js:768:5),     at processImmediate [as _immediateCallback] (timers.js:745:5)]
+2018-06-13T10:46:26.478Z - info: Express server listening on port 3334
+2018-06-13T10:50:18.402Z - info: HTTP 404 POST /api/profile
+2018-06-13T10:50:31.237Z - info: HTTP 404 POST /
+2018-06-13T10:50:43.926Z - info: HTTP 404 POST /
+2018-06-13T10:50:53.250Z - info: HTTP 404 POST /api/profile
+2018-06-13T10:50:57.552Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:52:28.791Z - info: Express server listening on port 3334
+2018-06-13T10:52:34.523Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:52:40.174Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:52:58.146Z - info: Express server listening on port 3334
+2018-06-13T10:53:20.529Z - info: Express server listening on port 3334
+2018-06-13T10:53:38.250Z - info: Express server listening on port 3334
+2018-06-13T10:54:21.049Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:57:38.135Z - info: Express server listening on port 3334
+2018-06-13T10:57:47.415Z - info: HTTP 401 GET /api/profile
+2018-06-13T10:59:04.527Z - info: Express server listening on port 3334
+2018-06-13T10:59:08.779Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:01:51.179Z - info: Express server listening on port 3334
+2018-06-13T11:02:20.216Z - info: Express server listening on port 3334
+2018-06-13T11:02:29.235Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:02:30.771Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:03:38.379Z - info: Express server listening on port 3334
+2018-06-13T11:03:44.095Z - info: HTTP 404 GET /api/profile
+2018-06-13T11:07:28.373Z - info: Express server listening on port 3334
+2018-06-13T11:07:34.470Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:11:59.517Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:12:08.083Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:12:15.829Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:13:26.847Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:14:27.352Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:16:30.369Z - info: Express server listening on port 3334
+2018-06-13T11:16:32.853Z - info: HTTP 401 GET /api/profile
+2018-06-13T11:16:39.672Z - info: HTTP 401 GET /api/profile

@@ -85,14 +85,14 @@ db.sequelize.sync().done(function(err) {
 	app.use(cookieParser(process.env.SESSION_SECRET));
 	app.use(session({
 		secret: process.env.SESSION_SECRET,
-		store: new SQLiteStore,
+		store: sessionStore,
 		resave: false,
 		saveUninitialized: false
 	}));
+	app.use(bodyParser.json());
+
 	app.use(passport.initialize());
 	app.use(passport.session());
-
-	app.use(bodyParser.json());
 	
 	// require('./routes')(logger, app, db, passport, mailer);
 	require('./config/passport')(logger, passport, db);
