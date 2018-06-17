@@ -57,7 +57,8 @@ module.exports = function (config) {
                 {
                     loader: "webpack-modernizr-loader",
                     test: /\.modernizrrc\.js$/
-                }
+                },
+
             ]
         },
 

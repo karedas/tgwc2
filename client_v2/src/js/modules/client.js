@@ -1,6 +1,8 @@
 // //NPM Modules
 import Cookies from 'js-cookie';
+import io from 'socket.io-client';
 import Modernizr from "modernizr";
+import assetsList from 'assets_list.json';
 
 // import 'malihu-custom-scrollbar-plugin';
 // import lodash from  'lodash';
@@ -10,12 +12,12 @@ export default class TgGui {
 
     constructor() {
 
-
+        this.serverIsOnline = false;
         this.isConnected = false;
-
-        this.ws_server_addr = '';
-        this.socket_io_resource = '';
-        this.media_server_addr = '';
+        this.socket = null;
+        this.ws_server_addr = '192.168.10.10:3333';
+        this.socket_io_resource = 'socket.io/';
+        this.media_server_addr = './images/';
         this.ws_prefix = '/';
         this.image_path = '';
         this.sounds_path = '';
@@ -33,57 +35,147 @@ export default class TgGui {
             linkURL: ''
         }
 
+        this.connectionInfo = {
+            loginName: null,
+            loginPass: null,
+            error: null
+        }
+
         this.client_state = {};
 
         /* UI Game Options */
         this.client_options = {};
 
-        //         this.notification = {
-        //             unread: 0,
-        //             originalTitle: document.title,
-        //             focused: true,
-        //             favico: null
-        //         };
-
         this.debug = false;
     }
 
     init() {
-        console.log('init');
         let _ = this;
-
-
-        // Waiting any dependencenies, server status and resources before init connection.
-        this.beforeStart().then(result => {
-            _.startClient();
-        }).catch(err => {
-            console.log(err);
+        
+        _.connectToServer().then(function(resolve){
+            _.enableLoginPanel();
+        })
+        .catch(function(error){
+            //Connection error
         });
-
     }
 
-    // List of all mandatory dependencies before init  
-    beforeStart() {
+    connectToServer() {
 
         let _ = this;
 
-        return new Promise(resolve => {
+        return new Promise(function(resolve, reject){
+            _.socket = io.connect(_.ws_server_addr, {
+                'reconnect': false,
+                'force new connection':true,
+                'resource': _.socket_io_resource,
+                'transports': ['polling']
+            });
+    
+            _.socket.on('connect', function(){
+                _.socket.on('data', _.handleLoginData.bind(_));
+                _.networkActivityMessage("Server Online");
+                _.setConnect();
+                resolve();
+            });
+    
+            _.socket.on('disconnect', function(){
+                _.networkActivityMessage("Disconnesso dal server");
+            });
+            _.socket.on('connect_error', function(e){
+                _.socket.disconnect();
+                if(_.isConnected){
+                    _.networkActivityMessage("Connessione chiusa");
+                }
+                else {
+                    _.networkActivityMessage("Il server di gioco è offline.");
+                }
+                reject();
+            });
+        });
+    }
 
+    setConnect() {
+        this.isConnected = true;
+    }
+
+    checkConnectionStatus() {
+        return this.isConnected;
+    }
+
+    showCookieLawDisclaimer() {
+        let _ = this;
+        $('#cookielawdisclaimer').show();
+        $('#cookieconsentbutton').on('click', function () {
+            _.saveUserSessionData('cookie_consent', true);
+            $('#cookielawdisclaimer').remove();
+            // Cookie Law approved = Start the Client
+            _.startClient();
+        });
+    }
+
+    enableLoginPanel() {
+
+        let _ = this;
+
+        $('.tg-loginform').show();
+        
+                
+        $('#doLocalLogin').on('click', function(){
+  
+            let name = $('#login_username').val();
+            let pass = $('#login_password').val();
+            
+            if(!name || !pass) {
+                //Notify user to provide credentials
+                return;
+            }
+            
+            _.connectionInfo.loginName = name;
+            _.connectionInfo.loginPass = pass;
+            _.connectionInfo.mode = "login";
+            
+            _.networkActivityMessage("Connessione in corso...");
             // Get Cookie "Italy cookie law"
             let cookie_consent = _.loadUserSessionData('cookie_consent');
-
             // Check Cookie Law Approval Status, then go to start or wait user action.
             if (!cookie_consent) {
-                $('#cookieconsentbutton').on('click', function () {
-                    _.saveUserSessionData('cookie_consent', true);
-                    $('#cookielawdisclaimer').remove();
-                    // Cookie Law approved = Start the Client
-                    resolve();
-                })
-            } else {
-                resolve();
+                _.showCookieLawDisclaimer();
+                // TODO se ok, allora send oob;
+                setTimeout(function(){performLogin();},1500);
+            } 
+            else {
+                _.initSessionData();
+                _.sendOOB({ itime: _.client_state.when.toString(16) });
+                _.performLogin();
             }
         });
+    }
+
+    performLogin() {
+        let _ = this;
+        if (_.connectionInfo.mode == 'login'){
+            _.sendToServer("login:" + _.connectionInfo.loginName + "," + _.connectionInfo.loginPass+"\n");
+        }
+    }
+
+    loginErrorClean() {
+        _.connectionInfo.error = null;
+    }
+
+    loginError(msg) {
+        this.connectionInfo.error = msg;
+        this.networkActivityMessage(msg);
+    }
+
+    networkActivityMessage(msg) {
+        $('#tgServerStatus').text(msg);
+    }
+
+    startClient() {
+        let _ = this;
+        //await Facebook SDK before end.
+        _.loadFacebookSDK()
     }
 
     loadFacebookSDK() {
@@ -135,23 +227,22 @@ export default class TgGui {
     }
 
     initSessionData() {
+
+        let _ = this;
         // Load State
         let saved_state = Cookies.getJSON(_.cookies.prefix + 'state');
 
         if (Modernizr.localstorage && saved_state) {
             _.saveUserSessionData('state', saved_state);
             Cookies.set(_.cookies.prefix + 'state', null);
-        } 
-
-        else {
+        } else {
             saved_state = _.loadUserSessionData('state')
         }
 
         if (saved_state) {
             $.extend(_.client_state, saved_state);
         }
-
-        if (!_.client_state.when) {
+        if (_.client_state.when == null) {
             _.client_state.when = new Date().getTime();
             _.saveUserSessionData('state', _.client_state);
         }
@@ -162,8 +253,7 @@ export default class TgGui {
         if (Modernizr.localstorage && saved_options) {
             _.saveUserSessionData('options', saved_options);
             Cookies(cookies.prefix + 'options', null);
-        }
-        else {
+        } else {
             saved_options = _.loadUserSessionData('options');
         }
 
@@ -180,7 +270,7 @@ export default class TgGui {
             let data = localStorage[what];
             return data ? JSON.parse(data) : null;
         } else {
-            return Cookies(what);
+            return Cookies.get(what);
         }
     }
 
@@ -190,33 +280,145 @@ export default class TgGui {
         if (Modernizr.localstorage) {
             localStorage[what] = JSON.stringify(value);
         } else {
-            Cookies(what, value, {
+            Cookies.set(what, value, {
                 'expires': _.cookies.expires,
                 'path': _.cookies.path
             });
         }
     }
-    
-    startClient() {
-        
-        let _ = this;
-        
-        _.initSessionData();
-        //await Facebook SDK before end.
-        $.when(_.loadFacebookSDK(), _.loadAssets()).done(function(){
-            console.log('facebook sdk and assets Loaded');
-        });
-
-    }
-
 
     // Load Assets List from relative filename
-    loadAssets() {
-        return new Promise(resolve => {
-            setTimeout(resolve, 500, "value1");
+    loadAssets(imageArray) {
+        let _ = this;
+        let images = [];
+        return new Promise(function(resolve, reject){
+            for (let i = 0; imageArray.length > i; i++) {
+                let img = new Image ();
+                img.onload = function() {
+                    if(imageArray.length - 1 == i) {
+                        // All Images loaded
+                        resolve();
+                    }
+                };
+                img.src = _.media_server_addr + imageArray[i];
+            }
         });
     }
 
+    handleLoginData(data){
+
+        let _ = this; 
+
+        if(data.indexOf("&!connmsg{") == 0) {
+            let end = data.indexOf('}!');
+            let rep = $.parseJSON(data.slice(9, end+1));
+            
+            if(rep.msg) {
+                switch(rep.msg) {
+                    case 'ready':
+                        _.serverIsOnline = true;
+                        break;
+    
+                    case 'enterlogin':
+                    _.performLogin();
+                        break;
+    
+                    case 'shutdown':
+                        console.log('shutdown');
+                        _.networkActivityMessage('Attenzione, il server sarà spento entro breve per manutenzione.');
+                        performLogin();
+                        break;
+    
+                    case 'reboot':
+                          console.log('reboot');
+
+                        _.networkActivityMessage('Attenzione, il server sarà riavviato entro breve.');
+                        performLogin();
+                        break;
+    
+                    case 'created':
+                    case 'loginok':
+                    console.log('loginok');
+                       /* completeHandshake();
+                        handleServerData(data.slice(end+2));
+                        
+                        if(!directLogin)
+                        {
+                            if (updateChars)
+                            {
+                                doUpdateCharacters();
+                            }
+                            
+                            moveLoginPanel('login');
+                        }*/
+                        break;
+    
+                    default:
+                        let connectionError = _.getLoginReplyMessage(rep.msg);
+                        if(!connectionError)
+                            connectionError = _.getLoginReplyMessage('errorproto');
+    
+                        _.loginError(connectionError);
+                        break;
+                }
+            }
+        }
+    }
+
+    sendOOB(data){	
+        let _ = this;
+         if (! _.isConnected) {
+             return;
+         }
+        _.socket.emit('oob', data);
+    }
+
+    sendToServer(text) {
+        let _ = this;
+        if(!_.isConnected) {
+            return;
+        }
+        _.socket.emit('data', text);
+    }
+
+    getLoginReplyMessage(what) {
+        let login_reply_message = {
+            'serverdown':'Il server di gioco è momentaneamente spento. Riprova più tardi.',
+            'errorproto':'Errore di comunicazione con il server.',
+            'errornonew':'In questo momento non è permessa la creazione di nuovi personaggi.',
+            'invalidname':'Nome non valido.',
+            'invalidpass':'Password non valida.',
+            'loginerror':'Personaggio inesistente o password errata.',
+            'staffonly':'In questo momento solo lo staff può collegarsi, riprova più tardi.',
+            'plrreaderror':'Errore di lettura del personaggio.',
+            'plrdisabled':'Il personaggio è stato disattivato.',
+            'bannedip':'Connessione da un indirizzo bloccato.',
+            'maxclients':'Il server ha raggiunto il massimo numero di connessioni, riprova più tardi.',
+            'errorcoderequired':'Per creare un altro personaggio ti serve un codice di attivazione.',
+            'errorinvalidcode':'Il codice di invito inserito non è valido. Verifica di averlo digitato correttamente.',
+            'dupname':'Esiste già un personaggio con questo nome. Per favore scegli un nome diverso.',
+            'invalidemail':'L\'indirizzo di email inserito non è valido.'
+        };
+
+        return login_reply_message[what];
+    }
+
+    /*enableLoginPanel() {
+        let _ = this;
+        console.log('enableLoginPanel');
+
+        // Normal Login
+        $('#tgLoginBtn').click(function() {
+
+        });
+
+        $('#tgFacebookLoginBtn').click(function(){});
+
+        // New Character Creation 
+        $('#tgNewCharactherRegistration').click(function(){
+
+        });
+    }*/
 
     //         // Event when client finishes loading
     //         // if ("Notification" in window) {
@@ -347,7 +549,7 @@ export default class TgGui {
     //     // New line insert event (coming from user or server).
     //     onNewLine(text, originator) {
     //         console.log('onNewLine');
-    //         let _ = this;
+    //         let _ = this; 
     //         // Changes unfocused browser tab title to number of unread messages
     //         // unread++;
     //         // favico.badge(unread);

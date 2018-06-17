@@ -10,9 +10,8 @@ import client from "modules/client.js";
     $.ajaxSetup({ cache: true });
 
     TG.onReady = function() {
-        console.log('ready');
         TG.Client = new client();
-        TG.Client.init();
+        TG.Client.init();        
     };
 
     $(document).ready(TG.onReady);

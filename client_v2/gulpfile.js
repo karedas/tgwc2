@@ -198,7 +198,7 @@ gulp.task('clean', () => {
 
 //Task for watching development
 gulp.task('dev', 
-	gulp.series('generate-sprites', 'generate-assetslist', 'copy-images', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
+	gulp.series('generate-sprites', 'generate-assetslist', 'copy-images', copyStaticFiles,  gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
 gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist' , 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));
