@@ -12,34 +12,37 @@ export default class TgGui {
 
     constructor() {
 
-        this.serverIsOnline = false;
-        this.isConnected = false;
-        this.socket = null;
-        this.ws_server_addr = '192.168.10.10:3333';
-        this.socket_io_resource = 'socket.io/';
+        this.ws_server_addr = '51.38.185.84';
+        this.socket_io_resource = 'socket.io';
         this.media_server_addr = './images/';
         this.ws_prefix = '/';
         this.image_path = '';
         this.sounds_path = '';
-
+        
         /* Cookies Settings */
         this.cookies = {
             prefix: 'tgwc',
             expires: 365 * 10
-        }
+        };
+        
+        /* Connection */
+        this.serverIsOnline = false;
+        this.isConnected = false;
+        this.socket = null;
+        this.netdata = '';
 
         /* Login */
         this.facebokoAppAuth = {
             clientId: '',
             loginURL: '',
             linkURL: ''
-        }
+        };
 
         this.connectionInfo = {
             loginName: null,
             loginPass: null,
             error: null
-        }
+        };
 
         this.client_state = {};
 
@@ -61,15 +64,12 @@ export default class TgGui {
     }
 
     connectToServer() {
-
         let _ = this;
-
         return new Promise(function(resolve, reject){
             _.socket = io.connect(_.ws_server_addr, {
                 'reconnect': false,
                 'force new connection':true,
                 'resource': _.socket_io_resource,
-                'transports': ['polling']
             });
     
             _.socket.on('connect', function(){
@@ -83,7 +83,6 @@ export default class TgGui {
                 _.networkActivityMessage("Disconnesso dal server");
             });
             _.socket.on('connect_error', function(e){
-                _.socket.disconnect();
                 if(_.isConnected){
                     _.networkActivityMessage("Connessione chiusa");
                 }
@@ -112,6 +111,39 @@ export default class TgGui {
             // Cookie Law approved = Start the Client
             _.startClient();
         });
+    }
+
+    preloadClient() {
+        let _ = this;
+
+        let percentage = 0;
+        let stepSize = 100 / assetsList.length;
+        $('#tgPreloader').show().find('span').text(percentage);
+
+        let images = [];
+
+        return new Promise(function(resolve, reject){
+            for (let i = 0; assetsList.length > i; i++) {
+                let img = new Image ();
+                img.onload = function() {
+                    percentage =percentage + stepSize;
+                    $('#tgPreloader span').text( Math.round(percentage));
+                    
+                    $('#tgPreloader')
+                    $(window).trigger('tgassetsload--step');
+
+                    if(assetsList.length - 1 == i) {
+                        // All Images loaded
+                        resolve();
+                    }
+                };
+                img.src = _.media_server_addr + assetsList[i];
+            }
+        });
+    }
+
+    hideLoginPanel() {
+        $('.tg-loginpanel').hide();
     }
 
     enableLoginPanel() {
@@ -175,7 +207,7 @@ export default class TgGui {
     startClient() {
         let _ = this;
         //await Facebook SDK before end.
-        _.loadFacebookSDK()
+        _.loadFacebookSDK();
     }
 
     loadFacebookSDK() {
@@ -236,7 +268,7 @@ export default class TgGui {
             _.saveUserSessionData('state', saved_state);
             Cookies.set(_.cookies.prefix + 'state', null);
         } else {
-            saved_state = _.loadUserSessionData('state')
+            saved_state = _.loadUserSessionData('state');
         }
 
         if (saved_state) {
@@ -289,24 +321,10 @@ export default class TgGui {
 
     // Load Assets List from relative filename
     loadAssets(imageArray) {
-        let _ = this;
-        let images = [];
-        return new Promise(function(resolve, reject){
-            for (let i = 0; imageArray.length > i; i++) {
-                let img = new Image ();
-                img.onload = function() {
-                    if(imageArray.length - 1 == i) {
-                        // All Images loaded
-                        resolve();
-                    }
-                };
-                img.src = _.media_server_addr + imageArray[i];
-            }
-        });
+        
     }
 
     handleLoginData(data){
-
         let _ = this; 
 
         if(data.indexOf("&!connmsg{") == 0) {
@@ -320,7 +338,8 @@ export default class TgGui {
                         break;
     
                     case 'enterlogin':
-                    _.performLogin();
+                        console.log('enterlogin');
+                        _.performLogin();
                         break;
     
                     case 'shutdown':
@@ -330,19 +349,23 @@ export default class TgGui {
                         break;
     
                     case 'reboot':
-                          console.log('reboot');
-
+                        console.log('reboot');
                         _.networkActivityMessage('Attenzione, il server sarà riavviato entro breve.');
                         performLogin();
                         break;
     
                     case 'created':
                     case 'loginok':
-                    console.log('loginok');
-                       /* completeHandshake();
-                        handleServerData(data.slice(end+2));
+                        // Preload client then start the magic
+                        _.preloadClient().then(function(resolve, reject) {
+                            _.hideLoginPanel();
+                            _.completeHandshake();
+                            _.handleServerData(data.slice(end+2));
+                        });
+
+                        // User loged in with Facebook SDK.
                         
-                        if(!directLogin)
+                        /*if(!directLogin)
                         {
                             if (updateChars)
                             {
@@ -363,6 +386,72 @@ export default class TgGui {
                 }
             }
         }
+    }
+
+    completeHandshake() {
+        let _ = this;
+        _.socket.removeListener('data', _.handleLoginData);
+        _.socket.on('data', _.handleServerData);
+    }
+
+    handleServerData(msg) {
+        let _ = this;
+        
+        _.netdata += msg;
+        let len = _.netdata.length;
+
+        if(_.netdata.indexOf("&!!", len-3) !== -1 ) {
+
+            let data = _.preparseText(_.netdata.substr(0, len - 3));
+
+            try {
+                _.showOutput(_.parseForDisplay(data));
+            } catch(err) {
+                console.log(err.message);
+            }
+
+            _.netdata = '';
+
+            let now = Date.now();
+        }
+        else if ( len > 200000 ) {
+            _.showOutput('<br>Errore di comunicazione con il server!<br>');
+            _.netdata = '';
+            _.setDisconnect();
+        }
+    }
+
+    preparseText(msg) {
+
+        // Remove -not-tags-
+        msg = msg.replace(/\r/gm, '');
+        msg = msg.replace(/&!!/gm, '');
+        msg = msg.replace(/\$\$/gm, '$');
+        msg = msg.replace(/%%/gm, '%');
+        msg = msg.replace(/&&/gm, '&#38;');
+        msg = msg.replace(/</gm, '&#60;');
+        msg = msg.replace(/>/gm, '&#62;');
+
+        return msg;
+    }
+
+    parseForDisplay(msg) {
+
+        let _ = this,
+            pas;
+
+        // Hide text (password)
+	    //msg = msg.replace(/&x\n*/gm, function() {
+		//inputPassword();
+        //return '';
+        //});
+
+        // Show Text (normal input)
+        msg = msg.replace(/&e\n*/gm, function() {
+            _.inputText();
+            return '';
+	    });
+        
     }
 
     sendOOB(data){	
@@ -441,10 +530,7 @@ export default class TgGui {
     //         });
     //     }
 
-    //     async loadAssets() {
-    //         console.log('loadAssets');
-    //         return;
-    //     }
+
 
     //     checkOptions() {
     //         // DEBUG STATUS

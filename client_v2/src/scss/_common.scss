@@ -58,6 +58,12 @@ body {
     }
 }
 
+.tg-preloader {
+    display: none;
+    text-align: center;
+    border:1px solid $tg-yellow;
+}
+
 .tg-cookielawcontent {
     display: none;
     .tg-btn-cookieconsent {
