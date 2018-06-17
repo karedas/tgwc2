@@ -153,7 +153,9 @@ export default class TgGui {
         $('.tg-loginform').show();
         
                 
-        $('#doLocalLogin').on('click', function(){
+        $('#loginPanel').on('submit', function(e){
+
+            e.preventDefault();
   
             let name = $('#login_username').val();
             let pass = $('#login_password').val();
@@ -177,8 +179,6 @@ export default class TgGui {
                 setTimeout(function(){performLogin();},1500);
             } 
             else {
-                _.initSessionData();
-                _.sendOOB({ itime: _.client_state.when.toString(16) });
                 _.performLogin();
             }
         });
