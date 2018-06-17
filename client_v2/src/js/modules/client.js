@@ -74,7 +74,7 @@ export default class TgGui {
     
             _.socket.on('connect', function(){
                 _.socket.on('data', _.handleLoginData.bind(_));
-                _.networkActivityMessage("Server Online");
+                _.loginNetworkActivityMessage("Server Online", 'up');
                 _.setConnect();
                 resolve();
             });
@@ -87,7 +87,7 @@ export default class TgGui {
                     _.networkActivityMessage("Connessione chiusa");
                 }
                 else {
-                    _.networkActivityMessage("Il server di gioco è offline.");
+                    _.loginNetworkActivityMessage("Il server di gioco è offline.");
                 }
                 reject();
             });
@@ -200,8 +200,12 @@ export default class TgGui {
         this.networkActivityMessage(msg);
     }
 
+    loginNetworkActivityMessage(msg, dataname) {
+        $('#tgServerStatus').text(msg).attr('data-status', dataname);
+    }
+
     networkActivityMessage(msg) {
-        $('#tgServerStatus').text(msg);
+        //$('#tgServerStatus').text(msg);
     }
 
     startClient() {
