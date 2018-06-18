@@ -16,64 +16,86 @@
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
-  
+
   <!-- <script src="js/vendor/modernizr-3.6.0.min.js"></script> -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
   <script src="js/vendor.min.js"></script>
   <script src="js/app.min.js"></script>
 </head>
 
-<body> 
+<body>
   <div class="tg-area">
-      <div class="container tg-loginpanel align-middle">
-        <div class="row justify-content-center align-self-center w-100">
-          <div class="col-xl-4 col-md-5 mx-auto">
-            <form id="loginPanel" class="tg-loginform" action="/">
-                  <p>TheGate Webclient v.2--alpha</p>
-                  <label for="login_username">Nome Utente</label>
-                  <input id="login_username" name="username" type="text">
-                  <label for="login_password">Password</label>
-                  <input id="login_password" name="password" type="password">
-                  <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
-                  <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
-            </form>
-            <div id="tgServerStatus" class="tg-serverstatus"></div>
-            <div id="tgPreloader" class="tg-preloader">
-              <span>0</span>%
+    <div class="container tg-loginpanel align-middle">
+      <div class="row justify-content-center align-self-center w-100">
+        <div class="col-xl-4 col-md-5 mx-auto">
+          <form id="loginPanel" class="tg-loginform" action="/">
+            <p>TheGate Webclient v.2--alpha</p>
+            <label for="login_username">Nome Utente</label>
+            <input id="login_username" name="username" type="text">
+            <label for="login_password">Password</label>
+            <input id="login_password" name="password" type="password">
+            <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
+            <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
+          </form>
+          <div id="tgServerStatus" class="tg-serverstatus"></div>
+          <div id="tgPreloader" class="tg-preloader">
+            <span>0</span>%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid tg-main">
+      <div class="row">
+        <div class="tg-navbar col-12">navbar</div>
+      </div>
+      <div class="row tg-main-row">
+        <div class="tg-leftside col-9">
+          <div class="tg-output tg-box tg-shadow">
+            <div id="output" class="tg-output-history"></div>
+            <div class="tg-border-box">
+              <div class="tg-border tg-border-top"></div>
+              <div class="tg-border tg-border-left"></div>
+              <div class="tg-border tg-border-right"></div>
+              <div class="tg-border tg-border-bottom"></div>
+            </div>
+          </div>
+          <div class="tg-controlpanel col-12">
+            <div class="row">
+              <div class="tg-input tg-box tg-shadow col-12">
+                  <input id="tgInputUser" type="text">
+                  <div class="tg-border-box">
+                      <div class="tg-border tg-border-top"></div>
+                      <div class="tg-border tg-border-left"></div>
+                      <div class="tg-border tg-border-right"></div>
+                      <div class="tg-border tg-border-bottom"></div>
+                    </div>
+              </div>  
             </div>
           </div>
         </div>
+        <div class="tg-rightside col-3">rightside</div>
       </div>
-      <div class="container-fluid tg-main">
-        <div class="row">
-          <div class="tg-navbar col-12">navbar</div>
-        </div>
-        <div class="row">
-          <div class="tg-leftside col-9">
-            
-            <div class="tg-controlpanel col-12">controlpanel</div>            
-          </div>
-          <div class="tg-rightside col-3">rightside</div>
-        </div>
-      </div>
-      <div id="cookielawdisclaimer" class="tg-cookielawcontent">
-        <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
-        <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il 
-        salvataggio della propria configurazione e il riconoscimento dell'utente per il conseguente
-        accesso automatico. Le funzionalità di "Login tramite Facebook" e i pulsanti social "Mi piace" richiedono
-        il salvataggio di cookie di terze parti. Maggiori informazioni sono disponibili <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
-        <b>Proseguendo nell'accesso si acconsente all'uso dei cookie.</b></p>
-        <p>
-          <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
-        </p>
-      </div>
-      <div class="tg-border-area">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+    </div>
+    <div id="cookielawdisclaimer" class="tg-cookielawcontent">
+      <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
+      <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della propria configurazione
+        e il riconoscimento dell'utente per il conseguente accesso automatico. Le funzionalità di "Login tramite Facebook"
+        e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. Maggiori informazioni sono disponibili
+        <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
+        <b>Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
+      </p>
+      <p>
+        <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
+      </p>
+    </div>
+    <div class="tg-border-area">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <!-- <script>

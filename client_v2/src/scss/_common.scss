@@ -1,4 +1,5 @@
 @import 'login';
+@import 'borders';
 
 body,
 html {
@@ -11,43 +12,78 @@ body {
     color: $white;
 }
 
+.tg-shadow {
+    box-shadow: 0px 2px 12px black;
+}
+
 .tg-area {
     width: 100%;
     height: 100%;
     position: relative;
 
     .tg-navbar {
-        @include sprite-image($navbar-background);
-        @include sprite-height($navbar-background);
+       background-image: url($imgPath + '/interface/navbar_background.png');
+       background-repeat: repeat-x;
+       height: 50px;
     }
 
-    .tg-leftside {
-        border:1px solid $tg-yellow;
+    .tg-main {
+        min-height: 100%;
         display: flex;
-        flex-grow: 1;
-        > .row {
+        flex-direction: column;
+    
+        .tg-main-row {
             flex-grow: 1;
         }
     }
+    
+    .tg-leftside {
+        display: flex;
+        flex-direction: column;
+    }
+    .tg-output {
+        background: black;
+        flex: 1 1 100%;
+        font-size: 12px;
+
+        .tg-output-history {
+            position: relative;
+            z-index: 2;
+            padding: .2rem;
+        }
+    }
+    
+    .tg-controlpanel {
+        height: 75px;
+        flex: 1 1 75px;
+    }
+
+    .tg-input {
+        background: #26261f;
+
+        input[type="text"] {
+            width: 100%;
+            background-color: #26261f;
+            border: none;
+            z-index: 10;
+            position: relative;
+            outline: 0;
+            color: $white;
+            font-size: 1rem;
+            padding:1px 2px;
+        }
+    }
+
+    
     .tg-rightside{
         border:1px solid red;
     }
-    .tg-controlpanel {
-        border:1px solid green;
-        position: absolute;
-        bottom: 0;
-        height: 75px;
-    }
 
 }
 
 
 
-.tg-main {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+
 
 .tg-preloader {
     display: none;

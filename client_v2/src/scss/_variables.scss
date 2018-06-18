@@ -1,4 +1,8 @@
+
+
 /*Bootstrap override*/
+$grid-gutter-width:12px;
+
 $input-border-radius: 0;
 $input-border-radius-lg: 0;
 $input-border-radius-sm: 0;
@@ -7,5 +11,10 @@ $btn-border-radius: 0;
 $font-size-base: 0.7rem;
 
 
+// System 
+$imgPath: "../images";
+
 //Custom
 $bodybackground : 'frame/background/dark-wood.jpg';
+
+$border-size : 8px;

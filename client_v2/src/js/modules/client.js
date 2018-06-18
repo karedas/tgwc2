@@ -32,6 +32,9 @@ export default class TgGui {
         this.netdata = '';
 
         /* Login */
+        this.inGame = false;
+        this.isGod = false;
+        this.godInvLev = 0;
         this.facebokoAppAuth = {
             clientId: '',
             loginURL: '',
@@ -167,7 +170,7 @@ export default class TgGui {
 
         $('.tg-loginform').show();
         $('#login_username').focus();
-        
+
         $('#loginPanel').on('submit', function (e) {
 
             e.preventDefault();
@@ -364,11 +367,9 @@ export default class TgGui {
                         // Preload client then start the magic
                         _.preloadClient().then(function (resolve, reject) {
                             _.hideLoginPanel();
-                            
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
-        
-                            _.loadApp();
+                            _.loadInterface();
                         });
 
                         // User loged in with Facebook SDK.
@@ -396,22 +397,19 @@ export default class TgGui {
         }
     }
 
-    loadApp() {
-        let _ = this;
-
-        $('.tg-main').show();
-    }
-
     completeHandshake() {
         let _ = this;
         _.socket.removeListener('data', _.handleLoginData);
-        _.socket.on('data', _.handleServerData);
+        _.socket.on('data', _.handleServerData.bind(_));
+        //_.setHandshaked();
     }
 
     handleServerData(msg) {
+
         let _ = this;
 
         _.netdata += msg;
+
         let len = _.netdata.length;
 
         if (_.netdata.indexOf("&!!", len - 3) !== -1) {
@@ -419,6 +417,7 @@ export default class TgGui {
             let data = _.preparseText(_.netdata.substr(0, len - 3));
 
             try {
+                console.log('show');
                 _.showOutput(_.parseForDisplay(data));
             } catch (err) {
                 console.log(err.message);
@@ -451,21 +450,347 @@ export default class TgGui {
     parseForDisplay(msg) {
 
         let _ = this,
-            pas;
+            pos;
+
+
+        // Not repeated tags
 
         // Hide text (password)
-        //msg = msg.replace(/&x\n*/gm, function() {
-        //inputPassword();
-        //return '';
-        //});
-
-        // Show Text (normal input)
-        msg = msg.replace(/&e\n*/gm, function () {
-            _.inputText();
+        msg = msg.replace(/&x\n*/gm, function () {
+            inputPassword();
             return '';
         });
 
+        // Show text (normal input)
+        msg = msg.replace(/&e\n*/gm, function () {
+            inputText();
+            return '';
+        });
+
+        // Sky picture
+        msg = msg.replace(/&o.\n*/gm, function (sky) {
+            var sky = sky.charAt(2);
+            //setSky(sky);
+            return '';
+        });
+
+        // Exits info
+        msg = msg.replace(/&d\d{6}\n*/gm, function (doors) {
+            var doors = doors.substr(2, 6);
+            //setDoors(doors);
+            return '';
+        });
+
+        // Audio
+        msg = msg.replace(/&!au"[^"]*"\n*/gm, function (audio) {
+            var audio = audio.slice(5, audio.lastIndexOf('"'));
+            playAudio(audio);
+            return '';
+        });
+
+        // Player status
+        msg = msg.replace(/&!st"[^"]*"\n*/gm, function (status) {
+            var st = status.slice(5, status.lastIndexOf('"')).split(',');
+            return _.setStatus(st);
+        });
+
+        // Player status
+        msg = msg.replace(/&!up"[^"]*"\n*/gm, function (update) {
+            var ud = update.slice(5, status.lastIndexOf('"')).split(',');
+
+            if (ud[0] > client_update.inventory.version)
+                client_update.inventory.needed = true;
+
+            if (ud[1] > client_update.equipment.version)
+                client_update.equipment.needed = true;
+
+            if (ud[2] > client_update.room.version)
+                client_update.room.needed = true;
+
+            return '';
+        });
+
+        // Image in side frame (with gamma)
+        msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
+            // var image = image.slice(6, image.lastIndexOf('"')).split(',');
+            // showImageWithGamma(image[0], image[1], image[2], image[3]);
+            return '';
+        });
+
+        // Image in side frame
+        msg = msg.replace(/&!im"[^"]*"\n*/gm, function (image) {
+            // var image = image.slice(5, image.lastIndexOf('"'));
+            // showImage(image);
+            return '';
+        });
+
+        // Player is logged in
+        msg = msg.replace(/&!logged"[^"]*"/gm, function () {
+            _.inGame = true;
+            return '';
+        });
+
+        // Close the text editor
+        msg = msg.replace(/&!ea"[^"]*"\n*/gm, function (options) {
+            closeEditor();
+            return '';
+        });
+
+        // Open the text editor
+        msg = msg.replace(/&!ed"[^"]*"\n*/gm, function (options) {
+            var options = options.slice(5, options.lastIndexOf('"')).split(',');
+            var text = options.slice(2).toString().replace(/\n/gm, ' ');
+            openEditor(options[0], options[1], text);
+            return '';
+        });
+
+        // Map data
+        msg = msg.replace(/&!map\{[\s\S]*?\}!/gm, function (map) {
+            var map = $.parseJSON(map.slice(5, -1));
+            //updateMap(map);
+            return '';
+        });
+
+        // Book
+        msg = msg.replace(/&!book\{[\s\S]*?\}!/gm, function (b) {
+            b = $.parseJSON(b.slice(6, -1));
+            openBook(b);
+            return '';
+        });
+
+        // List of commands
+        msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
+            cmd = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
+            return renderCommandsList(cmd);
+        });
+
+        // Generic page (title, text)
+        msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
+            p = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
+           // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
+            return '<div class="msg-title">'+ p.title +'</div><div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>';
+        });
+
+        // Generic table (title, head, data)
+        msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
+            t = $.parseJSON(t.slice(7, -1));
+            return renderTable(t);
+        });
+
+        // Inventory
+        msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
+            inv = $.parseJSON(inv.slice(5, -1));
+            renderInventory(inv);
+            return '';
+        });
+
+        // Room details
+        msg = msg.replace(/&!room\{[\s\S]*?\}!/gm, function (dtls) {
+            dtls = $.parseJSON(dtls.slice(6, -1));
+            //return renderDetails(dtls, dtls.dir ? 'dir' : 'room');
+        });
+
+        // Person details
+        msg = msg.replace(/&!pers\{[\s\S]*?\}!/gm, function (dtls) {
+            dtls = $.parseJSON(dtls.slice(6, -1));
+           // return renderDetails(dtls, 'pers');
+        });
+
+        // Object details
+        msg = msg.replace(/&!obj\{[\s\S]*?\}!/gm, function (dtls) {
+            dtls = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
+            return _.renderDetailsInText(dtls, 'obj');
+        });
+
+        // Equipment
+        msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
+            eq = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
+            //renderEquipment(eq);
+            return '';
+        });
+
+        // Workable lists
+        msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
+            wk = $.parseJSON(wk.slice(7, -1));
+            //return renderWorksList(wk);
+        });
+
+        // Skill list
+        msg = msg.replace(/&!sklst\{[\s\S]*?\}!/gm, function (skinfo) {
+            skinfo = $.parseJSON(skinfo.slice(7, -1));
+            //return renderSkillsList(skinfo);
+        });
+
+        // Player info
+        msg = msg.replace(/&!pginf\{[\s\S]*?\}!/gm, function (info) {
+            info = $.parseJSON(info.slice(7, -1));
+            //return renderPlayerInfo(info);
+        });
+
+        // Player status
+        msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
+            status = $.parseJSON(status.slice(6, -1));
+            //return renderPlayerStatus(status);
+        });
+
+        // Selectable generic
+        msg = msg.replace(/&!select\{[\s\S]*?\}!/gm, function (s) {
+            s = $.parseJSON(s.slice(8, -1));
+            //return selectDialog(s);
+        });
+
+        // Refresh command
+        msg = msg.replace(/&!refresh\{[\s\S]*?\}!/gm, function (t) {
+            t = $.parseJSON(t.slice(9, -1));
+            return handleRefresh(t);
+        });
+
+        // Pause scroll
+        msg = msg.replace(/&!crlf"[^"]*"/gm, function () {
+            //pauseOn();
+            console.log('//pauseOn();');
+            return '';
+        });
+
+        // Clear message
+        pos = msg.lastIndexOf('&*');
+        if (pos >= 0) {
+            _.clearOutput();
+            msg = msg.slice(pos + 2);
+        }
+
+        // Filterable messages
+        msg = msg.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, function (line, type, msg) {
+            return addFilterTag(type, msg);
+        });
+
+
+        msg = msg.replace(/&!ce"[^"]*"/gm, function (image) {
+            var image = image.slice(5, -1);
+            return renderEmbeddedImage(image);
+        });
+
+        msg = msg.replace(/&!ulink"[^"]*"/gm, function (link) {
+            var link = link.slice(8, -1).split(',');
+            return renderLink(link[0], link[1]);
+        });
+
+        msg = msg.replace(/&!as"[^"]*"/gm, '');
+
+        msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
+            var mob = mob.slice(mob.indexOf('"') + 1, -1).split(',');
+            var desc = mob.slice(5).toString();
+            return renderMob(mob[0], mob[1], mob[2], mob[3], desc, 'interact pers');
+        });
+
+        msg = msg.replace(/&!(ad|a)?o"[^"]*"/gm, function (obj) {
+            var obj = obj.slice(obj.indexOf('"') + 1, -1).split(',');
+            var desc = obj.slice(5).toString();
+            return renderObject(obj[0], obj[1], obj[2], obj[3], desc, 'interact obj');
+        });
+
+        msg = msg.replace(/&!sm"[^"]*"/gm, function (icon) {
+            var icon = icon.slice(5, -1).split(',');
+            //return renderIcon(icon[0], icon[1], 'room', null, null, 'interact pers');
+        });
+
+        msg = msg.replace(/&!si"[^"]*"/gm, function (icon) {
+            var icon = icon.slice(5, -1).split(',');
+            //return renderIcon(icon[0], null, null, null, null, "v " + icon[1]);
+        });
+
+        msg = msg.replace(/&i/gm, function () {
+            _.isGod = true;
+            return '';
+        });
+
+        msg = msg.replace(/&I\d/gm, function (inv) {
+            _.godInvLev = parseInt(inv.substr(2, 3));
+            return '';
+        });
+
+        /* \r is already removed at top */
+        msg = msg.replace(/\n/gm, '<br>');
+
+        msg = _.replaceColors(msg);
+
+        return msg.replace(/<p><\/p>/g, '');
+
     }
+
+    replaceColors(msg)
+    {
+        msg = msg.replace(/&B/gm, '<div class="gray">');
+        msg = msg.replace(/&R/gm, '<div class="lt-red">');
+        msg = msg.replace(/&G/gm, '<div class="lt-green">');
+        msg = msg.replace(/&Y/gm, '<div class="yellow">');
+        msg = msg.replace(/&L/gm, '<div class="lt-blue">');
+        msg = msg.replace(/&M/gm, '<div class="lt-magenta">');
+        msg = msg.replace(/&C/gm, '<div class="lt-cyan">');
+        msg = msg.replace(/&W/gm, '<div class="white">');
+        msg = msg.replace(/&b/gm, '<div class="black">');
+        msg = msg.replace(/&r/gm, '<div class="red">');
+        msg = msg.replace(/&g/gm, '<div class="green">');
+        msg = msg.replace(/&y/gm, '<div class="brown">');
+        msg = msg.replace(/&l/gm, '<div class="blue">');
+        msg = msg.replace(/&m/gm, '<div class="magenta">');
+        msg = msg.replace(/&c/gm, '<div class="cyan">');
+        msg = msg.replace(/&w/gm, '<div class="lt-white">');
+        msg = msg.replace(/&-/gm, '</div>');
+
+        return msg;
+    }
+
+    renderDetailsInText(info, type) {
+        let  res = '';
+
+        if(info.title)
+            res += '<div class="room"><div class="lts"></div>'+capFirstLetter(info.title)+'<div class="rts"></div></div>';
+            /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
+    
+        res += _.renderDetailsInner(info, type, false);
+    
+        //if(info.image)
+        //    showImage($('#image-cont'), info.image);
+    
+        return res;
+    }
+
+    renderDetailsInner(info, type, inDialog) {
+        let _ = this,
+            textarea = '';
+        if  ( info.action ) {
+		    textarea += '<p>'+info.action+'</p>';
+        }
+        /* Print description */
+	    if(info.desc) {
+            if(info.desc.base) {
+                if(type == 'room')
+                    last_room_desc = _.formatText(info.desc.base);
+                textarea += _.formatText(info.desc.base);
+            } else if(info.desc.repeatlast && last_room_desc)
+                textarea += last_room_desc;
+
+            if(info.desc.details)
+                textarea += _.formatText(info.desc.details, 'yellow');
+
+            if(info.desc.equip)
+                textarea += _.formatText(info.desc.equip, 'green');
+	    }
+
+    }
+
+    formatText(text, style){
+        let page = '';
+        let parags = text.replace(/\r/gm,'').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
+
+        $.each(parags, function(i, p) {
+            page += '<p'+( style ? ' class="' + style + '"' : '')+'>' + p + '</p>';
+        });
+
+        return page;
+    }
+
 
     sendOOB(data) {
         let _ = this;
@@ -473,6 +798,13 @@ export default class TgGui {
             return;
         }
         _.socket.emit('oob', data);
+    }
+
+    processCommands(text) {
+        let _ = this;
+        if(_.inGame) {
+
+        }
     }
 
     sendToServer(text) {
@@ -505,299 +837,81 @@ export default class TgGui {
         return login_reply_message[what];
     }
 
-    /*enableLoginPanel() {
+
+    showOutput(text) {
+        let toHtml = $(text);
+        $('#output').append(toHtml);
+    }
+
+    clearOutput() {
+        $('#output').empty();
+    }
+
+    loadInterface() {
+
         let _ = this;
-        console.log('enableLoginPanel');
 
-        // Normal Login
-        $('#tgLoginBtn').click(function() {
+
+        /*
+         * Interface Modules List.
+         */
+
+        //_.outputinit();
+        $('.tg-main').show();
+        
+        _.focusInput();
+        _.keyboardMapInit();
+        
+        _.main();
+    }
+
+    /* -------------------------------------------------
+    * KEYBOARD MAP
+    * -------------------------------------------------*/
+
+    keyboardMapInit() {
+
+        let _ = this;
+        
+        $(document).on('keydown', function(event) {
+            //TODO if is not connected?
+            if(event.metaKey || event.ctrlKey) {
+			    return true;
+            }
+
+            if($(event.target).is('#tgInputUser') === true) {
+                
+                /* Enter Key */
+                if( event.which == 13 ) {
+                    _.sendInput();
+                    return false;
+                }
+            }
 
         });
+    }
 
-        $('#tgFacebookLoginBtn').click(function(){});
+    /* -------------------------------------------------
+    * PLAYER STATUS
+    * -------------------------------------------------*/
+    updatePlayerStatus(hprc, mprc) {}
 
-        // New Character Creation 
-        $('#tgNewCharactherRegistration').click(function(){
+    setStatus(st) {
+        _.updatePlayerStatus(st[0], st[1]);
+	    return;
+    }
 
-        });
-    }*/
+    sendInput(){
+        this.processCommands($('#tgInputUser').val());
+    }
 
-    //         // Event when client finishes loading
-    //         // if ("Notification" in window) {
-    //         //     Notification.requestPermission();
-    //         // }
+    focusInput() {
+        $('#tgInputUser').focus();
+    }
 
-    //         //waiting any dependencenies and resources before init connection.
-    //         console.log('init');
-    //         this.beforeStart().then(result => {
-    //             // got final result
+    main() {
 
-    //             console.log('ok');
-
-    //             // this.checkOptions();
-    //             // this.initHandshake();
-    //             // this.addDOMEvents();
-
-    //         }).catch(err => {
-    //            console.log(err);
-    //         });
-    //     }
+    }
 
 
-
-    //     checkOptions() {
-    //         // DEBUG STATUS
-    //         if(this.options.debug) {
-    //             $('body').append('<div id="debug"/>');
-    //             console.log("%c Attenzione, i LOG client sono attivi.", 'background: red; color: white');
-    //         }
-    //     }
-
-
-    //     initHandshake() {
-
-    //         let _ = this;
-    //          // This is safe to call, it will always only
-    //         // initialize once.
-    //         Evennia.init();
-    //         // register listeners
-    //         Evennia.emitter.on("text", this.onText.bind(_));
-    //         Evennia.emitter.on("prompt", this.onPrompt.bind(_));
-    //         Evennia.emitter.on("default", this.onDefault.bind(_));
-    //         Evennia.emitter.on("connection_close", this.onConnectionClose.bind(_));
-    //         Evennia.emitter.on("logged_in", this.onLoggedIn.bind(_));
-    //         Evennia.emitter.on("webclient_options", this.onGotOptions.bind(_));
-    //         // silence currently unused events
-    //         Evennia.emitter.on("connection_open", this.onSilence.bind(_));
-    //         Evennia.emitter.on("connection_error", this.onSilence.bind(_));
-
-    //         // set an idle timer to send idle every 3 minutes,
-    //         // to avoid proxy servers timing out on us
-    //         setInterval(function () {
-    //                 // Connect to server
-    //                 Evennia.msg("text", ["idle"], {});
-    //             },
-    //             60000 * 3
-    //         );
-    //     }
-
-    //     // Ask the user if he wants to reconnect
-    //     reconnect() {
-    //         return false;
-    //     }
-    //     //Performing connection to server via auto or manual request.
-    //     connectToServer() {
-    //         Evennia.connect();
-    //         return;
-    //     }
-
-    //     // Handle text coming from the server
-    //     onText(args, kwargs) {
-
-    //         console.log('onText');
-    //         let _ = this;
-    //         // append message to previous ones, then scroll so latest is at
-    //         // the bottom. Send 'cls' kwarg to modify the output class.
-    //         let renderto = "main";
-    //         console.log('kwargs', kwargs);
-    //         if (kwargs["type"] == "help") {
-    //             if (("helppopup" in options) && (options["helppopup"])) {
-    //                 renderto = "#helpdialog";
-    //             }
-    //         }
-
-    //         if (renderto == "main") {
-    //             let mwin = $("#outputfield");
-    //             let cls = lodash.isEmpty(kwargs) ? 'out' : kwargs['cls'];
-    //             mwin.append("<div class='" + cls + "'>" + args[0] + "</div>");
-    //             mwin.animate({
-    //                 scrollTop: document.getElementById("outputfield").scrollHeight
-    //             }, 0);
-
-    //             this.onNewLine(args[0], null);
-
-    //         } else {
-    //             console.log('TODO: openPopup(renderto, args[0])')
-    //             // openPopup(renderto, args[0]);
-    //         }
-    //     }
-
-    //     onPrompt() {
-    //         console.log('onPrompt')
-    //     }
-
-    //     onDefault() {
-    //         console.log('onDefault')
-    //     }
-
-    //     onConnectionClose() {
-    //         console.log('onConnectionClose')
-    //     }
-
-    //     onLoggedIn() {
-    //         console.log('onLoggedIn')
-    //     }
-
-    //     onGotOptions() {
-    //         console.log('onGotOptions')
-    //     }
-
-    //     // Silences events we don't do anything with.
-    //     onSilence(cmdname, args, kwargs) {}
-
-    //     // New line insert event (coming from user or server).
-    //     onNewLine(text, originator) {
-    //         console.log('onNewLine');
-    //         let _ = this; 
-    //         // Changes unfocused browser tab title to number of unread messages
-    //         // unread++;
-    //         // favico.badge(unread);
-    //         // document.title = "(" + unread + ") " + originalTitle;
-    //         // if (!_.notification.focused) {
-    //             // Changes unfocused browser tab title to number of unread messages
-    //             // _.notification.unread++;
-    //             //   favico.badge(unread);
-    //             // document.title = "(" + unread + ") " + originalTitle;
-    //             // if ("Notification" in window) {
-    //             //     if (("notification_popup" in options) && (options["notification_popup"])) {
-    //             //         Notification.requestPermission().then(function (result) {
-    //             //             console.log('TODO Here');
-    //             //             //     if(result === "granted") {
-    //             //             //     var title = originalTitle === "" ? "Evennia" : originalTitle;
-    //             //             //     var options = {
-    //             //             //         body: text.replace(/(<([^>]+)>)/ig,""),
-    //             //             //         icon: "/static/website/images/evennia_logo.png"
-    //             //             //     }
-
-    //             //             //     var n = new Notification(title, options);
-    //             //             //     n.onclick = function(e) {
-    //             //             //         e.preventDefault();
-    //             //             //          window.focus();
-    //             //             //          this.close();
-    //             //             //     }
-    //             //             //   }
-    //             //         });
-    //             //     }
-    //             //     if (("notification_sound" in options) && (options["notification_sound"])) {
-    //             //         console.log('TODO Here (audio/sound?)');
-
-    //             //         // var audio = new Audio("/static/webclient/media/notification.wav");
-    //             //         // audio.play();
-    //             //     }
-    //             // }
-    //         // }
-    //     }
-
-    //     // Grab text from inputline and send to Server
-    //     doSendText() {
-    //         if(!Evennia.isConnected()) {
-    //             if(reconnect()) {
-    //                 //Making a connection if the user does not have one.
-    //                 this.onText(['Riconnessione in corso..."'], {cls: "sys"});
-    //                 this.connectToServer();
-
-    //             };
-    //             return ;
-    //         };
-
-    //         let inputfield = $('#inputfield');
-    //         let outtext = inputfield.val();
-    //         let lines = outtext.trim().replace(/[\r]+/,"\n").replace(/[\n]+/, "\n").split("\n");
-
-    //         for(var i = 0; i < lines.length; i++) {
-    //             let line = lines[i].trim();
-    //             if(line.length > 7 && line.substr(0,7) == '##send') {
-    //                 // send a specific oob instruction ["cmdname",[args],{kwargs}]
-    //                 line = line.slice(7);
-    //                 let cmdarr = JSON.parse(line);
-    //                 let cmdname = cmdarr[0];
-    //                 let args = cmdarr[1];
-    //                 let kwargs = cmdarr[2];
-
-    //                 console.log(cmdarr);
-    //                 log(cmdname, args, kwargs);
-    //                 Evennia.msg(cmdname, args, kwargs);
-    //             }
-    //             else {
-    //                 input_history.add(line);
-    //                 inputfield.val('');
-    //                 Evennia.msg("text", [line], {});
-    //             }
-    //         }
-
-    //     }
-
-    //     // doOpenOptions() {}
-
-
-    //     onKeyPress(event) {
-    //         console.log('onKeyPress');        
-    //     }
-
-    //     // catch all keyboard input, handle special chars
-    //     onKeyDown(event) {
-
-    //         console.log('onKeyDown');
-    //         let _ = this;
-    //         let code = event.which;
-    //         let history_entry = null;
-    //         let inputfield = $('#inputfield');
-
-    //         inputfield.focus();
-    //         // enter key sends text
-    //         if (code === 13 ) {
-    //             this.doSendText();
-    //             event.preventDefault();
-    //         }
-    //         else if (inputfield[0].selectionStart == inputfield.val().length) {
-    //             // Only process up/down arrow if cursor is at the end of the line.    
-    //             if(code === 30) {
-
-    //             }
-    //             else if (code === 40) {
-    //                 history_entry = input_history.fwd();
-    //             }
-    //         }
-    //         // escape key
-    //         if (code === 27 ) {}
-
-    //     }
-
-    //     toggleNavbarPosition() {
-    //        $('#tgNavbar').toggleClass('order-2');
-    //     }
-
-    //     // It Applies option base on data-option attribute setted on trigger element
-    //     toggleClientOption() {
-    //         //TODO: we need to store option every triggering
-    //        let option = $(this).attr('data-option');
-    //        if (option != '') {
-    //            option = 'op-' + option;
-    //        }
-
-    //        $('body').toggleClass(option);
-    //     }
-
-    //     addDOMEvents() {
-
-    //         let _ = this;
-
-    //         // Pressing the send button
-    //         $("#inputsend").on("click", this.doSendText.bind(_));
-    //          // Event when any key is pressed
-    //         $(document).keydown(this.onKeyDown.bind(_));
-
-    //         /* NavBar events */
-    //         $('#toggleNavbarPosition').on('click', this.toggleNavbarPosition);
-
-    //         $('.tg-trigger-option').on('click', this.toggleClientOption);
-
-    //     }
-
-    //     // Appends any kind of message inside Debug Output box
-    //     tglog(msg) {
-    //         if (msg) {
-    //             $('#debug').append('DEBUG MSG: ' + msg);
-    //         }
-    //     }
 }
