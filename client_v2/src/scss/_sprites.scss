@@ -1,0 +1,295 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$dark-wood-name: 'dark-wood';
+$dark-wood-x: 0px;
+$dark-wood-y: 0px;
+$dark-wood-offset-x: 0px;
+$dark-wood-offset-y: 0px;
+$dark-wood-width: 626px;
+$dark-wood-height: 477px;
+$dark-wood-total-width: 626px;
+$dark-wood-total-height: 477px;
+$dark-wood-image: '../images/background/background_tls.png';
+$dark-wood: (0px, 0px, 0px, 0px, 626px, 477px, 626px, 477px, '../images/background/background_tls.png', 'dark-wood', );
+$spritesheet-width: 626px;
+$spritesheet-height: 477px;
+$spritesheet-image: '../images/background/background_tls.png';
+$spritesheet-sprites: ($dark-wood, );
+$spritesheet: (626px, 477px, '../images/background/background_tls.png', $spritesheet-sprites, );
+
+
+
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$navbar-background-name: 'navbar_background';
+$navbar-background-x: 0px;
+$navbar-background-y: 0px;
+$navbar-background-offset-x: 0px;
+$navbar-background-offset-y: 0px;
+$navbar-background-width: 43px;
+$navbar-background-height: 50px;
+$navbar-background-total-width: 43px;
+$navbar-background-total-height: 50px;
+$navbar-background-image: '../images/interface/interface_tls.png';
+$navbar-background: (0px, 0px, 0px, 0px, 43px, 50px, 43px, 50px, '../images/interface/interface_tls.png', 'navbar_background', );
+$spritesheet-width: 43px;
+$spritesheet-height: 50px;
+$spritesheet-image: '../images/interface/interface_tls.png';
+$spritesheet-sprites: ($navbar-background, );
+$spritesheet: (43px, 50px, '../images/interface/interface_tls.png', $spritesheet-sprites, );
+
+
+
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$welcomelogo-name: 'welcomelogo';
+$welcomelogo-x: 295px;
+$welcomelogo-y: 0px;
+$welcomelogo-offset-x: -295px;
+$welcomelogo-offset-y: 0px;
+$welcomelogo-width: 295px;
+$welcomelogo-height: 169px;
+$welcomelogo-total-width: 590px;
+$welcomelogo-total-height: 169px;
+$welcomelogo-image: '../images/logo/logo_tls.png';
+$welcomelogo: (295px, 0px, -295px, 0px, 295px, 169px, 590px, 169px, '../images/logo/logo_tls.png', 'welcomelogo', );
+$welcomelogo-name: 'welcomelogo';
+$welcomelogo-x: 0px;
+$welcomelogo-y: 0px;
+$welcomelogo-offset-x: 0px;
+$welcomelogo-offset-y: 0px;
+$welcomelogo-width: 295px;
+$welcomelogo-height: 169px;
+$welcomelogo-total-width: 590px;
+$welcomelogo-total-height: 169px;
+$welcomelogo-image: '../images/logo/logo_tls.png';
+$welcomelogo: (0px, 0px, 0px, 0px, 295px, 169px, 590px, 169px, '../images/logo/logo_tls.png', 'welcomelogo', );
+$spritesheet-width: 590px;
+$spritesheet-height: 169px;
+$spritesheet-image: '../images/logo/logo_tls.png';
+$spritesheet-sprites: ($welcomelogo, $welcomelogo, );
+$spritesheet: (590px, 169px, '../images/logo/logo_tls.png', $spritesheet-sprites, );
+
+
+
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$border-wc-area-b-name: 'border-wc-area-b';
+$border-wc-area-b-x: 0px;
+$border-wc-area-b-y: 0px;
+$border-wc-area-b-offset-x: 0px;
+$border-wc-area-b-offset-y: 0px;
+$border-wc-area-b-width: 203px;
+$border-wc-area-b-height: 25px;
+$border-wc-area-b-total-width: 406px;
+$border-wc-area-b-total-height: 228px;
+$border-wc-area-b-image: '../images/borders/borders_tls.png';
+$border-wc-area-b: (0px, 0px, 0px, 0px, 203px, 25px, 406px, 228px, '../images/borders/borders_tls.png', 'border-wc-area-b', );
+$border-wc-area-l-name: 'border-wc-area-l';
+$border-wc-area-l-x: 203px;
+$border-wc-area-l-y: 25px;
+$border-wc-area-l-offset-x: -203px;
+$border-wc-area-l-offset-y: -25px;
+$border-wc-area-l-width: 25px;
+$border-wc-area-l-height: 203px;
+$border-wc-area-l-total-width: 406px;
+$border-wc-area-l-total-height: 228px;
+$border-wc-area-l-image: '../images/borders/borders_tls.png';
+$border-wc-area-l: (203px, 25px, -203px, -25px, 25px, 203px, 406px, 228px, '../images/borders/borders_tls.png', 'border-wc-area-l', );
+$border-wc-area-r-name: 'border-wc-area-r';
+$border-wc-area-r-x: 0px;
+$border-wc-area-r-y: 25px;
+$border-wc-area-r-offset-x: 0px;
+$border-wc-area-r-offset-y: -25px;
+$border-wc-area-r-width: 25px;
+$border-wc-area-r-height: 203px;
+$border-wc-area-r-total-width: 406px;
+$border-wc-area-r-total-height: 228px;
+$border-wc-area-r-image: '../images/borders/borders_tls.png';
+$border-wc-area-r: (0px, 25px, 0px, -25px, 25px, 203px, 406px, 228px, '../images/borders/borders_tls.png', 'border-wc-area-r', );
+$border-wc-area-t-name: 'border-wc-area-t';
+$border-wc-area-t-x: 203px;
+$border-wc-area-t-y: 0px;
+$border-wc-area-t-offset-x: -203px;
+$border-wc-area-t-offset-y: 0px;
+$border-wc-area-t-width: 203px;
+$border-wc-area-t-height: 25px;
+$border-wc-area-t-total-width: 406px;
+$border-wc-area-t-total-height: 228px;
+$border-wc-area-t-image: '../images/borders/borders_tls.png';
+$border-wc-area-t: (203px, 0px, -203px, 0px, 203px, 25px, 406px, 228px, '../images/borders/borders_tls.png', 'border-wc-area-t', );
+$corner-wc-area-bl-name: 'corner-wc-area-bl';
+$corner-wc-area-bl-x: 228px;
+$corner-wc-area-bl-y: 25px;
+$corner-wc-area-bl-offset-x: -228px;
+$corner-wc-area-bl-offset-y: -25px;
+$corner-wc-area-bl-width: 25px;
+$corner-wc-area-bl-height: 25px;
+$corner-wc-area-bl-total-width: 406px;
+$corner-wc-area-bl-total-height: 228px;
+$corner-wc-area-bl-image: '../images/borders/borders_tls.png';
+$corner-wc-area-bl: (228px, 25px, -228px, -25px, 25px, 25px, 406px, 228px, '../images/borders/borders_tls.png', 'corner-wc-area-bl', );
+$corner-wc-area-br-name: 'corner-wc-area-br';
+$corner-wc-area-br-x: 253px;
+$corner-wc-area-br-y: 25px;
+$corner-wc-area-br-offset-x: -253px;
+$corner-wc-area-br-offset-y: -25px;
+$corner-wc-area-br-width: 25px;
+$corner-wc-area-br-height: 25px;
+$corner-wc-area-br-total-width: 406px;
+$corner-wc-area-br-total-height: 228px;
+$corner-wc-area-br-image: '../images/borders/borders_tls.png';
+$corner-wc-area-br: (253px, 25px, -253px, -25px, 25px, 25px, 406px, 228px, '../images/borders/borders_tls.png', 'corner-wc-area-br', );
+$corner-wc-area-tl-name: 'corner-wc-area-tl';
+$corner-wc-area-tl-x: 278px;
+$corner-wc-area-tl-y: 25px;
+$corner-wc-area-tl-offset-x: -278px;
+$corner-wc-area-tl-offset-y: -25px;
+$corner-wc-area-tl-width: 25px;
+$corner-wc-area-tl-height: 25px;
+$corner-wc-area-tl-total-width: 406px;
+$corner-wc-area-tl-total-height: 228px;
+$corner-wc-area-tl-image: '../images/borders/borders_tls.png';
+$corner-wc-area-tl: (278px, 25px, -278px, -25px, 25px, 25px, 406px, 228px, '../images/borders/borders_tls.png', 'corner-wc-area-tl', );
+$corner-wc-area-tr-name: 'corner-wc-area-tr';
+$corner-wc-area-tr-x: 303px;
+$corner-wc-area-tr-y: 25px;
+$corner-wc-area-tr-offset-x: -303px;
+$corner-wc-area-tr-offset-y: -25px;
+$corner-wc-area-tr-width: 25px;
+$corner-wc-area-tr-height: 25px;
+$corner-wc-area-tr-total-width: 406px;
+$corner-wc-area-tr-total-height: 228px;
+$corner-wc-area-tr-image: '../images/borders/borders_tls.png';
+$corner-wc-area-tr: (303px, 25px, -303px, -25px, 25px, 25px, 406px, 228px, '../images/borders/borders_tls.png', 'corner-wc-area-tr', );
+$stone-corner-bottomleft-name: 'stone-corner-bottomleft';
+$stone-corner-bottomleft-x: 336px;
+$stone-corner-bottomleft-y: 41px;
+$stone-corner-bottomleft-offset-x: -336px;
+$stone-corner-bottomleft-offset-y: -41px;
+$stone-corner-bottomleft-width: 8px;
+$stone-corner-bottomleft-height: 8px;
+$stone-corner-bottomleft-total-width: 406px;
+$stone-corner-bottomleft-total-height: 228px;
+$stone-corner-bottomleft-image: '../images/borders/borders_tls.png';
+$stone-corner-bottomleft: (336px, 41px, -336px, -41px, 8px, 8px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-corner-bottomleft', );
+$stone-corner-bottomright-name: 'stone-corner-bottomright';
+$stone-corner-bottomright-x: 328px;
+$stone-corner-bottomright-y: 41px;
+$stone-corner-bottomright-offset-x: -328px;
+$stone-corner-bottomright-offset-y: -41px;
+$stone-corner-bottomright-width: 8px;
+$stone-corner-bottomright-height: 8px;
+$stone-corner-bottomright-total-width: 406px;
+$stone-corner-bottomright-total-height: 228px;
+$stone-corner-bottomright-image: '../images/borders/borders_tls.png';
+$stone-corner-bottomright: (328px, 41px, -328px, -41px, 8px, 8px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-corner-bottomright', );
+$stone-corner-topleft-name: 'stone-corner-topleft';
+$stone-corner-topleft-x: 398px;
+$stone-corner-topleft-y: 33px;
+$stone-corner-topleft-offset-x: -398px;
+$stone-corner-topleft-offset-y: -33px;
+$stone-corner-topleft-width: 8px;
+$stone-corner-topleft-height: 8px;
+$stone-corner-topleft-total-width: 406px;
+$stone-corner-topleft-total-height: 228px;
+$stone-corner-topleft-image: '../images/borders/borders_tls.png';
+$stone-corner-topleft: (398px, 33px, -398px, -33px, 8px, 8px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-corner-topleft', );
+$stone-corner-topright-name: 'stone-corner-topright';
+$stone-corner-topright-x: 398px;
+$stone-corner-topright-y: 25px;
+$stone-corner-topright-offset-x: -398px;
+$stone-corner-topright-offset-y: -25px;
+$stone-corner-topright-width: 8px;
+$stone-corner-topright-height: 8px;
+$stone-corner-topright-total-width: 406px;
+$stone-corner-topright-total-height: 228px;
+$stone-corner-topright-image: '../images/borders/borders_tls.png';
+$stone-corner-topright: (398px, 25px, -398px, -25px, 8px, 8px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-corner-topright', );
+$stone-horizontal-bottom-name: 'stone-horizontal-bottom';
+$stone-horizontal-bottom-x: 328px;
+$stone-horizontal-bottom-y: 33px;
+$stone-horizontal-bottom-offset-x: -328px;
+$stone-horizontal-bottom-offset-y: -33px;
+$stone-horizontal-bottom-width: 70px;
+$stone-horizontal-bottom-height: 8px;
+$stone-horizontal-bottom-total-width: 406px;
+$stone-horizontal-bottom-total-height: 228px;
+$stone-horizontal-bottom-image: '../images/borders/borders_tls.png';
+$stone-horizontal-bottom: (328px, 33px, -328px, -33px, 70px, 8px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-horizontal-bottom', );
+$stone-horizontal-top-name: 'stone-horizontal-top';
+$stone-horizontal-top-x: 328px;
+$stone-horizontal-top-y: 25px;
+$stone-horizontal-top-offset-x: -328px;
+$stone-horizontal-top-offset-y: -25px;
+$stone-horizontal-top-width: 70px;
+$stone-horizontal-top-height: 8px;
+$stone-horizontal-top-total-width: 406px;
+$stone-horizontal-top-total-height: 228px;
+$stone-horizontal-top-image: '../images/borders/borders_tls.png';
+$stone-horizontal-top: (328px, 25px, -328px, -25px, 70px, 8px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-horizontal-top', );
+$stone-vertical-left-name: 'stone-vertical-left';
+$stone-vertical-left-x: 236px;
+$stone-vertical-left-y: 50px;
+$stone-vertical-left-offset-x: -236px;
+$stone-vertical-left-offset-y: -50px;
+$stone-vertical-left-width: 8px;
+$stone-vertical-left-height: 70px;
+$stone-vertical-left-total-width: 406px;
+$stone-vertical-left-total-height: 228px;
+$stone-vertical-left-image: '../images/borders/borders_tls.png';
+$stone-vertical-left: (236px, 50px, -236px, -50px, 8px, 70px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-vertical-left', );
+$stone-vertical-right-name: 'stone-vertical-right';
+$stone-vertical-right-x: 228px;
+$stone-vertical-right-y: 50px;
+$stone-vertical-right-offset-x: -228px;
+$stone-vertical-right-offset-y: -50px;
+$stone-vertical-right-width: 8px;
+$stone-vertical-right-height: 70px;
+$stone-vertical-right-total-width: 406px;
+$stone-vertical-right-total-height: 228px;
+$stone-vertical-right-image: '../images/borders/borders_tls.png';
+$stone-vertical-right: (228px, 50px, -228px, -50px, 8px, 70px, 406px, 228px, '../images/borders/borders_tls.png', 'stone-vertical-right', );
+$spritesheet-width: 406px;
+$spritesheet-height: 228px;
+$spritesheet-image: '../images/borders/borders_tls.png';
+$spritesheet-sprites: ($border-wc-area-b, $border-wc-area-l, $border-wc-area-r, $border-wc-area-t, $corner-wc-area-bl, $corner-wc-area-br, $corner-wc-area-tl, $corner-wc-area-tr, $stone-corner-bottomleft, $stone-corner-bottomright, $stone-corner-topleft, $stone-corner-topright, $stone-horizontal-bottom, $stone-horizontal-top, $stone-vertical-left, $stone-vertical-right, );
+$spritesheet: (406px, 228px, '../images/borders/borders_tls.png', $spritesheet-sprites, );
+
+

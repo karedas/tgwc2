@@ -1,0 +1,53 @@
+/* Init Login box */
+
+.tg-loginpanel {
+    padding: .5rem;
+    display: flex;
+    height: 100%;
+    display: flex;
+
+    .tg-loginform {
+        border-radius: 15px;
+        border: 1px solid #2c2926;
+        padding: 2rem;
+        display: none;
+    }
+
+    input {
+        margin-bottom: .2rem;
+        border: 1px solid $tg-yellow;
+        background: none;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+        color: $white;
+        padding: 1px 2px;
+    }
+    label {
+        color: #ababaa;
+        margin: 0;
+    }
+
+    button {
+        cursor: pointer;
+        background-color:$tg-yellow;
+        border: none;
+        color: $black;
+    }
+
+    .tg-serverstatus {
+        padding: .5rem 0;
+        text-align: center;
+        &:before {
+            content: '';
+            display: inline-block;
+            width: .5rem;
+            height: .5rem;
+        }
+        &.tg-serverstatus[data-status="up"]:before {
+            background: green;
+            border-radius: 50%;
+            margin-right: 0.2rem;
+        }
+    }
+}
