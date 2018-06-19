@@ -2,7 +2,15 @@
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
+import 'magnific-popup';
+
+//Custom
+import FacebookSDK from 'FacebookSdk';
+import Map from 'mapDrawer';
+// Assets file list.
 import assetsList from 'assets_list.json';
+
+
 
 // import 'malihu-custom-scrollbar-plugin';
 // import lodash from  'lodash';
@@ -35,11 +43,7 @@ export default class TgGui {
         this.inGame = false;
         this.isGod = false;
         this.godInvLev = 0;
-        this.facebokoAppAuth = {
-            clientId: '',
-            loginURL: '',
-            linkURL: ''
-        };
+
 
         this.connectionInfo = {
             loginName: null,
@@ -53,14 +57,11 @@ export default class TgGui {
         this.client_options = {};
 
         this.debug = false;
-
-        Object.assign(this, options);
+        
     }
 
     init() {
         let _ = this;
-
-
         // Get Cookie "Italy cookie law"
         let cookie_consent = _.loadUserSessionData('cookie_consent');
         // Check Cookie Law Approval Status, then go to start or wait user action.
@@ -73,204 +74,170 @@ export default class TgGui {
 
     startClient() {
         let _ = this;
-        console.log(_.debug);
-        if(_.debug) {
-            _.hideLoginPanel();
-            _.loadInterface();
-        }
-        else {
-            _.loadFacebookSDK();
-            _.initSessionData();
-            _.connectToServer().then(function (resolve) {
-                    _.enableLoginPanel();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+
+        let facebookSDK = new FacebookSDK();
+        facebookSDK.load();
+
+        _.initSessionData();
+        _.connectToServer().then(function (resolve) {
+            _.showLoginPanel();
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     connectToServer() {
         let _ = this;
         return new Promise(function (resolve, reject) {
+
+            // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
                 'reconnect': false,
                 'force new connection': true,
                 'resource': _.socket_io_resource,
             });
 
+            // WebSocket is Up
             _.socket.on('connect', function () {
+                _.serverIsOnline = true;
+                _.networkActivityMessage("Server Online", 'up');
+                
                 _.socket.on('data', _.handleLoginData.bind(_));
-                _.loginNetworkActivityMessage("Server Online", 'up');
-                _.setConnect();
+
                 resolve();
             });
-
+            
             _.socket.on('disconnect', function () {
                 _.networkActivityMessage("Disconnesso dal server");
             });
+
             _.socket.on('connect_error', function (e) {
                 if (_.isConnected) {
                     _.networkActivityMessage("Connessione chiusa");
                 } else {
-                    _.loginNetworkActivityMessage("Il server di gioco è offline.");
+                    _.networkActivityMessage("Il server di gioco è offline.");
                 }
                 reject();
             });
         });
     }
 
-    setConnect() {
-        this.isConnected = true;
-    }
-
-    checkConnectionStatus() {
-        return this.isConnected;
-    }
-
-    showCookieLawDisclaimer() {
-        let _ = this;
-        $('#cookielawdisclaimer').show();
-        $('#cookieconsentbutton').on('click', function () {
-            _.saveUserSessionData('cookie_consent', true);
-            $('#cookielawdisclaimer').remove();
-            // Cookie Law approved = Start the Client
-            _.startClient();
-        });
-    }
-
-    preloadClient() {
+    handleLoginData(data) {
         let _ = this;
 
-        let percentage = 0;
-        let stepSize = 100 / assetsList.length;
-        $('#tgPreloader').show().find('span').text(percentage);
+        if (data.indexOf("&!connmsg{") == 0) {
+            
+            let end = data.indexOf('}!');
+            let rep = $.parseJSON(data.slice(9, end + 1));
 
-        let images = [];
+            if (rep.msg) {
+                switch (rep.msg) {
+                    case 'ready':
+                        _.sendOOB({ itime: _.client_state.when.toString(16) });
+                        break;
 
-        return new Promise(function (resolve, reject) {
-            for (let i = 0; assetsList.length > i; i++) {
-                let img = new Image();
-                img.onload = function () {
-                    percentage = percentage + stepSize;
-                    $('#tgPreloader span').text(Math.round(percentage));
+                    case 'enterlogin':
+                        _.performLogin();
+                        break;
 
-                    $('#tgPreloader')
-                    $(window).trigger('tgassetsload--step');
+                    case 'shutdown':
+                        console.log('shutdown');
+                        _.networkActivityMessage('Attenzione, il server sarà spento entro breve per manutenzione.');
+                        _.performLogin();
+                        break;
 
-                    if (assetsList.length - 1 == i) {
-                        // All Images loaded
-                        resolve();
-                    }
-                };
-                img.src = _.media_server_addr + assetsList[i];
+                    case 'reboot':
+                        console.log('reboot');
+                        _.networkActivityMessage('Attenzione, il server sarà riavviato entro breve.');
+                        _.performLogin();
+                        break;
+
+                    case 'created':
+                    case 'loginok':
+                        // Preload client then start the magic
+                        _.preloadClient().then(function (resolve, reject) {
+
+                            _.completeHandshake();
+                            _.handleServerData(data.slice(end + 2));
+                            _.hideLoginPanel();
+                            _.loadInterface();
+                        });
+
+                        // User loged in with Facebook SDK.
+
+                        /*if(!directLogin)
+                        {
+                            if (updateChars)
+                            {
+                                doUpdateCharacters();
+                            }
+                            
+                            moveLoginPanel('login');
+                        }*/
+                        break;
+
+                    default:
+                        let connectionError = _.getLoginReplyMessage(rep.msg);
+                        if (!connectionError)
+                            connectionError = _.getLoginReplyMessage('errorproto');
+                            _.loginError(connectionError);
+                        break;
+                }
             }
-        });
-    }
-
-    hideLoginPanel() {
-        $('.tg-loginpanel').hide();
-    }
-
-    enableLoginPanel() {
-
-        let _ = this;
-
-        $('.tg-loginform').show();
-        $('#login_username').focus();
-
-        $('#loginPanel').on('submit', function (e) {
-
-            e.preventDefault();
-
-            let name = $('#login_username').val();
-            let pass = $('#login_password').val();
-
-            if (!name || !pass) {
-                //Notify user to provide credentials
-                return;
-            }
-
-            _.connectionInfo.loginName = name;
-            _.connectionInfo.loginPass = pass;
-            _.connectionInfo.mode = "login";
-
-            _.performLogin();
-        });
-    }
-
-    performLogin() {
-        let _ = this;
-        if (_.connectionInfo.mode == 'login') {
-            _.sendToServer("login:" + _.connectionInfo.loginName + "," + _.connectionInfo.loginPass + "\n");
         }
     }
 
-    loginErrorClean() {
-        _.connectionInfo.error = null;
+    completeHandshake() {
+        let _ = this;
+        _.socket.removeListener('data', _.handleLoginData);
+        _.socket.on('data', _.handleServerData.bind(_));
+        //_.setHandshaked();
     }
 
-    loginError(msg) {
-        this.connectionInfo.error = msg;
-        this.networkActivityMessage(msg);
-    }
-
-    loginNetworkActivityMessage(msg, dataname) {
-        $('#tgServerStatus').text(msg).attr('data-status', dataname);
-    }
-
-    networkActivityMessage(msg) {
-        //$('#tgServerStatus').text(msg);
-    }
-
-    loadFacebookSDK() {
+    handleServerData(msg) {
 
         let _ = this;
 
-        return $.getScript('https://connect.facebook.net/it_IT/sdk.js', function () {
-            FB.init({
-                appId: _.facebokoAppAuth.clientId,
-                status: true,
-                cookie: false,
-                loggin: false,
-                version: 'v2.7',
-                xfbml: true
-            });
-            // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
-            // for any authentication related change, such as login, logout or session refresh. This means that
-            // whenever someone who was previously logged out tries to log in again, the correct case below 
-            // will be handled.
-            FB.Event.subscribe('auth.authResponseChange', function (response) {
-                // Here we specify what we do with the response anytime this event occurs. 
-                if (response.status === 'connected') {
-                    // The response object is returned with a status field that lets the app know the current
-                    // login status of the person. In this case, we're handling the situation where they 
-                    // have logged in to the app.
-                    let newToken = response.authResponse.accessToken;
+        _.netdata += msg;
 
-                    if (initialized) {
-                        if (facebookToken) {
-                            facebookAccountUpdate(newToken);
-                        } else {
-                            doFacebookLogin(response.authResponse.accessToken);
-                        }
-                    }
+        let len = _.netdata.length;
 
-                    facebookToken = newToken;
-                } else if (response.status === 'not_authorized') {
-                    // In this case, the person is logged into Facebook, but not into the app
-                    facebookToken = null;
-                } else {
-                    // In this case, the person is not logged into Facebook. Note that at this stage there
-                    // is no indication of whether they are logged into the app.
-                    facebookToken = null;
-                }
-            });
+        if (_.netdata.indexOf("&!!", len - 3) !== -1) {
+            
+            let now,
+                data = _.preparseText(_.netdata.substr(0, len - 3));
 
-            $('#loginbutton,#feedbutton').removeAttr('disabled');
-        });
+            try {
+                _.showOutput(_.parseForDisplay(data));
+            } catch (err) {
+                console.log(err.message);
+            }
+
+            _.netdata = '';
+            
+            now = Date.now();
+
+
+
+        } else if (len > 200000) {
+            _.showOutput('<br>Errore di comunicazione con il server!<br>');
+            _.netdata = '';
+            _.setDisconnect();
+        }
     }
 
+    /* COOKIE LAW */
+    showCookieLawDisclaimer() {
+        let _ = this;
+        $('.tg-cookielawcontent').show();
+        // Cookie Law approved === true,  Start the Client
+        $('#cookieconsentbutton').on('click', function () {
+            _.saveUserSessionData('cookie_consent', true);
+            $('.tg-cookielawcontent').remove();
+            _.startClient();
+        });
+    }
+    
     initSessionData() {
 
         let _ = this;
@@ -332,114 +299,97 @@ export default class TgGui {
         }
     }
 
-    // Load Assets List from relative filename
-    loadAssets(imageArray) {
 
-    }
-
-    handleLoginData(data) {
+    /* *****************************************************************************
+    * ASSETS PRELOAD 
+    */
+    preloadClient() {
         let _ = this;
 
-        if (data.indexOf("&!connmsg{") == 0) {
-            let end = data.indexOf('}!');
-            let rep = $.parseJSON(data.slice(9, end + 1));
+        let percentage = 0;
+        let stepSize = 100 / assetsList.length;
+        $('#tgPreloader').show().find('span').text(percentage);
 
-            if (rep.msg) {
-                switch (rep.msg) {
-                    case 'ready':
-                        _.sendOOB({
-                            itime: _.client_state.when.toString(16)
-                        });
-                        _.serverIsOnline = true;
-                        break;
+        let images = [];
 
-                    case 'enterlogin':
-                        console.log('enterlogin');
-                        _.performLogin();
-                        break;
+        return new Promise(function (resolve, reject) {
+            for (let i = 0; assetsList.length > i; i++) {
+                let img = new Image();
+                img.onload = function () {
+                    percentage = percentage + stepSize;
+                    $('#tgPreloader span').text(Math.round(percentage));
 
-                    case 'shutdown':
-                        console.log('shutdown');
-                        _.networkActivityMessage('Attenzione, il server sarà spento entro breve per manutenzione.');
-                        performLogin();
-                        break;
+                    $('#tgPreloader')
+                    $(window).trigger('tgassetsload--step');
 
-                    case 'reboot':
-                        console.log('reboot');
-                        _.networkActivityMessage('Attenzione, il server sarà riavviato entro breve.');
-                        performLogin();
-                        break;
-
-                    case 'created':
-                    case 'loginok':
-                        // Preload client then start the magic
-                        _.preloadClient().then(function (resolve, reject) {
-                            _.hideLoginPanel();
-                            _.completeHandshake();
-                            _.handleServerData(data.slice(end + 2));
-                            _.loadInterface();
-                        });
-
-                        // User loged in with Facebook SDK.
-
-                        /*if(!directLogin)
-                        {
-                            if (updateChars)
-                            {
-                                doUpdateCharacters();
-                            }
-                            
-                            moveLoginPanel('login');
-                        }*/
-                        break;
-
-                    default:
-                        let connectionError = _.getLoginReplyMessage(rep.msg);
-                        if (!connectionError)
-                            connectionError = _.getLoginReplyMessage('errorproto');
-
-                        _.loginError(connectionError);
-                        break;
-                }
+                    if (assetsList.length - 1 == i) {
+                        // All Images loaded
+                        resolve();
+                    }
+                };
+                img.src = _.media_server_addr + assetsList[i];
             }
+        });
+    }
+
+
+    hideLoginPanel() {
+        $('.tg-loginpanel').hide();
+    }
+
+    showLoginPanel() {
+        let _ = this;
+
+        $('.tg-loginform').show();
+        $('#login_username').focus();
+
+        $('#loginPanel').on('submit', function (e) {
+
+            e.preventDefault();
+
+            let name = $('#login_username').val();
+            let pass = $('#login_password').val();
+
+            if (!name || !pass) {
+                //Notify user to provide credentials
+                return;
+            }
+
+            _.connectionInfo.loginName = name;
+            _.connectionInfo.loginPass = pass;
+            _.connectionInfo.mode = "login";
+
+            _.performLogin();
+        });
+
+        // On New  Character Creation button
+        $('#doNewCharacter').on('click', _.openPopup);
+    }
+
+    performLogin() {
+        let _ = this;
+        if (_.connectionInfo.mode == 'login') {
+            _.sendToServer("login:" + _.connectionInfo.loginName + "," + _.connectionInfo.loginPass + "\n");
         }
     }
 
-    completeHandshake() {
-        let _ = this;
-        _.socket.removeListener('data', _.handleLoginData);
-        _.socket.on('data', _.handleServerData.bind(_));
-        //_.setHandshaked();
+    loginErrorClean() {
+        _.connectionInfo.error = null;
     }
 
-    handleServerData(msg) {
-
-        let _ = this;
-
-        _.netdata += msg;
-
-        let len = _.netdata.length;
-
-        if (_.netdata.indexOf("&!!", len - 3) !== -1) {
-
-            let data = _.preparseText(_.netdata.substr(0, len - 3));
-
-            try {
-                console.log('show');
-                _.showOutput(_.parseForDisplay(data));
-            } catch (err) {
-                console.log(err.message);
-            }
-
-            _.netdata = '';
-
-            let now = Date.now();
-        } else if (len > 200000) {
-            _.showOutput('<br>Errore di comunicazione con il server!<br>');
-            _.netdata = '';
-            _.setDisconnect();
-        }
+    loginError(msg) {
+        this.connectionInfo.error = msg;
+        this.loginNetworkActivityMessage(msg);
     }
+
+    loginNetworkActivityMessage(msg, dataname) {
+        $('#loginNetworkActivityMessage').text(msg).attr('data-status', dataname);
+    }
+
+    networkActivityMessage(msg) {
+        $('#networkActivityMessage').text(msg);
+    }
+ 
 
     preparseText(msg) {
 
@@ -460,51 +410,53 @@ export default class TgGui {
         let _ = this,
             pos;
 
-
         // Not repeated tags
 
         // Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
-            inputPassword();
+            console.log('input type password enabled');
+            // _.inputPassword();
             return '';
         });
 
         // Show text (normal input)
         msg = msg.replace(/&e\n*/gm, function () {
-            inputText();
+            console.log('input type text enabled');
+            //inputText();
             return '';
         });
 
         // Sky picture
         msg = msg.replace(/&o.\n*/gm, function (sky) {
-            var sky = sky.charAt(2);
-            //setSky(sky);
+            let sky_parse = sky.charAt(2);
+            _.setSky(sky_parse);
             return '';
         });
 
         // Exits info
         msg = msg.replace(/&d\d{6}\n*/gm, function (doors) {
-            var doors = doors.substr(2, 6);
-            //setDoors(doors);
+            let doors_parse = doors.substr(2, 6);
+            _.setDoors(doors_parse);
             return '';
         });
 
         // Audio
         msg = msg.replace(/&!au"[^"]*"\n*/gm, function (audio) {
-            var audio = audio.slice(5, audio.lastIndexOf('"'));
-            playAudio(audio);
+            let audio_parse = audio.slice(5, audio.lastIndexOf('"'));
+            _.playAudio(audio_parse);
             return '';
         });
 
         // Player status
         msg = msg.replace(/&!st"[^"]*"\n*/gm, function (status) {
-            var st = status.slice(5, status.lastIndexOf('"')).split(',');
+            let st = status.slice(5, status.lastIndexOf('"')).split(',');
             return _.setStatus(st);
         });
 
         // Player status
         msg = msg.replace(/&!up"[^"]*"\n*/gm, function (update) {
-            var ud = update.slice(5, status.lastIndexOf('"')).split(',');
+            console.log('playerstatus 2 - inv, eq , room version');
+            let ud = update.slice(5, status.lastIndexOf('"')).split(',');
 
             if (ud[0] > client_update.inventory.version)
                 client_update.inventory.needed = true;
@@ -520,6 +472,7 @@ export default class TgGui {
 
         // Image in side frame (with gamma)
         msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
+            console.log('show image with gamma');
             // var image = image.slice(6, image.lastIndexOf('"')).split(',');
             // showImageWithGamma(image[0], image[1], image[2], image[3]);
             return '';
@@ -527,6 +480,8 @@ export default class TgGui {
 
         // Image in side frame
         msg = msg.replace(/&!im"[^"]*"\n*/gm, function (image) {
+            console.log('Image in side frame');
+
             // var image = image.slice(5, image.lastIndexOf('"'));
             // showImage(image);
             return '';
@@ -540,7 +495,8 @@ export default class TgGui {
 
         // Close the text editor
         msg = msg.replace(/&!ea"[^"]*"\n*/gm, function (options) {
-            closeEditor();
+            console.log('closeEditor');
+            _.closeEditor();
             return '';
         });
 
@@ -554,8 +510,8 @@ export default class TgGui {
 
         // Map data
         msg = msg.replace(/&!map\{[\s\S]*?\}!/gm, function (map) {
-            var map = $.parseJSON(map.slice(5, -1));
-            //updateMap(map);
+            let map_parse = $.parseJSON(map.slice(5, -1));
+            _.updateMap(map_parse);
             return '';
         });
 
@@ -575,8 +531,8 @@ export default class TgGui {
         // Generic page (title, text)
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
             p = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-           // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            return '<div class="msg-title">'+ p.title +'</div><div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>';
+            // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
+            return '<div class="msg-title">' + p.title + '</div><div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>';
         });
 
         // Generic table (title, head, data)
@@ -601,7 +557,7 @@ export default class TgGui {
         // Person details
         msg = msg.replace(/&!pers\{[\s\S]*?\}!/gm, function (dtls) {
             dtls = $.parseJSON(dtls.slice(6, -1));
-           // return renderDetails(dtls, 'pers');
+            // return renderDetails(dtls, 'pers');
         });
 
         // Object details
@@ -726,8 +682,7 @@ export default class TgGui {
 
     }
 
-    replaceColors(msg)
-    {
+    replaceColors(msg) {
         msg = msg.replace(/&B/gm, '<div class="gray">');
         msg = msg.replace(/&R/gm, '<div class="lt-red">');
         msg = msg.replace(/&G/gm, '<div class="lt-green">');
@@ -749,56 +704,115 @@ export default class TgGui {
         return msg;
     }
 
-    renderDetailsInText(info, type) {
-        let  res = '';
 
-        if(info.title)
-            res += '<div class="room"><div class="lts"></div>'+capFirstLetter(info.title)+'<div class="rts"></div></div>';
-            /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
+
+
+    /* *****************************************************************************
+    * SKY
+    */
+
+    setSky(sky) {
+        console.log('TODO:SKY');
+        // let skypos = ['0','1','2','3','4','5','6','7','8','9','N','d','e','f','g','i','o','p','q','r','s','t','u','w','y'];
+        // $('#sky').css('background-position', '0 -'+(skypos.indexOf(sky)*29)+'px');
+    }
+
+    /* *****************************************************************************
+    * DOORS
+    */
+   
+    setDoors() {
+        console.log('TODO:DOORS');
+    }
+
+    /* *****************************************************************************
+    * AUDIO & MUSIC
+    */
+
+    playAudio() {
+        console.log('TODO:playaudio')
+    }
+
+    /* *****************************************************************************
+     * PLAYER STATUS
+    */
+
+    updatePlayerStatus(hprc, mprc) {
+        let hcolor = prcLowTxt(hprc, hlttxtcol);
+        let mcolor = prcLowTxt(hprc, hlttxtcol);
+
+        $('.movebar').width(limitPrc(mprc)+'%');
+        $('.moveprc').css('color', mcolor).text(mprc);
     
+        $('.healthbar').width(limitPrc(hprc)+'%');
+        $('.healthprc').css('color', hcolor).text(hprc);
+    }
+
+    setStatus(st) {
+        _.updatePlayerStatus(st[0], st[1]);
+        return;
+    }
+
+    
+    /* *****************************************************************************
+     * MAP
+    */
+    updateMap (map) {
+        _.drawCanvasMap();
+    }
+
+
+
+
+    renderDetailsInText(info, type) {
+        let res = '';
+
+        if (info.title)
+            res += '<div class="room"><div class="lts"></div>' + capFirstLetter(info.title) + '<div class="rts"></div></div>';
+        /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
+
         res += _.renderDetailsInner(info, type, false);
-    
+
         //if(info.image)
         //    showImage($('#image-cont'), info.image);
-    
+
         return res;
     }
 
     renderDetailsInner(info, type, inDialog) {
         let _ = this,
             textarea = '';
-        if  ( info.action ) {
-		    textarea += '<p>'+info.action+'</p>';
+        if (info.action) {
+            textarea += '<p>' + info.action + '</p>';
         }
         /* Print description */
-	    if(info.desc) {
-            if(info.desc.base) {
-                if(type == 'room')
+        if (info.desc) {
+            if (info.desc.base) {
+                if (type == 'room')
                     last_room_desc = _.formatText(info.desc.base);
                 textarea += _.formatText(info.desc.base);
-            } else if(info.desc.repeatlast && last_room_desc)
+            } else if (info.desc.repeatlast && last_room_desc)
                 textarea += last_room_desc;
 
-            if(info.desc.details)
+            if (info.desc.details)
                 textarea += _.formatText(info.desc.details, 'yellow');
 
-            if(info.desc.equip)
+            if (info.desc.equip)
                 textarea += _.formatText(info.desc.equip, 'green');
-	    }
+        }
 
     }
 
-    formatText(text, style){
+    formatText(text, style) {
         let page = '';
-        let parags = text.replace(/\r/gm,'').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
+        let parags = text.replace(/\r/gm, '').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
 
-        $.each(parags, function(i, p) {
-            page += '<p'+( style ? ' class="' + style + '"' : '')+'>' + p + '</p>';
+        $.each(parags, function (i, p) {
+            page += '<p' + (style ? ' class="' + style + '"' : '') + '>' + p + '</p>';
         });
 
         return page;
     }
-
 
     sendOOB(data) {
         let _ = this;
@@ -810,7 +824,7 @@ export default class TgGui {
 
     processCommands(text) {
         let _ = this;
-        if(_.inGame) {
+        if (_.inGame) {
 
         }
     }
@@ -857,40 +871,39 @@ export default class TgGui {
 
     loadInterface() {
 
-        let _ = this;
-
-
         /*
          * Interface Modules List.
          */
 
+        let _ = this;
+
         //_.outputinit();
         $('.tg-main').show();
-        
-        _.focusInput();
+
         _.keyboardMapInit();
-        
+        _.focusInput();
+        _.mapInit();
         _.main();
     }
 
     /* -------------------------------------------------
-    * KEYBOARD MAP
-    * -------------------------------------------------*/
+     * KEYBOARD MAP
+     * -------------------------------------------------*/
 
     keyboardMapInit() {
 
         let _ = this;
-        
-        $(document).on('keydown', function(event) {
+
+        $(document).on('keydown', function (event) {
             //TODO if is not connected?
-            if(event.metaKey || event.ctrlKey) {
-			    return true;
+            if (event.metaKey || event.ctrlKey) {
+                return true;
             }
 
-            if($(event.target).is('#tgInputUser') === true) {
-                
+            if ($(event.target).is('#tgInputUser') === true) {
+
                 /* Enter Key */
-                if( event.which == 13 ) {
+                if (event.which == 13) {
                     _.sendInput();
                     return false;
                 }
@@ -899,22 +912,38 @@ export default class TgGui {
         });
     }
 
+    
     /* -------------------------------------------------
-    * PLAYER STATUS
-    * -------------------------------------------------*/
-    updatePlayerStatus(hprc, mprc) {}
-
-    setStatus(st) {
-        _.updatePlayerStatus(st[0], st[1]);
-	    return;
+     *  MAP 
+     * -------------------------------------------------*/
+    mapInit() {
+        let _ = this;
+        let MiniMap = new Map();
+        MiniMap.init();
+        MiniMap.prepareCanvas();
+        
     }
 
-    sendInput(){
+    sendInput() {
         this.processCommands($('#tgInputUser').val());
     }
 
     focusInput() {
         $('#tgInputUser').focus();
+    }
+
+    openPopup() {
+        let _ = this,
+            content; 
+
+        console.log(this);
+        $.magnificPopup.open({
+            type: 'inline',
+            items: {
+                src: '<div class="tg-modal">Funzionalità non ancora implementata</div>',
+                type: 'inline'
+            }
+        });
     }
 
     main() {

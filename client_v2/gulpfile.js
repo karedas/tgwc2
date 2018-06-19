@@ -4,26 +4,27 @@ const gulp = require('gulp'),
 	debug = require('gulp-debug'),
 	del = require('del'),
 	path = require('path'),
-	exec = require('child_process').exec,
 	concat = require("gulp-concat"),
 	fs = require('fs'),
-	jsbeautify = require('gulp-jsbeautify'),
 	plumber = require('gulp-plumber'),
 	postcss = require('gulp-postcss'),
-	rename = require('gulp-rename'),
 	sass = require('gulp-sass'),
 	sassUnicode = require('gulp-sass-unicode'),
-	autoprefixer = require('autoprefixer'),
 	sourcemaps = require('gulp-sourcemaps'),
-	uglify = require('gulp-uglify'),
 	webpack = require('webpack'),
 	chalk = require('chalk'),
 	argv = require('yargs').argv,
 	stream = require('merge-stream'),
 	spritesmith = require('gulp.spritesmith'),
-//	concatFilenames = require('gulp-concat-filenames'),
 	fileList = require('gulp-filelist'),
-	webpackStream = require('webpack-stream');
+	webpackStream = require('webpack-stream'),
+	git = require('git-rev');
+ 
+// git.short(function (str) {
+// 	git_version = git_version + '-' + str;
+// })
+
+
 
 
 const log = console.log;
@@ -133,8 +134,7 @@ gulp.task('sass-compile', () => {
 	return gulp.src(config.src.base + config.src.scss + '**/*.scss')
 		// .pipe( sourcemaps.init())
 		.pipe(sass({
-			errLogToConsole: true,
-			includePaths: ['node_modules/susy/sass']
+			errLogToConsole: true
 		}).on('error', sass.logError))
 		.pipe(sassUnicode())
 		.pipe(postcss(postcss_config))
@@ -150,7 +150,7 @@ gulp.task('copy-images', () =>  {
 
 gulp.task('staticfiles-watch', function() { 
 
-	let glob = [config.src.base + '**/*.html', config.src.base + 'assets_list.json'];
+	let glob = [config.src.base + 'assets_list.json'];
 
 	let watcher = gulp.watch( glob , {
 		interval: 500,
@@ -198,16 +198,8 @@ gulp.task('clean', () => {
 
 //Task for watching development
 gulp.task('dev', 
-	gulp.series('generate-assetslist', 'sass-compile', 'copy-images', copyStaticFiles,  gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
+	gulp.series('generate-assetslist', 'sass-compile', 'copy-images',  gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
 gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist' , 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));
 
-
-gulp.task('test', function () {
-	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
-		.pipe(concatFilenames('assets_list', {
-			root: './'
-		}))
-		.pipe(gulp.dest(config.build.base));
-});

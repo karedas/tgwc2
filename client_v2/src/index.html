@@ -21,17 +21,20 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
-  <script src="js/vendor.min.js"></script>
-  <script src="js/app.min.js"></script>
+  <script type="text/javascript" src="js/vendor.min.js"></script>
+  <script type="text/javascript" src="js/app.min.js"></script>
 </head>
 
 <body>
-  <div class="tg-area">
-    <div class="container tg-loginpanel align-middle">
+  <div class="tg-area container-fluid">
+    <!-- Login Panel -->
+    <div class="tg-loginpanel align-middle container-fluid">
       <div class="row justify-content-center align-self-center w-100">
         <div class="col-xl-4 col-md-5 mx-auto">
           <form id="loginPanel" class="tg-loginform" action="/">
-            <p>TheGate Webclient v.2--alpha</p>
+            <p>TheGate Webclient
+              <span>v.2--alpha-"tgwcv2-rev_2.c51b3ba"</span>
+            </p>
             <label for="login_username">Nome Utente</label>
             <input id="login_username" name="username" type="text">
             <label for="login_password">Password</label>
@@ -39,20 +42,37 @@
             <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
             <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
           </form>
-          <div id="tgServerStatus" class="tg-serverstatus"></div>
+          <div id="networkActivityMessage"></div>
+          <div id="loginNetworkActivityMessage" class="tg-serverstatus"></div>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
           </div>
         </div>
       </div>
     </div>
-    <div class="container-fluid tg-main">
+    <div class="tg-main container-fluid">
+      <!-- Main NavBar -->
       <div class="row">
-        <div class="tg-navbar col-12">navbar</div>
+        <div class="tg-navbar col-12">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              Guida
+            </li>
+            <li class="list-inline-item">
+              data/tempo di gioco
+            </li>
+            <li class="list-inline-item">
+              [S] Server status
+            </li>
+            <li class="list-inline-item">Aiuto</li>
+            <li class="list-inline-item">[esci]</li>
+          </ul>
+        </div>
       </div>
       <div class="row tg-main-row">
         <div class="tg-leftside col-9">
-          <div class="tg-output tg-box tg-shadow">
+          <!-- Output Area -->
+          <div class="tg-output tg-box b-ironlight tg-shadow">
             <div id="output" class="tg-output-history"></div>
             <div class="tg-border-box">
               <div class="tg-border tg-border-top"></div>
@@ -61,41 +81,68 @@
               <div class="tg-border tg-border-bottom"></div>
             </div>
           </div>
+          <!-- Control Panel & Input Area-->
           <div class="tg-controlpanel col-12">
+            <!-- Character CPanel-->
             <div class="row">
-              <div class="tg-input tg-box tg-shadow col-12">
-                  <input id="tgInputUser" type="text">
-                  <div class="tg-border-box">
-                      <div class="tg-border tg-border-top"></div>
-                      <div class="tg-border tg-border-left"></div>
-                      <div class="tg-border tg-border-right"></div>
-                      <div class="tg-border tg-border-bottom"></div>
-                    </div>
-              </div>  
+              <div class="tg-characterpanel col-12">
+                <!-- Character avatar -->
+                <div class="tg-characteravatar"></div>
+                <!-- Character Status Bars -->
+                <div class="meterbar tooltip" title="<b>PF:</b> Punti ferita <br/><b>PM</b>: Punti Movimento">
+                  <div class="barcont">
+                    <span class="statusTxt">PF: 80 / 100</span>
+                    <span class="red barC" style="width:80%;"></span>
+                  </div>
+                  <div class="barcont">
+                    <span class="statusTxt">PM: 20 / 100</span>
+                    <span class="green barC" style="width:20%;"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Input Line -->
+            <div class="row">
+              <div class="tg-input tg-box b-ironlight tg-shadow col-12">
+                <input id="tgInputUser" type="text" />
+                <div class="tg-border-box">
+                  <div class="tg-border tg-border-top"></div>
+                  <div class="tg-border tg-border-left"></div>
+                  <div class="tg-border tg-border-right"></div>
+                  <div class="tg-border tg-border-bottom"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="tg-rightside col-3">rightside</div>
+      </div>
+      <div class="tg-rightside col-3">
+        <div id="tgMap" class="tg-map">
+
+        </div>
       </div>
     </div>
-    <div id="cookielawdisclaimer" class="tg-cookielawcontent">
-      <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
-      <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della propria configurazione
-        e il riconoscimento dell'utente per il conseguente accesso automatico. Le funzionalità di "Login tramite Facebook"
-        e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. Maggiori informazioni sono disponibili
-        <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
-        <b>Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
-      </p>
-      <p>
-        <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
-      </p>
+  </div>
+  <div class="tg-cookielawcontent">
+    <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
+    <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della propria configurazione
+      e il riconoscimento dell'utente per il conseguente accesso automatico. Le funzionalità di "Login tramite Facebook"
+      e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. Maggiori informazioni sono disponibili
+      <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
+      <b>Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
+    </p>
+    <p>
+      <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
+    </p>
+  </div>
+  <div class="tg-box b-area">
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
-    <div class="tg-border-area">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+  </div>
   </div>
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <!-- <script>

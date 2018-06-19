@@ -1,0 +1,10 @@
+.tg-modal {
+    color: tg-yellow;
+    background: $black;
+    border: 1px solid $tg-yellow;
+    padding: .5rem;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

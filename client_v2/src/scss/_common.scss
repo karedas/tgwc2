@@ -1,5 +1,6 @@
 @import 'login';
 @import 'borders';
+@import 'modal';
 
 body,
 html {
@@ -25,6 +26,11 @@ body {
        background-image: url($imgPath + '/interface/navbar_background.png');
        background-repeat: repeat-x;
        height: 50px;
+
+       ul {
+           padding: 5px 0;
+           margin-bottom: 0;
+       }
     }
 
     .tg-main {
@@ -41,6 +47,7 @@ body {
         display: flex;
         flex-direction: column;
     }
+
     .tg-output {
         background: black;
         flex: 1 1 100%;
@@ -74,16 +81,12 @@ body {
         }
     }
 
-    
     .tg-rightside{
         border:1px solid red;
     }
-
 }
 
-
-
-
+/* Preloader in Login */
 
 .tg-preloader {
     display: none;

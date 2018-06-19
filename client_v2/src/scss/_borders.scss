@@ -1,7 +1,7 @@
     
 .tg-box {
     position: relative;
-    padding: $border-size;
+    
 }
 
 .tg-border-box {
@@ -18,7 +18,6 @@
 
     .tg-border-top, .tg-border-bottom {
         position: absolute;
-        height: $border-size;
         width: 100%;
         background-repeat: repeat-x;
 
@@ -27,8 +26,6 @@
             content: '';
             position: absolute;
             display: block;
-            width: $border-size;
-            height: $border-size;
         }
 
         &::before {
@@ -42,16 +39,48 @@
         }
     }
     
-    
     .tg-border-left, .tg-border-right{
         position: absolute;
-        width: $border-size;
-        top: $border-size;
-        bottom: $border-size;
     }
     
     .tg-border-top {
         top: 0;
+    }
+
+    .tg-border-bottom {
+        bottom: 0;
+    }
+    
+    .tg-border-right {
+        right: 0;
+    }
+
+    .tg-border-left {
+        left: 0;
+    }
+}
+
+
+/* BORDER TYPE */
+
+.b-ironlight {
+    padding: $ironlight-border-size;  
+    .tg-border-top, .tg-border-bottom {
+        height: $ironlight-border-size;
+        &::after, &::before {
+            width: $ironlight-border-size;
+            height: $ironlight-border-size;
+        }
+    }
+
+    .tg-border-left, .tg-border-right{
+        position: absolute;
+        width: $ironlight-border-size;
+        top: $ironlight-border-size;
+        bottom: $ironlight-border-size;
+    }
+
+    .tg-border-top {
         background-image: url($imgPath + '/borders/border_stonelight_top.png');
         &::after {
             background-image: url($imgPath + '/borders/border_stonelight_topright.png');
@@ -59,10 +88,9 @@
         &::before {
             background-image: url($imgPath + '/borders/border_stonelight_topleft.png');
         }
-
     }
+    
     .tg-border-bottom {
-        bottom: 0;
         background-image:  url($imgPath + '/borders/border_stonelight_bottom.png');
         &::after {
             background-image: url($imgPath + '/borders/border_stonelight_bottomright.png');
@@ -72,15 +100,58 @@
         }
     }
     
-
     .tg-border-right {
-        right: 0;
         background-image: url($imgPath + '/borders/border_stonelight_right.png');
     }
 
     .tg-border-left {
-        left: 0;
         background-image: url($imgPath + '/borders/border_stonelight_left.png');
     }
-    
 }
+
+.b-area {
+    padding: $area-border-size;  
+    .tg-border-top, .tg-border-bottom {
+        height: $area-border-size;
+        &::after, &::before {
+            width: $area-border-size;
+            height: $area-border-size;
+        }
+    }
+
+    .tg-border-left, .tg-border-right{
+        position: absolute;
+        width: $area-border-size;
+        top: $area-border-size;
+        bottom: $area-border-size;
+    }
+
+    .tg-border-top {
+        background-image: url($imgPath + '/borders/border-wc-area-t.jpg');
+        &::after {
+            background-image: url($imgPath + '/borders/corner-wc-area-tr.jpg');
+        }
+        &::before {
+            background-image: url($imgPath + '/borders/corner-wc-area-tl.jpg');
+        }
+    }
+    
+    .tg-border-bottom {
+        background-image:  url($imgPath + '/borders/border-wc-area-b.jpg');
+        &::after {
+            background-image: url($imgPath + '/borders/corner-wc-area-br.jpg');
+        }
+        &::before {
+            background-image:  url($imgPath + '/borders/corner-wc-area-bl.jpg');
+        }
+    }
+    
+    .tg-border-right {
+        background-image: url($imgPath + '/borders/border-wc-area-r.jpg');
+    }
+
+    .tg-border-left {
+        background-image: url($imgPath + '/borders/border-wc-area-l.jpg');
+    }
+}
+

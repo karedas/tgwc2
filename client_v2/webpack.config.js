@@ -2,8 +2,22 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
 
-module.exports = function (config) {
+let gitRevisionPlugin = new GitRevisionPlugin();
+
+module.exports = function (prop) {
+
+    // if the local_config is not present then we're likely running webpack directly from the command line
+    // load the dev environment by default
+    let config = null;
+	if ( typeof prop == 'undefined' ) {
+		// combine it with the project configuration file
+        config = require('./gulp.config.js')();
+    }
+    else {
+        config = prop;
+    }
     
     var wp = {
         mode: 'development',
@@ -15,23 +29,23 @@ module.exports = function (config) {
             aggregateTimeout: 500,
         },
         // set basedir for entry point
-        context: path.resolve(__dirname, config.src.base + config.src.js),
+        context: path.resolve(__dirname, config.src.base),
 
         externals: {
             jquery: "jQuery",
             $: "jQuery",
+            gitversion: '123'
         },
 
         entry: {
-            // 'evennia': './evennia.js',
-            'app': './app.js'
+            'app': './js/app.js'
         },
 
         output: {
             path: path.resolve(__dirname, config.build.base + config.build.js),
             filename: '[name].min.js', //TODO only on build
             libraryTarget: 'umd',
-            library: ['TG', '[name]'],
+            library: ['Tg', '[name]'],
             umdNamedDefine: true
         },
 
@@ -42,12 +56,11 @@ module.exports = function (config) {
             ],
             alias: {
                 modernizr$: path.resolve(__dirname, "./.modernizrrc.js")
-              }
+            }
         },
 
         module: {
-            rules: [
-                {
+            rules: [{
                     test: /\.js$/,
                     exclude: /node_modules/,
                     use: {
@@ -58,20 +71,9 @@ module.exports = function (config) {
                     loader: "webpack-modernizr-loader",
                     test: /\.modernizrrc\.js$/
                 },
-
             ]
         },
 
-
-        plugins: [
-            new HtmlWebPackPlugin({
-                inject: "head",
-                minify: false,
-                template: "index.html",
-                filename: "./src/index.html"
-            })
-        ],
-        
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -94,7 +96,22 @@ module.exports = function (config) {
         },
 
         plugins: [
-            new webpack.NoEmitOnErrorsPlugin()
+
+            new webpack.NoEmitOnErrorsPlugin(),
+
+            // new webpack.DefinePlugin({
+            //     PRODUCTION: JSON.stringify(true)
+            // }),
+            
+            new HtmlWebPackPlugin({
+                title: 'My Awesome application',
+                git_version: JSON.stringify('tgwcv2-rev_2.' + gitRevisionPlugin.version()),
+                inject: "head",
+                minify: false,
+                hash: true,
+                template: './index.html',
+                filename: '../index.html' //relative to root of the application
+            }),
         ]
     }
 
