@@ -10,7 +10,7 @@ import assetsList from 'assets_list.json';
 // import {input_history} from 'modules/input_history';
 export default class TgGui {
 
-    constructor() {
+    constructor(options) {
 
         this.ws_server_addr = '51.38.185.84';
         this.socket_io_resource = 'socket.io';
@@ -53,6 +53,8 @@ export default class TgGui {
         this.client_options = {};
 
         this.debug = false;
+
+        Object.assign(this, options);
     }
 
     init() {
@@ -71,15 +73,21 @@ export default class TgGui {
 
     startClient() {
         let _ = this;
-        //await Facebook SDK before end.
-        _.loadFacebookSDK();
-        _.initSessionData();
-        _.connectToServer().then(function (resolve) {
-                _.enableLoginPanel();
-            })
-            .catch(function (error) {
-                //Connection error
-            });
+        console.log(_.debug);
+        if(_.debug) {
+            _.hideLoginPanel();
+            _.loadInterface();
+        }
+        else {
+            _.loadFacebookSDK();
+            _.initSessionData();
+            _.connectToServer().then(function (resolve) {
+                    _.enableLoginPanel();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
     connectToServer() {
