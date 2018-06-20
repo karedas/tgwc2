@@ -35,8 +35,10 @@ body {
 
     .tg-main {
         min-height: 100%;
-        display: flex;
+        display: none;
         flex-direction: column;
+        z-index: 10;
+        position: relative;
     
         .tg-main-row {
             flex-grow: 1;
@@ -52,17 +54,25 @@ body {
         background: black;
         flex: 1 1 100%;
         font-size: 12px;
+        margin-bottom: $grid-gutter-width / 2;
 
         .tg-output-history {
-            position: relative;
             z-index: 2;
             padding: .2rem;
+            max-height: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            overflow-y: auto;
+            margin: 8px;
         }
     }
     
     .tg-controlpanel {
-        height: 75px;
-        flex: 1 1 75px;
+        flex: 1 1 100%;
+        margin-bottom: $grid-gutter-width / 2;
     }
 
     .tg-input {
@@ -99,4 +109,13 @@ body {
     .tg-btn-cookieconsent {
         cursor: pointer;
     }
+}
+
+
+// Magnific Popup Override
+
+.mfp-close-btn-in .mfp-close{
+    top: -30px;
+    right: -35px;
+    color: white;
 }

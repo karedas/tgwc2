@@ -5,6 +5,8 @@
     display: flex;
     height: 100%;
     display: flex;
+    z-index: 10;
+    position: relative;
 
     .tg-loginform {
         border-radius: 15px;

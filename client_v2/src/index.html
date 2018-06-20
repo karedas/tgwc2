@@ -21,19 +21,17 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
-  <script type="text/javascript" src="js/vendor.min.js"></script>
-  <script type="text/javascript" src="js/app.min.js"></script>
 </head>
 
 <body>
-  <div class="tg-area container-fluid">
+  <div class="tg-area tg-box b-area">
     <!-- Login Panel -->
     <div class="tg-loginpanel align-middle container-fluid">
       <div class="row justify-content-center align-self-center w-100">
-        <div class="col-xl-4 col-md-5 mx-auto">
+        <div class="col-xl-3 col-lg-4 col-md-5 mx-auto">
           <form id="loginPanel" class="tg-loginform" action="/">
             <p>TheGate Webclient
-              <span>v.2--alpha-"tgwcv2-rev_2.c51b3ba"</span>
+              <span>v.2--alpha-<%= htmlWebpackPlugin.options.git_version%></span>
             </p>
             <label for="login_username">Nome Utente</label>
             <input id="login_username" name="username" type="text">
@@ -42,8 +40,8 @@
             <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
             <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
           </form>
-          <div id="networkActivityMessage"></div>
-          <div id="loginNetworkActivityMessage" class="tg-serverstatus"></div>
+          <div id="networkActivityMessage" class="tg-serverstatus"></div>
+          <div id="loginNetworkActivityMessage"></div>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
           </div>
@@ -71,6 +69,8 @@
       </div>
       <div class="row tg-main-row">
         <div class="tg-leftside col-9">
+          
+        <div class="row h-100">
           <!-- Output Area -->
           <div class="tg-output tg-box b-ironlight tg-shadow">
             <div id="output" class="tg-output-history"></div>
@@ -81,6 +81,8 @@
               <div class="tg-border tg-border-bottom"></div>
             </div>
           </div>
+         </div>
+          <div class="row">
           <!-- Control Panel & Input Area-->
           <div class="tg-controlpanel col-12">
             <!-- Character CPanel-->
@@ -114,28 +116,15 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
-      </div>
-      <div class="tg-rightside col-3">
-        <div id="tgMap" class="tg-map">
-
+        <div class="tg-rightside col-3">
+          <div id="tgMap" class="tg-map">
+  
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="tg-cookielawcontent">
-    <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
-    <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della propria configurazione
-      e il riconoscimento dell'utente per il conseguente accesso automatico. Le funzionalità di "Login tramite Facebook"
-      e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. Maggiori informazioni sono disponibili
-      <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
-      <b>Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
-    </p>
-    <p>
-      <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
-    </p>
-  </div>
-  <div class="tg-box b-area">
     <div class="tg-border-box">
       <div class="tg-border tg-border-top"></div>
       <div class="tg-border tg-border-left"></div>
@@ -143,7 +132,19 @@
       <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
-  </div>
+    <div class="tg-cookielawcontent">
+      <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
+      <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della propria configurazione
+        e il riconoscimento dell'utente per il conseguente accesso automatico. Le funzionalità di "Login tramite Facebook"
+        e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. Maggiori informazioni sono disponibili
+        <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
+        <b>Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
+      </p>
+      <p>
+        <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
+      </p>
+    </div>
+
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <!-- <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;

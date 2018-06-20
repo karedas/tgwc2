@@ -44,7 +44,6 @@ export default class TgGui {
         this.isGod = false;
         this.godInvLev = 0;
 
-
         this.connectionInfo = {
             loginName: null,
             loginPass: null,
@@ -54,10 +53,35 @@ export default class TgGui {
         this.client_state = {};
 
         /* UI Game Options */
-        this.client_options = {};
+        this.client_options = {
+            shortcuts: [],
+            login: {},
+        };
 
+        /* History */
+        this.max_history_length = 40;
+        this.cmd_history_pos = 0;
+        this.cmd_history = [];
+
+        /* Shortcuts */
+        this.shortcuts_map = {};
+
+        /* Input */
+        this.cmd_prefix = '';
+
+        /* Output */
+        this.last_room_desc='';
+
+        /* Health bars */
+        this.hlttxtcol = [
+            { let: 25, txt: 'orangered' },
+            { let: 50, txt: 'yellow' },
+            { let: 100, txt: 'greenyellow' },
+        ];
+
+        /* Debug */
         this.debug = false;
-        
+
     }
 
     init() {
@@ -101,18 +125,17 @@ export default class TgGui {
             _.socket.on('connect', function () {
                 _.serverIsOnline = true;
                 _.networkActivityMessage("Server Online", 'up');
-                
                 _.socket.on('data', _.handleLoginData.bind(_));
 
                 resolve();
             });
-            
+
             _.socket.on('disconnect', function () {
                 _.networkActivityMessage("Disconnesso dal server");
             });
 
             _.socket.on('connect_error', function (e) {
-                if (_.isConnected) {
+                if (_.serverIsOnline) {
                     _.networkActivityMessage("Connessione chiusa");
                 } else {
                     _.networkActivityMessage("Il server di gioco è offline.");
@@ -126,14 +149,16 @@ export default class TgGui {
         let _ = this;
 
         if (data.indexOf("&!connmsg{") == 0) {
-            
+
             let end = data.indexOf('}!');
             let rep = $.parseJSON(data.slice(9, end + 1));
 
             if (rep.msg) {
                 switch (rep.msg) {
                     case 'ready':
-                        _.sendOOB({ itime: _.client_state.when.toString(16) });
+                        _.sendOOB({
+                            itime: _.client_state.when.toString(16)
+                        });
                         break;
 
                     case 'enterlogin':
@@ -180,7 +205,7 @@ export default class TgGui {
                         let connectionError = _.getLoginReplyMessage(rep.msg);
                         if (!connectionError)
                             connectionError = _.getLoginReplyMessage('errorproto');
-                            _.loginError(connectionError);
+                        _.loginError(connectionError);
                         break;
                 }
             }
@@ -203,7 +228,7 @@ export default class TgGui {
         let len = _.netdata.length;
 
         if (_.netdata.indexOf("&!!", len - 3) !== -1) {
-            
+
             let now,
                 data = _.preparseText(_.netdata.substr(0, len - 3));
 
@@ -214,7 +239,7 @@ export default class TgGui {
             }
 
             _.netdata = '';
-            
+
             now = Date.now();
 
 
@@ -237,7 +262,7 @@ export default class TgGui {
             _.startClient();
         });
     }
-    
+
     initSessionData() {
 
         let _ = this;
@@ -301,8 +326,8 @@ export default class TgGui {
 
 
     /* *****************************************************************************
-    * ASSETS PRELOAD 
-    */
+     * ASSETS PRELOAD 
+     */
     preloadClient() {
         let _ = this;
 
@@ -319,7 +344,6 @@ export default class TgGui {
                     percentage = percentage + stepSize;
                     $('#tgPreloader span').text(Math.round(percentage));
 
-                    $('#tgPreloader')
                     $(window).trigger('tgassetsload--step');
 
                     if (assetsList.length - 1 == i) {
@@ -383,13 +407,13 @@ export default class TgGui {
     }
 
     loginNetworkActivityMessage(msg, dataname) {
-        $('#loginNetworkActivityMessage').text(msg).attr('data-status', dataname);
+        $('#loginNetworkActivityMessage').text(msg);
     }
 
-    networkActivityMessage(msg) {
-        $('#networkActivityMessage').text(msg);
+    networkActivityMessage(msg, dataname) {
+        $('#networkActivityMessage').text(msg).attr('data-status', dataname);
     }
- 
+
 
     preparseText(msg) {
 
@@ -406,7 +430,7 @@ export default class TgGui {
     }
 
     parseForDisplay(msg) {
-
+        console.log(msg);
         let _ = this,
             pos;
 
@@ -455,17 +479,16 @@ export default class TgGui {
 
         // Player status
         msg = msg.replace(/&!up"[^"]*"\n*/gm, function (update) {
-            console.log('playerstatus 2 - inv, eq , room version');
             let ud = update.slice(5, status.lastIndexOf('"')).split(',');
 
-            if (ud[0] > client_update.inventory.version)
-                client_update.inventory.needed = true;
+            if (ud[0] > _.client_update.inventory.version)
+                _.client_update.inventory.needed = true;
 
-            if (ud[1] > client_update.equipment.version)
-                client_update.equipment.needed = true;
+            if (ud[1] > _.client_update.equipment.version)
+                _.client_update.equipment.needed = true;
 
-            if (ud[2] > client_update.room.version)
-                client_update.room.needed = true;
+            if (ud[2] > _.client_update.room.version)
+                _.client_update.room.needed = true;
 
             return '';
         });
@@ -524,21 +547,21 @@ export default class TgGui {
 
         // List of commands
         msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
-            cmd = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-            return renderCommandsList(cmd);
+            let cmd_parse = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
+            return _.renderCommandsList(cmd_parse);
         });
 
         // Generic page (title, text)
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
-            p = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
+            let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            return '<div class="msg-title">' + p.title + '</div><div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>';
+            return '<div class="msg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
         });
 
         // Generic table (title, head, data)
         msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
-            t = $.parseJSON(t.slice(7, -1));
-            return renderTable(t);
+            let gtable_parse = $.parseJSON(t.slice(7, -1));
+            return renderTable(gtable_parse);
         });
 
         // Inventory
@@ -547,29 +570,29 @@ export default class TgGui {
             renderInventory(inv);
             return '';
         });
-
+/*
         // Room details
         msg = msg.replace(/&!room\{[\s\S]*?\}!/gm, function (dtls) {
-            dtls = $.parseJSON(dtls.slice(6, -1));
-            //return renderDetails(dtls, dtls.dir ? 'dir' : 'room');
-        });
+            let dtls_parse = $.parseJSON(dtls.slice(6, -1));
+            return _.renderDetails(dtls_parse, dtls_parse.dir ? 'dir' : 'room');
+        });*/
 
-        // Person details
+/*        // Person details
         msg = msg.replace(/&!pers\{[\s\S]*?\}!/gm, function (dtls) {
-            dtls = $.parseJSON(dtls.slice(6, -1));
-            // return renderDetails(dtls, 'pers');
+            dtls_parse = $.parseJSON(dtls.slice(6, -1));
+            return _.renderDetails(dtls_parse, 'pers');
         });
 
         // Object details
         msg = msg.replace(/&!obj\{[\s\S]*?\}!/gm, function (dtls) {
-            dtls = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
-            return _.renderDetailsInText(dtls, 'obj');
-        });
+            dtls_parse = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
+            return _.renderDetailsInText(dtls_parse, 'obj');
+        });*/
 
         // Equipment
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
-            eq = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-            //renderEquipment(eq);
+            let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
+            //renderEquipment(eq_parse);
             return '';
         });
 
@@ -593,8 +616,8 @@ export default class TgGui {
 
         // Player status
         msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
-            status = $.parseJSON(status.slice(6, -1));
-            //return renderPlayerStatus(status);
+            let status_parse = $.parseJSON(status.slice(6, -1));
+            //return renderPlayerStatus(status_parse);
         });
 
         // Selectable generic
@@ -605,8 +628,8 @@ export default class TgGui {
 
         // Refresh command
         msg = msg.replace(/&!refresh\{[\s\S]*?\}!/gm, function (t) {
-            t = $.parseJSON(t.slice(9, -1));
-            return handleRefresh(t);
+            let rcommand_parse = $.parseJSON(t.slice(9, -1));
+            return handleRefresh(rcommand_parse);
         });
 
         // Pause scroll
@@ -630,38 +653,38 @@ export default class TgGui {
 
 
         msg = msg.replace(/&!ce"[^"]*"/gm, function (image) {
-            var image = image.slice(5, -1);
-            return renderEmbeddedImage(image);
+            let image_parse = image.slice(5, -1);
+            return renderEmbeddedImage(image_parse);
         });
 
         msg = msg.replace(/&!ulink"[^"]*"/gm, function (link) {
-            var link = link.slice(8, -1).split(',');
-            return renderLink(link[0], link[1]);
+            let link_parse = link.slice(8, -1).split(',');
+            return renderLink(link_parse[0], link_parse[1]);
         });
 
         msg = msg.replace(/&!as"[^"]*"/gm, '');
 
         msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
-            var mob = mob.slice(mob.indexOf('"') + 1, -1).split(',');
-            var desc = mob.slice(5).toString();
-            return renderMob(mob[0], mob[1], mob[2], mob[3], desc, 'interact pers');
+            let mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
+            let desc_parse = mob.slice(5).toString();
+            return renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
         });
 
         msg = msg.replace(/&!(ad|a)?o"[^"]*"/gm, function (obj) {
-            var obj = obj.slice(obj.indexOf('"') + 1, -1).split(',');
-            var desc = obj.slice(5).toString();
-            return renderObject(obj[0], obj[1], obj[2], obj[3], desc, 'interact obj');
+            let obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
+            let desc_parse = obj.slice(5).toString();
+            return renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
         });
 
-        msg = msg.replace(/&!sm"[^"]*"/gm, function (icon) {
-            var icon = icon.slice(5, -1).split(',');
+        /*msg = msg.replace(/&!sm"[^"]*"/gm, function (icon) {
+            let icon_parse = icon.slice(5, -1).split(',');
             //return renderIcon(icon[0], icon[1], 'room', null, null, 'interact pers');
-        });
+        });*/
 
-        msg = msg.replace(/&!si"[^"]*"/gm, function (icon) {
-            var icon = icon.slice(5, -1).split(',');
+        /*msg = msg.replace(/&!si"[^"]*"/gm, function (icon) {
+            let icon_parse = icon.slice(5, -1).split(',');
             //return renderIcon(icon[0], null, null, null, null, "v " + icon[1]);
-        });
+        });*/
 
         msg = msg.replace(/&i/gm, function () {
             _.isGod = true;
@@ -708,8 +731,8 @@ export default class TgGui {
 
 
     /* *****************************************************************************
-    * SKY
-    */
+     * SKY
+     */
 
     setSky(sky) {
         console.log('TODO:SKY');
@@ -718,16 +741,16 @@ export default class TgGui {
     }
 
     /* *****************************************************************************
-    * DOORS
-    */
-   
+     * DOORS
+     */
+
     setDoors() {
         console.log('TODO:DOORS');
     }
 
     /* *****************************************************************************
-    * AUDIO & MUSIC
-    */
+     * AUDIO & MUSIC
+     */
 
     playAudio() {
         console.log('TODO:playaudio')
@@ -735,40 +758,41 @@ export default class TgGui {
 
     /* *****************************************************************************
      * PLAYER STATUS
-    */
+     */
 
     updatePlayerStatus(hprc, mprc) {
-        let hcolor = prcLowTxt(hprc, hlttxtcol);
-        let mcolor = prcLowTxt(hprc, hlttxtcol);
+        let _ = this;
+        let hcolor = _.prcLowTxt(hprc, _.hlttxtcol);
+        let mcolor = _.prcLowTxt(hprc, _.hlttxtcol);
 
-        $('.movebar').width(limitPrc(mprc)+'%');
+        $('.movebar').width(_.limitPrc(mprc) + '%');
         $('.moveprc').css('color', mcolor).text(mprc);
-    
-        $('.healthbar').width(limitPrc(hprc)+'%');
+
+        $('.healthbar').width(_.limitPrc(hprc) + '%');
         $('.healthprc').css('color', hcolor).text(hprc);
     }
 
     setStatus(st) {
+        let _ = this;
         _.updatePlayerStatus(st[0], st[1]);
         return;
     }
 
-    
+
     /* *****************************************************************************
      * MAP
-    */
-    updateMap (map) {
-        _.drawCanvasMap();
+     */
+    updateMap(map) {
+        let _ = this;
+       // _.drawCanvasMap();
     }
 
-
-
-
     renderDetailsInText(info, type) {
+        let _ = this;
         let res = '';
 
         if (info.title)
-            res += '<div class="room"><div class="lts"></div>' + capFirstLetter(info.title) + '<div class="rts"></div></div>';
+            res += '<div class="room"><div class="lts"></div>' + _.capFirstLetter(info.title) + '<div class="rts"></div></div>';
         /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
 
         res += _.renderDetailsInner(info, type, false);
@@ -779,7 +803,11 @@ export default class TgGui {
         return res;
     }
 
-    renderDetailsInner(info, type, inDialog) {
+    renderDetails(info, type){
+		return this.renderDetailsInText(info, type);
+    }
+
+    renderDetailsInner(info, type) {
         let _ = this,
             textarea = '';
         if (info.action) {
@@ -789,10 +817,10 @@ export default class TgGui {
         if (info.desc) {
             if (info.desc.base) {
                 if (type == 'room')
-                    last_room_desc = _.formatText(info.desc.base);
+                    _.last_room_desc = _.formatText(info.desc.base);
                 textarea += _.formatText(info.desc.base);
-            } else if (info.desc.repeatlast && last_room_desc)
-                textarea += last_room_desc;
+            } else if (info.desc.repeatlast && _.last_room_desc)
+                textarea += _.last_room_desc;
 
             if (info.desc.details)
                 textarea += _.formatText(info.desc.details, 'yellow');
@@ -802,6 +830,13 @@ export default class TgGui {
         }
 
     }
+
+    
+    capFirstLetter(string)
+    {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
 
     formatText(text, style) {
         let page = '';
@@ -814,9 +849,41 @@ export default class TgGui {
         return page;
     }
 
+
+/* *****************************************************************************
+ * STATUS BAR
+ */
+
+    limitPrc(prc) {
+        if(prc < 0)
+            prc = 0;
+        else if (prc > 100)
+            prc = 100;
+
+        return prc;
+    }
+
+    prcLowTxt(val, values){
+        for(var i=0; i < values.length; ++i) {
+            if(val <= values[i].val) {
+                return values[i].txt;
+            }
+            return null;
+        }
+    }
+
+    prcHighTxt(val, values){
+        for(var i=0; i < values.length; ++i) {
+            if(val >= values[i].val)
+                return values[i].txt;
+        }
+        return null;
+    }
+
+
     sendOOB(data) {
         let _ = this;
-        if (!_.isConnected) {
+        if (!_.serverIsOnline) {
             return;
         }
         _.socket.emit('oob', data);
@@ -825,13 +892,144 @@ export default class TgGui {
     processCommands(text) {
         let _ = this;
         if (_.inGame) {
+            let cmds = _.parseInput(text);
 
+            if (cmds) {
+                _.historyPush(text);
+                for (let i = 0; i < cmds.length; i++) {
+                    _.sendToServer(cmds[i]);
+                }
+            }
+        } else {
+            _.sendToServer(text);
+            $('#tgInputUser').val('').focus();
         }
     }
 
+
+
+    parseInput(input) {
+
+        let _ = this;
+        /* Split input separated by ; */
+        let inputs = input.split(/\s*;\s*/);
+        let res = [];
+
+        /* Substitute shortcuts on each command and join results */
+        for (let i = 0; i < inputs.length; ++i) {
+            var subs = _.substShort(inputs[i]).split(/\s*;\s*/);
+            res = res.concat(subs);
+        }
+
+        /* Return the resulting array */
+        return res;
+    }
+
+    substShort(input) {
+
+        let _ = this;
+        // Split into arguments
+        let args = input.split(/\s+/);
+
+        // Get the shortcut index
+        let shortcut_key = args.shift();
+        let shortcut_num = parseInt(shortcut_key);
+        let shortcut_cmd;
+        if (!isNaN(shortcut_num))
+            shortcut_cmd = _.client_options.shortcuts[shortcut_num];
+        else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined')
+            shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
+
+        // Check if the shortcut is defined
+        if (shortcut_cmd) {
+            // Use the shortcut text as command
+            input = shortcut_cmd.cmd;
+
+            if (/\$\d+/.test(input)) {
+                // Substitute the arguments
+                for (let arg = 0; arg < args.length; ++arg) {
+                    let rx = new RegExp("\\$" + (arg + 1), 'g');
+                    input = input.replace(rx, args[arg]);
+                }
+
+                // Remove remaining variables
+                input = input.replace(/\$\d+/g, '');
+            } else
+                input += " " + args.join(" ");
+        }
+
+        if (_.cmd_prefix.length > 0)
+            input = _.cmd_prefix + " " + input;
+
+        return input;
+    }
+
+
+    /* *****************************************************************************
+     * COMMAND HISTORY
+     */
+
+    updateInput() {
+        let _ = this;
+        var text = _.cmd_history[_.cmd_history_pos] ? _.cmd_history[_.cmd_history_pos] : '';
+        $('#inputline').val(text).focus();
+    }
+
+    historyTop() {
+        let _ = this;
+        if (_.cmd_history_pos > 0) {
+            _.cmd_history_pos = 0;
+            updateInput();
+        }
+    }
+
+    historyBottom() {
+        let _ = this;
+        if (_.cmd_history_pos < _.cmd_history.length) {
+            _.cmd_history_pos = _.cmd_history.length;
+            updateInput();
+        }
+    }
+
+
+    historyUp() {
+        let _ = this;
+        if (_.cmd_history_pos > 0) {
+            _.cmd_history_pos--;
+            updateInput();
+        }
+    }
+
+    historyDown() {
+        let _ = this;
+        if (_.cmd_history_pos < _.cmd_history.length) {
+            _.cmd_history_pos++;
+            updateInput();
+        }
+    }
+
+    historyPush(text) {
+        let _ = this;
+
+        if (text.length > 0) {
+            if (_.cmd_history.length >= _.max_history_length)
+                _.cmd_history.shift();
+
+            if (_.cmd_history.length == 0 || _.cmd_history[_.cmd_history.length - 1] != text)
+            _.cmd_history.push(text);
+
+            _.cmd_history_pos = _.cmd_history.length;
+
+            $('#inputline').val('');
+        }
+
+        return text;
+    }
+
+
     sendToServer(text) {
         let _ = this;
-        if (!_.isConnected) {
+        if (!_.serverIsOnline) {
             return;
         }
         _.socket.emit('data', text);
@@ -878,7 +1076,7 @@ export default class TgGui {
         let _ = this;
 
         //_.outputinit();
-        $('.tg-main').show();
+        $('.tg-main').addClass('d-flex');
 
         _.keyboardMapInit();
         _.focusInput();
@@ -908,20 +1106,20 @@ export default class TgGui {
                     return false;
                 }
             }
-
+            return true;
         });
     }
 
-    
+
     /* -------------------------------------------------
      *  MAP 
      * -------------------------------------------------*/
     mapInit() {
         let _ = this;
-        let MiniMap = new Map();
-        MiniMap.init();
-        MiniMap.prepareCanvas();
-        
+        _.MiniMap = new Map();
+        _.MiniMap.init();
+        _.MiniMap.prepareCanvas();
+
     }
 
     sendInput() {
@@ -934,9 +1132,8 @@ export default class TgGui {
 
     openPopup() {
         let _ = this,
-            content; 
+            content;
 
-        console.log(this);
         $.magnificPopup.open({
             type: 'inline',
             items: {

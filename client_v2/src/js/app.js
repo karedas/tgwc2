@@ -2,7 +2,7 @@
 /*  TG 2.0 @2018
     Main Client Entry Point */
 import TgClient from "modules/client.js";
-let debug = true;
+let debug = false;
 
 (function(document, window) {
     $.ajaxSetup({ cache: true });
@@ -12,7 +12,7 @@ let debug = true;
             Tg.client.hideLoginPanel();
             Tg.client.loadInterface();
         } else {
-            TG.client.init();   
+            Tg.client.init();   
         }     
     };
     $(document).ready(Tg.onReady);
