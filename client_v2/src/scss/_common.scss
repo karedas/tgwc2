@@ -14,7 +14,7 @@ body {
 }
 
 .tg-shadow {
-    box-shadow: 0px 2px 12px black;
+    box-shadow: 0px 2px 12px $black;
 }
 
 .tg-area {
@@ -22,14 +22,46 @@ body {
     height: 100%;
     position: relative;
 
+    /* Main Navbar */
     .tg-navbar {
        background-image: url($imgPath + '/interface/navbar_background.png');
        background-repeat: repeat-x;
        height: 50px;
+       display: flex;
 
        ul {
            padding: 5px 0;
            margin-bottom: 0;
+           color: $black;
+           text-shadow: 0 1px 0 
+       }
+
+       // Elements
+       .nav-quickinfo-item {
+        max-height: 18px;
+        margin-top: 3px;
+       }
+
+       .tg-serverstatus {
+           width: 15px;
+           height: 100%;
+           text-indent: -9999px;
+           display: inline-block;
+           position: relative;
+
+            &:before {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+            &[data-status="1"]:before {
+                @include sprite-image($serverstatus-up);
+            }
+            &[data-status="0"]:before {
+                @include sprite-image($serverstatus-down);
+            }
        }
     }
 
@@ -56,6 +88,10 @@ body {
         font-size: 12px;
         margin-bottom: $grid-gutter-width / 2;
 
+        .tg-output-options {
+            border-bottom: $gray-900;
+        }
+
         .tg-output-history {
             z-index: 2;
             padding: .2rem;
@@ -76,11 +112,10 @@ body {
     }
 
     .tg-input {
-        background: #26261f;
 
         input[type="text"] {
             width: 100%;
-            background-color: #26261f;
+            background-color: $inputbackground;
             border: none;
             z-index: 10;
             position: relative;
@@ -92,7 +127,12 @@ body {
     }
 
     .tg-rightside{
-        border:1px solid red;
+        .tg-map {
+            canvas {
+                max-width:  100%;
+                max-height: 100%;
+            }
+        }
     }
 }
 
@@ -113,7 +153,6 @@ body {
 
 
 // Magnific Popup Override
-
 .mfp-close-btn-in .mfp-close{
     top: -30px;
     right: -35px;

@@ -40,32 +40,32 @@ export default class MapDrawer{
         _.mapctx = $('#mapcont')[0].getContext('2d');
 
         // Base Tiles
-        _.maptileimg = new Image();
-        _.maptileimg.src = "<%= image_url_from_assets_file('/icons/tiles.png') %>";
+        // _.maptileimg = new Image();
+        // _.maptileimg.src = "<%= image_url_from_assets_file('/icons/tiles.png') %>";
         
-        // Fog
-        _.mapfogimg = new Image();
-        _.mapfogimg.src = "<%= image_url_from_assets_file('interface/map/fog.png') %>";
+        // // Fog
+        // _.mapfogimg = new Image();
+        // _.mapfogimg.src = "<%= image_url_from_assets_file('interface/map/fog.png') %>";
         
-        // Rain
-        _.maprainimg = new Image();
-        _.maprainimg.src = "<%= image_url_from_assets_file('interface/map/rain.png') %>";
+        // // Rain
+        // _.maprainimg = new Image();
+        // _.maprainimg.src = "<%= image_url_from_assets_file('interface/map/rain.png') %>";
 
-        // Snow
-        _.mapsnowimg = new Image();
-        _.mapsnowimg.src = "<%= image_url_from_assets_file('interface/map/snow.png') %>";
+        // // Snow
+        // _.mapsnowimg = new Image();
+        // _.mapsnowimg.src = "<%= image_url_from_assets_file('interface/map/snow.png') %>";
 
-        // Shadows
-        _.mapshadowimg[2] = new Image();
-        _.mapshadowimg[2].src = "<%= image_url_from_assets_file('interface/map/shadow1.png') %>";
+        // // Shadows
+        // _.mapshadowimg[2] = new Image();
+        // _.mapshadowimg[2].src = "<%= image_url_from_assets_file('interface/map/shadow1.png') %>";
         
-        _.mapshadowimg[1] = new Image();
-        _.mapshadowimg[1].src = "<%= image_url_from_assets_file('interface/map/shadow2.png') %>";
+        // _.mapshadowimg[1] = new Image();
+        // _.mapshadowimg[1].src = "<%= image_url_from_assets_file('interface/map/shadow2.png') %>";
     
-        _.mapshadowimg[0] = new Image();
-        _.mapshadowimg[0].src = "<%= image_url_from_assets_file('interface/map/shadow3.png') %>";
+        // _.mapshadowimg[0] = new Image();
+        // _.mapshadowimg[0].src = "<%= image_url_from_assets_file('interface/map/shadow3.png') %>";
         
-        _.mapshadowtile = new Image();
-        _.mapshadowtile.src = "<%= image_url_from_assets_file('interface/map/shadowtile.png') %>";
+        // _.mapshadowtile = new Image();
+        // _.mapshadowtile.src = "<%= image_url_from_assets_file('interface/map/shadowtile.png') %>";
     }
 }

@@ -28,6 +28,7 @@ const gulp = require('gulp'),
 
 
 const log = console.log;
+log("Starting Gulp, Wait...");
 
 // project configuration file
 const config = require('./gulp.config.js')();
@@ -44,7 +45,7 @@ function getFolders(dir) {
 
 function generateSprites(done) {
 
-	let dir = config.src.base + config.src.img;
+	let dir = config.src.base + config.src.img + '/sprites/';
 	let folders;
 
 	if (fs.existsSync(dir)) {
@@ -61,7 +62,7 @@ function generateSprites(done) {
 			for (let i = 0, len = folders.length; i < len; i++) {
 				let sprite_options = {
 					imgName: folders[i] + '_tls.png',
-					imgPath: '../images/'+ folders[i] + '/' + folders[i] + '_tls.png',
+					imgPath: '../images/sprites/' + folders[i] + '_tls.png',
 					cssName: "_" + folders[i] + '_sprite.scss',
 					// retinaSrcFilter: config.src.base + config.src.img + folders[i] + '/*@2x.png',
 					// retinaImgName: folders[i] + '_sprite_2x.png',
@@ -76,7 +77,7 @@ function generateSprites(done) {
 					.pipe(spritesmith(sprite_options));
 
 				// output our images locally
-				imgStream[i] = sprite.img.pipe(gulp.dest(config.build.base + config.build.img + folders[i]));
+				imgStream[i] = sprite.img.pipe(gulp.dest(config.build.base + config.build.img + '/sprites/'));
 				cssStream[i] = sprite.css;
 
 				log("	" + chalk.cyan((i + 1)) + " " + sprite_options.imgName);
@@ -150,22 +151,24 @@ gulp.task('copy-images', () =>  {
 
 gulp.task('staticfiles-watch', function() { 
 
-	let glob = [config.src.base + 'assets_list.json'];
+	let glob = [config.src.base + 'assets_list.json', config.src.base + 'ajax/**'];
 
-	let watcher = gulp.watch( glob , {
+	let watcher = gulp.watch( glob, {
+		base: ".",
 		interval: 500,
 		usePolling: true
 	});
 	watcher.on('all', (event, path) => {
 		log('File ' + chalk.yellow(path) + ' was ' + event + ', running tasks...');
-		return gulp.src(path)
+		return gulp.src(path, {base: './src'})
 				.pipe(gulp.dest(config.build.base));
 	});
   });
 
 
 function copyStaticFiles() {
-	let staticFileGlob = [config.src.base + '**/*.html'];
+	console.log(config.src.base + 'ajaxs');
+	let staticFileGlob = [config.src.base + '**/*.html', config.src.base + 'ajaxs'];
 	return gulp.src(staticFileGlob)
 		.pipe(gulp.dest(config.build.base));
 }
@@ -198,7 +201,7 @@ gulp.task('clean', () => {
 
 //Task for watching development
 gulp.task('dev', 
-	gulp.series('generate-assetslist', 'sass-compile', 'copy-images',  gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
+	gulp.series('generate-assetslist', 'generate-sprites', 'sass-compile', 'copy-images',  gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
 gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist' , 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));

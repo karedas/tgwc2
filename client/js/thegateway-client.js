@@ -7366,9 +7366,7 @@ function main()
 	{
 		// If in canvas, handle login
 		FB.getLoginStatus(function(response) {
-			
 			if (response.status === 'connected') {
-				
 				facebookToken = response.authResponse.accessToken;
 				completeFacebookLogin();
 				
@@ -7376,7 +7374,6 @@ function main()
 				
 				FB.login(function(response) {
 					if (response.authResponse) {
-						
 						facebookToken = response.authResponse.accessToken;
 						completeFacebookLogin();
 						

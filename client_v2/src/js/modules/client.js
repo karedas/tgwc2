@@ -2,7 +2,10 @@
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
+
+// import _Handlebars from 'handlebars/dist/handlebars';
 import 'magnific-popup';
+import 'malihu-custom-scrollbar-plugin';
 
 //Custom
 import FacebookSDK from 'FacebookSdk';
@@ -11,8 +14,6 @@ import Map from 'mapDrawer';
 import assetsList from 'assets_list.json';
 
 
-
-// import 'malihu-custom-scrollbar-plugin';
 // import lodash from  'lodash';
 // //My Modules
 // import {input_history} from 'modules/input_history';
@@ -63,6 +64,17 @@ export default class TgGui {
         this.cmd_history_pos = 0;
         this.cmd_history = [];
 
+        /* Exits */
+        this.dir_north = 0;
+        this.dir_east = 1;
+        this.dir_south = 2;
+        this.dir_west = 3;
+        this.dir_up = 4;
+        this.dir_down=5;
+
+        this.dir_names = ['nord', 'est', 'sud', 'ovest', 'alto', 'basso'];
+        this.dir_status = '000000';
+
         /* Shortcuts */
         this.shortcuts_map = {};
 
@@ -79,6 +91,26 @@ export default class TgGui {
             { let: 100, txt: 'greenyellow' },
         ];
 
+        this.client_update = {
+            last:0,
+            inventory: {
+                version:-1,
+                needed:false
+            },
+            equipment: {
+                version:-1,
+                needed:false
+            },
+            room: {
+                version:-1,
+                needed:false
+            }
+        }
+
+        this.template = {
+            modal : ['alertAlpha']
+        }
+
         /* Debug */
         this.debug = false;
 
@@ -87,11 +119,12 @@ export default class TgGui {
     init() {
         let _ = this;
         // Get Cookie "Italy cookie law"
-        let cookie_consent = _.loadUserSessionData('cookie_consent');
+        let cookie_consent = _.LoadStorage('cookie_consent');
         // Check Cookie Law Approval Status, then go to start or wait user action.
         if (!cookie_consent) {
             _.showCookieLawDisclaimer();
         } else {
+            _.removeCookieLawDisclaimer();
             _.startClient();
         }
     }
@@ -124,7 +157,7 @@ export default class TgGui {
             // WebSocket is Up
             _.socket.on('connect', function () {
                 _.serverIsOnline = true;
-                _.networkActivityMessage("Server Online", 'up');
+                _.networkActivityMessage("Server Online", 1);
                 _.socket.on('data', _.handleLoginData.bind(_));
 
                 resolve();
@@ -138,7 +171,7 @@ export default class TgGui {
                 if (_.serverIsOnline) {
                     _.networkActivityMessage("Connessione chiusa");
                 } else {
-                    _.networkActivityMessage("Il server di gioco è offline.");
+                    _.networkActivityMessage("Il server di gioco è offline.", 0);
                 }
                 reject();
             });
@@ -181,11 +214,13 @@ export default class TgGui {
                     case 'loginok':
                         // Preload client then start the magic
                         _.preloadClient().then(function (resolve, reject) {
-
-                            _.completeHandshake();
-                            _.handleServerData(data.slice(end + 2));
-                            _.hideLoginPanel();
-                            _.loadInterface();
+                            _.openPopup('alpha_version', function(done){
+                                console.log('ma ci entra mai?');
+                                _.completeHandshake();
+                                _.handleServerData(data.slice(end + 2));
+                                _.hideLoginPanel();
+                                _.loadInterface();
+                            });
                         });
 
                         // User loged in with Facebook SDK.
@@ -207,6 +242,7 @@ export default class TgGui {
                             connectionError = _.getLoginReplyMessage('errorproto');
                         _.loginError(connectionError);
                         break;
+            
                 }
             }
         }
@@ -224,13 +260,11 @@ export default class TgGui {
         let _ = this;
 
         _.netdata += msg;
-
         let len = _.netdata.length;
 
         if (_.netdata.indexOf("&!!", len - 3) !== -1) {
 
-            let now,
-                data = _.preparseText(_.netdata.substr(0, len - 3));
+            let data = _.preparseText(_.netdata.substr(0, len - 3));
 
             try {
                 _.showOutput(_.parseForDisplay(data));
@@ -240,9 +274,15 @@ export default class TgGui {
 
             _.netdata = '';
 
-            now = Date.now();
+            let now = Date.now();
 
-
+            if( now > _.client_update.last + 1000 ) {
+                if (_.client_update.room.needed && whichTabIsOpen('#detailsdialog') == 0) {
+                    _.sendToServer('@agg');
+                    _.client_update.room.needed = false;
+                    _.client_update.last = now;
+                }	 
+            }
 
         } else if (len > 200000) {
             _.showOutput('<br>Errore di comunicazione con il server!<br>');
@@ -257,10 +297,14 @@ export default class TgGui {
         $('.tg-cookielawcontent').show();
         // Cookie Law approved === true,  Start the Client
         $('#cookieconsentbutton').on('click', function () {
-            _.saveUserSessionData('cookie_consent', true);
+            _.SaveStorage('cookie_consent', true);
             $('.tg-cookielawcontent').remove();
             _.startClient();
         });
+    }
+
+    removeCookieLawDisclaimer() {
+        $('.tg-cookielawcontent').remove();
     }
 
     initSessionData() {
@@ -270,10 +314,10 @@ export default class TgGui {
         let saved_state = Cookies.getJSON(_.cookies.prefix + 'state');
 
         if (Modernizr.localstorage && saved_state) {
-            _.saveUserSessionData('state', saved_state);
+            _.SaveStorage('state', saved_state);
             Cookies.set(_.cookies.prefix + 'state', null);
         } else {
-            saved_state = _.loadUserSessionData('state');
+            saved_state = _.LoadStorage('state');
         }
 
         if (saved_state) {
@@ -281,17 +325,17 @@ export default class TgGui {
         }
         if (_.client_state.when == null) {
             _.client_state.when = new Date().getTime();
-            _.saveUserSessionData('state', _.client_state);
+            _.SaveStorage('state', _.client_state);
         }
 
         // Load Options
         let saved_options = Cookies.getJSON(_.cookies.prefix + 'options');
 
         if (Modernizr.localstorage && saved_options) {
-            _.saveUserSessionData('options', saved_options);
+            _.SaveStorage('options', saved_options);
             Cookies(cookies.prefix + 'options', null);
         } else {
-            saved_options = _.loadUserSessionData('options');
+            saved_options = _.LoadStorage('options');
         }
 
         if (saved_options) {
@@ -299,7 +343,7 @@ export default class TgGui {
         }
     }
 
-    loadUserSessionData(what) {
+    LoadStorage(what) {
 
         what = this.cookies.prefix + what;
 
@@ -311,7 +355,7 @@ export default class TgGui {
         }
     }
 
-    saveUserSessionData(what, value) {
+    SaveStorage(what, value) {
         let _ = this;
         what = _.cookies.prefix + what;
         if (Modernizr.localstorage) {
@@ -324,6 +368,13 @@ export default class TgGui {
         }
     }
 
+    UploadUserConfiguration() {
+        // TODO
+    }
+
+    ExtractAndSaveUserConfiguration() {
+        // TODO
+    }
 
     /* *****************************************************************************
      * ASSETS PRELOAD 
@@ -338,8 +389,10 @@ export default class TgGui {
         let images = [];
 
         return new Promise(function (resolve, reject) {
+
             for (let i = 0; assetsList.length > i; i++) {
                 let img = new Image();
+
                 img.onload = function () {
                     percentage = percentage + stepSize;
                     $('#tgPreloader span').text(Math.round(percentage));
@@ -351,11 +404,11 @@ export default class TgGui {
                         resolve();
                     }
                 };
+
                 img.src = _.media_server_addr + assetsList[i];
             }
         });
     }
-
 
     hideLoginPanel() {
         $('.tg-loginpanel').hide();
@@ -387,7 +440,9 @@ export default class TgGui {
         });
 
         // On New  Character Creation button
-        $('#doNewCharacter').on('click', _.openPopup);
+        $('#doNewCharacter').on('click', function(){
+            _.openPopup();
+        });
     }
 
     performLogin() {
@@ -407,13 +462,12 @@ export default class TgGui {
     }
 
     loginNetworkActivityMessage(msg, dataname) {
-        $('#loginNetworkActivityMessage').text(msg);
+        $('.tg-loginstatus').text(msg).attr('data-status', status);
     }
 
-    networkActivityMessage(msg, dataname) {
-        $('#networkActivityMessage').text(msg).attr('data-status', dataname);
+    networkActivityMessage(msg, status) {
+        $('.tg-serverstatus').text(msg).attr('data-status', status);
     }
-
 
     preparseText(msg) {
 
@@ -430,28 +484,26 @@ export default class TgGui {
     }
 
     parseForDisplay(msg) {
-        console.log(msg);
         let _ = this,
             pos;
 
-        // Not repeated tags
-
         // Hide text (password)
-        msg = msg.replace(/&x\n*/gm, function () {
-            console.log('input type password enabled');
-            // _.inputPassword();
-            return '';
-        });
+        // msg = msg.replace(/&x\n*/gm, function () {
+        //     console.log('input type password enabled');
+        //     // _.inputPassword();
+        //     return '';
+        // });
 
         // Show text (normal input)
-        msg = msg.replace(/&e\n*/gm, function () {
-            console.log('input type text enabled');
-            //inputText();
-            return '';
-        });
+        // msg = msg.replace(/&e\n*/gm, function () {
+        //     console.log('input type text enabled');
+        //     //inputText();
+        //     return '';
+        // });
 
         // Sky picture
         msg = msg.replace(/&o.\n*/gm, function (sky) {
+            console.log('set sky');
             let sky_parse = sky.charAt(2);
             _.setSky(sky_parse);
             return '';
@@ -459,56 +511,57 @@ export default class TgGui {
 
         // Exits info
         msg = msg.replace(/&d\d{6}\n*/gm, function (doors) {
+            console.log('Exit Info');
             let doors_parse = doors.substr(2, 6);
             _.setDoors(doors_parse);
             return '';
         });
 
-        // Audio
-        msg = msg.replace(/&!au"[^"]*"\n*/gm, function (audio) {
-            let audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-            _.playAudio(audio_parse);
-            return '';
-        });
+        // // Audio
+        // msg = msg.replace(/&!au"[^"]*"\n*/gm, function (audio) {
+        //     let audio_parse = audio.slice(5, audio.lastIndexOf('"'));
+        //     // _.playAudio(audio_parse);
+        //     console.log('_.playAudio');
+        //     return '';
+        // });
 
         // Player status
         msg = msg.replace(/&!st"[^"]*"\n*/gm, function (status) {
-            let st = status.slice(5, status.lastIndexOf('"')).split(',');
-            return _.setStatus(st);
+            let status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
+            return _.setStatus(status_parse);
         });
 
         // Player status
         msg = msg.replace(/&!up"[^"]*"\n*/gm, function (update) {
-            let ud = update.slice(5, status.lastIndexOf('"')).split(',');
+            let update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
 
-            if (ud[0] > _.client_update.inventory.version)
+            if (update_parse[0] > _.client_update.inventory.version)
                 _.client_update.inventory.needed = true;
 
-            if (ud[1] > _.client_update.equipment.version)
+            if (update_parse[1] > _.client_update.equipment.version)
                 _.client_update.equipment.needed = true;
 
-            if (ud[2] > _.client_update.room.version)
+            if (update_parse[2] > _.client_update.room.version)
                 _.client_update.room.needed = true;
 
             return '';
         });
 
-        // Image in side frame (with gamma)
-        msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
-            console.log('show image with gamma');
-            // var image = image.slice(6, image.lastIndexOf('"')).split(',');
-            // showImageWithGamma(image[0], image[1], image[2], image[3]);
-            return '';
-        });
+        // // Image in side frame (with gamma)
+        // msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
+        //     console.log('show image with gamma');
+        //     // var image = image.slice(6, image.lastIndexOf('"')).split(',');
+        //     // showImageWithGamma(image[0], image[1], image[2], image[3]);
+        //     return '';
+        // });
 
-        // Image in side frame
-        msg = msg.replace(/&!im"[^"]*"\n*/gm, function (image) {
-            console.log('Image in side frame');
-
-            // var image = image.slice(5, image.lastIndexOf('"'));
-            // showImage(image);
-            return '';
-        });
+        // // Image in side frame
+        // msg = msg.replace(/&!im"[^"]*"\n*/gm, function (image) {
+        //     console.log('Image in side frame');
+        //     // var image = image.slice(5, image.lastIndexOf('"'));
+        //     // showImage(image);
+        //     return '';
+        // });
 
         // Player is logged in
         msg = msg.replace(/&!logged"[^"]*"/gm, function () {
@@ -516,68 +569,74 @@ export default class TgGui {
             return '';
         });
 
-        // Close the text editor
-        msg = msg.replace(/&!ea"[^"]*"\n*/gm, function (options) {
-            console.log('closeEditor');
-            _.closeEditor();
-            return '';
-        });
+        // // Close the text editor
+        // msg = msg.replace(/&!ea"[^"]*"\n*/gm, function (options) {
+        //     console.log('closeEditor');
+        //     // _.closeEditor();
+        //     return '';
+        // });
 
-        // Open the text editor
-        msg = msg.replace(/&!ed"[^"]*"\n*/gm, function (options) {
-            var options = options.slice(5, options.lastIndexOf('"')).split(',');
-            var text = options.slice(2).toString().replace(/\n/gm, ' ');
-            openEditor(options[0], options[1], text);
-            return '';
-        });
+        // // Open the text editor
+        // msg = msg.replace(/&!ed"[^"]*"\n*/gm, function (options) {
+        //     let options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
+        //     let text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
+        //     openEditor(options_parse[0], options_parse[1], text);
+        //     return '';
+        // });
 
         // Map data
         msg = msg.replace(/&!map\{[\s\S]*?\}!/gm, function (map) {
             let map_parse = $.parseJSON(map.slice(5, -1));
-            _.updateMap(map_parse);
+            // _.updateMap(map_parse);
+            console.log('update map');
             return '';
         });
 
-        // Book
-        msg = msg.replace(/&!book\{[\s\S]*?\}!/gm, function (b) {
-            b = $.parseJSON(b.slice(6, -1));
-            openBook(b);
-            return '';
-        });
+        // // Book
+        // msg = msg.replace(/&!book\{[\s\S]*?\}!/gm, function (b) {
+        //     b = $.parseJSON(b.slice(6, -1));
+        //     console.log('open book');
+        //     // openBook(b);
+        //     return '';
+        // });
 
-        // List of commands
-        msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
-            let cmd_parse = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-            return _.renderCommandsList(cmd_parse);
-        });
+        // // List of commands
+        // msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
+        //     let cmd_parse = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
+        //     // return _.renderCommandsList(cmd_parse);
+        //     console.log('return commands list');
+        // });
 
-        // Generic page (title, text)
-        msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
-            let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-            // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            return '<div class="msg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
-        });
+        // // Generic page (title, text)
+        // msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
+        //     console.log('page_parse');
+        //     let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
+        //     // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
+        //     return '<div class="msg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+        // });
 
-        // Generic table (title, head, data)
-        msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
-            let gtable_parse = $.parseJSON(t.slice(7, -1));
-            return renderTable(gtable_parse);
-        });
+        // // Generic table (title, head, data)
+        // msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
+        //     let gtable_parse = $.parseJSON(t.slice(7, -1));
+        //     // return renderTable(gtable_parse);
+        //     console.log('Generic table');
+        // });
 
-        // Inventory
-        msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
-            inv = $.parseJSON(inv.slice(5, -1));
-            renderInventory(inv);
-            return '';
-        });
-/*
+        // // Inventory
+        // msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
+        //     let inv_parse = $.parseJSON(inv.slice(5, -1));
+        //     console.log('inventory');
+        //     // renderInventory(inv_parse);
+        //     return '';
+        // });
+
         // Room details
         msg = msg.replace(/&!room\{[\s\S]*?\}!/gm, function (dtls) {
             let dtls_parse = $.parseJSON(dtls.slice(6, -1));
             return _.renderDetails(dtls_parse, dtls_parse.dir ? 'dir' : 'room');
-        });*/
+        });
 
-/*        // Person details
+        // Person details
         msg = msg.replace(/&!pers\{[\s\S]*?\}!/gm, function (dtls) {
             dtls_parse = $.parseJSON(dtls.slice(6, -1));
             return _.renderDetails(dtls_parse, 'pers');
@@ -587,104 +646,103 @@ export default class TgGui {
         msg = msg.replace(/&!obj\{[\s\S]*?\}!/gm, function (dtls) {
             dtls_parse = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
             return _.renderDetailsInText(dtls_parse, 'obj');
-        });*/
+        });
 
         // Equipment
-        msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
-            let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-            //renderEquipment(eq_parse);
-            return '';
-        });
+        // msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
+        //     let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
+        //     //renderEquipment(eq_parse);
+        //     return '';
+        // });
 
-        // Workable lists
-        msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
-            wk = $.parseJSON(wk.slice(7, -1));
-            //return renderWorksList(wk);
-        });
+        // // Workable lists
+        // msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
+        //     wk = $.parseJSON(wk.slice(7, -1));
+        //     //return renderWorksList(wk);
+        // });
 
-        // Skill list
-        msg = msg.replace(/&!sklst\{[\s\S]*?\}!/gm, function (skinfo) {
-            skinfo = $.parseJSON(skinfo.slice(7, -1));
-            //return renderSkillsList(skinfo);
-        });
+        // // Skill list
+        // msg = msg.replace(/&!sklst\{[\s\S]*?\}!/gm, function (skinfo) {
+        //     skinfo = $.parseJSON(skinfo.slice(7, -1));
+        //     //return renderSkillsList(skinfo);
+        // });
 
-        // Player info
-        msg = msg.replace(/&!pginf\{[\s\S]*?\}!/gm, function (info) {
-            info = $.parseJSON(info.slice(7, -1));
-            //return renderPlayerInfo(info);
-        });
+        // // Player info
+        // msg = msg.replace(/&!pginf\{[\s\S]*?\}!/gm, function (info) {
+        //     info = $.parseJSON(info.slice(7, -1));
+        //     //return renderPlayerInfo(info);
+        // });
 
-        // Player status
-        msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
-            let status_parse = $.parseJSON(status.slice(6, -1));
-            //return renderPlayerStatus(status_parse);
-        });
+        // // Player status
+        // msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
+        //     let status_parse = $.parseJSON(status.slice(6, -1));
+        //     //return renderPlayerStatus(status_parse);
+        // });
 
-        // Selectable generic
-        msg = msg.replace(/&!select\{[\s\S]*?\}!/gm, function (s) {
-            s = $.parseJSON(s.slice(8, -1));
-            //return selectDialog(s);
-        });
+        // // Selectable generic
+        // msg = msg.replace(/&!select\{[\s\S]*?\}!/gm, function (s) {
+        //     s = $.parseJSON(s.slice(8, -1));
+        //     //return selectDialog(s);
+        // });
 
-        // Refresh command
-        msg = msg.replace(/&!refresh\{[\s\S]*?\}!/gm, function (t) {
-            let rcommand_parse = $.parseJSON(t.slice(9, -1));
-            return handleRefresh(rcommand_parse);
-        });
+        // // Refresh command
+        // msg = msg.replace(/&!refresh\{[\s\S]*?\}!/gm, function (t) {
+        //     let rcommand_parse = $.parseJSON(t.slice(9, -1));
+        //     return handleRefresh(rcommand_parse);
+        // });
 
         // Pause scroll
         msg = msg.replace(/&!crlf"[^"]*"/gm, function () {
-            //pauseOn();
-            console.log('//pauseOn();');
+            _.pauseOn();
             return '';
         });
 
-        // Clear message
-        pos = msg.lastIndexOf('&*');
-        if (pos >= 0) {
-            _.clearOutput();
-            msg = msg.slice(pos + 2);
-        }
+        // // Clear message
+        // pos = msg.lastIndexOf('&*');
+        // if (pos >= 0) {
+        //     _.clearOutput();
+        //     msg = msg.slice(pos + 2);
+        // }
 
-        // Filterable messages
-        msg = msg.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, function (line, type, msg) {
-            return addFilterTag(type, msg);
-        });
+        // // Filterable messages
+        // msg = msg.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, function (line, type, msg) {
+        //     return addFilterTag(type, msg);
+        // });
 
 
-        msg = msg.replace(/&!ce"[^"]*"/gm, function (image) {
-            let image_parse = image.slice(5, -1);
-            return renderEmbeddedImage(image_parse);
-        });
+        // msg = msg.replace(/&!ce"[^"]*"/gm, function (image) {
+        //     let image_parse = image.slice(5, -1);
+        //     return renderEmbeddedImage(image_parse);
+        // });
 
-        msg = msg.replace(/&!ulink"[^"]*"/gm, function (link) {
-            let link_parse = link.slice(8, -1).split(',');
-            return renderLink(link_parse[0], link_parse[1]);
-        });
+        // msg = msg.replace(/&!ulink"[^"]*"/gm, function (link) {
+        //     let link_parse = link.slice(8, -1).split(',');
+        //     return renderLink(link_parse[0], link_parse[1]);
+        // });
 
-        msg = msg.replace(/&!as"[^"]*"/gm, '');
+        // msg = msg.replace(/&!as"[^"]*"/gm, '');
 
-        msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
-            let mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
-            let desc_parse = mob.slice(5).toString();
-            return renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
-        });
+        // msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
+        //     let mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
+        //     let desc_parse = mob.slice(5).toString();
+        //     return renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
+        // });
 
-        msg = msg.replace(/&!(ad|a)?o"[^"]*"/gm, function (obj) {
-            let obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
-            let desc_parse = obj.slice(5).toString();
-            return renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
-        });
+        // msg = msg.replace(/&!(ad|a)?o"[^"]*"/gm, function (obj) {
+        //     let obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
+        //     let desc_parse = obj.slice(5).toString();
+        //     return renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
+        // });
 
-        /*msg = msg.replace(/&!sm"[^"]*"/gm, function (icon) {
+        msg = msg.replace(/&!sm"[^"]*"/gm, function (icon) {
             let icon_parse = icon.slice(5, -1).split(',');
-            //return renderIcon(icon[0], icon[1], 'room', null, null, 'interact pers');
-        });*/
-
-        /*msg = msg.replace(/&!si"[^"]*"/gm, function (icon) {
+            return _.renderIcon(icon_parse[0], icon_parse[1], 'room', null, null, 'interact pers');
+        });
+        
+        msg = msg.replace(/&!si"[^"]*"/gm, function (icon) {
             let icon_parse = icon.slice(5, -1).split(',');
-            //return renderIcon(icon[0], null, null, null, null, "v " + icon[1]);
-        });*/
+            return _.renderIcon(icon_parse[0], null, null, null, null, "v" + icon_parse[1]);
+        });
 
         msg = msg.replace(/&i/gm, function () {
             _.isGod = true;
@@ -697,8 +755,7 @@ export default class TgGui {
         });
 
         /* \r is already removed at top */
-        msg = msg.replace(/\n/gm, '<br>');
-
+        msg = msg.replace(/\n/gm, '');
         msg = _.replaceColors(msg);
 
         return msg.replace(/<p><\/p>/g, '');
@@ -728,24 +785,72 @@ export default class TgGui {
     }
 
 
+    /* *****************************************************************************
+    * OUTPUT BUTTONS
+    */
 
+    
+    pauseOn(){
+        console.log('pauseON');
+        // if(autoscroll_enabled) {
+        //     autoscroll_enabled = false;
+        //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-play' });
+        }
+    }
+
+    pauseOff(){ 
+        console.log('pauseOFF');
+        // if(!autoscroll_enabled) {
+        //     autoscroll_enabled = true;
+        //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-pause' });
+        // }
+    }
+
+
+    /* *****************************************************************************
+    * ICONS
+    */
+
+    tileBgPos(tilenum) {
+        let _ = this;
+        var tc = _.tileCoords(tilenum);
+        return '-'+tc[0]+'px -'+tc[1]+'px';
+    }
+
+    tileCoords(tilenum){ 
+        var posx = 32 * (tilenum & 0x7f);
+        var posy = 32 * (tilenum >> 7);
+
+        return [posx, posy];
+    }
+
+    renderIcon(icon, mrn, cnttype, cntmrn, cmd, addclass) {
+        let _ = this;
+        if(!icon)
+            icon = 416;
+    
+        return '<div class="iconimg'+(addclass ? ' '+addclass : '') + '" style="background-position:' +  _.tileBgPos(icon)+'"'+(mrn ? ' mrn="'+mrn+'"': '')+(cmd ? ' cmd="'+cmd+'"': '')+(cnttype ? ' cnttype="'+cnttype+'"': '')+(cntmrn ? ' cntmrn="'+cntmrn+'"': '')+'></div>';
+    }
 
     /* *****************************************************************************
      * SKY
      */
 
     setSky(sky) {
-        console.log('TODO:SKY');
-        // let skypos = ['0','1','2','3','4','5','6','7','8','9','N','d','e','f','g','i','o','p','q','r','s','t','u','w','y'];
-        // $('#sky').css('background-position', '0 -'+(skypos.indexOf(sky)*29)+'px');
+        let skypos = ['0','1','2','3','4','5','6','7','8','9','N','d','e','f','g','i','o','p','q','r','s','t','u','w','y'];
+        $('#sky').css('background-position', '0 -'+(skypos.indexOf(sky)*29)+'px');
     }
 
     /* *****************************************************************************
      * DOORS
      */
 
-    setDoors() {
-        console.log('TODO:DOORS');
+    setDoors(doors) {
+        let _ = this;
+        for (let d = 0; d < this.dir_names.length; ++d) {
+		    $('#'+ _.dir_names[d]).css('background-position', -33*doors[d]);
+        _.dir_status = doors;
+        }
     }
 
     /* *****************************************************************************
@@ -773,11 +878,12 @@ export default class TgGui {
     }
 
     setStatus(st) {
+        //TODO in combat or not 
+
         let _ = this;
         _.updatePlayerStatus(st[0], st[1]);
-        return;
+        return '';
     }
-
 
     /* *****************************************************************************
      * MAP
@@ -808,8 +914,10 @@ export default class TgGui {
     }
 
     renderDetailsInner(info, type) {
-        let _ = this,
-            textarea = '';
+        let _ = this;
+
+        let textarea = '';
+
         if (info.action) {
             textarea += '<p>' + info.action + '</p>';
         }
@@ -831,9 +939,7 @@ export default class TgGui {
 
     }
 
-    
-    capFirstLetter(string)
-    {
+    capFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
@@ -880,7 +986,6 @@ export default class TgGui {
         return null;
     }
 
-
     sendOOB(data) {
         let _ = this;
         if (!_.serverIsOnline) {
@@ -905,8 +1010,6 @@ export default class TgGui {
             $('#tgInputUser').val('').focus();
         }
     }
-
-
 
     parseInput(input) {
 
@@ -991,7 +1094,6 @@ export default class TgGui {
         }
     }
 
-
     historyUp() {
         let _ = this;
         if (_.cmd_history_pos > 0) {
@@ -1026,7 +1128,6 @@ export default class TgGui {
         return text;
     }
 
-
     sendToServer(text) {
         let _ = this;
         if (!_.serverIsOnline) {
@@ -1057,10 +1158,9 @@ export default class TgGui {
         return login_reply_message[what];
     }
 
-
     showOutput(text) {
-        let toHtml = $(text);
-        $('#output').append(toHtml);
+        console.log(text);
+        $('#output').append(text);
     }
 
     clearOutput() {
@@ -1077,11 +1177,20 @@ export default class TgGui {
 
         //_.outputinit();
         $('.tg-main').addClass('d-flex');
-
+        _.outputInit();
         _.keyboardMapInit();
         _.focusInput();
         _.mapInit();
         _.main();
+        
+    }
+
+    /* -------------------------------------------------
+     * OUTPUT
+     * -------------------------------------------------*/
+
+    outputInit() {
+        $('#output').mCustomScrollbar();
     }
 
     /* -------------------------------------------------
@@ -1130,22 +1239,46 @@ export default class TgGui {
         $('#tgInputUser').focus();
     }
 
-    openPopup() {
-        let _ = this,
-            content;
 
+    getTemplate(source, context) {
+        let template = Handlebars.compile(source);
+        let html = template(context);
+        return html;
+    }
+
+
+    openPopup(id, done) {
+        let _ = this,
+            MP_type = 'inline',
+            MP_html = '<div class="tg-modal">Funzionalità non ancora implementata</div>',
+            MP_callbacks = {
+                open: '',
+                close: function(){
+                    done();
+                }
+            };
+
+        // ==  Webclient , Alpa Version Alert
+        if(id == 'alpha_version') {
+            MP_html = 'ajax/alphaModalAlert.html'
+            MP_type = 'ajax';
+            MP_callbacks.open = function() {}
+        }
+        // ==  News
+        if(id == 'news') {
+        }
+
+        // Open Modal / Popup
         $.magnificPopup.open({
-            type: 'inline',
+            type: MP_type,
             items: {
-                src: '<div class="tg-modal">Funzionalità non ancora implementata</div>',
-                type: 'inline'
-            }
+                src: MP_html,
+            },
+            callbacks: MP_callbacks
         });
     }
 
-    main() {
-
-    }
+    main() {}
 
 
 }

@@ -3,6 +3,10 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+
+
 
 let gitRevisionPlugin = new GitRevisionPlugin();
 
@@ -60,7 +64,8 @@ module.exports = function (prop) {
         },
 
         module: {
-            rules: [{
+            rules: [
+                {
                     test: /\.js$/,
                     exclude: /node_modules/,
                     use: {
@@ -71,6 +76,10 @@ module.exports = function (prop) {
                     loader: "webpack-modernizr-loader",
                     test: /\.modernizrrc\.js$/
                 },
+                {
+                    loader: "handlebars-loader",
+                    test: /\.handlebars$/
+                }
             ]
         },
 
@@ -90,9 +99,9 @@ module.exports = function (prop) {
         },
 
         stats: {
-            modules: false,
-            entrypoints: false,
-            chunks: false
+            // modules: false,
+            // entrypoints: false,
+            // chunks: false
         },
 
         plugins: [
@@ -112,6 +121,12 @@ module.exports = function (prop) {
                 template: './index.html',
                 filename: '../index.html' //relative to root of the application
             }),
+
+            // new BundleAnalyzerPlugin({
+            //     // analyzerMode: env == 'dev' ? 'server' : 'disabled',
+            //     analyzerPort: 9998,
+            //     analyzerHost: '192.168.10.10'
+            // }),
         ]
     }
 

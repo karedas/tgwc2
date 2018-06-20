@@ -3,8 +3,12 @@
     background: $black;
     border: 1px solid $tg-yellow;
     padding: .5rem;
-    display: inline-block;
     position: absolute;
+    display: none;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.mfp-ready .tg-modal {
+    display: inline-block;
 }
