@@ -52,31 +52,42 @@
       <!-- Main NavBar -->
       <div class="row">
         <div class="tg-navbar col-12">
-          <ul class="list-inline">
-            <li class="list-inline-item">
-              Guida
-            </li>
-          </ul>
-          <div class="nav-quickinfo mx-auto">
-            [Regione] + [monete] + [data] + [clima]
+          <div class="nav-quickinfo-item  mr-auto">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="#">The Gate Mud</a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-quickinfo-item  mx-auto">
+            <ul class="nav-quickinfo">
+                <li class="list-inline-item">
+                  <a href="#">Sei al Verde!</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">E' il giorno ...</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">Ti trovi nella regione ...</a>
+                </li>
+            </ul>
           </div>
           <div class="nav-quickinfo-item ml-auto">
             <span id="navServerStatus" class="tg-serverstatus"></span>
           </div>
-
         </div>
       </div>
       <div class="row tg-main-row">
-        <div class="tg-leftside col-9">
+        <div class="tg-leftside col-12 col-md-9">
           <div class="row h-100">
             <!-- output options vertical bar -->
-            <div id="outputOptions" class="tg-output-options">
+          <!--  <div id="outputOptions" class="tg-output-options">
               <ul class="list ml-auto">
                 <li class="list-item">[1]</li>
                 <li class="list-item">[2]</li>
                 <li class="list-item">[3]</li>
               </ul>
-            </div>
+            </div>-->
             <!-- Output Area -->
             <div class="tg-output tg-box b-ironlight tg-shadow">
               <!-- Output History Area -->
@@ -112,7 +123,8 @@
             </div>
             <!-- Input Line -->
             <div class="row">
-              <div class="tg-input tg-box b-ironlight tg-shadow col-12">
+              <div class="tg-input tg-box b-ironlight-mini tg-shadow col-12">
+                <span id="il-placeholder" class="tg-inputline-placeholder">Scrivi qualcosa</span>
                 <input id="tgInputUser" type="text" />
                 <div class="tg-border-box">
                   <div class="tg-border tg-border-top"></div>
@@ -125,7 +137,7 @@
           </div>
           </div>
         </div>
-        <div class="tg-rightside col-3">
+        <div class="tg-rightside col-md-3 d-none d-md-flex">
           <div id="tgMap" class="tg-map">
   
           </div>

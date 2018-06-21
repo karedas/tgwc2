@@ -55,6 +55,7 @@ export default class TgGui {
 
         /* UI Game Options */
         this.client_options = {
+            alpha_approved: false,
             shortcuts: [],
             login: {},
         };
@@ -213,12 +214,11 @@ export default class TgGui {
                     case 'created':
                     case 'loginok':
                         // Preload client then start the magic
-                        _.preloadClient().then(function (resolve, reject) {
-                            _.openPopup('alpha_version', function(done){
-                                console.log('ma ci entra mai?');
+                        _.hideLoginPanel();
+                        _.openPopup('alpha_version', function(done){
+                             _.preloadClient().then(function (resolve, reject) {
                                 _.completeHandshake();
                                 _.handleServerData(data.slice(end + 2));
-                                _.hideLoginPanel();
                                 _.loadInterface();
                             });
                         });
@@ -277,7 +277,7 @@ export default class TgGui {
             let now = Date.now();
 
             if( now > _.client_update.last + 1000 ) {
-                if (_.client_update.room.needed && whichTabIsOpen('#detailsdialog') == 0) {
+                if (_.client_update.room.needed) {
                     _.sendToServer('@agg');
                     _.client_update.room.needed = false;
                     _.client_update.last = now;
@@ -755,8 +755,10 @@ export default class TgGui {
         });
 
         /* \r is already removed at top */
-        msg = msg.replace(/\n/gm, '');
-        msg = _.replaceColors(msg);
+        msg = msg.replace(/\n/gm, '<br>');
+        if(msg !== '') {
+            msg = _.replaceColors('<div class="tgline">'+msg+'</div>');
+        }
 
         return msg.replace(/<p><\/p>/g, '');
 
@@ -795,7 +797,6 @@ export default class TgGui {
         // if(autoscroll_enabled) {
         //     autoscroll_enabled = false;
         //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-play' });
-        }
     }
 
     pauseOff(){ 
@@ -936,6 +937,8 @@ export default class TgGui {
             if (info.desc.equip)
                 textarea += _.formatText(info.desc.equip, 'green');
         }
+
+        return textarea;
 
     }
 
@@ -1122,7 +1125,7 @@ export default class TgGui {
 
             _.cmd_history_pos = _.cmd_history.length;
 
-            $('#inputline').val('');
+            $('#tgInputUser').val('');
         }
 
         return text;
@@ -1248,25 +1251,41 @@ export default class TgGui {
 
 
     openPopup(id, done) {
-        let _ = this,
-            MP_type = 'inline',
+
+        let _ = this;
+        let MP_type = 'inline',
             MP_html = '<div class="tg-modal">Funzionalità non ancora implementata</div>',
-            MP_callbacks = {
-                open: '',
-                close: function(){
-                    done();
-                }
+            MP_callbacks = {};
+        
+
+        if(id) {
+            MP_callbacks.close =  function(){
+                done();
             };
+            MP_callbacks.open = function(e) {
+            };
+        };
 
         // ==  Webclient , Alpa Version Alert
         if(id == 'alpha_version') {
+
+            if(_.client_options.alpha_approved) {
+                done();
+                return;
+            }
+
             MP_html = 'ajax/alphaModalAlert.html'
             MP_type = 'ajax';
-            MP_callbacks.open = function() {}
+            MP_callbacks.close = function() {
+                _.client_options.alpha_approved = true;
+                done();
+            }
         }
         // ==  News
         if(id == 'news') {
         }
+
+
 
         // Open Modal / Popup
         $.magnificPopup.open({

@@ -1,6 +1,14 @@
+.tgline {
+    div {
+        display: inline-block;
+    }
+}
 $tg-yellow : #ffc000;
 
 /* Output colors */
+.white {
+    color: white;
+}
 .green {
     color: #2ce826;
 }

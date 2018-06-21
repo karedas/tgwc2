@@ -26,14 +26,21 @@ body {
     .tg-navbar {
        background-image: url($imgPath + '/interface/navbar_background.png');
        background-repeat: repeat-x;
-       height: 50px;
+       height: 38px;
        display: flex;
+       padding-bottom: 22px;
+       box-sizing: border-box;
 
        ul {
-           padding: 5px 0;
+           padding: 2px 0;
            margin-bottom: 0;
            color: $black;
            text-shadow: 0 1px 0 
+       }
+
+       a {
+           font-weight: 500;
+           color:#110601;
        }
 
        // Elements
@@ -86,6 +93,7 @@ body {
         background: black;
         flex: 1 1 100%;
         font-size: 12px;
+        margin-left:$grid-gutter-width / 2;
         margin-bottom: $grid-gutter-width / 2;
 
         .tg-output-options {
@@ -108,10 +116,31 @@ body {
     
     .tg-controlpanel {
         flex: 1 1 100%;
+        margin-left:$grid-gutter-width / 2;
         margin-bottom: $grid-gutter-width / 2;
+        background: url($imgPath + '/borders/border-controlpanel-top.png') repeat-x top left;
+        padding-top: 11px;
     }
 
     .tg-input {
+        position: relative;
+
+        .tg-inputline-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 12;
+            line-height: 1rem;
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-left: .5rem;
+            line-height: 30px;
+            color: #76716d;
+            font-size: 14px;
+        }
+
 
         input[type="text"] {
             width: 100%;
@@ -123,10 +152,13 @@ body {
             color: $white;
             font-size: 1rem;
             padding:1px 2px;
+            box-shadow: inset 0 0 14px 1px black;
         }
     }
 
     .tg-rightside{
+        background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
+        
         .tg-map {
             canvas {
                 max-width:  100%;

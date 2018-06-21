@@ -2,7 +2,7 @@
 
 /*Bootstrap override*/
 $grid-gutter-width:16px;
-
+$link-color: #FFF;
 $input-border-radius: 0;
 $input-border-radius-lg: 0;
 $input-border-radius-sm: 0;
@@ -17,7 +17,8 @@ $imgPath: "../images";
 //Custom
 $bodybackground : 'frame/background/dark-wood.jpg';
 
-$inputbackground: #26261f;
+$inputbackground: #151512;
 
 $area-border-size: 25px;
 $ironlight-border-size : 8px;
+$ironlight-mini-border-size: 4px;
