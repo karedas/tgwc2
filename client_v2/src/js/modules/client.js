@@ -5,7 +5,6 @@ import Modernizr from "modernizr";
 
 // import _Handlebars from 'handlebars/dist/handlebars';
 import 'magnific-popup';
-import 'malihu-custom-scrollbar-plugin';
 
 //Custom
 import FacebookSDK from 'FacebookSdk';
@@ -21,7 +20,7 @@ export default class TgGui {
 
     constructor(options) {
 
-        this.ws_server_addr = '51.38.185.84';
+        this.ws_server_addr = 'http://192.168.10.10:3333';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = './images/';
         this.ws_prefix = '/';
@@ -147,6 +146,7 @@ export default class TgGui {
     connectToServer() {
         let _ = this;
         return new Promise(function (resolve, reject) {
+            
 
             // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
@@ -155,20 +155,22 @@ export default class TgGui {
                 'resource': _.socket_io_resource,
             });
 
+            _.socket.on('data', _.handleLoginData.bind(_));
+
             // WebSocket is Up
             _.socket.on('connect', function () {
                 _.serverIsOnline = true;
                 _.networkActivityMessage("Server Online", 1);
-                _.socket.on('data', _.handleLoginData.bind(_));
-
                 resolve();
             });
 
             _.socket.on('disconnect', function () {
+                _.serverIsOnline = false;
                 _.networkActivityMessage("Disconnesso dal server");
             });
 
             _.socket.on('connect_error', function (e) {
+                
                 if (_.serverIsOnline) {
                     _.networkActivityMessage("Connessione chiusa");
                 } else {
@@ -180,22 +182,24 @@ export default class TgGui {
     }
 
     handleLoginData(data) {
+        console.log(data);
         let _ = this;
 
         if (data.indexOf("&!connmsg{") == 0) {
 
             let end = data.indexOf('}!');
             let rep = $.parseJSON(data.slice(9, end + 1));
-
             if (rep.msg) {
                 switch (rep.msg) {
                     case 'ready':
+                    console.log('ready');
                         _.sendOOB({
                             itime: _.client_state.when.toString(16)
                         });
                         break;
 
                     case 'enterlogin':
+                    console.log('enterlogin');
                         _.performLogin();
                         break;
 
@@ -215,12 +219,11 @@ export default class TgGui {
                     case 'loginok':
                         // Preload client then start the magic
                         _.hideLoginPanel();
-                        _.openPopup('alpha_version', function(done){
-                             _.preloadClient().then(function (resolve, reject) {
-                                _.completeHandshake();
-                                _.handleServerData(data.slice(end + 2));
-                                _.loadInterface();
-                            });
+                        _.preloadClient().then(function (resolve, reject) {
+                            _.openPopup('alpha_version');
+                            _.completeHandshake();
+                            _.handleServerData(data.slice(end + 2));
+                            _.loadInterface();
                         });
 
                         // User loged in with Facebook SDK.
@@ -250,7 +253,7 @@ export default class TgGui {
 
     completeHandshake() {
         let _ = this;
-        _.socket.removeListener('data', _.handleLoginData);
+        _.socket.removeListener('data', _.handleLoginData.bind(_));
         _.socket.on('data', _.handleServerData.bind(_));
         //_.setHandshaked();
     }
@@ -431,6 +434,8 @@ export default class TgGui {
                 //Notify user to provide credentials
                 return;
             }
+
+            _.networkActivityMessage("Connessione in corso...");
 
             _.connectionInfo.loginName = name;
             _.connectionInfo.loginPass = pass;
@@ -1193,7 +1198,7 @@ export default class TgGui {
      * -------------------------------------------------*/
 
     outputInit() {
-        $('#output').mCustomScrollbar();
+        // $('#output').mCustomScrollbar();
     }
 
     /* -------------------------------------------------

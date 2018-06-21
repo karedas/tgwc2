@@ -15,37 +15,16 @@ const crypto = require('crypto');
 const dotenv = require('dotenv').load({
 	path: '.env'
 });;
-
 const net = require('net');
-
 const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const expressSession = require('express-session');
-
-
-
-const socketSession = require("express-socket.io-session");
-const SQLiteStore = require('connect-sqlite3')(expressSession);
-
-const session = expressSession({
-	store: new SQLiteStore(),
-	secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-});
+const cookieParser = require('cookie-parser');
 
 
 // Attach session
 
-
 let convert = new Convert();
-
-let socket_transports = [
-	'polling', 
-	'websocket'
-];
-
 
 /**
  * Logging configuration.
@@ -66,87 +45,58 @@ let logger = new(winston.Logger)({
 	]
 });
 
-
 // start Session DB
-
-let db =  require('./models')({
-	storage: process.env.DATABASEPATH,
-	logging: logger.debug
-});
-
-
 app.set('trust proxy', 1);
-// Attach session
-app.use(session);
-// Share session with io sockets
-io.use(socketSession(session));
+app.set('max_requests_per_ip', 20);
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 
-db.sequelize.sync().done(function(err){
-	let sio = server.listen(process.env.WS_PORT, () => {
-		SocketServer(db);
-		log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
-		logger.info('Websocket server listening on port %d', process.env.WS_PORT);
-	});
+server.listen(process.env.WS_PORT, () => {
+	SocketServer();
+	log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
+	logger.info('Websocket server listening on port %d', process.env.WS_PORT);
 });
 
-function SocketServer(db) {
-
+function SocketServer() {
 	// Handle incoming websocket  connections
 	io.on('connection', function(socket) {
+		
 		socket.on('oob', function(msg) {
 			// Handle a login request
-			if (!msg["itime"])
-			{
+			if (msg["itime"]) {
+				let account_id =  0;
 				
-				GetUserFromSession(function(err, user) {
-					let account_id = ( err != null || user == null ) ? 0 : user.id;
-					
-					// Get the request headers
-					let headers =  socket.handshake.headers;
-					
-					let codeHeaders = CalcCodeFromHeaders(headers);
+				// Get the request headers
+				let headers =  socket.handshake.headers;
+				
+				let codeHeaders = CalcCodeFromHeaders(headers);
 
-					// Get the real client IP address
-					let client_ip = GetClientIp(headers);
+				// Get the real client IP address
+				let client_ip = GetClientIp(headers);
 
-					// Get the 'itime' code value
-					var codeitime = msg["itime"];
+				// Get the 'itime' code value
+				let codeitime = msg["itime"];
 
-					// Client code
-					var clientcode = codeitime + '-' + codeHeaders;
+				// Client code
+				let clientcode = codeitime + '-' + codeHeaders;
+				logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, clientcode, account_id);
+				// Conect to game server
 
-					logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
-					// Conect to game server
-					let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
 
-					socket.on('disconnect', function() {
-						logger.info('Closing %s', socket.id);
-						// Disconnect from game server
-						tgconn.destroy();
-					});
+				let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
+
+				socket.on('disconnect', function() {
+					logger.info('Closing %s', socket.id);
+					// Disconnect from game server
+					tgconn.destroy();
 				});
-			}
+			};
 
 		});
-
-		io.emit('data', '&!connmsg{"msg":"ready"}!');
-
+		socket.emit('data', '&!connmsg{"msg":"ready"}!');
 	});
 
-	function GetUserFromSession(done)
-	{	
-
-		try
-		{
-			db.Account.find(session.passport.user).complete(done)
-		}
-		catch(e) {
-			done('Error getting session');
-		}
-	};
-
-// 	// Get real client IP address from headers
+// // 	// Get real client IP address from headers
 	function GetClientIp(headers) {
 		let ipAddress;
 		let forwardedIpsStr = headers['x-forwarded-for'];
@@ -165,19 +115,17 @@ function SocketServer(db) {
 		return ipAddress;
 	}
 
-// 	// Calculate a code from headers
+// Calculate a code from headers
 	function CalcCodeFromHeaders(headers){
 		let hash = crypto.createHash('md5');
-
 		if(headers['user-agent'])
 			hash.update(headers['user-agent']);
-
 		if(headers['accept'])
 			hash.update(headers['accept']);
-
+		
 		if(headers['accept-language'])
 			hash.update(headers['accept-language']);
-
+		
 		if(headers['accept-encoding'])
 			hash.update(headers['accept-encoding']);
 
@@ -185,32 +133,31 @@ function SocketServer(db) {
 	}
 
 	function ConnectToGameServer(websocket, from_host, code_itime, code_headers, account_id) {
-
-		let tgconn = net.connect({ host: process.env.TGGAMEHOST, port: process.env.TGAPI_TELNET_PORT});
+		let tgconn = net.connect(process.env.SERVER_GAME_PORT , process.env.SERVER_GAME_HOST);
 
 	
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
-			tgconn.write(msg +'\n');
+			console.log(msg);
+			//tgconn.write(msg +'\n');
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
 			// Copy the data to the client
-			websocket.emit('data', convert.toHtml(msg.toString()));
+			websocket.emit('data', msg.toString());
 		};
 
 		// Handshaking server->client handler data handler
 		// This is used only until login
-		console.log(from_host);
 		function handshake(msg) {
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
+				console.log(msg);
 				// Substitute with the copy handler
 				tgconn.removeListener('data', handshake);
 				tgconn.on('data', sendToClient);
 				// Add handler for client->server data
 				websocket.on('data', sendToServer);
-
 
 				// Reply to challenge with webclient signature: ip, code
 				sendToServer('WEBCLIENT(0.0.0.0,'+ code_itime +'-'+ code_headers +','+account_id+')\n');

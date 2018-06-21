@@ -58,7 +58,7 @@
      id="layer1"
      transform="translate(-252.27565,-285.48694)">
     <path
-       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffc000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 236.29883,177.14258 -26.63281,45.10156 6.45703,11.12695 20.29297,-34.16406 0.97656,1.36914 12.90234,-0.0625 z m 20.57226,34.1914 -12.86328,0.0293 19.94141,34.22461 -1.67578,0.16211 -6.39844,10.98633 27.74023,0 z m -54,21.59571 -13.24218,23.80664 53.4082,0 6.76172,-11.58985 -41.06641,0 0.64258,-1.07421 z"
        transform="translate(78.642845,127.71934)"
        id="path4147"

@@ -35,92 +35,151 @@ body {
     .tg-main-row {
         flex-grow: 1;
     }
+}
 
-    .tg-leftside {
-        display: flex;
-        flex-direction: column;
+.tg-leftside {
+    display: flex;
+    flex-direction: column;
+}
+
+.tg-output {
+    background: black;
+    flex: 1 1 auto;
+    font-size: 12px;
+    margin-bottom: $grid-gutter-width / 2;
+
+    .tg-output-options {
+        border-bottom: $gray-900;
     }
 
-    .tg-output {
-        background: black;
-        flex: 1 1 auto;
-        font-size: 12px;
-        margin-bottom: $grid-gutter-width / 2;
-
-        .tg-output-options {
-            border-bottom: $gray-900;
-        }
-
-        .tg-output-history {
-            z-index: 2;
-            padding: .2rem;
-            max-height: 100%;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            overflow-y: auto;
-            margin: 8px;
-        }
+    .tg-output-history {
+        z-index: 2;
+        padding: .2rem;
+        max-height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        overflow-y: auto;
+        margin: 8px;
     }
-    
-    .tg-controlpanel {
-        margin-left:$grid-gutter-width / 2;
-        margin-bottom: $grid-gutter-width / 2;
-        background: url($imgPath + '/borders/border-controlpanel-top.png') repeat-x top left;
-        padding-top: 11px;
+}
+
+.tg-controlpanel {
+    background: url($imgPath + '/borders/border-controlpanel-top.png') repeat-x top left;
+    margin-left:$grid-gutter-width / 2;
+    margin-bottom: $grid-gutter-width / 2;
+    padding-top: 11px;
+}
+
+.tg-characterpanel {
+    display: flex;
+    flex-direction: row;
+
+    .tg-characteravatar {
+        width: 75px;
         height: 75px;
-        
-        .tg-input {
-            position: relative;
-            margin: 0 4px;
-    
-            .tg-inputline-placeholder {
-                display: none;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 12;
-                line-height: 1rem;
-                display: block;
-                width: 100%;
-                height: 100%;
-                box-sizing: border-box;
-                padding-left: .5rem;
-                line-height: 30px;
-                color: #76716d;
-                font-size: 14px;
-            }
-    
-    
-            input[type="text"] {
-                width: 100%;
-                background-color: $inputbackground;
-                border: none;
-                z-index: 10;
-                position: relative;
-                outline: 0;
-                color: $white;
-                font-size: 1rem;
-                padding:1px 2px;
-                box-shadow: inset 0 0 14px 1px black;
-            }
-        }
     }
-    
-    .tg-rightside{
-        background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
-        
-        .tg-map {
-            canvas {
-                max-width:  100%;
-                max-height: 100%;
+
+    .tg-meterbar {
+        flex: 1 1 auto;
+        height: 100%;
+
+        .barcont {
+            position: relative;
+            height: 50%; 
+        }
+
+        .statusTxt {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .barC {
+            height: 100%;
+            &.red {
+                background-color: red;
+            }
+            &.green {
+                background-color: green;
             }
         }
     }
 }
 
+
+.tg-input {
+    position: relative;
+    margin: 0 4px;
+
+    .tg-inputline-placeholder {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 12;
+        line-height: 1rem;
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: .5rem;
+        line-height: 30px;
+        color: #76716d;
+        font-size: 14px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        background-color: $inputbackground;
+        border: none;
+        z-index: 10;
+        position: relative;
+        outline: 0;
+        color: $white;
+        font-size: 1rem;
+        padding:1px 2px;
+        box-shadow: inset 0 0 14px 1px black;
+    }
+}
+
+.tg-rightside{
+    background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
+    
+    .tg-map {
+        canvas {
+            max-width:  100%;
+            max-height: 100%;
+        }
+    }
+}
+
+// .logo-svg {
+
+//     position: relative;
+//     width: 100%;
+//     height: 100%;
+
+//     &:before, &:after {
+//         content: '';
+//         display: block;
+//         position: absolute;
+//         top: 0;
+//         width: 100%;
+//         height: 100%;
+//         background-repeat: no-repeat;
+//         background-size: contain;
+//     }
+
+//     &:before {
+//         background-image: url($imgPath + '/logo/triang_est.svg');
+//     }
+//     &:after {
+//         background-image: url($imgPath + '/logo/triang_int.svg');
+//     }
+// }
 
 
 .tg-cookielawcontent {

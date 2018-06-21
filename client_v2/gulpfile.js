@@ -17,14 +17,7 @@ const gulp = require('gulp'),
 	stream = require('merge-stream'),
 	spritesmith = require('gulp.spritesmith'),
 	fileList = require('gulp-filelist'),
-	webpackStream = require('webpack-stream'),
-	git = require('git-rev');
- 
-// git.short(function (str) {
-// 	git_version = git_version + '-' + str;
-// })
-
-
+	webpackStream = require('webpack-stream');
 
 
 const log = console.log;
@@ -88,7 +81,7 @@ function generateSprites(done) {
 			let imgSpriteList = stream(imgStream)
 			let cssSpriteList = stream(cssStream)
 				.pipe(concat('_sprites.scss'))
-				.pipe(gulp.dest(config.src.base +  config.src.scss));
+				.pipe(gulp.dest(config.src.base + config.src.scss));
 
 			log(chalk.green("Sprites generated correctly"));
 			return stream(imgSpriteList, cssSpriteList)
@@ -99,7 +92,9 @@ function generateSprites(done) {
 
 function generateAssetsList() {
 	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
-		.pipe(fileList('assets_list.json', {relative: true}))
+		.pipe(fileList('assets_list.json', {
+			relative: true
+		}))
 		.pipe(gulp.dest(config.src.base))
 		.pipe(gulp.dest(config.build.base));
 }
@@ -144,25 +139,27 @@ gulp.task('sass-compile', () => {
 		.pipe(debug());
 });
 
-gulp.task('copy-images', () =>  {
-	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
+gulp.task('copy-images', () => {
+	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}')
 		.pipe(gulp.dest(config.build.base + config.build.img));
 });
 
-gulp.task('staticfiles-watch', function() { 
+gulp.task('staticfiles-watch', function () {
 
-	let glob = [config.src.base + 'assets_list.json', config.src.base + 'ajax/**'];
-	let watcher = gulp.watch( glob, {
+	let glob = [config.src.base + 'assets_list.json', config.src.base + 'ajax/**', config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}'];
+	let watcher = gulp.watch(glob, {
 		base: ".",
 		interval: 500,
 		usePolling: true
 	});
 	watcher.on('all', (event, path) => {
 		log('File ' + chalk.yellow(path) + ' was ' + event + ', running tasks...');
-		return gulp.src(path, {base: './src'})
-				.pipe(gulp.dest(config.build.base));
+		return gulp.src(path, {
+				base: './src'
+			})
+			.pipe(gulp.dest(config.build.base));
 	});
-  });
+});
 
 
 function copyStaticFiles() {
@@ -198,9 +195,8 @@ gulp.task('clean', () => {
 });
 
 //Task for watching development
-gulp.task('dev', 
-	gulp.series('generate-assetslist', 'generate-sprites', 'sass-compile', 'copy-images',  gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
+gulp.task('dev',
+	gulp.series('generate-assetslist', 'generate-sprites', 'sass-compile', 'copy-images', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
-gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist' , 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));
-
+gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist', 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));
