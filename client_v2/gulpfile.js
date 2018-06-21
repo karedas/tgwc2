@@ -152,7 +152,6 @@ gulp.task('copy-images', () =>  {
 gulp.task('staticfiles-watch', function() { 
 
 	let glob = [config.src.base + 'assets_list.json', config.src.base + 'ajax/**'];
-
 	let watcher = gulp.watch( glob, {
 		base: ".",
 		interval: 500,
@@ -167,8 +166,7 @@ gulp.task('staticfiles-watch', function() {
 
 
 function copyStaticFiles() {
-	console.log(config.src.base + 'ajaxs');
-	let staticFileGlob = [config.src.base + '**/*.html', config.src.base + 'ajaxs'];
+	let staticFileGlob = [config.src.base + '**/*.html', config.src.base + 'ajax'];
 	return gulp.src(staticFileGlob)
 		.pipe(gulp.dest(config.build.base));
 }

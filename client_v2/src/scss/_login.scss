@@ -73,3 +73,11 @@
         box-sizing: content-box;
     }
 }
+
+
+/* Preloader in Login */
+.tg-preloader {
+    display: none;
+    text-align: center;
+    border:1px solid $tg-yellow;
+}

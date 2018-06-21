@@ -31,7 +31,9 @@
         <div class="col-xl-3 col-lg-4 col-md-5 mx-auto">
           <form id="loginPanel" class="tg-loginform" action="/">
             <p>TheGate Webclient
-              <span>v.2--alpha-<%= htmlWebpackPlugin.options.git_version%></span>
+              <span>v.2--alpha-
+                <%= htmlWebpackPlugin.options.git_version%>
+              </span>
             </p>
             <label for="login_username">Nome Utente</label>
             <input id="login_username" name="username" type="text">
@@ -61,15 +63,15 @@
           </div>
           <div class="nav-quickinfo-item  mx-auto">
             <ul class="nav-quickinfo">
-                <li class="list-inline-item">
-                  <a href="#">Sei al Verde!</a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">E' il giorno ...</a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">Ti trovi nella regione ...</a>
-                </li>
+              <li class="list-inline-item">
+                <a href="#">Sei al Verde!</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">E' il giorno ...</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Ti trovi nella regione ...</a>
+              </li>
             </ul>
           </div>
           <div class="nav-quickinfo-item ml-auto">
@@ -79,9 +81,9 @@
       </div>
       <div class="row tg-main-row">
         <div class="tg-leftside col-12 col-md-9">
-          <div class="row h-100">
+          <div class="row tg-output tg-box b-ironlight tg-shadow">
             <!-- output options vertical bar -->
-          <!--  <div id="outputOptions" class="tg-output-options">
+            <!--  <div id="outputOptions" class="tg-output-options">
               <ul class="list ml-auto">
                 <li class="list-item">[1]</li>
                 <li class="list-item">[2]</li>
@@ -89,23 +91,19 @@
               </ul>
             </div>-->
             <!-- Output Area -->
-            <div class="tg-output tg-box b-ironlight tg-shadow">
-              <!-- Output History Area -->
-              <div id="output" class="tg-output-history"></div>
-              <div class="tg-border-box">
-                <div class="tg-border tg-border-top"></div>
-                <div class="tg-border tg-border-left"></div>
-                <div class="tg-border tg-border-right"></div>
-                <div class="tg-border tg-border-bottom"></div>
-              </div>
+            <!-- Output History Area -->
+            <div id="output" class="tg-output-history"></div>
+            <div class="tg-border-box">
+              <div class="tg-border tg-border-top"></div>
+              <div class="tg-border tg-border-left"></div>
+              <div class="tg-border tg-border-right"></div>
+              <div class="tg-border tg-border-bottom"></div>
             </div>
           </div>
           <div class="row">
-          <!-- Control Panel & Input Area-->
-          <div class="tg-controlpanel col-12">
-            <!-- Character CPanel-->
-            <div class="row">
-              <div class="tg-characterpanel col-12">
+            <div class="tg-controlpanel col-12">
+              <!-- Character CPanel-->
+              <div class="tg-characterpanel">
                 <!-- Character avatar -->
                 <div class="tg-characteravatar"></div>
                 <!-- Character Status Bars -->
@@ -120,10 +118,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Input Line -->
-            <div class="row">
-              <div class="tg-input tg-box b-ironlight-mini tg-shadow col-12">
+              <!-- Input Line -->
+              <div class="tg-input tg-box b-ironlight-mini tg-shadow">
                 <span id="il-placeholder" class="tg-inputline-placeholder">Scrivi qualcosa</span>
                 <input id="tgInputUser" type="text" />
                 <div class="tg-border-box">
@@ -135,11 +131,10 @@
               </div>
             </div>
           </div>
-          </div>
         </div>
         <div class="tg-rightside col-md-3 d-none d-md-flex">
           <div id="tgMap" class="tg-map">
-  
+
           </div>
         </div>
       </div>

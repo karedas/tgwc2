@@ -1,4 +1,5 @@
 @import 'login';
+@import 'navbar';
 @import 'borders';
 @import 'modal';
 
@@ -21,69 +22,20 @@ body {
     width: 100%;
     height: 100%;
     position: relative;
+}
 
-    /* Main Navbar */
-    .tg-navbar {
-       background-image: url($imgPath + '/interface/navbar_background.png');
-       background-repeat: repeat-x;
-       height: 38px;
-       display: flex;
-       padding-bottom: 22px;
-       box-sizing: border-box;
+.tg-main {
 
-       ul {
-           padding: 2px 0;
-           margin-bottom: 0;
-           color: $black;
-           text-shadow: 0 1px 0 
-       }
+    min-height: 100%;
+    display: none;
+    flex-direction: column;
+    z-index: 10;
+    position: relative;
 
-       a {
-           font-weight: 500;
-           color:#110601;
-       }
-
-       // Elements
-       .nav-quickinfo-item {
-        max-height: 18px;
-        margin-top: 3px;
-       }
-
-       .tg-serverstatus {
-           width: 15px;
-           height: 100%;
-           text-indent: -9999px;
-           display: inline-block;
-           position: relative;
-
-            &:before {
-                content: '';
-                display: block;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-            }
-            &[data-status="1"]:before {
-                @include sprite-image($serverstatus-up);
-            }
-            &[data-status="0"]:before {
-                @include sprite-image($serverstatus-down);
-            }
-       }
+    .tg-main-row {
+        flex-grow: 1;
     }
 
-    .tg-main {
-        min-height: 100%;
-        display: none;
-        flex-direction: column;
-        z-index: 10;
-        position: relative;
-    
-        .tg-main-row {
-            flex-grow: 1;
-        }
-    }
-    
     .tg-leftside {
         display: flex;
         flex-direction: column;
@@ -91,9 +43,8 @@ body {
 
     .tg-output {
         background: black;
-        flex: 1 1 100%;
+        flex: 1 1 auto;
         font-size: 12px;
-        margin-left:$grid-gutter-width / 2;
         margin-bottom: $grid-gutter-width / 2;
 
         .tg-output-options {
@@ -115,47 +66,49 @@ body {
     }
     
     .tg-controlpanel {
-        flex: 1 1 100%;
         margin-left:$grid-gutter-width / 2;
         margin-bottom: $grid-gutter-width / 2;
         background: url($imgPath + '/borders/border-controlpanel-top.png') repeat-x top left;
         padding-top: 11px;
-    }
-
-    .tg-input {
-        position: relative;
-
-        .tg-inputline-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 12;
-            line-height: 1rem;
-            display: block;
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-            padding-left: .5rem;
-            line-height: 30px;
-            color: #76716d;
-            font-size: 14px;
-        }
-
-
-        input[type="text"] {
-            width: 100%;
-            background-color: $inputbackground;
-            border: none;
-            z-index: 10;
+        height: 75px;
+        
+        .tg-input {
             position: relative;
-            outline: 0;
-            color: $white;
-            font-size: 1rem;
-            padding:1px 2px;
-            box-shadow: inset 0 0 14px 1px black;
+            margin: 0 4px;
+    
+            .tg-inputline-placeholder {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 12;
+                line-height: 1rem;
+                display: block;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                padding-left: .5rem;
+                line-height: 30px;
+                color: #76716d;
+                font-size: 14px;
+            }
+    
+    
+            input[type="text"] {
+                width: 100%;
+                background-color: $inputbackground;
+                border: none;
+                z-index: 10;
+                position: relative;
+                outline: 0;
+                color: $white;
+                font-size: 1rem;
+                padding:1px 2px;
+                box-shadow: inset 0 0 14px 1px black;
+            }
         }
     }
-
+    
     .tg-rightside{
         background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
         
@@ -168,13 +121,7 @@ body {
     }
 }
 
-/* Preloader in Login */
 
-.tg-preloader {
-    display: none;
-    text-align: center;
-    border:1px solid $tg-yellow;
-}
 
 .tg-cookielawcontent {
     display: none;
@@ -189,4 +136,13 @@ body {
     top: -30px;
     right: -35px;
     color: white;
+}
+
+@include media-breakpoint-down(md) {
+
+    .tg-main {
+        .tg-controlpanel {
+            margin-left: 0;
+        }
+    }
 }
