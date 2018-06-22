@@ -16,8 +16,7 @@ const dotenv = require('dotenv').load({
 	path: '.env'
 });;
 const net = require('net');
-// const app = require('express')();
-const app = require('connect');
+const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const cookieParser = require('cookie-parser');
@@ -50,9 +49,9 @@ let session = require("express-session")({
 });
 
 // start Session DB
-// app.set('trust proxy', 1);
-// app.set('max_requests_per_ip', 20);
-// app.use(session, cookieParser(process.env.SESSION_SECRET));
+app.set('trust proxy', 1);
+app.set('max_requests_per_ip', 20);
+app.use(session, cookieParser(process.env.SESSION_SECRET));
 // Use shared session middleware for socket.io
 // setting autoSave:true
 io.use(sharedsession(session, {
@@ -155,13 +154,14 @@ function SocketServer() {
 		});
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
-			console.log('sendTOSERVER');
+			console.log(msg.toString());
 			tgconn.write(msg + '\n');
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
-			console.log('send to client');
+			console.log(msg.toString());
+
 			websocket.emit('data', msg.toString());
 		};
 
@@ -184,14 +184,12 @@ function SocketServer() {
 		// This is used only until login
 		function handshake(msg) {
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
-				console.log('in');
 				// Substitute with the copy handler
 				tgconn.removeListener('data', handshake);
 				tgconn.on('data', sendToClient);
-
 				// Add handler for client->server data
 				websocket.on('data', sendToServer);
-				// sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
+				sendToServer('WEBCLIENT(0.0.0.0,'+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
 
 			} else {
