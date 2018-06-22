@@ -20,7 +20,7 @@ export default class TgGui {
 
     constructor(options) {
 
-        this.ws_server_addr = 'http://192.168.10.10:3333';
+        this.ws_server_addr = '192.168.10.10:3333';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = './images/';
         this.ws_prefix = '/';
@@ -107,12 +107,8 @@ export default class TgGui {
             }
         }
 
-        this.template = {
-            modal : ['alertAlpha']
-        }
-
         /* Debug */
-        this.debug = false;
+        this.debug = true;
 
     }
 
@@ -135,33 +131,36 @@ export default class TgGui {
         let facebookSDK = new FacebookSDK();
         facebookSDK.load();
 
+        console.log('startclient');
         _.initSessionData();
-        _.connectToServer().then(function (resolve) {
-            _.showLoginPanel();
-        }).catch(function (error) {
-            console.log(error);
+        _.connectToServer().then(function(resolve, reject) {
+            if(_.serverIsOnline) {
+                _.initLoginPanel();
+            }
+
+            if(_.debug) {
+                console.log('Server Status:', _.serverIsOnline);
+            }
         });
     }
 
     connectToServer() {
         let _ = this;
-        return new Promise(function (resolve, reject) {
-            
 
+        return new Promise(function (resolve, reject) {
             // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
                 'reconnect': false,
                 'force new connection': true,
                 'resource': _.socket_io_resource,
+                'transports': ['polling']
             });
 
-            _.socket.on('data', _.handleLoginData.bind(_));
-
-            // WebSocket is Up
+            // Server status
             _.socket.on('connect', function () {
                 _.serverIsOnline = true;
                 _.networkActivityMessage("Server Online", 1);
-                resolve();
+                resolve(true);
             });
 
             _.socket.on('disconnect', function () {
@@ -170,36 +169,33 @@ export default class TgGui {
             });
 
             _.socket.on('connect_error', function (e) {
-                
+                console.log('connect error');
                 if (_.serverIsOnline) {
                     _.networkActivityMessage("Connessione chiusa");
                 } else {
                     _.networkActivityMessage("Il server di gioco è offline.", 0);
                 }
-                reject();
+                resolve(false);
+
             });
         });
     }
 
     handleLoginData(data) {
-        console.log(data);
+        console.log('handlelogindata appended', data);
         let _ = this;
-
-        if (data.indexOf("&!connmsg{") == 0) {
-
+        if(data.indexOf("&!connmsg{") == 0) { 
             let end = data.indexOf('}!');
             let rep = $.parseJSON(data.slice(9, end + 1));
+
             if (rep.msg) {
-                switch (rep.msg) {
+                switch(rep.msg) {
                     case 'ready':
-                    console.log('ready');
-                        _.sendOOB({
-                            itime: _.client_state.when.toString(16)
-                        });
-                        break;
+                    _.sendOOB({ itime: _.client_state.when.toString(16) });
+                    break;
 
                     case 'enterlogin':
-                    console.log('enterlogin');
+                        console.log('enterlogin');
                         _.performLogin();
                         break;
 
@@ -217,6 +213,7 @@ export default class TgGui {
 
                     case 'created':
                     case 'loginok':
+                        console.log('loginok');
                         // Preload client then start the magic
                         _.hideLoginPanel();
                         _.preloadClient().then(function (resolve, reject) {
@@ -253,8 +250,8 @@ export default class TgGui {
 
     completeHandshake() {
         let _ = this;
-        _.socket.removeListener('data', _.handleLoginData.bind(_));
-        _.socket.on('data', _.handleServerData.bind(_));
+        // _.socket.removeListener('data', _.handleLoginData.bind(_));
+        // _.socket.on('data', _.handleServerData.bind(_));
         //_.setHandshaked();
     }
 
@@ -379,6 +376,71 @@ export default class TgGui {
         // TODO
     }
 
+     /* *****************************************************************************
+     * Login 
+     */
+
+    hideLoginPanel() {
+        $('.tg-loginpanel').hide();
+    }
+
+    initLoginPanel() {
+        console.log('showloginpanel');
+        let _ = this;
+
+        $('.tg-loginform').show();
+        $('#login_username').focus();
+        $('#loginPanel').on('submit', function (e) {
+            e.preventDefault();
+            let name = $('#login_username').val();
+            let pass = $('#login_password').val();
+            if (!name || !pass) {
+                //TODO: Notify user to provide credentials
+                return;
+            }
+            _.networkActivityMessage("Connessione in corso...");
+            _.connectionInfo.loginName = name;
+            _.connectionInfo.loginPass = pass;
+            _.connectionInfo.mode = "login";
+
+            //Attach oob Socket Handler
+            _.socket.on('data', _.handleLoginData.bind(_));
+
+            _.socket.emit('loginrequest');
+        });
+
+        // On New  Character Creation button
+        $('#doNewCharacter').on('click', function(){
+            _.openPopup();
+        });
+    }
+    
+    performLogin() {
+        let _ = this;
+        if (_.connectionInfo.mode == 'login') {
+            _.sendToServer("login:" + _.connectionInfo.loginName + "," + _.connectionInfo.loginPass + "\n");
+        }
+    }
+
+    loginErrorClean() {
+        _.connectionInfo.error = null;
+    }
+
+    loginError(msg) {
+        this.connectionInfo.error = msg;
+        this.loginNetworkActivityMessage(msg);
+    }
+
+    loginNetworkActivityMessage(msg, dataname) {
+        $('.tg-loginstatus').text(msg).attr('data-status', status);
+    }
+
+    networkActivityMessage(msg, status) {
+        $('.tg-serverstatus').text(msg).attr('data-status', status);
+    }
+
+
+
     /* *****************************************************************************
      * ASSETS PRELOAD 
      */
@@ -411,67 +473,6 @@ export default class TgGui {
                 img.src = _.media_server_addr + assetsList[i];
             }
         });
-    }
-
-    hideLoginPanel() {
-        $('.tg-loginpanel').hide();
-    }
-
-    showLoginPanel() {
-        let _ = this;
-
-        $('.tg-loginform').show();
-        $('#login_username').focus();
-
-        $('#loginPanel').on('submit', function (e) {
-
-            e.preventDefault();
-
-            let name = $('#login_username').val();
-            let pass = $('#login_password').val();
-
-            if (!name || !pass) {
-                //Notify user to provide credentials
-                return;
-            }
-
-            _.networkActivityMessage("Connessione in corso...");
-
-            _.connectionInfo.loginName = name;
-            _.connectionInfo.loginPass = pass;
-            _.connectionInfo.mode = "login";
-
-            _.performLogin();
-        });
-
-        // On New  Character Creation button
-        $('#doNewCharacter').on('click', function(){
-            _.openPopup();
-        });
-    }
-
-    performLogin() {
-        let _ = this;
-        if (_.connectionInfo.mode == 'login') {
-            _.sendToServer("login:" + _.connectionInfo.loginName + "," + _.connectionInfo.loginPass + "\n");
-        }
-    }
-
-    loginErrorClean() {
-        _.connectionInfo.error = null;
-    }
-
-    loginError(msg) {
-        this.connectionInfo.error = msg;
-        this.loginNetworkActivityMessage(msg);
-    }
-
-    loginNetworkActivityMessage(msg, dataname) {
-        $('.tg-loginstatus').text(msg).attr('data-status', status);
-    }
-
-    networkActivityMessage(msg, status) {
-        $('.tg-serverstatus').text(msg).attr('data-status', status);
     }
 
     preparseText(msg) {
@@ -996,6 +997,7 @@ export default class TgGui {
 
     sendOOB(data) {
         let _ = this;
+
         if (!_.serverIsOnline) {
             return;
         }

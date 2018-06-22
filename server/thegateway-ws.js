@@ -16,15 +16,13 @@ const dotenv = require('dotenv').load({
 	path: '.env'
 });;
 const net = require('net');
-const app = require('express')();
+// const app = require('express')();
+const app = require('connect');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const cookieParser = require('cookie-parser');
+const sharedsession = require('express-socket.io-session');
 
-
-// Attach session
-
-let convert = new Convert();
 
 /**
  * Logging configuration.
@@ -45,11 +43,21 @@ let logger = new(winston.Logger)({
 	]
 });
 
-// start Session DB
-app.set('trust proxy', 1);
-app.set('max_requests_per_ip', 20);
-app.use(cookieParser(process.env.SESSION_SECRET));
+let session = require("express-session")({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+});
 
+// start Session DB
+// app.set('trust proxy', 1);
+// app.set('max_requests_per_ip', 20);
+// app.use(session, cookieParser(process.env.SESSION_SECRET));
+// Use shared session middleware for socket.io
+// setting autoSave:true
+io.use(sharedsession(session, {
+    autoSave:true
+})); 
 
 server.listen(process.env.WS_PORT, () => {
 	SocketServer();
@@ -61,11 +69,16 @@ function SocketServer() {
 	// Handle incoming websocket  connections
 	io.on('connection', function(socket) {
 		
+		socket.on('loginrequest', function(){
+			console.log('loginrequested');
+			socket.emit('data', '&!connmsg{"msg":"ready"}!');
+		})
+
 		socket.on('oob', function(msg) {
 			// Handle a login request
+			console.log('oob received', msg);
 			if (msg["itime"]) {
 				let account_id =  0;
-				
 				// Get the request headers
 				let headers =  socket.handshake.headers;
 				
@@ -86,6 +99,7 @@ function SocketServer() {
 				let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
 
 				socket.on('disconnect', function() {
+					console.log('socket has disconnected')
 					logger.info('Closing %s', socket.id);
 					// Disconnect from game server
 					tgconn.destroy();
@@ -93,7 +107,6 @@ function SocketServer() {
 			};
 
 		});
-		socket.emit('data', '&!connmsg{"msg":"ready"}!');
 	});
 
 // // 	// Get real client IP address from headers
@@ -133,42 +146,63 @@ function SocketServer() {
 	}
 
 	function ConnectToGameServer(websocket, from_host, code_itime, code_headers, account_id) {
-		let tgconn = net.connect(process.env.SERVER_GAME_PORT , process.env.SERVER_GAME_HOST);
+		
+		let port =  process.env.SERVER_GAME_PORT,
+			host = process.env.SERVER_GAME_HOST;
 
-	
+		let tgconn = net.connect({"port": port , "host": host}, function(){
+			
+		});
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
-			console.log(msg);
-			//tgconn.write(msg +'\n');
+			console.log('sendTOSERVER');
+			tgconn.write(msg + '\n');
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
-			// Copy the data to the client
+			console.log('send to client');
 			websocket.emit('data', msg.toString());
 		};
+
+		// Socket close event handler
+		tgconn.on('close', function(){
+			console.log('close');
+		});
+
+		// Connection/transmission event error handler
+		tgconn.on('error', function(){
+
+			console.log('error from net');
+			// Tell the client the server is down
+			sendToClient('&!connmsg{"msg":"serverdown"}!');
+			// Close the websocket
+			websocket.disconnect();
+		});
 
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
-				console.log(msg);
+				console.log('in');
 				// Substitute with the copy handler
 				tgconn.removeListener('data', handshake);
 				tgconn.on('data', sendToClient);
+
 				// Add handler for client->server data
 				websocket.on('data', sendToServer);
+				// sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
-				// Reply to challenge with webclient signature: ip, code
-				sendToServer('WEBCLIENT(0.0.0.0,'+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
 			} else {
+				console.log('else_____________', msg);
+
 				sendToClient(msg);
 			}
 		}
 
+			
 		tgconn.on('data', handshake);
-
 		return tgconn;
 	}
 }
