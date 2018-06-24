@@ -69,13 +69,11 @@ function SocketServer() {
 	io.on('connection', function(socket) {
 		
 		socket.on('loginrequest', function(){
-			console.log('loginrequested');
 			socket.emit('data', '&!connmsg{"msg":"ready"}!');
 		})
 
 		socket.on('oob', function(msg) {
 			// Handle a login request
-			console.log('oob received', msg);
 			if (msg["itime"]) {
 				let account_id =  0;
 				// Get the request headers
@@ -145,11 +143,11 @@ function SocketServer() {
 	}
 
 	function ConnectToGameServer(websocket, from_host, code_itime, code_headers, account_id) {
-		
 		let port =  process.env.SERVER_GAME_PORT,
 			host = process.env.SERVER_GAME_HOST;
 
-		let tgconn = net.connect({"port": port , "host": host}, function(){
+		let tgconn = net.Socket(host, function(serversocket){
+			console.log(serversocket);
 			
 		});
 		// Normal server->client data handler. Move received data to websocket
@@ -180,6 +178,15 @@ function SocketServer() {
 			websocket.disconnect();
 		});
 
+    
+		tgconn.on("end", function(err){
+			console.log(err);
+			console.log('end');
+		});
+		tgconn.on("timeout",  function(){
+			console.log('timeout');
+
+		});
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {

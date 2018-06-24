@@ -36,7 +36,7 @@ function getFolders(dir) {
 		});
 }
 
-function generateSprites(done) {
+function generateSprites(done, path) {
 
 	let dir = config.src.base + config.src.img + '/sprites/';
 	let folders;
@@ -57,9 +57,6 @@ function generateSprites(done) {
 					imgName: folders[i] + '_tls.png',
 					imgPath: '../images/sprites/' + folders[i] + '_tls.png',
 					cssName: "_" + folders[i] + '_sprite.scss',
-					// retinaSrcFilter: config.src.base + config.src.img + folders[i] + '/*@2x.png',
-					// retinaImgName: folders[i] + '_sprite_2x.png',
-					// retinaImgPath: config.static_overrides.base + config.static_overrides.img + folders[i] + '_sprite_2x.png',
 					cssOpts: {
 						functions: false
 					}
@@ -140,13 +137,13 @@ gulp.task('sass-compile', () => {
 });
 
 gulp.task('copy-images', () => {
-	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}')
+	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}', config.src.base + '/icons/tiles.png')
 		.pipe(gulp.dest(config.build.base + config.build.img));
 });
 
 gulp.task('staticfiles-watch', function () {
 
-	let glob = [config.src.base + 'assets_list.json', config.src.base + 'ajax/**', config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}'];
+	let glob = [config.src.base + 'assets_list.json', config.src.base + 'ajax/**', config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}', config.src.base + 'fonts/**/*'];
 	let watcher = gulp.watch(glob, {
 		base: ".",
 		interval: 500,
@@ -163,8 +160,8 @@ gulp.task('staticfiles-watch', function () {
 
 
 function copyStaticFiles() {
-	let staticFileGlob = [config.src.base + '**/*.html', config.src.base + 'ajax'];
-	return gulp.src(staticFileGlob)
+	let staticFileGlob = [config.src.base + '**/*.html', config.src.base + 'ajax/**', config.src.base + 'fonts/**'];
+	return gulp.src(staticFileGlob, {base: './src'})
 		.pipe(gulp.dest(config.build.base));
 }
 
@@ -196,7 +193,7 @@ gulp.task('clean', () => {
 
 //Task for watching development
 gulp.task('dev',
-	gulp.series('generate-assetslist', 'generate-sprites', 'sass-compile', 'copy-images', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
+	gulp.series('generate-assetslist', 'generate-sprites', copyStaticFiles, 'sass-compile', 'copy-images', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
 gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist', 'copy-images', 'js-compile', 'sass-compile', copyStaticFiles));

@@ -20,12 +20,14 @@ export default class TgGui {
 
     constructor(options) {
 
-        this.ws_server_addr = '192.168.10.10:3333';
+        this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = './images/';
         this.ws_prefix = '/';
-        this.image_path = '';
+        this.images_path = '/images/';
         this.sounds_path = '';
+
+        this.socketListener = {}
 
         /* Cookies Settings */
         this.cookies = {
@@ -182,7 +184,7 @@ export default class TgGui {
     }
 
     handleLoginData(data) {
-        console.log('handlelogindata appended', data);
+        console.log('still appended');
         let _ = this;
         if(data.indexOf("&!connmsg{") == 0) { 
             let end = data.indexOf('}!');
@@ -213,11 +215,10 @@ export default class TgGui {
 
                     case 'created':
                     case 'loginok':
-                        console.log('loginok');
                         // Preload client then start the magic
                         _.hideLoginPanel();
                         _.preloadClient().then(function (resolve, reject) {
-                            _.openPopup('alpha_version');
+//                            _.openPopup('alpha_version');
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
                             _.loadInterface();
@@ -250,8 +251,8 @@ export default class TgGui {
 
     completeHandshake() {
         let _ = this;
-        // _.socket.removeListener('data', _.handleLoginData.bind(_));
-        // _.socket.on('data', _.handleServerData.bind(_));
+         _.socket.off('data');
+         _.socket.on('data', _.handleServerData.bind(_));
         //_.setHandshaked();
     }
 
@@ -385,9 +386,10 @@ export default class TgGui {
     }
 
     initLoginPanel() {
-        console.log('showloginpanel');
         let _ = this;
 
+        
+        $('.tg-logo-composit').css('visibility', 'visible');
         $('.tg-loginform').show();
         $('#login_username').focus();
         $('#loginPanel').on('submit', function (e) {
@@ -432,11 +434,13 @@ export default class TgGui {
     }
 
     loginNetworkActivityMessage(msg, dataname) {
-        $('.tg-loginstatus').text(msg).attr('data-status', status);
+        $('.tg-loginstatus').text(msg)
+        $('body').attr('data-serverstatus', status);
     }
 
     networkActivityMessage(msg, status) {
-        $('.tg-serverstatus').text(msg).attr('data-status', status);
+        $('.tg-serverstatus').text(msg)
+        $('body').attr('data-serverstatus', status);
     }
 
 
@@ -523,13 +527,13 @@ export default class TgGui {
             return '';
         });
 
-        // // Audio
-        // msg = msg.replace(/&!au"[^"]*"\n*/gm, function (audio) {
-        //     let audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-        //     // _.playAudio(audio_parse);
-        //     console.log('_.playAudio');
-        //     return '';
-        // });
+        // Audio
+         msg = msg.replace(/&!au"[^"]*"\n*/gm, function (audio) {
+             let audio_parse = audio.slice(5, audio.lastIndexOf('"'));
+             // _.playAudio(audio_parse);
+             console.log('_.playAudio');
+             return '';
+         });
 
         // Player status
         msg = msg.replace(/&!st"[^"]*"\n*/gm, function (status) {
@@ -561,13 +565,12 @@ export default class TgGui {
         //     return '';
         // });
 
-        // // Image in side frame
-        // msg = msg.replace(/&!im"[^"]*"\n*/gm, function (image) {
-        //     console.log('Image in side frame');
-        //     // var image = image.slice(5, image.lastIndexOf('"'));
-        //     // showImage(image);
-        //     return '';
-        // });
+        // Image in side frame
+        msg = msg.replace(/&!im"[^"]*"\n*/gm, function (image) {
+              let image_parse = image.slice(5, image.lastIndexOf('"'));
+              _.showImage(image_parse);
+             return '';
+         });
 
         // Player is logged in
         msg = msg.replace(/&!logged"[^"]*"/gm, function () {
@@ -613,13 +616,12 @@ export default class TgGui {
         //     console.log('return commands list');
         // });
 
-        // // Generic page (title, text)
-        // msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
-        //     console.log('page_parse');
-        //     let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-        //     // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-        //     return '<div class="msg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
-        // });
+        // Generic page (title, text)
+         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
+             let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
+             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
+             return '<div class="msg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+         });
 
         // // Generic table (title, head, data)
         // msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
@@ -726,19 +728,19 @@ export default class TgGui {
         //     return renderLink(link_parse[0], link_parse[1]);
         // });
 
-        // msg = msg.replace(/&!as"[^"]*"/gm, '');
+         //msg = msg.replace(/&!as"[^"]*"/gm, '');
 
-        // msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
-        //     let mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
-        //     let desc_parse = mob.slice(5).toString();
-        //     return renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
-        // });
+         msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
+             let mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
+             let desc_parse = mob.slice(5).toString();
+             return _.renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
+         });
 
-        // msg = msg.replace(/&!(ad|a)?o"[^"]*"/gm, function (obj) {
-        //     let obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
-        //     let desc_parse = obj.slice(5).toString();
-        //     return renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
-        // });
+        msg = msg.replace(/&!(ad|a)?o"[^"]*"/gm, function (obj) {
+             let obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
+             let desc_parse = obj.slice(5).toString();
+             return _.renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
+         });
 
         msg = msg.replace(/&!sm"[^"]*"/gm, function (icon) {
             let icon_parse = icon.slice(5, -1).split(',');
@@ -794,9 +796,48 @@ export default class TgGui {
 
 
     /* *****************************************************************************
-    * OUTPUT BUTTONS
+    * MISC RENDERING
     */
 
+    renderMob(icon, condprc, count, mrn, desc, addclass) {
+       return '<div class="mob">' + this.renderIcon(icon, mrn, 'room', null, null, addclass)+'<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
+   }
+
+    decoratedDescription(condprc, moveprc, wgt, count, desc) {
+        let _ = this;
+        let countStr = '';
+    
+        if (count > 1)
+            countStr = '&#160;<span class="cnt">[x' + count + ']</span>';
+    
+        return _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr;
+    }
+
+    renderMinidetails(condprc, moveprc, wgt) {
+        let pos = -11 * Math.floor(22 * (100 - condprc) / 100);
+        return '<div class="hstat" style="background-position:0 '+pos+'px" condprc="'+condprc+'"'+ (moveprc ? ' moveprc="'+moveprc+'"' : "") +(wgt != null ? ' wgt="'+wgt+'"' : "") + '></div>';
+    }
+
+    renderObject(icon, condprc, count, mrn, desc, addclass) {
+	    return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass)+'<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
+    }
+
+    /* *****************************************************************************
+    *  IMAGES IN OUTPUT 
+    */
+
+    showImage(cont, image) {
+        let _ = this;
+        let imgsrc = _.images_path + '/' + image;
+        let currimgsrc = cont.attr('src');
+
+        if (currimgsrc != imgsrc)
+            cont.attr('src', imgsrc);
+    }
+
+    /* *****************************************************************************
+    * OUTPUT BUTTONS
+    */
     
     pauseOn(){
         console.log('pauseON');
@@ -827,6 +868,7 @@ export default class TgGui {
     tileCoords(tilenum){ 
         var posx = 32 * (tilenum & 0x7f);
         var posy = 32 * (tilenum >> 7);
+        console.log(posx, posy);
 
         return [posx, posy];
     }
@@ -836,7 +878,7 @@ export default class TgGui {
         if(!icon)
             icon = 416;
     
-        return '<div class="iconimg'+(addclass ? ' '+addclass : '') + '" style="background-position:' +  _.tileBgPos(icon)+'"'+(mrn ? ' mrn="'+mrn+'"': '')+(cmd ? ' cmd="'+cmd+'"': '')+(cnttype ? ' cnttype="'+cnttype+'"': '')+(cntmrn ? ' cntmrn="'+cntmrn+'"': '')+'></div>';
+        return '<div class="iconimg ico_' + icon +  ' '+(addclass ? ' '+addclass : '') + '" style="background-position:' +  _.tileBgPos(icon)+'"'+(mrn ? ' mrn="'+mrn+'"': '')+(cmd ? ' cmd="'+cmd+'"': '')+(cnttype ? ' cnttype="'+cnttype+'"': '')+(cntmrn ? ' cntmrn="'+cntmrn+'"': '')+'></div>';
     }
 
     /* *****************************************************************************
@@ -910,8 +952,8 @@ export default class TgGui {
 
         res += _.renderDetailsInner(info, type, false);
 
-        //if(info.image)
-        //    showImage($('#image-cont'), info.image);
+        if(info.image)
+            _.showImage($('#image-cont'), info.image);
 
         return res;
     }
@@ -1169,7 +1211,6 @@ export default class TgGui {
     }
 
     showOutput(text) {
-        console.log(text);
         $('#output').append(text);
     }
 
@@ -1185,14 +1226,13 @@ export default class TgGui {
 
         let _ = this;
 
-        //_.outputinit();
         $('.tg-main').addClass('d-flex');
+        _.genericEvents();
         _.outputInit();
         _.keyboardMapInit();
         _.focusInput();
         _.mapInit();
         _.main();
-        
     }
 
     /* -------------------------------------------------
@@ -1241,6 +1281,17 @@ export default class TgGui {
 
     }
 
+     /* -------------------------------------------------
+     *  Generic Events
+     * -------------------------------------------------*/
+    genericEvents() {
+        let _ = this;
+        $('.no-feature').on('click', function(e){
+            e.preventDefault();
+            _.openPopup();
+        });
+    }
+
     sendInput() {
         this.processCommands($('#tgInputUser').val());
     }
@@ -1250,14 +1301,10 @@ export default class TgGui {
     }
 
 
-    getTemplate(source, context) {
-        let template = Handlebars.compile(source);
-        let html = template(context);
-        return html;
-    }
 
 
-    openPopup(id, done) {
+
+    openPopup(id) {
 
         let _ = this;
         let MP_type = 'inline',
@@ -1266,9 +1313,7 @@ export default class TgGui {
         
 
         if(id) {
-            MP_callbacks.close =  function(){
-                done();
-            };
+            MP_callbacks.close =  function(){};
             MP_callbacks.open = function(e) {
             };
         };
@@ -1277,7 +1322,6 @@ export default class TgGui {
         if(id == 'alpha_version') {
 
             if(_.client_options.alpha_approved) {
-                done();
                 return;
             }
 
@@ -1285,7 +1329,6 @@ export default class TgGui {
             MP_type = 'ajax';
             MP_callbacks.close = function() {
                 _.client_options.alpha_approved = true;
-                done();
             }
         }
         // ==  News

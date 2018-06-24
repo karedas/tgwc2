@@ -23,16 +23,18 @@
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
 
-<body>
+<body data-serverstatus="" data-loginstatus"0">
   <div class="tg-area tg-box b-area">
     <!-- Login Panel -->
     <div class="tg-loginpanel align-middle container-fluid">
       <div class="row justify-content-center align-self-center w-100">
         <div class="col-xl-3 col-lg-4 col-md-5 mx-auto">
+          <div class="tg-logo-composit">
+            <div class="tg-logo-composit-light"></div>
+          </div>
           <form id="loginPanel" class="tg-loginform" action="/">
-            <p>TheGate Webclient
-              <span>v.2--alpha-
-                <%= htmlWebpackPlugin.options.git_version%>
+            <p class="tg-version-name">TheGate Webclient v.2
+              <span>V.Alpha-<%= htmlWebpackPlugin.options.git_version %>
               </span>
             </p>
             <label for="login_username">Nome Utente</label>
@@ -64,13 +66,13 @@
           <div class="nav-quickinfo-item  mx-auto">
             <ul class="nav-quickinfo">
               <li class="list-inline-item">
-                <a href="#">Sei al Verde!</a>
+                <a href="#" class="no-feature">Sei al Verde!</a>
               </li>
               <li class="list-inline-item">
-                <a href="#">E' il giorno ...</a>
+                <a href="#" class="no-feature">E' il giorno ...</a>
               </li>
               <li class="list-inline-item">
-                <a href="#">Ti trovi nella regione ...</a>
+                <a href="#" class="no-feature">Ti trovi nella regione ...</a>
               </li>
             </ul>
           </div>
@@ -80,7 +82,7 @@
         </div>
       </div>
       <div class="row tg-main-row">
-        <div class="tg-leftside col-12 col-md-9">
+        <div class="tg-leftside col">
           <!-- Output History Area -->
           <div class="row tg-output tg-box b-ironlight tg-shadow">
             <!-- output options vertical bar -->
@@ -104,31 +106,36 @@
             <div class="tg-controlpanel col-12">
               <!-- Character CPanel-->
               <div class="tg-characterpanel">
-                <!-- Character avatar -->
-                <div class="tg-characteravatar tg-box b-ironlight tg-shadow">
-                  <div class="tg-border-box">
-                    <div class="tg-border tg-border-top"></div>
-                    <div class="tg-border tg-border-left"></div>
-                    <div class="tg-border tg-border-right"></div>
-                    <div class="tg-border tg-border-bottom"></div>
+                <div class="tg-characterpanel-wrap">
+                  <!-- Character avatar -->
+                  <div class="tg-characteravatar tg-shadow no-feature">
+                   
                   </div>
-                </div>
-                <!-- Character Status Bars -->
-                <div class="tg-meterbar">
-                  <div class="barcont">
-                    <span class="statusTxt">[PF]</span>
-                    <span class="red barC"></span>
+                  <div class="tg-infochar">
+                      <div class="tg-infocharname">
+                      Karedas L'eliantiriano
+                      </div>
+                    <div class="tg-meterbar">
+                      <!-- Character Status Bars -->
+                      <div class="barcont">
+                        <span class="statusTxt">[PF]</span>
+                        <span class="red barC"></span>
+                      </div>
+                      <div class="barcont">
+                        <span class="statusTxt">[PM]</span>
+                        <span class="green barC"></span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="barcont">
-                    <span class="statusTxt">[PM]</span>
-                    <span class="green barC"></span>
+
+                  <div class="tg-dashboard">
+                    // this is my dashboard!
                   </div>
                 </div>
               </div>
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight-mini tg-shadow">
-                <span id="il-placeholder" class="tg-inputline-placeholder">Scrivi qualcosa</span>
-                <input id="tgInputUser" type="text" />
+                <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa"/>
                 <div class="tg-border-box">
                   <div class="tg-border tg-border-top"></div>
                   <div class="tg-border tg-border-left"></div>
@@ -139,9 +146,11 @@
             </div>
           </div>
         </div>
-        <div class="tg-rightside col-md-3 d-none d-md-flex">
-          <div id="tgMap" class="tg-map">
-
+        <div class="tg-rightside  d-none d-md-flex">
+          <div class="tg-rightside-wrap">
+            <div id="tgMap" class="tg-map">
+              
+            </div>
           </div>
         </div>
       </div>
