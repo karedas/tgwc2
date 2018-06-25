@@ -186,7 +186,6 @@ export default class TgGui {
     }
 
     handleLoginData(data) {
-        console.log('still appended');
         let _ = this;
         if (data.indexOf("&!connmsg{") == 0) {
             let end = data.indexOf('}!');
@@ -506,6 +505,9 @@ export default class TgGui {
         let _ = this,
             pos;
 
+        console.log('mmhh', msg )
+
+
         // Hide text (password)
         // msg = msg.replace(/&x\n*/gm, function () {
         //     console.log('input type password enabled');
@@ -627,7 +629,10 @@ export default class TgGui {
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
             let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            return '<div class="msg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+            let page_html = '<div class="tg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+            _.openPopup('', page_html)
+            //return '<div class="tg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+            return '';
         });
 
         // // Generic table (title, head, data)
@@ -712,12 +717,12 @@ export default class TgGui {
             return '';
         });
 
-        // // Clear message
-        // pos = msg.lastIndexOf('&*');
-        // if (pos >= 0) {
-        //     _.clearOutput();
-        //     msg = msg.slice(pos + 2);
-        // }
+        // Clear message
+        pos = msg.lastIndexOf('&*');
+         if (pos >= 0) {
+             _.clearOutput();
+             msg = msg.slice(pos + 2);
+         }
 
         // // Filterable messages
         // msg = msg.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, function (line, type, msg) {
@@ -735,7 +740,7 @@ export default class TgGui {
         //     return renderLink(link_parse[0], link_parse[1]);
         // });
 
-        //msg = msg.replace(/&!as"[^"]*"/gm, '');
+        msg = msg.replace(/&!as"[^"]*"/gm, '');
 
         msg = msg.replace(/&!(ad|a)?m"[^"]*"/gm, function (mob) {
             let mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
@@ -925,10 +930,10 @@ export default class TgGui {
         let mcolor = _.prcLowTxt(hprc, _.hlttxtcol);
 
         $('.movebar').width(_.limitPrc(mprc) + '%');
-        $('#moveBarText').css('color', mcolor).text(mprc);
+        $('#moveBarText i').css('color', mcolor).text(mprc + '%');
 
         $('.healthbar').width(_.limitPrc(hprc) + '%');
-        $('#healtBarText').css('color', hcolor).text(hprc);
+        $('#healtBarText i').css('color', hcolor).text(hprc + '%');
     }
 
     setStatus(st) {
@@ -1215,7 +1220,11 @@ export default class TgGui {
     }
 
     showOutput(text) {
+        
         $('#output').append(text);
+
+        let outputHeigt = $('#output').height();
+        $('#scrollableOutput').scrollTop(outputHeigt);
     }
 
     clearOutput() {
@@ -1240,8 +1249,8 @@ export default class TgGui {
      * -------------------------------------------------*/
 
     outputInit() {
-        let selector = '.tg-output-wrap'
-        this.addScrollBar(selector);
+        let selector = '#output'
+        this.addScrollBar('#scrollableOutput');
     }
 
     /* -------------------------------------------------
@@ -1298,15 +1307,15 @@ export default class TgGui {
         $('#tgInputUser').focus();
     }
 
-    openPopup(what) {
+    openPopup(content_ref, content) {
 
         let _ = this;
 
         let MP_type = 'inline',
-            MP_html = '<div class="tg-modal">Funzionalità non ancora implementata</div>',
+            MP_html = content,
             MP_callbacks = {};
 
-        switch(what) {
+        switch(content_ref) {
             /* ALPHA Client Version ALERT */
             case 'alpha_version':
                 if (_.client_options.alpha_approved) {
@@ -1320,10 +1329,11 @@ export default class TgGui {
                 break;
             case 'nofeature':
                 MP_type = 'inline',
-                MP_html = '<div class="tg-modal">Funzionalità non ancora implementata</div>',
+                MP_html = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
                 break;
             default: 
                 //TODO: make default value to avoid error.
+                
                 break;
         }
         

@@ -67,7 +67,7 @@
 .b-ironlight {
     
     padding: $ironlight-border-size;  
-    .tg-border-box {
+    > .tg-border-box {
         .tg-border-top, .tg-border-bottom {
             height: $ironlight-border-size;
             &::after, &::before {
@@ -116,7 +116,7 @@
 .b-ironlight-mini {
     
     padding: $ironlight-mini-border-size;  
-    .tg-border-box {
+    > .tg-border-box {
         .tg-border-top, .tg-border-bottom {
             height: $ironlight-mini-border-size;
             &::after, &::before {
@@ -158,6 +158,54 @@
     
         .tg-border-left {
             background-image: url($imgPath + '/borders/border_ministone_left.png');
+        }
+    }
+}
+
+.b-controlpanel {
+    padding: $controlpanel-border-size;  
+    > .tg-border-box {
+        .tg-border-top, .tg-border-bottom {
+            height: $controlpanel-border-size;
+            &::after, &::before {
+                width: $controlpanel-border-size;
+                height: $controlpanel-border-size;
+            }
+        }
+    
+        .tg-border-left, .tg-border-right{
+            position: absolute;
+            width: $controlpanel-border-size;
+            top: $controlpanel-border-size;
+            bottom: $controlpanel-border-size;
+        }
+    
+        .tg-border-top {
+            background-image: url($imgPath + '/borders/border-controlpanel-top.png');
+            &::after {
+                background-image: url($imgPath + '/borders/border-controlpanel-topright.png');
+            }
+            &::before {
+                background-image: url($imgPath + '/borders/border-controlpanel-topleft.png');
+            }
+        }
+        
+        .tg-border-bottom {
+            background-image:  url($imgPath + '/borders/border-controlpanel-bottom.png');
+            &::after {
+                background-image: url($imgPath + '/borders/border-controlpanel-bottomright.png');
+            }
+            &::before {
+                background-image:  url($imgPath + '/borders/border-controlpanel-bottomleft.png');
+            }
+        }
+        
+        .tg-border-right {
+            background-image: url($imgPath + '/borders/border-controlpanel-right.png');
+        }
+    
+        .tg-border-left {
+            background-image: url($imgPath + '/borders/border-controlpanel-left.png');
         }
     }
 }

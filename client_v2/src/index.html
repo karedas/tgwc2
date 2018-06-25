@@ -81,17 +81,18 @@
         <div class="tg-leftside col">
           <!-- Output History Area -->
           <div class="row tg-output tg-box b-ironlight tg-shadow">
-              <div class="tg-output-wrap scrollable">
-                <!-- output options vertical bar -->
-                <div id="outputOptions" class="tg-output-options">
-                  <ul class="list-inline ml-auto">
-                    <li class="list-inline-item">[1]</li>
-                    <li class="list-inline-item">[2]</li>
-                    <li class="list-inline-item">[3]</li>
-                  </ul>
-                </div>
+              <!-- output options vertical bar -->
+              <div id="outputOptions" class="tg-output-options">
+                <ul class="list-inline ml-auto">
+                  <li class="list-inline-item">Sta: [1]</li>
+                  <li class="list-inline-item">Pers: [2]</li>
+                  <li class="list-inline-item">Ogg: [3]</li>
+                  <li class="list-inline-item">Dir: [4]</li>
+                </ul>
+              </div>
+              <div class="tg-output-wrap">
                 <!-- Output Area -->
-                <div class="scrollable">
+                <div id="scrollableOutput" class="scrollable">
                   <div id="output" class="tg-output-history"></div>
                 </div>
               </div>
@@ -103,9 +104,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="tg-controlpanel col-12">
+            <div class="tg-controlpanel col-12 tg-box">
               <!-- Character CPanel-->
-              <div class="tg-characterpanel">
+              <div class="tg-characterpanel b-controlpanel">
                 <div class="tg-characterpanel-wrap">
                   <!-- Character avatar -->
                   <div class="tg-characteravatar tg-shadow no-feature">
@@ -118,20 +119,28 @@
                     <div class="tg-meterbar">
                       <!-- Character Status Bars -->
                       <div class="barcont">
-                        <span id="moveBarText" class="tg-statusbar-text">[PF]</span>
+                        <span id="moveBarText" class="tg-statusbar-text"><i></i> Salute</span>
                         <span class="red barC movebar"></span>
                       </div>
                       <div class="barcont">
-                        <span id="healtBarText" class="tg-statusbar-text>[PM]"></span>
+                        <span id="healtBarText" class="tg-statusbar-text"><i></i> Movimento</span>
                         <span class="green barC healthbar"></span>
                       </div>
                     </div>
                   </div>
 
                   <div class="tg-dashboard">
-                    // this is my dashboard!
+                    <div class="tg-dashboard-wrap">
+                      // this is my dashboard!
+                    </div>
                   </div>
                 </div>
+                <div class="tg-border-box">
+                    <div class="tg-border tg-border-top"></div>
+                    <div class="tg-border tg-border-left"></div>
+                    <div class="tg-border tg-border-right"></div>
+                    <div class="tg-border tg-border-bottom"></div>
+                  </div>
               </div>
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight-mini tg-shadow">

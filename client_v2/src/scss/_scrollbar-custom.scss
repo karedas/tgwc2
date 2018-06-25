@@ -7,6 +7,9 @@
     -ms-overflow-style: none;
     touch-action: auto;
     -ms-touch-action: auto;
+    height: 100%;
+    width: 100%;
+    position: relative;
   }
   
   /*
@@ -25,6 +28,7 @@
   }
   
   .ps__rail-y {
+    cursor: pointer;
     display: none;
     opacity: 0;
     transition: background-color .2s linear, opacity .2s linear;
@@ -34,7 +38,7 @@
     right: 0;
     /* please don't change 'position' */
     position: absolute;
-    border-left: 1px solid 
+    z-index: 2;
   }
   
   .ps--active-x > .ps__rail-x,
@@ -57,7 +61,7 @@
   .ps .ps__rail-y:focus,
   .ps .ps__rail-x.ps--clicking,
   .ps .ps__rail-y.ps--clicking {
-    background-color: #eee;
+    background-color: #111;
     opacity: 0.9;
   }
   
@@ -66,7 +70,6 @@
    */
   .ps__thumb-x {
     background-color: #aaa;
-    border-radius: 6px;
     transition: background-color .2s linear, height .2s ease-in-out;
     -webkit-transition: background-color .2s linear, height .2s ease-in-out;
     height: 6px;
@@ -78,7 +81,6 @@
   
   .ps__thumb-y {
     background-color: #aaa;
-    border-radius: 6px;
     transition: background-color .2s linear, width .2s ease-in-out;
     -webkit-transition: background-color .2s linear, width .2s ease-in-out;
     width: 6px;

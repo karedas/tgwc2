@@ -177,13 +177,13 @@ function copyStaticFiles() {
 			config.src.base + '**/*.html',
 			config.src.base + 'ajax/**',
 			config.src.base + 'fonts/**',
-			config.src.base + 'icons/tiles.png',
+			config.src.base + 'tiles/tiles.png',
 			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
 			config.src.base + 'fonts/**/*',
 			'!' + config.src.base + config.src.img + 'sprites/**/*'
 	];
 			
-	return gulp.src(staticFileGlob, {base: './src'})
+	return gulp.src(staticFileGlob, {base: './src', cwd: './'})
 		.pipe(gulp.dest(config.build.base));
 }
 
@@ -218,7 +218,7 @@ gulp.task('clean', () => {
 
 //Task for watching development
 gulp.task('dev',
-	gulp.series( 'generate-sprites', copyStaticFiles, 'sass-compile', 'generate-assetslist', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
+	gulp.series( 'generate-sprites', 'copy-staticfiles', 'sass-compile', 'generate-assetslist', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
 gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist', 'js-compile', 'sass-compile', copyStaticFiles));

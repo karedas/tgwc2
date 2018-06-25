@@ -8,6 +8,8 @@
     padding-top: 2px;
     box-sizing: border-box;
     text-transform: uppercase;
+    font-size: 10px;
+
     ul {
         padding: 2px 0;
         margin-bottom: 0;
@@ -22,7 +24,6 @@
     // Elements
     .nav-quickinfo-group {
         max-height: 18px;
-        margin-top: 3px;
     }
 
     .tg-nav-item {
@@ -36,6 +37,7 @@
         background-repeat: no-repeat;
         background-size: contain;
         vertical-align: middle;
+        margin-right: .5em;
         &.icon-monete {
             @include sprite-image($monete-ico-sprite);
         }

@@ -3,19 +3,26 @@
     background: black;
     flex: 1 1 auto;
     font-size: 12px;
-    margin-bottom: $grid-gutter-width / 2;
+    position: relative;
 
     .tg-output-wrap {
         position: relative;
         width: 100%;
+        padding-top: 30px;
     }
 
     .tg-output-options {
-        border-bottom: $gray-900;
-        background: $gray-800;
-        padding:.5em 1em;
-        width: 100%;
         height: 30px;
+        position: absolute;
+        left: $ironlight-border-size;
+        right: $ironlight-border-size;
+        z-index: 2;
+        border-bottom: $gray-900;
+        padding: 0 1em 10px;
+        text-align: right;
+        box-shadow:inset 0 0 9px 5px black;
+        background: #15100c url($imgPath + '/borders/border-001-horizontal.png') repeat-x bottom left;
+
         ul {
             margin: 0;
         }
@@ -26,18 +33,21 @@
         z-index: 2;
         padding: .2rem .5rem;
         max-height: 100%;
+        width: 100%;
         position: absolute;
-        top: 30px;
+        top: 0;
         bottom: 0;
         right: 0;
         left: 0;
-        overflow-y: auto;
         padding: 8px;
+        display: table;
     }
 }
 
 .tg-output-history {
+    
     color: #d2d2d2; //  default color
+
     .tgline {
         padding-bottom:1em;
         p {
@@ -46,6 +56,11 @@
         div {
             display: inline;
         }
+    }
+
+    .tg-title {
+        display: block!important;
+        font-size: 22px;
     }
 
     .room {
@@ -60,7 +75,7 @@
 }
 
 .iconimg {
-    background-image: url($imgPath + '/tiles.png');
+    background-image: url('../tiles/tiles.png');
     background-repeat: no-repeat;
     width: 32px;
     height: 32px;

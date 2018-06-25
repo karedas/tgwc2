@@ -6365,6 +6365,7 @@ function parseForDisplay(msg)
 	// Player is logged in
 	msg = msg.replace(/&!logged"[^"]*"/gm, function() {
 		ingame = true;
+		console.log(msg);
 		return '';
 	});
 
