@@ -920,10 +920,10 @@ export default class TgGui {
         let mcolor = _.prcLowTxt(hprc, _.hlttxtcol);
 
         $('.movebar').width(_.limitPrc(mprc) + '%');
-        $('.moveprc').css('color', mcolor).text(mprc);
+        $('#moveBarText').css('color', mcolor).text(mprc);
 
         $('.healthbar').width(_.limitPrc(hprc) + '%');
-        $('.healthprc').css('color', hcolor).text(hprc);
+        $('#healtBarText').css('color', hcolor).text(hprc);
     }
 
     setStatus(st) {

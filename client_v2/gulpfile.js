@@ -88,7 +88,7 @@ function generateSprites(done, path) {
 }
 
 function generateAssetsList() {
-	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}')
+	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif}', config.src.base + 'icons/tiles.png')
 		.pipe(fileList('assets_list.json', {
 			relative: true
 		}))
@@ -137,7 +137,7 @@ gulp.task('sass-compile', () => {
 });
 
 gulp.task('copy-images', () => {
-	return gulp.src(config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}', config.src.base + '/icons/tiles.png')
+	return gulp.src([config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}', config.src.base + 'icons/tiles.png'])
 		.pipe(gulp.dest(config.build.base + config.build.img));
 });
 
