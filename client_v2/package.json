@@ -43,6 +43,7 @@
 		"merge-stream": "^1.0.1",
 		"modernizr": "^3.6.0",
 		"modernizr-webpack-plugin": "^1.0.7",
+		"perfect-scrollbar": "^1.4.0",
 		"popper.js": "^1.14.3",
 		"socket.io": "^2.1.1",
 		"vinyl-buffer": "^1.0.1",

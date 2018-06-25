@@ -9,32 +9,21 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-$serverstatus-down-name: 'serverstatus_down';
-$serverstatus-down-x: 0px;
-$serverstatus-down-y: 0px;
-$serverstatus-down-offset-x: 0px;
-$serverstatus-down-offset-y: 0px;
-$serverstatus-down-width: 18px;
-$serverstatus-down-height: 18px;
-$serverstatus-down-total-width: 36px;
-$serverstatus-down-total-height: 18px;
-$serverstatus-down-image: '../images/sprites/icons_tls.png';
-$serverstatus-down: (0px, 0px, 0px, 0px, 18px, 18px, 36px, 18px, '../images/sprites/icons_tls.png', 'serverstatus_down', );
-$serverstatus-up-name: 'serverstatus_up';
-$serverstatus-up-x: 18px;
-$serverstatus-up-y: 0px;
-$serverstatus-up-offset-x: -18px;
-$serverstatus-up-offset-y: 0px;
-$serverstatus-up-width: 18px;
-$serverstatus-up-height: 18px;
-$serverstatus-up-total-width: 36px;
-$serverstatus-up-total-height: 18px;
-$serverstatus-up-image: '../images/sprites/icons_tls.png';
-$serverstatus-up: (18px, 0px, -18px, 0px, 18px, 18px, 36px, 18px, '../images/sprites/icons_tls.png', 'serverstatus_up', );
-$spritesheet-width: 36px;
-$spritesheet-height: 18px;
-$spritesheet-image: '../images/sprites/icons_tls.png';
-$spritesheet-sprites: ($serverstatus-down, $serverstatus-up, );
-$spritesheet: (36px, 18px, '../images/sprites/icons_tls.png', $spritesheet-sprites, );
+$monete-ico-sprite-name: 'monete-ico@sprite';
+$monete-ico-sprite-x: 0px;
+$monete-ico-sprite-y: 0px;
+$monete-ico-sprite-offset-x: 0px;
+$monete-ico-sprite-offset-y: 0px;
+$monete-ico-sprite-width: 30px;
+$monete-ico-sprite-height: 30px;
+$monete-ico-sprite-total-width: 30px;
+$monete-ico-sprite-total-height: 30px;
+$monete-ico-sprite-image: '../images/icons/icons_sprite.png';
+$monete-ico-sprite: (0px, 0px, 0px, 0px, 30px, 30px, 30px, 30px, '../images/icons/icons_sprite.png', 'monete-ico@sprite', );
+$spritesheet-width: 30px;
+$spritesheet-height: 30px;
+$spritesheet-image: '../images/icons/icons_sprite.png';
+$spritesheet-sprites: ($monete-ico-sprite, );
+$spritesheet: (30px, 30px, '../images/icons/icons_sprite.png', $spritesheet-sprites, );
 
 

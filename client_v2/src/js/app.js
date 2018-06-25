@@ -8,6 +8,10 @@ import TgClient from "modules/client.js";
     Tg.onReady = function() {
         Tg.client = new TgClient();
         Tg.client.init();   
+
     };
+
+    // TODO: Google Analytics
+     
     $(document).ready(Tg.onReady);
 }(document, window));

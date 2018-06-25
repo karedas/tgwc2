@@ -38,7 +38,6 @@ module.exports = function (prop) {
         externals: {
             jquery: "jQuery",
             $: "jQuery",
-            gitversion: '123'
         },
 
         entry: {

@@ -1,10 +1,11 @@
 // Required
-@import 'variables';
-@import 'sprites-mixins';
+@import 'utils/variables';
+@import 'utils/sprites-mixins';
+@import 'utils/fonts_mixins';
 @import 'sprites';
-@import 'fonts_mixins';
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "node_modules/magnific-popup/src/css/main";
+@import "scrollbar-custom";
 
 //Custom Modules
 @import "colors";

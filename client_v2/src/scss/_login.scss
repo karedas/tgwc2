@@ -12,6 +12,11 @@
     position: relative;
     min-height: 250px;
 
+    > .row {
+        height: 100%;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
 
     .tg-loginform {
         border-radius: 15px;

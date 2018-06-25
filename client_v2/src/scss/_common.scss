@@ -11,6 +11,7 @@ body,
 html {
     height: 100%;
     width: 100%;
+    display: table;
 }
 
 body {
@@ -28,17 +29,14 @@ a {
 
 
 .tg-area {
-    overflow: hidden;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-
-
 .tg-logo-composit {
     width: 105px;
-    height:91px;
+    height: 91px;
     position: relative;
     margin: 0 auto 1.5rem;
     box-sizing: content-box;
@@ -78,11 +76,10 @@ a {
         0%   { opacity:0; }
         50%  { opacity:1; }
         100% { opacity:0; }
-      }
+    }
 }
 
 .tg-main {
-
     min-height: 100%;
     display: none;
     flex-direction: column;
@@ -98,8 +95,6 @@ a {
     display: flex;
     flex-direction: column;
 }
-
-
 
 .tg-controlpanel {
     margin-bottom: $grid-gutter-width / 2;

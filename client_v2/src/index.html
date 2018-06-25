@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="it">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,10 +7,8 @@
   <meta name="description" content="The Gate MUD è un gioco di ruolo online gratuito (davvero!) che ti permetterà di vivere straordinarie avventure in un dettagliato mondo virtuale di ambientazione fantasy. Prendendo le parti di un abitante della terra di Ikhari, potrai forgiare la sua storia con le tue gesta!">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- <link rel="manifest" href="site.webmanifest"> -->
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
-
   <link rel="stylesheet" href="css/tgwebclient.css">
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
@@ -22,7 +19,6 @@
     crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
-
 <body data-serverstatus="" data-loginstatus"0">
   <div class="tg-area tg-box b-area">
     <!-- Login Panel -->
@@ -34,8 +30,7 @@
           </div>
           <form id="loginPanel" class="tg-loginform" action="/">
             <p class="tg-version-name">TheGate Webclient v.2
-              <span>V.Alpha-<%= htmlWebpackPlugin.options.git_version %>
-              </span>
+              <span>V.Alpha-<%= htmlWebpackPlugin.options.git_version %></span>
             </p>
             <label for="login_username">Nome Utente</label>
             <input id="login_username" name="username" type="text">
@@ -52,21 +47,22 @@
         </div>
       </div>
     </div>
+    <!-- Main Panel -->
     <div class="tg-main container-fluid">
       <!-- Main NavBar -->
       <div class="row">
         <div class="tg-navbar col-12">
-          <div class="nav-quickinfo-item  mr-auto">
+          <div class="nav-quickinfo-group  mr-auto">
             <ul class="list-inline">
               <li class="list-inline-item">
-                <a href="#">The Gate Mud</a>
+                <a href="#" class="tg-bcdrand">The Gate Mud</a>
               </li>
             </ul>
           </div>
-          <div class="nav-quickinfo-item  mx-auto">
-            <ul class="nav-quickinfo">
-              <li class="list-inline-item">
-                <a href="#" class="no-feature">Sei al Verde!</a>
+          <div class="nav-quickinfo-group  mx-auto">
+            <ul class="list-inline">
+              <li class="list-inline-item tg-nav-item">
+                <a href="#" class="no-feature"><i class="tg-icon icon-monete"></i>Sei al Verde!</a>
               </li>
               <li class="list-inline-item">
                 <a href="#" class="no-feature">E' il giorno ...</a>
@@ -76,7 +72,7 @@
               </li>
             </ul>
           </div>
-          <div class="nav-quickinfo-item ml-auto">
+          <div class="nav-quickinfo-group ml-auto">
             <span id="navServerStatus" class="tg-serverstatus"></span>
           </div>
         </div>
@@ -85,16 +81,20 @@
         <div class="tg-leftside col">
           <!-- Output History Area -->
           <div class="row tg-output tg-box b-ironlight tg-shadow">
-            <!-- output options vertical bar -->
-            <!--  <div id="outputOptions" class="tg-output-options">
-              <ul class="list ml-auto">
-                <li class="list-item">[1]</li>
-                <li class="list-item">[2]</li>
-                <li class="list-item">[3]</li>
-              </ul>
-            </div>-->
-            <!-- Output Area -->
-            <div id="output" class="tg-output-history"></div>
+              <div class="tg-output-wrap scrollable">
+                <!-- output options vertical bar -->
+                <div id="outputOptions" class="tg-output-options">
+                  <ul class="list-inline ml-auto">
+                    <li class="list-inline-item">[1]</li>
+                    <li class="list-inline-item">[2]</li>
+                    <li class="list-inline-item">[3]</li>
+                  </ul>
+                </div>
+                <!-- Output Area -->
+                <div class="scrollable">
+                  <div id="output" class="tg-output-history"></div>
+                </div>
+              </div>
             <div class="tg-border-box">
               <div class="tg-border tg-border-top"></div>
               <div class="tg-border tg-border-left"></div>
@@ -118,11 +118,11 @@
                     <div class="tg-meterbar">
                       <!-- Character Status Bars -->
                       <div class="barcont">
-                        <span id="mvBarText" class="tg-statusbar-text">[PF]</span>
+                        <span id="moveBarText" class="tg-statusbar-text">[PF]</span>
                         <span class="red barC movebar"></span>
                       </div>
                       <div class="barcont">
-                        <span id="healtBarText" class="tg-statusbar-text>[PM]</span>
+                        <span id="healtBarText" class="tg-statusbar-text>[PM]"></span>
                         <span class="green barC healthbar"></span>
                       </div>
                     </div>
@@ -174,13 +174,6 @@
       <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
     </p>
   </div>
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <!-- <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async defer></script> -->
 </body>
 
 </html>
