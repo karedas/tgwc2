@@ -75,7 +75,7 @@
 }
 
 .iconimg {
-    background-image: url('../tiles/tiles.png');
+    background-image: url($imgPath + '/tiles/tiles.png');
     background-repeat: no-repeat;
     width: 32px;
     height: 32px;

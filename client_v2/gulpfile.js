@@ -138,8 +138,8 @@ gulp.task('sass-compile', () => {
 gulp.task('copy-images', () => {
 	let globImg = [
 		config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}', 
-		config.src.base + 'icons/tiles.png',
-		'!' + config.src.base + config.src.img + 'sprites/**/*'
+		'!' + config.src.base + config.src.img + 'sprites/**/*',
+		'!' + config.src.base + config.src.img + 'tiles/large/**/*'
 	]
 	return gulp.src(globImg)
 			.pipe(gulp.dest(config.build.base + config.build.img));
@@ -150,16 +150,17 @@ gulp.task('staticfiles-watch', function () {
 	let glob = [
 			config.src.base + 'assets_list.json',
 			config.src.base + 'ajax/**', 
-			config.src.base + 'icons/tiles.png',
 			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
 			config.src.base + 'fonts/**/*',
-			'!' + config.src.base + config.src.img + 'sprites/**/*'
+			'!' + config.src.base + config.src.img + 'sprites/**/*',
+			'!' + config.src.base + config.src.img + 'tiles/large/**/*'
 		];
 
 	let watcher = gulp.watch(glob, {
 		base: ".",
 		interval: 500,
-		usePolling: true
+		usePolling: true,
+		allowEmpty: true
 	});
 
 	watcher.on('all', (event, path) => {
@@ -172,15 +173,16 @@ gulp.task('staticfiles-watch', function () {
 });
 
 
-function copyStaticFiles() {
+function copyStaticFiles(done) {
 	let staticFileGlob = [
 			config.src.base + '**/*.html',
 			config.src.base + 'ajax/**',
 			config.src.base + 'fonts/**',
-			config.src.base + 'tiles/tiles.png',
 			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
 			config.src.base + 'fonts/**/*',
-			'!' + config.src.base + config.src.img + 'sprites/**/*'
+			'!' + config.src.base + config.src.img + 'sprites/**/*',
+			'!' + config.src.base + config.src.img + 'tiles/large/**/*'
+
 	];
 			
 	return gulp.src(staticFileGlob, {base: './src', cwd: './'})

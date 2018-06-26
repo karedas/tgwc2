@@ -1,0 +1,26 @@
+.tg-rightside{
+    background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
+    .tg-rightside-wrap {
+        height: 100%;
+        width: 100%;
+        background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
+        padding-left: 15px;
+        box-shadow: inset 3px -2px 112px 7px black;
+    }
+
+    .tg-map {
+        background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
+        background-size: contain;
+        height: 543px;
+        width: 100%;
+        padding-top: 68px;
+        position: relative;
+
+        canvas {
+            max-width:  100%;
+            max-height: 100%;
+            border-radius: 50%;
+        }
+    }
+
+}

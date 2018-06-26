@@ -81,23 +81,36 @@
         box-sizing: content-box;
     }
 
-
-}
-body[data-serverstatus="1"] {
-    .tg-serverstatus:before{
-        background: green;
+    // ON PRELOAD
+    &[data-loginstatus="preload"] {
+        .tg-loginform, .tg-serverstatus {
+            display: none;
+        }
+        .tg-preloader {
+            display: block;
+        }
     }
+
 }
 
+// Server OFFLINE
 body[data-serverstatus="0"] {
     .tg-loginstatus {
         display: none;
     }
-        .tg-serverstatus:before{ 
-            background: red;
-        }
+    .tg-serverstatus:before { 
+        background: red;
+    }
 }
-
+// Server ONLINE
+body[data-serverstatus="1"] {
+    .tg-loginform {
+        display: block;
+    }
+    .tg-serverstatus:before {
+        background: green;
+    }
+}
 
 /* Preloader in Login */
 .tg-preloader {

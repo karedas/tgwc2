@@ -19,9 +19,9 @@ export default class TgGui {
 
         this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
-        this.media_server_addr = './images/';
+        this.media_server_addr = './';
         this.ws_prefix = '/';
-        this.images_path = '/images/';
+        this.images_path = this.media_server_addr + 'images/';
         this.sounds_path = '';
 
         this.socketListener = {}
@@ -33,7 +33,7 @@ export default class TgGui {
         };
 
         /* Connection */
-        this.serverIsOnline = false;
+        this.serverIsReady = false;
         this.isConnected = false;
         this.socket = null;
         this.netdata = '';
@@ -139,11 +139,11 @@ export default class TgGui {
         facebookSDK.load();
         _.initSessionData();
         _.connectToServer().then(function (resolve, reject) {
-            if (_.serverIsOnline) {
+            if (_.serverIsReady) {
                 _.initLoginPanel();
             }
             if (_.debug) {
-                console.log('Server Status:', _.serverIsOnline);
+                console.log('Server Status:', _.serverIsReady);
             }
         });
     }
@@ -162,25 +162,24 @@ export default class TgGui {
 
             // Server status
             _.socket.on('connect', function () {
-                _.serverIsOnline = true;
+                _.serverIsReady = true;
                 _.networkActivityMessage("Server Online", 1);
                 resolve(true);
             });
 
             _.socket.on('disconnect', function () {
-                _.serverIsOnline = false;
+                console.log('disconnect');
+                _.setDisconnect();
                 _.networkActivityMessage("Disconnesso dal server");
             });
 
             _.socket.on('connect_error', function (e) {
-                console.log('connect error');
-                if (_.serverIsOnline) {
+                if (_.serverIsReady) {
                     _.networkActivityMessage("Connessione chiusa");
                 } else {
                     _.networkActivityMessage("Il server di gioco è offline.", 0);
                 }
                 resolve(false);
-
             });
         });
     }
@@ -200,7 +199,6 @@ export default class TgGui {
                         break;
 
                     case 'enterlogin':
-                        console.log('enterlogin');
                         _.performLogin();
                         break;
 
@@ -219,12 +217,12 @@ export default class TgGui {
                     case 'created':
                     case 'loginok':
                         // Preload client then start the magic
-                        _.hideLoginPanel();
-
+                        
                         _.preloadClient().then(function () {
+                            _.hideLoginPanel();
+                            _.loadInterface();
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
-                            _.loadInterface();
                         }, fail => {
                             console.log("Assets error") // Error!
                         });
@@ -279,21 +277,30 @@ export default class TgGui {
 
             _.netdata = '';
 
-            let now = Date.now();
-
-            if (now > _.client_update.last + 1000) {
-                if (_.client_update.room.needed) {
-                    _.sendToServer('@agg');
-                    _.client_update.room.needed = false;
-                    _.client_update.last = now;
-                }
-            }
-
         } else if (len > 200000) {
             _.showOutput('<br>Errore di comunicazione con il server!<br>');
             _.netdata = '';
             _.setDisconnect();
         }
+    }
+
+    setDisconnect() {
+        let _ = this;
+        _.isConnected = false;
+	    _.inGame = false;
+
+	    //TODO: $(window).unbind('beforeunload', leavePageAlertMessage);
+        $('.tg-loginform').show();
+/*
+	if(!debug && connectionInfo && connectionInfo.loginName)
+		_gaq.push(['_trackEvent', 'Player', 'Disconnection', connectionInfo.loginName.toLowerCase(), 0, false]);
+*/	
+	if(client_options.log.save)
+		saveLogs();
+	
+	closeAllDialogs();
+	networkActivityOff();
+	openMainDialog();
     }
 
     /* COOKIE LAW */
@@ -380,6 +387,7 @@ export default class TgGui {
     ExtractAndSaveUserConfiguration() {
         // TODO:
     }
+    
 
     /* *****************************************************************************
      * Login 
@@ -392,9 +400,9 @@ export default class TgGui {
     initLoginPanel() {
         let _ = this;
 
-
+        //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
-        $('.tg-loginform').show();
+
         $('#login_username').focus();
         $('#loginPanel').on('submit', function (e) {
             e.preventDefault();
@@ -404,7 +412,8 @@ export default class TgGui {
                 //TODO: Notify user to provide credentials
                 return;
             }
-            _.networkActivityMessage("Connessione in corso...");
+            _.loginNetworkActivityMessage("Connessione in corso...");
+
             _.connectionInfo.loginName = name;
             _.connectionInfo.loginPass = pass;
             _.connectionInfo.mode = "login";
@@ -436,9 +445,8 @@ export default class TgGui {
         this.loginNetworkActivityMessage(msg);
     }
 
-    loginNetworkActivityMessage(msg, dataname) {
+    loginNetworkActivityMessage(msg) {
         $('.tg-loginstatus').text(msg)
-        $('body').attr('data-serverstatus', status);
     }
 
     networkActivityMessage(msg, status) {
@@ -456,7 +464,10 @@ export default class TgGui {
 
         let percentage = 0;
         let stepSize = 100 / assetsList.length;
-        $('#tgPreloader').show().find('span').text(percentage);
+
+        $('.tg-loginpanel').attr('data-loginstatus', 'preload');
+
+        $('#tgPreloader').find('span').text(percentage);
 
         let images = [];
 
@@ -473,6 +484,7 @@ export default class TgGui {
 
                     if (assetsList.length - 1 == i) {
                         // All Images loaded
+                        $('.tg-loginpanel').attr('data-loginstatus', 'ready');
                         $('#tgPreloader').remove();
                         resolve();
                     }
@@ -482,7 +494,7 @@ export default class TgGui {
                     reject();
                 }
 
-                img.src = _.media_server_addr + assetsList[i];
+                img.src = _.images_path + assetsList[i];
             }
         });
     }
@@ -504,8 +516,7 @@ export default class TgGui {
     parseForDisplay(msg) {
         let _ = this,
             pos;
-
-        console.log('mmhh', msg )
+        console.log(msg )
 
 
         // Hide text (password)
@@ -531,7 +542,6 @@ export default class TgGui {
 
         // Exits info
         msg = msg.replace(/&d\d{6}\n*/gm, function (doors) {
-            console.log('Exit Info');
             let doors_parse = doors.substr(2, 6);
             _.setDoors(doors_parse);
             return '';
@@ -605,8 +615,7 @@ export default class TgGui {
         // Map data
         msg = msg.replace(/&!map\{[\s\S]*?\}!/gm, function (map) {
             let map_parse = $.parseJSON(map.slice(5, -1));
-            // _.updateMap(map_parse);
-            console.log('update map');
+            _.MAP_OBJECT.updateMap(map_parse);
             return '';
         });
 
@@ -629,9 +638,14 @@ export default class TgGui {
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
             let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            let page_html = '<div class="tg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
-            _.openPopup('', page_html)
-            //return '<div class="tg-title">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+            let page_html = '<div class="tg-title lt-red">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
+            if(page_parse.title == 'Notizie') {
+                _.openPopup('notizie', page_html);
+            }
+            else {
+                //TODO: Page parse generic 
+                console.log('!page todo');
+            }
             return '';
         });
 
@@ -658,28 +672,32 @@ export default class TgGui {
 
         // Person details
         msg = msg.replace(/&!pers\{[\s\S]*?\}!/gm, function (dtls) {
-            dtls_parse = $.parseJSON(dtls.slice(6, -1));
+            let dtls_parse = $.parseJSON(dtls.slice(6, -1));
             return _.renderDetails(dtls_parse, 'pers');
         });
 
         // Object details
         msg = msg.replace(/&!obj\{[\s\S]*?\}!/gm, function (dtls) {
-            dtls_parse = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
+            let dtls_parse = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
             return _.renderDetailsInText(dtls_parse, 'obj');
         });
 
         // Equipment
-        // msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
-        //     let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-        //     //renderEquipment(eq_parse);
-        //     return '';
-        // });
+        msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
+            let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
+            console.log('renderEquipment');
+            //_.renderEquipment(eq_parse);
+            _.openPopup('nofeature');
+            return '';
+        });
 
-        // // Workable lists
-        // msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
-        //     wk = $.parseJSON(wk.slice(7, -1));
-        //     //return renderWorksList(wk);
-        // });
+        // Workable lists
+        msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
+            let wk_parse = $.parseJSON(wk.slice(7, -1));
+            console.log('renderworkslist');
+            _.openPopup('nofeature');
+             //return renderWorksList(wk);
+        });
 
         // // Skill list
         // msg = msg.replace(/&!sklst\{[\s\S]*?\}!/gm, function (skinfo) {
@@ -693,11 +711,13 @@ export default class TgGui {
         //     //return renderPlayerInfo(info);
         // });
 
-        // // Player status
-        // msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
-        //     let status_parse = $.parseJSON(status.slice(6, -1));
-        //     //return renderPlayerStatus(status_parse);
-        // });
+        // Player status
+        msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
+            let status_parse = $.parseJSON(status.slice(6, -1));
+            console.log('renderPlayerStatus');
+            //return _.renderPlayerStatus(status_parse);
+            return '';
+        });
 
         // // Selectable generic
         // msg = msg.replace(/&!select\{[\s\S]*?\}!/gm, function (s) {
@@ -896,6 +916,7 @@ export default class TgGui {
      */
 
     setSky(sky) {
+        console.log('setsky');
         let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
         $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 29) + 'px');
     }
@@ -905,6 +926,7 @@ export default class TgGui {
      */
 
     setDoors(doors) {
+        console.log('setdoors');
         let _ = this;
         for (let d = 0; d < this.dir_names.length; ++d) {
             $('#' + _.dir_names[d]).css('background-position', -33 * doors[d]);
@@ -995,8 +1017,29 @@ export default class TgGui {
                 textarea += _.formatText(info.desc.equip, 'green');
         }
 
-        return textarea;
+        // if(inDialog) 
+        // else 
 
+        /* Print Objects List */
+        if(info.objcont) {
+            textarea += _.renderDetailsList(type, info.num, info.objcont, 'obj', 'yellow');
+        }
+
+        /* Print Persons List */
+        if(info.perscont) {
+            textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'lt-green');
+        }
+
+
+        return textarea;
+    }
+
+    renderDetailsList(cont_type, cont_num, cont, type, style) {
+        let _ = this;
+
+        let res = '';
+        console.log('renderDetailsList Not available');
+        return res;
     }
 
     capFirstLetter(string) {
@@ -1049,7 +1092,7 @@ export default class TgGui {
     sendOOB(data) {
         let _ = this;
 
-        if (!_.serverIsOnline) {
+        if (!_.serverIsReady) {
             return;
         }
         _.socket.emit('oob', data);
@@ -1139,27 +1182,11 @@ export default class TgGui {
         $('#inputline').val(text).focus();
     }
 
-    historyTop() {
-        let _ = this;
-        if (_.cmd_history_pos > 0) {
-            _.cmd_history_pos = 0;
-            updateInput();
-        }
-    }
-
-    historyBottom() {
-        let _ = this;
-        if (_.cmd_history_pos < _.cmd_history.length) {
-            _.cmd_history_pos = _.cmd_history.length;
-            updateInput();
-        }
-    }
-
     historyUp() {
         let _ = this;
         if (_.cmd_history_pos > 0) {
             _.cmd_history_pos--;
-            updateInput();
+            _.updateInput();
         }
     }
 
@@ -1167,7 +1194,7 @@ export default class TgGui {
         let _ = this;
         if (_.cmd_history_pos < _.cmd_history.length) {
             _.cmd_history_pos++;
-            updateInput();
+            _.updateInput();
         }
     }
 
@@ -1191,7 +1218,7 @@ export default class TgGui {
 
     sendToServer(text) {
         let _ = this;
-        if (!_.serverIsOnline) {
+        if (!_.serverIsReady) {
             return;
         }
         _.socket.emit('data', text);
@@ -1261,6 +1288,9 @@ export default class TgGui {
 
         let _ = this;
 
+        if(!_.serverIsReady)
+            return true;
+
         $(document).on('keydown', function (event) {
             // TODO: if is not connected?
             if (event.metaKey || event.ctrlKey) {
@@ -1268,9 +1298,20 @@ export default class TgGui {
             }
             if ($(event.target).is('#tgInputUser') === true) {
                 /* Enter Key */
-                if (event.which == 13) {
-                    _.sendInput();
-                    return false;
+                switch (event.which) {
+                    case 13 : 
+                        _.sendInput();
+                        break;
+                    //Arrow UP
+                    case 38:
+					    _.historyUp();
+                        event.preventDefault();
+                        break;
+                    //Arrow DOWN
+                    case 40:
+                        _.historyDown();
+                        event.preventDefault();
+                        break;
                 }
             }
             return true;
@@ -1282,9 +1323,9 @@ export default class TgGui {
      * -------------------------------------------------*/
     mapInit() {
         let _ = this;
-        _.MiniMap = new Map();
-        _.MiniMap.init();
-        _.MiniMap.prepareCanvas();
+        _.MAP_OBJECT = new Map();
+        _.MAP_OBJECT.init();
+        _.MAP_OBJECT.prepareCanvas(_.images_path);
 
     }
 
@@ -1307,6 +1348,9 @@ export default class TgGui {
         $('#tgInputUser').focus();
     }
 
+    /* -------------------------------------------------
+    *  POPUP
+    * -------------------------------------------------*/
     openPopup(content_ref, content) {
 
         let _ = this;
@@ -1329,8 +1373,15 @@ export default class TgGui {
                 break;
             case 'nofeature':
                 MP_type = 'inline',
-                MP_html = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
+                MP_html = 'Funzionalità non ancora implementata';
                 break;
+
+            case 'notizie':
+                MP_callbacks.close = function(){
+                    _.sendInput();
+                }
+                break; 
+
             default: 
                 //TODO: make default value to avoid error.
                 
@@ -1343,6 +1394,7 @@ export default class TgGui {
             items: {
                 src: MP_html,
             },
+            mainClass: 'tg-modal mfp-fade',
             callbacks: MP_callbacks
         });
     }

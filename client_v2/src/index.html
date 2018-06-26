@@ -19,7 +19,7 @@
     crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
-<body data-serverstatus="" data-loginstatus"0">
+<body data-serverstatus="">
   <div class="tg-area tg-box b-area">
     <!-- Login Panel -->
     <div class="tg-loginpanel align-middle container-fluid">
@@ -30,7 +30,7 @@
           </div>
           <form id="loginPanel" class="tg-loginform" action="/">
             <p class="tg-version-name">TheGate Webclient v.2
-              <span>V.Alpha-<%= htmlWebpackPlugin.options.git_version %></span>
+              <span><%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
             </p>
             <label for="login_username">Nome Utente</label>
             <input id="login_username" name="username" type="text">
@@ -104,7 +104,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="tg-controlpanel col-12 tg-box">
+            <div class="tg-dashboard col-12 tg-box">
               <!-- Character CPanel-->
               <div class="tg-characterpanel b-controlpanel">
                 <div class="tg-characterpanel-wrap">
@@ -129,9 +129,9 @@
                     </div>
                   </div>
 
-                  <div class="tg-dashboard">
-                    <div class="tg-dashboard-wrap">
-                      // this is my dashboard!
+                  <div class="tg-extraboard d-none d-md-flex">
+                    <div class="tg-extraboard-wrap">
+                      // this is my extra board!
                     </div>
                   </div>
                 </div>
@@ -155,10 +155,10 @@
             </div>
           </div>
         </div>
-        <div class="tg-rightside  d-none d-md-flex">
+        <div class="tg-rightside d-none d-md-flex">
           <div class="tg-rightside-wrap">
             <div id="tgMap" class="tg-map">
-              
+            
             </div>
           </div>
         </div>

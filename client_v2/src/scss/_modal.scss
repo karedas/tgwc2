@@ -1,14 +1,40 @@
-.tg-modal {
-    color: tg-yellow;
-    background: $black;
-    border: 1px solid $tg-yellow;
-    padding: .5rem;
-    position: absolute;
-    display: none;
-    left: 50%;
-    transform: translateX(-50%);
+/* overlay at start */
+.mfp-fade.mfp-bg {
+  background: #212529;
+  opacity: 0;
+  transition: all 0.15s ease-out;
 }
 
-.mfp-ready .tg-modal {
-    display: inline-block;
+/* overlay animate in */
+.mfp-fade.mfp-bg.mfp-ready {
+  opacity: 0.8;
+}
+/* overlay animate out */
+.mfp-fade.mfp-bg.mfp-removing {
+  opacity: 0;
+}
+
+/* content at start */
+.mfp-fade.mfp-wrap .mfp-content {
+  width: auto;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: all 0.15s ease-out;
+  border: 1px solid $tg-yellow;
+  box-shadow: 0 3px 20px black;
+  background: #000;
+
+  .tg-title {
+    font-size: 20px;
+  }
+}
+/* content animate it */
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* content animate out */
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
 }

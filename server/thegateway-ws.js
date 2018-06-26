@@ -146,32 +146,25 @@ function SocketServer() {
 		let port =  process.env.SERVER_GAME_PORT,
 			host = process.env.SERVER_GAME_HOST;
 
-		let tgconn = net.Socket(host, function(serversocket){
-			console.log(serversocket);
-			
-		});
+		let tgconn = net.Socket(host, function(serversocket));
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
-			console.log(msg.toString());
 			tgconn.write(msg + '\n');
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
-			console.log(msg.toString());
-
 			websocket.emit('data', msg.toString());
 		};
 
 		// Socket close event handler
 		tgconn.on('close', function(){
-			console.log('close');
+			// Close the websocket
+			websocket.disconnect();
 		});
 
 		// Connection/transmission event error handler
 		tgconn.on('error', function(){
-
-			console.log('error from net');
 			// Tell the client the server is down
 			sendToClient('&!connmsg{"msg":"serverdown"}!');
 			// Close the websocket
@@ -180,9 +173,9 @@ function SocketServer() {
 
     
 		tgconn.on("end", function(err){
-			console.log(err);
 			console.log('end');
 		});
+
 		tgconn.on("timeout",  function(){
 			console.log('timeout');
 
@@ -196,12 +189,8 @@ function SocketServer() {
 				tgconn.on('data', sendToClient);
 				// Add handler for client->server data
 				websocket.on('data', sendToServer);
-				sendToServer('WEBCLIENT(0.0.0.0,'+ code_itime +'-'+ code_headers +','+account_id+')\n');
-
 
 			} else {
-				console.log('else_____________', msg);
-
 				sendToClient(msg);
 			}
 		}
