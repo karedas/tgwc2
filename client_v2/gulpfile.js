@@ -17,6 +17,7 @@ const gulp = require('gulp'),
 	stream = require('merge-stream'),
 	spritesmith = require('gulp.spritesmith'),
 	fileList = require('gulp-filelist'),
+	minifyCSS = require('gulp-minify-css'),
 	webpackStream = require('webpack-stream');
 
 

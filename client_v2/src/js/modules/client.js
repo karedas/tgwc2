@@ -19,9 +19,9 @@ export default class TgGui {
 
         this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
-        this.media_server_addr = './';
+        this.media_server_addr = 'http://play.thegatemud.it/images/';
         this.ws_prefix = '/';
-        this.images_path = this.media_server_addr + 'images/';
+        this.images_path = './images/';
         this.sounds_path = '';
 
         this.socketListener = {}
@@ -99,6 +99,10 @@ export default class TgGui {
         ];
 
         this.client_update = {
+            interfaceData: {
+                info: false,
+                stato: false,
+            },
             last: 0,
             inventory: {
                 version: -1,
@@ -594,6 +598,7 @@ export default class TgGui {
         // Player is logged in
         msg = msg.replace(/&!logged"[^"]*"/gm, function () {
             _.inGame = true;
+            _.processCommands('info; stat');
             return '';
         });
 
@@ -705,17 +710,31 @@ export default class TgGui {
         //     //return renderSkillsList(skinfo);
         // });
 
-        // // Player info
-        // msg = msg.replace(/&!pginf\{[\s\S]*?\}!/gm, function (info) {
-        //     info = $.parseJSON(info.slice(7, -1));
-        //     //return renderPlayerInfo(info);
-        // });
+        // Player info
+        msg = msg.replace(/&!pginf\{[\s\S]*?\}!/gm, function (info) {
+           let info_parse = $.parseJSON(info.slice(7, -1));
+            if(!_.client_update.interfaceData.info) {
+                _.renderPlayerInfoInInterface('info', info_parse);
+                _.client_update.interfaceData.info = true;
+                return '';
+            }
+            else {
+                //return renderPlayerInfo(info);
+            }
+        });
 
         // Player status
         msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
             let status_parse = $.parseJSON(status.slice(6, -1));
-            console.log('renderPlayerStatus');
-            //return _.renderPlayerStatus(status_parse);
+            if(!_.client_update.interfaceData.stato) {
+                _.renderPlayerInfoInInterface('stato', status_parse);
+                _.client_update.interfaceData.stato = true;
+                return '';
+            }
+            else {
+                
+                //return _.renderPlayerStatus(status_parse);
+            }
             return '';
         });
 
@@ -854,6 +873,24 @@ export default class TgGui {
         return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
     }
 
+    renderPlayerInfoInInterface(cmd, data) {
+        let _ = this;
+        
+        if(cmd == 'info') {
+            $('#charName').html(data.name + ' ' + data.ethn);
+            
+            $('.tg-characteravatar img').attr('src', _.media_server_addr + data.image);
+        }
+        else if (cmd == 'stato') {
+            if(data.conv) {
+                $('.tg-infocharname .icon-conva').removeClass('d-none');
+            }
+            else { 
+                $('.tg-infocharname .icon-conva').addClass('d-none');
+            }
+        }
+    }
+
     /* *****************************************************************************
      *  IMAGES IN OUTPUT 
      */
@@ -952,10 +989,10 @@ export default class TgGui {
         let mcolor = _.prcLowTxt(hprc, _.hlttxtcol);
 
         $('.movebar').width(_.limitPrc(mprc) + '%');
-        $('#moveBarText i').css('color', mcolor).text(mprc + '%');
+        $('#moveBarText i').css('color', mcolor).text(mprc);
 
         $('.healthbar').width(_.limitPrc(hprc) + '%');
-        $('#healtBarText i').css('color', hcolor).text(hprc + '%');
+        $('#healtBarText i').css('color', hcolor).text(hprc);
     }
 
     setStatus(st) {
@@ -968,10 +1005,6 @@ export default class TgGui {
     /* *****************************************************************************
      * MAP
      */
-    updateMap(map) {
-        let _ = this;
-        // _.drawCanvasMap();
-    }
 
     renderDetailsInText(info, type) {
         let _ = this;
@@ -1036,7 +1069,6 @@ export default class TgGui {
 
     renderDetailsList(cont_type, cont_num, cont, type, style) {
         let _ = this;
-
         let res = '';
         console.log('renderDetailsList Not available');
         return res;
@@ -1402,9 +1434,7 @@ export default class TgGui {
 
     addScrollBar(container) {
         let ps = new PerfectScrollbar(container, {
-            wheelSpeed: 2,
             wheelPropagation: 2,
-            minScrollbarLength: 20
         });
     }
 

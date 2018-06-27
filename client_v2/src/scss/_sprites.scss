@@ -9,6 +9,17 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
+$conv-ico-sprite-name: 'conv-ico@sprite';
+$conv-ico-sprite-x: 30px;
+$conv-ico-sprite-y: 0px;
+$conv-ico-sprite-offset-x: -30px;
+$conv-ico-sprite-offset-y: 0px;
+$conv-ico-sprite-width: 19px;
+$conv-ico-sprite-height: 19px;
+$conv-ico-sprite-total-width: 49px;
+$conv-ico-sprite-total-height: 30px;
+$conv-ico-sprite-image: '../images/icons/icons_sprite.png';
+$conv-ico-sprite: (30px, 0px, -30px, 0px, 19px, 19px, 49px, 30px, '../images/icons/icons_sprite.png', 'conv-ico@sprite', );
 $monete-ico-sprite-name: 'monete-ico@sprite';
 $monete-ico-sprite-x: 0px;
 $monete-ico-sprite-y: 0px;
@@ -16,14 +27,14 @@ $monete-ico-sprite-offset-x: 0px;
 $monete-ico-sprite-offset-y: 0px;
 $monete-ico-sprite-width: 30px;
 $monete-ico-sprite-height: 30px;
-$monete-ico-sprite-total-width: 30px;
+$monete-ico-sprite-total-width: 49px;
 $monete-ico-sprite-total-height: 30px;
 $monete-ico-sprite-image: '../images/icons/icons_sprite.png';
-$monete-ico-sprite: (0px, 0px, 0px, 0px, 30px, 30px, 30px, 30px, '../images/icons/icons_sprite.png', 'monete-ico@sprite', );
-$spritesheet-width: 30px;
+$monete-ico-sprite: (0px, 0px, 0px, 0px, 30px, 30px, 49px, 30px, '../images/icons/icons_sprite.png', 'monete-ico@sprite', );
+$spritesheet-width: 49px;
 $spritesheet-height: 30px;
 $spritesheet-image: '../images/icons/icons_sprite.png';
-$spritesheet-sprites: ($monete-ico-sprite, );
-$spritesheet: (30px, 30px, '../images/icons/icons_sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($conv-ico-sprite, $monete-ico-sprite, );
+$spritesheet: (49px, 30px, '../images/icons/icons_sprite.png', $spritesheet-sprites, );
 
 

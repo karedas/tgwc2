@@ -84,31 +84,31 @@
         }
     
         .tg-border-top {
-            background-image: url($imgPath + '/borders/border_stonelight_top.png');
+            background-image: url($imgPath + '/borders/stone-horizontal-top.jpg');
             &::after {
-                background-image: url($imgPath + '/borders/border_stonelight_topright.png');
+                background-image: url($imgPath + '/borders/stone-corner-topright.jpg');
             }
             &::before {
-                background-image: url($imgPath + '/borders/border_stonelight_topleft.png');
+                background-image: url($imgPath + '/borders/stone-corner-topleft.jpg');
             }
         }
         
         .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border_stonelight_bottom.png');
+            background-image:  url($imgPath + '/borders/stone-horizontal-bottom.jpg');
             &::after {
-                background-image: url($imgPath + '/borders/border_stonelight_bottomright.png');
+                background-image: url($imgPath + '/borders/stone-corner-bottomright.jpg');
             }
             &::before {
-                background-image:  url($imgPath + '/borders/border_stonelight_bottomleft.png');
+                background-image:  url($imgPath + '/borders/stone-corner-bottomleft.jpg');
             }
         }
         
         .tg-border-right {
-            background-image: url($imgPath + '/borders/border_stonelight_right.png');
+            background-image: url($imgPath + '/borders/stone-vertical-right.jpg');
         }
     
         .tg-border-left {
-            background-image: url($imgPath + '/borders/border_stonelight_left.png');
+            background-image: url($imgPath + '/borders/stone-vertical-left.jpg');
         }
     }
 }

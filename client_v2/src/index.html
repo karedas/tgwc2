@@ -17,6 +17,7 @@
   <!-- <script src="js/vendor/modernizr-3.6.0.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
 <body data-serverstatus="">
@@ -109,22 +110,29 @@
               <div class="tg-characterpanel b-controlpanel">
                 <div class="tg-characterpanel-wrap">
                   <!-- Character avatar -->
-                  <div class="tg-characteravatar tg-shadow no-feature">
-                   
+                  <div class="tg-characteravatar b-ironlight tg-shadow no-feature">
+                    <img src="#" alt="Avatar">
+                    <div class="tg-border-box">
+                        <div class="tg-border tg-border-top"></div>
+                        <div class="tg-border tg-border-left"></div>
+                        <div class="tg-border tg-border-right"></div>
+                        <div class="tg-border tg-border-bottom"></div>
+                    </div>
                   </div>
                   <div class="tg-infochar">
                       <div class="tg-infocharname">
-                      Karedas L'eliantiriano
+                        <span id="charName"></span>
+                        <i class="tg-icon icon-conva d-none"></i>
                       </div>
                     <div class="tg-meterbar">
                       <!-- Character Status Bars -->
                       <div class="barcont">
-                        <span id="moveBarText" class="tg-statusbar-text"><i></i> Salute</span>
-                        <span class="red barC movebar"></span>
+                          <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS: <i></i> / 100</span>
+                          <span class="red barC healthbar"></span>
                       </div>
-                      <div class="barcont">
-                        <span id="healtBarText" class="tg-statusbar-text"><i></i> Movimento</span>
-                        <span class="green barC healthbar"></span>
+                      <div class="barcont" data-toggle="tooltip" title="Punti Movimento"> 
+                        <span id="moveBarText" class="tg-statusbar-text">PM: <i></i> / 100</span>
+                        <span class="green barC movebar"></span>
                       </div>
                     </div>
                   </div>
@@ -143,7 +151,7 @@
                   </div>
               </div>
               <!-- Input Line -->
-              <div class="tg-input tg-box b-ironlight-mini tg-shadow">
+              <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa"/>
                 <div class="tg-border-box">
                   <div class="tg-border tg-border-top"></div>
@@ -157,8 +165,8 @@
         </div>
         <div class="tg-rightside d-none d-md-flex">
           <div class="tg-rightside-wrap">
-            <div id="tgMap" class="tg-map">
-            
+            <div class="tg-map">
+              <div id="tgMap" class="tg-map-box"></div>
             </div>
           </div>
         </div>

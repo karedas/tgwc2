@@ -100,6 +100,8 @@ a {
 
 .tg-input {
     position: relative;
+    margin-top: 8px;
+    margin-bottom: 8px;
 
     .tg-inputline-placeholder {
         display: none;
@@ -132,29 +134,6 @@ a {
     }
 }
 
-.tg-rightside{
-    background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
-    .tg-rightside-wrap {
-        height: 100%;
-        width: 100%;
-        background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
-        padding-left: 15px;
-        box-shadow: inset 3px -2px 112px 7px black;
-    }
-
-    .tg-map {
-        background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
-        background-size: contain;
-        height: 543px;
-        width: 100%;
-        canvas {
-            max-width:  100%;
-            max-height: 100%;
-        }
-    }
-}
-
-
 .tg-cookielawcontent {
     display: none;
     .tg-btn-cookieconsent {
@@ -162,13 +141,16 @@ a {
     }
 }
 
-
-// Magnific Popup Override
-.mfp-close-btn-in .mfp-close{
-    top: -30px;
-    right: -35px;
-    color: white;
+/* ICONS */
+.tg-icon {
+    display: inline-block;
+    vertical-align: middle;
+    &.icon-conva{
+        @include sprite($conv-ico-sprite);
+    }
 }
+
+
 
 @include media-breakpoint-down(md) {
 

@@ -115,10 +115,8 @@ export default class MapDrawer {
                         //Draw image before Clip
                         _.MAPCTX.save();
                         _.MAPCTX.beginPath();
-                        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, radius, 0, 2 * Math.PI, false);
+                        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
                         _.MAPCTX.clip();
-                        _.MAPCTX.fillStyle = "black";
-                        _.MAPCTX.fill();
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
                         
                     }
