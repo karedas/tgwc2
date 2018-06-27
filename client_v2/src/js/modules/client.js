@@ -1,17 +1,18 @@
-// //NPM Modules
+// ========== NPM Modules
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'magnific-popup';
-//Custom
+import 'jquery-suggest/src/jquery.suggest.js';  //autocomplete
+
+//============ Custom
 import FacebookSDK from 'FacebookSdk';
 import Map from 'mapDrawer';
-// Assets file list.
+//============ Assets file list.
 import assetsList from 'assets_list.json';
 
 
-// //My Modules
 export default class TgGui {
 
     constructor(options) {
@@ -1226,7 +1227,7 @@ export default class TgGui {
     updateInput() {
         let _ = this;
         let text = _.cmd_history[_.cmd_history_pos] ? _.cmd_history[_.cmd_history_pos] : '';
-        $('#tgInputUser').val(text).focus();
+        $('#inputline').val(text).focus();
     }
 
     historyUp() {
@@ -1320,11 +1321,29 @@ export default class TgGui {
         $('.tg-main').addClass('d-flex');
         /* Interface Modules List.*/
         _.genericEvents();
+        _.inputInit();
         _.outputInit();
         _.keyboardMapInit();
         _.focusInput();
         _.mapInit();
         _.main();
+    }
+
+    /* -------------------------------------------------
+     * INPUT
+     * -------------------------------------------------*/
+
+    inputInit() {
+        let _ = this,
+            words,
+            inputID = '#tgInputUser';
+
+
+        words = ['inventario', 'equip', 'di', 'info'];    
+        /* Apply the AutoComplete suggest plugin */
+        $(inputID).suggest(words, {
+            suggestionColor   : '#cccccc',
+          });
     }
 
     /* -------------------------------------------------
