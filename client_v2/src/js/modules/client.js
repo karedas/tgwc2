@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'magnific-popup';
-
 //Custom
 import FacebookSDK from 'FacebookSdk';
 import Map from 'mapDrawer';
@@ -172,9 +171,10 @@ export default class TgGui {
             });
 
             _.socket.on('disconnect', function () {
-                console.log('disconnect');
-                _.setDisconnect();
-                _.networkActivityMessage("Disconnesso dal server");
+                _.setDisconnect();        
+        		if(!_.connectionInfo.error) {
+                    _.networkActivityMessage("Disconnesso dal server");
+                }
             });
 
             _.socket.on('connect_error', function (e) {
@@ -295,16 +295,6 @@ export default class TgGui {
 
 	    //TODO: $(window).unbind('beforeunload', leavePageAlertMessage);
         $('.tg-loginform').show();
-/*
-	if(!debug && connectionInfo && connectionInfo.loginName)
-		_gaq.push(['_trackEvent', 'Player', 'Disconnection', connectionInfo.loginName.toLowerCase(), 0, false]);
-*/	
-	if(client_options.log.save)
-		saveLogs();
-	
-	closeAllDialogs();
-	networkActivityOff();
-	openMainDialog();
     }
 
     /* COOKIE LAW */
@@ -464,43 +454,66 @@ export default class TgGui {
      * ASSETS PRELOAD 
      */
     preloadClient() {
-        let _ = this;
 
+        let _ = this;        
         let percentage = 0;
         let stepSize = 100 / assetsList.length;
 
-        $('.tg-loginpanel').attr('data-loginstatus', 'preload');
 
+        $('.tg-loginpanel').attr('data-loginstatus', 'preload');
         $('#tgPreloader').find('span').text(percentage);
 
-        let images = [];
+        return new Promise(function (resolve) {
 
-        return new Promise(function (resolve, reject) {
+            _.loadAssets().done(function(images){
+                
+                percentage = percentage + stepSize;
+                $('#tgPreloader span').text(Math.round(percentage));
 
-            for (let i = 0; assetsList.length > i; i++) {
-                let img = new Image();
-
-                img.onload = function () {
-                    percentage = percentage + stepSize;
-                    $('#tgPreloader span').text(Math.round(percentage));
-
-                    $(window).trigger('tgassetsload--step');
-
-                    if (assetsList.length - 1 == i) {
+                for ( let i = 0; i < images.length; i++ ) {
+                    if (assetsList.length == images.length) {
                         // All Images loaded
                         $('.tg-loginpanel').attr('data-loginstatus', 'ready');
                         $('#tgPreloader').remove();
                         resolve();
                     }
-                };
-
-                img.onerror= function(){
-                    reject();
                 }
+            });
 
-                img.src = _.images_path + assetsList[i];
-            }
         });
+    }
+
+    loadAssets() {
+        let _ = this;
+
+        let images = [],
+            loadedimages = 0, 
+            postaction = function() {}, 
+            assets = ( typeof assetsList != "object" ) ? [assetsList] : assetsList;
+
+        function imageloadpost(){
+            loadedimages++;
+            if ( loadedimages == assets.length ) {
+                postaction( images ) //call postaction and pass in newimages array as parameter
+            }
+        }
+
+        for (let i = 0 ; i < assets.length; i++ ){
+            images[i] = new Image();
+            images[i].src = _.images_path + assets[i];
+            images[i].onload = function() {
+                imageloadpost();
+            }
+            images[i].onerror = function() {
+                imageloadpost();
+            }
+        }
+
+        return { //return blank object with done() method
+            done: function(f){
+                postaction = f || postaction //remember user defined callback functions to be called when images load
+            }
+        }
     }
 
     preparseText(msg) {
@@ -520,7 +533,6 @@ export default class TgGui {
     parseForDisplay(msg) {
         let _ = this,
             pos;
-        console.log(msg )
 
 
         // Hide text (password)
@@ -598,7 +610,7 @@ export default class TgGui {
         // Player is logged in
         msg = msg.replace(/&!logged"[^"]*"/gm, function () {
             _.inGame = true;
-            _.processCommands('info; stat');
+            _.processCommands('info; stat', false);
             return '';
         });
 
@@ -716,7 +728,6 @@ export default class TgGui {
             if(!_.client_update.interfaceData.info) {
                 _.renderPlayerInfoInInterface('info', info_parse);
                 _.client_update.interfaceData.info = true;
-                return '';
             }
             else {
                 //return renderPlayerInfo(info);
@@ -1130,13 +1141,17 @@ export default class TgGui {
         _.socket.emit('oob', data);
     }
 
-    processCommands(text) {
+    processCommands(text, save_history) {
         let _ = this;
         if (_.inGame) {
             let cmds = _.parseInput(text);
 
             if (cmds) {
-                _.historyPush(text);
+                //check if cmd will be pushed in the history array
+                if(save_history) {
+                    _.historyPush(text);
+                }
+
                 for (let i = 0; i < cmds.length; i++) {
                     _.sendToServer(cmds[i]);
                 }
@@ -1210,8 +1225,8 @@ export default class TgGui {
 
     updateInput() {
         let _ = this;
-        var text = _.cmd_history[_.cmd_history_pos] ? _.cmd_history[_.cmd_history_pos] : '';
-        $('#inputline').val(text).focus();
+        let text = _.cmd_history[_.cmd_history_pos] ? _.cmd_history[_.cmd_history_pos] : '';
+        $('#tgInputUser').val(text).focus();
     }
 
     historyUp() {
@@ -1231,19 +1246,19 @@ export default class TgGui {
     }
 
     historyPush(text) {
+        console.log('letsgoo');
         let _ = this;
+            if (text.length > 0) {
+                if (_.cmd_history.length >= _.max_history_length)
+                    _.cmd_history.shift();
+    
+                if (_.cmd_history.length == 0 || _.cmd_history[_.cmd_history.length - 1] != text)
+                    _.cmd_history.push(text);
+    
+                _.cmd_history_pos = _.cmd_history.length;
+            }
 
-        if (text.length > 0) {
-            if (_.cmd_history.length >= _.max_history_length)
-                _.cmd_history.shift();
-
-            if (_.cmd_history.length == 0 || _.cmd_history[_.cmd_history.length - 1] != text)
-                _.cmd_history.push(text);
-
-            _.cmd_history_pos = _.cmd_history.length;
-
-            $('#tgInputUser').val('');
-        }
+        $('#tgInputUser').val('');
 
         return text;
     }
@@ -1290,6 +1305,15 @@ export default class TgGui {
         $('#output').empty();
     }
 
+    //check status of interface Data after first login.
+    interfaceUpdateStatus(){
+        let _ = this;
+        if (_.client_update.interfaceData.info && _.client_update.interfaceData.stato) {
+            return true;
+        }
+        console.log(_.client_update.interfaceData.info , _.client_update.interfaceData.stato);
+    }
+
     loadInterface() {
         
         let _ = this;
@@ -1320,30 +1344,32 @@ export default class TgGui {
 
         let _ = this;
 
-        if(!_.serverIsReady)
+        if(!_.serverIsReady) {
             return true;
+        }
 
         $(document).on('keydown', function (event) {
             // TODO: if is not connected?
             if (event.metaKey || event.ctrlKey) {
                 return true;
             }
+
             if ($(event.target).is('#tgInputUser') === true) {
                 /* Enter Key */
                 switch (event.which) {
                     case 13 : 
                         _.sendInput();
-                        break;
+                        return true;
                     //Arrow UP
                     case 38:
 					    _.historyUp();
                         event.preventDefault();
-                        break;
+                        return true;
                     //Arrow DOWN
                     case 40:
                         _.historyDown();
                         event.preventDefault();
-                        break;
+                        return true;
                 }
             }
             return true;
@@ -1373,7 +1399,8 @@ export default class TgGui {
     }
 
     sendInput() {
-        this.processCommands($('#tgInputUser').val());
+        let inputVal = $('#tgInputUser').val();
+        this.processCommands(inputVal, true);
     }
 
     focusInput() {

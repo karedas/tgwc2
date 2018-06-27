@@ -100,8 +100,6 @@ a {
 
 .tg-input {
     position: relative;
-    margin-top: 8px;
-    margin-bottom: 8px;
 
     .tg-inputline-placeholder {
         display: none;
@@ -134,6 +132,7 @@ a {
     }
 }
 
+
 .tg-cookielawcontent {
     display: none;
     .tg-btn-cookieconsent {
@@ -141,16 +140,13 @@ a {
     }
 }
 
-/* ICONS */
-.tg-icon {
-    display: inline-block;
-    vertical-align: middle;
-    &.icon-conva{
-        @include sprite($conv-ico-sprite);
-    }
+
+// Magnific Popup Override
+.mfp-close-btn-in .mfp-close{
+    top: -30px;
+    right: -35px;
+    color: white;
 }
-
-
 
 @include media-breakpoint-down(md) {
 

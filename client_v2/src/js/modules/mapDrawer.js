@@ -100,7 +100,7 @@ export default class MapDrawer {
             for (let y = 0; y < _.maxmapwidth; y++) {
                 for (let x = 0; x < _.maxmapheight; x++) {
                     if (x >= xoff && x < xlim && y >= yoff && y < ylim)
-                    _.layermap[y][x] = map.data[l][pos++];
+                        _.layermap[y][x] = map.data[l][pos++];
                     else {
                         _.layermap[y][x] = 59;
                     }
@@ -113,10 +113,10 @@ export default class MapDrawer {
                     if (d != 59) {
                         let tpos = _.tileCoords(d);
                         //Draw image before Clip
-                        _.MAPCTX.save();
-                        _.MAPCTX.beginPath();
-                        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
-                        _.MAPCTX.clip();
+                        // _.MAPCTX.save();
+                        // _.MAPCTX.beginPath();
+                        // _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
+                        // _.MAPCTX.clip();
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
                         
                     }

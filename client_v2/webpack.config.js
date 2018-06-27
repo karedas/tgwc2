@@ -24,6 +24,8 @@ module.exports = function (prop) {
     }
     
     var wp = {
+        
+        
         mode: 'development',
 
         // --watch true, --watch false
@@ -38,6 +40,7 @@ module.exports = function (prop) {
         externals: {
             jquery: "jQuery",
             $: "jQuery",
+            bootstrap: "bootstrap"
         },
 
         entry: {
@@ -74,15 +77,12 @@ module.exports = function (prop) {
                 {
                     loader: "webpack-modernizr-loader",
                     test: /\.modernizrrc\.js$/
-                },
-                {
-                    loader: "handlebars-loader",
-                    test: /\.handlebars$/
                 }
             ]
         },
 
         optimization: {
+            minimize: false,
             splitChunks: {
                 cacheGroups: {
                     vendor: {
@@ -106,10 +106,6 @@ module.exports = function (prop) {
         plugins: [
 
             new webpack.NoEmitOnErrorsPlugin(),
-
-            // new webpack.DefinePlugin({
-            //     PRODUCTION: JSON.stringify(true)
-            // }),
             
             new HtmlWebPackPlugin({
                 title: 'My Awesome application',

@@ -17,7 +17,6 @@ const gulp = require('gulp'),
 	stream = require('merge-stream'),
 	spritesmith = require('gulp.spritesmith'),
 	fileList = require('gulp-filelist'),
-	minifyCSS = require('gulp-minify-css'),
 	webpackStream = require('webpack-stream');
 
 
@@ -97,9 +96,12 @@ function generateAssetsList() {
 }
 
 // compile javascript with webpack
-function jsCompile(watch) {
+function jsCompile(watch, minimize) {
 
 	webpack_config.watch = watch;
+	webpack_config.optimization.minimize = minimize;
+	webpack_config.devtool = "source-map";
+
 	// webpackstream override src and gulp dest
 	return gulp.src(config.src.base + config.src.js + '**/*.js', {
 			base: './'
@@ -207,8 +209,8 @@ gulp.task('copy-staticfiles', (done) =>  {
 })
 
 //watching js watch and compile on live stream
-gulp.task('js-watch', jsCompile.bind(this, true));
-gulp.task('js-compile', jsCompile.bind(this, false));
+gulp.task('js-watch', jsCompile.bind(this, true, false));
+gulp.task('js-compile', jsCompile.bind(this, false, true));
 
 // Cleaning build folder
 gulp.task('clean', () => {
