@@ -1,0 +1,18 @@
+.tg-button {
+    background-color: transparent;
+    display: inline-block;
+    border: none;
+    text-indent: -9999px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px 0px black;
+
+    &.b-round {
+        border-radius: 50%;
+        @include sprite($base-brown-sprite);
+    }
+
+    &.b-square {
+        @include sprite($base-square-sprite);
+    }
+
+}

@@ -18,15 +18,37 @@
             display: flex;
             z-index: 2;
             position: relative;
+            padding: 6px 0;
+        }
+        
+        .tg-character-avmenu {
+            padding-right: 2px;
+            padding-top:6px;
+            ul {
+                margin-bottom: 0;
+            }
+            .tg-button {
+                margin-bottom: 5px;
+            }
         }
     
         .tg-characteravatar {
-            padding-right: 6px;
-            position: relative;
             cursor: pointer;
+            padding-right: 6px;
+            width: 95px;
+            height: 95px;
+            overflow: hidden;
+            position: relative;
             
+            .tg-avatar-wrap {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
             img {
-                max-width: 100%;
+                margin-left: -8px;
+                max-height: 100%;
                 height: 80px;
             }
         }
@@ -37,18 +59,16 @@
             flex-grow: 1;
             padding-left:6px;
             padding-right: 8px;
-            background-color: #10100d;
         }
     
         .tg-infocharname {
-            padding-left: 4px;
-            padding-top: 4px;
+            padding: 0 2px 1px 4px;
             text-transform: uppercase;
-            font-size: 10px;
+            font-size: 9px;
             height: 20px;
+            text-align: right;
 
             .tg-icon {
-                margin-left: 5px;
             }
         }
     
@@ -58,16 +78,33 @@
             z-index: 2;
             flex: 1 1 100%;
             flex-direction: column;
-            padding: 5px 0;
+            padding: 0 0 5px 0;
     
             .barcont {
                 box-sizing: border-box;
                 border: 1px solid #5f5c59;
                 padding: 2px 3px;
                 position: relative;
-                height: 50%;
                 background-color: #171614;
                 box-shadow: inset 0 0 5px 2px #53371c;
+            }
+            
+            .barbig {
+                height: 22px;
+                margin-bottom: 4px;
+            }
+
+            .barthin {
+                height: 100%;
+                width: 50%;
+                display: inline-block;
+                float: left;
+            }
+
+            
+            .tg-extrabars {
+                width: 100%;
+                height: 20px;
             }
     
             .tg-statusbar-text {
@@ -92,6 +129,12 @@
                 }
                 &.green {
                     background-image: url($imgPath + '/bars/stamina.jpg' );
+                }
+                &.orange {
+                    background-image: url($imgPath + '/bars/fame.jpg' );
+                }
+                &.blue {
+                    background-image: url($imgPath + '/bars/sete.jpg' );
                 }
             }
         }

@@ -1,6 +1,14 @@
 
 
 /*Bootstrap override*/
+$grid-breakpoints: (
+  xs: 0,
+  sm: 540px,
+  md: 960px,
+  lg: 1140px,
+  xl: 1450px
+);
+
 $grid-gutter-width:16px;
 $link-color: #FFF;
 $input-border-radius: 0;

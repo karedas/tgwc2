@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'magnific-popup';
-import 'jquery-suggest/src/jquery.suggest.js';  //autocomplete
 
 //============ Custom
 import FacebookSDK from 'FacebookSdk';
@@ -967,7 +966,7 @@ export default class TgGui {
     setSky(sky) {
         console.log('setsky');
         let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
-        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 29) + 'px');
+        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
     }
 
     /* *****************************************************************************
@@ -1334,16 +1333,7 @@ export default class TgGui {
      * -------------------------------------------------*/
 
     inputInit() {
-        let _ = this,
-            words,
-            inputID = '#tgInputUser';
-
-
-        words = ['inventario', 'equip', 'di', 'info'];    
-        /* Apply the AutoComplete suggest plugin */
-        $(inputID).suggest(words, {
-            suggestionColor   : '#cccccc',
-          });
+        let _ = this;
     }
 
     /* -------------------------------------------------
@@ -1470,7 +1460,7 @@ export default class TgGui {
         $.magnificPopup.open({
             type: MP_type,
             items: {
-                src: MP_html,
+                src:  MP_html,
             },
             mainClass: 'tg-modal mfp-fade',
             callbacks: MP_callbacks

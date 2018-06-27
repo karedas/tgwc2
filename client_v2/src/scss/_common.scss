@@ -1,3 +1,4 @@
+@import 'buttons';
 @import 'login';
 @import 'navbar';
 @import 'borders';
@@ -19,6 +20,10 @@ html {
 body {
     background: #1d1812;
     color: $white;
+}
+
+* {
+    outline: 0;
 }
 
 a {
@@ -100,6 +105,29 @@ a {
 
 .tg-input {
     position: relative;
+    margin-bottom: 6px;
+    margin-left: 3px;
+    margin-right: 0px;
+    &:after, &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        
+    }
+    &:before {
+        @include sprite($input-left-decoration-sprite);
+        left: -10px;
+
+    }
+
+    &:after {
+        @include sprite($input-right-decoration-sprite);
+        right: -10px;
+    }
+
 
     input[type="text"] {
         width: 100%;
@@ -124,15 +152,7 @@ a {
 }
 
 
-// Magnific Popup Override
-.mfp-close-btn-in .mfp-close{
-    top: -30px;
-    right: -35px;
-    color: white;
-}
-
 @include media-breakpoint-down(md) {
-
     .tg-main {
         .tg-controlpanel {
             margin-left: 0;

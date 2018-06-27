@@ -4746,10 +4746,6 @@ jquery-mousewheel@>=3.0.6:
   version "3.1.13"
   resolved "https://registry.yarnpkg.com/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
 
-jquery-suggest@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/jquery-suggest/-/jquery-suggest-1.1.6.tgz#6805da9a5b25257201f91a3ec1c2e37cab374c58"
-
 jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
