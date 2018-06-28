@@ -10,17 +10,22 @@
         margin-bottom: 8px;
         margin-left:3px;
         margin-right: 3px;
+        background: url($imgPath + '/background/background-rock-dark.jpg') repeat top left;
         
        
         .tg-characterpanel-wrap {
-            background-repeat: no-repeat;
-            background-position: bottom right;
-            display: flex;
-            z-index: 2;
             position: relative;
-            padding: 6px 0;
+            z-index: 2;
+            display: flex;
         }
-        
+
+        .tg-character {
+            box-shadow: inset 0 0 14px 1px black;
+            padding: 6px 0;
+            display: flex;
+            width: 40%;
+        }
+
         .tg-character-avmenu {
             padding-right: 2px;
             padding-top:6px;
@@ -142,15 +147,13 @@
         // dashboard
         .tg-extraboard {
             background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-            padding-left:6px;
             width: 50%;
+            padding: 6px 0 6px 6px;
     
             .tg-extraboard-wrap {
-                background: url($imgPath + '/background/background-rock-dark.jpg') repeat top left;
-                padding: .5em;
+                padding-left: .5em;
                 height: 100%;
                 width: 100%;
-                box-shadow: inset 0 0 14px 1px black;
                 //TEMP
                 text-transform: uppercase;
                 color: $gray-500;

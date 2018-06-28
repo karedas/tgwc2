@@ -55,25 +55,36 @@
     color: #d2d2d2; //  default color
 
     .tgline {
+
         padding-bottom:1em;
+
         p {
-            padding-bottom:1em;
+            padding-bottom: 0;
         }
         div {
             display: inline;
         }
+        .room {
+            font-size: 22px;
+            font-family: kingthinks;
+            color: #ac4c55;
+            display: block!important;
+        }
+
+        &:not(:first-of-type) .room {            
+            border-top: 1px solid #111;
+            margin-top: .5em;
+            padding-top: .5em;
+        }
     }
+
+
 
     .tg-title {
         display: block!important;
         font-size: 22px;
     }
 
-    .room {
-        font-size: 22px;
-        font-family: kingthinks;
-        color: #ac4c55;
-    }
 
     p {
         margin-bottom: 0;

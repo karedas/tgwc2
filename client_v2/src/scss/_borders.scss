@@ -24,6 +24,7 @@
                content: '';
                position: absolute;
                display: block;
+               background-repeat: no-repeat;
            }
     
            &::before {
@@ -206,6 +207,103 @@
     
         .tg-border-left {
             background-image: url($imgPath + '/borders/border-controlpanel-left.png');
+        }
+    }
+}
+
+.b-modal {
+    padding: $modal-border-size;  
+    > .tg-border-box {
+        .tg-border-top, .tg-border-bottom {
+            height: $modal-border-size;
+            &::after, &::before {
+                width: $modal-border-size;
+                height: $modal-border-size;
+            }
+        }
+    
+        .tg-border-left, .tg-border-right{
+            position: absolute;
+            width: $modal-border-size;
+            top: $modal-border-size;
+            bottom: $modal-border-size;
+        }
+    
+        .tg-border-top {
+            background-image: url($imgPath + '/borders/border-modal-top.png');
+            &::after {
+                background-image: url($imgPath + '/borders/border-modal-topright.png');
+            }
+            &::before {
+                background-image: url($imgPath + '/borders/border-modal-topleft.png');
+            }
+        }
+        
+        .tg-border-bottom {
+            background-image:  url($imgPath + '/borders/border-modal-bottom.png');
+            &::after {
+                background-image: url($imgPath + '/borders/border-modal-bottomright.png');
+            }
+            &::before {
+                background-image:  url($imgPath + '/borders/border-modal-bottomleft.png');
+            }
+        }
+        
+        .tg-border-right {
+            background-image: url($imgPath + '/borders/border-modal-right.png');
+        }
+    
+        .tg-border-left {
+            background-image: url($imgPath + '/borders/border-modal-left.png');
+        }
+    }
+}
+
+
+.b-paper {
+    padding: $modalpaper-border-size;  
+    > .tg-border-box {
+        .tg-border-top, .tg-border-bottom {
+            height: $modalpaper-border-size;
+            &::after, &::before {
+                width: $modalpaper-border-size;
+                height: $modalpaper-border-size;
+            }
+        }
+    
+        .tg-border-left, .tg-border-right{
+            position: absolute;
+            width: $modalpaper-border-size;
+            top: $modalpaper-border-size;
+            bottom: $modalpaper-border-size;
+        }
+    
+        .tg-border-top {
+            background-image: url($imgPath + '/borders/border-modal-paper-top.jpg');
+            &::after {
+                background-image: url($imgPath + '/borders/border-modal-paper-topright.jpg');
+            }
+            &::before {
+                background-image: url($imgPath + '/borders/border-modal-paper-topleft.jpg');
+            }
+        }
+        
+        .tg-border-bottom {
+            background-image:  url($imgPath + '/borders/border-modal-paper-bottom.jpg');
+            &::after {
+                background-image: url($imgPath + '/borders/border-modal-paper-bottomright.jpg');
+            }
+            &::before {
+                background-image:  url($imgPath + '/borders/border-modal-paper-bottomleft.jpg');
+            }
+        }
+        
+        .tg-border-right {
+            background-image: url($imgPath + '/borders/border-modal-paper-right.jpg');
+        }
+    
+        .tg-border-left {
+            background-image: url($imgPath + '/borders/border-modal-paper-left.jpg');
         }
     }
 }

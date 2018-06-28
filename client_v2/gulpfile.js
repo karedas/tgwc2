@@ -182,6 +182,7 @@ function copyStaticFiles(done) {
 			config.src.base + 'ajax/**',
 			config.src.base + 'fonts/**',
 			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
+			config.src.base + 'favicon.ico',
 			config.src.base + 'fonts/**/*',
 			'!' + config.src.base + config.src.img + 'sprites/**/*',
 			'!' + config.src.base + config.src.img + 'tiles/large/**/*'

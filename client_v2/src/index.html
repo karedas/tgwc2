@@ -113,58 +113,60 @@
               <!-- Character CPanel-->
               <div class="tg-characterpanel b-controlpanel">
                 <div class="tg-characterpanel-wrap">
-                  <div class="tg-character-avmenu">
-                    <ul class="list-unstyled">
-                      <li>
-                        <button type="button" id="triggerShowAbility" class="nofeature tg-button b-square" title="Modifica la descrizione del personaggio">[C]</button>
-                      </li>
-                      <li>
-                        <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
-                      </li>
-                      <li>
-                        <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- Character avatar -->
-                  <div class="tg-characteravatar b-ironlight tg-shadow no-feature">
-                    <div class="tg-avatar-wrap">
-                      <img src="#" alt="Avatar" />
+                  <div class="tg-character">
+                    <div class="tg-character-avmenu">
+                      <ul class="list-unstyled">
+                        <li>
+                          <button type="button" id="triggerShowAbility" class="nofeature tg-button b-square" title="Modifica la descrizione del personaggio">[C]</button>
+                        </li>
+                        <li>
+                          <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
+                        </li>
+                        <li>
+                          <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
+                        </li>
+                      </ul>
                     </div>
-                    <div class="tg-border-box">
-                      <div class="tg-border tg-border-top"></div>
-                      <div class="tg-border tg-border-left"></div>
-                      <div class="tg-border tg-border-right"></div>
-                      <div class="tg-border tg-border-bottom"></div>
-                    </div>
-                  </div>
-                  <div class="tg-infochar">
-                    <div class="tg-infocharname">
-                      <i class="tg-icon icon-conva d-none"></i>
-                      <span id="charName"></span>
-                    </div>
-                    <div class="tg-meterbar">
-                      <!-- Character Status Bars -->
-                      <div class="barcont barbig">
-                        <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
-                          <i></i> / 100</span>
-                        <span class="red barC healthbar"></span>
+                    <!-- Character avatar -->
+                    <div class="tg-characteravatar b-ironlight tg-shadow no-feature">
+                      <div class="tg-avatar-wrap">
+                        <img src="#" alt="Avatar" />
                       </div>
-                      <div class="barcont barbig" data-toggle="tooltip" title="Punti Movimento">
-                        <span id="moveBarText" class="tg-statusbar-text">PM:
-                          <i></i> / 100</span>
-                        <span class="green barC movebar"></span>
+                      <div class="tg-border-box">
+                        <div class="tg-border tg-border-top"></div>
+                        <div class="tg-border tg-border-left"></div>
+                        <div class="tg-border tg-border-right"></div>
+                        <div class="tg-border tg-border-bottom"></div>
                       </div>
-                      <div class="tg-extrabars">
-                        <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
-                          <span id="moveBarText" class="tg-statusbar-text">Fame:
+                    </div>
+                    <div class="tg-infochar">
+                      <div class="tg-infocharname">
+                        <i class="tg-icon icon-conva d-none"></i>
+                        <span id="charName"></span>
+                      </div>
+                      <div class="tg-meterbar">
+                        <!-- Character Status Bars -->
+                        <div class="barcont barbig">
+                          <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
                             <i></i> / 100</span>
-                          <span class="orange barC hungrybar"></span>
+                          <span class="red barC healthbar"></span>
                         </div>
-                        <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
-                          <span id="moveBarText" class="tg-statusbar-text">Sete:
+                        <div class="barcont barbig" data-toggle="tooltip" title="Punti Movimento">
+                          <span id="moveBarText" class="tg-statusbar-text">PM:
                             <i></i> / 100</span>
-                          <span class="blue barC thirstbar"></span>
+                          <span class="green barC movebar"></span>
+                        </div>
+                        <div class="tg-extrabars">
+                          <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
+                            <span id="moveBarText" class="tg-statusbar-text">Fame:
+                              <i></i> / 100</span>
+                            <span class="orange barC hungrybar"></span>
+                          </div>
+                          <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
+                            <span id="moveBarText" class="tg-statusbar-text">Sete:
+                              <i></i> / 100</span>
+                            <span class="blue barC thirstbar"></span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -186,6 +188,10 @@
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
+                <div class="tg-inputcommand">
+                  <button type="button" class="tg-button b-square">[a]</button>
+                  <button id="triggerToggleCharacterPanel" type="button" class="tg-button b-square" title="Chiudi/Apri Il pannello di controllo">[b]</button>
+                </div>
                 <div class="tg-border-box">
                   <div class="tg-border tg-border-top"></div>
                   <div class="tg-border tg-border-left"></div>
@@ -215,6 +221,7 @@
       <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
+  <!-- Cookie Law lgs -->
   <div class="tg-cookielawcontent">
     <h4>Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
     <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della propria configurazione
@@ -226,6 +233,29 @@
     <p>
       <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
     </p>
+  </div>
+  <!-- Editor Dialog -->
+  <div id="editorDialog" class="tg-modal">
+    <div class="tg-modal-title">
+      <h3 id="editorTitle"></h3>
+    </div>
+    <div class="tg-modal-content tg-shadow b-modal tg-box">
+      <div class="tg-modal-contentwrap tg-box tg-box b-paper">
+        <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
+        <div class="tg-border-box">
+            <div class="tg-border tg-border-top"></div>
+            <div class="tg-border tg-border-left"></div>
+            <div class="tg-border tg-border-right"></div>
+            <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
   </div>
 </body>
 

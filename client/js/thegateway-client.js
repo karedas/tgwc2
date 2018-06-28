@@ -6365,7 +6365,6 @@ function parseForDisplay(msg)
 	// Player is logged in
 	msg = msg.replace(/&!logged"[^"]*"/gm, function() {
 		ingame = true;
-		console.log(msg);
 		return '';
 	});
 
@@ -7602,7 +7601,7 @@ function handleServerData(msg)
 		
 		var now = Date.now();
 		
-		if( now > client_update.last + 1000)
+		if(now > client_update.last + 1000)
 		{
 			if (client_update.inventory.needed && isDialogOpen('#invdialog'))
 			{

@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'magnific-popup';
+import 'draggabilly/dist/draggabilly.pkgd.js';
 
 //============ Custom
 import FacebookSDK from 'FacebookSdk';
@@ -56,6 +57,9 @@ export default class TgGui {
             shortcuts: [],
             login: {},
         };
+        
+        /* Status */
+        this.in_editor = false;
 
         /* History */
         this.max_history_length = 40;
@@ -456,19 +460,12 @@ export default class TgGui {
     preloadClient() {
 
         let _ = this;        
-        let percentage = 0;
-        let stepSize = 100 / assetsList.length;
-
-
-        $('.tg-loginpanel').attr('data-loginstatus', 'preload');
-        $('#tgPreloader').find('span').text(percentage);
-
+    
         return new Promise(function (resolve) {
 
             _.loadAssets().done(function(images){
                 
-                percentage = percentage + stepSize;
-                $('#tgPreloader span').text(Math.round(percentage));
+                $('#tgPreloader span').text(0);
 
                 for ( let i = 0; i < images.length; i++ ) {
                     if (assetsList.length == images.length) {
@@ -485,17 +482,28 @@ export default class TgGui {
 
     loadAssets() {
         let _ = this;
+        let percentage = 0;
+        let stepSize = 100 / assetsList.length;
+
 
         let images = [],
             loadedimages = 0, 
             postaction = function() {}, 
             assets = ( typeof assetsList != "object" ) ? [assetsList] : assetsList;
 
+
+        $('.tg-loginpanel').attr('data-loginstatus', 'preload');
+        $('#tgPreloader').find('span').text(percentage);
+            
         function imageloadpost(){
             loadedimages++;
+            percentage = Math.round(percentage + stepSize);
+
+
             if ( loadedimages == assets.length ) {
                 postaction( images ) //call postaction and pass in newimages array as parameter
             }
+            $('#tgPreloader').find('span').text(percentage);
         }
 
         for (let i = 0 ; i < assets.length; i++ ){
@@ -621,13 +629,13 @@ export default class TgGui {
         //     return '';
         // });
 
-        // // Open the text editor
-        // msg = msg.replace(/&!ed"[^"]*"\n*/gm, function (options) {
-        //     let options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
-        //     let text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
-        //     openEditor(options_parse[0], options_parse[1], text);
-        //     return '';
-        // });
+        // Open the text editor
+        msg = msg.replace(/&!ed"[^"]*"\n*/gm, function (options) {
+            let options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
+            let text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
+            _.openEditor(options_parse[0], options_parse[1], text);
+            return '';
+        });
 
         // Map data
         msg = msg.replace(/&!map\{[\s\S]*?\}!/gm, function (map) {
@@ -657,7 +665,7 @@ export default class TgGui {
             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
             let page_html = '<div class="tg-title lt-red">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
             if(page_parse.title == 'Notizie') {
-                _.openPopup('notizie', page_html);
+                //_.openPopup('nofeature');
             }
             else {
                 //TODO: Page parse generic 
@@ -901,6 +909,25 @@ export default class TgGui {
             }
         }
     }
+    
+    /* *****************************************************************************
+     *  Editor 
+     */
+
+    openEditor(maxchars, title, text) {
+        let _ = this;
+        $('#editorTextArea').val(text);
+        $('#editorTitle').text(title);
+        _.openPopup('editor');
+       _.in_editor = true;
+    }
+
+    abortEdit() {
+        if( this.in_editor ) {
+            this.sendToServer('##ce_abort');
+        }
+    }
+
 
     /* *****************************************************************************
      *  IMAGES IN OUTPUT 
@@ -1226,7 +1253,7 @@ export default class TgGui {
     updateInput() {
         let _ = this;
         let text = _.cmd_history[_.cmd_history_pos] ? _.cmd_history[_.cmd_history_pos] : '';
-        $('#inputline').val(text).focus();
+        $('#tgInputUser').val(text).focus();
     }
 
     historyUp() {
@@ -1325,6 +1352,7 @@ export default class TgGui {
         _.keyboardMapInit();
         _.focusInput();
         _.mapInit();
+        _.buttonsEventInit();
         _.main();
     }
 
@@ -1397,6 +1425,19 @@ export default class TgGui {
     }
 
     /* -------------------------------------------------
+     *  Buttons Events
+     * -------------------------------------------------*/
+
+    buttonsEventInit() {
+        /* Toggle character panel  Display */
+        console.log('ok');
+        $('#triggerToggleCharacterPanel').on('click', function(){
+            console.log('ok');
+            $('.tg-characterpanel').slideToggle(300);
+        })
+    }
+
+    /* -------------------------------------------------
      *  Generic Events
      * -------------------------------------------------*/
     genericEvents() {
@@ -1405,6 +1446,7 @@ export default class TgGui {
             e.preventDefault();
             _.openPopup('nofeature');
         });
+        
     }
 
     sendInput() {
@@ -1419,12 +1461,12 @@ export default class TgGui {
     /* -------------------------------------------------
     *  POPUP
     * -------------------------------------------------*/
-    openPopup(content_ref, content) {
+    openPopup(content_ref, title, content) {
 
         let _ = this;
 
         let MP_type = 'inline',
-            MP_html = content,
+            MP_src = content,
             MP_callbacks = {};
 
         switch(content_ref) {
@@ -1433,15 +1475,12 @@ export default class TgGui {
                 if (_.client_options.alpha_approved) {
                     return;
                 }
-                MP_html = 'ajax/alphaModalAlert.html'
+                MP_src = 'ajax/alphaModalAlert.html'
                 MP_type = 'ajax';
-                MP_callbacks.close = function () {
-                    _.client_options.alpha_approved = true;
-                }
                 break;
             case 'nofeature':
                 MP_type = 'inline',
-                MP_html = 'Funzionalità non ancora implementata';
+                MP_src = 'Funzionalità non ancora implementata';
                 break;
 
             case 'notizie':
@@ -1449,22 +1488,36 @@ export default class TgGui {
                     _.sendInput();
                 }
                 break; 
+            
+            case 'editor': 
+                MP_src = '#editorDialog';
+                MP_callbacks.close = function() {
+                    _.abortEdit();
+                };
+                break;
 
             default: 
                 //TODO: make default value to avoid error.
                 
                 break;
         }
-        
+        console.log('open?');
         // Open Modal / Popup
         $.magnificPopup.open({
+            showCloseBtn: false,
+            closeOnBgClick: false,
             type: MP_type,
             items: {
-                src:  MP_html,
+                src:  MP_src,
+                type: 'inline'
             },
-            mainClass: 'tg-modal mfp-fade',
             callbacks: MP_callbacks
         });
+
+        $($.magnificPopup.instance.contentContainer).draggabilly({
+            handle: '.tg-modal-title',
+            containment: '.tg-area'
+          });
     }
 
 

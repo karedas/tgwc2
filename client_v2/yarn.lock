@@ -2572,6 +2572,13 @@ dot-case@^1.1.0:
   dependencies:
     sentence-case "^1.1.2"
 
+draggabilly@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/draggabilly/-/draggabilly-2.2.0.tgz#9bac6849816c5cd4e4a59707f63f14ea7d863baf"
+  dependencies:
+    get-size "^2.0.2"
+    unidragger "^2.3.0"
+
 duplexer2@0.0.2, duplexer2@~0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.0.2.tgz#c614dcf67e2fb14995a91711e5a617e8a60a31db"
@@ -2962,6 +2969,10 @@ esutils@~1.0.0:
 etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
+
+ev-emitter@^1.0.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
 
 event-emitter@~0.3.5:
   version "0.3.5"
@@ -3490,6 +3501,10 @@ get-pixels@~3.3.0:
     pngjs "^2.0.0"
     request "^2.44.0"
     through "^2.3.4"
+
+get-size@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/get-size/-/get-size-2.0.3.tgz#54a1d0256b20ea7ac646516756202769941ad2ef"
 
 get-stdin@^4.0.1:
   version "4.0.1"
@@ -4360,6 +4375,10 @@ inquirer@^6.0.0:
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
+
+install@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.12.1.tgz#38b2dd4489330e9af3eeaba93b9e3fc77dee7872"
 
 internal-ip@1.2.0:
   version "1.2.0"
@@ -8280,6 +8299,12 @@ undertaker@^1.0.0:
     object.reduce "^1.0.0"
     undertaker-registry "^1.0.0"
 
+unidragger@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/unidragger/-/unidragger-2.3.0.tgz#ab9d9fd62106f3252d88fae5f3a99575e6d31d02"
+  dependencies:
+    unipointer "^2.3.0"
+
 union-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.0.tgz#5c71c34cb5bad5dcebe3ea0cd08207ba5aa1aea4"
@@ -8288,6 +8313,12 @@ union-value@^1.0.0:
     get-value "^2.0.6"
     is-extendable "^0.1.1"
     set-value "^0.4.3"
+
+unipointer@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/unipointer/-/unipointer-2.3.0.tgz#ba0dc462ce31c2a88e80810e19c3bae0ce47ed9f"
+  dependencies:
+    ev-emitter "^1.0.1"
 
 uniq@^1.0.0, uniq@^1.0.1:
   version "1.0.1"
