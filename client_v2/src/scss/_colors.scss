@@ -1,29 +1,51 @@
 $tg-yellow : #ffc000;
 
+
 /* Output colors */
-.white {
+.tg-white, .default{
     color: white;
 }
-.gray {
+.tg-lt-white {
+    color: rgb(250, 250, 250);
+}
+
+.tg-gray {
    color: #b8b8b8; 
 }
-
-.lt-red {
-    color: #ff2a00;
+.tg-red {
+    color: #fe6442;
 }
-
-.green {
-    color: #2ce826;
+.tg-lt-red {
+    color: #df2a06;
 }
-.lt-green {
+.tg-green {
+    color: #1dc018;
+}
+.tg-lt-green {
     color: #c6fac4;
 }
-.lt-blue {
+.tg-blue {
+    color: #006eff
+}
+.tg-lt-blue {
     color: #7ccfff;
 }
-.brown {
+.tg-magenta {
+    color: #cf25df;
+}
+.tg-lt-magenta {
+    color: #ff63ed;
+}
+.tg-cyan {
+    color: #28b6cf;
+}
+.tg-lt-cyan {
+    color: #63e8ff;
+}
+
+.tg-brown {
     color: #d19336;
 }
-.yellow {
+.tg-yellow {
     color: #f2ff00;
 }

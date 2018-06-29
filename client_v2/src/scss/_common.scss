@@ -104,64 +104,6 @@ a {
 }
 
 
-.tg-input {
-    position: relative;
-    margin-bottom: 6px;
-    margin-left: 3px;
-    margin-right: 0px;
-    display: flex;
-    flex-direction: row;
-
-    &:after, &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top:50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        
-    }
-    &:before {
-        @include sprite($input-left-decoration-sprite);
-        left: -10px;
-
-    }
-
-    &:after {
-        @include sprite($input-right-decoration-sprite);
-        right: -10px;
-    }
-
-
-    input[type="text"] {
-        width: 100%;
-        background-color: $inputbackground;
-        border: none;
-        z-index: 10;
-        position: relative;
-        outline: 0;
-        color: $white;
-        font-size: .8rem;
-        padding:2px 4px 4px!important;
-        box-shadow: inset 0 0 14px 1px black;
-        flex: 1 1 auto;
-    }
-
-    .tg-inputcommand {
-        z-index: 2;
-        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-        padding-left: 3px;
-        margin-left:1px;
-        display: flex;
-        flex-direction: row;
-
-        .tg-button {
-            margin-left:1px;
-        }
-    }
-}
-
-
 .tg-cookielawcontent {
     display: none;
     .tg-btn-cookieconsent {

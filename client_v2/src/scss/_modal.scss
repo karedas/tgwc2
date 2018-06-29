@@ -32,6 +32,7 @@
   .tg-modal-contentwrap {
     position: relative;
     z-index: 2;
+    padding: 30px 36px 55px;
   }
 
   textarea {
@@ -45,18 +46,15 @@
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-size: 14px;
     line-height: 1.4;
-    box-shadow: 0 0 17px 16px #e3ceaa;
+    box-shadow: 0 0 11px 4px #e3ceaa;
     position: relative;
     z-index: 3;
   }
-}
 
-/* overlay at start */
-/*.mfp-fade.mfp-bg {
-  background: #;
-  opacity: 0;
-  transition: all 0.15s ease-out;
-}*/
+  @include media-breakpoint-down(md) {
+    min-width: auto;
+  }
+}
 
 .mfp-ready {
   .tg-modal {
@@ -125,3 +123,8 @@
   color: white;
 }
 
+
+@include media-breakpoint-down(sm) {
+  .mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content {
+  } 
+}

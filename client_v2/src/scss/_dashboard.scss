@@ -1,169 +1,187 @@
-
 .tg-dashboard {
-    padding-left:0;
-    padding-right:0;
-    
+    padding-left: 0;
+    padding-right: 0;
     .tg-characterpanel {
         position: relative;
         background-repeat: no-repeat;
         background-position: top left;
         margin-bottom: 8px;
-        margin-left:3px;
+        margin-left: 3px;
         margin-right: 3px;
         background: url($imgPath + '/background/background-rock-dark.jpg') repeat top left;
-        
-       
         .tg-characterpanel-wrap {
             position: relative;
             z-index: 2;
-            display: flex;
         }
-
-        .tg-character {
-            box-shadow: inset 0 0 14px 1px black;
-            padding: 6px 0;
-            display: flex;
-            width: 40%;
-        }
-
-        .tg-character-avmenu {
-            padding-right: 2px;
-            padding-top:6px;
-            ul {
-                margin-bottom: 0;
-            }
-            .tg-button {
-                margin-bottom: 5px;
-            }
-        }
-    
-        .tg-characteravatar {
-            cursor: pointer;
-            padding-right: 6px;
-            width: 95px;
-            height: 95px;
-            overflow: hidden;
-            position: relative;
-            
-            .tg-avatar-wrap {
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-            }
-
-            img {
-                margin-left: -8px;
-                max-height: 100%;
-                height: 80px;
-            }
-        }
-    
-        .tg-infochar{
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            padding-left:6px;
-            padding-right: 8px;
-        }
-    
-        .tg-infocharname {
-            padding: 0 2px 1px 4px;
-            text-transform: uppercase;
-            font-size: 9px;
-            height: 20px;
-            text-align: right;
-
-            .tg-icon {
-            }
-        }
-    
-        // BARS
-        .tg-meterbar {
-            left: 100px;
-            z-index: 2;
-            flex: 1 1 100%;
-            flex-direction: column;
-            padding: 0 0 5px 0;
-    
-            .barcont {
-                box-sizing: border-box;
-                border: 1px solid #5f5c59;
-                padding: 2px 3px;
-                position: relative;
-                background-color: #171614;
-                box-shadow: inset 0 0 5px 2px #53371c;
-            }
-            
-            .barbig {
-                height: 22px;
-                margin-bottom: 4px;
-            }
-
-            .barthin {
-                height: 100%;
-                width: 50%;
-                display: inline-block;
-                float: left;
-            }
-
-            
-            .tg-extrabars {
-                width: 100%;
-                height: 20px;
-            }
-    
-            .tg-statusbar-text {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                padding-left:.5em;
-                right: 10px;
-                text-shadow: 0 1px 0px black;
-            }
-            
-            .barC {
-                display: block;
-                width: 100%;
-                height: 100%;
-                background-repeat: repeat-x;
-                background-position: top left;
-                transition: width .2s cubic-bezier(0.65, 0.05, 0.36, 1);
-    
-                &.red {
-                    background-image: url($imgPath + '/bars/healt.jpg' );
-                }
-                &.green {
-                    background-image: url($imgPath + '/bars/stamina.jpg' );
-                }
-                &.orange {
-                    background-image: url($imgPath + '/bars/fame.jpg' );
-                }
-                &.blue {
-                    background-image: url($imgPath + '/bars/sete.jpg' );
-                }
-            }
-        }
-    
-        // dashboard
-        .tg-extraboard {
-            background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-            width: 50%;
-            padding: 6px 0 6px 6px;
-    
-            .tg-extraboard-wrap {
-                padding-left: .5em;
-                height: 100%;
-                width: 100%;
-                //TEMP
-                text-transform: uppercase;
-                color: $gray-500;
-                font-size: 11px;
-            }
-        }
-    }
-    
-    @include media-breakpoint-down(md) {
-
     }
 }
 
+/* TG Character Side */
+.tg-character {
+    box-shadow: inset 0 0 14px 1px black;
+    padding: 6px 0;
+    display: flex;
+    .tg-character-avmenu {
+        padding-right: 2px;
+        padding-top: 6px;
+        ul {
+            margin-bottom: 0;
+        }
+        .tg-button {
+            margin-bottom: 5px;
+        }
+    }
+    .tg-characteravatar {
+        cursor: pointer;
+        padding-right: 6px;
+        width: 95px;
+        height: 95px;
+        overflow: hidden;
+        position: relative;
+        .tg-avatar-wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        img {
+            margin-left: -8px;
+            max-height: 100%;
+            height: 80px;
+        }
+    }
+    .tg-infochar {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding-left: 6px;
+        padding-right: 8px;
+    }
+    .tg-infocharname {
+        padding: 0 2px 1px 4px;
+        text-transform: uppercase;
+        font-size: 9px;
+        height: 20px;
+        text-align: right;
+        .tg-icon {}
+    } // BARS
+    .tg-meterbar {
+        left: 100px;
+        z-index: 2;
+        flex: 1 1 100%;
+        flex-direction: column;
+        padding: 0 0 5px 0;
+        .barcont {
+            box-sizing: border-box;
+            border: 1px solid #5f5c59;
+            padding: 2px 3px;
+            position: relative;
+            background-color: #171614;
+            box-shadow: inset 0 0 5px 2px #53371c;
+        }
+        .barbig {
+            height: 22px;
+            margin-bottom: 4px;
+        }
+        .barthin {
+            height: 100%;
+            width: 50%;
+            display: inline-block;
+            float: left;
+        }
+        .tg-extrabars {
+            width: 100%;
+            height: 20px;
+        }
+        .tg-statusbar-text {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding-left: .5em;
+            right: 10px;
+            text-shadow: 0 1px 0px black;
+        }
+        .barC {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat-x;
+            background-position: top left;
+            transition: width .2s cubic-bezier(0.65, 0.05, 0.36, 1);
+            &.red {
+                background-image: url($imgPath + '/bars/healt.jpg' );
+            }
+            &.green {
+                background-image: url($imgPath + '/bars/stamina.jpg' );
+            }
+            &.orange {
+                background-image: url($imgPath + '/bars/fame.jpg' );
+            }
+            &.blue {
+                background-image: url($imgPath + '/bars/sete.jpg' );
+            }
+        }
+    }
+}
+
+/* Tg Extra Board */
+.tg-extraboard {
+    background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+    padding: 6px 0 6px 6px;
+    .tg-extraboard-wrap {
+        padding-left: .5em;
+        height: 100%;
+        width: 100%; //TEMP
+        text-transform: uppercase;
+        color: $gray-500;
+        font-size: 11px;
+    }
+}
+
+/* Tg User inputline */
+.tg-input {
+    position: relative;
+    margin-bottom: 6px;
+    margin-left: 3px;
+    margin-right: 0px;
+    display: flex;
+    flex-direction: row;
+    &:after,
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+    &:before {
+        @include sprite($input-left-decoration-sprite);
+        left: -10px;
+    }
+    &:after {
+        @include sprite($input-right-decoration-sprite);
+        right: -10px;
+    }
+    input[type="text"] {
+        width: 100%;
+        background-color: $inputbackground;
+        border: none;
+        z-index: 10;
+        position: relative;
+        outline: 0;
+        color: $white;
+        font-size: .8rem;
+        padding: 2px 4px 4px !important;
+        box-shadow: inset 0 0 14px 1px black;
+        flex: 1 1 auto;
+    }
+    .tg-inputcommand {
+        z-index: 2;
+        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+        padding-left: 3px;
+        margin-left: 1px;
+        .tg-button {
+            margin-left: 1px;
+        }
+    }
+}

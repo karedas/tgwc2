@@ -11,20 +11,16 @@
     overflow-y: auto;
     position: relative;
     min-height: 250px;
-
-    > .row {
+    >.row {
         padding-top: 1em;
         padding-bottom: 1em;
     }
-
     .tg-loginform {
         border-radius: 15px;
         border: 1px solid #2c2926;
         padding: 2rem;
         display: none;
-
         .tg-version-name {
-
             span {
                 display: block;
                 font-size: 11px;
@@ -32,12 +28,10 @@
             }
         }
     }
-
     input {
         margin-bottom: .2rem;
         border: 1px solid $tg-yellow;
         background: none;
-        padding: 0;
         width: 100%;
         box-sizing: border-box;
         color: $white;
@@ -47,24 +41,20 @@
         color: #ababaa;
         margin: 0;
     }
-
     button {
         cursor: pointer;
-        background-color:$tg-yellow;
+        background-color: $tg-yellow;
         border: none;
         color: $black;
     }
-
-    .tg-serverstatus, .tg-loginstatus {
+    .tg-serverstatus,
+    .tg-loginstatus {
         padding: .5rem 0 0;
         text-align: center;
     }
-
     .tg-serverstatus {
-        
         text-transform: uppercase;
         font-size: 10px;
-
         &:before {
             content: '';
             display: inline-block;
@@ -74,23 +64,22 @@
             margin-right: 0.2rem;
         }
     }
-
     .tg-loginstatus {
         line-height: 1em;
         min-height: 1rem;
         box-sizing: content-box;
     }
+}
 
-    // ON PRELOAD
-    &[data-loginstatus="preload"] {
-        .tg-loginform, .tg-serverstatus {
-            display: none;
-        }
-        .tg-preloader {
-            display: block;
-        }
+/* ON PRELOAD */
+body[data-loginstatus="preload"] {
+    .tg-loginform,
+    .tg-serverstatus {
+        display: none;
     }
-
+    .tg-preloader {
+        display: block;
+    }
 }
 
 // Server OFFLINE
@@ -98,11 +87,12 @@ body[data-serverstatus="0"] {
     .tg-loginstatus {
         display: none;
     }
-    .tg-serverstatus:before { 
+    .tg-serverstatus:before {
         background: red;
     }
 }
-// Server ONLINE
+
+/* Server ONLINE */
 body[data-serverstatus="1"] {
     .tg-loginform {
         display: block;
@@ -113,8 +103,26 @@ body[data-serverstatus="1"] {
 }
 
 /* Preloader in Login */
+
 .tg-preloader {
     display: none;
+    position: relative;
     text-align: center;
-    border:1px solid $tg-yellow;
+    margin: .5em 0;
+    border: 1px solid $tg-yellow;
+
+    span {
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 0 1px black;
+    }
+
+    //bar
+    div.pbar{
+        background-color: $tg-yellow;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom:0;
+    }
 }

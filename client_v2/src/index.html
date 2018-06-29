@@ -47,6 +47,7 @@
           <div id="networkActivityMessage" class="tg-serverstatus"></div>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
+            <div class="pbar"></div>
           </div>
         </div>
       </div>
@@ -113,68 +114,71 @@
               <!-- Character CPanel-->
               <div class="tg-characterpanel b-controlpanel">
                 <div class="tg-characterpanel-wrap">
-                  <div class="tg-character">
-                    <div class="tg-character-avmenu">
-                      <ul class="list-unstyled">
-                        <li>
-                          <button type="button" id="triggerShowAbility" class="nofeature tg-button b-square" title="Modifica la descrizione del personaggio">[C]</button>
-                        </li>
-                        <li>
-                          <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
-                        </li>
-                        <li>
-                          <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
-                        </li>
-                      </ul>
-                    </div>
-                    <!-- Character avatar -->
-                    <div class="tg-characteravatar b-ironlight tg-shadow no-feature">
-                      <div class="tg-avatar-wrap">
-                        <img src="#" alt="Avatar" />
-                      </div>
-                      <div class="tg-border-box">
-                        <div class="tg-border tg-border-top"></div>
-                        <div class="tg-border tg-border-left"></div>
-                        <div class="tg-border tg-border-right"></div>
-                        <div class="tg-border tg-border-bottom"></div>
-                      </div>
-                    </div>
-                    <div class="tg-infochar">
-                      <div class="tg-infocharname">
-                        <i class="tg-icon icon-conva d-none"></i>
-                        <span id="charName"></span>
-                      </div>
-                      <div class="tg-meterbar">
-                        <!-- Character Status Bars -->
-                        <div class="barcont barbig">
-                          <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
-                            <i></i> / 100</span>
-                          <span class="red barC healthbar"></span>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="tg-character">
+                        <div class="tg-character-avmenu">
+                          <ul class="list-unstyled">
+                            <li>
+                              <button type="button" id="triggerShowAbility" class="nofeature tg-button b-square" title="Modifica la descrizione del personaggio">[C]</button>
+                            </li>
+                            <li>
+                              <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
+                            </li>
+                            <li>
+                              <button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
+                            </li>
+                          </ul>
                         </div>
-                        <div class="barcont barbig" data-toggle="tooltip" title="Punti Movimento">
-                          <span id="moveBarText" class="tg-statusbar-text">PM:
-                            <i></i> / 100</span>
-                          <span class="green barC movebar"></span>
-                        </div>
-                        <div class="tg-extrabars">
-                          <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
-                            <span id="moveBarText" class="tg-statusbar-text">Fame:
-                              <i></i> / 100</span>
-                            <span class="orange barC hungrybar"></span>
+                        <!-- Character avatar -->
+                        <div class="tg-characteravatar b-ironlight tg-shadow no-feature">
+                          <div class="tg-avatar-wrap">
+                            <img src="#" alt="Avatar" />
                           </div>
-                          <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
-                            <span id="moveBarText" class="tg-statusbar-text">Sete:
-                              <i></i> / 100</span>
-                            <span class="blue barC thirstbar"></span>
+                          <div class="tg-border-box">
+                            <div class="tg-border tg-border-top"></div>
+                            <div class="tg-border tg-border-left"></div>
+                            <div class="tg-border tg-border-right"></div>
+                            <div class="tg-border tg-border-bottom"></div>
                           </div>
                         </div>
+                        <div class="tg-infochar">
+                          <div class="tg-infocharname">
+                            <i class="tg-icon icon-conva d-none"></i>
+                            <span id="charName"></span>
+                          </div>
+                          <div class="tg-meterbar">
+                            <!-- Character Status Bars -->
+                            <div class="barcont barbig">
+                              <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
+                                <i></i> / 100</span>
+                              <span class="red barC healthbar"></span>
+                            </div>
+                            <div class="barcont barbig" data-toggle="tooltip" title="Punti Movimento">
+                              <span id="moveBarText" class="tg-statusbar-text">PM:
+                                <i></i> / 100</span>
+                              <span class="green barC movebar"></span>
+                            </div>
+                            <div class="tg-extrabars">
+                              <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
+                                <span id="moveBarText" class="tg-statusbar-text">Fame:
+                                  <i></i> / 100</span>
+                                <span class="orange barC hungrybar"></span>
+                              </div>
+                              <div class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
+                                <span id="moveBarText" class="tg-statusbar-text">Sete:
+                                  <i></i> / 100</span>
+                                <span class="blue barC thirstbar"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div class="tg-extraboard d-none d-md-flex">
-                    <div class="tg-extraboard-wrap">
-                      // this is my extra board!
+                    <div class="tg-extraboard col-sm-6 d-none d-sm-flex">
+                      <div class="tg-extraboard-wrap">
+                        // this is my extra board!
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -188,7 +192,7 @@
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
-                <div class="tg-inputcommand">
+                <div class="tg-inputcommand d-none d-sm-flex">
                   <button type="button" class="tg-button b-square">[a]</button>
                   <button id="triggerToggleCharacterPanel" type="button" class="tg-button b-square" title="Chiudi/Apri Il pannello di controllo">[b]</button>
                 </div>
@@ -234,14 +238,19 @@
       <button id="cookieconsentbutton" class="tg-btn btn-default tg-btn-cookieconsent">Acconsenti</button>
     </p>
   </div>
+
   <!-- Editor Dialog -->
   <div id="editorDialog" class="tg-modal">
+    <div class="tg-modal-icon"></div>
     <div class="tg-modal-title">
       <h3 id="editorTitle"></h3>
     </div>
     <div class="tg-modal-content tg-shadow b-modal tg-box">
       <div class="tg-modal-contentwrap tg-box tg-box b-paper">
         <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
+        <div class="tg-txt-maxcharcount"></div>
+        <button type="button" id="abortEditor">Annulla</button>
+        <button type="button" id="saveEditor">Salva</button>
         <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
             <div class="tg-border tg-border-left"></div>
@@ -258,5 +267,4 @@
     </div>
   </div>
 </body>
-
 </html>
