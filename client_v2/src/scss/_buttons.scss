@@ -1,10 +1,13 @@
 .tg-button {
     background-color: transparent;
+    background-repeat: no-repeat;
     display: inline-block;
     border: none;
-    text-indent: -9999px;
-    cursor: pointer;
+    //text-indent: -9999px;
     box-shadow: 0 1px 4px 0px black;
+    transition: transform .1s linear;
+    color: #fff;
+    cursor: pointer;
 
     &.b-round {
         border-radius: 50%;
@@ -13,6 +16,22 @@
 
     &.b-square {
         @include sprite($base-square-sprite);
+    }
+
+    &.tg-btn-expand {
+        @include sprite($expand-sprite);
+        &:active {
+            opacity: .9;
+            transform: scale(.9);
+        }
+    }
+
+    &.tg-btn-dashboard {
+        @include sprite($dashboard-sprite);
+        &:active {
+            opacity: .9;
+            transform: scale(.9);
+        }
     }
 
 }

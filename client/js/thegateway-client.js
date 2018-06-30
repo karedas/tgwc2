@@ -5618,7 +5618,7 @@ function renderPlayerInfo(info)
 	$('#infoemplvl', d).text(prcLowTxt(info.abil.emp.prc, abiltxt));
 
 	$('#infosiz', d).width(limitPrc(info.abil.siz.prc)+"%");
-	$('#infosizlvl', d).text(prcLowTxt(info.abil.siz.prc, abiltxt));
+cLowTxt(info.abil.si	$('#infosizlvl', d).text(prcLowTxt(info.abil.siz.prc, abiltxt));
 
 	$('#infocon', d).width(limitPrc(info.abil.con.prc)+"%");
 	$('#infoconlvl', d).text(prcLowTxt(info.abil.con.prc, abiltxt));

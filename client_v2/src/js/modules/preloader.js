@@ -12,16 +12,13 @@ export default class Preloader {
                 reject('TG Error: Assets List mancante');
             }
 
-            _.loadAssets().done(function (images) {
+            $('body').attr('data-loginstatus', 'preload');
 
-                for (let i = 0; i < images.length; i++) {
-                    if (_.assetsList.length == images.length) {
-                        // All Images loaded
-                        $(document.body).attr('data-loginstatus', 'ready');
-                        $('#tgPreloader').remove();
-                        resolve();
-                    }
-                }
+            _.loadAssets().done(function (images) {
+                // All Images loaded
+                $(document.body).attr('data-loginstatus', 'ready');
+                $('#tgPreloader').remove();
+                resolve();
             });
         });
     }
@@ -40,8 +37,10 @@ export default class Preloader {
 
         function imageloadpost() {
 
-            percentage = Math.round(percentage + stepSize);
-            $('.tg-loginpanel').attr('data-loginstatus', 'preload');
+            percentage = Math.floor(percentage + stepSize);
+            if (loadedimages == assets.length - 1) {
+                percentage = 100;
+            }
             $('#tgPreloader').find('span').text(percentage);
             $('.pbar').css('width', percentage + '%');
 

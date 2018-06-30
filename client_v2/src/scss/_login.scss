@@ -72,10 +72,10 @@
 }
 
 /* ON PRELOAD */
-body[data-loginstatus="preload"] {
+body[data-loginstatus="preload"], body[data-loginstatus="ready"] {
     .tg-loginform,
     .tg-serverstatus {
-        display: none;
+        display: none!important;
     }
     .tg-preloader {
         display: block;

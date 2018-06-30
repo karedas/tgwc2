@@ -38,6 +38,8 @@ export default class MapDrawer {
 
     prepareCanvas(imagesPath) {
         let _ = this;
+
+        
         $(_.container).append('<canvas id="mapcont" width="' + (_.maxmapwidth * _.maptilewidth) + '" height="' + (_.maxmapheight * _.maptileheight) + '"></canvas>');
 
         _.MAPCTX = $('#mapcont')[0].getContext('2d');
@@ -95,10 +97,10 @@ export default class MapDrawer {
         _.MAPCTX.clearRect(0, 0, canvaswidth, canvasheight);
 
         /* Cycle on the 2 layers */
-        for (let l = 0; l < 2; l++) {
-            let pos = 0;
-            for (let y = 0; y < _.maxmapwidth; y++) {
-                for (let x = 0; x < _.maxmapheight; x++) {
+        for (var l =0; l < 2; l++) {
+            var pos = 0;
+            for (var y = 0; y < _.maxmapwidth; y++) {
+                for (var x = 0; x < _.maxmapheight; x++) {
                     if (x >= xoff && x < xlim && y >= yoff && y < ylim)
                         _.layermap[y][x] = map.data[l][pos++];
                     else {
@@ -107,27 +109,28 @@ export default class MapDrawer {
                 }
             }
 
-            for (let y = 0; y < _.maxmapwidth; y++) {
-                for (let x = 0; x < _.maxmapheight; x++) {
-                    let d = _.layermap[y][x];
+            for (var y = 0; y < _.maxmapwidth; y++) {
+                for (var x = 0; x < _.maxmapheight; x++) {
+                    var d = _.layermap[y][x];
                     if (d != 59) {
-                        let tpos = _.tileCoords(d);
+                        var tpos = _.tileCoords(d);
                         //Draw image before Clip
-                        // _.MAPCTX.save();
-                        // _.MAPCTX.beginPath();
+                        //_.MAPCTX.save();
+                        //_.MAPCTX.beginPath();
                         // _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
                         // _.MAPCTX.clip();
+                        console.log(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight)
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
                         
                     }
                 }
             }
 
-            if (l == 0) {
-                for (let y = 0; y < _.maxmapwidth; y++) {
-                    for (let x = 0; x < _.maxmapheight; x++) {
+           /* if (l == 0) {
+                for (var y = 0; y < _.maxmapwidth; y++) {
+                    for (var x = 0; x < _.maxmapheight; x++) {
                         if (_.layermap[y][x] == 59) {
-                            let clipx = 0,
+                            var clipx = 0,
                                 clipy = 0,
                                 swidth = 48,
                                 sheight = 48;
@@ -153,7 +156,7 @@ export default class MapDrawer {
                         }
                     }
                 }
-            }
+            }*/
         }
 
         // if(mapshadowimg[map.l]) {

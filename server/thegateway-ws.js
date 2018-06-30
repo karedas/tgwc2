@@ -96,7 +96,6 @@ function SocketServer() {
 				let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
 
 				socket.on('disconnect', function() {
-					console.log('socket has disconnected')
 					logger.info('Closing %s', socket.id);
 					// Disconnect from game server
 					tgconn.destroy();

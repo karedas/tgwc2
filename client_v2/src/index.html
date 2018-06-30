@@ -102,6 +102,7 @@
                 <div id="output" class="tg-output-history"></div>
               </div>
             </div>
+            <div class="tg-output-detail"></div>
             <div class="tg-border-box">
               <div class="tg-border tg-border-top"></div>
               <div class="tg-border tg-border-left"></div>
@@ -193,8 +194,8 @@
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
                 <div class="tg-inputcommand d-none d-sm-flex">
-                  <button type="button" class="tg-button b-square">[a]</button>
-                  <button id="triggerToggleCharacterPanel" type="button" class="tg-button b-square" title="Chiudi/Apri Il pannello di controllo">[b]</button>
+                  <button id="triggerExpandTgArea" type="button" class="tg-button tg-btn-expand" title="Full Screen"></button>
+                  <button id="triggerToggleCharacterPanel" type="button" class="tg-button tg-btn-dashboard" title="Chiudi/Apri Il pannello di controllo"></button>
                 </div>
                 <div class="tg-border-box">
                   <div class="tg-border tg-border-top"></div>
@@ -247,10 +248,12 @@
     </div>
     <div class="tg-modal-content tg-shadow b-modal tg-box">
       <div class="tg-modal-contentwrap tg-box tg-box b-paper">
-        <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
-        <div class="tg-txt-maxcharcount"></div>
-        <button type="button" id="abortEditor">Annulla</button>
-        <button type="button" id="saveEditor">Salva</button>
+        <div class="tg-box">
+          <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
+          <div class="tg-txt-maxcharcount"></div>
+          <button type="button" id="abortEditor">Annulla</button>
+          <button type="button" id="saveEditor">Salva</button>
+        </div>
         <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
             <div class="tg-border tg-border-left"></div>
