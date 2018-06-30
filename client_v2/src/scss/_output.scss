@@ -1,7 +1,7 @@
 .tg-output {
     background: black;
     flex: 1 1 auto;
-    font-size: 12px;
+    font-size: 11px;
     position: relative;
     margin-bottom: 8px;
     line-height: 1.4;
@@ -29,7 +29,6 @@
     }
     .tg-output-history {
         z-index: 2;
-        padding: .2rem .5rem;
         max-height: 100%;
         width: 100%;
         position: absolute;
@@ -37,7 +36,6 @@
         bottom: 0;
         right: 0;
         left: 0;
-        padding: 8px;
         display: table;
         color: #d2d2d2; //  default color
         text-align: justify;
@@ -77,19 +75,19 @@
             padding-top: .5em;
         }
 
+        .tg-description {
+            display: block;
+            padding-bottom: 1.5em;
+        }
         /* Description base*/
         .tg-descbase, .tg-descbase-last{
             display: block;
         }
-
-        .tg-descbase-last {
-            padding-bottom:1.5em;
-        }
-
         /* LIST Mob & Object*/
         .tg-outputlist {
             display: block;
             width: 100%;
+            padding-top:.5em;
             padding-bottom:1.5em;
 
             &.firstlist {

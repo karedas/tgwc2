@@ -9,6 +9,10 @@ $grid-breakpoints: (
   xl: 1450px
 );
 
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, Verdana, Geneva, sans-serif !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+
 $grid-gutter-width:16px;
 $link-color: #FFF;
 $input-border-radius: 0;

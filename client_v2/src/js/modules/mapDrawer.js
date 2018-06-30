@@ -119,7 +119,6 @@ export default class MapDrawer {
                         //_.MAPCTX.beginPath();
                         // _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
                         // _.MAPCTX.clip();
-                        console.log(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight)
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
                         
                     }

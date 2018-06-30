@@ -9,47 +9,6 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-$conv-ico-sprite-name: 'conv-ico@sprite';
-$conv-ico-sprite-x: 30px;
-$conv-ico-sprite-y: 0px;
-$conv-ico-sprite-offset-x: -30px;
-$conv-ico-sprite-offset-y: 0px;
-$conv-ico-sprite-width: 19px;
-$conv-ico-sprite-height: 19px;
-$conv-ico-sprite-total-width: 49px;
-$conv-ico-sprite-total-height: 30px;
-$conv-ico-sprite-image: '../images/icons/icons_sprite.png';
-$conv-ico-sprite: (30px, 0px, -30px, 0px, 19px, 19px, 49px, 30px, '../images/icons/icons_sprite.png', 'conv-ico@sprite', );
-$monete-ico-sprite-name: 'monete-ico@sprite';
-$monete-ico-sprite-x: 0px;
-$monete-ico-sprite-y: 0px;
-$monete-ico-sprite-offset-x: 0px;
-$monete-ico-sprite-offset-y: 0px;
-$monete-ico-sprite-width: 30px;
-$monete-ico-sprite-height: 30px;
-$monete-ico-sprite-total-width: 49px;
-$monete-ico-sprite-total-height: 30px;
-$monete-ico-sprite-image: '../images/icons/icons_sprite.png';
-$monete-ico-sprite: (0px, 0px, 0px, 0px, 30px, 30px, 49px, 30px, '../images/icons/icons_sprite.png', 'monete-ico@sprite', );
-$spritesheet-width: 49px;
-$spritesheet-height: 30px;
-$spritesheet-image: '../images/icons/icons_sprite.png';
-$spritesheet-sprites: ($conv-ico-sprite, $monete-ico-sprite, );
-$spritesheet: (49px, 30px, '../images/icons/icons_sprite.png', $spritesheet-sprites, );
-
-
-
-// SCSS variables are information about icon's compiled state, stored under its original file name
-//
-// .icon-home {
-//   width: $icon-home-width;
-// }
-//
-// The large array-like variables contain all information about a single icon
-// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
-//
-// At the bottom of this section, we provide information about the spritesheet itself
-// $spritesheet: width height image $spritesheet-sprites;
 $input-left-decoration-sprite-name: 'input_left_decoration@sprite';
 $input-left-decoration-sprite-x: 0px;
 $input-left-decoration-sprite-y: 0px;
@@ -91,54 +50,128 @@ $spritesheet: (18px, 16px, '../images/various/various_sprite.png', $spritesheet-
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
+$conv-ico-sprite-name: 'conv-ico@sprite';
+$conv-ico-sprite-x: 30px;
+$conv-ico-sprite-y: 0px;
+$conv-ico-sprite-offset-x: -30px;
+$conv-ico-sprite-offset-y: 0px;
+$conv-ico-sprite-width: 19px;
+$conv-ico-sprite-height: 19px;
+$conv-ico-sprite-total-width: 49px;
+$conv-ico-sprite-total-height: 48px;
+$conv-ico-sprite-image: '../images/icons/icons_sprite.png';
+$conv-ico-sprite: (30px, 0px, -30px, 0px, 19px, 19px, 49px, 48px, '../images/icons/icons_sprite.png', 'conv-ico@sprite', );
+$heart-minus-sprite-name: 'heart-minus@sprite';
+$heart-minus-sprite-x: 0px;
+$heart-minus-sprite-y: 30px;
+$heart-minus-sprite-offset-x: 0px;
+$heart-minus-sprite-offset-y: -30px;
+$heart-minus-sprite-width: 18px;
+$heart-minus-sprite-height: 18px;
+$heart-minus-sprite-total-width: 49px;
+$heart-minus-sprite-total-height: 48px;
+$heart-minus-sprite-image: '../images/icons/icons_sprite.png';
+$heart-minus-sprite: (0px, 30px, 0px, -30px, 18px, 18px, 49px, 48px, '../images/icons/icons_sprite.png', 'heart-minus@sprite', );
+$monete-ico-sprite-name: 'monete-ico@sprite';
+$monete-ico-sprite-x: 0px;
+$monete-ico-sprite-y: 0px;
+$monete-ico-sprite-offset-x: 0px;
+$monete-ico-sprite-offset-y: 0px;
+$monete-ico-sprite-width: 30px;
+$monete-ico-sprite-height: 30px;
+$monete-ico-sprite-total-width: 49px;
+$monete-ico-sprite-total-height: 48px;
+$monete-ico-sprite-image: '../images/icons/icons_sprite.png';
+$monete-ico-sprite: (0px, 0px, 0px, 0px, 30px, 30px, 49px, 48px, '../images/icons/icons_sprite.png', 'monete-ico@sprite', );
+$spritesheet-width: 49px;
+$spritesheet-height: 48px;
+$spritesheet-image: '../images/icons/icons_sprite.png';
+$spritesheet-sprites: ($conv-ico-sprite, $heart-minus-sprite, $monete-ico-sprite, );
+$spritesheet: (49px, 48px, '../images/icons/icons_sprite.png', $spritesheet-sprites, );
+
+
+
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
 $base-square-sprite-name: 'base-square@sprite';
 $base-square-sprite-x: 25px;
-$base-square-sprite-y: 31px;
+$base-square-sprite-y: 70px;
 $base-square-sprite-offset-x: -25px;
-$base-square-sprite-offset-y: -31px;
+$base-square-sprite-offset-y: -70px;
 $base-square-sprite-width: 25px;
 $base-square-sprite-height: 24px;
-$base-square-sprite-total-width: 56px;
-$base-square-sprite-total-height: 56px;
+$base-square-sprite-total-width: 117px;
+$base-square-sprite-total-height: 95px;
 $base-square-sprite-image: '../images/buttons/buttons_sprite.png';
-$base-square-sprite: (25px, 31px, -25px, -31px, 25px, 24px, 56px, 56px, '../images/buttons/buttons_sprite.png', 'base-square@sprite', );
+$base-square-sprite: (25px, 70px, -25px, -70px, 25px, 24px, 117px, 95px, '../images/buttons/buttons_sprite.png', 'base-square@sprite', );
 $base-brown-sprite-name: 'base_brown@sprite';
-$base-brown-sprite-x: 0px;
+$base-brown-sprite-x: 86px;
 $base-brown-sprite-y: 0px;
-$base-brown-sprite-offset-x: 0px;
+$base-brown-sprite-offset-x: -86px;
 $base-brown-sprite-offset-y: 0px;
 $base-brown-sprite-width: 31px;
 $base-brown-sprite-height: 31px;
-$base-brown-sprite-total-width: 56px;
-$base-brown-sprite-total-height: 56px;
+$base-brown-sprite-total-width: 117px;
+$base-brown-sprite-total-height: 95px;
 $base-brown-sprite-image: '../images/buttons/buttons_sprite.png';
-$base-brown-sprite: (0px, 0px, 0px, 0px, 31px, 31px, 56px, 56px, '../images/buttons/buttons_sprite.png', 'base_brown@sprite', );
+$base-brown-sprite: (86px, 0px, -86px, 0px, 31px, 31px, 117px, 95px, '../images/buttons/buttons_sprite.png', 'base_brown@sprite', );
+$btn-annulla-sprite-name: 'btn-annulla@sprite';
+$btn-annulla-sprite-x: 0px;
+$btn-annulla-sprite-y: 0px;
+$btn-annulla-sprite-offset-x: 0px;
+$btn-annulla-sprite-offset-y: 0px;
+$btn-annulla-sprite-width: 86px;
+$btn-annulla-sprite-height: 35px;
+$btn-annulla-sprite-total-width: 117px;
+$btn-annulla-sprite-total-height: 95px;
+$btn-annulla-sprite-image: '../images/buttons/buttons_sprite.png';
+$btn-annulla-sprite: (0px, 0px, 0px, 0px, 86px, 35px, 117px, 95px, '../images/buttons/buttons_sprite.png', 'btn-annulla@sprite', );
+$btn-salva-sprite-name: 'btn-salva@sprite';
+$btn-salva-sprite-x: 0px;
+$btn-salva-sprite-y: 35px;
+$btn-salva-sprite-offset-x: 0px;
+$btn-salva-sprite-offset-y: -35px;
+$btn-salva-sprite-width: 74px;
+$btn-salva-sprite-height: 35px;
+$btn-salva-sprite-total-width: 117px;
+$btn-salva-sprite-total-height: 95px;
+$btn-salva-sprite-image: '../images/buttons/buttons_sprite.png';
+$btn-salva-sprite: (0px, 35px, 0px, -35px, 74px, 35px, 117px, 95px, '../images/buttons/buttons_sprite.png', 'btn-salva@sprite', );
 $dashboard-sprite-name: 'dashboard@sprite';
-$dashboard-sprite-x: 31px;
-$dashboard-sprite-y: 0px;
-$dashboard-sprite-offset-x: -31px;
-$dashboard-sprite-offset-y: 0px;
+$dashboard-sprite-x: 86px;
+$dashboard-sprite-y: 31px;
+$dashboard-sprite-offset-x: -86px;
+$dashboard-sprite-offset-y: -31px;
 $dashboard-sprite-width: 25px;
 $dashboard-sprite-height: 25px;
-$dashboard-sprite-total-width: 56px;
-$dashboard-sprite-total-height: 56px;
+$dashboard-sprite-total-width: 117px;
+$dashboard-sprite-total-height: 95px;
 $dashboard-sprite-image: '../images/buttons/buttons_sprite.png';
-$dashboard-sprite: (31px, 0px, -31px, 0px, 25px, 25px, 56px, 56px, '../images/buttons/buttons_sprite.png', 'dashboard@sprite', );
+$dashboard-sprite: (86px, 31px, -86px, -31px, 25px, 25px, 117px, 95px, '../images/buttons/buttons_sprite.png', 'dashboard@sprite', );
 $expand-sprite-name: 'expand@sprite';
 $expand-sprite-x: 0px;
-$expand-sprite-y: 31px;
+$expand-sprite-y: 70px;
 $expand-sprite-offset-x: 0px;
-$expand-sprite-offset-y: -31px;
+$expand-sprite-offset-y: -70px;
 $expand-sprite-width: 25px;
 $expand-sprite-height: 25px;
-$expand-sprite-total-width: 56px;
-$expand-sprite-total-height: 56px;
+$expand-sprite-total-width: 117px;
+$expand-sprite-total-height: 95px;
 $expand-sprite-image: '../images/buttons/buttons_sprite.png';
-$expand-sprite: (0px, 31px, 0px, -31px, 25px, 25px, 56px, 56px, '../images/buttons/buttons_sprite.png', 'expand@sprite', );
-$spritesheet-width: 56px;
-$spritesheet-height: 56px;
+$expand-sprite: (0px, 70px, 0px, -70px, 25px, 25px, 117px, 95px, '../images/buttons/buttons_sprite.png', 'expand@sprite', );
+$spritesheet-width: 117px;
+$spritesheet-height: 95px;
 $spritesheet-image: '../images/buttons/buttons_sprite.png';
-$spritesheet-sprites: ($base-square-sprite, $base-brown-sprite, $dashboard-sprite, $expand-sprite, );
-$spritesheet: (56px, 56px, '../images/buttons/buttons_sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($base-square-sprite, $base-brown-sprite, $btn-annulla-sprite, $btn-salva-sprite, $dashboard-sprite, $expand-sprite, );
+$spritesheet: (117px, 95px, '../images/buttons/buttons_sprite.png', $spritesheet-sprites, );
 
 

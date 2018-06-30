@@ -2,10 +2,9 @@
 .tg-modal {
   max-width: 100%;
   margin: 0 auto;
-  color: black;
+  color: white;
   text-align: center;
   display: none;
-  min-width: 700px;
   
   .tg-modal-title {
 
@@ -26,7 +25,9 @@
   }
 
   .tg-modal-content {
+    position: relative;
     background:#dabe8b;
+    z-index: 2;
   }
   
   .tg-modal-contentwrap {
@@ -55,6 +56,23 @@
   }
 }
 
+/* Modals Type */
+.editor .mfp-content {
+  width: 600px!important;
+
+  .tg-modal-buttons-group {
+    position: absolute;
+    margin: 0 auto;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    .tg-button {
+      float: left;
+    }
+  }
+}
+
 .mfp-ready {
   .tg-modal {
     display: block!important;
@@ -66,6 +84,8 @@
 }
 
 .mfp-content {
+  max-width: 90%;
+  margin: 0 auto;
   opacity: 0;
   transform: translateY(20px);
   transition: all .1s linear 
@@ -120,10 +140,4 @@
   top: -30px;
   right: -35px;
   color: white;
-}
-
-
-@include media-breakpoint-down(sm) {
-  .mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content {
-  } 
 }

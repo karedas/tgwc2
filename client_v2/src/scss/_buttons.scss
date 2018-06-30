@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     display: inline-block;
     border: none;
-    //text-indent: -9999px;
+    text-indent: -9999px;
     box-shadow: 0 1px 4px 0px black;
     transition: transform .1s linear;
     color: #fff;
@@ -32,6 +32,13 @@
             opacity: .9;
             transform: scale(.9);
         }
+    }
+
+    &.tg-button-annulla {
+        @include sprite($btn-annulla-sprite);
+    }
+    &.tg-button-salva {
+        @include sprite($btn-salva-sprite);
     }
 
 }

@@ -353,13 +353,15 @@ export default class TgGui {
     /* COOKIE LAW */
     showCookieLawDisclaimer() {
         let _ = this;
-        $('.tg-cookielawcontent').show();
-        // Cookie Law approved === true,  Start the Client
-        $('#cookieconsentbutton').on('click', function () {
+        
+        $(document).on('click','#cookieconsentbutton', function () {
             _.SaveStorage('cookie_consent', true);
-            $('.tg-cookielawcontent').remove();
+            $.magnificPopup.close();
             _.startClient();
         });
+
+        _.openPopup('cookielaw', "Cookie Policy", '');
+
     }
 
     removeCookieLawDisclaimer() {
@@ -727,7 +729,7 @@ export default class TgGui {
                 _.client_update.interfaceData.stato = true;
                 return '';
             } else {
-                console.log('render player status Inline');
+                _.renderPlayerInfoInInterface('stato', status_parse);
                 //return _.renderPlayerStatus(status_parse);
             }
             return '';
@@ -885,7 +887,7 @@ export default class TgGui {
         let _ = this;
 
         if (cmd == 'info') {
-            $('#charName').html(data.name + ' ' + data.ethn);
+            $('#charName').html(data.name);
 
             $('.tg-characteravatar img').attr('src', _.media_server_addr + data.image);
         } else if (cmd == 'stato') {
@@ -893,6 +895,16 @@ export default class TgGui {
                 $('.tg-infocharname .icon-conva').removeClass('d-none');
             } else {
                 $('.tg-infocharname .icon-conva').addClass('d-none');
+            }
+
+            $('#foodBarText .barC').width(data.food + '%');
+            $('#foodBarText i').text(data.food);
+            $('#drinkBarText .barC').width(data.drink + '%')
+            $('#drinkBarText i').text(data.drink);
+
+            /* Update Status */
+            if(data.conv == true) {
+                $('.pg-status').text('( sei convalescente! )');
             }
         }
     }
@@ -1103,11 +1115,12 @@ export default class TgGui {
         let _ = this;
         let res = '';
 
-        if (info.title)
+        if (info.title) {
             res += '<div class="room"><div class="lts"></div>' + _.capFirstLetter(info.title) + '<div class="rts"></div></div>';
+        }
         /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
 
-        res += _.renderDetailsInner(info, type, false);
+        res += _.renderDetailsInner(info, type);
 
         if (info.image)
             _.showImage($('#image-cont'), info.image);
@@ -1115,8 +1128,30 @@ export default class TgGui {
         return res;
     }
 
+    renderDetailInSecondOutput( info, type) {
+        let _ = this,
+            res = '',
+            container = $('.tg-output-detail').empty(),
+            details = $(_.replaceColors(_.renderDetailsInner(info, '')));
+
+        container.append(details);
+
+        if(type == 'room')
+        {
+            if(_.client_update.room.version < info.ver)
+            {
+                _.client_update.room.version = info.ver;
+                _.client_update.room.needed = false;
+            }
+        }
+        
+        return res;
+    }
+
     renderDetails(info, type) {
         return this.renderDetailsInText(info, type);
+        //return this.renderDetailInSecondOutput(info, type);
+
     }
 
     renderDetailsInner(info, type) {
@@ -1129,18 +1164,24 @@ export default class TgGui {
         }
         /* Print description */
         if (info.desc) {
+            textarea += '<div class="tg-description">';
             if (info.desc.base) {
-                if (type == 'room')
+                if (type == 'room') {
                     _.last_room_desc = _.formatText(info.desc.base, 'tg-descbase');
-                textarea += _.formatText(info.desc.base, 'tg-descbase-last');
-            } else if (info.desc.repeatlast && _.last_room_desc)
+                    textarea += _.formatText(info.desc.base, 'tg-descbase');
+                }
+            } else if (info.desc.repeatlast && _.last_room_desc) {
                 textarea += _.last_room_desc;
+            }
+            textarea += '</div>';
 
-            if (info.desc.details)
+            if (info.desc.details) {
                 textarea += _.formatText(info.desc.details, 'tg-yellow d-block tg-character-subdetail');
+            }
 
-            if (info.desc.equip)
-                textarea += _.formatText(info.desc.equip, 'tg-green d-block tg-character-subdetail');
+            if (info.desc.equip) {
+                textarea += _.formatText(info.desc.equip, 'tg-green d-block tg-character-subdetail');   
+            }
         }
 
         // if(inDialog) 
@@ -1682,6 +1723,12 @@ export default class TgGui {
             MP_callbacks = {};
 
         switch (content_ref) {
+            /* Cookie Law */
+            case 'cookielaw':
+                MP_type = 'ajax'; 
+                MP_src = './ajax/cookielawAlert.html';
+                break;
+
             /* ALPHA Client Version ALERT */
             case 'alpha_version':
                 if (_.client_options.alpha_approved) {
@@ -1725,8 +1772,9 @@ export default class TgGui {
             preloader: false,
             items: {
                 src: MP_src,
-                type: 'inline'
+                type: MP_type
             },
+            mainClass: content_ref,
             callbacks: MP_callbacks
         });
 
@@ -1734,6 +1782,8 @@ export default class TgGui {
             handle: '.tg-modal-title',
             containment: '.tg-area'
         });
+
+        return $.magnificPopup.instance;
     }
 
 
