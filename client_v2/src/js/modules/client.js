@@ -1051,15 +1051,21 @@ export default class TgGui {
 
     setSky(sky) {
         //let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
-        /* q = mattina nuvolosa */
-        /* 7 = sereno */
-        let skypos = ['q', 'N', 'w'];
+
+        /*  5: alba 
+            o: mattina
+
+            t: neve
+            q: mattina nuvolosa
+        */
+        let skypos = ['o', 'N', 'w', '5', 't', 'q'];
+
         console.log('%c' + sky , 'background: red; color: #fff');
         console.log(skypos.indexOf(sky));
-    if(sky != 'q' && sky != 'N' && sky !='w') { //test
+/*    if(sky != 'q' && sky != 'N' && sky !='w' && sky !=5) { //test
             sky = 'q';
         }
-
+*/
       $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
     }
 

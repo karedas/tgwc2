@@ -12,7 +12,7 @@ export default class MapDrawer {
         this.MAPCTX = null;
         this.maptileimg = null;
         this.mapshadowimg = [];
-        this.maprainimg = null;
+        this.MAPRAIN = null;
         this.MAPSNOW = null;
         this.mapfogimg = null;
         this.cursoronmap = false;
@@ -53,9 +53,7 @@ export default class MapDrawer {
         // _.mapfogimg.src = "<%= image_url_from_assets_file('interface/map/fog.png') %>";
 
         // // Rain
-        // _.maprainimg = new Image();
-        // _.maprainimg.src = "<%= image_url_from_assets_file('interface/map/rain.png') %>";
-
+        //_.makeRain();
         // Snow
         _.makeSnow();
         // Shadows
@@ -95,10 +93,10 @@ export default class MapDrawer {
         _.MAPCTX.clearRect(0, 0, canvaswidth, canvasheight);
 
         /* Cycle on the 2 layers */
-        for (var l = 0; l < 2; l++) {
-            var pos = 0;
-            for (var y = 0; y < _.maxmapwidth; y++) {
-                for (var x = 0; x < _.maxmapheight; x++) {
+        for (let l = 0; l < 2; l++) {
+            let pos = 0;
+            for (let y = 0; y < _.maxmapwidth; y++) {
+                for (let x = 0; x < _.maxmapheight; x++) {
                     if (x >= xoff && x < xlim && y >= yoff && y < ylim)
                         _.layermap[y][x] = map.data[l][pos++];
                     else {
@@ -107,11 +105,11 @@ export default class MapDrawer {
                 }
             }
 
-            for (var y = 0; y < _.maxmapwidth; y++) {
-                for (var x = 0; x < _.maxmapheight; x++) {
-                    var d = _.layermap[y][x];
+            for (let y = 0; y < _.maxmapwidth; y++) {
+                for (let x = 0; x < _.maxmapheight; x++) {
+                    let d = _.layermap[y][x];
                     if (d != 59) {
-                        var tpos = _.tileCoords(d);
+                        let tpos = _.tileCoords(d);
                         //Draw image before Clip
                         //_.MAPCTX.save();
                         //_.MAPCTX.beginPath();
@@ -124,10 +122,10 @@ export default class MapDrawer {
             }
 
             if (l == 0) {
-                for (var y = 0; y < _.maxmapwidth; y++) {
-                    for (var x = 0; x < _.maxmapheight; x++) {
+                for (let y = 0; y < _.maxmapwidth; y++) {
+                    for (let x = 0; x < _.maxmapheight; x++) {
                         if (_.layermap[y][x] == 59) {
-                            var clipx = 0,
+                            let clipx = 0,
                                 clipy = 0,
                                 swidth = 48,
                                 sheight = 48;
@@ -164,21 +162,22 @@ export default class MapDrawer {
         //     _.MAPCTX.drawImage(mapfogimg, 0, 0);
         // }
 
-        // if(map.r) {
-        //     _.MAPCTX.drawImage(maprainimg, 0, 0);
-        // }
-
-        if(map.s) {
-             $('#snowCanvas').show();
+        if (map.r) {
+            $('#rainCanvas').show();
+        } else {
+            $('#rainCanvas').hide();
         }
-        else {
+
+        if (map.s) {
+            $('#snowCanvas').show();
+        } else {
             $('#snowCanvas').hide();
         }
     }
 
     tileCoords(tilenum) {
-        var posx = 32 * (tilenum & 0x7f);
-        var posy = 32 * (tilenum >> 7);
+        let posx = 32 * (tilenum & 0x7f);
+        let posy = 32 * (tilenum >> 7);
         return [posx, posy];
     }
 
@@ -272,6 +271,57 @@ export default class MapDrawer {
     }
 
     makeRain() {
+        let _ = this;
+        _.MAPRAIN = $('#rainCanvas')[0];
+        let w = $('#rainCanvas').innerWidth();
+        let h = $('#rainCanvas').innerHeight();
+        console.log(_.MAPRAIN.getContext);
+            _.MAPRAIN =  _.MAPRAIN.getContext('2d');
+            _.MAPRAIN.strokeStyle = 'rgba(174,194,224,0.5)';
+            _.MAPRAIN.lineWidth = 1;
+            _.MAPRAIN.lineCap = 'round';
 
+
+            let init = [];
+            let maxParts = 1000;
+            for (let a = 0; a < maxParts; a++) {
+                init.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    l: Math.random() * 1,
+                    xs: -4 + Math.random() * 4 + 2,
+                    ys: Math.random() * 10 + 10
+                })
+            }
+
+            let particles = [];
+            for (let b = 0; b < maxParts; b++) {
+                particles[b] = init[b];
+            }
+
+            function draw() {
+                _.MAPRAIN.clearRect(0, 0, w, h);
+                for (let c = 0; c < particles.length; c++) {
+                    let p = particles[c];
+                    _.MAPRAIN.beginPath();
+                    _.MAPRAIN.moveTo(p.x, p.y);
+                    _.MAPRAIN.lineTo(p.x + p.l * p.xs, p.y + p.l * p.ys);
+                    _.MAPRAIN.stroke();
+                }
+                move();
+            }
+
+            function move() {
+                for (let b = 0; b < particles.length; b++) {
+                    let p = particles[b];
+                    p.x += p.xs;
+                    p.y += p.ys;
+                    if (p.x > w || p.y > h) {
+                        p.x = Math.random() * w;
+                        p.y = -20;
+                    }
+                }
+            }
+            setInterval(draw, 30);
     }
 }
