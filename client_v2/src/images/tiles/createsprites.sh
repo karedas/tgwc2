@@ -19,8 +19,6 @@ mkdir -p small
 
 echo "Generating sprites"
 ./scripts/generatetiles.sh large/ tiles.png
-./scripts/generatetiles.sh medium/ tiles_m.png
-./scripts/generatetiles.sh small/ tiles_s.png
 
 echo "Removing temporary dirs"
 rm -rf medium small

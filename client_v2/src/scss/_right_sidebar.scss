@@ -1,5 +1,6 @@
 .tg-rightside{
     background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
+    overflow: hidden;
     .tg-rightside-wrap {
         height: 100%;
         width: 100%;
@@ -20,10 +21,24 @@
 
         
         .tg-map-box {
+            position: relative;
             background-color: #000;
             border-radius: 50%;
             position: absolute;
             cursor: pointer;
+            
+            &:after {
+                display: block;
+                content: '';
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                border-radius: 50%;
+                z-index: 6;
+                box-shadow: inset 0 0 20px 2px black;
+            }
+
 
             canvas {
                 background-color: #000;
@@ -31,6 +46,47 @@
                 max-height: 100%;
                 border-radius: 50%;
             }
+
+            .canvas-snow {
+                display: none;
+                position: absolute;
+                z-index: 5;
+                height: 100%;
+                width: 100%;
+                background-color: transparent;
+            }
+        }
+    }
+
+    .tg-directions {
+        position: absolute;
+        z-index: 4;
+        width: 100%;
+        height: 100%;
+        .tg-dir {
+            position: absolute;
+        }
+
+        
+        .dir-nord {
+            @include sprite($nord-dir-sprite);
+            top: -42px;
+            left: 76px;
+        }
+        .dir-est {
+            @include sprite($est-dir-sprite);
+            top: 78px;
+            right: -38px;
+        }
+        .dir-sud {
+            @include sprite($sud-dir-sprite);
+            left: 76px;
+            bottom: -36px;
+        }
+        .dir-ovest {
+            @include sprite($ovest-dir-sprite);
+            top: 78px;
+            left: -40px;
         }
     }
 
@@ -65,6 +121,7 @@
                 width: 222px;
             }
         }
+
     }
 
     @include media-breakpoint-up(xl) {
@@ -75,15 +132,42 @@
         
         .tg-map {
             width: 288px;
+            height: 288px;
             padding-left: 47px;
             padding-right: 47px;
             
             .tg-map-box {      
                 width: auto;    
-                top: 116px;              
+                top: 116px;        
+                width: 288px;
+                height: 288px;      
                 max-width:  100%;
                 max-height: 100%;
 
+            }
+        }
+        
+        .tg-directions {
+
+            .dir-nord {
+                @include sprite($nord-dir-sprite);
+                top: -42px;
+                left: 108px;
+            }
+            .dir-est {
+                @include sprite($est-dir-sprite);
+                top: 108px;
+                right: -38px;
+            }
+            .dir-sud {
+                @include sprite($sud-dir-sprite);
+                left: 108px;
+                bottom: -36px;
+            }
+            .dir-ovest {
+                @include sprite($ovest-dir-sprite);
+                top: 108px;
+                left: -40px;
             }
         }
     }

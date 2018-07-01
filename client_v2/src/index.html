@@ -161,12 +161,12 @@
                               <span class="green barC movebar"></span>
                             </div>
                             <div class="tg-extrabars">
-                              <div  id="foodBarText" class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
+                              <div  id="foodBarText" class="barcont barthin" data-toggle="tooltip" title="Fame">
                                 <span class="tg-statusbar-text">Fame:
                                   <i></i> / 100</span>
                                 <span class="orange barC hungrybar"></span>
                               </div>
-                              <div id="drinkBarText" class="barcont barthin" data-toggle="tooltip" title="Punti Movimento">
+                              <div id="drinkBarText" class="barcont barthin" data-toggle="tooltip" title="Sete">
                                 <span class="tg-statusbar-text">Sete:
                                   <i></i> / 100</span>
                                 <span class="blue barC thirstbar"></span>
@@ -210,7 +210,15 @@
         <div class="tg-rightside d-none d-md-flex">
           <div class="tg-rightside-wrap">
             <div class="tg-map">
-              <div id="tgMap" class="tg-map-box"></div>
+              <div id="tgMap" class="tg-map-box">
+                <canvas id="snowCanvas" class="canvas-snow"></canvas>
+                <div class="tg-directions">
+                  <div id="nord" class="tg-dir dir-nord"></div>
+                  <div id="est" class="tg-dir dir-est"></div>
+                  <div id="sud" class="tg-dir dir-sud"></div>
+                  <div id="ovest" class="tg-dir dir-ovest"></div>
+                </div>
+              </div>
             </div>
             <div class="tg-sky">
               <div id="sky"></div>
@@ -236,7 +244,7 @@
       <div class="tg-modal-contentwrap tg-box b-paper tg-box">
         <div class="tg-box">
           <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
-          <div class="tg-txt-maxcharcount"></div>
+          <div id="editorMaxCharsCount" class="tg-txt-maxcharcount"></div>
         </div>
         <div class="tg-modal-buttons-group">
             <button type="button" id="abortEditor" class="tg-button tg-button-annulla">Annulla</button>

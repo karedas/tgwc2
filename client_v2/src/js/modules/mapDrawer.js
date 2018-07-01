@@ -13,7 +13,7 @@ export default class MapDrawer {
         this.maptileimg = null;
         this.mapshadowimg = [];
         this.maprainimg = null;
-        this.mapsnowimg = null;
+        this.MAPSNOW = null;
         this.mapfogimg = null;
         this.cursoronmap = false;
         // this.mapsizedata = {
@@ -39,7 +39,7 @@ export default class MapDrawer {
     prepareCanvas(imagesPath) {
         let _ = this;
 
-        
+
         $(_.container).append('<canvas id="mapcont" width="' + (_.maxmapwidth * _.maptilewidth) + '" height="' + (_.maxmapheight * _.maptileheight) + '"></canvas>');
 
         _.MAPCTX = $('#mapcont')[0].getContext('2d');
@@ -56,22 +56,20 @@ export default class MapDrawer {
         // _.maprainimg = new Image();
         // _.maprainimg.src = "<%= image_url_from_assets_file('interface/map/rain.png') %>";
 
-        // // Snow
-        // _.mapsnowimg = new Image();
-        // _.mapsnowimg.src = "<%= image_url_from_assets_file('interface/map/snow.png') %>";
+        // Snow
+        _.makeSnow();
+        // Shadows
+        _.mapshadowimg[2] = new Image();
+        _.mapshadowimg[2].src = imagesPath + '/interface/shadow1.png';
 
-        // // Shadows
-        // _.mapshadowimg[2] = new Image();
-        // _.mapshadowimg[2].src = "<%= image_url_from_assets_file('interface/map/shadow1.png') %>";
+        _.mapshadowimg[1] = new Image();
+        _.mapshadowimg[1].src = imagesPath + '/interface/shadow2.png';
 
-        // _.mapshadowimg[1] = new Image();
-        // _.mapshadowimg[1].src = "<%= image_url_from_assets_file('interface/map/shadow2.png') %>";
+        _.mapshadowimg[0] = new Image();
+        _.mapshadowimg[0].src = imagesPath + '/interface/shadow3.png';
 
-        // _.mapshadowimg[0] = new Image();
-        // _.mapshadowimg[0].src = "<%= image_url_from_assets_file('interface/map/shadow3.png') %>";
-
-        // _.mapshadowtile = new Image();
-        // _.mapshadowtile.src = "<%= image_url_from_assets_file('interface/map/shadowtile.png') %>";
+        _.mapshadowtile = new Image();
+        _.mapshadowtile.src = imagesPath + '/interface/shadowtile.png';
     }
 
     updateMap(map) {
@@ -97,7 +95,7 @@ export default class MapDrawer {
         _.MAPCTX.clearRect(0, 0, canvaswidth, canvasheight);
 
         /* Cycle on the 2 layers */
-        for (var l =0; l < 2; l++) {
+        for (var l = 0; l < 2; l++) {
             var pos = 0;
             for (var y = 0; y < _.maxmapwidth; y++) {
                 for (var x = 0; x < _.maxmapheight; x++) {
@@ -120,12 +118,12 @@ export default class MapDrawer {
                         // _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
                         // _.MAPCTX.clip();
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
-                        
+
                     }
                 }
             }
 
-           /* if (l == 0) {
+            if (l == 0) {
                 for (var y = 0; y < _.maxmapwidth; y++) {
                     for (var x = 0; x < _.maxmapheight; x++) {
                         if (_.layermap[y][x] == 59) {
@@ -151,17 +149,17 @@ export default class MapDrawer {
                             if (x == (_.maxmapwidth - 1) || _.layermap[y][x + 1] == 59) {
                                 swidth -= 8;
                             }
-                            //_.MAPCTX.drawImage(_.mapshadowtile, clipx, clipy, swidth, sheight, x * _.maptilewidth - 8 + clipx, y * _.maptileheight - 8 + clipy, swidth, sheight);
+                            _.MAPCTX.drawImage(_.mapshadowtile, clipx, clipy, swidth, sheight, x * _.maptilewidth - 8 + clipx, y * _.maptileheight - 8 + clipy, swidth, sheight);
                         }
                     }
                 }
-            }*/
+            }
         }
 
-        // if(mapshadowimg[map.l]) {
-        //     _.MAPCTX.drawImage(mapshadowimg[map.l], 96 - 32*map.l, 96 - 32*map.l);
-        // }
-	
+        if (_.mapshadowimg[map.l]) {
+            _.MAPCTX.drawImage(_.mapshadowimg[map.l], 96 - 32 * map.l, 96 - 32 * map.l);
+        }
+
         // if(map.f) {
         //     _.MAPCTX.drawImage(mapfogimg, 0, 0);
         // }
@@ -170,14 +168,110 @@ export default class MapDrawer {
         //     _.MAPCTX.drawImage(maprainimg, 0, 0);
         // }
 
-        // if(map.s) {
-        //     _.MAPCTX.drawImage(mapsnowimg, 0, 0);
-        // }
+        if(map.s) {
+             $('#snowCanvas').show();
+        }
+        else {
+            $('#snowCanvas').hide();
+        }
     }
 
     tileCoords(tilenum) {
         var posx = 32 * (tilenum & 0x7f);
         var posy = 32 * (tilenum >> 7);
         return [posx, posy];
+    }
+
+
+    makeSnow() {
+
+        /* --- config start --- */
+
+        let snowCanvasId = "snowCanvas", // id of the canvas to use
+            framerate = 40, // which fps rate to use, this is not followed exactly
+            flakeNumberModifier = 1.0, // change this to change the number of flakes
+            fallSpeedModifier = 0.5; // falling speed
+
+        /* ---- config end ---- */
+
+        let canvas = document.getElementById(snowCanvasId),
+            context = canvas.getContext("2d"),
+            width = canvas.width,
+            height = canvas.height,
+            numFlakes = Math.min(width, 300) * height / 400 * flakeNumberModifier,
+            flakes = [],
+            TWO_PI = Math.PI * 2,
+            radHeight = 40;
+        let flake = document.createElement("CANVAS"),
+            flakeContext = flake.getContext("2d");
+
+        // create flake grafic
+        flake.width = 8;
+        flake.height = 8;
+        flakeContext.fillStyle = "#fff";
+        flakeContext.beginPath();
+        flakeContext.arc(4, 4, 4, 0, TWO_PI);
+        flakeContext.fill();
+
+        // init snowflakes
+        for (let x = 0; x < numFlakes; x++) {
+            flakes[x] = getRandomFlake(true);
+        }
+
+        // start tick at specified fps
+        window.setInterval(tick, Math.floor(1000 / framerate));
+
+        // main routine
+        function tick() {
+            let posX = 0,
+                imageData;
+
+            // reset canvas for next frame
+            context.clearRect(0, 0, width, height);
+
+            for (let x = 0; x < numFlakes; x++) {
+                // calculate changes to snowflake
+                posX = flakes[x].x + Math.sin(flakes[x].yMod + flakes[x].y / radHeight * (5 - flakes[x].size)) * flakes[x].waveSize * (1 - flakes[x].size);
+                flakes[x].y += flakes[x].size * fallSpeedModifier; // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
+
+                // if snowflake is out of bounds, reset
+                if (flakes[x].y > height + 5) {
+                    flakes[x] = getRandomFlake();
+                }
+
+                // draw snowflake
+                context.globalAlpha = (flakes[x].size - 1) / 3;
+                context.drawImage(flake, posX, flakes[x].y, flakes[x].size, flakes[x].size);
+            }
+
+            // repeat 300px wide strip with snowflakes to fill whole canvas
+            if (width > 300) {
+                context.globalAlpha = 1;
+                context.drawImage(canvas, 300, 0);
+                if (width > 600) context.drawImage(canvas, 600, 0);
+                if (width > 1200) context.drawImage(canvas, 1200, 0);
+                if (width > 2400) context.drawImage(canvas, 2400, 0);
+            }
+        }
+
+        // randomize flake data
+        function getRandomFlake(init) {
+            return {
+                x: range(10, 310),
+                y: init ? range(-5, height + 5) : -5,
+                size: Math.max(range(1, 4), 2),
+                yMod: range(0, 150),
+                waveSize: range(1, 4)
+            };
+        }
+
+        // get a random number inside a range
+        function range(start, end) {
+            return Math.random() * (end - start) + start;
+        }
+    }
+
+    makeRain() {
+
     }
 }

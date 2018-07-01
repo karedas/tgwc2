@@ -204,6 +204,7 @@ export default class TgGui {
             });
 
             _.socket.on('disconnect', function () {
+                console.log('disconnect');
                 _.setDisconnect();
                 _.connectToServer();
                 if (!_.connectionInfo.error) {
@@ -915,18 +916,30 @@ export default class TgGui {
 
     openEditor(maxchars, title, text) {
         let _ = this;
-        $('#editorTextArea').val(text);
+        
+        let textarea = $('#editorTextArea').val(text);
         $('#editorTitle').text(title);
 
         _.openPopup('editor');
 
-        $('#abortEditor').one('click', function () {
+        $('#abortEditor, #mfp-close').one('click', function () {
             _.abortEdit();
             _.closeEditor();
         });
         $('#saveEditor').one('click', function () {
             _.saveEdit(80);
             _.closeEditor();
+        });
+
+        // Max Chars counter
+        let text_max = maxchars;
+        $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
+        textarea.attr('maxlength', maxchars);
+        textarea.keyup(function() {
+            let text_length = $(this).val().length;
+            let text_remaining = text_max - text_length;
+    
+            $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
         });
 
         _.in_editor = true;
@@ -1037,9 +1050,17 @@ export default class TgGui {
      */
 
     setSky(sky) {
-        console.log('setsky');
-        let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
-        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
+        //let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
+        /* q = mattina nuvolosa */
+        /* 7 = sereno */
+        let skypos = ['q', 'N', 'w'];
+        console.log('%c' + sky , 'background: red; color: #fff');
+        console.log(skypos.indexOf(sky));
+    if(sky != 'q' && sky != 'N' && sky !='w') { //test
+            sky = 'q';
+        }
+
+      $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
     }
 
     /* *****************************************************************************
@@ -1068,12 +1089,7 @@ export default class TgGui {
 
 
     setDoors(doors) {
-        console.log('setdoors');
-        let _ = this;
-        for (let d = 0; d < this.dir_names.length; ++d) {
-            $('#' + _.dir_names[d]).css('background-position', -33 * doors[d]);
-            _.dir_status = doors;
-        }
+        this.dir_status = doors;
     }
 
     /* *****************************************************************************
@@ -1515,6 +1531,7 @@ export default class TgGui {
         _.keyboardMapInit();
         _.focusInput();
         _.mapInit();
+        _.doorsInit();
         _.buttonsEventInit();
         _.main();
     }
@@ -1639,11 +1656,33 @@ export default class TgGui {
     /* -------------------------------------------------
      *  MAP 
      * -------------------------------------------------*/
+
     mapInit() {
         let _ = this;
         _.MAP_OBJECT = new Map();
         _.MAP_OBJECT.init();
         _.MAP_OBJECT.prepareCanvas(_.images_path);
+    }
+
+    /* -------------------------------------------------
+     *  DOORS 
+     * -------------------------------------------------*/
+
+    doorsInit(){
+        let _ = this;
+        for(let d = 0; d < _.dir_names.length; ++d)
+            $('#' + _.dir_names[d]).on('click', {dir:d}, function(event) {
+
+                if (_.inGame    ) {
+                    if(event.which == 1) {
+                        _.goDir(event.data.dir);
+                } 
+                else if(event.which == 3) {
+                    event.preventDefault();
+                    _.closeLockDoor(event.data.dir);
+                }
+            }
+        });
     }
 
     /* -------------------------------------------------
@@ -1718,6 +1757,7 @@ export default class TgGui {
         let _ = this;
 
         let MP_type = 'inline',
+            MP_close_button = false,
             MP_closeOnBgClick = false,
             MP_src = content,
             MP_callbacks = {};
@@ -1744,16 +1784,24 @@ export default class TgGui {
                 break;
 
             case 'notizie':
-                MP_closeOnBgClick = true;
+                MP_close_button = true;
                 MP_src = '<div class="tg-modal">zona notizie</div>';
                 MP_callbacks.close = function () {
                     _.sendInput();
                 }
                 break;
-
+            
             case 'editor':
                 MP_src = '#editorDialog';
-                MP_callbacks.close = function () {
+                MP_close_button = true,
+                MP_callbacks.open = function(){
+                    $('.mfp-close').on('click', function(event){
+                        event.preventDefault();
+                        _.abortEdit();
+                        $.magnificPopup.close();
+                    });
+                }
+                MP_callbacks.close = function (e) {
                     _.closeEditor();
                 };
                 break;
@@ -1766,7 +1814,7 @@ export default class TgGui {
 
         // Open Modal / Popup
         $.magnificPopup.open({
-            showCloseBtn: false,
+            showCloseBtn: MP_close_button,
             closeOnBgClick: MP_closeOnBgClick,
             type: MP_type,
             preloader: false,

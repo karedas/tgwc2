@@ -38,7 +38,6 @@
         left: 0;
         display: table;
         color: #d2d2d2; //  default color
-        text-align: justify;
         padding: 8px 20px 8px 8px;
 
         .iconimg {
@@ -71,7 +70,7 @@
             padding-bottom: .2em;
         }
 
-        &:not(:first-of-type) .room {
+        &:first-of-type .room {
             padding-top: .5em;
         }
 

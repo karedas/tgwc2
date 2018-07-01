@@ -137,6 +137,7 @@
 .tg-extraboard {
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
     padding: 6px 0 6px 6px;
+
     .tg-extraboard-wrap {
         padding-left: .5em;
         height: 100%;
@@ -193,6 +194,7 @@
         background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
         padding-left: 5px;
         margin-left: 1px;
+        margin-right: 1px;
 
         .tg-button {
             margin-left: 1px;
