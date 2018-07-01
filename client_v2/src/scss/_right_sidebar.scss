@@ -104,13 +104,15 @@
 
     @include media-breakpoint-down(xl) {
         .tg-sky {
+            
             height: 162px;
             top: 10px;
             left: 24px;
             right: 10px;
             z-index: 2;
+            position: absolute;
+            
         }
-        
         .tg-map {
             width: 222px;
             padding-left:35px;

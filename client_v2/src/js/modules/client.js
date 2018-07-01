@@ -1054,11 +1054,11 @@ export default class TgGui {
 
         /*  5: alba 
             o: mattina
-
+            i: tramonto
             t: neve
             q: mattina nuvolosa
         */
-        let skypos = ['o', 'N', 'w', '5', 't', 'q'];
+        let skypos = ['o', 'N', 'w', 'i', 't', 'q'];
 
         console.log('%c' + sky , 'background: red; color: #fff');
         console.log(skypos.indexOf(sky));
