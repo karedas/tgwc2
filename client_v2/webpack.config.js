@@ -40,7 +40,6 @@ module.exports = function (prop) {
         externals: {
             jquery: "jQuery",
             $: "jQuery",
-            bootstrap: "bootstrap"
         },
 
         entry: {

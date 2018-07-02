@@ -5,11 +5,12 @@ import TgClient from "modules/client.js";
 
 (function(document, window) {
     $.ajaxSetup({ cache: true });
+
+    // enable any bootstrap tooltip
+    
     function onReady() {
-        console.log('client');
         let client = new TgClient();
         client.init();   
-
     };
 
     // TODO: Google Analytics

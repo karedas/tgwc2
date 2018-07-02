@@ -3,12 +3,11 @@
 .tg-navbar {
     background-image: url($imgPath + '/interface/navbar_background.png');
     background-repeat: repeat-x;
-    height: 38px;
-    display: flex;
-    padding-top: 4px;
-    box-sizing: border-box;
+    width: 100%;
+    height: 18px;
+    padding: 5px .5rem 18px;
+    box-sizing: content-box;
     text-transform: uppercase;
-    font-size: 10px;
 
     ul {
         margin-bottom: 0;
@@ -55,6 +54,27 @@
         background-color: rgb(205, 242, 253);
     }
     
+    /* Search Form*/
+    .tg-helpsearch {
+        input[type="search"], button{
+            padding: 0 .75rem;
+            border: 0;
+        }
+        input {
+            background-color: #2f2314;
+            color: white;
+        }
+        
+        button[type="submit"] {
+            background-color: transparent;
+            @include sprite($submitcerca-sprite);
+            padding: 0;
+            text-indent: -9999px;
+        }
+
+    }
+
+    /* Server Status*/
     .tg-serverstatus {
         width: 15px;
         height: 100%;

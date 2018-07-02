@@ -75,23 +75,41 @@
   }
 }
 
-/* Modals Type */
+/* MODALS CONTENT */
 
-.editor .mfp-content {
-  width: 600px !important;
-  .tg-modal-icon:after{
-    @include sprite($editor_lapis-sprite);
+/* ==== Nofeature */
+.modal-nofeature {
+  .mfp-content {
+    background: black;
+    padding: .75rem 1.2rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
   }
+}
+/* ==== Editor */
+.modal-editor  {
+  .mfp-close {
+    top: -12px;
+    right: -8px;
+  }
+  .mfp-content {
+    width: 600px !important;
 
-  .tg-modal-buttons-group {
-    position: absolute;
-    margin: 0 auto;
-    bottom: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 4;
-    .tg-button {
-      float: left;
+    .tg-modal-icon:after {
+      @include sprite($editor_lapis-sprite);
+    }
+
+    .tg-modal-buttons-group {
+      position: absolute;
+      margin: 0 auto;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      .tg-button {
+        float: left;
+      }
     }
   }
 }
@@ -170,7 +188,7 @@
   opacity: 1;
   text-indent: -9999px;
   display: block;
-  top: 8px;
+  top: -12px;
   right: -8px;
   @include sprite($close-sprite);
 }

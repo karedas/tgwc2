@@ -1,4 +1,5 @@
 // ========== NPM Modules
+import 'bootstrap';
 import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
@@ -9,7 +10,7 @@ import 'draggabilly/dist/draggabilly.pkgd.js';
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
 //============ Custom
-import FacebookSDK from 'facebookSdk';
+//import FacebookSDK from 'facebookSdk';
 import Preloader from 'preloader';
 import Map from 'mapDrawer';
 
@@ -18,7 +19,7 @@ import Map from 'mapDrawer';
 export default class TgGui {
 
     constructor(options) {
-
+        
         this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = 'http://play.thegatemud.it/images/';
@@ -60,7 +61,7 @@ export default class TgGui {
             shortcuts: [],
             login: {},
             interface: {
-                dashboard: 0 
+                dashboard: 0
             },
             details: {
                 compact: false,
@@ -159,8 +160,9 @@ export default class TgGui {
     startClient() {
         let _ = this;
 
-        let facebookSDK = new FacebookSDK();
+       /* let facebookSDK = new FacebookSDK();
         facebookSDK.load();
+        */
         // Init the Session
         _.initSessionData();
         // Start Server Connection
@@ -178,15 +180,13 @@ export default class TgGui {
         let _ = this;
 
         return new Promise(function (resolve, reject) {
-
-                
             if (_.socket) {
                 _.socket.destroy();
                 delete _.socket;
                 _.socket = null;
             }
-            // Initialize Connection to the WebSocket
 
+            // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
                 'reconnection': true,
                 'force new connection': true,
@@ -212,7 +212,7 @@ export default class TgGui {
                 }
             });
 
-            _.socket.on('reconnect_attempt', function(){
+            _.socket.on('reconnect_attempt', function () {
                 console.log('is a reconnect');
             });
 
@@ -264,6 +264,8 @@ export default class TgGui {
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
 
                         clientPreloader.init().then(function () {
+                            //reset login message
+                            _.loginNetworkActivityMessage("");
                             _.hideLoginPanel();
                             _.loadInterface();
                             _.completeHandshake();
@@ -347,15 +349,14 @@ export default class TgGui {
         let _ = this;
         _.isConnected = false;
         _.inGame = false;
-        //TODO: $(window).unbind('beforeunload', leavePageAlertMessage);
         $('.tg-loginform').show();
     }
 
     /* COOKIE LAW */
     showCookieLawDisclaimer() {
         let _ = this;
-        
-        $(document).on('click','#cookieconsentbutton', function () {
+
+        $(document).on('click', '#cookieconsentbutton', function () {
             _.SaveStorage('cookie_consent', true);
             $.magnificPopup.close();
             _.startClient();
@@ -493,6 +494,7 @@ export default class TgGui {
         this.loginNetworkActivityMessage(msg);
     }
 
+    
     loginNetworkActivityMessage(msg) {
         $('.tg-loginstatus').text(msg)
     }
@@ -501,6 +503,22 @@ export default class TgGui {
         $('.tg-serverstatus').text(msg)
         $('body').attr('data-serverstatus', status);
     }
+
+    disconnectFromServer() {
+        let _ = this;
+        if(_.isConnected)
+        {
+            if(_.inGame)
+                _.sendToServer(_.historyPush('fine'));
+            else
+                _.socket.disconnect();
+        }
+    }
+
+
+    /* *****************************************************************************
+    * MESSAGES PARSE
+    */
 
     preparseText(msg) {
 
@@ -520,20 +538,20 @@ export default class TgGui {
         let _ = this,
             pos;
 
-            console.log(msg);
+        console.log(msg);
 
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
-             console.log('input type password enabled');
-             // _.inputPassword();
-             return '';
-         });
+            console.log('input type password enabled');
+            // _.inputPassword();
+            return '';
+        });
 
         //Show text (normal input)
         msg = msg.replace(/&e\n*/gm, function () {
-             console.log('input type text enabled');
-             //inputText();
-             return '';
+            console.log('input type text enabled');
+            //inputText();
+            return '';
         });
 
         // Sky picture
@@ -581,10 +599,10 @@ export default class TgGui {
 
         // Image in side frame (with gamma)
         msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
-             console.log('show image with gamma');
-        //     // var image = image.slice(6, image.lastIndexOf('"')).split(',');
-        //     // showImageWithGamma(image[0], image[1], image[2], image[3]);
-        return '';
+            console.log('show image with gamma');
+            //     // var image = image.slice(6, image.lastIndexOf('"')).split(',');
+            //     // showImageWithGamma(image[0], image[1], image[2], image[3]);
+            return '';
         });
 
         // Image in side frame
@@ -712,7 +730,7 @@ export default class TgGui {
         msg = msg.replace(/&!pginf\{[\s\S]*?\}!/gm, function (info) {
             let info_parse = $.parseJSON(info.slice(7, -1));
             if (!_.client_update.interfaceData.info) {
-                _.renderPlayerInfoInInterface('info', info_parse);
+                _.setDataInterface('info', info_parse);
                 _.client_update.interfaceData.info = true;
                 return '';
             } else {
@@ -726,11 +744,11 @@ export default class TgGui {
         msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
             let status_parse = $.parseJSON(status.slice(6, -1));
             if (!_.client_update.interfaceData.stato) {
-                _.renderPlayerInfoInInterface('stato', status_parse);
+                _.setDataInterface('stato', status_parse);
                 _.client_update.interfaceData.stato = true;
                 return '';
             } else {
-                _.renderPlayerInfoInInterface('stato', status_parse);
+                _.setDataInterface('stato', status_parse);
                 //return _.renderPlayerStatus(status_parse);
             }
             return '';
@@ -828,7 +846,7 @@ export default class TgGui {
 
     handleRefresh(r) {
         let _ = this;
-        if(this.isModalOpen) {
+        if (this.isModalOpen) {
             _.sendToServer(r.cmd);
         }
         return '';
@@ -884,13 +902,19 @@ export default class TgGui {
         return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
     }
 
-    renderPlayerInfoInInterface(cmd, data) {
+    setDataInterface(cmd, data) {
         let _ = this;
 
         if (cmd == 'info') {
+            // Name
             $('#charName').html(data.name);
+            // Character Image
+            if(data.image) {
+                $('.tg-characteravatar img').attr('src', _.media_server_addr + data.image);
+            }
+            /* Info Tooltips */
+            $('.tg-characteravatar').attr('title', data.name + ' ' + data.title);
 
-            $('.tg-characteravatar img').attr('src', _.media_server_addr + data.image);
         } else if (cmd == 'stato') {
             if (data.conv) {
                 $('.tg-infocharname .icon-conva').removeClass('d-none');
@@ -898,15 +922,18 @@ export default class TgGui {
                 $('.tg-infocharname .icon-conva').addClass('d-none');
             }
 
+            /* Healt, Move, Food and Drink bars */
             $('#foodBarText .barC').width(data.food + '%');
             $('#foodBarText i').text(data.food);
             $('#drinkBarText .barC').width(data.drink + '%')
             $('#drinkBarText i').text(data.drink);
 
-            /* Update Status */
-            if(data.conv == true) {
+            /* Set Character Status */
+            if (data.conv == true) {
                 $('.pg-status').text('( sei convalescente! )');
             }
+
+           
         }
     }
 
@@ -916,7 +943,7 @@ export default class TgGui {
 
     openEditor(maxchars, title, text) {
         let _ = this;
-        
+
         let textarea = $('#editorTextArea').val(text);
         $('#editorTitle').text(title);
 
@@ -935,10 +962,10 @@ export default class TgGui {
         let text_max = maxchars;
         $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
         textarea.attr('maxlength', maxchars);
-        textarea.keyup(function() {
+        textarea.keyup(function () {
             let text_length = $(this).val().length;
             let text_remaining = text_max - text_length;
-    
+
             $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
         });
 
@@ -960,7 +987,7 @@ export default class TgGui {
     }
 
     saveEdit(maxLinelen) {
-        
+
         let _ = this;
 
         let text = $('#editorTextArea').val().split('\n');
@@ -975,8 +1002,7 @@ export default class TgGui {
                 if (slicepos > 0) {
                     currline = remText.slice(0, slicepos) + '\\';
                     remText = remText.slice(slicepos);
-                }
-                else {
+                } else {
                     currline = remText;
                     remText = '';
                 }
@@ -1060,13 +1086,13 @@ export default class TgGui {
         */
         let skypos = ['o', 'N', 'w', 'i', 't', 'q'];
 
-        console.log('%c' + sky , 'background: red; color: #fff');
+        console.log('%c' + sky, 'background: red; color: #fff');
         console.log(skypos.indexOf(sky));
-/*    if(sky != 'q' && sky != 'N' && sky !='w' && sky !=5) { //test
-            sky = 'q';
-        }
-*/
-      $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
+        /*    if(sky != 'q' && sky != 'N' && sky !='w' && sky !=5) { //test
+                    sky = 'q';
+                }
+        */
+        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
     }
 
     /* *****************************************************************************
@@ -1150,7 +1176,7 @@ export default class TgGui {
         return res;
     }
 
-    renderDetailInSecondOutput( info, type) {
+    renderDetailInSecondOutput(info, type) {
         let _ = this,
             res = '',
             container = $('.tg-output-detail').empty(),
@@ -1158,15 +1184,13 @@ export default class TgGui {
 
         container.append(details);
 
-        if(type == 'room')
-        {
-            if(_.client_update.room.version < info.ver)
-            {
+        if (type == 'room') {
+            if (_.client_update.room.version < info.ver) {
                 _.client_update.room.version = info.ver;
                 _.client_update.room.needed = false;
             }
         }
-        
+
         return res;
     }
 
@@ -1202,7 +1226,7 @@ export default class TgGui {
             }
 
             if (info.desc.equip) {
-                textarea += _.formatText(info.desc.equip, 'tg-green d-block tg-character-subdetail');   
+                textarea += _.formatText(info.desc.equip, 'tg-green d-block tg-character-subdetail');
             }
         }
 
@@ -1246,28 +1270,28 @@ export default class TgGui {
                 let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]);
                 let tradd = 'class="tg-element"',
                     tdadd = '';
-    
-                
+
+
                 if (is_group) {
-    
-                    tradd = ' class="grpcoll" data-mrn="' + l.mrn[l.mrn.length - 1]+'"';
-    
+
+                    tradd = ' class="grpcoll" data-mrn="' + l.mrn[l.mrn.length - 1] + '"';
+
                     if (opened) {
                         tradd += ' style="display:none"';
                     }
-    
+
                     tdadd += '<div class="expicon"></div>';
                 }
-    
-                
+
+
                 txt += '<div ' + tradd + '>';
-                    txt += '<div>' + tdadd + '</div>';
-                    txt += '<div class="tg-mobicon">' + _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type) + '</div>';
-                    txt += '<div class="tg-mob-description">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
+                txt += '<div>' + tdadd + '</div>';
+                txt += '<div class="tg-mobicon">' + _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type) + '</div>';
+                txt += '<div class="tg-mob-description">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
                 txt += '</div>';
                 if (is_group) {
                     txt += '<div class="grpexp"';
-    
+
                     if (!opened) {
                         txt += ' style="display:none"';
                     }
@@ -1278,7 +1302,7 @@ export default class TgGui {
                         txt += '<div><div></div><div><div>' + _.renderIcon(l.icon, null, cont_type, l.cntnum, null, /* 'interact '+type */ null) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc) + '</div></div>';
                     txt += '</div>';
                 }
-    
+
             }
             if (cont.title && (txt.length > 0 || cont.show === true)) {
                 res += '<p>' + cont.title;
@@ -1306,7 +1330,7 @@ export default class TgGui {
         let parags = text.replace(/\r/gm, '').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
 
         $.each(parags, function (i, p) {
-            if(p != '') {
+            if (p != '') {
                 page += '<div' + (style ? ' class="' + style + '"' : '') + '>' + p + '</div>';
             }
         });
@@ -1532,6 +1556,8 @@ export default class TgGui {
         $('.tg-main').addClass('d-flex');
         /* Interface Modules List.*/
         _.genericEvents();
+        _.mainNavBarInit();
+        _.tooltipInit();
         _.inputInit();
         _.outputInit();
         _.keyboardMapInit();
@@ -1543,6 +1569,31 @@ export default class TgGui {
     }
 
     /* -------------------------------------------------
+     * MAIN NAVBAR
+     * -------------------------------------------------*/
+
+    mainNavBarInit() {
+        let _ = this;
+        $('#tgSearchHelp').on('submit', function(e){
+            e.preventDefault();
+            _.openPopup('nofeature');
+        });
+    }
+
+
+    /* -------------------------------------------------
+     * TOOLTIP
+     * -------------------------------------------------*/
+
+    tooltipInit() {
+        $('body').tooltip({
+            selector: '[rel="tooltip"]',
+            html: true,
+            delay: {'show': 500, 'hide': 0}
+        });
+    }
+
+     /* -------------------------------------------------
      * INPUT
      * -------------------------------------------------*/
 
@@ -1674,21 +1725,22 @@ export default class TgGui {
      *  DOORS 
      * -------------------------------------------------*/
 
-    doorsInit(){
+    doorsInit() {
         let _ = this;
-        for(let d = 0; d < _.dir_names.length; ++d)
-            $('#' + _.dir_names[d]).on('click', {dir:d}, function(event) {
+        for (let d = 0; d < _.dir_names.length; ++d)
+            $('#' + _.dir_names[d]).on('click', {
+                dir: d
+            }, function (event) {
 
-                if (_.inGame    ) {
-                    if(event.which == 1) {
+                if (_.inGame) {
+                    if (event.which == 1) {
                         _.goDir(event.data.dir);
-                } 
-                else if(event.which == 3) {
-                    event.preventDefault();
-                    _.closeLockDoor(event.data.dir);
+                    } else if (event.which == 3) {
+                        event.preventDefault();
+                        _.closeLockDoor(event.data.dir);
+                    }
                 }
-            }
-        });
+            });
     }
 
     /* -------------------------------------------------
@@ -1697,10 +1749,34 @@ export default class TgGui {
 
     buttonsEventInit() {
         let _ = this;
+        
+        /* Buttons with CMD event */
+        let cmdButtons = [
+            {id:'#userDisconnect', cmd : function () {
+                disconnectFromServer();
+            } }
+        ]
+
+        $.each(cmdButtons, function(idx, bdata) {
+            let button = $(bdata.id);
+
+            if(bdata.cmd) {
+                button.on('click', 
+                typeof bdata.cmd == 'function' ? bdata.cmd  : function() {
+                    if(_.inGame) {
+                        _.processCommands(bdata.cmd)
+                    }
+                    if(bdata.text) {
+                        //TODO open modal by reference
+                    }
+                });
+            }
+        });
+
         /* Toggle character panel  Display */
         $('#triggerToggleCharacterPanel').on('click', function () {
 
-            if(_.client_options.interface.dashboard == 0) {
+            if (_.client_options.interface.dashboard == 0) {
 
                 $('.tg-dashboard').addClass('midopen');
                 _.client_options.interface.dashboard = 1;
@@ -1709,27 +1785,26 @@ export default class TgGui {
             }
 
             if (_.client_options.interface.dashboard == 1 || _.client_options.interface.dashboard == 2) {
+                _.client_options.interface.dashboard = _.client_options.interface.dashboard == 1 ? 2 : 0;
 
-                _.client_options.interface.dashboard  = _.client_options.interface.dashboard == 1 ? 2 : 0;
-
-                $('.tg-characterpanel').slideToggle(300, function(){ 
+                $('.tg-characterpanel').slideToggle(300, function () {
                     let outputHeigt = $('#output').height();
-                        $('#scrollableOutput').animate({
-                            scrollTop:outputHeigt
-                        }, 500, 'linear');
-                    $('.tg-dashboard').removeClass('midopen');                                       
+                    $('#scrollableOutput').animate({
+                        scrollTop: outputHeigt
+                    }, 500, 'linear');
+                    $('.tg-dashboard').removeClass('midopen');
                 });
-
             }
-
         });
 
         //Expand tg-area
-        $('#triggerExpandTgArea').on('click', function(){
-            $('.tg-area').toggleClass('expanded', function(){});
+        $('#triggerExpandTgArea').on('click', function () {
+            $('.tg-area').toggleClass('expanded', function () {});
             setTimeout(() => {
                 let outputHeigt = $('#output').height();
-                $('#scrollableOutput').animate({scrollTop:outputHeigt}, 500, 'linear'); 
+                $('#scrollableOutput').animate({
+                    scrollTop: outputHeigt
+                }, 500, 'linear');
             }, 200);
         })
     }
@@ -1771,7 +1846,7 @@ export default class TgGui {
         switch (content_ref) {
             /* Cookie Law */
             case 'cookielaw':
-                MP_type = 'ajax'; 
+                MP_type = 'ajax';
                 MP_src = './ajax/cookielawAlert.html';
                 break;
 
@@ -1786,6 +1861,7 @@ export default class TgGui {
             case 'nofeature':
                 MP_type = 'inline';
                 MP_closeOnBgClick = true;
+                MP_close_button = true;
                 MP_src = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
                 break;
 
@@ -1794,19 +1870,19 @@ export default class TgGui {
                 MP_src = '<div class="tg-modal">zona notizie</div>';
                 MP_callbacks.close = function () {
                     _.sendInput();
-                }
+                };
                 break;
-            
+
             case 'editor':
                 MP_src = '#editorDialog';
                 MP_close_button = true,
-                MP_callbacks.open = function(){
-                    $('.mfp-close').on('click', function(event){
-                        event.preventDefault();
-                        _.abortEdit();
-                        $.magnificPopup.close();
-                    });
-                }
+                    MP_callbacks.open = function () {
+                        $('.mfp-close').on('click', function (event) {
+                            event.preventDefault();
+                            _.abortEdit();
+                            $.magnificPopup.close();
+                        });
+                    }
                 MP_callbacks.close = function (e) {
                     _.closeEditor();
                 };
@@ -1828,10 +1904,10 @@ export default class TgGui {
                 src: MP_src,
                 type: MP_type
             },
-            mainClass: content_ref,
+            mainClass: 'modal-' + content_ref,
             callbacks: MP_callbacks
         });
-
+        //add Draggable
         $($.magnificPopup.instance.contentContainer).draggabilly({
             handle: '.tg-modal-title',
             containment: '.tg-area'
@@ -1848,14 +1924,10 @@ export default class TgGui {
     }
 
 
-
     // UTILITY
-
     isModalOpen() {
         return $.magnificPopup.instance.isOpen;
     }
 
     main() {}
-
-
 }
