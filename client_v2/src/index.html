@@ -17,40 +17,14 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+    
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
 
 <body data-serverstatus="">
   <div class="tg-area tg-box b-area">
-    <!-- Login Panel -->
-    <div class="tg-loginpanel align-middle container-fluid">
-      <div class="row justify-content-center align-self-center w-100">
-        <div class="col-xl-3 col-lg-4 col-md-5 mx-auto">
-          <div class="tg-logo-composit">
-            <div class="tg-logo-composit-light"></div>
-          </div>
-          <form id="loginPanel" class="tg-loginform" action="/">
-            <p class="tg-version-name">TheGate Webclient v.2
-              <span>
-                <%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
-            </p>
-            <label for="login_username">Nome Utente</label>
-            <input id="login_username" name="username" type="text">
-            <label for="login_password">Password</label>
-            <input id="login_password" name="password" type="password">
-            <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
-            <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
-          </form>
-          <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
-          <div id="networkActivityMessage" class="tg-serverstatus"></div>
-          <div id="tgPreloader" class="tg-preloader">
-            <span>0</span>%
-            <div class="pbar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- Main Panel -->
     <div class="tg-main container-fluid">
       <!-- Main NavBar -->
@@ -79,7 +53,7 @@
           </div>
           <form id="tgSearchHelp" class="form-inline tg-helpsearch">
             <input class="form-control mr-sm-2" id="tgSearchInput" type="search" placeholder="Cerca" aria-label="Cerca">
-            <button class="btn my-2 my-sm-0" type="submit" id="tgSearchSubmit">Cerca</button>
+            <button class="tg-fnt-button my-2" type="submit" id="tgSearchSubmit"><i class="fas fa-search"></i></button>
           </form>
         </nav>
       </div>
@@ -194,8 +168,8 @@
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
                 <div class="tg-inputcommand d-none d-sm-flex">
-                  <button id="triggerExpandTgArea" type="button" class="tg-button tg-btn-expand" ref="tooltip" title="Espandi/Comprimi l'Interfaccia"></button>
-                  <button id="triggerToggleCharacterPanel" type="button" class="tg-button tg-btn-dashboard" ref="tooltip" title="Chiudi/Apri Il pannello di controllo"></button>
+                  <button id="triggerExpandTgArea" type="button" class="tg-fnt-button" ref="tooltip" title="Espandi/Comprimi l'Interfaccia"><i class="fas fa-expand-arrows-alt"></i></button>
+                  <button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" ref="tooltip" title="Chiudi/Apri Il pannello di controllo"><i class="fas fa-solar-panel"></i></button>
                 </div>
                 <div class="tg-border-box">
                   <div class="tg-border tg-border-top"></div>
@@ -237,35 +211,63 @@
       <div class="tg-border tg-border-right"></div>
       <div class="tg-border tg-border-bottom"></div>
     </div>
-  </div>
-  <!-- Editor Dialog -->
-  <div id="editorDialog" class="tg-modal">
-    <div class="tg-modal-icon"></div>
-    <div class="tg-modal-title">
-      <h3 id="editorTitle"></h3>
-    </div>
-    <div class="tg-modal-content tg-shadow b-modal tg-box">
-      <div class="tg-modal-contentwrap tg-box b-paper tg-box">
-        <div class="tg-box">
-          <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
-          <div id="editorMaxCharsCount" class="tg-txt-maxcharcount"></div>
-        </div>
-        <div class="tg-modal-buttons-group">
-            <button type="button" id="abortEditor" class="tg-button tg-button-annulla">Annulla</button>
-            <button type="button" id="saveEditor" class="tg-button tg-button-salva">Salva</button>
+     <!-- Editor Dialog -->
+    <div id="editorDialog" class="tg-modal">
+      <div class="tg-modal-icon"></div>
+      <div class="tg-modal-title">
+        <h3 id="editorTitle"></h3>
+      </div>
+      <div class="tg-modal-content tg-shadow b-modal tg-box">
+        <div class="tg-modal-contentwrap tg-box b-paper tg-box">
+          <div class="tg-box">
+            <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
+            <div id="editorMaxCharsCount" class="tg-txt-maxcharcount"></div>
+          </div>
+          <div class="tg-modal-buttons-group">
+              <button type="button" id="abortEditor" class="tg-button tg-button-annulla">Annulla</button>
+              <button type="button" id="saveEditor" class="tg-button tg-button-salva">Salva</button>
+          </div>
+          <div class="tg-border-box">
+              <div class="tg-border tg-border-top"></div>
+              <div class="tg-border tg-border-left"></div>
+              <div class="tg-border tg-border-right"></div>
+              <div class="tg-border tg-border-bottom"></div>
+          </div>
         </div>
         <div class="tg-border-box">
-            <div class="tg-border tg-border-top"></div>
-            <div class="tg-border tg-border-left"></div>
-            <div class="tg-border tg-border-right"></div>
-            <div class="tg-border tg-border-bottom"></div>
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
         </div>
       </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
+    </div>
+    <!-- Login Panel -->
+    <div class="tg-loginpanel align-middle container-fluid">
+      <div class="row justify-content-center align-self-center w-100">
+        <div class="col-xl-3 col-lg-4 col-md-5 mx-auto">
+          <div class="tg-logo-composit">
+            <div class="tg-logo-composit-light"></div>
+          </div>
+          <form id="loginPanel" class="tg-loginform" action="/">
+            <p class="tg-version-name">TheGate Webclient v.2
+              <span>
+                <%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
+            </p>
+            <label for="login_username">Nome Utente</label>
+            <input id="login_username" name="username" type="text">
+            <label for="login_password">Password</label>
+            <input id="login_password" name="password" type="password">
+            <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
+            <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
+          </form>
+          <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
+          <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
+          <div id="tgPreloader" class="tg-preloader">
+            <span>0</span>%
+            <div class="pbar"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -357,3 +357,6 @@
     }
 }
 
+body[data-serverstatus=""] .b-area {
+    padding: 0;
+}

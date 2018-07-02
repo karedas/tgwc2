@@ -7,7 +7,6 @@ import TgClient from "modules/client.js";
     $.ajaxSetup({ cache: true });
 
     // enable any bootstrap tooltip
-    
     function onReady() {
         let client = new TgClient();
         client.init();   

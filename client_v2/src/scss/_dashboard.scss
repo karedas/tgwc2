@@ -191,14 +191,20 @@
     }
     .tg-inputcommand {
         z-index: 2;
-        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-        padding-left: 5px;
+        padding-left: 2px;
         margin-left: 1px;
         margin-right: 1px;
+        font-size: 13px;
 
-        .tg-button {
-            margin-left: 1px;
+        .tg-fnt-button {
+            background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+            padding-left:8px;
+            color: #54544d;
             box-shadow: none;
+
+            &:hover {
+                color: #cc6f17;
+            }
         }
     }
 }
