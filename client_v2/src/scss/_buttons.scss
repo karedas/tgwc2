@@ -2,13 +2,13 @@
     text-indent: -9999px;
     box-shadow: 0 1px 4px 0px black;
 }
+
 .tg-button, .tg-fnt-button {
     background-color: transparent;
     background-repeat: no-repeat;
     display: inline-block;
     border: none;
     cursor: pointer;
-    line-height: 1;
 
     &.b-round {
         border-radius: 50%;
@@ -25,4 +25,5 @@
     &.tg-button-salva {
         @include sprite($btn-salva-sprite);
     }
+
 }

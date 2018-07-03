@@ -1120,10 +1120,9 @@ export default class TgGui {
 
 
     setDoors(doors) {
-        console.log('%c' + doors, 'background-color:blue; color: white');
         let _ = this;
         for(var d = 0; d < _.dir_names.length; ++d) {
-            $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -33*doors[d]);   
+            $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -26 * doors[d]);   
         }
 
         _.dir_status = doors;
@@ -1558,8 +1557,10 @@ export default class TgGui {
     loadInterface() {
 
         let _ = this;
+
         $('.tg-main').addClass('d-flex');
-        /* Interface Modules List.*/
+
+        /* Interface Modules List */
         _.genericEvents();
         _.mainNavBarInit();
         _.tooltipInit();

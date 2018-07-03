@@ -41,15 +41,15 @@
 					</ul>
 					<ul class="navbar-nav mx-auto">
 						<!--<li class="nav-item">
-              <a href="#" class="no-feature">
-                <i class="tg-icon icon-monete"></i>Sei al Verde!</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="no-feature">E' il giorno ...</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="no-feature">Ti trovi nella regione ...</a>
-            </li>//-->
+						<a href="#" class="no-feature">
+							<i class="tg-icon icon-monete"></i>Sei al Verde!</a>
+						</li>
+						<li class="nav-item">
+						<a href="#" class="no-feature">E' il giorno ...</a>
+						</li>
+						<li class="nav-item">
+						<a href="#" class="no-feature">Ti trovi nella regione ...</a>
+						</li>//-->
 					</ul>
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
@@ -58,7 +58,7 @@
 							</button>
 						</li>
 					</ul>
-					<form id="tgSearchHelp" class="form-inline tg-helpsearch">
+					<form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider">
 						<input class="form-control mr-sm-2" id="tgSearchInput" type="search" placeholder="Cerca" aria-label="Cerca">
 						<button class="tg-fnt-button" type="submit" id="tgSearchSubmit">
 							<i class="fas fa-search"></i>
@@ -67,7 +67,7 @@
 					<ul class="navbar-nav">
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="tgNavBarGuidaDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Guida</a>
-							<div class="dropdown-menu" aria-labelledby="tgNavBarGuidaDropDown">
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="tgNavBarGuidaDropDown">
 								<a class="dropdown-item" href="#">Guida al gioco</a>
 								<a class="dropdown-item" href="#">Ultime Novità di gioco</a>
 								<a class="dropdown-item" href="#">Note di rilascio Webclient</a>
@@ -78,7 +78,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<button class="tg-fnt-button">Disconnetti
+							<button class="tg-fnt-button nav-link">Esci
 								<i class="fas fa-sign-out-alt"></i>
 							</button>
 						</li>
@@ -120,6 +120,7 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="tg-character">
+												<!--
 												<div class="tg-character-avmenu">
 													<ul class="list-unstyled">
 														<li>
@@ -130,6 +131,7 @@
 														</li>
 													</ul>
 												</div>
+												-->
 												<!-- Character avatar -->
 												<div class="tg-characteravatar b-ironlight tg-shadow no-feature" rel="tooltip" title "">
 													<div class="tg-avatar-wrap">
@@ -143,12 +145,12 @@
 													</div>
 												</div>
 												<div class="tg-infochar">
-                          <!-- Character Name & Status -->
+													<!-- Character Name & Status -->
 													<div class="tg-infocharname">
 														<span id="charName"></span>
 														<i class="pg-status"></i>
 													</div>
-                          <!-- Character Status Bars -->
+													<!-- Character Status Bars -->
 													<div class="tg-meterbar">
 														<div class="barcont barbig">
 															<span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
