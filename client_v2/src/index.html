@@ -196,10 +196,10 @@
 							<div class="tg-input tg-box b-ironlight tg-shadow">
 								<input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
 								<div class="tg-inputcommand d-none d-sm-flex">
-									<button id="triggerExpandTgArea" type="button" class="tg-fnt-button" ref="tooltip" title="Espandi/Comprimi l'Interfaccia">
+									<button id="triggerExpandTgArea" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
 										<i class="fas fa-expand-arrows-alt"></i>
 									</button>
-									<button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" ref="tooltip" title="Chiudi/Apri Il pannello di controllo">
+									<button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo">
 										<i class="fas fa-solar-panel"></i>
 									</button>
 								</div>
@@ -291,8 +291,7 @@
 					</div>
 					<form id="loginPanel" class="tg-loginform" action="/">
 						<p class="tg-version-name">TheGate Webclient v.2
-							<span>
-								<%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
+							<span><%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
 						</p>
 						<label for="login_username">Nome Utente</label>
 						<input id="login_username" name="username" type="text">

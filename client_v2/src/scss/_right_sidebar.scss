@@ -75,7 +75,6 @@
         }
 
         .dir-ico {
-            background-color: black;
             background-image: url($imgPath + '/interface/pass_sprite.png');
             background-repeat: no-repeat;
             width: 26px;
@@ -83,6 +82,7 @@
             display: block;
             position: absolute;
             border-radius: 50%;
+            background-position: -32px;
         }
 
         .dir-nord .dir-ico {
@@ -135,7 +135,6 @@
             height: 100%;
             width: 100%;
             background: url($imgPath + '/fasi/fasi.jpg') no-repeat;
-            background-size: 100% auto;
             box-shadow: inset 0 0 20px 0px black;
         }
     }
@@ -157,6 +156,10 @@
             right: 10px;
             z-index: 2;
             position: absolute;
+
+            #sky {
+                background-size: 275px auto;
+            }
             
         }
         .tg-map {

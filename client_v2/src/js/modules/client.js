@@ -56,6 +56,8 @@ export default class TgGui {
 
         /* UI Game Options */
         this.client_options = {
+            viewport: null,
+            skysize: 215,
             alpha_approved: false,
             shortcuts: [],
             login: {},
@@ -141,10 +143,14 @@ export default class TgGui {
         /* Debug */
         this.debug = true;
 
+        $.extend( this , options);
+
+
     }
 
     init() {
         let _ = this;
+        
         // Get Cookie "Italy cookie law"
         let cookie_consent = _.LoadStorage('cookie_consent');
         // Check Cookie Law Approval Status, then go to start or wait user action.
@@ -154,6 +160,12 @@ export default class TgGui {
             _.removeCookieLawDisclaimer();
             _.startClient();
         }
+        
+    }
+
+    setViewportSetup(val) {
+        $('.tg-area').attr('data-viewport', val);
+        this.client_options.viewport = val;
     }
 
     startClient() {
@@ -195,8 +207,6 @@ export default class TgGui {
 
             // Server status
             _.socket.on('connect', function () {
-
-                console.log('connect');
                 _.isConnected = true;
                 _.networkActivityMessage("Server Online", 1);
                 resolve(true);
@@ -836,7 +846,7 @@ export default class TgGui {
         msg = msg.replace(/\n/gm, '<br>');
 
         if (msg != '') {
-            msg = _.replaceColors('<div class="tgline">' + msg + '</div>');
+            msg = _.replaceColors('<div class="tg-line">' + msg + '</div>');
         }
 
         return msg.replace(/<p><\/p>/g, '');
@@ -1075,6 +1085,8 @@ export default class TgGui {
      */
 
     setSky(sky) {
+
+        let _ = this;
         //let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
 
         /*  5: alba 
@@ -1084,14 +1096,19 @@ export default class TgGui {
             q: mattina nuvolosa
         */
         let skypos = ['o', 'N', 'w', 'i', 't', 'q'];
-
-        console.log('%c' + sky, 'background: red; color: #fff');
+        let size;
         console.log(skypos.indexOf(sky));
         /*    if(sky != 'q' && sky != 'N' && sky !='w' && sky !=5) { //test
                     sky = 'q';
                 }
         */
-        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * 215) + 'px');
+        if(_.client_options.viewport == 'lg') {
+            size = 162;
+        }
+        else {
+            size = 215;
+        }
+        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * size) + 'px');
     }
 
     /* *****************************************************************************
@@ -1261,20 +1278,22 @@ export default class TgGui {
         if (cont.list) {
             if (cont_type == 'pers' || cont_type == 'equip') {
                 cont.list.sort(function (a, b) {
-                    /*let eq_pos_a = $.isArray(a.eq) ? pos_to_order[a.eq[0]] : 0;
+                    let eq_pos_a = $.isArray(a.eq) ? pos_to_order[a.eq[0]] : 0;
                     let eq_pos_b = $.isArray(b.eq) ? pos_to_order[b.eq[0]] : 0;
-                    return eq_pos_a - eq_pos_b;*/
-                    //return (eq_post_a) -  (eq_pos__b = '');
+                    return eq_pos_a - eq_pos_b;
                 });
             }
 
             for (let n = 0; n < cont.list.length; n++) {
+
                 let l = cont.list[n];
                 let is_group = (l.mrn && l.mrn.length) > 1;
                 let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]);
                 let tradd = 'class="tg-element"',
                     tdadd = '';
 
+                //Start LIST
+                txt += '<div class="tg-list">';
 
                 if (is_group) {
 
@@ -1287,25 +1306,27 @@ export default class TgGui {
                     tdadd += '<div class="expicon"></div>';
                 }
 
-
-                txt += '<div ' + tradd + '>';
-                txt += '<div>' + tdadd + '</div>';
-                txt += '<div class="tg-mobicon">' + _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type) + '</div>';
-                txt += '<div class="tg-mob-description">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
-                txt += '</div>';
+                    txt += '<div ' + tradd + '>';
+                    txt += tdadd; //exp icon
+                // txt += '<div class="tg-mobicon">' + _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type) + '</div>';
+                    //txt += '<div class="tg-mob-description">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
+                    txt += '</div>';
                 if (is_group) {
-                    txt += '<div class="grpexp"';
+                   /* txt += '<div class="grpexp"';
 
                     if (!opened) {
                         txt += ' style="display:none"';
                     }
                     txt += '>'
                     for (let m = 0; m < l.mrn.length; m++)
-                        txt += '<div>' + (m == 0 ? '<div class="collicon"></div>' : '') + '</div><div>' + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div></div>';
+                        txt += '<div class="test0">' + (m == 0 ? '<div class="collicon"></div>' : '') + '</div><div class="test0001">' + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div></div>';
                     if (l.sz && l.sz > l.mrn.length)
-                        txt += '<div><div></div><div><div>' + _.renderIcon(l.icon, null, cont_type, l.cntnum, null, /* 'interact '+type */ null) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc) + '</div></div>';
-                    txt += '</div>';
+                        txt += '<div class="test1"><div class="test2"></div class="test3"><div class="test4"><div class="test5">' + _.renderIcon(l.icon, null, cont_type, l.cntnum, null, /* 'interact '+type  null) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc) + '</div></div>';
+                  /* txt += '</div>';*/
                 }
+
+                // End LIST
+                txt += '</div>';
 
             }
             if (cont.title && (txt.length > 0 || cont.show === true)) {
@@ -1558,7 +1579,9 @@ export default class TgGui {
 
         let _ = this;
 
-        $('.tg-main').addClass('d-flex');
+        $('.tg-main')
+            .addClass('d-flex')
+            .attr('data-viewport', _.client_options.viewport);
 
         /* Interface Modules List */
         _.genericEvents();
@@ -1574,6 +1597,9 @@ export default class TgGui {
         _.main();
     }
 
+
+
+    
     /* -------------------------------------------------
      * MAIN NAVBAR
      * -------------------------------------------------*/
@@ -1600,7 +1626,7 @@ export default class TgGui {
             theme: "square"
           };
 
-        $('#tgSearchInput').easyAutocomplete(options);
+        //$('#tgSearchInput').easyAutocomplete(options);
           
         $('#tgSearchHelp').on('submit', function(e){
             e.preventDefault();
@@ -1617,6 +1643,7 @@ export default class TgGui {
         $('body').tooltip({
             selector: '[rel="tooltip"]',
             html: true,
+            trigger: 'hover',
             delay: {'show': 500, 'hide': 0}
         });
     }
