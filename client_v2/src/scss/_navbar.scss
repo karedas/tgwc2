@@ -25,69 +25,62 @@
         }
     }
     
-    // Elements
-    .nav-quickinfo-group {
-        max-height: 18px;
+    .tg-fnt-button {
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 
-    .tg-nav-item {
-        padding-right: 1.5em;
-    }
-
-    .tg-icon {
+    .v-divider:before {
+        content: '';
+        background-color: #1c0c04;
+        width: 1px;
+        height: 14px;
+        margin: 0 10px;
+        max-height: 100%;
         display: inline-block;
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        vertical-align: middle;
-        margin-right: .5em;
-        &.icon-monete {
-            @include sprite-image($monete-ico-sprite);
-        }
     }
-    /*SKY*/
-    .tg-sky-mini {
-        border-radius: 10px;
-        width: 150px;
-        height: 18px;
-        cursor: pointer;
-        background-color: rgb(205, 242, 253);
+}
+/*SKY*/
+.tg-sky-mini {
+    background-color: rgb(205, 242, 253);
+    width: 150px;
+    height: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Search Form*/
+.tg-helpsearch {
+    font-size: 13px;
+
+    input[type="search"], button{
+        padding: 0 .35rem;
+        border: 0;
+    }
+    input {
+        background-color: #2f2314;
+        color: white;
     }
     
-    /* Search Form*/
-    .tg-helpsearch {
-        font-size: 13px;
-        input[type="search"], button{
-            padding: 0 .35rem;
-            border: 0;
-        }
-        input {
-            background-color: #2f2314;
-            color: white;
-        }
-        
-        button[type="submit"] {
-            color: #2f2314;
-        }
-
+    button[type="submit"] {
+        color: #2f2314;
     }
 
-    /* Server Status*/
-    .tg-serverstatus {
-        width: 15px;
+}
+
+/* Server Status*/
+.tg-serverstatus {
+    width: 15px;
+    height: 100%;
+    text-indent: -9999px;
+    display: inline-block;
+    position: relative;
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
         height: 100%;
-        text-indent: -9999px;
-        display: inline-block;
-        position: relative;
-        &:before {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-        &[data-status="1"]:before {}
-        &[data-status="0"]:before {}
+        position: absolute;
     }
 }

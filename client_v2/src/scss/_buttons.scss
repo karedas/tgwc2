@@ -8,6 +8,7 @@
     display: inline-block;
     border: none;
     cursor: pointer;
+    line-height: 1;
 
     &.b-round {
         border-radius: 50%;
@@ -24,5 +25,4 @@
     &.tg-button-salva {
         @include sprite($btn-salva-sprite);
     }
-
 }

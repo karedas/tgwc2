@@ -1,11 +1,12 @@
 // ========== NPM Modules
-import 'bootstrap';
-import Cookies from 'js-cookie';
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
+import Cookies from 'js-cookie';
 import PerfectScrollbar from 'perfect-scrollbar';
+import 'bootstrap';
 import 'magnific-popup';
 import 'draggabilly/dist/draggabilly.pkgd.js';
+import 'easy-autocomplete';
 
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
@@ -15,11 +16,9 @@ import Preloader from 'preloader';
 import Map from 'mapDrawer';
 
 
-
 export default class TgGui {
 
     constructor(options) {
-        
         this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = 'http://play.thegatemud.it/images/';
@@ -1121,7 +1120,13 @@ export default class TgGui {
 
 
     setDoors(doors) {
-        this.dir_status = doors;
+        console.log('%c' + doors, 'background-color:blue; color: white');
+        let _ = this;
+        for(var d = 0; d < _.dir_names.length; ++d) {
+            $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -33*doors[d]);   
+        }
+
+        _.dir_status = doors;
     }
 
     /* *****************************************************************************
@@ -1574,6 +1579,28 @@ export default class TgGui {
 
     mainNavBarInit() {
         let _ = this;
+        /* Search Widget form */
+        _.initSearchWidget();
+    }
+
+    initSearchWidget() {
+
+        let options = {
+            url: "ajax/cmd_list_guide.json",
+            getValue: "name",
+            list: {	
+              match: {
+                enabled: true,
+                onClickEvent: function(element) {
+                    alert("Non è stata inserita alcuna guida per " + element.name);
+                }
+              }
+            },
+            theme: "square"
+          };
+
+        $('#tgSearchInput').easyAutocomplete(options);
+          
         $('#tgSearchHelp').on('submit', function(e){
             e.preventDefault();
             _.openPopup('nofeature');
