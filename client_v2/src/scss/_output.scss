@@ -74,18 +74,18 @@
             padding-top: .5em;
         }
 
-        .tg-description {
+        .out-description {
             display: block;
             padding-bottom: 1.5em;
         }
 
         /* Description base*/
-        .tg-descbase, .tg-descbase-last{
+        .out-descbase, .out-descbase-last{
             display: block;
         }
 
         /* LIST Mob & Object*/
-        .tg-outputlist {
+        .out-list {
             display: block;
             width: 100%;
             padding-top:.5em;
@@ -101,18 +101,23 @@
         }
 
 
-        .tg-character-subdetail {
+        .out-charsubdetail{
             padding-top:.4em;
         }
 
-        .tg-element {
+        .element {
             display: block;
         }
 
-        .tg-mobicon {
-            display: inline-block;
+        .iconimg {
+            background-image: url($imgPath + '/tiles/tiles.png');
+            background-repeat: no-repeat;
+            width: 32px;
+            height: 32px;
+            display: inline-block !important;
+            zoom: .8;
+            vertical-align: middle;
         }
-
        
     }
     .tg-title {
@@ -122,14 +127,5 @@
     p {
         margin-bottom: 0;
     }
-}
 
-.iconimg {
-    background-image: url($imgPath + '/tiles/tiles.png');
-    background-repeat: no-repeat;
-    width: 32px;
-    height: 32px;
-    display: inline-block !important;
-    zoom: .8;
-    vertical-align: middle;
 }

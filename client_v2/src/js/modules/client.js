@@ -30,7 +30,7 @@ export default class TgGui {
 
         /* Cookies Settings */
         this.cookies = {
-            prefix: 'tgwc',
+            prefix: 'tgwc_',
             expires: 365 * 10
         };
 
@@ -53,10 +53,10 @@ export default class TgGui {
         };
 
         this.client_state = {};
+        this.viewport = null;
 
         /* UI Game Options */
         this.client_options = {
-            viewport: null,
             skysize: 215,
             alpha_approved: false,
             shortcuts: [],
@@ -165,7 +165,7 @@ export default class TgGui {
 
     setViewportSetup(val) {
         $('.tg-area').attr('data-viewport', val);
-        this.client_options.viewport = val;
+        this.viewport = val;
     }
 
     startClient() {
@@ -404,7 +404,7 @@ export default class TgGui {
 
         if (Modernizr.localstorage && saved_options) {
             _.SaveStorage('options', saved_options);
-            Cookies(cookies.prefix + 'options', null);
+            Cookies(_.cookies.prefix + 'options', null);
         } else {
             saved_options = _.LoadStorage('options');
         }
@@ -546,8 +546,6 @@ export default class TgGui {
     parseForDisplay(msg) {
         let _ = this,
             pos;
-
-        console.log(msg);
 
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
@@ -891,6 +889,10 @@ export default class TgGui {
     renderMob(icon, condprc, count, mrn, desc, addclass) {
         return '<div class="mob">' + this.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
     }
+    
+    renderObject(icon, condprc, count, mrn, desc, addclass) {
+        return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
+    }
 
     decoratedDescription(condprc, moveprc, wgt, count, desc) {
         let _ = this;
@@ -905,10 +907,6 @@ export default class TgGui {
     renderMinidetails(condprc, moveprc, wgt) {
         let pos = -11 * Math.floor(22 * (100 - condprc) / 100);
         return '<div class="hstat" style="background-position:0 ' + pos + 'px" condprc="' + condprc + '"' + (moveprc ? ' moveprc="' + moveprc + '"' : "") + (wgt != null ? ' wgt="' + wgt + '"' : "") + '></div>';
-    }
-
-    renderObject(icon, condprc, count, mrn, desc, addclass) {
-        return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
     }
 
     setDataInterface(cmd, data) {
@@ -1102,7 +1100,7 @@ export default class TgGui {
                     sky = 'q';
                 }
         */
-        if(_.client_options.viewport == 'lg') {
+        if(_.viewport == 'lg') {
             size = 162;
         }
         else {
@@ -1231,11 +1229,11 @@ export default class TgGui {
         }
         /* Print description */
         if (info.desc) {
-            textarea += '<div class="tg-description">';
+            textarea += '<div class="out-description">';
             if (info.desc.base) {
                 if (type == 'room') {
-                    _.last_room_desc = _.formatText(info.desc.base, 'tg-descbase');
-                    textarea += _.formatText(info.desc.base, 'tg-descbase');
+                    _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
+                    textarea += _.formatText(info.desc.base, 'out-descbase');
                 }
             } else if (info.desc.repeatlast && _.last_room_desc) {
                 textarea += _.last_room_desc;
@@ -1243,11 +1241,11 @@ export default class TgGui {
             textarea += '</div>';
 
             if (info.desc.details) {
-                textarea += _.formatText(info.desc.details, 'tg-yellow d-block tg-character-subdetail');
+                textarea += _.formatText(info.desc.details, 'out-charsubdetail tg-yellow d-block');
             }
 
             if (info.desc.equip) {
-                textarea += _.formatText(info.desc.equip, 'tg-green d-block tg-character-subdetail');
+                textarea += _.formatText(info.desc.equip, 'out-charsubdetail tg-green d-block');
             }
         }
 
@@ -1271,6 +1269,36 @@ export default class TgGui {
     }
 
     renderDetailsList(cont_type, cont_num, cont, type, style) {
+
+        let pos_to_order = [
+            { pos:0, name: "" },
+            18,		// Finger R
+            19,		// Finger L
+            5,		// Neck
+            8,		// Body
+            1,		// Head
+            23,		// Legs
+            24,		// Feet
+            15,		// Hands
+            12,		// Arms
+            9,		// About
+            22,		// Waist
+            13,		// Wrist R
+            14,		// Wrist L
+            160,	// Hand R
+            170,	// Hand L
+            10,		// Back
+            2,		// Ear R
+            3,		// Ear L
+            4,		// Eyes
+            20,		// Sheath
+            21,		// Belt
+            11,		// Back
+            6,		// Shoulder R
+            7,		// Shoulder L
+            25		// Tied
+        ];
+
         let _ = this;
         let res = '',
             txt = '';
@@ -1288,47 +1316,66 @@ export default class TgGui {
 
                 let l = cont.list[n];
                 let is_group = (l.mrn && l.mrn.length) > 1;
-                let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]);
-                let tradd = 'class="tg-element"',
-                    tdadd = '';
+                let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]),
+                    grp_attribute = '',
+                    exp_attribute = '',
+                    data_mrn = '',
+                    expicon = '';
 
-                //Start LIST
-                txt += '<div class="tg-list">';
-
+                
+                /* if object/person type is more then 1 */
                 if (is_group) {
-
-                    tradd = ' class="grpcoll" data-mrn="' + l.mrn[l.mrn.length - 1] + '"';
-
+                    grp_attribute = ' grpcoll" data-mrn="' + l.mrn[l.mrn.length - 1] + '"';
+                    data_mrn = 'data-mrn="' + l.mrn[l.mrn.length - 1] + '"';
+                    
                     if (opened) {
-                        tradd += ' style="display:none"';
+                        grp_attribute += ' style="display:none"';
                     }
 
-                    tdadd += '<div class="expicon"></div>';
+                    expicon += '<div class="expicon"></div>';
                 }
 
-                    txt += '<div ' + tradd + '>';
-                    txt += tdadd; //exp icon
-                // txt += '<div class="tg-mobicon">' + _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type) + '</div>';
-                    //txt += '<div class="tg-mob-description">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
-                    txt += '</div>';
-                if (is_group) {
-                   /* txt += '<div class="grpexp"';
 
-                    if (!opened) {
-                        txt += ' style="display:none"';
-                    }
-                    txt += '>'
-                    for (let m = 0; m < l.mrn.length; m++)
-                        txt += '<div class="test0">' + (m == 0 ? '<div class="collicon"></div>' : '') + '</div><div class="test0001">' + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div></div>';
-                    if (l.sz && l.sz > l.mrn.length)
-                        txt += '<div class="test1"><div class="test2"></div class="test3"><div class="test4"><div class="test5">' + _.renderIcon(l.icon, null, cont_type, l.cntnum, null, /* 'interact '+type  null) + '</div></div><div>' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc) + '</div></div>';
-                  /* txt += '</div>';*/
-                }
-
-                // End LIST
+                /* print header triggerable element */
+                txt += '<div class="element'+ grp_attribute + '" '+ data_mrn +'>';
+                    txt += expicon 
+                    // mob/obj icon
+                    txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact '+type);
+                    txt += '<span class="desc">' +_.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) +'</span>';
                 txt += '</div>';
 
+                /* Start Collapsable Obj/Mob Container */
+                if (is_group) {
+                    
+                    if (!opened) {
+                        exp_attribute = ' style="display:none"';
+                    }
+
+                    txt += '<div class="grpexp"'+ exp_attribute +'>';
+
+                    for (let m = 0; m < l.mrn.length; m++) {
+                        txt += '<div class="element">'
+                            txt += (m == 0 ? '<div class="collicon"></div>' : '') + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type);
+                            txt += '<span class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</span>';
+                        txt += '</div>';
+                    }
+
+                    if (l.sz && l.sz > l.mrn.length) {
+                        txt += '<div class="element">';
+                            txt += _.renderIcon(l.icon, null, cont_type, l.cntnum, null, null);
+                            txt += '<span class="desc">';
+                            txt += _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc);
+                            txt += '</span>';
+                        txt += '</div>';
+                    }
+
+                    txt += '</div>';
+                }
+
+
+
             }
+
             if (cont.title && (txt.length > 0 || cont.show === true)) {
                 res += '<p>' + cont.title;
                 if (txt.length == 0)
@@ -1337,7 +1384,9 @@ export default class TgGui {
             }
 
             if (txt.length > 0) {
-                res += '<div class="tg-outputlist' + (style ? ' ' + style : '') + (_.client_options.details.compact ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>' + txt + '</div>';
+                res += '<div class="out-list" '+(style ? ' ' + style : '') + (_.client_options.details.compact ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
+                res +=  txt;
+                res += '</div>';
             }
         }
 
@@ -1581,8 +1630,9 @@ export default class TgGui {
 
         $('.tg-main')
             .addClass('d-flex')
-            .attr('data-viewport', _.client_options.viewport);
+            .attr('data-viewport', _.viewport);
 
+        _.setupInterface();
         /* Interface Modules List */
         _.genericEvents();
         _.mainNavBarInit();
@@ -1597,7 +1647,23 @@ export default class TgGui {
         _.main();
     }
 
-
+    
+    /* -------------------------------------------------
+     * SETUP INTERFACE BASED COOKIES AND OTHERS STUFF
+     * -------------------------------------------------*/
+    setupInterface() {
+        let _ = this;
+        /* Dashboard Expand/collapse status */
+        let d_status = _.client_options.interface.dashboard; //just alias
+        // Mid 
+        if(d_status == 1) {
+            $('.tg-dashboard').addClass('midopen');
+        }
+        // Collapse 
+        else if(d_status == 2) {
+            $('.tg-characterpanel').hide();
+        }
+    }
 
     
     /* -------------------------------------------------
@@ -1828,20 +1894,19 @@ export default class TgGui {
             }
         });
 
+       
         /* Toggle character panel  Display */
         $('#triggerToggleCharacterPanel').on('click', function () {
-
             if (_.client_options.interface.dashboard == 0) {
-
                 $('.tg-dashboard').addClass('midopen');
                 _.client_options.interface.dashboard = 1;
-
+                _.SaveStorage('options', _.client_options);
                 return;
-            }
-
+            };
             if (_.client_options.interface.dashboard == 1 || _.client_options.interface.dashboard == 2) {
                 _.client_options.interface.dashboard = _.client_options.interface.dashboard == 1 ? 2 : 0;
 
+                
                 $('.tg-characterpanel').slideToggle(300, function () {
                     let outputHeigt = $('#output').height();
                     $('#scrollableOutput').animate({
@@ -1849,7 +1914,8 @@ export default class TgGui {
                     }, 500, 'linear');
                     $('.tg-dashboard').removeClass('midopen');
                 });
-            }
+                _.SaveStorage('options', _.client_options);
+            };
         });
 
         //Expand tg-area
