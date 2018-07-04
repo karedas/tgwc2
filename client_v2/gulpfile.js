@@ -227,4 +227,4 @@ gulp.task('dev',
 	gulp.series( 'generate-sprites', 'copy-staticfiles', 'sass-compile', 'generate-assetslist', gulp.parallel('staticfiles-watch', 'sass-watch', 'js-watch')));
 
 //Compiling file withouth Watch setting
-gulp.task('build', gulp.series('clean', 'generate-sprites', 'generate-assetslist', 'js-compile', 'sass-compile', copyStaticFiles));
+gulp.task('build', gulp.series('clean', 'generate-sprites', 'copy-staticfiles', 'generate-assetslist', 'js-compile', 'sass-compile'));

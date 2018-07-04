@@ -1,4 +1,4 @@
-.tg-output {
+.tg-output{
     background: black;
     flex: 1 1 auto;
     font-size: 11px;
@@ -8,7 +8,7 @@
 
     .tg-output-wrap {
         position: relative;
-        width: 60%;
+        flex: auto;
         padding-top: 20px;
         margin: 6px 0;
     }
@@ -27,7 +27,7 @@
             margin: 0;
         }
     }
-    .tg-output-history {
+    .tg-output-history, .tg-extraoutput-history {
         z-index: 2;
         max-height: 100%;
         width: 100%;
@@ -46,88 +46,120 @@
     }
 }
 
-.tg-output-history {
+.tg-output-history, .tg-extraoutput-history{
+
     .tg-line {
         padding-bottom: 1em;
-        p {
-            padding-bottom: 0;
-        }
-        div {
-            display: inline;
-        }
-
-        .room {
-            font-size: 22px;
-            font-family: kingthinks;
-            color: #ac4c55;
-            display: block !important;
-            padding-bottom: .2em;
-        }
-
         &:first-of-type .room {
             padding-top: .5em;
         }
+    }
 
-        .out-description {
-            display: block;
-            padding-bottom: 1.5em;
-        }
+    p {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
 
-        /* Description base*/
-        .out-descbase, .out-descbase-last{
-            display: block;
-        }
+    .room {
+        font-size: 20px;
+        font-family: kingthinks;
+        color: #ac4c55;
+        display: block !important;
+        padding-bottom: .2em;
+    }
 
-        /* LIST Mob & Object*/
-        .out-list {
-            display: block;
-            width: 100%;
-            padding-top:.5em;
-            padding-bottom:1.5em;
+    .out-description {
+        display: block;
+        padding-bottom: 1.5em;
+    }
 
-            &.firstlist {
-                padding-bottom: 0;
+    /* Description base*/
+    .out-descbase, .out-descbase-last{
+        display: block;
+    }
+
+    /* LIST Mob & Object*/
+    .out-list {
+        display: block;
+        width: 100%;
+        padding-top:.5em;
+        
+        /* Double Columns style */
+        &.col-dispose {
+            display: flex;
+            flex-wrap: wrap;
+            .element {
+                padding: 2px 0;
+                flex: 0 1 50%;
+            } 
+            .element:nth-child(odd) {
+                padding-right: 10px;
             }
         }
 
-        .grpcoll {
-            display: block;
+        &.firstlist {
+            padding-bottom: 0;
         }
 
-
-        .out-charsubdetail{
-            padding-top:.4em;
+        .cnt {
+            color: #f2ff00;
         }
-
-        .element {
-            display: block;
-        }
-
-        .iconimg {
-            background-image: url($imgPath + '/tiles/tiles.png');
-            background-repeat: no-repeat;
-            width: 32px;
-            height: 32px;
-            display: inline-block !important;
-            zoom: .8;
-            vertical-align: middle;
-        }
-       
     }
+
+    .grpcoll {
+        display: block;
+    }
+
+
+    .out-charsubdetail{
+        padding-top:.4em;
+    }
+
+    .element {
+        cursor: pointer;
+        display: flex;
+
+        .desc {
+            display: flex;
+            margin: auto 0;
+            display: inline-block;
+        }
+    }
+
+    .iconimg {
+        background-image: url($imgPath + '/tiles/tiles.png');
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        display: inline-block !important;
+        zoom: .8;
+        vertical-align: middle;
+    }
+       
     .tg-title {
         display: block !important;
         font-size: 22px;
     }
-    p {
-        margin-bottom: 0;
-    }
 
+    // Highlight 
+    .mrn-hlight {
+        border:1px solid $tg-yellow;
+    }
 }
 
 /* Extra Output Area */
 
 .tg-outputextra-wrap {
+    display: none;
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-    width: 40%;
-    margin-top: 20px;
+    width: 50%;
+    padding-top: 20px;
+    margin: 6px 0;
+    z-index: 2;
+    position: relative;
+
+    .desc {
+        color: #f2ff00;
+    }
 }

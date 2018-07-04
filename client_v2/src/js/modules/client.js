@@ -620,7 +620,7 @@ export default class TgGui {
         // Player is logged in
         msg = msg.replace(/&!logged"[^"]*"/gm, function () {
             _.inGame = true;
-            _.processCommands('info; stat', false);
+            _.processCommands('info; stat; @rima', false);
             return '';
         });
 
@@ -1181,7 +1181,7 @@ export default class TgGui {
 
     renderDetails(info, type) {
         let _ = this;
-        if(_.client_options.secondoutput) {
+        if( _.client_options.secondoutput) {
             return _.renderDetailInSecondOutput(info, type);
         }
         else {
@@ -1213,8 +1213,6 @@ export default class TgGui {
             wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type),
             tpos;
 
-        console.log('extra');
-
 	    /* Set tab icon */
         if(type == 'dir') {
             //tpos = _.dirBgPos
@@ -1228,18 +1226,13 @@ export default class TgGui {
 
         /* Set Title and Tooltip */
         if(info.title) {
-            if(type == 'room' && !info.up) {
+            if(type == 'room'/* && !info.up*/) {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
 
             let title = info.title;
             // icon.attr('data-shdesc', title);
             // icon.attr('tooltip', title);
-            /*            
-            if(wtab == ctab) {
-                $('#detailsTitle').text(title);
-            }
-            */
         }
 
         /* Set Image */
@@ -1249,7 +1242,6 @@ export default class TgGui {
 
         let textarea = container.empty();
         let details = _.replaceColors(_.renderDetailsInner(info, type, true));
-        console.log(_.replaceColors(_.renderDetailsInner(info, type, true)));
        
         textarea.append(details);
 
@@ -1292,7 +1284,6 @@ export default class TgGui {
                 textarea += _.formatText(info.desc.equip, 'out-charsubdetail tg-green d-block');
             }
         }
-        
         if (_.client_options.secondoutput) {
             /* Print Persons List */
             if (info.perscont) {
@@ -1386,7 +1377,7 @@ export default class TgGui {
                 
                 /* if object/person type is more then 1 */
                 if (is_group) {
-                    exp_attribute = ' grpcoll';
+                    grp_attribute = ' grpcoll';
                     
                     if (opened) {
                         grp_attribute += ' d-none"';
@@ -1443,7 +1434,15 @@ export default class TgGui {
             }
 
             if (txt.length > 0) {
-                res += '<div class="out-list" '+(style ? ' ' + style : '') + (_.client_options.secondoutput ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
+                
+                //Double Column print option
+                //TODO: set list number in constructor
+                let columnableClass = ''; 
+                if(cont.list.length > 6) {
+                    columnableClass = ' col-dispose';
+                }
+
+                res += '<div class="out-list'+ columnableClass+'" '+(style ? ' ' + style : '') + (_.client_options.secondoutput ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
                 res +=  txt;
                 res += '</div>';
             }
@@ -1700,10 +1699,10 @@ export default class TgGui {
         let _ = this;
         /* Extra Detail Display */
         if(_.client_options.secondoutput) {
-            $('.tg-output-extra').show();
+            $('.tg-outputextra-wrap').show();
         }
         else {
-            $('.tg-output-extra').hide();
+            $('.tg-outputextra-wrap').hide();
         }
         
         /* Dashboard Expand/collapse status */
@@ -1783,7 +1782,7 @@ export default class TgGui {
         // init Extraoutput window
         this.extraOutputInit();
         // Highlightining mob/obj based on user click
-        this.highlightsOutputMRN();
+        //TODO: this.highlightsOutputMRN();
         //add Event Handler for Expndable list
         this.makeExpandable();
     }
@@ -1792,8 +1791,7 @@ export default class TgGui {
         let _ = this,
             $text = $(text);
         $('#output').append($text);
-        let outputHeigt = $('#output').height();
-        $('#scrollableOutput').scrollTop(outputHeigt);
+        _.scrollPanelTo('#output', '#scrollableOutput', false);
     }
 
     clearOutput() {
@@ -1803,20 +1801,20 @@ export default class TgGui {
     makeExpandable() {
         let _ = this;  
         $('.tg-output').on('click', '.grpcoll', function() {
-            let colgrp = $(this).closest('.grpcoll');
+            let colgrp = $(this);
             let expgrp = colgrp.next('.grpexp');
-            colgrp.hide();
-            expgrp.show();
+            colgrp.toggle();
+            expgrp.toggle();
             _.addExpandedGrp(colgrp.attr('mrn'));
         });
-        // $('.grpexp td:first-child', details).click(function() {
-        //     let expgrp = $(this).closest('tbody');
-        //     let colgrp = expgrp.prev('tbody').find('.grpcoll');
-            
-        //     expgrp.hide();
-        //     colgrp.show();
-        //     delete exp_grp_list[colgrp.attr('mrn')];
-        // });
+        $('.tg-output').on('click', '.grpexp', function() {
+             let expgrp = $(this);
+             let colgrp = expgrp.prev('.grpcoll');
+           
+             expgrp.toggle();
+             colgrp.toggle();
+             delete _.exp_grp_list[colgrp.attr('mrn')];
+        });
     }
     
     addExpandedGrp(mrn) {
@@ -1844,32 +1842,31 @@ export default class TgGui {
         let _ = this;
         $('#output, #extraoutput').on('click', '.element', function(){
             let mrn = $(this).attr('data-mrn');
-            console.log(_.client_options.mrn_highlights);
-            console.log(_.client_options.mrn_highlights.length);
             if(!_.client_options.mrn_highlights.length) {
                 $('.element[data-mrn="'+mrn+'"]').addClass('mrn-hlight');
                 _.client_options.mrn_highlights.push(mrn)
             }
             else {
-                for (let i = _.client_options.mrn_highlights.length - 1; i >= 0 ; i--) {
-                    if (_.client_options.mrn_highlights[i] === mrn) {
-                        $(this).removeClass('mrn-hlight');
-                        _.client_options.mrn_highlights.splice(i, 1);
-                        break; 
-                    }
-                    else {
-                        $('.element[data-mrn="'+mrn+'"]').addClass('mrn-hlight');
-                        _.client_options.mrn_highlights.push(mrn)
-                    }
+                if($.inArray(mrn, _.client_options.mrn_highlights) != -1) {
+                    _.client_options.mrn_highlights.splice($.inArray(mrn, _.client_options.mrn_highlights),1);
+                    $('.element[data-mrn="'+mrn+'"]').removeClass('mrn-hlight');
+
+                }
+                else {
+                    $('.element[data-mrn="'+mrn+'"]').addClass('mrn-hlight');
+                    _.client_options.mrn_highlights.push(mrn)
                 }
             }
+            console.log(_.client_options.mrn_highlights);
         });
     }
 
     extraOutputInit() {
+        let _ = this;
         let extraOutputID = '#scrollableExtraOutput';
         this.addScrollBar(extraOutputID);
     }
+
 
     /* -------------------------------------------------
      * KEYBOARD MAP
@@ -2036,8 +2033,10 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function(){
-            $('.tg-outputextra-wrap').toggle();
-            _.client_options.secondoutput =  _.client_options.secondoutput ? true : false;
+            $('.tg-outputextra-wrap').toggle(0, function(){
+                _.scrollPanelTo('#output', '#scrollableOutput', true);
+            });
+            _.client_options.secondoutput =  _.client_options.secondoutput ? false : true;
             _.SaveStorage('options', _.client_options);
         });
 
@@ -2054,10 +2053,7 @@ export default class TgGui {
 
                 
                 $('.tg-characterpanel').slideToggle(300, function () {
-                    let outputHeigt = $('#output').height();
-                    $('#scrollableOutput').animate({
-                        scrollTop: outputHeigt
-                    }, 500, 'linear');
+                    _.scrollPanelTo('#output', '#scrollableOutput', true);
                     $('.tg-dashboard').removeClass('midopen');
                 });
                 _.SaveStorage('options', _.client_options);
@@ -2068,10 +2064,7 @@ export default class TgGui {
         $('#triggerExpandTgArea').on('click', function () {
             $('.tg-area').toggleClass('expanded', function () {});
             setTimeout(() => {
-                let outputHeigt = $('#output').height();
-                $('#scrollableOutput').animate({
-                    scrollTop: outputHeigt
-                }, 500, 'linear');
+                _.scrollPanelTo('#output', '#scrollableOutput', true);
             }, 200);
         })
     }
@@ -2185,13 +2178,25 @@ export default class TgGui {
 
     addScrollBar(container) {
         this.scrollbar.output = new PerfectScrollbar(container, {
-            wheelPropagation: 2,
+            wheelPropagation: 1,
         });
     }
 
     // UTILITY
     isModalOpen() {
         return $.magnificPopup.instance.isOpen;
+    }
+
+    scrollPanelTo(parent, scrollablepanel, animate) {
+        let outputHeigt = $(parent).height();
+        if(animate) {
+            $(scrollablepanel).animate({
+                scrollTop: outputHeigt
+            }, 500, 'linear');
+        }
+        else {
+            $(scrollablepanel).scrollTop(outputHeigt);
+        }
     }
 
     main() {}

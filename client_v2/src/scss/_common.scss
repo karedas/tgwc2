@@ -22,8 +22,7 @@ body {
     color: $white;
 }
 
-button:focus , input:focus{
-    box-shadow: none!important;
+button:focus , input:focus, textarea:focus{
     outline: 0 none!important;
 }
 
