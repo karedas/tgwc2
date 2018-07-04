@@ -104,7 +104,12 @@
 								<div id="output" class="tg-output-history"></div>
 							</div>
 						</div>
-						<div class="tg-output-detail"></div>
+						<div class="tg-outputextra-wrap">
+							<!-- Extra Output Area-->
+							<div id="scrollableExtraOutput" class="scrollable">
+								<div id="extraoutput" class="tg-extraoutput-history"></div>
+							</div>
+						</div>
 						<div class="tg-border-box">
 							<div class="tg-border tg-border-top"></div>
 							<div class="tg-border tg-border-left"></div>
@@ -195,9 +200,9 @@
 							<!-- Input Line -->
 							<div class="tg-input tg-box b-ironlight tg-shadow">
 								<input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
-								<div class="tg-inputcommand d-none d-sm-flex">
-									<button id="triggerExpandTgArea" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
-										<i class="fas fa-expand-arrows-alt"></i>
+								<div class="tg-inputcommand d-flex">
+									<button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
+										<i class="fas fa-columns"></i>
 									</button>
 									<button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo">
 										<i class="fas fa-solar-panel"></i>

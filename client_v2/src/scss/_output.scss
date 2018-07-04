@@ -46,12 +46,6 @@
     }
 }
 
-.tg-output-detail {
-    background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-    width: 40%;
-    margin-top: 20px;
-}
-
 .tg-output-history {
     .tg-line {
         padding-bottom: 1em;
@@ -128,4 +122,12 @@
         margin-bottom: 0;
     }
 
+}
+
+/* Extra Output Area */
+
+.tg-outputextra-wrap {
+    background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+    width: 40%;
+    margin-top: 20px;
 }
