@@ -18,7 +18,6 @@ export default class Snow {
     }
     
     make() {
-        console.log('make');
 
         let _ = this;
             _.canvas = document.getElementById(_.canvasID);
@@ -41,17 +40,13 @@ export default class Snow {
         for (let x = 0; x < _.numFlakes; x++) {
             _.flakes[x] = _.getRandomFlake(true);
         }
-        console.log(_.context);
     }
 
     // main routine
     tick() {
-        console.log('tick');
-        console.log(this);
 
         let _ = this;
         let posX = 0;
-        console.log(_.context);
 
         // reset canvas for next frame
         _.context.clearRect(0, 0, _.width, _.height);
@@ -99,7 +94,6 @@ export default class Snow {
     }
 
     start(){
-        console.log(this);
         let _ = this;
         this.canvas.tickHandler = setInterval(_.tick.bind(_), Math.floor(1000 / _.framerate));
     }
