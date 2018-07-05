@@ -1,3 +1,4 @@
+import Snow from 'mapDrawer.snow';
 export default class MapDrawer {
 
     constructor() {
@@ -55,7 +56,9 @@ export default class MapDrawer {
         // // Rain
         //_.makeRain();
         // Snow
-        _.makeSnow();
+        _.MAPCTX.snow = new Snow();
+        _.MAPCTX.snow.make();
+
         // Shadows
         _.mapshadowimg[2] = new Image();
         _.mapshadowimg[2].src = imagesPath + '/interface/shadow1.png';
@@ -158,21 +161,27 @@ export default class MapDrawer {
             _.MAPCTX.drawImage(_.mapshadowimg[map.l], 96 - 32 * map.l, 96 - 32 * map.l);
         }
 
+        // Fog
         // if(map.f) {
-        //     _.MAPCTX.drawImage(mapfogimg, 0, 0);
+        //  _.MAPCTX.drawImage(mapfogimg, 0, 0);
+        // }
+        // Rain
+        // if(map.r) {
+        //  _.MAPCTX.drawImage(mapfogimg, 0, 0);
         // }
 
-        if (map.r) {
-            $('#rainCanvas').show();
-        } else {
-            $('#rainCanvas').hide();
-        }
 
         if (map.s) {
+            // Start Snow effect
+            _.MAPCTX.snow.start();
             $('#snowCanvas').show();
-        } else {
+        } 
+        else {
+            // Stop Snow effect
+            _.MAPCTX.snow.stop();
             $('#snowCanvas').hide();
         }
+
     }
 
     tileCoords(tilenum) {
@@ -182,146 +191,58 @@ export default class MapDrawer {
     }
 
 
-    makeSnow() {
-
-        /* --- config start --- */
-
-        let snowCanvasId = "snowCanvas", // id of the canvas to use
-            framerate = 40, // which fps rate to use, this is not followed exactly
-            flakeNumberModifier = 1.0, // change this to change the number of flakes
-            fallSpeedModifier = 0.5; // falling speed
-
-        /* ---- config end ---- */
-
-        let canvas = document.getElementById(snowCanvasId),
-            context = canvas.getContext("2d"),
-            width = canvas.width,
-            height = canvas.height,
-            numFlakes = Math.min(width, 300) * height / 400 * flakeNumberModifier,
-            flakes = [],
-            TWO_PI = Math.PI * 2,
-            radHeight = 40;
-        let flake = document.createElement("CANVAS"),
-            flakeContext = flake.getContext("2d");
-
-        // create flake grafic
-        flake.width = 8;
-        flake.height = 8;
-        flakeContext.fillStyle = "#fff";
-        flakeContext.beginPath();
-        flakeContext.arc(4, 4, 4, 0, TWO_PI);
-        flakeContext.fill();
-
-        // init snowflakes
-        for (let x = 0; x < numFlakes; x++) {
-            flakes[x] = getRandomFlake(true);
-        }
-
-        // start tick at specified fps
-        window.setInterval(tick, Math.floor(1000 / framerate));
-
-        // main routine
-        function tick() {
-            let posX = 0,
-                imageData;
-
-            // reset canvas for next frame
-            context.clearRect(0, 0, width, height);
-
-            for (let x = 0; x < numFlakes; x++) {
-                // calculate changes to snowflake
-                posX = flakes[x].x + Math.sin(flakes[x].yMod + flakes[x].y / radHeight * (5 - flakes[x].size)) * flakes[x].waveSize * (1 - flakes[x].size);
-                flakes[x].y += flakes[x].size * fallSpeedModifier; // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
-
-                // if snowflake is out of bounds, reset
-                if (flakes[x].y > height + 5) {
-                    flakes[x] = getRandomFlake();
-                }
-
-                // draw snowflake
-                context.globalAlpha = (flakes[x].size - 1) / 3;
-                context.drawImage(flake, posX, flakes[x].y, flakes[x].size, flakes[x].size);
-            }
-
-            // repeat 300px wide strip with snowflakes to fill whole canvas
-            if (width > 300) {
-                context.globalAlpha = 1;
-                context.drawImage(canvas, 300, 0);
-                if (width > 600) context.drawImage(canvas, 600, 0);
-                if (width > 1200) context.drawImage(canvas, 1200, 0);
-                if (width > 2400) context.drawImage(canvas, 2400, 0);
-            }
-        }
-
-        // randomize flake data
-        function getRandomFlake(init) {
-            return {
-                x: range(10, 310),
-                y: init ? range(-5, height + 5) : -5,
-                size: Math.max(range(1, 4), 2),
-                yMod: range(0, 150),
-                waveSize: range(1, 4)
-            };
-        }
-
-        // get a random number inside a range
-        function range(start, end) {
-            return Math.random() * (end - start) + start;
-        }
-    }
-
-    makeRain() {
-        let _ = this;
-        _.MAPRAIN = $('#rainCanvas')[0];
-        let w = $('#rainCanvas').innerWidth();
-        let h = $('#rainCanvas').innerHeight();
-        console.log(_.MAPRAIN.getContext);
-            _.MAPRAIN =  _.MAPRAIN.getContext('2d');
-            _.MAPRAIN.strokeStyle = 'rgba(174,194,224,0.5)';
-            _.MAPRAIN.lineWidth = 1;
-            _.MAPRAIN.lineCap = 'round';
+    // makeRain() {
+    //     let _ = this;
+    //     _.MAPRAIN = $('#rainCanvas')[0];
+    //     let w = $('#rainCanvas').innerWidth();
+    //     let h = $('#rainCanvas').innerHeight();
+    //     console.log(_.MAPRAIN.getContext);
+    //         _.MAPRAIN =  _.MAPRAIN.getContext('2d');
+    //         _.MAPRAIN.strokeStyle = 'rgba(174,194,224,0.5)';
+    //         _.MAPRAIN.lineWidth = 1;
+    //         _.MAPRAIN.lineCap = 'round';
 
 
-            let init = [];
-            let maxParts = 1000;
-            for (let a = 0; a < maxParts; a++) {
-                init.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    l: Math.random() * 1,
-                    xs: -4 + Math.random() * 4 + 2,
-                    ys: Math.random() * 10 + 10
-                })
-            }
+    //         let init = [];
+    //         let maxParts = 1000;
+    //         for (let a = 0; a < maxParts; a++) {
+    //             init.push({
+    //                 x: Math.random() * w,
+    //                 y: Math.random() * h,
+    //                 l: Math.random() * 1,
+    //                 xs: -4 + Math.random() * 4 + 2,
+    //                 ys: Math.random() * 10 + 10
+    //             })
+    //         }
 
-            let particles = [];
-            for (let b = 0; b < maxParts; b++) {
-                particles[b] = init[b];
-            }
+    //         let particles = [];
+    //         for (let b = 0; b < maxParts; b++) {
+    //             particles[b] = init[b];
+    //         }
 
-            function draw() {
-                _.MAPRAIN.clearRect(0, 0, w, h);
-                for (let c = 0; c < particles.length; c++) {
-                    let p = particles[c];
-                    _.MAPRAIN.beginPath();
-                    _.MAPRAIN.moveTo(p.x, p.y);
-                    _.MAPRAIN.lineTo(p.x + p.l * p.xs, p.y + p.l * p.ys);
-                    _.MAPRAIN.stroke();
-                }
-                move();
-            }
+    //         function draw() {
+    //             _.MAPRAIN.clearRect(0, 0, w, h);
+    //             for (let c = 0; c < particles.length; c++) {
+    //                 let p = particles[c];
+    //                 _.MAPRAIN.beginPath();
+    //                 _.MAPRAIN.moveTo(p.x, p.y);
+    //                 _.MAPRAIN.lineTo(p.x + p.l * p.xs, p.y + p.l * p.ys);
+    //                 _.MAPRAIN.stroke();
+    //             }
+    //             move();
+    //         }
 
-            function move() {
-                for (let b = 0; b < particles.length; b++) {
-                    let p = particles[b];
-                    p.x += p.xs;
-                    p.y += p.ys;
-                    if (p.x > w || p.y > h) {
-                        p.x = Math.random() * w;
-                        p.y = -20;
-                    }
-                }
-            }
-            setInterval(draw, 30);
-    }
+    //         function move() {
+    //             for (let b = 0; b < particles.length; b++) {
+    //                 let p = particles[b];
+    //                 p.x += p.xs;
+    //                 p.y += p.ys;
+    //                 if (p.x > w || p.y > h) {
+    //                     p.x = Math.random() * w;
+    //                     p.y = -20;
+    //                 }
+    //             }
+    //         }
+    //         setInterval(draw, 30);
+    // }
 }
