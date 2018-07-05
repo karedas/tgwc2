@@ -282,3 +282,66 @@ $spritesheet-sprites: ($base-square-sprite, $base-brown-sprite, $btn-annulla-spr
 $spritesheet: (117px, 95px, '../images/buttons/buttons_sprite.png', $spritesheet-sprites, );
 
 
+
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$giorno-nuvoloso-sprite-name: 'giorno_nuvoloso@sprite';
+$giorno-nuvoloso-sprite-x: 0px;
+$giorno-nuvoloso-sprite-y: 0px;
+$giorno-nuvoloso-sprite-offset-x: 0px;
+$giorno-nuvoloso-sprite-offset-y: 0px;
+$giorno-nuvoloso-sprite-width: 358px;
+$giorno-nuvoloso-sprite-height: 214px;
+$giorno-nuvoloso-sprite-total-width: 716px;
+$giorno-nuvoloso-sprite-total-height: 428px;
+$giorno-nuvoloso-sprite-image: '../images/sky/sky_sprite.png';
+$giorno-nuvoloso-sprite: (0px, 0px, 0px, 0px, 358px, 214px, 716px, 428px, '../images/sky/sky_sprite.png', 'giorno_nuvoloso@sprite', );
+$notte-sprite-name: 'notte@sprite';
+$notte-sprite-x: 358px;
+$notte-sprite-y: 0px;
+$notte-sprite-offset-x: -358px;
+$notte-sprite-offset-y: 0px;
+$notte-sprite-width: 358px;
+$notte-sprite-height: 214px;
+$notte-sprite-total-width: 716px;
+$notte-sprite-total-height: 428px;
+$notte-sprite-image: '../images/sky/sky_sprite.png';
+$notte-sprite: (358px, 0px, -358px, 0px, 358px, 214px, 716px, 428px, '../images/sky/sky_sprite.png', 'notte@sprite', );
+$notte-nuvolosa-sprite-name: 'notte_nuvolosa@sprite';
+$notte-nuvolosa-sprite-x: 0px;
+$notte-nuvolosa-sprite-y: 214px;
+$notte-nuvolosa-sprite-offset-x: 0px;
+$notte-nuvolosa-sprite-offset-y: -214px;
+$notte-nuvolosa-sprite-width: 358px;
+$notte-nuvolosa-sprite-height: 214px;
+$notte-nuvolosa-sprite-total-width: 716px;
+$notte-nuvolosa-sprite-total-height: 428px;
+$notte-nuvolosa-sprite-image: '../images/sky/sky_sprite.png';
+$notte-nuvolosa-sprite: (0px, 214px, 0px, -214px, 358px, 214px, 716px, 428px, '../images/sky/sky_sprite.png', 'notte_nuvolosa@sprite', );
+$weather-moon-sprite-name: 'weather_moon@sprite';
+$weather-moon-sprite-x: 358px;
+$weather-moon-sprite-y: 214px;
+$weather-moon-sprite-offset-x: -358px;
+$weather-moon-sprite-offset-y: -214px;
+$weather-moon-sprite-width: 83px;
+$weather-moon-sprite-height: 83px;
+$weather-moon-sprite-total-width: 716px;
+$weather-moon-sprite-total-height: 428px;
+$weather-moon-sprite-image: '../images/sky/sky_sprite.png';
+$weather-moon-sprite: (358px, 214px, -358px, -214px, 83px, 83px, 716px, 428px, '../images/sky/sky_sprite.png', 'weather_moon@sprite', );
+$spritesheet-width: 716px;
+$spritesheet-height: 428px;
+$spritesheet-image: '../images/sky/sky_sprite.png';
+$spritesheet-sprites: ($giorno-nuvoloso-sprite, $notte-sprite, $notte-nuvolosa-sprite, $weather-moon-sprite, );
+$spritesheet: (716px, 428px, '../images/sky/sky_sprite.png', $spritesheet-sprites, );
+
+

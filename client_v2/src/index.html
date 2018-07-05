@@ -58,7 +58,7 @@
 							</button>
 						</li>
 					</ul>
-					<form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider">
+					<form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider" autocomplete="off">
 						<input class="form-control mr-sm-2" id="tgSearchInput" type="search" placeholder="Cerca" aria-label="Cerca">
 						<button class="tg-fnt-button" type="submit" id="tgSearchSubmit">
 							<i class="fas fa-search"></i>
@@ -294,14 +294,14 @@
 					<div class="tg-logo-composit">
 						<div class="tg-logo-composit-light"></div>
 					</div>
-					<form id="loginPanel" class="tg-loginform" action="/">
+					<form id="loginPanel" class="tg-loginform" action="#" autocomplete="off">
 						<p class="tg-version-name">TheGate Webclient v.2
 							<span><%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
 						</p>
-						<label for="login_username">Nome Utente</label>
-						<input id="login_username" name="username" type="text">
+						<label for="login_username">Nome Personaggio!</label>
+						<input id="login_username" name="username" type="text" autocomplete="username">
 						<label for="login_password">Password</label>
-						<input id="login_password" name="password" type="password">
+						<input id="login_password" name="password" type="password" autocomplete="current-password">
 						<button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
 						<button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
 					</form>

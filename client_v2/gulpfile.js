@@ -10,7 +10,6 @@ const gulp = require('gulp'),
 	postcss = require('gulp-postcss'),
 	sass = require('gulp-sass'),
 	sassUnicode = require('gulp-sass-unicode'),
-	sourcemaps = require('gulp-sourcemaps'),
 	webpack = require('webpack'),
 	chalk = require('chalk'),
 	argv = require('yargs').argv,
@@ -96,11 +95,18 @@ function generateAssetsList() {
 }
 
 // compile javascript with webpack
-function jsCompile(watch, minimize) {
-
-	webpack_config.watch = watch;
-	webpack_config.optimization.minimize = minimize;
-	webpack_config.devtool = "source-map";
+function jsCompile(mode) {
+	if (mode == 'development') {
+		webpack_config.mode = mode;
+		webpack_config.watch = true;
+		webpack_config.optimization.minimize = false;
+		//webpack_config.devtool = "source-map";
+	}
+	else if (mode == 'production') {
+		webpack_config.mode = mode;
+		webpack_config.watch = false;
+		webpack_config.optimization.minimize = true;
+	}
 
 	// webpackstream override src and gulp dest
 	return gulp.src(config.src.base + config.src.js + '**/*.js', {
@@ -127,13 +133,11 @@ gulp.task('sass-watch', () => {
 // Compile sass files
 gulp.task('sass-compile', () => {
 	return gulp.src(config.src.base + config.src.scss + '**/*.scss')
-		// .pipe( sourcemaps.init())
 		.pipe(sass({
 			errLogToConsole: true
 		}).on('error', sass.logError))
 		.pipe(sassUnicode())
 		.pipe(postcss(postcss_config))
-		// .pipe(paths.src.base + 'css' ? sourcemaps.write('./maps'))
 		.pipe(gulp.dest(config.build.base + config.build.css))
 		.pipe(debug());
 });
@@ -193,7 +197,6 @@ function copyStaticFiles(done) {
 		.pipe(gulp.dest(config.build.base));
 }
 
-
 // generate CSS sprite images
 gulp.task('generate-sprites', (done) => {
 	//waiting stream end
@@ -210,8 +213,8 @@ gulp.task('copy-staticfiles', (done) =>  {
 })
 
 //watching js watch and compile on live stream
-gulp.task('js-watch', jsCompile.bind(this, true, false));
-gulp.task('js-compile', jsCompile.bind(this, false, true));
+gulp.task('js-watch', jsCompile.bind(this, 'development'));
+gulp.task('js-compile', jsCompile.bind(this, 'production'));
 
 // Cleaning build folder
 gulp.task('clean', () => {

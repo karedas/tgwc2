@@ -25,11 +25,7 @@ module.exports = function (prop) {
     
     var wp = {
         
-        
-        mode: 'development',
-
         // --watch true, --watch false
-        watch: false,
         watchOptions: {
             poll: 1000,
             aggregateTimeout: 500,
@@ -81,7 +77,7 @@ module.exports = function (prop) {
         },
 
         optimization: {
-            minimize: false,
+            minimize:  false,
             splitChunks: {
                 cacheGroups: {
                     vendor: {
@@ -101,6 +97,10 @@ module.exports = function (prop) {
             // entrypoints: false,
             // chunks: false
         },
+
+        performance: {
+            hints: process.env.NODE_ENV === 'production' ? "warning" : false
+          },
 
         plugins: [
 

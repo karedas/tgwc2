@@ -1,3 +1,5 @@
+@import 'sky';
+
 .tg-rightside{
 
     background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
@@ -124,21 +126,6 @@
         }
     }
 
-    .tg-sky {
-        position: absolute;
-        width: 358px;
-        height: 215px;
-        left: 28px;
-        top: 13px;
-        
-        #sky {
-            height: 100%;
-            width: 100%;
-            background: url($imgPath + '/fasi/fasi.jpg') no-repeat;
-            box-shadow: inset 0 0 20px 0px black;
-        }
-    }
-
     // Bottom Board
     .tg-right-board {
         background-color: rgba(0,0,0,.5);
@@ -148,20 +135,6 @@
     }
 
     @include media-breakpoint-down(lg) {
-        .tg-sky {
-            width: 275px;
-            height: 162px;
-            top: 10px;
-            left: 24px;
-            right: 10px;
-            z-index: 2;
-            position: absolute;
-
-            #sky {
-                background-size: 275px auto;
-            }
-            
-        }
         .tg-map {
             width: 222px;
             flex: 1 0 394px;

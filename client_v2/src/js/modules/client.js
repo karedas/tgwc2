@@ -1086,27 +1086,35 @@ export default class TgGui {
      */
 
     setSky(sky) {
+        /* 
+        0: notte (luna 0)
+        1: notte (luna 1)
+        2: notte (luna 2)
+        3: notte (luna 3)
+        4: notte (luna 4)
+        5: alba 
+        6: mattina
+        7: mezzogiorno
+        8: pomeriggio
+        9: sera
+        N: notte
+        d:  giorno + pioggia + fulmini
+        e:  giorno + pioggia
+        f:  giorno + fulmini
+        g:  aurora boreale (??)
+        i:  tramonto
+        o:  aurora
+        p:  notte + pioggia + fulmini
+        q:  giorno nuvoloso
+        r:  notte + pioggia
+        s:  notte + pioggia + fulmini
+        t:  giorno + neve
+        u:  Giorno con Arcobaleno (??)
+        w:  notte nuvolosa (no particelle)
+        y:  notte con neve
 
-        let _ = this;
-        //let skypos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'N', 'd', 'e', 'f', 'g', 'i', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y'];
-
-        /*  5: alba 
-            o: mattina
-            i: tramonto
-            t: neve
-            q: mattina nuvolosa
-        */
-        let skypos = ['o', 'N', 'w', 'i', 't', 'q'];
-        let size;
-        console.log(skypos.indexOf(sky));
-
-        if(_.viewport == 'lg') {
-            size = 162;
-        }
-        else {
-            size = 215;
-        }
-        $('#sky').css('background-position', '0 -' + (skypos.indexOf(sky) * size) + 'px');
+        /* Sets the attribute on sky element to interlace with the Css rules */
+        $('#sky').attr('data-sky', sky);
     }
 
     /* *****************************************************************************
