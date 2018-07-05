@@ -3071,7 +3071,6 @@ function renderDetailsList(cont_type, cont_num, cont, type, style)
 					
 				txt += '>'
 				for(var m=0; m < l.mrn.length; m++)
-					txt += '<tr><td>'+(m == 0 ? '<div class="collicon"></div>':'')+'</td><td><div>'+renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact '+type)+'</div></td><td>'+decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc)+'</td></tr>';
 				if (l.sz && l.sz > l.mrn.length)
 					txt += '<tr><td></td><td><div>'+renderIcon(l.icon, null, cont_type, l.cntnum, null, /* 'interact '+type */ null)+'</div></td><td>'+decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc)+'</td></tr>';				 
 				txt += '</tbody>';

@@ -57,6 +57,8 @@
         /* Alba */
         &[data-sky="5"] {
             @include sprite($alba-sprite);
+            @include  sprite-background-size($alba-sprite)
+
         }
         /* Mattina */
         &[data-sky="6"] {
@@ -97,6 +99,7 @@
         /* Tramonto */
         &[data-sky="i"] {
             @include sprite($tramonto-sprite);
+            @include  sprite-background-size($tramonto-sprite);
         }
         /* Aurora */
         &[data-sky="o"] {
@@ -146,7 +149,6 @@
         position: absolute;
 
         #sky {
-            background-size: contain;
         }
     }
 }

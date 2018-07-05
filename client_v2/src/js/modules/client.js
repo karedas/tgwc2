@@ -837,12 +837,11 @@ export default class TgGui {
             _.godInvLev = parseInt(inv.substr(2, 3));
             return '';
         });
-
         /* \r is already removed at top */
-        msg = msg.replace(/\n/gm, '<br>');
-
-        if (msg != '') {
-            msg = _.replaceColors('<div class="tg-line">' + msg + '</div>');
+        msg = msg.replace(/\n/gm, '</br>');
+        
+        if(msg !='') {
+            msg = '<div class="tg-line">' + _.replaceColors(msg) + '</div>';
         }
 
         return msg.replace(/<p><\/p>/g, '');
@@ -858,23 +857,23 @@ export default class TgGui {
     }
 
     replaceColors(msg) {
-        msg = msg.replace(/&B/gm, '<div class="tg-gray">');
-        msg = msg.replace(/&R/gm, '<div class="tg-lt-red">');
-        msg = msg.replace(/&G/gm, '<div class="tg-lt-green">');
-        msg = msg.replace(/&Y/gm, '<div class="tg-yellow">');
-        msg = msg.replace(/&L/gm, '<div class="tg-lt-blue">');
-        msg = msg.replace(/&M/gm, '<div class="tg-lt-magenta">');
-        msg = msg.replace(/&C/gm, '<div class="tg-lt-cyan">');
-        msg = msg.replace(/&W/gm, '<div class="tg-white">');
-        msg = msg.replace(/&b/gm, '<div class="tg-black">');
-        msg = msg.replace(/&r/gm, '<div class="tg-red">');
-        msg = msg.replace(/&g/gm, '<div class="tg-green">');
-        msg = msg.replace(/&y/gm, '<div class="tg-brown">');
-        msg = msg.replace(/&l/gm, '<div class="tg-blue">');
-        msg = msg.replace(/&m/gm, '<div class="tg-magenta">');
-        msg = msg.replace(/&c/gm, '<div class="tg-cyan">');
-        msg = msg.replace(/&w/gm, '<div class="tg-lt-white">');
-        msg = msg.replace(/&-/gm, '</div>');
+        msg = msg.replace(/&B/gm, '<span class="tg-gray">');
+        msg = msg.replace(/&R/gm, '<span class="tg-lt-red">');
+        msg = msg.replace(/&G/gm, '<span class="tg-lt-green">');
+        msg = msg.replace(/&Y/gm, '<span class="tg-yellow">');
+        msg = msg.replace(/&L/gm, '<span class="tg-lt-blue">');
+        msg = msg.replace(/&M/gm, '<span class="tg-lt-magenta">');
+        msg = msg.replace(/&C/gm, '<span class="tg-lt-cyan">');
+        msg = msg.replace(/&W/gm, '<span class="tg-white">');
+        msg = msg.replace(/&b/gm, '<span class="tg-black">');
+        msg = msg.replace(/&r/gm, '<span class="tg-red">');
+        msg = msg.replace(/&g/gm, '<span class="tg-green">');
+        msg = msg.replace(/&y/gm, '<span class="tg-brown">');
+        msg = msg.replace(/&l/gm, '<span class="tg-blue">');
+        msg = msg.replace(/&m/gm, '<span class="tg-magenta">');
+        msg = msg.replace(/&c/gm, '<span class="tg-cyan">');
+        msg = msg.replace(/&w/gm, '<span class="tg-lt-white">');
+        msg = msg.replace(/&-/gm, '</span>');
 
         return msg;
     }
@@ -885,26 +884,26 @@ export default class TgGui {
      */
 
     renderMob(icon, condprc, count, mrn, desc, addclass) {
-        return '<div class="mob">' + this.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
+        return '<div class="mob">' + this.renderIcon(icon, mrn, 'room', null, null, addclass) + '<div class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</div></div>'
     }
     
     renderObject(icon, condprc, count, mrn, desc, addclass) {
-        return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<span class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</span></div>'
+        return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<div class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</div></div>'
     }
 
     decoratedDescription(condprc, moveprc, wgt, count, desc) {
         let _ = this;
         let countStr = '';
 
-        if (count > 1)
+        if (count > 1) {
             countStr = '&#160;<span class="cnt">[x' + count + ']</span>';
-
+        }
         return _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr;
     }
 
     renderMinidetails(condprc, moveprc, wgt) {
         let pos = -11 * Math.floor(22 * (100 - condprc) / 100);
-        return '<div class="hstat" style="background-position:0 ' + pos + 'px" condprc="' + condprc + '"' + (moveprc ? ' moveprc="' + moveprc + '"' : "") + (wgt != null ? ' wgt="' + wgt + '"' : "") + '></div>';
+        return '<div class="hstat" style="background-position:0 ' + pos + 'px" data-condprc="' + condprc + '"' + (moveprc ? ' data-moveprc="' + moveprc  + '"': '') + (wgt != null ? ' wgt="' + wgt + '"' : '') + '></div>';
     }
 
     setDataInterface(cmd, data) {
@@ -1073,7 +1072,7 @@ export default class TgGui {
         if (!icon)
             icon = 416;
 
-        return '<div class="iconimg ico_' + icon + ' ' + (addclass ? ' ' + addclass : '') + '" style="background-position:' + _.tileBgPos(icon) + '"' + (mrn ? ' mrn="' + mrn + '"' : '') + (cmd ? ' cmd="' + cmd + '"' : '') + (cnttype ? ' cnttype="' + cnttype + '"' : '') + (cntmrn ? ' cntmrn="' + cntmrn + '"' : '') + '></div>';
+        return '<div class="iconimg ico_' + icon + ' ' + (addclass ? ' ' + addclass : '') + '" style="background-position:' + _.tileBgPos(icon) + '"' + (mrn ? ' data-mrn="' + mrn + '"' : '') + (cmd ? ' cmd="' + cmd + '"' : '') + (cnttype ? ' data-cnttype="' + cnttype + '"' : '') + (cntmrn ? ' data-cntmrn="' + cntmrn + '"' : '') + '></div>';
     }
 
     renderIconWithBackBorder(icon, mrn, cnttype, cntmrn, cmd, addclass) {
@@ -1206,8 +1205,7 @@ export default class TgGui {
         }
         /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
 
-        res += _.renderDetailsInner(info, type);
-
+        res += _.renderDetailsInner(info, type, false);
         if (info.image)
             _.showImage($('#image-cont'), info.image);
 
@@ -1233,12 +1231,14 @@ export default class TgGui {
         }
 
         /* Set Title and Tooltip */
+        let extratitle = '';
         if(info.title) {
-            if(type == 'room'/* && !info.up*/) {
+            if(type == 'room' && !info.up) {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
 
-            let title = info.title;
+            let extratitle = 'div class="tg-extra-title">' + info.title + '</div>';
+
             // icon.attr('data-shdesc', title);
             // icon.attr('tooltip', title);
         }
@@ -1251,7 +1251,7 @@ export default class TgGui {
         let textarea = container.empty();
         let details = _.replaceColors(_.renderDetailsInner(info, type, true));
        
-        textarea.append(details);
+        textarea.append(extratitle+details);
 
         if(type == 'room') {
             if(_.client_update.room.version < info.var) {
@@ -1321,7 +1321,7 @@ export default class TgGui {
         }
 	    /* Print where info */
         if(info.where) {
-            textarea += '<div>'+renderIconWithBackBorder(info.where.icon, info.where.num, null, null, null, 'interact where')+'<span class="desc">Si trova '+info.where.title+'.</span></div>';
+            textarea += '<div>'+_.renderIconWithBackBorder(info.where.icon, info.where.num, null, null, null, 'interact where')+'<div class="desc">Si trova '+info.where.title+'.</div></div>';
         }
 
 
@@ -1329,6 +1329,8 @@ export default class TgGui {
     }
 
     renderDetailsList(cont_type, cont_num, cont, type, style) {
+       
+        let _ = this;
 
         let pos_to_order = [
             { pos:0, name: "" },
@@ -1359,7 +1361,6 @@ export default class TgGui {
             25		// Tied
         ];
 
-        let _ = this;
         let res = '',
             txt = '';
 
@@ -1388,18 +1389,17 @@ export default class TgGui {
                     grp_attribute = ' grpcoll';
                     
                     if (opened) {
-                        grp_attribute += ' d-none"';
+                        grp_attribute += ' d-none';
                     }
-                    expicon += '<div class="expicon"></div>';
+                    expicon = '<div class="expicon"></div>';
                 }
 
                 
                 /* print header triggerable element */
                 txt += '<div class="element'+ grp_attribute +'" ' + data_mrn + '>';
-                    txt += expicon 
                     // mob/obj icon
                     txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact '+type);
-                    txt += '<span class="desc">' +_.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) +'</span>';
+                    txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) +'</div>';
                 txt += '</div>';
 
                 /* Start Collapsable Obj/Mob Container */
@@ -1414,16 +1414,17 @@ export default class TgGui {
                     for (let m = 0; m < l.mrn.length; m++) {
                         txt += '<div class="element">'
                             txt += (m == 0 ? '<div class="collicon"></div>' : '') + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type);
-                            txt += '<span class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</span>';
+                            console.log(l.condprc, l.mvprc, l.wgt, 1, l.desc);
+                            txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div>';
                         txt += '</div>';
                     }
 
                     if (l.sz && l.sz > l.mrn.length) {
                         txt += '<div class="element">';
                             txt += _.renderIcon(l.icon, null, cont_type, l.cntnum, null, null);
-                            txt += '<span class="desc">';
+                            txt += '<div class="desc">';
                             txt += _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc);
-                            txt += '</span>';
+                            txt += '</div>';
                         txt += '</div>';
                     }
 
@@ -1797,8 +1798,8 @@ export default class TgGui {
     
     showOutput(text) {
         let _ = this,
-            $text = $(text);
-        $('#output').append($text);
+            app =  $(text);
+        $('#output').append(app);
         _.scrollPanelTo('#output', '#scrollableOutput', false);
     }
 
@@ -1865,7 +1866,6 @@ export default class TgGui {
                     _.client_options.mrn_highlights.push(mrn)
                 }
             }
-            console.log(_.client_options.mrn_highlights);
         });
     }
 
