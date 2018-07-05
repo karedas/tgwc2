@@ -95,6 +95,7 @@ export default class Snow {
 
     start(){
         let _ = this;
+        clearInterval(_.canvas.tickHandler);
         this.canvas.tickHandler = setInterval(_.tick.bind(_), Math.floor(1000 / _.framerate));
     }
     stop(){

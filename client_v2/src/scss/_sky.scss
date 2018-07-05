@@ -10,14 +10,15 @@
         height: 100%;
         width: 100%;
         box-shadow: inset 0 0 20px 0px black;
-
+        &:after {
+            display: none;
+        }
         /* Notte con Luna */
         &[data-sky="0"],
         &[data-sky="1"],
         &[data-sky="2"],
         &[data-sky="3"],
-        &[data-sky="4"],
-        &[data-sky="5"] {
+        &[data-sky="4"]{
             @include sprite($notte-sprite);
             /* Elemento Luna */
             &:after {
@@ -35,18 +36,18 @@
         /* Notte + luna 1/4 */
         &[data-sky="1"]:after {
             top: 12px;
-            left: 14px;
+            left: 20px;
         }
         /* Notte + luna 2/4 */
         &[data-sky="2"]:after {
             top: -18px;
-            left: 50%;
+            left: 177px;
             transform: translateX(-50%);
         }
         /* Notte + luna 3/4 */
         &[data-sky="3"]:after {
             top: 12px;
-            right: 14px;
+            right: 20px;
         }
         /* Notte + luna 4/4 */
         &[data-sky="4"]:after {
@@ -55,23 +56,23 @@
         }
         /* Alba */
         &[data-sky="5"] {
-            //@include sprite($alba-sprite);
+            @include sprite($alba-sprite);
         }
         /* Mattina */
         &[data-sky="6"] {
-            //@include sprite($mattina-sprite);
+            @include sprite($mattina-sprite);
         }
         /*Mezzogiorno*/
         &[data-sky="7"] {
-            //@include sprite($mezzogiorno-sprite);
+            @include sprite($mezzogiorno-sprite);
         }
         /*Pomeriggio*/
         &[data-sky="8"] {
-            //@include sprite($pomeriggio-sprite);
+           @include sprite($pomeriggio-sprite);
         }
         /* Sera */
         &[data-sky="9"] {
-            //@include sprite($sera-sprite);
+            @include sprite($sera-sprite);
         }
         /* Notte (no luna) */
         &[data-sky="N"] {
@@ -79,12 +80,15 @@
         }
         /* giorno con pioggia e fulmini */
         &[data-sky="d"] {
+            @include sprite($giorno-pioggia-sprite);
         }
         /* giorno e pioggia */
         &[data-sky="e"] {
+            @include sprite($giorno-pioggia-sprite);
         }
         /* giorno e fulmini */
         &[data-sky="f"] {
+            @include sprite($giorno-nuvoloso-sprite);
         }
         /* Aurora boreale */
         &[data-sky="g"] {
@@ -92,14 +96,15 @@
         }
         /* Tramonto */
         &[data-sky="i"] {
-            //@include sprite($tramonto-sprite);
+            @include sprite($tramonto-sprite);
         }
         /* Aurora */
         &[data-sky="o"] {
-            //@include sprite($aurora-sprite);
+            @include sprite($aurora-sprite);
         }
         /* Notte + pioggia + fulmini */
         &[data-sky="p"] {
+            @include sprite($notte-nuvolosa-sprite);            
         }
         /* Giorno nuvoloso  */
         &[data-sky="q"] {
@@ -107,15 +112,19 @@
         }
         /* Notte + Pioggia */
         &[data-sky="r"] {
+            @include sprite($notte-nuvolosa-sprite);
         }
         /* Notte + Pioggia + Fulmini */
         &[data-sky="s"] {
+            @include sprite($notte-nuvolosa-sprite);
         }
         /* Giorno + Neve */
         &[data-sky="t"] {
+            @include sprite($giorno-neve-sprite);
         }
         /* Arcobaleno */
         &[data-sky="u"] {
+            @include sprite($rainbow-sprite);
         }
         /* Notte nuvolosa */
         &[data-sky="w"] {
@@ -123,6 +132,7 @@
         }
         /* Notte con Neve */
         &[data-sky="y"] {
+            @include sprite($notte-neve-sprite);
         }
     }
 
