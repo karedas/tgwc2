@@ -4,21 +4,20 @@
     font-size: 11px;
     position: relative;
     margin-bottom: 8px;
-    line-height: 26px;
     
 
     .tg-output-wrap {
         position: relative;
         flex: auto;
-        padding-top: 20px;
         margin: 6px 0;
         display: flex;
     }
     .tg-output-options {
         height: 30px;
         position: absolute;
-        left: $ironlight-border-size;
-        right: $ironlight-border-size;
+        top: 0;
+        left: 2px;
+        right: 0;
         z-index: 2;
         border-bottom: $gray-900;
         padding: 0 1em 10px;
@@ -154,7 +153,6 @@
 
         .desc {
             display: flex;
-            margin: auto 0;
             display: inline-block;
         }
     }
@@ -169,14 +167,7 @@
         zoom: .8;
         vertical-align: middle;
     }
-    .iconimg {
-        float:left;
-        clear:left;
-    }
-    .iconimg .iconimg {
-        float: none;
-        clear: none;
-    }
+
        
     .tg-title {
         display: block !important;
@@ -195,12 +186,23 @@
     display: none;
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
     width: 50%;
-    padding-top: 20px;
-    margin: 6px 0;
+    padding-top: 26px;
+    margin: 0 0 6px;
     z-index: 2;
     position: relative;
 
     .desc {
         color: #f2ff00;
     }
+}
+
+
+.tg-resizablehand {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 15px;
+    cursor: col-resize;
+    z-index: 10;
 }

@@ -64,6 +64,7 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
             &:after {
                @include sprite($weather-moon-sprite);
                display: block;
+               transition: all 6s ease-in;
             }
         }
         

@@ -7,6 +7,7 @@ import 'bootstrap';
 import 'magnific-popup';
 import 'draggabilly/dist/draggabilly.pkgd.js';
 import 'easy-autocomplete';
+import 'jquery-resizable-dom';
 
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
@@ -65,6 +66,7 @@ export default class TgGui {
             dashboard: "0",
             secondoutput: true,
             mrn_highlights: [],
+            extradetail_width: '50%'
         };
 
         /* Status */
@@ -1935,9 +1937,21 @@ export default class TgGui {
 
     extraOutputInit() {
         let _ = this;
-        let extraOutputID = '#scrollableExtraOutput';
-        this.addScrollBar(extraOutputID);
+        let extraOutputID = '.tg-outputextra-wrap';
+        this.addScrollBar('#scrollableExtraOutput');
+        console.log(_.client_options.extradetail_width);
+        $(extraOutputID).width(_.client_options.extradetail_width);
 
+        $(extraOutputID).resizable({ 
+            handleSelector: ".tg-resizablehand",
+            resizeHeight: false,
+            resizeWidthFrom: 'left',
+            onDragEnd: function(){
+                let width = $(extraOutputID).width();
+                _.client_options.extradetail_width = width;
+                _.SaveStorage('options', _.client_options);
+            }
+        });   
         /* Image Event */
         $('#detailimage')
             .on('error', function(){

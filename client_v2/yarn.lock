@@ -4842,7 +4842,13 @@ jquery-mousewheel@>=3.0.6:
   version "3.1.13"
   resolved "https://registry.yarnpkg.com/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
 
-jquery@*, jquery@^3.3.1:
+jquery-resizable-dom@^0.32.0:
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/jquery-resizable-dom/-/jquery-resizable-dom-0.32.0.tgz#85269fdc604fce3e0b15fe65f2ebb7ca7d4dd247"
+  dependencies:
+    jquery "~3.3.1"
+
+jquery@*, jquery@^3.3.1, jquery@~3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
