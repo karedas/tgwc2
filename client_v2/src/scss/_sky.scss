@@ -161,7 +161,7 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
         }
         /* Notte + pioggia + fulmini */
         &[data-sky="p"] {
-            background-image: url( $skyPath + 'notte-nuvolosa-fulmini.jpg');      
+            background-image: url( $skyPath + 'notte-pioggia-fulmini.jpg');      
         }
         /* Giorno nuvoloso  */
         &[data-sky="q"] {
@@ -173,7 +173,7 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
         }
         /* Notte + Pioggia + Fulmini */
         &[data-sky="s"] {
-            background-image: url( $skyPath + 'notte-nuvolosa-fulmini.jpg');
+            background-image: url( $skyPath + 'notte-pioggia-fulmini.jpg');
         }
         /* Giorno + Neve */
         &[data-sky="t"] {

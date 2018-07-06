@@ -1438,6 +1438,7 @@ export default class TgGui {
                     grp_attribute = '',  
                     exp_attribute = '',
                     data_mrn = 'data-mrn="' + l.mrn[l.mrn.length - 1] + '"',
+                    tooltip = '',
                     expicon = '';
 
                 
@@ -1876,16 +1877,15 @@ export default class TgGui {
         $('.tg-output').on('click', '.grpcoll', function() {
             let colgrp = $(this);
             let expgrp = colgrp.next('.grpexp');
-            colgrp.toggle();
-            expgrp.toggle();
+            expgrp.slideToggle();
+            $(this).toggleClass('expanded');
             _.addExpandedGrp(colgrp.attr('mrn'));
         });
         $('.tg-output').on('click', '.grpexp', function() {
              let expgrp = $(this);
              let colgrp = expgrp.prev('.grpcoll');
-           
-             expgrp.toggle();
-             colgrp.toggle();
+             $(this).toggleClass('expanded');
+             expgrp.slideToggle();
              delete _.exp_grp_list[colgrp.attr('mrn')];
         });
     }

@@ -4,7 +4,8 @@
     font-size: 11px;
     position: relative;
     margin-bottom: 8px;
-    line-height: 1.4;
+    line-height: 26px;
+    
 
     .tg-output-wrap {
         position: relative;
@@ -118,6 +119,28 @@
 
     .grpcoll {
         display: block;
+        &.expanded {
+            flex: 1 1 100%!important;
+            background-color: $gray-900;
+            position: relative;
+            z-index: 2;
+            border: 1px solid $gray-700;
+        }
+    }
+
+    .grpexp {
+        border:1px solid $gray-700;
+        flex: 1 1 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: .2em;
+        margin-top: -1px;
+        padding:.2em 0;
+        position: relative;
+        z-index: 1;
+        .element {
+            flex: 1 1 50%;
+        }
     }
 
 
@@ -146,8 +169,13 @@
         zoom: .8;
         vertical-align: middle;
     }
-    > .iconimg {
+    .iconimg {
         float:left;
+        clear:left;
+    }
+    .iconimg .iconimg {
+        float: none;
+        clear: none;
     }
        
     .tg-title {
