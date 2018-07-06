@@ -1,4 +1,6 @@
 
+$skyPath : $imgPath + '/sky/'; 
+
 .tg-sky {
     position: absolute;
     width: 358px;
@@ -10,6 +12,9 @@
         height: 100%;
         width: 100%;
         box-shadow: inset 0 0 20px 0px black;
+        background-size: contain;
+        background-position: top left;
+        
         &:after {
             display: none;
         }
@@ -19,7 +24,7 @@
         &[data-sky="2"],
         &[data-sky="3"],
         &[data-sky="4"]{
-            @include sprite($notte-sprite);
+           background-image: url( $skyPath + 'notte.jpg');
             /* Elemento Luna */
             &:after {
                content: '';
@@ -56,41 +61,39 @@
         }
         /* Alba */
         &[data-sky="5"] {
-            @include sprite($alba-sprite);
-            @include  sprite-background-size($alba-sprite)
-
+           background-image: url( $skyPath + 'alba.jpg');
         }
         /* Mattina */
         &[data-sky="6"] {
-            @include sprite($mattina-sprite);
+           background-image: url( $skyPath + 'mattina.jpg');
         }
         /*Mezzogiorno*/
         &[data-sky="7"] {
-            @include sprite($mezzogiorno-sprite);
+            background-image: url( $skyPath + 'mezzogiorno.jpg');
         }
         /*Pomeriggio*/
         &[data-sky="8"] {
-           @include sprite($pomeriggio-sprite);
+            background-image: url( $skyPath + 'pomeriggio.jpg');
         }
         /* Sera */
         &[data-sky="9"] {
-            @include sprite($sera-sprite);
+            background-image: url( $skyPath + 'sera.jpg');
         }
         /* Notte (no luna) */
         &[data-sky="N"] {
-            @include sprite($notte-sprite);
+            background-image: url( $skyPath + 'notte.jpg');
         }
         /* giorno con pioggia e fulmini */
         &[data-sky="d"] {
-            @include sprite($giorno-pioggia-sprite);
+            background-image: url( $skyPath + 'giorno-pioggia.jpg');
         }
         /* giorno e pioggia */
         &[data-sky="e"] {
-            @include sprite($giorno-pioggia-sprite);
+            background-image: url( $skyPath + 'giorno-pioggia.jpg');
         }
         /* giorno e fulmini */
         &[data-sky="f"] {
-            @include sprite($giorno-nuvoloso-sprite);
+            background-image: url( $skyPath + 'giorno-nuvoloso.jpg');
         }
         /* Aurora boreale */
         &[data-sky="g"] {
@@ -98,44 +101,43 @@
         }
         /* Tramonto */
         &[data-sky="i"] {
-            @include sprite($tramonto-sprite);
-            @include  sprite-background-size($tramonto-sprite);
+            background-image: url( $skyPath + 'tramonto.jpg');
         }
         /* Aurora */
         &[data-sky="o"] {
-            @include sprite($aurora-sprite);
+            background-image: url( $skyPath + 'aurora.jpg');
         }
         /* Notte + pioggia + fulmini */
         &[data-sky="p"] {
-            @include sprite($notte-nuvolosa-sprite);            
+            background-image: url( $skyPath + 'notte-nuvolosa.jpg');      
         }
         /* Giorno nuvoloso  */
         &[data-sky="q"] {
-            @include sprite($giorno-nuvoloso-sprite);
+           background-image: url( $skyPath + 'giorno-nuvoloso.jpg');
         }
         /* Notte + Pioggia */
         &[data-sky="r"] {
-            @include sprite($notte-nuvolosa-sprite);
+            background-image: url( $skyPath + 'notte-nuvolosa.jpg');
         }
         /* Notte + Pioggia + Fulmini */
         &[data-sky="s"] {
-            @include sprite($notte-nuvolosa-sprite);
+            background-image: url( $skyPath + 'notte-nuvolosa.jpg');
         }
         /* Giorno + Neve */
         &[data-sky="t"] {
-            @include sprite($giorno-neve-sprite);
+            background-image: url( $skyPath + 'giorno-neve.jpg');
         }
         /* Arcobaleno */
         &[data-sky="u"] {
-            @include sprite($rainbow-sprite);
+            background-image: url( $skyPath + 'rainbow.jpg');
         }
         /* Notte nuvolosa */
         &[data-sky="w"] {
-            @include sprite($notte-nuvolosa-sprite);
+            background-image: url( $skyPath + 'notte-nuvolosa.jpg');
         }
         /* Notte con Neve */
         &[data-sky="y"] {
-            @include sprite($notte-neve-sprite);
+            background-image: url( $skyPath + 'notte-neve.jpg');
         }
     }
 

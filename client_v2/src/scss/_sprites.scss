@@ -9,55 +9,22 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-$est-dir-sprite-name: 'est-dir@sprite';
-$est-dir-sprite-x: 0px;
-$est-dir-sprite-y: 55px;
-$est-dir-sprite-offset-x: 0px;
-$est-dir-sprite-offset-y: -55px;
-$est-dir-sprite-width: 52px;
-$est-dir-sprite-height: 68px;
-$est-dir-sprite-total-width: 188px;
-$est-dir-sprite-total-height: 123px;
-$est-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
-$est-dir-sprite: (0px, 55px, 0px, -55px, 52px, 68px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'est-dir@sprite', );
-$nord-dir-sprite-name: 'nord-dir@sprite';
-$nord-dir-sprite-x: 0px;
-$nord-dir-sprite-y: 0px;
-$nord-dir-sprite-offset-x: 0px;
-$nord-dir-sprite-offset-y: 0px;
-$nord-dir-sprite-width: 68px;
-$nord-dir-sprite-height: 55px;
-$nord-dir-sprite-total-width: 188px;
-$nord-dir-sprite-total-height: 123px;
-$nord-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
-$nord-dir-sprite: (0px, 0px, 0px, 0px, 68px, 55px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'nord-dir@sprite', );
-$ovest-dir-sprite-name: 'ovest-dir@sprite';
-$ovest-dir-sprite-x: 68px;
-$ovest-dir-sprite-y: 0px;
-$ovest-dir-sprite-offset-x: -68px;
-$ovest-dir-sprite-offset-y: 0px;
-$ovest-dir-sprite-width: 52px;
-$ovest-dir-sprite-height: 68px;
-$ovest-dir-sprite-total-width: 188px;
-$ovest-dir-sprite-total-height: 123px;
-$ovest-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
-$ovest-dir-sprite: (68px, 0px, -68px, 0px, 52px, 68px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'ovest-dir@sprite', );
-$sud-dir-sprite-name: 'sud-dir@sprite';
-$sud-dir-sprite-x: 120px;
-$sud-dir-sprite-y: 0px;
-$sud-dir-sprite-offset-x: -120px;
-$sud-dir-sprite-offset-y: 0px;
-$sud-dir-sprite-width: 68px;
-$sud-dir-sprite-height: 52px;
-$sud-dir-sprite-total-width: 188px;
-$sud-dir-sprite-total-height: 123px;
-$sud-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
-$sud-dir-sprite: (120px, 0px, -120px, 0px, 68px, 52px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'sud-dir@sprite', );
-$spritesheet-width: 188px;
-$spritesheet-height: 123px;
-$spritesheet-image: '../images/mapobj/mapobj_sprite.png';
-$spritesheet-sprites: ($est-dir-sprite, $nord-dir-sprite, $ovest-dir-sprite, $sud-dir-sprite, );
-$spritesheet: (188px, 123px, '../images/mapobj/mapobj_sprite.png', $spritesheet-sprites, );
+$weather-moon-sprite-name: 'weather_moon@sprite';
+$weather-moon-sprite-x: 0px;
+$weather-moon-sprite-y: 0px;
+$weather-moon-sprite-offset-x: 0px;
+$weather-moon-sprite-offset-y: 0px;
+$weather-moon-sprite-width: 83px;
+$weather-moon-sprite-height: 83px;
+$weather-moon-sprite-total-width: 83px;
+$weather-moon-sprite-total-height: 83px;
+$weather-moon-sprite-image: '../images/sky/sky_sprite.png';
+$weather-moon-sprite: (0px, 0px, 0px, 0px, 83px, 83px, 83px, 83px, '../images/sky/sky_sprite.png', 'weather_moon@sprite', );
+$spritesheet-width: 83px;
+$spritesheet-height: 83px;
+$spritesheet-image: '../images/sky/sky_sprite.png';
+$spritesheet-sprites: ($weather-moon-sprite, );
+$spritesheet: (83px, 83px, '../images/sky/sky_sprite.png', $spritesheet-sprites, );
 
 
 
@@ -121,6 +88,69 @@ $spritesheet-height: 54px;
 $spritesheet-image: '../images/icons/icons_sprite.png';
 $spritesheet-sprites: ($conv-ico-sprite, $editor-lapis-sprite, $heart-minus-sprite, $monete-ico-sprite, );
 $spritesheet: (65px, 54px, '../images/icons/icons_sprite.png', $spritesheet-sprites, );
+
+
+
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$est-dir-sprite-name: 'est-dir@sprite';
+$est-dir-sprite-x: 0px;
+$est-dir-sprite-y: 55px;
+$est-dir-sprite-offset-x: 0px;
+$est-dir-sprite-offset-y: -55px;
+$est-dir-sprite-width: 52px;
+$est-dir-sprite-height: 68px;
+$est-dir-sprite-total-width: 188px;
+$est-dir-sprite-total-height: 123px;
+$est-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
+$est-dir-sprite: (0px, 55px, 0px, -55px, 52px, 68px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'est-dir@sprite', );
+$nord-dir-sprite-name: 'nord-dir@sprite';
+$nord-dir-sprite-x: 0px;
+$nord-dir-sprite-y: 0px;
+$nord-dir-sprite-offset-x: 0px;
+$nord-dir-sprite-offset-y: 0px;
+$nord-dir-sprite-width: 68px;
+$nord-dir-sprite-height: 55px;
+$nord-dir-sprite-total-width: 188px;
+$nord-dir-sprite-total-height: 123px;
+$nord-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
+$nord-dir-sprite: (0px, 0px, 0px, 0px, 68px, 55px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'nord-dir@sprite', );
+$ovest-dir-sprite-name: 'ovest-dir@sprite';
+$ovest-dir-sprite-x: 68px;
+$ovest-dir-sprite-y: 0px;
+$ovest-dir-sprite-offset-x: -68px;
+$ovest-dir-sprite-offset-y: 0px;
+$ovest-dir-sprite-width: 52px;
+$ovest-dir-sprite-height: 68px;
+$ovest-dir-sprite-total-width: 188px;
+$ovest-dir-sprite-total-height: 123px;
+$ovest-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
+$ovest-dir-sprite: (68px, 0px, -68px, 0px, 52px, 68px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'ovest-dir@sprite', );
+$sud-dir-sprite-name: 'sud-dir@sprite';
+$sud-dir-sprite-x: 120px;
+$sud-dir-sprite-y: 0px;
+$sud-dir-sprite-offset-x: -120px;
+$sud-dir-sprite-offset-y: 0px;
+$sud-dir-sprite-width: 68px;
+$sud-dir-sprite-height: 52px;
+$sud-dir-sprite-total-width: 188px;
+$sud-dir-sprite-total-height: 123px;
+$sud-dir-sprite-image: '../images/mapobj/mapobj_sprite.png';
+$sud-dir-sprite: (120px, 0px, -120px, 0px, 68px, 52px, 188px, 123px, '../images/mapobj/mapobj_sprite.png', 'sud-dir@sprite', );
+$spritesheet-width: 188px;
+$spritesheet-height: 123px;
+$spritesheet-image: '../images/mapobj/mapobj_sprite.png';
+$spritesheet-sprites: ($est-dir-sprite, $nord-dir-sprite, $ovest-dir-sprite, $sud-dir-sprite, );
+$spritesheet: (188px, 123px, '../images/mapobj/mapobj_sprite.png', $spritesheet-sprites, );
 
 
 
@@ -280,189 +310,5 @@ $spritesheet-height: 95px;
 $spritesheet-image: '../images/buttons/buttons_sprite.png';
 $spritesheet-sprites: ($base-square-sprite, $base-brown-sprite, $btn-annulla-sprite, $btn-salva-sprite, $close-sprite, $dashboard-sprite, $expand-sprite, );
 $spritesheet: (117px, 95px, '../images/buttons/buttons_sprite.png', $spritesheet-sprites, );
-
-
-
-// SCSS variables are information about icon's compiled state, stored under its original file name
-//
-// .icon-home {
-//   width: $icon-home-width;
-// }
-//
-// The large array-like variables contain all information about a single icon
-// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
-//
-// At the bottom of this section, we provide information about the spritesheet itself
-// $spritesheet: width height image $spritesheet-sprites;
-$alba-sprite-name: 'alba@sprite';
-$alba-sprite-x: 358px;
-$alba-sprite-y: 0px;
-$alba-sprite-offset-x: -358px;
-$alba-sprite-offset-y: 0px;
-$alba-sprite-width: 358px;
-$alba-sprite-height: 215px;
-$alba-sprite-total-width: 1074px;
-$alba-sprite-total-height: 1074px;
-$alba-sprite-image: '../images/sky/sky_sprite.png';
-$alba-sprite: (358px, 0px, -358px, 0px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'alba@sprite', );
-$aurora-sprite-name: 'aurora@sprite';
-$aurora-sprite-x: 716px;
-$aurora-sprite-y: 215px;
-$aurora-sprite-offset-x: -716px;
-$aurora-sprite-offset-y: -215px;
-$aurora-sprite-width: 358px;
-$aurora-sprite-height: 215px;
-$aurora-sprite-total-width: 1074px;
-$aurora-sprite-total-height: 1074px;
-$aurora-sprite-image: '../images/sky/sky_sprite.png';
-$aurora-sprite: (716px, 215px, -716px, -215px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'aurora@sprite', );
-$giorno-neve-sprite-name: 'giorno-neve@sprite';
-$giorno-neve-sprite-x: 0px;
-$giorno-neve-sprite-y: 215px;
-$giorno-neve-sprite-offset-x: 0px;
-$giorno-neve-sprite-offset-y: -215px;
-$giorno-neve-sprite-width: 358px;
-$giorno-neve-sprite-height: 215px;
-$giorno-neve-sprite-total-width: 1074px;
-$giorno-neve-sprite-total-height: 1074px;
-$giorno-neve-sprite-image: '../images/sky/sky_sprite.png';
-$giorno-neve-sprite: (0px, 215px, 0px, -215px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'giorno-neve@sprite', );
-$giorno-pioggia-sprite-name: 'giorno-pioggia@sprite';
-$giorno-pioggia-sprite-x: 358px;
-$giorno-pioggia-sprite-y: 215px;
-$giorno-pioggia-sprite-offset-x: -358px;
-$giorno-pioggia-sprite-offset-y: -215px;
-$giorno-pioggia-sprite-width: 358px;
-$giorno-pioggia-sprite-height: 215px;
-$giorno-pioggia-sprite-total-width: 1074px;
-$giorno-pioggia-sprite-total-height: 1074px;
-$giorno-pioggia-sprite-image: '../images/sky/sky_sprite.png';
-$giorno-pioggia-sprite: (358px, 215px, -358px, -215px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'giorno-pioggia@sprite', );
-$giorno-nuvoloso-sprite-name: 'giorno_nuvoloso@sprite';
-$giorno-nuvoloso-sprite-x: 358px;
-$giorno-nuvoloso-sprite-y: 860px;
-$giorno-nuvoloso-sprite-offset-x: -358px;
-$giorno-nuvoloso-sprite-offset-y: -860px;
-$giorno-nuvoloso-sprite-width: 358px;
-$giorno-nuvoloso-sprite-height: 214px;
-$giorno-nuvoloso-sprite-total-width: 1074px;
-$giorno-nuvoloso-sprite-total-height: 1074px;
-$giorno-nuvoloso-sprite-image: '../images/sky/sky_sprite.png';
-$giorno-nuvoloso-sprite: (358px, 860px, -358px, -860px, 358px, 214px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'giorno_nuvoloso@sprite', );
-$mattina-sprite-name: 'mattina@sprite';
-$mattina-sprite-x: 358px;
-$mattina-sprite-y: 430px;
-$mattina-sprite-offset-x: -358px;
-$mattina-sprite-offset-y: -430px;
-$mattina-sprite-width: 358px;
-$mattina-sprite-height: 215px;
-$mattina-sprite-total-width: 1074px;
-$mattina-sprite-total-height: 1074px;
-$mattina-sprite-image: '../images/sky/sky_sprite.png';
-$mattina-sprite: (358px, 430px, -358px, -430px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'mattina@sprite', );
-$mezzogiorno-sprite-name: 'mezzogiorno@sprite';
-$mezzogiorno-sprite-x: 716px;
-$mezzogiorno-sprite-y: 0px;
-$mezzogiorno-sprite-offset-x: -716px;
-$mezzogiorno-sprite-offset-y: 0px;
-$mezzogiorno-sprite-width: 358px;
-$mezzogiorno-sprite-height: 215px;
-$mezzogiorno-sprite-total-width: 1074px;
-$mezzogiorno-sprite-total-height: 1074px;
-$mezzogiorno-sprite-image: '../images/sky/sky_sprite.png';
-$mezzogiorno-sprite: (716px, 0px, -716px, 0px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'mezzogiorno@sprite', );
-$notte-neve-sprite-name: 'notte-neve@sprite';
-$notte-neve-sprite-x: 0px;
-$notte-neve-sprite-y: 0px;
-$notte-neve-sprite-offset-x: 0px;
-$notte-neve-sprite-offset-y: 0px;
-$notte-neve-sprite-width: 358px;
-$notte-neve-sprite-height: 215px;
-$notte-neve-sprite-total-width: 1074px;
-$notte-neve-sprite-total-height: 1074px;
-$notte-neve-sprite-image: '../images/sky/sky_sprite.png';
-$notte-neve-sprite: (0px, 0px, 0px, 0px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'notte-neve@sprite', );
-$notte-nuvolosa-sprite-name: 'notte-nuvolosa@sprite';
-$notte-nuvolosa-sprite-x: 716px;
-$notte-nuvolosa-sprite-y: 430px;
-$notte-nuvolosa-sprite-offset-x: -716px;
-$notte-nuvolosa-sprite-offset-y: -430px;
-$notte-nuvolosa-sprite-width: 358px;
-$notte-nuvolosa-sprite-height: 215px;
-$notte-nuvolosa-sprite-total-width: 1074px;
-$notte-nuvolosa-sprite-total-height: 1074px;
-$notte-nuvolosa-sprite-image: '../images/sky/sky_sprite.png';
-$notte-nuvolosa-sprite: (716px, 430px, -716px, -430px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'notte-nuvolosa@sprite', );
-$notte-sprite-name: 'notte@sprite';
-$notte-sprite-x: 0px;
-$notte-sprite-y: 860px;
-$notte-sprite-offset-x: 0px;
-$notte-sprite-offset-y: -860px;
-$notte-sprite-width: 358px;
-$notte-sprite-height: 214px;
-$notte-sprite-total-width: 1074px;
-$notte-sprite-total-height: 1074px;
-$notte-sprite-image: '../images/sky/sky_sprite.png';
-$notte-sprite: (0px, 860px, 0px, -860px, 358px, 214px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'notte@sprite', );
-$pomeriggio-sprite-name: 'pomeriggio@sprite';
-$pomeriggio-sprite-x: 358px;
-$pomeriggio-sprite-y: 645px;
-$pomeriggio-sprite-offset-x: -358px;
-$pomeriggio-sprite-offset-y: -645px;
-$pomeriggio-sprite-width: 358px;
-$pomeriggio-sprite-height: 215px;
-$pomeriggio-sprite-total-width: 1074px;
-$pomeriggio-sprite-total-height: 1074px;
-$pomeriggio-sprite-image: '../images/sky/sky_sprite.png';
-$pomeriggio-sprite: (358px, 645px, -358px, -645px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'pomeriggio@sprite', );
-$rainbow-sprite-name: 'rainbow@sprite';
-$rainbow-sprite-x: 716px;
-$rainbow-sprite-y: 645px;
-$rainbow-sprite-offset-x: -716px;
-$rainbow-sprite-offset-y: -645px;
-$rainbow-sprite-width: 358px;
-$rainbow-sprite-height: 215px;
-$rainbow-sprite-total-width: 1074px;
-$rainbow-sprite-total-height: 1074px;
-$rainbow-sprite-image: '../images/sky/sky_sprite.png';
-$rainbow-sprite: (716px, 645px, -716px, -645px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'rainbow@sprite', );
-$sera-sprite-name: 'sera@sprite';
-$sera-sprite-x: 0px;
-$sera-sprite-y: 645px;
-$sera-sprite-offset-x: 0px;
-$sera-sprite-offset-y: -645px;
-$sera-sprite-width: 358px;
-$sera-sprite-height: 215px;
-$sera-sprite-total-width: 1074px;
-$sera-sprite-total-height: 1074px;
-$sera-sprite-image: '../images/sky/sky_sprite.png';
-$sera-sprite: (0px, 645px, 0px, -645px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'sera@sprite', );
-$tramonto-sprite-name: 'tramonto@sprite';
-$tramonto-sprite-x: 0px;
-$tramonto-sprite-y: 430px;
-$tramonto-sprite-offset-x: 0px;
-$tramonto-sprite-offset-y: -430px;
-$tramonto-sprite-width: 358px;
-$tramonto-sprite-height: 215px;
-$tramonto-sprite-total-width: 1074px;
-$tramonto-sprite-total-height: 1074px;
-$tramonto-sprite-image: '../images/sky/sky_sprite.png';
-$tramonto-sprite: (0px, 430px, 0px, -430px, 358px, 215px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'tramonto@sprite', );
-$weather-moon-sprite-name: 'weather_moon@sprite';
-$weather-moon-sprite-x: 716px;
-$weather-moon-sprite-y: 860px;
-$weather-moon-sprite-offset-x: -716px;
-$weather-moon-sprite-offset-y: -860px;
-$weather-moon-sprite-width: 83px;
-$weather-moon-sprite-height: 83px;
-$weather-moon-sprite-total-width: 1074px;
-$weather-moon-sprite-total-height: 1074px;
-$weather-moon-sprite-image: '../images/sky/sky_sprite.png';
-$weather-moon-sprite: (716px, 860px, -716px, -860px, 83px, 83px, 1074px, 1074px, '../images/sky/sky_sprite.png', 'weather_moon@sprite', );
-$spritesheet-width: 1074px;
-$spritesheet-height: 1074px;
-$spritesheet-image: '../images/sky/sky_sprite.png';
-$spritesheet-sprites: ($alba-sprite, $aurora-sprite, $giorno-neve-sprite, $giorno-pioggia-sprite, $giorno-nuvoloso-sprite, $mattina-sprite, $mezzogiorno-sprite, $notte-neve-sprite, $notte-nuvolosa-sprite, $notte-sprite, $pomeriggio-sprite, $rainbow-sprite, $sera-sprite, $tramonto-sprite, $weather-moon-sprite, );
-$spritesheet: (1074px, 1074px, '../images/sky/sky_sprite.png', $spritesheet-sprites, );
 
 
