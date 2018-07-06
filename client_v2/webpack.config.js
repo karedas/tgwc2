@@ -22,6 +22,7 @@ module.exports = function (prop) {
     
     var wp = {
         
+        mode: 'development',
         // --watch true, --watch false
         watchOptions: {
             poll: 1000,

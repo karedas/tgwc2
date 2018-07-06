@@ -100,7 +100,7 @@ function jsCompile(mode) {
 		webpack_config.mode = mode;
 		webpack_config.watch = true;
 		webpack_config.optimization.minimize = false;
-		//webpack_config.devtool = "source-map";
+		webpack_config.devtool = "source-map";
 	}
 	else if (mode == 'production') {
 		webpack_config.mode = mode;

@@ -34,10 +34,11 @@ export default class Preloader {
             postaction = function () {},
             assets = (typeof _.assetsList != "object") ? [_.assetsList] : _.assetsList;
 
+            percentage = Math.floor(percentage + stepSize);
+
 
         function imageloadpost() {
 
-            percentage = Math.floor(percentage + stepSize);
             if (loadedimages == assets.length - 1) {
                 percentage = 100;
             }
@@ -51,14 +52,15 @@ export default class Preloader {
             }
             $('#tgPreloader').find('span').text(percentage);
         }
-
         for (let i = 0; i < assets.length; i++) {
             images[i] = new Image();
             images[i].src = _.basepath + assets[i];
             images[i].onload = function () {
+                percentage++;
                 imageloadpost();
             }
             images[i].onerror = function () {
+                percentage++;
                 imageloadpost();
             }
         }
