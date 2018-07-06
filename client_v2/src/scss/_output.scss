@@ -11,6 +11,7 @@
         flex: auto;
         padding-top: 20px;
         margin: 6px 0;
+        display: flex;
     }
     .tg-output-options {
         height: 30px;
@@ -68,9 +69,18 @@
         padding-bottom: .2em;
     }
 
+    .out-title {
+        font-size: 20px;
+        color: #ac4c55;
+        font-family: kingthinks;
+    }
+
     .out-description {
         display: block;
         padding-bottom: 1.5em;
+        display: flex;
+        flex-direction: column;
+
     }
 
     /* Description base*/
@@ -135,6 +145,9 @@
         display: inline-block !important;
         zoom: .8;
         vertical-align: middle;
+    }
+    > .iconimg {
+        float:left;
     }
        
     .tg-title {

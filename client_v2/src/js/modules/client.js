@@ -139,6 +139,40 @@ export default class TgGui {
         this.scrollbar = {
             output: null
         };
+
+        this.equip_positions_by_name = {
+
+            "r_finger":"Al dito destro",
+            "l_finger":"Al dito sinistro",
+            "neck":"Al collo",
+            "body":"Sul corpo",
+            "head":"In testa",
+            "legs":"Sulle gambe",
+            "feet":"Ai piedi",
+            "hands":"Sulle mani",
+            "arms":"Sulle braccia",
+            "around":"Attorno al corpo",
+            "waist":"In vita",
+            "r_wrist":"Al polso destro",
+            "l_wrist":"Al polso sinistro",
+            "r_hand":"Nella mano destra",
+            "l_hand":"Nella mano sinistra",
+            "back":"Sulla schiena",
+            "r_ear":"All'orecchio destro",
+            "l_ear":"All'orecchio sinistro",
+            "eyes":"Sugli occhi",
+            "sheath":"Nel fodero",
+            "belt":"Alla cintura",
+            "over":"A tracolla",
+            "r_shoulder":"Sulla spalla destra",
+            "l_shoulder":"Sulla spalla sinistra",
+            "tied":"Imprigionato"
+        };
+        
+        this.equip_positions_by_num = [''].concat($.map(this.equip_positions_by_name, function(v) {
+            return v;
+        }));
+
         
 
         /* Debug */
@@ -664,7 +698,7 @@ export default class TgGui {
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
             let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            return renderGenericPage(page_parse)
+            return _.renderGenericPage(page_parse)
         });
 
         // Generic table (title, head, data)
@@ -884,7 +918,8 @@ export default class TgGui {
         } else {
             //TODO: Page parse generic 
             console.log('!page todo');
-        }
+        };
+        return '';
     }
 
     renderMob(icon, condprc, count, mrn, desc, addclass) {
@@ -1042,7 +1077,7 @@ export default class TgGui {
     }
 
     cleanImageContainer(cont) {
-        cont.slideUp('fast');
+        $(cont).slideUp('fast');
     }
 
     /* *****************************************************************************
@@ -1250,14 +1285,14 @@ export default class TgGui {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
             let title = 'div class="tg-extra-title">' + info.title + '</div>';
-            if(wtab == ctab) {
+            /*  if(wtab == ctab) {
                 $('extratitle').text(title);
-            }
+            }*/
         }
 
         /* Set Image */
         if(info.image) {
-            _.showImage($('#detailimage', cont), info.image);
+            _.showImage($('#detailimage'), info.image);
         }
         else {
             _.cleanImageContainer('.tg-detailimage');
@@ -1286,18 +1321,22 @@ export default class TgGui {
         if (info.action) {
             textarea += '<div class="details-inner">' + info.action + '</div>';
         }
+        /* Print Title/Name */
+        if(info.title) {
+            textarea += '<div class="out-title">' + info.title + '</div>'
+        }
         /* Print description */
         if (info.desc) {
             textarea += '<div class="out-description">';
             if (info.desc.base) {
                 if (type == 'room') {
                     _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
-                    textarea += _.formatText(info.desc.base, 'out-descbase');
                 }
-            } else if (info.desc.repeatlast && _.last_room_desc) {
+                textarea += _.formatText(info.desc.base, 'out-descbase');
+            } 
+            else if (info.desc.repeatlast && _.last_room_desc) {
                 textarea += _.last_room_desc;
             }
-            textarea += '</div>';
 
             if (info.desc.details) {
                 textarea += _.formatText(info.desc.details, 'out-charsubdetail tg-yellow d-block');
@@ -1306,6 +1345,9 @@ export default class TgGui {
             if (info.desc.equip) {
                 textarea += _.formatText(info.desc.equip, 'out-charsubdetail tg-green d-block');
             }
+
+            textarea += '</div>';
+
         }
         if (_.client_options.secondoutput) {
             /* Print Persons List */
@@ -1413,8 +1455,8 @@ export default class TgGui {
                 /* print header triggerable element */
                 txt += '<div class="element'+ grp_attribute +'" ' + data_mrn + '>';
                     // mob/obj icon
-                    txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact '+type);
-                    txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) +'</div>';
+                    txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type);
+                    txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) +'</div>';
                 txt += '</div>';
 
                 /* Start Collapsable Obj/Mob Container */
@@ -1722,10 +1764,10 @@ export default class TgGui {
         let _ = this;
         /* Extra Detail Display */
         if(_.client_options.secondoutput) {
-            $('.tg-outputextra-wrap').show();
+            $('.tg-outputextra-wrap').addClass('d-flex');
         }
         else {
-            $('.tg-outputextra-wrap').hide();
+            $('.tg-outputextra-wrap').removeClass('d-flex');
         }
         
         /* Dashboard Expand/collapse status */
@@ -1897,7 +1939,7 @@ export default class TgGui {
         this.addScrollBar(extraOutputID);
 
         /* Image Event */
-        $('.detailsimage')
+        $('#detailimage')
             .on('error', function(){
                 $(this).closest('.tg-detailsimage').slideUp('fast');
             })
@@ -2072,7 +2114,7 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function(){
-            $('.tg-outputextra-wrap').toggle(0, function(){
+            $('.tg-outputextra-wrap').toggleClass('d-flex', function(){
                 _.scrollPanelTo('#output', '#scrollableOutput', true);
             });
             _.client_options.secondoutput =  _.client_options.secondoutput ? false : true;
@@ -2217,7 +2259,7 @@ export default class TgGui {
 
     addScrollBar(container) {
         this.scrollbar.output = new PerfectScrollbar(container, {
-            wheelPropagation: 1,
+            wheelPropagation: 2,
         });
     }
 
