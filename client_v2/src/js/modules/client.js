@@ -12,6 +12,7 @@ import 'easy-autocomplete';
 import AssetsList from 'assets_list.json';
 //============ Custom
 //import FacebookSDK from 'facebookSdk';
+import Render from 'render';
 import Preloader from 'preloader';
 import Map from 'mapDrawer';
 
@@ -545,17 +546,16 @@ export default class TgGui {
         let _ = this,
             pos;
 
+            console.log(msg);
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
-            console.log('input type password enabled');
-            // _.inputPassword();
+            _.inputPassword();
             return '';
         });
 
         //Show text (normal input)
         msg = msg.replace(/&e\n*/gm, function () {
-            console.log('input type text enabled');
-            //inputText();
+            _.inputText();
             return '';
         });
 
@@ -664,14 +664,7 @@ export default class TgGui {
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
             let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
             // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
-            let page_html = '<div class="tg-title lt-red">' + page_parse.title + '</div><div class="text">' + page_parse.text.replace(/\n/gm, '<br>') + '</div>';
-            if (page_parse.title == 'Notizie') {
-                _.openPopup('notizie');
-            } else {
-                //TODO: Page parse generic 
-                console.log('!page todo');
-            }
-            return '';
+            return renderGenericPage(page_parse)
         });
 
         // Generic table (title, head, data)
@@ -754,7 +747,7 @@ export default class TgGui {
                 return '';
             } else {
                 _.setDataInterface('stato', status_parse);
-                //return _.renderPlayerStatus(status_parse);
+                _.renderPlayerStatus(status_parse);
             }
             return '';
         });
@@ -883,6 +876,17 @@ export default class TgGui {
      * MISC RENDERING
      */
 
+    renderGenericPage(page) {
+        let _ = this;
+        let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
+        if (page.title == 'Notizie') {
+            _.openPopup('notizie', "Notizie dal gioco", page);
+        } else {
+            //TODO: Page parse generic 
+            console.log('!page todo');
+        }
+    }
+
     renderMob(icon, condprc, count, mrn, desc, addclass) {
         return '<div class="mob">' + this.renderIcon(icon, mrn, 'room', null, null, addclass) + '<div class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</div></div>'
     }
@@ -939,6 +943,12 @@ export default class TgGui {
 
            
         }
+    }
+
+    renderPlayerStatus(status) {
+        let sttxt;
+            stats =+ '<table class="stats"><caption>Condizioni</caption>'
+            stats =+ '</table>';
     }
 
     /* *****************************************************************************
@@ -1024,11 +1034,15 @@ export default class TgGui {
 
     showImage(cont, image) {
         let _ = this;
-        let imgsrc = _.images_path + '/' + image;
+        let imgsrc = _.media_server_addr + image;
         let currimgsrc = cont.attr('src');
 
         if (currimgsrc != imgsrc)
             cont.attr('src', imgsrc);
+    }
+
+    cleanImageContainer(cont) {
+        cont.slideUp('fast');
     }
 
     /* *****************************************************************************
@@ -1203,7 +1217,6 @@ export default class TgGui {
         if (info.title) {
             res += '<div class="room"><div class="lts"></div>' + _.capFirstLetter(info.title) + '<div class="rts"></div></div>';
         }
-        /* addBannerStyle(capFirstLetter(info.title), 'mini', 'long'); */
 
         res += _.renderDetailsInner(info, type, false);
         if (info.image)
@@ -1213,6 +1226,7 @@ export default class TgGui {
     }
 
     renderDetailInSecondOutput(info, type) {
+
         let _ = this,
             res = '',
             container = $('#extraoutput'),
@@ -1224,34 +1238,35 @@ export default class TgGui {
             //tpos = _.dirBgPos
         }
         else if (type == 'room' && !info.icon) {
-		    tpos = $('#mp044').css('background-position')
+		    //tpos = $('#mp044').css('background-position')
         }
         else {
-		    tpos = _.tileBgPos(info.icon ? info.icon : 0);
+		    //tpos = _.tileBgPos(info.icon ? info.icon : 0);
         }
 
         /* Set Title and Tooltip */
-        let extratitle = '';
         if(info.title) {
             if(type == 'room' && !info.up) {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
-
-            let extratitle = 'div class="tg-extra-title">' + info.title + '</div>';
-
-            // icon.attr('data-shdesc', title);
-            // icon.attr('tooltip', title);
+            let title = 'div class="tg-extra-title">' + info.title + '</div>';
+            if(wtab == ctab) {
+                $('extratitle').text(title);
+            }
         }
 
         /* Set Image */
         if(info.image) {
-            //_.showImage($('.detailsimage', cont), info.image);
+            _.showImage($('#detailimage', cont), info.image);
+        }
+        else {
+            _.cleanImageContainer('.tg-detailimage');
         }
 
         let textarea = container.empty();
         let details = _.replaceColors(_.renderDetailsInner(info, type, true));
        
-        textarea.append(extratitle+details);
+        textarea.append(details);
 
         if(type == 'room') {
             if(_.client_update.room.version < info.var) {
@@ -1414,7 +1429,6 @@ export default class TgGui {
                     for (let m = 0; m < l.mrn.length; m++) {
                         txt += '<div class="element">'
                             txt += (m == 0 ? '<div class="collicon"></div>' : '') + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type);
-                            console.log(l.condprc, l.mvprc, l.wgt, 1, l.desc);
                             txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div>';
                         txt += '</div>';
                     }
@@ -1688,7 +1702,7 @@ export default class TgGui {
 
         _.configInit();
         /* Interface Modules List */
-        _.inputInit();
+        //_.inputInit();
         _.genericEvents();
         _.mainNavBarInit();
         _.tooltipInit();
@@ -1776,6 +1790,14 @@ export default class TgGui {
      /* -------------------------------------------------
      * INPUT
      * -------------------------------------------------*/
+
+    inputPassword() {
+        $('#tgInputUser').attr('type', 'password').focus();
+    }
+
+    inputText() {
+        $('#tgInputUser').attr('type', 'text').focus();
+    }
 
     inputInit() {
         let _ = this;
@@ -1873,6 +1895,15 @@ export default class TgGui {
         let _ = this;
         let extraOutputID = '#scrollableExtraOutput';
         this.addScrollBar(extraOutputID);
+
+        /* Image Event */
+        $('.detailsimage')
+            .on('error', function(){
+                $(this).closest('.tg-detailsimage').slideUp('fast');
+            })
+            .on('load', function(){
+                $(this).closest('.tg-detailsimage').slideDown('fast');
+            });
     }
 
 
@@ -2143,14 +2174,14 @@ export default class TgGui {
 
             case 'editor':
                 MP_src = '#editorDialog';
-                MP_close_button = true,
-                    MP_callbacks.open = function () {
-                        $('.mfp-close').on('click', function (event) {
-                            event.preventDefault();
-                            _.abortEdit();
-                            $.magnificPopup.close();
-                        });
-                    }
+                MP_close_button = true;
+                MP_callbacks.open = function () {
+                    $('.mfp-close').on('click', function (e) {
+                        e.preventDefault();
+                        _.abortEdit();
+                        $.magnificPopup.close();
+                    });
+                };
                 MP_callbacks.close = function (e) {
                     _.closeEditor();
                 };

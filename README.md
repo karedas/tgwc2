@@ -1,15 +1,5 @@
 # README #
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-
 ### TODO ###
 
 * Login panel quando disconnesso (voluto o meno).
@@ -18,3 +8,6 @@
 * Pannello scheda personaggio
 * Pannello Equip / Inventory
 * Immagine default personaggio
+
+# Hard Code #
+* Migrare il rendering html su Mustache/HandleBear per avere maggior         ordine e miglior controllo del parsing.

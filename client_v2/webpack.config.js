@@ -3,10 +3,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let gitRevisionPlugin = new GitRevisionPlugin();
 
@@ -116,11 +113,11 @@ module.exports = function (prop) {
                 filename: '../index.html' //relative to root of the application
             }),
 
-            // new BundleAnalyzerPlugin({
-            //     // analyzerMode: env == 'dev' ? 'server' : 'disabled',
-            //     analyzerPort: 9998,
-            //     analyzerHost: '192.168.10.10'
-            // }),
+            new BundleAnalyzerPlugin({
+                // analyzerMode: env == 'dev' ? 'server' : 'disabled',
+                analyzerPort: 9998,
+                analyzerHost: '192.168.10.10'
+            }),
         ]
     }
 
