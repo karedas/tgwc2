@@ -1,6 +1,39 @@
 
 $skyPath : $imgPath + '/sky/'; 
 
+$thunder_color1: transparent;
+$thunder_color2: rgba(189, 189, 189, 0.4);
+
+@keyframes thunder {
+    0% {
+        background-color: $thunder_color1;
+      }
+      9% {
+        background-color: $thunder_color1;
+      }
+      10% {
+        background-color: $thunder_color2;
+      }
+      10.5% {
+        background-color: $thunder_color1;
+      }
+      80% {
+        background-color: $thunder_color1;
+      }
+      82% {
+        background-color: $thunder_color2;
+      }
+      83% {
+        background-color: $thunder_color1;
+      }
+      83.5% {
+        background-color: $thunder_color2;
+      }
+      100% {
+        background-color: $thunder_color1;
+      }
+}
+
 .tg-sky {
     position: absolute;
     width: 358px;
@@ -14,9 +47,11 @@ $skyPath : $imgPath + '/sky/';
         box-shadow: inset 0 0 20px 0px black;
         background-size: contain;
         background-position: top left;
-        
+
         &:after {
             display: none;
+            content: '';
+            position: absolute;
         }
         /* Notte con Luna */
         &[data-sky="0"],
@@ -27,12 +62,28 @@ $skyPath : $imgPath + '/sky/';
            background-image: url( $skyPath + 'notte.jpg');
             /* Elemento Luna */
             &:after {
-               content: '';
                @include sprite($weather-moon-sprite);
                display: block;
-               position: absolute;
             }
         }
+
+        &[data-sky="d"],
+        &[data-sky="e"],
+        &[data-sky="f"],
+        &[data-sky="p"],
+        &[data-sky="r"],
+        &[data-sky="s"]{
+            &:after {
+                background-color: transparent;
+                display: block!important;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                animation: thunder 8s infinite;
+            }
+        }
+
+
         /* Notte + luna 0/4 */
         &[data-sky="0"]:after {
             top: 80px;
