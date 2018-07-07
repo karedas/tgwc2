@@ -47,7 +47,8 @@ export default class MapDrawer {
 
         //Base Tiles
         _.maptileimg = new Image();
-        _.maptileimg.src = imagesPath + '/tiles/tiles.png';
+        _.maptileimg.src = imagesPath + 'tiles/tiles.png';
+
 
         // // Fog
         // _.mapfogimg = new Image();
