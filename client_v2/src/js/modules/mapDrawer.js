@@ -62,16 +62,16 @@ export default class MapDrawer {
 
         // Shadows
         _.mapshadowimg[2] = new Image();
-        _.mapshadowimg[2].src = imagesPath + '/interface/shadow1.png';
+        _.mapshadowimg[2].src = imagesPath + 'interface/shadow1.png';
 
         _.mapshadowimg[1] = new Image();
-        _.mapshadowimg[1].src = imagesPath + '/interface/shadow2.png';
+        _.mapshadowimg[1].src = imagesPath + 'interface/shadow2.png';
 
         _.mapshadowimg[0] = new Image();
-        _.mapshadowimg[0].src = imagesPath + '/interface/shadow3.png';
+        _.mapshadowimg[0].src = imagesPath + 'interface/shadow3.png';
 
         _.mapshadowtile = new Image();
-        _.mapshadowtile.src = imagesPath + '/interface/shadowtile.png';
+        _.mapshadowtile.src = imagesPath + 'interface/shadowtile.png';
     }
 
     updateMap(map) {
@@ -95,6 +95,11 @@ export default class MapDrawer {
 
         /* Clear the canvas*/
         _.MAPCTX.clearRect(0, 0, canvaswidth, canvasheight);
+        _.MAPCTX.save();
+        _.MAPCTX.beginPath();
+        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth / 2, 0, Math.PI * 2, true);
+        _.MAPCTX.clip();
+        _.MAPCTX.fill();
 
         /* Cycle on the 2 layers */
         for (let l = 0; l < 2; l++) {
@@ -114,13 +119,8 @@ export default class MapDrawer {
                     let d = _.layermap[y][x];
                     if (d != 59) {
                         let tpos = _.tileCoords(d);
-                        let totalwidth = _.maxmapwidth * _.maptilewidth;
-                        let totalheight = _.maxmapheight * _.maptileheight;
+
                         // Clip inside circle then draw.
-                        _.MAPCTX.save();
-                        _.MAPCTX.beginPath();
-                        _.MAPCTX.arc(totalwidth / 2, totalheight / 2, totalwidth / 2, 0, Math.PI * 2, true);
-                        _.MAPCTX.clip();
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
                     }
                 }
