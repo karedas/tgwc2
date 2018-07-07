@@ -1128,6 +1128,7 @@ export default class TgGui {
     }
 
     renderIconWithBackBorder(icon, mrn, cnttype, cntmrn, cmd, addclass) {
+        let _ = this;
 	    return '<div class="backslot">' + _.renderIcon(icon, mrn, cnttype, cntmrn, cmd, addclass)+'</div>';
     }
 
@@ -1886,7 +1887,7 @@ export default class TgGui {
             $(this).toggleClass('expanded');
             _.addExpandedGrp(colgrp.attr('mrn'));
         });
-        $('.tg-output').on('click', '.grpexp', function() {
+        $('.tg-output').on('click', '.grpcoll', function() {
              let expgrp = $(this);
              let colgrp = expgrp.prev('.grpcoll');
              $(this).toggleClass('expanded');

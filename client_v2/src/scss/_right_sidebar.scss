@@ -66,6 +66,17 @@
         }
     }
 
+    .dir-ico {
+        background-image: url($imgPath + '/interface/pass_sprite.png');
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 26px;
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        background-position: -32px;
+    }
+
     .tg-directions {
         position: absolute;
         z-index: 4;
@@ -75,16 +86,7 @@
             position: absolute;
         }
 
-        .dir-ico {
-            background-image: url($imgPath + '/interface/pass_sprite.png');
-            background-repeat: no-repeat;
-            width: 26px;
-            height: 26px;
-            display: block;
-            position: absolute;
-            border-radius: 50%;
-            background-position: -32px;
-        }
+
 
         .dir-nord .dir-ico {
             top: 11px;
@@ -101,6 +103,14 @@
         .dir-est .dir-ico {
             top: 21px;
             left: 17px;
+        }
+        .dir-basso, .dir-alto {
+            .dir-ico {
+                top: 4px;
+                left: 4px;
+                background-color: black;
+                border-radius: 0;
+            }
         }
         
         .dir-nord {
@@ -123,29 +133,15 @@
             top: 78px;
             left: -40px;
         }
-    }
-
-    .tg-altobasso-dir {
-        position: absolute;
-        top: 300px;
-        height: 50px;
-        width: 100%;
-        left: 0;
-        
         .dir-alto {
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            left: 0;
-            cursor: pointer;
+            @include sprite($alto-dir-sprite);
+            left: -19px;
+            top: 20px;
         }
         .dir-basso {
-            width: 50px;
-            height: 50px;
-            border:1px solid white;
-            position: absolute;
-            right: 0;
-            cursor: pointer;
+            @include sprite($basso-dir-sprite);
+            left: -19px;
+            bottom: 20px;
         }
     }
 
