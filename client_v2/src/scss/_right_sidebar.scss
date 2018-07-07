@@ -125,6 +125,31 @@
         }
     }
 
+    .tg-altobasso-dir {
+        position: absolute;
+        top: 300px;
+        height: 50px;
+        width: 100%;
+        left: 0;
+        
+        .dir-alto {
+            width: 50px;
+            height: 50px;
+            border:1px solid white;
+            position: absolute;
+            left: 0;
+            cursor: pointer;
+        }
+        .dir-basso {
+            width: 50px;
+            height: 50px;
+            border:1px solid white;
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+        }
+    }
+
     // Bottom Board
     .tg-right-board {
         background-color: rgba(0,0,0,.5);

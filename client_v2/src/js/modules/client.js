@@ -692,6 +692,7 @@ export default class TgGui {
         msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
             let cmd_parse = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
             console.log('return commands list');
+            return(cmd_parse);
             //return _.renderCommandsList(cmd_parse);
         });
 
@@ -714,6 +715,7 @@ export default class TgGui {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
             console.log('inventory');
             // renderInventory(inv_parse);
+            return(inv_parse);
             return '';
         });
 
@@ -1175,10 +1177,11 @@ export default class TgGui {
         let _ = this;
 
         let cmd;
+        console.log(_.godInvLev ,  _.dir_status[dir]);
 
-        if (_.godinvlev == 0 && _.dir_status[dir] == '3') {
+        if (_.godInvLev == 0 && _.dir_status[dir] == '3') {
             cmd = 'apri ' + _.dir_names[dir];
-        } else if (_.godinvlev == 0 && _.dir_status[dir] == '4') {
+        } else if (_.godInvLev == 0 && _.dir_status[dir] == '4') {
             cmd = 'sblocca ' + _.dir_names[dir];
         } else {
             cmd = _.dir_names[dir];
@@ -1284,7 +1287,6 @@ export default class TgGui {
 
         /* Set Title and Tooltip */
         if(info.title) {
-            console.log(info);
             if(type == 'room' && !info.up) {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
@@ -1797,6 +1799,7 @@ export default class TgGui {
 
     initSearchWidget() {
 
+        let _ = this;
         let options = {
             url: "ajax/cmd_list_guide.json",
             getValue: "name",
@@ -1939,7 +1942,6 @@ export default class TgGui {
         let _ = this;
         let extraOutputID = '.tg-outputextra-wrap';
         this.addScrollBar('#scrollableExtraOutput');
-        console.log(_.client_options.extradetail_width);
         $(extraOutputID).width(_.client_options.extradetail_width);
 
         $(extraOutputID).resizable({ 
@@ -1949,7 +1951,7 @@ export default class TgGui {
             onDragEnd: function(){
                 let width = $(extraOutputID).width();
                 _.client_options.extradetail_width = width;
-                   _.SaveStorage('options', saved_options);
+                   _.SaveStorage('options', _.client_options);
             }
         });   
         /* Image Event */
@@ -2077,18 +2079,28 @@ export default class TgGui {
     /* -------------------------------------------------
      *  DOORS 
      * -------------------------------------------------*/
+    closeLockDoor(dir) {
+        let cmd;
+        if(_.dir_status[dir] == '2') {
+            cmd = 'chiudi' + _.dir_names[dir];
+        }
+        else if(_.dir_status[dir] == '3') {
+            cmd = 'blocca ' + _.dir_names[dir];
+        }
+        if(cmd) {
+            _.sendToServer(cmd);
+        }
+    }
 
     doorsInit() {
         let _ = this;
         for (let d = 0; d < _.dir_names.length; ++d)
-            $('#' + _.dir_names[d]).on('click', {
-                dir: d
-            }, function (event) {
-
+            $('#' + _.dir_names[d]).on('click', { dir: d}, function (event) {
                 if (_.inGame) {
                     if (event.which == 1) {
                         _.goDir(event.data.dir);
-                    } else if (event.which == 3) {
+                    } 
+                    else if (event.which == 3) {
                         event.preventDefault();
                         _.closeLockDoor(event.data.dir);
                     }
@@ -2128,9 +2140,8 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function(){
-            $('.tg-outputextra-wrap').toggleClass('d-flex', function(){
-                _.scrollPanelTo('#output', '#scrollableOutput', true);
-            });
+            $('.tg-outputextra-wrap').toggleClass('d-flex')
+            _.scrollPanelTo('#output', '#scrollableOutput', true);
             _.client_options.secondoutput =  _.client_options.secondoutput ? false : true;
             _.SaveStorage('options', _.client_options);
         });

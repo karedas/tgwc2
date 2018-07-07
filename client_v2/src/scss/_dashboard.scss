@@ -176,7 +176,7 @@
         @include sprite($input-right-decoration-sprite);
         right: -10px;
     }
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
         width: 100%;
         background-color: $inputbackground;
         border: none;
