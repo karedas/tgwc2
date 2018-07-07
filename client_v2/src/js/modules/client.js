@@ -1942,6 +1942,7 @@ export default class TgGui {
         console.log(_.client_options.extradetail_width);
         $(extraOutputID).width(_.client_options.extradetail_width);
 
+        //TODO: Isolate resizable in a personal function.
         $(extraOutputID).resizable({ 
             handleSelector: ".tg-resizablehand",
             resizeHeight: false,
@@ -1950,6 +1951,7 @@ export default class TgGui {
                 let width = $(extraOutputID).width();
                 _.client_options.extradetail_width = width;
                 _.SaveStorage('options', _.client_options);
+                _.scrollPanelTo('#output', '#scrollableOutput', true);
             }
         });   
         /* Image Event */

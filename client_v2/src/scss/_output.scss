@@ -150,6 +150,7 @@
     .element {
         cursor: pointer;
         display: flex;
+        margin-bottom: 2px;
 
         .desc {
             display: flex;
@@ -181,11 +182,36 @@
 }
 
 /* Extra Output Area */
+.extranotice {
+    display: table;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    max-width: 90%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 11px;
+    padding: 10px 10px;
+    border-bottom: 1px solid #222;
+    border-top: 1px solid #222;
+    box-sizing: border-box;
+    color: #9e9e9e;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    font-family: kingthinks;
+
+    span {
+        color: #e0df9d;
+    }
+}
 
 .tg-outputextra-wrap {
     display: none;
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
     width: 50%;
+    min-width: 300px;
+    max-width: 65%;
     padding-top: 26px;
     margin: 0 0 6px;
     z-index: 2;
