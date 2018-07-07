@@ -582,7 +582,6 @@ export default class TgGui {
         let _ = this,
             pos;
 
-            console.log(msg);
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
             _.inputPassword();
@@ -1252,7 +1251,7 @@ export default class TgGui {
         let res = '';
 
         if (info.title) {
-            res += '<div class="room"><div class="lts"></div>' + _.capFirstLetter(info.title) + '<div class="rts"></div></div>';
+            res += '<div class="room"><div class="out-title"></div>' + _.capFirstLetter(info.title) + '<div class="rts"></div></div>';
         }
 
         res += _.renderDetailsInner(info, type, false);
@@ -1269,6 +1268,8 @@ export default class TgGui {
             container = $('#extraoutput'),
             wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type),
             tpos;
+        
+        let details = '';
 
 	    /* Set tab icon */
         if(type == 'dir') {
@@ -1283,10 +1284,12 @@ export default class TgGui {
 
         /* Set Title and Tooltip */
         if(info.title) {
+            console.log(info);
             if(type == 'room' && !info.up) {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
-            let title = 'div class="tg-extra-title">' + info.title + '</div>';
+            let title  = '<div class="out-title">' + info.title + '</div>';
+            details += title;
             /*  if(wtab == ctab) {
                 $('extratitle').text(title);
             }*/
@@ -1301,7 +1304,7 @@ export default class TgGui {
         }
 
         let textarea = container.empty();
-        let details = _.replaceColors(_.renderDetailsInner(info, type, true));
+        details +=  _.replaceColors(_.renderDetailsInner(info, type, true));
        
         textarea.append(details);
 
@@ -1315,7 +1318,7 @@ export default class TgGui {
         return res;
     }
 
-    renderDetailsInner(info, type, inExtraDetail) {
+    renderDetailsInner(info, type) {
         let _ = this;
         let numberClassList = ' firstlist';
         let textarea = '';
@@ -1323,10 +1326,7 @@ export default class TgGui {
         if (info.action) {
             textarea += '<div class="details-inner">' + info.action + '</div>';
         }
-        /* Print Title/Name */
-        if(info.title) {
-            textarea += '<div class="out-title">' + info.title + '</div>'
-        }
+
         /* Print description */
         if (info.desc) {
             textarea += '<div class="out-description">';
@@ -1942,7 +1942,6 @@ export default class TgGui {
         console.log(_.client_options.extradetail_width);
         $(extraOutputID).width(_.client_options.extradetail_width);
 
-        //TODO: Isolate resizable in a personal function.
         $(extraOutputID).resizable({ 
             handleSelector: ".tg-resizablehand",
             resizeHeight: false,
@@ -1950,8 +1949,7 @@ export default class TgGui {
             onDragEnd: function(){
                 let width = $(extraOutputID).width();
                 _.client_options.extradetail_width = width;
-                _.SaveStorage('options', _.client_options);
-                _.scrollPanelTo('#output', '#scrollableOutput', true);
+                   _.SaveStorage('options', saved_options);
             }
         });   
         /* Image Event */

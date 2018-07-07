@@ -95,11 +95,9 @@
                 <div id="output" class="tg-output-history"></div>
               </div>
             </div>
-            <div id="extraoutput" class="tg-outputextra-wrap">
+            <div class="tg-outputextra-wrap">
               <div class="tg-resizablehand"></div>
-              <div class="extranotice">
-                <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
-              </div>
+
               <!-- output options horizontal  bar -->
               <div id="outputOptions" class="tg-output-options">
                 <ul class="list-inline ml-auto">
@@ -112,9 +110,9 @@
               <!-- Extra Output Area-->
               <div id="scrollableExtraOutput" class="scrollable">
                 <div id="extraoutput" class="tg-extraoutput-history">
-                  <div class="tg-detailimage">
-                    <img id="detailimage" src="" />
-                  </div>
+                    <div class="extranotice">
+                        <span>Guarda</span> dove ti trovi , qualcosa o qualcuno.
+                     </div>
                 </div>
               </div>
             </div>
@@ -308,7 +306,7 @@
               <span>
                 <%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
             </p>
-            <label for="login_username">Nome Personaggio!</label>
+            <label for="login_username">Nome Personaggio</label>
             <input id="login_username" name="username" type="text" autocomplete="username">
             <label for="login_password">Password</label>
             <input id="login_password" name="password" type="password" autocomplete="current-password">
