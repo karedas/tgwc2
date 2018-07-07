@@ -113,13 +113,14 @@ export default class MapDrawer {
                     let d = _.layermap[y][x];
                     if (d != 59) {
                         let tpos = _.tileCoords(d);
-                        //Draw image before Clip
-                        //_.MAPCTX.save();
-                        //_.MAPCTX.beginPath();
-                        // _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth, 0, 2 * Math.PI, false);
-                        // _.MAPCTX.clip();
+                        let totalwidth = _.maxmapwidth * _.maptilewidth;
+                        let totalheight = _.maxmapheight * _.maptileheight;
+                        // Clip inside circle then draw.
+                        _.MAPCTX.save();
+                        _.MAPCTX.beginPath();
+                        _.MAPCTX.arc(totalwidth / 2, totalheight / 2, totalwidth / 2, 0, Math.PI * 2, true);
+                        _.MAPCTX.clip();
                         _.MAPCTX.drawImage(_.maptileimg, tpos[0], tpos[1], _.maptilewidth, _.maptilewidth, x * _.maptilewidth, y * _.maptileheight, _.maptilewidth, _.maptileheight);
-
                     }
                 }
             }
