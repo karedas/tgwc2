@@ -44,7 +44,13 @@ export default class MapDrawer {
         $(_.container).append('<canvas id="mapcont" width="' + (_.maxmapwidth * _.maptilewidth) + '" height="' + (_.maxmapheight * _.maptileheight) + '"></canvas>');
 
         _.MAPCTX = $('#mapcont')[0].getContext('2d');
-
+        let canvaswidth = _.maxmapwidth * _.maptilewidth;
+        let canvasheight = _.maxmapheight * _.maptileheight;
+        _.MAPCTX.save();
+        _.MAPCTX.beginPath();
+        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth / 2, 0, Math.PI * 2, true);
+        _.MAPCTX.clip();
+        _.MAPCTX.fill();
         //Base Tiles
         _.maptileimg = new Image();
         _.maptileimg.src = imagesPath + 'tiles/tiles.png';
@@ -80,7 +86,7 @@ export default class MapDrawer {
 
     drawCanvasMap(map) {
         let _ = this;
-        let xoff, yoff, xlim, ylim, light, canvaswidth, canvasheight;
+        let xoff, yoff, xlim, ylim, light;
         //clip options
         let radius = 75;
         let offset = 0;
@@ -90,16 +96,9 @@ export default class MapDrawer {
         xlim = xoff + map.d;
         ylim = yoff + map.d;
 
-        canvaswidth = _.maxmapwidth * _.maptilewidth;
-        canvasheight = _.maxmapheight * _.maptileheight;
-
         /* Clear the canvas*/
         _.MAPCTX.clearRect(0, 0, canvaswidth, canvasheight);
-        _.MAPCTX.save();
-        _.MAPCTX.beginPath();
-        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth / 2, 0, Math.PI * 2, true);
-        _.MAPCTX.clip();
-        _.MAPCTX.fill();
+
 
         /* Cycle on the 2 layers */
         for (let l = 0; l < 2; l++) {
