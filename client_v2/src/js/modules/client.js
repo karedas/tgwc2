@@ -579,7 +579,6 @@ export default class TgGui {
     }
 
     parseForDisplay(msg) {
-        console.log(msg);
         let _ = this,
             pos;
 
@@ -1297,8 +1296,21 @@ export default class TgGui {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
             let title  = _.capFirstLetter(info.title);
-            $(cont_header).children('#detailtitle').text(title);
-            $(cont_header).children('#detaildesc').text(info.desc.base);
+
+            let detaildesc = '';
+            if (info.desc.base) {
+                if (type == 'room') {
+                    _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
+                }
+                detaildesc += _.formatText(info.desc.base, 'out-descbase');
+            } 
+            else if (info.desc.repeatlast && _.last_room_desc) {
+                detaildesc += _.last_room_desc;
+            }
+
+            $(cont_header).show();
+            $(cont_header).children('#detailtitle').html(title);
+            $(cont_header).children('#detaildesc').html(detaildesc);
             /*  if(wtab == ctab) {
                 $('extratitle').text(title);
             }*/
@@ -1327,7 +1339,7 @@ export default class TgGui {
         return res;
     }
 
-    renderDetailsInner(info, type) {
+    renderDetailsInner(info, type, inExtra) {
         let _ = this;
         let numberClassList = ' firstlist';
         let textarea = '';
@@ -1337,7 +1349,7 @@ export default class TgGui {
         }
 
         /* Print description */
-        if (info.desc &&  !_.client_options.extradetail) {
+        if (info.desc && !_.client_options.extradetail) {
             textarea += '<div class="out-description">';
             if (info.desc.base) {
                 if (type == 'room') {
@@ -1360,7 +1372,7 @@ export default class TgGui {
             textarea += '</div>';
 
         }
-        if (_.client_options.extradetail) {
+        if (inExtra) {
             /* Print Persons List */
             if (info.perscont) {
                 textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'tg-lt-green tg-list-person' + numberClassList);
