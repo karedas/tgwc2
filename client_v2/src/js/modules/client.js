@@ -693,8 +693,7 @@ export default class TgGui {
         msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
             let cmd_parse = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
             console.log('return commands list');
-            return(cmd_parse);
-            //return _.renderCommandsList(cmd_parse);
+            return _.renderCommandsList(cmd_parse);
         });
 
         // Generic page (title, text)
@@ -987,6 +986,32 @@ export default class TgGui {
         let sttxt;
             stats =+ '<table class="stats"><caption>Condizioni</caption>'
             stats =+ '</table>';
+    }
+
+    renderCommandsList (cmd) {
+        let cols=6;
+        let txt ='<table class="cmd"><caption>'+cmd.title+'</caption>';
+    
+        delete cmd.title;
+    
+        $.each(cmd, function(group, data) {
+            txt += '<tr><th colspan="'+cols+'">Comandi '+group+':</th></tr>';
+    
+            $.each(data.sort(), function(idx, command) {
+                if(idx % cols == 0)
+                    txt += '<tr>';
+    
+                txt += '<td>'+command+'</td>';
+    
+                if(idx % cols == (cols-1) || idx == (data.length-1))
+                    txt += '</tr>';
+            });
+        });
+    
+        txt += '</table>';
+    
+        //return addFrameStyle(txt, 'small');
+        return txt;
     }
 
     /* *****************************************************************************

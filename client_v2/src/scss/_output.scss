@@ -209,7 +209,7 @@
     .extraoutput-header {
         display: none;
         overflow: hidden; 
-        padding-bottom: .2em;
+        padding-bottom: .4em;
         margin-left: -5px;
         margin-right: -20px;
         margin-bottom: 1em;
@@ -236,11 +236,9 @@
         .extra-detailimg {
             max-width: 150px;
             border: 1px solid #60482b;
-            border-left: 0;
             padding:2px;
             float:left;
-            margin-right: .5em;
-            margin-top: .5em;
+            margin: .5em .5em 0 .5em;
 
             img {
                 max-width: 100%;
