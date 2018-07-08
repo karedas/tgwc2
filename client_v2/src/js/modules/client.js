@@ -1847,6 +1847,7 @@ export default class TgGui {
             selector: '[rel="tooltip"]',
             html: true,
             trigger: 'hover',
+            container: 'body',
             delay: {'show': 500, 'hide': 0}
         });
     }

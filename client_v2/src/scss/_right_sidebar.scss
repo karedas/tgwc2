@@ -80,14 +80,15 @@
 
     .tg-directions {
         position: absolute;
-        z-index: 4;
+        z-index: 8;
         left:0;
         top: 0;
         bottom:0;
         right:0;
         .tg-dir {
             position: absolute;
-            zoom: .8;
+            transform: scale(.8);
+            cursor: pointer;
         }
 
 
@@ -135,33 +136,33 @@
         
         .dir-nord {
             @include sprite($nord-dir-sprite);
-            top: 66px;
-            left: 148px;
+            top: 48px;
+            left: 112px;
         }
         .dir-est {
             @include sprite($est-dir-sprite);
-            top: 208px;
-            right: 4px;
+            top: 164px;
+            right: 0px;
         }
         .dir-sud {
             @include sprite($sud-dir-sprite);
-            left: 148px;
-            bottom: 68px;
+            bottom: 50px;
+            left: 112px;
         }
         .dir-ovest {
             @include sprite($ovest-dir-sprite);
-            top: 208px;
-            left: 4px;
+            top: 164px;
+            left: 0;
         }
         .dir-alto {
             @include sprite($alto-dir-sprite);
-            bottom: 145px;
-            left: 22px;
+            bottom: 107px;
+            left: 15px;
         }
         .dir-basso {
             @include sprite($basso-dir-sprite);
-            bottom: 104px;
-            left: 58px;
+            bottom: 82px;
+            left: 46px;
         }
     }
 
@@ -192,7 +193,7 @@
     @include media-breakpoint-up(xl) {
         .tg-directions {
             .tg-dir {
-                zoom: 1;
+            transform: scale(1);
             }
 
             .dir-nord {
