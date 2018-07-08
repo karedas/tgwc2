@@ -8,6 +8,8 @@ export default class MapDrawer {
         this.maxmapheight = 9;
         this.maptilewidth = 32;
         this.maptileheight = 32;
+        this.canvaswidth = 0;
+        this.canvasheight = 0;
         this.maplight;
         this.mapidprefix = 'mp'
         this.MAPCTX = null;
@@ -44,11 +46,11 @@ export default class MapDrawer {
         $(_.container).append('<canvas id="mapcont" width="' + (_.maxmapwidth * _.maptilewidth) + '" height="' + (_.maxmapheight * _.maptileheight) + '"></canvas>');
 
         _.MAPCTX = $('#mapcont')[0].getContext('2d');
-        let canvaswidth = _.maxmapwidth * _.maptilewidth;
-        let canvasheight = _.maxmapheight * _.maptileheight;
+        _.canvaswidth = _.maxmapwidth * _.maptilewidth;
+        _.canvasheight = _.maxmapheight * _.maptileheight;
         _.MAPCTX.save();
         _.MAPCTX.beginPath();
-        _.MAPCTX.arc(canvaswidth / 2, canvasheight / 2, canvaswidth / 2, 0, Math.PI * 2, true);
+        _.MAPCTX.arc(_.canvaswidth / 2, _.canvasheight / 2, _.canvaswidth / 2, 0, Math.PI * 2, true);
         _.MAPCTX.clip();
         _.MAPCTX.fill();
         //Base Tiles
@@ -97,7 +99,7 @@ export default class MapDrawer {
         ylim = yoff + map.d;
 
         /* Clear the canvas*/
-        _.MAPCTX.clearRect(0, 0, canvaswidth, canvasheight);
+        _.MAPCTX.clearRect(0, 0, _.canvaswidth, _.canvasheight);
 
 
         /* Cycle on the 2 layers */

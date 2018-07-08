@@ -66,7 +66,8 @@ export default class TgGui {
             dashboard: "0",
             extradetail: true,
             mrn_highlights: [],
-            extradetail_width: '50%'
+            extradetail_width: '50%',
+            output_trimlines: 500,
         };
 
         /* Status */
@@ -873,7 +874,6 @@ export default class TgGui {
         if(msg !='') {
             msg = '<div class="tg-line">' + _.replaceColors(msg) + '</div>';
         }
-
         return msg.replace(/<p><\/p>/g, '');
 
     }
@@ -1179,7 +1179,6 @@ export default class TgGui {
         let _ = this;
 
         let cmd;
-        console.log(_.godInvLev ,  _.dir_status[dir]);
 
         if (_.godInvLev == 0 && _.dir_status[dir] == '3') {
             cmd = 'apri ' + _.dir_names[dir];
@@ -1271,10 +1270,8 @@ export default class TgGui {
         let _ = this,
             res = '',
             container = $('#extraoutput'),
-            wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type),
-            tpos;
+            wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type);
         
-        let details = '';
 
         let cont_header = container.children('.extraoutput-header');
         let cont_detail = container.children('.extraoutput-detail');
@@ -1325,7 +1322,7 @@ export default class TgGui {
         }
 
         let textarea = $(cont_detail).empty();
-        details +=  _.replaceColors(_.renderDetailsInner(info, type, true));
+        let details =  _.replaceColors(_.renderDetailsInner(info, type, true));
         
         textarea.append(details);
 
@@ -1701,12 +1698,15 @@ export default class TgGui {
 
     historyPush(text) {
         let _ = this;
+        console.log(_.cmd_history.length);
         if (text.length > 0) {
-            if (_.cmd_history.length >= _.max_history_length)
+            if (_.cmd_history.length >= _.max_history_length) {
                 _.cmd_history.shift();
+            }
 
-            if (_.cmd_history.length == 0 || _.cmd_history[_.cmd_history.length - 1] != text)
+            if (_.cmd_history.length == 0 || _.cmd_history[_.cmd_history.length - 1] != text) {
                 _.cmd_history.push(text);
+            }
 
             _.cmd_history_pos = _.cmd_history.length;
         }
@@ -1888,6 +1888,14 @@ export default class TgGui {
             app =  $(text);
         $('#output').append(app);
         _.scrollPanelTo('#output', '#scrollableOutput', false);
+
+        
+        if (_.client_options.output_trimlines < 10000) {
+            console.log(_.client_options.output_trimlines);
+			$('#output').contents().slice(0, - _.client_options.output_trimlines).remove();
+        }
+        
+        $('#scrollableOutput').get(0).scrollTop = 100000
     }
 
     clearOutput() {
