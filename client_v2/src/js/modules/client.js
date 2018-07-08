@@ -1081,7 +1081,7 @@ export default class TgGui {
     }
 
     cleanImageContainer(cont) {
-        $(cont).slideUp('fast');
+        $(cont).slideUp('fast').find('img').attr('src', '');
     }
 
     /* *****************************************************************************
@@ -1321,7 +1321,7 @@ export default class TgGui {
             _.showImage($('#detailimage'), info.image);
         }
         else {
-            _.cleanImageContainer('.tg-detailimage');
+            _.cleanImageContainer('.extra-detailimg');
         }
 
         let textarea = $(cont_detail).empty();
@@ -1974,10 +1974,10 @@ export default class TgGui {
         /* Image Event */
         $('#detailimage')
             .on('error', function(){
-                $(this).closest('.tg-detailsimage').slideUp('fast');
+                $(this).closest('.extra-detailimg').slideUp('fast');
             })
             .on('load', function(){
-                $(this).closest('.tg-detailsimage').slideDown('fast');
+                $(this).closest('.extra-detailimg').slideDown('fast');
             });
     }
 
