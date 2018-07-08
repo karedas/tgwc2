@@ -64,7 +64,7 @@ export default class TgGui {
             shortcuts: [],
             login: {},
             dashboard: "0",
-            secondoutput: true,
+            extradetail: true,
             mrn_highlights: [],
             extradetail_width: '50%'
         };
@@ -579,6 +579,7 @@ export default class TgGui {
     }
 
     parseForDisplay(msg) {
+        console.log(msg);
         let _ = this,
             pos;
 
@@ -734,7 +735,7 @@ export default class TgGui {
         // Object details
         msg = msg.replace(/&!obj\{[\s\S]*?\}!/gm, function (dtls) {
             let dtls_parse = $.parseJSON(dtls.slice(5, -1).replace(/\n/gm, ' '));
-            return _.renderDetailsInText(dtls_parse, 'obj');
+            return _.renderDetails(dtls_parse, 'obj');
         });
 
         // Equipment
@@ -1075,8 +1076,9 @@ export default class TgGui {
         let imgsrc = _.media_server_addr + image;
         let currimgsrc = cont.attr('src');
 
-        if (currimgsrc != imgsrc)
+        if (currimgsrc != imgsrc) {
             cont.attr('src', imgsrc);
+        }
     }
 
     cleanImageContainer(cont) {
@@ -1242,8 +1244,8 @@ export default class TgGui {
 
     renderDetails(info, type) {
         let _ = this;
-        if( _.client_options.secondoutput) {
-            return _.renderDetailInSecondOutput(info, type);
+        if( _.client_options.extradetail) {
+            return _.renderExtraOutput(info, type);
         }
         else {
             return _.renderDetailsInText(info, type);
@@ -1265,7 +1267,7 @@ export default class TgGui {
         return res;
     }
 
-    renderDetailInSecondOutput(info, type) {
+    renderExtraOutput(info, type) {
 
         let _ = this,
             res = '',
@@ -1274,6 +1276,9 @@ export default class TgGui {
             tpos;
         
         let details = '';
+
+        let cont_header = container.children('.extraoutput-header');
+        let cont_detail = container.children('.extraoutput-detail');
 
 	    /* Set tab icon */
         if(type == 'dir') {
@@ -1291,8 +1296,9 @@ export default class TgGui {
             if(type == 'room' && !info.up) {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
-            let title  = '<div class="out-title">' + info.title + '</div>';
-            details += title;
+            let title  = _.capFirstLetter(info.title);
+            $(cont_header).children('#detailtitle').text(title);
+            $(cont_header).children('#detaildesc').text(info.desc.base);
             /*  if(wtab == ctab) {
                 $('extratitle').text(title);
             }*/
@@ -1306,9 +1312,9 @@ export default class TgGui {
             _.cleanImageContainer('.tg-detailimage');
         }
 
-        let textarea = container.empty();
+        let textarea = $(cont_detail).empty();
         details +=  _.replaceColors(_.renderDetailsInner(info, type, true));
-       
+        
         textarea.append(details);
 
         if(type == 'room') {
@@ -1331,7 +1337,7 @@ export default class TgGui {
         }
 
         /* Print description */
-        if (info.desc) {
+        if (info.desc &&  !_.client_options.extradetail) {
             textarea += '<div class="out-description">';
             if (info.desc.base) {
                 if (type == 'room') {
@@ -1354,7 +1360,7 @@ export default class TgGui {
             textarea += '</div>';
 
         }
-        if (_.client_options.secondoutput) {
+        if (_.client_options.extradetail) {
             /* Print Persons List */
             if (info.perscont) {
                 textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'tg-lt-green tg-list-person' + numberClassList);
@@ -1383,7 +1389,7 @@ export default class TgGui {
         }
 	    /* Print where info */
         if(info.where) {
-            textarea += '<div>'+_.renderIconWithBackBorder(info.where.icon, info.where.num, null, null, null, 'interact where')+'<div class="desc">Si trova '+info.where.title+'.</div></div>';
+            textarea += '<div class="tg-backdetail">'+_.renderIconWithBackBorder(info.where.icon, info.where.num, null, null, null, 'interact where')+'<div class="desc">Si trova '+info.where.title+'.</div></div>';
         }
 
 
@@ -1492,9 +1498,6 @@ export default class TgGui {
 
                     txt += '</div>';
                 }
-
-
-
             }
 
             if (cont.title && (txt.length > 0 || cont.show === true)) {
@@ -1513,7 +1516,7 @@ export default class TgGui {
                     columnableClass = ' col-dispose';
                 }
 
-                res += '<div class="out-list'+ columnableClass+'" '+(style ? ' ' + style : '') + (_.client_options.secondoutput ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
+                res += '<div class="out-list'+ columnableClass+'" '+(style ? ' ' + style : '') + (_.client_options.extradetail ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
                 res +=  txt;
                 res += '</div>';
             }
@@ -1769,7 +1772,7 @@ export default class TgGui {
     configInit() {
         let _ = this;
         /* Extra Detail Display */
-        if(_.client_options.secondoutput) {
+        if(_.client_options.extradetail) {
             $('.tg-outputextra-wrap').addClass('d-flex');
         }
         else {
@@ -2143,7 +2146,7 @@ export default class TgGui {
         $('#triggerToggleExtraOutput').on('click', function(){
             $('.tg-outputextra-wrap').toggleClass('d-flex')
             _.scrollPanelTo('#output', '#scrollableOutput', true);
-            _.client_options.secondoutput =  _.client_options.secondoutput ? false : true;
+            _.client_options.extradetail =  _.client_options.extradetail ? false : true;
             _.SaveStorage('options', _.client_options);
         });
 

@@ -62,6 +62,7 @@
                 height: 100%;
                 width: 100%;
                 background-color: transparent;
+                border-radius: 50%;
             }
         }
     }
@@ -80,10 +81,13 @@
     .tg-directions {
         position: absolute;
         z-index: 4;
-        width: 100%;
-        height: 100%;
+        left:0;
+        top: 0;
+        bottom:0;
+        right:0;
         .tg-dir {
             position: absolute;
+            zoom: .8;
         }
 
 
@@ -105,6 +109,17 @@
             left: 17px;
         }
         .dir-basso, .dir-alto {
+            &:before {
+                content: attr(data-label);
+                position: absolute;
+                top: -16px;
+                width: 100%;
+                text-align: center;
+                color: #d3c6ae;
+                text-shadow: 0 0 4px black;
+                font-family: kingthinks;
+                white-space: nowrap;
+            }
             .dir-ico {
                 top: 4px;
                 left: 4px;
@@ -112,36 +127,41 @@
                 border-radius: 0;
             }
         }
+
+        .dir-basso:before {
+            top: auto;
+            bottom: -16px;
+        }
         
         .dir-nord {
             @include sprite($nord-dir-sprite);
-            top: -42px;
-            left: 76px;
+            top: 66px;
+            left: 148px;
         }
         .dir-est {
             @include sprite($est-dir-sprite);
-            top: 78px;
-            right: -38px;
+            top: 208px;
+            right: 4px;
         }
         .dir-sud {
             @include sprite($sud-dir-sprite);
-            left: 76px;
-            bottom: -36px;
+            left: 148px;
+            bottom: 68px;
         }
         .dir-ovest {
             @include sprite($ovest-dir-sprite);
-            top: 78px;
-            left: -40px;
+            top: 208px;
+            left: 4px;
         }
         .dir-alto {
             @include sprite($alto-dir-sprite);
-            left: -19px;
-            top: 20px;
+            bottom: 145px;
+            left: 22px;
         }
         .dir-basso {
             @include sprite($basso-dir-sprite);
-            left: -19px;
-            bottom: 20px;
+            bottom: 104px;
+            left: 58px;
         }
     }
 
@@ -171,26 +191,38 @@
 
     @include media-breakpoint-up(xl) {
         .tg-directions {
+            .tg-dir {
+                zoom: 1;
+            }
 
             .dir-nord {
                 @include sprite($nord-dir-sprite);
-                top: -42px;
-                left: 108px;
+                top: 72px;
+                left: 155px;
             }
             .dir-est {
                 @include sprite($est-dir-sprite);
-                top: 108px;
-                right: -38px;
+                top: 226px;
+                right: 6px;
             }
             .dir-sud {
                 @include sprite($sud-dir-sprite);
-                left: 108px;
-                bottom: -36px;
+                bottom: 73px;
+                left: 155px;
             }
             .dir-ovest {
                 @include sprite($ovest-dir-sprite);
-                top: 108px;
-                left: -40px;
+                top: 226px;
+                left: 4px;
+            }
+
+            .dir-alto {
+                bottom: 145px;
+                left: 16px;
+            }
+            .dir-basso {
+                bottom: 108px;
+                left: 53px;
             }
         }
     }
