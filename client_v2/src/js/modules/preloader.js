@@ -50,6 +50,8 @@ export default class Preloader {
             if (loadedimages == assets.length) {
                 postaction(images) //call postaction and pass in newimages array as parameter
             }
+
+            percentage = percentage > 100 ? 100 : percentage;
             $('#tgPreloader').find('span').text(percentage);
         }
         for (let i = 0; i < assets.length; i++) {
