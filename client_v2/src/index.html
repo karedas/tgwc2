@@ -80,10 +80,17 @@
 						</li>//-->
           </ul>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <button class="tg-fnt-button no-feature" id="triggerAudio">
+            <li class="nav-item dropdown">
+              <button class="tg-fnt-button no-feature dropdown-toggle" id="tgNavBartriggerAudio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-volume-up"></i>
               </button>
+              <div class="dropdown-menu" aria-labelledby="tgNavBarTriggerAudio">
+                <div class="tg-audiobox">
+
+                  <span class="tg-audiotoggle"></span>
+                  <div class="tg-audiolabel">55</div>
+                </div>
+              </div>
             </li>
           </ul>
           <form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider" autocomplete="off">
@@ -318,6 +325,7 @@
         </div>
       </div>
     </div>
+
     <!-- Login Panel -->
     <div class="tg-loginpanel align-middle container-fluid">
       <div class="row justify-content-center align-self-center w-100">

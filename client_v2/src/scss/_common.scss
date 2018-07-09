@@ -30,6 +30,10 @@ a {
     outline: 0;
 }
 
+button, input[type="checkbox"] {
+    cursor: pointer;
+}
+
 .tg-shadow {
     box-shadow: 0px 2px 12px $black;
 }

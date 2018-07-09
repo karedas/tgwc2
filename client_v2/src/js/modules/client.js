@@ -58,6 +58,7 @@ export default class TgGui {
 
         /* UI Game Options */
         this.client_options = {
+            show_news: true,
             musicVolume:70,
             soundVolume:100,
             skysize: 215,
@@ -920,7 +921,14 @@ export default class TgGui {
         let _ = this;
         let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
         if (page.title == 'Notizie') {
-            _.openPopup('notizie', "Notizie dal gioco", page);
+            console.log(_.client_options.show_news)
+            if(_.client_options.show_news) {
+                _.openPopup('notizie', "Notizie dal gioco", page);
+            }
+            else {
+                _.sendInput();
+                return '';
+            }
         } else {
             //TODO: Page parse generic 
             console.log('!page todo');
@@ -1268,7 +1276,6 @@ export default class TgGui {
     }
 
     playMusic(music) {
-        console.log(music);
         let _ = this;
         if(_.client_options.musicVolume > 0 ) {
             let current_src = $('#music').attr('src');
@@ -1290,6 +1297,15 @@ export default class TgGui {
                 $('#sound').attr('src', new_src);
             }
         }
+    }
+
+    stopMusic() {
+        let _ = this;
+        $('#music').animate({volume: 0}, 3500, function(){
+            $(this)[0].pause();
+            $(this).get(0).volume = _.client_options.musicVolume / 100;
+        })
+
     }
 
     /* *****************************************************************************
@@ -1778,7 +1794,6 @@ export default class TgGui {
 
     historyPush(text) {
         let _ = this;
-        console.log(_.cmd_history.length);
         if (text.length > 0) {
             if (_.cmd_history.length >= _.max_history_length) {
                 _.cmd_history.shift();
@@ -1792,7 +1807,6 @@ export default class TgGui {
         }
 
         $('#tgInputUser').val('');
-
         return text;
     }
 
@@ -1846,7 +1860,6 @@ export default class TgGui {
         _.configInit();
         /* Interface Modules List */
         //_.inputInit();
-        _.audioInit();
         _.genericEvents();
         _.mainNavBarInit();
         _.tooltipInit();
@@ -1856,6 +1869,9 @@ export default class TgGui {
         _.mapInit();
         _.doorsInit();
         _.buttonsEventInit();
+
+        _.stopMusic();
+
         _.main();
     }
 
@@ -1874,14 +1890,15 @@ export default class TgGui {
         
         /* Dashboard Expand/collapse status */
         let d_status = _.client_options.dashboard; //just alias
-        // Mid 
         if(d_status == 1) {
             $('.tg-dashboard').addClass('midopen');
         }
-        // Collapse 
         else if(d_status == 2) {
             $('.tg-characterpanel').hide();
         }
+
+        /* audio */
+        $('#tgNavBartriggerAudio').on('click')
     }
 
     /* -------------------------------------------------
@@ -2322,14 +2339,6 @@ export default class TgGui {
                 MP_src = './ajax/cookielawAlert.html';
                 break;
 
-            /* ALPHA Client Version ALERT */
-            case 'alpha_version':
-                if (_.client_options.alpha_approved) {
-                    return;
-                }
-                MP_src = 'ajax/alphaModalAlert.html';
-                MP_type = 'ajax';
-                break;
             case 'nofeature':
                 MP_type = 'inline';
                 MP_closeOnBgClick = true;
@@ -2338,8 +2347,18 @@ export default class TgGui {
                 break;
 
             case 'notizie':
-                MP_close_button = true;
-                MP_src = '<div class="tg-modal">zona notizie</div>';
+                MP_src = 'ajax/news/last.html';
+                MP_type = 'ajax';
+                MP_callbacks.ajaxContentAdded = function() {
+                    $('#initNewsButton').one('click', function(){
+                        if($('input[type=checkbox]').prop('checked')) {
+                            _.client_options.show_news = false;
+                            SaveStorage('options',_.client_options);
+                        }
+                        _.sendInput();
+                        $.magnificPopup.close();
+                    });
+                }
                 MP_callbacks.close = function () {
                     _.sendInput();
                 };
@@ -2376,8 +2395,8 @@ export default class TgGui {
                 src: MP_src,
                 type: MP_type
             },
-            mainClass: 'modal-' + content_ref,
-            callbacks: MP_callbacks
+            mainClass: 'tg-mp modal-' + content_ref,
+            callbacks: MP_callbacks,
         });
         //add Draggable
         $($.magnificPopup.instance.contentContainer).draggabilly({

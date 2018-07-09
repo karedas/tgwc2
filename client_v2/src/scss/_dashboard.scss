@@ -20,15 +20,6 @@
 .tg-character {
     padding: 6px 0 3px;
     display: flex;
-    .tg-character-avmenu {
-        padding-right: 2px;
-        ul {
-            margin-bottom: 0;
-        }
-        .tg-button {
-            margin-bottom: 2px;
-        }
-    }
     .tg-characteravatar {
         cursor: pointer;
         padding-right: 6px;
@@ -220,7 +211,7 @@
             max-width: 100%;
         }
 
-        .tg-extraboard,.tg-character-avmenu, .tg-characteravatar, .tg-infocharname, .tg-extrabars{
+        .tg-extraboard, .tg-characteravatar, .tg-infocharname, .tg-extrabars{
             display: none!important;
         }
         
