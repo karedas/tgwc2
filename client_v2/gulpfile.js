@@ -1,22 +1,11 @@
 const gulp = require('gulp'),
-	_ = require('lodash'),
-	cache = require('gulp-cached'),
 	debug = require('gulp-debug'),
 	del = require('del'),
 	path = require('path'),
-	concat = require("gulp-concat"),
 	fs = require('fs'),
-	plumber = require('gulp-plumber'),
-	postcss = require('gulp-postcss'),
-	sass = require('gulp-sass'),
-	sassUnicode = require('gulp-sass-unicode'),
-	webpack = require('webpack'),
 	chalk = require('chalk'),
-	argv = require('yargs').argv,
-	stream = require('merge-stream'),
-	spritesmith = require('gulp.spritesmith'),
-	fileList = require('gulp-filelist'),
-	webpackStream = require('webpack-stream');
+	argv = require('yargs').argv;
+	
 
 
 const log = console.log;
@@ -36,6 +25,11 @@ function getFolders(dir) {
 }
 
 function generateSprites(done, path) {
+
+	let spritesmith = require('gulp.spritesmith'),
+		concat = require("gulp-concat"),
+		stream = require('merge-stream');
+
 
 	let dir = config.src.base + config.src.img + 'sprites/';
 	let folders;
@@ -84,6 +78,8 @@ function generateSprites(done, path) {
 }
 
 function generateAssetsList() {
+	let fileList = require('gulp-filelist');
+
 	return gulp.src([
 		config.build.base + config.build.img + '**/*.{png,jpg,gif}',
 		])
@@ -96,6 +92,12 @@ function generateAssetsList() {
 
 // compile javascript with webpack
 function jsCompile(mode) {
+
+	let webpack = require('webpack'),
+		webpackStream = require('webpack-stream'),
+		cache = require('gulp-cached'),
+		plumber = require('gulp-plumber');
+	
 	if (mode == 'development') {
 		webpack_config.mode = mode;
 		webpack_config.watch = true;
@@ -132,6 +134,11 @@ gulp.task('sass-watch', () => {
 
 // Compile sass files
 gulp.task('sass-compile', () => {
+	
+	let sassUnicode = require('gulp-sass-unicode'),
+		postcss = require('gulp-postcss'),
+		sass = require('gulp-sass');
+
 	return gulp.src(config.src.base + config.src.scss + '**/*.scss')
 		.pipe(sass({
 			errLogToConsole: true

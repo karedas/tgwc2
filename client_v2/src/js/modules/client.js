@@ -21,6 +21,8 @@ import Map from 'mapDrawer';
 export default class TgGui {
 
     constructor(options) {
+
+
         this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = 'http://play.thegatemud.it/images/';
@@ -99,7 +101,6 @@ export default class TgGui {
         /* Output */
         this.last_room_desc = '';
         
-
         /* Details */
         this.exp_grp_list = {}
         this.max_exp_grp = 15;
@@ -143,6 +144,10 @@ export default class TgGui {
             output: null
         };
 
+        /* References to the instantiated classes */
+        this.MAP_OBJECT = null;
+        this.RENDER = null;
+
         this.equip_positions_by_name = {
 
             "r_finger":"Al dito destro",
@@ -175,7 +180,6 @@ export default class TgGui {
         this.equip_positions_by_num = [''].concat($.map(this.equip_positions_by_name, function(v) {
             return v;
         }));
-
         
 
         /* Debug */
@@ -583,6 +587,10 @@ export default class TgGui {
         let _ = this,
             pos;
 
+        if(!(_.RENDER instanceof Object)) {
+            console.log('render init');
+            _.RENDER = new Render();
+        }
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
             _.inputPassword();
