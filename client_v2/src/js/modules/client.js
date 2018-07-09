@@ -13,10 +13,8 @@ import 'jquery-resizable-dom';
 import AssetsList from 'assets_list.json';
 //============ Custom
 //import FacebookSDK from 'facebookSdk';
-import Render from 'render';
 import Preloader from 'preloader';
 import Map from 'mapDrawer';
-
 
 export default class TgGui {
 
@@ -28,7 +26,7 @@ export default class TgGui {
         this.media_server_addr = 'http://play.thegatemud.it/images/';
         this.ws_prefix = '/';
         this.images_path = './images/';
-        this.sounds_path = '';
+        this.sounds_path = './sounds/';
 
         this.socketListener = {}
 
@@ -39,7 +37,6 @@ export default class TgGui {
         };
 
         /* Connection */
-        //this.serverIsReady = false;
         this.isConnected = false;
         this.socket = null;
         this.netdata = '';
@@ -61,6 +58,8 @@ export default class TgGui {
 
         /* UI Game Options */
         this.client_options = {
+            musicVolume:70,
+            soundVolume:100,
             skysize: 215,
             alpha_approved: false,
             shortcuts: [],
@@ -226,6 +225,9 @@ export default class TgGui {
                 console.log('Server Online: %c'+_.isConnected, 'font-weight:bold;');
             }
         });
+
+        _.audioInit();
+        _.playAudio('fantasy1.mp3');
     }
 
     connectToServer() {
@@ -586,11 +588,6 @@ export default class TgGui {
     parseForDisplay(msg) {
         let _ = this,
             pos;
-
-        if(!(_.RENDER instanceof Object)) {
-            console.log('render init');
-            _.RENDER = new Render();
-        }
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
             _.inputPassword();
@@ -700,7 +697,6 @@ export default class TgGui {
         // List of commands
         msg = msg.replace(/&!cmdlst\{[\s\S]*?\}!/gm, function (cmd) {
             let cmd_parse = $.parseJSON(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-            console.log('return commands list');
             return _.renderCommandsList(cmd_parse);
         });
 
@@ -1241,8 +1237,59 @@ export default class TgGui {
      * AUDIO & MUSIC
      */
 
-    playAudio() {
-        console.log('TODO:playaudio')
+    audioInit() {
+        let _ = this;
+        if(typeof _.client_options.musicVolume != 'number' || _.client_options.musicVolume < 0 || _.client_options.musicVolume > 100) {
+            client_options.musicVolume = 70;
+        }
+
+        if(typeof _.client_options.soundVolume != 'number' || _.client_options.soundVolume < 0 || _.client_options.soundVolume > 100) {
+            _.client_options.soundVolume = 100;
+        }
+
+        $('#music').get(0).volume = _.client_options.musicVolume / 100;
+        $('#sound').get(0).volume = _.client_options.soundVolume / 100;
+    }
+
+    playAudio(audio) {
+        let _ = this;
+        let mp3 = '.mp3';
+        let mid = '.mid';
+
+        if(audio.indexOf(mp3, audio.length - mp3.length) !== -1) {
+            _.playMusic(audio);
+        }
+        else if(audio.indexOf(mid, audio.length - mid.length) !== -1) {
+            _.playSound(audio.replace('.mid', '.mp3'));
+        }
+        else if(_.client_options.soundVolume > 0) {
+            _.playSound(audio.replace('.wav', '.mp3'));
+        }
+    }
+
+    playMusic(music) {
+        console.log(music);
+        let _ = this;
+        if(_.client_options.musicVolume > 0 ) {
+            let current_src = $('#music').attr('src');
+            let new_src = _.sounds_path + music;
+
+            if(current_src != new_src || $('#music').prop('paused') == true) {
+                $('#music').attr('src', new_src);
+            }
+        }
+    }
+
+    playSound(sound) {
+        let _ = this;
+        if(_.client_options.soundVolume > 0 ) {
+            let current_src = $('#sound').attr('src');
+            let new_src = _.sounds_path + sound;
+
+            if(current_src != new_src || $('#sound').prop('ended')) {
+                $('#sound').attr('src', new_src);
+            }
+        }
     }
 
     /* *****************************************************************************
@@ -1799,6 +1846,7 @@ export default class TgGui {
         _.configInit();
         /* Interface Modules List */
         //_.inputInit();
+        _.audioInit();
         _.genericEvents();
         _.mainNavBarInit();
         _.tooltipInit();

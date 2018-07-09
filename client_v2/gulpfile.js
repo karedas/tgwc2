@@ -87,7 +87,9 @@ function generateAssetsList() {
 			relative: true
 		}))
 		.pipe(gulp.dest(config.src.base))
-		.pipe(gulp.dest(config.build.base));
+		.pipe(gulp.dest(config.build.base))
+		.pipe(debug());
+
 }
 
 // compile javascript with webpack
@@ -163,7 +165,8 @@ gulp.task('staticfiles-watch', function () {
 
 	let glob = [
 			config.src.base + 'assets_list.json',
-			config.src.base + 'ajax/**', 
+			config.src.base + 'ajax/**',
+			config.src.base + 'static/**',
 			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
 			config.src.base + 'fonts/**/*',
 			'!' + config.src.base + config.src.img + 'sprites/**/*',
@@ -192,6 +195,7 @@ function copyStaticFiles(done) {
 			config.src.base + '**/*.html',
 			config.src.base + 'ajax/**',
 			config.src.base + 'fonts/**',
+			config.src.base + 'sounds/**',
 			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
 			config.src.base + 'favicon.ico',
 			config.src.base + 'fonts/**/*',
@@ -201,7 +205,9 @@ function copyStaticFiles(done) {
 	];
 			
 	return gulp.src(staticFileGlob, {base: './src', cwd: './'})
-		.pipe(gulp.dest(config.build.base));
+		.pipe(gulp.dest(config.build.base))
+		.pipe(debug());
+
 }
 
 // generate CSS sprite images
