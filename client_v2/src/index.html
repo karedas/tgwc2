@@ -328,23 +328,31 @@
 
     <!-- Login Panel -->
     <div class="tg-loginpanel align-middle container-fluid">
-      <div class="row justify-content-center align-self-center w-100">
-        <div class="col-xl-3 col-lg-4 col-md-5 mx-auto">
+      <div class="justify-content-center align-self-top mt-5 w-100">
+        <div class="mx-auto tg-login-container">
           <div class="tg-logo-composit">
-            <div class="tg-logo-composit-light"></div>
           </div>
-          <form id="loginPanel" class="tg-loginform" action="#" autocomplete="off">
+          <div class="tg-loginform">
+            <div class="tg-loginform-wrap">
+              <div class="tg-loginform-content">
+                <h2>Gioco di Ruolo Fantasy Online<br>
+                    Accedi <span>gratis</span> al mondo di Ikhari!</h2>
+                <form id="loginPanel" action="#" autocomplete="off">
+                  <input id="login_username" name="username" type="text" autocomplete="off" placeholder="Username">
+                  <input id="login_password" name="password" type="password" autocomplete="off" placeholder="Password">
+                  <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
+                  <p class="tg-newcharacter">Sei nuovo?
+                    <a href="#" id="doNewCharacter">Crea un Personaggio</a>
+                  </p>
+                </form>
+              </div>
+            </div>
             <p class="tg-version-name">TheGate Webclient v.2
-              <span>
-                <%= htmlWebpackPlugin.options.git_version %> (Alpha)</span>
+                <span>
+                <%= htmlWebpackPlugin.options.git_version %> (Alpha)
+              </span>
             </p>
-            <label for="login_username">Nome Personaggio!</label>
-            <input id="login_username" name="username" type="text" autocomplete="off">
-            <label for="login_password">Password</label>
-            <input id="login_password" name="password" type="password" autocomplete="off">
-            <button type="submit" value="accedi" id="doLocalLogin">Accedi</button>
-            <button type="submit" value="Nuovo personaggio" id="doNewCharacter">Nuovo personaggio</button>
-          </form>
+          </div>
           <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
           <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
           <div id="tgPreloader" class="tg-preloader">

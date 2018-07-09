@@ -53,51 +53,6 @@ button, input[type="checkbox"] {
     }
 }
 
-.tg-logo-composit {
-    width: 105px;
-    height: 91px;
-    position: relative;
-    margin: 0 auto 1.5rem;
-    box-sizing: content-box;
-    visibility: visible;
-
-    &:before, &:after {
-        background-size: contain;
-        background-repeat: no-repeat;
-        content: '';
-        display: block;
-        height: 100%;
-        width: 100%
-    }
-    &:before {
-        background-image: url($imgPath + '/logo/triang_est.png');
-    }
-    &:after {
-        position: absolute;
-        top: 0;
-        background-image: url($imgPath + '/logo/triang_int.png');
-    }
-
-    .tg-logo-composit-light {
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        background: url($imgPath + '/logo/triang_est_light.png') no-repeat;
-        background-size: contain;
-        position: absolute;
-        top:0;
-        opacity: 0;
-        animation: logolightAnimation 5s infinite;
-        animation-delay: .5s;
-    }
-
-    @keyframes logolightAnimation {
-        0%   { opacity:0; }
-        50%  { opacity:1; }
-        100% { opacity:0; }
-    }
-}
-
 
 
 .tg-main {

@@ -311,6 +311,7 @@
 
 .b-area {
     padding: $area-border-size;  
+    padding: 0;  
     > .tg-border-box {
         .tg-border-top, > .tg-border-bottom {
             height: $area-border-size;

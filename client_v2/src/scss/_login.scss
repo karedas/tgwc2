@@ -1,7 +1,10 @@
 /* Init Login box */
 
 .tg-loginpanel {
-    background-color: #1d1812;
+    background-color: #0b0807;
+    background-image: url($imgPath + '/login/login_background_01.jpg');
+    background-position: top center;
+    background-repeat: no-repeat;
     padding: .5rem;
     display: flex;
     height: 100%;
@@ -9,46 +12,154 @@
     overflow: hidden;
     overflow-y: auto;
     position: relative;
-    min-height: 250px;
     >.row {
         padding-top: 1em;
         padding-bottom: 1em;
     }
+
+.tg-login-container {
+    width: 415px;
+    max-width: 100%;
+    min-height: 250px;
+}
+    
+.tg-logo-composit {
+    width: 244px;
+    height: 184px;
+    position: relative;
+    box-sizing: content-box;
+    visibility: visible;
+    background: url($imgPath + '/login/logo_hd.png');
+    z-index: 2;
+    margin: 0 auto;
+
+    
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: url($imgPath + '/login/logo_light_triangle.png') no-repeat;
+        width:98px;
+        height: 91px;
+        left: 70px;
+        top: 58px;
+        opacity: 0;
+        animation: logolightAnimation 8s infinite;
+        animation-delay: .5s;
+    }
+
+    @keyframes logolightAnimation {
+        0%   { opacity:0; }
+        50%  { opacity:.6; }
+        100% { opacity:0; }
+    }
+}
+
+
+
     .tg-loginform {
-        border-radius: 15px;
-        border: 1px solid #2c2926;
-        padding: 2rem;
         display: none;
+        background: url($imgPath + '/login/border-top-mainbox.png') no-repeat top left;
+        background-size: 100%;
+        text-align: center;
+        padding-top: 55px;
+        margin-top: -28px;
+
+
+        .tg-loginform-wrap {
+            background: url($imgPath + '/login/border-bottom-mainbox.png') no-repeat bottom left;
+            background-size: 100%;
+            padding-bottom: 13px;
+        }
+
+        .tg-loginform-content {
+            padding: 0 2rem 2rem;
+            background: url($imgPath + '/login/border-central-mainbox.png') repeat-y top;
+            background-size: 100%;
+            color: #ababaa;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
         .tg-version-name {
+            padding-top:.4em;
+            font-size: 9px;
+            text-transform: uppercase;
             span {
                 display: block;
-                font-size: 11px;
                 color: $gray-600;
             }
         }
+
+        h2{
+            font-size: 16px;
+            line-height: 1.2;
+            span {
+                color: white;
+            }
+        } 
     }
     input {
         margin-bottom: .2rem;
-        border: 1px solid $tg-yellow;
-        background: none;
+        border: 1px solid #403a32;
+        line-height: 38px;
         width: 100%;
         box-sizing: border-box;
-        color: $white;
-        padding: 1px 2px;
+        color: #feece0;
+        background: rgba(18,13,10, .8);
+        background-repeat: no-repeat;
+        background-position: 1em;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 16px;
+        padding: 0 .5em 0 3.2em;
+        margin-bottom: .8em;
+        box-shadow: inset 0 0 9px 2px black;
+        position: relative;
+
+        &[type="text"] {
+          background-image: url($imgPath + '/login/username_labelico.png');
+        }
+        &[type="password"] {
+            background-image: url($imgPath + '/login/password_labelico.png');
+        }
     }
-    label {
-        color: #ababaa;
-        margin: 0;
-    }
-    button {
+
+    .tg-loginbtn {
+        background-color: transparent;
+        @include sprite($login_button-sprite);
+        text-indent: -9999px;
         cursor: pointer;
-        background-color: $tg-yellow;
+        position: relative;
         border: none;
-        color: $black;
+        margin-bottom: .5em;
+        
+        &:before {
+            content: '';
+            opacity: 0;
+            @include sprite($login_button_hover-sprite);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity .3s linear ;
+        }
+        &:hover:before {
+            opacity: 1;
+        }
     }
+
+    .tg-newcharacter {
+        padding: .5em 0;
+        border-top: 1px solid #55584d;
+        border-bottom: 1px solid #55584d;
+        display: inline-block;
+
+        a, a:hover {
+            text-decoration: underline;
+        }
+    }
+
     .tg-serverstatus,
     .tg-loginstatus {
-        padding: .5rem 0 0;
+        padding: 0;
         text-align: center;
     }
     .tg-serverstatus {
@@ -66,6 +177,7 @@
     .tg-loginstatus {
         line-height: 1em;
         min-height: 1rem;
+        padding-bottom: .4em;
         box-sizing: content-box;
     }
 }
