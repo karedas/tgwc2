@@ -542,7 +542,7 @@ export default class TgGui {
                 return;
             }
             
-            $('#widgetLoginNetworkActivity').txt("Connessione in corso...");
+            $('#widgetLoginNetworkActivity').text("Connessione in corso...");
 
             _.connectionInfo.loginName = name;
             _.connectionInfo.loginPass = pass;
@@ -1725,7 +1725,7 @@ export default class TgGui {
                     columnableClass = ' col-dispose';
                 }
 
-                res += '<div class="out-list'+ columnableClass+'" '+(style ? ' ' + style : '') + (_.client_options.extradetail ? ' compact' : '') + '" data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
+                res += '<div class="out-list'+ columnableClass+' '+(style ? ' ' + style : '') + (_.client_options.extradetail ? 'compact"' : '"') + ' data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
                 res +=  txt;
                 res += '</div>';
             }

@@ -135,17 +135,7 @@
             }
         }
     }
-    
-    .tg-version-name {
-        padding-top:.4em;
-        font-size: 9px;
-        text-transform: uppercase;
-        text-align: center
-        span {
-            display: block;
-            color: $gray-600;
-        }
-    }
+
 
     .tg-newcharacter {
         padding: .5em 0;
@@ -183,7 +173,10 @@
         line-height: 1em;
         min-height: 1rem;
         padding-bottom: .4em;
+        padding: 1em 0;
+        font-size: .9em;
         box-sizing: content-box;
+        text-transform: uppercase;
     }
 
     .tg-login-footer {
@@ -197,7 +190,21 @@
         }
     }
 }
+    
+.tg-version-name {
+    padding-top:.4em;
+    font-size: 9px;
+    text-transform: uppercase;
+    text-align: center;
+    span {
+        display: block;
+        color: $gray-600;
+    }
+}
 
+.tg-loginform-widget {
+    display: none;
+}
 
 // Server OFFLINE
 body[data-serverstatus="0"] {

@@ -192,6 +192,11 @@
 
     .tg-backdetail {
         display: flex;
+
+        .backslot {
+            cursor: pointer;
+        }
+        
         .desc {
             color: white;
         }

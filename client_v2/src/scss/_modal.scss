@@ -95,7 +95,11 @@
   margin: 0 auto;
   opacity: 0;
   transform: translateY(20px);
-  transition: all .1s linear
+  transition: all .1s linear;
+
+  > div {
+    display: block;
+  }
 }
 
 .mfp-ready .mfp-content {
