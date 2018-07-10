@@ -177,6 +177,19 @@ export default class TgGui {
             "l_shoulder":"Sulla spalla sinistra",
             "tied":"Imprigionato"
         };
+
+        this.dirBgPos = {
+            "nord":"0px -64px",
+            "nordest":"0 -288px",
+            "est":"0px -160px",
+            "sudest":"0 -256px",
+            "sud":"0px -128px",
+            "sudovest":"0 -224px",
+            "ovest":"0px -96px",
+            "nordovest":"0 -192px",
+            "alto":"0",
+            "basso":"0"
+        }
         
         this.equip_positions_by_num = [''].concat($.map(this.equip_positions_by_name, function(v) {
             return v;
@@ -314,7 +327,6 @@ export default class TgGui {
 
                     case 'created':
                     case 'loginok':
-
                         // Preload client then start the magic
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
 
@@ -891,15 +903,15 @@ export default class TgGui {
         // Player status
         msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
             let status_parse = $.parseJSON(status.slice(6, -1));
+            console.log(_.client_update.interfaceData.stato);
             if (!_.client_update.interfaceData.stato) {
                 _.setDataInterface('stato', status_parse);
                 _.client_update.interfaceData.stato = true;
                 return '';
             } else {
-                _.setDataInterface('stato', status_parse);
-                _.renderPlayerStatus(status_parse);
+                return _.renderPlayerStatus(status_parse);
             }
-            return '';
+
         });
 
         // Selectable generic
@@ -1103,9 +1115,30 @@ export default class TgGui {
     }
 
     renderPlayerStatus(status) {
+        let _ = this;
+
+        console.log('renderPlayerStatus');
+        let colors = [
+            { val:15, txt:'red' },
+            { val:40, txt:'brown' },
+            { val:100, txt:'green' }
+        ];
+
+        console.log(status.hit);
+    
         let sttxt;
             sttxt = '<table class="stats"><caption>Condizioni</caption>';
-            sttxt =+ '</table>';
+                sttxt += '<tr><th>Salute</th><td><span class="' + _.prcLowTxt(status.hit, colors)+'">'+status.hit+'</span>%</td><td>0%&#160;' + _.prcBar(status.hit, 'red')+'&#160;100%</td></tr>';
+                sttxt += '<tr><th>Movimento</th><td><span class="' + _.prcLowTxt(status.move, colors)+'">'+status.move+'</span>%</td><td>0%&#160;' + _.prcBar(status.move, 'green')+'&#160;100%</td></tr>';
+                sttxt += '<tr><th>Fame</th><td><span class="' + _.prcLowTxt(status.food, colors)+'">'+status.food+'</span>%</td><td>0%&#160;' + _.prcBar(status.food, 'cookie')+'&#160;100%</td></tr>';
+                sttxt += '<tr><th>Sete</th><td><span class="' + _.prcLowTxt(status.drink, colors)+'">'+status.drink+'</span>%</td><td>0%&#160;' + _.prcBar(status.drink, 'blue')+'&#160;100%</td></tr>';
+
+                if(status.msg) {
+                    sttxt += '<tr><td colspan=1000>'+status.msg+'</td></tr>';
+                }
+
+            sttxt +=  '</table>';
+
             return sttxt;
     }
 
@@ -1469,23 +1502,27 @@ export default class TgGui {
 
         let _ = this,
             res = '',
+            tpos,
             container = $('#extraoutput'),
+            tabicon = $('#detailsicon-' + type, '#outputOptions'),
             wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type);
         
+            console.log(tabicon);
 
         let cont_header = container.children('.extraoutput-header');
         let cont_detail = container.children('.extraoutput-detail');
 
 	    /* Set tab icon */
         if(type == 'dir') {
-            //tpos = _.dirBgPos
+            tpos = _.dirBgPos[info.dir];
         }
         else if (type == 'room' && !info.icon) {
-		    //tpos = $('#mp044').css('background-position')
+		    tpos = $('#mp044').css('background-position')
         }
         else {
-		    //tpos = _.tileBgPos(info.icon ? info.icon : 0);
+		    tpos = _.tileBgPos(info.icon ? info.icon : 0);
         }
+        tabicon.css('background-position', tpos);
 
         /* Set Title and Tooltip */
         if(info.title) {
@@ -1493,23 +1530,28 @@ export default class TgGui {
                 res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
             }
             let title  = _.capFirstLetter(info.title);
-
+            let icon = '';
             let detaildesc = '';
             if (info.desc.base) {
+
                 if (type == 'room') {
                     _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
                 }
+                else {
+                    icon = _.renderIcon(info.icon, null, null, null , null, null);
+                }
+
                 detaildesc += _.formatText(info.desc.base, 'out-descbase');
             } 
             else if (info.desc.repeatlast && _.last_room_desc) {
                 detaildesc += _.last_room_desc;
             }
-
             $(cont_header).show();
-            $(cont_header).children('#detailtitle').html(title);
+            $(cont_header).children('#detailtitle').html(icon + title);
             $(cont_header).children('#detaildesc').html(detaildesc);
-            /*  if(wtab == ctab) {
-                $('extratitle').text(title);
+            //TODO: da capire
+      /*      if(wtab == ctab) {
+                $('#detailtitle').text(title);
             }*/
         }
 
@@ -1825,6 +1867,12 @@ export default class TgGui {
         }
     }
 
+    prcBar(prc, color, txt) {
+        let _ = this;
+        return '<div class="meter2'+(txt ? ' withtxtbox': '')+'"><div class="barcont"><span class="' + color +'" style="width:' + _.limitPrc(prc)+'%"></span></div>'+(txt ? '<div class="metertxt">'+txt+'</div>' : '')+'</div>';
+    }
+
+
     prcHighTxt(val, values) {
         for (var i = 0; i < values.length; ++i) {
             if (val >= values[i].val)
@@ -2073,16 +2121,16 @@ export default class TgGui {
             let colgrp = $(this);
             let expgrp = colgrp.next('.grpexp');
             expgrp.slideToggle();
-            $(this).toggleClass('expanded');
+           
             _.addExpandedGrp(colgrp.attr('mrn'));
         });
-        $('.tg-output').on('click', '.grpcoll', function() {
+    /*    $('.tg-output').on('click', '.grpcoll', function() {
              let expgrp = $(this);
              let colgrp = expgrp.prev('.grpcoll');
              $(this).toggleClass('expanded');
              expgrp.slideToggle();
              delete _.exp_grp_list[colgrp.attr('mrn')];
-        });
+        });*/
     }
     
     addExpandedGrp(mrn) {
@@ -2147,10 +2195,10 @@ export default class TgGui {
         /* Image Event */
         $('#detailimage')
             .on('error', function(){
-                $(this).closest('.extra-detailimg').slideUp('fast');
+                $(this).closest('.extra-detailimg').slideUp(0);
             })
             .on('load', function(){
-                $(this).closest('.extra-detailimg').slideDown('fast');
+                $(this).closest('.extra-detailimg').slideDown(0);
             });
     }
 
@@ -2453,7 +2501,7 @@ export default class TgGui {
 
             /* Login Widget */
             case 'login': 
-
+                MP_closeOnBgClick = false;
                 break;
 
             default:

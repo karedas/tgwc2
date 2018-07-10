@@ -111,6 +111,18 @@ button, input[type="checkbox"] {
 }
 
 
+.iconimg {
+    background-image: url($imgPath + '/tiles/tiles.png');
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: inline-block !important;
+    zoom: .7;
+    vertical-align: middle;
+}
+
+
 @include media-breakpoint-down(md) {
     .tg-main {
         .tg-controlpanel {

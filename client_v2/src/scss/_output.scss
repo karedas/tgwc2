@@ -32,11 +32,20 @@
             font-size: 12px;
             color: $gray-600;
             li {
+                margin: 0 1px;
+                position: relative;
                 width: 25px;
                 height: 24px;
                 padding: 4px 0;
                 text-align: center;
                 background: url($imgPath + '/interface/iconbg-25.png') no-repeat top left;
+                
+            }
+
+            .iconimg {
+                position: absolute;
+                top: 0;
+                left: 0;
             }
 
             i {
@@ -59,7 +68,7 @@
         height: 100%;
 
         .iconimg {
-            margin-right: .5em;
+            margin: auto 0;
         }
     }
 }
@@ -128,9 +137,24 @@
             padding-bottom: 0;
         }
 
-        .cnt {
+        .tg-list-object {
             color: #f2ff00;
         }
+        .tg-list-person {
+            color: #c6fac4;
+        }
+    }
+
+    .hstat {
+        background-position: 0 0px;
+        display: inline-block;
+        margin: auto .5em auto 0;
+        background: url($imgPath + '/interface/obj_mob_health.png') no-repeat;
+        box-sizing: content-box;
+        height: 11px;
+        width: 32px;
+        flex: 1 0 32px;
+        
     }
 
     .grpcoll {
@@ -172,23 +196,14 @@
         line-height: 14px;
 
         .desc {
-            display: flex;
             display: inline-block;
             vertical-align: middle;
             margin: auto 0;
+            flex-direction: row;
+            display: flex;
         }
     }
 
-    .iconimg {
-        background-image: url($imgPath + '/tiles/tiles.png');
-        background-repeat: no-repeat;
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-        display: inline-block !important;
-        zoom: .7;
-        vertical-align: middle;
-    }
 
     .tg-backdetail {
         display: flex;
@@ -196,7 +211,7 @@
         .backslot {
             cursor: pointer;
         }
-        
+
         .desc {
             color: white;
         }
@@ -239,7 +254,7 @@
         }
         
         .extra-detailimg {
-            max-width: 150px;
+            max-width: 148px;
             border: 1px solid #60482b;
             padding:2px;
             float:left;
@@ -297,9 +312,6 @@
     z-index: 2;
     position: relative;
 
-    .desc {
-        color: #f2ff00;
-    }
 }
 
 

@@ -229,7 +229,8 @@ body[data-serverstatus="1"] {
 /* ON PRELOAD */
 body[data-loginstatus="preload"], body[data-loginstatus="ready"] {
     .tg-loginform,
-    .tg-serverstatus {
+    .tg-serverstatus,
+    .tg-version-name  {
         display: none;
     }
     .tg-preloader {

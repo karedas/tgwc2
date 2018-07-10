@@ -27,12 +27,11 @@
         }
         
         
-        &[aria-expanded="true"] {
-            background: #2f2314;
-            color: white;
-        }
-
         &:hover {
+            color: #2d2c2a;
+        }
+        
+        &[aria-expanded="true"] {
             background: #2f2314;
             color: white;
         }
