@@ -28,7 +28,7 @@ export default class TgGui {
         this.sounds_path = './sounds/';
 
         this.socketListener = {}
-
+ 
         /* Cookies Settings */
         this.cookies = {
             prefix: 'tgwc_',
@@ -52,7 +52,9 @@ export default class TgGui {
             error: null
         };
 
-        this.client_state = {};
+        this.client_state = {
+            live : false
+        };
         this.viewport = null;
 
         /* UI Game Options */
@@ -185,8 +187,6 @@ export default class TgGui {
         this.debug = true;
 
         $.extend( this , options);
-
-
     }
 
     init() {
@@ -253,12 +253,18 @@ export default class TgGui {
             });
 
             _.socket.on('disconnect', function () {
-                console.log('disconnect');
                 _.setDisconnect();
                 _.connectToServer();
                 if (!_.connectionInfo.error) {
                     _.networkActivityMessage("Disconnesso dal server");
                 }
+
+                /* Login Widget on Disconnect (small panel) */
+                if(_.client_state.live) {
+                    _.initWidgetLoginPanel();
+                    _.openPopup('login', 'Effettua l\'accesso', '.tg-loginform-widget');
+                }
+
             });
 
             _.socket.on('reconnect_attempt', function () {
@@ -434,7 +440,7 @@ export default class TgGui {
         if (saved_state) {
             $.extend(_.client_state, saved_state);
         }
-        if (_.client_state.when == null) {
+        if (!_.client_state.when) {
             _.client_state.when = new Date().getTime();
             _.SaveStorage('state', _.client_state);
         }
@@ -484,19 +490,21 @@ export default class TgGui {
 
     hideLoginPanel() {
         $('.tg-loginpanel').hide();
+        $('#loginForm')[0].reset();
     }
 
     initLoginPanel() {
         let _ = this;
-
         _.addScrollBar('.tg-loginpanel');
+        
 
         //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
         
 
         $('#login_username').focus();
-        $('#loginPanel').on('submit', function (e) {
+
+        $('#loginForm').on('submit', function (e) {
             e.preventDefault();
             let name = $('#login_username').val();
             let pass = $('#login_password').val();
@@ -517,6 +525,31 @@ export default class TgGui {
         // On New  Character Creation button
         $('#doNewCharacter').on('click', function () {
             _.openPopup('nofeature');
+        });
+    }
+
+    /* Mini Panel showed after disconnect or InGame Error (with disconection)*/
+    initWidgetLoginPanel () {
+        let _ = this;
+        $('#widget_username').focus();
+        
+        $('#widgetLoginForm').on('submit', function (e) {
+            e.preventDefault();
+            let name = $('#widget_username').val();
+            let pass = $('#widget_password').val();
+            if (!name || !pass) {
+                //TODO: Notify user to provide credentials
+                return;
+            }
+            
+            $('#widgetLoginNetworkActivity').txt("Connessione in corso...");
+
+            _.connectionInfo.loginName = name;
+            _.connectionInfo.loginPass = pass;
+            _.connectionInfo.mode = "login";
+            //Attach oob Socket Handler
+            _.socket.on('data', _.handleLoginData.bind(_));
+            _.socket.emit('loginrequest');
         });
     }
 
@@ -998,7 +1031,7 @@ export default class TgGui {
         let _ = this;
         let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
         if (page.title == 'Notizie') {
-            if(_.client_options.show_news) {
+            if(_.client_options.show_news && !_.client_state.live) {
                 _.openPopup('notizie', "Notizie dal gioco", page);
             }
             else {
@@ -1071,8 +1104,9 @@ export default class TgGui {
 
     renderPlayerStatus(status) {
         let sttxt;
-            stats =+ '<table class="stats"><caption>Condizioni</caption>'
-            stats =+ '</table>';
+            sttxt = '<table class="stats"><caption>Condizioni</caption>';
+            sttxt =+ '</table>';
+            return sttxt;
     }
 
     renderCommandsList (cmd) {
@@ -1904,7 +1938,9 @@ export default class TgGui {
         _.interactionInit();
         _.buttonsEventInit();
         _.audioInit();
-        _.main();
+
+        //Interface is up
+        _.client_state.live = true;
     }
 
     /* -------------------------------------------------
@@ -2355,23 +2391,24 @@ export default class TgGui {
      *  POPUP
      * -------------------------------------------------*/
 
-    openPopup(content_ref, title, content) {
+    openPopup(ref, title, src) {
 
         let _ = this;
 
         let MP_type = 'inline',
             MP_close_button = false,
             MP_closeOnBgClick = false,
-            MP_src = content,
+            MP_src = src,
             MP_callbacks = {};
 
-        switch (content_ref) {
+        switch (ref) {
             /* Cookie Law */
             case 'cookielaw':
                 MP_type = 'ajax';
                 MP_src = './ajax/cookielawAlert.html';
                 break;
 
+            /* Messaggio "non ancora implementato" */
             case 'nofeature':
                 MP_type = 'inline';
                 MP_closeOnBgClick = true;
@@ -2379,6 +2416,7 @@ export default class TgGui {
                 MP_src = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
                 break;
 
+            /* Beginning News */
             case 'notizie':
                 MP_src = 'ajax/news/last.html';
                 MP_type = 'ajax';
@@ -2397,11 +2435,12 @@ export default class TgGui {
                 };
                 break;
 
+            /* Modals with Editor inside */
             case 'editor':
                 MP_src = '#editorDialog';
                 MP_close_button = true;
                 MP_callbacks.open = function () {
-                    $('.mfp-close').on('click', function (e) {
+                    $('.mfp-close').one('click', function (e) {
                         e.preventDefault();
                         _.abortEdit();
                         $.magnificPopup.close();
@@ -2412,9 +2451,13 @@ export default class TgGui {
                 };
                 break;
 
+            /* Login Widget */
+            case 'login': 
+
+                break;
+
             default:
                 //TODO: make default value to avoid error.
-
                 break;
         }
 
@@ -2428,7 +2471,7 @@ export default class TgGui {
                 src: MP_src,
                 type: MP_type
             },
-            mainClass: 'tg-mp modal-' + content_ref,
+            mainClass: 'tg-mp modal-' + ref,
             callbacks: MP_callbacks,
         });
         //add Draggable

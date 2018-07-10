@@ -10,7 +10,6 @@
   <meta name="format-detection" content="telephone=no" />
 
   <!-- <link rel="apple-touch-icon" href="icon.png"> //-->
-  <!-- Place favicon.ico in the root directory -->
 
   <link rel="stylesheet" href="css/tgwebclient.css">
   <!--[if lte IE 9]>
@@ -337,7 +336,7 @@
               <div class="tg-loginform-content">
                 <h2>Gioco di Ruolo Fantasy Online<br>
                     Accedi <span>gratis</span> al mondo di Ikhari!</h2>
-                <form id="loginPanel" action="#" autocomplete="off">
+                <form id="loginForm" action="#" autocomplete="off">
                   <input id="login_username" name="username" type="text" autocomplete="off" placeholder="Username">
                   <input id="login_password" name="password" type="password" autocomplete="off" placeholder="Password">
                   <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
@@ -347,19 +346,39 @@
                 </form>
               </div>
             </div>
-            <p class="tg-version-name">TheGate Webclient v.2
-                <span>
-                <%= htmlWebpackPlugin.options.git_version %> (Alpha)
-              </span>
-            </p>
           </div>
           <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
           <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
+          <p class="tg-version-name">TheGate Webclient v.2
+              <span>
+              <%= htmlWebpackPlugin.options.git_version %> (Alpha)
+            </span>
+          </p>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
             <div class="pbar"></div>
           </div>
         </div>
+      </div>
+      <div class="tg-loginform-widget">
+          <!-- Login Widget -->
+        <form id="widgetLoginForm" action="#" autocomplete="off">
+            <input id="widget_username" name="username" type="text" autocomplete="off" placeholder="Username">
+            <input id="widget_password" name="password" type="password" autocomplete="off" placeholder="Password">
+            <button type="submit" class="tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
+            <div id="widgetLoginNetworkActivity" class="tg-loginstatus"></div>
+          </form>
+      </div>
+      <!-- Copyright and Usefull Links -->
+      <div class="tg-login-footer container align-self-baseline w-100">
+        <div class="row">
+          <div class="col-6">
+            <i class="fab fa-facebook"></i> <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
+            <i class="fab fa-wpforms"></i> <a href="http://forum.thegatemud.it/" target="_blank">Forum</a> | 
+            <i class="fas fa-envelope"></i> <a href="#" target="_blank">Contattaci</a></div>
+          <div class="col-6">
+            &copy; 2013-2018 The Gate MUD | <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and disclaimer</a></div>
+          </div>
       </div>
     </div>
   </div>
@@ -367,5 +386,4 @@
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
   <audio id="sound" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
 </body>
-
 </html>

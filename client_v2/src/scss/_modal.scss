@@ -1,4 +1,6 @@
 @import 'modals/notizie';
+@import 'modals/editor';
+@import 'modals/widget-login';
 
 .tg-modal {
   max-width: 100%;
@@ -157,32 +159,7 @@
   @include sprite($close-sprite);
 }
 
-/* ==== Editor */
-.modal-editor  {
-  .mfp-close {
-    top: 8px;
-    right: -8px;
-  }
-  .mfp-content {
-    width: 600px !important;
 
-    .tg-modal-icon:after {
-      @include sprite($editor_lapis-sprite);
-    }
-
-    .tg-modal-buttons-group {
-      position: absolute;
-      margin: 0 auto;
-      bottom: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 4;
-      .tg-button {
-        float: left;
-      }
-    }
-  }
-}
 
 .tg-mp {
   .mfp-content {
