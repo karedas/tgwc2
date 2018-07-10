@@ -20,7 +20,6 @@ export default class TgGui {
 
     constructor(options) {
 
-
         this.ws_server_addr = '51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = 'http://play.thegatemud.it/images/';
@@ -226,9 +225,6 @@ export default class TgGui {
                 console.log('Server Online: %c'+_.isConnected, 'font-weight:bold;');
             }
         });
-
-        _.audioInit();
-        _.playAudio('fantasy1.mp3');
     }
 
     connectToServer() {
@@ -482,15 +478,6 @@ export default class TgGui {
         }
     }
 
-    UploadUserConfiguration() {
-        // TODO:
-    }
-
-    ExtractAndSaveUserConfiguration() {
-        // TODO:
-    }
-
-
     /* *****************************************************************************
      * Login 
      */
@@ -502,8 +489,11 @@ export default class TgGui {
     initLoginPanel() {
         let _ = this;
 
+        _.addScrollBar('.tg-loginpanel');
+
         //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
+        
 
         $('#login_username').focus();
         $('#loginPanel').on('submit', function (e) {
@@ -545,7 +535,6 @@ export default class TgGui {
         this.connectionInfo.error = msg;
         this.loginNetworkActivityMessage(msg);
     }
-
     
     loginNetworkActivityMessage(msg) {
         $('.tg-loginstatus').text(msg)
@@ -566,7 +555,92 @@ export default class TgGui {
                 _.socket.disconnect();
         }
     }
+    
+    sendOOB(data) {
+        let _ = this;
 
+        if (!_.isConnected) {
+            return;
+        }
+        _.socket.emit('oob', data);
+    }
+
+    processCommands(text, save_history) {
+        let _ = this;
+        if (_.inGame) {
+            let cmds = _.parseInput(text);
+
+            if (cmds) {
+                //check if cmd will be pushed in the history array
+                if (save_history) {
+                    _.historyPush(text);
+                }
+
+                for (let i = 0; i < cmds.length; i++) {
+                    _.sendToServer(cmds[i]);
+                }
+            }
+        } else {
+            _.sendToServer(text);
+            $('#tgInputUser').val('').focus();
+        }
+    }
+
+    parseInput(input) {
+
+        let _ = this;
+        /* Split input separated by ; */
+        let inputs = input.split(/\s*;\s*/);
+        let res = [];
+
+        /* Substitute shortcuts on each command and join results */
+        for (let i = 0; i < inputs.length; ++i) {
+            var subs = _.substShort(inputs[i]).split(/\s*;\s*/);
+            res = res.concat(subs);
+        }
+
+        /* Return the resulting array */
+        return res;
+    }
+
+    substShort(input) {
+
+        let _ = this;
+        // Split into arguments
+        let args = input.split(/\s+/);
+
+        // Get the shortcut index
+        let shortcut_key = args.shift();
+        let shortcut_num = parseInt(shortcut_key);
+        let shortcut_cmd;
+        if (!isNaN(shortcut_num))
+            shortcut_cmd = _.client_options.shortcuts[shortcut_num];
+        else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined')
+            shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
+
+        // Check if the shortcut is defined
+        if (shortcut_cmd) {
+            // Use the shortcut text as command
+            input = shortcut_cmd.cmd;
+
+            if (/\$\d+/.test(input)) {
+                // Substitute the arguments
+                for (let arg = 0; arg < args.length; ++arg) {
+                    let rx = new RegExp("\\$" + (arg + 1), 'g');
+                    input = input.replace(rx, args[arg]);
+                }
+
+                // Remove remaining variables
+                input = input.replace(/\$\d+/g, '');
+            } else
+                input += " " + args.join(" ");
+        }
+
+        if (_.cmd_prefix.length > 0)
+            input = _.cmd_prefix + " " + input;
+
+        return input;
+    }
 
     /* *****************************************************************************
     * MESSAGES PARSE
@@ -712,6 +786,7 @@ export default class TgGui {
         msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
             let gtable_parse = $.parseJSON(t.slice(7, -1));
             console.log('Generic table');
+            return gtable_parse;
             //return _.renderTable(gtable_parse);
         });
 
@@ -835,8 +910,7 @@ export default class TgGui {
 
         msg = msg.replace(/&!ulink"[^"]*"/gm, function (link) {
             let link_parse = link.slice(8, -1).split(',');
-            console.log('renderLink');
-            //            return renderLink(link_parse[0], link_parse[1]);
+            return _.renderLink(link_parse[0], link_parse[1]);
         });
 
         msg = msg.replace(/&!as"[^"]*"/gm, '');
@@ -912,16 +986,18 @@ export default class TgGui {
         return msg;
     }
 
-
     /* *****************************************************************************
      * MISC RENDERING
      */
+     
+    renderLink(href, text) {
+        return '<a href="' + href + '" target="_blank">' + text + '</a>';
+    }
 
     renderGenericPage(page) {
         let _ = this;
         let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
         if (page.title == 'Notizie') {
-            console.log(_.client_options.show_news)
             if(_.client_options.show_news) {
                 _.openPopup('notizie', "Notizie dal gioco", page);
             }
@@ -929,7 +1005,8 @@ export default class TgGui {
                 _.sendInput();
                 return '';
             }
-        } else {
+        } 
+        else {
             //TODO: Page parse generic 
             console.log('!page todo');
         };
@@ -989,8 +1066,6 @@ export default class TgGui {
             if (data.conv == true) {
                 $('.pg-status').text('( sei convalescente! )');
             }
-
-           
         }
     }
 
@@ -1102,7 +1177,6 @@ export default class TgGui {
         _.sendToServer('##ce_save');
     }
 
-
     /* *****************************************************************************
      *  IMAGES IN OUTPUT 
      */
@@ -1140,7 +1214,6 @@ export default class TgGui {
         // }
     }
 
-
     /* *****************************************************************************
      * ICONS
      */
@@ -1162,14 +1235,13 @@ export default class TgGui {
         if (!icon)
             icon = 416;
 
-        return '<div class="iconimg ico_' + icon + ' ' + (addclass ? ' ' + addclass : '') + '" style="background-position:' + _.tileBgPos(icon) + '"' + (mrn ? ' data-mrn="' + mrn + '"' : '') + (cmd ? ' cmd="' + cmd + '"' : '') + (cnttype ? ' data-cnttype="' + cnttype + '"' : '') + (cntmrn ? ' data-cntmrn="' + cntmrn + '"' : '') + '></div>';
+        return '<div class="iconimg ico_' + icon + ' ' + (addclass ? ' ' + addclass : '') + '" style="background-position:' + _.tileBgPos(icon) + '"' + (mrn ? ' data-mrn="' + mrn + '"' : '') + (cmd ? ' data-cmd="' + cmd + '"' : '') + (cnttype ? ' data-cnttype="' + cnttype + '"' : '') + (cntmrn ? ' data-cntmrn="' + cntmrn + '"' : '') + '></div>';
     }
 
     renderIconWithBackBorder(icon, mrn, cnttype, cntmrn, cmd, addclass) {
         let _ = this;
 	    return '<div class="backslot">' + _.renderIcon(icon, mrn, cnttype, cntmrn, cmd, addclass)+'</div>';
     }
-
 
     /* *****************************************************************************
      * SKY
@@ -1230,7 +1302,6 @@ export default class TgGui {
             _.sendToServer(cmd);
         }
     }
-
 
     setDoors(doors) {
         let _ = this;
@@ -1331,7 +1402,6 @@ export default class TgGui {
         return '';
     }
 
-    
     /* *****************************************************************************
      * RENDERING
      */
@@ -1635,7 +1705,6 @@ export default class TgGui {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-
     formatText(text, style) {
         let page = '';
         let parags = text.replace(/\r/gm, '').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
@@ -1647,6 +1716,56 @@ export default class TgGui {
         });
 
         return page;
+    }
+
+
+    /* *****************************************************************************
+    * INTERACTION
+    */
+
+    interactionInit() {
+        let _ = this;
+       $(document).on('mouseup', '.interact', function(event){
+            _.interactEvent(event, this)
+       });
+    }
+
+    interactEvent(event, trigger) {
+
+        let _ = this;
+
+        if(_.inGame) {
+
+            switch(event.which) {
+                case 1:
+                    let mrn = $(trigger).attr('data-mrn');
+                    let cmd = $(trigger).attr('data-cmd');
+
+                    if(cmd == null) {
+                        cmd = $(trigger).is('.where') ? '@agg' : "guarda";
+                    }               
+                    if(!mrn || mrn == 0) {
+                        _.sendToServer(cmd);
+                    }
+                    else {
+                        let cnttype = $(trigger).attr('data-cnttype');
+                        let cntmrn = $(trigger).attr('data-cntmrn');
+
+                        if(cnttype == 'inv') {
+                            _.sendToServer(cmd + ' &' + mrn);
+                        }
+                        else if(cntmrn && !isNaN(parseInt(cntmrn))) {
+                            _.sendToServer(cmd + ' &' + mrn + ' &' + cntmrn);
+                        }
+                        else {
+                            _.sendToServer(cmd + ' &' + mrn);
+                        }
+                    }
+                    break;
+            }
+        }
+        
+        return true;
     }
 
 
@@ -1678,92 +1797,6 @@ export default class TgGui {
                 return values[i].txt;
         }
         return null;
-    }
-
-    sendOOB(data) {
-        let _ = this;
-
-        if (!_.isConnected) {
-            return;
-        }
-        _.socket.emit('oob', data);
-    }
-
-    processCommands(text, save_history) {
-        let _ = this;
-        if (_.inGame) {
-            let cmds = _.parseInput(text);
-
-            if (cmds) {
-                //check if cmd will be pushed in the history array
-                if (save_history) {
-                    _.historyPush(text);
-                }
-
-                for (let i = 0; i < cmds.length; i++) {
-                    _.sendToServer(cmds[i]);
-                }
-            }
-        } else {
-            _.sendToServer(text);
-            $('#tgInputUser').val('').focus();
-        }
-    }
-
-    parseInput(input) {
-
-        let _ = this;
-        /* Split input separated by ; */
-        let inputs = input.split(/\s*;\s*/);
-        let res = [];
-
-        /* Substitute shortcuts on each command and join results */
-        for (let i = 0; i < inputs.length; ++i) {
-            var subs = _.substShort(inputs[i]).split(/\s*;\s*/);
-            res = res.concat(subs);
-        }
-
-        /* Return the resulting array */
-        return res;
-    }
-
-    substShort(input) {
-
-        let _ = this;
-        // Split into arguments
-        let args = input.split(/\s+/);
-
-        // Get the shortcut index
-        let shortcut_key = args.shift();
-        let shortcut_num = parseInt(shortcut_key);
-        let shortcut_cmd;
-        if (!isNaN(shortcut_num))
-            shortcut_cmd = _.client_options.shortcuts[shortcut_num];
-        else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined')
-            shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
-
-        // Check if the shortcut is defined
-        if (shortcut_cmd) {
-            // Use the shortcut text as command
-            input = shortcut_cmd.cmd;
-
-            if (/\$\d+/.test(input)) {
-                // Substitute the arguments
-                for (let arg = 0; arg < args.length; ++arg) {
-                    let rx = new RegExp("\\$" + (arg + 1), 'g');
-                    input = input.replace(rx, args[arg]);
-                }
-
-                // Remove remaining variables
-                input = input.replace(/\$\d+/g, '');
-            } else
-                input += " " + args.join(" ");
-        }
-
-        if (_.cmd_prefix.length > 0)
-            input = _.cmd_prefix + " " + input;
-
-        return input;
     }
 
     /* *****************************************************************************
@@ -1868,16 +1901,16 @@ export default class TgGui {
         _.focusInput();
         _.mapInit();
         _.doorsInit();
+        _.interactionInit();
         _.buttonsEventInit();
-
-        _.stopMusic();
-
+        _.audioInit();
         _.main();
     }
 
     /* -------------------------------------------------
      * SETUP INTERFACE BASED COOKIES AND OTHERS STUFF
      * -------------------------------------------------*/
+
     configInit() {
         let _ = this;
         /* Extra Detail Display */
@@ -1986,10 +2019,8 @@ export default class TgGui {
             app =  $(text);
         $('#output').append(app);
         _.scrollPanelTo('#output', '#scrollableOutput', false);
-
         
         if (_.client_options.output_trimlines < 10000) {
-            console.log(_.client_options.output_trimlines);
 			$('#output').contents().slice(0, - _.client_options.output_trimlines).remove();
         }
         
@@ -2086,7 +2117,6 @@ export default class TgGui {
                 $(this).closest('.extra-detailimg').slideDown('fast');
             });
     }
-
 
     /* -------------------------------------------------
      * KEYBOARD MAP
@@ -2202,6 +2232,7 @@ export default class TgGui {
     /* -------------------------------------------------
      *  DOORS 
      * -------------------------------------------------*/
+
     closeLockDoor(dir) {
         let cmd;
         if(_.dir_status[dir] == '2') {
@@ -2301,6 +2332,7 @@ export default class TgGui {
     /* -------------------------------------------------
      *  Generic Events
      * -------------------------------------------------*/
+
     genericEvents() {
         let _ = this;
         $('.no-feature').on('click', function (e) {
@@ -2322,6 +2354,7 @@ export default class TgGui {
     /* -------------------------------------------------
      *  POPUP
      * -------------------------------------------------*/
+
     openPopup(content_ref, title, content) {
 
         let _ = this;
