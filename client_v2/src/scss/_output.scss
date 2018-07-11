@@ -24,6 +24,7 @@
         text-align: right;
         box-shadow: inset 0 0 9px 5px black;
         background: #15100c url($imgPath + '/borders/border-001-horizontal.png') repeat-x bottom left;
+        
         ul {
             margin: 0;
         }
@@ -53,27 +54,26 @@
             }
         }
     }
-    .tg-output-history, .tg-extraoutput-history {
-        z-index: 2;
-        max-height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        display: table;
-        color: #d2d2d2; //  default color
-        padding: 8px 20px 8px 8px;
-        height: 100%;
+}
 
-        .iconimg {
-            margin: auto 0;
-        }
-    }
+
+.tg-extraoutput-history {
+    padding-top: 0;
 }
 
 .tg-output-history, .tg-extraoutput-history{
+    z-index: 2;
+    max-height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: table;
+    color: #d2d2d2; //  default color
+    padding: 8px 20px 8px 8px;
+    height: 100%;
 
     .tg-line {
         padding-bottom: 1em;
@@ -85,6 +85,10 @@
     p {
         margin-bottom: 0;
         padding-bottom: 0;
+    }
+
+    .iconimg {
+        margin: auto 0;        
     }
 
     .room {
@@ -149,11 +153,11 @@
         background-position: 0 0px;
         display: inline-block;
         margin: auto .5em auto 0.3em;
-        background: url($imgPath + '/interface/obj_mob_health.png') no-repeat;
+        background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
         box-sizing: content-box;
-        height: 11px;
-        width: 32px;
-        flex: 1 0 32px;
+        height: 13px;
+        width: 21px;
+        flex: 1 0 21px;
         
     }
 
@@ -182,7 +186,6 @@
             flex: 1 1 50%;
         }
     }
-
 
     .out-charsubdetail{
         padding-top:.4em;
@@ -216,16 +219,7 @@
             color: white;
         }
     }
-       
-    .tg-title {
-        display: block !important;
-        font-size: 22px;
-    }
 
-    &.tg-extraoutput-history {
-        padding-top: 0;
-    }
-    
     .extraoutput-header {
         display: none;
         overflow: hidden; 
@@ -273,6 +267,28 @@
     // Highlight 
     .mrn-hlight {
         border:1px solid $tg-yellow;
+    }
+    
+    /* TABLE */
+    .out-table {
+
+        &.out-plstatus {
+            .meter2 {
+                display: block;
+            }
+            .green {
+                background-color:#90ee90;
+            }
+            .red {
+                background-color: #df2a06;
+            }
+            .cookie {
+                background-color: #d19336;
+            }
+            .blue {
+                background-color: #7ccfff;
+            }
+        }
     }
 }
 

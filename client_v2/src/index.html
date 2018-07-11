@@ -92,7 +92,7 @@
               </div>
             </li>
           </ul>
-          <form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider" autocomplete="off">
+          <form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider d-none d-xs-flex" autocomplete="off">
             <input class="form-control" id="tgSearchInput" type="search" placeholder="Cerca" aria-label="Cerca">
             <button class="tg-fnt-button" type="submit" id="tgSearchSubmit">
               <i class="fas fa-search"></i>
@@ -231,7 +231,7 @@
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
-                <div class="tg-inputcommand d-flex">
+                <div class="tg-inputcommand d-none d-sm-flex">
                   <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
                     <i class="fas fa-columns"></i>
                   </button>
@@ -361,7 +361,15 @@
         </div>
       </div>
       <div class="tg-loginform-widget">
-          <!-- Login Widget -->
+        <!-- Login Widget -->
+        <div id="widgetLoginStatus" class="tg-widgetlogin-status">
+            Utente <span>[nomeutente]</span> disconnesso.
+        </div>
+        <div class="tg-widgetlogin-menu">
+          <button id="widgetLoginReconnect" type="button" class="btn btn-reconnect">Riconnetti</button>
+          <button id="widgetLoginNewConnection" type="button" class ="btn btn-newconnection">Accedi con un personaggio diverso.</button>
+          <button id="widgetLoginExit" type="button" class ="btn btn-newconnection">Esci.</button>
+        </div>
         <form id="widgetLoginForm" action="#" autocomplete="off">
             <input id="widget_username" name="username" type="text" autocomplete="off" placeholder="Username">
             <input id="widget_password" name="password" type="password" autocomplete="off" placeholder="Password">

@@ -268,16 +268,22 @@ export default class TgGui {
             _.socket.on('disconnect', function () {
                 _.setDisconnect();
                 _.connectToServer();
-                if (!_.connectionInfo.error) {
-                    _.networkActivityMessage("Disconnesso dal server");
-                }
 
                 /* Login Widget on Disconnect (small panel) */
                 if(_.client_state.live) {
+                    if(!_.connectionInfo.error) {
+                        _.widgetLoginNetworkActivityMessage('Torna presto!')
+                    }
+                    else {
+                        _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
+                    }
                     _.initWidgetLoginPanel();
                     _.openPopup('login', 'Effettua l\'accesso', '.tg-loginform-widget');
                 }
 
+                if (!_.connectionInfo.error) {
+                    _.networkActivityMessage("Disconnesso dal server");
+                }
             });
 
             _.socket.on('reconnect_attempt', function () {
@@ -331,6 +337,7 @@ export default class TgGui {
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
 
                         clientPreloader.init().then(function () {
+                            _.closePopup();
                             //reset login message
                             _.loginNetworkActivityMessage("");
                             _.hideLoginPanel();
@@ -425,7 +432,7 @@ export default class TgGui {
 
         $(document).on('click', '#cookieconsentbutton', function () {
             _.SaveStorage('cookie_consent', true);
-            $.magnificPopup.close();
+            _.closePopup();
             _.startClient();
         });
 
@@ -543,8 +550,27 @@ export default class TgGui {
     /* Mini Panel showed after disconnect or InGame Error (with disconection)*/
     initWidgetLoginPanel () {
         let _ = this;
-        $('#widget_username').focus();
-        
+
+        /* Reconnect Button */
+        $('#widgetLoginReconnect').on('click', function(){
+            _.socket.off('data');
+            //Attach oob Socket Handler
+            _.socket.on('data', _.handleLoginData.bind(_));
+            _.socket.emit('loginrequest');
+            _.closePopup();
+        });
+
+        /* Exit */
+        $('#widgetLoginExit').on('click', function(){
+            location.reload();
+        })
+
+        $('#widgetLoginNewConnection').on('click', function(){
+            $('.tg-widgetlogin-menu').hide();
+            $('#widgetLoginForm').show();
+        })
+
+        /* New Login */
         $('#widgetLoginForm').on('submit', function (e) {
             e.preventDefault();
             let name = $('#widget_username').val();
@@ -553,12 +579,12 @@ export default class TgGui {
                 //TODO: Notify user to provide credentials
                 return;
             }
-            
-            $('#widgetLoginNetworkActivity').text("Connessione in corso...");
+            _.widgetLoginNetworkActivityMessage("Connessione in corso...");
 
             _.connectionInfo.loginName = name;
             _.connectionInfo.loginPass = pass;
             _.connectionInfo.mode = "login";
+            _.socket.off('data');
             //Attach oob Socket Handler
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
@@ -582,7 +608,11 @@ export default class TgGui {
     }
     
     loginNetworkActivityMessage(msg) {
-        $('.tg-loginstatus').text(msg)
+        $('#loginNetworkActivityMessage').text(msg)
+    }
+
+    widgetLoginNetworkActivityMessage(msg) {
+        $('#widgetLoginStatus').text(msg);
     }
 
     networkActivityMessage(msg, status) {
@@ -903,7 +933,6 @@ export default class TgGui {
         // Player status
         msg = msg.replace(/&!pgst\{[\s\S]*?\}!/gm, function (status) {
             let status_parse = $.parseJSON(status.slice(6, -1));
-            console.log(_.client_update.interfaceData.stato);
             if (!_.client_update.interfaceData.stato) {
                 _.setDataInterface('stato', status_parse);
                 _.client_update.interfaceData.stato = true;
@@ -1077,7 +1106,7 @@ export default class TgGui {
     }
 
     renderMinidetails(condprc, moveprc, wgt) {
-        let pos = -11 * Math.floor(22 * (100 - condprc) / 100);
+        let pos = -13 * Math.floor(12 * (100 - condprc) / 100);
         return '<div class="hstat" style="background-position:0 ' + pos + 'px" data-condprc="' + condprc + '"' + (moveprc ? ' data-moveprc="' + moveprc  + '"': '') + (wgt != null ? ' wgt="' + wgt + '"' : '') + '></div>';
     }
 
@@ -1117,27 +1146,26 @@ export default class TgGui {
     renderPlayerStatus(status) {
         let _ = this;
 
-        console.log('renderPlayerStatus');
         let colors = [
             { val:15, txt:'red' },
             { val:40, txt:'brown' },
             { val:100, txt:'green' }
         ];
 
-        console.log(status.hit);
-    
         let sttxt;
-            sttxt = '<table class="stats"><caption>Condizioni</caption>';
-                sttxt += '<tr><th>Salute</th><td><span class="' + _.prcLowTxt(status.hit, colors)+'">'+status.hit+'</span>%</td><td>0%&#160;' + _.prcBar(status.hit, 'red')+'&#160;100%</td></tr>';
-                sttxt += '<tr><th>Movimento</th><td><span class="' + _.prcLowTxt(status.move, colors)+'">'+status.move+'</span>%</td><td>0%&#160;' + _.prcBar(status.move, 'green')+'&#160;100%</td></tr>';
-                sttxt += '<tr><th>Fame</th><td><span class="' + _.prcLowTxt(status.food, colors)+'">'+status.food+'</span>%</td><td>0%&#160;' + _.prcBar(status.food, 'cookie')+'&#160;100%</td></tr>';
-                sttxt += '<tr><th>Sete</th><td><span class="' + _.prcLowTxt(status.drink, colors)+'">'+status.drink+'</span>%</td><td>0%&#160;' + _.prcBar(status.drink, 'blue')+'&#160;100%</td></tr>';
+            sttxt = '<div class="out-table out-plstatus table-responsive">';
+                sttxt += '<table class="table table-sm"><caption>Condizioni</caption>';
+                sttxt += '<tr><th scope="row">Salute</th><td><span class="' + _.prcLowTxt(status.hit, colors)+'">'+status.hit+'</span>%</td><td>' + _.prcBar(status.hit, 'red')+'</td></tr>';
+                sttxt += '<tr><th scope="row">Movimento</th><td><span class="' + _.prcLowTxt(status.move, colors)+'">'+status.move+'</span>%</td><td>' + _.prcBar(status.move, 'green')+'</td></tr>';
+                sttxt += '<tr><th scope="row">Fame</th><td><span class="' + _.prcLowTxt(status.food, colors)+'">'+status.food+'</span>%</td><td>' + _.prcBar(status.food, 'cookie')+'</td></tr>';
+                sttxt += '<tr><th scope="row">Sete</th><td><span class="' + _.prcLowTxt(status.drink, colors)+'">'+status.drink+'</span>%</td><td>' + _.prcBar(status.drink, 'blue')+'</td></tr>';
 
                 if(status.msg) {
                     sttxt += '<tr><td colspan=1000>'+status.msg+'</td></tr>';
                 }
 
             sttxt +=  '</table>';
+            sttxt +=  '</div>';
 
             return sttxt;
     }
@@ -1207,7 +1235,7 @@ export default class TgGui {
         let _ = this;
         _.in_editor = false;
 
-        $.magnificPopup.close();
+        _.closePopup();
         _.focusInput();
     }
 
@@ -1863,8 +1891,8 @@ export default class TgGui {
             if (val <= values[i].val) {
                 return values[i].txt;
             }
-            return null;
         }
+        return null;
     }
 
     prcBar(prc, color, txt) {
@@ -2475,7 +2503,7 @@ export default class TgGui {
                             SaveStorage('options',_.client_options);
                         }
                         _.sendInput();
-                        $.magnificPopup.close();
+                        _.closePopup();
                     });
                 }
                 MP_callbacks.close = function () {
@@ -2491,7 +2519,7 @@ export default class TgGui {
                     $('.mfp-close').one('click', function (e) {
                         e.preventDefault();
                         _.abortEdit();
-                        $.magnificPopup.close();
+                        _.closePopup();
                     });
                 };
                 MP_callbacks.close = function (e) {
@@ -2540,6 +2568,10 @@ export default class TgGui {
     // UTILITY
     isModalOpen() {
         return $.magnificPopup.instance.isOpen;
+    }
+
+    closePopup() {
+        $.magnificPopup.close();
     }
 
     scrollPanelTo(parent, scrollablepanel, animate) {
