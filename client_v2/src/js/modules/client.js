@@ -1670,7 +1670,7 @@ export default class TgGui {
         if (inExtra) {
             /* Print Persons List */
             if (info.perscont) {
-                textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'tg-lt-green tg-list-person' + numberClassList);
+                textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'tg-lt-cyan tg-list-person' + numberClassList);
             }
             /* Print Objects List */
             if (info.objcont) {

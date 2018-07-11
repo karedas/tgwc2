@@ -1,0 +1,26 @@
+
+{
+	"human":[
+		{ "name":"Eliantiriano", "code":"uma", "help_url":"data/ethnicity/eliantiriano_40556ed1eb6b64de0934fe48d33c35e6.html" },
+		{ "name":"Emeriano", "code":"ume", "help_url":"data/ethnicity/emeriano_a1b103fc35f6914fb32b10477e5d7520.html" }
+	],
+	"halfling":[
+		{ "name":"Halfling dell'Arcipelago", "code":"hal", "help_url":"data/ethnicity/halfling_arcipelago_d77f540f4aeea0d7311b40f888de6875.html" }
+	],
+	"dwarf":[
+		{ "name":"Nano Zanarquon", "code":"nan", "help_url":"data/ethnicity/nano_zanarquon_bf1f4f3ddcfd2061cae1bba0c204d2d0.html" }
+	],
+	"elf":[
+		{ "name":"Elfo di Alwenion", "code":"eal", "help_url":"data/ethnicity/elfo_alwenion_f445b712824960eae23afd88277d33d3.html" },
+		{ "name":"Elfo sinoriano", "code":"esi", "help_url":"data/ethnicity/elfo_sinoriano_075e03326cf974a1d8ca7f458e27684f.html" },
+		{ "name":"Elfo ambrato", "code":"dra", "help_url":"data/ethnicity/elfo_ambrato_13d09b2b9adc9d2b993a0e55e4d0902e.html" },
+		{ "name":"Ousst'viiryn", "code":"drw", "help_url":"data/ethnicity/ousst_viiryn_1ce8652cc39c0123296d8fcf4badddb6.html", "limited":true },
+		{ "name":"Selvaggio delle radure", "code":"els", "help_url":"data/ethnicity/elfo_selvaggio_69ee9b345f3e97f5ca626b5ad80ff2a4.html", "limited":true }
+	],
+	"goblin":[
+		{ "name":"Pelleverde", "code":"gob", "help_url":"data/ethnicity/goblin_pelleverde_2e5588d4768bb33a78f659545c19a05d.html" }
+	],
+	"orc":[
+		{ "name":"Nktama", "code":"orc", "help_url":"data/ethnicity/orco_nktama_d6699b29945d2c22b8204ab354e93303.html" }
+	]
+}
