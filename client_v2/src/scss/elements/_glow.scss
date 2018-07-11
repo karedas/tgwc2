@@ -192,3 +192,18 @@
         transform: rotate(-360deg)
     }
 }
+
+/* for border b-area*/
+@include media-breakpoint-down(sm) {
+
+    .glow_box.glow_wamp {
+
+        top: 6px;
+        left: -30px;
+    }
+    
+    .glow_box._spectral {
+        top: -129px;
+        left: -14px;
+    }
+}

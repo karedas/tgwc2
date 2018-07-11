@@ -88,7 +88,7 @@
     }
 
     .iconimg {
-        margin: auto 0;        
+        margin: auto .5em auto 0;        
     }
 
     .room {
@@ -123,7 +123,7 @@
         display: block;
         width: 100%;
         padding-top:.5em;
-        padding-bottom: 1em;
+        padding-bottom: .5em;
         
         /* Double Columns style */
         &.col-dispose {
@@ -241,10 +241,11 @@
             text-shadow: 0 0 12px #dbbf90;
             box-shadow: inset 0px 0px 20px 4px black;
             font-size: 16px;
+
         }
 
         .detaildesc {
-            padding: .2em 10px;
+            padding: 0.5em 10px .2em;
             
         }
         
@@ -328,6 +329,10 @@
     margin: 0 0 6px;
     z-index: 2;
     position: relative;
+
+    .out-list {
+        padding-bottom: .2em;
+    }
 
 }
 

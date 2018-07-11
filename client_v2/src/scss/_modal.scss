@@ -10,34 +10,6 @@
   display: none;
 
 
-  .tg-modal-icon {
-    position: absolute;
-    top: -6px;
-    left: -25px;
-    z-index: 3;
-    padding: 8px;
-    @include sprite($modal-icon-sprite);
-    &:after {
-      content: '';
-      display: block;
-    }
-  }
-
-  .tg-modal-title {
-    cursor: pointer;
-    display: inline-block;
-    margin: 0 auto;
-    color: #FFF;
-    background: url($imgPath + '/interface/modal_title_left_bg.png') repeat-x top left;
-    h3 {
-      background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
-      font-size: 10px;
-      text-transform: uppercase;
-      line-height: 19px;
-      padding: 0 32px;
-      margin-bottom: 0;
-    }
-  }
 
   .tg-modal-content {
     position: relative;
@@ -82,6 +54,35 @@
   }
 }
 
+.tg-modal-icon {
+  position: absolute;
+  top: -6px;
+  left: -25px;
+  z-index: 3;
+  padding: 8px;
+  @include sprite($modal-icon-sprite);
+  &:after {
+    content: '';
+    display: block;
+  }
+}
+
+.tg-modal-title {
+  cursor: pointer;
+  display: table;
+  margin: 0 auto;
+  color: #FFF;
+  background: url($imgPath + '/interface/modal_title_left_bg.png') repeat-x top left;
+  h3 {
+    background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
+    font-size: 10px;
+    text-transform: uppercase;
+    line-height: 19px;
+    padding: 0 32px;
+    margin-bottom: 0;
+  }
+}
+
 /* MODALS CONTENT */
 
 .mfp-ready {
@@ -97,9 +98,6 @@
   transform: translateY(20px);
   transition: all .1s linear;
 
-  > div {
-    display: block;
-  }
 }
 
 .mfp-ready .mfp-content {

@@ -202,7 +202,7 @@
     text-transform: uppercase;
     text-align: center;
     span {
-        display: block;
+        display: inline-block;
         color: $gray-600;
     }
 }
@@ -235,8 +235,15 @@ body[data-serverstatus="1"] {
     }
 }
 
+body[data-loginstatus="0"] {
+    .b-area{
+        transition: none!important;
+        padding: 0 !important;
+    }
+}
 /* ON PRELOAD */
 body[data-loginstatus="preload"], body[data-loginstatus="ready"] {
+
     .tg-loginform,
     .tg-serverstatus,
     .tg-version-name  {
