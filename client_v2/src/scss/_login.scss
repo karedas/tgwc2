@@ -1,5 +1,6 @@
-/* Init Login box */
+@import 'elements/glow';
 
+/* Init Login box */
 .tg-loginpanel {
     background-color: #0b0807;
     background-image: url($imgPath + '/login/login_background_01.jpg');
@@ -63,6 +64,7 @@
         text-align: center;
         padding-top: 53px;
         margin-top: -28px;
+        box-shadow: 0 0 5px 2px black;
 
 
         .tg-loginform-wrap {

@@ -190,6 +190,37 @@ export default class TgGui {
             "alto":"0",
             "basso":"0"
         }
+
+        
+        this.pos_to_order = [
+            { pos:0, name: "" },
+            18,		// Finger R
+            19,		// Finger L
+            5,		// Neck
+            8,		// Body
+            1,		// Head
+            23,		// Legs
+            24,		// Feet
+            15,		// Hands
+            12,		// Arms
+            9,		// About
+            22,		// Waist
+            13,		// Wrist R
+            14,		// Wrist L
+            160,	// Hand R
+            170,	// Hand L
+            10,		// Back
+            2,		// Ear R
+            3,		// Ear L
+            4,		// Eyes
+            20,		// Sheath
+            21,		// Belt
+            11,		// Back
+            6,		// Shoulder R
+            7,		// Shoulder L
+            25		// Tied
+        ];
+
         
         this.equip_positions_by_num = [''].concat($.map(this.equip_positions_by_name, function(v) {
             return v;
@@ -514,7 +545,7 @@ export default class TgGui {
 
     initLoginPanel() {
         let _ = this;
-        _.addScrollBar('.tg-loginpanel');
+        _.addScrollBar('.tg-loginpanel', 'loginpanel');
         
 
         //toggle logo visibility
@@ -1191,8 +1222,6 @@ export default class TgGui {
         });
     
         txt += '</table>';
-    
-        //return addFrameStyle(txt, 'small');
         return txt;
     }
 
@@ -1678,44 +1707,14 @@ export default class TgGui {
     renderDetailsList(cont_type, cont_num, cont, type, style) {
        
         let _ = this;
-
-        let pos_to_order = [
-            { pos:0, name: "" },
-            18,		// Finger R
-            19,		// Finger L
-            5,		// Neck
-            8,		// Body
-            1,		// Head
-            23,		// Legs
-            24,		// Feet
-            15,		// Hands
-            12,		// Arms
-            9,		// About
-            22,		// Waist
-            13,		// Wrist R
-            14,		// Wrist L
-            160,	// Hand R
-            170,	// Hand L
-            10,		// Back
-            2,		// Ear R
-            3,		// Ear L
-            4,		// Eyes
-            20,		// Sheath
-            21,		// Belt
-            11,		// Back
-            6,		// Shoulder R
-            7,		// Shoulder L
-            25		// Tied
-        ];
-
         let res = '',
             txt = '';
 
         if (cont.list) {
             if (cont_type == 'pers' || cont_type == 'equip') {
                 cont.list.sort(function (a, b) {
-                    let eq_pos_a = $.isArray(a.eq) ? pos_to_order[a.eq[0]] : 0;
-                    let eq_pos_b = $.isArray(b.eq) ? pos_to_order[b.eq[0]] : 0;
+                    let eq_pos_a = $.isArray(a.eq) ? _.pos_to_order[a.eq[0]] : 0;
+                    let eq_pos_b = $.isArray(b.eq) ? _.pos_to_order[b.eq[0]] : 0;
                     return eq_pos_a - eq_pos_b;
                 });
             }
@@ -2117,7 +2116,7 @@ export default class TgGui {
 
     outputInit() {
         let outputID = '#scrollableOutput';
-        this.addScrollBar(outputID);
+        this.addScrollBar(outputID, 'output');
         // init Extraoutput window
         this.extraOutputInit();
         // Highlightining mob/obj based on user click
@@ -2148,8 +2147,9 @@ export default class TgGui {
         $('.tg-output').on('click', '.grpcoll', function() {
             let colgrp = $(this);
             let expgrp = colgrp.next('.grpexp');
+
             expgrp.slideToggle();
-           
+
             _.addExpandedGrp(colgrp.attr('mrn'));
         });
     /*    $('.tg-output').on('click', '.grpcoll', function() {
@@ -2207,7 +2207,7 @@ export default class TgGui {
     extraOutputInit() {
         let _ = this;
         let extraOutputID = '.tg-outputextra-wrap';
-        this.addScrollBar('#scrollableExtraOutput');
+        this.addScrollBar('#scrollableExtraOutput', 'extraoutput');
         $(extraOutputID).width(_.client_options.extradetail_width);
 
         $(extraOutputID).resizable({ 
@@ -2451,7 +2451,6 @@ export default class TgGui {
             e.preventDefault();
             _.openPopup('nofeature');
         });
-
     }
 
     sendInput() {
@@ -2559,10 +2558,11 @@ export default class TgGui {
         return $.magnificPopup.instance;
     }
 
-    addScrollBar(container) {
-        this.scrollbar.output = new PerfectScrollbar(container, {
+    addScrollBar(container, key) {
+        this.scrollbar[key] = new PerfectScrollbar(container, {
             wheelPropagation: 2,
         });
+
     }
 
     // UTILITY
