@@ -28,7 +28,7 @@ export default class TgGui {
         this.sounds_path = './sounds/';
 
         this.socketListener = {}
- 
+
         /* Cookies Settings */
         this.cookies = {
             prefix: 'tgwc_',
@@ -53,15 +53,15 @@ export default class TgGui {
         };
 
         this.client_state = {
-            live : false
+            live: false
         };
         this.viewport = null;
 
         /* UI Game Options */
         this.client_options = {
             show_news: true,
-            musicVolume:70,
-            soundVolume:100,
+            musicVolume: 70,
+            soundVolume: 100,
             skysize: 215,
             alpha_approved: false,
             shortcuts: [],
@@ -101,7 +101,7 @@ export default class TgGui {
 
         /* Output */
         this.last_room_desc = '';
-        
+
         /* Details */
         this.exp_grp_list = {}
         this.max_exp_grp = 15;
@@ -151,91 +151,93 @@ export default class TgGui {
 
         this.equip_positions_by_name = {
 
-            "r_finger":"Al dito destro",
-            "l_finger":"Al dito sinistro",
-            "neck":"Al collo",
-            "body":"Sul corpo",
-            "head":"In testa",
-            "legs":"Sulle gambe",
-            "feet":"Ai piedi",
-            "hands":"Sulle mani",
-            "arms":"Sulle braccia",
-            "around":"Attorno al corpo",
-            "waist":"In vita",
-            "r_wrist":"Al polso destro",
-            "l_wrist":"Al polso sinistro",
-            "r_hand":"Nella mano destra",
-            "l_hand":"Nella mano sinistra",
-            "back":"Sulla schiena",
-            "r_ear":"All'orecchio destro",
-            "l_ear":"All'orecchio sinistro",
-            "eyes":"Sugli occhi",
-            "sheath":"Nel fodero",
-            "belt":"Alla cintura",
-            "over":"A tracolla",
-            "r_shoulder":"Sulla spalla destra",
-            "l_shoulder":"Sulla spalla sinistra",
-            "tied":"Imprigionato"
+            "r_finger": "Al dito destro",
+            "l_finger": "Al dito sinistro",
+            "neck": "Al collo",
+            "body": "Sul corpo",
+            "head": "In testa",
+            "legs": "Sulle gambe",
+            "feet": "Ai piedi",
+            "hands": "Sulle mani",
+            "arms": "Sulle braccia",
+            "around": "Attorno al corpo",
+            "waist": "In vita",
+            "r_wrist": "Al polso destro",
+            "l_wrist": "Al polso sinistro",
+            "r_hand": "Nella mano destra",
+            "l_hand": "Nella mano sinistra",
+            "back": "Sulla schiena",
+            "r_ear": "All'orecchio destro",
+            "l_ear": "All'orecchio sinistro",
+            "eyes": "Sugli occhi",
+            "sheath": "Nel fodero",
+            "belt": "Alla cintura",
+            "over": "A tracolla",
+            "r_shoulder": "Sulla spalla destra",
+            "l_shoulder": "Sulla spalla sinistra",
+            "tied": "Imprigionato"
         };
 
         this.dirBgPos = {
-            "nord":"0px -64px",
-            "nordest":"0 -288px",
-            "est":"0px -160px",
-            "sudest":"0 -256px",
-            "sud":"0px -128px",
-            "sudovest":"0 -224px",
-            "ovest":"0px -96px",
-            "nordovest":"0 -192px",
-            "alto":"0",
-            "basso":"0"
+            "nord": "0px -64px",
+            "nordest": "0 -288px",
+            "est": "0px -160px",
+            "sudest": "0 -256px",
+            "sud": "0px -128px",
+            "sudovest": "0 -224px",
+            "ovest": "0px -96px",
+            "nordovest": "0 -192px",
+            "alto": "0",
+            "basso": "0"
         }
 
-        
-        this.pos_to_order = [
-            { pos:0, name: "" },
-            18,		// Finger R
-            19,		// Finger L
-            5,		// Neck
-            8,		// Body
-            1,		// Head
-            23,		// Legs
-            24,		// Feet
-            15,		// Hands
-            12,		// Arms
-            9,		// About
-            22,		// Waist
-            13,		// Wrist R
-            14,		// Wrist L
-            160,	// Hand R
-            170,	// Hand L
-            10,		// Back
-            2,		// Ear R
-            3,		// Ear L
-            4,		// Eyes
-            20,		// Sheath
-            21,		// Belt
-            11,		// Back
-            6,		// Shoulder R
-            7,		// Shoulder L
-            25		// Tied
+
+        this.pos_to_order = [{
+                pos: 0,
+                name: ""
+            },
+            18, // Finger R
+            19, // Finger L
+            5, // Neck
+            8, // Body
+            1, // Head
+            23, // Legs
+            24, // Feet
+            15, // Hands
+            12, // Arms
+            9, // About
+            22, // Waist
+            13, // Wrist R
+            14, // Wrist L
+            160, // Hand R
+            170, // Hand L
+            10, // Back
+            2, // Ear R
+            3, // Ear L
+            4, // Eyes
+            20, // Sheath
+            21, // Belt
+            11, // Back
+            6, // Shoulder R
+            7, // Shoulder L
+            25 // Tied
         ];
 
-        
-        this.equip_positions_by_num = [''].concat($.map(this.equip_positions_by_name, function(v) {
+
+        this.equip_positions_by_num = [''].concat($.map(this.equip_positions_by_name, function (v) {
             return v;
         }));
-        
+
 
         /* Debug */
         this.debug = true;
 
-        $.extend( this , options);
+        $.extend(this, options);
     }
 
     init() {
         let _ = this;
-        
+
         // Get Cookie "Italy cookie law"
         let cookie_consent = _.LoadStorage('cookie_consent');
         // Check Cookie Law Approval Status, then go to start or wait user action.
@@ -255,9 +257,9 @@ export default class TgGui {
     startClient() {
         let _ = this;
 
-       /* let facebookSDK = new FacebookSDK();
-        facebookSDK.load();
-        */
+        /* let facebookSDK = new FacebookSDK();
+         facebookSDK.load();
+         */
         // Init the Session
         _.initSessionData();
         // Start Server Connection
@@ -266,7 +268,7 @@ export default class TgGui {
                 _.initLoginPanel();
             }
             if (_.debug) {
-                console.log('Server Online: %c'+_.isConnected, 'font-weight:bold;');
+                console.log('Server Online: %c' + _.isConnected, 'font-weight:bold;');
             }
         });
     }
@@ -301,11 +303,10 @@ export default class TgGui {
                 _.connectToServer();
 
                 /* Login Widget on Disconnect (small panel) */
-                if(_.client_state.live) {
-                    if(!_.connectionInfo.error) {
+                if (_.client_state.live) {
+                    if (!_.connectionInfo.error) {
                         _.widgetLoginNetworkActivityMessage('Torna presto!')
-                    }
-                    else {
+                    } else {
                         _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
                     }
                     _.initWidgetLoginPanel();
@@ -546,11 +547,11 @@ export default class TgGui {
     initLoginPanel() {
         let _ = this;
         _.addScrollBar('.tg-loginpanel', 'loginpanel');
-        
+
 
         //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
-        
+
 
         $('#login_username').focus();
 
@@ -579,11 +580,11 @@ export default class TgGui {
     }
 
     /* Mini Panel showed after disconnect or InGame Error (with disconection)*/
-    initWidgetLoginPanel () {
+    initWidgetLoginPanel() {
         let _ = this;
 
         /* Reconnect Button */
-        $('#widgetLoginReconnect').on('click', function(){
+        $('#widgetLoginReconnect').on('click', function () {
             _.socket.off('data');
             //Attach oob Socket Handler
             _.socket.on('data', _.handleLoginData.bind(_));
@@ -592,11 +593,11 @@ export default class TgGui {
         });
 
         /* Exit */
-        $('#widgetLoginExit').on('click', function(){
+        $('#widgetLoginExit').on('click', function () {
             location.reload();
         })
 
-        $('#widgetLoginNewConnection').on('click', function(){
+        $('#widgetLoginNewConnection').on('click', function () {
             $('.tg-widgetlogin-menu').hide();
             $('#widgetLoginForm').show();
         })
@@ -637,7 +638,7 @@ export default class TgGui {
         this.connectionInfo.error = msg;
         this.loginNetworkActivityMessage(msg);
     }
-    
+
     loginNetworkActivityMessage(msg) {
         $('#loginNetworkActivityMessage').text(msg)
     }
@@ -653,15 +654,14 @@ export default class TgGui {
 
     disconnectFromServer() {
         let _ = this;
-        if(_.isConnected)
-        {
-            if(_.inGame)
+        if (_.isConnected) {
+            if (_.inGame)
                 _.sendToServer(_.historyPush('fine'));
             else
                 _.socket.disconnect();
         }
     }
-    
+
     sendOOB(data) {
         let _ = this;
 
@@ -749,8 +749,8 @@ export default class TgGui {
     }
 
     /* *****************************************************************************
-    * MESSAGES PARSE
-    */
+     * MESSAGES PARSE
+     */
 
     preparseText(msg) {
 
@@ -901,7 +901,7 @@ export default class TgGui {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
             console.log('inventory');
             // renderInventory(inv_parse);
-            return(inv_parse);
+            return (inv_parse);
             return '';
         });
 
@@ -1053,8 +1053,8 @@ export default class TgGui {
         });
         /* \r is already removed at top */
         msg = msg.replace(/\n/gm, '</br>');
-        
-        if(msg !='') {
+
+        if (msg != '') {
             msg = '<div class="tg-line">' + _.replaceColors(msg) + '</div>';
         }
         return msg.replace(/<p><\/p>/g, '');
@@ -1094,7 +1094,7 @@ export default class TgGui {
     /* *****************************************************************************
      * MISC RENDERING
      */
-     
+
     renderLink(href, text) {
         return '<a href="' + href + '" target="_blank">' + text + '</a>';
     }
@@ -1103,15 +1103,13 @@ export default class TgGui {
         let _ = this;
         let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
         if (page.title == 'Notizie') {
-            if(_.client_options.show_news && !_.client_state.live) {
+            if (_.client_options.show_news && !_.client_state.live) {
                 _.openPopup('notizie', "Notizie dal gioco", page);
-            }
-            else {
+            } else {
                 _.sendInput();
                 return '';
             }
-        } 
-        else {
+        } else {
             //TODO: Page parse generic 
             console.log('!page todo');
         };
@@ -1121,7 +1119,7 @@ export default class TgGui {
     renderMob(icon, condprc, count, mrn, desc, addclass) {
         return '<div class="mob">' + this.renderIcon(icon, mrn, 'room', null, null, addclass) + '<div class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</div></div>'
     }
-    
+
     renderObject(icon, condprc, count, mrn, desc, addclass) {
         return '<div class="obj">' + _.renderIcon(icon, mrn, 'room', null, null, addclass) + '<div class="desc">' + _.decoratedDescription(condprc, null, null, count, desc) + '</div></div>'
     }
@@ -1138,7 +1136,7 @@ export default class TgGui {
 
     renderMinidetails(condprc, moveprc, wgt) {
         let pos = -13 * Math.floor(12 * (100 - condprc) / 100);
-        return '<div class="hstat" style="background-position:0 ' + pos + 'px" data-condprc="' + condprc + '"' + (moveprc ? ' data-moveprc="' + moveprc  + '"': '') + (wgt != null ? ' wgt="' + wgt + '"' : '') + '></div>';
+        return '<div class="hstat" style="background-position:0 ' + pos + 'px" data-condprc="' + condprc + '"' + (moveprc ? ' data-moveprc="' + moveprc + '"' : '') + (wgt != null ? ' wgt="' + wgt + '"' : '') + '></div>';
     }
 
     setDataInterface(cmd, data) {
@@ -1148,7 +1146,7 @@ export default class TgGui {
             // Name
             $('#charName').html(data.name);
             // Character Image
-            if(data.image) {
+            if (data.image) {
                 $('.tg-characteravatar img').attr('src', _.media_server_addr + data.image);
             }
             /* Info Tooltips */
@@ -1177,50 +1175,58 @@ export default class TgGui {
     renderPlayerStatus(status) {
         let _ = this;
 
-        let colors = [
-            { val:15, txt:'red' },
-            { val:40, txt:'brown' },
-            { val:100, txt:'green' }
+        let colors = [{
+                val: 15,
+                txt: 'red'
+            },
+            {
+                val: 40,
+                txt: 'brown'
+            },
+            {
+                val: 100,
+                txt: 'green'
+            }
         ];
 
         let sttxt;
-            sttxt = '<div class="out-table out-plstatus table-responsive">';
-                sttxt += '<table class="table table-sm"><caption>Condizioni</caption>';
-                sttxt += '<tr><th scope="row">Salute</th><td><span class="' + _.prcLowTxt(status.hit, colors)+'">'+status.hit+'</span>%</td><td>' + _.prcBar(status.hit, 'red')+'</td></tr>';
-                sttxt += '<tr><th scope="row">Movimento</th><td><span class="' + _.prcLowTxt(status.move, colors)+'">'+status.move+'</span>%</td><td>' + _.prcBar(status.move, 'green')+'</td></tr>';
-                sttxt += '<tr><th scope="row">Fame</th><td><span class="' + _.prcLowTxt(status.food, colors)+'">'+status.food+'</span>%</td><td>' + _.prcBar(status.food, 'cookie')+'</td></tr>';
-                sttxt += '<tr><th scope="row">Sete</th><td><span class="' + _.prcLowTxt(status.drink, colors)+'">'+status.drink+'</span>%</td><td>' + _.prcBar(status.drink, 'blue')+'</td></tr>';
+        sttxt = '<div class="out-table out-plstatus table-responsive">';
+        sttxt += '<table class="table table-sm"><caption>Condizioni</caption>';
+        sttxt += '<tr><th scope="row">Salute</th><td><span class="' + _.prcLowTxt(status.hit, colors) + '">' + status.hit + '</span>%</td><td>' + _.prcBar(status.hit, 'red') + '</td></tr>';
+        sttxt += '<tr><th scope="row">Movimento</th><td><span class="' + _.prcLowTxt(status.move, colors) + '">' + status.move + '</span>%</td><td>' + _.prcBar(status.move, 'green') + '</td></tr>';
+        sttxt += '<tr><th scope="row">Fame</th><td><span class="' + _.prcLowTxt(status.food, colors) + '">' + status.food + '</span>%</td><td>' + _.prcBar(status.food, 'cookie') + '</td></tr>';
+        sttxt += '<tr><th scope="row">Sete</th><td><span class="' + _.prcLowTxt(status.drink, colors) + '">' + status.drink + '</span>%</td><td>' + _.prcBar(status.drink, 'blue') + '</td></tr>';
 
-                if(status.msg) {
-                    sttxt += '<tr><td colspan=1000>'+status.msg+'</td></tr>';
-                }
+        if (status.msg) {
+            sttxt += '<tr><td colspan=1000>' + status.msg + '</td></tr>';
+        }
 
-            sttxt +=  '</table>';
-            sttxt +=  '</div>';
+        sttxt += '</table>';
+        sttxt += '</div>';
 
-            return sttxt;
+        return sttxt;
     }
 
-    renderCommandsList (cmd) {
-        let cols=6;
-        let txt ='<table class="cmd"><caption>'+cmd.title+'</caption>';
-    
+    renderCommandsList(cmd) {
+        let cols = 6;
+        let txt = '<table class="cmd"><caption>' + cmd.title + '</caption>';
+
         delete cmd.title;
-    
-        $.each(cmd, function(group, data) {
-            txt += '<tr><th colspan="'+cols+'">Comandi '+group+':</th></tr>';
-    
-            $.each(data.sort(), function(idx, command) {
-                if(idx % cols == 0)
+
+        $.each(cmd, function (group, data) {
+            txt += '<tr><th colspan="' + cols + '">Comandi ' + group + ':</th></tr>';
+
+            $.each(data.sort(), function (idx, command) {
+                if (idx % cols == 0)
                     txt += '<tr>';
-    
-                txt += '<td>'+command+'</td>';
-    
-                if(idx % cols == (cols-1) || idx == (data.length-1))
+
+                txt += '<td>' + command + '</td>';
+
+                if (idx % cols == (cols - 1) || idx == (data.length - 1))
                     txt += '</tr>';
             });
         });
-    
+
         txt += '</table>';
         return txt;
     }
@@ -1364,7 +1370,7 @@ export default class TgGui {
 
     renderIconWithBackBorder(icon, mrn, cnttype, cntmrn, cmd, addclass) {
         let _ = this;
-	    return '<div class="backslot">' + _.renderIcon(icon, mrn, cnttype, cntmrn, cmd, addclass)+'</div>';
+        return '<div class="backslot">' + _.renderIcon(icon, mrn, cnttype, cntmrn, cmd, addclass) + '</div>';
     }
 
     /* *****************************************************************************
@@ -1429,8 +1435,8 @@ export default class TgGui {
 
     setDoors(doors) {
         let _ = this;
-        for(var d = 0; d < _.dir_names.length; ++d) {
-            $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -26 * doors[d]);   
+        for (var d = 0; d < _.dir_names.length; ++d) {
+            $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -26 * doors[d]);
         }
 
         _.dir_status = doors;
@@ -1442,11 +1448,11 @@ export default class TgGui {
 
     audioInit() {
         let _ = this;
-        if(typeof _.client_options.musicVolume != 'number' || _.client_options.musicVolume < 0 || _.client_options.musicVolume > 100) {
+        if (typeof _.client_options.musicVolume != 'number' || _.client_options.musicVolume < 0 || _.client_options.musicVolume > 100) {
             client_options.musicVolume = 70;
         }
 
-        if(typeof _.client_options.soundVolume != 'number' || _.client_options.soundVolume < 0 || _.client_options.soundVolume > 100) {
+        if (typeof _.client_options.soundVolume != 'number' || _.client_options.soundVolume < 0 || _.client_options.soundVolume > 100) {
             _.client_options.soundVolume = 100;
         }
 
@@ -1459,24 +1465,22 @@ export default class TgGui {
         let mp3 = '.mp3';
         let mid = '.mid';
 
-        if(audio.indexOf(mp3, audio.length - mp3.length) !== -1) {
+        if (audio.indexOf(mp3, audio.length - mp3.length) !== -1) {
             _.playMusic(audio);
-        }
-        else if(audio.indexOf(mid, audio.length - mid.length) !== -1) {
+        } else if (audio.indexOf(mid, audio.length - mid.length) !== -1) {
             _.playSound(audio.replace('.mid', '.mp3'));
-        }
-        else if(_.client_options.soundVolume > 0) {
+        } else if (_.client_options.soundVolume > 0) {
             _.playSound(audio.replace('.wav', '.mp3'));
         }
     }
 
     playMusic(music) {
         let _ = this;
-        if(_.client_options.musicVolume > 0 ) {
+        if (_.client_options.musicVolume > 0) {
             let current_src = $('#music').attr('src');
             let new_src = _.sounds_path + music;
 
-            if(current_src != new_src || $('#music').prop('paused') == true) {
+            if (current_src != new_src || $('#music').prop('paused') == true) {
                 $('#music').attr('src', new_src);
             }
         }
@@ -1484,11 +1488,11 @@ export default class TgGui {
 
     playSound(sound) {
         let _ = this;
-        if(_.client_options.soundVolume > 0 ) {
+        if (_.client_options.soundVolume > 0) {
             let current_src = $('#sound').attr('src');
             let new_src = _.sounds_path + sound;
 
-            if(current_src != new_src || $('#sound').prop('ended')) {
+            if (current_src != new_src || $('#sound').prop('ended')) {
                 $('#sound').attr('src', new_src);
             }
         }
@@ -1496,7 +1500,9 @@ export default class TgGui {
 
     stopMusic() {
         let _ = this;
-        $('#music').animate({volume: 0}, 3500, function(){
+        $('#music').animate({
+            volume: 0
+        }, 3500, function () {
             $(this)[0].pause();
             $(this).get(0).volume = _.client_options.musicVolume / 100;
         })
@@ -1532,10 +1538,9 @@ export default class TgGui {
 
     renderDetails(info, type) {
         let _ = this;
-        if( _.client_options.extradetail) {
+        if (_.client_options.extradetail) {
             return _.renderExtraOutput(info, type);
-        }
-        else {
+        } else {
             return _.renderDetailsInText(info, type);
         }
     }
@@ -1563,70 +1568,65 @@ export default class TgGui {
             container = $('#extraoutput'),
             tabicon = $('#detailsicon-' + type, '#outputOptions'),
             wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type);
-        
-            console.log(tabicon);
+
+        console.log(tabicon);
 
         let cont_header = container.children('.extraoutput-header');
         let cont_detail = container.children('.extraoutput-detail');
 
-	    /* Set tab icon */
-        if(type == 'dir') {
+        /* Set tab icon */
+        if (type == 'dir') {
             tpos = _.dirBgPos[info.dir];
-        }
-        else if (type == 'room' && !info.icon) {
-		    tpos = $('#mp044').css('background-position')
-        }
-        else {
-		    tpos = _.tileBgPos(info.icon ? info.icon : 0);
+        } else if (type == 'room' && !info.icon) {
+            tpos = $('#mp044').css('background-position')
+        } else {
+            tpos = _.tileBgPos(info.icon ? info.icon : 0);
         }
         tabicon.css('background-position', tpos);
 
         /* Set Title and Tooltip */
-        if(info.title) {
-            if(type == 'room' && !info.up) {
-                res += '<div class="room"><div class="lts"></div>'+info.title+'<div class="rts"></div></div>';
+        if (info.title) {
+            if (type == 'room' && !info.up) {
+                res += '<div class="room"><div class="lts"></div>' + info.title + '<div class="rts"></div></div>';
             }
-            let title  = _.capFirstLetter(info.title);
+            let title = _.capFirstLetter(info.title);
             let icon = '';
             let detaildesc = '';
             if (info.desc.base) {
 
                 if (type == 'room') {
                     _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
-                }
-                else {
-                    icon = _.renderIcon(info.icon, null, null, null , null, null);
+                } else {
+                    icon = _.renderIcon(info.icon, null, null, null, null, null);
                 }
 
                 detaildesc += _.formatText(info.desc.base, 'out-descbase');
-            } 
-            else if (info.desc.repeatlast && _.last_room_desc) {
+            } else if (info.desc.repeatlast && _.last_room_desc) {
                 detaildesc += _.last_room_desc;
             }
             $(cont_header).show();
             $(cont_header).children('#detailtitle').html(icon + title);
             $(cont_header).children('#detaildesc').html(detaildesc);
             //TODO: da capire
-      /*      if(wtab == ctab) {
-                $('#detailtitle').text(title);
-            }*/
+            /*      if(wtab == ctab) {
+                      $('#detailtitle').text(title);
+                  }*/
         }
 
         /* Set Image */
-        if(info.image) {
+        if (info.image) {
             _.showImage($('#detailimage'), info.image);
-        }
-        else {
+        } else {
             _.cleanImageContainer('.extra-detailimg');
         }
 
         let textarea = $(cont_detail).empty();
-        let details =  _.replaceColors(_.renderDetailsInner(info, type, true));
-        
+        let details = _.replaceColors(_.renderDetailsInner(info, type, true));
+
         textarea.append(details);
 
-        if(type == 'room') {
-            if(_.client_update.room.version < info.var) {
+        if (type == 'room') {
+            if (_.client_update.room.version < info.var) {
                 _.client_update.room.version = info.ver;
                 _.client_update.room.needed = false;
             }
@@ -1652,8 +1652,7 @@ export default class TgGui {
                     _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
                 }
                 textarea += _.formatText(info.desc.base, 'out-descbase');
-            } 
-            else if (info.desc.repeatlast && _.last_room_desc) {
+            } else if (info.desc.repeatlast && _.last_room_desc) {
                 textarea += _.last_room_desc;
             }
 
@@ -1677,27 +1676,26 @@ export default class TgGui {
             if (info.objcont) {
                 textarea += _.renderDetailsList(type, info.num, info.objcont, 'obj', 'tg-yellow tg-list-object' + numberClassList);
             }
-        }
-        else  {
+        } else {
             /* Print objects list */
-		    if(info.objcont) {
+            if (info.objcont) {
                 numberClassList = info.perscont ? numberClassList : '';
                 textarea += _.renderDetailsList(type, info.num, info.objcont, 'obj', 'tg-yellow');
             }
             /* Print Persons List */
-            if(info.perscont) {
+            if (info.perscont) {
                 numberClassList = !info.objcont ? numberClassList : '';
                 textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'tg-lt-green');
             }
         }
 
-	    /* Print equipment list */
-        if(info.eqcont) {
+        /* Print equipment list */
+        if (info.eqcont) {
             textarea += _.renderDetailsList(type, info.num, info.eqcont, 'obj');
         }
-	    /* Print where info */
-        if(info.where) {
-            textarea += '<div class="tg-backdetail">'+_.renderIconWithBackBorder(info.where.icon, info.where.num, null, null, null, 'interact where')+'<div class="desc">Si trova '+info.where.title+'.</div></div>';
+        /* Print where info */
+        if (info.where) {
+            textarea += '<div class="tg-backdetail">' + _.renderIconWithBackBorder(info.where.icon, info.where.num, null, null, null, 'interact where') + '<div class="desc">Si trova ' + info.where.title + '.</div></div>';
         }
 
 
@@ -1705,7 +1703,7 @@ export default class TgGui {
     }
 
     renderDetailsList(cont_type, cont_num, cont, type, style) {
-       
+
         let _ = this;
         let res = '',
             txt = '';
@@ -1724,53 +1722,53 @@ export default class TgGui {
                 let l = cont.list[n];
                 let is_group = (l.mrn && l.mrn.length) > 1;
                 let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]),
-                    grp_attribute = '',  
+                    grp_attribute = '',
                     exp_attribute = '',
                     data_mrn = 'data-mrn="' + l.mrn[l.mrn.length - 1] + '"',
                     tooltip = '',
                     expicon = '';
 
-                
+
                 /* if object/person type is more then 1 */
                 if (is_group) {
                     grp_attribute = ' grpcoll';
-                    
+
                     if (opened) {
                         grp_attribute += ' d-none';
                     }
                     expicon = '<div class="expicon"></div>';
                 }
 
-                
+
                 /* print header triggerable element */
-                txt += '<div class="element'+ grp_attribute +'" ' + data_mrn + '>';
-                    // mob/obj icon
-                    txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type);
-                    txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) +'</div>';
+                txt += '<div class="element' + grp_attribute + '" ' + data_mrn + '>';
+                // mob/obj icon
+                txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type);
+                txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
                 txt += '</div>';
 
                 /* Start Collapsable Obj/Mob Container */
                 if (is_group) {
-                    
+
                     if (!opened) {
                         exp_attribute = ' style="display:none"';
                     }
 
-                    txt += '<div class="grpexp"'+ exp_attribute +'>';
+                    txt += '<div class="grpexp"' + exp_attribute + '>';
 
                     for (let m = 0; m < l.mrn.length; m++) {
                         txt += '<div class="element">'
-                            txt += (m == 0 ? '<div class="collicon"></div>' : '') + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type);
-                            txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div>';
+                        txt += (m == 0 ? '<div class="collicon"></div>' : '') + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type);
+                        txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div>';
                         txt += '</div>';
                     }
 
                     if (l.sz && l.sz > l.mrn.length) {
                         txt += '<div class="element">';
-                            txt += _.renderIcon(l.icon, null, cont_type, l.cntnum, null, null);
-                            txt += '<div class="desc">';
-                            txt += _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc);
-                            txt += '</div>';
+                        txt += _.renderIcon(l.icon, null, cont_type, l.cntnum, null, null);
+                        txt += '<div class="desc">';
+                        txt += _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc);
+                        txt += '</div>';
                         txt += '</div>';
                     }
 
@@ -1786,16 +1784,16 @@ export default class TgGui {
             }
 
             if (txt.length > 0) {
-                
+
                 //Double Column print option
                 //TODO: set list number in constructor
-                let columnableClass = ''; 
-                if(cont.list.length > 6) {
+                let columnableClass = '';
+                if (cont.list.length > 6) {
                     columnableClass = ' col-dispose';
                 }
 
-                res += '<div class="out-list'+ columnableClass+' '+(style ? ' ' + style : '') + (_.client_options.extradetail ? 'compact"' : '"') + ' data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
-                res +=  txt;
+                res += '<div class="out-list' + columnableClass + ' ' + (style ? ' ' + style : '') + (_.client_options.extradetail ? 'compact"' : '"') + ' data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
+                res += txt;
                 res += '</div>';
             }
         }
@@ -1823,51 +1821,48 @@ export default class TgGui {
 
 
     /* *****************************************************************************
-    * INTERACTION
-    */
+     * INTERACTION
+     */
 
     interactionInit() {
         let _ = this;
-       $(document).on('mouseup', '.interact', function(event){
+        $(document).on('mouseup', '.interact', function (event) {
             _.interactEvent(event, this)
-       });
+        });
     }
 
     interactEvent(event, trigger) {
 
         let _ = this;
 
-        if(_.inGame) {
+        if (_.inGame) {
 
-            switch(event.which) {
+            switch (event.which) {
                 case 1:
                     let mrn = $(trigger).attr('data-mrn');
                     let cmd = $(trigger).attr('data-cmd');
 
-                    if(cmd == null) {
+                    if (cmd == null) {
                         cmd = $(trigger).is('.where') ? '@agg' : "guarda";
-                    }               
-                    if(!mrn || mrn == 0) {
-                        _.sendToServer(cmd);
                     }
-                    else {
+                    if (!mrn || mrn == 0) {
+                        _.sendToServer(cmd);
+                    } else {
                         let cnttype = $(trigger).attr('data-cnttype');
                         let cntmrn = $(trigger).attr('data-cntmrn');
 
-                        if(cnttype == 'inv') {
+                        if (cnttype == 'inv') {
                             _.sendToServer(cmd + ' &' + mrn);
-                        }
-                        else if(cntmrn && !isNaN(parseInt(cntmrn))) {
+                        } else if (cntmrn && !isNaN(parseInt(cntmrn))) {
                             _.sendToServer(cmd + ' &' + mrn + ' &' + cntmrn);
-                        }
-                        else {
+                        } else {
                             _.sendToServer(cmd + ' &' + mrn);
                         }
                     }
                     break;
             }
         }
-        
+
         return true;
     }
 
@@ -1896,7 +1891,7 @@ export default class TgGui {
 
     prcBar(prc, color, txt) {
         let _ = this;
-        return '<div class="meter2'+(txt ? ' withtxtbox': '')+'"><div class="barcont"><span class="' + color +'" style="width:' + _.limitPrc(prc)+'%"></span></div>'+(txt ? '<div class="metertxt">'+txt+'</div>' : '')+'</div>';
+        return '<div class="meter2' + (txt ? ' withtxtbox' : '') + '"><div class="barcont"><span class="' + color + '" style="width:' + _.limitPrc(prc) + '%"></span></div>' + (txt ? '<div class="metertxt">' + txt + '</div>' : '') + '</div>';
     }
 
 
@@ -2025,19 +2020,17 @@ export default class TgGui {
     configInit() {
         let _ = this;
         /* Extra Detail Display */
-        if(_.client_options.extradetail) {
+        if (_.client_options.extradetail) {
             $('.tg-outputextra-wrap').addClass('d-flex');
-        }
-        else {
+        } else {
             $('.tg-outputextra-wrap').removeClass('d-flex');
         }
-        
+
         /* Dashboard Expand/collapse status */
         let d_status = _.client_options.dashboard; //just alias
-        if(d_status == 1) {
+        if (d_status == 1) {
             $('.tg-dashboard').addClass('midopen');
-        }
-        else if(d_status == 2) {
+        } else if (d_status == 2) {
             $('.tg-characterpanel').hide();
         }
 
@@ -2061,20 +2054,20 @@ export default class TgGui {
         let options = {
             url: "ajax/cmd_list_guide.json",
             getValue: "name",
-            list: {	
-              match: {
-                enabled: true,
-                onClickEvent: function(element) {
-                    alert("Non è stata inserita alcuna guida per " + element.name);
+            list: {
+                match: {
+                    enabled: true,
+                    onClickEvent: function (element) {
+                        alert("Non è stata inserita alcuna guida per " + element.name);
+                    }
                 }
-              }
             },
             theme: "square"
-          };
+        };
 
         //$('#tgSearchInput').easyAutocomplete(options);
-          
-        $('#tgSearchHelp').on('submit', function(e){
+
+        $('#tgSearchHelp').on('submit', function (e) {
             e.preventDefault();
             _.openPopup('nofeature');
         });
@@ -2090,11 +2083,14 @@ export default class TgGui {
             html: true,
             trigger: 'hover',
             container: 'body',
-            delay: {'show': 500, 'hide': 0}
+            delay: {
+                'show': 500,
+                'hide': 0
+            }
         });
     }
 
-     /* -------------------------------------------------
+    /* -------------------------------------------------
      * INPUT
      * -------------------------------------------------*/
 
@@ -2124,17 +2120,17 @@ export default class TgGui {
         //add Event Handler for Expndable list
         this.makeExpandable();
     }
-    
+
     showOutput(text) {
         let _ = this,
-            app =  $(text);
+            app = $(text);
         $('#output').append(app);
         _.scrollPanelTo('#output', '#scrollableOutput', false);
-        
+
         if (_.client_options.output_trimlines < 10000) {
-			$('#output').contents().slice(0, - _.client_options.output_trimlines).remove();
+            $('#output').contents().slice(0, -_.client_options.output_trimlines).remove();
         }
-        
+
         $('#scrollableOutput').get(0).scrollTop = 100000
     }
 
@@ -2143,8 +2139,8 @@ export default class TgGui {
     }
 
     makeExpandable() {
-        let _ = this;  
-        $('.tg-output').on('click', '.grpcoll', function() {
+        let _ = this;
+        $('.tg-output').on('click', '.grpcoll', function () {
             let colgrp = $(this);
             let expgrp = colgrp.next('.grpexp');
 
@@ -2152,52 +2148,48 @@ export default class TgGui {
 
             _.addExpandedGrp(colgrp.attr('mrn'));
         });
-    /*    $('.tg-output').on('click', '.grpcoll', function() {
-             let expgrp = $(this);
-             let colgrp = expgrp.prev('.grpcoll');
-             $(this).toggleClass('expanded');
-             expgrp.slideToggle();
-             delete _.exp_grp_list[colgrp.attr('mrn')];
-        });*/
+        /*    $('.tg-output').on('click', '.grpcoll', function() {
+                 let expgrp = $(this);
+                 let colgrp = expgrp.prev('.grpcoll');
+                 $(this).toggleClass('expanded');
+                 expgrp.slideToggle();
+                 delete _.exp_grp_list[colgrp.attr('mrn')];
+            });*/
     }
-    
+
     addExpandedGrp(mrn) {
         let _ = this;
         let minval = _.exp_grp_list[mrn] = $.now();
         let minkey;
-    
+
         var keys = Object.keys(_.exp_grp_list);
-        if(keys.length > _.max_exp_grp)
-        {
-            for(var k in keys) {
+        if (keys.length > _.max_exp_grp) {
+            for (var k in keys) {
                 var val = _.exp_grp_list[k];
-                if(val < minval)
-                {
+                if (val < minval) {
                     minkey = k;
                     minval = val;
                 }
             }
-            
+
             delete _.exp_grp_list[minkey];
         }
     }
 
     highlightsOutputMRN() {
         let _ = this;
-        $('#output, #extraoutput').on('click', '.element', function(){
+        $('#output, #extraoutput').on('click', '.element', function () {
             let mrn = $(this).attr('data-mrn');
-            if(!_.client_options.mrn_highlights.length) {
-                $('.element[data-mrn="'+mrn+'"]').addClass('mrn-hlight');
+            if (!_.client_options.mrn_highlights.length) {
+                $('.element[data-mrn="' + mrn + '"]').addClass('mrn-hlight');
                 _.client_options.mrn_highlights.push(mrn)
-            }
-            else {
-                if($.inArray(mrn, _.client_options.mrn_highlights) != -1) {
-                    _.client_options.mrn_highlights.splice($.inArray(mrn, _.client_options.mrn_highlights),1);
-                    $('.element[data-mrn="'+mrn+'"]').removeClass('mrn-hlight');
+            } else {
+                if ($.inArray(mrn, _.client_options.mrn_highlights) != -1) {
+                    _.client_options.mrn_highlights.splice($.inArray(mrn, _.client_options.mrn_highlights), 1);
+                    $('.element[data-mrn="' + mrn + '"]').removeClass('mrn-hlight');
 
-                }
-                else {
-                    $('.element[data-mrn="'+mrn+'"]').addClass('mrn-hlight');
+                } else {
+                    $('.element[data-mrn="' + mrn + '"]').addClass('mrn-hlight');
                     _.client_options.mrn_highlights.push(mrn)
                 }
             }
@@ -2210,22 +2202,22 @@ export default class TgGui {
         this.addScrollBar('#scrollableExtraOutput', 'extraoutput');
         $(extraOutputID).width(_.client_options.extradetail_width);
 
-        $(extraOutputID).resizable({ 
+        $(extraOutputID).resizable({
             handleSelector: ".tg-resizablehand",
             resizeHeight: false,
             resizeWidthFrom: 'left',
-            onDragEnd: function(){
+            onDragEnd: function () {
                 let width = $(extraOutputID).width();
                 _.client_options.extradetail_width = width;
-                   _.SaveStorage('options', _.client_options);
+                _.SaveStorage('options', _.client_options);
             }
-        });   
+        });
         /* Image Event */
         $('#detailimage')
-            .on('error', function(){
+            .on('error', function () {
                 $(this).closest('.extra-detailimg').slideUp(0);
             })
-            .on('load', function(){
+            .on('load', function () {
                 $(this).closest('.extra-detailimg').slideDown(0);
             });
     }
@@ -2347,13 +2339,12 @@ export default class TgGui {
 
     closeLockDoor(dir) {
         let cmd;
-        if(_.dir_status[dir] == '2') {
+        if (_.dir_status[dir] == '2') {
             cmd = 'chiudi' + _.dir_names[dir];
-        }
-        else if(_.dir_status[dir] == '3') {
+        } else if (_.dir_status[dir] == '3') {
             cmd = 'blocca ' + _.dir_names[dir];
         }
-        if(cmd) {
+        if (cmd) {
             _.sendToServer(cmd);
         }
     }
@@ -2361,12 +2352,13 @@ export default class TgGui {
     doorsInit() {
         let _ = this;
         for (let d = 0; d < _.dir_names.length; ++d)
-            $('#' + _.dir_names[d]).on('click', { dir: d}, function (event) {
+            $('#' + _.dir_names[d]).on('click', {
+                dir: d
+            }, function (event) {
                 if (_.inGame) {
                     if (event.which == 1) {
                         _.goDir(event.data.dir);
-                    } 
-                    else if (event.which == 3) {
+                    } else if (event.which == 3) {
                         event.preventDefault();
                         _.closeLockDoor(event.data.dir);
                     }
@@ -2380,35 +2372,36 @@ export default class TgGui {
 
     buttonsEventInit() {
         let _ = this;
-        
-        /* Buttons with CMD event */
-        let cmdButtons = [
-            {id:'#userDisconnect', cmd : function () {
-                _.disconnectFromServer();
-            } }
-        ]
 
-        $.each(cmdButtons, function(idx, bdata) {
+        /* Buttons with CMD event */
+        let cmdButtons = [{
+            id: '#userDisconnect',
+            cmd: function () {
+                _.disconnectFromServer();
+            }
+        }]
+
+        $.each(cmdButtons, function (idx, bdata) {
             let button = $(bdata.id);
 
-            if(bdata.cmd) {
-                button.on('click', 
-                typeof bdata.cmd == 'function' ? bdata.cmd  : function() {
-                    if(_.inGame) {
-                        _.processCommands(bdata.cmd)
-                    }
-                    if(bdata.text) {
-                        //TODO open modal by reference
-                    }
-                });
+            if (bdata.cmd) {
+                button.on('click',
+                    typeof bdata.cmd == 'function' ? bdata.cmd : function () {
+                        if (_.inGame) {
+                            _.processCommands(bdata.cmd)
+                        }
+                        if (bdata.text) {
+                            //TODO open modal by reference
+                        }
+                    });
             }
         });
 
         /* Toggle Extra Output Window */
-        $('#triggerToggleExtraOutput').on('click', function(){
+        $('#triggerToggleExtraOutput').on('click', function () {
             $('.tg-outputextra-wrap').toggleClass('d-flex')
             _.scrollPanelTo('#output', '#scrollableOutput', true);
-            _.client_options.extradetail =  _.client_options.extradetail ? false : true;
+            _.client_options.extradetail = _.client_options.extradetail ? false : true;
             _.SaveStorage('options', _.client_options);
         });
 
@@ -2423,7 +2416,7 @@ export default class TgGui {
             if (_.client_options.dashboard == 1 || _.client_options.dashboard == 2) {
                 _.client_options.dashboard = _.client_options.dashboard == 1 ? 2 : 0;
 
-                
+
                 $('.tg-characterpanel').slideToggle(300, function () {
                     _.scrollPanelTo('#output', '#scrollableOutput', true);
                     $('.tg-dashboard').removeClass('midopen');
@@ -2483,7 +2476,7 @@ export default class TgGui {
                 MP_src = './ajax/cookielawAlert.html';
                 break;
 
-            /* Messaggio "non ancora implementato" */
+                /* Messaggio "non ancora implementato" */
             case 'nofeature':
                 MP_type = 'inline';
                 MP_closeOnBgClick = true;
@@ -2491,15 +2484,15 @@ export default class TgGui {
                 MP_src = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
                 break;
 
-            /* Beginning News */
+                /* Beginning News */
             case 'notizie':
                 MP_src = 'ajax/news/last.html';
                 MP_type = 'ajax';
-                MP_callbacks.ajaxContentAdded = function() {
-                    $('#initNewsButton').one('click', function(){
-                        if($('input[type=checkbox]').prop('checked')) {
+                MP_callbacks.ajaxContentAdded = function () {
+                    $('#initNewsButton').one('click', function () {
+                        if ($('input[type=checkbox]').prop('checked')) {
                             _.client_options.show_news = false;
-                            SaveStorage('options',_.client_options);
+                            SaveStorage('options', _.client_options);
                         }
                         _.sendInput();
                         _.closePopup();
@@ -2510,7 +2503,7 @@ export default class TgGui {
                 };
                 break;
 
-            /* Modals with Editor inside */
+                /* Modals with Editor inside */
             case 'editor':
                 MP_src = '#editorDialog';
                 MP_close_button = true;
@@ -2526,8 +2519,8 @@ export default class TgGui {
                 };
                 break;
 
-            /* Login Widget */
-            case 'login': 
+                /* Login Widget */
+            case 'login':
                 MP_closeOnBgClick = false;
                 break;
 
@@ -2576,12 +2569,11 @@ export default class TgGui {
 
     scrollPanelTo(parent, scrollablepanel, animate) {
         let outputHeigt = $(parent).height();
-        if(animate) {
+        if (animate) {
             $(scrollablepanel).animate({
                 scrollTop: outputHeigt
             }, 500, 'linear');
-        }
-        else {
+        } else {
             $(scrollablepanel).scrollTop(outputHeigt);
         }
     }
