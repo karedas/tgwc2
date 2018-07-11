@@ -1,13 +1,29 @@
-.modal-notizie{
+.tg-mp { 
+  &.modal-notizie{
+   
     .mfp-content {
-      padding:1.5em 2.5em;
-      background: #dabe8b;
       color: black;
+      width: 700px;
     }
-
     h2 {
         font-size: 30px;
         color: #ac4c55;
         font-family: kingthinks;
     }
+
+    .scrollable {
+      max-height: 300px;
+    }
+
+    //vertical scrollbar
+    .ps__rail-y {
+      opacity: 1;
+    }
+
+    .notizie-action {
+      padding-top: .5em;
+      margin-top: .5em;
+      border-top: 1px solid #dcc59d;
+    }
   }
+}

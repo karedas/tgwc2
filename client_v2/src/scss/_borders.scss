@@ -262,9 +262,14 @@
 
 
 .b-paper {
-    padding: $modalpaper-border-size;  
+    .tg-box {
+        background-color:#ead3ab;
+        box-shadow: 0 0 10px 8px #ead3ab;
+    }
+    padding: 52px;  
     > .tg-border-box {
         .tg-border-top, .tg-border-bottom {
+            background-position: left;
             height: $modalpaper-border-size;
             &::after, &::before {
                 width: $modalpaper-border-size;

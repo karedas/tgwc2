@@ -884,7 +884,6 @@ export default class TgGui {
         // Generic page (title, text)
         msg = msg.replace(/&!page\{[\s\S]*?\}!/gm, function (p) {
             let page_parse = $.parseJSON(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-            // return addFrameStyle(addBannerStyle(p.title) + '<div class="text">' + p.text.replace(/\n/gm, '<br>') + '</div>');
             return _.renderGenericPage(page_parse)
         });
 
@@ -1103,7 +1102,8 @@ export default class TgGui {
         let _ = this;
         let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
         if (page.title == 'Notizie') {
-            if (_.client_options.show_news && !_.client_state.live) {
+            console.log(_.client_options.show_news && _.client_state.live);
+            if (_.client_options.show_news && _.client_state.live) {
                 _.openPopup('notizie', "Notizie dal gioco", page);
             } else {
                 _.sendInput();
@@ -2489,6 +2489,7 @@ export default class TgGui {
                 MP_src = 'ajax/news/last.html';
                 MP_type = 'ajax';
                 MP_callbacks.ajaxContentAdded = function () {
+                     _.addScrollBar('.modal-notizie .scrollable', 'notizie');
                     $('#initNewsButton').one('click', function () {
                         if ($('input[type=checkbox]').prop('checked')) {
                             _.client_options.show_news = false;
@@ -2551,9 +2552,11 @@ export default class TgGui {
         return $.magnificPopup.instance;
     }
 
-    addScrollBar(container, key) {
+    addScrollBar(container, key, sx) {
+        let scrollX = false;
         this.scrollbar[key] = new PerfectScrollbar(container, {
             wheelPropagation: 2,
+            suppressScrollX: scrollX
         });
 
     }

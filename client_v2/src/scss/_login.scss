@@ -66,13 +66,14 @@
         padding-top: 53px;
         margin-top: -28px;
         position: relative;
-        z-index: 2;
 
 
         .tg-loginform-wrap {
             background: url($imgPath + '/login/border-bottom-mainbox.jpg') no-repeat bottom left;
             background-size: 100%;
             padding-bottom: 13px;
+            position: relative;
+            z-index: 4;
         }
 
         .tg-loginform-content {
