@@ -26,5 +26,11 @@
       margin-top: .5em;
       border-top: 1px solid #dcc59d;
     }
+
+    .tg-mnch-img {
+      width: 100%;
+      background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
+      background-size: contain;
+    }
   }
 }

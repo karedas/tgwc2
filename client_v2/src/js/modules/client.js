@@ -2502,7 +2502,7 @@ export default class TgGui {
             success: function(result, status, xhr) {
                 
                 let fileTimeStamp =  Date.parse(xhr.getResponseHeader("Last-Modified"));
-                if( fileTimeStamp != _.client_options.news_date_last ) {
+                if( fileTimeStamp != _.client_options.news_date_last || _.client_options.news_wantsee ) {
 
                     _.client_options.news_wantsee = true;
 
@@ -2539,7 +2539,9 @@ export default class TgGui {
                     });
                 }
 
-                else return;
+                else {
+                    _.sendInput()
+                }
             },
 
             fail: function(){
