@@ -53,8 +53,8 @@ export default class TgGui {
         };
 
         this.client_state = {
+            ui: false,
             news_showed: false,
-            live: false
         };
         this.viewport = null;
 
@@ -304,7 +304,7 @@ export default class TgGui {
                 _.connectToServer();
 
                 /* Login Widget on Disconnect (small panel) */
-                if (_.client_state.live) {
+                if (_.client_state.ui) {
                     if (!_.connectionInfo.error) {
                         _.widgetLoginNetworkActivityMessage('Torna presto!')
                     } else {
@@ -368,18 +368,25 @@ export default class TgGui {
                     case 'loginok':
                         // Preload client then start the magic
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
-
-                        clientPreloader.init().then(function () {
+                        // If UI has been past loaded (like on disconnection user action)
+                        if(_.client_state.ui) {
+                            console.log('già caricato!');
                             _.closePopup();
-                            //reset login message
-                            _.loginNetworkActivityMessage("");
-                            _.hideLoginPanel();
-                            _.loadInterface();
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
-                        }, () => {
-                            console.log("Assets error") // Error!
-                        });
+                        }
+                        else {
+                            clientPreloader.init().then(function () {
+                                //reset login message
+                                _.loginNetworkActivityMessage("");
+                                _.hideLoginPanel();
+                                _.loadInterface();
+                                _.completeHandshake();
+                                _.handleServerData(data.slice(end + 2));
+                            }, () => {
+                                console.log("Assets error") // Error!
+                            });
+                        }
 
                         // User loged in with Facebook SDK.
 
@@ -682,7 +689,6 @@ export default class TgGui {
                 if (save_history) {
                     _.historyPush(text);
                 }
-
                 for (let i = 0; i < cmds.length; i++) {
                     _.sendToServer(cmds[i]);
                 }
@@ -843,7 +849,7 @@ export default class TgGui {
         // Player is logged in
         msg = msg.replace(/&!logged"[^"]*"/gm, function () {
             _.inGame = true;
-            _.processCommands('info; stat; @rima', false);
+            _.processCommands('info; stato; @rima', false);
             return '';
         });
 
@@ -2011,7 +2017,7 @@ export default class TgGui {
         _.audioInit();
 
         //Interface is up
-        _.client_state.live = true;
+        _.client_state.ui = true;
     }
 
     /* -------------------------------------------------
