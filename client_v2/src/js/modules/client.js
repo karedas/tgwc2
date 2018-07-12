@@ -267,7 +267,7 @@ export default class TgGui {
 
             // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
-                'reconnection': true,
+                'reconnection': false,
                 'autoConnect:': true,
                 'forceNew': true,
                 'resource': _.socket_io_resource,
@@ -547,6 +547,10 @@ export default class TgGui {
 
         $('#loginForm').on('submit', function (e) {
             e.preventDefault();
+            var el = $('.tg-loginbtn');
+            el.prop('disabled', true);
+            setTimeout(function(){el.prop('disabled', false); }, 3000);
+
             let name = $('#login_username').val();
             let pass = $('#login_password').val();
             if (!name || !pass) {
@@ -2552,6 +2556,9 @@ export default class TgGui {
     }
 
     openEditorPopup() {
+
+        let _ = this;
+
         $.magnificPopup.open({
             items: {
                 src: '#editorDialog',
