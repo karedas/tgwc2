@@ -18,7 +18,9 @@ const dotenv = require('dotenv').load({
 const net = require('net');
 const app = require('express')();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+	'pingInterval': 2000, 'pingTimeout': 5000
+});
 const cookieParser = require('cookie-parser');
 const sharedsession = require('express-socket.io-session');
 

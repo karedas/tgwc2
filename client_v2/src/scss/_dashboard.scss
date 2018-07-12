@@ -127,10 +127,8 @@
 /* Tg Extra Board */
 .tg-extraboard {
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-    padding: 6px 0 6px 6px;
 
     .tg-extraboard-wrap {
-        padding-left: .5em;
         height: 100%;
         width: 100%; //TEMP
         text-transform: uppercase;
@@ -144,15 +142,44 @@
     }
     .extraboard-btnmenu {
         height: 100%;
-        width: 50px;
         margin-left: auto;
-        display: inline-block;
+        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+        padding-left:2px;
+
+        .nav-tabs {
+            border: none;
+        }
+
+        .nav-link {
+            background: transparent;
+            padding: 0;
+            color: white;
+            border: none;
+            border-radius: 0;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+        }
     }
 
     .extraboard-caption {
+        text-align: right;
         font-size: 10px;
-        padding: 2px 0;
-        color: $tg-lt-white;
+        color: $gray-500;
+        height: 2em;
+        padding:4px .5em 0;
+        background: url($imgPath + '/borders/border-002-tiny.png') repeat-x top left;
+    }
+
+
+    /*Dashboard Tabs*/
+    .shortcut-btn {
+        width: 34px;
+        height: 34px;
+        border: 1px solid gray;
+        display: inline-block;
     }
 }
 

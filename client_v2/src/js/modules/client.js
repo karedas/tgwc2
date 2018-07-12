@@ -2001,14 +2001,15 @@ export default class TgGui {
         /* Interface Modules List */
         //_.inputInit();
         _.genericEvents();
+        _.keyboardMapInit();
         _.mainNavBarInit();
         _.tooltipInit();
         _.outputInit();
-        _.keyboardMapInit();
         _.focusInput();
         _.mapInit();
         _.doorsInit();
         _.interactionInit();
+        _.extraBoardInit();
         _.buttonsEventInit();
         _.audioInit();
 
@@ -2458,6 +2459,29 @@ export default class TgGui {
         $('#tgInputUser').focus();
     }
 
+
+    /* -------------------------------------------------
+     *  EXTRA BOARD
+     * -------------------------------------------------*/
+    extraBoardInit() {
+        //TODO
+        $('a', '.extraboard-btnmenu')
+            .on('mouseover',  function() {
+                let val = $(this).text();
+                $('#extraboardCaption').text(val);
+            })
+            .on('mouseout', function(){
+                $('#extraboardCaption').text('');
+            });
+
+
+            //Shortcut TODO:
+            for(let x= 0; x < 26; x++) {
+                let shortcut = $('<div class="shortcut-btn"></div>');
+                shortcut.appendTo('#tg-pills-shortcut');
+            }
+    }
+
     /* -------------------------------------------------
      *  POPUP
      * -------------------------------------------------*/
@@ -2631,6 +2655,4 @@ export default class TgGui {
             $(scrollablepanel).scrollTop(outputHeigt);
         }
     }
-
-    main() {}
 }

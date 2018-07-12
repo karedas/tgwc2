@@ -213,24 +213,27 @@
                         </div>
                       </div>
                     </div>
-                    <div class="tg-extraboard col-sm-6 d-none d-sm-flex">
-                      <div class="tg-resizablehandle"></div>
-                      <div class="tg-extraboard-wrap container-fluid">
-                        <!-- 
-                        <div class="extraboard-btnmenu">
-                          
+                    <div class="tg-extraboard col-sm-6 d-none d-sm-flex flex-column">
+                      <div class="row h-100">
+                        <div class="col-12 d-flex flex-row">
+                          <div class="extraboard-btnmenu nav flex-column nav-pills" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="tg-pills-tab-monitor" data-toggle="pill" href="#tg-pills-monitor" role="tab" aria-controls="tg-pills-monitor" aria-selected="true">A</a>
+                            <a class="nav-link" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut" aria-selected="false">B</a>
+                            <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility" aria-selected="false">C</a>
+                          </div>
+                          <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
+                              <div class="tab-pane fade show active" id="tg-pills-monitor" role="tabpanel" aria-labelledby="tg-pills-monitor-tab">Monitor</div>
+                              <div class="tab-pane fade" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
+                              <div class="tab-pane fade" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
+                          </div>  
                         </div>
-                        <div class="extraboard-content"></div>  
-                        <div class="extraboard-caption">
-                            <div id="extraboardCaption" class="tg-lt-white">[hover label]: [hover msg]</div>
-                            <div class="extraboard-btnmenu">
-                              [button tab 1]
-                              [button tab 2]
-                              [button tab 3]
-                              [button tab 4]
-                            </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 mt-auto pl-0">
+                          <div class="extraboard-caption">
+                            <div id="extraboardCaption"></div>
+                          </div>
                         </div>
-                        //-->
                       </div>
                     </div>
                   </div>
