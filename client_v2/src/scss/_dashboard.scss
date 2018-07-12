@@ -137,6 +137,23 @@
         color: $gray-500;
         font-size: 11px;
     }
+
+    .extraboard-content {
+        display: flex;
+        flex: 1 1 100%;
+    }
+    .extraboard-btnmenu {
+        height: 100%;
+        width: 50px;
+        margin-left: auto;
+        display: inline-block;
+    }
+
+    .extraboard-caption {
+        font-size: 10px;
+        padding: 2px 0;
+        color: $tg-lt-white;
+    }
 }
 
 /* Tg User inputline */

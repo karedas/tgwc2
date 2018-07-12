@@ -215,8 +215,20 @@
                     </div>
                     <div class="tg-extraboard col-sm-6 d-none d-sm-flex">
                       <div class="tg-resizablehandle"></div>
-                      <div class="tg-extraboard-wrap">
-                        // this is my extra board!
+                      <div class="tg-extraboard-wrap container-fluid">
+                        <div class="extraboard-btnmenu">
+                          
+                        </div>
+                        <div class="extraboard-content"></div>  
+                        <div class="extraboard-caption">
+                            <div id="extraboardCaption" class="tg-lt-white">[hover label]: [hover msg]</div>
+                            <div class="extraboard-btnmenu">
+                              [button tab 1]
+                              [button tab 2]
+                              [button tab 3]
+                              [button tab 4]
+                            </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -286,12 +298,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
     </div>
     <!-- Editor Dialog -->
     <div id="editorDialog" class="tg-modal">
@@ -379,22 +385,14 @@
           </div>
         </div>
       </div>
-      <div class="tg-loginform-widget">
-        <!-- Login Widget -->
-        <div id="widgetLoginStatus" class="tg-widgetlogin-status">
-            Utente <span>[nomeutente]</span> disconnesso.
+      <div id="rotateText" class="tg-intro-rotatext">
+        <div class="phrase">
+          L'importante non è guardare, occorre vedere.
+          <span class="auth">- Anonimo -</span>
         </div>
-        <div class="tg-widgetlogin-menu">
-          <button id="widgetLoginReconnect" type="button" class="btn btn-reconnect">Riconnetti</button>
-          <button id="widgetLoginNewConnection" type="button" class ="btn btn-newconnection">Accedi con un personaggio diverso.</button>
-          <button id="widgetLoginExit" type="button" class ="btn btn-newconnection">Esci.</button>
-        </div>
-        <form id="widgetLoginForm" action="#" autocomplete="off">
-            <input id="widget_username" name="username" type="text" autocomplete="off" placeholder="Username">
-            <input id="widget_password" name="password" type="password" autocomplete="off" placeholder="Password">
-            <button type="submit" class="tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
-            <div id="widgetLoginNetworkActivity" class="tg-loginstatus"></div>
-          </form>
+        <div class="phrase">abc</div>
+        <div class="phrase">cde</div>
+        <div class="phrase">fgh</div>
       </div>
       <!-- Copyright and Usefull Links -->
       <div class="tg-login-footer align-self-baseline mt-auto w-100">
@@ -415,6 +413,29 @@
             &copy; 2013-2018 The Gate MUD | <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a></div>
           </div>
       </div>
+    </div>
+    <!-- Login Widget -->
+    <div class="tg-loginwidget">
+      <div id="widgetLoginStatus" class="tg-widgetlogin-status">
+          Utente <span>[nomeutente]</span> disconnesso.
+      </div>
+      <div class="tg-widgetlogin-menu">
+        <button id="widgetLoginReconnect" type="button" class="btn btn-reconnect">Riconnetti</button>
+        <button id="widgetLoginNewConnection" type="button" class ="btn btn-newconnection">Accedi con un personaggio diverso.</button>
+        <button id="widgetLoginExit" type="button" class ="btn btn-newconnection">Esci.</button>
+      </div>
+      <form id="widgetLoginForm" action="#" autocomplete="off">
+        <input id="widget_username" name="username" type="text" autocomplete="off" placeholder="Username">
+        <input id="widget_password" name="password" type="password" autocomplete="off" placeholder="Password">
+        <button type="submit" class="tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
+        <div id="widgetLoginNetworkActivity" class="tg-loginstatus"></div>
+      </form>
+    </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
   <!-- Audio & Music -->

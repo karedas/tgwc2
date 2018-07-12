@@ -10,7 +10,19 @@ import enquire from 'enquire-js';
    // enable any bootstrap tooltip
     function onReady() {
         let client = new TgClient();
-        client.init();   
+        // Get Cookie "Italy cookie law".
+        let cookie_consent = client.LoadStorage('cookie_consent');
+        // Check Cookie Law Approval Status, then go to start or wait user action.
+        if (!cookie_consent) {
+            //waiting "Accept" action
+            $.when(client.showCookieLawDisclaimer()).done(function(){
+                client.startClient();
+            });
+
+        } else {
+            client.removeCookieLawDisclaimer();
+            client.startClient();
+        }
         
         // Enquire Breakpoint/Viewport manager
         let vp = '';

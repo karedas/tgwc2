@@ -6,7 +6,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import 'bootstrap';
 import 'magnific-popup';
 import 'draggabilly/dist/draggabilly.pkgd.js';
-import 'easy-autocomplete';
+// import 'easy-autocomplete';
 import 'jquery-resizable-dom';
 
 //============ Assets file list.
@@ -60,7 +60,8 @@ export default class TgGui {
 
         /* UI Game Options */
         this.client_options = {
-            show_news: true,
+            news_date_last: null,
+            news_wantsee: true,
             musicVolume: 70,
             soundVolume: 100,
             skysize: 215,
@@ -236,28 +237,8 @@ export default class TgGui {
         $.extend(this, options);
     }
 
-    init() {
-        let _ = this;
-
-        // Get Cookie "Italy cookie law"
-        let cookie_consent = _.LoadStorage('cookie_consent');
-        // Check Cookie Law Approval Status, then go to start or wait user action.
-        if (!cookie_consent) {
-            _.showCookieLawDisclaimer();
-        } else {
-            _.removeCookieLawDisclaimer();
-            _.startClient();
-        }
-    }
-
-    setViewportSetup(val) {
-        $('.tg-area').attr('data-viewport', val);
-        this.viewport = val;
-    }
-
     startClient() {
         let _ = this;
-
         /* let facebookSDK = new FacebookSDK();
          facebookSDK.load();
          */
@@ -286,7 +267,7 @@ export default class TgGui {
 
             // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
-                'reconnection': true,
+                'reconnection': false,
                 'force new connection': true,
                 'resource': _.socket_io_resource,
                 'transports': ['polling']
@@ -311,7 +292,6 @@ export default class TgGui {
                         _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
                     }
                     _.initWidgetLoginPanel();
-                    _.openPopup('login', 'Effettua l\'accesso', '.tg-loginform-widget');
                 }
 
                 if (!_.connectionInfo.error) {
@@ -378,8 +358,7 @@ export default class TgGui {
                         else {
                             clientPreloader.init().then(function () {
                                 //reset login message
-                                _.loginNetworkActivityMessage("");
-                                _.hideLoginPanel();
+                                _.dismissLoginPanel();
                                 _.loadInterface();
                                 _.completeHandshake();
                                 _.handleServerData(data.slice(end + 2));
@@ -468,16 +447,17 @@ export default class TgGui {
 
     /* COOKIE LAW */
     showCookieLawDisclaimer() {
-        let _ = this;
 
+        let _ = this;
+        let def = $.Deferred();
         $(document).on('click', '#cookieconsentbutton', function () {
             _.SaveStorage('cookie_consent', true);
             _.closePopup();
-            _.startClient();
+            //Done deferred back
+            def.resolve();
         });
-
-        _.openPopup('cookielaw', "Cookie Policy", '');
-
+        _.openCookieLawPopup();
+        return def;
     }
 
     removeCookieLawDisclaimer() {
@@ -547,15 +527,16 @@ export default class TgGui {
      * Login 
      */
 
-    hideLoginPanel() {
-        $('.tg-loginpanel').hide();
-        $('#loginForm')[0].reset();
+    dismissLoginPanel() {
+        $('.tg-loginpanel').remove();
     }
 
     initLoginPanel() {
-        let _ = this;
-        _.addScrollBar('.tg-loginpanel', 'loginpanel');
 
+        let _ = this;
+        
+        _.initIntroTextRotator();
+        _.addScrollBar('.tg-loginpanel', 'loginpanel');
 
         //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
@@ -583,7 +564,44 @@ export default class TgGui {
 
         // On New  Character Creation button
         $('#doNewCharacter').on('click', function () {
-            _.openPopup('nofeature');
+            _.openNoFeaturePopup();
+        });
+    }
+
+    initIntroTextRotator(child) {
+        let _ = this,
+            fadeSpeed = 500,
+            pauseSpeed = 2000, 
+            next = null;
+            
+        $('#rotateText').each(function(){
+            let cont = $(this);
+            let items = $(cont.children(), cont);
+         
+            items.each(function() {
+                $(this).hide();
+            });
+
+            items.each(function(){
+                
+                if(!child){
+                    next = $(cont).children(':first');
+                    $(next).show();
+                }else{
+                    next = child;
+                }
+                $(next).fadeIn(fadeSpeed, function () {
+                    $(next).delay(pauseSpeed).fadeOut(fadeSpeed, function () {
+                        console.log('fadeout completed');
+                        let next = $(this).next();
+                        if (next.length == 0) {
+                            next = $(cont).children(':first');
+                        }
+
+                        _.initIntroTextRotator(next);
+                    });
+                });
+            });
         });
     }
 
@@ -597,7 +615,6 @@ export default class TgGui {
             //Attach oob Socket Handler
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
-            _.closePopup();
         });
 
         /* Exit */
@@ -629,6 +646,8 @@ export default class TgGui {
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
         });
+        
+        _.openPopup('login', 'Effettua l\'accesso', '.tg-loginwidget');
     }
 
     performLogin() {
@@ -934,7 +953,7 @@ export default class TgGui {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
             console.log('renderEquipment');
             //_.renderEquipment(eq_parse);
-            _.openPopup('nofeature');
+            openNoFeaturePopup();
             return '';
         });
 
@@ -942,7 +961,7 @@ export default class TgGui {
         msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
             let wk_parse = $.parseJSON(wk.slice(7, -1));
             console.log('renderworkslist');
-            _.openPopup('nofeature');
+            openNoFeaturePopup();
             //return renderWorksList(wk);
         });
 
@@ -961,9 +980,8 @@ export default class TgGui {
                 _.client_update.interfaceData.info = true;
                 return '';
             } else {
-                //TODO: Carefully, after change desc this msg will be call
+                _.openNoFeaturePopup();
                 return '';
-                //return renderPlayerInfo(info);
             }
         });
 
@@ -1110,12 +1128,8 @@ export default class TgGui {
         let page_html = '<div class="tg-title lt-red">' + page.title + '</div><div class="text">' + page.text.replace(/\n/gm, '<br>') + '</div>';
 
         if (page.title == 'Notizie') {
-            if (_.client_options.show_news && !_.client_state.news_showed) {
-                _.openPopup('notizie', "Notizie dal gioco", page);
-            } else {
-                _.sendInput();
-                return '';
-            }
+            _.openNotiziePopup();
+            return '';
         } else {
             //TODO: Page parse generic 
             console.log('!page todo');
@@ -1248,7 +1262,7 @@ export default class TgGui {
         let textarea = $('#editorTextArea').val(text);
         $('#editorTitle').text(title);
 
-        _.openPopup('editor');
+        _.openEditorPopup();
 
         $('#abortEditor, #mfp-close').one('click', function () {
             _.abortEdit();
@@ -2076,7 +2090,7 @@ export default class TgGui {
 
         $('#tgSearchHelp').on('submit', function (e) {
             e.preventDefault();
-            _.openPopup('nofeature');
+            openNoFeaturePopup();
         });
     }
 
@@ -2449,7 +2463,7 @@ export default class TgGui {
         let _ = this;
         $('.no-feature').on('click', function (e) {
             e.preventDefault();
-            _.openPopup('nofeature');
+            openNoFeaturePopup();
         });
     }
 
@@ -2466,99 +2480,135 @@ export default class TgGui {
      *  POPUP
      * -------------------------------------------------*/
 
-    openPopup(ref, title, src) {
+    openNoFeaturePopup() {
+        /* Popup - Funzione non ancora implementata */
+        let src = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
+        $.magnificPopup.open({
+            showCloseBtn: true,
+            closeOnBgClick: true,
+            type: 'inline',
+            items: {
+                src: src,
+                type: 'inline'
+            },
+            mainClass: 'tg-mp modal-nofeature',
+        });
+    }
 
+    openCookieLawPopup() {
+        let src = './ajax/cookielawAlert.html';    
+        $.magnificPopup.open({
+            showCloseBtn: false,
+            closeOnBgClick: false,
+            type: 'ajax',
+            preloader: false,
+            items: {
+                src: src,
+                type: 'ajax'
+            },
+            mainClass: 'tg-mp modal-cookielaw',
+        });
+    }
+
+    openNotiziePopup() {
+        /**
+         * I use Jquery.ajax to preload the file and read via xhr the last-modified date value
+         *  to klnow if there is a new news or not since the last display of the client.
+         * */
         let _ = this;
 
-        let MP_type = 'inline',
-            MP_close_button = false,
-            MP_closeOnBgClick = false,
-            MP_src = src,
-            MP_callbacks = {};
+        let src = 'ajax/news/last.html';
 
-        switch (ref) {
-            /* Cookie Law */
-            case 'cookielaw':
-                MP_type = 'ajax';
-                MP_src = './ajax/cookielawAlert.html';
-                break;
+        $.ajax({
+            url : src,
+            success: function(result, status, xhr) {
+                
+                let fileTimeStamp =  Date.parse(xhr.getResponseHeader("Last-Modified"));
+                if( fileTimeStamp != _.client_options.news_date_last ) {
 
-                /* Messaggio "non ancora implementato" */
-            case 'nofeature':
-                MP_type = 'inline';
-                MP_closeOnBgClick = true;
-                MP_close_button = true;
-                MP_src = '<div class="tg-modal">Funzionalità non ancora implementata</div>';
-                break;
+                    _.client_options.news_wantsee = true;
 
-                /* Beginning News */
-            case 'notizie':
-                MP_src = 'ajax/news/last.html';
-                MP_type = 'ajax';
-                MP_callbacks.ajaxContentAdded = function () {
-                     _.addScrollBar('.modal-notizie .scrollable', 'notizie');
-                     _.client_state.news_showed = true;
-                    $('#initNewsButton').one('click', function () {
-                        if ($('input[type=checkbox]').prop('checked')) {
-                            _.client_options.show_news = false;
-                            SaveStorage('options', _.client_options);
+                    $.magnificPopup.open({
+                        showCloseBtn: false,
+                        closeOnBgClick: false,
+                        type: 'inline',
+                        preloader: false,
+                        items: {
+                            src: result,
+                            type: 'inline'
+                        },
+                        mainClass: 'tg-mp modal-notizie',
+                        callbacks: {
+                            open: function () {
+                                _.addScrollBar('.modal-notizie .scrollable', 'notizie');
+                                _.client_state.news_showed = true;
+                                _.client_options.news_date_last = fileTimeStamp;
+
+                               $('#initNewsButton').one('click', function () {
+                                   if ($('input[type=checkbox]').prop('checked')) {
+                                       _.client_options.news_wantsee = false;
+                                    }
+                                   _.sendInput();
+                                   _.closePopup();
+                               });
+
+                           },
+                           close: function () {
+                                _.sendInput();
+                                _.SaveStorage('options', _.client_options);
+                           }
                         }
-                        _.sendInput();
-                        _.closePopup();
                     });
                 }
-                MP_callbacks.close = function () {
-                    _.sendInput();
-                };
-                break;
 
-                /* Modals with Editor inside */
-            case 'editor':
-                MP_src = '#editorDialog';
-                MP_close_button = true;
-                MP_callbacks.open = function () {
+                else return;
+            },
+
+            fail: function(){
+                _.sendInput();
+                return;
+            }
+        })
+    }
+
+    openEditorPopup() {
+        $.magnificPopup.open({
+            items: {
+                src: '#editorDialog',
+                type: 'inline'
+            },
+            showCloseBtn: true,
+            closeOnBgClick: false,
+            type: 'inline',
+            preloader: false,
+            callbacks: {
+                open: function () {
                     $('.mfp-close').one('click', function (e) {
                         e.preventDefault();
                         _.abortEdit();
                         _.closePopup();
                     });
-                };
-                MP_callbacks.close = function (e) {
+                },
+                close: function (e) {
                     _.closeEditor();
-                };
-                break;
-
-                /* Login Widget */
-            case 'login':
-                MP_closeOnBgClick = false;
-                break;
-
-            default:
-                //TODO: make default value to avoid error.
-                break;
-        }
-
-        // Open Modal / Popup
-        $.magnificPopup.open({
-            showCloseBtn: MP_close_button,
-            closeOnBgClick: MP_closeOnBgClick,
-            type: MP_type,
-            preloader: false,
-            items: {
-                src: MP_src,
-                type: MP_type
-            },
-            mainClass: 'tg-mp modal-' + ref,
-            callbacks: MP_callbacks,
+                }
+            }
         });
-        //add Draggable
-        $($.magnificPopup.instance.contentContainer).draggabilly({
-            handle: '.tg-modal-title',
-            containment: '.tg-area'
-        });
-
-        return $.magnificPopup.instance;
     }
+
+    openPopup(ref, title, src) {
+        let _ = this;
+
+        // //add Draggable
+        // $($.magnificPopup.instance.contentContainer).draggabilly({
+        //     handle: '.tg-modal-title',
+        //     containment: '.tg-area'
+        // });
+
+        // return $.magnificPopup.instance;
+    }
+
+    
 
     addScrollBar(container, key, sx) {
         let scrollX = false;
@@ -2570,6 +2620,12 @@ export default class TgGui {
     }
 
     // UTILITY
+    
+    setViewportSetup(val) {
+        $('.tg-area').attr('data-viewport', val);
+        this.viewport = val;
+    }
+
     isModalOpen() {
         return $.magnificPopup.instance.isOpen;
     }

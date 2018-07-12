@@ -90,11 +90,11 @@ module.exports = function (prop) {
             }
         },
 
-        stats: {
-            // modules: false,
-            // entrypoints: false,
-            // chunks: false
-        },
+        // stats: {
+        //     modules: true,
+        //     entrypoints: true,
+        //     chunks: true
+        // },
 
         performance: {
             hints: process.env.NODE_ENV === 'production' ? "warning" : false

@@ -194,6 +194,12 @@
             color: $gray-300;
         }
     }
+
+    .tg-intro-rotatext {
+        .phrase{
+            display: none;
+        }
+    }
 }
     
 .tg-version-name {
@@ -207,7 +213,7 @@
     }
 }
 
-.tg-loginform-widget {
+.tg-loginwidget {
     display: none;
 
     form {
