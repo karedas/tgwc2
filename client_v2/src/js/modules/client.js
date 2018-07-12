@@ -568,41 +568,19 @@ export default class TgGui {
         });
     }
 
-    initIntroTextRotator(child) {
-        let _ = this,
-            fadeSpeed = 500,
-            pauseSpeed = 2000, 
-            next = null;
-            
-        $('#rotateText').each(function(){
-            let cont = $(this);
-            let items = $(cont.children(), cont);
-         
-            items.each(function() {
-                $(this).hide();
-            });
+    initIntroTextRotator(index) {
+        let _ = this;
+        
+        let quotes = $("#rotateText .phrase");
+        let quoteIndex = index == null ? -1 : index;
 
-            items.each(function(){
-                
-                if(!child){
-                    next = $(cont).children(':first');
-                    $(next).show();
-                }else{
-                    next = child;
-                }
-                $(next).fadeIn(fadeSpeed, function () {
-                    $(next).delay(pauseSpeed).fadeOut(fadeSpeed, function () {
-                        console.log('fadeout completed');
-                        let next = $(this).next();
-                        if (next.length == 0) {
-                            next = $(cont).children(':first');
-                        }
-
-                        _.initIntroTextRotator(next);
-                    });
-                });
+        ++quoteIndex;
+        quotes.eq(quoteIndex % quotes.length)
+            .fadeIn(2000)
+            .delay(6000)
+            .fadeOut(2000, function(){
+                _.initIntroTextRotator(quoteIndex);
             });
-        });
     }
 
     /* Mini Panel showed after disconnect or InGame Error (with disconection)*/

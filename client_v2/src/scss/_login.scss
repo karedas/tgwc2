@@ -162,7 +162,6 @@
     .tg-serverstatus {
         text-transform: uppercase;
         font-size: 10px;
-        padding-bottom: 6px;
         
         &:before {
             content: '';
@@ -194,11 +193,21 @@
             color: $gray-300;
         }
     }
+}
 
-    .tg-intro-rotatext {
-        .phrase{
-            display: none;
-        }
+.tg-intro-rotatext {
+    color: #9c9c9c;
+    font-style: italic;
+    font-family:kingthinks;
+    font-size: 1.2em;
+    .phrase{
+        display: none;
+    }
+
+    .auth {
+        font-size: 0.8em;
+        display: block;
+        
     }
 }
     

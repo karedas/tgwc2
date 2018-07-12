@@ -378,24 +378,30 @@
             </div>
           </div>
           <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
-          <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
             <div class="pbar"></div>
           </div>
         </div>
       </div>
-      <div id="rotateText" class="tg-intro-rotatext">
-        <div class="phrase">
-          L'importante non è guardare, occorre vedere.
-          <span class="auth">- Anonimo -</span>
+      <div id="rotateText" class="tg-intro-rotatext row text-center">
+        <div class="col-12">
+          <div class="phrase">
+            "L'importante non è Guardare, occorre Vedere.""
+            <span class="auth">- Anonimo -</span>
+          </div>
+          <div class="phrase">"Nuovo giorno, buon giorno!""
+            <span class="auth">- Una guardia cittadina -</span>
+          </div>
         </div>
-        <div class="phrase">abc</div>
-        <div class="phrase">cde</div>
-        <div class="phrase">fgh</div>
       </div>
       <!-- Copyright and Usefull Links -->
       <div class="tg-login-footer align-self-baseline mt-auto w-100">
+        <div class="row">
+          <div class="col-12 text-center">
+            <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-4 text-center">
             <i class="fab fa-facebook"></i> <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
@@ -403,7 +409,7 @@
             <i class="fas fa-envelope"></i> <a href="#" target="_blank">Contattaci</a>
           </div>
           <div class="col-4 text-center">
-            <p class="tg-version-name">TheGate Webclient v.2  - 
+            <p class="tg-version-name">TGWC v.2  - 
               <span>
                 <%= htmlWebpackPlugin.options.git_version %> (Alpha)
             </span>
