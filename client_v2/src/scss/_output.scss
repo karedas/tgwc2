@@ -204,6 +204,11 @@
         margin: auto 0;
         flex-direction: row;
         display: flex;
+
+        .dd-desc {
+            flex-direction: row;
+            display: flex;
+        }
     }
 
 
