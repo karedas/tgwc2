@@ -1,5 +1,3 @@
-$tg-yellow : #ffc000;
-
 .tg-white, .default, .tg-lt-white, .tg-gray, .tg-red, .tg-lt-red,
 .tg-green, .tg-lt-green, .tg-blue, .tg-lt-blue, .tg-magenta, .tg-lt-magenta,
 .tg-cyan, .tg-lt-cyan, .tg-brown, .tg-yellow {
@@ -8,49 +6,49 @@ $tg-yellow : #ffc000;
 
 /* Output colors */
 .tg-white, .default{
-    color: white;
+    color: $tg-white;
 }
 .tg-lt-white {
-    color: rgb(250, 250, 250);
+    color: $tg-lt-white;
 }
 
 .tg-gray {
-   color: #b8b8b8; 
+   color: $tg-gray; 
 }
 .tg-red {
-    color: #df2a06;
+    color: $tg-red;
 }
 .tg-lt-red {
-    color: #fe6442;
+    color: $tg-lt-red;
 }
 .tg-green {
-    color: #2bbf93;
+    color: $tg-green;
 }
 .tg-lt-green {
-    color: #c6fac4;
+    color: $tg-lt-green;
 }
 .tg-blue {
-    color: #006eff
+    color: $tg-blue
 }
 .tg-lt-blue {
-    color: #7ccfff;
+    color: $tg-lt-blue;
 }
 .tg-magenta {
-    color: #cf25df;
+    color: $tg-magenta;
 }
 .tg-lt-magenta {
-    color: #ff63ed;
+    color: $tg-lt-magenta;
 }
 .tg-cyan {
-    color: #4ec7dc;
+    color: $tg-cyan;
 }
 .tg-lt-cyan {
-    color: #63e8ff;
+    color: $tg-lt-cyan;
 }
 
 .tg-brown {
-    color: #d19336;
+    color: $tg-brown;
 }
 .tg-yellow {
-    color: #f2ff00;
+    color: $tg-yellow;
 }

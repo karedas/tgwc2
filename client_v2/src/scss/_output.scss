@@ -56,11 +56,6 @@
     }
 }
 
-
-.tg-extraoutput-history {
-    padding-top: 0;
-}
-
 .tg-output-history, .tg-extraoutput-history{
     z-index: 2;
     max-height: 100%;
@@ -143,10 +138,13 @@
         }
 
         .tg-list-object {
-            color: #f2ff00;
+            color: $tg-yellow;
         }
         .tg-list-person {
-            color: #c6fac4;
+            color: $tg-lt-green;
+        }
+        .poseq {
+            color: $tg-yellow;
         }
     }
 
@@ -279,16 +277,16 @@
                 display: block;
             }
             .green {
-                background-color:#90ee90;
+                background-color:$tg-green;
             }
             .red {
-                background-color: #df2a06;
+                background-color: $tg-red;
             }
             .cookie {
-                background-color: #d19336;
+                background-color: $tg-brown;
             }
             .blue {
-                background-color: #7ccfff;
+                background-color: $tg-blue;
             }
         }
     }
@@ -325,7 +323,6 @@
     width: 50%;
     min-width: 300px;
     max-width: 65%;
-    padding-top: 31px;
     margin: 0 0 6px;
     z-index: 2;
     position: relative;
@@ -334,6 +331,9 @@
         padding-bottom: .2em;
     }
 
+    .tg-extraoutput-history {
+        padding-top: 0;
+    }
 }
 
 

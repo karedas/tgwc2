@@ -1132,7 +1132,7 @@ export default class TgGui {
         if (count > 1) {
             countStr = '&#160;<span class="cnt">[x' + count + ']</span>';
         }
-        return _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr;
+        return '<div class="dd-desc">'+ _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr + '</div>';
     }
 
     renderMinidetails(condprc, moveprc, wgt) {
@@ -1745,7 +1745,7 @@ export default class TgGui {
                 txt += '<div class="element' + grp_attribute + '" ' + data_mrn + '>';
                 // mob/obj icon
                 txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type);
-                txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b>' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
+                txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b class="poseq">' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
                 txt += '</div>';
 
                 /* Start Collapsable Obj/Mob Container */
