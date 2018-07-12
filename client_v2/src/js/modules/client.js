@@ -2557,7 +2557,7 @@ export default class TgGui {
     addScrollBar(container, key, sx) {
         let scrollX = false;
         this.scrollbar[key] = new PerfectScrollbar(container, {
-            wheelPropagation: 2,
+            wheelPropagation: false,
             suppressScrollX: scrollX
         });
 
