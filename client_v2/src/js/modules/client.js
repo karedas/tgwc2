@@ -267,8 +267,9 @@ export default class TgGui {
 
             // Initialize Connection to the WebSocket
             _.socket = io.connect(_.ws_server_addr, {
-                'reconnection': false,
-                'force new connection': true,
+                'reconnection': true,
+                'autoConnect:': true,
+                'forceNew': true,
                 'resource': _.socket_io_resource,
                 'transports': ['polling']
             });
@@ -576,9 +577,9 @@ export default class TgGui {
 
         ++quoteIndex;
         quotes.eq(quoteIndex % quotes.length)
-            .fadeIn(2000)
-            .delay(6000)
-            .fadeOut(2000, function(){
+            .fadeIn(1500)
+            .delay(4000)
+            .fadeOut(1500, function(){
                 _.initIntroTextRotator(quoteIndex);
             });
     }
@@ -1568,7 +1569,6 @@ export default class TgGui {
             tabicon = $('#detailsicon-' + type, '#outputOptions'),
             wtab = ['room', 'pers', 'obj', 'dir'].indexOf(type);
 
-        console.log(tabicon);
 
         let cont_header = container.children('.extraoutput-header');
         let cont_detail = container.children('.extraoutput-detail');

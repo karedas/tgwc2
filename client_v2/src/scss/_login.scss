@@ -197,7 +197,6 @@
 
 .tg-intro-rotatext {
     color: #9c9c9c;
-    font-style: italic;
     font-family:kingthinks;
     font-size: 1.2em;
     .phrase{
@@ -205,6 +204,7 @@
     }
 
     .auth {
+        font-style: italic;
         font-size: 0.8em;
         display: block;
         
@@ -250,7 +250,7 @@ body[data-serverstatus="1"] {
     }
 }
 
-body[data-loginstatus="0"] {
+body[data-loginstatus="0"], body[data-loginstatus="preload"] {
     .b-area{
         transition: none!important;
         padding: 0 !important;
