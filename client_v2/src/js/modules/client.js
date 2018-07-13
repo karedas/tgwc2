@@ -275,7 +275,7 @@ export default class TgGui {
                 'autoConnect:': true,
                 'forceNew': true,
                 'resource': _.socket_io_resource,
-                'transports': ['polling']
+                'transports': ['websocket']
             });
 
             // Server status
@@ -419,7 +419,28 @@ export default class TgGui {
                 console.log(err);
             }
 
-            _.netdata = '';
+        _.netdata = '';
+
+        let now = Date.now();
+        if(now > _.client_update.last + 1000) {
+            if(_.client_update.inventory.needed && _.client_options.extradetail) {
+                _.sendToServer('@inv');
+                _.client_update.inventory.needed = false;
+                _.client_update.last = now;
+            }
+            /*if (_.client_update.equipment.needed && isDialogOpen('#equipdialog'))
+			{
+				sendToServer('@equip');
+				client_update.equipment.needed = false;
+				client_update.last = now;
+			}*/
+
+			if (_.client_update.room.needed && _.client_options.extradetail) {
+				_.sendToServer('@agg');
+				_.client_update.room.needed = false;
+				_.client_update.last = now;
+			}	
+        }
 
         } else if (len > 200000) {
             _.showOutput('<br>Errore di comunicazione con il server!<br>');
@@ -915,7 +936,7 @@ export default class TgGui {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
             console.log('inventory');
             // renderInventory(inv_parse);
-            return (inv_parse);
+            //return (inv_parse);
             return '';
         });
 
