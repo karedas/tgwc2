@@ -11,7 +11,7 @@
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",
-    "dotenv": "^5.0.1",
+    "dotenv": "6.0.0",
     "email-templates": "^4.0.1",
     "errorhandler": "^1.5.0",
     "express": "^4.16.3",
@@ -32,8 +32,9 @@
     "should": "^13.2.1",
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0",
+    "sqlite3": "^4.0.1",
     "uuid": "^3.2.1",
-    "winston": "^2.4.1",
+    "winston": "3.0.0",
     "yarn": "^1.6.0"
   },
   "devDependencies": {

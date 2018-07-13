@@ -50,6 +50,8 @@ let session = require("express-session")({
     saveUninitialized: true
 });
 
+let usercount = 0;
+
 // start Session DB
 app.set('trust proxy', 1);
 app.set('max_requests_per_ip', 20);
@@ -94,11 +96,12 @@ function SocketServer() {
 				logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, clientcode, account_id);
 				// Conect to game server
 
-
 				let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
 
 				socket.on('disconnect', function() {
 					logger.info('Closing %s', socket.id);
+					usercount--;
+					socket.emit('gamedata', {usercount:usercount});
 					// Disconnect from game server
 					tgconn.destroy();
 				});
@@ -185,6 +188,8 @@ function SocketServer() {
 		// This is used only until login
 		function handshake(msg) {
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
+				usercount++;
+				websocket.emit('gamedata', {usercount:usercount})
 				// Substitute with the copy handler
 				tgconn.removeListener('data', handshake);
 				tgconn.on('data', sendToClient);
