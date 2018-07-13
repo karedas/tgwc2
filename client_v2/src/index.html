@@ -22,7 +22,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
 
-
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
 
@@ -112,17 +111,6 @@
             </div>
             <div class="tg-outputextra-wrap">
               <div class="tg-resizablehand"></div>
-
-              <!-- output options horizontal  bar -->
-              <!-- <div id="outputOptions" class="tg-output-options">
-                <ul class="tg-tabdetail list-inline ml-auto">
-                  <li class="list-inline-item"><div id="detailsicon-room" class="iconimg"></div></li>
-                  <li class="list-inline-item"><div id="detailsicon-pers" class="iconimg"></div></li>
-                  <li class="list-inline-item"><div id="detailsicon-obj" class="iconimg"></div></li>
-                  <li class="list-inline-item"><div id="detailsicon-dir" class="iconimg"></div></li>
-                </ul>
-              </div> -->
-              <!-- Extra Output Area-->
               <div id="scrollableExtraOutput" class="scrollable">
                 <div id="extraoutput" class="tg-extraoutput-history">
                     <div class="extraoutput-header">
@@ -134,7 +122,7 @@
                     </div>
                     <div class="extraoutput-detail">
                         <div class="extranotice">
-                            <span>Guarda</span> dove ti trovi , qualcosa o qualcuno.
+                            <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
                          </div>
                     </div>
                 </div>
@@ -213,17 +201,34 @@
                         </div>
                       </div>
                     </div>
+                    <!-- Extra Board in Dashboard -->
                     <div class="tg-extraboard col-sm-6 d-none d-sm-flex flex-column">
                       <div class="row h-100">
                         <div class="col-12 d-flex flex-row">
                           <div class="extraboard-btnmenu nav flex-column nav-pills" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="tg-pills-tab-monitor" data-toggle="pill" href="#tg-pills-monitor" role="tab" aria-controls="tg-pills-monitor" aria-selected="true">A</a>
+                            <a class="nav-link active" id="tg-pills-tab-monitor" 
+                                href="#tg-pills-monitor"
+                                data-toggle="pill" 
+                                role="tab"
+                                aria-controls="tg-pills-monitor"
+                                aria-selected="true"
+                                rel="tooltip"
+                                title="Generale">[G]</a>
                             <a class="nav-link" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut" aria-selected="false">B</a>
                             <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility" aria-selected="false">C</a>
                           </div>
                           <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
-                              <div class="tab-pane fade show active" id="tg-pills-monitor" role="tabpanel" aria-labelledby="tg-pills-monitor-tab">Monitor</div>
+                            <!-- Generale -->
+                              <div class="tab-pane fade show active" id="tg-pills-monitor" role="tabpanel" aria-labelledby="tg-pills-monitor-tab">
+                                <div id="combatpanel">
+                                  <div id="enemyicon"></div>
+                                  <div id="enemyH"></div>
+                                  <div id="enemyM"></div>
+                                </div>
+                              </div>
+                            <!-- Shortcut -->
                               <div class="tab-pane fade" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
+                            <!-- Utility -->
                               <div class="tab-pane fade" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
                           </div>  
                         </div>
@@ -236,6 +241,7 @@
                         </div>
                       </div>
                     </div>
+                    <!-- End Extra Board in Dashboard -->
                   </div>
                 </div>
                 <div class="tg-border-box">

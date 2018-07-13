@@ -98,6 +98,10 @@ export default class TgGui {
         /* Shortcuts */
         this.shortcuts_map = {};
 
+        /* Combat Panel */
+        this.in_combat = false;
+        this.enemy_icon = 0;
+
         /* Input */
         this.cmd_prefix = '';
 
@@ -350,13 +354,12 @@ export default class TgGui {
                         // Preload client then start the magic
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
                         // If UI has been past loaded (like on disconnection user action)
-                        if(_.client_state.ui) {
+                        if (_.client_state.ui) {
                             console.log('già caricato!');
                             _.closePopup();
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
-                        }
-                        else {
+                        } else {
                             clientPreloader.init().then(function () {
                                 //reset login message
                                 _.dismissLoginPanel();
@@ -535,7 +538,7 @@ export default class TgGui {
     initLoginPanel() {
 
         let _ = this;
-        
+
         _.initIntroTextRotator();
         _.addScrollBar('.tg-loginpanel', 'loginpanel');
 
@@ -549,7 +552,9 @@ export default class TgGui {
             e.preventDefault();
             var el = $('.tg-loginbtn');
             el.prop('disabled', true);
-            setTimeout(function(){el.prop('disabled', false); }, 3000);
+            setTimeout(function () {
+                el.prop('disabled', false);
+            }, 3000);
 
             let name = $('#login_username').val();
             let pass = $('#login_password').val();
@@ -575,7 +580,7 @@ export default class TgGui {
 
     initIntroTextRotator(index) {
         let _ = this;
-        
+
         let quotes = $("#rotateText .phrase");
         let quoteIndex = index == null ? -1 : index;
 
@@ -583,7 +588,7 @@ export default class TgGui {
         quotes.eq(quoteIndex % quotes.length)
             .fadeIn(1500)
             .delay(4000)
-            .fadeOut(1500, function(){
+            .fadeOut(1500, function () {
                 _.initIntroTextRotator(quoteIndex);
             });
     }
@@ -629,7 +634,7 @@ export default class TgGui {
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
         });
-        
+
         _.openPopup('login', 'Effettua l\'accesso', '.tg-loginwidget');
     }
 
@@ -776,6 +781,7 @@ export default class TgGui {
     }
 
     parseForDisplay(msg) {
+        console.log(msg);
         let _ = this,
             pos;
         //Hide text (password)
@@ -1135,7 +1141,7 @@ export default class TgGui {
         if (count > 1) {
             countStr = '&#160;<span class="cnt">[x' + count + ']</span>';
         }
-        return '<div class="dd-desc">'+ _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr + '</div>';
+        return '<div class="dd-desc">' + _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr + '</div>';
     }
 
     renderMinidetails(condprc, moveprc, wgt) {
@@ -1530,10 +1536,42 @@ export default class TgGui {
     }
 
     setStatus(st) {
-        //TODO: in combat or not 
         let _ = this;
+
+        _.setCombatStatus(st);
         _.updatePlayerStatus(st[0], st[1]);
         return '';
+    }
+
+    /* Combat Box  */
+    setCombatStatus(st) {
+
+        let _ = this;
+
+        if (st.length == 5) {
+            if (!_.in_combat) {
+                _.in_combat = true;
+                $('#combatpanel').show();
+            }
+            _.updateEnemyStatus(st[2], st[3]);
+            _.updateEnemyIcon(st[4]);
+
+        } else if (_.in_combat) {
+            $('#combatpanel').hide();
+            _.in_combat = false;
+        }
+    }
+
+    updateEnemyStatus(hprc, mprc) {
+        $('#enemyH').width(this.limitPrc(hprc) + '%');
+        $('#enemyM').width(this.limitPrc(mprc) + '%');
+    }
+
+    updateEnemyIcon(icon) {
+        let _ = this;
+        if(_.enemy_icon != icon) {
+            $('#enemyicon').css('background-position', _.tileBgPos(icon)).attr('mrn', 0);
+        }
     }
 
     /* *****************************************************************************
@@ -2466,20 +2504,20 @@ export default class TgGui {
     extraBoardInit() {
         //TODO
         $('a', '.extraboard-btnmenu')
-            .on('mouseover',  function() {
+            .on('mouseover', function () {
                 let val = $(this).text();
                 $('#extraboardCaption').text(val);
             })
-            .on('mouseout', function(){
+            .on('mouseout', function () {
                 $('#extraboardCaption').text('');
             });
 
 
-            //Shortcut TODO:
-            for(let x= 0; x < 26; x++) {
-                let shortcut = $('<div class="shortcut-btn"></div>');
-                shortcut.appendTo('#tg-pills-shortcut');
-            }
+        //Shortcut TODO:
+        for (let x = 0; x < 26; x++) {
+            let shortcut = $('<div class="shortcut-btn"></div>');
+            shortcut.appendTo('#tg-pills-shortcut');
+        }
     }
 
     /* -------------------------------------------------
@@ -2502,7 +2540,7 @@ export default class TgGui {
     }
 
     openCookieLawPopup() {
-        let src = './ajax/cookielawAlert.html';    
+        let src = './ajax/cookielawAlert.html';
         $.magnificPopup.open({
             showCloseBtn: false,
             closeOnBgClick: false,
@@ -2526,11 +2564,11 @@ export default class TgGui {
         let src = 'ajax/news/last.html';
 
         $.ajax({
-            url : src,
-            success: function(result, status, xhr) {
-                
-                let fileTimeStamp =  Date.parse(xhr.getResponseHeader("Last-Modified"));
-                if( fileTimeStamp != _.client_options.news_date_last || _.client_options.news_wantsee ) {
+            url: src,
+            success: function (result, status, xhr) {
+
+                let fileTimeStamp = Date.parse(xhr.getResponseHeader("Last-Modified"));
+                if (fileTimeStamp != _.client_options.news_date_last || _.client_options.news_wantsee) {
 
                     _.client_options.news_wantsee = true;
 
@@ -2550,29 +2588,27 @@ export default class TgGui {
                                 _.client_state.news_showed = true;
                                 _.client_options.news_date_last = fileTimeStamp;
 
-                               $('#initNewsButton').one('click', function () {
-                                   if ($('input[type=checkbox]').prop('checked')) {
-                                       _.client_options.news_wantsee = false;
+                                $('#initNewsButton').one('click', function () {
+                                    if ($('input[type=checkbox]').prop('checked')) {
+                                        _.client_options.news_wantsee = false;
                                     }
-                                   _.sendInput();
-                                   _.closePopup();
-                               });
+                                    _.sendInput();
+                                    _.closePopup();
+                                });
 
-                           },
-                           close: function () {
+                            },
+                            close: function () {
                                 _.sendInput();
                                 _.SaveStorage('options', _.client_options);
-                           }
+                            }
                         }
                     });
-                }
-
-                else {
+                } else {
                     _.sendInput()
                 }
             },
 
-            fail: function(){
+            fail: function () {
                 _.sendInput();
                 return;
             }
@@ -2619,7 +2655,7 @@ export default class TgGui {
         // return $.magnificPopup.instance;
     }
 
-    
+
 
     addScrollBar(container, key, sx) {
         let scrollX = false;
@@ -2631,7 +2667,7 @@ export default class TgGui {
     }
 
     // UTILITY
-    
+
     setViewportSetup(val) {
         $('.tg-area').attr('data-viewport', val);
         this.viewport = val;
