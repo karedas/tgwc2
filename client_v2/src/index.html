@@ -21,7 +21,6 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
 </head>
 
@@ -34,7 +33,9 @@
         <nav class="tg-navbar navbar-expand navbar">
           <ul class="navbar-nav">
             <li class="nav-item h-100">
-              <a href="#" class="tg-bcdrand"><img src="images/logo/tgminilogo.png"/></a>
+              <a href="#" class="tg-bcdrand">
+                <img src="images/logo/tgminilogo.png" />
+              </a>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -46,13 +47,13 @@
                 <a class="dropdown-item" href="#">Opzioni</a>
                 <a class="dropdown-item" href="#">Log di gioco</a>
                 <a id="userDisconnect" href="#" class="dropdown-item">Esci
-                    <i class="fas fa-sign-out-alt"></i>
+                  <i class="fas fa-sign-out-alt"></i>
                 </a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="tgNavBarGuidaDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-question-circle"></i> Guida
+                <i class="fas fa-question-circle"></i> Guida
               </a>
               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="tgNavBarGuidaDropDown">
                 <a class="dropdown-item" href="#">Guida al gioco</a>
@@ -78,13 +79,16 @@
 						</li>//-->
           </ul>
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item" rel="tooltip" title="Utenti Online">
+                <i class="fas fa-user"></i> 0
+            </li>
             <li class="nav-item dropdown">
-              <button class="tg-fnt-button no-feature dropdown-toggle" id="tgNavBartriggerAudio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="tg-fnt-button no-feature dropdown-toggle" id="tgNavBartriggerAudio" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <i class="fas fa-volume-up"></i>
               </button>
               <div class="dropdown-menu" aria-labelledby="tgNavBarTriggerAudio">
                 <div class="tg-audiobox">
-
                   <span class="tg-audiotoggle"></span>
                   <div class="tg-audiolabel">55</div>
                 </div>
@@ -113,18 +117,18 @@
               <div class="tg-resizablehand"></div>
               <div id="scrollableExtraOutput" class="scrollable">
                 <div id="extraoutput" class="tg-extraoutput-history">
-                    <div class="extraoutput-header">
-                      <div class="out-title" id="detailtitle"></div>
-                      <div class="extra-detailimg">
-                        <img src="" id="detailimage" />
-                      </div>
-                      <div class="detaildesc" id="detaildesc"></div>
+                  <div class="extraoutput-header">
+                    <div class="out-title" id="detailtitle"></div>
+                    <div class="extra-detailimg">
+                      <img src="" id="detailimage" />
                     </div>
-                    <div class="extraoutput-detail">
-                        <div class="extranotice">
-                            <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
-                         </div>
+                    <div class="detaildesc" id="detaildesc"></div>
+                  </div>
+                  <div class="extraoutput-detail">
+                    <div class="extranotice">
+                      <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,18 +147,6 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="tg-character">
-                        <!--
-												<div class="tg-character-avmenu">
-													<ul class="list-unstyled">
-														<li>
-															<button type="button" id="triggerShowAbility" class="nofeature tg-button b-square" title="Modifica la descrizione del personaggio">[C]</button>
-														</li>
-														<li>
-															<button type="button" id="triggerShowSheet" class="nofeature tg-button b-square" title="Apri la tua scheda">[C]</button>
-														</li>
-													</ul>
-												</div>
-												-->
                         <!-- Character avatar -->
                         <div class="tg-characteravatar b-ironlight tg-shadow no-feature" rel="tooltip" title "">
                           <div class="tg-avatar-wrap">
@@ -206,31 +198,27 @@
                       <div class="row h-100">
                         <div class="col-12 d-flex flex-row">
                           <div class="extraboard-btnmenu nav flex-column nav-pills" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="tg-pills-tab-monitor" 
-                                href="#tg-pills-monitor"
-                                data-toggle="pill" 
-                                role="tab"
-                                aria-controls="tg-pills-monitor"
-                                aria-selected="true"
-                                rel="tooltip"
-                                title="Generale">[G]</a>
-                            <a class="nav-link" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut" aria-selected="false">B</a>
-                            <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility" aria-selected="false">C</a>
+                            <a class="nav-link active" id="tg-pills-tab-monitor" href="#tg-pills-monitor" data-toggle="pill" role="tab" aria-controls="tg-pills-monitor"
+                              aria-selected="true" rel="tooltip" title="Generale">[G]</a>
+                            <a class="nav-link" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut"
+                              aria-selected="false">B</a>
+                            <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility"
+                              aria-selected="false">C</a>
                           </div>
                           <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
                             <!-- Generale -->
-                              <div class="tab-pane fade show active" id="tg-pills-monitor" role="tabpanel" aria-labelledby="tg-pills-monitor-tab">
-                                <div id="combatpanel">
-                                  <div id="enemyicon"></div>
-                                  <div id="enemyH"></div>
-                                  <div id="enemyM"></div>
-                                </div>
+                            <div class="tab-pane fade show active" id="tg-pills-monitor" role="tabpanel" aria-labelledby="tg-pills-monitor-tab">
+                              <div id="combatpanel">
+                                <div id="enemyicon"></div>
+                                <div id="enemyH"></div>
+                                <div id="enemyM"></div>
                               </div>
+                            </div>
                             <!-- Shortcut -->
-                              <div class="tab-pane fade" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
+                            <div class="tab-pane fade" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
                             <!-- Utility -->
-                              <div class="tab-pane fade" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
-                          </div>  
+                            <div class="tab-pane fade" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
+                          </div>
                         </div>
                       </div>
                       <div class="row">
@@ -293,10 +281,10 @@
                 <span class="dir-ico"></span>
               </div>
               <div id="alto" class="tg-dir dir-alto" rel="tooltip" title="Vai verso l'alto" data-label="Alto">
-                  <span class="dir-ico"></span>
-                </div>
-                <div id="basso" class="tg-dir dir-basso" rel="tooltip" title="Vai verso il basso" data-label="Basso">
-                    <span class="dir-ico"></span>
+                <span class="dir-ico"></span>
+              </div>
+              <div id="basso" class="tg-dir dir-basso" rel="tooltip" title="Vai verso il basso" data-label="Basso">
+                <span class="dir-ico"></span>
               </div>
               <div class="tg-directions">
               </div>
@@ -351,8 +339,9 @@
           <div class="tg-loginform">
             <div class="tg-loginform-wrap">
               <div class="tg-loginform-content">
-                <h2>Gioco di Ruolo Fantasy Online<br>
-                    Accedi <span>gratis</span> al mondo di Ikhari!</h2>
+                <h2>Gioco di Ruolo Fantasy Online
+                  <br> Accedi
+                  <span>gratis</span> al mondo di Ikhari!</h2>
                 <form id="loginForm" action="#" autocomplete="off">
                   <input id="login_username" name="username" type="text" autocomplete="off" placeholder="Username">
                   <input id="login_password" name="password" type="password" autocomplete="off" placeholder="Password">
@@ -415,31 +404,37 @@
         </div>
         <div class="row">
           <div class="col-4 text-center">
-            <i class="fab fa-facebook"></i> <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
-            <i class="fab fa-wpforms"></i> <a href="http://forum.thegatemud.it/" target="_blank">Forum</a> | 
-            <i class="fas fa-envelope"></i> <a href="#" target="_blank">Contattaci</a>
+            <i class="fab fa-facebook"></i>
+            <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
+            <i class="fab fa-wpforms"></i>
+            <a href="http://forum.thegatemud.it/" target="_blank">Forum</a> |
+            <i class="fas fa-envelope"></i>
+            <a href="#" target="_blank">Contattaci</a>
           </div>
           <div class="col-4 text-center">
-            <p class="tg-version-name">TGWC v.2  - 
+            <p class="tg-version-name">TGWC v.2 -
               <span>
                 <%= htmlWebpackPlugin.options.git_version %> (Alpha)
-            </span>
-          </p>
+              </span>
+            </p>
           </div>
           <div class="col-4 text-center">
-            &copy; 2013-2018 The Gate MUD | <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a></div>
+            &copy; 2013-2018 The Gate MUD |
+            <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a>
           </div>
+        </div>
       </div>
     </div>
     <!-- Login Widget -->
     <div class="tg-loginwidget">
       <div id="widgetLoginStatus" class="tg-widgetlogin-status">
-          Utente <span>[nomeutente]</span> disconnesso.
+        Utente
+        <span>[nomeutente]</span> disconnesso.
       </div>
       <div class="tg-widgetlogin-menu">
         <button id="widgetLoginReconnect" type="button" class="btn btn-reconnect">Riconnetti</button>
-        <button id="widgetLoginNewConnection" type="button" class ="btn btn-newconnection">Accedi con un personaggio diverso.</button>
-        <button id="widgetLoginExit" type="button" class ="btn btn-newconnection">Esci.</button>
+        <button id="widgetLoginNewConnection" type="button" class="btn btn-newconnection">Accedi con un personaggio diverso.</button>
+        <button id="widgetLoginExit" type="button" class="btn btn-newconnection">Esci.</button>
       </div>
       <form id="widgetLoginForm" action="#" autocomplete="off">
         <input id="widget_username" name="username" type="text" autocomplete="off" placeholder="Username">
@@ -459,4 +454,5 @@
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
   <audio id="sound" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
 </body>
+
 </html>
