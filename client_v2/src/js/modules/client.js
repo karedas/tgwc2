@@ -1179,6 +1179,7 @@ export default class TgGui {
             // Character Image
             if (data.image) {
                 $('.tg-characteravatar img').attr('src', _.media_server_addr + data.image);
+                $('.tg-characteravatar').show();
             }
             /* Info Tooltips */
             $('.tg-characteravatar').attr('title', data.name + ' ' + data.title);
@@ -1571,14 +1572,15 @@ export default class TgGui {
 
         if (st.length == 5) {
             if (!_.in_combat) {
+                $('#combatpanel').addClass('in-combat');
+                $('#tg-pills-tab-monitor').tab('show');
                 _.in_combat = true;
-                $('#combatpanel').show();
             }
             _.updateEnemyStatus(st[2], st[3]);
             _.updateEnemyIcon(st[4]);
 
         } else if (_.in_combat) {
-            $('#combatpanel').hide();
+            $('#combatpanel').removeClass('in-combat');
             _.in_combat = false;
         }
     }
@@ -2269,8 +2271,16 @@ export default class TgGui {
             handleSelector: ".tg-resizablehand",
             resizeHeight: false,
             resizeWidthFrom: 'left',
-            onDragEnd: function () {
-                let width = $(extraOutputID).width();
+
+            onDragEnd: function (e, el) {
+                let width = $(el).width();
+
+                let maxWidth = Number($(el).css('maxWidth').replace(/[^-\d\.]/g, ''));
+                let contWidth = Math.round(($(el).width() / $(el).parent().width()) * 100)
+                if(contWidth >= maxWidth) {
+                    width =  maxWidth;
+                    $(el).width(maxWidth+'%');
+                }
                 _.client_options.extradetail_width = width;
                 _.SaveStorage('options', _.client_options);
             }
@@ -2524,21 +2534,36 @@ export default class TgGui {
      * -------------------------------------------------*/
     extraBoardInit() {
         //TODO
-        $('a', '.extraboard-btnmenu')
-            .on('mouseover', function () {
-                let val = $(this).text();
-                $('#extraboardCaption').text(val);
-            })
-            .on('mouseout', function () {
-                $('#extraboardCaption').text('');
-            });
+        let _ = this;
 
+        _.addScrollBar('#tg-pills-shortcut', 'extraboard');
 
         //Shortcut TODO:
         for (let x = 0; x < 26; x++) {
-            let shortcut = $('<div class="shortcut-btn"></div>');
+            let shortcut = $('<div class="shortcut-btn" title="nome shortcut '+x+'" data-cmd="grida oryon ti amo"><span>'+ x +'</span></div>');
             shortcut.appendTo('#tg-pills-shortcut');
         }
+
+                
+        $('.tg-extraboard [title]')
+            .on('mouseover', function () {
+                let val = $(this).attr('title');
+                let cmdVal = $(this).data('cmd');
+                cmdVal = cmdVal ? ': ' + cmdVal : '';
+
+                $('#extraboardCaption').text(val + cmdVal);
+            })
+            .on('mouseout', function () {
+                $('#extraboardCaption').text('');
+        });
+
+        $(".shortcut-btn")
+            .on("contextmenu",function(){
+            return false;
+            })
+            .on('click', function() {
+                _.processCommands($(this).data('cmd'));
+            });
     }
 
     /* -------------------------------------------------
@@ -2679,7 +2704,7 @@ export default class TgGui {
 
 
     addScrollBar(container, key, sx) {
-        let scrollX = false;
+        let scrollX = true;
         this.scrollbar[key] = new PerfectScrollbar(container, {
             wheelPropagation: false,
             suppressScrollX: scrollX

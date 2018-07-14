@@ -70,9 +70,9 @@ button, input[type="checkbox"] {
     display: flex;
     flex-direction: column;
     background: #0a0806;
+    overflow: hidden;
+
 }
-
-
 
 
 .modal-cookielaw {
@@ -116,8 +116,8 @@ button, input[type="checkbox"] {
     width: 32px;
     height: 32px;
     min-width: 32px;
-    display: inline-block !important;
-    zoom: .8;
+    display: inline-block;
+    transform: scale(.7);
     vertical-align: middle;
 }
 

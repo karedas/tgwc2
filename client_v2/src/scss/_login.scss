@@ -199,6 +199,9 @@
     color: #9c9c9c;
     font-family:kingthinks;
     font-size: 1.2em;
+    min-height: 2.4em;
+    box-sizing: content-box;
+
     .phrase{
         display: none;
     }

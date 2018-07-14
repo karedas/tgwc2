@@ -4,6 +4,7 @@
 
     background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
     overflow: hidden;
+    flex: 0  1 auto;
 
     .tg-rightside-wrap {
         height: 100%;
