@@ -52,8 +52,6 @@ button, input[type="checkbox"] {
     }
 }
 
-
-
 .tg-main {
     min-height: 100%;
     display: none;
@@ -73,7 +71,6 @@ button, input[type="checkbox"] {
     overflow: hidden;
 
 }
-
 
 .modal-cookielaw {
     &.mfp-bg {
@@ -109,7 +106,6 @@ button, input[type="checkbox"] {
     }
 }
 
-
 .iconimg {
     background-image: url($imgPath + '/tiles/tiles.png');
     background-repeat: no-repeat;
@@ -119,6 +115,19 @@ button, input[type="checkbox"] {
     display: inline-block;
     transform: scale(.7);
     vertical-align: middle;
+}
+
+.popover-header {
+    font-size:.6rem;
+    padding-bottom: 0;
+}
+
+.popover-body {
+    padding-top: 0;
+    a {
+        text-decoration: underline;
+        color: $tg-yellow;
+    }
 }
 
 

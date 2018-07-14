@@ -1651,23 +1651,26 @@ export default class TgGui {
         /* Set Title and Tooltip */
         if (info.title) {
             if (type == 'room' && !info.up) {
-                res += '<div class="room"><div class="lts"></div>' + info.title + '<div class="rts"></div></div>';
+                //res += '<div class="room"><div class="lts"></div>' + info.title + '<div class="rts"></div></div>';
             }
             let title = _.capFirstLetter(info.title);
             let icon = '';
             let detaildesc = '';
-            if (info.desc.base) {
-
-                if (type == 'room') {
-                    _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
-                } else {
-                    icon = _.renderIcon(info.icon, null, null, null, null, null);
+            if(info.desc) {
+                if (info.desc.base) {
+    
+                    if (type == 'room') {
+                        _.last_room_desc = _.formatText(info.desc.base, 'out-descbase');
+                    } else {
+                        icon = _.renderIcon(info.icon, null, null, null, null, null);
+                    }
+    
+                    detaildesc += _.formatText(info.desc.base, 'out-descbase');
+                } else if (info.desc.repeatlast && _.last_room_desc) {
+                    detaildesc += _.last_room_desc;
                 }
-
-                detaildesc += _.formatText(info.desc.base, 'out-descbase');
-            } else if (info.desc.repeatlast && _.last_room_desc) {
-                detaildesc += _.last_room_desc;
             }
+
             $(cont_header).show();
             $(cont_header).children('#detailtitle').html(icon + title);
             $(cont_header).children('#detaildesc').html(detaildesc);
@@ -2264,7 +2267,9 @@ export default class TgGui {
     extraOutputInit() {
         let _ = this;
         let extraOutputID = '.tg-outputextra-wrap';
+
         this.addScrollBar('#scrollableExtraOutput', 'extraoutput');
+
         $(extraOutputID).width(_.client_options.extradetail_width);
 
         $(extraOutputID).resizable({
@@ -2281,6 +2286,10 @@ export default class TgGui {
                     width =  maxWidth;
                     $(el).width(maxWidth+'%');
                 }
+                
+                //update scrollbar
+                _.scrollbar.extraoutput.update();
+                
                 _.client_options.extradetail_width = width;
                 _.SaveStorage('options', _.client_options);
             }
@@ -2513,10 +2522,23 @@ export default class TgGui {
 
     genericEvents() {
         let _ = this;
+
+        $(window).on("contextmenu",function(e){
+            e.preventDefault();
+        });
+        
         $('.no-feature').on('click', function (e) {
             e.preventDefault();
             openNoFeaturePopup();
         });
+
+        $(window).resize(function(){
+            setTimeout(function(){
+                $.each(_.scrollbar, function(i, s) {
+                    s.update();
+                });
+            }, 400)
+        })
     }
 
     sendInput() {
@@ -2542,6 +2564,11 @@ export default class TgGui {
         for (let x = 0; x < 26; x++) {
             let shortcut = $('<div class="shortcut-btn" title="nome shortcut '+x+'" data-cmd="grida oryon ti amo"><span>'+ x +'</span></div>');
             shortcut.appendTo('#tg-pills-shortcut');
+
+            $('.shortcut-btn').eq(x).popover({
+                content: '<a href="#">modifica</a>',
+                html: true             
+            })
         }
 
                 
@@ -2559,7 +2586,9 @@ export default class TgGui {
 
         $(".shortcut-btn")
             .on("contextmenu",function(){
-            return false;
+                $('.shortcut-btn').popover('hide');
+                $(this).popover('show');
+                return false;
             })
             .on('click', function() {
                 _.processCommands($(this).data('cmd'));

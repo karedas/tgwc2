@@ -125,7 +125,7 @@
             display: flex;
             flex-wrap: wrap;
             .element {
-                padding: 2px 0;
+                padding: 2px 0 0;
                 flex: 0 1 50%;
             } 
             .element:nth-child(odd) {
