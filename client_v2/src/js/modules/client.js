@@ -1572,11 +1572,15 @@ export default class TgGui {
 
         let _ = this;
 
-        if (st.length == 5) {
+        if (st.length == 6) {
             if (!_.in_combat) {
                 $('#combatpanel').addClass('in-combat');
                 $('#tg-pills-tab-monitor').tab('show');
                 $('#actionCombaAction_b button').prop('disabled', false);
+
+                //set enemy name
+                $('#enemyName').text(st[5]);
+
                 _.in_combat = true;
             }
             _.updateEnemyStatus(st[2], st[3]);

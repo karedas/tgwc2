@@ -207,14 +207,24 @@
             height: 100%;
         }
 
-        .th-combatpanel-wrap:before {
+        .tg-combatpanel-wrap:before {
             content: "Non sei in combattimento";
-            color: #625e55;
+            color: #8b867b;
             position: absolute;
             top: 50%;
             left: 0;
             transform: translateY(-50%);
             width: 100%;
+        }
+
+        .tg-enemy-name{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-top: 5px;
+            overflow: hidden;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: $tg-red;
         }
 
         .tg-enemyicon {
@@ -267,16 +277,16 @@
             display: none;
             position: absolute;
             top: 24px;
-            left: 154px;
+            right: 8px;
             font-size: 9px;
-            color: $tg-red;
+            color: $tg-lt-red;
         }
 
         .enemy-m-prc {
             display: none;
             position: absolute;
             top: 38px;
-            left: 154px;
+            right: 8px;
             font-size: 9px;
             color: $tg-green;
         }
@@ -285,9 +295,9 @@
         //== pieta/tregua
         .tg-combat-right {
             display: none;
-            right: 15px;
+            right: 8px;
             position: absolute;
-            top: 22px;
+            top: 16px;
             button {
                 display: block;
             }
@@ -299,9 +309,8 @@
         
         &.in-combat {
             @include sprite($combatpanel-box-target-sprite);
-
-            :before {
-                content: none;
+            .tg-combatpanel-wrap:before {
+                display: none;
             }
             .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon, .tg-combat-right{
                 display: inline-block;
