@@ -963,7 +963,7 @@ export default class TgGui {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
             console.log('renderEquipment');
             //_.renderEquipment(eq_parse);
-            openNoFeaturePopup();
+            _.openNoFeaturePopup();
             return '';
         });
 
@@ -971,7 +971,7 @@ export default class TgGui {
         msg = msg.replace(/&!wklst\{[\s\S]*?\}!/gm, function (wk) {
             let wk_parse = $.parseJSON(wk.slice(7, -1));
             console.log('renderworkslist');
-            openNoFeaturePopup();
+            _.openNoFeaturePopup();
             //return renderWorksList(wk);
         });
 
@@ -1162,7 +1162,7 @@ export default class TgGui {
         if (count > 1) {
             countStr = '&#160;<span class="cnt">[x' + count + ']</span>';
         }
-        return '<div class="dd-desc">' + _.renderMinidetails(condprc, moveprc, wgt) + desc.replace(/\n/gm, ' ') + countStr + '</div>';
+        return _.renderMinidetails(condprc, moveprc, wgt) + '<div class="dd-desc">' + desc.replace(/\n/gm, ' ') + countStr + '</div>';
     }
 
     renderMinidetails(condprc, moveprc, wgt) {
@@ -2145,7 +2145,7 @@ export default class TgGui {
 
         $('#tgSearchHelp').on('submit', function (e) {
             e.preventDefault();
-            openNoFeaturePopup();
+            _.openNoFeaturePopup();
         });
     }
 
@@ -2538,7 +2538,7 @@ export default class TgGui {
         
         $('.no-feature').on('click', function (e) {
             e.preventDefault();
-            openNoFeaturePopup();
+            _.openNoFeaturePopup();
         });
 
         $(window).resize(function(){

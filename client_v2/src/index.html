@@ -145,7 +145,7 @@
               <div class="tg-characterpanel b-controlpanel">
                 <div class="tg-characterpanel-wrap">
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col">
                       <div class="tg-character">
                         <!-- Character avatar -->
                         <div class="tg-characteravatar b-ironlight tg-shadow no-feature" rel="tooltip" title "">
@@ -210,9 +210,6 @@
                             <div class="tab-pane show active" id="tg-pills-combat" role="tabpanel" aria-labelledby="tg-pills-combat-tab">
                               <div class="row h-100">
                                 <div class="col">
-                                  <div class="tg-combatpanel-special"></div>
-                                </div>
-                                <div class="col">
                                   <div id="combatpanel" class="tg-combatpanel">
                                     <div class="tg-combatpanel-wrap">
                                       <div class="tg-enemyicon">
@@ -224,16 +221,20 @@
                                       </div>
                                       <div class="enemy-m-prc">0%</div>
                                       <div class="tg-enemy-m">
-                                          <div id="enemyM" class="enemy-bar"></div>
+                                        <div id="enemyM" class="enemy-bar"></div>
+                                      </div>
+                                      <div id="actionCombaAction_b" class="tg-combat-right">
+                                        <button id="combatPieta" class="tg-fnt-button tg-button-pieta mb-1 mt-auto" disabled="disabled" title="Chiedi la Piet&agrave;"></button>
+                                        <button id="combatTregua" class="tg-fnt-button tg-button-tregua mb-auto" disabled="disabled" title="Chiedi una Tregua"></button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                                 <div class="col">
-                                  <div id="actionCombaAction_b" class="tg-combat-right d-flex flex-column h-100">
-                                    <button id="combatPieta" class="tg-fnt-button tg-button-tregua mb-1 mt-auto" disabled="disabled"></button>
-                                    <button id="combatTregua" class="tg-fnt-button tg-button-pieta mb-auto" disabled="disabled"></button>
-                                  </div>
+          
+                                </div>
+                                <div class="col">
+                                  <div class="tg-combatpanel-special"></div>
                                 </div>
                               </div>
                             </div>
@@ -488,4 +489,5 @@
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
   <audio id="sound" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
 </body>
+
 </html>

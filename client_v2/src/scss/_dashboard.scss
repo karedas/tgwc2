@@ -146,7 +146,7 @@
         overflow-y: auto;
         position: relative;
         background-color: #1b1513;
-        box-shadow: inset 0 0 12px 0px black;
+        box-shadow: inset 0 0 6px 0px black;
     }
     .extraboard-btnmenu {
         height: 100%;
@@ -195,9 +195,11 @@
     //== combat Panel
     .tg-combatpanel {
         text-align: center;
-        min-width: 182px;
+        min-width: 256px;
+        margin-left: 6px;
         height: 75px;
-        background: url($imgPath +'/frame/combatpanel_box.jpg') no-repeat top left;
+        background-repeat: no-repeat;
+        @include sprite($combatpanel-box-notarget-sprite);
 
         .tg-combatpanel-wrap {
             position: relative;
@@ -205,13 +207,25 @@
             height: 100%;
         }
 
+        .th-combatpanel-wrap:before {
+            content: "Non sei in combattimento";
+            color: #625e55;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+        }
+
         .tg-enemyicon {
+            display: none;
             margin: 5px auto;
             transform: none;
             width: 39px;
             height: 39px;
             position: absolute;
             top: 14px;
+            left: 6px;
             z-index: 2;
             background: url($imgPath + '/frame/enemy-target-icon-box.png') no-repeat;
     
@@ -225,7 +239,7 @@
             height: 11px;
             position: absolute;
             left: 40px;
-            right: 33px;
+            width: 108px;
 
             .enemy-bar {
                 display: block;
@@ -266,21 +280,34 @@
             font-size: 9px;
             color: $tg-green;
         }
+
+        
+        //== pieta/tregua
+        .tg-combat-right {
+            display: none;
+            right: 15px;
+            position: absolute;
+            top: 22px;
+            button {
+                display: block;
+            }
+            button:disabled {
+                opacity: .6;
+            }
+        }
+
         
         &.in-combat {
-            .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc{
+            @include sprite($combatpanel-box-target-sprite);
+
+            :before {
+                content: none;
+            }
+            .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon, .tg-combat-right{
                 display: inline-block;
             }
         }
 
-    }
-
-    //== pieta/tregua
-    .tg-combat-right {
-        max-width: 110px;
-        button:disabled {
-            opacity: .6;
-        }
     }
 
     /*Dashboard Tabs*/
