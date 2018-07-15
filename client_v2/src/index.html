@@ -198,7 +198,7 @@
                       <div class="row h-100">
                         <div class="col-12 d-flex flex-row pl-1">
                           <div class="extraboard-btnmenu nav flex-column nav-pills order-2" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="tg-pills-tab-monitor" href="#tg-pills-monitor" data-toggle="pill" role="tab" aria-controls="tg-pills-monitor"
+                            <a class="nav-link active" id="tg-pills-tab-combat" href="#tg-pills-combat" data-toggle="pill" role="tab" aria-controls="tg-pills-monitor"
                               aria-selected="true" title="Combattimento">G</a>
                             <a class="nav-link" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut"
                               aria-selected="false" title="Scorciatoie">S</a>
@@ -207,15 +207,32 @@
                           </div>
                           <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
                             <!-- Generale -->
-                            <div class="tab-pane show active" id="tg-pills-monitor" role="tabpanel" aria-labelledby="tg-pills-monitor-tab">
-                              <div id="combatpanel" class="tg-combatpanel">
-                                <div class="tg-combatpanel-wrap">
-                                  <div id="enemyicon" class="tg-enemyicon iconimg"></div>
-                                  <div class="tg-enemy-h">
-                                    <div id="enemyH"></div>
+                            <div class="tab-pane show active" id="tg-pills-combat" role="tabpanel" aria-labelledby="tg-pills-combat-tab">
+                              <div class="row h-100">
+                                <div class="col">
+                                  <div class="tg-combatpanel-special"></div>
+                                </div>
+                                <div class="col">
+                                  <div id="combatpanel" class="tg-combatpanel">
+                                    <div class="tg-combatpanel-wrap">
+                                      <div class="tg-enemyicon">
+                                        <div id="enemyicon" class="iconimg"></div>
+                                      </div>
+                                      <div class="enemy-h-prc">0%</div>
+                                      <div class="tg-enemy-h">
+                                        <div id="enemyH" class="enemy-bar"></div>
+                                      </div>
+                                      <div class="enemy-m-prc">0%</div>
+                                      <div class="tg-enemy-m">
+                                          <div id="enemyM" class="enemy-bar"></div>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <div class="tg-enemy-m">
-                                      <div id="enemyM"></div>
+                                </div>
+                                <div class="col">
+                                  <div id="actionCombaAction_b" class="tg-combat-right d-flex flex-column h-100">
+                                    <button id="combatPieta" class="tg-fnt-button tg-button-tregua mb-1 mt-auto" disabled="disabled"></button>
+                                    <button id="combatTregua" class="tg-fnt-button tg-button-pieta mb-auto" disabled="disabled"></button>
                                   </div>
                                 </div>
                               </div>
@@ -447,9 +464,9 @@
             <div class="tg-charavatar-last">[--- immagine pg connesso ---]</div>
           </div>
           <div class="col">
-            <button id="widgetLoginReconnect" type="button" class="btn btn-reconnect">Riconnetti</button>
-            <button id="widgetLoginNewConnection" type="button" class="btn btn-newconnection">Accedi con un personaggio diverso.</button>
-            <button id="widgetLoginExit" type="button" class="btn btn-newconnection">Esci.</button>
+            <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti</button>
+            <button id="widgetLoginNewConnection" type="button" class="btn-newconnection">Accedi con un personaggio diverso.</button>
+            <button id="widgetLoginExit" type="button" class="btn-newconnection">Esci.</button>
           </div>
         </div>
       </div>

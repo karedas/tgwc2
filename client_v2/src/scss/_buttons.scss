@@ -27,5 +27,11 @@
     &.tg-button-continua {
         @include sprite($btn-continua-sprite);
     }
+    &.tg-button-tregua {
+        @include sprite($btn-tregua-sprite);
+    }
+    &.tg-button-pieta {
+        @include sprite($btn-pieta-sprite);
+    }
 
 }

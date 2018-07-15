@@ -1175,6 +1175,7 @@ export default class TgGui {
 
         if (cmd == 'info') {
             // Name
+            console.log('?');
             $('#charName').html(data.name);
             // Character Image
             if (data.image) {
@@ -1185,6 +1186,7 @@ export default class TgGui {
             $('.tg-characteravatar').attr('title', data.name + ' ' + data.title);
 
         } else if (cmd == 'stato') {
+            console.log('ok');
             if (data.conv) {
                 $('.tg-infocharname .icon-conva').removeClass('d-none');
             } else {
@@ -1574,6 +1576,7 @@ export default class TgGui {
             if (!_.in_combat) {
                 $('#combatpanel').addClass('in-combat');
                 $('#tg-pills-tab-monitor').tab('show');
+                $('#actionCombaAction_b button').prop('disabled', false);
                 _.in_combat = true;
             }
             _.updateEnemyStatus(st[2], st[3]);
@@ -1581,13 +1584,18 @@ export default class TgGui {
 
         } else if (_.in_combat) {
             $('#combatpanel').removeClass('in-combat');
+            $('#actionCombaAction_b button').prop('disabled', true);
             _.in_combat = false;
         }
     }
 
     updateEnemyStatus(hprc, mprc) {
-        $('#enemyH').width(this.limitPrc(hprc) + '%');
-        $('#enemyM').width(this.limitPrc(mprc) + '%');
+        let h = this.limitPrc(hprc) + '%';
+        let m = this.limitPrc(mprc) + '%';
+        $('#enemyH').width(h);
+        $('.enemy-h-prc').text(h)
+        $('#enemyM').width(m);
+        $('.enemy-m-prc').text(m)
     }
 
     updateEnemyIcon(icon) {
@@ -2456,12 +2464,13 @@ export default class TgGui {
         let _ = this;
 
         /* Buttons with CMD event */
-        let cmdButtons = [{
-            id: '#userDisconnect',
-            cmd: function () {
-                _.disconnectFromServer();
-            }
-        }]
+        let cmdButtons = [
+            {id: '#userDisconnect', cmd: function () { _.disconnectFromServer()}},
+            {id: '#combatPieta', cmd: 'pieta'},
+            {id: '#combatTregua', cmd: 'tregua'}
+
+
+            ]
 
         $.each(cmdButtons, function (idx, bdata) {
             let button = $(bdata.id);
@@ -2567,8 +2576,10 @@ export default class TgGui {
 
             $('.shortcut-btn').eq(x).popover({
                 content: '<a href="#">modifica</a>',
-                html: true             
+                html: true ,
+                trigger: 'manual'
             })
+
         }
 
                 
@@ -2585,14 +2596,17 @@ export default class TgGui {
         });
 
         $(".shortcut-btn")
-            .on("contextmenu",function(){
+            .on("contextmenu",function(e){
                 $('.shortcut-btn').popover('hide');
                 $(this).popover('show');
+
                 return false;
             })
             .on('click', function() {
                 _.processCommands($(this).data('cmd'));
             });
+
+            
     }
 
     /* -------------------------------------------------
