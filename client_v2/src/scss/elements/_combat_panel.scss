@@ -1,0 +1,129 @@
+    //== combat Panel
+    .tg-combatpanel {
+        text-align: center;
+        min-width: 256px;
+        margin-left: 6px;
+        height: 75px;
+        background-repeat: no-repeat;
+
+        .tg-combatpanel-wrap {
+            position: relative;
+            padding: 0 6px;
+            height: 100%;
+            @include sprite($combatpanel-box-notarget-sprite);
+        }
+
+        .tg-combatpanel-wrap:before {
+            content: "- non sei in combattimento -";
+            color: #8b867b;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+        }
+
+        .tg-enemy-name{
+            display: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-top: 5px;
+            overflow: hidden;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #f5deb3;
+        }
+
+        .tg-enemyicon {
+            display: none;
+            margin: 5px auto;
+            transform: none;
+            width: 39px;
+            height: 39px;
+            position: absolute;
+            top: 14px;
+            left: 6px;
+            z-index: 2;
+            background: url($imgPath + '/frame/enemy-target-icon-box.png') no-repeat;
+    
+            .iconimg {
+                display: none;
+            }
+        }
+        
+        .tg-enemy-m, .tg-enemy-h {
+            display: none;
+            height: 11px;
+            position: absolute;
+            left: 39px;
+            width: 172px;
+
+            .enemy-bar {
+                display: block;
+                height: 100%;    
+                background-size: cover;
+                background-repeat: repeat-x;
+                transition: width .2s linear; 
+            }
+        }
+        .tg-enemy-h {
+            top: 25px;
+        }
+        .tg-enemy-m {
+            top: 38px;
+        }
+
+        .tg-enemy-h .enemy-bar {
+            background: url($imgPath + '/bars/healt.jpg') center;
+        }
+        .tg-enemy-m .enemy-bar {
+            background: url($imgPath + '/bars/stamina.jpg') center;
+        }
+
+        .enemy-h-prc {
+            display: none;
+            position: absolute;
+            top: 24px;
+            right: 8px;
+            font-size: 9px;
+            color: $tg-lt-red;
+        }
+
+        .enemy-m-prc {
+            display: none;
+            position: absolute;
+            top: 38px;
+            right: 8px;
+            font-size: 9px;
+            color: $tg-green;
+        }
+
+        
+        //== pieta/tregua
+        .tg-combat-right {
+            display: none;
+            right: 8px;
+            position: absolute;
+            top: 16px;
+            button {
+                display: block;
+            }
+            button:disabled {
+                opacity: .6;
+            }
+        }
+
+        
+        &.in-combat {
+            .tg-combatpanel-wrap {
+                
+                @include sprite($combatpanel-box-target-sprite);        
+                :before {
+                    display: none;
+                }
+            }
+            .tg-enemy-name, .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon, .tg-combat-right{
+                display: inline-block;
+            }
+        }
+    }

@@ -168,6 +168,19 @@
 
 
 .tg-mp {
+  &.fx-scale {
+    .mfp-content {
+      transform: scale(.9);
+      opacity: 0;
+      transition: all .1s linear;
+    }
+
+    &.mfp-ready .mfp-content{
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .mfp-content {
     width: 500px;
     max-width: 100%;

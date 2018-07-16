@@ -22,6 +22,10 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122402371-1"></script>
+
 </head>
 
 <body data-serverstatus="" data-loginstatus="0">
@@ -466,8 +470,7 @@
     <!-- Login Widget -->
     <div class="tg-loginwidget">
       <div id="widgetLoginStatus" class="tg-widgetlogin-status">
-        Utente
-        <span>[nomeutente]</span> disconnesso.
+        Sei stato disconnesso.
       </div>
       <div class="tg-widgetlogin-menu">
         <div class="row">
@@ -482,10 +485,10 @@
         </div>
       </div>
       <form id="widgetLoginForm" action="#" autocomplete="off">
-        <input id="widget_username" name="username" type="text" autocomplete="off" placeholder="Username">
-        <input id="widget_password" name="password" type="password" autocomplete="off" placeholder="Password">
-        <button type="submit" class="tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
-        <div id="widgetLoginNetworkActivity" class="tg-loginstatus"></div>
+        <input id="widget_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
+        <input id="widget_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
+        <button type="submit" class="form-control tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
+        <div id="widgetLoginNetworkActivity" class="form-control tg-loginstatus"></div>
       </form>
     </div>
     <div class="tg-border-box">
@@ -499,5 +502,4 @@
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
   <audio id="sound" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
 </body>
-
 </html>
