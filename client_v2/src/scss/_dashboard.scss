@@ -145,7 +145,7 @@
         height: 75px;
         overflow-y: auto;
         position: relative;
-        background-color: #1b1513;
+        background-color: #0f0e0e;
         box-shadow: inset 0 0 6px 0px black;
     }
     .extraboard-btnmenu {
@@ -208,7 +208,7 @@
         }
 
         .tg-combatpanel-wrap:before {
-            content: "Non sei in combattimento";
+            content: "- non sei in combattimento -";
             color: #8b867b;
             position: absolute;
             top: 50%;
@@ -218,13 +218,14 @@
         }
 
         .tg-enemy-name{
+            display: none;
             text-overflow: ellipsis;
             white-space: nowrap;
             padding-top: 5px;
             overflow: hidden;
             font-size: 9px;
             text-transform: uppercase;
-            color: $tg-red;
+            color: #f5deb3;
         }
 
         .tg-enemyicon {
@@ -248,8 +249,8 @@
             display: none;
             height: 11px;
             position: absolute;
-            left: 40px;
-            width: 108px;
+            left: 39px;
+            width: 172px;
 
             .enemy-bar {
                 display: block;
@@ -312,7 +313,7 @@
             .tg-combatpanel-wrap:before {
                 display: none;
             }
-            .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon, .tg-combat-right{
+            .tg-enemy-name, .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon, .tg-combat-right{
                 display: inline-block;
             }
         }

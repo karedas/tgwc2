@@ -282,7 +282,7 @@ body[data-loginstatus="preload"], body[data-loginstatus="ready"] {
     position: relative;
     text-align: center;
     margin: .5em 0;
-    border: 1px solid $tg-yellow;
+    border: 1px solid $tg-brown;
 
     span {
         position: relative;
@@ -292,7 +292,7 @@ body[data-loginstatus="preload"], body[data-loginstatus="ready"] {
 
     //bar
     div.pbar{
-        background-color: $tg-yellow;
+        background-color: $tg-brown;
         position: absolute;
         left: 0;
         top: 0;
