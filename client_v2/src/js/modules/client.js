@@ -802,9 +802,10 @@ export default class TgGui {
     }
 
     parseForDisplay(msg) {
-        console.log(msg);
         let _ = this,
             pos;
+
+            console.log(msg);
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
             _.inputPassword();
@@ -962,8 +963,7 @@ export default class TgGui {
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
             console.log('renderEquipment');
-            //_.renderEquipment(eq_parse);
-            _.openNoFeaturePopup();
+            _.renderEquipment(eq_parse);
             return '';
         });
 
@@ -1642,17 +1642,17 @@ export default class TgGui {
 
         if (st.length == 6) {
             if (!_.in_combat) {
-                $('#combatpanel').addClass('in-combat');
+                $('body').addClass('in-combat');
                 $('#tg-pills-tab-monitor').tab('show');
                 //set enemy name
-                $('#enemyName').text(st[5]);
                 _.in_combat = true;
             }
+            $('#enemyName').text(st[5]);
             _.updateEnemyStatus(st[2], st[3]);
             _.updateEnemyIcon(st[4]);
 
         } else if (_.in_combat) {
-            $('#combatpanel').removeClass('in-combat');
+            $('body').removeClass('in-combat');
             $('#actionCombaAction_b button').prop('disabled', true);
             _.in_combat = false;
         }
@@ -2603,7 +2603,7 @@ export default class TgGui {
 
         // Zen Mode
         $('#triggerZenModality').on('click', function () {
-            console.log('Zen Mode: Funzione non ancora implementata');
+            $('.tg-rightside, .tg-navbar, .tg-characterpanel').toggleClass('d-none');
         });
     }
 
@@ -2675,6 +2675,16 @@ export default class TgGui {
                 $('#extraboardCaption').text('');
             });
 
+        
+        //shortcut contextmenu
+
+        $('.shortcut-btn').on('shown.bs.popover', function (e) {   
+            let pop = this;
+                setTimeout(function() {
+                    $(this).popover('hide');
+                }, 2500);
+            });
+    
         $(".shortcut-btn")
             .on("contextmenu", function (e) {
                 $('.shortcut-btn').popover('hide');
@@ -2685,6 +2695,15 @@ export default class TgGui {
             .on('click', function () {
                 _.processCommands($(this).data('cmd'));
             });
+
+
+        $('body').on('click', function (e) {
+            $('.shortcut-btn').each(function () {
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('hide');
+                }
+            });
+        }); 
     }
 
     /* -------------------------------------------------
@@ -2812,10 +2831,12 @@ export default class TgGui {
 
     addScrollBar(container, key, sx) {
         let scrollX = true;
-        this.scrollbar[key] = new PerfectScrollbar(container, {
-            wheelPropagation: false,
-            suppressScrollX: scrollX
-        });
+        if($(container).length) {
+            this.scrollbar[key] = new PerfectScrollbar(container, {
+                wheelPropagation: false,
+                suppressScrollX: scrollX
+            });
+        }
 
     }
 

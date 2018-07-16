@@ -1,35 +1,37 @@
 .tg-mp { 
   &.modal-notizie{
+
+    .mfp-content {
       color: black;
       width: 700px;
     }
-    
-    h2 {
-        font-size: 30px;
-        color: #ac4c55;
-        font-family: kingthinks;
-    }
+  }
+  
+  h2 {
+      font-size: 30px;
+      color: #ac4c55;
+      font-family: kingthinks;
+  }
 
-    .scrollable {
-      max-height: 300px;
-    }
+  .scrollable {
+    max-height: 300px;
+  }
 
-    //vertical scrollbar
-    .ps__rail-y {
-      opacity: 1;
-    }
+  //vertical scrollbar
+  .ps__rail-y {
+    opacity: 1;
+  }
 
-    .notizie-action {
-      padding-top: .5em;
-      margin-top: .5em;
-      border-top: 1px solid #dcc59d;
-    }
+  .notizie-action {
+    padding-top: .5em;
+    margin-top: .5em;
+    border-top: 1px solid #dcc59d;
+  }
 
-    .tg-mnch-img {
-      margin-top: 5em;
-      width: 100%;
-      background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
-      background-size: contain;
-    }
+  .tg-mnch-img {
+    margin-top: 5em;
+    width: 100%;
+    background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
+    background-size: contain;
   }
 }

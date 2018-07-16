@@ -150,103 +150,92 @@
                 <div class="tg-characterpanel-wrap">
                   <div class="row">
                     <div class="col">
-                      <div class="tg-character">
-                        <!-- Character avatar -->
-                        <div class="tg-characteravatar b-ironlight tg-shadow no-feature" rel="tooltip" title "">
-                          <div class="tg-avatar-wrap">
-                            <img src="#" alt="Avatar" />
+                      <div class="row">
+                        <div class="tg-character col">
+                          <!-- Character avatar -->
+                          <div class="tg-characteravatar b-ironlight tg-shadow no-feature" rel="tooltip" title "">
+                            <div class="tg-avatar-wrap">
+                              <img src="#" alt="Avatar" />
+                            </div>
+                            <div class="tg-border-box">
+                              <div class="tg-border tg-border-top"></div>
+                              <div class="tg-border tg-border-left"></div>
+                              <div class="tg-border tg-border-right"></div>
+                              <div class="tg-border tg-border-bottom"></div>
+                            </div>
                           </div>
-                          <div class="tg-border-box">
-                            <div class="tg-border tg-border-top"></div>
-                            <div class="tg-border tg-border-left"></div>
-                            <div class="tg-border tg-border-right"></div>
-                            <div class="tg-border tg-border-bottom"></div>
+                          <div class="tg-infochar">
+                            <!-- Character Name & Status -->
+                            <div class="tg-infocharname">
+                              <span id="charName"></span>
+                              <i class="pg-status"></i>
+                            </div>
+                            <!-- Character Status Bars -->
+                            <div class="tg-meterbar">
+                              <div class="barcont barbig">
+                                <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
+                                  <i></i> / 100</span>
+                                <span class="red barC healthbar"></span>
+                              </div>
+                              <div class="barcont barbig" data-toggle="tooltip" title="Punti Movimento">
+                                <span id="moveBarText" class="tg-statusbar-text">PM:
+                                  <i></i> / 100</span>
+                                <span class="green barC movebar"></span>
+                              </div>
+                              <div class="tg-extrabars">
+                                <div id="foodBarText" class="barcont barthin" data-toggle="tooltip" title="Fame">
+                                  <span class="tg-statusbar-text">Fame:
+                                    <i></i> / 100</span>
+                                  <span class="orange barC hungrybar"></span>
+                                </div>
+                                <div id="drinkBarText" class="barcont barthin" data-toggle="tooltip" title="Sete">
+                                  <span class="tg-statusbar-text">Sete:
+                                    <i></i> / 100</span>
+                                  <span class="blue barC thirstbar"></span>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="tg-infochar">
-                          <!-- Character Name & Status -->
-                          <div class="tg-infocharname">
-                            <span id="charName"></span>
-                            <i class="pg-status"></i>
-                          </div>
-                          <!-- Character Status Bars -->
-                          <div class="tg-meterbar">
-                            <div class="barcont barbig">
-                              <span id="healtBarText" class="tg-statusbar-text" data-toggle="tooltip" title="Punti Salute">PS:
-                                <i></i> / 100</span>
-                              <span class="red barC healthbar"></span>
-                            </div>
-                            <div class="barcont barbig" data-toggle="tooltip" title="Punti Movimento">
-                              <span id="moveBarText" class="tg-statusbar-text">PM:
-                                <i></i> / 100</span>
-                              <span class="green barC movebar"></span>
-                            </div>
-                            <div class="tg-extrabars">
-                              <div id="foodBarText" class="barcont barthin" data-toggle="tooltip" title="Fame">
-                                <span class="tg-statusbar-text">Fame:
-                                  <i></i> / 100</span>
-                                <span class="orange barC hungrybar"></span>
+                        <div id="combatpanel" class="tg-combatpanel col-auto pr-0">
+                          <div class="tg-combatpanel-wrap">
+                            <div class="tg-combatpanel-box">
+                              <div id="enemyName" class="tg-enemy-name"></div>
+                              <div class="tg-enemyicon">
+                                <div id="enemyicon" class="iconimg"></div>
                               </div>
-                              <div id="drinkBarText" class="barcont barthin" data-toggle="tooltip" title="Sete">
-                                <span class="tg-statusbar-text">Sete:
-                                  <i></i> / 100</span>
-                                <span class="blue barC thirstbar"></span>
+                              <div class="enemy-h-prc">0%</div>
+                              <div class="tg-enemy-h">
+                                <div id="enemyH" class="enemy-bar"></div>
+                              </div>
+                              <div class="enemy-m-prc">0%</div>
+                              <div class="tg-enemy-m">
+                                <div id="enemyM" class="enemy-bar"></div>
                               </div>
                             </div>
+                            <!--
+                              <div id="actionCombaAction_b" class="tg-combat-right">
+                                <button id="combatPieta" class="tg-fnt-button tg-button-pieta mb-1 mt-auto" disabled="disabled" title="Chiedi la Piet&agrave;"></button>
+                                <button id="combatTregua" class="tg-fnt-button tg-button-tregua mb-auto" disabled="disabled" title="Chiedi una Tregua"></button>
+                              </div>
+                              -->
                           </div>
                         </div>
                       </div>
                     </div>
                     <!-- Extra Board in Dashboard -->
-                    <div class="tg-extraboard col-sm-6 d-none d-sm-flex flex-column">
+                     <div class="tg-extraboard col-auto d-none d-md-flex flex-column">
                       <div class="row h-100">
                         <div class="col-12 d-flex flex-row pl-1">
                           <div class="extraboard-btnmenu nav flex-column nav-pills order-2" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="tg-pills-tab-combat" href="#tg-pills-combat" data-toggle="pill" role="tab" aria-controls="tg-pills-monitor"
-                              aria-selected="true" title="Combattimento">G</a>
-                            <a class="nav-link" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut"
+                            <a class="nav-link active" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut"
                               aria-selected="false" title="Scorciatoie">S</a>
                             <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility"
                               aria-selected="false" title="Utility">U</a>
                           </div>
                           <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
-                            <!-- Generale -->
-                            <div class="tab-pane show active" id="tg-pills-combat" role="tabpanel" aria-labelledby="tg-pills-combat-tab">
-                              <div class="row h-100">
-                                <div class="col">
-                                  <div id="combatpanel" class="tg-combatpanel">
-                                    <div class="tg-combatpanel-wrap">
-                                      <div id="enemyName" class="tg-enemy-name"></div>
-                                      <div class="tg-enemyicon">
-                                        <div id="enemyicon" class="iconimg"></div>
-                                      </div>
-                                      <div class="enemy-h-prc">0%</div>
-                                      <div class="tg-enemy-h">
-                                        <div id="enemyH" class="enemy-bar"></div>
-                                      </div>
-                                      <div class="enemy-m-prc">0%</div>
-                                      <div class="tg-enemy-m">
-                                        <div id="enemyM" class="enemy-bar"></div>
-                                      </div>
-                                       <!--
-                                      <div id="actionCombaAction_b" class="tg-combat-right">
-                                        <button id="combatPieta" class="tg-fnt-button tg-button-pieta mb-1 mt-auto" disabled="disabled" title="Chiedi la Piet&agrave;"></button>
-                                        <button id="combatTregua" class="tg-fnt-button tg-button-tregua mb-auto" disabled="disabled" title="Chiedi una Tregua"></button>
-                                      </div>
-                                      -->
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col">
-          
-                                </div>
-                                <div class="col">
-                                  <div class="tg-combatpanel-special"></div>
-                                </div>
-                              </div>
-                            </div>
                             <!-- Shortcut -->
-                            <div class="tab-pane" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
+                             <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
                             <!-- Utility -->
                             <div class="tab-pane" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
                           </div>
@@ -295,7 +284,7 @@
             </div>
           </div>
         </div>
-        <div class="tg-rightside d-none d-md-flex">
+        <div class="tg-rightside">
           <div class="tg-rightside-wrap">
             <!-- Sky -->
             <div class="tg-sky">
@@ -502,4 +491,5 @@
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
   <audio id="sound" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
 </body>
+
 </html>
