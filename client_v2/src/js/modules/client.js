@@ -2676,12 +2676,12 @@ export default class TgGui {
             });
 
         
-        //shortcut contextmenu
-
+        /* shortcut contextmenu */
+        let popoverHandler;
         $('.shortcut-btn').on('shown.bs.popover', function (e) {   
             let pop = this;
-                setTimeout(function() {
-                    $(this).popover('hide');
+            popoverHandler = setTimeout(function() {
+                    $(pop).popover('hide');
                 }, 2500);
             });
     
