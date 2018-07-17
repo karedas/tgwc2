@@ -224,18 +224,20 @@
                       </div>
                     </div>
                     <!-- Extra Board in Dashboard -->
-                     <div class="tg-extraboard col-auto d-none d-md-flex flex-column">
+                    <div class="tg-extraboard col-auto d-none d-md-flex flex-column">
                       <div class="row h-100">
                         <div class="col-12 d-flex flex-row pl-1">
                           <div class="extraboard-btnmenu nav flex-column nav-pills order-2" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
                             <a class="nav-link active" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut"
-                              aria-selected="false" title="Scorciatoie"><i class="fas fa-book"></i></a>
+                              aria-selected="false" title="Scorciatoie">
+                              <i class="fas fa-book"></i>
+                            </a>
                             <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility"
                               aria-selected="false" title="Utility">U</a>
                           </div>
                           <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
                             <!-- Shortcut -->
-                             <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
+                            <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
                             <!-- Utility -->
                             <div class="tab-pane" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
                           </div>
@@ -327,7 +329,7 @@
       </div>
     </div>
     <!-- Editor Dialog -->
-    <div id="editorDialog" class="tg-modal">
+    <div id="editorDialog" class="tg-mp-inline">
       <div class="tg-modal-icon"></div>
       <div class="tg-modal-title">
         <h3 id="editorTitle"></h3>
@@ -354,6 +356,23 @@
           <div class="tg-border tg-border-left"></div>
           <div class="tg-border tg-border-right"></div>
           <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interact Box  -->
+
+    <div id="interactBox" class="tg-interactbox">
+      <div class="iron content">
+        <div id="interactbox-cont">
+          <div class="interact-elem eqp-in">Indossa</div>
+          <div class="interact-elem eqp-out">Rimuovi</div>
+          <div class="interact-elem meq-in">Barda</div>
+          <div class="interact-elem meq-out">Rimuovi</div>
+          <div class="interact-elem inv-in">Prendi</div>
+          <div class="interact-elem inv-out">Posa</div>
+          <div class="interact-elem wpn-in">Impugna</div>
+          <div class="interact-elem wpn-out">Riponi</div>
         </div>
       </div>
     </div>

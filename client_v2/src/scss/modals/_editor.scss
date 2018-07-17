@@ -1,15 +1,26 @@
 /* ==== Editor */
-.modal-editor  {
+.tg-mp.modal-editor  {
     .mfp-close {
       top: 8px;
       right: -8px;
     }
     .mfp-content {
-  
+        width: 600px;
+        max-width: 100%;  
       .tg-modal-icon:after {
         @include sprite($editor_lapis-sprite);
       }
     }
+
+    .tg-modal-content {
+      max-width: none;
+    }
+
+
+    .tg-modal-contentwrap {
+      padding-bottom: 70px;
+    }
+
     .tg-modal-buttons-group {
       position: absolute;
       margin: 0 auto;
@@ -21,4 +32,17 @@
         float: left;
       }
     }
+
+    
+    .tg-txt-maxcharcount {
+      background: #c6a779;
+      border-radius: 6px;
+      display: inline-block;
+      color: black;
+      padding:2px 12px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
   }

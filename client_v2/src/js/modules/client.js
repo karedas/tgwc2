@@ -6,6 +6,8 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import 'bootstrap';
 import 'magnific-popup';
 import 'draggabilly/dist/draggabilly.pkgd.js';
+i
+import Sortable from 'sortablejs';
 // import 'easy-autocomplete';
 import 'jquery-resizable-dom';
 
@@ -234,6 +236,15 @@ export default class TgGui {
             return v;
         }));
 
+
+        this.obj_interaction_config = {
+            // rimuovi, rimuovi+posa, riponi, impugna
+            'equip': ['.eqp-out','.inv-out','.wpn-out','.wpn-in'],
+            'inv': ['.inv-out','.eqp-in','.wpn-in'],
+            'room': ['.inv-in', '.eqp-in','.wpn-in'],
+            'obj': ['.inv-in', '.inv-out', '.eqp-in','.wpn-in'],
+            'pers':['.inv-out','.meq-out', '.meq-in']
+        };
 
         /* Debug */
         this.debug = true;
@@ -1226,7 +1237,7 @@ export default class TgGui {
         ];
 
         let sttxt;
-        sttxt = '<div class="out-table out-plstatus container">';
+        sttxt = '<div class="out-table out-plstatus">';
             sttxt += '<div class="row">';
                 sttxt += '<div class="tg-caption col-12">Condizioni</div>';
                 sttxt += '<div class="col-3 rps-col">Salute</div><div class="col-4 rps-col"><span class="' + _.prcLowTxt(status.hit, colors) + '">' + status.hit + '</span>%</div><div class="col-5 rps-col">' + _.prcBar(status.hit, 'red') + '</div>';
@@ -2271,7 +2282,11 @@ export default class TgGui {
 
     showOutput(text) {
         let _ = this,
-            app = $(text);
+        
+        app = $(text);
+
+        _.addDragAndDrop('', app);
+
         $('#output').append(app);
         _.scrollPanelTo('#output', '#scrollableOutput', false);
 
@@ -2817,6 +2832,7 @@ export default class TgGui {
             closeOnBgClick: false,
             type: 'inline',
             preloader: false,
+            mainClass: 'tg-mp modal-editor',
             callbacks: {
                 open: function () {
                     $('.mfp-close').one('click', function (e) {
@@ -2824,6 +2840,7 @@ export default class TgGui {
                         _.abortEdit();
                         _.closePopup();
                     });
+                    _.addDraggable('#editorDialog', '.modal-editor');
                 },
                 close: function (e) {
                     _.closeEditor();
@@ -2856,7 +2873,48 @@ export default class TgGui {
     }
     
 
-    // UTILITY
+    addDraggable(selector, context) {
+        $(selector, context).draggabilly({
+            containment: 'body',
+          })
+    }
+
+    updateInteractBox(config) {
+
+        if(config && config.length) {
+            let box = $('#interactBox');
+
+            $('.interact-elem', box).hide();
+
+            $.each(config, function(idx, elemClass){
+                $(elemClass, box).show();
+            });
+
+            box.height(18.64*config.length);
+            return true;
+        }
+        return false;
+    }
+
+    addDragAndDrop(subselector, objs){
+        let _ = this;
+        let $draggable = $('.iconimg.interact', objs).draggabilly({
+            containment: 'body'
+        });
+
+        $draggable.on('pointerDown', function(){
+            return false;
+            let what = $(this);
+            if(what.is('.obj')) {
+                if(_.updateInteractBox(_.obj_interaction_config[what.attr('data-cnttype')])) {
+                }
+            }
+        })
+
+    }
+
+    /* UTILITY */
+    
 
     setViewportSetup(val) {
         $('.tg-area').attr('data-viewport', val);

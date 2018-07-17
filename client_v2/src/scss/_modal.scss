@@ -2,14 +2,22 @@
 @import 'modals/editor';
 @import 'modals/widget-login';
 
-.tg-modal {
+.tg-mp-inline {
+  display: none;
+}
+
+.tg-mp {
   max-width: 100%;
   margin: 0 auto;
   color: white;
   text-align: center;
-  display: none;
+
+  
 
 
+  &.mfp-ready .tg-mp-inline {
+    display: block;
+  }
 
   .tg-modal-content {
     position: relative;
@@ -40,14 +48,6 @@
     z-index: 3;
   }
 
-  .tg-txt-maxcharcount {
-    background: #c6a779;
-    border-radius: 6px;
-    display: inline-block;
-    margin: 5px auto 0;
-    color: black;
-    padding:2px 12px;
-  }
 
   @include media-breakpoint-down(md) {
     min-width: auto;
@@ -56,7 +56,7 @@
 
 .tg-modal-icon {
   position: absolute;
-  top: -6px;
+  top: 8px;
   left: -25px;
   z-index: 3;
   padding: 8px;
@@ -104,9 +104,11 @@
 
 }
 
-.mfp-ready .mfp-content {
-  transform: none;
-  opacity: 1;
+.mfp-ready {
+  .mfp-content {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 /* overlay animate in */
