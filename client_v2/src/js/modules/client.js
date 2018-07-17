@@ -280,6 +280,8 @@ export default class TgGui {
 
             // Server status
             _.socket.on('connect', function () {
+                console.log('ok-------------------');
+
                 _.isConnected = true;
                 _.networkActivityMessage("Server Online", 1);
                 resolve(true);
@@ -620,6 +622,7 @@ export default class TgGui {
 
         /* Reconnect Button */
         $('#widgetLoginReconnect').on('click', function () {
+            console.log(_.connectionInfo.mode );
             _.socket.off('data');
             //Attach oob Socket Handler
             _.socket.on('data', _.handleLoginData.bind(_));
@@ -656,7 +659,7 @@ export default class TgGui {
             _.socket.emit('loginrequest');
         });
 
-        _.openPopup('login', 'Effettua l\'accesso', '.tg-loginwidget');
+        _.openWidgetLoginPopup();
     }
 
     performLogin() {
@@ -1210,31 +1213,31 @@ export default class TgGui {
 
         let colors = [{
                 val: 15,
-                txt: 'red'
+                txt: 'tg-red'
             },
             {
                 val: 40,
-                txt: 'brown'
+                txt: 'tg-brown'
             },
             {
                 val: 100,
-                txt: 'green'
+                txt: 'tg-green'
             }
         ];
 
         let sttxt;
-        sttxt = '<div class="out-table out-plstatus table-responsive">';
-        sttxt += '<table class="table table-sm"><caption>Condizioni</caption>';
-        sttxt += '<tr><th scope="row">Salute</th><td><span class="' + _.prcLowTxt(status.hit, colors) + '">' + status.hit + '</span>%</td><td>' + _.prcBar(status.hit, 'red') + '</td></tr>';
-        sttxt += '<tr><th scope="row">Movimento</th><td><span class="' + _.prcLowTxt(status.move, colors) + '">' + status.move + '</span>%</td><td>' + _.prcBar(status.move, 'green') + '</td></tr>';
-        sttxt += '<tr><th scope="row">Fame</th><td><span class="' + _.prcLowTxt(status.food, colors) + '">' + status.food + '</span>%</td><td>' + _.prcBar(status.food, 'cookie') + '</td></tr>';
-        sttxt += '<tr><th scope="row">Sete</th><td><span class="' + _.prcLowTxt(status.drink, colors) + '">' + status.drink + '</span>%</td><td>' + _.prcBar(status.drink, 'blue') + '</td></tr>';
+        sttxt = '<div class="out-table out-plstatus container">';
+            sttxt += '<div class="row">';
+                sttxt += '<div class="tg-caption col-12">Condizioni</div>';
+                sttxt += '<div class="col-3 rps-col">Salute</div><div class="col-4 rps-col"><span class="' + _.prcLowTxt(status.hit, colors) + '">' + status.hit + '</span>%</div><div class="col-5 rps-col">' + _.prcBar(status.hit, 'red') + '</div>';
+                sttxt += '<div class="col-3 rps-col">Movimento</div><div class="col-4 rps-col"><span class="' + _.prcLowTxt(status.move, colors) + '">' + status.move + '</span>%</div><div class="col-5 rps-col">' + _.prcBar(status.move, 'green') + '</div>';
+                sttxt += '<div class="col-3 rps-col">Fame</div><div class="col-4 rps-col"><span class="' + _.prcLowTxt(status.food, colors) + '">' + status.food + '</span>%</div><div class="col-5 rps-col">' + _.prcBar(status.food, 'cookie') + '</div>';
+                sttxt += '<div class="col-3 rps-col">Sete</div><div class="col-4 rps-col"><span class="' + _.prcLowTxt(status.drink, colors) + '">' + status.drink + '</span>%</div><div class="col-5 rps-col">' + _.prcBar(status.drink, 'blue') + '</div>';
+                if (status.msg) {
+                    sttxt += '<div class="col-12 tg-yellow pg-atg">' + status.msg + '</div>';
+                }
+            sttxt += '</div>';
 
-        if (status.msg) {
-            sttxt += '<tr><td colspan=1000>' + status.msg + '</td></tr>';
-        }
-
-        sttxt += '</table>';
         sttxt += '</div>';
 
         _.setDataInterface();
@@ -2829,6 +2832,18 @@ export default class TgGui {
         });
     }
 
+    openWidgetLoginPopup() {
+        $.magnificPopup.open({
+            items: {
+                src: '#loginWidget',
+                inline : 'inline'
+            },
+            showCloseBtn: false,
+            closeOnBgClick: false,
+            mainClass: 'tg-mp modal-login',
+        });
+    }
+
     addScrollBar(container, key, sx) {
         let scrollX = true;
         if($(container).length) {
@@ -2839,6 +2854,7 @@ export default class TgGui {
         }
 
     }
+    
 
     // UTILITY
 

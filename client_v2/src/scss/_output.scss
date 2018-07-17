@@ -276,20 +276,25 @@
     
     /* TABLE */
     .out-table {
+        border:1px solid $gray-900;
 
-        &.out-plstatus {
-            .meter2 {
-                display: block;
-            }
-            .green {
-            }
-            .red {
-            }
-            .cookie {
-            }
-            .blue {
-            }
+        .tg-caption {
+            border-bottom: 1px solid $gray-900;
         }
+
+        .rps-col {
+            background: #0f0f0f;
+        }
+        .col-4, .col-5 {
+            border-left:1px solid $gray-900;
+        }
+
+        .meter2 {
+            width: 100%;
+            height: 100%;
+        }
+
+       
     }
 }
 
