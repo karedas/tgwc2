@@ -60,7 +60,8 @@ export default class TgGui {
         this.client_state = {
             ui: false,
             news_showed: false,
-            widget_login: false
+            widget_login: false,
+            max_drop_stack: null
         };
         this.viewport = null;
 
@@ -75,7 +76,7 @@ export default class TgGui {
             shortcuts: [],
             login: {},
             dashboard: "0",
-            extradetail: true,
+            extradetail_open: true,
             mrn_highlights: [],
             extradetail_width: '50%',
             output_trimlines: 500,
@@ -443,7 +444,7 @@ export default class TgGui {
 
             let now = Date.now();
             if (now > _.client_update.last + 1000) {
-                if (_.client_update.inventory.needed && _.client_options.extradetail) {
+                if (_.client_update.inventory.needed && _.client_options.extradetail_open) {
                     _.sendToServer('@inv');
                     _.client_update.inventory.needed = false;
                     _.client_update.last = now;
@@ -455,7 +456,7 @@ export default class TgGui {
 				client_update.last = now;
 			}*/
 
-                if (_.client_update.room.needed && _.client_options.extradetail) {
+                if (_.client_update.room.needed && _.client_options.extradetail_open) {
                     _.sendToServer('@agg');
                     _.client_update.room.needed = false;
                     _.client_update.last = now;
@@ -598,7 +599,7 @@ export default class TgGui {
 
         $('#loginForm').on('submit', function (e) {
             e.preventDefault();
-            var el = $('.tg-loginbtn');
+            let el = $('.tg-loginbtn');
             el.prop('disabled', true);
             setTimeout(function () {
                 el.prop('disabled', false);
@@ -765,7 +766,7 @@ export default class TgGui {
 
         /* Substitute shortcuts on each command and join results */
         for (let i = 0; i < inputs.length; ++i) {
-            var subs = _.substShort(inputs[i]).split(/\s*;\s*/);
+            let subs = _.substShort(inputs[i]).split(/\s*;\s*/);
             res = res.concat(subs);
         }
 
@@ -800,7 +801,7 @@ export default class TgGui {
                     input = input.replace(rx, args[arg]);
                 }
 
-                // Remove remaining variables
+                // Remove remaining letiables
                 input = input.replace(/\$\d+/g, '');
             } else
                 input += " " + args.join(" ");
@@ -892,7 +893,7 @@ export default class TgGui {
         // Image in side frame (with gamma)
         msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
             console.log('show image with gamma');
-            //     // var image = image.slice(6, image.lastIndexOf('"')).split(',');
+            //     // let image = image.slice(6, image.lastIndexOf('"')).split(',');
             //     // showImageWithGamma(image[0], image[1], image[2], image[3]);
             return '';
         });
@@ -1356,7 +1357,7 @@ export default class TgGui {
             let remText = text[l]
             while (remText.length > 0) {
 
-                var currline,
+                let currline,
                     slicepos = remText.lastIndexOf(' ', maxLinelen);
 
                 if (slicepos > 0) {
@@ -1416,13 +1417,13 @@ export default class TgGui {
 
     tileBgPos(tilenum) {
         let _ = this;
-        var tc = _.tileCoords(tilenum);
+        let tc = _.tileCoords(tilenum);
         return '-' + tc[0] + 'px -' + tc[1] + 'px';
     }
 
     tileCoords(tilenum) {
-        var posx = 32 * (tilenum & 0x7f);
-        var posy = 32 * (tilenum >> 7);
+        let posx = 32 * (tilenum & 0x7f);
+        let posy = 32 * (tilenum >> 7);
         return [posx, posy];
     }
 
@@ -1501,7 +1502,7 @@ export default class TgGui {
 
     setDoors(doors) {
         let _ = this;
-        for (var d = 0; d < _.dir_names.length; ++d) {
+        for (let d = 0; d < _.dir_names.length; ++d) {
             $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -26 * doors[d]);
         }
 
@@ -1711,7 +1712,7 @@ export default class TgGui {
 
     renderDetails(info, type) {
         let _ = this;
-        if (_.client_options.extradetail) {
+        if (_.client_options.extradetail_open) {
             return _.renderExtraOutput(info, type);
         } else {
             return _.renderDetailsInText(info, type);
@@ -1800,7 +1801,7 @@ export default class TgGui {
         textarea.append(details);
 
         if (type == 'room') {
-            if (_.client_update.room.version < info.var) {
+            if (_.client_update.room.version < info.let) {
                 _.client_update.room.version = info.ver;
                 _.client_update.room.needed = false;
             }
@@ -1819,7 +1820,7 @@ export default class TgGui {
         }
 
         /* Print description */
-        if (info.desc && !_.client_options.extradetail) {
+        if (info.desc && !_.client_options.extradetail_open) {
             textarea += '<div class="out-description">';
             if (info.desc.base) {
                 if (type == 'room') {
@@ -1966,7 +1967,7 @@ export default class TgGui {
                     columnableClass = ' col-dispose';
                 }
 
-                res += '<div class="out-list' + columnableClass + ' ' + (style ? ' ' + style : '') + (_.client_options.extradetail ? 'compact"' : '"') + ' data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
+                res += '<div class="out-list' + columnableClass + ' ' + (style ? ' ' + style : '') + (_.client_options.extradetail_open ? 'compact"' : '"') + ' data-type="' + cont_type + '"' + (cont_num ? '" data-mrn="' + cont_num + '"' : '') + '>';
                 res += txt;
                 res += '</div>';
             }
@@ -2024,10 +2025,14 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
+                
+                console.log(_.max_drop_stack);
+                let zidx = 10000;
                 console.log('ok');
-                var zidx = 10000;
                 if(_.max_drop_stack < zidx) {
+                    console.log('is');
                     _.at_drag_stop_func = function() {
+                        console.log('toinventory');
                         _.toInventory(ui.draggable);
                     };
                     _.max_drop_stack = zidx;
@@ -2041,7 +2046,7 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromInventory(_.ui.draggable);
@@ -2057,10 +2062,10 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
-                    at_drag_stop_func = function() {
-                        toEquip(_.ui.draggable);
+                    _.at_drag_stop_func = function() {
+                        _.toEquip(_.ui.draggable);
                     };
                     _.max_drop_stack = zidx;
                 }
@@ -2073,7 +2078,7 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromEquip(ui.draggable);
@@ -2089,7 +2094,7 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.toHand(ui.draggable);
@@ -2105,7 +2110,7 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromHand(ui.draggable);
@@ -2122,9 +2127,10 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
+                        console.log('tomobequip');
                         _.toMobEquip(ui.draggable);
                     };
                     _.max_drop_stack = zidx;
@@ -2138,7 +2144,7 @@ export default class TgGui {
             hoverClass: 'valid',
             greedy:true,
             drop: function(event, ui) {
-                var zidx = 10000;
+                let zidx = 10000;
                 if( _.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromEquip(ui.draggable);
@@ -2186,6 +2192,148 @@ export default class TgGui {
         return true;
     }
 
+    toMobEquip(obj) {
+        let _ = this;
+        let mrn = $(obj).attr('mrn');
+        let cnttype = $(obj).attr('data-cnttype');
+        let cmd;
+
+        switch (cnttype) {
+            case 'pers':
+                let cntmrn = $(obj).attr('data-cntmrn');
+                cmd = 'barda &' + cntmrn + '&' + mrn;
+                break;
+            
+            default: 
+                return;
+        }
+        
+        _.processCommands(cmd);
+    }
+
+    toEquip(obj) {
+        let _ = this;
+        let mrn = $(obj).attr('data-mrn');
+        let cnttype = $(obj).attr('data-cnttype');
+        let cmd;
+
+        switch(cnttype) {
+            case 'room':
+                cmd = 'prendi &'  +mrn + '; indossa &'+ mrn;
+                cmd += '; @agg';
+                break;
+                
+            case 'inv':
+                cmd = 'indossa &' + mrn;
+                break;
+    
+            case 'obj':
+                let cntmrn = $(obj).attr('data-cntmrn');
+                cmd = 'prendi &' + mrn + ' &' + cntmrn + '; indossa &' + mrn;
+                cmd += '; @agg &'+cntmrn;
+                break;
+    
+            case 'pers':
+                cntmrn = $(obj).attr('data-cntmrn');
+                cmd = 'barda &' + cntmrn + ' &' + mrn;
+                cmd += '; @agg &' + cntmrn;
+                break;
+                
+            default:
+                return;
+        }
+        _.processCommands(cmd);
+    }
+
+    fromEquip(obj) {
+        let _ = this;
+        let mrn = $(obj).attr('data-mrn');
+	    let cnttype = $(obj).attr('data-cnttype');
+        let cmd;
+
+        switch(cnttype) {
+            case 'equip':
+                cmd = 'rimuovi &' + mrn;
+                break;
+    
+            case 'pers':
+            let cntmrn = $(obj).attr('data-cntmrn');
+                cmd = 'rimuovi &' + mrn + ' &' + cntmrn;
+                cmd += '; @agg &' + cntmrn;
+                break;
+    
+            default:
+                return;
+        }
+        _.processCommands(cmd);
+	
+        switch(cnttype) {
+            case 'equip':
+                cmd = 'rimuovi &' + mrn;
+                break;
+
+            case 'pers':
+                let cntmrn = $(obj).attr('cntmrn');
+                cmd = 'rimuovi &'+mrn+' &'+cntmrn;
+                cmd += '; @agg &'+cntmrn;
+                break;
+
+            default:
+                return;
+        }
+
+        _.processCommands(cmd);
+    
+    }
+
+    toInventory(obj) {
+        let _ = this;
+        let mrn = $(obj).attr('data-mrn');
+        let cnttype = $(obj).attr('data-cnttype');
+        let cmd;
+        console.log('cnttype', cnttype);
+        switch(cnttype) {
+            case 'room':
+            console.log('room');
+                cmd = 'prend &' + mrn;
+                    cmd += ';@agg';
+                break;
+            
+            case 'equip':
+            console.log('equip');
+
+                cmd = 'rimuovi &' + mrn;
+                break;
+            
+            case 'obj':
+            console.log('obj');
+
+                cntmrn = $(obj).attr('data-cntmrn');
+                cmd = 'prendi &' + mrn + '&' +cntmrn;
+                cmd += '; @agg &' +cntmrn;
+                break;
+
+            case 'pers':
+            console.log('pers');
+
+                cntmrn = $(obj).attr('data-cntmrn');
+                cmd = 'prendi &' + mrn + '&' + cntmrn;
+                cmd += '; @agg &' + cntmrn;
+                break;
+
+            default:
+                return;
+        }
+
+        _.processCommands(cmd);
+    }
+
+    fromInventory(cmd) {}
+
+    tohand(obj) {}
+
+    fromHand(obj) {}
+
 
     /* *****************************************************************************
      * STATUS BAR
@@ -2201,7 +2349,7 @@ export default class TgGui {
     }
 
     prcLowTxt(val, values) {
-        for (var i = 0; i < values.length; ++i) {
+        for (let i = 0; i < values.length; ++i) {
             if (val <= values[i].val) {
                 return values[i].txt;
             }
@@ -2216,7 +2364,7 @@ export default class TgGui {
 
 
     prcHighTxt(val, values) {
-        for (var i = 0; i < values.length; ++i) {
+        for (let i = 0; i < values.length; ++i) {
             if (val >= values[i].val)
                 return values[i].txt;
         }
@@ -2341,7 +2489,7 @@ export default class TgGui {
     configInit() {
         let _ = this;
         /* Extra Detail Display */
-        if (_.client_options.extradetail) {
+        if (_.client_options.extradetail_open) {
             $('.tg-outputextra-wrap').addClass('d-flex');
         } else {
             $('.tg-outputextra-wrap').removeClass('d-flex');
@@ -2489,10 +2637,10 @@ export default class TgGui {
         let minval = _.exp_grp_list[mrn] = $.now();
         let minkey;
 
-        var keys = Object.keys(_.exp_grp_list);
+        let keys = Object.keys(_.exp_grp_list);
         if (keys.length > _.max_exp_grp) {
-            for (var k in keys) {
-                var val = _.exp_grp_list[k];
+            for (let k in keys) {
+                let val = _.exp_grp_list[k];
                 if (val < minval) {
                     minkey = k;
                     minval = val;
@@ -2529,7 +2677,7 @@ export default class TgGui {
 
         this.addScrollBar('#scrollableExtraOutput', 'extraoutput');
 
-        $(extraOutputID).width(_.client_options.extradetail_width);
+        $(extraOutputID).width(_.client_options.extradetail_open_width);
 
         $(extraOutputID).resizable({
             handleSelector: ".tg-resizablehand",
@@ -2549,7 +2697,7 @@ export default class TgGui {
                 //update scrollbar
                 _.scrollbar.extraoutput.update();
 
-                _.client_options.extradetail_width = width;
+                _.client_options.extradetail_open_width = width;
                 _.SaveStorage('options', _.client_options);
             }
         });
@@ -2751,7 +2899,7 @@ export default class TgGui {
         $('#triggerToggleExtraOutput').on('click', function () {
             $('.tg-outputextra-wrap').toggleClass('d-flex')
             _.scrollPanelTo('#output', '#scrollableOutput', true);
-            _.client_options.extradetail = _.client_options.extradetail ? false : true;
+            _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
             _.SaveStorage('options', _.client_options);
         });
 
@@ -3061,7 +3209,7 @@ export default class TgGui {
             scroll: false,
             zIndex: 1000,
             start: function (event, ui) {
-                _.dragging = true
+                _.dragging = true;
                 let what = $(this);
                 if (what.is('.obj')) {
                     if (_.updateInteractBox(_.obj_interaction_config[what.attr('data-cnttype')])) {
@@ -3070,17 +3218,19 @@ export default class TgGui {
                             at: 'left center',
                             of: what
                         });
-                        console.log('posizionato');
                     }
                 }
             },
             stop: function (event, ui) {
                 _.dragging = false;
+
                 $('#interactBox').hide();
+
                 if (_.at_drag_stop_func) {
-                    at_drag_stop_func();
-                    max_drop_stack = 0;
-                    at_drag_stop_func = null;
+                    console.log('ok');
+                    _.at_drag_stop_func();
+                    _.max_drop_stack = 0;
+                    _.at_drag_stop_func = null;
                 }
             }
         }).droppable({
