@@ -2026,16 +2026,16 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 
-                console.log(_.max_drop_stack);
+                console.log(_.client_state.max_drop_stack);
                 let zidx = 10000;
                 console.log('ok');
-                if(_.max_drop_stack < zidx) {
+                if(_.client_state.max_drop_stack < zidx) {
                     console.log('is');
                     _.at_drag_stop_func = function() {
                         console.log('toinventory');
                         _.toInventory(ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2047,11 +2047,11 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromInventory(_.ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2063,11 +2063,11 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.toEquip(_.ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2079,11 +2079,11 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromEquip(ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2095,11 +2095,11 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.toHand(ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2111,11 +2111,11 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromHand(ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2128,12 +2128,12 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         console.log('tomobequip');
                         _.toMobEquip(ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -2145,11 +2145,11 @@ export default class TgGui {
             greedy:true,
             drop: function(event, ui) {
                 let zidx = 10000;
-                if( _.max_drop_stack < zidx) {
+                if( _.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function() {
                         _.fromEquip(ui.draggable);
                     };
-                    _.max_drop_stack = zidx;
+                    _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
@@ -3229,7 +3229,7 @@ export default class TgGui {
                 if (_.at_drag_stop_func) {
                     console.log('ok');
                     _.at_drag_stop_func();
-                    _.max_drop_stack = 0;
+                    _.client_state.max_drop_stack = 0;
                     _.at_drag_stop_func = null;
                 }
             }
