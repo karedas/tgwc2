@@ -5,8 +5,11 @@
     background: black;
     border:1px solid $gray-900;
     padding: .8em 1em;
+    max-width: 100px;
+    background-color: black;
+    border: 1px solid $tg-red;
 
-    .interact-elem {
-        background-color: yellow;
+    .interact-elem.valid {
+        background: green;
     }
 }

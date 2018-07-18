@@ -2000,9 +2000,155 @@ export default class TgGui {
 
     interactionInit() {
         let _ = this;
+
         $(document).on('mouseup', '.interact', function (event) {
             _.interactEvent(event, this)
         });
+
+        /* Drag & Drop on InputBar (new) */
+        let input = $('#tgInputUser');
+        $(input).droppable({
+            greedy: true,
+            hoverClass: 'valid',
+            drop: function(event, ui) {
+                let preCmd = $(input).val();
+                
+                _.processCommands(preCmd + '&'+ $(ui.draggable).attr('data-mrn'));
+            }
+        });
+
+        let cont = $('#interactBox');
+
+        $('.inv-in', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                console.log('ok');
+                var zidx = 10000;
+                if(_.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.toInventory(ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });
+
+        $('.inv-out', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.fromInventory(_.ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });
+    
+        $('.eqp-in', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    at_drag_stop_func = function() {
+                        toEquip(_.ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });
+    
+        $('.eqp-out', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.fromEquip(ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });
+        
+        $('.wpn-in', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.toHand(ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });
+    
+        $('.wpn-out', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.fromHand(ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });	
+    
+    
+        $('.meq-in', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.toMobEquip(ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });
+    
+        $('.meq-out', cont).droppable({
+            accept: '.obj',
+            hoverClass: 'valid',
+            greedy:true,
+            drop: function(event, ui) {
+                var zidx = 10000;
+                if( _.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function() {
+                        _.fromEquip(ui.draggable);
+                    };
+                    _.max_drop_stack = zidx;
+                }
+                return false;
+            }
+        });	
+    
     }
 
     interactEvent(event, trigger) {
