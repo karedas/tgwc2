@@ -119,6 +119,10 @@ caption {
     display: inline-block;
     transform: scale(.7);
     vertical-align: middle;
+
+    &.tg-dragging {
+        transform: none;
+    }
 }
 
 .popover-header {

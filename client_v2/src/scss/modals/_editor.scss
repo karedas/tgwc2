@@ -16,18 +16,17 @@
       max-width: none;
     }
 
-
     .tg-modal-contentwrap {
       padding-bottom: 70px;
     }
 
     .tg-modal-buttons-group {
       position: absolute;
-      margin: 0 auto;
       bottom: -18px;
-      left: 50%;
-      transform: translateX(-50%);
       z-index: 4;
+      width: 100%;
+      display: flex;
+      left: 0;
       .tg-button {
         float: left;
       }

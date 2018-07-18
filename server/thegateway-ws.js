@@ -50,7 +50,6 @@ let session = require("express-session")({
     saveUninitialized: true
 });
 
-let usercount = 0;
 
 // start Session DB
 app.set('trust proxy', 1);
@@ -100,8 +99,6 @@ function SocketServer() {
 
 				socket.on('disconnect', function() {
 					logger.info('Closing %s', socket.id);
-					usercount--;
-					socket.emit('gamedata', {usercount:usercount});
 					// Disconnect from game server
 					tgconn.destroy();
 				});
@@ -110,7 +107,7 @@ function SocketServer() {
 		});
 	});
 
-// // 	// Get real client IP address from headers
+  	// Get real client IP address from headers
 	function GetClientIp(headers) {
 		let ipAddress;
 		let forwardedIpsStr = headers['x-forwarded-for'];
@@ -129,7 +126,7 @@ function SocketServer() {
 		return ipAddress;
 	}
 
-// Calculate a code from headers
+	// Calculate a code from headers
 	function CalcCodeFromHeaders(headers){
 		let hash = crypto.createHash('md5');
 		if(headers['user-agent'])
@@ -150,7 +147,7 @@ function SocketServer() {
 		let port =  process.env.SERVER_GAME_PORT,
 			host = process.env.SERVER_GAME_HOST;
 
-		let tgconn = net.Socket(host, function(serversocket));
+		let tgconn = net.Socket(host);
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
 			tgconn.write(msg + '\n');
@@ -175,21 +172,17 @@ function SocketServer() {
 			websocket.disconnect();
 		});
 
-    
+
 		tgconn.on("end", function(err){
-			console.log('end');
 		});
 
 		tgconn.on("timeout",  function(){
-			console.log('timeout');
-
 		});
+		
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
 			if (msg.toString().indexOf("Vuoi i codici ANSI") != -1) {
-				usercount++;
-				websocket.emit('gamedata', {usercount:usercount})
 				// Substitute with the copy handler
 				tgconn.removeListener('data', handshake);
 				tgconn.on('data', sendToClient);
@@ -199,10 +192,11 @@ function SocketServer() {
 			} else {
 				sendToClient(msg);
 			}
-		}
+		};
 
 			
 		tgconn.on('data', handshake);
+
 		return tgconn;
 	}
 }
