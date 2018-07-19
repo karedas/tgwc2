@@ -1903,12 +1903,12 @@ export default class TgGui {
 
                     detaildesc += _.formatText(info.desc.base, 'out-descbase');
                 } else if (info.desc.repeatlast && _.last_room_desc) {
-                    detaildesc += _.last_room_desc;
+                    detaildesc += _.formatText(_.last_room_desc);
                 }
             }
             $(cont_header).show();
             $(cont_header).children('#detailtitle').html(icon + title);
-            $(cont_header).children('#detaildesc').html(detaildesc);
+            $(cont_header).children('#detaildesc').html(_.replaceColors(detaildesc));
             //TODO: da capire
             /*      if(wtab == ctab) {
                       $('#detailtitle').text(title);
@@ -2145,6 +2145,11 @@ export default class TgGui {
         $('#tgInputUser').droppable({
             greedy: true,
             hoverClass: 'valid',
+            activate: function(){
+
+                $('#dropcmd').text($('#tgInputUser').val());
+                console.log('activate');
+            },
             drop: function (event, ui) {
 
                 let zidx = 10000;
@@ -2157,9 +2162,12 @@ export default class TgGui {
             }
         });
 
-        $('.concat-input', cont).droppable({
+        $('.input-concat', cont).droppable({
             greedy: true,
             hoverClass: 'valid',
+            activate: function(){
+                $('#dropcmd').text($('#tgInputUser').val());
+            },
             drop: function (event, ui) {
                 let zidx = 10000;
                 if (_.client_state.max_drop_stack < zidx) {
@@ -2212,7 +2220,7 @@ export default class TgGui {
                 let zidx = 10000;
                 if (_.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function () {
-                        _.fromInventory(_.ui.draggable);
+                        _.fromInventory(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
                 }
@@ -2228,7 +2236,7 @@ export default class TgGui {
                 let zidx = 10000;
                 if (_.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function () {
-                        _.toEquip(_.ui.draggable);
+                        _.toEquip(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
                 }
@@ -2382,7 +2390,6 @@ export default class TgGui {
         switch (cnttype) {
             case 'room':
                 cmd = 'prendi &' + mrn + '; indossa &' + mrn;
-                cmd += '; @agg';
                 break;
 
             case 'inv':
@@ -2392,13 +2399,11 @@ export default class TgGui {
             case 'obj':
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'prendi &' + mrn + ' &' + cntmrn + '; indossa &' + mrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             case 'pers':
                 cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'barda &' + cntmrn + ' &' + mrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             default:
@@ -2421,7 +2426,6 @@ export default class TgGui {
             case 'pers':
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'rimuovi &' + mrn + ' &' + cntmrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             default:
@@ -2437,7 +2441,6 @@ export default class TgGui {
             case 'pers':
                 let cntmrn = $(obj).attr('cntmrn');
                 cmd = 'rimuovi &' + mrn + ' &' + cntmrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             default:
@@ -2465,9 +2468,9 @@ export default class TgGui {
         let cmd;
 
         if (!preCmd) {
-            cmd = 'guarda ' + mrn;
+            cmd = 'guarda &' + mrn;
         } else {
-            cmd = preCmd + ' ' + mrn;
+            cmd = preCmd + ' &' + mrn;
         }
         _.processCommands(cmd);
     }
@@ -2480,7 +2483,6 @@ export default class TgGui {
         switch (cnttype) {
             case 'room':
                 cmd = 'prend &' + mrn;
-                cmd += ';@agg';
                 break;
 
             case 'equip':
@@ -2492,14 +2494,12 @@ export default class TgGui {
 
                 cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'prendi &' + mrn + '&' + cntmrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             case 'pers':
 
                 cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'prendi &' + mrn + '&' + cntmrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             default:
@@ -2525,13 +2525,11 @@ export default class TgGui {
             case 'obj':
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'scarica &' + mrn + ' &' + cntmrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             case 'pers':
                 cntmrn = $(obj).attr('cntmrn');
                 cmd = 'scarica &' + mrn + ' &' + cntmrn;
-                cmd += '; @agg &' + cntmrn;
 
             default:
                 return;
@@ -2540,7 +2538,7 @@ export default class TgGui {
         _.processCommands(cmd);
     }
 
-    tohand(obj) {
+    toHand(obj) {
         let mrn = $(obj).attr('data-mrn');
         let cnttype = $(obj).attr('data-cnttype');
         let cmd;
@@ -2548,7 +2546,6 @@ export default class TgGui {
         switch (cnttype) {
             case 'room':
                 cmd = 'prendi &' + mrn + '; impugna &' + mrn;
-                cmd += '; @agg';
                 break;
 
             case 'inv':
@@ -2562,7 +2559,6 @@ export default class TgGui {
             case 'obj':
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'prendi &' + mrn + ' &' + cntmrn + '; impugna &' + mrn;
-                cmd += '; @agg &' + cntmrn;
                 break;
 
             default:
@@ -3468,6 +3464,7 @@ export default class TgGui {
             appendTo: "body",
             helper: 'clone',
             revert: "invalid",
+            delay: 300,
             scroll: false,
             zIndex: 1000,
             start: function (event, ui) {
@@ -3504,7 +3501,7 @@ export default class TgGui {
     }
 
     updateInteractBox(config) {
-
+        let _ = this;
         if (config && config.length) {
             let box = $('#interactBox');
 
@@ -3525,6 +3522,7 @@ export default class TgGui {
     }
 
     iconToIcon(obj1, obj2) {
+        let _ = this;
         let mrn2 = $(obj2).attr('data-mrn');
         let cnttype2 = $(obj2).attr('data-cnntype');
         let cntmrn2 = $(obj2).attr('data-cntmrn');

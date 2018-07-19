@@ -266,6 +266,7 @@
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
+                <span class="drop-alert"><b class="tg-yellow">Comando: <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span>
                 <div class="tg-inputcommand d-none d-sm-flex">
                   <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
                     <i class="fas fa-columns"></i>
@@ -363,7 +364,6 @@
     <!-- Interact Box  -->
     <div id="interactBox" class="tg-interactbox tg-shadow b-modal tg-box">
       <div id="interactbox-cont">
-        <div class="interact-elem watch"><i class="far fa-eye"></i> Guarda</div>
         <div class="interact-elem eqp-in">Indossa</div>
         <div class="interact-elem eqp-out">Rimuovi</div>
         <div class="interact-elem meq-in">Barda</div>
@@ -488,27 +488,29 @@
     </div>
     <!-- Login Widget -->
     <div id="loginWidget" class="tg-loginwidget tg-shadow b-modal tg-box">
-      <div id="widgetLoginStatus" class="tg-widgetlogin-status">
-        Sei stato disconnesso.
-      </div>
-      <div class="tg-widgetlogin-menu">
-        <div class="row">
-          <div class="col">
-            <div class="tg-charavatar-last"></div>
-          </div>
-          <div class="col">
-            <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti <span></span></button>
-            <button id="widgetLoginNewConnection" type="button" class="btn-newconnection">Accedi con un personaggio diverso.</button>
-            <button id="widgetLoginExit" type="button" class="btn-newconnection">Esci.</button>
+      <div class="tg-box">
+        <div id="widgetLoginStatus" class="tg-widgetlogin-status">
+          Sei stato disconnesso.
+        </div>
+        <div class="tg-widgetlogin-menu">
+          <div class="row">
+            <div class="col">
+              <div class="tg-charavatar-last"></div>
+            </div>
+            <div class="col">
+              <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti <span></span></button>
+              <button id="widgetLoginNewConnection" type="button" class="btn-newconnection">Accedi con un personaggio diverso.</button>
+              <button id="widgetLoginExit" type="button" class="btn-newconnection">Esci.</button>
+            </div>
           </div>
         </div>
+        <form id="widgetLoginForm" action="#" autocomplete="off">
+          <input id="widget_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
+          <input id="widget_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
+          <button type="submit" class="form-control tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
+          <div id="widgetLoginNetworkActivity" class="form-control tg-loginstatus"></div>
+        </form>
       </div>
-      <form id="widgetLoginForm" action="#" autocomplete="off">
-        <input id="widget_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
-        <input id="widget_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
-        <button type="submit" class="form-control tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
-        <div id="widgetLoginNetworkActivity" class="form-control tg-loginstatus"></div>
-      </form>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
         <div class="tg-border tg-border-left"></div>

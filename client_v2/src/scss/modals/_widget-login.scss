@@ -1,9 +1,12 @@
 /* ==== Widget Login */
+.tg-loginwidget {
+    display: none;
+}
 .modal-login  {
 
     .tg-loginwidget {
         display: block;
-        border:1px solid $tg-yellow;
+        display: block;
         background: $gray-900;
     }
     .tg-loginpanel {

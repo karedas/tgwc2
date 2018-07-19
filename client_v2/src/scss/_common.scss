@@ -6,7 +6,6 @@
 @import 'output';
 @import 'dashboard';
 @import 'right_sidebar';
-@import 'elements/widgetlogin';
 
 @include font-face(kingthinks, '../fonts/Kingthings_Foundation', null, null, ttf );
 
@@ -16,6 +15,7 @@ html {
     height: 100%;
     width: 100%;
     display: inline-block;
+    overflow: hidden;
 }
 
 body {

@@ -4,16 +4,16 @@
     color: white;
     background: black;
     border:1px solid $gray-900;
-    padding: .8em 1em;
+    padding: .8em 6px;
     max-width: 250px;
     min-width: 100px;
     background-color: black;
 
     .interact-elem {
-        padding: .5em 0;
+        padding: .5em 5px;
     }
 
     .interact-elem.valid {
-        background: green;
+        background:$gray-800;
     }
 }
