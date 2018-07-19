@@ -6,6 +6,7 @@
 @import 'output';
 @import 'dashboard';
 @import 'right_sidebar';
+@import 'elements/widgetlogin';
 
 @include font-face(kingthinks, '../fonts/Kingthings_Foundation', null, null, ttf );
 
@@ -14,7 +15,7 @@ body,
 html {
     height: 100%;
     width: 100%;
-    display: flex;
+    display: inline-block;
 }
 
 body {
@@ -74,40 +75,6 @@ caption {
     background: #0a0806;
     overflow: hidden;
 
-}
-
-.modal-cookielaw {
-    &.mfp-bg {
-        background: #0b0b0b;
-    }
-    
-    .mfp-content {
-        width: 450px;
-    }
-    .tg-cookielawcontent {
-        text-align: center;
-        overflow: hidden;
-        background: #231c16;
-        padding: 24px 12px;
-        
-        .tg-title {
-            color: $tg-yellow;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-        .tg-btn-cookieconsent {
-            cursor: pointer;
-            background: #ffc000;
-            border: none;
-            text-transform: uppercase;
-        }
-
-        .cookie-lastalert {
-            padding:.5em;
-            text-decoration: underline;
-            display: block;
-        }
-    }
 }
 
 .iconimg {

@@ -10,34 +10,51 @@ import enquire from 'enquire-js';
    /* enable any bootstrap tooltip */
     function onReady() {
 
-        let client = new TgClient();
+        let Client = new TgClient();
 
         /* Get Cookie "Italy cookie law". */
-        let cookie_consent = client.LoadStorage('cookie_consent');
+        let cookie_consent = Client.LoadStorage('cookie_consent');
         /* Check Cookie Law Approval Status, then go to start or wait user action. */
         if (!cookie_consent) {
-            $.when(client.showCookieLawDisclaimer()).done(function(){
-                client.startClient();
+            $.when(Client.showCookieLawDisclaimer()).done(function(){
+                Client.startClient();
             });
 
         } else {
-            client.removeCookieLawDisclaimer();
-            client.startClient();
+            Client.removeCookieLawDisclaimer();
+            Client.startClient();
         }
         
         /* Enquire Breakpoint/Viewport manager */
-        let vp = '';
+        
+
+        let last_options;
+        /*== LG viewport */
         enquire.register("screen and (max-width:1450px)", {
             match : function() {
-                client.setViewportSetup('lg');
+                Client.setViewportSetup('lg');
             },      
             unmatch : function() {
-                client.setViewportSetup('xl');
+                Client.setViewportSetup('xl');
             },  
             setup : function() {},      
             destroy : function() {},    
             deferSetup: false
         });
+
+        /* Sm Viewport */
+        enquire.register("screen and (max-width: 750px)", {
+            match: function() {
+                 last_options = {
+                    extradetail_open : Client.client_options.extradetail_open
+                }
+                Client.client_options.extradetail_open = false;
+                Client.setViewportSetup('sm');
+            },
+            unmatch: function() {
+                Client.client_options.extradetail_open = last_options.extradetail_open;
+            }
+        })
 
     };    
 

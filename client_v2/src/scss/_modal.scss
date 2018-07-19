@@ -1,6 +1,7 @@
 @import 'modals/notizie';
 @import 'modals/editor';
 @import 'modals/widget-login';
+@import 'modals/cookielaw';
 
 .tg-mp-inline {
   display: none;
@@ -21,7 +22,7 @@
 
   .tg-modal-content {
     position: relative;
-    background: #dabe8b;
+    background: black;
     z-index: 2;
     width: 100%;
     max-width: 500px;
@@ -47,7 +48,6 @@
     position: relative;
     z-index: 3;
   }
-
 
   @include media-breakpoint-down(md) {
     min-width: auto;
