@@ -2011,7 +2011,8 @@ export default class TgGui {
 
         let _ = this;
         let res = '',
-            txt = '';
+            txt = '',
+            interactClass = '';
 
         if (cont.list) {
             if (cont_type == 'pers' || cont_type == 'equip') {
@@ -2036,6 +2037,7 @@ export default class TgGui {
 
                 /* if object/person type is more then 1 */
                 if (is_group) {
+                    interactClass = '';
                     grp_attribute = ' grpcoll';
 
                     if (opened) {
@@ -2044,11 +2046,15 @@ export default class TgGui {
                     expicon = '<div class="expicon"></div>';
                 }
 
+                else {
+                    interactClass = ' interact'
+                }
+
 
                 /* print header triggerable element */
                 txt += '<div class="element' + grp_attribute + '" ' + data_mrn + '>';
                 // mob/obj icon
-                txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, 'interact ' + type);
+                txt += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, interactClass + ' ' + type);
                 txt += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b class="poseq">' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
                 txt += '</div>';
 
@@ -2509,9 +2515,10 @@ export default class TgGui {
     }
 
     fromInventory(obj) {
-        let mrn = $(obj).attr('data-mrn');
-        let cnttype = $(obj).attr('data-cnttype');
-        let cmd;
+        let _ = this,
+        mrn = $(obj).attr('data-mrn'),
+        cnttype = $(obj).attr('data-cnttype'),
+        cmd;
 
         switch (cnttype) {
             case 'inv':
@@ -2539,9 +2546,10 @@ export default class TgGui {
     }
 
     toHand(obj) {
-        let mrn = $(obj).attr('data-mrn');
-        let cnttype = $(obj).attr('data-cnttype');
-        let cmd;
+        let _ = this,
+            mrn = $(obj).attr('data-mrn'),
+            cnttype = $(obj).attr('data-cnttype'),
+            cmd;
 
         switch (cnttype) {
             case 'room':
@@ -3465,6 +3473,7 @@ export default class TgGui {
             helper: 'clone',
             revert: "invalid",
             delay: 300,
+            revertDuration: 200,
             scroll: false,
             zIndex: 1000,
             start: function (event, ui) {
