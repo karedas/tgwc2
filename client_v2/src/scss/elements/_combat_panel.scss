@@ -104,21 +104,6 @@
         font-size: 9px;
         color: $tg-green;
     }
-
-    
-    //== pieta/tregua
-    .tg-combat-right {
-        display: none;
-        right: 8px;
-        position: absolute;
-        top: 16px;
-        button {
-            display: block;
-        }
-        button:disabled {
-            opacity: .6;
-        }
-    }
 }
 
     
@@ -134,7 +119,7 @@
             display: none;
         }
 
-        .tg-enemy-name, .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon, .tg-combat-right{
+        .tg-enemy-name, .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon{
             display: inline-block;
         }
     }

@@ -24,11 +24,12 @@ const io = require('socket.io')(server, {
 const cookieParser = require('cookie-parser');
 const sharedsession = require('express-socket.io-session');
 
+var multer  = require('multer')
 
 /**
  * Logging configuration.
  */
-let fileLogger = new winston.transports.File({
+const fileLogger = new winston.transports.File({
 	level: 'info',
 	timestamp: true,
 	filename: 'thegateway-ws',
@@ -38,7 +39,7 @@ let fileLogger = new winston.transports.File({
 	json: false
 });
 
-let logger = new(winston.Logger)({
+const logger = winston.createLogger({
 	transports: [
 		fileLogger
 	]
@@ -51,10 +52,20 @@ let session = require("express-session")({
 });
 
 
+//setup multer for images
+var upload = multer({ dest: 'uploads/' })
+let cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
+
 // start Session DB
 app.set('trust proxy', 1);
 app.set('max_requests_per_ip', 20);
 app.use(session, cookieParser(process.env.SESSION_SECRET));
+
+app.post('/profile', upload.single('avatar'), function (req, res, next) {
+	// req.file is the `avatar` file
+	// req.body will hold the text fields, if there were any
+  })
+  
 // Use shared session middleware for socket.io
 // setting autoSave:true
 io.use(sharedsession(session, {
