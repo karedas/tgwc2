@@ -251,7 +251,7 @@ export default class TgGui {
             // rimuovi, rimuovi+posa, riponi, impugna
             'equip': ['.watch', '.eqp-out', '.inv-out', '.wpn-out', '.wpn-in', '.input-concat'],
             'inv': ['.watch', '.inv-out', '.eqp-in', '.wpn-in', '.input-concat'],
-            'room': ['.watch', '.inv-in', '.eqp-in', '.wpn-in','.input-concat'],
+            'room': ['.watch', '.inv-in', '.eqp-in', '.wpn-in', '.input-concat'],
             'obj': ['.watch', '.inv-in', '.inv-out', '.eqp-in', '.wpn-in', '.input-concat'],
             'pers': ['.watch', '.inv-out', '.meq-out', '.meq-in', '.input-concat']
         };
@@ -317,7 +317,7 @@ export default class TgGui {
                     } else {
                         _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
                     }
-                    if(!_.client_state.widget_login) {
+                    if (!_.client_state.widget_login) {
                         _.initWidgetLoginPanel();
                         _.clearDataInterface();
                     }
@@ -508,7 +508,7 @@ export default class TgGui {
         $(document).on('change', '#cookieCheckbox', function () {
             $('#cookieconsentbutton')
                 .toggleClass('invisible')
-                .one('click', function(){
+                .one('click', function () {
                     _.SaveStorage('cookie_consent', true);
                     _.closePopup();
                     //Done deferred back
@@ -701,7 +701,7 @@ export default class TgGui {
             _.socket.emit('loginrequest');
         });
 
-        
+
         _.client_state.widget_login = true;
     }
 
@@ -1180,10 +1180,10 @@ export default class TgGui {
 
     renderGenericPage(page) {
         let _ = this;
-        
+
         if (page.title == 'Notizie') {
             // If isnt a widget-login connection
-            if(!_.client_state.widget_login) {
+            if (!_.client_state.widget_login) {
                 _.openNotiziePopup();
             }
             return '';
@@ -1815,7 +1815,7 @@ export default class TgGui {
         let textarea = $(cont_detail).empty();
         let details = $(_.replaceColors(_.renderDetailsInner(info, type, true)));
 
-	    _.addDragAndDrop('.iconimg.interact', details);
+        _.addDragAndDrop('.iconimg.interact', details);
 
 
         textarea.append(details);
@@ -2014,7 +2014,7 @@ export default class TgGui {
 
     toggleNotifyOutput() {
         $('#updateRoomNotify').addClass('up');
-        setTimeout(function(){
+        setTimeout(function () {
             $('#updateRoomNotify').removeClass('u')
         }, 2500);
     }
@@ -2032,14 +2032,32 @@ export default class TgGui {
         });
 
         /* Drag & Drop on InputBar (new) */
-        let input = $('#tgInputUser');
-        $(input).droppable({
+        $('#tgInputUser').droppable({
             greedy: true,
             hoverClass: 'valid',
-            drop: function(event, ui) {
-                let preCmd = $(input).val();
-                
-                _.processCommands(preCmd + '&'+ $(ui.draggable).attr('data-mrn'));
+            drop: function (event, ui) {
+
+                let zidx = 10000;
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
+                        _.toCustomInput(ui.draggable);
+                    }
+                    _.client_state.max_drop_stack = zidx;
+                }
+            }
+        });
+
+        $('.concat-input', cont).droppable({
+            greedy: true,
+            hoverClass: 'valid',
+            drop: function (event, ui) {
+                let zidx = 10000;
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
+                        _.toCustomInput(ui.draggable);
+                    }
+                    _.client_state.max_drop_stack = zidx;
+                }
             }
         });
 
@@ -2047,10 +2065,10 @@ export default class TgGui {
         $('.watch', cont).droppable({
             hoverClass: 'valid',
             greedy: true,
-            drop: function(event, ui) {
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if(_.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.toWatch(ui.draggable);
                     }
                     _.client_state.max_drop_stack = zidx;
@@ -2059,29 +2077,15 @@ export default class TgGui {
 
         });
 
-        $('.concat-input', cont).droppable({
-            hoverClass: 'valid',
-            greedy: true,
-            drop: function(event, ui) {
-                let zidx = 10000;
-                if(_.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
-                        _.toCustomInput(ui.draggable);
-                    }
-                    _.client_state.max_drop_stack = zidx;
-                }
-            }
-
-        });
 
         $('.inv-in', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if(_.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.toInventory(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
@@ -2093,11 +2097,11 @@ export default class TgGui {
         $('.inv-out', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.fromInventory(_.ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
@@ -2105,15 +2109,15 @@ export default class TgGui {
                 return false;
             }
         });
-    
+
         $('.eqp-in', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.toEquip(_.ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
@@ -2121,15 +2125,15 @@ export default class TgGui {
                 return false;
             }
         });
-    
+
         $('.eqp-out', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.fromEquip(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
@@ -2137,15 +2141,15 @@ export default class TgGui {
                 return false;
             }
         });
-        
+
         $('.wpn-in', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.toHand(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
@@ -2153,32 +2157,32 @@ export default class TgGui {
                 return false;
             }
         });
-    
+
         $('.wpn-out', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.fromHand(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
-        });	
-    
-    
+        });
+
+
         $('.meq-in', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.toMobEquip(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
@@ -2186,23 +2190,23 @@ export default class TgGui {
                 return false;
             }
         });
-    
+
         $('.meq-out', cont).droppable({
             accept: '.obj',
             hoverClass: 'valid',
-            greedy:true,
-            drop: function(event, ui) {
+            greedy: true,
+            drop: function (event, ui) {
                 let zidx = 10000;
-                if( _.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function() {
+                if (_.client_state.max_drop_stack < zidx) {
+                    _.at_drag_stop_func = function () {
                         _.fromEquip(ui.draggable);
                     };
                     _.client_state.max_drop_stack = zidx;
                 }
                 return false;
             }
-        });	
-    
+        });
+
     }
 
     interactEvent(event, trigger) {
@@ -2251,11 +2255,11 @@ export default class TgGui {
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'barda &' + cntmrn + '&' + mrn;
                 break;
-            
-            default: 
+
+            default:
                 return;
         }
-        
+
         _.processCommands(cmd);
     }
 
@@ -2265,28 +2269,28 @@ export default class TgGui {
         let cnttype = $(obj).attr('data-cnttype');
         let cmd;
 
-        switch(cnttype) {
+        switch (cnttype) {
             case 'room':
-                cmd = 'prendi &'  +mrn + '; indossa &'+ mrn;
+                cmd = 'prendi &' + mrn + '; indossa &' + mrn;
                 cmd += '; @agg';
                 break;
-                
+
             case 'inv':
                 cmd = 'indossa &' + mrn;
                 break;
-    
+
             case 'obj':
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'prendi &' + mrn + ' &' + cntmrn + '; indossa &' + mrn;
-                cmd += '; @agg &'+cntmrn;
+                cmd += '; @agg &' + cntmrn;
                 break;
-    
+
             case 'pers':
                 cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'barda &' + cntmrn + ' &' + mrn;
                 cmd += '; @agg &' + cntmrn;
                 break;
-                
+
             default:
                 return;
         }
@@ -2296,34 +2300,34 @@ export default class TgGui {
     fromEquip(obj) {
         let _ = this;
         let mrn = $(obj).attr('data-mrn');
-	    let cnttype = $(obj).attr('data-cnttype');
+        let cnttype = $(obj).attr('data-cnttype');
         let cmd;
 
-        switch(cnttype) {
+        switch (cnttype) {
             case 'equip':
                 cmd = 'rimuovi &' + mrn;
                 break;
-    
+
             case 'pers':
-            let cntmrn = $(obj).attr('data-cntmrn');
+                let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'rimuovi &' + mrn + ' &' + cntmrn;
                 cmd += '; @agg &' + cntmrn;
                 break;
-    
+
             default:
                 return;
         }
         _.processCommands(cmd);
-	
-        switch(cnttype) {
+
+        switch (cnttype) {
             case 'equip':
                 cmd = 'rimuovi &' + mrn;
                 break;
 
             case 'pers':
                 let cntmrn = $(obj).attr('cntmrn');
-                cmd = 'rimuovi &'+mrn+' &'+cntmrn;
-                cmd += '; @agg &'+cntmrn;
+                cmd = 'rimuovi &' + mrn + ' &' + cntmrn;
+                cmd += '; @agg &' + cntmrn;
                 break;
 
             default:
@@ -2331,7 +2335,7 @@ export default class TgGui {
         }
 
         _.processCommands(cmd);
-    
+
     }
 
     toWatch(obj) {
@@ -2346,6 +2350,16 @@ export default class TgGui {
         /* New: Concatenate cmd + droppped element */
         let _ = this;
         let mrn = $(obj).attr('data-mrn');
+        let input = $('#tgInputUser');
+        let preCmd = $(input).val();
+        let cmd;
+
+        if (!preCmd) {
+            cmd = 'guarda ' + mrn;
+        } else {
+            cmd = preCmd + ' ' + mrn;
+        }
+        _.processCommands(cmd);
     }
 
     toInventory(obj) {
@@ -2353,22 +2367,22 @@ export default class TgGui {
         let mrn = $(obj).attr('data-mrn');
         let cnttype = $(obj).attr('data-cnttype');
         let cmd;
-        switch(cnttype) {
+        switch (cnttype) {
             case 'room':
                 cmd = 'prend &' + mrn;
-                    cmd += ';@agg';
+                cmd += ';@agg';
                 break;
-            
+
             case 'equip':
 
                 cmd = 'rimuovi &' + mrn;
                 break;
-            
+
             case 'obj':
 
                 cntmrn = $(obj).attr('data-cntmrn');
-                cmd = 'prendi &' + mrn + '&' +cntmrn;
-                cmd += '; @agg &' +cntmrn;
+                cmd = 'prendi &' + mrn + '&' + cntmrn;
+                cmd += '; @agg &' + cntmrn;
                 break;
 
             case 'pers':
@@ -2388,8 +2402,8 @@ export default class TgGui {
         let mrn = $(obj).attr('data-mrn');
         let cnttype = $(obj).attr('data-cnttype');
         let cmd;
-        
-        switch(cnttype) {
+
+        switch (cnttype) {
             case 'inv':
                 cmd = 'posa &' + mrn;
                 break;
@@ -2408,7 +2422,7 @@ export default class TgGui {
                 cntmrn = $(obj).attr('cntmrn');
                 cmd = 'scarica &' + mrn + ' &' + cntmrn;
                 cmd += '; @agg &' + cntmrn;
-                
+
             default:
                 return;
         }
@@ -2420,27 +2434,27 @@ export default class TgGui {
         let mrn = $(obj).attr('data-mrn');
         let cnttype = $(obj).attr('data-cnttype');
         let cmd;
-        
-        switch(cnttype) {
+
+        switch (cnttype) {
             case 'room':
                 cmd = 'prendi &' + mrn + '; impugna &' + mrn;
                 cmd += '; @agg';
                 break;
-    
+
             case 'inv':
                 cmd = 'impugna &' + mrn;
                 break;
-    
+
             case 'equip':
                 cmd = 'sfodera &' + mrn;
                 break;
-    
+
             case 'obj':
                 let cntmrn = $(obj).attr('data-cntmrn');
                 cmd = 'prendi &' + mrn + ' &' + cntmrn + '; impugna &' + mrn;
                 cmd += '; @agg &' + cntmrn;
                 break;
-    
+
             default:
                 return;
         }
@@ -2451,12 +2465,12 @@ export default class TgGui {
         let mrn = $(obj).attr('data-mrn');
         let cnttype = $(obj).attr('data-cnttype');
         let cmd;
-        
-        switch(cnttype) {
+
+        switch (cnttype) {
             case 'equip':
                 cmd = 'riponi &' + mrn;
                 break;
-    
+
             default:
                 return;
         }
@@ -3028,7 +3042,7 @@ export default class TgGui {
         $('#triggerToggleExtraOutput').on('click', function () {
             $('.tg-outputextra-wrap').toggleClass('d-flex')
             /* Refresh Extra when is open */
-            if( $('.tg-outputextra-wrap').is(':visible')){
+            if ($('.tg-outputextra-wrap').is(':visible')) {
                 _.processCommands('@agg');
             }
             _.scrollPanelTo('#output', '#scrollableOutput', true);
@@ -3076,9 +3090,9 @@ export default class TgGui {
      * -------------------------------------------------*/
 
     toggleExtraDetail() {
-        
+
     }
-     
+
     genericEvents() {
         let _ = this;
 
@@ -3222,7 +3236,7 @@ export default class TgGui {
             success: function (result, status, xhr) {
 
                 let fileTimeStamp = Date.parse(xhr.getResponseHeader("Last-Modified"));
-                if ((fileTimeStamp != _.client_options.news_date_last || _.client_options.news_wantsee) && !_.client_state.news_showed ) {
+                if ((fileTimeStamp != _.client_options.news_date_last || _.client_options.news_wantsee) && !_.client_state.news_showed) {
 
                     _.client_options.news_wantsee = true;
 
@@ -3334,7 +3348,7 @@ export default class TgGui {
         });
     }
 
-    
+
     addDragAndDrop(subselector, objs) {
         let _ = this;
         $('.iconimg.interact', objs).draggable({
@@ -3406,10 +3420,9 @@ export default class TgGui {
         let cntmrn2 = $(obj2).attr('data-cntmrn');
         let type2;
 
-        if($(obj2).is('.obj')) {
+        if ($(obj2).is('.obj')) {
             type2 = 'obj';
-        }
-        else if($(obj2).is('.pers')) {
+        } else if ($(obj2).is('.pers')) {
             type2 = 'pers';
         }
 
@@ -3423,7 +3436,7 @@ export default class TgGui {
     loadContentAjax(what, appendTo) {
         return $.ajax({
             url: what,
-            success: function(responseJSON){
+            success: function (responseJSON) {
                 appendTo = appendTo != null ? appendTo : 'body';
                 $(responseJSON).appendTo(appendTo);
             }
