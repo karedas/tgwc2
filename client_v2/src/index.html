@@ -394,9 +394,15 @@
                 <h2>Gioco di Ruolo Fantasy Online
                   <br> Accedi
                   <span>gratis</span> al mondo di Ikhari!</h2>
-                <form id="loginForm" action="#" autocomplete="off">
-                  <input id="login_username" name="username" type="text" autocomplete="off" placeholder="Username">
-                  <input id="login_password" name="password" type="password" autocomplete="off" placeholder="Password">
+                <form id="loginForm" action="#" autocomplete="off" novalidate>
+                  <input id="login_username" name="username" type="text" autocomplete="off" placeholder="Username" required>
+                  <div class="invalid-feedback">
+                      Nome utente obbligatorio.
+                  </div>
+                  <input id="login_password" name="password" type="password" autocomplete="off" placeholder="Password" required>
+                  <div class="invalid-feedback">
+                      Password obbligatoria.
+                  </div>
                   <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
                   <p class="tg-newcharacter">Sei nuovo?
                     <a href="#" id="doNewCharacter">Crea un Personaggio</a>

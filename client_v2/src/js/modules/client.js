@@ -256,6 +256,44 @@ export default class TgGui {
             'pers': ['.watch', '.inv-out', '.meq-out', '.meq-in', '.input-concat']
         };
 
+        this.abiltxt = [{
+                val: 6,
+                txt: "Terribile"
+            },
+            {
+                val: 14,
+                txt: "Pessima"
+            },
+            {
+                val: 24,
+                txt: "Scarsa"
+            },
+            {
+                val: 34,
+                txt: "Discreta"
+            },
+            {
+                val: 64,
+                txt: "Normale"
+            },
+            {
+                val: 74,
+                txt: "Buona"
+            },
+            {
+                val: 84,
+                txt: "Ottima"
+            },
+            {
+                val: 94,
+                txt: "Eccellente"
+            },
+            {
+                val: 100,
+                txt: "Leggendaria"
+            }
+        ];
+
         /* Debug */
         this.debug = true;
 
@@ -606,18 +644,24 @@ export default class TgGui {
 
         $('#loginForm').on('submit', function (e) {
             e.preventDefault();
+            e.stopPropagation();
+
             let el = $('.tg-loginbtn');
             el.prop('disabled', true);
+
             setTimeout(function () {
                 el.prop('disabled', false);
-            }, 3000);
+            }, 1500);
 
             let name = $('#login_username').val();
             let pass = $('#login_password').val();
-            if (!name || !pass) {
+
+            if($(this)[0].checkValidity() === false) {
                 //TODO: Notify user to provide credentials
+                $(this).addClass('was-validated');
                 return;
-            }
+            };
+
             _.loginNetworkActivityMessage("Connessione in corso...");
 
             _.connectionInfo.loginName = name;
@@ -1035,8 +1079,7 @@ export default class TgGui {
                 _.client_update.data.info = true;
                 return '';
             } else {
-                _.openNoFeaturePopup();
-                return '';
+                _.renderPlayerInfo();
             }
         });
 
@@ -1314,6 +1357,73 @@ export default class TgGui {
         txt += '</table>';
         return txt;
     }
+
+
+    /* *****************************************************************************
+     * INFO
+     */
+
+    renderPlayerInfo(info) {
+        let _ = this,
+            d = $('#tgSchedaPg');
+
+        if (info.image) {
+            $('#infoimage', d).attr('src', _.media_server_addr + info_image);
+        }
+        $('#infotitle', d).text(info.title);
+
+        if (info.adjective) {
+            $('#infoadj', d).text(info.adjective);
+            $('#changeadj').hide();
+        } else {
+            $('#infoadj', d).text('Nessuno');
+            $('#changeAdj').show();
+        }
+
+        $('#inforace', d).text(info.race.name);
+        $('#infocult', d).text(info.cult);
+        $('#infoethn', d).text(info.ethn);
+        $('#inforelig', d).text(info.relig ? info.relig : 'Nessuna');
+        $('#infoheight', d).text(info.height);
+        $('#infosex', d).text(info.sex.name);
+        $('#infocity', d).text(info.city ? info.city : "Nessuna");
+        $('#infowgt', d).text(info.weight);
+        $('#infoage', d).text(info.age);
+        $('#infolang', d).text(info.lang);
+        $('#infoborn', d).text(info.born);
+
+        $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1<p></p>').replace(/\n/gm, ' '));
+
+        $('#raceimage', d).attr('class', race_to_class[info.race.code] + '_' + info.sex.code + ' img');
+
+        $('#infowil', d).width(limitPrc(info.abil.wil.prc) + "%");
+        $('#infowillvl', d).text(prcLowTxt(info.abil.wil.prc, abiltxt));
+
+        $('#infoint', d).width(limitPrc(info.abil.int.prc) + "%");
+        $('#infointlvl', d).text(prcLowTxt(info.abil.int.prc, abiltxt));
+
+        $('#infoemp', d).width(limitPrc(info.abil.emp.prc) + "%");
+        $('#infoemplvl', d).text(prcLowTxt(info.abil.emp.prc, abiltxt));
+
+        $('#infosiz', d).width(limitPrc(info.abil.siz.prc) + "%");
+        $('#infosizlvl', d).text(prcLowTxt(info.abil.siz.prc, abiltxt));
+
+        $('#infocon', d).width(limitPrc(info.abil.con.prc) + "%");
+        $('#infoconlvl', d).text(prcLowTxt(info.abil.con.prc, abiltxt));
+
+        $('#infostr', d).width(limitPrc(info.abil.str.prc) + "%");
+        $('#infostrlvl', d).text(prcLowTxt(info.abil.str.prc, abiltxt));
+
+        $('#infodex', d).width(limitPrc(info.abil.dex.prc) + "%");
+        $('#infodexlvl', d).text(prcLowTxt(info.abil.dex.prc, abiltxt));
+
+        $('#infospd', d).width(limitPrc(info.abil.spd.prc) + "%");
+        $('#infospdlvl', d).text(prcLowTxt(info.abil.spd.prc, abiltxt));
+
+        return '';
+    }
+
+
 
     /* *****************************************************************************
      *  Editor 
