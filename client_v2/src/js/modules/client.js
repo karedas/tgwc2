@@ -1888,6 +1888,7 @@ export default class TgGui {
         /* Set Title and Tooltip */
         if (info.title) {
             if (type == 'room' && !info.up) {
+                _.toggleNotifyOutput();
                 //res += '<div class="room"><div class="lts"></div>' + info.title + '<div class="rts"></div></div>';
             }
             let title = _.capFirstLetter(info.title);
@@ -2131,10 +2132,11 @@ export default class TgGui {
     }
 
     toggleNotifyOutput() {
+        clearTimeout(window.notifyToggle);
         $('#updateRoomNotify').addClass('up');
-        setTimeout(function () {
-            $('#updateRoomNotify').removeClass('u')
-        }, 2500);
+        window.notifyToggle = setTimeout(function () {
+            $('#updateRoomNotify').removeClass('up')
+        }, 1500);
     }
 
     /* *****************************************************************************
@@ -2448,7 +2450,7 @@ export default class TgGui {
         let cmd;
 
         $.magnificPopup.open({
-            showCloseBtn: false,
+            showCloseBtn: true,
             preloader: false, 
             closeOnBgClick: true,
             items: {
@@ -2462,9 +2464,14 @@ export default class TgGui {
                     $('.interact-placeicon').html(icon);
                     $('.interact-inputbar.pre').text('');
                     $('.interact-inputbar.post').text('');
+                    
                 },
                 open: function(){
-                   $('#interactSendButton').one('click', function(){
+;
+                    var node = document.getElementsByClassName('pre');
+                    $(node).mousedown();
+
+                    $('#interactSendButton').one('click', function(){
                        
                        let pre = $('.interact-inputbar.pre').text();
                        let post = $('.interact-inputbar.post').text();
@@ -2475,14 +2482,6 @@ export default class TgGui {
                 }
             }
         });
-
-
-        // if (!preCmd) {
-        //     cmd = 'guarda &' + mrn;
-        // } else {
-        //     cmd = preCmd + ' &' + mrn;
-        // }
-        // _.processCommands(cmd);
     }
 
     toInputBar(obj) {
@@ -2494,6 +2493,7 @@ export default class TgGui {
         let cmd;
 
         _.processCommands(preCmd + ' &' + mrn);
+        $(input).focus();
     }
 
     toInventory(obj) {

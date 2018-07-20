@@ -26,6 +26,11 @@
 
     .tg-boxcontent {
         padding:12px 6px;
+        
+        button {
+            background: $tg-green;
+            border: none;
+        }
     }
     .c-caption {
         margin: 0 0 .2em;
@@ -58,11 +63,6 @@
     .example {
         font-size: 10px;
         color: $gray-600;
-    }
-
-    button {
-        background: $tg-green;
-        border: none;
     }
 }
 
