@@ -1974,6 +1974,7 @@ export default class TgGui {
 
         }
         if (inExtra) {
+
             /* Print Persons List */
             if (info.perscont) {
                 textarea += _.renderDetailsList(type, info.num, info.perscont, 'pers', 'tg-cyan tg-list-person' + numberClassList);
@@ -2136,7 +2137,6 @@ export default class TgGui {
         }, 2500);
     }
 
-
     /* *****************************************************************************
      * INTERACTION
      */
@@ -2169,6 +2169,8 @@ export default class TgGui {
             }
         });
 
+        let cont = $('#interactBox');
+
         $('.input-concat', cont).droppable({
             greedy: true,
             hoverClass: 'valid',
@@ -2185,23 +2187,6 @@ export default class TgGui {
                 }
             }
         });
-
-        let cont = $('#interactBox');
-        $('.watch', cont).droppable({
-            hoverClass: 'valid',
-            greedy: true,
-            drop: function (event, ui) {
-                let zidx = 10000;
-                if (_.client_state.max_drop_stack < zidx) {
-                    _.at_drag_stop_func = function () {
-                        _.toWatch(ui.draggable);
-                    }
-                    _.client_state.max_drop_stack = zidx;
-                }
-            }
-
-        });
-
 
         $('.inv-in', cont).droppable({
             accept: '.obj',
@@ -2458,14 +2443,6 @@ export default class TgGui {
 
     }
 
-    toWatch(obj) {
-        let _ = this;
-        let mrn = $(obj).attr('data-mrn');
-        let cmd = 'guarda &' + mrn;
-
-        _.processCommands(cmd);
-    }
-
     toCustomInput(obj) {
         /* New: Concatenate cmd + droppped element */
         let _ = this;
@@ -2474,12 +2451,28 @@ export default class TgGui {
         let preCmd = $(input).val();
         let cmd;
 
-        if (!preCmd) {
-            cmd = 'guarda &' + mrn;
-        } else {
-            cmd = preCmd + ' &' + mrn;
-        }
-        _.processCommands(cmd);
+        $.magnificPopup.open({
+            showCloseBtn: false,
+            preloader: false, 
+            closeOnBgClick: true,
+            items: {
+                src: '#interactBoxEvent',
+                type: 'inline'
+            },
+            mainClass: 'tg-mp modal-custom',
+            beforeOpen: function() {
+                let icon = $(obj).clone();
+                $('.placeholder').html(icon);
+            }
+        });
+
+
+        // if (!preCmd) {
+        //     cmd = 'guarda &' + mrn;
+        // } else {
+        //     cmd = preCmd + ' &' + mrn;
+        // }
+        // _.processCommands(cmd);
     }
 
     toInventory(obj) {
@@ -2620,7 +2613,6 @@ export default class TgGui {
         return '<div class="meter2' + (txt ? ' withtxtbox' : '') + '"><div class="barcont"><span class="' + color + '" style="width:' + _.limitPrc(prc) + '%"></span></div>' + (txt ? '<div class="metertxt">' + txt + '</div>' : '') + '</div>';
     }
 
-
     prcHighTxt(val, values) {
         for (let i = 0; i < values.length; ++i) {
             if (val >= values[i].val)
@@ -2628,6 +2620,7 @@ export default class TgGui {
         }
         return null;
     }
+
 
     /* *****************************************************************************
      * COMMAND HISTORY
@@ -2672,6 +2665,8 @@ export default class TgGui {
         $('#tgInputUser').val('');
         return text;
     }
+    
+    /* ***************************************************************************** */
 
     sendToServer(text) {
         let _ = this;
@@ -3429,6 +3424,10 @@ export default class TgGui {
     }
 
     openWidgetLoginPopup() {
+        /*TODO: Load via Ajax if Login Widget Element is not in the DOM */
+
+        $.magnificPopup.close();
+
         $.magnificPopup.open({
             items: {
                 src: '#loginWidget',

@@ -30,6 +30,12 @@
 
 <body data-serverstatus="" data-loginstatus="0">
   <div class="tg-area tg-box b-area">
+    <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+    </div>
     <!-- Main Panel -->
     <div class="tg-main container-fluid">
       <!-- Main NavBar -->
@@ -385,6 +391,39 @@
         <div class="tg-border tg-border-bottom"></div>
       </div>
     </div>
+    <div id="interactBoxEvent" class="container tg-interactevent tg-shadow tg-box b-modal">
+      <div class="tg-boxcontent tg-box">
+        <div class="row">
+          <div class="col">
+            <div class="c-caption">Pre: </div>
+            <div class="d-flex">
+              <div class="interact-inputbar pre" contenteditable="true"></div><span>+</span>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="c-caption">Selezione:</div>
+            <div class="d-flex">
+              <div class="interact-placeicon"><img src=""/></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="c-caption">Post:</div>
+            <span>+</span><div class="interact-inputbar post" contenteditable="true"></div>
+          </div>
+          <div class="col d-flex"><button type="button" class="mt-auto">Invia</button></div> 
+          <div class="w-100"></div>
+  
+          <div class="col example">Es. Carica + [selezione] + carro </div>
+        </div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+    <!-- End Interact Box -->
 
     <div class="tg-loginpanel align-middle container-fluid">
       <!-- Login Panel -->
@@ -528,12 +567,7 @@
       </div>
     </div>
     <!-- Login Widget End -->
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
+
   </div>
   <!-- Audio & Music -->
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>

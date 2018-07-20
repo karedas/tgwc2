@@ -16,4 +16,40 @@
     .interact-elem.valid {
         background:$gray-900;
     }
+
+}
+
+.tg-interactevent {
+    display: none;
+    background: #040910;
+    .tg-boxcontent {
+        padding:12px 6px;
+    }
+    .c-caption {
+        margin: 0 0 .2em;
+        color: $tg-green;
+        text-transform: uppercase;
+        font-size: 9px;
+    }
+
+    .interact-inputbar {
+        min-width: 100px;
+        border: 1px solid $gray-900;
+        color: white;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    .col {
+        padding-bottom: 1em;
+    }
+
+    .example {
+        font-size: 10px;
+        color: $gray-600;
+    }
+}
+
+.modal-custom .tg-interactevent {
+    display: block;
 }
