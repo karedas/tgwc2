@@ -116,7 +116,9 @@
               <div id="scrollableOutput" class="scrollable">
                 <div id="output" class="tg-output-history"></div>
               </div>
-              <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata <i class="far fa-arrow-alt-circle-right"></i></div>
+              <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
+                <i class="far fa-arrow-alt-circle-right"></i>
+              </div>
             </div>
             <div class="tg-outputextra-wrap">
               <div class="tg-resizablehand"></div>
@@ -266,7 +268,9 @@
               <!-- Input Line -->
               <div class="tg-input tg-box b-ironlight tg-shadow">
                 <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
-                <span class="drop-alert"><b class="tg-yellow">Comando: <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span>
+                <span class="drop-alert">
+                  <b class="tg-yellow">Comando:
+                    <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span>
                 <div class="tg-inputcommand d-none d-sm-flex">
                   <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
                     <i class="fas fa-columns"></i>
@@ -383,7 +387,7 @@
     </div>
 
     <div class="tg-loginpanel align-middle container-fluid">
-    <!-- Login Panel -->
+      <!-- Login Panel -->
       <div class="justify-content-center align-self-top mt-auto w-100">
         <div class="mx-auto tg-login-container">
           <div class="tg-logo-composit">
@@ -393,15 +397,18 @@
               <div class="tg-loginform-content">
                 <h2>Gioco di Ruolo Fantasy Online
                   <br> Accedi
-                  <span>gratis</span> al mondo di Ikhari!</h2>
+                  <span>gratis</span> al mondo di Ikhari!
+                </h2>
                 <form id="loginForm" action="#" autocomplete="off" novalidate>
-                  <input id="login_username" name="username" type="text" autocomplete="off" placeholder="Username" required>
-                  <div class="invalid-feedback">
-                      Nome utente obbligatorio.
+                  <div class="form-row">
+                    <div class="col-12">
+                      <input id="login_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username" required />
+                    </div>
                   </div>
-                  <input id="login_password" name="password" type="password" autocomplete="off" placeholder="Password" required>
-                  <div class="invalid-feedback">
-                      Password obbligatoria.
+                  <div class="form-row">
+                    <div class="col-12">
+                      <input id="login_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password" required />
+                    </div>  
                   </div>
                   <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
                   <p class="tg-newcharacter">Sei nuovo?
@@ -498,7 +505,9 @@
               <div class="tg-charavatar-last"></div>
             </div>
             <div class="col">
-              <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti <span></span></button>
+              <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti
+                <span></span>
+              </button>
               <button id="widgetLoginNewConnection" type="button" class="btn-newconnection">Accedi con un personaggio diverso.</button>
               <button id="widgetLoginExit" type="button" class="btn-newconnection">Esci.</button>
             </div>

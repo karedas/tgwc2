@@ -657,6 +657,7 @@ export default class TgGui {
             let pass = $('#login_password').val();
 
             if($(this)[0].checkValidity() === false) {
+                console.log('novalidate!');
                 //TODO: Notify user to provide credentials
                 $(this).addClass('was-validated');
                 return;
