@@ -382,7 +382,7 @@
         <div class="interact-elem inv-out">Posa</div>
         <div class="interact-elem wpn-in">Impugna</div>
         <div class="interact-elem wpn-out">Riponi</div>
-        <div class="interact-elem input-concat">Concatena comando</div>
+        <div class="interact-elem input-concat">Comando personale</div>
       </div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
@@ -394,27 +394,27 @@
     <div id="interactBoxEvent" class="container tg-interactevent tg-shadow tg-box b-modal">
       <div class="tg-boxcontent tg-box">
         <div class="row">
-          <div class="col">
-            <div class="c-caption">Pre: </div>
-            <div class="d-flex">
+          <div class="col d-flex flex-column">
+            <div class="c-caption mx-auto">Pre: </div>
+            <div class="d-flex d-flex mt-auto">
               <div class="interact-inputbar pre" contenteditable="true"></div><span>+</span>
             </div>
           </div>
           <div class="col-auto">
             <div class="c-caption">Selezione:</div>
             <div class="d-flex">
-              <div class="interact-placeicon"><img src=""/></div>
+              <div class="interact-placeicon mx-auto"></div>
             </div>
           </div>
-          <div class="col">
-            <div class="c-caption">Post:</div>
-            <span>+</span><div class="interact-inputbar post" contenteditable="true"></div>
+          <div class="col d-flex flex-column">
+            <div class="c-caption mx-auto">Post:</div>
+            <div class="d-flex mt-auto">
+              <span>+</span><div class="interact-inputbar post" contenteditable="true"></div>
+            </div>
           </div>
-          <div class="col d-flex"><button type="button" class="mt-auto">Invia</button></div> 
-          <div class="w-100"></div>
-  
-          <div class="col example">Es. Carica + [selezione] + carro </div>
+          <div class="col d-flex"><button type="button" id="interactSendButton" class="mt-auto">Invia</button></div> 
         </div>
+          <div class="col example">Es. Carica + [selezione] + carro </div>
       </div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>

@@ -22,6 +22,8 @@
 .tg-interactevent {
     display: none;
     background: #040910;
+
+
     .tg-boxcontent {
         padding:12px 6px;
     }
@@ -40,16 +42,38 @@
         white-space: nowrap;
     }
 
-    .col {
+    .col, .col-auto {
         padding-bottom: 1em;
+    }
+
+    span {
+        color: $tg-green;
+        padding:0 .5em;
+    }
+
+    .interact-placeicon {
+        text-align: center;
     }
 
     .example {
         font-size: 10px;
         color: $gray-600;
     }
+
+    button {
+        background: $tg-green;
+        border: none;
+    }
 }
 
-.modal-custom .tg-interactevent {
-    display: block;
+.modal-custom {
+    &.mfp-bg {
+        background-color: transparent;
+    }
+    .mfp-content {
+        width: auto;
+    }
+    .tg-interactevent {
+        display: block;
+    }
 }

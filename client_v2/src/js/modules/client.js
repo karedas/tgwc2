@@ -2153,16 +2153,14 @@ export default class TgGui {
             greedy: true,
             hoverClass: 'valid',
             activate: function(){
-
                 $('#dropcmd').text($('#tgInputUser').val());
-                console.log('activate');
             },
             drop: function (event, ui) {
 
                 let zidx = 10000;
                 if (_.client_state.max_drop_stack < zidx) {
                     _.at_drag_stop_func = function () {
-                        _.toCustomInput(ui.draggable);
+                        _.toInputBar(ui.draggable);
                     }
                     _.client_state.max_drop_stack = zidx;
                 }
@@ -2447,8 +2445,6 @@ export default class TgGui {
         /* New: Concatenate cmd + droppped element */
         let _ = this;
         let mrn = $(obj).attr('data-mrn');
-        let input = $('#tgInputUser');
-        let preCmd = $(input).val();
         let cmd;
 
         $.magnificPopup.open({
@@ -2460,9 +2456,23 @@ export default class TgGui {
                 type: 'inline'
             },
             mainClass: 'tg-mp modal-custom',
-            beforeOpen: function() {
-                let icon = $(obj).clone();
-                $('.placeholder').html(icon);
+            callbacks: {
+                beforeOpen: function() {
+                    let icon = $(obj).clone();
+                    $('.interact-placeicon').html(icon);
+                    $('.interact-inputbar.pre').text('');
+                    $('.interact-inputbar.post').text('');
+                },
+                open: function(){
+                   $('#interactSendButton').one('click', function(){
+                       
+                       let pre = $('.interact-inputbar.pre').text();
+                       let post = $('.interact-inputbar.post').text();
+                       cmd = pre + ' &'+mrn + ' ' + post;
+                       _.processCommands(cmd);
+                       $.magnificPopup.close();
+                   });
+                }
             }
         });
 
@@ -2473,6 +2483,17 @@ export default class TgGui {
         //     cmd = preCmd + ' &' + mrn;
         // }
         // _.processCommands(cmd);
+    }
+
+    toInputBar(obj) {
+        /* New: Concatenate cmd + droppped element */
+        let _ = this;
+        let mrn = $(obj).attr('data-mrn');
+        let input = $('#tgInputUser');
+        let preCmd = $(input).val();
+        let cmd;
+
+        _.processCommands(preCmd + ' &' + mrn);
     }
 
     toInventory(obj) {
