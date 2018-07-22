@@ -168,6 +168,23 @@ export default class TgGui {
         this.MAP_OBJECT = null;
         this.RENDER = null;
 
+        this.race_to_class = {
+            "uma":"human",
+            "ume":"human",
+            "eal":"elf",
+            "esi":"elf",
+            "dra":"elf",
+            "drw":"elf",
+            "meu":"human",
+            "mel":"human",
+            "hal":"halfling",
+            "nan":"dwarf",
+            "orc":"orc",
+            "gob":"goblin",
+            "els":"elf"
+        };
+        
+
         this.equip_positions_by_name = {
 
             "r_finger": "Al dito destro",
@@ -1081,7 +1098,7 @@ export default class TgGui {
                 _.client_update.data.info = true;
                 return '';
             } else {
-                _.renderPlayerInfo();
+                _.renderPlayerInfo(info_parse);
             }
         });
 
@@ -1367,10 +1384,11 @@ export default class TgGui {
 
     renderPlayerInfo(info) {
         let _ = this,
-            d = $('#tgSchedaPg');
+
+        d = $('#tgSchedaPg');
 
         if (info.image) {
-            $('#infoimage', d).attr('src', _.media_server_addr + info_image);
+            $('#infoimage', d).attr('src', _.media_server_addr + info.image);
         }
         $('#infotitle', d).text(info.title);
 
@@ -1396,31 +1414,31 @@ export default class TgGui {
 
         $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1<p></p>').replace(/\n/gm, ' '));
 
-        $('#raceimage', d).attr('class', race_to_class[info.race.code] + '_' + info.sex.code + ' img');
+        $('#raceimage', d).attr('class', _.race_to_class[info.race.code] + '_' + info.sex.code + ' img');
 
-        $('#infowil', d).width(limitPrc(info.abil.wil.prc) + "%");
-        $('#infowillvl', d).text(prcLowTxt(info.abil.wil.prc, abiltxt));
+        $('#infowil', d).width(_.limitPrc(info.abil.wil.prc) + "%");
+        $('#infowillvl', d).text(_.prcLowTxt(info.abil.wil.prc, _.abiltxt));
 
-        $('#infoint', d).width(limitPrc(info.abil.int.prc) + "%");
-        $('#infointlvl', d).text(prcLowTxt(info.abil.int.prc, abiltxt));
+        $('#infoint', d).width(_.limitPrc(info.abil.int.prc) + "%");
+        $('#infointlvl', d).text(_.prcLowTxt(info.abil.int.prc, _.abiltxt));
 
-        $('#infoemp', d).width(limitPrc(info.abil.emp.prc) + "%");
-        $('#infoemplvl', d).text(prcLowTxt(info.abil.emp.prc, abiltxt));
+        $('#infoemp', d).width(_.limitPrc(info.abil.emp.prc) + "%");
+        $('#infoemplvl', d).text(_.prcLowTxt(info.abil.emp.prc, _.abiltxt));
 
-        $('#infosiz', d).width(limitPrc(info.abil.siz.prc) + "%");
-        $('#infosizlvl', d).text(prcLowTxt(info.abil.siz.prc, abiltxt));
+        $('#infosiz', d).width(_.limitPrc(info.abil.siz.prc) + "%");
+        $('#infosizlvl', d).text(_.prcLowTxt(info.abil.siz.prc, _.abiltxt));
 
-        $('#infocon', d).width(limitPrc(info.abil.con.prc) + "%");
-        $('#infoconlvl', d).text(prcLowTxt(info.abil.con.prc, abiltxt));
+        $('#infocon', d).width(_.limitPrc(info.abil.con.prc) + "%");
+        $('#infoconlvl', d).text(_.prcLowTxt(info.abil.con.prc, _.abiltxt));
 
-        $('#infostr', d).width(limitPrc(info.abil.str.prc) + "%");
-        $('#infostrlvl', d).text(prcLowTxt(info.abil.str.prc, abiltxt));
+        $('#infostr', d).width(_.limitPrc(info.abil.str.prc) + "%");
+        $('#infostrlvl', d).text(_.prcLowTxt(info.abil.str.prc, _.abiltxt));
 
-        $('#infodex', d).width(limitPrc(info.abil.dex.prc) + "%");
-        $('#infodexlvl', d).text(prcLowTxt(info.abil.dex.prc, abiltxt));
+        $('#infodex', d).width(_.limitPrc(info.abil.dex.prc) + "%");
+        $('#infodexlvl', d).text(_.prcLowTxt(info.abil.dex.prc, _.abiltxt));
 
-        $('#infospd', d).width(limitPrc(info.abil.spd.prc) + "%");
-        $('#infospdlvl', d).text(prcLowTxt(info.abil.spd.prc, abiltxt));
+        $('#infospd', d).width(_.limitPrc(info.abil.spd.prc) + "%");
+        $('#infospdlvl', d).text(_.prcLowTxt(info.abil.spd.prc, _.abiltxt));
 
         return '';
     }
@@ -1806,14 +1824,20 @@ export default class TgGui {
 
             if (!_.in_combat) {
 
+                $('body').addClass('in-combat');
+
                 if(_.client_options.dashboard == 0) {
-                    $('body').addClass('in-combat');
                     $('#tg-pills-tab-monitor').tab('show');
-                    //set enemy name
                 }
                 //open dialog if dashboard is collapsed
                 else {
-                    _.dialog = $('.tg-combatpanel').clone();
+
+                    if($('#combatBoxWidget').is(':empty')) {
+                        let combatbox = $('.tg-combatpanel').clone();
+                        $('.incnt', '.combatwidget-modal').append(combatbox);
+                    }
+
+                    _.dialog = $('.combatwidget-modal');
 
                     $(_.dialog).dialog({
                         closeOnEscape: false,
@@ -1821,10 +1845,11 @@ export default class TgGui {
                         draggable: true,
                         minHeight: 0,
                         resizable: false,
-                        width: 256,
-                        dialogClass: 'tg-shadow'
-                    }).draggable();
-
+                        width: 280,
+                        title: 'Target',
+                        closeText: "hide"
+                    });
+                   
                     $('#tgInputUser').focus();
                 }
 
@@ -3549,7 +3574,7 @@ export default class TgGui {
             appendTo: "body",
             helper: 'clone',
             revert: "invalid",
-            delay: 300,
+            delay: 200,
             revertDuration: 200,
             scroll: false,
             zIndex: 1000,

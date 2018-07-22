@@ -207,7 +207,7 @@
                           </div>
                         </div>
                         <div class="tg-combatpanel col-auto pr-0">
-                          <div id="combatpanelcontent" class="tg-combatpanel-wrap">
+                          <div class="tg-combatpanel-wrap">
                             <div class="tg-combatpanel-box">
                               <div class="enemyname"></div>
                               <div class="tg-enemyicon">
@@ -457,6 +457,20 @@
             </div>
           </div>
           <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
+          <div id="rotateText" class="tg-intro-rotatext row text-center">
+            <div class="col-12">
+              <div class="phrase">
+                "L'importante non è Guardare, occorre Vedere."
+                <span class="auth">- Anonimo -</span>
+              </div>
+              <div class="phrase">"Nuovo giorno, buon giorno!"
+                <span class="auth">- Una guardia cittadina -</span>
+              </div>
+              <div class="phrase">"Gnek gnek!"
+                <span class="auth">- Strane creature di Ikhari -</span>
+              </div>
+            </div>
+          </div>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
             <div class="pbar"></div>
@@ -484,20 +498,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div id="rotateText" class="tg-intro-rotatext row text-center">
-        <div class="col-12">
-          <div class="phrase">
-            "L'importante non è Guardare, occorre Vedere."
-            <span class="auth">- Anonimo -</span>
-          </div>
-          <div class="phrase">"Nuovo giorno, buon giorno!"
-            <span class="auth">- Una guardia cittadina -</span>
-          </div>
-          <div class="phrase">"Gnek gnek!"
-            <span class="auth">- Strane creature di Ikhari -</span>
           </div>
         </div>
       </div>
@@ -565,9 +565,9 @@
         <div class="tg-border tg-border-bottom"></div>
       </div>
     </div>
-    <div class="tg-generic-modal tg-shadow b-modal tg-box">
-      <div class="tg-box" id="generic">
-      </div>
+    
+    <div class="combatwidget-modal tg-shadow b-modal tg-box">
+      <div id="combatBoxWidget" class="tg-box incnt"></div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
         <div class="tg-border tg-border-left"></div>

@@ -123,6 +123,26 @@ caption {
 .ui-dialog { z-index: 1000 !important ;}
 .ui-dialog-titlebar {
     display:none;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    color: #FFF;
+    padding-right: 3px;
+    background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
+}
+
+.ui-dialog-title {
+    background: url($imgPath + '/interface/modal_title_left_bg.png') repeat-x top left;
+    font-size: 10px;
+    text-transform: uppercase;
+    line-height: 19px;
+    padding: 0 32px;
+    margin-bottom: 0;
+    display: block;
+}
+
+.ui-dialog-content {
+    box-shadow: 0px 2px 12px #000;
 }
 
 .ui-resizable-handle {

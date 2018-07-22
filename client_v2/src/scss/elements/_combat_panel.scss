@@ -17,17 +17,8 @@
     .tg-combatpanel-box {
         position: relative;
         @include sprite($combatpanel-box-notarget-sprite);
+        margin: 0 auto;
         background-repeat: no-repeat;
-    }
-
-    .tg-combatpanel-wrap:before {
-        content: "- non sei in combattimento -";
-        color: #8b867b;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        width: 100%;
     }
 
     .tg-enemy-name{
@@ -50,6 +41,12 @@
         left: 6px;
         z-index: 2;
         background: url($imgPath + '/frame/enemy-target-icon-box.png') no-repeat;
+    }
+    
+    .enemyname {
+        color: #d5cbad;
+        text-transform: uppercase;
+        font-size: 9px;
     }
     
     .tg-enemy-m, .tg-enemy-h {
@@ -114,17 +111,32 @@
             display: inline-block;
         }
     }
+
+    .midopen .tg-combatpanel {
+        display: none;
+    }
 }
 
 .ui-dialog {
+
+    .ui-dialog-titlebar-close {
+        display: none;
+    }
+    .ui-dialog-titlebar {
+        display: table;
+    }
     .tg-combatpanel {
         cursor: pointer;
         padding-left: 0;
-        border:1px solid #333;
     }
 
     .tg-combatpanel-wrap {
         padding-top:6px;
         padding-bottom: 6px;
+    }
+
+    .tg-combatpanel-box {
+        background: none;
+        height: 64px;
     }
 }
