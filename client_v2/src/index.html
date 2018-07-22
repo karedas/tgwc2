@@ -31,10 +31,10 @@
 <body data-serverstatus="" data-loginstatus="0">
   <div class="tg-area tg-box b-area">
     <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
     <!-- Main Panel -->
     <div class="tg-main container-fluid">
@@ -117,18 +117,18 @@
         <div class="tg-leftside col">
           <!-- Output History Area -->
           <div class="row tg-output tg-box b-ironlight tg-shadow">
-            <div class="tg-output-wrap">
-              <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
-                <i class="far fa-arrow-alt-circle-right"></i>
+            <div class="tg-box col-12 p-0 d-flex">
+              <div class="tg-output-main p-0 resizable">
+                <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
+                  <i class="far fa-arrow-alt-circle-right"></i>
+                </div>
+                <!-- Output Area -->
+                <div class="scrollable">
+                  <div id="output" class=" tg-output-history">
+                  </div>  
+                </div>
               </div>
-              <!-- Output Area -->
-              <div id="scrollableOutput" class="scrollable">
-                <div id="output" class="tg-output-history"></div>
-              </div>
-            </div>
-            <div class="tg-outputextra-wrap">
-              <div class="tg-resizablehand"></div>
-              <div id="scrollableExtraOutput" class="scrollable">
+              <div class="tg-output-extra scrollable">
                 <div id="extraoutput" class="tg-extraoutput-history">
                   <div class="extraoutput-header">
                     <div class="out-title" id="detailtitle"></div>
@@ -206,28 +206,22 @@
                             </div>
                           </div>
                         </div>
-                        <div id="combatpanel" class="tg-combatpanel col-auto pr-0">
-                          <div class="tg-combatpanel-wrap">
+                        <div class="tg-combatpanel col-auto pr-0">
+                          <div id="combatpanelcontent" class="tg-combatpanel-wrap">
                             <div class="tg-combatpanel-box">
-                              <div id="enemyName" class="tg-enemy-name"></div>
+                              <div class="enemyname"></div>
                               <div class="tg-enemyicon">
-                                <div id="enemyicon" class="iconimg"></div>
+                                <div class="iconimg enemyicon"></div>
                               </div>
                               <div class="enemy-h-prc">0%</div>
                               <div class="tg-enemy-h">
-                                <div id="enemyH" class="enemy-bar"></div>
+                                <div class="enemy-bar enemyH"></div>
                               </div>
                               <div class="enemy-m-prc">0%</div>
                               <div class="tg-enemy-m">
-                                <div id="enemyM" class="enemy-bar"></div>
+                                <div class="enemy-bar enemyM"></div>
                               </div>
                             </div>
-                            <!--
-                              <div id="actionCombaAction_b" class="tg-combat-right">
-                                <button id="combatPieta" class="tg-fnt-button tg-button-pieta mb-1 mt-auto" disabled="disabled" title="Chiedi la Piet&agrave;"></button>
-                                <button id="combatTregua" class="tg-fnt-button tg-button-tregua mb-auto" disabled="disabled" title="Chiedi una Tregua"></button>
-                              </div>
-                              -->
                           </div>
                         </div>
                       </div>
@@ -397,7 +391,8 @@
           <div class="col d-flex flex-column">
             <div class="c-caption mx-auto">Pre: </div>
             <div class="d-flex d-flex mt-auto">
-              <div class="interact-inputbar pre" contenteditable="true"></div><span>+</span>
+              <div class="interact-inputbar pre" contenteditable="true"></div>
+              <span>+</span>
             </div>
           </div>
           <div class="col-auto">
@@ -409,12 +404,15 @@
           <div class="col d-flex flex-column">
             <div class="c-caption mx-auto">Post:</div>
             <div class="d-flex mt-auto">
-              <span>+</span><div class="interact-inputbar post" contenteditable="true"></div>
+              <span>+</span>
+              <div class="interact-inputbar post" contenteditable="true"></div>
             </div>
           </div>
-          <div class="col d-flex"><button type="button" id="interactSendButton" class="mt-auto">Invia</button></div> 
+          <div class="col d-flex">
+            <button type="button" id="interactSendButton" class="mt-auto">Invia</button>
+          </div>
         </div>
-          <div class="col example">Es. Carica + [selezione] + carro </div>
+        <div class="example">Es. Carica + [selezione] + carro </div>
       </div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
@@ -424,11 +422,10 @@
       </div>
     </div>
     <!-- End Interact Box -->
-
     <div class="tg-loginpanel align-middle container-fluid">
       <!-- Login Panel -->
-      <div class="justify-content-center align-self-top mt-auto w-100">
-        <div class="mx-auto tg-login-container">
+      <div class="justify-content-center align-self-top w-100 d-flex h-100">
+        <div class="mx-auto tg-login-container my-auto">
           <div class="tg-logo-composit">
           </div>
           <div class="tg-loginform">
@@ -441,13 +438,15 @@
                 <form id="loginForm" action="#" autocomplete="off" novalidate>
                   <div class="form-row">
                     <div class="col-12">
-                      <input id="login_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username" required />
+                      <input id="login_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username" required
+                      />
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-12">
-                      <input id="login_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password" required />
-                    </div>  
+                      <input id="login_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password"
+                        required />
+                    </div>
                   </div>
                   <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
                   <p class="tg-newcharacter">Sei nuovo?
@@ -456,35 +455,35 @@
                 </form>
               </div>
             </div>
-            <!-- glow Effect ### //-->
-            <div class="glow_container">
-              <div class="glow_wamp glow_box"></div>
-              <div class="glow_box _spectral">
-                <div class="glow_stream _type_1">
-                  <div class="glow_slide">
-                    <div class="shake">
-                      <div class="glow_item _type_1"></div>
-                      <div class="glow_item _type_2"></div>
-                      <div class="glow_item _type_3"></div>
-                      <div class="glow_item _type_4"></div>
-                    </div>
-                  </div>
-                  <div class="glow_slide _delay_1">
-                    <div class="shake _delay_1">
-                      <div class="glow_item _type_1"></div>
-                      <div class="glow_item _type_2"></div>
-                      <div class="glow_item _type_3"></div>
-                      <div class="glow_item _type_4"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
           <div id="tgPreloader" class="tg-preloader">
             <span>0</span>%
             <div class="pbar"></div>
+          </div>
+        </div>
+        <!-- glow Effect ### //-->
+        <div class="glow_container">
+          <div class="glow_wamp glow_box"></div>
+          <div class="glow_box _spectral">
+            <div class="glow_stream _type_1">
+              <div class="glow_slide">
+                <div class="shake">
+                  <div class="glow_item _type_1"></div>
+                  <div class="glow_item _type_2"></div>
+                  <div class="glow_item _type_3"></div>
+                  <div class="glow_item _type_4"></div>
+                </div>
+              </div>
+              <div class="glow_slide _delay_1">
+                <div class="shake _delay_1">
+                  <div class="glow_item _type_1"></div>
+                  <div class="glow_item _type_2"></div>
+                  <div class="glow_item _type_3"></div>
+                  <div class="glow_item _type_4"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -566,8 +565,17 @@
         <div class="tg-border tg-border-bottom"></div>
       </div>
     </div>
+    <div class="tg-generic-modal tg-shadow b-modal tg-box">
+      <div class="tg-box" id="generic">
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
     <!-- Login Widget End -->
-
   </div>
   <!-- Audio & Music -->
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>

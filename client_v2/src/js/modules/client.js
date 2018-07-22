@@ -10,9 +10,9 @@ import 'magnific-popup';
 import position from 'jquery-ui/ui/position';
 import draggable from 'jquery-ui/ui/widgets/draggable';
 import droppable from 'jquery-ui/ui/widgets/droppable';
+import dialog from 'jquery-ui/ui/widgets/dialog';
 /* ----------*/
-//TODO: REMOVE IT
-import 'jquery-resizable-dom';
+//TODO: REMOVE IT+
 
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
@@ -61,9 +61,10 @@ export default class TgGui {
             ui: false,
             news_showed: false,
             widget_login: false,
-            max_drop_stack: null
+            max_drop_stack: null,
         };
 
+        this.dialog = null;
         this.viewport = null;
 
         /* UI Game Options */
@@ -79,7 +80,7 @@ export default class TgGui {
             dashboard: "0",
             extradetail_open: true,
             mrn_highlights: [],
-            extradetail_width: '50%',
+            output_width: '50%',
             output_trimlines: 500,
         };
 
@@ -1801,36 +1802,64 @@ export default class TgGui {
         let _ = this;
 
         if (st.length == 6) {
+            $('.enemyname').text(st[5]);
+
             if (!_.in_combat) {
-                $('body').addClass('in-combat');
-                $('#tg-pills-tab-monitor').tab('show');
-                //set enemy name
+
+                if(_.client_options.dashboard == 0) {
+                    $('body').addClass('in-combat');
+                    $('#tg-pills-tab-monitor').tab('show');
+                    //set enemy name
+                }
+                //open dialog if dashboard is collapsed
+                else {
+                    _.dialog = $('.tg-combatpanel').clone();
+
+                    $(_.dialog).dialog({
+                        closeOnEscape: false,
+                        closeOnText: false,
+                        draggable: true,
+                        minHeight: 0,
+                        resizable: false,
+                        width: 256,
+                        dialogClass: 'tg-shadow'
+                    }).draggable();
+
+                    $('#tgInputUser').focus();
+                }
+
+                _.updateEnemyStatus(st[2], st[3]);
+                _.updateEnemyIcon(st[4]);
+
+                
                 _.in_combat = true;
             }
-            $('#enemyName').text(st[5]);
-            _.updateEnemyStatus(st[2], st[3]);
-            _.updateEnemyIcon(st[4]);
 
-        } else if (_.in_combat) {
+        }
+        else if (_.in_combat) {
             $('body').removeClass('in-combat');
             $('#actionCombaAction_b button').prop('disabled', true);
+            if( _.dialog ) {
+                $(_.dialog).dialog('destroy');
+                _.dialog = null;
+            }
             _.in_combat = false;
-        }
+        }      
     }
 
     updateEnemyStatus(hprc, mprc) {
         let h = this.limitPrc(hprc) + '%';
         let m = this.limitPrc(mprc) + '%';
-        $('#enemyH').width(h);
+        $('.enemyH').width(h);
         $('.enemy-h-prc').text(h)
-        $('#enemyM').width(m);
+        $('.enemyM').width(m);
         $('.enemy-m-prc').text(m)
     }
 
     updateEnemyIcon(icon) {
         let _ = this;
         if (_.enemy_icon != icon) {
-            $('#enemyicon').css('background-position', _.tileBgPos(icon)).attr('mrn', 0);
+            $('.enemyicon').css('background-position', _.tileBgPos(icon)).attr('mrn', 0);
         }
     }
 
@@ -1929,8 +1958,9 @@ export default class TgGui {
 
         _.addDragAndDrop('.iconimg.interact', details);
 
-
         textarea.append(details);
+
+        _.scrollPanelTo('#extraoutput', '.scrollable', false, 0);
 
         if (type == 'room') {
             if (_.client_update.room.version < info.let) {
@@ -2152,6 +2182,7 @@ export default class TgGui {
 
         /* Drag & Drop on InputBar (new) */
         $('#tgInputUser').droppable({
+            accept: '.interact',
             greedy: true,
             hoverClass: 'valid',
             activate: function(){
@@ -2764,13 +2795,14 @@ export default class TgGui {
         let _ = this;
         /* Extra Detail Display */
         if (_.client_options.extradetail_open) {
-            $('.tg-outputextra-wrap').addClass('d-flex');
+            $('.tg-output-extra').addClass('d-flex');
         } else {
-            $('.tg-outputextra-wrap').removeClass('d-flex');
+            $('.tg-output-extra').removeClass('d-flex');
         }
 
         /* Dashboard Expand/collapse status */
         let d_status = _.client_options.dashboard; //just alias
+
         if (d_status == 1) {
             $('.tg-dashboard').addClass('midopen');
         } else if (d_status == 2) {
@@ -2854,14 +2886,73 @@ export default class TgGui {
      * -------------------------------------------------*/
 
     outputInit() {
-        let outputID = '#scrollableOutput';
-        this.addScrollBar(outputID, 'output');
+
+        let _ = this;
+        let outputID = '.tg-output-main';
+
+        _.addScrollBar(outputID + ' .scrollable', 'output'); 
+
+        if(!_.client_options.extradetail_open) {
+            console.log(outputID);
+            $(outputID).css('width', '100%');
+        }
+        else {
+            $(outputID).css('width', _.client_options.output_width);
+        }
+
+        if(_.client_options.extradetail_open) {
+            _.addResizableOutput();
+        }
         // init Extraoutput window
-        this.extraOutputInit();
+        _.extraOutputInit();
         // Highlightining mob/obj based on user click
         //TODO: this.highlightsOutputMRN();
         //add Event Handler for Expndable list
-        this.makeExpandable();
+        _.makeExpandable();
+    }
+
+    addResizableOutput() {
+
+        let _ = this;
+
+        $('.tg-output-main.resizable').resizable({
+            handles: "e",
+            containment: '.tg-output',
+            create: function(event, ui) {
+                let w;
+                if(!_.client_options.output_width) {
+                    w = $(this).parent().width() / 2;
+                }
+                $('.tg-output-extra').css({
+                    left: w + 1,
+                    //width: ($(this).parent().width() - w),
+                });
+            },
+            resize: function(event, ui) {
+                event.stopImmediatePropagation();
+                $('.tg-output-extra').css({
+                    left: parseInt(ui.size.width + 1) + 'px',
+                });
+            },
+            stop: function(event, ui) {
+                let width = ui.size.width;
+            /*      let maxWidth = Number($(el).css('maxWidth').replace(/[^-\d\.]/g, ''));
+                let contWidth = Math.round(($(el).width() / $(el).parent().width()) * 100)
+                if (contWidth >= maxWidth) {
+                    width = maxWidth;
+                    $(el).width(maxWidth + '%');
+                }*/
+        
+                //update scrollbar
+                _.scrollbar.extraoutput.update();
+                _.client_options.output_width = width + 'px';
+                _.SaveStorage('options', _.client_options);
+            }
+
+        /*     onDragEnd: function (e, el) {
+
+            }*/
+        });
     }
 
     showOutput(text) {
@@ -2871,16 +2962,14 @@ export default class TgGui {
 
         _.addDragAndDrop('.iconimg.interact', app);
 
-
         $('#output').append(app);
-
-        _.scrollPanelTo('#output', '#scrollableOutput', false);
 
         if (_.client_options.output_trimlines < 10000) {
             $('#output').contents().slice(0, -_.client_options.output_trimlines).remove();
         }
 
-        $('#scrollableOutput').get(0).scrollTop = 100000
+        _.scrollPanelTo('#output', '.scrollable', false, null);
+
     }
 
     clearOutput() {
@@ -2947,34 +3036,10 @@ export default class TgGui {
 
     extraOutputInit() {
         let _ = this;
-        let extraOutputID = '.tg-outputextra-wrap';
+        $('.tg-output-extra').css({left: _.client_options.output_width.toString()});
+        
+        this.addScrollBar('.tg-output-extra', 'extraoutput');
 
-        this.addScrollBar('#scrollableExtraOutput', 'extraoutput');
-
-        $(extraOutputID).width(_.client_options.extradetail_open_width);
-
-        $(extraOutputID).resizable({
-            handleSelector: ".tg-resizablehand",
-            resizeHeight: false,
-            resizeWidthFrom: 'left',
-
-            onDragEnd: function (e, el) {
-                let width = $(el).width();
-
-                let maxWidth = Number($(el).css('maxWidth').replace(/[^-\d\.]/g, ''));
-                let contWidth = Math.round(($(el).width() / $(el).parent().width()) * 100)
-                if (contWidth >= maxWidth) {
-                    width = maxWidth;
-                    $(el).width(maxWidth + '%');
-                }
-
-                //update scrollbar
-                _.scrollbar.extraoutput.update();
-
-                _.client_options.extradetail_open_width = width;
-                _.SaveStorage('options', _.client_options);
-            }
-        });
         /* Image Event */
         $('#detailimage')
             .on('error', function () {
@@ -3171,12 +3236,12 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function () {
-            $('.tg-outputextra-wrap').toggleClass('d-flex')
+            $('.tg-output-extra').toggleClass('d-flex')
             /* Refresh Extra when is open */
-            if ($('.tg-outputextra-wrap').is(':visible')) {
+            if ($('.tg-output-extra').is(':visible')) {
                 _.processCommands('@agg');
             }
-            _.scrollPanelTo('#output', '#scrollableOutput', true);
+            _.scrollPanelTo('#output', '.scrollable', true, null);
             _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
             _.SaveStorage('options', _.client_options);
         });
@@ -3194,7 +3259,7 @@ export default class TgGui {
 
 
                 $('.tg-characterpanel').slideToggle(300, function () {
-                    _.scrollPanelTo('#output', '#scrollableOutput', true);
+                    _.scrollPanelTo('#output', '.scrollable', true, null);
                     $('.tg-dashboard').removeClass('midopen');
                 });
                 _.SaveStorage('options', _.client_options);
@@ -3205,7 +3270,7 @@ export default class TgGui {
         $('#triggerExpandTgArea').on('click', function () {
             $('.tg-area').toggleClass('expanded', function () {});
             setTimeout(() => {
-                _.scrollPanelTo('#output', '#scrollableOutput', true);
+                _.scrollPanelTo('#output', '.scrollable', true, null);
             }, 200);
         })
 
@@ -3213,6 +3278,7 @@ export default class TgGui {
         $('#triggerZenModality').on('click', function () {
             //TODO: change to a body class + css
             $('.tg-rightside, .tg-navbar, .tg-characterpanel').toggleClass('d-none');
+            $('body').toggleClass('zen');
         });
     }
 
@@ -3220,9 +3286,6 @@ export default class TgGui {
      *  Generic Events
      * -------------------------------------------------*/
 
-    toggleExtraDetail() {
-
-    }
 
     genericEvents() {
         let _ = this;
@@ -3236,14 +3299,7 @@ export default class TgGui {
             _.openNoFeaturePopup();
         });
 
-        $(window).resize(function () {
-            setTimeout(function () {
-                $.each(_.scrollbar, function (i, s) {
-                    s.update();
-                });
-            }, 400)
-        })
-    }
+     }
 
     sendInput() {
         let inputVal = $('#tgInputUser').val();
@@ -3570,7 +3626,10 @@ export default class TgGui {
 
 
     /* UTILITY */
-
+    disableResizable(widget) {
+        $(widget).resizable('disable');
+    }
+    
     loadContentAjax(what, appendTo) {
         return $.ajax({
             url: what,
@@ -3594,14 +3653,23 @@ export default class TgGui {
         $.magnificPopup.close();
     }
 
-    scrollPanelTo(parent, scrollablepanel, animate) {
-        let outputHeigt = $(parent).height();
+    scrollPanelTo(content, scrollbox, animate, where) {
+        
+        let outputHeight;
+        scrollbox = $(content).parent(scrollbox);
+
+        if (where !== null) {
+            outputHeight = where;
+        }
+        else {
+            outputHeight = $(content).height();
+        }
         if (animate) {
-            $(scrollablepanel).animate({
-                scrollTop: outputHeigt
+            $(scrollbox).animate({
+                scrollTop: outputHeight
             }, 500, 'linear');
         } else {
-            $(scrollablepanel).scrollTop(outputHeigt);
+            $(scrollbox).scrollTop(outputHeight);
         }
     }
 }

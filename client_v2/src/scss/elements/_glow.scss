@@ -11,6 +11,8 @@
     left: 0;
     right: 0;
     z-index: 1;
+    width: 415px;
+    pointer-events: none;
 }
 
 .glow_box {
@@ -23,15 +25,15 @@
     background: #f3faff;
     box-shadow: 0 0 30px 22px #ffffff;
     border-radius: 50%;
-    top: -16px;
-    left: -30px;
+    top: 276px;
+    left: -26px;
     animation: pulse 8s infinite linear;
 }
 
 .glow_box._spectral {
     width: 120px;
     height: 255px;
-    top: -153px;
+    top: 145px;
     left: -14px;
 }
 .glow_stream {
@@ -190,20 +192,5 @@
     }
     100% {
         transform: rotate(-360deg)
-    }
-}
-
-/* for border b-area*/
-@include media-breakpoint-down(sm) {
-
-    .glow_box.glow_wamp {
-
-        top: 6px;
-        left: -30px;
-    }
-    
-    .glow_box._spectral {
-        top: -129px;
-        left: -14px;
     }
 }

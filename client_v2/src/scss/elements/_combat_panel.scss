@@ -1,12 +1,12 @@
 //== combat Panel
 .tg-combatpanel {
     display: none;
-    text-align: center;
     min-width: 274px;
     background:  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
     padding-left:6px;
-
+    
     .tg-combatpanel-wrap {
+        text-align: center;
         height: 100%;
         padding: 0 6px;
         display: flex;
@@ -31,7 +31,6 @@
     }
 
     .tg-enemy-name{
-        display: none;
         text-overflow: ellipsis;
         white-space: nowrap;
         padding-top: 5px;
@@ -42,7 +41,6 @@
     }
 
     .tg-enemyicon {
-        display: none;
         margin: 5px auto;
         transform: none;
         width: 39px;
@@ -52,14 +50,9 @@
         left: 6px;
         z-index: 2;
         background: url($imgPath + '/frame/enemy-target-icon-box.png') no-repeat;
-
-        .iconimg {
-            display: none;
-        }
     }
     
     .tg-enemy-m, .tg-enemy-h {
-        display: none;
         height: 11px;
         position: absolute;
         left: 39px;
@@ -88,7 +81,6 @@
     }
 
     .enemy-h-prc {
-        display: none;
         position: absolute;
         top: 24px;
         right: 8px;
@@ -97,7 +89,6 @@
     }
 
     .enemy-m-prc {
-        display: none;
         position: absolute;
         top: 38px;
         right: 8px;
@@ -122,5 +113,18 @@
         .tg-enemy-name, .tg-enemy-h, .tg-enemy-m, .iconimg, .enemy-h-prc, .enemy-m-prc, .tg-enemyicon{
             display: inline-block;
         }
+    }
+}
+
+.ui-dialog {
+    .tg-combatpanel {
+        cursor: pointer;
+        padding-left: 0;
+        border:1px solid #333;
+    }
+
+    .tg-combatpanel-wrap {
+        padding-top:6px;
+        padding-bottom: 6px;
     }
 }

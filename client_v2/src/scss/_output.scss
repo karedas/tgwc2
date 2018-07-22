@@ -6,14 +6,24 @@
     font-size: 11px;
     position: relative;
     margin-bottom: 8px;
-    
 
-    .tg-output-wrap {
-        position: relative;
-        flex: auto;
-        margin: 6px 0;
-        display: flex;
+    > div {
+        overflow: hidden;
     }
+
+    .tg-output-main {
+        overflow: hidden;
+        position: absolute;
+        width: 50%;
+        top: 0;
+        bottom: 0;
+    
+        .ps {  
+            background: url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
+        }
+    }
+
+
     .tg-output-options {
         height: 36px;
         position: absolute;
@@ -58,19 +68,21 @@
     }
 
     .output-notify-bottom {
-        color: white;
+        color: $tg-yellow;
         position: absolute;
         text-align: center;
         z-index: 2000;
         text-transform: uppercase;
-        padding: 6px 12px;
+        padding: 4px 12px;
         font-size: 8px;
-        left: 0;
-        top:-6px;
-        right:0;
-        background: black;
-        border: 1px solid #333;
-        border-top: 0;
+        left: 50%;
+        top: 8px;
+        transform: translateX(-50%);
+        background: #1f1f1fa6;        
+        border-bottom: 1px solid #333;
+        border-left: 1px solid #333;
+        border-right: 1px solid #333;
+        border-radius: 6px;
         pointer-events: none;
         display: inline-block;
         opacity: 0;
@@ -349,32 +361,22 @@
     }
 }
 
-.tg-outputextra-wrap {
+.tg-output-extra {
+    width: auto;
     display: none;
-    background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-    width: 50%;
-    min-width: 300px;
-    max-width: 65%;
     margin: 0 0 6px;
     z-index: 2;
-    position: relative;
+    right: 0;
+    overflow: hidden;
+    position: absolute;
+
+    .tg-extraoutput-history {
+        padding-top: 0;
+        padding-left: 0;
+    }
 
     .out-list {
         padding-bottom: .2em;
     }
 
-    .tg-extraoutput-history {
-        padding-top: 0;
-    }
-}
-
-
-.tg-resizablehand {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 15px;
-    cursor: col-resize;
-    z-index: 10;
 }
