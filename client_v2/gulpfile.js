@@ -189,25 +189,31 @@ gulp.task('staticfiles-watch', function () {
 	});
 });
 
-
 function copyStaticFiles(done) {
-	let staticFileGlob = [
-			config.src.base + '**/*.html',
-			config.src.base + 'ajax/**',
-			config.src.base + 'fonts/**',
-			config.src.base + 'sounds/**',
-			config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
-			config.src.base + 'favicon.ico',
-			config.src.base + 'fonts/**/*',
-			'!' + config.src.base + config.src.img + 'sprites/**/*',
-			'!' + config.src.base + config.src.img + 'tiles/large/**/*'
 
+	// copyFonts(); 
+
+	let staticFileGlob = [
+		config.src.base + '**/*.html',
+		config.src.base + 'ajax/**',
+		config.src.base + 'fonts/**',
+		config.src.base + 'sounds/**',
+		config.src.base + config.src.img + '**/*.{png,jpg,gif,svg}',
+		config.src.base + 'favicon.ico',
+		config.src.base + 'fonts/**/*',
+		'!' + config.src.base + config.src.img + 'sprites/**/*',
+		'!' + config.src.base + config.src.img + 'tiles/large/**/*'
 	];
 			
 	return gulp.src(staticFileGlob, {base: './src', cwd: './'})
 		.pipe(gulp.dest(config.build.base))
 		.pipe(debug());
+}
 
+// Adding fonts from custom path
+function copyFonts(done) {
+	return gulp.src('./node_modules/rpg-awesome/fonts/**')
+		.pipe(gulp.dest(config.build.base + config.build.fonts));
 }
 
 // generate CSS sprite images
@@ -223,6 +229,7 @@ gulp.task('generate-assetslist', (done) => {
 
 gulp.task('copy-staticfiles', (done) =>  {
 	return copyStaticFiles();
+
 })
 
 //watching js watch and compile on live stream

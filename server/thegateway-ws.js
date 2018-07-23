@@ -12,11 +12,13 @@ const winston = require('winston');
 const chalk = require('chalk');
 const Convert = require('ansi-to-html');
 const crypto = require('crypto');
+const bodyParser = require ('body-parser');
 const dotenv = require('dotenv').load({
 	path: '.env'
 });;
 const net = require('net');
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
 	'pingInterval': 2000, 'pingTimeout': 5000
@@ -24,7 +26,7 @@ const io = require('socket.io')(server, {
 const cookieParser = require('cookie-parser');
 const sharedsession = require('express-socket.io-session');
 
-var multer  = require('multer')
+
 
 /**
  * Logging configuration.
@@ -52,20 +54,14 @@ let session = require("express-session")({
 });
 
 
-//setup multer for images
-var upload = multer({ dest: 'uploads/' })
-let cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
-
 // start Session DB
 app.set('trust proxy', 1);
 app.set('max_requests_per_ip', 20);
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(session, cookieParser(process.env.SESSION_SECRET));
+app.use('/static', express.static(__dirname + '/public'));
 
-app.post('/profile', upload.single('avatar'), function (req, res, next) {
-	// req.file is the `avatar` file
-	// req.body will hold the text fields, if there were any
-  })
-  
+
 // Use shared session middleware for socket.io
 // setting autoSave:true
 io.use(sharedsession(session, {
@@ -76,15 +72,24 @@ server.listen(process.env.WS_PORT, () => {
 	SocketServer();
 	log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
 	logger.info('Websocket server listening on port %d', process.env.WS_PORT);
+
+
 });
 
 function SocketServer() {
+	
 	// Handle incoming websocket  connections
+
+	
+	//import routes
+
 	io.on('connection', function(socket) {
 		
 		socket.on('loginrequest', function(){
 			socket.emit('data', '&!connmsg{"msg":"ready"}!');
 		})
+
+		socket.join('culo');
 
 		socket.on('oob', function(msg) {
 			// Handle a login request
@@ -155,8 +160,8 @@ function SocketServer() {
 	}
 
 	function ConnectToGameServer(websocket, from_host, code_itime, code_headers, account_id) {
-		let port =  process.env.SERVER_GAME_PORT,
-			host = process.env.SERVER_GAME_HOST;
+//		let port =  process.env.SERVER_GAME_PORT;
+		let	host = process.env.SERVER_GAME_HOST;
 
 		let tgconn = net.Socket(host);
 		// Normal server->client data handler. Move received data to websocket
@@ -166,6 +171,10 @@ function SocketServer() {
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
+			let godpath = /&i/gm;
+			if(godpath.test(msg.toString())) {
+				tgconn.join('gods');
+			}
 			websocket.emit('data', msg.toString());
 		};
 
@@ -185,9 +194,11 @@ function SocketServer() {
 
 
 		tgconn.on("end", function(err){
+			websocket.disconnect();
 		});
 
 		tgconn.on("timeout",  function(){
+			websocket.disconnect();
 		});
 		
 		// Handshaking server->client handler data handler
@@ -201,6 +212,7 @@ function SocketServer() {
 				websocket.on('data', sendToServer);
 
 			} else {
+				console.log('beforegod');
 				sendToClient(msg);
 			}
 		};

@@ -11,9 +11,6 @@ import position from 'jquery-ui/ui/position';
 import draggable from 'jquery-ui/ui/widgets/draggable';
 import droppable from 'jquery-ui/ui/widgets/droppable';
 import dialog from 'jquery-ui/ui/widgets/dialog';
-/* ----------*/
-//TODO: REMOVE IT+
-
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
 //============ Custom
@@ -402,10 +399,10 @@ export default class TgGui {
 
     handleLoginData(data) {
         let _ = this;
+        console.log(data);
         if (data.indexOf("&!connmsg{") == 0) {
             let end = data.indexOf('}!');
             let rep = $.parseJSON(data.slice(9, end + 1));
-
             if (rep.msg) {
                 switch (rep.msg) {
                     case 'ready':
@@ -484,7 +481,6 @@ export default class TgGui {
     }
 
     handleServerData(msg) {
-
         let _ = this;
         _.netdata += msg;
         let len = _.netdata.length;
@@ -675,7 +671,6 @@ export default class TgGui {
             let pass = $('#login_password').val();
 
             if($(this)[0].checkValidity() === false) {
-                console.log('novalidate!');
                 //TODO: Notify user to provide credentials
                 $(this).addClass('was-validated');
                 return;
@@ -914,6 +909,8 @@ export default class TgGui {
         let _ = this,
             pos;
 
+            console.log(msg);
+
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
             _.inputPassword();
@@ -1115,6 +1112,12 @@ export default class TgGui {
 
         });
 
+        // New Image Request Box
+        msg = msg.replace(/&!imgreq\{[\s\S]*?\}!/gm, function(imgreq) {
+//            imgreq = $.parseJSON(imgreq.slice())
+            return _.renderUserImageRequest(imgreq);
+        });
+
         // Selectable generic
         msg = msg.replace(/&!select\{[\s\S]*?\}!/gm, function (s) {
             s = $.parseJSON(s.slice(8, -1));
@@ -1235,6 +1238,13 @@ export default class TgGui {
     /* *****************************************************************************
      * MISC RENDERING
      */
+
+
+    renderUserImageRequest(imgreq) {
+        console.log(imgreq[0])
+        console.log(imgreq[1])
+    }
+     
 
     renderLink(href, text) {
         return '<a href="' + href + '" target="_blank">' + text + '</a>';
@@ -2918,7 +2928,6 @@ export default class TgGui {
         _.addScrollBar(outputID + ' .scrollable', 'output'); 
 
         if(!_.client_options.extradetail_open) {
-            console.log(outputID);
             $(outputID).css('width', '100%');
         }
         else {

@@ -117,14 +117,24 @@
     }
 }
 
-.ui-dialog {
 
+
+.combatwidget-modal {
+    display: none;
+}
+
+.ui-dialog {
     .ui-dialog-titlebar-close {
         display: none;
     }
     .ui-dialog-titlebar {
         display: table;
     }
+
+    .combatwidget-modal {
+        display: block;
+    }
+    
     .tg-combatpanel {
         cursor: pointer;
         padding-left: 0;
