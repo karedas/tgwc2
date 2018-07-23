@@ -68,18 +68,18 @@
     }
 
     .output-notify-bottom {
-        color: $tg-yellow;
+        color: $gray-500;
         position: absolute;
         text-align: center;
         z-index: 2000;
         text-transform: uppercase;
-        padding: 4px 12px;
+        padding: 6px 12px;
         font-size: 8px;
         left: 50%;
-        top: 8px;
+        bottom: 0;
         transform: translateX(-50%);
         background: #1f1f1fa6;        
-        border-bottom: 1px solid #333;
+        border-top: 1px solid #333;
         border-left: 1px solid #333;
         border-right: 1px solid #333;
         border-radius: 6px;

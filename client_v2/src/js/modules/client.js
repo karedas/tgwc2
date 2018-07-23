@@ -909,8 +909,6 @@ export default class TgGui {
         let _ = this,
             pos;
 
-            console.log(msg);
-
         //Hide text (password)
         msg = msg.replace(/&x\n*/gm, function () {
             _.inputPassword();
@@ -1032,9 +1030,7 @@ export default class TgGui {
         // Generic table (title, head, data)
         msg = msg.replace(/&!table\{[\s\S]*?\}!/gm, function (t) {
             let gtable_parse = $.parseJSON(t.slice(7, -1));
-            console.log('Generic table');
-            return gtable_parse;
-            //return _.renderTable(gtable_parse);
+            return _.renderTable(gtable_parse);
         });
 
         // Inventory
@@ -1385,6 +1381,91 @@ export default class TgGui {
 
         txt += '</table>';
         return txt;
+    }
+
+
+
+
+    /* *****************************************************************************
+    *   OTHERS COMMANDS
+     */
+
+    renderTable(t) {
+        let _ = this;
+
+
+        let txt ='<div class="container-fluid">';
+
+        if(t.title && t.dialog == false)
+            //txt += '<caption>'+(t.plain ? t.title : addBannerStyle(t.title))+'</caption>';
+    
+        if(t.head) {
+            txt += '<div class="row">';
+    
+            $.each(t.head, function(i,v) {
+                switch($.type(v)) {
+                case "object":
+                    txt += '<div>'+v.title+'</div>';
+                    break;
+    
+                default:
+                    txt += '<div>'+v+'</div>';
+                    break;
+                }
+            });
+    
+            txt += '</div>';
+        }
+    
+        if(t.data) {
+            $.each(t.data, function(ri, row) {
+                txt += '<div class="row">';
+                $.each(row, function(di, elem) {
+    
+                    var h = t.head ? t.head[di] : null;
+    
+                    switch($.type(h)) {
+                        case "object":
+                            switch(h.type) {
+                                case "account":
+                                    txt += '<div class="col"><a target="_blank" href="/admin/accounts/'+elem+'">'+elem+'</a></div>';
+                                    break;
+    
+                                case "ipaddr":
+                                    txt += '<div class="col"><a target="_blank" href="http://www.infosniper.net/index.php?ip_address='+elem+'">'+elem+'</a></div>';
+                                    break;
+    
+                                case "icon":
+                                    txt += '<div class="col">' + _.renderIcon(elem) + '</div>';
+                                    break;
+    
+                                default:
+                                    txt += '<div class="col">'+elem+'</div>';
+                                    break;
+                            }
+                            break;
+    
+                        default:
+                            txt += '<div class="col">'+elem+'</div>';
+                            break;
+                    }
+                });
+                txt += '</div>';
+            });
+        }
+    
+        txt += '</div>';
+        /*
+        if(t.dialog == false)
+            return t.plain ? txt : addFrameStyle(txt);
+    
+        renderInTableDialog(t.title ? t.title : "Informazioni", txt);
+    
+        if(t.head)
+            $('#tablecont table').tablesorter();
+        */
+       return txt;
+        //return '';
     }
 
 
