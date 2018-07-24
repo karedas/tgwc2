@@ -43,7 +43,6 @@ export default class TgGui {
         this.netdata = '';
 
         /* Login */
-
         this.inGame = false;
         this.isGod = false;
         this.godInvLev = 0;
@@ -55,11 +54,13 @@ export default class TgGui {
         };
 
         this.client_state = {
-            ui: false,
             news_showed: false,
-            widget_login: false,
             max_drop_stack: null,
+            window: {}
         };
+
+        this.client_open = false;
+        this.ajax_loaded = [];
 
         this.dialog = null;
         this.viewport = null;
@@ -166,24 +167,23 @@ export default class TgGui {
         this.RENDER = null;
 
         this.race_to_class = {
-            "uma":"human",
-            "ume":"human",
-            "eal":"elf",
-            "esi":"elf",
-            "dra":"elf",
-            "drw":"elf",
-            "meu":"human",
-            "mel":"human",
-            "hal":"halfling",
-            "nan":"dwarf",
-            "orc":"orc",
-            "gob":"goblin",
-            "els":"elf"
+            "uma": "human",
+            "ume": "human",
+            "eal": "elf",
+            "esi": "elf",
+            "dra": "elf",
+            "drw": "elf",
+            "meu": "human",
+            "mel": "human",
+            "hal": "halfling",
+            "nan": "dwarf",
+            "orc": "orc",
+            "gob": "goblin",
+            "els": "elf"
         };
-        
+
 
         this.equip_positions_by_name = {
-
             "r_finger": "Al dito destro",
             "l_finger": "Al dito sinistro",
             "neck": "Al collo",
@@ -223,7 +223,6 @@ export default class TgGui {
             "alto": "0",
             "basso": "0"
         }
-
 
         this.pos_to_order = [{
                 pos: 0,
@@ -362,28 +361,22 @@ export default class TgGui {
             _.socket.on('disconnect', function () {
                 _.setDisconnect();
                 _.connectToServer();
-
                 /* Login Widget on Disconnect (small panel) */
-                if (_.client_state.ui) {
-                    if (!_.connectionInfo.error) {
-                        _.widgetLoginNetworkActivityMessage('Torna presto!')
+                if (_.client_open) {
+                    _.clearDataInterface();
+                    if (!_.ajax_loaded.includes('loginwidget')) {
+                        _.loadWidgetLogin();
                     } else {
-                        _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
+                        _.showWidgetLogin();
                     }
-                    if (!_.client_state.widget_login) {
-                        _.initWidgetLoginPanel();
-                        _.clearDataInterface();
-                    }
-                    _.openWidgetLoginPopup();
                 }
-
                 if (!_.connectionInfo.error) {
                     _.networkActivityMessage("Disconnesso dal server");
                 }
             });
 
             _.socket.on('reconnect_attempt', function () {
-                console.log('is a reconnect');
+                console.log('User Reconnected');
             });
 
             _.socket.on('connect_error', function (e) {
@@ -399,7 +392,6 @@ export default class TgGui {
 
     handleLoginData(data) {
         let _ = this;
-        console.log(data);
         if (data.indexOf("&!connmsg{") == 0) {
             let end = data.indexOf('}!');
             let rep = $.parseJSON(data.slice(9, end + 1));
@@ -432,13 +424,12 @@ export default class TgGui {
                         // Preload client then start the magic
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
                         // If UI has been past loaded (like on disconnection user action)
-                        if (_.client_state.ui) {
+                        if (_.client_open) {
                             _.closePopup();
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
                         } else {
                             clientPreloader.init().then(function () {
-                                //reset login message
                                 _.dismissLoginPanel();
                                 _.loadInterface();
                                 _.completeHandshake();
@@ -463,8 +454,9 @@ export default class TgGui {
 
                     default:
                         let connectionError = _.getLoginReplyMessage(rep.msg);
-                        if (!connectionError)
+                        if (!connectionError) {
                             connectionError = _.getLoginReplyMessage('errorproto');
+                        }
                         _.loginError(connectionError);
                         break;
 
@@ -504,12 +496,12 @@ export default class TgGui {
                     _.client_update.inventory.needed = false;
                     _.client_update.last = now;
                 }
-                /*if (_.client_update.equipment.needed && isDialogOpen('#equipdialog'))
-			{
-				sendToServer('@equip');
-				client_update.equipment.needed = false;
-				client_update.last = now;
-			}*/
+
+                /*if (_.client_update.equipment.needed && _.isDialogOpen('#equipdialog')){
+                    sendToServer('@equip');
+                    client_update.equipment.needed = false;
+                    client_update.last = now;
+                }*/
 
                 if (_.client_update.room.needed && _.client_options.extradetail_open) {
                     _.sendToServer('@agg');
@@ -538,7 +530,6 @@ export default class TgGui {
         this.client_update.room.needed = false;
     }
 
-
     setDisconnect() {
         let _ = this;
         _.clearDataInterface();
@@ -554,7 +545,6 @@ export default class TgGui {
 
     /* COOKIE LAW */
     showCookieLawDisclaimer() {
-
         let _ = this;
         let def = $.Deferred();
         $(document).on('change', '#cookieCheckbox', function () {
@@ -567,7 +557,6 @@ export default class TgGui {
                     def.resolve();
                 });
         });
-
         _.openCookieLawPopup();
         return def;
     }
@@ -577,7 +566,6 @@ export default class TgGui {
     }
 
     initSessionData() {
-
         let _ = this;
         // Load State
         let saved_state = Cookies.getJSON(_.cookies.prefix + 'state');
@@ -635,6 +623,69 @@ export default class TgGui {
         }
     }
 
+
+    /* *****************************************************************************
+    * WINDOWS
+    */
+    setWindowPosition(id, left, top) {
+        if(this.client_state.window[id] == null) {
+            this.client_state.window[id] = {};
+        }
+        this.client_state.window[id].position = [-left, +top];
+    }
+
+    getWindowPosition(id) {
+        if(this.client_state.window[id] == null) {
+            return null;
+        }
+        return this.client_state.window[id].position;
+    }
+
+    setWindowSize(id, width, height) {
+        if(this.client_state.window[id] == null) {
+            this.client_state.window[id] = {};
+        }
+        this.client_state.window[id].size = [width, height];
+    }
+
+    getWindowSize(id) {
+        if(this.client_state.window[id] == null)
+            return null;
+
+        return this.client_state.window[id].size;
+    }
+
+    saveWindowData(event, obj) {
+        let _ = this,  
+            id;
+        switch(event.type) {
+            case 'dialogdragstop':
+                id = event.target.id;
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                break;
+
+            case 'dragstop':
+                id = $(event.target).children('.ui-dialog-content').attr('id');
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                break;
+
+            case 'dialogresizestop':
+                id = event.target.id;
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                _.setWindowSize(id, obj.size.width, obj.size.height);
+                break;
+
+            case 'resizestop':
+                id = $(event.target).children('.ui-dialog-content').attr('id');
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                _.setWindowSize(id, obj.size.width, obj.size.height);
+                break;
+            }
+
+            _.SaveStorage('state', _.client_state);
+    }
+
+
     /* *****************************************************************************
      * Login 
      */
@@ -670,8 +721,7 @@ export default class TgGui {
             let name = $('#login_username').val();
             let pass = $('#login_password').val();
 
-            if($(this)[0].checkValidity() === false) {
-                //TODO: Notify user to provide credentials
+            if ($(this)[0].checkValidity() === false) {
                 $(this).addClass('was-validated');
                 return;
             };
@@ -758,9 +808,6 @@ export default class TgGui {
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
         });
-
-
-        _.client_state.widget_login = true;
     }
 
     performLogin() {
@@ -843,7 +890,6 @@ export default class TgGui {
             let subs = _.substShort(inputs[i]).split(/\s*;\s*/);
             res = res.concat(subs);
         }
-
         /* Return the resulting array */
         return res;
     }
@@ -858,10 +904,11 @@ export default class TgGui {
         let shortcut_key = args.shift();
         let shortcut_num = parseInt(shortcut_key);
         let shortcut_cmd;
-        if (!isNaN(shortcut_num))
+        if (!isNaN(shortcut_num)) {
             shortcut_cmd = _.client_options.shortcuts[shortcut_num];
-        else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined')
+        } else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {
             shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
+        }
 
         // Check if the shortcut is defined
         if (shortcut_cmd) {
@@ -881,8 +928,9 @@ export default class TgGui {
                 input += " " + args.join(" ");
         }
 
-        if (_.cmd_prefix.length > 0)
+        if (_.cmd_prefix.length > 0) {
             input = _.cmd_prefix + " " + input;
+        }
 
         return input;
     }
@@ -967,8 +1015,8 @@ export default class TgGui {
         // Image in side frame (with gamma)
         msg = msg.replace(/&!img"[^"]*"\n*/gm, function (image) {
             console.log('image gamma');
-            //     // let image = image.slice(6, image.lastIndexOf('"')).split(',');
-            //     // showImageWithGamma(image[0], image[1], image[2], image[3]);
+            // let image = image.slice(6, image.lastIndexOf('"')).split(',');
+            // showImageWithGamma(image[0], image[1], image[2], image[3]);
             return '';
         });
 
@@ -1109,8 +1157,8 @@ export default class TgGui {
         });
 
         // New Image Request Box
-        msg = msg.replace(/&!imgreq\{[\s\S]*?\}!/gm, function(imgreq) {
-//            imgreq = $.parseJSON(imgreq.slice())
+        msg = msg.replace(/&!imgreq\{[\s\S]*?\}!/gm, function (imgreq) {
+            //            imgreq = $.parseJSON(imgreq.slice())
             return _.renderUserImageRequest(imgreq);
         });
 
@@ -1231,16 +1279,19 @@ export default class TgGui {
         return msg;
     }
 
+    removeColors(msg) {
+        return msg.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
+    }
+
     /* *****************************************************************************
      * MISC RENDERING
      */
-
 
     renderUserImageRequest(imgreq) {
         console.log(imgreq[0])
         console.log(imgreq[1])
     }
-     
+
 
     renderLink(href, text) {
         return '<a href="' + href + '" target="_blank">' + text + '</a>';
@@ -1351,7 +1402,6 @@ export default class TgGui {
             sttxt += '<div class="col-12 tg-yellow pg-atg">' + status.msg + '</div>';
         }
         sttxt += '</div>';
-
         sttxt += '</div>';
 
         _.setDataInterface();
@@ -1383,89 +1433,122 @@ export default class TgGui {
         return txt;
     }
 
-
-
-
     /* *****************************************************************************
-    *   OTHERS COMMANDS
+     *   OTHERS COMMANDS
      */
 
     renderTable(t) {
         let _ = this;
 
+        let colclass = [];
 
-        let txt ='<div class="container-fluid">';
+        let txt = '<table class="table table-sm">';
+        if (t.title && t.dialog == false) {
+            txt += '<caption>' + (t.plain ? t.title : t.title) + '</caption>';
+        }
 
-        if(t.title && t.dialog == false)
-            //txt += '<caption>'+(t.plain ? t.title : addBannerStyle(t.title))+'</caption>';
-    
-        if(t.head) {
-            txt += '<div class="row">';
-    
-            $.each(t.head, function(i,v) {
-                switch($.type(v)) {
-                case "object":
-                    txt += '<div>'+v.title+'</div>';
-                    break;
-    
-                default:
-                    txt += '<div>'+v+'</div>';
-                    break;
+        if (t.head) {
+            txt += '<thead><tr>';
+
+            $.each(t.head, function (i, v) {
+                switch ($.type(v)) {
+                    case "object":
+                        txt += '<th scope="col">' + v.title + '</th>';
+                        break;
+
+                    default:
+                        txt += '<th scope="col">' + v + '</th>';
+                        break;
                 }
             });
-    
-            txt += '</div>';
+
+            txt += '</tr></thead>';
         }
-    
-        if(t.data) {
-            $.each(t.data, function(ri, row) {
-                txt += '<div class="row">';
-                $.each(row, function(di, elem) {
-    
-                    var h = t.head ? t.head[di] : null;
-    
-                    switch($.type(h)) {
+
+        if (t.data) {
+            $.each(t.data, function (ri, row) {
+                txt += '<tr>';
+                $.each(row, function (di, elem) {
+                    let h = t.head ? t.head[di] : null;
+                    switch ($.type(h)) {
                         case "object":
-                            switch(h.type) {
+                            switch (h.type) {
                                 case "account":
-                                    txt += '<div class="col"><a target="_blank" href="/admin/accounts/'+elem+'">'+elem+'</a></div>';
+                                    txt += '<td><a target="_blank" href="/admin/accounts/' + elem + '">' + elem + '</a></td>';
                                     break;
-    
+
                                 case "ipaddr":
-                                    txt += '<div class="col"><a target="_blank" href="http://www.infosniper.net/index.php?ip_address='+elem+'">'+elem+'</a></div>';
+                                    txt += '<td><a target="_blank" href="http://www.infosniper.net/index.php?ip_address=' + elem + '">' + elem + '</a></td>';
                                     break;
-    
+
                                 case "icon":
-                                    txt += '<div class="col">' + _.renderIcon(elem) + '</div>';
+                                    txt += '<td>' + _.renderIcon(elem) + '</td>';
                                     break;
-    
+
                                 default:
-                                    txt += '<div class="col">'+elem+'</div>';
+                                    txt += '<td>' + elem + '</td>';
                                     break;
                             }
                             break;
-    
+
                         default:
-                            txt += '<div class="col">'+elem+'</div>';
+                            txt += '<td>' + elem + '</td>';
                             break;
                     }
                 });
-                txt += '</div>';
+                txt += '</tr>';
             });
         }
-    
-        txt += '</div>';
-        /*
-        if(t.dialog == false)
-            return t.plain ? txt : addFrameStyle(txt);
-    
-        renderInTableDialog(t.title ? t.title : "Informazioni", txt);
-    
-        if(t.head)
-            $('#tablecont table').tablesorter();
-        */
-       return txt;
-        //return '';
+        txt += '</table>';
+
+        if (t.dialog == false)
+            return t.plain ? txt : _.addFrameStyle(txt);
+
+        _.renderInTableDialog(t.title ? t.title : "Informazioni", txt);
+
+        //if(t.head)
+        // $('#tablecont table').tablesorter();
+
+        return '';
+    }
+
+
+    renderInTableDialog(title, txt) {
+        let _ = this;
+        let options = {};
+
+        $('#tablecont').empty().append(_.removeColors(txt));
+
+        if (!_.openDialog('tabledialog')) {
+            console.log('not open');
+            let pos = _.getWindowPosition('tabledialog');
+            let size = _.getWindowSize('tabledialog');
+            let w, h;
+
+            if(size) {
+                w = size[0];
+                h = size[1];
+            }
+            else {
+                w = 650;
+                h = 600;
+            }
+            
+            if(pos == null ) {
+                pos = {my: "center", at: "center", of:window};
+            }
+
+            $('#tabledialog').dialog({
+                modal: false,
+                width: 'auto',
+                position: pos,
+                dialogClass:'tg-dialog parch',
+                dragStop: _.saveWindowData.bind(_),
+                resizeStop: _.saveWindowData.bind(_),
+                closeText: 'Chiudi',
+                title: title
+            });
+        }
     }
 
 
@@ -1476,7 +1559,7 @@ export default class TgGui {
     renderPlayerInfo(info) {
         let _ = this,
 
-        d = $('#tgSchedaPg');
+            d = $('#tgSchedaPg');
 
         if (info.image) {
             $('#infoimage', d).attr('src', _.media_server_addr + info.image);
@@ -1533,7 +1616,6 @@ export default class TgGui {
 
         return '';
     }
-
 
 
     /* *****************************************************************************
@@ -1743,7 +1825,6 @@ export default class TgGui {
         for (let d = 0; d < _.dir_names.length; ++d) {
             $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -26 * doors[d]);
         }
-
         _.dir_status = doors;
     }
 
@@ -1874,7 +1955,6 @@ export default class TgGui {
     }
 
     renderEquipment(eq) {
-
         if (!eq.up) {
 
         }
@@ -1912,55 +1992,53 @@ export default class TgGui {
 
         if (st.length == 6) {
             $('.enemyname').text(st[5]);
-
             if (!_.in_combat) {
-
                 $('body').addClass('in-combat');
 
-                if(_.client_options.dashboard == 0) {
+                /* Opening inline (default) or  dialog if dashboard is collapsed */
+                if ($('.tg-characterpanel').is(':visible')) {
                     $('#tg-pills-tab-monitor').tab('show');
                 }
-                //open dialog if dashboard is collapsed
                 else {
-
-                    if($('#combatBoxWidget').is(':empty')) {
-                        let combatbox = $('.tg-combatpanel').clone();
-                        $('.incnt', '.combatwidget-modal').append(combatbox);
+                    let dialogID = '#combatPanelWidget';
+                    let pos = _.getWindowPosition('combatPanelWidget');
+                    
+                    if(pos == null) {
+                        pos = {my: "center", at: "center"};
                     }
-
-                    _.dialog = $('.combatwidget-modal');
-
-                    $(_.dialog).dialog({
+                    else {
+                        pos = {my: 'left' + pos[0] + ' center' + pos[1]};
+                    }
+                    _.dialog = $(dialogID).dialog({
                         closeOnEscape: false,
                         closeOnText: false,
-                        draggable: true,
                         minHeight: 0,
+                        draggable: true,
                         resizable: false,
                         width: 280,
                         title: 'Target',
-                        closeText: "hide"
+                        dragStop: _.saveWindowData.bind(_),
+                        position: pos,
+                        collision: 'flip',
                     });
-                   
+
                     $('#tgInputUser').focus();
                 }
-
                 _.updateEnemyStatus(st[2], st[3]);
                 _.updateEnemyIcon(st[4]);
 
-                
                 _.in_combat = true;
             }
 
-        }
-        else if (_.in_combat) {
+        } else if (_.in_combat) {
             $('body').removeClass('in-combat');
             $('#actionCombaAction_b button').prop('disabled', true);
-            if( _.dialog ) {
+            if (_.dialog) {
                 $(_.dialog).dialog('destroy');
                 _.dialog = null;
             }
             _.in_combat = false;
-        }      
+        }
     }
 
     updateEnemyStatus(hprc, mprc) {
@@ -2001,8 +2079,10 @@ export default class TgGui {
         }
 
         res += _.renderDetailsInner(info, type, false);
-        if (info.image)
+
+        if (info.image) {
             _.showImage($('#image-cont'), info.image);
+        }
 
         return res;
     }
@@ -2193,9 +2273,7 @@ export default class TgGui {
                         grp_attribute += ' d-none';
                     }
                     expicon = '<div class="expicon"></div>';
-                }
-
-                else {
+                } else {
                     interactClass = ' interact'
                 }
 
@@ -2301,7 +2379,7 @@ export default class TgGui {
             accept: '.interact',
             greedy: true,
             hoverClass: 'valid',
-            activate: function(){
+            activate: function () {
                 $('#dropcmd').text($('#tgInputUser').val());
             },
             drop: function (event, ui) {
@@ -2321,7 +2399,7 @@ export default class TgGui {
         $('.input-concat', cont).droppable({
             greedy: true,
             hoverClass: 'valid',
-            activate: function(){
+            activate: function () {
                 $('#dropcmd').text($('#tgInputUser').val());
             },
             drop: function (event, ui) {
@@ -2598,7 +2676,7 @@ export default class TgGui {
 
         $.magnificPopup.open({
             showCloseBtn: true,
-            preloader: false, 
+            preloader: false,
             closeOnBgClick: true,
             items: {
                 src: '#interactBoxEvent',
@@ -2606,26 +2684,25 @@ export default class TgGui {
             },
             mainClass: 'tg-mp modal-custom',
             callbacks: {
-                beforeOpen: function() {
+                beforeOpen: function () {
                     let icon = $(obj).clone();
                     $('.interact-placeicon').html(icon);
                     $('.interact-inputbar.pre').text('');
                     $('.interact-inputbar.post').text('');
-                    
+
                 },
-                open: function(){
-;
+                open: function () {;
                     var node = document.getElementsByClassName('pre');
                     $(node).mousedown();
 
-                    $('#interactSendButton').one('click', function(){
-                       
-                       let pre = $('.interact-inputbar.pre').text();
-                       let post = $('.interact-inputbar.post').text();
-                       cmd = pre + ' &'+mrn + ' ' + post;
-                       _.processCommands(cmd);
-                       $.magnificPopup.close();
-                   });
+                    $('#interactSendButton').one('click', function () {
+
+                        let pre = $('.interact-inputbar.pre').text();
+                        let post = $('.interact-inputbar.post').text();
+                        cmd = pre + ' &' + mrn + ' ' + post;
+                        _.processCommands(cmd);
+                        $.magnificPopup.close();
+                    });
                 }
             }
         });
@@ -2678,9 +2755,9 @@ export default class TgGui {
 
     fromInventory(obj) {
         let _ = this,
-        mrn = $(obj).attr('data-mrn'),
-        cnttype = $(obj).attr('data-cnttype'),
-        cmd;
+            mrn = $(obj).attr('data-mrn'),
+            cnttype = $(obj).attr('data-cnttype'),
+            cmd;
 
         switch (cnttype) {
             case 'inv':
@@ -2833,7 +2910,7 @@ export default class TgGui {
         $('#tgInputUser').val('');
         return text;
     }
-    
+
     /* ***************************************************************************** */
 
     sendToServer(text) {
@@ -2897,10 +2974,11 @@ export default class TgGui {
         _.interactionInit();
         _.extraBoardInit();
         _.buttonsEventInit();
+        _.combatPanelWidgetInit();
         _.audioInit();
 
         //Interface is up
-        _.client_state.ui = true;
+        _.client_open = true;
     }
 
     /* -------------------------------------------------
@@ -2956,8 +3034,6 @@ export default class TgGui {
             theme: "square"
         };
 
-        //$('#tgSearchInput').easyAutocomplete(options);
-
         $('#tgSearchHelp').on('submit', function (e) {
             e.preventDefault();
             _.openNoFeaturePopup();
@@ -3006,16 +3082,15 @@ export default class TgGui {
         let _ = this;
         let outputID = '.tg-output-main';
 
-        _.addScrollBar(outputID + ' .scrollable', 'output'); 
+        _.addScrollBar(outputID + ' .scrollable', 'output');
 
-        if(!_.client_options.extradetail_open) {
+        if (!_.client_options.extradetail_open) {
             $(outputID).css('width', '100%');
-        }
-        else {
+        } else {
             $(outputID).css('width', _.client_options.output_width);
         }
 
-        if(_.client_options.extradetail_open) {
+        if (_.client_options.extradetail_open) {
             _.addResizableOutput();
         }
         // init Extraoutput window
@@ -3033,9 +3108,9 @@ export default class TgGui {
         $('.tg-output-main.resizable').resizable({
             handles: "e",
             containment: '.tg-output',
-            create: function(event, ui) {
+            create: function (event, ui) {
                 let w;
-                if(!_.client_options.output_width) {
+                if (!_.client_options.output_width) {
                     w = $(this).parent().width() / 2;
                 }
                 $('.tg-output-extra').css({
@@ -3043,30 +3118,30 @@ export default class TgGui {
                     //width: ($(this).parent().width() - w),
                 });
             },
-            resize: function(event, ui) {
+            resize: function (event, ui) {
                 event.stopImmediatePropagation();
                 $('.tg-output-extra').css({
                     left: parseInt(ui.size.width + 1) + 'px',
                 });
             },
-            stop: function(event, ui) {
+            stop: function (event, ui) {
                 let width = ui.size.width;
-            /*      let maxWidth = Number($(el).css('maxWidth').replace(/[^-\d\.]/g, ''));
-                let contWidth = Math.round(($(el).width() / $(el).parent().width()) * 100)
-                if (contWidth >= maxWidth) {
-                    width = maxWidth;
-                    $(el).width(maxWidth + '%');
-                }*/
-        
+                /*      let maxWidth = Number($(el).css('maxWidth').replace(/[^-\d\.]/g, ''));
+                    let contWidth = Math.round(($(el).width() / $(el).parent().width()) * 100)
+                    if (contWidth >= maxWidth) {
+                        width = maxWidth;
+                        $(el).width(maxWidth + '%');
+                    }*/
+
                 //update scrollbar
                 _.scrollbar.extraoutput.update();
                 _.client_options.output_width = width + 'px';
                 _.SaveStorage('options', _.client_options);
             }
 
-        /*     onDragEnd: function (e, el) {
+            /*     onDragEnd: function (e, el) {
 
-            }*/
+                }*/
         });
     }
 
@@ -3151,8 +3226,10 @@ export default class TgGui {
 
     extraOutputInit() {
         let _ = this;
-        $('.tg-output-extra').css({left: _.client_options.output_width.toString()});
-        
+        $('.tg-output-extra').css({
+            left: _.client_options.output_width.toString()
+        });
+
         this.addScrollBar('.tg-output-extra', 'extraoutput');
 
         /* Image Event */
@@ -3343,7 +3420,7 @@ export default class TgGui {
                             _.processCommands(bdata.cmd)
                         }
                         if (bdata.text) {
-                            //TODO open modal by reference
+                            //TODO: open modal by reference
                         }
                     });
             }
@@ -3414,7 +3491,7 @@ export default class TgGui {
             _.openNoFeaturePopup();
         });
 
-     }
+    }
 
     sendInput() {
         let inputVal = $('#tgInputUser').val();
@@ -3459,7 +3536,6 @@ export default class TgGui {
                 $('#extraboardCaption').text('');
             });
 
-
         /* shortcut contextmenu */
         let popoverHandler;
         $('.shortcut-btn').on('shown.bs.popover', function (e) {
@@ -3489,6 +3565,17 @@ export default class TgGui {
             });
         });
     }
+
+
+    /* -------------------------------------------------
+    * COMBAT PANEL
+    * -------------------------------------------------*/
+    
+    combatPanelWidgetInit() {
+        let combatbox = $('.tg-combatpanel').clone();
+        $('.incnt', '#combatPanelWidget').append(combatbox);
+    }
+    
 
     /* -------------------------------------------------
      *  POPUP
@@ -3586,9 +3673,7 @@ export default class TgGui {
     }
 
     openEditorPopup() {
-
         let _ = this;
-
         $.magnificPopup.open({
             items: {
                 src: '#editorDialog',
@@ -3615,11 +3700,25 @@ export default class TgGui {
         });
     }
 
-    openWidgetLoginPopup() {
-        /*TODO: Load via Ajax if Login Widget Element is not in the DOM */
+    loadWidgetLogin() {
+        let _ = this;
+        $.ajax('ajax/login_widget.html').done(function (responseJSON) {
+            $(responseJSON).appendTo('body');
+            _.initWidgetLoginPanel();
+            _.showWidgetLogin();
+            _.ajax_loaded.push('loginwidget');
+        });
+    }
 
+    showWidgetLogin() {
+        let _ = this;
+        if (!_.connectionInfo.error) {
+            _.widgetLoginNetworkActivityMessage('Torna presto!')
+        } else {
+            _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
+        }
+        //close any opened popup
         $.magnificPopup.close();
-
         $.magnificPopup.open({
             items: {
                 src: '#loginWidget',
@@ -3629,6 +3728,7 @@ export default class TgGui {
             closeOnBgClick: false,
             mainClass: 'tg-mp modal-login',
         });
+
     }
 
     addScrollBar(container, key, sx) {
@@ -3639,7 +3739,6 @@ export default class TgGui {
                 suppressScrollX: scrollX
             });
         }
-
     }
 
     //TODO: Va sostituito
@@ -3712,14 +3811,48 @@ export default class TgGui {
                 $(elemClass, box).show();
             });
 
-            //box.height(18.64 * config.length);
             return true;
         }
         return false;
     }
 
     iconToDest(obj1, type2, mrn2, cnttype2, cntmrn2) {
+        let mrn1 = $(obj1).attr('data-mrn');
+        let cnttype1 = $(obj1).attr('data-cnttype');
 
+        switch (cnttype1) {
+            case 'inv':
+                if (type2 == 'obj') {
+                    cmd = 'metti &' + mrn1 + '&' + mrn2;
+                    //TODO: if(whichTabIsOpen('#detailsdialog') == 2)
+                    //cmd += '; @agg &'+mrn2;
+                } else if (type2 == 'pers') {
+                    cmd = 'dai &' + mrn1 + '&' + mrn2;
+                    //TODO: if(whichTabIsOpen('#detailsdialog') == 1)
+                    //cmd += '; @agg &'+mrn2;
+                } else
+                    return;
+                break;
+
+            case 'room':
+                switch (cnttype2) {
+                    case 'room':
+                        cmd = 'carica &' + mrn1 + ' &' + mrn2;
+                        //TODO: if(whichTabIsOpen('#detailsdialog') == 2)
+                        // cmd += '; @agg &'+mrn2;
+                        // if(whichTabIsOpen('#detailsdialog') == 0)
+                        //     cmd += '; @agg';
+                        // }
+                        break;
+
+                    default:
+                        return;
+                }
+                break;
+            default:
+                return;
+        }
+        _.processCommands(cmd);
     }
 
     iconToIcon(obj1, obj2) {
@@ -3740,19 +3873,38 @@ export default class TgGui {
 
 
 
-    /* UTILITY */
+    /* *****************************************************************************
+     * UTILITY
+     */
+
+    openDialog(dialogid) {
+        let d = $(dialogid);
+
+        if (d.is(':data(uiDialog)'))
+            return d.dialog(d.dialog('isOpen') ? 'moveToTop' : 'open');
+        return null;
+    }
+
+    isDialogOpen(dialogid) {
+        let d = $(dialogid);
+        return d.is(':data(uiDialog)') && d.dialog('isOpen');
+    }
+
+    isDialog(dialogid) {
+        let d = $(dialogid);
+
+        return d.is(':data(uiDialog)');
+    }
+
+    whichTabIsOpen(dialogid) {
+        if (isDialogOpen(dialogid))
+            return $(dialogid).tabs('option', 'active');
+
+        return null;
+    }
+
     disableResizable(widget) {
         $(widget).resizable('disable');
-    }
-    
-    loadContentAjax(what, appendTo) {
-        return $.ajax({
-            url: what,
-            success: function (responseJSON) {
-                appendTo = appendTo != null ? appendTo : 'body';
-                $(responseJSON).appendTo(appendTo);
-            }
-        });
     }
 
     setViewportSetup(val) {
@@ -3769,14 +3921,13 @@ export default class TgGui {
     }
 
     scrollPanelTo(content, scrollbox, animate, where) {
-        
+
         let outputHeight;
         scrollbox = $(content).parent(scrollbox);
 
         if (where !== null) {
             outputHeight = where;
-        }
-        else {
+        } else {
             outputHeight = $(content).height();
         }
         if (animate) {

@@ -1,0 +1,16 @@
+.tg-generictable {
+    width: 100%;
+    background: black;
+    display: none;
+    > div {
+        padding:.5em;
+    }
+    table {
+        background: #dabe8b;
+        color: black;
+    }
+}
+
+.ui-dialog .tg-generictable {
+    display: block;
+}

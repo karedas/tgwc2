@@ -154,7 +154,7 @@
           <div class="row">
             <div class="tg-dashboard col-12 tg-box">
               <!-- Character CPanel-->
-              <div class="tg-characterpanel b-controlpanel">
+              <div class="tg-characterpanel d-none d-sm-flex b-controlpanel">
                 <div class="tg-characterpanel-wrap">
                   <div class="row">
                     <div class="col">
@@ -530,42 +530,7 @@
         </div>
       </div>
     </div>
-    <!-- Login Widget -->
-    <div id="loginWidget" class="tg-loginwidget tg-shadow b-modal tg-box">
-      <div class="tg-box">
-        <div id="widgetLoginStatus" class="tg-widgetlogin-status">
-          Sei stato disconnesso.
-        </div>
-        <div class="tg-widgetlogin-menu">
-          <div class="row">
-            <div class="col">
-              <div class="tg-charavatar-last"></div>
-            </div>
-            <div class="col">
-              <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti
-                <span></span>
-              </button>
-              <button id="widgetLoginNewConnection" type="button" class="btn-newconnection">Accedi con un personaggio diverso.</button>
-              <button id="widgetLoginExit" type="button" class="btn-newconnection">Esci.</button>
-            </div>
-          </div>
-        </div>
-        <form id="widgetLoginForm" action="#" autocomplete="off">
-          <input id="widget_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
-          <input id="widget_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
-          <button type="submit" class="form-control tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
-          <div id="widgetLoginNetworkActivity" class="form-control tg-loginstatus"></div>
-        </form>
-      </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
-      </div>
-    </div>
-    
-    <div class="combatwidget-modal tg-shadow b-modal tg-box">
+    <div id="combatPanelWidget" class="combatwidget-modal tg-shadow b-modal tg-box">
       <div id="combatBoxWidget" class="tg-box incnt"></div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
@@ -574,7 +539,16 @@
         <div class="tg-border tg-border-bottom"></div>
       </div>
     </div>
-    <!-- Login Widget End -->
+  </div>
+  <div id="tabledialog" class="b-modal tg-box tg-generictable">
+    <div id="tablecont" class="container tg-box">
+    </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
   </div>
   <!-- Audio & Music -->
   <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
