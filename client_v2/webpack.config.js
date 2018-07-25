@@ -5,7 +5,9 @@ const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-let gitRevisionPlugin = new GitRevisionPlugin();
+let gitRevisionPlugin = new GitRevisionPlugin({
+    lightweightTags: true
+});
 
 module.exports = function (prop) {
 
@@ -106,10 +108,7 @@ module.exports = function (prop) {
             
             new HtmlWebPackPlugin({
                 title: 'My Awesome application',
-                git_version: JSON.stringify('tgwcv2-rev_2.' + gitRevisionPlugin.version({
-                    lightweightTags: true,
-                    versionCommand: 'describe --always --tags --dirty'
-                })),
+                git_version: JSON.stringify('tgwc.' + gitRevisionPlugin.version()),
                 inject: "head",
                 minify: false,
                 hash: true,

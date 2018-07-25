@@ -17,12 +17,13 @@ import AssetsList from 'assets_list.json';
 //import FacebookSDK from 'facebookSdk';
 import Preloader from 'preloader';
 import Map from 'mapDrawer';
+import uploadAvatar from 'uploadAvatar';
 
 export default class TgGui {
 
     constructor(options) {
 
-        this.ws_server_addr = '51.38.185.84:3335';
+        this.ws_server_addr = 'http://51.38.185.84:3335';
         this.socket_io_resource = 'socket.io';
         this.media_server_addr = 'http://play.thegatemud.it/images/';
         this.ws_prefix = '/';
@@ -164,7 +165,7 @@ export default class TgGui {
 
         /* References to the instantiated classes */
         this.MAP_OBJECT = null;
-        this.RENDER = null;
+        this.AVUPLOAD = null;
 
         this.race_to_class = {
             "uma": "human",
@@ -1656,8 +1657,28 @@ export default class TgGui {
     }
 
     addCharacterWindowEvent() {
+        let _ = this;
+
+        $('.info-avatar').on('click', function(){
+            if(!_.AVUPLOAD){
+                _.AVUPLOAD = new uploadAvatar();
+                _.AVUPLOAD.init();
+            };
+            $('#characterInfo').addClass('upimg');            
+        });
+
+        $('#playerImgFile').on('change', function (e) {
+            console.log(this);
+            _.AVUPLOAD.readFile(this).then(function(){
+                console.log('readed');
+            });
+        });
+
         /* Upload Image */
-        $('#info-avatar').on('click', function(){});
+        $('#formUplAvatar').on('submit', function(e){
+            e.preventDefault();
+            _.AVUPLOAD.send(_.ws_server_addr);
+        })
     }
 
 

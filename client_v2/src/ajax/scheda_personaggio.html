@@ -9,23 +9,6 @@
         <div id="infoname"></div>
         <div id="infotitle"></div>
       </div>
-      <form class="upload-avatar" type="">
-          <h3>Modifica l'immagine del tuo personaggio</h3>
-          <p>Puoi impostare un'immagine per una rappresentazione artistica del tuo personaggio e che verrà mostrata
-              a te e agli altri giocatori assieme alla tua descrizione.
-          </p>
-          <h4>L'immagine deve rispettare queste semplici regole:</h4>
-          <ul>
-              <li>Deve essere coerente con la descrizione e la tipologia del tuo PG.</li>
-              <li>Non deve contenere elementi non in linea con l'ambientazione.</li>
-              <li>Non deve contenere elementi offensivi e / o volgari.</li>
-          </ul>
-          <div class="custom-file">
-              <input type="file" class="custom-file-input" id="playerImgFile">
-              <label class="custom-file-label" for="playerImgFile">Sfoglia</label>
-          </div>
-      </div>
-      </form>
     </div>
     <div class="info-databox">
       <div id="infoGeneralData" class="info-data general">
@@ -72,6 +55,24 @@
         //base stats
       </div>
     </div>
+    <form id="formUplAvatar" class="upload-avatar" enctype="multipart/form-data" method="post" action="">
+        <h3>Modifica l'immagine del tuo personaggio</h3>
+        <p>Puoi impostare un'immagine per una rappresentazione artistica del tuo personaggio e che verrà mostrata
+            a te e agli altri giocatori assieme alla tua descrizione.
+        </p>
+        <h4>L'immagine deve rispettare queste semplici regole:</h4>
+        <ul>
+            <li>Deve essere coerente con la descrizione e la tipologia del tuo PG.</li>
+            <li>Non deve contenere elementi non in linea con l'ambientazione.</li>
+            <li>Non deve contenere elementi offensivi e / o volgari.</li>
+        </ul>
+        <div id="croppied"></div>
+        <div class="custom-file">
+            <input name="avatar" type="file" class="custom-file-input" id="playerImgFile" >
+            <label class="custom-file-label" for="avatar">Sfoglia</label>
+            <button type="submit" id="submitUploadAvatar">Invia</button>  
+        </div>
+    </form>
   </div>
   <div class="tab-pane fade" id="characterEquip" role="tabpanel" aria-labelledby="character-equip-tab">
   </div>
