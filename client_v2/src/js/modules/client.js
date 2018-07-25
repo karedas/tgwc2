@@ -332,6 +332,157 @@ export default class TgGui {
         });
     }
 
+    /* *****************************************************************************
+    * COOKIES
+    */
+
+    showCookieLawDisclaimer() {
+        let _ = this;
+        let def = $.Deferred();
+        $(document).on('change', '#cookieCheckbox', function () {
+            $('#cookieconsentbutton')
+                .toggleClass('invisible')
+                .one('click', function () {
+                    _.SaveStorage('cookie_consent', true);
+                    _.closePopup();
+                    //Done deferred back
+                    def.resolve();
+                });
+        });
+        _.openCookieLawPopup();
+        return def;
+    }
+
+    removeCookieLawDisclaimer() {
+        $('.tg-cookielawcontent').remove();
+    }
+
+    initSessionData() {
+        let _ = this;
+        // Load State
+        let saved_state = Cookies.getJSON(_.cookies.prefix + 'state');
+
+        if (Modernizr.localstorage && saved_state) {
+            _.SaveStorage('state', saved_state);
+            Cookies.set(_.cookies.prefix + 'state', null);
+        } else {
+            saved_state = _.LoadStorage('state');
+        }
+        if (saved_state) {
+            $.extend(_.client_state, saved_state);
+        }
+        if (!_.client_state.when) {
+            _.client_state.when = new Date().getTime();
+            _.SaveStorage('state', _.client_state);
+        }
+
+        // Load Options
+        let saved_options = Cookies.getJSON(_.cookies.prefix + 'options');
+        if (Modernizr.localstorage && saved_options) {
+            _.SaveStorage('options', saved_options);
+            Cookies.set(_.cookies.prefix + 'options', null);
+        } else {
+            saved_options = _.LoadStorage('options');
+        }
+
+        if (saved_options) {
+            $.extend(_.client_options, saved_options);
+        }
+    }
+
+    LoadStorage(what) {
+
+        what = this.cookies.prefix + what;
+
+        if (Modernizr.localstorage) {
+            let data = localStorage[what];
+            return data ? JSON.parse(data) : null;
+        } else {
+            return Cookies.get(what);
+        }
+    }
+
+    SaveStorage(what, value) {
+        let _ = this;
+        what = _.cookies.prefix + what;
+        if (Modernizr.localstorage) {
+            localStorage[what] = JSON.stringify(value);
+        } else {
+            Cookies.set(what, value, {
+                'expires': _.cookies.expires,
+                'path': _.cookies.path
+            });
+        }
+    }
+
+
+    /* *****************************************************************************
+    * WINDOWS
+    */
+
+    setWindowPosition(id, left, top) {
+        if(this.client_state.window[id] == null) {
+            this.client_state.window[id] = {};
+        }
+        this.client_state.window[id].position = [-left, +top];
+    }
+
+    getWindowPosition(id) {
+        if(this.client_state.window[id] == null) {
+            return null;
+        }
+        return this.client_state.window[id].position;
+    }
+
+    setWindowSize(id, width, height) {
+        if(this.client_state.window[id] == null) {
+            this.client_state.window[id] = {};
+        }
+        this.client_state.window[id].size = [width, height];
+    }
+
+    getWindowSize(id) {
+        if(this.client_state.window[id] == null)
+            return null;
+
+        return this.client_state.window[id].size;
+    }
+
+    saveWindowData(event, obj) {
+        let _ = this,  
+            id;
+        switch(event.type) {
+            case 'dialogdragstop':
+                id = event.target.id;
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                break;
+
+            case 'dragstop':
+                id = $(event.target).children('.ui-dialog-content').attr('id');
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                break;
+
+            case 'dialogresizestop':
+                id = event.target.id;
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                _.setWindowSize(id, obj.size.width, obj.size.height);
+                break;
+
+            case 'resizestop':
+                id = $(event.target).children('.ui-dialog-content').attr('id');
+                _.setWindowPosition(id, obj.position.left, obj.position.top);
+                _.setWindowSize(id, obj.size.width, obj.size.height);
+                break;
+            }
+
+            _.SaveStorage('state', _.client_state);
+    }
+
+
+    /* *****************************************************************************
+     * LOGIN & SERVER CONNECTION 
+     */
+     
     connectToServer() {
         let _ = this;
 
@@ -542,153 +693,6 @@ export default class TgGui {
         _.client_update.data.info = false;
         _.client_update.data.stato = false;
     }
-
-    /* COOKIE LAW */
-    showCookieLawDisclaimer() {
-        let _ = this;
-        let def = $.Deferred();
-        $(document).on('change', '#cookieCheckbox', function () {
-            $('#cookieconsentbutton')
-                .toggleClass('invisible')
-                .one('click', function () {
-                    _.SaveStorage('cookie_consent', true);
-                    _.closePopup();
-                    //Done deferred back
-                    def.resolve();
-                });
-        });
-        _.openCookieLawPopup();
-        return def;
-    }
-
-    removeCookieLawDisclaimer() {
-        $('.tg-cookielawcontent').remove();
-    }
-
-    initSessionData() {
-        let _ = this;
-        // Load State
-        let saved_state = Cookies.getJSON(_.cookies.prefix + 'state');
-
-        if (Modernizr.localstorage && saved_state) {
-            _.SaveStorage('state', saved_state);
-            Cookies.set(_.cookies.prefix + 'state', null);
-        } else {
-            saved_state = _.LoadStorage('state');
-        }
-        if (saved_state) {
-            $.extend(_.client_state, saved_state);
-        }
-        if (!_.client_state.when) {
-            _.client_state.when = new Date().getTime();
-            _.SaveStorage('state', _.client_state);
-        }
-
-        // Load Options
-        let saved_options = Cookies.getJSON(_.cookies.prefix + 'options');
-        if (Modernizr.localstorage && saved_options) {
-            _.SaveStorage('options', saved_options);
-            Cookies.set(_.cookies.prefix + 'options', null);
-        } else {
-            saved_options = _.LoadStorage('options');
-        }
-
-        if (saved_options) {
-            $.extend(_.client_options, saved_options);
-        }
-    }
-
-    LoadStorage(what) {
-
-        what = this.cookies.prefix + what;
-
-        if (Modernizr.localstorage) {
-            let data = localStorage[what];
-            return data ? JSON.parse(data) : null;
-        } else {
-            return Cookies.get(what);
-        }
-    }
-
-    SaveStorage(what, value) {
-        let _ = this;
-        what = _.cookies.prefix + what;
-        if (Modernizr.localstorage) {
-            localStorage[what] = JSON.stringify(value);
-        } else {
-            Cookies.set(what, value, {
-                'expires': _.cookies.expires,
-                'path': _.cookies.path
-            });
-        }
-    }
-
-
-    /* *****************************************************************************
-    * WINDOWS
-    */
-    setWindowPosition(id, left, top) {
-        if(this.client_state.window[id] == null) {
-            this.client_state.window[id] = {};
-        }
-        this.client_state.window[id].position = [-left, +top];
-    }
-
-    getWindowPosition(id) {
-        if(this.client_state.window[id] == null) {
-            return null;
-        }
-        return this.client_state.window[id].position;
-    }
-
-    setWindowSize(id, width, height) {
-        if(this.client_state.window[id] == null) {
-            this.client_state.window[id] = {};
-        }
-        this.client_state.window[id].size = [width, height];
-    }
-
-    getWindowSize(id) {
-        if(this.client_state.window[id] == null)
-            return null;
-
-        return this.client_state.window[id].size;
-    }
-
-    saveWindowData(event, obj) {
-        let _ = this,  
-            id;
-        switch(event.type) {
-            case 'dialogdragstop':
-                id = event.target.id;
-                _.setWindowPosition(id, obj.position.left, obj.position.top);
-                break;
-
-            case 'dragstop':
-                id = $(event.target).children('.ui-dialog-content').attr('id');
-                _.setWindowPosition(id, obj.position.left, obj.position.top);
-                break;
-
-            case 'dialogresizestop':
-                id = event.target.id;
-                _.setWindowPosition(id, obj.position.left, obj.position.top);
-                _.setWindowSize(id, obj.size.width, obj.size.height);
-                break;
-
-            case 'resizestop':
-                id = $(event.target).children('.ui-dialog-content').attr('id');
-                _.setWindowPosition(id, obj.position.left, obj.position.top);
-                _.setWindowSize(id, obj.size.width, obj.size.height);
-                break;
-            }
-
-            _.SaveStorage('state', _.client_state);
-    }
-
-
-    /* *****************************************************************************
-     * Login 
-     */
 
     dismissLoginPanel() {
         $('.tg-loginpanel').remove();
@@ -1136,10 +1140,9 @@ export default class TgGui {
             let info_parse = $.parseJSON(info.slice(7, -1));
             if (!_.client_update.data.info) {
                 _.setDataInterface('info', info_parse);
-                _.client_update.data.info = true;
                 return '';
             } else {
-                _.renderPlayerInfo(info_parse);
+                return _.renderPlayerInfo(info_parse);
             }
         });
 
@@ -1148,17 +1151,17 @@ export default class TgGui {
             let status_parse = $.parseJSON(status.slice(6, -1));
             if (!_.client_update.data.stato) {
                 _.setDataInterface('stato', status_parse);
-                _.client_update.data.stato = true;
                 return '';
-            } else {
+            } 
+            else {
                 return _.renderPlayerStatus(status_parse);
             }
 
         });
 
-        // New Image Request Box
+        // (New) Image Request Box
         msg = msg.replace(/&!imgreq\{[\s\S]*?\}!/gm, function (imgreq) {
-            //            imgreq = $.parseJSON(imgreq.slice())
+            //  imgreq = $.parseJSON(imgreq.slice())
             return _.renderUserImageRequest(imgreq);
         });
 
@@ -1352,8 +1355,9 @@ export default class TgGui {
             }
             /* Info Tooltips */
             $('.tg-characteravatar').attr('title', data.name + ' ' + data.title);
-
-        } else if (cmd == 'stato') {
+            _.client_update.data.info = true;
+        } 
+        else if (cmd == 'stato') {
             if (data.conv) {
                 $('.tg-infocharname .icon-conva').removeClass('d-none');
             } else {
@@ -1370,6 +1374,7 @@ export default class TgGui {
             if (data.conv == true) {
                 $('.pg-status').text('( sei convalescente! )');
             }
+            _.client_update.data.stato = true;
         }
     }
 
@@ -1403,8 +1408,6 @@ export default class TgGui {
         }
         sttxt += '</div>';
         sttxt += '</div>';
-
-        _.setDataInterface();
 
         return sttxt;
     }
@@ -1553,68 +1556,108 @@ export default class TgGui {
 
 
     /* *****************************************************************************
-     * INFO
+     * CHARACTER PAGE
      */
 
+    loadCharacterWindow() {
+        let _ = this;
+        return new Promise(function (resolve, reject) {
+            if(!$('#tgCharacterPage').length) {
+                $.ajax({
+                   url: './ajax/scheda_personaggio.html',
+                }).done(function(html){
+                    $('body').append(html);
+                    _.addCharacterWindowEvent();
+                    resolve();
+                });
+            }
+            else {
+                resolve();
+            }
+        });
+    }
+
     renderPlayerInfo(info) {
-        let _ = this,
+        let _ = this;
+        /* Wait / Check Data in DOM */
+        _.loadCharacterWindow().then(function (resolve, reject) {
+            let d = $('#tgCharacterPage');
 
-            d = $('#tgSchedaPg');
+            d.attr('data-class', _.race_to_class[info.race.code]);
 
-        if (info.image) {
-            $('#infoimage', d).attr('src', _.media_server_addr + info.image);
-        }
-        $('#infotitle', d).text(info.title);
+            if (info.image) {
+                $('#infoimage', d).attr('src', _.media_server_addr + info.image);
+            }
 
-        if (info.adjective) {
-            $('#infoadj', d).text(info.adjective);
-            $('#changeadj').hide();
-        } else {
-            $('#infoadj', d).text('Nessuno');
-            $('#changeAdj').show();
-        }
+            $('#infoname', d).text(info.name);
+            $('#infotitle', d).text(info.title);
+    
+            if (info.adjective) {
+                $('#infoadj', d).text(info.adjective);
+                $('#changeadj').hide();
+            } else {
+                $('#infoadj', d).text('Nessuno');
+                $('#changeAdj').show();
+            }
+    
+            $('#inforace', d).text(info.race.name);
+            $('#infocult', d).text(info.cult);
+            $('#infoethn', d).text(info.ethn);
+            $('#inforelig', d).text(info.relig ? info.relig : 'Nessuna');
+            $('#infoheight', d).text(info.height + ' Cm.');
+            $('#infosex', d).text(info.sex.name);
+            $('#infocity', d).text(info.city ? info.city : "Nessuna");
+            $('#infowgt', d).text(info.weight + ' Pietre');
+            $('#infoage', d).text(info.age + ' Anni');
+            $('#infolang', d).text(info.lang);
+            $('#infoborn', d).text(info.born);
+    
+            $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1<p></p>').replace(/\n/gm, ' '));
+    
+    
+            $('#infowil', d).width(_.limitPrc(info.abil.wil.prc) + "%");
+            $('#infowillvl', d).text(_.prcLowTxt(info.abil.wil.prc, _.abiltxt));
+    
+            $('#infoint', d).width(_.limitPrc(info.abil.int.prc) + "%");
+            $('#infointlvl', d).text(_.prcLowTxt(info.abil.int.prc, _.abiltxt));
+    
+            $('#infoemp', d).width(_.limitPrc(info.abil.emp.prc) + "%");
+            $('#infoemplvl', d).text(_.prcLowTxt(info.abil.emp.prc, _.abiltxt));
+    
+            $('#infosiz', d).width(_.limitPrc(info.abil.siz.prc) + "%");
+            $('#infosizlvl', d).text(_.prcLowTxt(info.abil.siz.prc, _.abiltxt));
+    
+            $('#infocon', d).width(_.limitPrc(info.abil.con.prc) + "%");
+            $('#infoconlvl', d).text(_.prcLowTxt(info.abil.con.prc, _.abiltxt));
+    
+            $('#infostr', d).width(_.limitPrc(info.abil.str.prc) + "%");
+            $('#infostrlvl', d).text(_.prcLowTxt(info.abil.str.prc, _.abiltxt));
+    
+            $('#infodex', d).width(_.limitPrc(info.abil.dex.prc) + "%");
+            $('#infodexlvl', d).text(_.prcLowTxt(info.abil.dex.prc, _.abiltxt));
+    
+            $('#infospd', d).width(_.limitPrc(info.abil.spd.prc) + "%");
+            $('#infospdlvl', d).text(_.prcLowTxt(info.abil.spd.prc, _.abiltxt));
+       
+            if (!_.openDialog('#infodialog')) {
+                $('#tgCharacterPage').dialog({
+                    modal: false,
+                    maxWidth:'700',
+                    resizable: false,
+                    minHeight: '500',
+                    position: {my: 'center', at:'center'},
+                    fluid: true
+                });
+            }
 
-        $('#inforace', d).text(info.race.name);
-        $('#infocult', d).text(info.cult);
-        $('#infoethn', d).text(info.ethn);
-        $('#inforelig', d).text(info.relig ? info.relig : 'Nessuna');
-        $('#infoheight', d).text(info.height);
-        $('#infosex', d).text(info.sex.name);
-        $('#infocity', d).text(info.city ? info.city : "Nessuna");
-        $('#infowgt', d).text(info.weight);
-        $('#infoage', d).text(info.age);
-        $('#infolang', d).text(info.lang);
-        $('#infoborn', d).text(info.born);
-
-        $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1<p></p>').replace(/\n/gm, ' '));
-
-        $('#raceimage', d).attr('class', _.race_to_class[info.race.code] + '_' + info.sex.code + ' img');
-
-        $('#infowil', d).width(_.limitPrc(info.abil.wil.prc) + "%");
-        $('#infowillvl', d).text(_.prcLowTxt(info.abil.wil.prc, _.abiltxt));
-
-        $('#infoint', d).width(_.limitPrc(info.abil.int.prc) + "%");
-        $('#infointlvl', d).text(_.prcLowTxt(info.abil.int.prc, _.abiltxt));
-
-        $('#infoemp', d).width(_.limitPrc(info.abil.emp.prc) + "%");
-        $('#infoemplvl', d).text(_.prcLowTxt(info.abil.emp.prc, _.abiltxt));
-
-        $('#infosiz', d).width(_.limitPrc(info.abil.siz.prc) + "%");
-        $('#infosizlvl', d).text(_.prcLowTxt(info.abil.siz.prc, _.abiltxt));
-
-        $('#infocon', d).width(_.limitPrc(info.abil.con.prc) + "%");
-        $('#infoconlvl', d).text(_.prcLowTxt(info.abil.con.prc, _.abiltxt));
-
-        $('#infostr', d).width(_.limitPrc(info.abil.str.prc) + "%");
-        $('#infostrlvl', d).text(_.prcLowTxt(info.abil.str.prc, _.abiltxt));
-
-        $('#infodex', d).width(_.limitPrc(info.abil.dex.prc) + "%");
-        $('#infodexlvl', d).text(_.prcLowTxt(info.abil.dex.prc, _.abiltxt));
-
-        $('#infospd', d).width(_.limitPrc(info.abil.spd.prc) + "%");
-        $('#infospdlvl', d).text(_.prcLowTxt(info.abil.spd.prc, _.abiltxt));
+        });
 
         return '';
+    }
+
+    addCharacterWindowEvent() {
+        /* Upload Image */
+        $('#info-avatar').on('click', function(){});
     }
 
 
@@ -1694,42 +1737,6 @@ export default class TgGui {
         _.sendToServer('##ce_save');
     }
 
-    /* *****************************************************************************
-     *  IMAGES IN OUTPUT 
-     */
-
-    showImage(cont, image) {
-        let _ = this;
-        let imgsrc = _.media_server_addr + image;
-        let currimgsrc = cont.attr('src');
-
-        if (currimgsrc != imgsrc) {
-            cont.attr('src', imgsrc);
-        }
-    }
-
-    cleanImageContainer(cont) {
-        $(cont).slideUp('fast').find('img').attr('src', '');
-    }
-
-    /* *****************************************************************************
-     * OUTPUT BUTTONS
-     */
-
-    pauseOn() {
-        console.log('pauseON');
-        // if(autoscroll_enabled) {
-        //     autoscroll_enabled = false;
-        //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-play' });
-    }
-
-    pauseOff() {
-        console.log('pauseOFF');
-        // if(!autoscroll_enabled) {
-        //     autoscroll_enabled = true;
-        //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-pause' });
-        // }
-    }
 
     /* *****************************************************************************
      * ICONS
@@ -1800,6 +1807,35 @@ export default class TgGui {
      * DOORS & DIRECTION
      */
 
+    closeLockDoor(dir) {
+        let cmd;
+        if (_.dir_status[dir] == '2') {
+            cmd = 'chiudi' + _.dir_names[dir];
+        } else if (_.dir_status[dir] == '3') {
+            cmd = 'blocca ' + _.dir_names[dir];
+        }
+        if (cmd) {
+            _.sendToServer(cmd);
+        }
+    }
+
+    doorsInit() {
+        let _ = this;
+        for (let d = 0; d < _.dir_names.length; ++d)
+            $('#' + _.dir_names[d]).on('click', {
+                dir: d
+            }, function (event) {
+                if (_.inGame) {
+                    if (event.which == 1) {
+                        _.goDir(event.data.dir);
+                    } else if (event.which == 3) {
+                        event.preventDefault();
+                        _.closeLockDoor(event.data.dir);
+                    }
+                }
+            });
+    }
+
     goDir(dir) {
 
         let _ = this;
@@ -1826,6 +1862,17 @@ export default class TgGui {
             $('#' + _.dir_names[d] + ' .dir-ico').css('background-position', -26 * doors[d]);
         }
         _.dir_status = doors;
+    }
+    
+    /* -------------------------------------------------
+     *  MAP 
+     * -------------------------------------------------*/
+
+    mapInit() {
+        let _ = this;
+        _.MAP_OBJECT = new Map();
+        _.MAP_OBJECT.init();
+        _.MAP_OBJECT.prepareCanvas(_.images_path);
     }
 
     /* *****************************************************************************
@@ -1985,7 +2032,10 @@ export default class TgGui {
     }
 
 
-    /* Combat Box  */
+   /* *****************************************************************************
+     * COMBAT BOX
+     */
+
     setCombatStatus(st) {
 
         let _ = this;
@@ -2353,14 +2403,6 @@ export default class TgGui {
         });
 
         return page;
-    }
-
-    toggleNotifyOutput() {
-        clearTimeout(window.notifyToggle);
-        $('#updateRoomNotify').addClass('up');
-        window.notifyToggle = setTimeout(function () {
-            $('#updateRoomNotify').removeClass('up')
-        }, 1500);
     }
 
     /* *****************************************************************************
@@ -3072,6 +3114,16 @@ export default class TgGui {
     inputInit() {
         let _ = this;
     }
+    
+    sendInput() {
+        let inputVal = $('#tgInputUser').val();
+        this.processCommands(inputVal, true);
+    }
+
+    focusInput() {
+        $('#tgInputUser').focus();
+    }
+
 
     /* -------------------------------------------------
      * OUTPUT
@@ -3241,6 +3293,52 @@ export default class TgGui {
                 $(this).closest('.extra-detailimg').slideDown(0);
             });
     }
+    
+    toggleNotifyOutput() {
+        clearTimeout(window.notifyToggle);
+        $('#updateRoomNotify').addClass('up');
+        window.notifyToggle = setTimeout(function () {
+            $('#updateRoomNotify').removeClass('up')
+        }, 1500);
+    }
+
+    
+    /* *****************************************************************************
+     *  IMAGES IN OUTPUT 
+     */
+
+    showImage(cont, image) {
+        let _ = this;
+        let imgsrc = _.media_server_addr + image;
+        let currimgsrc = cont.attr('src');
+
+        if (currimgsrc != imgsrc) {
+            cont.attr('src', imgsrc);
+        }
+    }
+
+    cleanImageContainer(cont) {
+        $(cont).slideUp('fast').find('img').attr('src', '');
+    }
+
+    /* *****************************************************************************
+     * OUTPUT BUTTONS
+     */
+
+    pauseOn() {
+        console.log('pauseON');
+        // if(autoscroll_enabled) {
+        //     autoscroll_enabled = false;
+        //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-play' });
+    }
+
+    pauseOff() {
+        console.log('pauseOFF');
+        // if(!autoscroll_enabled) {
+        //     autoscroll_enabled = true;
+        //     $('#pausebutton').button("option", "icons", { primary: 'ui-icon-custom-pause' });
+        // }
+    }
 
     /* -------------------------------------------------
      * KEYBOARD MAP
@@ -3343,50 +3441,6 @@ export default class TgGui {
     }
 
     /* -------------------------------------------------
-     *  MAP 
-     * -------------------------------------------------*/
-
-    mapInit() {
-        let _ = this;
-        _.MAP_OBJECT = new Map();
-        _.MAP_OBJECT.init();
-        _.MAP_OBJECT.prepareCanvas(_.images_path);
-    }
-
-    /* -------------------------------------------------
-     *  DOORS 
-     * -------------------------------------------------*/
-
-    closeLockDoor(dir) {
-        let cmd;
-        if (_.dir_status[dir] == '2') {
-            cmd = 'chiudi' + _.dir_names[dir];
-        } else if (_.dir_status[dir] == '3') {
-            cmd = 'blocca ' + _.dir_names[dir];
-        }
-        if (cmd) {
-            _.sendToServer(cmd);
-        }
-    }
-
-    doorsInit() {
-        let _ = this;
-        for (let d = 0; d < _.dir_names.length; ++d)
-            $('#' + _.dir_names[d]).on('click', {
-                dir: d
-            }, function (event) {
-                if (_.inGame) {
-                    if (event.which == 1) {
-                        _.goDir(event.data.dir);
-                    } else if (event.which == 3) {
-                        event.preventDefault();
-                        _.closeLockDoor(event.data.dir);
-                    }
-                }
-            });
-    }
-
-    /* -------------------------------------------------
      *  Buttons Events
      * -------------------------------------------------*/
 
@@ -3486,22 +3540,22 @@ export default class TgGui {
             e.preventDefault();
         });
 
+        // on window resize run function
+        $(window).resize(function () {
+            _.fluidDialog();
+        });
+
+        // catch dialog if opened within a viewport smaller than the dialog width
+        $(document).on("dialogopen", ".ui-dialog", function (event, ui) {
+            _.fluidDialog();
+        })
+
         $('.no-feature').on('click', function (e) {
             e.preventDefault();
             _.openNoFeaturePopup();
         });
 
     }
-
-    sendInput() {
-        let inputVal = $('#tgInputUser').val();
-        this.processCommands(inputVal, true);
-    }
-
-    focusInput() {
-        $('#tgInputUser').focus();
-    }
-
 
     /* -------------------------------------------------
      *  EXTRA BOARD
@@ -3607,7 +3661,7 @@ export default class TgGui {
                 src: src,
                 type: 'ajax'
             },
-            mainClass: 'tg-mp modal-cookielaw',
+            mainClass: 'modal-cookielaw',
         });
     }
 
@@ -3638,7 +3692,7 @@ export default class TgGui {
                             src: result,
                             type: 'inline'
                         },
-                        mainClass: 'tg-mp modal-notizie',
+                        mainClass: 'modal-notizie',
                         callbacks: {
                             open: function () {
                                 _.addScrollBar('.modal-notizie .scrollable', 'notizie');
@@ -3741,7 +3795,6 @@ export default class TgGui {
         }
     }
 
-    //TODO: Va sostituito
     addDraggable(selector, context, handle) {
 
         let _ = this;
@@ -3894,6 +3947,30 @@ export default class TgGui {
         let d = $(dialogid);
 
         return d.is(':data(uiDialog)');
+    }
+
+    fluidDialog() {
+        var $visible = $(".ui-dialog:visible");
+        // each open dialog
+        $visible.each(function () {
+            var $this = $(this);
+            var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
+            // if fluid option == true
+            if (dialog.options.fluid) {
+                var wWidth = $(window).width();
+                // check window width against dialog width
+                if (wWidth < (parseInt(dialog.options.maxWidth) + 50))  {
+                    // keep dialog from filling entire screen
+                    $this.css("max-width", "90%");
+                } else {
+                    // fix maxWidth bug
+                    $this.css("max-width", dialog.options.maxWidth + "px");
+                }
+                //reposition dialog
+                dialog.option("position", dialog.options.position);
+            }
+        });
+
     }
 
     whichTabIsOpen(dialogid) {

@@ -106,7 +106,10 @@ module.exports = function (prop) {
             
             new HtmlWebPackPlugin({
                 title: 'My Awesome application',
-                git_version: JSON.stringify('tgwcv2-rev_2.' + gitRevisionPlugin.version()),
+                git_version: JSON.stringify('tgwcv2-rev_2.' + gitRevisionPlugin.version({
+                    lightweightTags: true,
+                    versionCommand: 'describe --always --tags --dirty'
+                })),
                 inject: "head",
                 minify: false,
                 hash: true,

@@ -1,0 +1,46 @@
+.modal-character {
+    &.mfp-bg {
+        display: none;
+    }
+    &.mfp-ready {
+        .tg-character-card {
+            display: block;
+        }
+    }
+}
+.tg-character-card {
+    display: none;
+    color: black;
+
+    .info-databox {
+       background: #dabe8b;
+    }
+    
+    .info-main {
+        .info-avatar {
+            position: relative;
+            margin: 0 auto;
+            display: inline-block;
+
+            &:hover:before{
+                content: 'Cambia';
+                background: rgba(255, 255, 255 , .8);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+        }
+    }
+
+    .info-databox {
+        .description, .stats {
+            display: none;
+        }
+    }
+}
+
+
+/* Avatar Upload */
+.upload-avatar {
+    display: none;
+}
