@@ -1,5 +1,8 @@
 .out-system {
-    color: $gray-600;
+    color: #6c757d;
+    padding: .5em 0;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
     &:before {
         content: '> ';
         display: inline-block;
