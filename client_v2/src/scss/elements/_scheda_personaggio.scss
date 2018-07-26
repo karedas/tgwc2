@@ -1,40 +1,55 @@
 .tg-character-card {
     display: none;
     color: black;
+    
+    .tab-pane {
+        background: #dabe8b;
+    }
 
     .info-databox {
-       background: #dabe8b;
     }
     
     .info-main {
-        .info-avatar {
-            position: relative;
-            margin: 0 auto;
-            display: inline-block;
-            text-align: center;
-            cursor: pointer;
+    }
 
-            &:hover {
-                background: rgba(0, 0, 0, 0.8);
+    .info-avatar {
+        position: relative;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        img {
+            box-shadow: 0px 2px 12px #231c16 inset;
+        }
+        &:hover {
+            background: rgba(0, 0, 0, 0.8);
 
-                &:before{
-                    content: 'Cambia';
-                    display: inline-block;
-                    color: white;
-                    position: absolute;
-                    margin: auto auto;
-                    transform: translate(-50%, -50%);
-                    left: 50%;
-                    top: 50%;
-                }
-                
-                img {
-                    opacity:.2;
-                }
-
+            &:before{
+                content: 'Cambia';
+                display: inline-block;
+                color: white;
+                position: absolute;
+                margin: auto auto;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+            }
+            
+            img {
+                opacity:.2;
             }
         }
     }
+
+    .info-nametitle {
+        text-align: center;
+    }
+    .info-name {
+        font-family: kingthinks;
+        font-size: 34px;
+    }
+    
+    .info-title {}
 
     .info-databox {
         .description, .stats {

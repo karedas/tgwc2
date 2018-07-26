@@ -18,7 +18,6 @@ html {
 }
 
 body {
-    overflow: hidden;
     background: #1d1812;
     color: $white;
 }
@@ -50,6 +49,7 @@ caption {
 .tg-area {
     width: 100%;
     height: 100%;
+    min-height: 600px;
     overflow: hidden;
 
     &.expanded  {

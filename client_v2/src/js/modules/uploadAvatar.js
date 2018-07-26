@@ -44,8 +44,6 @@ export default class uploadAvatar {
 
                         _.data = new FormData();
                         _.data.append('avatar', file);
-                        _.data.append('fileName', file.name);
-                        _.data.append('type', file.type);
                     });
                 }
 
@@ -83,10 +81,6 @@ export default class uploadAvatar {
             _.uploadCrop.croppie('result', {
                 type: 'canvas',
                 size: 'viewport'
-            }).then(function (resp) {
-                console.log('then');
-                //send to server 
-                //socket.emit('image','image!');
             });
         });
 

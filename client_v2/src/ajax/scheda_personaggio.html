@@ -1,84 +1,106 @@
 <div class="tg-character-card tab-content" id="tgCharacterPage">
-  <div class="tab-pane fade show active" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
-    <div class="info-main">
-      <div class="info-menu"></div>
-      <div class="info-avatar">
-        <img id="infoimage" src=""/>
-      </div>
-      <div class="info-nametitle">
-        <div id="infoname"></div>
-        <div id="infotitle"></div>
-      </div>
-    </div>
-    <div class="info-databox">
-      <div id="infoGeneralData" class="info-data general">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-3">
-              <div class="data-name">Razza:</div>
-              <div class="data-name">Cultura:</div>
-              <div class="data-name">Etnia:</div>
-              <div class="data-name">Religione:</div>
-              <div class="data-name">Citt&agrave;:</div>
-            </div>
-            <div class="col-3">
-              <div id="inforace"></div>
-              <div id="infocult"></div>
-              <div id="infoethn"></div>
-              <div id="inforelig"></div>
-              <div id="infocity"></div>
-            </div>
-            <div class="col-3">
-              <div class="data-name">Altezza:</div>
-              <div class="data-name">Sesso:</div>
-              <div class="data-name">Et&agrave;:</div>
-              <div class="data-name">Peso:</div>
-              <div class="data-name">Lingua parlata:</div>
-            </div>
-            <div class="col-3">
-                <div id="infoheight"></div>
-                <div id="infosex"></div>
-                <div id="infoage"></div>
-                <div id="infowgt"></div>
-                <div id="infolang"></div>
+  <div class="tg-shadow b-modal tg-box">
+    <div class="tg-box">
+      <div class="tab-pane fade show active" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
+        <!-- <div class="info-menu col-auto">
+          <button type="button" class="btn-i-generale" id="infoTabGenerale">Generalit&agrave;</button>
+          <button type="button" class="btn-i-descr" id="infoTabGenerale">Descrizione</button>
+          <button type="button" class="btn-i-stats" id="infoTabGenerale">Statistiche</button>
+        </div> -->
+        <div class="info-avatar">
+          <img id="infoimage" src=""/>
+        </div>
+        <div class="info-nametitle col-12">
+          <div class="info-name" id="infoname"></div>
+          <div class="info-title" id="infotitle"></div>
+        </div>
+        <div class="info-databox">
+          <div id="infoGeneralData" class="info-data general">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-3">
+                  <div class="data-name">Razza:</div>
+                  <div class="data-name">Cultura:</div>
+                  <div class="data-name">Etnia:</div>
+                  <div class="data-name">Religione:</div>
+                  <div class="data-name">Citt&agrave;:</div>
+                </div>
+                <div class="col-3">
+                  <div id="inforace"></div>
+                  <div id="infocult"></div>
+                  <div id="infoethn"></div>
+                  <div id="inforelig"></div>
+                  <div id="infocity"></div>
+                </div>
+                <div class="col-3">
+                  <div class="data-name">Altezza:</div>
+                  <div class="data-name">Sesso:</div>
+                  <div class="data-name">Et&agrave;:</div>
+                  <div class="data-name">Peso:</div>
+                  <div class="data-name">Lingua parlata:</div>
+                </div>
+                <div class="col-3">
+                    <div id="infoheight"></div>
+                    <div id="infosex"></div>
+                    <div id="infoage"></div>
+                    <div id="infowgt"></div>
+                    <div id="infolang"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">Sei nato il <span id="infoborn"></span></span></div>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">Sei nato il <span id="infoborn"></span></span></div>
+          <div id="infoDescriptionData" class="info-data description">
+            <textarea name="description" id="infoDescriptionTextArea" cols="30" rows="4"></textarea>
+            <button type="button" id="acceptDescrInInfo">Modifica</button>
+          </div>
+          <div id="infoBaseStatsData" class="info-data stats container-fluid">
+            <div class="row">
+              <div class="col-6">//left column</div>
+              <div class="col-6">//right column</div>
+            </div>>
           </div>
         </div>
+        <!-- <form id="formUplAvatar" class="upload-avatar" enctype="multipart/form-data" method="post" action="">
+          <div id="croppied"></div>
+          <div class="custom-file">
+              <input name="avatar" type="file" class="custom-file-input" id="playerImgFile" >
+              <label class="custom-file-label" for="avatar">Sfoglia</label>
+              <button type="submit" id="submitUploadAvatar">Invia</button>  
+          </div>  
+          <h3>Modifica l'immagine del tuo personaggio</h3>
+            <p>Puoi impostare un'immagine per una rappresentazione artistica del tuo personaggio e che verrà mostrata
+                a te e agli altri giocatori assieme alla tua descrizione.
+            </p>
+            <h4>L'immagine deve rispettare queste semplici regole:</h4>
+            <ul>
+                <li>Deve essere coerente con la descrizione e la tipologia del tuo PG.</li>
+                <li>Non deve contenere elementi non in linea con l'ambientazione.</li>
+                <li>Non deve contenere elementi offensivi e / o volgari.</li>
+            </ul>
+        </form> -->
       </div>
-      <div id="infoDescriptionData" class="info-data description">
-        <textarea name="description" id="infoDescriptionTextArea" cols="30" rows="4"></textarea>
+      <div class="tab-pane fade" id="characterEquip" role="tabpanel" aria-labelledby="character-equip-tab">
+        //Equip
       </div>
-      <div id="infoBaseStatsData" class="info-data stats">
-        //base stats
+      <div class="tab-pane fade" id="characterInventory" role="tabpanel" aria-labelledby="character-inventory-tab">
+          //Inventory
+      </div>
+      <div class="tab-pane fade" id="characterAbility" role="tabpanel" aria-labelledby="character-ability-tab">
+          <div class="row">
+            <div class="col-6">//col left 6</div>
+            <div class="col-6">//col right 6</div>
+          </div>
       </div>
     </div>
-    <form id="formUplAvatar" class="upload-avatar" enctype="multipart/form-data" method="post" action="">
-        <h3>Modifica l'immagine del tuo personaggio</h3>
-        <p>Puoi impostare un'immagine per una rappresentazione artistica del tuo personaggio e che verrà mostrata
-            a te e agli altri giocatori assieme alla tua descrizione.
-        </p>
-        <h4>L'immagine deve rispettare queste semplici regole:</h4>
-        <ul>
-            <li>Deve essere coerente con la descrizione e la tipologia del tuo PG.</li>
-            <li>Non deve contenere elementi non in linea con l'ambientazione.</li>
-            <li>Non deve contenere elementi offensivi e / o volgari.</li>
-        </ul>
-        <div id="croppied"></div>
-        <div class="custom-file">
-            <input name="avatar" type="file" class="custom-file-input" id="playerImgFile" >
-            <label class="custom-file-label" for="avatar">Sfoglia</label>
-            <button type="submit" id="submitUploadAvatar">Invia</button>  
-        </div>
-    </form>
-  </div>
-  <div class="tab-pane fade" id="characterEquip" role="tabpanel" aria-labelledby="character-equip-tab">
-  </div>
-  <div class="tab-pane fade" id="characterInventory" role="tabpanel" aria-labelledby="character-inventory-tab">
-  </div>
-  <div class="tab-pane fade" id="characterAbility" role="tabpanel" aria-labelledby="character-ability-tab">
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
   </div>
   <nav>
     <div class="nav nav-tabs" id="characterTabNav" role="tablist">

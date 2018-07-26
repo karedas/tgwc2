@@ -752,7 +752,6 @@ export default class TgGui {
 
         let quotes = $("#rotateText .phrase");
         let quoteIndex = index == null ? -1 : index;
-
         ++quoteIndex;
         quotes.eq(quoteIndex % quotes.length)
             .fadeIn(1500)
@@ -1090,8 +1089,7 @@ export default class TgGui {
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
             console.log('inventory');
-            // renderInventory(inv_parse);
-            //return (inv_parse);
+            return _.renderInventory(inv_parse);
             return '';
         });
 
@@ -1116,9 +1114,7 @@ export default class TgGui {
         // Equipment
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-            console.log('renderEquipment');
-            _.renderEquipment(eq_parse);
-            return '';
+            return _.renderEquipment(eq_parse);
         });
 
         // Workable lists
@@ -1580,7 +1576,6 @@ export default class TgGui {
 
     renderPlayerInfo(info) {
         let _ = this;
-        /* Wait / Check Data in DOM */
         _.loadCharacterWindow().then(function (resolve, reject) {
             let d = $('#tgCharacterPage');
 
@@ -1642,12 +1637,12 @@ export default class TgGui {
        
             if (!_.openDialog('#infodialog')) {
                 $('#tgCharacterPage').dialog({
-                    modal: false,
+                    width: '700',
+                    height: '600',
                     maxWidth:'700',
-                    resizable: false,
                     minHeight: '500',
-                    position: {my: 'center', at:'center'},
-                    fluid: true
+                    resizable: false,
+                    position: {my: 'center', at:'center', of: $('.tg-area')},
                 });
             }
 
@@ -1668,23 +1663,20 @@ export default class TgGui {
         });
 
         $('#playerImgFile').on('change', function (e) {
-            console.log(this);
-            _.AVUPLOAD.readFile(this).then(function(){
-                console.log('readed');
-            });
+            _.AVUPLOAD.readFile(this);
         });
 
         /* Upload Image */
         $('#formUplAvatar').on('submit', function(e){
             e.preventDefault();
             _.AVUPLOAD.send(_.ws_server_addr);
-        })
+        });
     }
 
 
     /* *****************************************************************************
-     *  Editor 
-     */
+    *  Editor 
+    */
 
     openEditor(maxchars, title, text) {
         let _ = this;
@@ -2023,9 +2015,12 @@ export default class TgGui {
     }
 
     renderEquipment(eq) {
-        if (!eq.up) {
-
-        }
+        let _ = this;
+        _.loadCharacterWindow().then(function (resolve, reject) {
+            if (!eq.up) {
+                return '';
+            }
+        });
     }
 
 

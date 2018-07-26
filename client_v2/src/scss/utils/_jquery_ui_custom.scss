@@ -1,11 +1,23 @@
 
 
 /* UI OVERRIDE */
-.ui-dialog {
-    z-index: 1000 !important;
-    max-height: 100%;
-    max-width: 100%;
+.ui-front {
+    z-index: 100;
 }
+
+.ui-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    outline: 0;
+}
+
+.ui-dialog .ui-dialog-content {
+    position: relative;
+    overflow: auto;
+}
+
+
 .ui-dialog-titlebar {
     display:none;
     text-align: center;
