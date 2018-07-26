@@ -13,8 +13,6 @@ log("Starting Gulp, Wait...");
 
 // project configuration file
 const config = require('./gulp.config.js')();
-const postcss_config = require("./postcss.config.js")
-const webpack_config = require("./webpack.config.js")(config);
 
 //get folders list
 function getFolders(dir) {
@@ -98,7 +96,10 @@ function jsCompile(mode) {
 	let webpack = require('webpack'),
 		webpackStream = require('webpack-stream'),
 		cache = require('gulp-cached'),
-		plumber = require('gulp-plumber');
+		plumber = require('gulp-plumber'),
+
+		webpack_config = require("./webpack.config.js")(config, webpack);
+
 	
 	if (mode == 'development') {
 		webpack_config.mode = mode;
@@ -139,7 +140,8 @@ gulp.task('sass-compile', () => {
 	
 	let sassUnicode = require('gulp-sass-unicode'),
 		postcss = require('gulp-postcss'),
-		sass = require('gulp-sass');
+		sass = require('gulp-sass'),
+		postcss_config = require("./postcss.config.js")
 
 	return gulp.src(config.src.base + config.src.scss + '**/*.scss')
 		.pipe(sass({

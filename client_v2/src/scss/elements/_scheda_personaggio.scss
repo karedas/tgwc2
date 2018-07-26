@@ -4,20 +4,27 @@
     
     .tab-pane {
         background: #dabe8b;
+        padding:1em 1.5em;
     }
 
-    .info-databox {
-    }
-    
     .info-main {
+        position: relative;
+    }
+
+    .info-menu {
+        position: absolute;
+        left: 0;
+        button {
+            display: block;
+        }
     }
 
     .info-avatar {
+        width:190px;
         position: relative;
         margin: 0 auto;
-        display: inline-block;
-        text-align: center;
         cursor: pointer;
+
         img {
             box-shadow: 0px 2px 12px #231c16 inset;
         }

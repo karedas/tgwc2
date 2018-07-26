@@ -31,16 +31,19 @@ module.exports = function (logger, app, io) {
 
         app.post('/user/:id', upload.single('avatar'), async (req, res, next) => {
                 if (!req.file) {
-                    console.log(req.file);
-
                     //Error
                     return res.send({
                         success: false
                     });
                 } else {
-                    io.in('gods').emit('data', '&!imgreq{"uname":"'+req.params.id+'", "f":"' +req.file.filename+'"}!&!!');
-                    return res.send({
-                        success: true
+                        fs.readFile("./tmp/" + req.file.filename, function(err, data) {
+                        if (err) 
+                            throw err;
+                            
+                        io.in('gods').emit('avatar', {user: req.params.id, image: true, buffer: data.toString('base64')});
+                        return res.send({
+                            success: true
+                        });
                     });
                 }
         });

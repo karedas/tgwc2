@@ -1,14 +1,16 @@
 <div class="tg-character-card tab-content" id="tgCharacterPage">
   <div class="tg-shadow b-modal tg-box">
     <div class="tg-box">
-      <div class="tab-pane fade show active" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
-        <!-- <div class="info-menu col-auto">
-          <button type="button" class="btn-i-generale" id="infoTabGenerale">Generalit&agrave;</button>
-          <button type="button" class="btn-i-descr" id="infoTabGenerale">Descrizione</button>
-          <button type="button" class="btn-i-stats" id="infoTabGenerale">Statistiche</button>
-        </div> -->
-        <div class="info-avatar">
-          <img id="infoimage" src=""/>
+      <div class="tab-pane fade tg-shadow-inside" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
+        <div class="info-main">
+          <div class="info-menu">
+            <button type="button" class="btn-i-generale" id="infoTabGenerale">Generalit&agrave;</button>
+            <button type="button" class="btn-i-descr" id="infoTabGenerale">Descrizione</button>
+            <button type="button" class="btn-i-stats" id="infoTabGenerale">Statistiche</button>
+          </div> 
+          <div class="info-avatar">
+            <img id="infoimage" src=""/>
+          </div>
         </div>
         <div class="info-nametitle col-12">
           <div class="info-name" id="infoname"></div>
@@ -25,7 +27,7 @@
                   <div class="data-name">Religione:</div>
                   <div class="data-name">Citt&agrave;:</div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 tg-yellow">
                   <div id="inforace"></div>
                   <div id="infocult"></div>
                   <div id="infoethn"></div>
@@ -39,7 +41,7 @@
                   <div class="data-name">Peso:</div>
                   <div class="data-name">Lingua parlata:</div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 tg-yellow">
                     <div id="infoheight"></div>
                     <div id="infosex"></div>
                     <div id="infoage"></div>
@@ -48,7 +50,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12">Sei nato il <span id="infoborn"></span></span></div>
+                <div class="col-12 text-center">Sei nato il <span id="infoborn"></span></span></div>
               </div>
             </div>
           </div>
@@ -82,13 +84,13 @@
             </ul>
         </form> -->
       </div>
-      <div class="tab-pane fade" id="characterEquip" role="tabpanel" aria-labelledby="character-equip-tab">
+      <div class="tab-pane fade tg-shadow-inside" id="characterEquip" role="tabpanel" aria-labelledby="character-equip-tab">
         //Equip
       </div>
-      <div class="tab-pane fade" id="characterInventory" role="tabpanel" aria-labelledby="character-inventory-tab">
+      <div class="tab-pane fade tg-shadow-inside" id="characterInventory" role="tabpanel" aria-labelledby="character-inventory-tab">
           //Inventory
       </div>
-      <div class="tab-pane fade" id="characterAbility" role="tabpanel" aria-labelledby="character-ability-tab">
+      <div class="tab-pane fade tg-shadow-inside" id="characterAbility" role="tabpanel" aria-labelledby="character-ability-tab">
           <div class="row">
             <div class="col-6">//col left 6</div>
             <div class="col-6">//col right 6</div>
@@ -102,9 +104,9 @@
       <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
-  <nav>
+  <nav id="characterPageNav">
     <div class="nav nav-tabs" id="characterTabNav" role="tablist">
-      <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#characterInfo" role="tab" aria-controls="nav-info"
+      <a class="nav-item nav-link" id="nav-info-tab" data-toggle="tab" href="#characterInfo" role="tab" aria-controls="nav-info"
         aria-selected="true">Informazioni</a>
       <a class="nav-item nav-link" id="nav-equip-tab" data-toggle="tab" href="#characterEquip" role="tab" aria-controls="nav-equip"
         aria-selected="false">Equip</a>

@@ -621,6 +621,7 @@ export default class TgGui {
         let _ = this;
         _.socket.off('data');
         _.socket.on('data', _.handleServerData.bind(_));
+        _.socket.on('avatar', _.handleAvatarData.bind(_));
         _.setHandshaked();
     }
 
@@ -668,6 +669,21 @@ export default class TgGui {
             _.setDisconnect();
         }
     }
+
+    handleAvatarData(data) {
+        console.log(data);
+        if(data.image) {
+            let msg = '<div class="out-system"><b>TGSYS</b>: Richiesta approvazione ';
+                msg += '<a href="#" rel="popoverimg" data-img="'+ data.buffer +'" class="tg-yellow">immagine</a> | ';
+                msg += ' Utente: <span class="tg-green">' + data.user +'</span></div>';
+                msg = $(msg);
+
+                
+                this.showOutput(msg);
+
+        }
+    }
+
 
     setHandshaked() {
         this.clearUpdate();
@@ -1635,16 +1651,7 @@ export default class TgGui {
             $('#infospd', d).width(_.limitPrc(info.abil.spd.prc) + "%");
             $('#infospdlvl', d).text(_.prcLowTxt(info.abil.spd.prc, _.abiltxt));
        
-            if (!_.openDialog('#infodialog')) {
-                $('#tgCharacterPage').dialog({
-                    width: '700',
-                    height: '600',
-                    maxWidth:'700',
-                    minHeight: '500',
-                    resizable: false,
-                    position: {my: 'center', at:'center', of: $('.tg-area')},
-                });
-            }
+            _.openCharacterWindow('#nav-info-tab');
 
         });
 
@@ -1672,6 +1679,25 @@ export default class TgGui {
             _.AVUPLOAD.send(_.ws_server_addr);
         });
     }
+
+    openCharacterWindow(navId) {
+        let _ = this;
+
+        $(navId, '#characterPageNav').tab('show')
+
+        if (!_.openDialog('characterdialog')) {
+            $('#tgCharacterPage').dialog({
+                width: '700',
+                height: '600',
+                maxWidth:'700',
+                minHeight: '500',
+                resizable: false,
+                position: {my: 'center', at:'center', of: $('.tg-area')},
+            });
+        }
+    }
+
+    
 
 
     /* *****************************************************************************
@@ -3569,7 +3595,18 @@ export default class TgGui {
         $('.no-feature').on('click', function (e) {
             e.preventDefault();
             _.openNoFeaturePopup();
-        });
+        })
+
+        
+        $('body').popover({
+            selector: 'a[rel=popoverimg]',
+            html: true,
+            trigger: 'hover',
+            //placement: 'bottom',
+            content: function(){
+                return '<img src="data:image/png;base64,'+$(this).data('img') + '" />';
+            }
+          });
 
     }
 
@@ -3582,58 +3619,58 @@ export default class TgGui {
         _.addScrollBar('#tg-pills-shortcut', 'extraboard');
 
         //Shortcut TODO:
-        for (let x = 0; x < 26; x++) {
-            let shortcut = $('<div class="shortcut-btn" title="nome shortcut ' + x + '" data-cmd="grida oryon ti amo"><span>' + x + '</span></div>');
-            shortcut.appendTo('#tg-pills-shortcut');
+        // for (let x = 0; x < 26; x++) {
+        //     let shortcut = $('<div class="shortcut-btn" title="nome shortcut ' + x + '" data-cmd="grida oryon ti amo"><span>' + x + '</span></div>');
+        //     shortcut.appendTo('#tg-pills-shortcut');
 
-            $('.shortcut-btn').eq(x).popover({
-                content: '<a href="#">modifica</a>',
-                html: true,
-                trigger: 'manual'
-            });
-        }
+        //     // $('.shortcut-btn').eq(x).popover({
+        //     //     content: '<a href="#">modifica</a>',
+        //     //     html: true,
+        //     //     trigger: 'manual'
+        //     // });
+        // }
 
 
-        $('.tg-extraboard [title]')
-            .on('mouseover', function () {
-                let val = $(this).attr('title');
-                let cmdVal = $(this).data('cmd');
-                cmdVal = cmdVal ? ': ' + cmdVal : '';
+        // $('.tg-extraboard [title]')
+        //     .on('mouseover', function () {
+        //         let val = $(this).attr('title');
+        //         let cmdVal = $(this).data('cmd');
+        //         cmdVal = cmdVal ? ': ' + cmdVal : '';
 
-                $('#extraboardCaption').text(val + cmdVal);
-            })
-            .on('mouseout', function () {
-                $('#extraboardCaption').text('');
-            });
+        //         $('#extraboardCaption').text(val + cmdVal);
+        //     })
+        //     .on('mouseout', function () {
+        //         $('#extraboardCaption').text('');
+        //     });
 
         /* shortcut contextmenu */
-        let popoverHandler;
-        $('.shortcut-btn').on('shown.bs.popover', function (e) {
-            let pop = this;
-            popoverHandler = setTimeout(function () {
-                $(pop).popover('hide');
-            }, 2500);
-        });
+        // let popoverHandler;
+        // $('.shortcut-btn').on('shown.bs.popover', function (e) {
+        //     let pop = this;
+        //     popoverHandler = setTimeout(function () {
+        //         $(pop).popover('hide');
+        //     }, 2500);
+        // });
 
-        $(".shortcut-btn")
-            .on("contextmenu", function (e) {
-                $('.shortcut-btn').popover('hide');
-                $(this).popover('show');
+        // $(".shortcut-btn")
+        //     .on("contextmenu", function (e) {
+        //         $('.shortcut-btn').popover('hide');
+        //         $(this).popover('show');
 
-                return false;
-            })
-            .on('click', function () {
-                _.processCommands($(this).data('cmd'));
-            });
+        //         return false;
+        //     })
+        //     .on('click', function () {
+        //         _.processCommands($(this).data('cmd'));
+        //     });
 
 
-        $('body').on('click', function (e) {
-            $('.shortcut-btn').each(function () {
-                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                    $(this).popover('hide');
-                }
-            });
-        });
+        // $('body').on('click', function (e) {
+        //     $('.shortcut-btn').each(function () {
+        //         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+        //             $(this).popover('hide');
+        //         }
+        //     });
+        // });
     }
 
 

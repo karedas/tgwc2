@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
@@ -9,20 +8,24 @@ let gitRevisionPlugin = new GitRevisionPlugin({
     lightweightTags: true
 });
 
-module.exports = function (prop) {
+let webpack;
+module.exports = function (prop, wp_instance) {
 
     // if the local_config is not present then we're likely running webpack directly from the command line
     // load the dev environment by default
     let config = null;
 	if ( typeof prop == 'undefined' ) {
-		// combine it with the project configuration file
+        // combine it with the project configuration file
+        webpack = require('webpack');
         config = require('./gulp.config.js')();
+
     }
     else {
         config = prop;
+        webpack = wp_instance;
     }
     
-    var wp = {
+    let wp = {
         
         mode: 'production',
         // --watch true, --watch false
@@ -116,11 +119,11 @@ module.exports = function (prop) {
                 filename: '../index.html' //relative to root of the application
             }),
 
-//            new BundleAnalyzerPlugin({
-//                // analyzerMode: env == 'dev' ? 'server' : 'disabled',
-//                analyzerPort: 9998,
-//                analyzerHost: '192.168.10.10'
-//            }),
+           new BundleAnalyzerPlugin({
+               // analyzerMode: env == 'dev' ? 'server' : 'disabled',
+               analyzerPort: 9998,
+               analyzerHost: '192.168.10.10'
+           }),
         ]
     }
 

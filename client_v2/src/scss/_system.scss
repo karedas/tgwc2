@@ -1,0 +1,19 @@
+.out-system {
+    color: $gray-600;
+    &:before {
+        content: '> ';
+        display: inline-block;
+        color: #00e22d;
+    }
+
+
+    b {
+        color: #00e22d;
+    } 
+
+    a {
+        text-decoration: underline;
+    }
+
+    padding: 1.5em 0;
+}
