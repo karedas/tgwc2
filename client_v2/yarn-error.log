@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn remove rpg-awesome
+  /usr/bin/node /usr/bin/yarn add dataTables.bootstrap4.js
 
 PATH: 
   /home/vagrant/.composer/vendor/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,14 +14,24 @@ Platform:
   linux x64
 
 Trace: 
-  Error: EPROTO: protocol error, symlink '../../../acorn/bin/acorn' -> '/home/vagrant/Sites/TG2/tg2_webclient/client_v2/node_modules/acorn-dynamic-import/node_modules/.bin/acorn'
+  Error: https://registry.yarnpkg.com/dataTables.bootstrap4.js: Not found
+      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:65656:18)
+      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:134675:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:135658:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:135578:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)
 
 npm manifest: 
   {
   	"dependencies": {
   		"@fortawesome/fontawesome-free": "^5.1.0",
   		"@fortawesome/fontawesome-free-regular": "^5.0.13",
-  		"autoprefixer": "9.0.0",
+  		"autoprefixer": "9.0.1",
   		"babel-core": "^6.26.3",
   		"babel-loader": "^7.1.4",
   		"babel-polyfill": "^6.26.0",
@@ -32,7 +42,9 @@ npm manifest:
   		"babel-register": "^6.26.0",
   		"bootstrap": "^4.1.1",
   		"chalk": "^2.4.0",
+  		"croppie": "^2.6.2",
   		"cssnano": "4.0.3",
+  		"datatables.net": "^1.10.19",
   		"draggabilly": "^2.2.0",
   		"easy-autocomplete": "^1.3.5",
   		"enquire-js": "^0.2.1",
@@ -105,8 +117,8 @@ Lockfile:
       "@fortawesome/fontawesome-common-types" "^0.1.7"
   
   "@fortawesome/fontawesome-free@^5.1.0":
-    version "5.1.1"
-    resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.1.1.tgz#b2c8d73675e349062112c2795a6e9e146bf47e1e"
+    version "5.2.0"
+    resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.2.0.tgz#50cd9856774351c56c0b1b0db4efe122d7913e58"
   
   "@webassemblyjs/ast@1.5.13":
     version "1.5.13"
@@ -636,15 +648,15 @@ Lockfile:
     version "0.15.3"
     resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-0.15.3.tgz#342417d8f2f3461b14cf09088d5edf8791dc9832"
   
-  autoprefixer@9.0.0:
-    version "9.0.0"
-    resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.0.0.tgz#fce072cb3c9c61374bf6fb7d1906f630afdb2889"
+  autoprefixer@9.0.1:
+    version "9.0.1"
+    resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.0.1.tgz#b5b74aba3fa60b4f1403729e46a6a1246f16818f"
     dependencies:
       browserslist "^4.0.1"
       caniuse-lite "^1.0.30000865"
       normalize-range "^0.1.2"
       num2fraction "^1.2.2"
-      postcss "^7.0.0"
+      postcss "^7.0.1"
       postcss-value-parser "^3.2.3"
   
   aws-sign2@~0.6.0:
@@ -1472,8 +1484,8 @@ Lockfile:
       hoek "2.x.x"
   
   bootstrap@^4.1.1:
-    version "4.1.2"
-    resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.2.tgz#aee2a93472e61c471fc79fb475531dcbc87de326"
+    version "4.1.3"
+    resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.3.tgz#0eb371af2c8448e8c210411d0cb824a6409a12be"
   
   brace-expansion@^1.1.7:
     version "1.1.11"
@@ -2024,6 +2036,10 @@ Lockfile:
     version "2.13.0"
     resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
   
+  commander@~2.16.0:
+    version "2.16.0"
+    resolved "https://registry.yarnpkg.com/commander/-/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
+  
   commondir@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -2213,6 +2229,10 @@ Lockfile:
       ripemd160 "^2.0.0"
       safe-buffer "^5.0.1"
       sha.js "^2.4.8"
+  
+  croppie@^2.6.2:
+    version "2.6.2"
+    resolved "https://registry.yarnpkg.com/croppie/-/croppie-2.6.2.tgz#d605ceeffb4aea281f72a63c9a0a305db0a46e50"
   
   cross-spawn@^3.0.0:
     version "3.0.1"
@@ -2441,6 +2461,12 @@ Lockfile:
   data-uri-to-buffer@0.0.3:
     version "0.0.3"
     resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-0.0.3.tgz#18ae979a6a0ca994b0625853916d2662bbae0b1a"
+  
+  datatables.net@^1.10.19:
+    version "1.10.19"
+    resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.19.tgz#97a1ed41c85e62d61040603481b59790a172dd1f"
+    dependencies:
+      jquery ">=1.7"
   
   date-now@^0.1.4:
     version "0.1.4"
@@ -3011,8 +3037,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/esprima/-/esprima-1.2.5.tgz#0993502feaf668138325756f30f9a51feeec11e9"
   
   esprima@^4.0.0:
-    version "4.0.0"
-    resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
   
   esprima@~1.0.2:
     version "1.0.4"
@@ -3947,13 +3973,14 @@ Lockfile:
       vinyl "^1.0.0"
   
   gulp-uglify@^3.0.0:
-    version "3.0.0"
-    resolved "https://registry.yarnpkg.com/gulp-uglify/-/gulp-uglify-3.0.0.tgz#0df0331d72a0d302e3e37e109485dddf33c6d1ca"
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/gulp-uglify/-/gulp-uglify-3.0.1.tgz#8d3eee466521bea6b10fd75dff72adf8b7ea2d97"
     dependencies:
       gulplog "^1.0.0"
       has-gulplog "^0.1.0"
       lodash "^4.13.1"
       make-error-cause "^1.1.1"
+      safe-buffer "^5.1.2"
       through2 "^2.0.0"
       uglify-js "^3.0.5"
       vinyl-sourcemaps-apply "^0.2.0"
@@ -4383,8 +4410,8 @@ Lockfile:
       minimatch "^3.0.4"
   
   ignore@^3.3.3:
-    version "3.3.8"
-    resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.8.tgz#3f8e9c35d38708a3a7e0e9abb6c73e7ee7707b2b"
+    version "3.3.10"
+    resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
   
   import-local@^1.0.0:
     version "1.0.0"
@@ -4874,7 +4901,7 @@ Lockfile:
     version "1.12.1"
     resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
   
-  jquery@*, jquery@^3.3.1, jquery@~3.3.1:
+  jquery@*, jquery@>=1.7, jquery@^3.3.1, jquery@~3.3.1:
     version "3.3.1"
     resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
   
@@ -6771,9 +6798,9 @@ Lockfile:
       source-map "^0.6.1"
       supports-color "^5.4.0"
   
-  postcss@^7.0.0:
-    version "7.0.0"
-    resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.0.tgz#163f70d2fe2715c6d4a4b3d300051c1ea9594aa9"
+  postcss@^7.0.1:
+    version "7.0.1"
+    resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.1.tgz#db20ca4fc90aa56809674eea75864148c66b67fa"
     dependencies:
       chalk "^2.4.1"
       source-map "^0.6.1"
@@ -7363,10 +7390,6 @@ Lockfile:
     dependencies:
       hash-base "^3.0.0"
       inherits "^2.0.1"
-  
-  rpg-awesome@^0.2.0:
-    version "0.2.0"
-    resolved "https://registry.yarnpkg.com/rpg-awesome/-/rpg-awesome-0.2.0.tgz#33ef2f14660943c71bf3916bb157f86665417267"
   
   run-async@^2.2.0:
     version "2.3.0"
@@ -8365,10 +8388,10 @@ Lockfile:
       uglify-to-browserify "~1.0.0"
   
   uglify-js@^3.0.5:
-    version "3.4.0"
-    resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.4.0.tgz#796762282b5b5f0eafe7d5c8c708d1d7bd5ba11d"
+    version "3.4.5"
+    resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.4.5.tgz#650889c0766cf0f6fd5346cea09cd212f544be69"
     dependencies:
-      commander "~2.15.0"
+      commander "~2.16.0"
       source-map "~0.6.1"
   
   uglify-to-browserify@~1.0.0:
@@ -8896,7 +8919,37 @@ Lockfile:
       vinyl "^2.1.0"
       webpack "^4.7.0"
   
-  webpack@^4.12.0, webpack@^4.7.0:
+  webpack@^4.12.0:
+    version "4.16.2"
+    resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.16.2.tgz#c3e0e771adc94582e0543dd18d7436066051e885"
+    dependencies:
+      "@webassemblyjs/ast" "1.5.13"
+      "@webassemblyjs/helper-module-context" "1.5.13"
+      "@webassemblyjs/wasm-edit" "1.5.13"
+      "@webassemblyjs/wasm-opt" "1.5.13"
+      "@webassemblyjs/wasm-parser" "1.5.13"
+      acorn "^5.6.2"
+      acorn-dynamic-import "^3.0.0"
+      ajv "^6.1.0"
+      ajv-keywords "^3.1.0"
+      chrome-trace-event "^1.0.0"
+      enhanced-resolve "^4.1.0"
+      eslint-scope "^4.0.0"
+      json-parse-better-errors "^1.0.2"
+      loader-runner "^2.3.0"
+      loader-utils "^1.1.0"
+      memory-fs "~0.4.1"
+      micromatch "^3.1.8"
+      mkdirp "~0.5.0"
+      neo-async "^2.5.0"
+      node-libs-browser "^2.0.0"
+      schema-utils "^0.4.4"
+      tapable "^1.0.0"
+      uglifyjs-webpack-plugin "^1.2.4"
+      watchpack "^1.5.0"
+      webpack-sources "^1.0.1"
+  
+  webpack@^4.7.0:
     version "4.16.1"
     resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.16.1.tgz#2c4b89ea648125c3e67bcca6adf49ce2c14b2d31"
     dependencies:

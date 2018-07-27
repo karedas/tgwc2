@@ -20,6 +20,7 @@ html {
 body {
     background: #1d1812;
     color: $white;
+    overflow: hidden;
 }
 
 button:focus , input:focus, textarea:focus{

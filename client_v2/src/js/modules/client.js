@@ -3,8 +3,9 @@ import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import Cookies from 'js-cookie';
 import PerfectScrollbar from 'perfect-scrollbar';
-import 'bootstrap';
+// import 'bootstrap';
 import 'magnific-popup';
+import dt from 'datatables.net';
 
 /* Jquery UI */
 import position from 'jquery-ui/ui/position';
@@ -671,19 +672,15 @@ export default class TgGui {
     }
 
     handleAvatarData(data) {
-        console.log(data);
         if(data.image) {
-            let msg = '<div class="out-system"><b>TGSYS</b>: Richiesta approvazione ';
+            let msg = '<div class="out-system"><b>SYS</b>: Richiesta approvazione ';
                 msg += '<a href="#" rel="popoverimg" data-img="'+ data.buffer +'" class="tg-yellow">immagine</a> | ';
                 msg += ' Utente: <span class="tg-green">' + data.user +'</span></div>';
                 msg = $(msg);
 
-                
                 this.showOutput(msg);
-
         }
     }
-
 
     setHandshaked() {
         this.clearUpdate();
@@ -701,6 +698,7 @@ export default class TgGui {
     setDisconnect() {
         let _ = this;
         _.clearDataInterface();
+        _.closeAllDialogs();
         _.isConnected = false;
         _.inGame = false;
     }
@@ -1458,13 +1456,13 @@ export default class TgGui {
 
         let colclass = [];
 
-        let txt = '<table class="table table-sm">';
+        let txt = '<table class="tg-rendertable table table-sm table-responsive table-striped table-hover">';
         if (t.title && t.dialog == false) {
             txt += '<caption>' + (t.plain ? t.title : t.title) + '</caption>';
         }
 
         if (t.head) {
-            txt += '<thead><tr>';
+            txt += '<thead class="thead-dark"><tr>';
 
             $.each(t.head, function (i, v) {
                 switch ($.type(v)) {
@@ -1515,28 +1513,39 @@ export default class TgGui {
                 txt += '</tr>';
             });
         }
+
         txt += '</table>';
 
-        if (t.dialog == false)
+        /*if (t.dialog == false)
             return t.plain ? txt : _.addFrameStyle(txt);
+            */
+        let sortable = false;
+        if(t.head) {
+            sortable = true;
+        }
 
-        _.renderInTableDialog(t.title ? t.title : "Informazioni", txt);
+        _.renderInTableDialog(t.title ? t.title : "Informazioni", txt, true);
 
-        //if(t.head)
-        // $('#tablecont table').tablesorter();
 
         return '';
     }
 
 
-    renderInTableDialog(title, txt) {
-        let _ = this;
-        let options = {};
+    renderInTableDialog(title, txt, sortable) {
+        let _ = this,
+            cont = '#tablecont',
+            options = {};
 
-        $('#tablecont').empty().append(_.removeColors(txt));
+        $(cont).empty().append(_.removeColors(txt));
+
+        if(sortable) {
+            let table = $('table', cont).DataTable({
+                "dom": '<"dataheader"fl>t<"datafooter"ip>',
+                "autoWidth": false
+            });
+        }
 
         if (!_.openDialog('tabledialog')) {
-            console.log('not open');
             let pos = _.getWindowPosition('tabledialog');
             let size = _.getWindowSize('tabledialog');
             let w, h;
@@ -1558,13 +1567,30 @@ export default class TgGui {
                 modal: false,
                 width: 'auto',
                 position: pos,
+                resizable: true,
                 dialogClass:'tg-dialog parch',
-                dragStop: _.saveWindowData.bind(_),
-                resizeStop: _.saveWindowData.bind(_),
+                //dragStop: _.saveWindowData.bind(_),
+                //resizeStop: _.saveWindowData.bind(_),
                 closeText: 'Chiudi',
-                title: title
+                title: title,
+                open: function() {
+                   let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
+                    $('.tg-rendertable').css('maxHeight', tableMaxHeight);
+                },
+                resize: function() {
+                    let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
+                    $('.tg-rendertable').css('maxHeight', tableMaxHeight);
+                }
             });
         }
+    }
+
+    getDialogTableMaxHeight (cont, dialog) {
+        let childrenHeight = 0;
+        $(cont , dialog).siblings().each(function(){
+            childrenHeight = childrenHeight + $(this).outerHeight(true);
+        });
+        return $(cont).height() - childrenHeight;
     }
 
 
@@ -1689,8 +1715,6 @@ export default class TgGui {
             $('#tgCharacterPage').dialog({
                 width: '700',
                 height: '600',
-                maxWidth:'700',
-                minHeight: '500',
                 resizable: false,
                 position: {my: 'center', at:'center', of: $('.tg-area')},
             });
@@ -3087,8 +3111,35 @@ export default class TgGui {
             $('.tg-characterpanel').hide();
         }
 
-        /* audio */
+        /* Audio */
         $('#tgNavBartriggerAudio').on('click')
+
+        /* Data Sorter */
+        $.extend( $.fn.dataTable.defaults, {
+            language: {
+                "sEmptyTable":     "Nessun dato presente nella tabella",
+                "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
+                "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
+                "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+                "sInfoPostFix":    "",
+                "sInfoThousands":  ".",
+                "sLengthMenu":     "Visualizza _MENU_ elementi",
+                "sLoadingRecords": "Caricamento...",
+                "sProcessing":     "Elaborazione...",
+                "sSearch":         "Cerca:",
+                "sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+                "oPaginate": {
+                    "sFirst":      "Inizio",
+                    "sPrevious":   "Precedente",
+                    "sNext":       "Successivo",
+                    "sLast":       "Fine"
+                },
+                "oAria": {
+                    "sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
+                    "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                }
+            }
+        });
     }
 
     /* -------------------------------------------------
@@ -3414,6 +3465,11 @@ export default class TgGui {
                 return true;
             }
 
+            if(event.which == 27) {
+                _.closeAllDialogs();
+                return false;
+            }
+
             /* Stop event Listener if we are inside Modal  */
             if (_.in_editor) {
                 return true;
@@ -3604,7 +3660,9 @@ export default class TgGui {
             trigger: 'hover',
             //placement: 'bottom',
             content: function(){
-                return '<img src="data:image/png;base64,'+$(this).data('img') + '" />';
+                let content = '<img src="data:image/png;base64,'+$(this).data('img') + '" />';
+                    content += '<p class="text-center"><a href="#">APPROVA</a> - <a href="#">DISAPPROVA</a></p>'
+                return content;
             }
           });
 
@@ -3983,6 +4041,15 @@ export default class TgGui {
      * UTILITY
      */
 
+    closeDialog(dialogid) {
+        let d = $(dialogid);
+
+        if(d.is(':data(uiDialog)')) {
+            return d.dialog('close');
+        }
+        return null;
+    }
+
     openDialog(dialogid) {
         let d = $(dialogid);
 
@@ -4023,7 +4090,6 @@ export default class TgGui {
                 dialog.option("position", dialog.options.position);
             }
         });
-
     }
 
     whichTabIsOpen(dialogid) {
@@ -4031,6 +4097,18 @@ export default class TgGui {
             return $(dialogid).tabs('option', 'active');
 
         return null;
+    }
+
+    closeAllDialogs() {
+        this.abortEdit();
+        this.closeDialog('#characterdialog');
+//        this.closeDialog('#equipdialog');
+//        this.closeDialog('#invdialog');
+//        this.closeDialog('#bookdialog');
+//        this.closeDialog('#configdialog');
+//        this.closeDialog('#selectdialog');
+//        this.closeDialog('#logdialog');
+//        this.closeDialog('#tabledialog');
     }
 
     disableResizable(widget) {
