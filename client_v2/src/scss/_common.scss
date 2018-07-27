@@ -107,6 +107,10 @@ caption {
     }
 }
 
+.scrollable {
+    height: 100%;
+}
+
 
 @include media-breakpoint-down(md) {
     .tg-area {

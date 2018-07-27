@@ -1,42 +1,62 @@
+@import "lib/datatable-bs4";
 @import 'elements/table_filters';
 
 .tg-generictable {
     width: 100%;
-    background: black;
+    background:  #111;
+    color: white;
     display: none;
+
     .table-cont {
         padding: $grid-gutter-width / 2;
+        padding: 0;
     }
+
+    a {
+        cursor: pointer;
+    }
+    
     > div {
         height: 100%;
         overflow: hidden;
-        overflow-y: auto;
-    }
-
-    thead, tbody, tr {
-        display: table;
-        width:100%;
-        table-layout:fixed;/* even columns width , fix width of table too*/
     }
 
     th {
-        display: table-cell;
+        border: none;
     }
 
-    table {
-        background: #dabe8b;
+    .dataTables_scrollHead {
+        background-color: $table-dark-bg;
+    }
+
+    .dataTables_scrollBody {
+        background-color: #d9cca4;
         color: black;
         margin-bottom: 0;
+
         
+        a {
+            color: black;
+        }
+    
+    }
+    
+    .dataheader {
+        padding:1em .5em;
+        background-color: #212529;
+        border-bottom: 1px solid #343a40;
 
-        //thead, tbody { display: block; }
-
-        tbody {
-            overflow-y: auto;    /* Trigger vertical scroll    */
-            overflow-x: hidden;  /* Hide the horizontal scroll */
+        input[type="search"], select {
+            color: white;
+            background: #212529;
         }
     }
+    .datafooter {
+        background-color: #212529;
+        padding:1em .5em;
+    }
 }
+
 
 .ui-dialog .tg-generictable {
     display: block;

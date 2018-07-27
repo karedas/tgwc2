@@ -1103,7 +1103,7 @@ export default class TgGui {
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
             console.log('inventory');
-            return _.renderInventory(inv_parse);
+            //return _.renderInventory(inv_parse);
             return '';
         });
 
@@ -1456,7 +1456,7 @@ export default class TgGui {
 
         let colclass = [];
 
-        let txt = '<table class="tg-rendertable table table-sm table-responsive table-striped table-hover">';
+        let txt = '<table class="tg-rendertable table table-sm table-striped table-hover">';
         if (t.title && t.dialog == false) {
             txt += '<caption>' + (t.plain ? t.title : t.title) + '</caption>';
         }
@@ -1538,10 +1538,12 @@ export default class TgGui {
 
         $(cont).empty().append(_.removeColors(txt));
 
+        let table;
         if(sortable) {
-            let table = $('table', cont).DataTable({
+            table = $('table', cont).DataTable({
                 "dom": '<"dataheader"fl>t<"datafooter"ip>',
-                "autoWidth": false
+                "scrollCollapse": true,
+                "scrollY": 400,
             });
         }
 
@@ -1566,21 +1568,26 @@ export default class TgGui {
             $('#tabledialog').dialog({
                 modal: false,
                 width: 'auto',
+                height: 'auto',
                 position: pos,
                 resizable: true,
                 dialogClass:'tg-dialog parch',
                 //dragStop: _.saveWindowData.bind(_),
                 //resizeStop: _.saveWindowData.bind(_),
                 closeText: 'Chiudi',
-                title: title,
+                title: "Lista Generica",
+                position: {my: 'center', at: 'center'},
                 open: function() {
-                   let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
-                    $('.tg-rendertable').css('maxHeight', tableMaxHeight);
+                    if(sortable) {
+                        table.columns.adjust().draw();
+                        let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
+                        $('.tg-rendertable tbody').css('maxHeight', tableMaxHeight);
+                    }
                 },
-                resize: function() {
+                /*resize: function() {
                     let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
-                    $('.tg-rendertable').css('maxHeight', tableMaxHeight);
-                }
+                    $('.tg-rendertable tbody').css('maxHeight', tableMaxHeight);
+                }*/
             });
         }
     }
@@ -4108,7 +4115,7 @@ export default class TgGui {
 //        this.closeDialog('#configdialog');
 //        this.closeDialog('#selectdialog');
 //        this.closeDialog('#logdialog');
-//        this.closeDialog('#tabledialog');
+        this.closeDialog('#tabledialog');
     }
 
     disableResizable(widget) {
