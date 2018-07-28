@@ -2,14 +2,7 @@
 
 /* UI OVERRIDE */
 
-/*!
- * jQuery UI Resizable 1.12.1
- * http://jqueryui.com
- *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- */
+
  .ui-resizable {
 	position: relative;
 }
@@ -28,57 +21,56 @@
 	cursor: n-resize;
 	height: 12px;
 	width: 100%;
-	top: 8px;
+	top: 12px;
 	left: 0;
 }
 .ui-resizable-s {
 	cursor: s-resize;
 	height: 12px;
 	width: 100%;
-	bottom: -8px;
+	bottom: -12px;
 	left: 0;
 }
 .ui-resizable-e {
 	cursor: e-resize;
 	width: 12px;
-	right: -8px;
-	top: 0;
+	right: -12px;
+	top: 8px;
 	height: 100%;
 }
 .ui-resizable-w {
 	cursor: w-resize;
 	width: 12px;
-	left: -8px;
-	top: 0;
+	left: -12px;
+	top: 8px;
 	height: 100%;
 }
 .ui-resizable-se {
 	cursor: se-resize;
 	width: 12px;
 	height: 12px;
-	right: -8px;
-	bottom: -8px;
+	right: -12px;
+	bottom: -12px;
 }
 .ui-resizable-sw {
 	cursor: sw-resize;
 	width: 9px;
 	height: 9px;
-	left: -8px;
-	bottom: 8px;
+	left: -12px;
+	bottom: 12px;
 }
 .ui-resizable-nw {
 	cursor: nw-resize;
 	width: 9px;
 	height: 9px;
-	left: -8px;
-	top: 8px;
+	top: 18px;
 }
 .ui-resizable-ne {
 	cursor: ne-resize;
 	width: 9px;
 	height: 9px;
-	right: 8px;
-	top: 8px;
+	right: 0;
+	top: 18px;
 }
 
 
@@ -99,9 +91,7 @@
 .ui-dialog .ui-dialog-content {
 	position: relative;
 	margin: 0 auto;
-    overflow: hidden;
 }
-
 
 .ui-dialog-titlebar {
     display:none;

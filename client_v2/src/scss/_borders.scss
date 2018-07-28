@@ -365,3 +365,15 @@
     padding: 0;
 }
 
+
+// Borders with JQUERY UI DIALOG
+.tg-dialog-border {  
+    padding: 0;  
+    .tg-border-box {
+        left: -8px;
+        top: -8px;
+        right: -8px;
+        bottom: -8px;
+    }
+}
+

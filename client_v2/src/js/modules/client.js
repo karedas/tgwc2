@@ -1534,16 +1534,16 @@ export default class TgGui {
     renderInTableDialog(title, txt, sortable) {
         let _ = this,
             cont = '#tablecont',
-            options = {};
+            options = {},
+            table;
 
         $(cont).empty().append(_.removeColors(txt));
 
-        let table;
         if(sortable) {
             table = $('table', cont).DataTable({
-                "dom": '<"dataheader"fl>t<"datafooter"ip>',
+                "dom": '<"dataheader"fl><"databody"t><"datafooter"ip>',
                 "scrollCollapse": true,
-                "scrollY": 400,
+                "scrollY": true,
             });
         }
 
@@ -1557,43 +1557,51 @@ export default class TgGui {
                 h = size[1];
             }
             else {
-                w = 650;
-                h = 600;
+                w = 'auto';
+                h = 'auto';
             }
             
             if(pos == null ) {
                 pos = {my: "center", at: "center", of:window};
             }
 
+            let tableStartHeight = 0;
+
             $('#tabledialog').dialog({
                 modal: false,
-                width: 'auto',
-                height: 'auto',
+                width: w,
+                height: h,
                 position: pos,
                 resizable: true,
                 dialogClass:'tg-dialog parch',
-                //dragStop: _.saveWindowData.bind(_),
-                //resizeStop: _.saveWindowData.bind(_),
+                dragStop: _.saveWindowData.bind(_),
+                resizeStop: _.saveWindowData.bind(_),
                 closeText: 'Chiudi',
                 title: "Lista Generica",
                 position: {my: 'center', at: 'center'},
                 open: function() {
                     if(sortable) {
                         table.columns.adjust().draw();
-                        let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
-                        $('.tg-rendertable tbody').css('maxHeight', tableMaxHeight);
+                        //let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
+                       // $('.tg-rendertable tbody').css('height', tableMaxHeight);
                     }
                 },
-                /*resize: function() {
-                    let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
-                    $('.tg-rendertable tbody').css('maxHeight', tableMaxHeight);
-                }*/
+                resize: function() {
+                    let a = $('.dataheader').outerHeight(true);
+                    let b = $('.datafooter').outerHeight(true);
+                    let c = $('.databody table').outerHeight(true);
+                    let calc = $('#tabledialog').height() - a - b - c;
+                    $('.dataTables_scrollBody').height(calc);
+                   // let tableMaxHeight =  _.getDialogTableMaxHeight('.tg-rendertable', this);
+                   // $('.tg-rendertable tbody').css('maxHeight', tableMaxHeight);
+                },
             });
         }
     }
 
     getDialogTableMaxHeight (cont, dialog) {
-        let childrenHeight = 0;
+        let height = 0;
+        height = $(dialog).height() - $(cont).height();
         $(cont , dialog).siblings().each(function(){
             childrenHeight = childrenHeight + $(this).outerHeight(true);
         });
@@ -1720,8 +1728,9 @@ export default class TgGui {
 
         if (!_.openDialog('characterdialog')) {
             $('#tgCharacterPage').dialog({
-                width: '700',
-                height: '600',
+                modal: false,
+                width: 'auto',
+                height: 'auto',
                 resizable: false,
                 position: {my: 'center', at:'center', of: $('.tg-area')},
             });
@@ -3382,7 +3391,7 @@ export default class TgGui {
             left: _.client_options.output_width.toString()
         });
 
-        this.addScrollBar('.tg-output-extra', 'extraoutput');
+        _.addScrollBar('.tg-output-extra', 'extraoutput');
 
         /* Image Event */
         $('#detailimage')
@@ -3590,7 +3599,11 @@ export default class TgGui {
             $('.tg-output-extra').toggleClass('d-flex')
             /* Refresh Extra when is open */
             if ($('.tg-output-extra').is(':visible')) {
+                $('.tg-output-main').css('width', _.client_options.output_width);
                 _.processCommands('@agg');
+            }
+            else {
+                $('.tg-output-main').css('width', '100%');
             }
             _.scrollPanelTo('#output', '.scrollable', true, null);
             _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;

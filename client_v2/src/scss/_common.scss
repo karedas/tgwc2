@@ -35,6 +35,7 @@ button, input[type="checkbox"] {
     cursor: pointer;
 }
 
+
 caption {
   caption-side: top;
 }
@@ -105,6 +106,17 @@ caption {
         text-decoration: underline;
         color: $tg-yellow;
     }
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+.nav-tabs .nav-link {
+    border: none;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    border: none;
 }
 
 .scrollable {

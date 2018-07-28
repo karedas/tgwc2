@@ -3,30 +3,36 @@
 
 .tg-generictable {
     width: 100%;
-    background:  #111;
     color: white;
     display: none;
+    background-color: #30241d;
+
 
     .table-cont {
-        padding: $grid-gutter-width / 2;
-        padding: 0;
+        height: 100%;
     }
 
     a {
         cursor: pointer;
     }
-    
-    > div {
-        height: 100%;
-        overflow: hidden;
-    }
 
     th {
         border: none;
+        background-color: #30241d;
+    }
+
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+        border-right: 1px solid $table-dark-bg;
+    }
+
+    td {
+      background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
     }
 
     .dataTables_scrollHead {
-        background-color: $table-dark-bg;
+        background: #30241d;
     }
 
     .dataTables_scrollBody {
@@ -34,26 +40,26 @@
         color: black;
         margin-bottom: 0;
 
-        
         a {
             color: black;
         }
-    
     }
     
     .dataheader {
         padding:1em .5em;
-        background-color: #212529;
         border-bottom: 1px solid #343a40;
+        background:  url($imgPath + '/interface/trow-bg-brown.jpg') repeat-x bottom left;
+
 
         input[type="search"], select {
             color: white;
-            background: #212529;
+            background: #30241d;
+            border: 1px solid #42342c;
         }
     }
     .datafooter {
-        background-color: #212529;
-        padding:1em .5em;
+        padding: 1em .5em;
+        background:  url($imgPath + '/interface/trow-bg-brown.jpg') repeat-x top left;
     }
 }
 
