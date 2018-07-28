@@ -54,21 +54,21 @@
 }
 .ui-resizable-sw {
 	cursor: sw-resize;
-	width: 9px;
-	height: 9px;
+	width: 12px;
+	height: 12px;
 	left: -12px;
-	bottom: 12px;
+	bottom: -12px;
 }
 .ui-resizable-nw {
 	cursor: nw-resize;
-	width: 9px;
-	height: 9px;
+	width: 12px;
+	height: 12px;
 	top: 18px;
 }
 .ui-resizable-ne {
 	cursor: ne-resize;
-	width: 9px;
-	height: 9px;
+	width: 12px;
+	height: 12px;
 	right: 0;
 	top: 18px;
 }
