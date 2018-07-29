@@ -102,6 +102,7 @@
 
     .info-nametitle {
         padding-top:4px;
+        padding-bottom: 4px;
         text-align: center;
     }
     .info-name {
@@ -126,6 +127,7 @@
     }
     
     .info-title {
+        font-style: italic;
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-size: 15px;
         color:#85816a;
@@ -203,9 +205,9 @@
     .info-data.general {
         box-shadow: 0 0 40px rgba(0, 0, 0, 0.6) inset;
         background-color: rgba(0, 0, 0, 0.2);
-        border: 1px solid #59564c;
-        padding:.5em ;
-        margin: 0 25px;
+        border: 1px solid #393731;
+        padding: 1em 1em .5em;
+        margin: 0 1em;
     }
 
     .data-name {
@@ -222,7 +224,7 @@
             content: '';
             position: absolute;
             width:45px;
-            top: 2px;
+            top: 4px;
             height:1px;
             display: block;
             background: #5e583b;

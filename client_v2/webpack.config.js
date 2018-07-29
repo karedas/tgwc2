@@ -119,11 +119,11 @@ module.exports = function (prop, wp_instance) {
                 filename: '../index.html' //relative to root of the application
             }),
 
-           new BundleAnalyzerPlugin({
-               // analyzerMode: env == 'dev' ? 'server' : 'disabled',
-               analyzerPort: 9998,
-               analyzerHost: '192.168.10.10'
-           }),
+//           new BundleAnalyzerPlugin({
+  //             // analyzerMode: env == 'dev' ? 'server' : 'disabled',
+    //           analyzerPort: 9998,
+      //         analyzerHost: '192.168.10.10'
+        //   }),
         ]
     }
 
