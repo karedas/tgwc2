@@ -1,23 +1,26 @@
 <div class="tg-character-card tab-content" id="characterdialog">
-  <div class="tg-shadow">
-    <div class="tab-content">
+  <div class="tg-shadow-dialog">
+    <div class="tab-content tg-character-content">
       <div class="tab-pane fade tg-shadow-inside" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
-        <div class="info-main">
-          <div class="info-menu">
-            <button type="button" class="btn-i-generale" id="infoTabGenerale">Generalit&agrave;</button>
-            <button type="button" class="btn-i-descr" id="infoTabGenerale">Descrizione</button>
-            <button type="button" class="btn-i-stats" id="infoTabGenerale">Statistiche</button>
-          </div> 
+        <div class="info-main" id="infoMainTab">
+          <nav class="info-menu nav nav-tabs flex-column" role="tablist">
+            <a href="#infoGeneralData" class="btn-i-generale tg-button tg-shadow nav-item nav-link active" id="infoTabGenerale" data-toggle="tab"
+              role="tab" aria-controls="infoGeneralData" aria-selected="true">Generalit&agrave;</a>
+            <a href="#infoDescriptionData" class="btn-i-descr tg-button tg-shadow nav-item nav-link" id="infoTabGenerale" data-toggle="tab"
+              role="tab" aria-controls="infoDescriptionData" aria-selected="false">Descrizione</a>
+            <a href="#infoBaseStatsData" class="btn-i-stats tg-button tg-shadow nav-item nav-link" id="infoTabGenerale" data-toggle="tab"
+              role="tab" aria-controls="infoBaseStatsData" aria-selected="false">Statistiche</a>
+          </nav>
           <div class="info-avatar tg-shadow">
-            <img id="infoimage" src=""/>
+            <img id="infoimage" src="" />
           </div>
         </div>
         <div class="info-nametitle col-12">
           <div class="info-name" id="infoname"></div>
           <div class="info-title" id="infotitle"></div>
         </div>
-        <div class="info-databox">
-          <div id="infoGeneralData" class="info-data general">
+        <div id="infoDataContent" class="info-databox tab-content">
+          <div id="infoGeneralData" class="info-data general tab-pane show active" role="tabpanel">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-2 ml-auto">
@@ -27,7 +30,7 @@
                   <div class="data-name">Religione:</div>
                   <div class="data-name">Citt&agrave;:</div>
                 </div>
-                <div class="col-auto tg-yellow">
+                <div class="col-auto tg-yellow mr-auto">
                   <div id="inforace"></div>
                   <div id="infocult"></div>
                   <div id="infoethn"></div>
@@ -42,27 +45,51 @@
                   <div class="data-name">Lingua parlata:</div>
                 </div>
                 <div class="col-auto tg-yellow mr-auto">
-                    <div id="infoheight"></div>
-                    <div id="infosex"></div>
-                    <div id="infoage"></div>
-                    <div id="infowgt"></div>
-                    <div id="infolang"></div>
+                  <div id="infoheight"></div>
+                  <div id="infosex"></div>
+                  <div id="infoage"></div>
+                  <div id="infowgt"></div>
+                  <div id="infolang"></div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-12 text-center data-born">Sei nato il <span id="infoborn" class="tg-yellow"></span></div>
+                <div class="col-12 text-center data-born">Sei nato il
+                  <span id="infoborn" class="tg-yellow"></span>
+                </div>
               </div>
             </div>
           </div>
-          <div id="infoDescriptionData" class="info-data description">
-            <textarea name="description" id="infoDescriptionTextArea" cols="30" rows="4"></textarea>
-            <button type="button" id="acceptDescrInInfo">Modifica</button>
+          <div id="infoDescriptionData" class="info-data description tab-pane " role="tabpanel">
+            <textarea name="description" id="infodesc"> </textarea>
+            <button type="button" id="acceptDescrInInfo" class="btn-i-modifica tg-button tg-shadow">Modifica</button>
           </div>
-          <div id="infoBaseStatsData" class="info-data stats container-fluid">
+          <div id="infoBaseStatsData" class="info-data stats tab-pane containerfluid" role="tabpanel">
             <div class="row">
-              <div class="col-6">//left column</div>
-              <div class="col-6">//right column</div>
-            </div>>
+              <div class="col-2 text-right">
+                <div class="data-name name-skill">Volont&agrave;:</div>
+                <div class="data-name name-skill">Intelligenza:</div>
+                <div class="data-name name-skill">Empatia:</div>
+                <div class="data-name name-skill">Taglia:</div>
+              </div>
+              <div class="col-4">
+                <div class="data-skill-box"><span id="infowil"></span><i id="infowillvl"></i></div>
+                <div class="data-skill-box"><span id="infoint"></span><i id="infointlvl"></i></div>
+                <div class="data-skill-box"><span id="infoemp"></span><i id="infoemplvl"></i></div>
+                <div class="data-skill-box"><span id="infosiz"></span><i id="infosizlvl"></i></div>
+              </div>
+              <div class="col-4">
+                  <div class="data-skill-box"><span id="infostr"></span><i id="infostrlvl"></i></div>
+                  <div class="data-skill-box"><span id="infocon"></span><i id="infoconlvl"></i></div>
+                  <div class="data-skill-box"><span id="infodex"></span><i id="infodexlvl"></i></div>
+                  <div class="data-skill-box"><span id="infospd"></span><i id="infospdlvl"></i></div>
+              </div>
+              <div class="col-2">
+                  <div class="data-name name-skill">Forza:</div>
+                  <div class="data-name name-skill">Costituzione:</div>
+                  <div class="data-name name-skill">Destrezza:</div>
+                  <div class="data-name name-skill">Velocit&agrave;:</div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- <form id="formUplAvatar" class="upload-avatar" enctype="multipart/form-data" method="post" action="">
@@ -88,26 +115,26 @@
         //Equip
       </div>
       <div class="tab-pane fade tg-shadow-inside" id="characterInventory" role="tabpanel" aria-labelledby="character-inventory-tab">
-          //Inventory
+        //Inventory
       </div>
       <div class="tab-pane fade tg-shadow-inside" id="characterAbility" role="tabpanel" aria-labelledby="character-ability-tab">
-          <div class="row">
-            <div class="col-6">//col left 6</div>
-            <div class="col-6">//col right 6</div>
-          </div>
+        <div class="row">
+          <div class="col-6">//col left 6</div>
+          <div class="col-6">//col right 6</div>
+        </div>
       </div>
     </div>
   </div>
-  <nav id="characterPageNav">
+  <nav id="characterPageNav" class="tg-character-nav">
     <div class="nav nav-tabs" id="characterTabNav" role="tablist">
-      <a class="nav-item nav-link" id="nav-info-tab" data-toggle="tab" href="#characterInfo" role="tab" aria-controls="nav-info"
-        aria-selected="true">Informazioni</a>
-      <a class="nav-item nav-link" id="nav-equip-tab" data-toggle="tab" href="#characterEquip" role="tab" aria-controls="nav-equip"
-        aria-selected="false">Equip</a>
-      <a class="nav-item nav-link" id="nav-inventory-tab" data-toggle="tab" href="#characterInventory" role="tab" aria-controls="nav-inventory"
-        aria-selected="false">Inventario</a>
-      <a class="nav-item nav-link" id="nav-ability-tab" data-toggle="tab" href="#characterAbility" role="tab" aria-controls="nav-ability"
-        aria-selected="false">Abilità</a>
+      <a class="nav-item nav-link btn-info-tab tg-button" id="nav-info-tab" data-toggle="tab" href="#characterInfo" role="tab"
+        aria-controls="nav-info" aria-selected="true">Informazioni</a>
+      <a class="nav-item nav-link btn-equip-tab tg-button" id="nav-equip-tab" data-toggle="tab" href="#characterEquip" role="tab"
+        aria-controls="nav-equip" aria-selected="false">Equip</a>
+      <a class="nav-item nav-link btn-inv-tab tg-button" id="nav-inventory-tab" data-toggle="tab" href="#characterInventory" role="tab"
+        aria-controls="nav-inventory" aria-selected="false">Inventario</a>
+      <a class="nav-item nav-link btn-skill-tab tg-button" id="nav-ability-tab" data-toggle="tab" href="#characterAbility" role="tab"
+        aria-controls="nav-ability" aria-selected="false">Abilità</a>
     </div>
   </nav>
 </div>

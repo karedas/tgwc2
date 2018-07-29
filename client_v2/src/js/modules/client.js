@@ -1695,6 +1695,7 @@ export default class TgGui {
     renderPlayerInfo(info) {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
+            console.log('ok');
             let d = $('#characterdialog');
 
             d.attr('data-class', _.race_to_class[info.race.code]);
@@ -1725,8 +1726,8 @@ export default class TgGui {
             $('#infoage', d).text(info.age + ' Anni');
             $('#infolang', d).text(info.lang);
             $('#infoborn', d).text(info.born);
-
-            $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1<p></p>').replace(/\n/gm, ' '));
+            console.log(info.desc);
+            $('#infodesc', d).val(info.desc.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, ''));
 
 
             $('#infowil', d).width(_.limitPrc(info.abil.wil.prc) + "%");

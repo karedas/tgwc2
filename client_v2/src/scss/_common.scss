@@ -38,7 +38,11 @@ caption {
 }
 
 .tg-shadow {
-    box-shadow: 0px 2px 12px $black;
+    box-shadow: 0px 2px 8px $black;
+}
+
+.tg-shadow-dialog {
+    box-shadow: 0px 2px 20px 6px black;
 }
 
 .tg-shadow-inset {
