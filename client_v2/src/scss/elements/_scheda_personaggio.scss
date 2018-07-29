@@ -2,14 +2,18 @@
     display: none;
     color: black;
     
-    .tab-container {
-        background: #dabe8b;
-        padding:1em 1.5em;
+    .tab-content {
+        width:735px;
+        height: 502px;
+        background: url($imgPath + '/interface/playerinfo-mainbackground_default.jpg') no-repeat top left;
+        padding: 29px 28px 24px;
+        box-sizing: border-box;
     }
     .tab-pane {
     }
 
     .info-main {
+        padding-top: 22px;
         position: relative;
     }
 
@@ -22,43 +26,84 @@
     }
 
     .info-avatar {
-        width:190px;
-        position: relative;
-        margin: 0 auto;
         cursor: pointer;
+        background: url($imgPath + '/interface/riquadro-avatar-big.jpg') no-repeat top left;
+        width:220px;
+        height: 190px;
+        margin: 0 auto;
+        position: relative;
 
         img {
+            position: absolute;
             box-shadow: 0px 2px 12px #231c16 inset;
+            top:15px;
+            left: 15px;
+            
+        }
+
+        &:before {
+            content: '';
+            display: block;                
+            position: absolute;        
+            top: 15px;
+            left: 15px;
+            bottom:15px;
+            right:15px;
+            z-index: 2;
+            box-shadow: inset 0 0 20px 1px black;
+            transition: background-color .1s linear;
         }
         &:hover {
-            background: rgba(0, 0, 0, 0.8);
-
-            &:before{
-                content: 'Cambia';
+            
+            &:after{
+                content: 'CAMBIA IMMAGINE';
                 display: inline-block;
                 color: white;
                 position: absolute;
                 margin: auto auto;
                 transform: translate(-50%, -50%);
+                z-index: 3;
                 left: 50%;
                 top: 50%;
+                color: #c4c0aa;
             }
-            
-            img {
-                opacity:.2;
+            &:before {    
+                background-color: rgba(0, 0, 0, 0.8);
             }
         }
     }
 
     .info-nametitle {
+        padding-top:4px;
         text-align: center;
     }
     .info-name {
+        display: flex;
+        flex: 0 1 auto;
+        justify-content: center;
         font-family: kingthinks;
-        font-size: 34px;
+        font-size: 43px;
+        color: #e6deb2;
+        letter-spacing: 2px;
+        line-height: 54px;
+        align-items: center;
+
+        &:before, &:after {
+            flex: 0 1 100px;
+            margin:0 .5em;
+            content: '';
+            display: inline-block;
+            height:1px;
+            background-color: #45433a;
+        }
     }
     
-    .info-title {}
+    .info-title {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 15px;
+        color:#85816a;
+        text-transform: capitalize;
+    }
 
     .info-databox {
         .description, .stats {
@@ -84,5 +129,22 @@
         .info-main, .info-databox {
             visibility: hidden;
         }
+    }
+
+    .info-data {
+        padding: 8px 0;
+        font-size: 12px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .data-name {
+        color: #c4c0aa;
+    }
+
+    .data-born {
+        font-size: 11px;
+        letter-spacing: 1px;
+        padding-top: 12px;
+        color: #c4c0aa;
     }
 }

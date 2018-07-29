@@ -23,13 +23,10 @@ body {
     overflow: hidden;
 }
 
-button:focus , input:focus, textarea:focus{
+a, button:focus , input:focus, textarea:focus, select:focus{
     outline: 0 none!important;
 }
 
-a {
-    outline: 0;
-}
 
 button, input[type="checkbox"] {
     cursor: pointer;

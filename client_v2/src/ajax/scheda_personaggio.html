@@ -1,6 +1,6 @@
-<div class="tg-character-card tab-content" id="tgCharacterPage">
-  <div class="tg-shadow b-modal tg-box">
-    <div class="tg-box">
+<div class="tg-character-card tab-content" id="characterdialog">
+  <div class="tg-shadow">
+    <div class="tab-content">
       <div class="tab-pane fade tg-shadow-inside" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
         <div class="info-main">
           <div class="info-menu">
@@ -8,7 +8,7 @@
             <button type="button" class="btn-i-descr" id="infoTabGenerale">Descrizione</button>
             <button type="button" class="btn-i-stats" id="infoTabGenerale">Statistiche</button>
           </div> 
-          <div class="info-avatar">
+          <div class="info-avatar tg-shadow">
             <img id="infoimage" src=""/>
           </div>
         </div>
@@ -20,28 +20,28 @@
           <div id="infoGeneralData" class="info-data general">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-3">
+                <div class="col-2 ml-auto">
                   <div class="data-name">Razza:</div>
                   <div class="data-name">Cultura:</div>
                   <div class="data-name">Etnia:</div>
                   <div class="data-name">Religione:</div>
                   <div class="data-name">Citt&agrave;:</div>
                 </div>
-                <div class="col-3 tg-yellow">
+                <div class="col-auto tg-yellow">
                   <div id="inforace"></div>
                   <div id="infocult"></div>
                   <div id="infoethn"></div>
                   <div id="inforelig"></div>
                   <div id="infocity"></div>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                   <div class="data-name">Altezza:</div>
                   <div class="data-name">Sesso:</div>
                   <div class="data-name">Et&agrave;:</div>
                   <div class="data-name">Peso:</div>
                   <div class="data-name">Lingua parlata:</div>
                 </div>
-                <div class="col-3 tg-yellow">
+                <div class="col-auto tg-yellow mr-auto">
                     <div id="infoheight"></div>
                     <div id="infosex"></div>
                     <div id="infoage"></div>
@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12 text-center">Sei nato il <span id="infoborn"></span></span></div>
+                <div class="col-12 text-center data-born">Sei nato il <span id="infoborn" class="tg-yellow"></span></div>
               </div>
             </div>
           </div>
@@ -96,12 +96,6 @@
             <div class="col-6">//col right 6</div>
           </div>
       </div>
-    </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
   <nav id="characterPageNav">
