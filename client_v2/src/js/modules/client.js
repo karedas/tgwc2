@@ -1076,8 +1076,7 @@ export default class TgGui {
         // Book
         msg = msg.replace(/&!book\{[\s\S]*?\}!/gm, function (b) {
             let b_parse = $.parseJSON(b.slice(6, -1));
-            console.log('open book');
-            // openBook(b);
+            _.openBook(b_parse);
             return '';
         });
 
@@ -1250,7 +1249,7 @@ export default class TgGui {
             return '';
         });
         /* \r is already removed at top */
-        msg = msg.replace(/\n/gm, '</br>');
+        msg = msg.replace(/\n/gm, '<div class="w-100" />');
 
         if (msg != '') {
             msg = '<div class="tg-line">' + _.replaceColors(msg) + '</div>';
@@ -1513,7 +1512,7 @@ export default class TgGui {
 
         /*if (t.dialog == false)
             return t.plain ? txt : _.addFrameStyle(txt);
-            */
+        */
         let sortable = false;
         if (t.head) {
             sortable = true;
@@ -1524,7 +1523,6 @@ export default class TgGui {
 
         return '';
     }
-
 
     renderInTableDialog(title, txt, sortable) {
         let _ = this,
@@ -1566,6 +1564,7 @@ export default class TgGui {
 
             let tableStartHeight = 0;
             $('#tabledialog').dialog({
+                appendTo: ".tg-area",
                 modal: false,
                 width: w,
                 height: h,
@@ -1618,10 +1617,16 @@ export default class TgGui {
 
         let _ = this;
 
-        let txt = '<table class="tg-rendertable table table-sm table-striped table-hover"><thead class="thead-dark"><tr><th>#</th><th style="width:50px"></th><th>Difficolt&agrave;</th><th>Puoi?</th><th>Descrizione</th></tr></thead><tbody>'
+        let txt = '<table class="tg-rendertable table table-sm table-striped table-hover">';
+            txt += '<thead class="thead-dark"><tr><th>#</th><th style="width:50px"></th><th>Difficolt&agrave;</th><th>Puoi?</th><th>Descrizione</th><th></th></tr></thead>';
+            txt += '<tbody>';
 
         for (let n = 0; n < wk.list.length; n++) {
-            txt += '<tr><td>' + (n + 1) + '</td><td>' + _.renderIconWithSmallBorder(wk.list[n].icon, null, null, null, (wk.cmd ? wk.cmd + ' ' + (n + 1) : null), 'interact obj') + '</td><td>' + wk.list[n].diff + '</td><td><div class="checkbox' + (wk.list[n].cando ? ' checked' : '') + '"></div></td><td>' + wk.list[n].desc + '</td></tr>';
+            let wkCmd = wk.cmd ? wk.cmd + ' ' + (n + 1) : null;
+            txt += '<tr><td>' + (n + 1) + '</td>';
+            txt += '<td>' + _.renderIconWithSmallBorder(wk.list[n].icon, null, null, null, wkCmd, 'interact obj') + '</td><td>' + wk.list[n].diff + '</td><td><div class="checkbox' + (wk.list[n].cando ? ' checked' : '') + '"></div></td>';
+            txt += '<td>' + wk.list[n].desc + '</td>';
+            txt += '<td><button type="button" class="tg-button btn-workcmd" data-workcmd="'+ wkCmd +'"></button></td></tr>';
         }
 
         txt += '</tbody></table>';
@@ -1629,6 +1634,12 @@ export default class TgGui {
         _.renderInTableDialog('Potresti ' + wk.verb + ':', txt, true);
 
         return '';
+    }
+
+    execWorkCmdInList() {
+        let _ = this;
+        let cmd = $(this).data('workcmd');
+        _.processCommands(cmd);
     }
 
     renderSkillsList(skinfo) {
@@ -1675,8 +1686,10 @@ export default class TgGui {
      * CHARACTER PAGE
      */
 
-    loadCharacterWindow() {
-        let _ = this;
+    loadCharacterWindow(dialogid) {
+        let _ = this,
+            url;
+            
         return new Promise(function (resolve, reject) {
             if (!$('#characterdialog').length) {
                 $.ajax({
@@ -1686,16 +1699,17 @@ export default class TgGui {
                     _.addCharacterWindowEvent();
                     resolve();
                 });
-            } else {
-                resolve();
             }
+            else
+                resolve();
         });
     }
 
     renderPlayerInfo(info) {
+
         let _ = this;
+
         _.loadCharacterWindow().then(function (resolve, reject) {
-            console.log('ok');
             let d = $('#characterdialog');
 
             d.attr('data-class', _.race_to_class[info.race.code]);
@@ -1726,7 +1740,6 @@ export default class TgGui {
             $('#infoage', d).text(info.age + ' Anni');
             $('#infolang', d).text(info.lang);
             $('#infoborn', d).text(info.born);
-            console.log(info.desc);
             $('#infodesc', d).val(info.desc.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, ''));
 
 
@@ -1789,7 +1802,8 @@ export default class TgGui {
         $(navId, '#characterPageNav').tab('show')
 
         if (!_.openDialog('#characterdialog')) {
-            $('#characterdialog').dialog({
+            $('#characterdialog').dialog({            
+                appendTo: ".tg-area",
                 modal: false,
                 width: 'auto',
                 height: 'auto',
@@ -2217,6 +2231,7 @@ export default class TgGui {
                         };
                     }
                     _.dialog = $(dialogID).dialog({
+                        appendTo: ".tg-area",
                         closeOnEscape: false,
                         closeOnText: false,
                         minHeight: 0,
@@ -2281,15 +2296,18 @@ export default class TgGui {
         let _ = this;
         let res = '';
 
-        if (info.title) {
-            res += '<div class="room"><div class="out-title"></div>' + _.capFirstLetter(info.title) + '<div class="rts"></div></div>';
-        }
+        res += '<div class="detailblock">';
 
+        if (info.title) {
+            res += '<div class="room"><div class="out-title"></div>' + _.capFirstLetter(info.title) + '</div>';
+        }
         res += _.renderDetailsInner(info, type, false);
 
         if (info.image) {
             _.showImage($('#image-cont'), info.image);
         }
+
+        res += '</div>'
 
         return res;
     }
@@ -2321,7 +2339,6 @@ export default class TgGui {
         if (info.title) {
             if (type == 'room' && !info.up) {
                 _.toggleNotifyOutput();
-                //res += '<div class="room"><div class="lts"></div>' + info.title + '<div class="rts"></div></div>';
             }
             let title = _.capFirstLetter(info.title);
             let icon = '';
@@ -2563,6 +2580,53 @@ export default class TgGui {
     }
 
     /* *****************************************************************************
+     * BOOK
+     */
+
+    openBook(b) {
+
+        let _ = this;
+
+        $('#bookdialog').dialog({
+            appendTo: ".tg-area",
+            closeOnEscape: false,
+            title: b.title,
+            dialogClass: 'tg-dialog book',
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            draggable: true,
+            dragStop: _.saveWindowData,
+            hide: 'fold',
+            show: 'blind',
+            closeText: 'Chiudi'
+        });
+
+        $('#book').empty();
+
+        if(b.pages.length == 0 ) {
+            $('#book').append('<div>Non ci sono pagine');
+        }
+        else {
+            for (let p = 0; p < b.pages.length; ++p) {
+                
+                let page;
+                if(b.pages[p].title) {
+                    page = '<div rel="'+b.pages[p].title+'" title="'+b.pages[p].title+'"><h3>'+b.pages[p].title+'</h3>';
+                }
+                else {
+                    page = '</div>';
+                }
+                page += _.replaceColors(_.formatText(b.pages[p].text)) + '</div>';
+
+                $('#book').append(page);
+            }
+        }
+
+        //... //
+    }
+
+    /* *****************************************************************************
      * INTERACTION
      */
 
@@ -2774,7 +2838,6 @@ export default class TgGui {
                     break;
             }
         }
-
         return true;
     }
 
@@ -2793,7 +2856,6 @@ export default class TgGui {
             default:
                 return;
         }
-
         _.processCommands(cmd);
     }
 
@@ -3642,20 +3704,12 @@ export default class TgGui {
         let _ = this;
 
         /* Buttons with CMD event */
-        let cmdButtons = [{
-                id: '#userDisconnect',
-                cmd: function () {
-                    _.disconnectFromServer()
-                }
-            },
-            {
-                id: '#combatPieta',
-                cmd: 'pieta'
-            },
-            {
-                id: '#combatTregua',
-                cmd: 'tregua'
-            }
+        let cmdButtons = [
+            { id: '#userDisconnect', cmd: function () { _.disconnectFromServer() }},
+            { id: '#combatPieta', cmd: 'pieta' },
+            { id: '#combatTregua', cmd: 'tregua' },
+            { id: '#pgMiniAvatar', cmd: 'info' },
+            { id: '.btn-workcmd', cmd: function(){ _.execWorkCmdInList.bind(_) }}
         ]
 
         $.each(cmdButtons, function (idx, bdata) {
@@ -4203,7 +4257,7 @@ export default class TgGui {
         this.closeDialog('#characterdialog');
         //        this.closeDialog('#equipdialog');
         //        this.closeDialog('#invdialog');
-        //        this.closeDialog('#bookdialog');
+        this.closeDialog('#bookdialog');
         //        this.closeDialog('#configdialog');
         //        this.closeDialog('#selectdialog');
         //        this.closeDialog('#logdialog');

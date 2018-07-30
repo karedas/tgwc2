@@ -117,34 +117,22 @@
     }
 }
 
-
-
 .combatwidget-modal {
     display: none;
 }
 
 .ui-dialog {
-    .ui-dialog-titlebar-close {
-        display: none;
-    }
-    .ui-dialog-titlebar {
-        display: table;
-    }
-
     .combatwidget-modal {
         display: block;
     }
-    
     .tg-combatpanel {
         cursor: pointer;
         padding-left: 0;
     }
-
     .tg-combatpanel-wrap {
         padding-top:6px;
         padding-bottom: 6px;
     }
-
     .tg-combatpanel-box {
         background: none;
         height: 64px;

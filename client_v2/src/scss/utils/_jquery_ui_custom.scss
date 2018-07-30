@@ -1,80 +1,5 @@
 
 
-/* UI OVERRIDE */
-
-
- .ui-resizable {
-	position: relative;
-}
-.ui-resizable-handle {
-	position: absolute;
-	font-size: 0.1px;
-	display: block;
-	-ms-touch-action: none;
-	touch-action: none;
-}
-.ui-resizable-disabled .ui-resizable-handle,
-.ui-resizable-autohide .ui-resizable-handle {
-	display: none;
-}
-.ui-resizable-n {
-	cursor: n-resize;
-	height: 12px;
-	width: 100%;
-	top: 12px;
-	left: 0;
-}
-.ui-resizable-s {
-	cursor: s-resize;
-	height: 12px;
-	width: 100%;
-	bottom: -12px;
-	left: 0;
-}
-.ui-resizable-e {
-	cursor: e-resize;
-	width: 12px;
-	right: 0;
-	top: 8px;
-	height: 100%;
-}
-.ui-resizable-w {
-	cursor: w-resize;
-	width: 12px;
-	left: 0;
-	top: 8px;
-	height: 100%;
-}
-.ui-resizable-se {
-	cursor: se-resize;
-	width: 12px;
-	height: 12px;
-	right: -12px;
-	bottom: -12px;
-}
-.ui-resizable-sw {
-	cursor: sw-resize;
-	width: 12px;
-	height: 12px;
-	left: -12px;
-	bottom: -12px;
-}
-.ui-resizable-nw {
-	cursor: nw-resize;
-	width: 12px;
-	height: 12px;
-	top: 18px;
-}
-.ui-resizable-ne {
-	cursor: ne-resize;
-	width: 12px;
-	height: 12px;
-	right: 0;
-	top: 18px;
-}
-
-
-
 .ui-front {
     z-index: 100;
 }
@@ -85,7 +10,10 @@
     left: 0;
     outline: 0;
     max-width: 100%;
-    max-height: 100%;
+	max-height: 100%;
+	opacity: 0;
+	transform: translateY(30px);
+	transition: all .2s linear;
 }
 
 .ui-dialog .ui-dialog-content {
@@ -94,7 +22,7 @@
 }
 
 .ui-dialog-titlebar {
-    display:none;
+    display: table;
     text-align: center;
     cursor: pointer;
     margin: 0 auto;
@@ -115,9 +43,17 @@
     display: block;
 }
 
-// .ui-dialog-content {
-//     box-shadow: 0px 2px 12px #000;
-// }
+.ui-dialog-titlebar-close {
+	border: none;
+    background-color: transparent;
+	opacity: 1;
+	text-indent: -9999px;
+	display: block;
+	top: -5px;
+	right: -8px;
+	text-indent: -9999px;
+	@include sprite($close-sprite);
+}
 
 .ui-resizable-handle {
     position: absolute;
@@ -125,4 +61,86 @@
     display: block;
     -ms-touch-action: none;
     touch-action: none;
+}
+
+
+/* UI OVERRIDE */
+.ui-resizable {
+	position: relative;
+}
+
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: block;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+
+.ui-resizable-disabled .ui-resizable-handle,
+.ui-resizable-autohide .ui-resizable-handle {
+	display: none;
+}
+
+.ui-resizable-n {
+	cursor: n-resize;
+	height: 12px;
+	width: 100%;
+	top: 12px;
+	left: 0;
+}
+
+.ui-resizable-s {
+	cursor: s-resize;
+	height: 12px;
+	width: 100%;
+	bottom: -12px;
+	left: 0;
+}
+
+.ui-resizable-e {
+	cursor: e-resize;
+	width: 12px;
+	right: 0;
+	top: 8px;
+	height: 100%;
+}
+
+.ui-resizable-w {
+	cursor: w-resize;
+	width: 12px;
+	left: 0;
+	top: 8px;
+	height: 100%;
+}
+
+.ui-resizable-se {
+	cursor: se-resize;
+	width: 12px;
+	height: 12px;
+	right: -12px;
+	bottom: -12px;
+}
+
+.ui-resizable-sw {
+	cursor: sw-resize;
+	width: 12px;
+	height: 12px;
+	left: -12px;
+	bottom: -12px;
+}
+
+.ui-resizable-nw {
+	cursor: nw-resize;
+	width: 12px;
+	height: 12px;
+	top: 18px;
+}
+
+.ui-resizable-ne {
+	cursor: ne-resize;
+	width: 12px;
+	height: 12px;
+	right: 0;
+	top: 18px;
 }
