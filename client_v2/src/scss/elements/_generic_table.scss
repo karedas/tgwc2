@@ -43,37 +43,6 @@
     .checkbox.checked {
         @include sprite($checked-sprite);
     }
-        
-    .dataheader {
-        padding:1em .5em;
-        border-bottom: 1px solid #343a40;
-        background:  url($imgPath + '/interface/trow-bg-brown.jpg') repeat-x bottom left;
-
-
-        input[type="search"], select {
-            color: white;
-            background: #30241d;
-            border: 1px solid #42342c;
-        }
-    }
-    .datafooter {
-        padding: 1em .5em;
-        background:  url($imgPath + '/interface/trow-bg-brown.jpg') repeat-x top left;
-    }
-    
-    .dataTables_scrollHead {
-        background: #1c1510;
-    }
-
-    .dataTables_scrollBody {
-        background-color: #d9cca4;
-        color: black;
-        margin-bottom: 0;
-
-        a {
-            color: black;
-        }
-    }
 }
 
 

@@ -1,6 +1,7 @@
 import 'croppie'; 
 export default class uploadAvatar {
-    constructor() {
+    constructor(baseurl) {
+        this.baseurl = baseurl;
         this.uploadCrop;
         this.options = {
             viewport: {
@@ -16,11 +17,13 @@ export default class uploadAvatar {
         }
         this.data = null;
         this.form = null;
+        this.deferred = null;
     }
 
     init() {
         let _ = this;
-        _.addCropEvent()
+        _.deferred = new $.Deferred;
+        _.addEvents()
     }
 
     readFile(input) {
@@ -52,11 +55,10 @@ export default class uploadAvatar {
         });
     }
 
-    send(baseurl) {
+    send(baseurl, callback, done) {
         //TODO: Cambiare su Nginx il proxyreverse per la mappatura dell'url senza porta.
         // Send an HTTP POST request using the jquery
         let _ = this;
-        console.log(_.data);
         $.post({
             enctype: 'multipart/form-data',
             url: baseurl + '/user/karedas',
@@ -67,21 +69,32 @@ export default class uploadAvatar {
             type: 'POST',
             success: function (data) {
                 //TODO: NEED SOCKET HERE
-                console.log('success, send to socket avvenuto');
-                resolve(x);
+                _.deferred.resolve();
             }
         });
-
     }
 
-    addCropEvent() {
+    onUpload(callback) {
         let _ = this;
-
+        return _.deferred.promise($(this));
+    }
+    
+    addEvents() {
         $('.uploadResult').on('click', function (ev) {
-            _.uploadCrop.croppie('result', {
+            _.croppie('result', {
                 type: 'canvas',
                 size: 'viewport'
             });
+        });
+
+        $('#playerImgFile').on('change', function (e) {
+            _.readFile(this);
+        });
+
+        /* Upload Image */
+        $('#formUplAvatar').on('submit', function (e) {
+            e.preventDefault();
+            _.send();
         });
 
     }

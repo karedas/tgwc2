@@ -6,6 +6,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 // import 'bootstrap';
 import 'magnific-popup';
 import dt from 'datatables.net';
+//import md from 'markdown-it';
 
 /* Jquery UI */
 import position from 'jquery-ui/ui/position';
@@ -123,20 +124,29 @@ export default class TgGui {
         this.exp_grp_list = {}
         this.max_exp_grp = 15;
 
-        /* Health bars */
-        this.hlttxtcol = [{
-                let: 25,
-                txt: 'orangered'
-            },
-            {
-                let: 50,
-                txt: 'yellow'
-            },
-            {
-                let: 100,
-                txt: 'greenyellow'
-            },
+        /* Weight bars */
+        this.wgttxtcol = [
+            { val:80, txt:'orangered' },
+            { val:60, txt:'yellow' },
+            { val:0, txt:'greenyellow' },
         ];
+
+        this.wgtbarcol = [
+            { val:80, txt:'red' },
+            { val:60, txt:'yellow' },
+            { val:0, txt:'green' },
+        ];
+
+        /* Health bars */
+        this.hlttxtcol = [
+            { val:25, txt:'orangered' },
+            { val:50, txt:'yellow' },
+            { val:100, txt:'greenyellow' },
+        ];
+
+        /* Equip */
+        this.eqracesex = '';
+        this. lastEquip;
 
         this.client_update = {
             data: {
@@ -271,6 +281,21 @@ export default class TgGui {
             'obj': ['.watch', '.inv-in', '.inv-out', '.eqp-in', '.wpn-in', '.input-concat'],
             'pers': ['.watch', '.inv-out', '.meq-out', '.meq-in', '.input-concat']
         };
+
+        this.equip_races=[
+            'human_m',
+            'human_f',
+            'halfling_m',
+            'halfling_f',
+            'elf_m',
+            'elf_f',
+            'dwarf_m',
+            'dwarf_f',
+            'goblin_m',
+            'goblin_f',
+            'orc_m',
+            'orc_f'
+        ];        
 
         this.abiltxt = [{
                 val: 6,
@@ -645,17 +670,17 @@ export default class TgGui {
 
             let now = Date.now();
             if (now > _.client_update.last + 1000) {
-                if (_.client_update.inventory.needed && _.client_options.extradetail_open) {
+                if (_.client_update.inventory.needed && _.isDialogOpen('#characterdialog')) {
                     _.sendToServer('@inv');
                     _.client_update.inventory.needed = false;
                     _.client_update.last = now;
                 }
 
-                /*if (_.client_update.equipment.needed && _.isDialogOpen('#equipdialog')){
+                if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')){
                     sendToServer('@equip');
                     client_update.equipment.needed = false;
                     client_update.last = now;
-                }*/
+                }
 
                 if (_.client_update.room.needed && _.client_options.extradetail_open) {
                     _.sendToServer('@agg');
@@ -1101,9 +1126,7 @@ export default class TgGui {
         // Inventory
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
-            console.log('inventory');
-            //return _.renderInventory(inv_parse);
-            return '';
+            return _.renderInventory(inv_parse);
         });
 
         // Room details
@@ -1740,7 +1763,7 @@ export default class TgGui {
             $('#infoage', d).text(info.age + ' Anni');
             $('#infolang', d).text(info.lang);
             $('#infoborn', d).text(info.born);
-            $('#infodesc', d).val(info.desc.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, ''));
+            $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, ''));
 
 
             $('#infowil', d).width(_.limitPrc(info.abil.wil.prc) + "%");
@@ -1780,21 +1803,18 @@ export default class TgGui {
         $('.info-avatar').on('click', function () {
             if (!_.AVUPLOAD) {
                 _.AVUPLOAD = new uploadAvatar();
-                _.AVUPLOAD.init();
+                _.AVUPLOAD.init(_.ws_server_addr);
             };
-            $('#characterInfo').addClass('upimg');
-        });
 
-        $('#playerImgFile').on('change', function (e) {
-            _.AVUPLOAD.readFile(this);
-        });
+            
+            _.AVUPLOAD.onUpload(function(){
+                console.log('OK VA');
+                //TODO: emit socket to server.
+            });
 
-        /* Upload Image */
-        $('#formUplAvatar').on('submit', function (e) {
-            e.preventDefault();
-            _.AVUPLOAD.send(_.ws_server_addr);
+            $('#characterdialog').addClass('upimg');
         });
-
+        
         $('#acceptDescrInInfo').on('click', function(){
             _.sendToServer('cambia desc');
         });
@@ -1819,7 +1839,7 @@ export default class TgGui {
                     of: $('.tg-area')
                 },
                 open: function(event, ui){
-                    _.addScrollBar( '#characterdialog .scrollable', 'infodescr');
+                    _.addScrollBar( '#characterdialog .scrollable', 'infodesc');
                 }
             });
         }
@@ -2156,7 +2176,7 @@ export default class TgGui {
     }
 
     getRaceToClass() {
-        return {
+        return  {
             "uma": "human",
             "ume": "human",
             "eal": "elf",
@@ -2170,18 +2190,142 @@ export default class TgGui {
             "orc": "orc",
             "gob": "goblin",
             "els": "elf"
-        }
+        };
     }
 
     renderEquipment(eq) {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!eq.up) {
-                return '';
+                if(!_.openDialog('#characterdialog')) {
+                    _.openCharacterWindow('#nav-equip-tab');
+                }
             }
+
+            _.equipUpdate(eq);
         });
     }
 
+    equipUpdate(eq) {
+        let _ = this;
+
+        /* Check if Equip wanted in widget or not */
+        if($('#equipdialog').is('aslist')) {}
+
+        else {
+            if(!eq.race) {
+                eq.race = 0;
+            }
+            if(!eq.sex) {
+                eq.sex = 'f';
+            }
+
+            let race_to_class = _.getRaceToClass();
+
+            _.equipSetRace(race_to_class[eq.race] + '_' + eq.sex );
+
+            $('.enabled', '#characterEquip').removeClass('enabled');
+            $('.iconimg', '#characterEquip').remove();
+
+            $('#characterEquip').children('ul').each(function (idbx, pos) {
+                let where = _.equip_positions_by_name[pos.id];
+                let eqdata = eq[pos.id];
+                let cont = $(pos);
+
+                if(eqdata) {
+                    eqdata.sort(function(a,b) {
+                        let eq_pos_a = $.isArray(a.eq) ? a.eq[1] : 0;
+                        let eq_pos_b = $.isArray(b.eq) ? b.eq[1] : 0;
+
+                        return eq_pos_b - eq_pos_a;
+                    });
+
+                    $.each(eqdata, function(idx, obj){
+                        let slot = $('.eq' + idx, cont);
+                        let desc = where + ': ' + obj.desc;
+                        let img = $(_.renderIcon(obj.icon, obj.mrn[0], 'equip', null, null, 'interact obj')).attr('tooltip',desc).attr('data-wgt',obj.wgt).attr('data-condprc',obj.condprc);
+                        slot.append(img).addClass('enabled');
+                    }); 
+                }
+            });
+
+            //_.addDragAndDrop('#equipcont');
+            _.updateWeight(eq.weight, eq.wprc);
+
+            _.lastEquip = eq;
+
+            if(_.client_update.equipment.version < eq.ver) {
+                _.client_update.equipment.version = eq.ver;
+                _.client_update.equipment.needed = false;
+            }
+        }
+    }
+
+    equipSetRace (racesex) {
+        let _ = this;
+        if(_.eqracesex != racesex) {
+            _.eqracesex = racesex;
+            
+            $('#characterEquip').removeClass(_.equip_races.join(' ')).addClass(racesex);
+        }
+    }
+
+    updateWeight(weight, wprc) {
+        let _ = this,
+            txtcolor, barcolor;
+
+        wprc = _.limitPrc(wprc),
+
+        txtcolor = _.prcHighTxt(wprc, _.wgttxtcol);
+        barcolor = _.prcHighTxt(wprc, _.wgtbarcol);
+
+        $('.carrywgt').css('color', txtcolor).text(weight);
+        $('.carrywgtprc').css('color', txtcolor).text(wprc);
+        $('.carrywgtbar').css('width', wprc + '%').removeClass('red yellow green').addClass(barcolor);
+    }
+
+
+    /* *****************************************************************************
+    * INVENTORY
+    */
+
+
+    updateInventory(inv) {
+
+        let _ = this;
+        let invcont = $('#characterInventory');
+
+        _.updateWeight(inv.weight, inv.wprc);
+
+        invcont.empty();
+        
+        if(inv.list.length == 0) {
+            invcont.append('<tr><td></td><td>Non hai niente in inventario!</td></tr>');
+        }
+        else {
+            let invdata = $(_.replaceColors(_.renderDetails('inv', null, inv, 'obj')));
+            _.makeExpandable(invdata);
+            //_.addDragAndDrop()
+            invcont.append(invdata);
+        }
+
+        if(_.client_update.inventory.version < inv.ver) {
+            _.client_update.inventory.version = inv.ver;
+            _.client_update.inventory.needed = false;
+        }
+    }
+
+    renderInventory(invent) {
+        let _ = this;
+        _.loadCharacterWindow().then(function (resolve, reject) {
+            if (!invent.up) {
+                if(!_.openDialog('#characterdialog')) {
+                    _.openCharacterWindow('#nav-inventory-tab');
+                }
+            }
+            _.updateInventory(invent);
+        });
+    }
 
     /* *****************************************************************************
      * PLAYER STATUS
@@ -2593,6 +2737,9 @@ export default class TgGui {
     openBook(b) {
 
         let _ = this;
+        console.log(b);
+
+
 
         $('#bookdialog').dialog({
             appendTo: ".tg-area",
@@ -3448,10 +3595,6 @@ export default class TgGui {
                 _.client_options.output_width = width + 'px';
                 _.SaveStorage('options', _.client_options);
             }
-
-            /*     onDragEnd: function (e, el) {
-
-                }*/
         });
     }
 
@@ -3715,7 +3858,7 @@ export default class TgGui {
             { id: '#userDisconnect', cmd: function () { _.disconnectFromServer() }},
             { id: '#combatPieta', cmd: 'pieta' },
             { id: '#combatTregua', cmd: 'tregua' },
-            { id: '#pgMiniAvatar', cmd: 'info' },
+            { id: '.tg-characteravatar', cmd: 'info' },
             { id: '.btn-workcmd', cmd: function(){ _.execWorkCmdInList.bind(_) }}
         ]
 
@@ -4005,20 +4148,24 @@ export default class TgGui {
                 type: 'inline'
             },
             showCloseBtn: true,
+            enableEscapeKey: false,
             closeOnBgClick: false,
             type: 'inline',
             preloader: false,
             mainClass: 'tg-mp modal-editor',
             callbacks: {
                 open: function () {
+
+                    _.addDraggable('#editorDialog', '.modal-editor');
+
                     $('.mfp-close').one('click', function (e) {
                         e.preventDefault();
                         _.abortEdit();
                         _.closePopup();
                     });
-                    _.addDraggable('#editorDialog', '.modal-editor');
                 },
                 close: function (e) {
+                    console.log('ok');
                     _.closeEditor();
                 }
             }

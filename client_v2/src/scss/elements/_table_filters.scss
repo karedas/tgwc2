@@ -1,10 +1,18 @@
 
 .dataheader {
     overflow: hidden;
-    padding:6px 0;
+    padding:1em .5em;
+    border-bottom: 1px solid #343a40;
+    background:  url($imgPath + '/interface/trow-bg-brown.jpg') repeat-x bottom left;
 
     .dataTables_filter, .dataTables_length {
         display: inline-block;
+    }
+
+    input[type="search"], select {
+        color: white;
+        background: #30241d;
+        border: 1px solid #42342c;
     }
 
     .dataTables_filter {
@@ -27,7 +35,9 @@
 }
 
 .datafooter {
-    overflow: hidden;
+    padding: 1em .5em;
+    background:  url($imgPath + '/interface/trow-bg-brown.jpg') repeat-x top left;
+
 
     .dataTables_info {
         float:left;
@@ -48,5 +58,19 @@
         &.current {
             color: $tg-yellow;
         }
+    }
+}
+
+.dataTables_scrollHead {
+    background: #1c1510;
+}
+
+.dataTables_scrollBody {
+    background-color: #d9cca4;
+    color: black;
+    margin-bottom: 0;
+
+    a {
+        color: black;
     }
 }

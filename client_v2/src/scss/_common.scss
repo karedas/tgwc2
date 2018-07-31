@@ -20,7 +20,7 @@ html {
 body {
     background: #1d1812;
     color: $white;
-    display: table;
+    display: inline-block;
 }
 
 a, button:focus , input:focus, textarea:focus, select:focus{
