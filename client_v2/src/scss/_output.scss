@@ -110,10 +110,22 @@
     height: 100%;
 
     .tg-line {
+        
         padding-bottom: 1em;
+        overflow: hidden;
+
         &:first-of-type .room {
             padding-top: .5em;
         }
+
+        br {
+            clear: both;
+        }
+
+        > span {
+            padding-top: 8px;           
+        }
+
     }
 
     p {
@@ -122,6 +134,7 @@
     }
 
     .iconimg {
+        float: left;
         margin: auto .5em auto 0;        
     }
 

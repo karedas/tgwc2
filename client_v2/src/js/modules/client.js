@@ -1249,7 +1249,7 @@ export default class TgGui {
             return '';
         });
         /* \r is already removed at top */
-        msg = msg.replace(/\n/gm, '<div class="w-100" />');
+        msg = msg.replace(/\n/gm, '<br>');
 
         if (msg != '') {
             msg = '<div class="tg-line">' + _.replaceColors(msg) + '</div>';
@@ -1794,6 +1794,10 @@ export default class TgGui {
             e.preventDefault();
             _.AVUPLOAD.send(_.ws_server_addr);
         });
+
+        $('#acceptDescrInInfo').on('click', function(){
+            _.sendToServer('cambia desc');
+        });
     }
 
     openCharacterWindow(navId) {
@@ -1814,6 +1818,9 @@ export default class TgGui {
                     at: 'center',
                     of: $('.tg-area')
                 },
+                open: function(event, ui){
+                    _.addScrollBar( '#characterdialog .scrollable', 'infodescr');
+                }
             });
         }
     }
@@ -2596,7 +2603,7 @@ export default class TgGui {
             height: 'auto',
             resizable: false,
             draggable: true,
-            dragStop: _.saveWindowData,
+            dragStop: _.saveWindowData.bind(_),
             hide: 'fold',
             show: 'blind',
             closeText: 'Chiudi'
