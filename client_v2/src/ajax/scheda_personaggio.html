@@ -97,24 +97,21 @@
         <form id="formUplAvatar" class="upload-avatar" enctype="multipart/form-data" method="post" action="">
           <div id="croppied" class="avatar-crop"></div>
           <div class="row">
-            <div class="col">
+            <div class="col mx-auto">
               <div class="custom-file">
                 <input name="avatar" type="file" class="custom-file-input" id="playerImgFile" >
-                <label class="custom-file-label" for="avatar">Sfoglia</label>
+                <label class="custom-file-label" for="avatar">Seleziona File</label>
               </div>  
+              <button type="submit" id="submitUploadAvatar" class="btn-actioncrop">Ritaglia</button>  
             </div>
-              <div class="col">
-                <button type="submit" id="submitUploadAvatar">Ritaglia</button>  
-              </div>
           </div>
-          <h3>Modifica l'immagine del tuo personaggio</h3>
-            <p>Puoi impostare un'immagine per una rappresentazione artistica del tuo personaggio e che verrà mostrata
-                a te e agli altri giocatori assieme alla tua descrizione.
+          <h3>Modifica l'immagine personale</h3>
+            <p>Arricchisci il tuo profilo con un'immagine che rappresenti al meglio il tuo personaggio.
             </p>
-            <h4>L'immagine deve rispettare queste semplici regole:</h4>
-            <ul class="list-unstyled">
+            <b>L'immagine deve rispettare queste semplici regole:</b>
+            <ul class="mx-auto text-left">
                 <li>Deve essere coerente con la descrizione e la tipologia del tuo PG.</li>
-                <li>Non deve contenere elementi non in linea con l'ambientazione.</li>
+                <li>Non deve contenere elementi incongruenti con l'ambientazione.</li>
                 <li>Non deve contenere elementi offensivi e / o volgari.</li>
             </ul>
         </form>

@@ -371,7 +371,7 @@ export default class TgGui {
                 .toggleClass('invisible')
                 .one('click', function () {
                     _.SaveStorage('cookie_consent', true);
-                    _.closePopup();
+                    _.closeAllPopups();
                     //Done deferred back
                     def.resolve();
                 });
@@ -603,7 +603,7 @@ export default class TgGui {
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
                         // If UI has been past loaded (like on disconnection user action)
                         if (_.client_open) {
-                            _.closePopup();
+                            _.closeAllPopups();
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
                         } else {
@@ -677,9 +677,9 @@ export default class TgGui {
                 }
 
                 if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')){
-                    _.sendToServer('@equip');
-                    _.client_update.equipment.needed = false;
-                    _.client_update.last = now;
+                    sendToServer('@equip');
+                    client_update.equipment.needed = false;
+                    client_update.last = now;
                 }
 
                 if (_.client_update.room.needed && _.client_options.extradetail_open) {
@@ -1126,8 +1126,7 @@ export default class TgGui {
         // Inventory
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
-            _.renderInventory(inv_parse);
-            return '';
+            return _.renderInventory(inv_parse);
         });
 
         // Room details
@@ -1151,8 +1150,7 @@ export default class TgGui {
         // Equipment
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-            _.renderEquipment(eq_parse);
-            return '';
+            return _.renderEquipment(eq_parse);
         });
 
         // Workable lists
@@ -1285,7 +1283,7 @@ export default class TgGui {
 
     handleRefresh(r) {
         let _ = this;
-        if (this.isModalOpen) {
+        if (this.isPopupOpen) {
             _.sendToServer(r.cmd);
         }
         return '';
@@ -1733,6 +1731,7 @@ export default class TgGui {
     renderPlayerInfo(info) {
 
         let _ = this;
+
         _.loadCharacterWindow().then(function (resolve, reject) {
             let d = $('#characterdialog');
 
@@ -1793,6 +1792,8 @@ export default class TgGui {
 
             _.openCharacterWindow('#nav-info-tab');
 
+            $('.')
+
         });
 
         return '';
@@ -1803,8 +1804,8 @@ export default class TgGui {
 
         $('.info-avatar').on('click', function () {
             if (!_.AVUPLOAD) {
-                _.AVUPLOAD = new uploadAvatar(_.ws_server_addr);
-                _.AVUPLOAD.init();
+                _.AVUPLOAD = new uploadAvatar();
+                _.AVUPLOAD.init(_.ws_server_addr);
             };
 
             
@@ -1823,7 +1824,7 @@ export default class TgGui {
 
     openCharacterWindow(navId) {
         let _ = this;
-        console.log(navId);
+
         $(navId, '#characterPageNav').tab('show')
 
         if (!_.openDialog('#characterdialog')) {
@@ -1843,11 +1844,8 @@ export default class TgGui {
                     _.addScrollBar( '#characterdialog .scrollable', 'infodesc');
                 }
             });
-
-            _.focusInput();
         }
     }
-
 
 
 
@@ -1856,41 +1854,69 @@ export default class TgGui {
      */
 
     openEditor(maxchars, title, text) {
-        let _ = this;
 
-        let textarea = $('#editorTextArea').val(text);
+        let _ = this,
+            options, textarea;
+            
+            
+        textarea = $('#editorTextArea').val(text);
+
         $('#editorTitle').text(title);
 
-        _.openEditorPopup();
+        //_.openEditorPopup();
 
-        $('#abortEditor, #mfp-close').one('click', function () {
-            _.abortEdit();
-            _.closeEditor();
-        });
-        $('#saveEditor').one('click', function () {
-            _.saveEdit(80);
-            _.closeEditor();
-        });
+        if(_.isDialog('#editordialog')) {
+            options = { title: title }
+        }
+        else {
+            options = {
+                appendTo: '.tg-area',
+                title: title,
+                width: 500,
+                height: 300,
+                maxHeight: '100vh',
+                maxWidth: '100vw',
+                height: 'auto',
+                modal: true,
+                dialogClass: 'tg-dialog parch',
+                close: function() {
+                    _.abortEdit();
+                }
+            }
+        }
+
+        $('#editorDialog').dialog({options});
+
+
+        // $('#abortEditor, #mfp-close').one('click', function () {
+        //     _.abortEdit();
+        //     _.closeEditor();
+        // });
+        // $('#saveEditor').one('click', function () {
+        //     _.saveEdit(80);
+        //     _.closeEditor();
+        // });
 
         // Max Chars counter
-        let text_max = maxchars;
-        $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
-        textarea.attr('maxlength', maxchars);
-        textarea.keyup(function () {
-            let text_length = $(this).val().length;
-            let text_remaining = text_max - text_length;
+        // let text_max = maxchars;
 
-            $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
-        });
+        // $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
+        // textarea.attr('maxlength', maxchars);
+        // textarea.keyup(function () {
+        //     let text_length = $(this).val().length;
+        //     let text_remaining = text_max - text_length;
 
-        _.in_editor = true;
+        //     $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
+        // });
+
+        // _.in_editor = true;
     }
 
     closeEditor() {
         let _ = this;
         _.in_editor = false;
 
-        _.closePopup();
+        _.closeAllPopups();
         _.focusInput();
     }
 
@@ -2198,12 +2224,11 @@ export default class TgGui {
 
     renderEquipment(eq) {
         let _ = this;
-        console.log('render');
         _.loadCharacterWindow().then(function (resolve, reject) {
-        console.log(eq.up);
-
             if (!eq.up) {
-                _.openCharacterWindow('#nav-equip-tab');
+                if(!_.openDialog('#characterdialog')) {
+                    _.openCharacterWindow('#nav-equip-tab');
+                }
             }
 
             _.equipUpdate(eq);
@@ -2323,7 +2348,9 @@ export default class TgGui {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!invent.up) {
-                _.openCharacterWindow('#nav-inventory-tab');
+                if(!_.openDialog('#characterdialog')) {
+                    _.openCharacterWindow('#nav-inventory-tab');
+                }
             }
             _.updateInventory(invent);
         });
@@ -3943,16 +3970,6 @@ export default class TgGui {
             e.preventDefault();
         });
 
-        // on window resize run function
-        $(window).resize(function () {
-            _.fluidDialog();
-        });
-
-        // catch dialog if opened within a viewport smaller than the dialog width
-        $(document).on("dialogopen", ".ui-dialog", function (event, ui) {
-            _.fluidDialog();
-        })
-
         $('.no-feature').on('click', function (e) {
             e.preventDefault();
             _.openNoFeaturePopup();
@@ -4120,7 +4137,7 @@ export default class TgGui {
                                         _.client_options.news_wantsee = false;
                                     }
                                     _.sendInput();
-                                    _.closePopup();
+                                    _.closeAllPopups();
                                 });
 
                             },
@@ -4163,7 +4180,7 @@ export default class TgGui {
                     $('.mfp-close').one('click', function (e) {
                         e.preventDefault();
                         _.abortEdit();
-                        _.closePopup();
+                        _.closeAllPopups();
                     });
                 },
                 close: function (e) {
@@ -4378,29 +4395,6 @@ export default class TgGui {
         return d.is(':data(uiDialog)');
     }
 
-    fluidDialog() {
-        var $visible = $(".ui-dialog:visible");
-        // each open dialog
-        $visible.each(function () {
-            var $this = $(this);
-            var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
-            // if fluid option == true
-            if (dialog.options.fluid) {
-                var wWidth = $(window).width();
-                // check window width against dialog width
-                if (wWidth < (parseInt(dialog.options.maxWidth) + 50)) {
-                    // keep dialog from filling entire screen
-                    $this.css("max-width", "90%");
-                } else {
-                    // fix maxWidth bug
-                    $this.css("max-width", dialog.options.maxWidth + "px");
-                }
-                //reposition dialog
-                dialog.option("position", dialog.options.position);
-            }
-        });
-    }
-
     whichTabIsOpen(dialogid) {
         if (isDialogOpen(dialogid))
             return $(dialogid).tabs('option', 'active');
@@ -4429,11 +4423,11 @@ export default class TgGui {
         this.viewport = val;
     }
 
-    isModalOpen() {
+    isPopupOpen() {
         return $.magnificPopup.instance.isOpen;
     }
 
-    closePopup() {
+    closeAllPopups() {
         $.magnificPopup.close();
     }
 

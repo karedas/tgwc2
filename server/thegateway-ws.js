@@ -210,9 +210,10 @@ function SocketServer() {
 				tgconn.on('data', sendToClient);
 				// Add handler for client->server data
 				websocket.on('data', sendToServer);
+				// Reply to challenge with webclient signature: ip, code
+				sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
 			} else {
-				console.log('beforegod');
 				sendToClient(msg);
 			}
 		};

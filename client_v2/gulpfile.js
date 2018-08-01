@@ -130,7 +130,7 @@ gulp.task('sass-watch', () => {
 		interval: 500,
 		usePolling: true
 	}, gulp.series('sass-compile'));
-	watcher.on('all', (event, path) => {
+	return watcher.on('all', (event, path) => {
 		log('File ' + chalk.yellow(path) + ' was ' + event + ', running tasks...');
 	});
 });
