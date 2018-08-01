@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     outline: 0;
-    max-width: 100%;
+    gumax-width: 100%;
 	max-height: 100%;
 	
 }
@@ -42,15 +42,7 @@
 }
 
 .ui-dialog-titlebar-close {
-	border: none;
-    background-color: transparent;
-	opacity: 1;
-	text-indent: -9999px;
-	display: block;
-	top: -5px;
-	right: -8px;
-	text-indent: -9999px;
-	@include sprite($close-sprite);
+	display: none;
 }
 
 .ui-resizable-handle {

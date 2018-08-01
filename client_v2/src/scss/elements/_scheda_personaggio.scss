@@ -155,6 +155,7 @@
             left: 0;
             bottom: 32px;
             background-color: rgba(0, 0, 0, 0.2);
+            padding: .5em 0;
 
             .descr-text {
                 border: none;
@@ -184,6 +185,51 @@
         display: none;
         color: #c4c0aa;
         text-align: center;
+
+        .avatar-crop {
+            background: url($imgPath + '/interface/riquadro-avatar-big.jpg') no-repeat top left;
+            width:220px;
+            height: 190px;
+            margin: 0 auto;
+            position: relative;
+            box-sizing: content-box;
+            padding-bottom: 40px;
+            margin-top: 15px;
+        }
+
+        .cr-boundary, .croppy-result{
+            background-color: black;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .cr-overlay {
+            z-index: 1;
+            position: absolute;
+            cursor: move;
+            touch-action: none;
+        }
+
+        .cr-slider-wrap {
+            position: absolute;
+            top: 195px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .cr-boundary img {
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            max-height: none;
+            max-width: none;
+        }
     }
 
     &.upimg {

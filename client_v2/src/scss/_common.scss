@@ -21,6 +21,7 @@ body {
     background: #1d1812;
     color: $white;
     display: inline-block;
+    overflow: hidden;
 }
 
 a, button:focus , input:focus, textarea:focus, select:focus{
@@ -54,6 +55,7 @@ caption {
     height: 100%;
     min-height: 600px;
     overflow: hidden;
+    overflow-y: auto;
 
     &.expanded  {
         padding:0;

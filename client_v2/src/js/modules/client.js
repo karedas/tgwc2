@@ -677,9 +677,9 @@ export default class TgGui {
                 }
 
                 if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')){
-                    sendToServer('@equip');
-                    client_update.equipment.needed = false;
-                    client_update.last = now;
+                    _.sendToServer('@equip');
+                    _.client_update.equipment.needed = false;
+                    _.client_update.last = now;
                 }
 
                 if (_.client_update.room.needed && _.client_options.extradetail_open) {
@@ -1126,7 +1126,8 @@ export default class TgGui {
         // Inventory
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
-            return _.renderInventory(inv_parse);
+            _.renderInventory(inv_parse);
+            return '';
         });
 
         // Room details
@@ -1150,7 +1151,8 @@ export default class TgGui {
         // Equipment
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-            return _.renderEquipment(eq_parse);
+            _.renderEquipment(eq_parse);
+            return '';
         });
 
         // Workable lists
@@ -1731,7 +1733,6 @@ export default class TgGui {
     renderPlayerInfo(info) {
 
         let _ = this;
-
         _.loadCharacterWindow().then(function (resolve, reject) {
             let d = $('#characterdialog');
 
@@ -1802,8 +1803,8 @@ export default class TgGui {
 
         $('.info-avatar').on('click', function () {
             if (!_.AVUPLOAD) {
-                _.AVUPLOAD = new uploadAvatar();
-                _.AVUPLOAD.init(_.ws_server_addr);
+                _.AVUPLOAD = new uploadAvatar(_.ws_server_addr);
+                _.AVUPLOAD.init();
             };
 
             
@@ -1822,7 +1823,7 @@ export default class TgGui {
 
     openCharacterWindow(navId) {
         let _ = this;
-
+        console.log(navId);
         $(navId, '#characterPageNav').tab('show')
 
         if (!_.openDialog('#characterdialog')) {
@@ -1842,6 +1843,8 @@ export default class TgGui {
                     _.addScrollBar( '#characterdialog .scrollable', 'infodesc');
                 }
             });
+
+            _.focusInput();
         }
     }
 
@@ -2195,11 +2198,12 @@ export default class TgGui {
 
     renderEquipment(eq) {
         let _ = this;
+        console.log('render');
         _.loadCharacterWindow().then(function (resolve, reject) {
+        console.log(eq.up);
+
             if (!eq.up) {
-                if(!_.openDialog('#characterdialog')) {
-                    _.openCharacterWindow('#nav-equip-tab');
-                }
+                _.openCharacterWindow('#nav-equip-tab');
             }
 
             _.equipUpdate(eq);
@@ -2319,9 +2323,7 @@ export default class TgGui {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!invent.up) {
-                if(!_.openDialog('#characterdialog')) {
-                    _.openCharacterWindow('#nav-inventory-tab');
-                }
+                _.openCharacterWindow('#nav-inventory-tab');
             }
             _.updateInventory(invent);
         });

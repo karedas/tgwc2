@@ -5,13 +5,13 @@ export default class uploadAvatar {
         this.uploadCrop;
         this.options = {
             viewport: {
-                width: 250,
-                height: 200,
+                width: 190,
+                height: 156,
                 type: 'square'
             },
             boundary: {
-                width: 250,
-                height: 200
+                width: 190,
+                height: 156
             },
             enableExif: true
         }
@@ -23,11 +23,12 @@ export default class uploadAvatar {
     init() {
         let _ = this;
         _.deferred = new $.Deferred;
+        _.uploadCrop = $('#croppied').croppie(_.options);
         _.addEvents()
     }
 
     readFile(input) {
-
+        let _ = this;
         return new Promise(resolve => {
 
             let _ = this;
@@ -37,31 +38,28 @@ export default class uploadAvatar {
 
                 reader.onload = function (e) {
                     $(_.form).addClass('ready');
-                    _.uploadCrop = $('#croppied').croppie(_.options);
                     _.uploadCrop.croppie('bind', {
                         url: e.target.result
                     }).then(function () {
-                        console.log('jQuery bind complete');
                         // Get the first file only
                         let file = input.files[0]; // FileList object.
-
                         _.data = new FormData();
                         _.data.append('avatar', file);
                     });
-                }
+                };
 
                 reader.readAsDataURL(input.files[0]);
             }
         });
     }
 
-    send(baseurl, callback, done) {
+    send(callback, done) {
+        let _ = this;
         //TODO: Cambiare su Nginx il proxyreverse per la mappatura dell'url senza porta.
         // Send an HTTP POST request using the jquery
-        let _ = this;
         $.post({
             enctype: 'multipart/form-data',
-            url: baseurl + '/user/karedas',
+            url: _.baseurl + '/user/karedas',
             data: _.data,
             processData: false,
             cache: false,
@@ -74,12 +72,38 @@ export default class uploadAvatar {
         });
     }
 
+    crop() {
+        let _ = this;
+        _.uploadCrop.croppie('result', {
+            type: 'rawcanvas',
+            size: 'viewport',
+            format: 'png'
+        }).then(function (canvas) {
+            _.result({
+                src: canvas.toDataURL()
+            });
+        });
+    }
+
+    result(result) {
+        let _ = this;
+        let html;
+
+        if (result.src) {
+            $('<img class="croppy-result" src="'+ result.src +'" />').prependTo('#croppied');
+            _.uploadCrop.destroy();
+        }
+    }
+
     onUpload(callback) {
         let _ = this;
         return _.deferred.promise($(this));
     }
     
+    
     addEvents() {
+        let _ = this;
+
         $('.uploadResult').on('click', function (ev) {
             _.croppie('result', {
                 type: 'canvas',
@@ -94,7 +118,7 @@ export default class uploadAvatar {
         /* Upload Image */
         $('#formUplAvatar').on('submit', function (e) {
             e.preventDefault();
-            _.send();
+            _.crop();
         });
 
     }
