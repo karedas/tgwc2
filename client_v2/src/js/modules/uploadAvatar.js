@@ -94,10 +94,7 @@ export default class uploadAvatar {
     
     send(callback, done) {
         let _ = this;
-
-
         _.data = _.data.replace('data:image/png;base64,','');
-        console.log(_.data);
         //TODO: Cambiare su Nginx il proxyreverse per la mappatura dell'url senza porta.
         // Send an HTTP POST request using the jquery
         $.ajax({

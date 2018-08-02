@@ -10,6 +10,18 @@
         box-sizing: border-box;
     }
 
+    .btn-g-close {
+        position: absolute;
+        right: 35px;
+        top: 44px;
+    }
+    .btn-g-back {
+        position: absolute;
+        right: 66px;
+        top: 44px;
+        display: none;
+    }
+
     .tab-pane {
         height: 100%;
     }
@@ -183,11 +195,10 @@
     /* Avatar Upload */
     .upload-avatar {
         display: none;
-        
         width: 100%;
         height: 100%;
         flex-direction: column;
-        justify-content: center;
+        justify-content: start;
         color: #c4c0aa;
         text-align: center;
 
@@ -202,7 +213,7 @@
             background: url($imgPath + '/interface/riquadro-avatar-big.jpg') no-repeat top left;
             width:220px;
             height: 190px;
-            margin: 0 auto;
+            margin: 15px auto 0;
             position: relative;
             box-sizing: content-box;
             padding-bottom: 36px;
@@ -311,8 +322,10 @@
         }
     }
 
-
     &.upimg {
+        .btn-g-back {
+            display: block;
+        }
         .upload-avatar {
             display: flex;
         }

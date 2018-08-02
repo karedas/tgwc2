@@ -1709,17 +1709,19 @@ export default class TgGui {
      * CHARACTER PAGE
      */
 
-    loadCharacterWindow(dialogid) {
+    loadCharacterWindow() {
         let _ = this,
-            url;
+            url, id;
+        
+        id = '#characterdialog';
             
         return new Promise(function (resolve, reject) {
-            if (!$('#characterdialog').length) {
+            if (!$(id).length) {
                 $.ajax({
                     url: './ajax/scheda_personaggio.html',
                 }).done(function (html) {
                     $('body').append(html);
-                    _.addCharacterWindowEvent();
+                    _.addCharacterWindowEvent(id);
                     resolve();
                 });
             }
@@ -1798,27 +1800,37 @@ export default class TgGui {
         return '';
     }
 
-    addCharacterWindowEvent() {
+    addCharacterWindowEvent(dialogid) {
         let _ = this;
 
         $('.info-avatar').on('click', function () {
             if (!_.AVUPLOAD) {
                 _.AVUPLOAD = new uploadAvatar(_.ws_server_addr);
                 _.AVUPLOAD.init();
+                
+                $('.btn-g-back').on('click', function(){
+                    $(dialogid).toggleClass('upimg');
+                } )
             };
 
-            
             _.AVUPLOAD.onUpload(function(){
                 console.log('OK VA');
                 //TODO: emit socket to server.
             });
 
-            $('#characterdialog').addClass('upimg');
+            $(dialogid).toggleClass('upimg');
         });
         
         $('#acceptDescrInInfo').on('click', function(){
             _.sendToServer('cambia desc');
         });
+
+        $('.btn-g-close', dialogid).on('click', function(){
+            _.closeDialog('#characterdialog');
+        });
+
+
+       
     }
 
     openCharacterWindow(navId) {
