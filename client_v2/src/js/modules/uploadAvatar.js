@@ -16,23 +16,35 @@ export default class uploadAvatar {
             enableExif: true
         }
         this.data = null;
-        this.form = null;
+        this.form = '#formUplAvatar';
         this.deferred = null;
     }
 
     init() {
         let _ = this;
         _.deferred = new $.Deferred;
-        _.uploadCrop = $('#croppied').croppie(_.options);
+        _.uploadCrop = _.createCroppie();
         _.addEvents()
+    }
+
+    createCroppie() {
+        return $('#croppied').croppie(this.options);
+    }
+
+    destroyCroppie() {
+        this.uploadCrop.croppie('destroy');
     }
 
     readFile(input) {
         let _ = this;
-        return new Promise(resolve => {
 
+        if(!$('#croppied').data('croppie')) {
+            $('.croppy-result').remove();
+            _.uploadCrop = _.createCroppie();
+        }
+
+        return new Promise(resolve => {
             let _ = this;
-            _.form = $(input).closest('form');
             if (input.files && input.files[0]) {
                 let reader = new FileReader();
 
@@ -40,34 +52,16 @@ export default class uploadAvatar {
                     $(_.form).addClass('ready');
                     _.uploadCrop.croppie('bind', {
                         url: e.target.result
-                    }).then(function () {
+                    })
+                    /*.then(function (a) {
                         // Get the first file only
                         let file = input.files[0]; // FileList object.
                         _.data = new FormData();
-                        _.data.append('avatar', file);
-                    });
+                    });*/
+                    
                 };
 
                 reader.readAsDataURL(input.files[0]);
-            }
-        });
-    }
-
-    send(callback, done) {
-        let _ = this;
-        //TODO: Cambiare su Nginx il proxyreverse per la mappatura dell'url senza porta.
-        // Send an HTTP POST request using the jquery
-        $.post({
-            enctype: 'multipart/form-data',
-            url: _.baseurl + '/user/karedas',
-            data: _.data,
-            processData: false,
-            cache: false,
-            contentType: false,
-            type: 'POST',
-            success: function (data) {
-                //TODO: NEED SOCKET HERE
-                _.deferred.resolve();
             }
         });
     }
@@ -77,23 +71,52 @@ export default class uploadAvatar {
         _.uploadCrop.croppie('result', {
             type: 'rawcanvas',
             size: 'viewport',
-            format: 'png'
-        }).then(function (canvas) {
+            
+        }).then(function (result) {
             _.result({
-                src: canvas.toDataURL()
+                src: result.toDataURL()
             });
         });
+        
     }
 
     result(result) {
         let _ = this;
         let html;
-
+        _.data = result.src;
         if (result.src) {
+            $(_.form).toggleClass('ready sendable');
             $('<img class="croppy-result" src="'+ result.src +'" />').prependTo('#croppied');
-            _.uploadCrop.destroy();
+            _.destroyCroppie();
         }
     }
+
+    
+    send(callback, done) {
+        let _ = this;
+
+        let formdata= new FormData();
+        formdata.append('avatar', _.data);
+
+        //TODO: Cambiare su Nginx il proxyreverse per la mappatura dell'url senza porta.
+        // Send an HTTP POST request using the jquery
+        $.ajax({
+            enctype: 'multipart/form-data',
+            url: _.baseurl + '/user/karedas',
+            data: formdata,
+            processData: false,
+            cache: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                console.log('resolve');
+                //TODO: NEED SOCKET HERE
+                _.deferred.resolve();
+            }
+        });
+    }
+
+
 
     onUpload(callback) {
         let _ = this;
@@ -116,9 +139,14 @@ export default class uploadAvatar {
         });
 
         /* Upload Image */
-        $('#formUplAvatar').on('submit', function (e) {
+        $('#cropAvatar').on('click', function(e){
             e.preventDefault();
             _.crop();
+        })
+        
+        $(_.form).on('submit', function (e) {
+            e.preventDefault();
+            _.send();
         });
 
     }

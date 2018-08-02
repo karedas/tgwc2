@@ -24,7 +24,7 @@ body {
     vertical-align: top;
 }
 
-a, button:focus , input:focus, textarea:focus, select:focus{
+a, button:focus , input:focus, .input:active, textarea:focus, select:focus{
     outline: 0 none!important;
 }
 

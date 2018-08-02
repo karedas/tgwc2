@@ -206,11 +206,10 @@
             position: relative;
             box-sizing: content-box;
             padding-bottom: 36px;
-            margin-top: 15px;
         }
 
         .cr-boundary, .croppy-result{
-            background-color: black;
+            display: none;
             position: absolute;
             top: 15px;
             left: 15px;
@@ -247,10 +246,14 @@
             max-height: none;
             max-width: none;
         }
+        .cr-image {
+            display: none;
+        }
 
         .custom-file, .custom-file-input {
             width: auto;
             vertical-align: middle;
+            cursor: pointer;
         }
         
         .custom-file-label {
@@ -266,21 +269,44 @@
             }
         }
 
-        .btn-actioncrop {
+        .btn-crop, .btn-sendcrop{
             display: none;
             vertical-align: middle;
             height: 1.8rem;
             border: none;
             color: white;
         }
+
+        .btn-crop {
+            background-color: $tg-brown;
+        }
+
+        .btn-sendcrop {
+            background-color: $tg-red;
+        }
         
         &.ready {
-            .btn-actioncrop {
+            .btn-crop {
                 display: inline-block;
             }
 
             .cr-slider-wrap {
                 display: initial;
+            }
+
+            .cr-boundary, .croppy-result, .cr-image {
+                display: block;
+            }
+        }
+
+        &.sendable {
+            .cr-boundary, .croppy-result, .cr-image{
+                display: block;
+            }
+            .btn-sendcrop {
+                display: inline-block;
+            }
+            .custom-file-label:after {
             }
         }
     }

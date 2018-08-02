@@ -677,9 +677,9 @@ export default class TgGui {
                 }
 
                 if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')){
-                    sendToServer('@equip');
-                    client_update.equipment.needed = false;
-                    client_update.last = now;
+                    _.sendToServer('@equip');
+                    _.client_update.equipment.needed = false;
+                    _.client_update.last = now;
                 }
 
                 if (_.client_update.room.needed && _.client_options.extradetail_open) {
@@ -699,6 +699,7 @@ export default class TgGui {
     handleAvatarData(data) {
         if (data.image) {
             let msg = '<div class="out-system"><b>SYS</b>: Richiesta approvazione ';
+            console.log(data);
             msg += '<a href="#" rel="popoverimg" data-img="' + data.buffer + '" class="tg-yellow">immagine</a> | ';
             msg += ' Utente: <span class="tg-green">' + data.user + '</span></div>';
             msg = $(msg);
@@ -1320,8 +1321,7 @@ export default class TgGui {
      */
 
     renderUserImageRequest(imgreq) {
-        console.log(imgreq[0])
-        console.log(imgreq[1])
+     
     }
 
 
@@ -1792,7 +1792,6 @@ export default class TgGui {
 
             _.openCharacterWindow('#nav-info-tab');
 
-            $('.')
 
         });
 
@@ -1804,8 +1803,8 @@ export default class TgGui {
 
         $('.info-avatar').on('click', function () {
             if (!_.AVUPLOAD) {
-                _.AVUPLOAD = new uploadAvatar();
-                _.AVUPLOAD.init(_.ws_server_addr);
+                _.AVUPLOAD = new uploadAvatar(_.ws_server_addr);
+                _.AVUPLOAD.init();
             };
 
             
@@ -1863,8 +1862,8 @@ export default class TgGui {
 
         $('#editorTitle').text(title);
 
-        //_.openEditorPopup();
-
+        _.openEditorPopup();
+/*
         if(_.isDialog('#editordialog')) {
             options = { title: title }
         }
@@ -1886,30 +1885,29 @@ export default class TgGui {
         }
 
         $('#editorDialog').dialog({options});
+*/
 
+        $('#abortEditor, #mfp-close').one('click', function () {
+            _.abortEdit();
+            _.closeEditor();
+        });
+        $('#saveEditor').one('click', function () {
+            _.saveEdit(80);
+            _.closeEditor();
+        });
 
-        // $('#abortEditor, #mfp-close').one('click', function () {
-        //     _.abortEdit();
-        //     _.closeEditor();
-        // });
-        // $('#saveEditor').one('click', function () {
-        //     _.saveEdit(80);
-        //     _.closeEditor();
-        // });
+        //Max Chars counter
+        let text_max = maxchars;
+        $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
+        textarea.attr('maxlength', maxchars);
+        textarea.keyup(function () {
+            let text_length = $(this).val().length;
+            let text_remaining = text_max - text_length;
 
-        // Max Chars counter
-        // let text_max = maxchars;
+             $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
+         });
 
-        // $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
-        // textarea.attr('maxlength', maxchars);
-        // textarea.keyup(function () {
-        //     let text_length = $(this).val().length;
-        //     let text_remaining = text_max - text_length;
-
-        //     $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
-        // });
-
-        // _.in_editor = true;
+         _.in_editor = true;
     }
 
     closeEditor() {
@@ -2766,7 +2764,6 @@ export default class TgGui {
     openBook(b) {
 
         let _ = this;
-        console.log(b);
 
 
 
@@ -4162,6 +4159,7 @@ export default class TgGui {
     openEditorPopup() {
         let _ = this;
         $.magnificPopup.open({
+            modal: true,
             items: {
                 src: '#editorDialog',
                 type: 'inline'
@@ -4175,7 +4173,7 @@ export default class TgGui {
             callbacks: {
                 open: function () {
 
-                    _.addDraggable('#editorDialog', '.modal-editor');
+                    _.addDraggable('.modal-editor', 'body');
 
                     $('.mfp-close').one('click', function (e) {
                         e.preventDefault();
@@ -4184,7 +4182,6 @@ export default class TgGui {
                     });
                 },
                 close: function (e) {
-                    console.log('ok');
                     _.closeEditor();
                 }
             }

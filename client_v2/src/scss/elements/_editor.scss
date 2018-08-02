@@ -1,6 +1,9 @@
 /* ==== Editor */
 .tg-mp.modal-editor  {
-    .mfp-close {
+  &.mfp-bg {
+    opacity: .6;
+  }  
+  .mfp-close {
       top: 8px;
       right: -8px;
     }
