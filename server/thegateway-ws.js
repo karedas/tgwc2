@@ -66,7 +66,6 @@ app.use(cors());
 app.use(session, cookieParser(process.env.SESSION_SECRET));
 app.use('/static', express.static(__dirname + '/public'));
 
-
 // Use shared session middleware for socket.io
 // setting autoSave:true
 io.use(sharedsession(session, {
@@ -84,9 +83,6 @@ server.listen(process.env.WS_PORT, () => {
 function SocketServer() {
 	
 	// Handle incoming websocket  connections
-
-	
-	//import routes
 
 	io.on('connection', function(socket) {
 		
