@@ -1,7 +1,6 @@
 <div class="tg-character-card tab-content" id="characterdialog">
   <div class="tg-shadow-dialog">
     <div class="tab-content tg-character-content">
-      <button class="tg-button btn-g-back"></button>
       <button class="tg-button btn-g-close"></button>
       <div class="tab-pane fade tg-shadow-inside" id="characterInfo" role="tabpanel" aria-labelledby="character-info-tab">
         <div class="info-main" id="infoMainTab">
@@ -97,6 +96,7 @@
           </div>
         </div>
         <form id="formUplAvatar" class="upload-avatar" enctype="multipart/form-data" method="post" action="">
+          <button class="tg-button btn-g-back"></button>
           <input type="hidden" id="avatar" name="avatar">
           <div id="croppied" class="avatar-crop"></div>
           <div class="row">
@@ -127,9 +127,8 @@
         //Inventory
       </div>
       <div class="tab-pane fade tg-shadow-inside" id="characterAbility" role="tabpanel" aria-labelledby="character-ability-tab">
-        <div class="row">
-          <div class="col-6">//col left 6</div>
-          <div class="col-6">//col right 6</div>
+        <div class="skill-cont">
+          <h3>Abilità Personali</h3>
         </div>
       </div>
     </div>

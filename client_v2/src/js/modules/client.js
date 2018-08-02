@@ -125,28 +125,52 @@ export default class TgGui {
         this.max_exp_grp = 15;
 
         /* Weight bars */
-        this.wgttxtcol = [
-            { val:80, txt:'orangered' },
-            { val:60, txt:'yellow' },
-            { val:0, txt:'greenyellow' },
+        this.wgttxtcol = [{
+                val: 80,
+                txt: 'orangered'
+            },
+            {
+                val: 60,
+                txt: 'yellow'
+            },
+            {
+                val: 0,
+                txt: 'greenyellow'
+            },
         ];
 
-        this.wgtbarcol = [
-            { val:80, txt:'red' },
-            { val:60, txt:'yellow' },
-            { val:0, txt:'green' },
+        this.wgtbarcol = [{
+                val: 80,
+                txt: 'red'
+            },
+            {
+                val: 60,
+                txt: 'yellow'
+            },
+            {
+                val: 0,
+                txt: 'green'
+            },
         ];
 
         /* Health bars */
-        this.hlttxtcol = [
-            { val:25, txt:'orangered' },
-            { val:50, txt:'yellow' },
-            { val:100, txt:'greenyellow' },
+        this.hlttxtcol = [{
+                val: 25,
+                txt: 'orangered'
+            },
+            {
+                val: 50,
+                txt: 'yellow'
+            },
+            {
+                val: 100,
+                txt: 'greenyellow'
+            },
         ];
 
         /* Equip */
         this.eqracesex = '';
-        this. lastEquip;
+        this.lastEquip;
 
         this.client_update = {
             data: {
@@ -282,7 +306,7 @@ export default class TgGui {
             'pers': ['.watch', '.inv-out', '.meq-out', '.meq-in', '.input-concat']
         };
 
-        this.equip_races=[
+        this.equip_races = [
             'human_m',
             'human_f',
             'halfling_m',
@@ -295,7 +319,7 @@ export default class TgGui {
             'goblin_f',
             'orc_m',
             'orc_f'
-        ];        
+        ];
 
         this.abiltxt = [{
                 val: 6,
@@ -676,7 +700,7 @@ export default class TgGui {
                     _.client_update.last = now;
                 }
 
-                if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')){
+                if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')) {
                     _.sendToServer('@equip');
                     _.client_update.equipment.needed = false;
                     _.client_update.last = now;
@@ -1163,7 +1187,7 @@ export default class TgGui {
         // Skill list
         msg = msg.replace(/&!sklst\{[\s\S]*?\}!/gm, function (skinfo) {
             let skinfo_parse = $.parseJSON(skinfo.slice(7, -1));
-            _.renderSkillsList(skinfo_parse);
+            return _.renderSkillsList(skinfo_parse);
         });
 
         // Player info
@@ -1321,7 +1345,7 @@ export default class TgGui {
      */
 
     renderUserImageRequest(imgreq) {
-     
+
     }
 
 
@@ -1641,15 +1665,15 @@ export default class TgGui {
         let _ = this;
 
         let txt = '<table class="tg-rendertable table table-sm table-striped table-hover">';
-            txt += '<thead class="thead-dark"><tr><th>#</th><th style="width:50px"></th><th>Difficolt&agrave;</th><th>Puoi?</th><th>Descrizione</th><th></th></tr></thead>';
-            txt += '<tbody>';
+        txt += '<thead class="thead-dark"><tr><th>#</th><th style="width:50px"></th><th>Difficolt&agrave;</th><th>Puoi?</th><th>Descrizione</th><th></th></tr></thead>';
+        txt += '<tbody>';
 
         for (let n = 0; n < wk.list.length; n++) {
             let wkCmd = wk.cmd ? wk.cmd + ' ' + (n + 1) : null;
             txt += '<tr><td>' + (n + 1) + '</td>';
             txt += '<td>' + _.renderIconWithSmallBorder(wk.list[n].icon, null, null, null, wkCmd, 'interact obj') + '</td><td>' + wk.list[n].diff + '</td><td><div class="checkbox' + (wk.list[n].cando ? ' checked' : '') + '"></div></td>';
             txt += '<td>' + wk.list[n].desc + '</td>';
-            txt += '<td><button type="button" class="tg-button btn-workcmd" data-workcmd="'+ wkCmd +'"></button></td></tr>';
+            txt += '<td><button type="button" class="tg-button btn-workcmd" data-workcmd="' + wkCmd + '"></button></td></tr>';
         }
 
         txt += '</tbody></table>';
@@ -1666,43 +1690,54 @@ export default class TgGui {
     }
 
     renderSkillsList(skinfo) {
+
         let _ = this;
 
-        let txt = '<table class="skills tg-rendertable table table-sm table-striped table-hover">';
+        _.loadCharacterWindow().then(function (resolve, reject) {
+            let txt = '<div class="skill-list scrollable">';
+            txt += '<table class="skills tg-rendertable table table-sm table-striped table-hover">';
 
-        if (skinfo.dialog == false)
-            txt += '<caption>Abilit&agrave; conosciute</caption>';
+            if (skinfo.dialog == false)
+                txt += '<caption>Abilit&agrave; conosciute</caption>';
 
-        for (let groupname in skinfo) {
-            txt += '<tr><td colspan="1000" class="skillsep">' + groupname + '</td></tr>';
+            for (let groupname in skinfo) {
+                txt += '<tr><td colspan="1000" class="skillsep">' + groupname + '</td></tr>';
 
-            let group = skinfo[groupname];
+                let group = skinfo[groupname];
 
-            for (let skname in group) {
-                txt += '<tr><th>' + skname + '</th>';
+                for (let skname in group) {
+                    txt += '<tr><th>' + skname + '</th>';
 
-                let sk = group[skname];
+                    let sk = group[skname];
 
-                if ('prac' in sk && 'theo' in sk)
-                    txt += '<td>' + _.prcBicolorBar(sk.prac, 'yellow', null, sk.theo, 'green', null) + '</td>';
+                    if ('prac' in sk && 'theo' in sk)
+                        txt += '<td>' + _.prcBicolorBar(sk.prac, 'yellow', null, sk.theo, 'green', null) + '</td>';
 
-                if ('auto' in sk)
-                    txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
+                    if ('auto' in sk)
+                        txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
 
-                if ('exp' in sk)
-                    txt += '<td>' + sk.exp + '</td>';
+                    if ('exp' in sk)
+                        txt += '<td>' + sk.exp + '</td>';
 
-                if ('check' in sk)
-                    txt += '<td>' + sk.check + '</td>';
+                    if ('check' in sk)
+                        txt += '<td>' + sk.check + '</td>';
 
-                txt += '</tr>';
+                    txt += '</tr>';
+                }
             }
-        }
 
-        txt += '</table>';
+            txt += '</table>';
+            txt += '</div>';
 
-        _.renderInTableDialog('Abilit&agrave; conosciute', txt, false);
+            $('.skill-list', '#characterAbility').remove();
+            $('.skill-cont', '#characterAbility').append(txt);
+
+            _.openCharacterWindow('#nav-ability-tab');
+
+        });
+
         return '';
+
     }
 
     /* *****************************************************************************
@@ -1712,9 +1747,9 @@ export default class TgGui {
     loadCharacterWindow() {
         let _ = this,
             url, id;
-        
+
         id = '#characterdialog';
-            
+
         return new Promise(function (resolve, reject) {
             if (!$(id).length) {
                 $.ajax({
@@ -1724,8 +1759,7 @@ export default class TgGui {
                     _.addCharacterWindowEvent(id);
                     resolve();
                 });
-            }
-            else
+            } else
                 resolve();
         });
     }
@@ -1807,30 +1841,45 @@ export default class TgGui {
             if (!_.AVUPLOAD) {
                 _.AVUPLOAD = new uploadAvatar(_.ws_server_addr);
                 _.AVUPLOAD.init();
-                
-                $('.btn-g-back').on('click', function(){
+
+                $('.btn-g-back').on('click', function () {
                     $(dialogid).toggleClass('upimg');
-                } )
+                })
             };
 
-            _.AVUPLOAD.onUpload(function(){
+            _.AVUPLOAD.onUpload(function () {
                 console.log('OK VA');
                 //TODO: emit socket to server.
             });
 
             $(dialogid).toggleClass('upimg');
         });
-        
-        $('#acceptDescrInInfo').on('click', function(){
+
+        $('#acceptDescrInInfo').on('click', function () {
             _.sendToServer('cambia desc');
         });
 
-        $('.btn-g-close', dialogid).on('click', function(){
+        $('.btn-g-close', dialogid).on('click', function () {
             _.closeDialog('#characterdialog');
         });
 
+        // Tab
+        $('#nav-info-tab').on('click', function () {
+            _.processCommands('info');
+        });
+        $('#nav-equip-tab').on('click', function () {
+            _.processCommands('equip');
+        });
+        $('#nav-inventory-tab').on('click', function () {
+            _.processCommands('inventario');
+        });
+        $('#nav-ability-tab').on('click', function () {
+            console.log('click');
+            _.processCommands('abilita');
+        });
 
-       
+
+
     }
 
     openCharacterWindow(navId) {
@@ -1839,7 +1888,7 @@ export default class TgGui {
         $(navId, '#characterPageNav').tab('show')
 
         if (!_.openDialog('#characterdialog')) {
-            $('#characterdialog').dialog({            
+            $('#characterdialog').dialog({
                 appendTo: ".tg-area",
                 modal: false,
                 width: 'auto',
@@ -1851,8 +1900,8 @@ export default class TgGui {
                     at: 'center',
                     of: $('.tg-area')
                 },
-                open: function(event, ui){
-                    _.addScrollBar( '#characterdialog .scrollable', 'infodesc');
+                open: function (event, ui) {
+                    _.addScrollBar('#characterdialog .scrollable', 'infodesc');
                 }
             });
         }
@@ -1868,36 +1917,36 @@ export default class TgGui {
 
         let _ = this,
             options, textarea;
-            
-            
+
+
         textarea = $('#editorTextArea').val(text);
 
         $('#editorTitle').text(title);
 
         _.openEditorPopup();
-/*
-        if(_.isDialog('#editordialog')) {
-            options = { title: title }
-        }
-        else {
-            options = {
-                appendTo: '.tg-area',
-                title: title,
-                width: 500,
-                height: 300,
-                maxHeight: '100vh',
-                maxWidth: '100vw',
-                height: 'auto',
-                modal: true,
-                dialogClass: 'tg-dialog parch',
-                close: function() {
-                    _.abortEdit();
+        /*
+                if(_.isDialog('#editordialog')) {
+                    options = { title: title }
                 }
-            }
-        }
+                else {
+                    options = {
+                        appendTo: '.tg-area',
+                        title: title,
+                        width: 500,
+                        height: 300,
+                        maxHeight: '100vh',
+                        maxWidth: '100vw',
+                        height: 'auto',
+                        modal: true,
+                        dialogClass: 'tg-dialog parch',
+                        close: function() {
+                            _.abortEdit();
+                        }
+                    }
+                }
 
-        $('#editorDialog').dialog({options});
-*/
+                $('#editorDialog').dialog({options});
+        */
 
         $('#abortEditor, #mfp-close').one('click', function () {
             _.abortEdit();
@@ -1916,10 +1965,10 @@ export default class TgGui {
             let text_length = $(this).val().length;
             let text_remaining = text_max - text_length;
 
-             $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
-         });
+            $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
+        });
 
-         _.in_editor = true;
+        _.in_editor = true;
     }
 
     closeEditor() {
@@ -2215,7 +2264,7 @@ export default class TgGui {
     }
 
     getRaceToClass() {
-        return  {
+        return {
             "uma": "human",
             "ume": "human",
             "eal": "elf",
@@ -2236,7 +2285,7 @@ export default class TgGui {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!eq.up) {
-                if(!_.openDialog('#characterdialog')) {
+                if (!_.openDialog('#characterdialog')) {
                     _.openCharacterWindow('#nav-equip-tab');
                 }
             }
@@ -2249,19 +2298,17 @@ export default class TgGui {
         let _ = this;
 
         /* Check if Equip wanted in widget or not */
-        if($('#equipdialog').is('aslist')) {}
-
-        else {
-            if(!eq.race) {
+        if ($('#equipdialog').is('aslist')) {} else {
+            if (!eq.race) {
                 eq.race = 0;
             }
-            if(!eq.sex) {
+            if (!eq.sex) {
                 eq.sex = 'f';
             }
 
             let race_to_class = _.getRaceToClass();
 
-            _.equipSetRace(race_to_class[eq.race] + '_' + eq.sex );
+            _.equipSetRace(race_to_class[eq.race] + '_' + eq.sex);
 
             $('.enabled', '#characterEquip').removeClass('enabled');
             $('.iconimg', '#characterEquip').remove();
@@ -2271,20 +2318,20 @@ export default class TgGui {
                 let eqdata = eq[pos.id];
                 let cont = $(pos);
 
-                if(eqdata) {
-                    eqdata.sort(function(a,b) {
+                if (eqdata) {
+                    eqdata.sort(function (a, b) {
                         let eq_pos_a = $.isArray(a.eq) ? a.eq[1] : 0;
                         let eq_pos_b = $.isArray(b.eq) ? b.eq[1] : 0;
 
                         return eq_pos_b - eq_pos_a;
                     });
 
-                    $.each(eqdata, function(idx, obj){
+                    $.each(eqdata, function (idx, obj) {
                         let slot = $('.eq' + idx, cont);
                         let desc = where + ': ' + obj.desc;
-                        let img = $(_.renderIcon(obj.icon, obj.mrn[0], 'equip', null, null, 'interact obj')).attr('tooltip',desc).attr('data-wgt',obj.wgt).attr('data-condprc',obj.condprc);
+                        let img = $(_.renderIcon(obj.icon, obj.mrn[0], 'equip', null, null, 'interact obj')).attr('tooltip', desc).attr('data-wgt', obj.wgt).attr('data-condprc', obj.condprc);
                         slot.append(img).addClass('enabled');
-                    }); 
+                    });
                 }
             });
 
@@ -2293,18 +2340,19 @@ export default class TgGui {
 
             _.lastEquip = eq;
 
-            if(_.client_update.equipment.version < eq.ver) {
+            if (_.client_update.equipment.version < eq.ver) {
                 _.client_update.equipment.version = eq.ver;
                 _.client_update.equipment.needed = false;
             }
         }
+        return '';
     }
 
-    equipSetRace (racesex) {
+    equipSetRace(racesex) {
         let _ = this;
-        if(_.eqracesex != racesex) {
+        if (_.eqracesex != racesex) {
             _.eqracesex = racesex;
-            
+
             $('#characterEquip').removeClass(_.equip_races.join(' ')).addClass(racesex);
         }
     }
@@ -2315,7 +2363,7 @@ export default class TgGui {
 
         wprc = _.limitPrc(wprc),
 
-        txtcolor = _.prcHighTxt(wprc, _.wgttxtcol);
+            txtcolor = _.prcHighTxt(wprc, _.wgttxtcol);
         barcolor = _.prcHighTxt(wprc, _.wgtbarcol);
 
         $('.carrywgt').css('color', txtcolor).text(weight);
@@ -2325,8 +2373,8 @@ export default class TgGui {
 
 
     /* *****************************************************************************
-    * INVENTORY
-    */
+     * INVENTORY
+     */
 
 
     updateInventory(inv) {
@@ -2337,18 +2385,17 @@ export default class TgGui {
         _.updateWeight(inv.weight, inv.wprc);
 
         invcont.empty();
-        
-        if(inv.list.length == 0) {
+
+        if (inv.list.length == 0) {
             invcont.append('<tr><td></td><td>Non hai niente in inventario!</td></tr>');
-        }
-        else {
+        } else {
             let invdata = $(_.replaceColors(_.renderDetails('inv', null, inv, 'obj')));
             _.makeExpandable(invdata);
             //_.addDragAndDrop()
             invcont.append(invdata);
         }
 
-        if(_.client_update.inventory.version < inv.ver) {
+        if (_.client_update.inventory.version < inv.ver) {
             _.client_update.inventory.version = inv.ver;
             _.client_update.inventory.needed = false;
         }
@@ -2358,7 +2405,7 @@ export default class TgGui {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!invent.up) {
-                if(!_.openDialog('#characterdialog')) {
+                if (!_.openDialog('#characterdialog')) {
                     _.openCharacterWindow('#nav-inventory-tab');
                 }
             }
@@ -2796,17 +2843,15 @@ export default class TgGui {
 
         $('#book').empty();
 
-        if(b.pages.length == 0 ) {
+        if (b.pages.length == 0) {
             $('#book').append('<div>Non ci sono pagine');
-        }
-        else {
+        } else {
             for (let p = 0; p < b.pages.length; ++p) {
-                
+
                 let page;
-                if(b.pages[p].title) {
-                    page = '<div rel="'+b.pages[p].title+'" title="'+b.pages[p].title+'"><h3>'+b.pages[p].title+'</h3>';
-                }
-                else {
+                if (b.pages[p].title) {
+                    page = '<div rel="' + b.pages[p].title + '" title="' + b.pages[p].title + '"><h3>' + b.pages[p].title + '</h3>';
+                } else {
                     page = '</div>';
                 }
                 page += _.replaceColors(_.formatText(b.pages[p].text)) + '</div>';
@@ -3313,7 +3358,7 @@ export default class TgGui {
 
     prcBicolorBar(prc1, color1, id1, prc2, color2, id2, txt) {
         let _ = this;
-        return '<div class="meter2'+(txt ? ' withtxtbox': '')+'"><div class="barcont"><span '+(id1 ? 'id="'+id1+'" ': '')+'class="' + color1 +' up" style="width:' + _.limitPrc(prc1) + '%"></span><span '+(id2 ? 'id="'+id2+'" ': '')+'class="' + color2 +' low" style="width:' + _.limitPrc(prc2) + '%"></span></div>'+(txt ? '<div class="metertxt">'+txt+'</div>' : '')+'</div>';
+        return '<div class="meter2' + (txt ? ' withtxtbox' : '') + '"><div class="barcont"><span ' + (id1 ? 'id="' + id1 + '" ' : '') + 'class="' + color1 + ' up" style="width:' + _.limitPrc(prc1) + '%"></span><span ' + (id2 ? 'id="' + id2 + '" ' : '') + 'class="' + color2 + ' low" style="width:' + _.limitPrc(prc2) + '%"></span></div>' + (txt ? '<div class="metertxt">' + txt + '</div>' : '') + '</div>';
     }
 
     prcHighTxt(val, values) {
@@ -3892,12 +3937,30 @@ export default class TgGui {
         let _ = this;
 
         /* Buttons with CMD event */
-        let cmdButtons = [
-            { id: '#userDisconnect', cmd: function () { _.disconnectFromServer() }},
-            { id: '#combatPieta', cmd: 'pieta' },
-            { id: '#combatTregua', cmd: 'tregua' },
-            { id: '.tg-characteravatar', cmd: 'info' },
-            { id: '.btn-workcmd', cmd: function(){ _.execWorkCmdInList.bind(_) }}
+        let cmdButtons = [{
+                id: '#userDisconnect',
+                cmd: function () {
+                    _.disconnectFromServer()
+                }
+            },
+            {
+                id: '#combatPieta',
+                cmd: 'pieta'
+            },
+            {
+                id: '#combatTregua',
+                cmd: 'tregua'
+            },
+            {
+                id: '.tg-characteravatar',
+                cmd: 'info'
+            },
+            {
+                id: '.btn-workcmd',
+                cmd: function () {
+                    _.execWorkCmdInList.bind(_)
+                }
+            }
         ]
 
         $.each(cmdButtons, function (idx, bdata) {
