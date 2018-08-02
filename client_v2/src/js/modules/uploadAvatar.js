@@ -95,21 +95,21 @@ export default class uploadAvatar {
     send(callback, done) {
         let _ = this;
 
-        let formdata= new FormData();
-        formdata.append('avatar', _.data);
 
+        _.data = _.data.replace('data:image/png;base64,','');
+        console.log(_.data);
         //TODO: Cambiare su Nginx il proxyreverse per la mappatura dell'url senza porta.
         // Send an HTTP POST request using the jquery
         $.ajax({
             enctype: 'multipart/form-data',
             url: _.baseurl + '/user/karedas',
-            data: formdata,
+            data: JSON.stringify({  "avatar": _.data}),
             processData: false,
             cache: false,
-            contentType: false,
+            contentType: "application/json",
+            dataType: 'json',
             type: 'POST',
             success: function (data) {
-                console.log('resolve');
                 //TODO: NEED SOCKET HERE
                 _.deferred.resolve();
             }
