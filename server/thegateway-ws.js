@@ -15,7 +15,10 @@ const crypto = require('crypto');
 const bodyParser = require ('body-parser');
 const dotenv = require('dotenv').load({
 	path: '.env'
-});;
+});
+const cors = require('cors');
+
+
 const net = require('net');
 const express = require('express');
 const app = express();
@@ -58,6 +61,8 @@ let session = require("express-session")({
 app.set('trust proxy', 1);
 app.set('max_requests_per_ip', 20);
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(cors());
 app.use(session, cookieParser(process.env.SESSION_SECRET));
 app.use('/static', express.static(__dirname + '/public'));
 

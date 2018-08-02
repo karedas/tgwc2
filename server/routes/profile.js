@@ -1,51 +1,42 @@
-const multer = require('multer');
+const fs = require('fs');
+//const multer = require('multer');
 const crypto = require('crypto');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 module.exports = function (logger, app, io) {
 
-        const storage = multer.diskStorage({
-            destination: (req, file, cb) => {
-                cb(null, './tmp')
-            },
-            filename: (req, file, cb) => {
-                crypto.pseudoRandomBytes(16, function (err, raw) {
-                    if (err) return cb(err);
-                    cb(null, req.params.id + '-' + Date.now() + path.extname(file.originalname));
-                })
-            }
-        });
+    app.post('/user/:id', async (req, res, next) => {
+        let fullpath = './tmp/' + req.params.id + '.png';
+        let bitmap = new Buffer(req.body.avatar, 'base64');
+        fs.unlink('path/file.txt', (err) => {});
 
-        const imageFilter = function (req, file, cb) {
-            //accept image only
-            if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-                return cb(new Error("Estensione del file non permessa"), false);
-            }
-            cb(null, true);
-        }
+        fs.writeFile(fullpath, bitmap, function (err) {
 
-        let upload = multer({
-            fileFilter: imageFilter,
-            storage: storage
-        });
+            if (!req.body) {
+                //Error
+                return res.send({
+                    success: false
+                });
+            } else {
+                if (err)
+                    throw err;
 
-        app.post('/user/:id', upload.single('avatar'), async (req, res, next) => {
-                if (!req.file) {
-                    //Error
+                fs.readFile(fullpath, function (err, file) {
+
+                    if (err) throw err;
+
+                    io.in('gods').emit('avatar', {
+                        user: req.params.id,
+                        image: true,
+                        buffer: file.toString('base64')
+                    });
                     return res.send({
-                        success: false
+                        success: true
                     });
-                } else {
-                        fs.readFile("./tmp/" + req.file.filename, function(err, data) {
-                        if (err) 
-                            throw err;
-                            
-                        io.in('gods').emit('avatar', {user: req.params.id, image: true, buffer: data.toString('base64')});
-                        return res.send({
-                            success: true
-                        });
-                    });
-                }
+
+                });
+            }
         });
-    }
-        
+    });
+}
