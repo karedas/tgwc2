@@ -22,11 +22,13 @@
     height: 15px;
     /* there must be 'bottom' or 'top' for ps__rail-x */
     bottom: 0px;
+    right: 0;
     /* please don't change 'position' */
     position: absolute;
   }
   
   .ps__rail-y {
+    background: black;
     cursor: pointer;
     display: block;
     transition: background-color .2s linear, opacity .2s linear;
@@ -84,7 +86,7 @@
     -webkit-transition: background-color .2s linear, width .2s ease-in-out;
     width: 6px;
     /* there must be 'right' for ps__thumb-y */
-    right: 2px;
+    right: 4px;
     /* please don't change 'position' */
     position: absolute;
   }

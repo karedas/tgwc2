@@ -12,6 +12,10 @@ import enquire from 'enquire-js';
 
         let Client = new TgClient();
 
+        if (Client.debug) {
+            window.debugclient = Client;
+        }
+
         /* Get Cookie "Italy cookie law". */
         let cookie_consent = Client.LoadStorage('cookie_consent');
         /* Check Cookie Law Approval Status, then go to start or wait user action. */

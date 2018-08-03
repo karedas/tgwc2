@@ -32,8 +32,6 @@ export default class TgGui {
         this.images_path = './images/';
         this.sounds_path = './sounds/';
 
-        this.socketListener = {}
-
         /* Cookies Settings */
         this.cookies = {
             prefix: 'tgwc_',
@@ -44,6 +42,15 @@ export default class TgGui {
         this.isConnected = false;
         this.socket = null;
         this.netdata = '';
+        this.socket_connection = {
+            'reconnection': true,
+            'autoConnect:': true,
+            'forceNew': true,
+            'resource': this.socket_io_resource,
+            'transports': ['websocket'],
+            'reconnectionDelay': 1500,
+            'reconnectionAttempts': 'Infinity'
+        }
 
         /* Login */
         this.inGame = false;
@@ -194,9 +201,7 @@ export default class TgGui {
             }
         };
 
-        this.scrollbar = {
-            output: null
-        };
+        this.scrollbar = {};
 
         /* References to the instantiated classes */
         this.MAP_OBJECT = null;
@@ -367,9 +372,11 @@ export default class TgGui {
 
     startClient() {
         let _ = this;
+
         /* let facebookSDK = new FacebookSDK();
          facebookSDK.load();
          */
+
         // Init the Session
         _.initSessionData();
         // Start Server Connection
@@ -545,14 +552,7 @@ export default class TgGui {
             }
 
             // Initialize Connection to the WebSocket
-            _.socket = io.connect(_.ws_server_addr, {
-                'reconnection': false,
-                'autoConnect:': true,
-                'forceNew': true,
-                'resource': _.socket_io_resource,
-                'transports': ['websocket']
-            });
-
+            _.socket = io.connect(_.ws_server_addr, _.socket_connection);
             // Server status
             _.socket.on('connect', function () {
                 _.isConnected = true;
@@ -768,7 +768,6 @@ export default class TgGui {
         let _ = this;
 
         _.initIntroTextRotator();
-        _.addScrollBar('.tg-loginpanel', 'loginpanel');
 
         //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
@@ -1689,16 +1688,15 @@ export default class TgGui {
         _.processCommands(cmd);
     }
 
+    /*== SKill List */
     renderSkillsList(skinfo) {
 
-        let _ = this;
+        console.log(skinfo);
 
+        let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             let txt = '<div class="skill-list scrollable">';
             txt += '<table class="skills tg-rendertable table table-sm table-striped table-hover">';
-
-            if (skinfo.dialog == false)
-                txt += '<caption>Abilit&agrave; conosciute</caption>';
 
             for (let groupname in skinfo) {
                 txt += '<tr><td colspan="1000" class="skillsep">' + groupname + '</td></tr>';
@@ -1733,6 +1731,7 @@ export default class TgGui {
             $('.skill-cont', '#characterAbility').append(txt);
 
             _.openCharacterWindow('#nav-ability-tab');
+
 
         });
 
@@ -1827,8 +1826,6 @@ export default class TgGui {
             $('#infospdlvl', d).text(_.prcLowTxt(info.abil.spd.prc, _.abiltxt));
 
             _.openCharacterWindow('#nav-info-tab');
-
-
         });
 
         return '';
@@ -1877,15 +1874,13 @@ export default class TgGui {
             console.log('click');
             _.processCommands('abilita');
         });
-
-
-
     }
 
     openCharacterWindow(navId) {
         let _ = this;
 
-        $(navId, '#characterPageNav').tab('show')
+        $(navId, '#characterPageNav').tab('show');
+        _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
 
         if (!_.openDialog('#characterdialog')) {
             $('#characterdialog').dialog({
@@ -1899,14 +1894,10 @@ export default class TgGui {
                     my: 'center',
                     at: 'center',
                     of: $('.tg-area')
-                },
-                open: function (event, ui) {
-                    _.addScrollBar('#characterdialog .scrollable', 'infodesc');
                 }
             });
         }
     }
-
 
 
     /* *****************************************************************************
@@ -1924,29 +1915,6 @@ export default class TgGui {
         $('#editorTitle').text(title);
 
         _.openEditorPopup();
-        /*
-                if(_.isDialog('#editordialog')) {
-                    options = { title: title }
-                }
-                else {
-                    options = {
-                        appendTo: '.tg-area',
-                        title: title,
-                        width: 500,
-                        height: 300,
-                        maxHeight: '100vh',
-                        maxWidth: '100vw',
-                        height: 'auto',
-                        modal: true,
-                        dialogClass: 'tg-dialog parch',
-                        close: function() {
-                            _.abortEdit();
-                        }
-                    }
-                }
-
-                $('#editorDialog').dialog({options});
-        */
 
         $('#abortEditor, #mfp-close').one('click', function () {
             _.abortEdit();
@@ -2335,7 +2303,6 @@ export default class TgGui {
                 }
             });
 
-            //_.addDragAndDrop('#equipcont');
             _.updateWeight(eq.weight, eq.wprc);
 
             _.lastEquip = eq;
@@ -2391,7 +2358,6 @@ export default class TgGui {
         } else {
             let invdata = $(_.replaceColors(_.renderDetails('inv', null, inv, 'obj')));
             _.makeExpandable(invdata);
-            //_.addDragAndDrop()
             invcont.append(invdata);
         }
 
@@ -3543,6 +3509,7 @@ export default class TgGui {
 
     mainNavBarInit() {
         let _ = this;
+        /* Events List Here */
         /* Search Widget form */
         _.initSearchWidget();
     }
@@ -3570,6 +3537,33 @@ export default class TgGui {
         });
     }
 
+    /* -------------------------------------------------
+     * CONFIGURATION PANEL
+     * -------------------------------------------------*/
+
+    renderConfigurationPanel() {
+        let _ = this;
+        _.loadConfigurationPanel().then(function(){
+            //is ready for DOM, now start update.
+            
+        });
+    }
+
+    loadConfigurationPanel() {
+        let _ = this;
+        return new Promise(function (resolve, reject) {
+            if (!$('#configurationpanel').length) {
+                $.ajax({
+                    url: './ajax/configuration_panel.html',
+                }).done(function (html) {
+                    $('body').append(html);
+                    resolve();
+                });
+            } else
+                resolve();
+        });
+    }
+    
     /* -------------------------------------------------
      * TOOLTIP
      * -------------------------------------------------*/
@@ -3611,7 +3605,6 @@ export default class TgGui {
     focusInput() {
         $('#tgInputUser').focus();
     }
-
 
     /* -------------------------------------------------
      * OUTPUT
@@ -4137,7 +4130,7 @@ export default class TgGui {
 
 
     /* -------------------------------------------------
-     *  POPUP
+     *  DIALOG & POPUP
      * -------------------------------------------------*/
 
     openNoFeaturePopup() {
@@ -4294,14 +4287,19 @@ export default class TgGui {
 
     }
 
-    addScrollBar(container, key, sx) {
-        let scrollX = true;
-        if ($(container).length) {
-            this.scrollbar[key] = new PerfectScrollbar(container, {
-                wheelPropagation: false,
-                suppressScrollX: scrollX
-            });
-        }
+    addScrollBar(selector, ref, sx) {
+        let _ = this;
+        $(selector).each(function (idx, s) {
+            let refer_id = ref + '_' + idx;
+            if (_.scrollbar[refer_id]) {
+                _.scrollbar[refer_id].update();
+            } else {
+                _.scrollbar[refer_id] = new PerfectScrollbar(s, {
+                    wheelPropagation: false,
+                    suppressScrollX: true
+                });
+            }
+        });
     }
 
     addDraggable(selector, context, handle) {

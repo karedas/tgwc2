@@ -282,3 +282,6 @@
 {"level":"info","message":"Websocket server listening on port %d"}
 {"level":"info","message":"Websocket server listening on port %d"}
 {"level":"info","message":"Websocket server listening on port %d"}
+{"level":"info","message":"Websocket server listening on port %d"}
+{"level":"info","message":"Websocket server listening on port %d"}
+{"level":"info","message":"Websocket server listening on port %d"}

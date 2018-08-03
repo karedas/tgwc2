@@ -94,6 +94,7 @@ server.listen(process.env.WS_PORT, () => {
 function SocketServer() {
 	// Handle incoming websocket  connections
 	io.on('connection', function(socket) {
+		console.log(socket);
 		console.log('connected');
 		socket.on('loginrequest', function(){
 			socket.emit('data', '&!connmsg{"msg":"ready"}!');

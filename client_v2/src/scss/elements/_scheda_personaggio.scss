@@ -1,6 +1,6 @@
 .tg-character-card {
     display: none;
-    color: black;
+    color: #c4c0aa;
     
     .tg-character-content {
         width:735px;
@@ -350,10 +350,6 @@
         margin: 0 1em;
     }
 
-    .data-name {
-        color: #c4c0aa;
-    }
-
     .data-born {
         font-size: 11px;
         letter-spacing: 1px;
@@ -456,37 +452,63 @@
 
     /* Skill Panel */
     .skill-cont {
-        padding: 15px;
+        padding: 15px 0;
         overflow: hidden;
-        color: white;
         height: 100%;
         display: flex;
         flex-direction: column;
 
         h3 {
             border-bottom: 1px solid #2c251b;
-            color: white;
             text-align: center;
             color: #c4c0aa;
             padding: .4em 20px;
+            margin-bottom: 0;
             font-family: kingthinks;
         }
 
         .skill-list {
-            overflow-x: auto;
+            background: #4a433e82;
             height: 100%;
         }
 
+        table th {
+            vertical-align: middle;
+        }
+
         .meter2 {
-            height: 19px;
             min-width: 153px;
             border: 1px solid #59564c;
             background: #0f0f0e;
+            position: relative;
+            padding: 2px;
+
+            span:first-child{
+                margin-bottom:2px;
+            }
+
+            span {
+                display: block;
+                width: 0;
+                height: 13px;
+                max-width: 100%;
+                background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top right;
+                transition: width .4s ease-out;
+            }
+
+            i {
+                position: absolute;
+                font-size: 11px;
+                font-style: normal;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 1px;
+            }
         }
     }
     
     .skillsep {
+        color: #e6deb2;
         font-size: 2em;
     }
-
 }

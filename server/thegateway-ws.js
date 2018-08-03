@@ -77,7 +77,6 @@ server.listen(process.env.WS_PORT, () => {
 	log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
 	logger.info('Websocket server listening on port %d', process.env.WS_PORT);
 
-
 });
 
 function SocketServer() {
@@ -85,6 +84,7 @@ function SocketServer() {
 	// Handle incoming websocket  connections
 
 	io.on('connection', function(socket) {
+	console.log(socket.handshake);
 		
 		socket.on('loginrequest', function(){
 			socket.emit('data', '&!connmsg{"msg":"ready"}!');

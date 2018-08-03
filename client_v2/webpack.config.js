@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -14,19 +15,18 @@ module.exports = function (prop, wp_instance) {
     // if the local_config is not present then we're likely running webpack directly from the command line
     // load the dev environment by default
     let config = null;
-	if ( typeof prop == 'undefined' ) {
+    if (typeof prop == 'undefined') {
         // combine it with the project configuration file
         webpack = require('webpack');
         config = require('./gulp.config.js')();
 
-    }
-    else {
+    } else {
         config = prop;
         webpack = wp_instance;
     }
-    
+
     let wp = {
-        
+
         mode: 'development',
         // --watch true, --watch false
         watchOptions: {
@@ -64,8 +64,7 @@ module.exports = function (prop, wp_instance) {
         },
 
         module: {
-            rules: [
-                {
+            rules: [{
                     test: /\.js$/,
                     exclude: /node_modules/,
                     use: {
@@ -80,7 +79,7 @@ module.exports = function (prop, wp_instance) {
         },
 
         optimization: {
-            minimize:  false,
+            minimize: false,
             splitChunks: {
                 cacheGroups: {
                     vendor: {
@@ -103,12 +102,11 @@ module.exports = function (prop, wp_instance) {
 
         performance: {
             hints: process.env.NODE_ENV === 'production' ? "warning" : false
-          },
+        },
 
         plugins: [
-
+            new ProgressBarPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
-            
             new HtmlWebPackPlugin({
                 title: 'My Awesome application',
                 git_version: JSON.stringify('tgwc.' + gitRevisionPlugin.version()),
@@ -118,12 +116,11 @@ module.exports = function (prop, wp_instance) {
                 template: './index.html',
                 filename: '../index.html' //relative to root of the application
             }),
-
-//           new BundleAnalyzerPlugin({
-  //             // analyzerMode: env == 'dev' ? 'server' : 'disabled',
-    //           analyzerPort: 9998,
-      //         analyzerHost: '192.168.10.10'
-        //   }),
+            // new BundleAnalyzerPlugin({
+            //     // analyzerMode: env == 'dev' ? 'server' : 'disabled',
+            //     analyzerPort: 9998,
+            //     analyzerHost: '192.168.10.10'
+            // })
         ]
     }
 
