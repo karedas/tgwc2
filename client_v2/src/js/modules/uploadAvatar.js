@@ -146,5 +146,9 @@ export default class uploadAvatar {
             _.send();
         });
 
+        
+                
+        $('.btn-g-back').on('click', )
+
     }
 }

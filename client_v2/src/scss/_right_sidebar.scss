@@ -140,7 +140,7 @@
     }
     .dir-sud {
         @include sprite($sud-dir-sprite);
-        bottom: 50px;
+        top: 291px;
         left: 112px;
     }
     .dir-ovest {
@@ -150,12 +150,12 @@
     }
     .dir-alto {
         @include sprite($alto-dir-sprite);
-        bottom: 107px;
+        top: 265px;
         left: 15px;
     }
     .dir-basso {
         @include sprite($basso-dir-sprite);
-        bottom: 82px;
+        top: 284px;
         left: 46px;
     }
 
@@ -163,8 +163,8 @@
     .tg-right-board {
         background:url($imgPath + '/borders/border-002-tiny.png') repeat-x top left;
         padding-top:2px;
-        margin: 0;
-        flex: 1 1 100%;
+        margin: -30px 0 0 0;
+        height: 100%;
         
         .tg-right-board-wrap {
             background-color: rgba(0,0,0,.5) ;
@@ -173,9 +173,119 @@
             box-shadow: inset 0 0 32px 20px black;
         }
 
+        .tg-board-activity {
+            height: 100%;
+            position: relative;
+
+
+            &:before, &:after  {
+                content: '';
+                display: block;
+                position: absolute;
+                width:25px;
+                height: 25px;
+            }
+            &:before {
+                border-top: 1px solid #33322d;
+                border-left: 1px solid #33322d;
+                top:15px;
+                left: 15px;
+            }
+            &:after {
+                border-top: 1px solid #33322d;
+                border-right: 1px solid #33322d;
+                top:15px;
+                right: 15px;
+            }
+        }
+        .tg-board-activity-wrap {
+            height: 100%;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: .5em;
+            box-sizing: border-box;
+
+            &:before, &:after  {
+                content: '';
+                display: block;
+                position: absolute;
+                width:25px;
+                height: 25px;
+            }
+            &:before {
+                border-bottom: 1px solid #33322d;
+                border-left: 1px solid #33322d;
+                bottom:15px;
+                left: 15px;
+            }
+            &:after {
+                border-bottom: 1px solid #33322d;
+                border-right: 1px solid #33322d;
+                bottom:15px;
+                right: 15px;
+            }
+        }
+
+        .no-activity {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+            color: #676455;
+            font-size: 10px;
+            text-transform: uppercase;
+
+            i {
+                display: block;
+                font-size: 20px;
+                margin-bottom: 6px;
+                color: #676455;
+            }
+        }
+
+
         .tg-right-board-end {
-            border-top: 1px solid #594733;
-            height: 2.6em;
+            padding-top: 2px;
+            height: 54px;
+            box-sizing: content-box;
+            background: black url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
+            margin-top: auto;
+            flex-direction: row;
+            display: flex;
+
+            .wrap-btnend-box {
+                height: 49px;
+                display: flex;
+                flex: 0 1 50px;
+                text-align: center;
+            }
+            // Buttons 
+            button {
+                margin: auto;
+            }
+
+            .btn-inventario-graph {
+                @include sprite($btn-inventario-graph-sprite);
+            }
+            .btn-stato-graph {
+                @include sprite($btn-stato-graph-sprite);
+            }
+            .btn-info-graph {
+                @include sprite($btn-info-graph-sprite);
+            }
+            .btn-equip-graph {
+                @include sprite($btn-equip-graph-sprite);
+            }
+            .btn-skill-graph {
+                @include sprite($btn-skill-graph-sprite);
+            }
+            .btn-config-graph {
+                @include sprite($btn-config-graph-sprite);
+            }
         }
     }
 
@@ -192,7 +302,6 @@
                 height: 222px;
             }
         }
-
     }
 
     @include media-breakpoint-up(xl) {
@@ -212,7 +321,7 @@
         }
         .dir-sud {
             @include sprite($sud-dir-sprite);
-            bottom: 73px;
+            top: 388px;
             left: 155px;
         }
         .dir-ovest {
@@ -222,11 +331,11 @@
         }
 
         .dir-alto {
-            bottom: 145px;
+            top: 344px;
             left: 16px;
         }
         .dir-basso {
-            bottom: 108px;
+            top: 376px;
             left: 53px;
         }
     }

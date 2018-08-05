@@ -9,12 +9,10 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    height: 100%;
     min-width: 416px;
     padding: .5rem;
     z-index: 10;
     overflow: hidden;
-    overflow-y: auto;
     >.row {
         padding-top: 1em;
         padding-bottom: 1em;
@@ -23,7 +21,6 @@
     .tg-login-container {
         width: 415px;
         max-width: 100%;
-        min-height: 250px;
         position: relative;
     }
         
@@ -229,12 +226,34 @@
 
 
 // Server OFFLINE
-body[data-serverstatus="0"] {
-    .tg-loginstatus {
+body[data-serverstatus="0"], body[data-serverstatus="9999"] {
+    .tg-loginpanel {
+        background-image: none;
+    }
+
+    .tg-loginstatus, .tg-logo-composit, .tg-intro-rotatext, .glow_container {
         display: none;
     }
     .tg-serverstatus:before {
         background: red;
+    }
+}
+
+body[data-serverstatus="0"] {
+    .tg-loginpanel {
+        background-image: none;
+    }
+    .tg-login-container {
+        &:before {
+            content: 'Il gioco è offline, torna più tardi :) !';
+            text-align: center;
+            width: 100%;
+            display: block;
+            font-size: 27px;
+            font-family: kingthinks;
+            line-height: 1;
+            color: $gray-500;
+        }
     }
 }
 
@@ -246,6 +265,7 @@ body[data-serverstatus="1"] {
     .tg-serverstatus:before {
         background: green;
     }
+    
 }
 
 body[data-loginstatus="0"], body[data-loginstatus="preload"] {
@@ -253,6 +273,7 @@ body[data-loginstatus="0"], body[data-loginstatus="preload"] {
         transition: none!important;
         padding: 0 !important;
     }
+    
 }
 /* ON PRELOAD */
 body[data-loginstatus="preload"], body[data-loginstatus="ready"] {

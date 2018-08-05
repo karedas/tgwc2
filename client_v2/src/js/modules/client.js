@@ -723,7 +723,6 @@ export default class TgGui {
     handleAvatarData(data) {
         if (data.image) {
             let msg = '<div class="out-system"><b>SYS</b>: Richiesta approvazione ';
-            console.log(data);
             msg += '<a href="#" rel="popoverimg" data-img="' + data.buffer + '" class="tg-yellow">immagine</a> | ';
             msg += ' Utente: <span class="tg-green">' + data.user + '</span></div>';
             msg = $(msg);
@@ -1150,7 +1149,8 @@ export default class TgGui {
         // Inventory
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
-            return _.renderInventory(inv_parse);
+             _.renderInventory(inv_parse);
+             return '';
         });
 
         // Room details
@@ -1174,7 +1174,8 @@ export default class TgGui {
         // Equipment
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-            return _.renderEquipment(eq_parse);
+             _.renderEquipment(eq_parse);
+             return '';
         });
 
         // Workable lists
@@ -1691,8 +1692,6 @@ export default class TgGui {
     /*== SKill List */
     renderSkillsList(skinfo) {
 
-        console.log(skinfo);
-
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             let txt = '<div class="skill-list scrollable">';
@@ -1844,11 +1843,6 @@ export default class TgGui {
                 })
             };
 
-            _.AVUPLOAD.onUpload(function () {
-                console.log('OK VA');
-                //TODO: emit socket to server.
-            });
-
             $(dialogid).toggleClass('upimg');
         });
 
@@ -1861,6 +1855,7 @@ export default class TgGui {
         });
 
         // Tab
+        // TODO: abbreviare sul get di un data-attribute per il comando.
         $('#nav-info-tab').on('click', function () {
             _.processCommands('info');
         });
@@ -1871,7 +1866,6 @@ export default class TgGui {
             _.processCommands('inventario');
         });
         $('#nav-ability-tab').on('click', function () {
-            console.log('click');
             _.processCommands('abilita');
         });
     }
@@ -1880,6 +1874,7 @@ export default class TgGui {
         let _ = this;
 
         $(navId, '#characterPageNav').tab('show');
+        //TODO better function
         _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
 
         if (!_.openDialog('#characterdialog')) {
@@ -2260,6 +2255,7 @@ export default class TgGui {
 
             _.equipUpdate(eq);
         });
+        return '';
     }
 
     equipUpdate(eq) {
@@ -3626,6 +3622,10 @@ export default class TgGui {
         if (_.client_options.extradetail_open) {
             _.addResizableOutput();
         }
+        else {
+            _.addResizableOutput();
+            $('.tg-main-output').resizable('disable');
+        }
         // init Extraoutput window
         _.extraOutputInit();
         // Highlightining mob/obj based on user click
@@ -3667,12 +3667,14 @@ export default class TgGui {
                     }*/
 
                 //update scrollbar
-                _.scrollbar.extraoutput.update();
+                _.scrollbar.extraoutput_0.update();
                 _.client_options.output_width = width + 'px';
                 _.SaveStorage('options', _.client_options);
             }
         });
     }
+
+
 
     showOutput(text) {
         let _ = this,
@@ -3974,17 +3976,23 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function () {
-            $('.tg-output-extra').toggleClass('d-flex')
-            /* Refresh Extra when is open */
-            if ($('.tg-output-extra').is(':visible')) {
-                $('.tg-output-main').css('width', _.client_options.output_width);
-                _.processCommands('@agg');
-            } else {
-                $('.tg-output-main').css('width', '100%');
+            if(!$(this).is(':animated')) {
+                $('.tg-output-extra').toggleClass('d-flex');
+                /* Refresh Extra when is open */
+                if ($('.tg-output-extra').is(':visible')) {
+                    console.log(_.client_options.output_width)
+
+                    $('.tg-output-main').css('width', _.client_options.output_width).resizable('enable');
+
+                    _.processCommands('@agg');
+
+                } else {
+                    $('.tg-output-main').css('width', '100%').resizable('disable');
+                }
+                _.scrollPanelTo('#output', '.scrollable', true, null);
+                _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
+                _.SaveStorage('options', _.client_options);
             }
-            _.scrollPanelTo('#output', '.scrollable', true, null);
-            _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
-            _.SaveStorage('options', _.client_options);
         });
 
         /* Toggle character panel  Display */
@@ -4291,15 +4299,23 @@ export default class TgGui {
         let _ = this;
         $(selector).each(function (idx, s) {
             let refer_id = ref + '_' + idx;
-            if (_.scrollbar[refer_id]) {
-                _.scrollbar[refer_id].update();
-            } else {
+            
+            _.updateScrollBar(refer_id);
+
+            if (!_.scrollbar[refer_id]) {
                 _.scrollbar[refer_id] = new PerfectScrollbar(s, {
                     wheelPropagation: false,
                     suppressScrollX: true
                 });
             }
         });
+    }
+
+    updateScrollBar (ref) {
+       let _ = this;
+        if(_.scrollbar[ref]) {
+            _.scrollbar[ref].update();
+       }
     }
 
     addDraggable(selector, context, handle) {

@@ -139,8 +139,9 @@
     }
 
     .iconimg {
-        float: left;
-        margin: auto .5em auto 0;        
+        margin: auto .5em auto 0;
+        vertical-align: middle;
+        display: inline-block;        
     }
 
     .room {
@@ -293,15 +294,14 @@
         background: url($imgPath + '/background/detaildesc-bg.jpg');
         
         .out-title {
-            padding: .2em 0;
             background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-            padding: .2em 10px;
+            padding: .2em 10px 0;
             color: #dbbf90;
             border-bottom: 1px solid #433b3a;
             text-shadow: 0 0 12px #dbbf90;
             box-shadow: inset 0px 0px 20px 4px black;
             font-size: 16px;
-
+            overflow: hidden;
         }
 
         .detaildesc {
