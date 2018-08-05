@@ -168,7 +168,6 @@
             left: 0;
             bottom: 32px;
             background-color: rgba(0, 0, 0, 0.2);
-            padding: .5em 0;
 
             .descr-text {
                 border: none;
@@ -181,7 +180,7 @@
                 text-align: center;
                 font-family: Arial,Helvetica,sans-serif;
                 line-height: 1.4;
-                padding: 0 14px;
+                padding: .5em 14px;
             }
         }
 
@@ -471,6 +470,7 @@
             padding:0 15px;
             height: 100%;
             box-shadow: 0px 0px 40px #000000 inset;
+            margin: 2px 0;
         }
 
         table th, table td{

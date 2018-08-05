@@ -1874,7 +1874,6 @@ export default class TgGui {
         let _ = this;
 
         $(navId, '#characterPageNav').tab('show');
-        //TODO better function
         _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
 
         if (!_.openDialog('#characterdialog')) {
@@ -1889,6 +1888,10 @@ export default class TgGui {
                     my: 'center',
                     at: 'center',
                     of: $('.tg-area')
+                },
+                open: function() {
+                    let panel = $(navId).attr('href');
+                    _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
                 }
             });
         }
@@ -3967,12 +3970,8 @@ export default class TgGui {
                 $(this).toggleClass('tg-brown');
                 /* Refresh Extra when is open */
                 if ($('.tg-output-extra').is(':visible')) {
-                    console.log(_.client_options.output_width)
-
                     $('.tg-output-main').css('width', _.client_options.output_width).resizable('enable');
-
                     _.processCommands('@agg');
-
                 } else {
                     $('.tg-output-main').css('width', '100%').resizable('disable');
                 }
@@ -4014,6 +4013,7 @@ export default class TgGui {
         $('#triggerZenModality').on('click', function () {
             //TODO: change to a body class + css
             $('.tg-rightside, .tg-navbar, .tg-characterpanel').toggleClass('d-none');
+            $('body').toggleClass('zen');
             $(this).toggleClass('tg-brown');
         });
     }
@@ -4289,12 +4289,12 @@ export default class TgGui {
             
             _.updateScrollBar(refer_id);
 
-            if (!_.scrollbar[refer_id]) {
+            //if (!_.scrollbar[refer_id]) {
                 _.scrollbar[refer_id] = new PerfectScrollbar(s, {
                     wheelPropagation: false,
                     suppressScrollX: true
                 });
-            }
+            //}
         });
     }
 
