@@ -3451,13 +3451,17 @@ export default class TgGui {
         /* Extra Detail Display */
         if (_.client_options.extradetail_open) {
             $('.tg-output-extra').addClass('d-flex');
+            $('#triggerToggleExtraOutput').addClass('tg-brown');
         } else {
             $('.tg-output-extra').removeClass('d-flex');
+            $('#triggerToggleExtraOutput').removeClass('tg-brown');
         }
 
         /* Dashboard Expand/collapse status */
         let d_status = _.client_options.dashboard; //just alias
-
+        if(d_status != 2 ) {
+            $('#triggerToggleCharacterPanel').addClass('tg-brown');
+        }
         if (d_status == 1) {
             $('.tg-dashboard').addClass('midopen');
         } else if (d_status == 2) {
@@ -3960,6 +3964,7 @@ export default class TgGui {
         $('#triggerToggleExtraOutput').on('click', function () {
             if(!$(this).is(':animated')) {
                 $('.tg-output-extra').toggleClass('d-flex');
+                $(this).toggleClass('tg-brown');
                 /* Refresh Extra when is open */
                 if ($('.tg-output-extra').is(':visible')) {
                     console.log(_.client_options.output_width)
@@ -3979,6 +3984,7 @@ export default class TgGui {
 
         /* Toggle character panel  Display */
         $('#triggerToggleCharacterPanel').on('click', function () {
+            let self = this;
             if (_.client_options.dashboard == 0) {
                 $('.tg-dashboard').addClass('midopen');
                 _.client_options.dashboard = 1;
@@ -3987,12 +3993,11 @@ export default class TgGui {
             };
             if (_.client_options.dashboard == 1 || _.client_options.dashboard == 2) {
                 _.client_options.dashboard = _.client_options.dashboard == 1 ? 2 : 0;
-
-
                 $('.tg-characterpanel').slideToggle(300, function () {
                     _.scrollPanelTo('#output', '.scrollable', true, null);
                     $('.tg-dashboard').removeClass('midopen');
                 });
+                $(self).toggleClass('tg-brown');
                 _.SaveStorage('options', _.client_options);
             };
         });
@@ -4009,7 +4014,7 @@ export default class TgGui {
         $('#triggerZenModality').on('click', function () {
             //TODO: change to a body class + css
             $('.tg-rightside, .tg-navbar, .tg-characterpanel').toggleClass('d-none');
-            $('body').toggleClass('zen');
+            $(this).toggleClass('tg-brown');
         });
     }
 

@@ -316,6 +316,12 @@
     }
 }
 
+.zen {
+    #triggerToggleCharacterPanel {
+        display: none;
+    }
+}
+
 
 /*In Combat Event */
 @include media-breakpoint-down(md) {
