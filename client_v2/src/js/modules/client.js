@@ -2248,9 +2248,7 @@ export default class TgGui {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!eq.up) {
-                if (!_.openDialog('#characterdialog')) {
-                    _.openCharacterWindow('#nav-equip-tab');
-                }
+                _.openCharacterWindow('#nav-equip-tab');
             }
 
             _.equipUpdate(eq);
@@ -2367,9 +2365,7 @@ export default class TgGui {
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
             if (!invent.up) {
-                if (!_.openDialog('#characterdialog')) {
-                    _.openCharacterWindow('#nav-inventory-tab');
-                }
+                _.openCharacterWindow('#nav-inventory-tab');
             }
             _.updateInventory(invent);
         });
@@ -3932,30 +3928,16 @@ export default class TgGui {
         let _ = this;
 
         /* Buttons with CMD event */
-        let cmdButtons = [{
-                id: '#userDisconnect',
-                cmd: function () {
-                    _.disconnectFromServer()
-                }
-            },
-            {
-                id: '#combatPieta',
-                cmd: 'pieta'
-            },
-            {
-                id: '#combatTregua',
-                cmd: 'tregua'
-            },
-            {
-                id: '.tg-characteravatar',
-                cmd: 'info'
-            },
-            {
-                id: '.btn-workcmd',
-                cmd: function () {
-                    _.execWorkCmdInList.bind(_)
-                }
-            }
+        let cmdButtons = [
+            {id: '#userDisconnect', cmd: function () {_.disconnectFromServer()}},
+            {id: '#combatPieta', cmd: 'pieta'},
+            {id: '.btn-workcmd', cmd: function () { _.execWorkCmdInList.bind(_)}},
+            {id: '.tg-characteravatar, #infoRightBtn', cmd: 'info'},
+            {id: '#equipRightBtn', cmd: 'equip'},
+            {id: '#skillRightBtn', cmd: 'abilita'},
+            {id: '#invRightBtn', cmd: 'inventario'},
+            {id: '#statoRightBtn', cmd: 'stato'}
+            //{id: '#configRightBtn', cmd: 'equip'},
         ]
 
         $.each(cmdButtons, function (idx, bdata) {
@@ -4467,6 +4449,7 @@ export default class TgGui {
 
         if (d.is(':data(uiDialog)'))
             return d.dialog(d.dialog('isOpen') ? 'moveToTop' : 'open');
+            
         return null;
     }
 

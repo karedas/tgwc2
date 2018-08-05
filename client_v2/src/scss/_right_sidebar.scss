@@ -250,12 +250,12 @@
 
         .tg-right-board-end {
             padding-top: 2px;
-            height: 54px;
             box-sizing: content-box;
             background: black url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
             margin-top: auto;
-            flex-direction: row;
             display: flex;
+            flex-direction: row;
+            flex: 1 1 61px;
 
             .wrap-btnend-box {
                 height: 49px;
