@@ -771,7 +771,6 @@ export default class TgGui {
         //toggle logo visibility
         $('.tg-logo-composit').css('visibility', 'visible');
 
-
         $('#login_username').focus();
 
         $('#loginForm').on('submit', function (e) {
@@ -1149,8 +1148,8 @@ export default class TgGui {
         // Inventory
         msg = msg.replace(/&!inv\{[\s\S]*?\}!/gm, function (inv) {
             let inv_parse = $.parseJSON(inv.slice(5, -1));
-             _.renderInventory(inv_parse);
-             return '';
+            _.renderInventory(inv_parse);
+            return '';
         });
 
         // Room details
@@ -1174,8 +1173,8 @@ export default class TgGui {
         // Equipment
         msg = msg.replace(/&!equip\{[\s\S]*?\}!/gm, function (eq) {
             let eq_parse = $.parseJSON(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-             _.renderEquipment(eq_parse);
-             return '';
+            _.renderEquipment(eq_parse);
+            return '';
         });
 
         // Workable lists
@@ -1735,12 +1734,12 @@ export default class TgGui {
         });
 
         return '';
-
     }
 
     /* *****************************************************************************
      * CHARACTER PAGE
      */
+
 
     loadCharacterWindow() {
         let _ = this,
@@ -1799,7 +1798,6 @@ export default class TgGui {
             $('#infoborn', d).text(info.born);
             $('#infodesc', d).text(info.desc.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, ''));
 
-
             $('#infowil', d).width(_.limitPrc(info.abil.wil.prc) + "%");
             $('#infowillvl', d).text(_.prcLowTxt(info.abil.wil.prc, _.abiltxt));
 
@@ -1824,7 +1822,7 @@ export default class TgGui {
             $('#infospd', d).width(_.limitPrc(info.abil.spd.prc) + "%");
             $('#infospdlvl', d).text(_.prcLowTxt(info.abil.spd.prc, _.abiltxt));
 
-            _.openCharacterWindow('#nav-info-tab');
+            _.openCharacterWindow('#nav-info-tab', 'Generale');
         });
 
         return '';
@@ -1842,7 +1840,6 @@ export default class TgGui {
                     $(dialogid).toggleClass('upimg');
                 })
             };
-
             $(dialogid).toggleClass('upimg');
         });
 
@@ -1855,25 +1852,20 @@ export default class TgGui {
         });
 
         // Tab
-        // TODO: abbreviare sul get di un data-attribute per il comando.
-        $('#nav-info-tab').on('click', function () {
-            _.processCommands('info');
-        });
-        $('#nav-equip-tab').on('click', function () {
-            _.processCommands('equip');
-        });
-        $('#nav-inventory-tab').on('click', function () {
-            _.processCommands('inventario');
-        });
-        $('#nav-ability-tab').on('click', function () {
-            _.processCommands('abilita');
+        $('nav-link', '#characterPageNav').each(function (idx, el) {
+            let cmd = $(this).attr('data-cmd');
+            $(el).on('click', function () {
+                _.processCommands(cmd);
+            });
         });
     }
 
-    openCharacterWindow(navId) {
+    openCharacterWindow(subNavId, title) {
         let _ = this;
 
-        $(navId, '#characterPageNav').tab('show');
+        let pid = '#characterdialog';
+
+        _.openTab(subNavId);
         _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
 
         if (!_.openDialog('#characterdialog')) {
@@ -1883,18 +1875,22 @@ export default class TgGui {
                 width: 'auto',
                 height: 'auto',
                 resizable: false,
-                title: "Scheda Personaggio",
+                title: title,
                 position: {
                     my: 'center',
                     at: 'center',
                     of: $('.tg-area')
                 },
-                open: function() {
-                    let panel = $(navId).attr('href');
+                open: function () {
+                    let panel = $(subNavId).attr('href');
                     _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
                 }
             });
         }
+    }
+
+    openTab(navId) {
+        $(navId, '#characterPageNav').tab('show');
     }
 
 
@@ -3002,7 +2998,6 @@ export default class TgGui {
                 return false;
             }
         });
-
     }
 
     interactEvent(event, trigger) {
@@ -3462,7 +3457,7 @@ export default class TgGui {
 
         /* Dashboard Expand/collapse status */
         let d_status = _.client_options.dashboard; //just alias
-        if(d_status != 2 ) {
+        if (d_status != 2) {
             $('#triggerToggleCharacterPanel').addClass('tg-brown');
         }
         if (d_status == 1) {
@@ -3540,11 +3535,11 @@ export default class TgGui {
      * CONFIGURATION PANEL
      * -------------------------------------------------*/
 
-    renderConfigurationPanel() {
+    openConfigurationPanel() {
         let _ = this;
-        _.loadConfigurationPanel().then(function(){
+        _.loadConfigurationPanel().then(function () {
             //is ready for DOM, now start update.
-            
+
         });
     }
 
@@ -3562,7 +3557,7 @@ export default class TgGui {
                 resolve();
         });
     }
-    
+
     /* -------------------------------------------------
      * TOOLTIP
      * -------------------------------------------------*/
@@ -3624,8 +3619,7 @@ export default class TgGui {
 
         if (_.client_options.extradetail_open) {
             _.addResizableOutput();
-        }
-        else {
+        } else {
             _.addResizableOutput();
             $('.tg-main-output').resizable('disable');
         }
@@ -3935,15 +3929,48 @@ export default class TgGui {
         let _ = this;
 
         /* Buttons with CMD event */
-        let cmdButtons = [
-            {id: '#userDisconnect', cmd: function () {_.disconnectFromServer()}},
-            {id: '#combatPieta', cmd: 'pieta'},
-            {id: '.btn-workcmd', cmd: function () { _.execWorkCmdInList.bind(_)}},
-            {id: '.tg-characteravatar, #infoRightBtn', cmd: 'info'},
-            {id: '#equipRightBtn', cmd: 'equip'},
-            {id: '#skillRightBtn', cmd: 'abilita'},
-            {id: '#invRightBtn', cmd: 'inventario'},
-            {id: '#statoRightBtn', cmd: 'stato'}
+        let cmdButtons = [{
+                id: '#userDisconnect',
+                cmd: function () {
+                    _.disconnectFromServer()
+                }
+            },
+            {
+                id: '#combatPieta',
+                cmd: 'pieta'
+            },
+            {
+                id: '.btn-workcmd',
+                cmd: function () {
+                    _.execWorkCmdInList.bind(_)
+                }
+            },
+            {
+                id: '.tg-characteravatar, #infoRightBtn',
+                cmd: 'info'
+            },
+            {
+                id: '#equipRightBtn',
+                cmd: 'equip'
+            },
+            {
+                id: '#skillRightBtn',
+                cmd: 'abilita'
+            },
+            {
+                id: '#invRightBtn',
+                cmd: 'inventario'
+            },
+            {
+                id: '#statoRightBtn',
+                cmd: 'stato'
+            }
+            {
+                id: '#',
+                cmd: function() {
+                    _.openConfigurationPanel.bind();
+                }
+            }
             //{id: '#configRightBtn', cmd: 'equip'},
         ]
 
@@ -3965,7 +3992,7 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function () {
-            if(!$(this).is(':animated')) {
+            if (!$(this).is(':animated')) {
                 $('.tg-output-extra').toggleClass('d-flex');
                 $(this).toggleClass('tg-brown');
                 /* Refresh Extra when is open */
@@ -4286,28 +4313,31 @@ export default class TgGui {
         let _ = this;
         $(selector).each(function (idx, s) {
             let refer_id = ref + '_' + idx;
-            
+
             _.updateScrollBar(refer_id);
 
             //if (!_.scrollbar[refer_id]) {
-                _.scrollbar[refer_id] = new PerfectScrollbar(s, {
-                    wheelPropagation: false,
-                    suppressScrollX: true
-                });
+            _.scrollbar[refer_id] = new PerfectScrollbar(s, {
+                wheelPropagation: false,
+                suppressScrollX: true
+            });
             //}
         });
     }
 
-    updateScrollBar (ref) {
-       let _ = this;
-        if(_.scrollbar[ref]) {
+    updateScrollBar(ref) {
+        let _ = this;
+        if (_.scrollbar[ref]) {
             _.scrollbar[ref].update();
-       }
+        }
     }
 
     addDraggable(selector, context, handle) {
 
         let _ = this;
+        console.log(selector);
+        console.log(context);
+        console.log(handle);
         $(selector, context).draggable({
             appendTo: 'body',
             zIndex: 1000,
@@ -4434,8 +4464,6 @@ export default class TgGui {
         _.iconToDest(obj1, type2, mrn2, cnttype2, cntmrn2);
     }
 
-
-
     /* *****************************************************************************
      * UTILITY
      */
@@ -4454,7 +4482,7 @@ export default class TgGui {
 
         if (d.is(':data(uiDialog)'))
             return d.dialog(d.dialog('isOpen') ? 'moveToTop' : 'open');
-            
+
         return null;
     }
 
