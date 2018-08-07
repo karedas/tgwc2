@@ -371,8 +371,10 @@
 
 
 // Borders with JQUERY UI DIALOG
-.tg-dialog-box {  
+.tg-dialog-box { 
     padding: 0;  
+    position: absolute;
+
     .tg-border-box {
         left: -8px;
         top: -8px;

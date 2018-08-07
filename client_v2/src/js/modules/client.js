@@ -1866,16 +1866,16 @@ export default class TgGui {
         let pid = '#characterdialog';
 
         _.openTab(subNavId);
-        _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
 
-        if (!_.openDialog('#characterdialog')) {
-            $('#characterdialog').dialog({
+        if (!_.openDialog(pid)) {
+            $(pid).dialog({
                 appendTo: ".tg-area",
                 modal: false,
                 width: 'auto',
                 height: 'auto',
                 resizable: false,
                 title: title,
+                classes: {'ui-dialog': 'modal-character'},
                 position: {
                     my: 'center',
                     at: 'center',
@@ -1883,7 +1883,7 @@ export default class TgGui {
                 },
                 open: function () {
                     let panel = $(subNavId).attr('href');
-                    _.addScrollBar('#characterdialog .scrollable', 'characterinfo');
+                    _.addScrollBar(pid + ' .scrollable', 'characterinfo');
                 }
             });
         }
@@ -3467,7 +3467,17 @@ export default class TgGui {
         }
 
         /* Audio */
-        $('#tgNavBartriggerAudio').on('click')
+        $('#tgNavBartriggerAudio').on('click');
+
+        // on window resize run function
+        $(window).resize(function () {
+            _.fluidDialog();
+        });
+
+        // catch dialog if opened within a viewport smaller than the dialog width
+        $(document).on("dialogopen", ".ui-dialog", function (event, ui) {
+            _.fluidDialog();
+        });
 
         /* Data Sorter */
         $.extend($.fn.dataTable.defaults, {
@@ -3537,9 +3547,11 @@ export default class TgGui {
 
     openConfigurationPanel() {
         let _ = this;
-        _.loadConfigurationPanel().then(function () {
-            //is ready for DOM, now start update.
 
+        let pid = '#configurationpanel';
+        _.loadConfigurationPanel().then(function () {
+            
+            _.openConfigPanel();
         });
     }
 
@@ -3556,6 +3568,41 @@ export default class TgGui {
             } else
                 resolve();
         });
+    }
+
+    openConfigPanel() {
+        let _ = this;
+
+        let pid = '#configurationpanel';
+
+        //_.addScrollBar(pid + ' .scrollable', 'characterinfo');
+
+        var wWidth = $(window).width();
+        let mWidth = wWidth * 0.90;
+        var wHeight = $(window).height();
+        let mHeight = wHeight * 0.90;
+        
+        console.log(mWidth, mHeight);
+        if (!_.openDialog(pid)) {
+            $(pid).dialog({
+                appendTo: "body",
+                modal: false,
+                width: 'auto',
+                maxWidth: mWidth,
+                maxHeight: mHeight,
+                resizable: true,
+                classes: {
+                    "ui-dialog": "dialog-config"
+                },
+                title: 'Configurazione e Opzioni personali',
+                position: {
+                    my: 'center',
+                    at: 'center',
+                    of: $('.tg-area')
+                },
+                fluid: true
+            });
+        }
     }
 
     /* -------------------------------------------------
@@ -3936,14 +3983,14 @@ export default class TgGui {
                 }
             },
             {
-                id: '#combatPieta',
-                cmd: 'pieta'
+                id: '#configRightBtn',
+                cmd: function () {
+                    _.openConfigurationPanel();
+                }
             },
             {
-                id: '.btn-workcmd',
-                cmd: function () {
-                    _.execWorkCmdInList.bind(_)
-                }
+                id: '#combatPieta',
+                cmd: 'pieta'
             },
             {
                 id: '.tg-characteravatar, #infoRightBtn',
@@ -3965,18 +4012,10 @@ export default class TgGui {
                 id: '#statoRightBtn',
                 cmd: 'stato'
             }
-            {
-                id: '#',
-                cmd: function() {
-                    _.openConfigurationPanel.bind();
-                }
-            }
-            //{id: '#configRightBtn', cmd: 'equip'},
         ]
 
         $.each(cmdButtons, function (idx, bdata) {
             let button = $(bdata.id);
-
             if (bdata.cmd) {
                 button.on('click',
                     typeof bdata.cmd == 'function' ? bdata.cmd : function () {
@@ -4550,5 +4589,29 @@ export default class TgGui {
         } else {
             $(scrollbox).scrollTop(outputHeight);
         }
+    }
+
+    fluidDialog() {
+        var $visible = $(".ui-dialog:visible");
+        // each open dialog
+        $visible.each(function () {
+            var $this = $(this);
+            var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
+            // if fluid option == true
+            if (dialog.options.fluid) {
+                var wWidth = $(window).width();
+                // check window width against dialog width
+                if (wWidth < (parseInt(dialog.options.maxWidth) + 50))  {
+                    // keep dialog from filling entire screen
+                    $this.css("max-width", "90%");
+                } else {
+                    // fix maxWidth bug
+                    $this.css("max-width", dialog.options.maxWidth + "px");
+                }
+                //reposition dialog
+                dialog.option("position", dialog.options.position);
+            }
+        });
+    
     }
 }
