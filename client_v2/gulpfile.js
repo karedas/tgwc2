@@ -121,7 +121,6 @@ function jsCompile(mode) {
 		.pipe(plumber())
 		.pipe(webpackStream(webpack_config, webpack))
 		.pipe(gulp.dest(config.build.base + config.build.js))
-		.pipe(debug());
 }
 
 // Watch sass files for changes then compile and upload
@@ -197,6 +196,7 @@ function copyStaticFiles(done) {
 
 	let staticFileGlob = [
 		config.src.base + '**/*.html',
+		config.src.base + 'lib/**',
 		config.src.base + 'ajax/**',
 		config.src.base + 'fonts/**',
 		config.src.base + 'sounds/**',

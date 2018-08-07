@@ -1,19 +1,22 @@
+
 // ========== NPM Modules
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import Cookies from 'js-cookie';
-import PerfectScrollbar from 'perfect-scrollbar';
-import 'magnific-popup';
+// import PerfectScrollbar from 'perfect-scrollbar';
+// import 'magnific-popup';
 import dt from 'datatables.net';
 //============ JQWidgets
 import 'jqwidgets-framework/jqwidgets/jqxcore';
 import 'jqwidgets-framework/jqwidgets/jqxwindow';
-import 'jqwidgets-framework/jqwidgets/styles/jqx.base.css';
+import 'jqwidgets-framework/jqwidgets/jqxdockinglayout';
+import 'jqwidgets-framework/jqwidgets/jqxscrollbar';
+import 'jqwidgets-framework/jqwidgets/jqxbuttons';
 /* Jquery UI */
-import position from 'jquery-ui/ui/position';
-import draggable from 'jquery-ui/ui/widgets/draggable';
-import droppable from 'jquery-ui/ui/widgets/droppable';
-import dialog from 'jquery-ui/ui/widgets/dialog';
+// import position from 'jquery-ui/ui/position';
+// import draggable from 'jquery-ui/ui/widgets/draggable';
+// import droppable from 'jquery-ui/ui/widgets/droppable';
+// import dialog from 'jquery-ui/ui/widgets/dialog';
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
 //============ Custom
@@ -3410,19 +3413,19 @@ export default class TgGui {
         _.configInit();
         /* Interface Modules List */
         //_.inputInit();
-        _.genericEvents();
-        _.keyboardMapInit();
-        _.mainNavBarInit();
-        _.tooltipInit();
-        _.outputInit();
-        _.focusInput();
-        _.mapInit();
-        _.doorsInit();
-        _.interactionInit();
-        _.extraBoardInit();
-        _.buttonsEventInit();
-        _.combatPanelWidgetInit();
-        _.audioInit();
+        // _.genericEvents();
+        // _.keyboardMapInit();
+        // _.mainNavBarInit();
+        // _.tooltipInit();
+        // _.outputInit();
+        // _.focusInput();
+        // _.mapInit();
+        // _.doorsInit();
+        // _.interactionInit();
+        // _.extraBoardInit();
+        // _.buttonsEventInit();
+        // _.combatPanelWidgetInit();
+        // _.audioInit();
 
         //Interface is up
         _.client_open = true;
@@ -3653,10 +3656,10 @@ export default class TgGui {
         }
 
         if (_.client_options.extradetail_open) {
-            _.addResizableOutput();
+          //  _.addResizableOutput();
         } else {
-            _.addResizableOutput();
-            $('.tg-main-output').resizable('disable');
+          //  _.addResizableOutput();
+          // $('.tg-main-output').resizable('disable');
         }
         // init Extraoutput window
         _.extraOutputInit();
@@ -4202,34 +4205,23 @@ export default class TgGui {
 
         $.ajax(src, {
             success: function(response) {
-                $('<div class="tg-window"/>').appendTo('body');
-                $('.tg-window').append(response);
-                $('.tg-window').jqxWindow({
-                    theme: 'bootstrap',
-                    width: '75%',
-                    height: '65%',
-                    resizable: true,
-                    isModal: false,
-                    showCollapseButton: true,
+                $('body').append(response);
+                $('.tg-cookielaw').jqxWindow({
+                    width: '450px',
+                    height: 'auto',
+                    maxWidth: '95%',
+                    maxHeight: '95%',
+                    resizable: false,
+                    draggable: false,
+                    isModal: true,
+                    keyboardCloseKey :'none',
                     content: response,
-                    animationType: 'fade'
+                    animationType: 'combined'
                 });
   
                 
             }
         });
-
-        // $.magnificPopup.open({
-        //     showCloseBtn: false,
-        //     closeOnBgClick: false,
-        //     type: 'ajax',
-        //     preloader: false,
-        //     items: {
-        //         src: src,
-        //         type: 'ajax'
-        //     },
-        //     mainClass: 'modal-cookielaw',
-        // });
     }
 
     openNotiziePopup() {
@@ -4361,14 +4353,24 @@ export default class TgGui {
         $(selector).each(function (idx, s) {
             let refer_id = ref + '_' + idx;
 
-            _.updateScrollBar(refer_id);
+            //_.updateScrollBar(refer_id);
 
+            $(s).jqxScrollBar({
+                width: 18,
+                height: '100%',
+                min: 0,
+                max: '100%',
+                vertical: true,
+                showButtons: true,
+
+            })
             //if (!_.scrollbar[refer_id]) {
-            _.scrollbar[refer_id] = new PerfectScrollbar(s, {
-                wheelPropagation: false,
-                suppressScrollX: true
-            });
+            // _.scrollbar[refer_id] = new PerfectScrollbar(s, {
+            //     wheelPropagation: false,
+            //     suppressScrollX: true
+            // });
             //}
+
         });
     }
 
@@ -4577,7 +4579,7 @@ export default class TgGui {
     }
 
     closeAllPopups() {
-        $.magnificPopup.close();
+        $('.jqx-window').jqxWindow('close'); 
     }
 
     scrollPanelTo(content, scrollbox, animate, where) {
@@ -4597,29 +4599,5 @@ export default class TgGui {
         } else {
             $(scrollbox).scrollTop(outputHeight);
         }
-    }
-
-    fluidDialog() {
-        var $visible = $(".ui-dialog:visible");
-        // each open dialog
-        $visible.each(function () {
-            var $this = $(this);
-            var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
-            // if fluid option == true
-            if (dialog.options.fluid) {
-                var wWidth = $(window).width();
-                // check window width against dialog width
-                if (wWidth < (parseInt(dialog.options.maxWidth) + 50))  {
-                    // keep dialog from filling entire screen
-                    $this.css("max-width", "90%");
-                } else {
-                    // fix maxWidth bug
-                    $this.css("max-width", dialog.options.maxWidth + "px");
-                }
-                //reposition dialog
-                dialog.option("position", dialog.options.position);
-            }
-        });
-    
     }
 }
