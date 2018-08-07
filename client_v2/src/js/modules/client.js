@@ -3,11 +3,12 @@ import io from 'socket.io-client';
 import Modernizr from "modernizr";
 import Cookies from 'js-cookie';
 import PerfectScrollbar from 'perfect-scrollbar';
-// import 'bootstrap';
 import 'magnific-popup';
 import dt from 'datatables.net';
-//import md from 'markdown-it';
-
+//============ JQWidgets
+import 'jqwidgets-framework/jqwidgets/jqxcore';
+import 'jqwidgets-framework/jqwidgets/jqxwindow';
+import 'jqwidgets-framework/jqwidgets/styles/jqx.base.css';
 /* Jquery UI */
 import position from 'jquery-ui/ui/position';
 import draggable from 'jquery-ui/ui/widgets/draggable';
@@ -551,9 +552,9 @@ export default class TgGui {
                 _.socket = null;
             }
 
-            // Initialize Connection to the WebSocket
+            /* Initialize Connection to the WebSocket */
             _.socket = io.connect(_.ws_server_addr, _.socket_connection);
-            // Server status
+            /* Server status */
             _.socket.on('connect', function () {
                 _.isConnected = true;
                 _.networkActivityMessage("Server Online", 1);
@@ -577,9 +578,7 @@ export default class TgGui {
                 }
             });
 
-            _.socket.on('reconnect_attempt', function () {
-                console.log('User Reconnected');
-            });
+            _.socket.on('reconnect_attempt', function () {/* User Reconnection */});
 
             _.socket.on('connect_error', function (e) {
                 if (_.isConnected) {
@@ -623,9 +622,9 @@ export default class TgGui {
 
                     case 'created':
                     case 'loginok':
-                        // Preload client then start the magic
+                        /* Preload client then start the magic */
                         let clientPreloader = new Preloader(AssetsList, _.images_path);
-                        // If UI has been past loaded (like on disconnection user action)
+                        /* If UI has been past loaded (like on disconnection user action) */
                         if (_.client_open) {
                             _.closeAllPopups();
                             _.completeHandshake();
@@ -642,14 +641,12 @@ export default class TgGui {
                         }
 
                         // User loged in with Facebook SDK.
-
                         /*if(!directLogin)
                         {
                             if (updateChars)
                             {
                                 doUpdateCharacters();
-                            }
-                            
+                            }                           
                             moveLoginPanel('login');
                         }*/
                         break;
@@ -661,7 +658,6 @@ export default class TgGui {
                         }
                         _.loginError(connectionError);
                         break;
-
                 }
             }
         }
@@ -677,6 +673,7 @@ export default class TgGui {
 
     handleServerData(msg) {
         let _ = this;
+
         _.netdata += msg;
         let len = _.netdata.length;
 
@@ -768,7 +765,7 @@ export default class TgGui {
 
         _.initIntroTextRotator();
 
-        //toggle logo visibility
+        /* Toggle Logo visibility */
         $('.tg-logo-composit').css('visibility', 'visible');
 
         $('#login_username').focus();
@@ -839,7 +836,7 @@ export default class TgGui {
         /* Reconnect Button */
         $('#widgetLoginReconnect').on('click', function (e) {
             _.socket.off('data');
-            //Attach oob Socket Handler
+            /* Attach oob Socket Handler */
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
         });
@@ -860,7 +857,7 @@ export default class TgGui {
             let name = $('#widget_username').val();
             let pass = $('#widget_password').val();
             if (!name || !pass) {
-                //TODO: Notify user to provide credentials
+                /* TODO: Notify user to provide credentials */
                 return;
             }
             _.widgetLoginNetworkActivityMessage("Connessione in corso...");
@@ -869,7 +866,7 @@ export default class TgGui {
             _.connectionInfo.loginPass = pass;
             _.connectionInfo.mode = "login";
             _.socket.off('data');
-            //Attach oob Socket Handler
+            /* Attach oob Socket Handler */
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
         });
@@ -929,7 +926,7 @@ export default class TgGui {
             let cmds = _.parseInput(text);
 
             if (cmds) {
-                //check if cmd will be pushed in the history array
+                /* check if cmd will be pushed in the history array */
                 if (save_history) {
                     _.historyPush(text);
                 }
@@ -962,10 +959,10 @@ export default class TgGui {
     substShort(input) {
 
         let _ = this;
-        // Split into arguments
+        /* Split into arguments */
         let args = input.split(/\s+/);
 
-        // Get the shortcut index
+        /* Get the shortcut index */
         let shortcut_key = args.shift();
         let shortcut_num = parseInt(shortcut_key);
         let shortcut_cmd;
@@ -975,19 +972,17 @@ export default class TgGui {
             shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
         }
 
-        // Check if the shortcut is defined
+        /* Check if the shortcut is defined */
         if (shortcut_cmd) {
-            // Use the shortcut text as command
+            /* Use the shortcut text as command */
             input = shortcut_cmd.cmd;
-
             if (/\$\d+/.test(input)) {
-                // Substitute the arguments
+                /* Substitute the arguments */
                 for (let arg = 0; arg < args.length; ++arg) {
                     let rx = new RegExp("\\$" + (arg + 1), 'g');
                     input = input.replace(rx, args[arg]);
                 }
-
-                // Remove remaining letiables
+                /* Remove remaining letiables */
                 input = input.replace(/\$\d+/g, '');
             } else
                 input += " " + args.join(" ");
@@ -996,7 +991,6 @@ export default class TgGui {
         if (_.cmd_prefix.length > 0) {
             input = _.cmd_prefix + " " + input;
         }
-
         return input;
     }
 
@@ -1005,8 +999,7 @@ export default class TgGui {
      */
 
     preparseText(msg) {
-
-        // Remove -not-tags-
+        /* Remove -not-tags- */
         msg = msg.replace(/\r/gm, '');
         msg = msg.replace(/&!!/gm, '');
         msg = msg.replace(/\$\$/gm, '$');
@@ -1342,11 +1335,6 @@ export default class TgGui {
     /* *****************************************************************************
      * MISC RENDERING
      */
-
-    renderUserImageRequest(imgreq) {
-
-    }
-
 
     renderLink(href, text) {
         return '<a href="' + href + '" target="_blank">' + text + '</a>';
@@ -4211,17 +4199,37 @@ export default class TgGui {
 
     openCookieLawPopup() {
         let src = './ajax/cookielawAlert.html';
-        $.magnificPopup.open({
-            showCloseBtn: false,
-            closeOnBgClick: false,
-            type: 'ajax',
-            preloader: false,
-            items: {
-                src: src,
-                type: 'ajax'
-            },
-            mainClass: 'modal-cookielaw',
+
+        $.ajax(src, {
+            success: function(response) {
+                $('<div class="tg-window"/>').appendTo('body');
+                $('.tg-window').append(response);
+                $('.tg-window').jqxWindow({
+                    theme: 'bootstrap',
+                    width: '75%',
+                    height: '65%',
+                    resizable: true,
+                    isModal: false,
+                    showCollapseButton: true,
+                    content: response,
+                    animationType: 'fade'
+                });
+  
+                
+            }
         });
+
+        // $.magnificPopup.open({
+        //     showCloseBtn: false,
+        //     closeOnBgClick: false,
+        //     type: 'ajax',
+        //     preloader: false,
+        //     items: {
+        //         src: src,
+        //         type: 'ajax'
+        //     },
+        //     mainClass: 'modal-cookielaw',
+        // });
     }
 
     openNotiziePopup() {

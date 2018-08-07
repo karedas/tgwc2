@@ -11,35 +11,36 @@
         font-size: 15px;
         line-height: 1.3;
 
-        a {
-            text-decoration: underline;
-            color: $tg-brown;
-        }
-        
-        .tg-title {
-            color: $tg-yellow;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-        .tg-btn-cookieconsent {
+    }
+    a {
+        text-decoration: underline;
+        color: $tg-brown;
+    }
+    
+    .tg-title {
+        color: $tg-yellow;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+    .tg-btn-cookieconsent {
+        cursor: pointer;
+        background: #ffc000;
+        border: none;
+        text-transform: uppercase;
+    }
+
+    .cookie-lastalert {
+        padding:.5em;
+        text-decoration: underline;
+        display: block;
+    }
+
+    .custom-checkbox {
+        line-height: 22px;
+        padding-bottom: .5em;
+        label {
             cursor: pointer;
-            background: #ffc000;
-            border: none;
-            text-transform: uppercase;
-        }
-
-        .cookie-lastalert {
-            padding:.5em;
-            text-decoration: underline;
-            display: block;
-        }
-
-        .custom-checkbox {
-            line-height: 22px;
-            padding-bottom: .5em;
-            label {
-                cursor: pointer;
-            }
+            line-height: 1;
         }
     }
 }

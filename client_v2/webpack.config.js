@@ -4,6 +4,8 @@ const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const cssLoader = require ('css-loader');
+const styleLoader = require ('style-loader');
 
 let gitRevisionPlugin = new GitRevisionPlugin({
     lightweightTags: true
@@ -58,6 +60,7 @@ module.exports = function (prop, wp_instance) {
                 'node_modules',
                 './'
             ],
+            
             alias: {
                 modernizr$: path.resolve(__dirname, "./.modernizrrc.js")
             }
@@ -72,9 +75,18 @@ module.exports = function (prop, wp_instance) {
                     }
                 },
                 {
+                    test: /\.css$/,
+                    use: [ 'style-loader', 'css-loader' ]
+                },
+                {
                     loader: "webpack-modernizr-loader",
                     test: /\.modernizrrc\.js$/
-                }
+                },
+                {
+
+                    test: /\.(gif|png|jpg|jpeg|svg)(\?[a-z0-9]+)?$/,
+                    use: 'file-loader',
+                }, 
             ]
         },
 

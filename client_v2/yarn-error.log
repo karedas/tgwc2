@@ -1,11 +1,11 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn add dataTables.bootstrap4.js
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add css-loader
 
 PATH: 
   /home/vagrant/.composer/vendor/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Yarn version: 
-  1.7.0
+  1.9.2
 
 Node version: 
   8.11.3
@@ -14,24 +14,14 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/dataTables.bootstrap4.js: Not found
-      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:65656:18)
-      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:134675:22)
-      at emitTwo (events.js:126:13)
-      at Request.emit (events.js:214:7)
-      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:135658:10)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:135578:12)
-      at Object.onceWrapper (events.js:313:30)
-      at emitNone (events.js:111:20)
+  Error: EPROTO: protocol error, symlink '../../../acorn/bin/acorn' -> '/home/vagrant/Sites/TG2/tg2_webclient/client_v2/node_modules/acorn-dynamic-import/node_modules/.bin/acorn'
 
 npm manifest: 
   {
   	"dependencies": {
   		"@fortawesome/fontawesome-free": "^5.1.0",
   		"@fortawesome/fontawesome-free-regular": "^5.0.13",
-  		"autoprefixer": "9.0.1",
+  		"autoprefixer": "9.0.2",
   		"babel-core": "^6.26.3",
   		"babel-loader": "^7.1.4",
   		"babel-polyfill": "^6.26.0",
@@ -43,8 +33,10 @@ npm manifest:
   		"bootstrap": "^4.1.1",
   		"chalk": "^2.4.0",
   		"croppie": "^2.6.2",
-  		"cssnano": "4.0.3",
+  		"cssnano": "4.0.5",
   		"datatables.net": "^1.10.19",
+  		"datatables.net-bs4": "^1.10.19",
+  		"datatables.net-dt": "^1.10.19",
   		"draggabilly": "^2.2.0",
   		"easy-autocomplete": "^1.3.5",
   		"enquire-js": "^0.2.1",
@@ -69,20 +61,20 @@ npm manifest:
   		"gulp4": "^4.0.2",
   		"html-loader": "^0.5.5",
   		"html-webpack-plugin": "^3.2.0",
-  		"install": "^0.12.1",
   		"jquery": "^3.3.1",
   		"jquery-resizable-dom": "^0.32.0",
   		"jquery-ui": "^1.12.1",
+  		"jqwidgets-framework": "^6.0.5",
   		"js-cookie": "^2.2.0",
   		"jsbeautify": "^0.3.6",
   		"lodash": "^4.17.10",
   		"magnific-popup": "^1.1.0",
-  		"malihu-custom-scrollbar-plugin": "^3.1.5",
   		"merge-stream": "^1.0.1",
   		"modernizr": "^3.6.0",
   		"modernizr-webpack-plugin": "^1.0.7",
   		"perfect-scrollbar": "^1.4.0",
   		"popper.js": "^1.14.3",
+  		"progress-bar-webpack-plugin": "^1.11.0",
   		"socket.io": "^2.1.1",
   		"vinyl-buffer": "^1.0.1",
   		"webpack": "^4.12.0",
@@ -648,15 +640,15 @@ Lockfile:
     version "0.15.3"
     resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-0.15.3.tgz#342417d8f2f3461b14cf09088d5edf8791dc9832"
   
-  autoprefixer@9.0.1:
-    version "9.0.1"
-    resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.0.1.tgz#b5b74aba3fa60b4f1403729e46a6a1246f16818f"
+  autoprefixer@9.0.2:
+    version "9.0.2"
+    resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.0.2.tgz#c41947aa155038b3614414dbc58b4e70908af6e0"
     dependencies:
       browserslist "^4.0.1"
       caniuse-lite "^1.0.30000865"
       normalize-range "^0.1.2"
       num2fraction "^1.2.2"
-      postcss "^7.0.1"
+      postcss "^7.0.2"
       postcss-value-parser "^3.2.3"
   
   aws-sign2@~0.6.0:
@@ -1609,8 +1601,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/buffer-equal/-/buffer-equal-1.0.0.tgz#59616b498304d556abd466966b22eeda3eca5fbe"
   
   buffer-from@^1.0.0:
-    version "1.1.0"
-    resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.0.tgz#87fcaa3a298358e0ade6e442cfce840740d1ad04"
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   
   buffer-indexof@^1.0.0:
     version "1.1.1"
@@ -2393,9 +2385,9 @@ Lockfile:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/cssnano-util-same-parent/-/cssnano-util-same-parent-4.0.0.tgz#d2a3de1039aa98bc4ec25001fa050330c2a16dac"
   
-  cssnano@4.0.3:
-    version "4.0.3"
-    resolved "https://registry.yarnpkg.com/cssnano/-/cssnano-4.0.3.tgz#b694d626906bf1844f573465ecc166b2240b8699"
+  cssnano@4.0.5:
+    version "4.0.5"
+    resolved "https://registry.yarnpkg.com/cssnano/-/cssnano-4.0.5.tgz#8789b5fdbe7be05d8a0f7e45c4c789ebe712f5aa"
     dependencies:
       cosmiconfig "^5.0.0"
       cssnano-preset-default "^4.0.0"
@@ -2462,7 +2454,21 @@ Lockfile:
     version "0.0.3"
     resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-0.0.3.tgz#18ae979a6a0ca994b0625853916d2662bbae0b1a"
   
-  datatables.net@^1.10.19:
+  datatables.net-bs4@^1.10.19:
+    version "1.10.19"
+    resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.10.19.tgz#0608dff22008cf3c7b8a68b1bc702ed255b404fb"
+    dependencies:
+      datatables.net "1.10.19"
+      jquery ">=1.7"
+  
+  datatables.net-dt@^1.10.19:
+    version "1.10.19"
+    resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-1.10.19.tgz#fc668e4942ac6e331be2707975d0f33e01afb60f"
+    dependencies:
+      datatables.net "1.10.19"
+      jquery ">=1.7"
+  
+  datatables.net@1.10.19, datatables.net@^1.10.19:
     version "1.10.19"
     resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.19.tgz#97a1ed41c85e62d61040603481b59790a172dd1f"
     dependencies:
@@ -4497,10 +4503,6 @@ Lockfile:
       strip-ansi "^4.0.0"
       through "^2.3.6"
   
-  install@^0.12.1:
-    version "0.12.1"
-    resolved "https://registry.yarnpkg.com/install/-/install-0.12.1.tgz#38b2dd4489330e9af3eeaba93b9e3fc77dee7872"
-  
   internal-ip@1.2.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-1.2.0.tgz#ae9fbf93b984878785d50a8de1b356956058cf5c"
@@ -4887,10 +4889,6 @@ Lockfile:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.1.2.tgz#135b992c0575c985cfa0f494a3227ed238583ece"
   
-  jquery-mousewheel@>=3.0.6:
-    version "3.1.13"
-    resolved "https://registry.yarnpkg.com/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
-  
   jquery-resizable-dom@^0.32.0:
     version "0.32.0"
     resolved "https://registry.yarnpkg.com/jquery-resizable-dom/-/jquery-resizable-dom-0.32.0.tgz#85269fdc604fce3e0b15fe65f2ebb7ca7d4dd247"
@@ -4904,6 +4902,10 @@ Lockfile:
   jquery@*, jquery@>=1.7, jquery@^3.3.1, jquery@~3.3.1:
     version "3.3.1"
     resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  
+  jqwidgets-framework@^6.0.5:
+    version "6.0.5"
+    resolved "https://registry.yarnpkg.com/jqwidgets-framework/-/jqwidgets-framework-6.0.5.tgz#94adc1ec4b7e761c85ed3b01b577ad7f4106d7bc"
   
   js-base64@^2.1.8:
     version "2.4.5"
@@ -5406,12 +5408,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/make-iterator/-/make-iterator-1.0.1.tgz#29b33f312aa8f547c4a5e490f56afcec99133ad6"
     dependencies:
       kind-of "^6.0.2"
-  
-  malihu-custom-scrollbar-plugin@^3.1.5:
-    version "3.1.5"
-    resolved "https://registry.yarnpkg.com/malihu-custom-scrollbar-plugin/-/malihu-custom-scrollbar-plugin-3.1.5.tgz#310cecc5e59415a1c29e9dfb5d2b6e01d66a29ef"
-    dependencies:
-      jquery-mousewheel ">=3.0.6"
   
   mamacro@^0.0.3:
     version "0.0.3"
@@ -5950,8 +5946,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.3.tgz#7e71703d973af3370a9591bafe3a63aca0be2308"
   
   npm-packlist@^1.1.6:
-    version "1.1.10"
-    resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.1.10.tgz#1039db9e985727e464df066f4cf0ab6ef85c398a"
+    version "1.1.11"
+    resolved "https://registry.yarnpkg.com/npm-packlist/-/npm-packlist-1.1.11.tgz#84e8c683cbe7867d34b1d357d893ce29e28a02de"
     dependencies:
       ignore-walk "^3.0.1"
       npm-bundled "^1.0.1"
@@ -6035,7 +6031,7 @@ Lockfile:
     dependencies:
       isobject "^3.0.0"
   
-  object.assign@^4.0.4, object.assign@^4.1.0:
+  object.assign@^4.0.1, object.assign@^4.0.4, object.assign@^4.1.0:
     version "4.1.0"
     resolved "https://registry.yarnpkg.com/object.assign/-/object.assign-4.1.0.tgz#968bf1100d7956bb3ca086f006f846b3bc4008da"
     dependencies:
@@ -6514,8 +6510,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-2.3.1.tgz#11d1e12b9cb64d63e30c143a330f4c1f567da85f"
   
   popper.js@^1.14.3:
-    version "1.14.3"
-    resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
+    version "1.14.4"
+    resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.4.tgz#8eec1d8ff02a5a3a152dd43414a15c7b79fd69b6"
   
   portfinder@^1.0.9:
     version "1.0.13"
@@ -6798,9 +6794,9 @@ Lockfile:
       source-map "^0.6.1"
       supports-color "^5.4.0"
   
-  postcss@^7.0.1:
-    version "7.0.1"
-    resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.1.tgz#db20ca4fc90aa56809674eea75864148c66b67fa"
+  postcss@^7.0.2:
+    version "7.0.2"
+    resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.2.tgz#7b5a109de356804e27f95a960bef0e4d5bc9bb18"
     dependencies:
       chalk "^2.4.1"
       source-map "^0.6.1"
@@ -6840,6 +6836,18 @@ Lockfile:
   process@^0.11.1, process@^0.11.10:
     version "0.11.10"
     resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
+  
+  progress-bar-webpack-plugin@^1.11.0:
+    version "1.11.0"
+    resolved "https://registry.yarnpkg.com/progress-bar-webpack-plugin/-/progress-bar-webpack-plugin-1.11.0.tgz#4f801288443c55ec029b20cbfdcbf3e1dc17f852"
+    dependencies:
+      chalk "^1.1.1"
+      object.assign "^4.0.1"
+      progress "^1.1.8"
+  
+  progress@^1.1.8:
+    version "1.1.8"
+    resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
   
   progress@^2.0.0:
     version "2.0.0"
@@ -7962,8 +7970,8 @@ Lockfile:
       readable-stream "^2.0.2"
   
   stream-each@^1.1.0:
-    version "1.2.2"
-    resolved "https://registry.yarnpkg.com/stream-each/-/stream-each-1.2.2.tgz#8e8c463f91da8991778765873fe4d960d8f616bd"
+    version "1.2.3"
+    resolved "https://registry.yarnpkg.com/stream-each/-/stream-each-1.2.3.tgz#ebe27a0c389b04fbcc233642952e10731afa9bae"
     dependencies:
       end-of-stream "^1.1.0"
       stream-shift "^1.0.0"
@@ -8151,8 +8159,8 @@ Lockfile:
       inherits "2"
   
   tar@^4:
-    version "4.4.4"
-    resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.4.tgz#ec8409fae9f665a4355cc3b4087d0820232bb8cd"
+    version "4.4.6"
+    resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.6.tgz#63110f09c00b4e60ac8bcfe1bf3c8660235fbc9b"
     dependencies:
       chownr "^1.0.1"
       fs-minipass "^1.2.5"
@@ -8920,8 +8928,8 @@ Lockfile:
       webpack "^4.7.0"
   
   webpack@^4.12.0:
-    version "4.16.2"
-    resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.16.2.tgz#c3e0e771adc94582e0543dd18d7436066051e885"
+    version "4.16.5"
+    resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.16.5.tgz#29fb39462823d7eb8aefcab8b45f7f241db0d092"
     dependencies:
       "@webassemblyjs/ast" "1.5.13"
       "@webassemblyjs/helper-module-context" "1.5.13"

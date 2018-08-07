@@ -376,10 +376,10 @@
     position: absolute;
 
     .tg-border-box {
-        left: -8px;
-        top: -8px;
-        right: -8px;
-        bottom: -8px;
+        left: - $ironlight-border-size;
+        top: - $ironlight-border-size;
+        right: - $ironlight-border-size;
+        bottom: - $ironlight-border-size;
     }
 }
 
