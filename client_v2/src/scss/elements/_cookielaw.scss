@@ -4,6 +4,12 @@
 }
 
 .tg-cookielaw {
+    font-size: 11px;
+    width:480px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    font-family: Kingthings;
 
     .tg-modal-content {
         color: #86725a;
@@ -20,8 +26,7 @@
     }
     .tg-title {
         color: $tg-yellow;
-        font-size: 12px;
-        text-transform: uppercase;
+        font-size: 13px;
     }
     .tg-btn-cookieconsent {
         cursor: pointer;
@@ -37,6 +42,8 @@
     .custom-checkbox {
         line-height: 22px;
         padding-bottom: .5em;
+        padding-top: .5em;
+        color: white;
         label {
             cursor: pointer;
             line-height: 1;

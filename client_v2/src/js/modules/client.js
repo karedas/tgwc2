@@ -11,7 +11,9 @@ import 'jqwidgets-framework/jqwidgets/jqxcore';
 import 'jqwidgets-framework/jqwidgets/jqxwindow';
 import 'jqwidgets-framework/jqwidgets/jqxdockinglayout';
 import 'jqwidgets-framework/jqwidgets/jqxscrollbar';
+import 'jqwidgets-framework/jqwidgets/jqxPanel';
 import 'jqwidgets-framework/jqwidgets/jqxbuttons';
+import 'jqwidgets-framework/jqwidgets/jqxSplitter';
 /* Jquery UI */
 // import position from 'jquery-ui/ui/position';
 // import draggable from 'jquery-ui/ui/widgets/draggable';
@@ -694,7 +696,7 @@ export default class TgGui {
 
             let now = Date.now();
             if (now > _.client_update.last + 1000) {
-                if (_.client_update.inventory.needed && _.isDialogOpen('#characterdialog')) {
+               /* if (_.client_update.inventory.needed && _.isDialogOpen('#characterdialog')) {
                     _.sendToServer('@inv');
                     _.client_update.inventory.needed = false;
                     _.client_update.last = now;
@@ -710,7 +712,7 @@ export default class TgGui {
                     _.sendToServer('@agg');
                     _.client_update.room.needed = false;
                     _.client_update.last = now;
-                }
+                }*/
             }
 
         } else if (len > 200000) {
@@ -1684,7 +1686,7 @@ export default class TgGui {
 
         let _ = this;
         _.loadCharacterWindow().then(function (resolve, reject) {
-            let txt = '<div class="skill-list scrollable">';
+            let txt = '<div class="skill-list">';
             txt += '<table class="skills tg-rendertable table table-sm table-striped table-hover">';
 
             for (let groupname in skinfo) {
@@ -3412,21 +3414,21 @@ export default class TgGui {
 
         _.configInit();
         /* Interface Modules List */
-        //_.inputInit();
-        // _.genericEvents();
-        // _.keyboardMapInit();
-        // _.mainNavBarInit();
-        // _.tooltipInit();
-        // _.outputInit();
-        // _.focusInput();
-        // _.mapInit();
-        // _.doorsInit();
-        // _.interactionInit();
-        // _.extraBoardInit();
-        // _.buttonsEventInit();
-        // _.combatPanelWidgetInit();
-        // _.audioInit();
-
+         _.inputInit();
+         _.genericEvents();
+         _.keyboardMapInit();
+         _.mainNavBarInit();
+         _.tooltipInit();
+         _.outputInit();
+         _.mapInit();
+         _.doorsInit();
+         //_.interactionInit();
+         _.extraBoardInit();
+         _.buttonsEventInit();
+         //_.combatPanelWidgetInit();
+         _.audioInit();
+         _.focusInput();
+        
         //Interface is up
         _.client_open = true;
     }
@@ -3459,16 +3461,6 @@ export default class TgGui {
 
         /* Audio */
         $('#tgNavBartriggerAudio').on('click');
-
-        // on window resize run function
-        $(window).resize(function () {
-            _.fluidDialog();
-        });
-
-        // catch dialog if opened within a viewport smaller than the dialog width
-        $(document).on("dialogopen", ".ui-dialog", function (event, ui) {
-            _.fluidDialog();
-        });
 
         /* Data Sorter */
         $.extend($.fn.dataTable.defaults, {
@@ -3573,7 +3565,6 @@ export default class TgGui {
         var wHeight = $(window).height();
         let mHeight = wHeight * 0.90;
         
-        console.log(mWidth, mHeight);
         if (!_.openDialog(pid)) {
             $(pid).dialog({
                 appendTo: "body",
@@ -3645,28 +3636,39 @@ export default class TgGui {
     outputInit() {
 
         let _ = this;
-        let outputID = '.tg-output-main';
 
-        _.addScrollBar(outputID + ' .scrollable', 'output');
+        let output_width;
 
         if (!_.client_options.extradetail_open) {
-            $(outputID).css('width', '100%');
+            output_width = '100%';
+            extraoutput_width = '0'
         } else {
-            $(outputID).css('width', _.client_options.output_width);
+            output_width = _.client_options.output_width;
         }
 
-        if (_.client_options.extradetail_open) {
-          //  _.addResizableOutput();
-        } else {
-          //  _.addResizableOutput();
-          // $('.tg-main-output').resizable('disable');
-        }
+        $(".output-split").jqxSplitter({
+            width: '100%',
+            height: '100%',
+            panels: [{ size: output_width, collapsible: false }, { collapsible: true}]
+         });
+
+         $('.tg-output-main').jqxPanel();
+
+        /* Image Event */
+        $('#detailimage')
+        .on('error', function () {
+            $(this).closest('.extra-detailimg').slideUp(0);
+        })
+        .on('load', function () {
+            $(this).closest('.extra-detailimg').slideDown(0);
+        });
+
         // init Extraoutput window
-        _.extraOutputInit();
+        //_.extraOutputInit();
         // Highlightining mob/obj based on user click
         //TODO: this.highlightsOutputMRN();
         //add Event Handler for Expndable list
-        _.makeExpandable();
+        //_.makeExpandable();
     }
 
     addResizableOutput() {
@@ -3683,7 +3685,6 @@ export default class TgGui {
                 }
                 $('.tg-output-extra').css({
                     left: w + 1,
-                    //width: ($(this).parent().width() - w),
                 });
             },
             resize: function (event, ui) {
@@ -3716,7 +3717,7 @@ export default class TgGui {
 
             app = $(text);
 
-        _.addDragAndDrop('.iconimg.interact', app);
+       // _.addDragAndDrop('.iconimg.interact', app);
 
         $('#output').append(app);
 
@@ -3788,24 +3789,6 @@ export default class TgGui {
                 }
             }
         });
-    }
-
-    extraOutputInit() {
-        let _ = this;
-        $('.tg-output-extra').css({
-            left: _.client_options.output_width.toString()
-        });
-
-        _.addScrollBar('.tg-output-extra', 'extraoutput');
-
-        /* Image Event */
-        $('#detailimage')
-            .on('error', function () {
-                $(this).closest('.extra-detailimg').slideUp(0);
-            })
-            .on('load', function () {
-                $(this).closest('.extra-detailimg').slideDown(0);
-            });
     }
 
     toggleNotifyOutput() {
@@ -4206,20 +4189,17 @@ export default class TgGui {
         $.ajax(src, {
             success: function(response) {
                 $('body').append(response);
-                $('.tg-cookielaw').jqxWindow({
-                    width: '450px',
+                $('#tgCookieLaw').jqxWindow({
+                    minWidth: '100%',
+                    width: '100%',
                     height: 'auto',
-                    maxWidth: '95%',
-                    maxHeight: '95%',
                     resizable: false,
                     draggable: false,
                     isModal: true,
                     keyboardCloseKey :'none',
-                    content: response,
-                    animationType: 'combined'
+                    animationType: 'combined',
+                    modalOpacity:1,
                 });
-  
-                
             }
         });
     }
@@ -4242,6 +4222,31 @@ export default class TgGui {
 
                     _.client_options.news_wantsee = true;
 
+                    $('body').append(result);
+
+                    $('#tgNews').jqxWindow({
+                        minWidth: '100%',
+                        width: '100%',
+                        maxHeight: '100%',
+                        resizable: false,
+                        draggable: false,
+                        isModal: true,
+                        keyboardCloseKey :'none',
+                        animationType: 'combined',
+                        modalOpacity:0.8,
+                        initContent: function(){
+                            _.client_state.news_showed = true;
+                            _.client_options.news_date_last = fileTimeStamp;
+                            $('#initNewsButton').one('click', function () {
+                                if ($('input[type=checkbox]').prop('checked')) {
+                                    _.client_options.news_wantsee = false;
+                                }
+                                _.sendInput();
+                                _.closeAllPopups();
+                            }); 
+                        }
+                    });
+/*
                     $.magnificPopup.open({
                         showCloseBtn: false,
                         closeOnBgClick: false,
@@ -4272,7 +4277,7 @@ export default class TgGui {
                                 _.SaveStorage('options', _.client_options);
                             }
                         }
-                    });
+                    });*/
                 } else {
                     _.sendInput()
                 }
@@ -4354,11 +4359,10 @@ export default class TgGui {
             let refer_id = ref + '_' + idx;
 
             //_.updateScrollBar(refer_id);
-
-            $(s).jqxScrollBar({
+            $('<div class="handle-scroll-v" id="scr_'+idx+'"/>').appendTo(s);
+            $('#scr_'+idx).jqxScrollBar({
                 width: 18,
                 height: '100%',
-                min: 0,
                 max: '100%',
                 vertical: true,
                 showButtons: true,
@@ -4397,6 +4401,7 @@ export default class TgGui {
 
 
     addDragAndDrop(subselector, objs) {
+        return ;
         let _ = this;
         $('.iconimg.interact', objs).draggable({
             classes: {
