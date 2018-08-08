@@ -2567,7 +2567,7 @@ export default class TgGui {
 
         textarea.append(details);
 
-        _.scrollPanelTo('#extraoutput', '.scrollable', false, 0);
+        //_.scrollPanelTo('#extraoutput', '.scrollable', false, 0);
 
         if (type == 'room') {
             if (_.client_update.room.version < info.let) {
@@ -3637,7 +3637,7 @@ export default class TgGui {
 
         let _ = this;
 
-        let output_width;
+        let output_width, extraoutput_width;
 
         if (!_.client_options.extradetail_open) {
             output_width = '100%';
@@ -3652,7 +3652,11 @@ export default class TgGui {
             panels: [{ size: output_width, collapsible: false }, { collapsible: true}]
          });
 
-         $('.tg-output-main').jqxPanel();
+         $('.tg-output-main').jqxPanel({
+             autoUpdate: true,
+             sizeMode: 'fixed'
+            }
+          );
 
         /* Image Event */
         $('#detailimage')
@@ -3725,7 +3729,7 @@ export default class TgGui {
             $('#output').contents().slice(0, -_.client_options.output_trimlines).remove();
         }
 
-        _.scrollPanelTo('#output', '.scrollable', false, null);
+        _.scrollPanelTo('.tg-output-main', '#output', false, null);
 
     }
 
@@ -4015,7 +4019,7 @@ export default class TgGui {
                 } else {
                     $('.tg-output-main').css('width', '100%').resizable('disable');
                 }
-                _.scrollPanelTo('#output', '.scrollable', true, null);
+                //_.scrollPanelTo('#output', '.scrollable', true, null);
                 _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
                 _.SaveStorage('options', _.client_options);
             }
@@ -4033,7 +4037,7 @@ export default class TgGui {
             if (_.client_options.dashboard == 1 || _.client_options.dashboard == 2) {
                 _.client_options.dashboard = _.client_options.dashboard == 1 ? 2 : 0;
                 $('.tg-characterpanel').slideToggle(300, function () {
-                    _.scrollPanelTo('#output', '.scrollable', true, null);
+                    //_.scrollPanelTo('#output', '.scrollable', true, null);
                     $('.tg-dashboard').removeClass('midopen');
                 });
                 $(self).toggleClass('tg-brown');
@@ -4045,7 +4049,7 @@ export default class TgGui {
         $('#triggerExpandTgArea').on('click', function () {
             $('.tg-area').toggleClass('expanded', function () {});
             setTimeout(() => {
-                _.scrollPanelTo('#output', '.scrollable', true, null);
+                //_.scrollPanelTo('#output', '.scrollable', true, null);
             }, 200);
         })
 
@@ -4227,7 +4231,6 @@ export default class TgGui {
                     $('#tgNews').jqxWindow({
                         minWidth: '100%',
                         width: '100%',
-                        maxHeight: '100%',
                         resizable: false,
                         draggable: false,
                         isModal: true,
@@ -4587,22 +4590,21 @@ export default class TgGui {
         $('.jqx-window').jqxWindow('close'); 
     }
 
-    scrollPanelTo(content, scrollbox, animate, where) {
-
-        let outputHeight;
-        scrollbox = $(content).parent(scrollbox);
-
-        if (where !== null) {
-            outputHeight = where;
+    scrollPanelTo(selector, children, animate, where) {
+        let contentheight;
+        if(where !== null) {
+            contentheight = where;
         } else {
-            outputHeight = $(content).height();
+            contentheight = $(children).outerHeight(true);
         }
-        if (animate) {
-            $(scrollbox).animate({
-                scrollTop: outputHeight
+
+        if(animate) {
+            $(selector).animate({
+                scrollTop: contentheight
             }, 500, 'linear');
         } else {
-            $(scrollbox).scrollTop(outputHeight);
+            console.log(contentheight);
+            $(selector).jqxPanel('scrollTo', 0, contentheight );
         }
     }
 }

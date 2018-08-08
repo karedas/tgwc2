@@ -92,11 +92,11 @@ module.exports = function (prop, wp_instance) {
             }
         },
 
-        stats: {
-            modules: true,
-            entrypoints: false,
-            chunks: false
-        },
+        // stats: {
+        //     modules: false,
+        //     entrypoints: false,
+        //     chunks: false
+        // },
 
         performance: {
             hints: process.env.NODE_ENV === 'production' ? "warning" : false
