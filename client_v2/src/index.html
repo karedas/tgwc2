@@ -18,12 +18,14 @@
   <![endif]-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
     crossorigin="anonymous">
-    
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
   <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122402371-1"></script>
 
@@ -120,26 +122,28 @@
           <div class="row tg-output tg-box b-ironlight tg-shadow">
             <div class="tg-box col-12 p-0 d-flex">
               <div class="output-split">
-                <div class="tg-output-main p-0 resizable">
-                  <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
-                    <i class="far fa-arrow-alt-circle-right"></i>
-                  </div>
-                  <!-- Output Area -->
+                <div class="splitter-panel">
+                  <div class="tg-output-main p-0 resizable">
+   
+                    <!-- Output Area -->
                     <div id="output" class=" tg-output-history">
-                    </div>  
-                </div>
-                <div class="tg-output-extra">
-                  <div id="extraoutput" class="tg-extraoutput-history">
-                    <div class="extraoutput-header">
-                      <div class="out-title" id="detailtitle"></div>
-                      <div class="extra-detailimg">
-                        <img src="" id="detailimage" />
-                      </div>
-                      <div class="detaildesc" id="detaildesc"></div>
                     </div>
-                    <div class="extraoutput-detail">
-                      <div class="extranotice">
-                        <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
+                  </div>
+                </div>
+                <div class="splitter-panel">
+                  <div class="tg-output-extra">
+                    <div id="extraoutput" class="tg-extraoutput-history">
+                      <div class="extraoutput-header">
+                        <div class="out-title" id="detailtitle"></div>
+                        <div class="extra-detailimg">
+                          <img src="" id="detailimage" />
+                        </div>
+                        <div class="detaildesc" id="detaildesc"></div>
+                      </div>
+                      <div class="extraoutput-detail">
+                        <div class="extranotice">
+                          <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -330,7 +334,8 @@
               <div class="tg-right-board-wrap d-flex flex-column">
                 <div class="tg-board-activity">
                   <div class="tg-board-activity-wrap">
-                    <span class="no-activity"><i class="far fa-bell"></i>Non ci sono attivit&agrave; recenti</span>
+                    <span class="no-activity">
+                      <i class="far fa-bell"></i>Non ci sono attivit&agrave; recenti</span>
                   </div>
                 </div>
                 <div class="tg-right-board-end">
@@ -343,13 +348,13 @@
                   <div class="wrap-btnend-box">
                     <button id="invRightBtn" class="tg-button btn-inventario-graph" rel="tooltip" title="Inventario">Inventario</button>
                   </div>
-                  <div class="wrap-btnend-box">                    
+                  <div class="wrap-btnend-box">
                     <button id="skillRightBtn" class="tg-button btn-skill-graph" rel="tooltip" title="Abilita'">abilit&agrave;</button>
                   </div>
-                  <div class="wrap-btnend-box">                    
+                  <div class="wrap-btnend-box">
                     <button id="statoRightBtn" class="tg-button btn-stato-graph" rel="tooltip" title="Stato">Stato</button>
                   </div>
-                  <div class="wrap-btnend-box">                    
+                  <div class="wrap-btnend-box">
                     <button id="configRightBtn" class="tg-button btn-config-graph" rel="tooltip" title="Configurazione">Configurazione</button>
                   </div>
                 </div>
@@ -567,14 +572,14 @@
       </div>
     </div>
     <div id="tabledialog" class="tg-generictable tg-shadow tg-dialog-box tg-box b-ironlight">
-        <div id="tablecont" class="table-cont tg-shadow-inset tg-box">
-        </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
+      <div id="tablecont" class="table-cont tg-shadow-inset tg-box">
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
     </div>
     <div id="bookdialog" class="tg-shadow tg-dialog-box tg-box b-ironlight">
       <div id="book" class="tg-bookpage"></div>

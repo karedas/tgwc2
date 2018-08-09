@@ -122,13 +122,6 @@ caption {
     border: none;
 }
 
-.scrollable {
-    height: 100%;
-    padding-right: 12px;
-    overflow: hidden;
-}
-
-
 @include media-breakpoint-down(md) {
     .tg-area {
         padding: 0;

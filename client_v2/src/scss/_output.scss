@@ -11,16 +11,9 @@
         overflow: hidden;
     }
 
-    .ui-resizable-handle {
-        right: -6px;
-    }
-
     .tg-output-main {
         overflow: hidden;
-        position: absolute;
-        width: 50%;
-        top: 0;
-        bottom: 0;
+        overflow-y: auto;
     }
 
 
@@ -367,18 +360,18 @@
 }
 
 .tg-output-extra {
-    width: auto;
+    width: 100%;
     display: none;
-    margin: 0 0 6px;
+    margin: 0 0 6px -3px;
     z-index: 2;
     right: 0;
     overflow: hidden;
     position: absolute;
 
     .tg-extraoutput-history {
+        width: 100%;
         padding-top: 0;
         padding-left: 2px;
-        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
     }
 
     .out-list {

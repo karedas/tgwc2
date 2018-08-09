@@ -1,4 +1,3 @@
-
 // ========== NPM Modules
 import io from 'socket.io-client';
 import Modernizr from "modernizr";
@@ -583,7 +582,7 @@ export default class TgGui {
                 }
             });
 
-            _.socket.on('reconnect_attempt', function () {/* User Reconnection */});
+            _.socket.on('reconnect_attempt', function () { /* User Reconnection */ });
 
             _.socket.on('connect_error', function (e) {
                 if (_.isConnected) {
@@ -696,23 +695,23 @@ export default class TgGui {
 
             let now = Date.now();
             if (now > _.client_update.last + 1000) {
-               /* if (_.client_update.inventory.needed && _.isDialogOpen('#characterdialog')) {
-                    _.sendToServer('@inv');
-                    _.client_update.inventory.needed = false;
-                    _.client_update.last = now;
-                }
+                /* if (_.client_update.inventory.needed && _.isDialogOpen('#characterdialog')) {
+                     _.sendToServer('@inv');
+                     _.client_update.inventory.needed = false;
+                     _.client_update.last = now;
+                 }
 
-                if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')) {
-                    _.sendToServer('@equip');
-                    _.client_update.equipment.needed = false;
-                    _.client_update.last = now;
-                }
+                 if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')) {
+                     _.sendToServer('@equip');
+                     _.client_update.equipment.needed = false;
+                     _.client_update.last = now;
+                 }
 
-                if (_.client_update.room.needed && _.client_options.extradetail_open) {
-                    _.sendToServer('@agg');
-                    _.client_update.room.needed = false;
-                    _.client_update.last = now;
-                }*/
+                 if (_.client_update.room.needed && _.client_options.extradetail_open) {
+                     _.sendToServer('@agg');
+                     _.client_update.room.needed = false;
+                     _.client_update.last = now;
+                 }*/
             }
 
         } else if (len > 200000) {
@@ -1868,7 +1867,9 @@ export default class TgGui {
                 height: 'auto',
                 resizable: false,
                 title: title,
-                classes: {'ui-dialog': 'modal-character'},
+                classes: {
+                    'ui-dialog': 'modal-character'
+                },
                 position: {
                     my: 'center',
                     at: 'center',
@@ -3414,21 +3415,21 @@ export default class TgGui {
 
         _.configInit();
         /* Interface Modules List */
-         _.inputInit();
-         _.genericEvents();
-         _.keyboardMapInit();
-         _.mainNavBarInit();
-         _.tooltipInit();
-         _.outputInit();
-         _.mapInit();
-         _.doorsInit();
-         //_.interactionInit();
-         _.extraBoardInit();
-         _.buttonsEventInit();
-         //_.combatPanelWidgetInit();
-         _.audioInit();
-         _.focusInput();
-        
+        _.inputInit();
+        _.genericEvents();
+        _.keyboardMapInit();
+        _.mainNavBarInit();
+        _.tooltipInit();
+        _.outputInit();
+        _.mapInit();
+        _.doorsInit();
+        //_.interactionInit();
+        _.extraBoardInit();
+        _.buttonsEventInit();
+        //_.combatPanelWidgetInit();
+        _.audioInit();
+        _.focusInput();
+
         //Interface is up
         _.client_open = true;
     }
@@ -3533,7 +3534,7 @@ export default class TgGui {
 
         let pid = '#configurationpanel';
         _.loadConfigurationPanel().then(function () {
-            
+
             _.openConfigPanel();
         });
     }
@@ -3564,7 +3565,7 @@ export default class TgGui {
         let mWidth = wWidth * 0.90;
         var wHeight = $(window).height();
         let mHeight = wHeight * 0.90;
-        
+
         if (!_.openDialog(pid)) {
             $(pid).dialog({
                 appendTo: "body",
@@ -3646,26 +3647,44 @@ export default class TgGui {
             output_width = _.client_options.output_width;
         }
 
+        
         $(".output-split").jqxSplitter({
             width: '100%',
             height: '100%',
-            panels: [{ size: output_width, collapsible: false }, { collapsible: true}]
-         });
+            orientation: 'vertical',
+            splitBarSize: 5,
+            panels: [{
+                size: output_width,
+                collapsible: false
+            }, {
+                collapsible: true
+            }]
+        });
 
-         $('.tg-output-main').jqxPanel({
-             autoUpdate: true,
-             sizeMode: 'fixed'
-            }
-          );
+        $('.tg-output-main').jqxPanel({
+            width: "100%",
+            height: "100%",
+            autoUpdate: true,
+            scrollBarSize: 8
+        });
+
+        $('.tg-output-extra').jqxPanel({
+            width: "100%",
+            height: "100%",
+            autoUpdate: true,
+            sizeMode: "fixed",
+            scrollBarSize: 8
+        })
+
 
         /* Image Event */
         $('#detailimage')
-        .on('error', function () {
-            $(this).closest('.extra-detailimg').slideUp(0);
-        })
-        .on('load', function () {
-            $(this).closest('.extra-detailimg').slideDown(0);
-        });
+            .on('error', function () {
+                $(this).closest('.extra-detailimg').slideUp(0);
+            })
+            .on('load', function () {
+                $(this).closest('.extra-detailimg').slideDown(0);
+            });
 
         // init Extraoutput window
         //_.extraOutputInit();
@@ -3721,7 +3740,7 @@ export default class TgGui {
 
             app = $(text);
 
-       // _.addDragAndDrop('.iconimg.interact', app);
+        // _.addDragAndDrop('.iconimg.interact', app);
 
         $('#output').append(app);
 
@@ -4009,20 +4028,20 @@ export default class TgGui {
 
         /* Toggle Extra Output Window */
         $('#triggerToggleExtraOutput').on('click', function () {
-            if (!$(this).is(':animated')) {
-                $('.tg-output-extra').toggleClass('d-flex');
-                $(this).toggleClass('tg-brown');
-                /* Refresh Extra when is open */
-                if ($('.tg-output-extra').is(':visible')) {
-                    $('.tg-output-main').css('width', _.client_options.output_width).resizable('enable');
-                    _.processCommands('@agg');
-                } else {
-                    $('.tg-output-main').css('width', '100%').resizable('disable');
-                }
-                //_.scrollPanelTo('#output', '.scrollable', true, null);
-                _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
-                _.SaveStorage('options', _.client_options);
+            $(this).toggleClass('tg-brown');
+
+            let collapsed = $('.output-split').jqxSplitter('panels')[1].collapsed;
+            if (!collapsed) {
+                $('.output-split').jqxSplitter('collapse');
+                // $('.tg-output-main').css('width', _.client_options.output_width).resizable('enable');
+                _.processCommands('@agg');
+            } else {
+                $('.output-split').jqxSplitter('expand');
+                //$('.tg-output-main').css('width', '100%').resizable('disable');
             }
+            //_.scrollPanelTo('#output', '.scrollable', true, null);
+            _.client_options.extradetail_open = _.client_options.extradetail_open ? false : true;
+            _.SaveStorage('options', _.client_options);
         });
 
         /* Toggle character panel  Display */
@@ -4191,7 +4210,7 @@ export default class TgGui {
         let src = './ajax/cookielawAlert.html';
 
         $.ajax(src, {
-            success: function(response) {
+            success: function (response) {
                 $('body').append(response);
                 $('#tgCookieLaw').jqxWindow({
                     minWidth: '100%',
@@ -4200,9 +4219,9 @@ export default class TgGui {
                     resizable: false,
                     draggable: false,
                     isModal: true,
-                    keyboardCloseKey :'none',
+                    keyboardCloseKey: 'none',
                     animationType: 'combined',
-                    modalOpacity:1,
+                    modalOpacity: 1,
                 });
             }
         });
@@ -4234,10 +4253,10 @@ export default class TgGui {
                         resizable: false,
                         draggable: false,
                         isModal: true,
-                        keyboardCloseKey :'none',
+                        keyboardCloseKey: 'none',
                         animationType: 'combined',
-                        modalOpacity:0.8,
-                        initContent: function(){
+                        modalOpacity: 0.8,
+                        initContent: function () {
                             _.client_state.news_showed = true;
                             _.client_options.news_date_last = fileTimeStamp;
                             $('#initNewsButton').one('click', function () {
@@ -4246,41 +4265,41 @@ export default class TgGui {
                                 }
                                 _.sendInput();
                                 _.closeAllPopups();
-                            }); 
+                            });
                         }
                     });
-/*
-                    $.magnificPopup.open({
-                        showCloseBtn: false,
-                        closeOnBgClick: false,
-                        type: 'inline',
-                        preloader: false,
-                        items: {
-                            src: result,
-                            type: 'inline'
-                        },
-                        mainClass: 'modal-notizie',
-                        callbacks: {
-                            open: function () {
-                                _.addScrollBar('.modal-notizie .scrollable', 'notizie');
-                                _.client_state.news_showed = true;
-                                _.client_options.news_date_last = fileTimeStamp;
+                    /*
+                                        $.magnificPopup.open({
+                                            showCloseBtn: false,
+                                            closeOnBgClick: false,
+                                            type: 'inline',
+                                            preloader: false,
+                                            items: {
+                                                src: result,
+                                                type: 'inline'
+                                            },
+                                            mainClass: 'modal-notizie',
+                                            callbacks: {
+                                                open: function () {
+                                                    _.addScrollBar('.modal-notizie .scrollable', 'notizie');
+                                                    _.client_state.news_showed = true;
+                                                    _.client_options.news_date_last = fileTimeStamp;
 
-                                $('#initNewsButton').one('click', function () {
-                                    if ($('input[type=checkbox]').prop('checked')) {
-                                        _.client_options.news_wantsee = false;
-                                    }
-                                    _.sendInput();
-                                    _.closeAllPopups();
-                                });
+                                                    $('#initNewsButton').one('click', function () {
+                                                        if ($('input[type=checkbox]').prop('checked')) {
+                                                            _.client_options.news_wantsee = false;
+                                                        }
+                                                        _.sendInput();
+                                                        _.closeAllPopups();
+                                                    });
 
-                            },
-                            close: function () {
-                                _.sendInput();
-                                _.SaveStorage('options', _.client_options);
-                            }
-                        }
-                    });*/
+                                                },
+                                                close: function () {
+                                                    _.sendInput();
+                                                    _.SaveStorage('options', _.client_options);
+                                                }
+                                            }
+                                        });*/
                 } else {
                     _.sendInput()
                 }
@@ -4362,8 +4381,8 @@ export default class TgGui {
             let refer_id = ref + '_' + idx;
 
             //_.updateScrollBar(refer_id);
-            $('<div class="handle-scroll-v" id="scr_'+idx+'"/>').appendTo(s);
-            $('#scr_'+idx).jqxScrollBar({
+            $('<div class="handle-scroll-v" id="scr_' + idx + '"/>').appendTo(s);
+            $('#scr_' + idx).jqxScrollBar({
                 width: 18,
                 height: '100%',
                 max: '100%',
@@ -4404,7 +4423,7 @@ export default class TgGui {
 
 
     addDragAndDrop(subselector, objs) {
-        return ;
+        return;
         let _ = this;
         $('.iconimg.interact', objs).draggable({
             classes: {
@@ -4587,24 +4606,23 @@ export default class TgGui {
     }
 
     closeAllPopups() {
-        $('.jqx-window').jqxWindow('close'); 
+        $('.jqx-window').jqxWindow('close');
     }
 
     scrollPanelTo(selector, children, animate, where) {
         let contentheight;
-        if(where !== null) {
+        if (where !== null) {
             contentheight = where;
         } else {
             contentheight = $(children).outerHeight(true);
         }
 
-        if(animate) {
+        if (animate) {
             $(selector).animate({
                 scrollTop: contentheight
             }, 500, 'linear');
         } else {
             console.log(contentheight);
-            $(selector).jqxPanel('scrollTo', 0, contentheight );
         }
     }
 }
