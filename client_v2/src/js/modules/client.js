@@ -8,7 +8,6 @@ import dt from 'datatables.net';
 //============ JQWidgets
 import 'jqwidgets-framework/jqwidgets/jqxcore';
 import 'jqwidgets-framework/jqwidgets/jqxwindow';
-import 'jqwidgets-framework/jqwidgets/jqxdockinglayout';
 import 'jqwidgets-framework/jqwidgets/jqxscrollbar';
 import 'jqwidgets-framework/jqwidgets/jqxPanel';
 import 'jqwidgets-framework/jqwidgets/jqxbuttons';
@@ -18,6 +17,7 @@ import 'jqwidgets-framework/jqwidgets/jqxSplitter';
 // import draggable from 'jquery-ui/ui/widgets/draggable';
 // import droppable from 'jquery-ui/ui/widgets/droppable';
 // import dialog from 'jquery-ui/ui/widgets/dialog';
+import PerfectScrollbar from 'perfect-scrollbar';
 //============ Assets file list.
 import AssetsList from 'assets_list.json';
 //============ Custom
@@ -3665,15 +3665,12 @@ export default class TgGui {
             width: "100%",
             height: "100%",
             autoUpdate: true,
-            scrollBarSize: 8
         });
 
         $('.tg-output-extra').jqxPanel({
             width: "100%",
             height: "100%",
-            autoUpdate: true,
-            sizeMode: "fixed",
-            scrollBarSize: 8
+            autoUpdate: true
         })
 
 
@@ -4220,7 +4217,7 @@ export default class TgGui {
                     draggable: false,
                     isModal: true,
                     keyboardCloseKey: 'none',
-                    animationType: 'combined',
+                    animationType: 'fade',
                     modalOpacity: 1,
                 });
             }
@@ -4254,7 +4251,7 @@ export default class TgGui {
                         draggable: false,
                         isModal: true,
                         keyboardCloseKey: 'none',
-                        animationType: 'combined',
+                        animationType: 'fade',
                         modalOpacity: 0.8,
                         initContent: function () {
                             _.client_state.news_showed = true;
@@ -4380,23 +4377,15 @@ export default class TgGui {
         $(selector).each(function (idx, s) {
             let refer_id = ref + '_' + idx;
 
-            //_.updateScrollBar(refer_id);
-            $('<div class="handle-scroll-v" id="scr_' + idx + '"/>').appendTo(s);
-            $('#scr_' + idx).jqxScrollBar({
-                width: 18,
-                height: '100%',
-                max: '100%',
-                vertical: true,
-                showButtons: true,
+            $(s).attr('id', 'scrollb_' + idx);
+            _.updateScrollBar(refer_id);
 
-            })
-            //if (!_.scrollbar[refer_id]) {
-            // _.scrollbar[refer_id] = new PerfectScrollbar(s, {
-            //     wheelPropagation: false,
-            //     suppressScrollX: true
-            // });
-            //}
-
+            if(!_.scrollbar[refer_id]) {
+                _.scrollbar[refer_id] = new PerfectScrollbar(s, {
+                    wheelPropagation: false,
+                    suppressScrollX: true
+                });
+            }
         });
     }
 
@@ -4410,9 +4399,6 @@ export default class TgGui {
     addDraggable(selector, context, handle) {
 
         let _ = this;
-        console.log(selector);
-        console.log(context);
-        console.log(handle);
         $(selector, context).draggable({
             appendTo: 'body',
             zIndex: 1000,
@@ -4609,20 +4595,22 @@ export default class TgGui {
         $('.jqx-window').jqxWindow('close');
     }
 
-    scrollPanelTo(selector, children, animate, where) {
-        let contentheight;
-        if (where !== null) {
-            contentheight = where;
-        } else {
-            contentheight = $(children).outerHeight(true);
-        }
+    scrollPanelTo(content, scrollbox, animate, where) {
 
+        let outputHeight;
+        scrollbox = $(content).parent(scrollbox);
+
+        if (where !== null) {
+            outputHeight = where;
+        } else {
+            outputHeight = $(content).height();
+        }
         if (animate) {
-            $(selector).animate({
-                scrollTop: contentheight
+            $(scrollbox).animate({
+                scrollTop: outputHeight
             }, 500, 'linear');
         } else {
-            console.log(contentheight);
+            $(scrollbox).scrollTop(outputHeight);
         }
     }
 }
