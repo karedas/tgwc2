@@ -1,39 +1,47 @@
 /* ==== Editor */
-.tg-mp.modal-editor  {
-  &.mfp-bg {
-    opacity: .6;
-  }  
-  .mfp-close {
-      top: 8px;
-      right: -8px;
-    }
-    .mfp-content {
+.editor-dialog {
+  background-color: #dabe8b;
+   /* .mfp-content {
         width: 600px;
         max-width: 100%;  
       .tg-modal-icon:after {
         @include sprite($editor_lapis-sprite);
       }
     }
-
+*/
     .tg-modal-content {
       max-width: none;
       background: #dabe8b;
     }
 
     .tg-modal-contentwrap {
-      padding-bottom: 70px;
+      padding-bottom: 34px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+      
+    textarea {
+      background: #e3ceaa;
+      border: none;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      resize: none;
+      font-size: 14px;
+      line-height: 1.4;
+      box-shadow: 0 0 11px 4px #e3ceaa;
+      position: relative;
+      z-index: 3;
     }
 
     .tg-modal-buttons-group {
-      position: absolute;
-      bottom: -18px;
       z-index: 4;
       width: 100%;
-      display: flex;
-      left: 0;
-      .tg-button {
-        float: left;
-      }
+      padding-top: 15px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     
@@ -43,9 +51,8 @@
       display: inline-block;
       color: black;
       padding:2px 12px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      margin: 16px auto 0;
+      font-size: 11px;
     }
 
   }

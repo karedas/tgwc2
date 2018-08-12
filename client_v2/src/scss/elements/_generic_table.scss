@@ -1,16 +1,16 @@
 @import "../utils/datatable-bs4";
 @import 'elements/table_filters';
 
+
+
 .tg-generictable {
     width: 100%;
     color: white;
-    display: none;
-    background-color: #30241d;
-
 
     .table-cont {
         height: 100%;
         overflow: hidden;
+        background-color: #2e241b;
     }
 
     a {
@@ -43,9 +43,4 @@
     .checkbox.checked {
         @include sprite($checked-sprite);
     }
-}
-
-
-.ui-dialog .tg-generictable {
-    display: block;
 }

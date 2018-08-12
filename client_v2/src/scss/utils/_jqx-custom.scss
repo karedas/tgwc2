@@ -1,6 +1,7 @@
 .jqx-widget-content {
     background: transparent;
     border: none;
+    font-size: 11px;
 }
 
 
@@ -36,3 +37,55 @@
     background: #645a41;
     border-color: #564d37;
 }
+
+
+/* Window */
+.tg-window {
+    display: none;
+    overflow: unset;
+}
+
+.jqx-window.tg-window {
+    display: block;
+}
+
+.jqx-window-close-button-background {
+    top: 2.5px;    
+}
+.jqx-window-header {
+    display: table;
+    margin: 0 auto;
+    border: none;
+    width: auto!important;
+    color: #FFF;
+    line-height: 24px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-family: kingthinks;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 0 8px 0;
+    box-sizing: content-box;
+    color: #c5c0b6;
+    background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 4px 0;
+    
+    > div:first-child {
+        width: 100%;
+        background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
+        padding: 0 32px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 100%;
+        background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
+    }
+}
+.jqx-window-content {
+    padding: 0;
+}
+
+
+

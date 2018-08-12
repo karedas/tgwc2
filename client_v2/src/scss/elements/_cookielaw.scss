@@ -1,7 +1,9 @@
-
-.jqx-window-header, .jqx-widget-header {
-    display:none !important;
+#tgCookieLaw {
+    .jqx-window-header, .jqx-widget-header {
+        display:none !important;
+    }
 }
+
 
 .tg-cookielaw {
     font-size: 11px;
@@ -12,7 +14,7 @@
     font-family: Kingthings;
 
     .tg-modal-content {
-        color: #86725a;
+        color: #86725a; 
         text-align: center;
         overflow: hidden;
         background: #190f06 url($imgPath + '/background/bg-leather.jpg') repeat;

@@ -12,8 +12,11 @@
     }
 
     .tg-output-main {
-        overflow: hidden;
-        overflow-y: auto;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
     }
 
 
@@ -266,6 +269,8 @@
         overflow: hidden; 
         padding-bottom: .4em;
         margin-bottom: 1em;
+        margin-left: -5px;
+        margin-right: -20px;
         border-bottom: 1px solid #433b3a;
         box-shadow: inset 0 -13px 65px 0px black;
         background: url($imgPath + '/background/detaildesc-bg.jpg');
@@ -367,8 +372,7 @@
 
     .tg-extraoutput-history {
         width: 100%;
-        padding-top: 0;
-        padding-left: 2px;
+        padding: 0;
     }
 
     .out-list {

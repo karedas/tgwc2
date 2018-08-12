@@ -1,4 +1,5 @@
 @import 'utils/jqx-custom';
+@import 'utils/scrollbar-custom';
 @import 'buttons';
 @import 'login';
 @import 'navbar';
@@ -121,6 +122,8 @@ caption {
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
     border: none;
 }
+
+
 
 @include media-breakpoint-down(md) {
     .tg-area {

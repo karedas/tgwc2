@@ -572,7 +572,7 @@ export default class TgGui {
                 if (_.client_open) {
                     _.clearDataInterface();
                     if (!_.ajax_loaded.includes('loginwidget')) {
-                        _.loadWidgetLogin();
+                        _.loadWidgetLoginContent();
                     } else {
                         _.showWidgetLogin();
                     }
@@ -1578,8 +1578,7 @@ export default class TgGui {
                 "scrollY": true,
             });
         }
-
-        if (!_.openDialog('tabledialog')) {
+        if (!_.openDialog('#tabledialog')) {
             let pos = _.getWindowPosition('tabledialog');
             let size = _.getWindowSize('tabledialog');
             let w, h;
@@ -1601,53 +1600,44 @@ export default class TgGui {
             }
 
             let tableStartHeight = 0;
-            $('#tabledialog').dialog({
-                appendTo: ".tg-area",
-                modal: false,
-                width: w,
-                height: h,
-                position: pos,
+            $('#tabledialog').jqxWindow({
+                minWidth: '400px',
+                width: '650px',
+                height: 'auto',
                 resizable: true,
-                dialogClass: 'tg-dialog parch',
-                dragStop: _.saveWindowData.bind(_),
-                resizeStop: _.saveWindowData.bind(_),
-                closeText: 'Chiudi',
+                draggable: true,
+                isModal: false,
+                showCloseButton: true,
+                modalOpacity: 0,
                 title: title,
-                position: {
-                    my: 'center',
-                    at: 'center'
+                initContent: function () {
+                    table.columns.adjust().draw();
+                    console.log('initcontent');
+                    $('table', cont).on( 'length.dt', function ( e, settings, len ) {
+                        _.getDialogTableMaxHeight();
+                    });
                 },
-                open: function () {
-                    if (sortable) {
-                        table.columns.adjust().draw();
-                        //TODO: spostare
-                        let a = $('.dataheader').outerHeight(true);
-                        let b = $('.datafooter').outerHeight(true);
-                        let c = $('.databody table').outerHeight(true);
-                        let calc = $('#tabledialog').height() - a - b - c;
-                        $('.dataTables_scrollBody').height(calc);
-                    }
-                },
-                resize: function () {
-                    if (sortable) {
-                        let a = $('.dataheader').outerHeight(true);
-                        let b = $('.datafooter').outerHeight(true);
-                        let c = $('.databody table').outerHeight(true);
-                        let calc = $('#tabledialog').height() - a - b - c;
-                        $('.dataTables_scrollBody').height(calc);
-                    }
-                },
+            }).on('open', function(){
+                if (sortable) {
+                    _.getDialogTableMaxHeight();
+                }
+            }).on('resizing', function(){
+                if (sortable) {
+                    _.getDialogTableMaxHeight();
+                }
+            }).on('resize', function(){
+                //TODO: da fare su jqx
+                //_.saveWindowData();
             });
         }
     }
 
     getDialogTableMaxHeight(cont, dialog) {
-        let height = 0;
-        height = $(dialog).height() - $(cont).height();
-        $(cont, dialog).siblings().each(function () {
-            childrenHeight = childrenHeight + $(this).outerHeight(true);
-        });
-        return $(cont).height() - childrenHeight;
+        let a = $('.dataheader').outerHeight(true);
+        let b = $('.datafooter').outerHeight(true);
+        let c = $('.dataTables_scrollHead').outerHeight(true);
+        let calc = $('#tablecont').height() - a - b -c;
+        $('.dataTables_scrollBody').css('maxHeight', calc);
     }
 
 
@@ -1860,8 +1850,8 @@ export default class TgGui {
         _.openTab(subNavId);
 
         if (!_.openDialog(pid)) {
-            $(pid).dialog({
-                appendTo: ".tg-area",
+            $(pid).jqxWindow({
+               /* appendTo: ".tg-area",
                 modal: false,
                 width: 'auto',
                 height: 'auto',
@@ -1878,7 +1868,21 @@ export default class TgGui {
                 open: function () {
                     let panel = $(subNavId).attr('href');
                     _.addScrollBar(pid + ' .scrollable', 'characterinfo');
+                }*/
+                width: 'auto',
+                maxWidth: '100%',
+                minHeight: '536px',
+                height: 'auto',
+                autoOpen: true,
+                resizable: false,
+                draggable: true,
+                isModal: false,
+                showCloseButton: true,
+                modalOpacity: 0,
+                initContent: function() {
+                    let panel = $(subNavId).attr('href');
                 }
+
             });
         }
     }
@@ -1893,46 +1897,109 @@ export default class TgGui {
      */
 
     openEditor(maxchars, title, text) {
+        let _ = this,    
+            textarea;
 
-        let _ = this,
-            options, textarea;
+        let id = '#editorDialog';
 
+        _.initEditor().then(function(){
+            
+            $('#editorDialog').jqxWindow('setTitle', title);
+            textarea = $('#editorTextArea');
+            
+            //Max Chars counter
+            textarea.attr('maxlength', maxchars);
+            textarea.val(text);
+            $('#editorMaxCharsCount').html((maxchars - textarea.val().length) + ' caratteri rimasti');
+            textarea.keyup(function () {
+                let text_length = $(this).val().length;
+                let text_remaining = maxchars - text_length;
 
-        textarea = $('#editorTextArea').val(text);
+                $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
+            });
 
-        $('#editorTitle').text(title);
+            $('#editorDialog').jqxWindow('open');
 
-        _.openEditorPopup();
+            _.in_editor = true;
 
-        $('#abortEditor, #mfp-close').one('click', function () {
-            _.abortEdit();
-            _.closeEditor();
         });
-        $('#saveEditor').one('click', function () {
-            _.saveEdit(80);
-            _.closeEditor();
-        });
+        
+/*
+        $.magnificPopup.open({
+            modal: true,
+            items: {
+                src: '#editorDialog',
+                type: 'inline'
+            },
+            showCloseBtn: true,
+            enableEscapeKey: false,
+            closeOnBgClick: false,
+            type: 'inline',
+            preloader: false,
+            mainClass: 'tg-mp modal-editor',
+            callbacks: {
 
-        //Max Chars counter
-        let text_max = maxchars;
-        $('#editorMaxCharsCount').html(text_max + ' caratteri rimasti');
-        textarea.attr('maxlength', maxchars);
-        textarea.keyup(function () {
-            let text_length = $(this).val().length;
-            let text_remaining = text_max - text_length;
-
-            $('#editorMaxCharsCount').html(text_remaining + ' caratteri rimasti');
-        });
-
-        _.in_editor = true;
+                close: function (e) {
+                    _.closeEditor();
+                }
+            }
+        });*/
     }
+
+    initEditor() {
+        let _ = this;
+        return new Promise(function (resolve, reject) {
+            if(!_.ajax_loaded.includes('editor')) {
+                $.ajax({
+                    url: 'ajax/editor.html',
+                    success: function(responseJSON){
+                       $('body').append(responseJSON);
+                        _.ajax_loaded.push('editor');
+
+                        $('#editorDialog').jqxWindow({
+                            minWidth: '100%',
+                            width: '550px',
+                            minWidth: '500px',
+                            minHeight: '400px',
+                            height: 'auto',
+                            autoOpen: false,
+                            resizable: true,
+                            draggable: true,
+                            isModal: true,
+                            showCloseButton: false,
+                            keyboardCloseKey: 'none',
+                            animationType: 'fade',
+                            modalOpacity: 0.4,
+                            initContent: function() {
+                                $('#abortEditor').on('click', function () {
+                                    _.abortEdit();
+                                    _.closeEditor();
+                                });
+                                $('#saveEditor').on('click', function () {
+                                    _.saveEdit(80);
+                                    _.closeEditor();
+                                });
+                            }
+
+                        }).on('close', function(){
+                            _.abortEdit();
+                        });
+                        
+                        resolve();
+                    }
+                });
+            } else {
+                resolve();
+            }
+        });
+    }
+
 
     closeEditor() {
         let _ = this;
-        _.in_editor = false;
-
-        _.closeAllPopups();
+        $('#editorDialog').jqxWindow('close');
         _.focusInput();
+        _.in_editor = false;
     }
 
     abortEdit() {
@@ -2317,7 +2384,7 @@ export default class TgGui {
 
         wprc = _.limitPrc(wprc),
 
-            txtcolor = _.prcHighTxt(wprc, _.wgttxtcol);
+        txtcolor = _.prcHighTxt(wprc, _.wgttxtcol);
         barcolor = _.prcHighTxt(wprc, _.wgtbarcol);
 
         $('.carrywgt').css('color', txtcolor).text(weight);
@@ -3421,12 +3488,13 @@ export default class TgGui {
         _.mainNavBarInit();
         _.tooltipInit();
         _.outputInit();
+        _.extraOutputInit();
         _.mapInit();
         _.doorsInit();
         //_.interactionInit();
         _.extraBoardInit();
         _.buttonsEventInit();
-        //_.combatPanelWidgetInit();
+        _.combatPanelWidgetInit();
         _.audioInit();
         _.focusInput();
 
@@ -3661,19 +3729,6 @@ export default class TgGui {
             }]
         });
 
-        $('.tg-output-main').jqxPanel({
-            width: "100%",
-            height: "100%",
-            autoUpdate: true,
-        });
-
-        $('.tg-output-extra').jqxPanel({
-            width: "100%",
-            height: "100%",
-            autoUpdate: true
-        })
-
-
         /* Image Event */
         $('#detailimage')
             .on('error', function () {
@@ -3683,8 +3738,7 @@ export default class TgGui {
                 $(this).closest('.extra-detailimg').slideDown(0);
             });
 
-        // init Extraoutput window
-        //_.extraOutputInit();
+        _.addScrollBar('.tg-output-main', '#output');    
         // Highlightining mob/obj based on user click
         //TODO: this.highlightsOutputMRN();
         //add Event Handler for Expndable list
@@ -3809,6 +3863,24 @@ export default class TgGui {
                 }
             }
         });
+    }
+
+    extraOutputInit() {
+        let _ = this;
+        //$('.tg-output-extra').css({
+        //    left: _.client_options.output_width.toString()
+        //});
+
+        _.addScrollBar('.tg-output-extra', '#extraoutput');
+
+        /* Image Event */
+        $('#detailimage')
+            .on('error', function () {
+                $(this).closest('.extra-detailimg').slideUp(0);
+            })
+            .on('load', function () {
+                $(this).closest('.extra-detailimg').slideDown(0);
+            });
     }
 
     toggleNotifyOutput() {
@@ -4253,6 +4325,7 @@ export default class TgGui {
                         keyboardCloseKey: 'none',
                         animationType: 'fade',
                         modalOpacity: 0.8,
+                        title: "Ultime Novità",
                         initContent: function () {
                             _.client_state.news_showed = true;
                             _.client_options.news_date_last = fileTimeStamp;
@@ -4260,43 +4333,14 @@ export default class TgGui {
                                 if ($('input[type=checkbox]').prop('checked')) {
                                     _.client_options.news_wantsee = false;
                                 }
-                                _.sendInput();
                                 _.closeAllPopups();
                             });
                         }
+                    }).on('close', function(){
+                        _.sendInput();
+                        _.SaveStorage('options', _.client_options);
                     });
-                    /*
-                                        $.magnificPopup.open({
-                                            showCloseBtn: false,
-                                            closeOnBgClick: false,
-                                            type: 'inline',
-                                            preloader: false,
-                                            items: {
-                                                src: result,
-                                                type: 'inline'
-                                            },
-                                            mainClass: 'modal-notizie',
-                                            callbacks: {
-                                                open: function () {
-                                                    _.addScrollBar('.modal-notizie .scrollable', 'notizie');
-                                                    _.client_state.news_showed = true;
-                                                    _.client_options.news_date_last = fileTimeStamp;
 
-                                                    $('#initNewsButton').one('click', function () {
-                                                        if ($('input[type=checkbox]').prop('checked')) {
-                                                            _.client_options.news_wantsee = false;
-                                                        }
-                                                        _.sendInput();
-                                                        _.closeAllPopups();
-                                                    });
-
-                                                },
-                                                close: function () {
-                                                    _.sendInput();
-                                                    _.SaveStorage('options', _.client_options);
-                                                }
-                                            }
-                                        });*/
                 } else {
                     _.sendInput()
                 }
@@ -4309,39 +4353,9 @@ export default class TgGui {
         })
     }
 
-    openEditorPopup() {
-        let _ = this;
-        $.magnificPopup.open({
-            modal: true,
-            items: {
-                src: '#editorDialog',
-                type: 'inline'
-            },
-            showCloseBtn: true,
-            enableEscapeKey: false,
-            closeOnBgClick: false,
-            type: 'inline',
-            preloader: false,
-            mainClass: 'tg-mp modal-editor',
-            callbacks: {
-                open: function () {
+    
 
-                    _.addDraggable('.modal-editor', 'body');
-
-                    $('.mfp-close').one('click', function (e) {
-                        e.preventDefault();
-                        _.abortEdit();
-                        _.closeAllPopups();
-                    });
-                },
-                close: function (e) {
-                    _.closeEditor();
-                }
-            }
-        });
-    }
-
-    loadWidgetLogin() {
+    loadWidgetLoginContent() {
         let _ = this;
         $.ajax('ajax/login_widget.html').done(function (responseJSON) {
             $(responseJSON).appendTo('body');
@@ -4372,12 +4386,12 @@ export default class TgGui {
 
     }
 
-    addScrollBar(selector, ref, sx) {
+    addScrollBar(selector, ref) {
         let _ = this;
         $(selector).each(function (idx, s) {
             let refer_id = ref + '_' + idx;
 
-            $(s).attr('id', 'scrollb_' + idx);
+            $(s).attr('id', 'scrollb_' + idx).addClass('scrollable');
             _.updateScrollBar(refer_id);
 
             if(!_.scrollbar[refer_id]) {
@@ -4533,17 +4547,19 @@ export default class TgGui {
     closeDialog(dialogid) {
         let d = $(dialogid);
 
-        if (d.is(':data(uiDialog)')) {
-            return d.dialog('close');
+        if (d.is('.jqx-window')) {
+            return d.jqxWindow('close');
         }
         return null;
     }
 
     openDialog(dialogid) {
         let d = $(dialogid);
-
-        if (d.is(':data(uiDialog)'))
-            return d.dialog(d.dialog('isOpen') ? 'moveToTop' : 'open');
+        
+        if (d.is('.jqx-window')){
+            d.jqxWindow(d.jqxWindow('isOpen') ? 'bringToFront' : 'open');
+            return true;
+        }
 
         return null;
     }
@@ -4592,13 +4608,12 @@ export default class TgGui {
     }
 
     closeAllPopups() {
-        $('.jqx-window').jqxWindow('close');
+        $('.jqx-window').jqxWindow('closeAll');
     }
 
-    scrollPanelTo(content, scrollbox, animate, where) {
+    scrollPanelTo(scrollable, content, animate, where) {
 
         let outputHeight;
-        scrollbox = $(content).parent(scrollbox);
 
         if (where !== null) {
             outputHeight = where;
@@ -4606,11 +4621,11 @@ export default class TgGui {
             outputHeight = $(content).height();
         }
         if (animate) {
-            $(scrollbox).animate({
+            $(scrollable).animate({
                 scrollTop: outputHeight
             }, 500, 'linear');
         } else {
-            $(scrollbox).scrollTop(outputHeight);
+            $(scrollable).scrollTop(outputHeight);
         }
     }
 }

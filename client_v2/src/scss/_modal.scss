@@ -28,20 +28,6 @@
     padding: 30px 36px 34px;
   }
 
-  textarea {
-    background: #e3ceaa;
-    border: none;
-    width: 100%;
-    height: 100%;
-    min-height: 290px;
-    box-sizing: border-box;
-    resize: none;
-    font-size: 14px;
-    line-height: 1.4;
-    box-shadow: 0 0 11px 4px #e3ceaa;
-    position: relative;
-    z-index: 3;
-  }
 
   &.fx-scale {
     .mfp-content {
@@ -86,19 +72,14 @@
   display: table;
   margin: 0 auto;
   color: #FFF;
+  padding: 0 32px;
   background: url($imgPath + '/interface/modal_title_left_bg.png') repeat-x top left;
+  text-transform: uppercase;
+  font-size: 10px;
+  line-height: 19px;
   h3 {
     background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
-    font-size: 10px;
-    text-transform: uppercase;
-    line-height: 19px;
-    padding: 0 32px;
-    margin-bottom: 0;
   }
-}
-
-.tg-modal-buttons-group {
-  position: absolute;
 }
 
 /* MODALS CONTENT */
