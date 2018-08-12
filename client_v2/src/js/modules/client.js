@@ -1869,16 +1869,15 @@ export default class TgGui {
                     let panel = $(subNavId).attr('href');
                     _.addScrollBar(pid + ' .scrollable', 'characterinfo');
                 }*/
-                width: 'auto',
-                maxWidth: '100%',
-                minHeight: '536px',
-                height: 'auto',
+                width:'735px',
+                height: '560px',
                 autoOpen: true,
                 resizable: false,
                 draggable: true,
                 isModal: false,
                 showCloseButton: true,
                 modalOpacity: 0,
+                title: title,
                 initContent: function() {
                     let panel = $(subNavId).attr('href');
                 }
