@@ -1,9 +1,9 @@
 <div id="tgNews">
     <!-- Notizie -->
     <div class="tg-notizie">
-      <div class="g-shadow b-modal tg-box">
-        <div class="tg-box b-paper container-fluid">
-          <div class="tg-box">
+      <div class="g-shadow b-ironlight-mini tg-box">
+        <div class="tg-box b-paper">
+          <div class="tg-box container-fluid">
             <div class="row">
               <!-- ## Menu ## -->
               <div class="col-4 d-flex">
@@ -11,7 +11,7 @@
               </div>
               <!-- ## End Menu ## -->
               <!-- Init Content ## -->
-              <div class="col-8">
+              <div id="contentNews" class="col-8">
                   <h2>
                     Webclient 2.0
                   </h2>
@@ -30,17 +30,6 @@
               </div>
               <!-- ## End Content ## -->
             </div>
-            <div class="row">
-              <div class="col-12 text-center notizie-action">
-                <button id="initNewsButton" class="tg-button tg-button-continua">Continua</button>
-                <div class="input-group-prepend">
-                  <div class="input-group-text m-auto">
-                    <input id="hideNewsAtBeginning" type="checkbox" aria-label="Non mostrare">
-                    <label for="hideNewsAtBeginning">Non mostrare piu' questa notizia.</label>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="tg-border-box">
               <div class="tg-border tg-border-top"></div>
@@ -48,6 +37,15 @@
               <div class="tg-border tg-border-right"></div>
               <div class="tg-border tg-border-bottom"></div>
             </div>
+        </div>
+        <div class="tg-box text-center notizie-action">
+          <button id="initNewsButton" class="tg-button tg-button-continua tg-shadow">Continua</button>
+          <div class="input-group-prepend">
+            <div class="input-group-text m-auto">
+              <input id="hideNewsAtBeginning" type="checkbox" aria-label="Non mostrare">
+              <label for="hideNewsAtBeginning">Non mostrare piu' questa notizia.</label>
+            </div>
+          </div>
         </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>

@@ -4854,8 +4854,8 @@ jquery@*, jquery@>=1.7, jquery@^3.3.1, jquery@~3.3.1:
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 jqwidgets-framework@^6.0.5:
-  version "6.0.5"
-  resolved "https://registry.yarnpkg.com/jqwidgets-framework/-/jqwidgets-framework-6.0.5.tgz#94adc1ec4b7e761c85ed3b01b577ad7f4106d7bc"
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/jqwidgets-framework/-/jqwidgets-framework-6.0.6.tgz#1e7de91636a3364619504e3bd0bf90e9695df1ed"
 
 js-base64@^2.1.8:
   version "2.4.5"

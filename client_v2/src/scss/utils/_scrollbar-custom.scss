@@ -38,12 +38,15 @@
     display: block;
     transition: background-color .2s linear, opacity .2s linear;
     -webkit-transition: background-color .2s linear, opacity .2s linear;
-    width: 15px;
+    width: 12px;
     /* there must be 'right' or 'left' for ps__rail-y */
     right: 0;
     /* please don't change 'position' */
     position: absolute;
     z-index: 2;
+    //margin-right: 1px;
+    //border: 1px solid #2d271a;
+    //background-color:#19160f;
   }
   
   .ps--active-x > .ps__rail-x,
@@ -75,7 +78,7 @@
     -webkit-transition: background-color .2s linear, width .2s ease-in-out;
     width: 6px;
     /* there must be 'right' for ps__thumb-y */
-    right: 2px;
+    right: 0;
     /* please don't change 'position' */
     position: absolute;
   }
@@ -84,14 +87,14 @@
   .ps__rail-x:focus > .ps__thumb-x,
   .ps__rail-x.ps--clicking .ps__thumb-x {
     background-color: #999;
-    height: 11px;
+    height: 9px;
   }
   
   .ps__rail-y:hover > .ps__thumb-y,
   .ps__rail-y:focus > .ps__thumb-y,
   .ps__rail-y.ps--clicking .ps__thumb-y {
     background-color: #332f25;
-    width: 11px;
+    width: 12px;
   }
 
 

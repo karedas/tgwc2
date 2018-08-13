@@ -1620,6 +1620,7 @@ export default class TgGui {
             }).on('open', function(){
                 if (sortable) {
                     _.getDialogTableMaxHeight();
+                    $('table', '#tabledialog').DataTable().columns.adjust().draw();
                 }
             }).on('resizing', function(){
                 if (sortable) {
@@ -3737,7 +3738,7 @@ export default class TgGui {
                 $(this).closest('.extra-detailimg').slideDown(0);
             });
 
-        _.addScrollBar('.tg-output-main', '#output');    
+        _.addScrollBar('.tg-output-main', 'output');    
         // Highlightining mob/obj based on user click
         //TODO: this.highlightsOutputMRN();
         //add Event Handler for Expndable list
@@ -3870,7 +3871,7 @@ export default class TgGui {
         //    left: _.client_options.output_width.toString()
         //});
 
-        _.addScrollBar('.tg-output-extra', '#extraoutput');
+        _.addScrollBar('.tg-output-extra', 'extraoutput');
 
         /* Image Event */
         $('#detailimage')
@@ -4326,6 +4327,7 @@ export default class TgGui {
                         modalOpacity: 0.8,
                         title: "Ultime Novità",
                         initContent: function () {
+                            _.addScrollBar('#contentNews', 'news');    
                             _.client_state.news_showed = true;
                             _.client_options.news_date_last = fileTimeStamp;
                             $('#initNewsButton').one('click', function () {

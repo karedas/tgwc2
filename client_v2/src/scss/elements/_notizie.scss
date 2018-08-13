@@ -26,7 +26,11 @@
   .notizie-action {
     padding-top: .5em;
     margin-top: .5em;
-    border-top: 1px solid #dcc59d;
+    label {
+      font-size: 11px;
+      margin-left: 5px;
+      color: #cbb48d;
+    }
   }
 
   .tg-mnch-img {

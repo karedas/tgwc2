@@ -20,8 +20,9 @@
     
        .tg-border-top, .tg-border-bottom {
            position: absolute;
-           width: 100%;
            background-repeat: repeat-x;
+           left: 0;
+           right: 0;
     
            // Corners
            &::after, &::before {
@@ -119,9 +120,11 @@
 }
 
 .b-ironlight-mini {
-    
+    background: #2d2518;
     padding: $ironlight-mini-border-size;  
+    box-shadow: inset 0 0 40px 20px black;
     > .tg-border-box {
+        overflow: hidden;
         .tg-border-top, .tg-border-bottom {
             height: $ironlight-mini-border-size;
             &::after, &::before {
@@ -138,21 +141,29 @@
         }
     
         .tg-border-top {
+            left: 4px;
+            right: 4px;
             background-image: url($imgPath + '/borders/border_ministone_top.png');
             &::after {
+                right:-4px;
                 background-image: url($imgPath + '/borders/border_ministone_topright.png');
             }
             &::before {
+                left: -4px;
                 background-image: url($imgPath + '/borders/border_ministone_topleft.png');
             }
         }
         
         .tg-border-bottom {
             background-image:  url($imgPath + '/borders/border_ministone_bottom.png');
+            left: 4px;
+            right: 4px;
             &::after {
+                right: -4px;
                 background-image: url($imgPath + '/borders/border_ministone_bottomright.png');
             }
             &::before {
+                left: -4px;
                 background-image:  url($imgPath + '/borders/border_ministone_bottomleft.png');
             }
         }
@@ -265,15 +276,19 @@
 
 
 .b-paper {
+    margin: 10px;
     .tg-box {
-        background-color:#ead3ab;
-        box-shadow: 0 0 10px 8px #ead3ab;
+        background-color:#cbb48d;
+        box-shadow: 0 0 10px 8px #cbb48d;
+
     }
     padding: 52px;  
     > .tg-border-box {
         .tg-border-top, .tg-border-bottom {
             background-position: left;
             height: $modalpaper-border-size;
+            left: 80px;
+            right: 80px;
             &::after, &::before {
                 width: $modalpaper-border-size;
                 height: $modalpaper-border-size;
@@ -288,31 +303,35 @@
         }
     
         .tg-border-top {
-            background-image: url($imgPath + '/borders/border-modal-paper-top.jpg');
+            background-image: url($imgPath + '/borders/border-modal-paper-top.png');
             &::after {
-                background-image: url($imgPath + '/borders/border-modal-paper-topright.jpg');
+                right:-80px;
+                background-image: url($imgPath + '/borders/border-modal-paper-topright.png');
             }
             &::before {
-                background-image: url($imgPath + '/borders/border-modal-paper-topleft.jpg');
+                left: -80px;
+                background-image: url($imgPath + '/borders/border-modal-paper-topleft.png');
             }
         }
         
         .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border-modal-paper-bottom.jpg');
+            background-image:  url($imgPath + '/borders/border-modal-paper-bottom.png');
             &::after {
-                background-image: url($imgPath + '/borders/border-modal-paper-bottomright.jpg');
+                right:-80px;
+                background-image: url($imgPath + '/borders/border-modal-paper-bottomright.png');
             }
             &::before {
-                background-image:  url($imgPath + '/borders/border-modal-paper-bottomleft.jpg');
+                left: -80px;
+                background-image:  url($imgPath + '/borders/border-modal-paper-bottomleft.png');
             }
         }
         
         .tg-border-right {
-            background-image: url($imgPath + '/borders/border-modal-paper-right.jpg');
+            background-image: url($imgPath + '/borders/border-modal-paper-right.png');
         }
     
         .tg-border-left {
-            background-image: url($imgPath + '/borders/border-modal-paper-left.jpg');
+            background-image: url($imgPath + '/borders/border-modal-paper-left.png');
         }
     }
 }
