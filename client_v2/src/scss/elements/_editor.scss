@@ -10,7 +10,6 @@
     }
 */
     .tg-modal-contentwrap {
-      padding-bottom: 34px;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -21,14 +20,14 @@
       background: #e3ceaa;
       border: none;
       width: 100%;
-      height: 100%;
       box-sizing: border-box;
       resize: none;
-      font-size: 14px;
+      font-size: 1.2em;
       line-height: 1.4;
       box-shadow: 0 0 11px 4px #e3ceaa;
       position: relative;
       z-index: 3;
+      flex: 0 1 100%;
     }
 
     .tg-modal-buttons-group {
@@ -43,7 +42,7 @@
     .tg-txt-maxcharcount {
       background: #c6a779;
       border-radius: 6px;
-      display: inline-block;
+      display: table;
       color: black;
       padding:2px 12px;
       margin: 16px auto 0;

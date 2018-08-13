@@ -1924,26 +1924,6 @@ export default class TgGui {
 
         });
         
-/*
-        $.magnificPopup.open({
-            modal: true,
-            items: {
-                src: '#editorDialog',
-                type: 'inline'
-            },
-            showCloseBtn: true,
-            enableEscapeKey: false,
-            closeOnBgClick: false,
-            type: 'inline',
-            preloader: false,
-            mainClass: 'tg-mp modal-editor',
-            callbacks: {
-
-                close: function (e) {
-                    _.closeEditor();
-                }
-            }
-        });*/
     }
 
     initEditor() {
@@ -1957,11 +1937,8 @@ export default class TgGui {
                         _.ajax_loaded.push('editor');
 
                         $('#editorDialog').jqxWindow({
-                            minWidth: '100%',
-                            width: '550px',
-                            minWidth: '500px',
-                            minHeight: '400px',
-                            height: 'auto',
+                            width: '500px',
+                            height: '450px',
                             autoOpen: false,
                             resizable: true,
                             draggable: true,

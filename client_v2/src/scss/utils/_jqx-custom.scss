@@ -47,6 +47,8 @@
 
 .jqx-window.tg-window {
     display: block;
+    font-family: kingthinks;
+    font-size: 14px;
 }
 
 .jqx-window-close-button-background {
@@ -61,12 +63,11 @@
     line-height: 24px;
     font-size: 13px;
     letter-spacing: 1px;
-    font-family: kingthinks;
     text-transform: capitalize;
     text-align: center;
     padding: 0 8px 0;
     box-sizing: content-box;
-    color: #c5c0b6;
+    color: #dcdac8;
     background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 4px 0;
     
     > div:first-child {
