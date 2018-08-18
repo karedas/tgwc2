@@ -287,6 +287,12 @@ body[data-loginstatus="preload"], body[data-loginstatus="ready"] {
     }
 }
 
+body[data-loginstatus="disconnect"] {
+    .tg-area {
+        filter: blur(3px);
+    }
+}
+
 
 
 /* Preloader in Login */

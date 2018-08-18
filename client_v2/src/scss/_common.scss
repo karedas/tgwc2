@@ -1,3 +1,4 @@
+@import 'utils/bootstrap-slider';
 @import 'utils/jqx-custom';
 @import 'utils/scrollbar-custom';
 @import 'buttons';
@@ -25,7 +26,11 @@ body {
     vertical-align: top;
 }
 
-a, button:focus , input:focus, .input:active, textarea:focus, select:focus{
+body[data-loginstatus=ready]{
+    overflow: hidden;
+}
+
+a, button:focus , input:focus, .input:active, textarea:focus, select:focus, button:active{
     outline: 0 none!important;
 }
 
@@ -53,7 +58,7 @@ caption {
 }
 
 .tg-shadow-inset {
-    box-shadow: 0px 0px 48px 10px black inset;
+    box-shadow: 0px 0px 11px 5px black inset;
 }
 
 .tg-area {
@@ -129,6 +134,32 @@ caption {
 }
 
 
+// Custom Form Elements
+.custom-control-label {
+    cursor: pointer;
+}
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+    @include sprite($checkbox-sprite);
+    transition: none;
+}
+
+.custom-checkbox .custom-control-label::after {
+    border: none!important;
+    background-color: transparent;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    @include sprite($checkbox-checked-sprite);
+    top: -4px;
+    background-size: unset;
+}
+
+.custom-control-input{
+    visibility: hidden;
+}
 
 @include media-breakpoint-down(md) {
     .tg-area {

@@ -8,7 +8,12 @@
 
 
 .tg-modal-content {
-  background-color: #2d2518;
+  font-size: 12px;
+  color: #dcdac8;
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+}
+.tg-modal-contentwrap {
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
 }
 /*
 .tg-mp-inline {

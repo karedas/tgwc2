@@ -15,19 +15,23 @@
       flex-direction: column;
     }
 
-      
+    .textarea-cont {
+      flex: 0 1 100%;
+    }
+    
     textarea {
-      background: #e3ceaa;
+      background: #cbb48d;
       border: none;
       width: 100%;
       box-sizing: border-box;
       resize: none;
       font-size: 1.2em;
       line-height: 1.4;
-      box-shadow: 0 0 11px 4px #e3ceaa;
+      box-shadow: 0 0 11px 4px #cbb48d;
       position: relative;
       z-index: 3;
       flex: 0 1 100%;
+      overflow: hidden;
     }
 
     .tg-modal-buttons-group {

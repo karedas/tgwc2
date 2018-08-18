@@ -16,7 +16,6 @@ export default class Preloader {
 
             _.loadAssets().done(function (images) {
                 // All Images loaded
-                $(document.body).attr('data-loginstatus', 'ready');
                 $('#tgPreloader').remove();
                 resolve();
             });

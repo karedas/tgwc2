@@ -43,4 +43,40 @@
         @include sprite($back-square-sprite);
     }
 
+    &.btn-backtohome {
+        @include sprite($btn-backhome-sprite);
+        &:hover {
+            @include sprite($btn-backhome-hover-sprite);
+        }
+    }
+    &.btn-reconnect {
+        @include sprite($btn-reconnect-sprite);
+        &:hover {
+            @include sprite($btn-reconnect-hover-sprite);
+        }
+    }
+    &.btn-newlogin {
+        @include sprite($btn-newlogin-sprite);
+        &:hover {
+            @include sprite($btn-newlogin-hover-sprite);
+        }
+    }
+    &.btn-loginwidget {
+        @include sprite($btn-wlogin-sprite);
+        &:hover {
+            @include sprite($btn-wlogin-hover-sprite);
+        }
+    }
+    &.btn-annulla {
+        @include sprite($btn-wlogin-sprite);
+        &:hover {
+            @include sprite($btn-wlogin-hover-sprite);
+        }
+    }
+    &.btn-workcmd {
+        @include sprite($btn-lavora-sprite);
+        &:hover {
+            @include sprite($btn-lavora-hover-sprite);
+        }
+    }
 }

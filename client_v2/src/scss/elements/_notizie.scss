@@ -1,11 +1,10 @@
 .tg-notizie{
     color: black;
-    width: 700px;
     max-width: 100%;
     margin: 0 auto;
-
-  .tg-modal-content {
-    background: #dabe8b;
+ 
+  p {
+    color: black;
   }
   
   h2 {
@@ -24,13 +23,10 @@
   }
 
   .notizie-action {
-    padding-top: .5em;
-    padding-bottom: .5em;
-    margin-top: .5em;
+    margin-top: 1.5em;
     label {
-      font-size: 11px;
       margin-left: 5px;
-      color: #cbb48d;
+      color: black;
     }
   }
 

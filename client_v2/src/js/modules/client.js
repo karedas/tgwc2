@@ -5,12 +5,10 @@ import Cookies from 'js-cookie';
 // import PerfectScrollbar from 'perfect-scrollbar';
 // import 'magnific-popup';
 import dt from 'datatables.net';
+import Slider from 'bootstrap-slider';
 //============ JQWidgets
 import 'jqwidgets-framework/jqwidgets/jqxcore';
 import 'jqwidgets-framework/jqwidgets/jqxwindow';
-import 'jqwidgets-framework/jqwidgets/jqxscrollbar';
-import 'jqwidgets-framework/jqwidgets/jqxPanel';
-import 'jqwidgets-framework/jqwidgets/jqxbuttons';
 import 'jqwidgets-framework/jqwidgets/jqxSplitter';
 /* Jquery UI */
 // import position from 'jquery-ui/ui/position';
@@ -633,12 +631,14 @@ export default class TgGui {
                             _.closeAllPopups();
                             _.completeHandshake();
                             _.handleServerData(data.slice(end + 2));
+                            $(document.body).attr('data-loginstatus', 'ready');
                         } else {
-                            clientPreloader.init().then(function () {
+                            clientPreloader.init().then(function () {                
                                 _.dismissLoginPanel();
                                 _.loadInterface();
                                 _.completeHandshake();
                                 _.handleServerData(data.slice(end + 2));
+                                $(document.body).attr('data-loginstatus', 'ready');
                             }, () => {
                                 console.log("Assets error") // Error!
                             });
@@ -695,13 +695,13 @@ export default class TgGui {
 
             let now = Date.now();
             if (now > _.client_update.last + 1000) {
-                /* if (_.client_update.inventory.needed && _.isDialogOpen('#characterdialog')) {
+                 if (_.client_update.inventory.needed && _.isDialogOpen('#infodialog')) {
                      _.sendToServer('@inv');
                      _.client_update.inventory.needed = false;
                      _.client_update.last = now;
                  }
 
-                 if (_.client_update.equipment.needed && _.isDialogOpen('#characterdialog')) {
+                 if (_.client_update.equipment.needed && _.isDialogOpen('#infodialog')) {
                      _.sendToServer('@equip');
                      _.client_update.equipment.needed = false;
                      _.client_update.last = now;
@@ -711,7 +711,7 @@ export default class TgGui {
                      _.sendToServer('@agg');
                      _.client_update.room.needed = false;
                      _.client_update.last = now;
-                 }*/
+                 }
             }
 
         } else if (len > 200000) {
@@ -827,15 +827,8 @@ export default class TgGui {
     initWidgetLoginPanel() {
         let _ = this;
 
-        /* Set Player Image (Last) */
-        let playerImg = $('<img/>', {
-            src: _.client_update.data.player_image
-        });
-
         /* Set Player Name */
         $('span', '#widgetLoginReconnect').text(_.client_update.data.player_name);
-
-        $('.tg-charavatar-last').html(playerImg);
 
         /* Reconnect Button */
         $('#widgetLoginReconnect').on('click', function (e) {
@@ -851,9 +844,18 @@ export default class TgGui {
         })
 
         $('#widgetLoginNewConnection').on('click', function () {
-            $('.tg-widgetlogin-menu').hide();
-            $('#widgetLoginForm').show();
-        })
+
+            let before_height, after_height;
+            
+            before_height = $('.tg-loginwidget', '#loginWidget').height();
+
+            $('.tg-loginwidget').addClass('new');
+            $('#widgetLoginStatus').text('Accedi con:')
+        });
+
+        $('#backToRootWidgetLogin').on('click', function(){
+            $('.tg-loginwidget').removeClass('new');
+        });
 
         /* New Login */
         $('#widgetLoginForm').on('submit', function (e) {
@@ -874,6 +876,45 @@ export default class TgGui {
             _.socket.on('data', _.handleLoginData.bind(_));
             _.socket.emit('loginrequest');
         });
+    }
+
+     
+
+    loadWidgetLoginContent() {
+        let _ = this;
+        $.ajax('ajax/login_widget.html').done(function (responseJSON) {
+            $(responseJSON).appendTo('body');
+            _.initWidgetLoginPanel();
+            _.showWidgetLogin();
+            _.ajax_loaded.push('loginwidget');
+        });
+    }
+
+    showWidgetLogin() {
+        let _ = this;
+        if (!_.connectionInfo.error) {
+            _.widgetLoginNetworkActivityMessage('Torna presto!')
+        } else {
+            _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
+        }
+
+        _.closeAllDialogs();
+
+        if(!_.openDialog('#loginWidget')) {
+            $('#loginWidget').jqxWindow({
+                width: 'auto',
+                height: 'auto',
+                resizable: false,
+                draggable: false,
+                isModal: true,
+                modalOpacity: .4,
+                showCloseButton: false,
+                title: 'Connessione',
+                initContent: function(){
+                    $('body').attr('data-loginstatus', 'disconnect');
+                }
+            });
+        }
     }
 
     performLogin() {
@@ -1304,7 +1345,7 @@ export default class TgGui {
 
     handleRefresh(r) {
         let _ = this;
-        if (this.isPopupOpen) {
+        if (this.isDialogOpen('#'+r.dlg)) {
             _.sendToServer(r.cmd);
         }
         return '';
@@ -1600,36 +1641,38 @@ export default class TgGui {
             }
 
             let tableStartHeight = 0;
-            $('#tabledialog').jqxWindow({
-                minWidth: '400px',
-                width: '650px',
-                height: 'auto',
-                resizable: true,
-                draggable: true,
-                isModal: false,
-                showCloseButton: true,
-                modalOpacity: 0,
-                title: title,
-                initContent: function () {
-                    table.columns.adjust().draw();
-                    console.log('initcontent');
-                    $('table', cont).on( 'length.dt', function ( e, settings, len ) {
+            if(!_.isDialogOpen('#tabledialog')) {
+                $('#tabledialog').jqxWindow({
+                    minWidth: '400px',
+                    width: '650px',
+                    height: 'auto',
+                    resizable: true,
+                    draggable: true,
+                    isModal: false,
+                    showCloseButton: true,
+                    modalOpacity: 0,
+                    title: title,
+                    initContent: function () {
+                        table.columns.adjust().draw();
+                        console.log('initcontent');
+                        $('table', cont).on( 'length.dt', function ( e, settings, len ) {
+                            _.getDialogTableMaxHeight();
+                        });
+                    },
+                }).on('open', function(){
+                    if (sortable) {
                         _.getDialogTableMaxHeight();
-                    });
-                },
-            }).on('open', function(){
-                if (sortable) {
-                    _.getDialogTableMaxHeight();
-                    $('table', '#tabledialog').DataTable().columns.adjust().draw();
-                }
-            }).on('resizing', function(){
-                if (sortable) {
-                    _.getDialogTableMaxHeight();
-                }
-            }).on('resize', function(){
-                //TODO: da fare su jqx
-                //_.saveWindowData();
-            });
+                        $('table', '#tabledialog').DataTable().columns.adjust().draw();
+                    }
+                }).on('resizing', function(){
+                    if (sortable) {
+                        _.getDialogTableMaxHeight();
+                    }
+                }).on('resize', function(){
+                    //TODO: da fare su jqx
+                    //_.saveWindowData();
+                });
+            }
         }
     }
 
@@ -1661,13 +1704,21 @@ export default class TgGui {
         txt += '</tbody></table>';
 
         _.renderInTableDialog('Potresti ' + wk.verb + ':', txt, true);
+        _.addExecCmdEvent();
 
         return '';
     }
 
-    execWorkCmdInList() {
+    addExecCmdEvent() {
         let _ = this;
-        let cmd = $(this).data('workcmd');
+        $(document).on('click', '.btn-workcmd', function(e){
+            _.execWorkCmdInList(e.target);
+        });
+    }
+
+    execWorkCmdInList(target) {
+        let _ = this;
+        let cmd = $(target).data('workcmd');
         _.processCommands(cmd);
     }
 
@@ -1728,7 +1779,7 @@ export default class TgGui {
         let _ = this,
             url, id;
 
-        id = '#characterdialog';
+        id = '#infodialog';
 
         return new Promise(function (resolve, reject) {
             if (!$(id).length) {
@@ -1749,7 +1800,7 @@ export default class TgGui {
         let _ = this;
 
         _.loadCharacterWindow().then(function (resolve, reject) {
-            let d = $('#characterdialog');
+            let d = $('#infodialog');
 
             d.attr('data-class', _.race_to_class[info.race.code]);
 
@@ -1831,7 +1882,7 @@ export default class TgGui {
         });
 
         $('.btn-g-close', dialogid).on('click', function () {
-            _.closeDialog('#characterdialog');
+            _.closeDialog('#infodialog');
         });
 
         // Tab
@@ -1846,30 +1897,12 @@ export default class TgGui {
     openCharacterWindow(subNavId, title) {
         let _ = this;
 
-        let pid = '#characterdialog';
+        let pid = '#infodialog';
 
         _.openTab(subNavId);
 
         if (!_.openDialog(pid)) {
             $(pid).jqxWindow({
-               /* appendTo: ".tg-area",
-                modal: false,
-                width: 'auto',
-                height: 'auto',
-                resizable: false,
-                title: title,
-                classes: {
-                    'ui-dialog': 'modal-character'
-                },
-                position: {
-                    my: 'center',
-                    at: 'center',
-                    of: $('.tg-area')
-                },
-                open: function () {
-                    let panel = $(subNavId).attr('href');
-                    _.addScrollBar(pid + ' .scrollable', 'characterinfo');
-                }*/
                 width:'735px',
                 height: '560px',
                 autoOpen: true,
@@ -1948,6 +1981,7 @@ export default class TgGui {
                             animationType: 'fade',
                             modalOpacity: 0.4,
                             initContent: function() {
+                                _.addScrollBar('.textarea-cont', 'editortextarea');
                                 $('#abortEditor').on('click', function () {
                                     _.abortEdit();
                                     _.closeEditor();
@@ -2415,20 +2449,24 @@ export default class TgGui {
     setStatus(st) {
         let _ = this;
         _.setCombatStatus(st);
-        _.updatePlayerStatus(st[0], st[1]);
+        _.updatePlayerStatus(st[0], st[1], st[2], st[3]);
         return '';
     }
 
-    updatePlayerStatus(hprc, mprc) {
+    updatePlayerStatus(hprc, mprc, fprc, sprc) {
         let _ = this;
-        let hcolor = _.prcLowTxt(hprc, _.hlttxtcol);
-        let mcolor = _.prcLowTxt(hprc, _.hlttxtcol);
-
-        $('.movebar').width(_.limitPrc(mprc) + '%');
-        $('#moveBarText i').css('color', mcolor).text(mprc);
 
         $('.healthbar').width(_.limitPrc(hprc) + '%');
-        $('#healtBarText i').css('color', hcolor).text(hprc);
+        $('#healtBarText i').text(hprc);
+
+        $('.movebar').width(_.limitPrc(mprc) + '%');
+        $('#moveBarText i').text(mprc);
+
+        $('.hungrybar').width(_.limitPrc(fprc) + '%');
+        $('#healtBarText i').text(fprc);
+
+        $('.thirstbar').width(_.limitPrc(sprc) + '%');
+        $('#drinkBarText i').text(sprc);
     }
 
 
@@ -3579,7 +3617,6 @@ export default class TgGui {
 
         let pid = '#configurationpanel';
         _.loadConfigurationPanel().then(function () {
-
             _.openConfigPanel();
         });
     }
@@ -3604,31 +3641,19 @@ export default class TgGui {
 
         let pid = '#configurationpanel';
 
-        //_.addScrollBar(pid + ' .scrollable', 'characterinfo');
-
-        var wWidth = $(window).width();
-        let mWidth = wWidth * 0.90;
-        var wHeight = $(window).height();
-        let mHeight = wHeight * 0.90;
-
         if (!_.openDialog(pid)) {
-            $(pid).dialog({
-                appendTo: "body",
-                modal: false,
+            $(pid).jqxWindow({
                 width: 'auto',
-                maxWidth: mWidth,
-                maxHeight: mHeight,
+                height: 'auto',
                 resizable: true,
-                classes: {
-                    "ui-dialog": "dialog-config"
-                },
-                title: 'Configurazione e Opzioni personali',
-                position: {
-                    my: 'center',
-                    at: 'center',
-                    of: $('.tg-area')
-                },
-                fluid: true
+                draggable: true,
+                isModal: false,
+                modalOpacity: 0,
+                title: 'Configurazione e Opzioni',
+                initContent: function(){
+                    let musicSlider = new Slider('#cc_musicLevel', {handle: 'custom'});
+                    let soundSlider = new Slider('#cc_soundLevel', {handle: 'custom'});
+                }
             });
         }
     }
@@ -4294,8 +4319,7 @@ export default class TgGui {
                     $('body').append(result);
 
                     $('#tgNews').jqxWindow({
-                        minWidth: '100%',
-                        width: '100%',
+                        width: 700,
                         resizable: false,
                         draggable: false,
                         isModal: true,
@@ -4329,39 +4353,6 @@ export default class TgGui {
                 return;
             }
         })
-    }
-
-    
-
-    loadWidgetLoginContent() {
-        let _ = this;
-        $.ajax('ajax/login_widget.html').done(function (responseJSON) {
-            $(responseJSON).appendTo('body');
-            _.initWidgetLoginPanel();
-            _.showWidgetLogin();
-            _.ajax_loaded.push('loginwidget');
-        });
-    }
-
-    showWidgetLogin() {
-        let _ = this;
-        if (!_.connectionInfo.error) {
-            _.widgetLoginNetworkActivityMessage('Torna presto!')
-        } else {
-            _.widgetLoginNetworkActivityMessage('Errore di comunicazione con il Server');
-        }
-        //close any opened popup
-        $.magnificPopup.close();
-        $.magnificPopup.open({
-            items: {
-                src: '#loginWidget',
-                inline: 'inline'
-            },
-            showCloseBtn: false,
-            closeOnBgClick: false,
-            mainClass: 'tg-mp modal-login',
-        });
-
     }
 
     addScrollBar(selector, ref) {
@@ -4521,11 +4512,10 @@ export default class TgGui {
     /* *****************************************************************************
      * UTILITY
      */
-
+    
     closeDialog(dialogid) {
         let d = $(dialogid);
-
-        if (d.is('.jqx-window')) {
+        if (this.isDialog(d)) {
             return d.jqxWindow('close');
         }
         return null;
@@ -4533,36 +4523,33 @@ export default class TgGui {
 
     openDialog(dialogid) {
         let d = $(dialogid);
-        
         if (d.is('.jqx-window')){
             d.jqxWindow(d.jqxWindow('isOpen') ? 'bringToFront' : 'open');
-            return true;
         }
-
         return null;
     }
 
     isDialogOpen(dialogid) {
         let d = $(dialogid);
-        return d.is(':data(uiDialog)') && d.dialog('isOpen');
+        if(d.length > 0) {
+            return d.jqxWindow('isOpen');
+        }
     }
 
     isDialog(dialogid) {
         let d = $(dialogid);
-
-        return d.is(':data(uiDialog)');
+        return d.is('.jqx-wnidow');
     }
 
     whichTabIsOpen(dialogid) {
         if (isDialogOpen(dialogid))
             return $(dialogid).tabs('option', 'active');
-
         return null;
     }
 
     closeAllDialogs() {
         this.abortEdit();
-        this.closeDialog('#characterdialog');
+        this.closeDialog('#infodialog');
         //        this.closeDialog('#equipdialog');
         //        this.closeDialog('#invdialog');
         this.closeDialog('#bookdialog');
@@ -4572,17 +4559,9 @@ export default class TgGui {
         this.closeDialog('#tabledialog');
     }
 
-    disableResizable(widget) {
-        $(widget).resizable('disable');
-    }
-
     setViewportSetup(val) {
         $('.tg-area').attr('data-viewport', val);
         this.viewport = val;
-    }
-
-    isPopupOpen() {
-        return $.magnificPopup.instance.isOpen;
     }
 
     closeAllPopups() {

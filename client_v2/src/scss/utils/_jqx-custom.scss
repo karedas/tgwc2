@@ -47,16 +47,19 @@
 
 .jqx-window.tg-window {
     display: block;
-    font-family: kingthinks;
     font-size: 14px;
 }
 
-.jqx-window-close-button-background {
+.jqx-resize {
+    height: auto!important;
+}
+
+.jqx-window-close-button-background, .jqx-window-collapse-button-background{
     top: 2.5px;    
 }
+
+
 .jqx-window-header {
-    display: table;
-    margin: 0 auto;
     border: none;
     width: auto!important;
     color: #FFF;
@@ -68,6 +71,7 @@
     padding: 0 8px 0;
     box-sizing: content-box;
     color: #dcdac8;
+    font-family: kingthinks;
     background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 4px 0;
     
     > div:first-child {
@@ -87,6 +91,9 @@
 .jqx-window-content {
     background-color: transparent;
     padding: 0;
+    font-family: kingthinks;
+    overflow: unset;
+    font-size: 12px;
 }
 
 

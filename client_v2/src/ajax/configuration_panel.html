@@ -1,25 +1,44 @@
-<div id="configurationpanel" class="configpanel tg-shadow tg-dialog-box tg-box b-ironlight tg-shadow-inset">
-    <div class="tg-box">
-      <div class="row">
-        <div class="col-3">
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+<div id="configurationpanel" class="tg-configpanel">
+  <div class="tg-shadow tg-shadow b-ironlight-mini tg-box">
+    <div class="tg-box tg-modal-content tg-shadow-inset h-100">
+      <div class="row h-100">
+        <div class="col-auto h-100 pr-0">
+          <div class="tg-configitemlist nav flex-column nav-pills h-100" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-interfaccia-tab" data-toggle="pill" href="#v-pills-interfaccia" role="tab" aria-controls="v-pills-interfaccia" aria-selected="true">Interfaccia</a>
+            <a class="nav-link" id="v-pills-scorciatoie-tab" data-toggle="pill" href="#v-pills-scorciatoie" role="tab" aria-controls="v-pills-scorciatoie" aria-selected="false">Scorciatoie personali</a>
+            <a class="nav-link" id="v-pills-tastirapidi-tab" data-toggle="pill" href="#v-pills-tastirapidi" role="tab" aria-controls="v-pills-tastirapidi" aria-selected="false">Lista Tasti rapidi</a>
+            <a class="nav-link" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-selected="false">Account</a>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col config-content">
           <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt tempor augue, eget commodo orci. Ut porttitor iaculis dignissim. Curabitur pretium nibh in ex egestas, vel tempor felis rutrum. In dapibus odio sit amet ligula mattis egestas. Nam elementum diam ut nulla volutpat efficitur. Duis velit neque, hendrerit sed orci a, malesuada pretium neque. Maecenas non condimentum mauris. Nunc dictum cursus blandit. Sed bibendum porttitor lectus, sed pellentesque nulla consectetur quis. Mauris cursus vel leo nec maximus. Maecenas rutrum maximus libero nec molestie. Nam facilisis ut est vitae pharetra. Etiam scelerisque nec purus vitae laoreet. Aliquam erat volutpat. In posuere neque ac velit sagittis placerat.
-
+            <div class="tab-pane fade show active" id="v-pills-interfaccia" role="tabpanel" aria-labelledby="v-pills-interfaccia-tab">
+              <div class="config-block">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="cc_enableSound">
+                  <label class="custom-control-label" for="cc_enableSound">Abilita Suoni</label>
+                </div>
+                <div class="form-group indent-control">
+                    <label for="cc_soundLevel" for="cc_level_sound">Volume suoni: <span class="sound-value-txt">100</span></label>
+                    <input id="cc_soundLevel" data-slider-id="cc_soundlevel_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="60"/>
+                </div>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="cc_enableMusic">
+                  <label class="custom-control-label" for="cc_enableMusic">Abilita Musica</label>
+                </div>
+                <div class="form-group indent-control">
+                    <label for="cc_musicLevel">Volume Musica: <span class="music-value-txt">100</span></label>
+                    <input id="cc_musicLevel" data-slider-id="cc_musiclevel_slider" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="90"/>
+                </div>
+              </div>
+              <div class="config-block">
+              </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <div class="tab-pane fade" id="v-pills-scorciatoie" role="tabpanel" aria-labelledby="v-pills-scorciatoie-tab">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt tempor augue, eget commodo orci. Ut porttitor iaculis dignissim. Curabitur pretium nibh in ex egestas, vel tempor felis rutrum. In dapibus odio sit amet ligula mattis egestas. Nam elementum diam ut nulla volutpat efficitur. Duis velit neque, hendrerit sed orci a, malesuada pretium neque. Maecenas non condimentum mauris. Nunc dictum cursus blandit. Sed bibendum porttitor lectus, sed pellentesque nulla consectetur quis. Mauris cursus vel leo nec maximus. Maecenas rutrum maximus libero nec molestie. Nam facilisis ut est vitae pharetra. Etiam scelerisque nec purus vitae laoreet. Aliquam erat volutpat. In posuere neque ac velit sagittis placerat.
             </div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-tastirapidi" role="tabpanel" aria-labelledby="v-pills-tastirapidi-tab">...</div>
+            <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">...</div>
           </div>
         </div>
       </div>
@@ -30,4 +49,5 @@
       <div class="tg-border tg-border-right"></div>
       <div class="tg-border tg-border-bottom"></div>
     </div>
+  </div>
 </div>

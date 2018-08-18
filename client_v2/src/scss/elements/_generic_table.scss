@@ -4,23 +4,34 @@
 
 
 .tg-generictable {
-    width: 100%;
-    color: white;
 
     .table-cont {
         height: 100%;
         overflow: hidden;
-        background-color: #2e241b;
     }
 
     a {
         cursor: pointer;
     }
 
+    tbody tr:nth-of-type(odd) {
+        background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
+    }
+    tbody tr:nth-of-type(even) {
+        background: url($imgPath + '/interface/trow-bg-dark.jpg') repeat-x bottom left;
+    }
+    tbody tr:hover{
+        background: url($imgPath + '/interface/trow-bg-hover.jpg') repeat-x bottom left;
+    }
+
+
     th {
         border: none;
         background-color: #30241d;
         border: 1px solid  #42342c!important;
+        padding-left:20px;
+        font-weight: normal;
+        font-size: 12px;
     }
 
     th, td {
@@ -30,9 +41,6 @@
         border-top: 1px solid  $table-dark-bg;
     }
 
-    td {
-      background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
-    }
 
     .checkbox {
         margin: 0 auto;

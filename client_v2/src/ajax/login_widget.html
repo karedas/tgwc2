@@ -1,33 +1,32 @@
-<div id="loginWidget" class="tg-loginwidget tg-shadow b-modal tg-box">
-  <div class="tg-box">
-    <div id="widgetLoginStatus" class="tg-widgetlogin-status">
-      Sei stato disconnesso.
-    </div>
-    <div class="tg-widgetlogin-menu">
-      <div class="row">
-        <div class="col">
-          <div class="tg-charavatar-last"></div>
-        </div>
-        <div class="col">
-          <button id="widgetLoginReconnect" type="button" class="btn-reconnect">Riconnetti
-            <span></span>
-          </button>
-          <button id="widgetLoginNewConnection" type="button" class="btn-newconnection">Accedi con un personaggio diverso.</button>
-          <button id="widgetLoginExit" type="button" class="btn-newconnection">Esci.</button>
+<div id="loginWidget">
+  <div class="tg-box tg-loginwidget g-shadow b-ironlight-mini">
+    <div class="tg-box tg-modal-content tg-shadow-inset">
+      <div id="widgetLoginStatus" class="tg-widgetlogin-status">
+        Sei stato disconnesso.
+      </div>
+      <div class="tg-widgetlogin-menu">
+        <div class="row">
+          <div class="col">
+            <button id="widgetLoginReconnect" type="button" class="btn-reconnect tg-button">Riconnetti
+              <span></span>
+            </button>
+            <button id="widgetLoginNewConnection" type="button" class="btn-newlogin tg-button">Accedi con un personaggio diverso.</button>
+            <button id="widgetLoginExit" type="button" class="btn-backtohome tg-button">Torna alla Home</button>
+          </div>
         </div>
       </div>
+      <form id="widgetLoginForm" action="#" autocomplete="off">
+        <input id="widget_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
+        <input id="widget_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
+        <button type="submit" class="form-control btn-loginwidget tg-button" value="accedi" id="widgetDoLocalLogin">Accedi</button>
+        <a href="#" id="backToRootWidgetLogin" class="back-to-root">Torna indietro</a>
+      </form>
     </div>
-    <form id="widgetLoginForm" action="#" autocomplete="off">
-      <input id="widget_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
-      <input id="widget_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
-      <button type="submit" class="form-control tg-loginbtn" value="accedi" id="widgetDoLocalLogin">Accedi</button>
-      <div id="widgetLoginNetworkActivity" class="form-control tg-loginstatus"></div>
-    </form>
-  </div>
-  <div class="tg-border-box">
-    <div class="tg-border tg-border-top"></div>
-    <div class="tg-border tg-border-left"></div>
-    <div class="tg-border tg-border-right"></div>
-    <div class="tg-border tg-border-bottom"></div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div id="tgNews">
     <!-- Notizie -->
     <div class="tg-notizie">
-      <div class="g-shadow b-ironlight-mini tg-box">
+      <div class="g-shadow b-ironlight-mini tg-box tg-modal-content">
         <div class="tg-box b-paper">
           <div class="tg-box container-fluid">
             <div class="row">
@@ -30,6 +30,15 @@
               </div>
               <!-- ## End Content ## -->
             </div>
+            <div class="tg-box text-center notizie-action">
+              <button id="initNewsButton" class="tg-button tg-button-continua tg-shadow">Continua</button>
+              <div class="input-group-prepend mt-2">
+                <div class="input-group-text m-auto">
+                  <input id="hideNewsAtBeginning" type="checkbox" aria-label="Non mostrare">
+                  <label for="hideNewsAtBeginning">Non mostrare piu' questa notizia.</label>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="tg-border-box">
               <div class="tg-border tg-border-top"></div>
@@ -37,15 +46,6 @@
               <div class="tg-border tg-border-right"></div>
               <div class="tg-border tg-border-bottom"></div>
             </div>
-        </div>
-        <div class="tg-box text-center notizie-action">
-          <button id="initNewsButton" class="tg-button tg-button-continua tg-shadow">Continua</button>
-          <div class="input-group-prepend">
-            <div class="input-group-text m-auto">
-              <input id="hideNewsAtBeginning" type="checkbox" aria-label="Non mostrare">
-              <label for="hideNewsAtBeginning">Non mostrare piu' questa notizia.</label>
-            </div>
-          </div>
         </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>
