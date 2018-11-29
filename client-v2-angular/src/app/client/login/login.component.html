@@ -1,0 +1,109 @@
+<div class="tg-loginpanel">
+  <!-- Login Panel -->
+  <div class="justify-content-center align-self-top w-100 d-flex h-100">
+    <div class="mx-auto tg-login-container my-auto">
+      <div class="tg-logo-composit">
+      </div>
+      <div class="tg-loginform">
+        <div class="tg-loginform-wrap">
+          <div class="tg-loginform-content">
+            <h2>Gioco di Ruolo Fantasy Online
+              <br> Accedi
+              <span>gratis</span> al mondo di Ikhari!
+            </h2>
+            <form (submit)="loginUser($event)" action="#" autocomplete="off" novalidate >
+              <div class="form-row">
+                <div class="col-12">
+                  <input id="login_username" class="form-control" name="username" type="text" autocomplete="off"
+                    placeholder="Username" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-12">
+                  <input id="login_password" class="form-control" name="password" type="password" autocomplete="off"
+                    placeholder="Password" required />
+                </div>
+              </div>
+              <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
+              <p class="tg-newcharacter">Sei nuovo?
+                <a href="#" id="doNewCharacter">Crea un Personaggio</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
+      <div id="rotateText" class="tg-intro-rotatext row text-center">
+        <div class="col-12">
+          <div class="phrase">
+            "L'importante non è Guardare, occorre Vedere."
+            <span class="auth">- Anonimo -</span>
+          </div>
+          <div class="phrase">"Nuovo giorno, buon giorno!"
+            <span class="auth">- Una guardia cittadina -</span>
+          </div>
+          <div class="phrase">"Gnek gnek!"
+            <span class="auth">- Strane creature di Ikhari -</span>
+          </div>
+        </div>
+      </div>
+      <div id="tgPreloader" class="tg-preloader">
+        <span>0</span>%
+        <div class="pbar"></div>
+      </div>
+    </div>
+    <!-- glow Effect ### //-->
+    <div class="glow_container">
+      <div class="glow_wamp glow_box"></div>
+      <div class="glow_box _spectral">
+        <div class="glow_stream _type_1">
+          <div class="glow_slide">
+            <div class="shake">
+              <div class="glow_item _type_1"></div>
+              <div class="glow_item _type_2"></div>
+              <div class="glow_item _type_3"></div>
+              <div class="glow_item _type_4"></div>
+            </div>
+          </div>
+          <div class="glow_slide _delay_1">
+            <div class="shake _delay_1">
+              <div class="glow_item _type_1"></div>
+              <div class="glow_item _type_2"></div>
+              <div class="glow_item _type_3"></div>
+              <div class="glow_item _type_4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright and Usefull Links -->
+  <div class="tg-login-footer align-self-baseline mt-auto w-100">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 text-center">
+        <i class="fab fa-facebook"></i>
+        <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
+        <i class="fab fa-wpforms"></i>
+        <a href="http://forum.thegatemud.it/" target="_blank">Forum</a> |
+        <i class="fas fa-envelope"></i>
+        <a href="#" target="_blank">Contattaci</a>
+      </div>
+      <div class="col-4 text-center">
+        <p class="tg-version-name">TGWC v.2 -
+          <span>
+            <%= htmlWebpackPlugin.options.git_version %>
+          </span>
+        </p>
+      </div>
+      <div class="col-4 text-center">
+        &copy; 2013-2018 The Gate MUD |
+        <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a>
+      </div>
+    </div>
+  </div>
+</div>

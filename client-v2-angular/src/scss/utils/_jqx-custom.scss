@@ -1,0 +1,103 @@
+.jqx-widget-content {
+    background: transparent;
+    border: none;
+    font-size: 11px;
+}
+
+
+// Splitter 
+.jqx-splitter-splitbar-vertical {
+    border: none;
+    background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+}
+    // ===  Splitter Collapse button
+    .jqx-splitter-collapse-button-vertical {
+        display: none;
+    }
+
+// Scroll Bar
+
+#jqxWidgethorizontalScrollBar {display:none;}
+
+
+.jqx-scrollbar-state-normal {
+    border: none;
+    background-color: #1f1d1a;
+}
+
+.jqx-scrollbar-thumb-state-normal {
+    background: #332f25;
+    border-color: #564d37;
+}
+
+.jqx-scrollbar-thumb-state-hover {
+    background: #4c4535;
+    border-color: #564d37;
+}
+
+.jqx-scrollbar-thumb-state-pressed{
+    background: #645a41;
+    border-color: #564d37;
+}
+
+
+/* Window */
+.tg-window {
+    display: none;
+    overflow: unset;
+}
+
+.jqx-window.tg-window {
+    display: block;
+    font-size: 14px;
+}
+
+.jqx-resize {
+    height: auto!important;
+}
+
+.jqx-window-close-button-background, .jqx-window-collapse-button-background{
+    top: 2.5px;    
+}
+
+
+.jqx-window-header {
+    border: none;
+    width: auto!important;
+    color: #FFF;
+    line-height: 24px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 0 8px 0;
+    box-sizing: content-box;
+    color: #dcdac8;
+    font-family: kingthinks;
+    background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 4px 0;
+    
+    > div:first-child {
+        width: 100%;
+        background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
+        padding: 0 32px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 100%;
+        background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
+    }
+}
+
+.jqx-window-content {
+    background-color: transparent;
+    padding: 0;
+    font-family: kingthinks;
+    overflow: unset;
+    font-size: 12px;
+}
+
+
+

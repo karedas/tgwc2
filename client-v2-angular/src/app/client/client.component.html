@@ -1,0 +1,18 @@
+<ng-container *ngIf="!isCookieAccepted">
+  <tg-cookie-law (iAcceptCookie)="onCookieAccepted($event)"></tg-cookie-law>
+</ng-container>
+
+<!-- Client -->
+<ng-container *ngIf="isCookieAccepted">
+  <div class="tg-area tg-box">
+    <tg-login></tg-login>
+    <!-- <div class="tg-main container-fluid">
+    </div>  -->
+    <!-- <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div> -->
+  </div>
+</ng-container>

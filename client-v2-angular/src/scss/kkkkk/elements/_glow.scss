@@ -1,0 +1,196 @@
+/*------------------------/
+ * GLOW EFFECT ANIMATION
+ * THEME SETTING: PORTAL BLUE *
+ *------------------------*/
+
+ .glow_container {
+    position: absolute;
+    margin: 0 auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    width: 415px;
+    pointer-events: none;
+}
+
+.glow_box {
+    position: absolute;
+}
+
+.glow_box.glow_wamp {
+    width: 2px;
+    height: 7px;
+    background: #f3faff;
+    box-shadow: 0 0 30px 22px #ffffff;
+    border-radius: 50%;
+    top: 276px;
+    left: -26px;
+    animation: pulse 8s infinite linear;
+}
+
+.glow_box._spectral {
+    width: 120px;
+    height: 255px;
+    top: 145px;
+    left: -14px;
+}
+.glow_stream {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+.glow_slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.shake {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: shake 9s infinite linear;
+}
+.shake._delay_1 {
+    animation-delay: 3s
+}
+.shake._delay_2 {
+    animation-delay: 6s
+}
+.glow_item {
+    position: absolute;
+    border-radius: 50%;
+    left: 100%;
+    top: 100%;
+    opacity: 0;
+    animation: scale 9s infinite linear;
+}
+._delay_1 .glow_item {
+    animation-delay: 3s
+}
+._delay_2 .glow_item {
+    animation-delay: 6s
+}
+.glow_item._type_1 {
+    margin: 6% 0 0 -2%;
+    width: 1px;
+    height: 1px;
+}
+.glow_item._type_2 {
+    margin: -7% 0 0 -1%;
+    width: 4px;
+    height: 4px;
+}
+.glow_item._type_3 {
+    margin: -11% 0 0 -15%;
+    width: 1px;
+    height: 1px;
+}
+.glow_item._type_4 {
+    margin: 7% 0 0 17%;
+    width: 2px;
+    height: 2px;
+}
+.glow_box._spectral .glow_item {
+    background: #f3faff;
+    box-shadow: 0 0 10px 3px #99ba9f;
+}
+.glow_box._spectral .glow_stream._type_1 {
+    transform: rotate(42deg) scale(1) translate(-78%, -23%);
+}
+.glow_box._spectral .glow_slide._delay_1 {
+    transform: rotate(-3deg) translate(2%, 9%) scale(0.9)
+}
+.glow_box._spectral .glow_slide._delay_2 {
+    transform: rotate(4deg) translate(-12%, -10%) scale(1.2)
+}
+
+@keyframes scale {
+    60% {
+        opacity: 1;
+        transform: translate3d(-90px, -90px, 0) scale(1)
+    }
+    100% {
+        transform: translate3d(-150px, -150px, 0) scale(0);
+        opacity: 0
+    }
+    
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 0;
+    }
+    65% {
+        opacity: 1
+    }
+    90% {
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0%, 0)
+    }
+    25% {
+        transform: translate(-2%, 2%)
+    }
+    75% {
+        transform: translate(2%, -2%)
+    }
+    100% {
+        transform: translate(0%, 0)
+    }
+}
+
+@keyframes pulsation {
+    0% {
+        opacity: 0;
+        visibility: hidden
+    }
+    50% {
+        opacity: 1;
+        visibility: visible
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden
+    }
+}
+@keyframes pulsation_r {
+    0% {
+        opacity: 1;
+        visibility: visible
+    }
+    50% {
+        opacity: 0;
+        visibility: hidden
+    }
+    100% {
+        opacity: 1;
+        visibility: visible
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+@keyframes rotate_r {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(-360deg)
+    }
+}

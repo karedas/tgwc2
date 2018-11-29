@@ -1,0 +1,235 @@
+
+$skyPath : $imgPath + '/sky/'; 
+
+$lightining_color1: transparent;
+$lightining_color2: rgba(255, 255, 255, 0.6);
+
+@keyframes lightining {
+    0% {
+        background-color: $lightining_color1;
+      }
+      9% {
+        background-color: $lightining_color1;
+      }
+      10% {
+        background-color: $lightining_color2;
+      }
+      20.5% {
+        background-color: $lightining_color1;
+      }
+      80% {
+        background-color: $lightining_color1;
+      }
+      82% {
+        background-color: $lightining_color2;
+      }
+      83% {
+        background-color: $lightining_color1;
+      }
+      83.5% {
+        background-color: $lightining_color2;
+      }
+      100% {
+        background-color: $lightining_color1;
+      }
+}
+
+.tg-sky {
+    position: absolute;
+    width: 358px;
+    height: 215px;
+    left: 28px;
+    top: 13px;
+    
+    #sky {
+        height: 100%;
+        width: 100%;
+        box-shadow: inset 0 0 20px 0px black;
+        background-size: cover;
+        background-position: top left;
+
+        &:after {
+            display: none;
+            content: '';
+            position: absolute;
+        }
+        /* Notte con Luna */
+        &[data-sky="0"],
+        &[data-sky="1"],
+        &[data-sky="2"],
+        &[data-sky="3"],
+        &[data-sky="4"]{
+           background-image: url( $skyPath + 'notte.jpg');
+            /* Elemento Luna */
+            &:after {
+               @include sprite($weather-moon-sprite);
+               display: block;
+               transition: all 6s ease-in;
+            }
+        }
+        
+        /* Lampi  */
+        &[data-sky="d"],
+        &[data-sky="e"],
+        &[data-sky="f"],
+        &[data-sky="p"],
+        &[data-sky="r"],
+        &[data-sky="s"]{
+            &:after {
+                background-color: transparent;
+                display: block!important;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                animation: lightining 8s infinite;
+            }
+        }
+
+
+        /* Notte + luna 0/4 */
+        &[data-sky="0"]:after {
+            top: 80px;
+            left: -16px;
+        }
+        /* Notte + luna 1/4 */
+        &[data-sky="1"]:after {
+            top: 12px;
+            left: 20px;
+        }
+        /* Notte + luna 2/4 */
+        &[data-sky="2"]:after {
+            top: -18px;
+            left: 177px;
+            transform: translateX(-50%);
+        }
+        /* Notte + luna 3/4 */
+        &[data-sky="3"]:after {
+            top: 12px;
+            right: 20px;
+        }
+        /* Notte + luna 4/4 */
+        &[data-sky="4"]:after {
+            top: 80px;
+            right: -16px;
+        }
+        /* Alba */
+        &[data-sky="5"] {
+           background-image: url( $skyPath + 'alba.jpg');
+        }
+        /* Mattina */
+        &[data-sky="6"] {
+           background-image: url( $skyPath + 'mattina.jpg');
+        }
+        /*Mezzogiorno*/
+        &[data-sky="7"] {
+            background-image: url( $skyPath + 'mezzogiorno.jpg');
+        }
+        /*Pomeriggio*/
+        &[data-sky="8"] {
+            background-image: url( $skyPath + 'pomeriggio.jpg');
+        }
+        /* Sera */
+        &[data-sky="9"] {
+            background-image: url( $skyPath + 'sera.jpg');
+        }
+        /* Notte (no luna) */
+        &[data-sky="N"] {
+            background-image: url( $skyPath + 'notte.jpg');
+        }
+        /* giorno con pioggia e fulmini */
+        &[data-sky="d"] {
+            background-image: url( $skyPath + 'giorno-pioggia-fulmini.jpg');
+        }
+        /* giorno e pioggia */
+        &[data-sky="e"] {
+            background-image: url( $skyPath + 'giorno-pioggia.jpg');
+        }
+        /* giorno e fulmini */
+        &[data-sky="f"] {
+            background-image: url( $skyPath + 'giorno-nuvoloso.jpg');
+        }
+        /* Aurora boreale */
+        &[data-sky="g"] {
+            //@include sprite($auroraboreale-sprite);
+        }
+        /* Tramonto */
+        &[data-sky="i"] {
+            background-image: url( $skyPath + 'tramonto.jpg');
+        }
+        /* Aurora */
+        &[data-sky="o"] {
+            background-image: url( $skyPath + 'aurora.jpg');
+        }
+        /* Notte + pioggia + fulmini */
+        &[data-sky="p"] {
+            background-image: url( $skyPath + 'notte-pioggia-fulmini.jpg');      
+        }
+        /* Giorno nuvoloso  */
+        &[data-sky="q"] {
+           background-image: url( $skyPath + 'giorno-nuvoloso.jpg');
+        }
+        /* Notte + Pioggia */
+        &[data-sky="r"] {
+            background-image: url( $skyPath + 'notte-pioggia.jpg');
+        }
+        /* Notte + Pioggia + Fulmini */
+        &[data-sky="s"] {
+            background-image: url( $skyPath + 'notte-pioggia-fulmini.jpg');
+        }
+        /* Giorno + Neve */
+        &[data-sky="t"] {
+            background-image: url( $skyPath + 'giorno-neve.jpg');
+        }
+        /* Arcobaleno */
+        &[data-sky="u"] {
+            background-image: url( $skyPath + 'rainbow.jpg');
+        }
+        /* Notte nuvolosa */
+        &[data-sky="w"] {
+            background-image: url( $skyPath + 'notte-nuvolosa.jpg');
+        }
+        /* Notte con Neve */
+        &[data-sky="y"] {
+            background-image: url( $skyPath + 'notte-neve.jpg');
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        width: 275px;
+        height: 162px;
+        top: 10px;
+        left: 24px;
+        right: 10px;
+        z-index: 2;
+        position: absolute;
+
+        #sky {
+            /* Notte + luna 0/4 */
+            &[data-sky="0"]:after {
+                top: 52px;
+                left: -15px;
+            }
+            /* Notte + luna 1/4 */
+            &[data-sky="1"]:after {
+                top: 12px;
+                left: 20px;
+            }
+            /* Notte + luna 2/4 */
+            &[data-sky="2"]:after {
+                top: -18px;
+                left: 136px;
+                transform: translateX(-50%);
+            }
+            /* Notte + luna 3/4 */
+            &[data-sky="3"]:after {
+                top: 12px;
+                right: 20px;
+            }
+            /* Notte + luna 4/4 */
+            &[data-sky="4"]:after {
+                top: 52px;
+                right: -15px;
+            }
+        }
+    }
+}

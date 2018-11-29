@@ -1,0 +1,49 @@
+.jqx-window.tg-configpanel  {
+    display: block;
+}
+
+.tg-configpanel {
+    display: none;
+
+    .tg-configitemlist {
+        background: #14100b url($imgPath + '/background/nav-pills-background.jpg') top right repeat-y;
+        font-size: 14px;
+        a {
+            text-transform: capitalize;
+            color: #b59c72;
+            background: url($imgPath + '/background/nav-pills-divider.jpg') no-repeat center bottom;
+        }
+
+        a.active, a:hover {
+            color: #dcdac8;
+            background-color: unquote('#4023063d');
+        }
+
+    }
+
+    .config-block {
+        
+    }
+
+    .config-content {
+        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+    }
+    
+    .tab-content {
+        padding: 25px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .custom-control {
+        margin-bottom: 1em;
+    }
+
+    .indent-control {
+        padding-left: 24px;
+    }
+
+    .slider-horizontal {
+        display: block;
+    }
+}
+
