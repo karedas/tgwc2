@@ -10,31 +10,31 @@
             <h2>Gioco di Ruolo Fantasy Online
               <br> Accedi
               <span>gratis</span> al mondo di Ikhari!
-            </h2>
-            <form (submit)="loginUser($event)" action="#" autocomplete="off" novalidate >
+            </h2> 
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
               <div class="form-row">
                 <div class="col-12">
-                  <input id="login_username" class="form-control" name="username" type="text" autocomplete="off"
+                  <input class="form-control" formControlName="username" type="text" autocomplete="off"
                     placeholder="Username" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-12">
-                  <input id="login_password" class="form-control" name="password" type="password" autocomplete="off"
+                  <input class="form-control" formControlName="password" type="password" autocomplete="off"
                     placeholder="Password" required />
                 </div>
               </div>
-              <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
+              <button type="submit" class="tg-loginbtn" value="accedi">Accedi</button>
               <p class="tg-newcharacter">Sei nuovo?
-                <a href="#" id="doNewCharacter">Crea un Personaggio</a>
+                <a href="#">Crea un Personaggio</a>
               </p>
             </form>
           </div>
         </div>
       </div>
-      <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
-      <div id="rotateText" class="tg-intro-rotatext row text-center">
-        <div class="col-12">
+      <div class="tg-loginstatus"></div>
+      <div class="tg-intro-rotatext row text-center" @fadeTextAnimation> 
+        <div class="col-12" >
           <div class="phrase">
             "L'importante non è Guardare, occorre Vedere."
             <span class="auth">- Anonimo -</span>
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div id="tgPreloader" class="tg-preloader">
+      <div class="tg-preloader">
         <span>0</span>%
         <div class="pbar"></div>
       </div>
@@ -81,7 +81,7 @@
   <div class="tg-login-footer align-self-baseline mt-auto w-100">
     <div class="row">
       <div class="col-12 text-center">
-        <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
+        <div class="tg-serverstatus">{{ serverStatusText }}</div>
       </div>
     </div>
     <div class="row">

@@ -2,6 +2,14 @@
 export interface GameState {
     players: number,
     time: Date;
-    state: string;
+    serverStatus: string;
+}
+
+
+export const initializeGameState = function() {
+    return {
+        players: 0,
+        time: new Date(),
+    }
 }
 

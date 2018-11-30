@@ -9,7 +9,6 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class CookieLawComponent {
 
-  // @ViewChild('cookieLawReference') cookieLaw: jqxWindowComponent; 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
   display: boolean = false;

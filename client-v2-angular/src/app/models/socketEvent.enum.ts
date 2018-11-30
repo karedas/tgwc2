@@ -1,4 +1,4 @@
-export enum Event {
+export enum socketEvent {
     CONNECT = 'connect',
     DISCONNECT = 'disconnect',
     RECONNECT = 'reconnect_attempt',

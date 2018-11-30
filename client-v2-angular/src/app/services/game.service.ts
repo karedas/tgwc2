@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { socketEvent } from '../models/socketEvent.enum';
 import { SocketService } from './socket.service';
-import { Event } from '../models/socketEvent.enum';
+import { NetworkStatusService } from './networkstatus.service';
+
+import { NGXLogger } from 'ngx-logger';
 
 
 @Injectable({
@@ -10,45 +13,65 @@ import { Event } from '../models/socketEvent.enum';
 
 export class GameService {
 
-  private subject = new Subject<any>();
-  
+  isConnected: boolean;
   ioConnection: any;
 
-  constructor(private socketService: SocketService) {
-  }
+  inGame: boolean; 
+
+  private subject = new Subject<any>();
+  constructor(
+    private socketService: SocketService,
+    private networkService: NetworkStatusService,
+    private logger: NGXLogger
+    ) { }
   
-  connectToServer() {
+  run() {
     /* Start the Socket Connection to the WebSocket Server */
     this.InitIOSocket();
   }
 
   private InitIOSocket(): void {
-    // Initialize the IO Web Socket
-    this.socketService.initSocket();
+       this.socketService.initSocket();
 
-    this.socketService.onEvent(Event.CONNECT)
+    this.socketService.onEvent(socketEvent.CONNECT)
       .subscribe(() => {
-        console.log('TG-LOG: Connessione al server avvenuta');
+        this.networkService.changeStatus('Il server è online');
+        this.logger.debug('Websocket: ' + socketEvent.CONNECT);
       });
 
-    this.socketService.onEvent(Event.DISCONNECT)
+    this.socketService.onEvent(socketEvent.DISCONNECT)
       .subscribe(() => {
-        console.log('TG-LOG: Disconnesso dal server');
+        this.networkService.changeStatus('Il server è Offline');
+        this.logger.debug('Websocket: '+ socketEvent.DISCONNECT);
+
       });
 
-    this.socketService.onEvent(Event.ERROR)
+    this.socketService.onEvent(socketEvent.ERROR)
       .subscribe(() => {
-        console.log('TG-LOG: Errore di connessione al WebSocket');
+        this.logger.warn('Websocket: '+ socketEvent.ERROR);
       });
 
-    this.socketService.onEvent(Event.RECONNECT)
+    this.socketService.onEvent(socketEvent.RECONNECT)
       .subscribe(() => {
-        console.log('TG-LOG: Tentativo di riconnessione al WebSocket');
+        this.logger.debug('Websocket: '+ socketEvent.RECONNECT);
       });
 
     // this.ioConnection = this.socketService.onMessage()
     //   .subscribe((message: Message) => {
     //     this.messages.push(message);
     //   });
+  }
+
+  private onConnect() {
+    this.inGame = true;
+  }
+  private onDisconnect() {
+    this.setDisconnect();
+  }
+  private onError() {}
+  private onReconnect() {}
+
+  setDisconnect(){
+    this.inGame = false;
   }
 }

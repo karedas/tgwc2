@@ -34,6 +34,7 @@
     "jqwidgets-scripts": "^6.1.0",
     "merge-stream": "^1.0.1",
     "ngx-cookie-service": "^2.0.0",
+    "ngx-logger": "^3.3.6",
     "ngx-socket-io": "^2.0.0",
     "normalize.css": "^8.0.1",
     "primeicons": "^1.0.0",

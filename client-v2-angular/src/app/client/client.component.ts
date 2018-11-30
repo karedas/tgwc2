@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
-
+ 
 
 @Component({
   selector: 'tg-client',
@@ -20,7 +20,7 @@ export class ClientComponent implements OnInit{
     private platform: Platform,
     @Inject(DOCUMENT) private document: any
   ) {
-    /* Add a class to the Body Dom Element client is exec in a Mobile device. */
+    /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
       this.document.body.className += 'is-mobile';
     }
@@ -28,7 +28,13 @@ export class ClientComponent implements OnInit{
 
   ngOnInit() {
     /* Mndatory verification of acceptance of the use of cookies before proceed */
-    this.isCookieAccepted = this.cookieService.check('tgCookieLaw') ? true : false;
+    if(!this.cookieService.check('tgCookieLaw')) {
+      return;
+    }
+    else {
+      this.game.run();
+      this.isCookieAccepted = true;
+    }
   }
 
   onCookieAccepted(status: boolean) {
