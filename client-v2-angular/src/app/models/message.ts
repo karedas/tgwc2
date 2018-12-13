@@ -1,2 +1,3 @@
-export class Message {
+export interface Message {
+    data: string
 }

@@ -2,24 +2,24 @@ import { NgModule, } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 import { CookieLawComponent } from './cookie-law/cookie-law.component';
-import { LoginComponent } from './login/login.component';
 import { ClientComponent } from './client.component';
-
-import {DialogModule} from 'primeng/dialog';
-
+import { DialogModule } from 'primeng/dialog';
+import { ClientRoutingModule } from './client-routing.module';
+import { Auth2Module } from '../authentication/auth.module';
+import { ClientContainerComponent } from './client-container/client-container.component';
 
 @NgModule({
   declarations: [
     ClientComponent,
-    LoginComponent,
     CookieLawComponent,
+    ClientContainerComponent,
   ],
   imports: [
     CommonModule,
+    ClientRoutingModule,
+    Auth2Module,
     BrowserModule,
     DialogModule,
     FormsModule,
@@ -29,4 +29,5 @@ import {DialogModule} from 'primeng/dialog';
     ClientComponent
   ]
 })
-export class ClientModule { }
+export class ClientModule {
+ }

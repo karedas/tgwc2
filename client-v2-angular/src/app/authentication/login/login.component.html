@@ -11,7 +11,7 @@
               <br> Accedi
               <span>gratis</span> al mondo di Ikhari!
             </h2> 
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+            <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
               <div class="form-row">
                 <div class="col-12">
                   <input class="form-control" formControlName="username" type="text" autocomplete="off"
@@ -33,20 +33,22 @@
         </div>
       </div>
       <div class="tg-loginstatus"></div>
-      <div class="tg-intro-rotatext row text-center" @fadeTextAnimation> 
+      <!-- <div class="tg-intro-rotatext row text-center"> 
         <div class="col-12" >
-          <div class="phrase">
+          <div class="phrase" #phrase>
             "L'importante non è Guardare, occorre Vedere."
             <span class="auth">- Anonimo -</span>
           </div>
-          <div class="phrase">"Nuovo giorno, buon giorno!"
+          <div class="phrase" #phrase>
+            "Nuovo giorno, buon giorno!"
             <span class="auth">- Una guardia cittadina -</span>
           </div>
-          <div class="phrase">"Gnek gnek!"
+          <div class="phrase" #phrase>
+            "Gnek gnek!"
             <span class="auth">- Strane creature di Ikhari -</span>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="tg-preloader">
         <span>0</span>%
         <div class="pbar"></div>
@@ -81,7 +83,9 @@
   <div class="tg-login-footer align-self-baseline mt-auto w-100">
     <div class="row">
       <div class="col-12 text-center">
-        <div class="tg-serverstatus">{{ serverStatusText }}</div>
+        <div class="tg-serverstatus">
+          <!-- {{ serverStatusText }} -->
+        </div>
       </div>
     </div>
     <div class="row">

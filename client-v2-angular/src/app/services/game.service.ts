@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { socketEvent } from '../models/socketEvent.enum';
 import { SocketService } from './socket.service';
 import { NetworkStatusService } from './networkstatus.service';
 
 import { NGXLogger } from 'ngx-logger';
-
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -15,51 +15,45 @@ export class GameService {
 
   isConnected: boolean;
   ioConnection: any;
+  messages: Message;
 
   inGame: boolean; 
-
   private subject = new Subject<any>();
   constructor(
     private socketService: SocketService,
-    private networkService: NetworkStatusService,
-    private logger: NGXLogger
+    // private networkService: NetworkStatusService,
+    // private logger: NGXLogger,
     ) { }
   
-  run() {
-    /* Start the Socket Connection to the WebSocket Server */
-    this.InitIOSocket();
+  newGame() {
+    this.setSocketHandler();
   }
 
-  private InitIOSocket(): void {
-       this.socketService.initSocket();
+  private setSocketHandler(): void {
 
-    this.socketService.onEvent(socketEvent.CONNECT)
-      .subscribe(() => {
-        this.networkService.changeStatus('Il server è online');
-        this.logger.debug('Websocket: ' + socketEvent.CONNECT);
-      });
-
-    this.socketService.onEvent(socketEvent.DISCONNECT)
-      .subscribe(() => {
-        this.networkService.changeStatus('Il server è Offline');
-        this.logger.debug('Websocket: '+ socketEvent.DISCONNECT);
-
-      });
-
-    this.socketService.onEvent(socketEvent.ERROR)
-      .subscribe(() => {
-        this.logger.warn('Websocket: '+ socketEvent.ERROR);
-      });
-
-    this.socketService.onEvent(socketEvent.RECONNECT)
-      .subscribe(() => {
-        this.logger.debug('Websocket: '+ socketEvent.RECONNECT);
-      });
-
-    // this.ioConnection = this.socketService.onMessage()
-    //   .subscribe((message: Message) => {
-    //     this.messages.push(message);
+    // this.socketService.onEvent(socketEvent.CONNECT)
+    //   .subscribe(() => {
+    //     console.log(socketEvent.CONNECT);
+    //     // this.networkService.changeStatus(socketEvent.CONNECT);
+    //     this.isConnected = true;
     //   });
+
+    // this.socketService.onEvent(socketEvent.DISCONNECT)
+    //   .subscribe(() => {
+    //   });
+
+    // this.socketService.onEvent(socketEvent.ERROR)
+    //   .subscribe(() => {
+    //     console.log(socketEvent.ERROR);
+    //   });
+
+    // this.socketService.onEvent(socketEvent.RECONNECT)
+    //   .subscribe(() => {
+    //     console.log(socketEvent.RECONNECT);
+    //   });
+ 
+    this.socketService.onMessage().subscribe( msg => {
+    });
   }
 
   private onConnect() {

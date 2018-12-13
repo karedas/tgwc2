@@ -1,7 +1,10 @@
 @import "src/scss/core";
 @import './glow';
 
-/* Init Login box */
+:host {
+  width: 100%;
+}
+
 .tg-loginpanel {
   background-color: #0b0807;
   background-image: url($imgPath + '/login/login_background_01.jpg');
@@ -49,20 +52,6 @@
       opacity: 0;
       animation: logolightAnimation 8s infinite;
       animation-delay: .5s;
-    }
-
-    @keyframes logolightAnimation {
-      0% {
-        opacity: 0;
-      }
-
-      50% {
-        opacity: .6;
-      }
-
-      100% {
-        opacity: 0;
-      }
     }
   }
 
@@ -205,6 +194,24 @@
   }
 }
 
+@keyframes logolightAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: .6;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/*
+* Phrases Rotator - Footer Side 
+*/
+
 .tg-intro-rotatext {
   color: #9c9c9c;
   font-family: kingthinks;
@@ -213,7 +220,8 @@
   box-sizing: content-box;
 
   .phrase {
-    // display: none;
+    opacity: 0;
+    animation: textRotatorAnimation 4s infinite;
   }
 
   .auth {
@@ -222,6 +230,27 @@
     display: block;
 
   }
+
+  .phrase:nth-child(1) {
+    animation-delay: 0s;
+    animation-duration: 4s;
+  }
+  .phrase:nth-child(2) {
+    animation-delay: 4s;
+    animation-duration: 8s;
+
+  }
+  .phrase:nth-child(3) {
+    animation-delay: 8s;
+    animation-duration: 12s;
+  }
+}
+
+@keyframes textRotatorAnimation {
+  0% { opacity: 0; z-index: 100;}
+  15% { opacity: 1;}
+  50% { opacity: 1;}
+  100% { opacity: 0; z-index: 1;}
 }
 
 .tg-version-name {
@@ -233,6 +262,30 @@
   span {
     display: inline-block;
     color: $gray-600;
+  }
+}
+
+/* Preloader in Login */
+.tg-preloader {
+  display: none;
+  position: relative;
+  text-align: center;
+  margin: .5em 0;
+  border: 1px solid $tg-brown;
+
+  span {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 1px black;
+  }
+
+  //bar
+  div.pbar {
+    background-color: $tg-brown;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
   }
 }
 
@@ -314,32 +367,5 @@ body[data-loginstatus="ready"] {
 body[data-loginstatus="disconnect"] {
   .tg-area {
     filter: blur(3px);
-  }
-}
-
-
-
-/* Preloader in Login */
-
-.tg-preloader {
-  display: none;
-  position: relative;
-  text-align: center;
-  margin: .5em 0;
-  border: 1px solid $tg-brown;
-
-  span {
-    position: relative;
-    z-index: 2;
-    text-shadow: 0 0 1px black;
-  }
-
-  //bar
-  div.pbar {
-    background-color: $tg-brown;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
   }
 }
