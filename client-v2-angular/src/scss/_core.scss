@@ -4,7 +4,7 @@
 /* Bootstrap */
 @import "~bootstrap/scss/bootstrap";
 /* Prime Ng */
-// @import "~primeng/resources/primeng.min.css",
+@import "~primeng/resources/primeng.min.css";
 // @import "~bootstrap/scss/functions";
 // @import "~bootstrap/scss/variables";
 // @import "~bootstrap/scss/mixins";
@@ -13,3 +13,5 @@
 // ...
 @import 'colors';
 @import 'utils/sprites-mixins';
+/* Elements */
+@import 'elements/modal';

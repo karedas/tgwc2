@@ -3,7 +3,7 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 
 const authRoutes: Routes = [
-	{path: 'auth/login', component: LoginComponent},
+	{path: 'login', component: LoginComponent},
 	// {path: 'auth/forgot-password', component: ForgotPasswordComponent},
 	// {path: 'auth/reset-password', component: ResetPasswordComponent},
 	// {path: 'auth/register', component: RegisterComponent},

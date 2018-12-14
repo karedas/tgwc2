@@ -32,7 +32,6 @@ export class SocketService {
     }
 
     this.socket = io(environment.socket.url, environment.socket.options);
-    console.log(this.socket);
 
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
@@ -79,7 +78,6 @@ export class SocketService {
   }
 
   public removeListener(event: socketEvent): void {
-    console.log('removed?', event);
     this.socket.off(event);
   }
 }

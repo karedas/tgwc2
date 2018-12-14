@@ -1,28 +1,25 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ClientComponent } from "./client.component";
+import { AuthGuard } from "../authentication/auth.guard";
+import { ClientContainerComponent } from "./client-container/client-container.component";
 
-const clientRouting: Routes = [{
-        path: '',
-        component: ClientComponent,
-        children: [{
-            path: '',
-            redirectTo: 'login',
-            pathMatch: 'full'
-        }],
-    }, { 
-        path: 'login',
-        redirectTo: 'auth/login',
-        pathMatch: 'full'
-    }, {
-        path: '**',
-        redirectTo: 'game'
-    }
+const clientRouting: Routes = [
+	{
+		path: '',
+		redirectTo: 'login',
+		pathMatch: 'full'
+	},
+	{ 
+		path: 'webclient', 
+		component: ClientContainerComponent, 
+		pathMatch: 'full',
+		canActivate: [AuthGuard] 
+	}
 ]
 
 @NgModule({
-    imports: [RouterModule.forChild(clientRouting)],
-    exports: [RouterModule]
+	imports: [RouterModule.forChild(clientRouting)],
+	exports: [RouterModule]
 })
 
-export class ClientRoutingModule {}
+export class ClientRoutingModule { }

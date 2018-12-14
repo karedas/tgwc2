@@ -5,7 +5,6 @@ import { GameState } from 'src/app/store/state/game.state';
 @Component({
   selector: 'tg-client-container',
   templateUrl: './client-container.component.html',
-  styleUrls: ['./client-container.component.scss']
 })
 export class ClientContainerComponent {
   @Input() state: GameState;

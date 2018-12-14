@@ -30,13 +30,8 @@ export class ClientComponent{
 
   ngOnInit() {
     /* Mndatory verification of acceptance of the use of cookies before proceed */
-    if(!this.cookieService.check('tgCookieLaw')) {
-      return;
-    }
-    else {
-      this.isCookieAccepted = true;
-      this.router.navigate(['login']);
-    }
+    if(!this.cookieService.check('tgCookieLaw')) { return true; }
+    else { this.isCookieAccepted = true; }
   }
 
   onCookieAccepted(status: boolean) {

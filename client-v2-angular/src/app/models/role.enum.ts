@@ -1,4 +1,4 @@
-export enum Role {
+export class Role {
     God = 'god',
     Player = 'player'
 }

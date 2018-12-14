@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of} from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { NGXLogger } from 'ngx-logger';
 import { Store } from '@ngrx/store';
 import { GameState } from '../store/state/game.state';
@@ -14,9 +15,13 @@ import { Player } from '../models';
 
 export class LoginService {
 
+  isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  isLoggedIn: boolean;
+  redirectUrl: string;
+
   private username: string;
   private password: string;
-  isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  
 
   constructor(
     private socketService: SocketService,
@@ -33,24 +38,16 @@ export class LoginService {
 
     this.socketService.connect();
     this.setHandleLoginData();
+
     this.socketService.send('loginrequest');
+    
     return this.isLoggedInSubject.asObservable();
+
   }
-
-
-  public isLoggedIn(): Observable<boolean> {
-    return this.isLoggedInSubject.asObservable();
-  }
-
 
   public logout() {
-  //   localStorage.removeItem('token');
-  //   this.socketService.removeListener(socketEvent.LOGIN, this.handleLoginData);
-  //   this.isLoggedInSubject.next(false);
-  }
-
-  get isConnected() {
-    return this.isConnected;
+    this.isLoggedIn = false;
+    this.isLoggedInSubject.next(false);
   }
 
   setHandleLoginData() {
@@ -85,7 +82,6 @@ export class LoginService {
             break;
 
           case socketEvent.LOGINOK:
-          console.log('yo!!!!!!!!!!!!!!');
             this.onLoginOk(data.slice(end + 2));
             break;
 
@@ -121,6 +117,7 @@ export class LoginService {
     });
 
     this.socketService.removeListener(socketEvent.LOGIN);
+    this.isLoggedIn = true;
     this.isLoggedInSubject.next(true);
 
   }

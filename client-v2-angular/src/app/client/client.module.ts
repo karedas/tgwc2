@@ -9,12 +9,16 @@ import { DialogModule } from 'primeng/dialog';
 import { ClientRoutingModule } from './client-routing.module';
 import { Auth2Module } from '../authentication/auth.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { OutputComponent } from './output/output.component';
 
 @NgModule({
   declarations: [
     ClientComponent,
     CookieLawComponent,
     ClientContainerComponent,
+    NavbarComponent,
+    OutputComponent
   ],
   imports: [
     CommonModule,

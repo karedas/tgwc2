@@ -6,6 +6,8 @@ import { LoginService } from 'src/app/services/login.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { GameState } from 'src/app/store/state/game.state';
+import { AuthGuard } from '../auth.guard';
+import { compileFactoryFunction } from '@angular/compiler/src/render3/r3_factory';
 
 @Component({
   selector: 'tg-login',
@@ -23,7 +25,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private store: Store<GameState>,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.loginFormErrors = {
@@ -54,14 +55,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
 
     const values = this.loginForm.value;
-    // const keys = Object.keys(values);
 
-    
-    this.loginService.login(values);
-    this.store.select<any>('gameState').subscribe(state => {
-      if(state.isAuthenticated) {
-        console.log('YO');
-        this.router.navigate(['/game']);
+    this.loginSubscription = this.loginService.login(values).subscribe(() => {
+      if(this.loginService.isLoggedIn) { 
+        // Get the redirect URL from our auth service
+        // If no redirect has been set, use the default
+        let redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient'
+
+        // Redirect the user
+        this.router.navigate([redirect]);
       }
     });
   }
@@ -75,3 +77,4 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSubscription.unsubscribe();
   }
 }
+
