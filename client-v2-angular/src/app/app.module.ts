@@ -15,7 +15,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { reducer } from './store/reducers/game.reducer'
+// import { reducers } from './store/reducers/game.reducer'
+import * as fromStore from './store/'
+import { GameService } from './services/game.service';
 
 
 
@@ -28,15 +30,19 @@ import { reducer } from './store/reducers/game.reducer'
     BrowserModule,
     BrowserAnimationsModule,
     ClientModule,
-    LoggerModule.forRoot({ serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR }),
-    StoreModule.forRoot({ gameState: reducer }),
+    LoggerModule.forRoot({ 
+      serverLoggingUrl: '/api/logs', 
+      level: NgxLoggerLevel.DEBUG, 
+      serverLogLevel: NgxLoggerLevel.ERROR 
+    }),
+    StoreModule.forRoot(fromStore.reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       // logOnly: environment.production, // Restrict extension to log-only mode
     }),
     AppRoutingModule
   ],
-  providers: [SocketService, CookieService],
+  providers: [SocketService, CookieService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

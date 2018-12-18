@@ -1,4 +1,4 @@
 export class Role {
-    God = 'god',
-    Player = 'player'
+    God = 'god';
+    Player = 'player';
 }

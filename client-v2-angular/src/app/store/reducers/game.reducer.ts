@@ -7,12 +7,10 @@ export function reducer(
     action: GameActions 
     ): GameState  {
     
-    console.log(action.type, state);
-
     switch (action.type) {
         
         case SocketConnectionType.CONNECT: {
-            return Object.assign({}, state, { state: action.payload })
+            return Object.assign({}, state, { socketStatus: action.payload })
         }
 
         case SocketConnectionType.DISCONNECT: {
@@ -22,15 +20,15 @@ export function reducer(
         case AuthenticationType.LOGIN_SUCCESS: {
             return Object.assign({}, state, action.payload)
         }
-
         default: {
             return state;
         }
     }
 }
 
+export const getSocketStatus = (state: GameState): string => state.socketStatus;
 
-export const getUserLoginSuccess = ( state: GameState ) => state.isAuthenticated;
+// export const getUserLoginSuccess = ( state: GameState ) => state.isAuthenticated;
 
 
 

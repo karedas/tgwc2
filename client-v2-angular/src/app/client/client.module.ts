@@ -11,6 +11,10 @@ import { Auth2Module } from '../authentication/auth.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { OutputComponent } from './output/output.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { InputComponent } from './dashboard/input/input.component';
+import { CharacterPanelComponent } from './dashboard/character-panel/character-panel.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { OutputComponent } from './output/output.component';
     CookieLawComponent,
     ClientContainerComponent,
     NavbarComponent,
-    OutputComponent
+    OutputComponent,
+    DashboardComponent,
+    InputComponent,
+    CharacterPanelComponent,
+    ControlPanelComponent
   ],
   imports: [
     CommonModule,

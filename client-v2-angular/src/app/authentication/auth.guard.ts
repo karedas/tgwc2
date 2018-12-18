@@ -29,15 +29,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     checkLogin(url: string): boolean {
-        if (this.loginService.isLoggedIn) {
+        if (this.loginService.IsLoggedInStatus) {
              return true;
         }
 
         // Store the attempted URL for redirecting
         this.loginService.redirectUrl = url;
-
-        // Create a dummy session id
-        let sessionId = 123456789;
 
         // Navigate to the login page with extras
         this.router.navigate(['/login']);

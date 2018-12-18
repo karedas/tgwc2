@@ -9,14 +9,26 @@ import { GameState } from '../store/state/game.state';
 import { AuthenticationType, LoginAction, LoginSuccessAction } from '../store/actions/game.action';
 import { Player } from '../models';
 
+
+
+export const loginEventName = {
+  READY : 'ready',
+  SHUTDOWN : 'shutdown',
+  SERVERDOWN: 'serverdown',
+  REBOOT : 'reboot',
+  ENTERLOGIN : 'enterlogin',
+  LOGINOK: 'loginok',
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class LoginService {
 
-  isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  isLoggedIn: boolean;
+  public isLoggedInSubject : BehaviorSubject<boolean>;
+  public isLoggedIn$ : Observable<any>; 
+
   redirectUrl: string;
 
   private username: string;
@@ -27,6 +39,9 @@ export class LoginService {
     private socketService: SocketService,
     private logger: NGXLogger,
     private store: Store<GameState>) {
+
+      this.isLoggedInSubject = new BehaviorSubject(false);
+      this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
   }
 
   public login({ username, password }): Observable<boolean> {
@@ -39,19 +54,22 @@ export class LoginService {
     this.socketService.connect();
     this.setHandleLoginData();
 
-    this.socketService.send('loginrequest');
-    
+    this.socketService.emit('loginrequest');
+
     return this.isLoggedInSubject.asObservable();
 
   }
 
   public logout() {
-    this.isLoggedIn = false;
     this.isLoggedInSubject.next(false);
   }
 
+  public get IsLoggedInStatus(): boolean {
+    return this.isLoggedInSubject.value;
+  }
+
   setHandleLoginData() {
-    this.socketService.removeListener(socketEvent.LOGIN);
+    this.socketService.off(socketEvent.LOGIN);
     this.socketService.addListener(socketEvent.LOGIN, (data) => this.handleLoginData(data));
   }
 
@@ -65,28 +83,32 @@ export class LoginService {
       if (rep.msg) {
         switch (rep.msg) {
 
-          case socketEvent.READY:
+          case loginEventName.READY:
             this.onReady();
             break;
 
-          case socketEvent.ENTERLOGIN:
+          case loginEventName.ENTERLOGIN:
             this.onEnterLogin();
             break;
 
-          case socketEvent.SHUTDOWN:
+          case loginEventName.SHUTDOWN:
             this.onShutDown();
             break;
 
-          case socketEvent.REBOOT:
+          case loginEventName.REBOOT:
             this.onReboot();
             break;
 
-          case socketEvent.LOGINOK:
-            this.onLoginOk(data.slice(end + 2));
+          case loginEventName.LOGINOK:
+            this.onLoginOk(data);
             break;
+          
+          case loginEventName.SERVERDOWN: 
+            this.onServerDown();  
+          break;
 
           default:
-            this.socketService.removeListener(socketEvent.LOGIN);
+            this.socketService.off(socketEvent.LOGIN);
             // this.loginError();
             break;
         }
@@ -96,15 +118,17 @@ export class LoginService {
 
   onReady() {
     let when = new Date().getTime();
-    this.socketService.send('oob', { itime: when.toString(16) });
+    this.socketService.emit(socketEvent.OOB, { itime: when.toString(16) });
   }
 
   onEnterLogin() {
     const credentials = `login:${this.username},${this.password}\n`;
-    this.socketService.send(socketEvent.DATA, credentials);
+    this.socketService.emit(socketEvent.DATA, credentials);
   }
 
   onLoginOk(msg) {
+    /** Show NEWS TODO */
+    
     this.store.dispatch({
       type: AuthenticationType.LOGIN_SUCCESS,
       payload: <GameState>{
@@ -115,14 +139,20 @@ export class LoginService {
         }
       }
     });
-
-    this.socketService.removeListener(socketEvent.LOGIN);
-    this.isLoggedIn = true;
+    
+    this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
-
   }
 
-  onShutDown() { };
+  onShutDown() { 
+    alert('onshutdown');
+  };
 
-  onReboot() { };
+  onReboot() {
+    alert('onReboot');
+   };
+
+  onServerDown() {
+    alert('onServerDown');
+  }
 }

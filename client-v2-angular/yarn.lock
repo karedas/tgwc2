@@ -6586,9 +6586,9 @@ primeicons@^1.0.0:
   integrity sha512-p/hzIjUVccW4eJPhuORHI3AUkDpqfvCQVrjxbFEejnTEdWY4C8fomVfjiaA9jCu83fSQnBHuRIGB96iAR8R6uA==
 
 primeng@^7.0.0:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/primeng/-/primeng-7.0.1.tgz#0a1bea540116b1105b6e75413aabb7be62b9311c"
-  integrity sha512-30oYArlMUmHJlW2RRTSi08oe2vxk4thwS+Qmj/TKodKF1/AKjTgbkJU0jVZrKOLJmphONPbdVKYpFr7+wHkMew==
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-7.0.3.tgz#425ea68bc95e57d95911a05bbda65669035cec55"
+  integrity sha512-WbC8ScwpFO6iSxiTm/FGRr0T1Q6PvmbIjSFChoA9YIGXVGFK1hCG3K0xhEMdStCdS237m8SKoFoq/jcuJCZIjA==
 
 process-nextick-args@^1.0.7, process-nextick-args@~1.0.6:
   version "1.0.7"

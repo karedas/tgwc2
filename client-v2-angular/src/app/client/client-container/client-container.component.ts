@@ -12,12 +12,4 @@ export class ClientContainerComponent {
   constructor( private game: GameService) {
     
   }
-
-  ngOnInit() {
-    this.loadClient();
-  }
-
-  loadClient(){
-    this.game.newGame();
-  }
 }

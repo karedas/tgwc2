@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Message } from '../models/message'
+import { Observable, BehaviorSubject } from 'rxjs';
 import { socketEvent } from '../models/socketEvent.enum';
 import { environment } from '../../environments/environment';
 
-import * as io from 'socket.io-client';
 import { Store } from '@ngrx/store';
-import { GameState } from '../store/state/game.state'; 
-import { 
-  SocketConnectionType, 
-  AuthenticationType 
-} from '../store/actions/game.action';
+import { State } from '../store';
 
+import * as io from 'socket.io-client';
+import {
+  SocketConnectionType,
+  AuthenticationType
+} from '../store/actions/game.action';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +18,12 @@ import {
 
 export class SocketService {
 
-  private socket;
-  private netdata;
+  private socket: io;
+  connected$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private store: Store<GameState>) { }
+
+  constructor(private store: Store<State>) {
+  }
 
   public connect(): void {
     if (this.socket) {
@@ -32,44 +33,55 @@ export class SocketService {
     }
 
     this.socket = io(environment.socket.url, environment.socket.options);
+    this.startSocketEvent();
+  }
 
+  private startSocketEvent() {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
-        this.store.dispatch({type: SocketConnectionType.CONNECT, payload: 'connect'});
+      this.store.dispatch({ type: SocketConnectionType.CONNECT, payload: 'connect' });
     });
 
     /* Disconnected */
     this.socket.on(socketEvent.DISCONNECT, () => {
       this.disconnect();
-      this.store.dispatch({type: SocketConnectionType.DISCONNECT});
+      this.store.dispatch({ type: SocketConnectionType.DISCONNECT });
     });
-    
+
     /* Error */
     this.socket.on(socketEvent.ERROR, () => {
-      this.store.dispatch({type: AuthenticationType.LOGIN_FAILURE});
+      this.store.dispatch({ type: AuthenticationType.LOGIN_FAILURE });
     });
-    
+
     /* Reconnection */
-    this.socket.on(socketEvent.RECONNECT, () => {});
+    this.socket.on(socketEvent.RECONNECT, () => { });
   }
 
   public disconnect(): void {
     this.socket.disconnect();
+    this.connected$.next(false);
   }
 
-  public send(eventName:string, data?): void {
-    this.socket.emit(eventName, data);
+  public emit(event: any, data?: any) {
+    console.group();
+      console.log('----- SOCKET OUTGOING -----');
+      console.log('Action: ', event);
+      console.log('Payload: ', data);
+    console.groupEnd();
+
+    this.socket.emit(event, data);
   }
 
-  public onMessage(): Observable<Message> {
-    return new Observable<Message>(observer => {
-      this.socket.on('data', (data: Message) => observer.next(data));
-    });
-  }
-
-  public onEvent(event: socketEvent): Observable<any> {
-    return new Observable<Event>(observer => {
-      this.socket.on(event, () => observer.next());
+  public listen(event: socketEvent): Observable<any> {
+    return new Observable<Event>(observer =>  {
+      this.socket.on(event, data => {
+        console.group();
+          console.log('----- SOCKET INBOUND -----');
+          console.log('Action: ', event);
+          console.log('Payload: ', data);
+        console.groupEnd();
+        observer.next(data);
+      });
     });
   }
 
@@ -77,7 +89,7 @@ export class SocketService {
     this.socket.on(eventName, handler);
   }
 
-  public removeListener(event: socketEvent): void {
+  public off(event: socketEvent): void {
     this.socket.off(event);
   }
 }

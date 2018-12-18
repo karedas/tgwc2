@@ -5,6 +5,9 @@ export class Player {
     username?: string;
     password?: string;
     token?: string;
+    command?: string;
+    lastCommand?: string;
+    status: string;
     // chracter:  Character;
     constructor() {
     }

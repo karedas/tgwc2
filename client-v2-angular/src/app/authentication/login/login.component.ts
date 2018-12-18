@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const values = this.loginForm.value;
 
     this.loginSubscription = this.loginService.login(values).subscribe(() => {
-      if(this.loginService.isLoggedIn) { 
+      if(this.loginService.isLoggedIn$) { 
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         let redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient'
