@@ -1,13 +1,18 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from "@ngrx/store";
-import * as fromGame from './reducers/game.reducer';
-import { GameState } from "./state/game.state";
+import * as fromClient from './reducers/client.reducer';
+import * as fromMessage from './reducers/message.reducer';
+import { ClientState } from "./state/client.state";
+import { MessageState } from "./state/message.state";
+import { from } from "rxjs";
 
 export interface State {
-    game: GameState
+    clientState: ClientState,
+    message: MessageState
 }
 
 export const reducers: ActionReducerMap<State> = {
-    game: fromGame.reducer
+    clientState: fromClient.reducer,
+    message: fromMessage.reducer
 }
 
 

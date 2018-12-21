@@ -10,7 +10,7 @@ import * as io from 'socket.io-client';
 import {
   SocketConnectionType,
   AuthenticationType
-} from '../store/actions/game.action';
+} from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'

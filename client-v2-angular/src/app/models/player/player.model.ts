@@ -1,15 +1,13 @@
+import { Deserializable } from "../deserializable.model";
 import { Character } from "../character/character.model";
 
-export class Player {
-    id?: string;
-    username?: string;
-    password?: string;
-    token?: string;
+export class Player extends Character{
+    id?: number;
+    username: string;
+    password: string;
+    email?: number;
     command?: string;
     lastCommand?: string;
-    status: string;
-    // chracter:  Character;
-    constructor() {
-    }
+    status?: string;
 }
 

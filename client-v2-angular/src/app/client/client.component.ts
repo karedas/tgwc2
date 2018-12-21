@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { GameService } from '../services/game.service';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../authentication/services/login.service';
 
 @Component({
   selector: 'tg-client',
@@ -40,8 +40,6 @@ export class ClientComponent implements OnInit{
         if(auth) this.game.startGame();
       }
     );
-
-    
   }
 
   onCookieAccepted(status: boolean) {

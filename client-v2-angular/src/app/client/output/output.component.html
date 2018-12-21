@@ -9,6 +9,7 @@
           </div>
           <!-- Output Area -->
           <div id="output" class=" tg-output-history">
+            <div *ngFor="let message of messages$ | async"></div>
           </div>
         </div>
       </div>
@@ -24,7 +25,7 @@
             </div>
             <div class="extraoutput-detail">
               <div class="extranotice">
-                <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
+                <!-- <span>Guarda</span> dove ti trovi, qualcosa o qualcuno. -->
               </div>
             </div>
           </div>

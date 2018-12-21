@@ -1,19 +1,18 @@
-import { Player } from '../../models';
 import { SocketState } from '../game.const';
+import { UI } from 'src/app/models/client/ui.model';
 
-export interface GameState {
+export interface ClientState {
     socketStatus: string;
     isAuthenticated: boolean;
-    player?: Player | null;
     errorMessage: string | null;
     time?: string;
-    
+    ui: UI[];
 }
 
-export const initialState: GameState = {
+export const initialState: ClientState = {
     socketStatus: SocketState.INITIALIZE,
     isAuthenticated: false,
     errorMessage: null,
     time: undefined,
-    player: undefined
+    ui: []
 }

@@ -1,26 +1,25 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { SocketService } from './socket.service';
-import { LoginService } from './login.service';
+import { LoginService } from '../authentication/services/login.service';
 import { socketEvent } from '../models/socketEvent.enum';
-import { ParserService } from './parser.service';
+import { MessageService } from './message.service';
+import { Store } from '@ngrx/store';
+import { ClientState } from 'src/app/store/state/client.state';
 
 
 @Injectable({
   providedIn: 'root'
 })
 
-
 export class GameService {
-  history$ = [];
   netData: string;
 
   constructor(
     private loginService: LoginService,
     private socketService: SocketService,
-    private parserService: ParserService
-  ) {
-  }
+    private messageService: MessageService,
+    private store: Store<ClientState>
+  ) { }
 
   startGame() {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
@@ -35,12 +34,8 @@ export class GameService {
     let len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-      let data = this.parserService.preParseText(this.netData.substr(0, len - 3));
-
-      this.parserService.parse(data).subscribe(message => {
-          this.history$.push(message);
-      });
-
+      let data = this.netData.substr(0, len - 3);
+      this.messageService.parse(data);
       this.netData = '';
     }
 
@@ -48,5 +43,9 @@ export class GameService {
       this.netData = '';
       this.loginService.logout();
     }
+  }
+
+  showOutput() {
+
   }
 }

@@ -2,12 +2,9 @@ import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from '../../common/validations';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/authentication/services/login.service';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { GameState } from 'src/app/store/state/game.state';
-import { AuthGuard } from '../auth.guard';
-import { compileFactoryFunction } from '@angular/compiler/src/render3/r3_factory';
+import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
 @Component({
   selector: 'tg-login',
@@ -52,25 +49,37 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.loginForm.get('password');
   }
 
-  onSubmit() {
+  public login() {
 
+    if(this.loginForm.invalid) {
+      return;
+    }
+    
     const values = this.loginForm.value;
 
-    this.loginSubscription = this.loginService.login(values).subscribe(() => {
-      if(this.loginService.isLoggedIn$) { 
-        // Get the redirect URL from our auth service
-        // If no redirect has been set, use the default
-        let redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient'
-
-        // Redirect the user
-        this.router.navigate([redirect]);
-      }
+    this.loginSubscription = this.loginService.login(values)
+      .subscribe((loginSuccess: boolean) => {
+        console.log(loginSuccess);
+        if(loginSuccess === true) { 
+          // Get the redirect URL from our auth service
+          // If no redirect has been set, use the default
+          let redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient'
+          // Redirect the user
+          this.router.navigate([redirect]);
+        } else {
+          this.loginFailed = true;
+        }
+    }, (error) => {
+        console.log(error);
+        if (error instanceof NotAuthorizeError) {
+          this.loginFailed = false;
+        }
     });
   }
 
-  private pushErrorfor(ctrl_name: string, msg: string) {
-    this.loginForm.controls[ctrl_name].setErrors({ 'msg': msg });
-  }
+  // private pushErrorfor(ctrl_name: string, msg: string) {
+  //   this.loginForm.controls[ctrl_name].setErrors({ 'msg': msg });
+  // }
 
 
   ngOnDestroy() {

@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
-import { 
-    CanActivateChild, 
+import {
+    CanActivateChild,
     CanLoad, CanActivate,
     ActivatedRouteSnapshot,
-    RouterStateSnapshot, Router, Route }
+    RouterStateSnapshot, Router, Route
+}
     from "@angular/router";
 
-import { LoginService } from "../services/login.service";
+import { LoginService } from "./login.service";
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +18,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
         return this.checkLogin(url);
-      }
+    }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         return this.canActivate(route, state);
@@ -30,7 +31,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     checkLogin(url: string): boolean {
         if (this.loginService.IsLoggedInStatus) {
-             return true;
+            return true;
         }
 
         // Store the attempted URL for redirecting

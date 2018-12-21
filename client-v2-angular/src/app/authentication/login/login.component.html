@@ -11,7 +11,7 @@
               <br> Accedi
               <span>gratis</span> al mondo di Ikhari!
             </h2> 
-            <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" novalidate>
+            <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off" novalidate>
               <div class="form-row">
                 <div class="col-12">
                   <input class="form-control" formControlName="username" type="text" autocomplete="off"

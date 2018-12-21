@@ -18,6 +18,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 // import { reducers } from './store/reducers/game.reducer'
 import * as fromStore from './store/'
 import { GameService } from './services/game.service';
+import { EffectsModule } from '@ngrx/effects';
+import { MessageEffects } from './store/effects/message.effects';
 
 
 
@@ -36,6 +38,7 @@ import { GameService } from './services/game.service';
       serverLogLevel: NgxLoggerLevel.ERROR 
     }),
     StoreModule.forRoot(fromStore.reducers),
+    EffectsModule.forRoot([MessageEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       // logOnly: environment.production, // Restrict extension to log-only mode
