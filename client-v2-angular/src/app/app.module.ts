@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-
 import { SocketService } from './services/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -18,9 +13,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 // import { reducers } from './store/reducers/game.reducer'
 import * as fromStore from './store/'
 import { GameService } from './services/game.service';
-import { EffectsModule } from '@ngrx/effects';
-import { MessageEffects } from './store/effects/message.effects';
-
+//import { EffectsModule } from '@ngrx/effects';
+//import { MessageEffects } from './store/effects/message.effects';
+import { SharedModule } from './shared/shared.module';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -29,16 +27,17 @@ import { MessageEffects } from './store/effects/message.effects';
   ],
   imports: [
     HttpClientModule,
+    SharedModule,
+    ClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ClientModule,
+    StoreModule.forRoot(fromStore.reducers),
+//    EffectsModule.forRoot([MessageEffects]),
     LoggerModule.forRoot({ 
       serverLoggingUrl: '/api/logs', 
       level: NgxLoggerLevel.DEBUG, 
       serverLogLevel: NgxLoggerLevel.ERROR 
     }),
-    StoreModule.forRoot(fromStore.reducers),
-    EffectsModule.forRoot([MessageEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       // logOnly: environment.production, // Restrict extension to log-only mode

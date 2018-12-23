@@ -1,4 +1,5 @@
 <!-- Output History Area -->
+<div *ngIf="test">ok</div>
 <div class="row tg-output tg-box b-ironlight tg-shadow">
   <div class="tg-box col-12 p-0 d-flex">
     <div class="output-split">
@@ -9,7 +10,9 @@
           </div>
           <!-- Output Area -->
           <div id="output" class=" tg-output-history">
-            <div *ngFor="let message of messages$ | async"></div>
+            <div *ngFor="let message of messages$ | async">
+              {{ message }}
+            </div>
           </div>
         </div>
       </div>

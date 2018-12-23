@@ -1,17 +1,11 @@
+
 @import 'variables';
-@import 'sprites';
-@import 'utils/fonts_mixins';
 /* Bootstrap */
 @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/variables";
 /* Prime Ng */
 @import "~primeng/resources/primeng.min.css";
-// @import "~bootstrap/scss/functions";
-// @import "~bootstrap/scss/variables";
-// @import "~bootstrap/scss/mixins";
-// @import "~bootstrap/scss/root";
-// @import "~bootstrap/scss/reboot";
-// ...
-@import 'colors';
+/* Others */
+@import 'sprites';
+@import 'utils/fonts_mixins';
 @import 'utils/sprites-mixins';
-/* Elements */
-@import 'elements/modal';

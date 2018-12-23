@@ -7,6 +7,7 @@ import { ClientState } from 'src/app/store/state/client.state';
   templateUrl: './client-container.component.html',
 })
 export class ClientContainerComponent {
+  data = true;
   @Input() state: ClientState;
 
   constructor( private game: GameService) {

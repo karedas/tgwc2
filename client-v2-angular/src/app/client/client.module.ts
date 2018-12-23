@@ -15,6 +15,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InputComponent } from './dashboard/input/input.component';
 import { CharacterPanelComponent } from './dashboard/character-panel/character-panel.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,16 +28,17 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
     DashboardComponent,
     InputComponent,
     CharacterPanelComponent,
-    ControlPanelComponent
+    ControlPanelComponent,
+    RightSidebarComponent,
   ],
   imports: [
-    CommonModule,
     ClientRoutingModule,
     Auth2Module,
     BrowserModule,
     DialogModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   exports: [
     ClientComponent

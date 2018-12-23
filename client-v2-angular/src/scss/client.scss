@@ -1,6 +1,12 @@
 @import 'core';
-@import 'base';
+@import 'colors';
+/* Elements */
+@import 'elements/modal';
 @import 'borders';
+@import 'base';
+
+
+
 // @import 'utils/bootstrap-slider';
 // @import 'utils/jqx-custom';
 // @import 'utils/scrollbar-custom';
@@ -9,6 +15,5 @@
 // @import 'dashboard';
 // @import 'right_sidebar';
 
-@include font-face(kingthinks, '/assets/fonts/Kingthings_Foundation', null, null, ttf );
 
 

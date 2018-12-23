@@ -46,7 +46,7 @@ export class MessageService {
     data = data.replace(/&x\n*/gm, (msg) => {
       messageState.data = msg;
       messageState.type = 'hideInputText';
-      this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
+      //this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
       // _.inputPassword();
       return '';
     });
@@ -55,7 +55,7 @@ export class MessageService {
     data = data.replace(/&e\n*/gm, () => {
       messageState.data = data;
       messageState.type = 'ShowInputText';
-      this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
+      //this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
       // _.inputText();
       return '';
     });
@@ -65,7 +65,7 @@ export class MessageService {
       let sky_parse = sky.charAt(2);
       messageState.data = sky_parse;
       messageState.type = 'SkyPicture';
-      this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
+      //this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
       // _.setSky(sky_parse);
       return '';
     });
@@ -75,7 +75,7 @@ export class MessageService {
       let doors_parse = doors.substr(2, 6);
       messageState.data = doors_parse;
       messageState.type = 'ExitsInformation';
-      this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
+      //this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
       // _.setDoors(doors_parse);
       return '';
     });
@@ -85,7 +85,7 @@ export class MessageService {
       let audio_parse = audio.slice(5, audio.lastIndexOf('"'));
       messageState.data = audio_parse;
       messageState.type = 'Audio';
-      this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
+      //this.store.dispatch({ type: MessageEventType.IN, payload: messageState });
       // _.playAudio(audio_parse);
       return '';
     });
@@ -96,7 +96,7 @@ export class MessageService {
       messageState.data = status_parse;
       messageState.type = 'status';
       // return _.setStatus(status_parse);
-      this.store.dispatch(new IncomingMessage(messageState));
+//      this.store.dispatch(new IncomingMessage(messageState));
       return '';
     });
 
@@ -104,7 +104,7 @@ export class MessageService {
     // Player status server Update 
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       // let update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      this.store.dispatch(new UpdateUi());
+      //this.store.dispatch(new UpdateUi());
       // if (update_parse[0] > test)
       //   this.store.dispatch(new UpdateInventory());      
 
@@ -137,7 +137,7 @@ export class MessageService {
         // _.processCommands('info; stato; @rima', false);
         messageState.type = 'status';
         // return _.setStatus(status_parse);
-        this.store.dispatch(new PlayerIsLoggedIn());
+       // this.store.dispatch(new PlayerIsLoggedIn());
         return '';
     });
 
@@ -155,12 +155,13 @@ export class MessageService {
     /* \r is already removed at top */
     data = data.replace(/\n/gm, '<br>');
 
-    if (data != '') {
+    if (data != 'undefined') {
+      console.log('data', data);
       // data = '<div class="tg-line">' + _.replaceColors(msg) + '</div>';
+      messageState.data = data.replace(/<p><\/p>/g, '');
+      messageState.type = 'text'
+      this.store.dispatch(new IncomingMessage(messageState));
+      // this.parseSubject.next(data);
     }
-
-    // messageState.data = data;
-    // this.store.dispatch(new IncomingMessage(data.replace(/<p><\/p>/g, ''));
-    // this.parseSubject.next(data);
   }
 }

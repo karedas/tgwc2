@@ -1,3 +1,23 @@
-<p>
-  input works!
-</p>
+<div class="tg-input tg-box b-ironlight tg-shadow">
+  <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
+  <span class="drop-alert">
+    <b class="tg-yellow">Comando:
+      <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span>
+  <div class="tg-inputcommand d-none d-sm-flex">
+    <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
+      <i class="fas fa-columns"></i>
+    </button>
+    <button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo">
+      <i class="fas fa-solar-panel"></i>
+    </button>
+    <button id="triggerZenModality" type="button" class="tg-fnt-button" rel="tooltip" title="Modalit&agrave; Zen">
+      <i class="fas fa-bullseye"></i>
+    </button>
+  </div>
+  <div class="tg-border-box">
+    <div class="tg-border tg-border-top"></div>
+    <div class="tg-border tg-border-left"></div>
+    <div class="tg-border tg-border-right"></div>
+    <div class="tg-border tg-border-bottom"></div>
+  </div>
+</div>

@@ -7,10 +7,10 @@ export function reducer(
 ): MessageState {
     switch (action.type) {
         case MessageEventType.IN: 
-            return Object.assign({}, state, {message: action.payload})
+            return Object.assign({}, state, action.payload)
         break;
         case MessageEventType.OUT: 
-            return Object.assign({}, state, {message: action.payload})
+            return Object.assign({}, state, action.payload)
         break;
         default:
             return state;

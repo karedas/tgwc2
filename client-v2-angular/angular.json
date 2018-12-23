@@ -31,6 +31,11 @@
               "node_modules/primeicons/primeicons.css",
               "src/scss/client.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/scss"
+              ]
+          },
             "scripts": []
           },
           "configurations": {
