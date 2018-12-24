@@ -1,5 +1,4 @@
 <!-- Output History Area -->
-<div *ngIf="test">ok</div>
 <div class="row tg-output tg-box b-ironlight tg-shadow">
   <div class="tg-box col-12 p-0 d-flex">
     <div class="output-split">
@@ -10,13 +9,13 @@
           </div>
           <!-- Output Area -->
           <div id="output" class=" tg-output-history">
-            <div *ngFor="let message of messages$ | async">
-              {{ message }}
+            <div *ngFor="let msg of history">
+              <div class="tg-line" [innerHTML]="msg"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="splitter-panel">
+      <!-- <div class="splitter-panel">
         <div class="tg-output-extra">
           <div id="extraoutput" class="tg-extraoutput-history">
             <div class="extraoutput-header">
@@ -28,12 +27,12 @@
             </div>
             <div class="extraoutput-detail">
               <div class="extranotice">
-                <!-- <span>Guarda</span> dove ti trovi, qualcosa o qualcuno. -->
+               <span>Guarda</span> dove ti trovi, qualcosa o qualcuno. 
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="tg-border-box">

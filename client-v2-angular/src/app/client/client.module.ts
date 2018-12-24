@@ -15,8 +15,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InputComponent } from './dashboard/input/input.component';
 import { CharacterPanelComponent } from './dashboard/character-panel/character-panel.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { SharedModule } from '../shared/shared.module';
+import { MapComponent } from './map/map.component';
+import { SkyComponent } from './sky/sky.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SharedModule } from '../shared/shared.module';
     InputComponent,
     CharacterPanelComponent,
     ControlPanelComponent,
-    RightSidebarComponent,
+    MapComponent,
+    SkyComponent,
   ],
   imports: [
     ClientRoutingModule,

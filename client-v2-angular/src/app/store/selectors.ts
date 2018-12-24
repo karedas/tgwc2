@@ -5,5 +5,5 @@ export const getMessageState = createFeatureSelector<MessageState>('message');
 
 export const getMessage = createSelector(
     getMessageState,
-    message => message.data,
+    message => message,
   );

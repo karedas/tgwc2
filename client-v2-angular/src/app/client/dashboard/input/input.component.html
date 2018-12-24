@@ -1,8 +1,8 @@
 <div class="tg-input tg-box b-ironlight tg-shadow">
-  <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
-  <span class="drop-alert">
+  <input type="text" autofocus placeholder="Scrivi qualcosa" #inputCommand (keydown.enter)="onKeyDown($event, inputCommand.value)" name="sendinput" [(ngModel)]="inputValue"/>
+  <!-- <span class="drop-alert">
     <b class="tg-yellow">Comando:
-      <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span>
+      <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
   <div class="tg-inputcommand d-none d-sm-flex">
     <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
       <i class="fas fa-columns"></i>

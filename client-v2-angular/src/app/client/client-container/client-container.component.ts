@@ -6,11 +6,7 @@ import { ClientState } from 'src/app/store/state/client.state';
   selector: 'tg-client-container',
   templateUrl: './client-container.component.html',
 })
-export class ClientContainerComponent {
-  data = true;
-  @Input() state: ClientState;
 
-  constructor( private game: GameService) {
-    
-  }
+export class ClientContainerComponent {
+  constructor(){}
 }

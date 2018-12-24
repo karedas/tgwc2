@@ -6,12 +6,16 @@ import { LoginService } from 'src/app/authentication/services/login.service';
 import { Subscription } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
+import gitInfo from '../../../git-version.json';
+
 @Component({
   selector: 'tg-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
+
+  gitVersion = gitInfo.raw;
 
   loginForm: FormGroup;
   loginFormErrors: any;
@@ -59,7 +63,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.loginSubscription = this.loginService.login(values)
       .subscribe((loginSuccess: boolean) => {
-        console.log(loginSuccess);
         if(loginSuccess === true) { 
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default

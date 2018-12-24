@@ -1,9 +1,9 @@
-/* Bootstrap */
 @import "~bootstrap/scss/bootstrap";
-/* Prime Ng */
 @import "~primeng/resources/primeng.min.css";
 @import 'borders';
 @import 'colors';
+
+@import 'right-sidebar';
 
 
 @include font-face(kingthinks, '/assets/fonts/Kingthings_Foundation', null, null, ttf );
@@ -39,11 +39,6 @@ input[type="checkbox"] {
 
 caption {
   caption-side: top;
-}
-
-/* CLIENT LOGIN STATUS */
-body[data-loginstatus=ready] {
-  overflow: hidden;
 }
 
 /* BOX SHADOWS */
@@ -89,12 +84,13 @@ body[data-loginstatus=ready] {
   }
 }
 
+
+// LEFT SIDE AREA
 .tg-leftside {
   display: flex;
   flex-direction: column;
   background: #0a0806;
   overflow: hidden;
-
 }
 
 
@@ -110,20 +106,20 @@ body[data-loginstatus=ready] {
   }
 }
 
-// .iconimg {
-//     background-image: url( $imgPath + '/tiles/tiles.png');
-//     background-repeat: no-repeat;
-//     width: 32px;
-//     height: 32px;
-//     min-width: 32px;
-//     display: inline-block;
-//     transform: scale(.7);
-//     vertical-align: middle;
+.iconimg {
+    background-image: url( $imgPath + '/tiles/tiles.png');
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: inline-block;
+    transform: scale(.7);
+    vertical-align: middle;
 
-//     &.tg-dragging {
-//         transform: none;
-//     }
-// }
+    &.tg-dragging {
+        transform: none;
+    }
+}
 
 // .popover-header {
 //     font-size:.6rem;

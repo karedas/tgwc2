@@ -1,345 +1,372 @@
 @import 'sky';
 
-.tg-rightside{
+.tg-rightside {
 
-    background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
-    overflow: hidden;
-    flex: 0  1 auto;
+  background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
+  overflow: hidden;
+  flex: 0 1 auto;
+  display: flex;
+
+  .tg-rightside-wrap {
+    height: 100%;
+    width: 100%;
+    background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
+    padding-left: 15px;
+    box-shadow: inset 3px -2px 112px 7px black;
+    position: relative;
     display: flex;
+    flex-direction: column;
+  }
 
-    .tg-rightside-wrap {
+  .tg-map {
+    background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
+    background-size: contain;
+    box-sizing: content-box;
+    position: relative;
+    z-index: 3;
+    width: 288px;
+    flex: 1 0 516px;
+    padding-left: 47px;
+    padding-right: 47px;
+
+    .tg-map-box {
+      position: relative;
+      border-radius: 50%;
+      position: absolute;
+      cursor: pointer;
+      width: 288px;
+      height: 288px;
+      top: 116px;
+
+      &:after {
+        display: block;
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        border-radius: 50%;
+        z-index: 6;
+        box-shadow: inset 0 0 20px 2px black;
+      }
+
+      canvas {
+        background-color: transparent;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .canvas-snow,
+      .canvas-rain {
+        display: none;
+        position: absolute;
+        z-index: 5;
         height: 100%;
         width: 100%;
-        background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
-        padding-left: 15px;
-        box-shadow: inset 3px -2px 112px 7px black;
-        position: relative;
-        display: flex;
-        flex-direction: column;
+        background-color: transparent;
+        border-radius: 50%;
+      }
     }
+  }
 
-    .tg-map {
-        background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
-        background-size: contain;
-        box-sizing: content-box;
-        position: relative;
-        z-index: 3;
-        width: 288px;
-        flex: 1 0 516px;
-        padding-left: 47px; 
-        padding-right: 47px;
-       
-        .tg-map-box {
-            position: relative;
-            border-radius: 50%;
-            position: absolute;
-            cursor: pointer;
-            width: 288px;
-            height: 288px;
-            top: 116px;         
-            
-            &:after {
-                display: block;
-                content: '';
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                border-radius: 50%;
-                z-index: 6;
-                box-shadow: inset 0 0 20px 2px black;
-            }
+  .dir-ico {
+    background-image: url($imgPath + '/interface/pass_sprite.png');
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    background-position: -32px;
+  }
 
-            canvas {
-                background-color: transparent;
-                max-width:  100%;
-                max-height: 100%;
-            }
+  .tg-dir {
+    position: absolute;
+    transform: scale(.8);
+    cursor: pointer;
+    z-index: 12;
+  }
 
-            .canvas-snow, .canvas-rain {
-                display: none;
-                position: absolute;
-                z-index: 5;
-                height: 100%;
-                width: 100%;
-                background-color: transparent;
-                border-radius: 50%;
-            }
-        }
+  .dir-nord .dir-ico {
+    top: 11px;
+    left: 22px;
+  }
+
+  .dir-ovest .dir-ico {
+    top: 21px;
+    left: 10px;
+  }
+
+  .dir-sud .dir-ico {
+    top: 18px;
+    left: 22px;
+  }
+
+  .dir-est .dir-ico {
+    top: 21px;
+    left: 17px;
+  }
+
+  .dir-basso,
+  .dir-alto {
+    &:before {
+      content: attr(data-label);
+      position: absolute;
+      top: -16px;
+      width: 100%;
+      text-align: center;
+      color: #d3c6ae;
+      text-shadow: 0 0 4px black;
+      font-family: kingthinks;
+      white-space: nowrap;
     }
 
     .dir-ico {
-        background-image: url($imgPath + '/interface/pass_sprite.png');
-        background-repeat: no-repeat;
-        width: 26px;
-        height: 26px;
+      top: 4px;
+      left: 4px;
+      border-radius: 0;
+    }
+  }
+
+  .dir-basso:before {
+    top: auto;
+    bottom: -16px;
+  }
+
+  .dir-nord {
+    @include sprite($nord-dir-sprite);
+    top: 48px;
+    left: 112px;
+  }
+
+  .dir-est {
+    @include sprite($est-dir-sprite);
+    top: 164px;
+    right: 0px;
+  }
+
+  .dir-sud {
+    @include sprite($sud-dir-sprite);
+    top: 291px;
+    left: 112px;
+  }
+
+  .dir-ovest {
+    @include sprite($ovest-dir-sprite);
+    top: 164px;
+    left: 0;
+  }
+
+  .dir-alto {
+    @include sprite($alto-dir-sprite);
+    top: 265px;
+    left: 15px;
+  }
+
+  .dir-basso {
+    @include sprite($basso-dir-sprite);
+    top: 284px;
+    left: 46px;
+  }
+
+  // Bottom Board
+  .tg-right-board {
+    background: url($imgPath + '/borders/border-002-tiny.png') repeat-x top left;
+    padding-top: 2px;
+    margin: -30px 0 0 0;
+    height: 100%;
+
+    .tg-right-board-wrap {
+      background-color: rgba(0, 0, 0, .5);
+      padding-top: 2px;
+      height: 100%;
+      box-shadow: inset 0 0 32px 20px black;
+    }
+
+    .tg-board-activity {
+      height: 100%;
+      position: relative;
+
+
+      &:before,
+      &:after {
+        content: '';
         display: block;
         position: absolute;
-        border-radius: 50%;
-        background-position: -32px;
-    }
+        width: 25px;
+        height: 25px;
+      }
 
-    .tg-dir {
-        position: absolute;
-        transform: scale(.8);
-        cursor: pointer;
-        z-index: 12;
-    }
-
-
-
-    .dir-nord .dir-ico {
-        top: 11px;
-        left: 22px;
-    }
-    .dir-ovest .dir-ico {
-        top: 21px;
-        left: 10px;
-    }
-    .dir-sud .dir-ico {
-        top: 18px;
-        left: 22px;
-    }
-    .dir-est .dir-ico {
-        top: 21px;
-        left: 17px;
-    }
-    .dir-basso, .dir-alto {
-        &:before {
-            content: attr(data-label);
-            position: absolute;
-            top: -16px;
-            width: 100%;
-            text-align: center;
-            color: #d3c6ae;
-            text-shadow: 0 0 4px black;
-            font-family: kingthinks;
-            white-space: nowrap;
-        }
-        .dir-ico {
-            top: 4px;
-            left: 4px;
-            border-radius: 0;
-        }
-    }
-
-    .dir-basso:before {
-        top: auto;
-        bottom: -16px;
-    }
-    
-    .dir-nord {
-        @include sprite($nord-dir-sprite);
-        top: 48px;
-        left: 112px;
-    }
-    .dir-est {
-        @include sprite($est-dir-sprite);
-        top: 164px;
-        right: 0px;
-    }
-    .dir-sud {
-        @include sprite($sud-dir-sprite);
-        top: 291px;
-        left: 112px;
-    }
-    .dir-ovest {
-        @include sprite($ovest-dir-sprite);
-        top: 164px;
-        left: 0;
-    }
-    .dir-alto {
-        @include sprite($alto-dir-sprite);
-        top: 265px;
+      &:before {
+        border-top: 1px solid #33322d;
+        border-left: 1px solid #33322d;
+        top: 15px;
         left: 15px;
+      }
+
+      &:after {
+        border-top: 1px solid #33322d;
+        border-right: 1px solid #33322d;
+        top: 15px;
+        right: 15px;
+      }
     }
+
+    .tg-board-activity-wrap {
+      height: 100%;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: .5em;
+      box-sizing: border-box;
+
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+      }
+
+      &:before {
+        border-bottom: 1px solid #33322d;
+        border-left: 1px solid #33322d;
+        bottom: 15px;
+        left: 15px;
+      }
+
+      &:after {
+        border-bottom: 1px solid #33322d;
+        border-right: 1px solid #33322d;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+
+    .no-activity {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin: auto;
+      color: #676455;
+      font-size: 10px;
+      text-transform: uppercase;
+
+      i {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 6px;
+        color: #676455;
+      }
+    }
+
+
+    .tg-right-board-end {
+      padding-top: 2px;
+      box-sizing: content-box;
+      background: black url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
+      margin-top: auto;
+      display: flex;
+      flex-direction: row;
+      flex: 1 1 54px;
+
+      .wrap-btnend-box {
+        display: flex;
+        flex: 0 1 48px;
+        text-align: center;
+      }
+
+      // Buttons 
+      button {
+        margin: auto;
+      }
+
+      .btn-inventario-graph {
+        @include sprite($btn-inventario-graph-sprite);
+      }
+
+      .btn-stato-graph {
+        @include sprite($btn-stato-graph-sprite);
+      }
+
+      .btn-info-graph {
+        @include sprite($btn-info-graph-sprite);
+      }
+
+      .btn-equip-graph {
+        @include sprite($btn-equip-graph-sprite);
+      }
+
+      .btn-skill-graph {
+        @include sprite($btn-skill-graph-sprite);
+      }
+
+      .btn-config-graph {
+        @include sprite($btn-config-graph-sprite);
+      }
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    .tg-map {
+      width: 222px;
+      flex: 1 0 394px;
+      padding-left: 35px;
+      padding-right: 35px;
+
+      .tg-map-box {
+        top: 85px;
+        width: 222px;
+        height: 222px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .tg-dir {
+      transform: scale(1);
+    }
+
+    .dir-nord {
+      @include sprite($nord-dir-sprite);
+      top: 72px;
+      left: 155px;
+    }
+
+    .dir-est {
+      @include sprite($est-dir-sprite);
+      top: 226px;
+      right: 6px;
+    }
+
+    .dir-sud {
+      @include sprite($sud-dir-sprite);
+      top: 388px;
+      left: 155px;
+    }
+
+    .dir-ovest {
+      @include sprite($ovest-dir-sprite);
+      top: 226px;
+      left: 4px;
+    }
+
+    .dir-alto {
+      top: 344px;
+      left: 16px;
+    }
+
     .dir-basso {
-        @include sprite($basso-dir-sprite);
-        top: 284px;
-        left: 46px;
+      top: 376px;
+      left: 53px;
     }
+  }
 
-    // Bottom Board
-    .tg-right-board {
-        background:url($imgPath + '/borders/border-002-tiny.png') repeat-x top left;
-        padding-top:2px;
-        margin: -30px 0 0 0;
-        height: 100%;
-        
-        .tg-right-board-wrap {
-            background-color: rgba(0,0,0,.5) ;
-            padding-top:2px;
-            height: 100%;
-            box-shadow: inset 0 0 32px 20px black;
-        }
-
-        .tg-board-activity {
-            height: 100%;
-            position: relative;
-
-
-            &:before, &:after  {
-                content: '';
-                display: block;
-                position: absolute;
-                width:25px;
-                height: 25px;
-            }
-            &:before {
-                border-top: 1px solid #33322d;
-                border-left: 1px solid #33322d;
-                top:15px;
-                left: 15px;
-            }
-            &:after {
-                border-top: 1px solid #33322d;
-                border-right: 1px solid #33322d;
-                top:15px;
-                right: 15px;
-            }
-        }
-        .tg-board-activity-wrap {
-            height: 100%;
-            display: flex;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: .5em;
-            box-sizing: border-box;
-
-            &:before, &:after  {
-                content: '';
-                display: block;
-                position: absolute;
-                width:25px;
-                height: 25px;
-            }
-            &:before {
-                border-bottom: 1px solid #33322d;
-                border-left: 1px solid #33322d;
-                bottom:15px;
-                left: 15px;
-            }
-            &:after {
-                border-bottom: 1px solid #33322d;
-                border-right: 1px solid #33322d;
-                bottom:15px;
-                right: 15px;
-            }
-        }
-
-        .no-activity {
-            display: block;
-            width: 100%;
-            text-align: center;
-            margin: auto;
-            color: #676455;
-            font-size: 10px;
-            text-transform: uppercase;
-
-            i {
-                display: block;
-                font-size: 20px;
-                margin-bottom: 6px;
-                color: #676455;
-            }
-        }
-
-
-        .tg-right-board-end {
-            padding-top: 2px;
-            box-sizing: content-box;
-            background: black url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
-            margin-top: auto;
-            display: flex;
-            flex-direction: row;
-            flex: 1 1 54px;
-
-            .wrap-btnend-box {
-                display: flex;
-                flex: 0 1 48px;
-                text-align: center;
-            }
-            // Buttons 
-            button {
-                margin: auto;
-            }
-
-            .btn-inventario-graph {
-                @include sprite($btn-inventario-graph-sprite);
-            }
-            .btn-stato-graph {
-                @include sprite($btn-stato-graph-sprite);
-            }
-            .btn-info-graph {
-                @include sprite($btn-info-graph-sprite);
-            }
-            .btn-equip-graph {
-                @include sprite($btn-equip-graph-sprite);
-            }
-            .btn-skill-graph {
-                @include sprite($btn-skill-graph-sprite);
-            }
-            .btn-config-graph {
-                @include sprite($btn-config-graph-sprite);
-            }
-        }
-    }
-
-    @include media-breakpoint-down(lg) {
-        .tg-map {
-            width: 222px;
-            flex: 1 0 394px;
-            padding-left:35px;
-            padding-right: 35px;
-            
-            .tg-map-box {
-                top:85px;
-                width: 222px;
-                height: 222px;
-            }
-        }
-    }
-
-    @include media-breakpoint-up(xl) {
-        .tg-dir {
-        transform: scale(1);
-        }
-
-        .dir-nord {
-            @include sprite($nord-dir-sprite);
-            top: 72px;
-            left: 155px;
-        }
-        .dir-est {
-            @include sprite($est-dir-sprite);
-            top: 226px;
-            right: 6px;
-        }
-        .dir-sud {
-            @include sprite($sud-dir-sprite);
-            top: 388px;
-            left: 155px;
-        }
-        .dir-ovest {
-            @include sprite($ovest-dir-sprite);
-            top: 226px;
-            left: 4px;
-        }
-
-        .dir-alto {
-            top: 344px;
-            left: 16px;
-        }
-        .dir-basso {
-            top: 376px;
-            left: 53px;
-        }
-    }
-
-    @include media-breakpoint-down(md) {
-        display: none;   
-    }
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
 }

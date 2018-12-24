@@ -12,14 +12,16 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./output.component.scss']
 })
 export class OutputComponent {
-  messages$: Observable<MessageState>;
+  history: Array<string> = [];
+  
+  private messages$: Observable<MessageState>;
 
   constructor(private store: Store<MessageState>) { 
-    
-    this.messages$ = this.store.select(fromSelectors.getMessage)
-/*     this.messages$.subscribe(data => console.log(data));
-*/
-
+    this.messages$ = this.store.select(fromSelectors.getMessage);
+    this.messages$.subscribe(
+      msg => {
+        this.history.push(msg.data) 
+      }
+    )
   }
-
 }
