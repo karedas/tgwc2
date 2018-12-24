@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class DataParser {
   private cmdPrefix = '';
-  parseUiObject$: BehaviorSubject<any> = new BehaviorSubject([]);
+  private parseUiObject$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   private msgRegexp = {
     hideInputText: /&x\n*/gm,
@@ -25,7 +25,6 @@ export class DataParser {
 
   parse(data): void {
     this.parseForDisplay(this.preParseText(data));
-
   }
 
   preParseText(data: string): string {

@@ -2,6 +2,7 @@
 export interface MessageState {
     id: number;
     data: any;
+    cmd: undefined;
     timestamp: number;
     type: string;
 }
@@ -9,6 +10,7 @@ export interface MessageState {
 export const initialState: MessageState = {
     id: undefined,
     data: undefined,
+    cmd: undefined,
     timestamp: undefined,
     type: undefined
 }
