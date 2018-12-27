@@ -13,10 +13,10 @@ import gitInfo from '../../../git-version.json';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
 
   gitVersion = gitInfo.raw;
-
   loginForm: FormGroup;
   loginFormErrors: any;
   loginFailed: boolean;
@@ -35,16 +35,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initForm();
-  }
-
-  initForm() {
     this.loginForm = this.formBuilder.group({
       'username': ['', UsernameValidation],
       'password': ['', PasswordValidation]
     });
   }
-
+  
   get username() {
     return this.loginForm.get('username');
   }
@@ -54,7 +50,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-
     if(this.loginForm.invalid) {
       return;
     }
@@ -79,11 +74,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
     });
   }
-
-  // private pushErrorfor(ctrl_name: string, msg: string) {
-  //   this.loginForm.controls[ctrl_name].setErrors({ 'msg': msg });
-  // }
-
 
   ngOnDestroy() {
     this.loginSubscription.unsubscribe();

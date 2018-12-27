@@ -1,12 +1,14 @@
 import { SocketState } from '../game.const';
 import { UI } from 'src/app/models/client/ui.model';
 
-export interface ClientState {
+export interface ClientState  {
     socketStatus: string;
     isAuthenticated: boolean;
     errorMessage: string | null;
     time?: string;
-    ui: UI[];
+    dialog: boolean
+    musicVolume: number,
+    soundVolume: number,
 }
 
 export const initialState: ClientState = {
@@ -14,5 +16,7 @@ export const initialState: ClientState = {
     isAuthenticated: false,
     errorMessage: null,
     time: undefined,
-    ui: []
+    dialog: false,
+    musicVolume: 70,
+    soundVolume: 100
 }

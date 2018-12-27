@@ -1,7 +1,7 @@
 export class UI {
-    inventory: boolean;
-    equipment: boolean;
-    room: boolean;
+    inventory?: boolean;
+    equipment?: boolean;
+    room?: boolean;
 
     constructor (){
         this.inventory = false;

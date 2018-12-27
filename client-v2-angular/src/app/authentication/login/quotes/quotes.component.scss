@@ -1,0 +1,26 @@
+/*
+* Phrases Rotator - Footer Side 
+*/
+
+.tg-intro-rotatext {
+  color: #9c9c9c;
+  font-family: kingthinks;
+  font-size: 1.2em;
+  min-height: 2.4em;
+  box-sizing: content-box;
+  position: relative;
+
+  .phrase {
+    opacity: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .auth {
+    font-style: italic;
+    font-size: 0.8em;
+    display: block;
+
+  }
+
+}

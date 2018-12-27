@@ -1,4 +1,3 @@
-import { Deserializable } from "../deserializable.model";
 import { Character } from "../character/character.model";
 
 export class Player extends Character{

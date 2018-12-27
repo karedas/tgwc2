@@ -3,19 +3,20 @@ import * as fromClient from './reducers/client.reducer';
 import * as fromMessage from './reducers/message.reducer';
 import { ClientState } from "./state/client.state";
 import { MessageState } from "./state/message.state";
-import { from } from "rxjs";
+import { PlayerState } from "./state/player.state";
 
 export interface State {
-    clientState: ClientState,
+    client: ClientState,
     message: MessageState
+    player: PlayerState
 }
 
 export const reducers: ActionReducerMap<State> = {
-    clientState: fromClient.reducer,
-    message: fromMessage.reducer
+    client: fromClient.reducer,
+    message: fromMessage.reducer,
+    player: null
 }
 
 
-export const selectGameState = createFeatureSelector<State>('game');
-
+export const selectClientState = createFeatureSelector<State>('client');
 // export const getSocketStatus = createSelector(selectGameState, fromGame.getSocketStatus);

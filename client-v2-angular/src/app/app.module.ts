@@ -16,9 +16,11 @@ import { GameService } from './services/game.service';
 //import { EffectsModule } from '@ngrx/effects';
 //import { MessageEffects } from './store/effects/message.effects';
 import { SharedModule } from './shared/shared.module';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+/** DA SPOSTARE IN SHARED MODULE */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 
 @NgModule({
