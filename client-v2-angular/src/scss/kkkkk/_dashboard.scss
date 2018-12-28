@@ -201,11 +201,6 @@
         background: url($imgPath + '/borders/border-002-tiny.png') repeat-x top left;
     }
 
-    .extraboard-addin {
-    }
-
-    /* Combat Panel */
-    
     /*Dashboard Tabs*/
     .shortcut-btn {
         width: 35px;
@@ -214,8 +209,6 @@
         float:left;
         margin: 1px 3px;
         cursor: pointer;
-
-
 
         span {
             display: inline-block;

@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { MessageState } from "./state/message.state";
+import { DataState } from "./state/data.state";
 
-export const getMessageState = createFeatureSelector<MessageState>('message');
+export const getDataState = createFeatureSelector<DataState>('data');
 
-export const getMessage = createSelector(
-    getMessageState,
+export const getData = createSelector(
+    getDataState,
     message => message,
   );

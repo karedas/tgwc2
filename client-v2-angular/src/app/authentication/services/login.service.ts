@@ -5,9 +5,9 @@ import { Observable, BehaviorSubject, of} from 'rxjs';
 import { NGXLogger } from 'ngx-logger';
 import { Store } from '@ngrx/store';
 import { ClientState } from '../../store/state/client.state';
-import { AuthenticationType } from '../../store/actions/client.action';
-
-
+import { User } from 'src/app/models/user/user.model';
+import { LoginSuccessAction, LoginFailureAction } from 'src/app/store/actions/client.action';
+import { loginError } from './login-errors';
 
 export const loginEventName = {
   READY : 'ready',
@@ -105,8 +105,12 @@ export class LoginService {
           break;
 
           default:
-            this.socketService.off(socketEvent.LOGIN);
-            // this.loginError();
+            let connectionError = this.getLoginReplayMessage(rep.msg);
+            if(!connectionError) {
+              connectionError = this.getLoginReplayMessage('errorproto');
+            }
+            this.onError(connectionError);
+
             break;
         }
       }
@@ -125,12 +129,8 @@ export class LoginService {
 
   onLoginOk(data) {
     /** Show NEWS TODO */
-    this.store.dispatch({
-      type: AuthenticationType.LOGIN_SUCCESS,
-      payload: <ClientState>{
-        isAuthenticated: true,
-      }
-    });
+    const user = new User({state: 'Active'}); 
+    this.store.dispatch(new LoginSuccessAction());
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }
@@ -146,4 +146,14 @@ export class LoginService {
   onServerDown() {
     alert('onServerDown');
   }
+
+  onError(err) {
+    this.socketService.off(socketEvent.LOGIN);
+    this.store.dispatch(new LoginFailureAction(err));
+  }
+
+  getLoginReplayMessage(what): string{
+    return loginError[what];
+  }
+
 }

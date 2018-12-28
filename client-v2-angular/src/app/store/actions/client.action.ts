@@ -1,54 +1,42 @@
 import { Action } from '@ngrx/store';
 
-export enum SocketConnectionType {
-	INITIALIZE = '[Socket] Initialize',
-	CONNECT = '[Socket] Connect',
-	DISCONNECT = '[Socket] Disconnect'
-};
+export enum UIType {
+	UPDATE = '[UI] Update',
+}
 
-export enum AuthenticationType {
+
+export enum ClientEventType {
+	INITIALIZE = '[Authentication] Socket Initialize',
+	CONNECT = '[Authentication] Socket Connect',
 	DISCONNECT = '[Authentication] User Disconnect',
 	LOGIN = '[Authentication] User Login',
 	LOGIN_SUCCESS = '[Authentication] User Login Success',
 	LOGIN_FAILURE = '[Authentication] User Login Failure'
 }
 
-export enum UIType {
-	UPDATE = '[UI] Update',
-}
-
-/** 
- Connection / Login Actions
-*/
-export class ConnectAction implements Action {
-	readonly type = SocketConnectionType.CONNECT
-	constructor(public payload: any) { }
-}
-
-export class DisconnectAction implements Action {
-	readonly type = SocketConnectionType.DISCONNECT
+export class SocketStatusAction implements Action {
+	readonly type = ClientEventType.CONNECT;
+	constructor(public payload: string) {}
 }
 
 export class LoginAction implements Action {
-	readonly type = AuthenticationType.LOGIN;
+	readonly type = ClientEventType.LOGIN;
+}
+
+export class DisconnectAction implements Action {
+	readonly type = ClientEventType.DISCONNECT
 }
 
 export class LoginSuccessAction implements Action {
-	readonly type = AuthenticationType.LOGIN_SUCCESS;
-	constructor(public payload: {
-		isAuthenticated: boolean;
-	}) { }
+	readonly type = ClientEventType.LOGIN_SUCCESS;
 }
 
 export class LoginFailureAction implements Action {
-	readonly type = AuthenticationType.LOGIN_FAILURE;
+	readonly type = ClientEventType.LOGIN_FAILURE;
 	constructor(public payload: any) { }
 }
 
-/**
- * Client UI Status
- * 
-*/
+
 export class UpdateUi implements Action {
 	readonly type = UIType.UPDATE
 }
@@ -58,9 +46,10 @@ export class UpdateUi implements Action {
 // }
 
 export type GameActions
-	= ConnectAction
+	= UpdateUi
+	| SocketStatusAction
 	| LoginAction
+	| DisconnectAction
 	| LoginSuccessAction
 	| LoginFailureAction
-	| DisconnectAction
 	;

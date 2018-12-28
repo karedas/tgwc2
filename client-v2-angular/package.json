@@ -36,6 +36,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^4.0.0",
     "gulp.spritesmith": "^6.9.0",
+    "immutable": "^4.0.0-rc.12",
     "merge-stream": "^1.0.1",
     "ngx-cookie-service": "^2.0.0",
     "ngx-logger": "^3.3.6",

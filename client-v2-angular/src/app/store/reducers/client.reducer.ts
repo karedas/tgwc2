@@ -1,5 +1,5 @@
 import { ClientState, initialState } from "../state/client.state";
-import { GameActions, SocketConnectionType, AuthenticationType } from "../actions/client.action";
+import { GameActions, ClientEventType } from "../actions/client.action";
 
 
 export function reducer(
@@ -9,16 +9,24 @@ export function reducer(
 
 	switch (action.type) {
 
-		case SocketConnectionType.CONNECT: {
-			return Object.assign({}, state, { socketStatus: action.payload })
+		// case SocketConnectionType.CONNECT: {
+		// 	return Object.assign({}, state, { socketStatus: action.payload })
+		// }
+
+		// case SocketConnectionType.DISCONNECT: {
+		// 	return initialState;
+		// }
+
+		// case AuthenticationType.LOGIN_SUCCESS: {
+		// 	return Object.assign({}, state, action.payload)
+		// }
+
+		case ClientEventType.CONNECT: {
+			return Object.assign({}, state, { socketStatus: action.payload });
 		}
 
-		case SocketConnectionType.DISCONNECT: {
-			return initialState;
-		}
-
-		case AuthenticationType.LOGIN_SUCCESS: {
-			return Object.assign({}, state, action.payload)
+		case ClientEventType.LOGIN_FAILURE: {
+			return { ...state, errorMessage: action.payload};
 		}
 
 		default: {

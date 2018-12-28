@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { MessageState } from 'src/app/store/state/message.state';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-output',
@@ -14,13 +12,13 @@ import { map } from 'rxjs/operators';
 export class OutputComponent {
   history: Array<string> = [];
   
-  private messages$: Observable<MessageState>;
+  private messages$: Observable<DataState>;
 
-  constructor(private store: Store<MessageState>) { 
-    this.messages$ = this.store.select(fromSelectors.getMessage);
+  constructor(private store: Store<DataState>) { 
+    this.messages$ = this.store.select(fromSelectors.getData);
     this.messages$.subscribe(
       msg => {
-        this.history.push(msg.data) 
+          this.history.push(msg.data) 
       }
     )
   }

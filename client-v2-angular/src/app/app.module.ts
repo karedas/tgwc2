@@ -1,27 +1,25 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { SocketService } from './services/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 
-import { ClientModule } from './client/client.module';
-import { AppRoutingModule } from './app-routing.module';
-
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-// import { reducers } from './store/reducers/game.reducer'
-import * as fromStore from './store/'
-import { GameService } from './services/game.service';
-//import { EffectsModule } from '@ngrx/effects';
-//import { MessageEffects } from './store/effects/message.effects';
-import { SharedModule } from './shared/shared.module';
-/** DA SPOSTARE IN SHARED MODULE */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
+import { ClientModule } from './client/client.module';
+import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+
+import { SocketService } from './services/socket.service';
+import { GameService } from './services/game.service';
+import { SharedModule } from './shared/shared.module';
+import * as fromStore from './store/'
+/** DA SPOSTARE IN SHARED MODULE */
 
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-
+import { ClientEffects } from './store/effects/client.effects';
 
 @NgModule({
   declarations: [
@@ -34,7 +32,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(fromStore.reducers),
-//    EffectsModule.forRoot([MessageEffects]),
+    EffectsModule.forRoot([ClientEffects]),
     LoggerModule.forRoot({ 
       serverLoggingUrl: '/api/logs', 
       level: NgxLoggerLevel.DEBUG, 

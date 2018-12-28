@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { MessageState } from '../store/state/message.state';
-import { IncomingMessage } from '../store/actions/message.action';
+import { DataState } from '../store/state/data.state';
+import { IncomingData } from '../store/actions/data.action'; // DA TOGLIERE
+import * as MessageActions from '../store/actions/data.action'; 
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
 
@@ -19,7 +20,9 @@ export class DataParser {
     updateSkyPicture: /&o.\n*/gm,
   }
 
-  constructor(private store: Store<MessageState>) {
+  constructor(
+    private store: Store<DataState>,
+    ) {
     this.parseUiObject$.asObservable();
   }
 
@@ -43,8 +46,8 @@ export class DataParser {
   parseForDisplay(data: string) {
 
     let pos: any;
-    const messageState: MessageState = {} as MessageState;
-    messageState.timestamp = new Date().getTime();
+    const dataState: DataState = {} as DataState;
+    dataState.timestamp = new Date().getTime();
 
 
     //Hide text (password)
@@ -91,7 +94,9 @@ export class DataParser {
     // Generic Update Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       let update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      this.parseUiObject$.next({ update_parse, type: GameMode.UPDATEPLAYER });
+      dataState.data = update_parse;
+      this.store.dispatch(new MessageActions.PlayerStatus(dataState))
+      
       return '';
     });
 
@@ -319,10 +324,8 @@ export class DataParser {
 
     if (data != 'undefined' && data != '') {
       data = this.replaceColors(data);
-      messageState.data = data.replace(/<p><\/p>/g, '');
-
-      messageState.type = 'text'
-      this.store.dispatch(new IncomingMessage(messageState));
+      dataState.data = data.replace(/<p><\/p>/g, '');
+      this.store.dispatch(new IncomingData(dataState));
       // this.parseSubject.next(data);
     }
   }

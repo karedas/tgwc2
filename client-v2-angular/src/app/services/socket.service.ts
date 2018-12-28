@@ -7,10 +7,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../store';
 
 import * as io from 'socket.io-client';
-import {
-  SocketConnectionType,
-  AuthenticationType
-} from '../store/actions/client.action';
+import * as ClientActions from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -39,18 +36,18 @@ export class SocketService {
   private startSocketEvent() {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
-      this.store.dispatch({ type: SocketConnectionType.CONNECT, payload: 'connect' });
+      this.store.dispatch(new ClientActions.SocketStatusAction('connect'));
     });
 
     /* Disconnected */
     this.socket.on(socketEvent.DISCONNECT, () => {
       this.disconnect();
-      this.store.dispatch({ type: SocketConnectionType.DISCONNECT });
+      this.store.dispatch(new ClientActions.DisconnectAction());
     });
 
     /* Error */
-    this.socket.on(socketEvent.ERROR, () => {
-      this.store.dispatch({ type: AuthenticationType.LOGIN_FAILURE });
+    this.socket.on(socketEvent.ERROR, (err) => {
+      this.store.dispatch(new ClientActions.LoginFailureAction(err));
     });
 
     /* Reconnection */
@@ -63,23 +60,12 @@ export class SocketService {
   }
 
   public emit(event: any, data?: any) {
-    console.group();
-      console.log('----- SOCKET OUTGOING -----');
-      console.log('Action: ', event);
-      console.log('Payload: ', data);
-    console.groupEnd();
-
     this.socket.emit(event, data);
   }
 
   public listen(event: socketEvent): Observable<any> {
     return new Observable<Event>(observer =>  {
       this.socket.on(event, data => {
-        console.group();
-          console.log('----- SOCKET INBOUND -----');
-          console.log('Action: ', event);
-          console.log('Payload: ', data);
-        console.groupEnd();
         observer.next(data);
       });
     });

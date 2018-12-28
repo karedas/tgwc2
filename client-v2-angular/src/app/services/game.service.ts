@@ -68,6 +68,46 @@ export class GameService {
         // this.setDoors(pdata.data);
       case GameMode.AUDIO:
         // this.playAudio(pdata.data);
+      case GameMode.UPDATE:
+      
+      case GameMode.IMAGEWITHGAMMA:
+      
+      case GameMode.IMAGE: 
+
+      case GameMode.PLAYERISLOGGEDIN:
+      
+      case GameMode.CLOSETEXTEDITOR: 
+      
+      case GameMode.MAP:
+      
+      case GameMode.RENDERGENERIC:
+      
+      case GameMode.RENDERTABLE:
+      
+      case GameMode.ROOMDETAILS:
+      
+      case GameMode.PERSONDETAILS:
+      
+      case GameMode.OBJECTDETAILS:
+      
+      case GameMode.EQUIP:
+      
+      case GameMode.WORKABLELIST:
+      
+      case GameMode.SKILLS:
+      
+      case GameMode.PLAYERINFO:
+      
+      case GameMode.PLAYERSTATUS:
+      
+      case GameMode.NEWIMAGEREQUEST:
+      
+      case GameMode.SELECTABLEGENERIC:
+      
+      case GameMode.REFRESH:
+      
+      case GameMode.PAUSESCROLL:
+      
       default:
         return;
     }

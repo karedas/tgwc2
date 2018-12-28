@@ -1,5 +1,5 @@
 import { SocketState } from '../game.const';
-import { UI } from 'src/app/models/client/ui.model';
+import { User } from 'src/app/models/user/user.model';
 
 export interface ClientState  {
     socketStatus: string;
@@ -18,5 +18,5 @@ export const initialState: ClientState = {
     time: undefined,
     dialog: false,
     musicVolume: 70,
-    soundVolume: 100
+    soundVolume: 100,
 }
