@@ -1,27 +1,8 @@
 <!-- Mini Mappa -->
-<div class="tg-map">
-  <div id="nord" class="tg-dir dir-nord" rel="tooltip" title="Vai a nord">
-    <span class="dir-ico"></span>
-  </div>
-  <div id="est" class="tg-dir dir-est" rel="tooltip" title="Vai a est">
-    <span class="dir-ico"></span>
-  </div>
-  <div id="sud" class="tg-dir dir-sud" rel="tooltip" title="Vai a sud">
-    <span class="dir-ico"></span>
-  </div>
-  <div id="ovest" class="tg-dir dir-ovest" rel="tooltip" title="Vai a ovest">
-    <span class="dir-ico"></span>
-  </div>
-  <div id="alto" class="tg-dir dir-alto" rel="tooltip" title="Vai verso l'alto" data-label="Alto">
-    <span class="dir-ico"></span>
-  </div>
-  <div id="basso" class="tg-dir dir-basso" rel="tooltip" title="Vai verso il basso" data-label="Basso">
-    <span class="dir-ico"></span>
-  </div>
-  <div class="tg-directions">
-  </div>
-  <div id="tgMap" class="tg-map-box">
-    <canvas id="snowCanvas" class="canvas-snow"></canvas>
-    <canvas id="rainCanvas" class="canvas-rain"></canvas>
-  </div>
+<tg-directions></tg-directions>
+<div class="tg-map-box">
+  <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>
+  </canvas>
+  <canvas id="snowCanvas" class="canvas-snow"></canvas>
+  <canvas id="rainCanvas" class="canvas-rain"></canvas>
 </div>

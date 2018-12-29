@@ -45,7 +45,7 @@ export class UpdateUi implements Action {
 
 // }
 
-export type GameActions
+export type ClientActions
 	= UpdateUi
 	| SocketStatusAction
 	| LoginAction

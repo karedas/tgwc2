@@ -44,7 +44,7 @@ import { ClientEffects } from './store/effects/client.effects';
     }),
     AppRoutingModule
   ],
-  providers: [SocketService, CookieService, GameService],
+  providers: [SocketService, CookieService, GameService, PreloaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

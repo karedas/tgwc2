@@ -7,5 +7,6 @@ export class UI {
         this.inventory = false;
         this.equipment = false;
         this.room = false;
+        this.map = [];
     }
 }

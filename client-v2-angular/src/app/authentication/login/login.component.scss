@@ -6,7 +6,6 @@
 /* Others */
 @import 'sprites';
 @import 'utils/sprites-mixins';
-/* Bootstrap */
 @import './glow';
 
 :host {
@@ -105,7 +104,7 @@
       height: auto;
       box-sizing: border-box;
       color: #feece0;
-      background: rgba(18, 13, 10, .8);
+      background: rgba(11, 8, 7, .8);
       background-repeat: no-repeat;
       background-position: 1em;
       font-size: 16px;

@@ -16,7 +16,7 @@
         flex-direction: column;
     }
   
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       display: none;
     }
   }

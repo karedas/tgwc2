@@ -20,7 +20,7 @@ function getFolders(dir) {
 		});
 }
 
-function generateSprites(done, path) {
+function generateSprites(done) {
 
 	let spritesmith = require('gulp.spritesmith'),
 		concat = require("gulp-concat"),
@@ -30,7 +30,6 @@ function generateSprites(done, path) {
 	let dir = config.src.img + 'sprites/';
 	let folders;
 
-	console.log(dir);
 	if (fs.existsSync(dir)) {
 		folders = getFolders(dir),
 			cssStream = [],
@@ -76,14 +75,14 @@ function generateSprites(done, path) {
 function generateAssetsList() {
 	let fileList = require('gulp-filelist');
 
+	console.log(config.src.img + '!tiles/*/**/*');
 	return gulp.src([
-			config.build.base + config.build.img + '**/*.{png,jpg,gif}',
+			config.src.img + '**/*.{png,jpg,gif}', 
 		])
 		.pipe(fileList('assets_list.json', {
 			relative: true
 		}))
-		.pipe(gulp.dest(config.src.base))
-		.pipe(gulp.dest(config.build.base))
+		.pipe(gulp.dest(config.src.assets))
 		.pipe(debug());
 
 }

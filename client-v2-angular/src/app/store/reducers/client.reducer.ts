@@ -1,25 +1,14 @@
 import { ClientState, initialState } from "../state/client.state";
-import { GameActions, ClientEventType } from "../actions/client.action";
+import { ClientEventType } from "../actions/client.action";
 
 
 export function reducer(
 	state = initialState,
-	action: GameActions
+	action: ClientAction
 ): ClientState {
 
 	switch (action.type) {
 
-		// case SocketConnectionType.CONNECT: {
-		// 	return Object.assign({}, state, { socketStatus: action.payload })
-		// }
-
-		// case SocketConnectionType.DISCONNECT: {
-		// 	return initialState;
-		// }
-
-		// case AuthenticationType.LOGIN_SUCCESS: {
-		// 	return Object.assign({}, state, action.payload)
-		// }
 
 		case ClientEventType.CONNECT: {
 			return Object.assign({}, state, { socketStatus: action.payload });

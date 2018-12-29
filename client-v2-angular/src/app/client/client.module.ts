@@ -13,6 +13,7 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { SharedModule } from '../shared/shared.module';
 import { MapComponent } from './map/map.component';
 import { SkyComponent } from './sky/sky.component';
+import { DirectionsComponent } from './map/directions/directions.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SkyComponent } from './sky/sky.component';
     ControlPanelComponent,
     MapComponent,
     SkyComponent,
+    DirectionsComponent,
   ],
   imports: [
     ClientRoutingModule,
