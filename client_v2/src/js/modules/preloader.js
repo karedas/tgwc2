@@ -53,6 +53,7 @@ export default class Preloader {
             percentage = percentage > 100 ? 100 : percentage;
             $('#tgPreloader').find('span').text(percentage);
         }
+        
         for (let i = 0; i < assets.length; i++) {
             images[i] = new Image();
             images[i].src = _.basepath + assets[i];

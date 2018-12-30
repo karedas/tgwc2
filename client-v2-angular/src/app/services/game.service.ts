@@ -6,7 +6,11 @@ import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { GameMode } from '../store/game.const';
-import { NGXLogger } from 'ngx-logger';
+import { Observable, BehaviorSubject } from 'rxjs';
+
+import * as fromSelectors from 'src/app/store/selectors';
+import { DataState } from '../store/state/data.state';
+
 
 
 @Injectable({
@@ -15,13 +19,17 @@ import { NGXLogger } from 'ngx-logger';
 
 export class GameService {
   netData: string;
+  
+  private _history: BehaviorSubject<DataState[]> = new BehaviorSubject([]);
+  messages$: Observable<any> =  this._history.asObservable();
+
+
 
   constructor(
     private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
     private store: Store<ClientState>,
-    private logger: NGXLogger
   ) { }
 
   startGame() {
@@ -31,12 +39,19 @@ export class GameService {
     this.socketService.emit('data', '');
 
     //dispatch data from socket and call actions
+    /*
     this.dataParserService.parseUiObject$.subscribe(
       data => this.updateUi(data),
       err => {
-        this.logger.error('Data Error from Socket', err);
+        console.error('Data Error from Socket', err);
       }
-    )
+    )*/
+
+    this.messages$ = this.store.select(fromSelectors.getData);
+    this.messages$.subscribe(data => {
+      this._history.next(data);
+    })
+
   }
 
   handleServerGameData(data) {
@@ -56,7 +71,6 @@ export class GameService {
   }
 
   updateUi(pdata: any) {
-    console.log(pdata);
     switch (pdata.type) {
       case GameMode.HIDEINPUTTEXT:
         // this.hideInputText();
@@ -113,21 +127,48 @@ export class GameService {
     }
   }
 
-  updateSky(map) {
+  getHistory(): Observable<any>{
+    return this._history;
   }
 
+  pushInHistory(data) {
+    this._history.next(data);
+  }
+
+
+  getRoom(data) {
+    let res = '';
+    /*res += '<div class="detailblock">';
+
+    /*    if (data.title) {
+            res += '<div class="room"><div class="out-title"></div>' + this.capFirstLetter.transform(data.title) + '</div>';
+        }
+        res += _.renderDetailsInner(info, type, false);
+
+        if (info.image) {
+            _.showImage($('#image-cont'), info.image);
+        }
+
+        res += '</div>'*/
+      
+    //this.pushInHistory(data);
+  }
+/*
+  updateSky(map) {
+  }
+/*
   hideInputText() { }
 
   showInputText() { }
 
   setDoors(data) { }
 
-  playAudio(data) { }
-
+  playAudio(data) { }*/
+/*
   gameState(mode) {
     // let hideText = () => {
     // }
-  }
+  }*/
 
   /**
    * 

@@ -130,7 +130,7 @@ export class LoginService {
   onLoginOk(data) {
     /** Show NEWS TODO */
     const user = new User({state: 'Active'}); 
-    this.store.dispatch(new LoginSuccessAction());
+    this.store.dispatch(new LoginSuccessAction(true));
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }

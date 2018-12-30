@@ -1,10 +1,10 @@
 import { ClientState, initialState } from "../state/client.state";
-import { ClientEventType } from "../actions/client.action";
+import { ClientEventType, ClientActions } from "../actions/client.action";
 
 
 export function reducer(
 	state = initialState,
-	action: ClientAction
+	action: ClientActions
 ): ClientState {
 
 	switch (action.type) {
@@ -12,6 +12,10 @@ export function reducer(
 
 		case ClientEventType.CONNECT: {
 			return Object.assign({}, state, { socketStatus: action.payload });
+		}
+
+		case ClientEventType.LOGIN_SUCCESS: {
+			return Object.assign({}, state, {isAuthenticated: action.payload})
 		}
 
 		case ClientEventType.LOGIN_FAILURE: {

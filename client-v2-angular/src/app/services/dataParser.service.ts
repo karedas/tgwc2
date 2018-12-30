@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from '../store/state/data.state';
 import { IncomingData } from '../store/actions/data.action'; // DA TOGLIERE
-import * as MessageActions from '../store/actions/data.action'; 
+import * as DataActions from '../store/actions/data.action'; 
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
+import { Room } from '../models/message/room.model';
 
 @Injectable({
   providedIn: 'root'
@@ -93,9 +94,9 @@ export class DataParser {
 
     // Generic Update Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
-      let update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      dataState.data = update_parse;
-      this.store.dispatch(new MessageActions.PlayerStatus(dataState))
+      dataState.type = 'update';
+      dataState.info = update.slice(5, status.lastIndexOf('"')).split(',');
+      //this.store.dispatch(new DataActions.PlayerStatus(dataState))
       
       return '';
     });
@@ -172,8 +173,8 @@ export class DataParser {
 
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
-      let dtls_parse = JSON.parse(dtls.slice(6, -1));
-      this.parseUiObject$.next({ dtls_parse, type: GameMode.ROOMDETAILS });
+      dtls = JSON.parse(dtls.slice(6, -1)) ;
+      this.store.dispatch(new DataActions.RoomAction(dtls));
       return '';
     });
 
@@ -324,7 +325,8 @@ export class DataParser {
 
     if (data != 'undefined' && data != '') {
       data = this.replaceColors(data);
-      dataState.data = data.replace(/<p><\/p>/g, '');
+      dataState.type = 'default';
+      dataState.info = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new IncomingData(dataState));
       // this.parseSubject.next(data);
     }

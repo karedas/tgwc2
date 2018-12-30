@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
-import * as fromSelectors from 'src/app/store/selectors';
+import { GameService } from 'src/app/services/game.service';
+import { map, filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tg-output',
@@ -10,16 +11,13 @@ import * as fromSelectors from 'src/app/store/selectors';
   styleUrls: ['./output.component.scss']
 })
 export class OutputComponent {
-  history: Array<string> = [];
   
-  private messages$: Observable<DataState>;
+  private output = [];
 
-  constructor(private store: Store<DataState>) { 
-    this.messages$ = this.store.select(fromSelectors.getData);
-    this.messages$.subscribe(
-      msg => {
-          this.history.push(msg.data) 
-      }
-    )
+  constructor(
+    private store: Store<DataState>, 
+    private game: GameService) {
+      this.game.getHistory().subscribe(msg  => this.output = msg );
+     
+    }
   }
-}

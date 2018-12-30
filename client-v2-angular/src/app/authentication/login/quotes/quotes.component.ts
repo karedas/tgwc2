@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
       <div class="col-12">
       <ng-container [@crossFadeQuote]>
         {{ (quotes[index$ | async])?.msg  }}
-        <div class="auth">{{ (quotes[index$ | async])?.author }}</div>
+        <div class="auth">- {{ (quotes[index$ | async])?.author }} -</div>
       </ng-container>
       </div>
   </div>`,
@@ -51,7 +51,7 @@ import { map } from 'rxjs/operators';
 
 export class QuotesComponent{
   quotes = [
-    { show: true, author: `anonimo`, msg: `L'importante non è Guardare, occorre Vedere`},
+    { show: true, author: `Anonimo`, msg: `L'importante non è Guardare, occorre Vedere`},
     { show: false, author: `Una guardia cittadina`, msg: `Nuovo giorno, buon giorno!`},
     { show: false, author: `Strane creature di Ikhari`, msg: `Gnek gnek!` }
   ]

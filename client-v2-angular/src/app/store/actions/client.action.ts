@@ -29,6 +29,7 @@ export class DisconnectAction implements Action {
 
 export class LoginSuccessAction implements Action {
 	readonly type = ClientEventType.LOGIN_SUCCESS;
+	constructor( public payload: boolean) {}
 }
 
 export class LoginFailureAction implements Action {

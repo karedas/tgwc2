@@ -19,7 +19,8 @@ import * as fromStore from './store/'
 /** DA SPOSTARE IN SHARED MODULE */
 
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { ClientEffects } from './store/effects/client.effects';
+import { PreloaderService } from './services/preloader.service';
+import { DataEffects } from './store/effects/data.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ClientEffects } from './store/effects/client.effects';
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(fromStore.reducers),
-    EffectsModule.forRoot([ClientEffects]),
+    EffectsModule.forRoot([DataEffects]),
     LoggerModule.forRoot({ 
       serverLoggingUrl: '/api/logs', 
       level: NgxLoggerLevel.DEBUG, 

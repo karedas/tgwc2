@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MapComponent } from './map/map.component';
 import { SkyComponent } from './sky/sky.component';
 import { DirectionsComponent } from './map/directions/directions.component';
+import { TextComponent } from './output/renders/text/text.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DirectionsComponent } from './map/directions/directions.component';
     MapComponent,
     SkyComponent,
     DirectionsComponent,
+    TextComponent,
   ],
   imports: [
     ClientRoutingModule,

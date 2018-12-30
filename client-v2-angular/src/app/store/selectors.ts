@@ -5,5 +5,5 @@ export const getDataState = createFeatureSelector<DataState>('data');
 
 export const getData = createSelector(
     getDataState,
-    message => message,
+    data => data,
   );
