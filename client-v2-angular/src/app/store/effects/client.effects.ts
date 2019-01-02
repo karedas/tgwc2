@@ -10,10 +10,10 @@ export class ClientEffects {
 	) { }
 
 	// @Effect({ dispatch: false })
-	// disconnect$ = this.actions$.pipe(
-	// 	ofType(ClientEventType.DISCONNECT),
-	// 	tap(action => {
-	// 		console.log(action);
-	// 	})
+	// 	playerUpdate$ = this.actions$.pipe(
+	// 		ofType(ClientEventType),
+	// // 	tap(action => {
+	// // 		console.log(action);
+	// // 	})
 	// )
 }
