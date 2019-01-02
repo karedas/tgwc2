@@ -1,13 +1,15 @@
 import { Room } from 'src/app/models/message/room.model';
 
 export interface DataState {
-    info: any;
-    type: string;
+    default: any;
+    room: any;
+    lastType: string;
     timestamp: number;
 }
 
 export const initialState: DataState = {
-    info: '',
-    type: 'default',
+    default: '',
+    room: undefined,
+    lastType: 'default',
     timestamp: new Date().getTime()
 };

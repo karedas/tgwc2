@@ -19,10 +19,10 @@ export class DataEffects {
     private actions$: Actions,
     private game: GameService
   ) { }
-
+/*
   @Effect({dispatch: false})
   room$: Observable<Action> = this.actions$.pipe(
     ofType<RoomAction>(DataEvenType.ROOM),
     tap((action: PayloadAction) => this.game.getRoom(action.payload)
-  ));
+  ));*/
 }

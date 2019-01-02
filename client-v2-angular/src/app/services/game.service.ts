@@ -22,7 +22,8 @@ export class GameService {
   
   private _history: BehaviorSubject<DataState[]> = new BehaviorSubject([]);
     
-  messages$: Observable<any> =  this._history.asObservable();
+  //socket data messages and various
+  _data$: Observable<any> =  this._history.asObservable();
 
 
 
@@ -48,8 +49,8 @@ export class GameService {
       }
     )*/
 
-    this.messages$ = this.store.select(fromSelectors.getData);
-    this.messages$.subscribe(data => {
+    this._data$ = this.store.select(fromSelectors.getData);
+    this._data$.subscribe(data => {
       this._history.next(data);
     });
 
@@ -134,24 +135,6 @@ export class GameService {
     this._history.next(data);
   }
 
-
-  getRoom(data) {
-    const res = '';
-    /*res += '<div class="detailblock">';
-
-    /*    if (data.title) {
-            res += '<div class="room"><div class="out-title"></div>' + this.capFirstLetter.transform(data.title) + '</div>';
-        }
-        res += _.renderDetailsInner(info, type, false);
-
-        if (info.image) {
-            _.showImage($('#image-cont'), info.image);
-        }
-
-        res += '</div>'*/
-
-    // this.pushInHistory(data);
-  }
 /*
   updateSky(map) {
   }

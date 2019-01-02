@@ -53,49 +53,49 @@ export class DataParser {
 
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
-      this.parseUiObject$.next({ data, type: GameMode.HIDEINPUTTEXT });
+      //this.parseUiObject$.next({ data, type: GameMode.HIDEINPUTTEXT });
       return '';
     });
 
     // Show text (normal input)
     data = data.replace(this.msgRegexp.showInputText, () => {
-      this.parseUiObject$.next({ data, type: GameMode.SHOWINPUTTEXT });
+      //this.parseUiObject$.next({ data, type: GameMode.SHOWINPUTTEXT });
       return '';
     });
 
     // Sky picture
     data = data.replace(this.msgRegexp.updateSkyPicture, (sky) => {
       const sky_parse = sky.charAt(2);
-      this.parseUiObject$.next({ sky_parse, type: GameMode.SKYPICTURE });
+      //this.parseUiObject$.next({ sky_parse, type: GameMode.SKYPICTURE });
       return '';
     });
 
     // Doors Info
     data = data.replace(/&d\d{6}\n*/gm, (doors) => {
       const doors_parse = doors.substr(2, 6);
-      this.parseUiObject$.next({ doors_parse, type: GameMode.DOORSINFO });
+      //this.parseUiObject$.next({ doors_parse, type: GameMode.DOORSINFO });
       return '';
     });
 
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.parseUiObject$.next({ audio_parse, type: GameMode.AUDIO });
+      //this.parseUiObject$.next({ audio_parse, type: GameMode.AUDIO });
       return '';
     });
 
     // Player status
     data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
       const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
-      this.parseUiObject$.next({ status_parse, type: GameMode.UPDATE });
+      //this.parseUiObject$.next({ status_parse, type: GameMode.UPDATE });
       return '';
     });
 
 
     // Generic Update Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
-      dataState.type = 'update';
-      dataState.info = update.slice(5, status.lastIndexOf('"')).split(',');
+      dataState.lastType = 'update';
+      dataState.default = update.slice(5, status.lastIndexOf('"')).split(',');
       // this.store.dispatch(new DataActions.PlayerStatus(dataState))
 
       return '';
@@ -139,7 +139,7 @@ export class DataParser {
     // Map data
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, (map) => {
       const map_parse = JSON.parse(map.slice(5, -1));
-      this.parseUiObject$.next({ map_parse, type: GameMode.MAP });
+      this.store.dispatch(new DataActions.MapAction(map_parse));
       return '';
     });
 
@@ -174,6 +174,7 @@ export class DataParser {
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
       dtls = JSON.parse(dtls.slice(6, -1)) ;
+      console.log(dtls);
       this.store.dispatch(new DataActions.RoomAction(dtls));
       return '';
     });
@@ -324,35 +325,13 @@ export class DataParser {
     data = data.replace(/\n/gm, '<br>');
 
     if (data != 'undefined' && data !== '') {
-      data = this.replaceColors(data);
-      dataState.type = 'default';
-      dataState.info = data.replace(/<p><\/p>/g, '');
+      dataState.lastType = 'default';
+      dataState.default = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new IncomingData(dataState));
       // this.parseSubject.next(data);
     }
   }
 
-  replaceColors(data) {
-    // data = data.replace(/&B/gm, '<span class="tg-gray">');
-    // data = data.replace(/&R/gm, '<span class="tg-lt-red">');
-    // data = data.replace(/&G/gm, '<span class="tg-lt-green">');
-    // data = data.replace(/&Y/gm, '<span class="tg-yellow">');
-    // data = data.replace(/&L/gm, '<span class="tg-lt-blue">');
-    // data = data.replace(/&M/gm, '<span class="tg-lt-magenta">');
-    // data = data.replace(/&C/gm, '<span class="tg-lt-cyan">');
-    // data = data.replace(/&W/gm, '<span class="tg-white">');
-    // data = data.replace(/&b/gm, '<span class="tg-black">');
-    // data = data.replace(/&r/gm, '<span class="tg-red">');
-    // data = data.replace(/&g/gm, '<span class="tg-green">');
-    // data = data.replace(/&y/gm, '<span class="tg-brown">');
-    // data = data.replace(/&l/gm, '<span class="tg-blue">');
-    // data = data.replace(/&m/gm, '<span class="tg-magenta">');
-    // data = data.replace(/&c/gm, '<span class="tg-cyan">');
-    // data = data.replace(/&w/gm, '<span class="tg-lt-white">');
-    // data = data.replace(/&-/gm, '</span>');
-
-    return data;
-  }
 
   removeColors(data) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');

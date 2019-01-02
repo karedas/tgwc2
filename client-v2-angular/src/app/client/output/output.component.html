@@ -9,9 +9,12 @@
           </div>
           <!-- Output Area -->
           <div id="output" class=" tg-output-history">
-            <ng-container *ngFor="let data of output" [ngSwitch]="data.type">
-              <tg-text *ngSwitchDefault [html]='data'></tg-text>
-            </ng-container>
+            <div *ngFor="let data of output">
+              <div class="tg-line" [ngSwitch]="data.lastType">
+                <tg-text *ngSwitchCase="'default'" [html]="data.default"></tg-text>
+                <tg-room *ngSwitchCase="'room'" [html]="data.room"></tg-room>
+              </div>
+            </div>
           </div>
         </div>
       </div>

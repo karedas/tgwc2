@@ -13,17 +13,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class OutputComponent {
 
-  private output = [];
+  output = [];
 
   constructor(
     private store: Store<DataState>,
-    private sanitizer: DomSanitizer,
     private game: GameService) {
       this.game.getHistory()
-      .subscribe(msg  => 
+      .subscribe(data  => 
         {
-          this.output.push(msg);
-          console.log(this.output, 'output!!');
+          this.output.push(data);
+          console.log(data);
       });
     }
   }

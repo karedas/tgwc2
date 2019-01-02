@@ -15,6 +15,7 @@ import { MapComponent } from './map/map.component';
 import { SkyComponent } from './sky/sky.component';
 import { DirectionsComponent } from './map/directions/directions.component';
 import { TextComponent } from './output/renders/text/text.component';
+import { RoomComponent } from './output/renders/room/room.component';
 // import { PreloadBarModule } from './preload-bar/preload-bar.module';
 
 
@@ -33,6 +34,7 @@ import { TextComponent } from './output/renders/text/text.component';
     SkyComponent,
     DirectionsComponent,
     TextComponent,
+    RoomComponent,
   ],
   imports: [
     ClientRoutingModule,

@@ -7,3 +7,8 @@ export const getData = createSelector(
     getDataState,
     data => data,
   );
+
+export const getDataDefault = createSelector(
+  getDataState,
+  data => data.default
+)

@@ -13,11 +13,15 @@ export function reducer(
         case DataEvenType.PLAYERSTATUS:
             return Object.assign({}, state, action.payload);
         case DataEvenType.ROOM:
-        console.log(action.payload);
             return Object.assign({}, state, {
-                info: action.payload,
+                room: action.payload,
                 type: 'room'
             });
+       /* case DataEvenType.MAP:
+            return Object.assign({}, state, {
+                default: action.payload,
+                type: 'map'
+            });*/
         default:
             return state;
     }

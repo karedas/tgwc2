@@ -7,7 +7,8 @@ export enum DataEvenType {
     OUT = '[Data] Outgoing Data',
     LOGGEDIN = '[Data] Player is Logged In',
     PLAYERSTATUS = '[Data] Update Player Status',
-    ROOM = '[Data] Room'
+    ROOM = '[Data] Room',
+    MAP = '[Data] Map Update'
 }
 
 export class IncomingData implements Action {
@@ -30,12 +31,18 @@ export class PlayerStatus implements Action {
     constructor( public payload: DataState) {}
 }
 
+export class MapAction implements Action {
+    readonly type = DataEvenType.MAP;
+    constructor(public payload: any) {}
+
+}
+
 
 
 export type DataAction
 = IncomingData
 | OutgoingData
-// | PlayerIsLoggedIn
+| MapAction
 | RoomAction
 | PlayerStatus
 ;
