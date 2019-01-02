@@ -8,7 +8,7 @@ import { PreloaderService } from 'src/app/services/preloader.service';
 })
 
 export class ClientContainerComponent {
-  constructor(private preloadService: PreloaderService){
+  constructor(private preloadService: PreloaderService) {
     preloadService.load();
   }
 }

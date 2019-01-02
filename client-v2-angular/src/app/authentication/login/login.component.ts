@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginFormErrors = {
       username: {},
       password: {}
-    }
+    };
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
   }
-  
+
   get username() {
     return this.loginForm.get('username');
   }
@@ -50,18 +50,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       return;
     }
-    
+
     const values = this.loginForm.value;
 
     this.loginSubscription = this.loginService.login(values)
       .subscribe((loginSuccess: boolean) => {
-        if(loginSuccess === true) { 
+        if (loginSuccess === true) {
           // Get the redirect URL from our auth service
           // If no redirect has been set, use the default
-          let redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient'
+          const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
           // Redirect the user
           this.router.navigate([redirect]);
         } else {

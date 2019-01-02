@@ -1,6 +1,6 @@
-import { IUser } from "./user.interface";
+import { IUser } from './user.interface';
 
-export class User implements IUser{
+export class User implements IUser {
     name: string;
     state: string;
     action?: string;
@@ -10,7 +10,7 @@ export class User implements IUser{
     constructor(name) {
         this.name = name;
         this.state = 'active';
-        this.speed = 2; 
+        this.speed = 2;
     }
 }
 

@@ -24,7 +24,7 @@ export class LoginAction implements Action {
 }
 
 export class DisconnectAction implements Action {
-	readonly type = ClientEventType.DISCONNECT
+	readonly type = ClientEventType.DISCONNECT;
 }
 
 export class LoginSuccessAction implements Action {
@@ -39,7 +39,7 @@ export class LoginFailureAction implements Action {
 
 
 export class UpdateUi implements Action {
-	readonly type = UIType.UPDATE
+	readonly type = UIType.UPDATE;
 }
 
 // export class UpdateInventory implements Action {

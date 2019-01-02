@@ -11,7 +11,7 @@ export class CookieLawComponent {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
-  display: boolean = false;
+  display = false;
   showButton = false;
 
   constructor(private cookieService: CookieService) {

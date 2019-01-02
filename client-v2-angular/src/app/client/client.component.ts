@@ -10,11 +10,11 @@ import { LoginService } from '../authentication/services/login.service';
   templateUrl: './client.component.html',
 })
 
-export class ClientComponent implements OnInit{
+export class ClientComponent implements OnInit {
 
   @Input('state') gameState$;
 
-  isCookieAccepted: boolean = false;
+  isCookieAccepted = false;
 
   constructor(
     private cookieService: CookieService,
@@ -30,14 +30,14 @@ export class ClientComponent implements OnInit{
 
     }
   }
-  
+
   ngOnInit() {
     /* Mndatory verification of acceptance of the use of cookies before proceed */
-    if(this.cookieService.check('tgCookieLaw')) {  this.isCookieAccepted = true; }
+    if (this.cookieService.check('tgCookieLaw')) {  this.isCookieAccepted = true; }
 
     /** Until Login Auth */
     this.loginService.isLoggedIn$.subscribe( auth => {
-        if(auth) this.game.startGame();
+        if (auth) { this.game.startGame(); }
       }
     );
   }

@@ -55,7 +55,7 @@ export class MapComponent implements AfterViewInit {
 
     this.mapTileImg = new Image();
     this.mapTileImg.src = images_path + 'tiles/tiles.png';
-    console.log(images_path + 'tiles/tiles.png')
+    console.log(images_path + 'tiles/tiles.png');
 
 
     this.mapShadowImg[2] = new Image();
@@ -66,7 +66,7 @@ export class MapComponent implements AfterViewInit {
 
     this.mapShadowImg[0] = new Image();
     this.mapShadowImg[0].src = images_path + 'interface/shadow3.png';
-   
+
     this.mapShadowImg[0] = new Image();
     this.mapShadowImg[0].src = images_path + 'interface/shadow3.png';
 
@@ -83,11 +83,11 @@ export class MapComponent implements AfterViewInit {
   }
 
   public drawCanvasMap(dataMap) {
-    let _ = this;
+    const _ = this;
     let xoff, yoff, xlim, ylim, light;
-    //clip options
-    let radius = 75;
-    let offset = 0;
+    // clip options
+    const radius = 75;
+    const offset = 0;
 
     xoff = (this.maxMapWidth - dataMap.d) / 2;
     yoff = (this.maxMapHeight - dataMap.d) / 2;
@@ -104,9 +104,9 @@ export class MapComponent implements AfterViewInit {
       let pos = 0;
       for (let y = 0; y < this.maxMapWidth; y++) {
         for (let x = 0; x < this.maxMapHeight; x++) {
-          if (x >= xoff && x < xlim && y >= yoff && y < ylim)
+          if (x >= xoff && x < xlim && y >= yoff && y < ylim) {
             this.layerMap[y][x] = dataMap.data[l][pos++];
-          else {
+          } else {
             this.layerMap[y][x] = 59;
           }
         }
@@ -114,9 +114,9 @@ export class MapComponent implements AfterViewInit {
 
       for (let y = 0; y < this.maxMapWidth; y++) {
         for (let x = 0; x < this.maxMapHeight; x++) {
-          let d = this.layerMap[y][x];
+          const d = this.layerMap[y][x];
           if (d != 59) {
-            let tpos = this.tileCoords(d);
+            const tpos = this.tileCoords(d);
 
             // Clip inside circle then draw.
             this.context.drawImage(
@@ -184,18 +184,17 @@ export class MapComponent implements AfterViewInit {
       // Start Snow effect
 //      this.context.snow.start();
      // $('#snowCanvas').show();
-    }
-    else {
+    } else {
       // Stop Snow effect
-      //this.context.snow.stop();
+      // this.context.snow.stop();
      // $('#snowCanvas').hide();
     }
   }
 
 
   private tileCoords(tilenum: number): number[] {
-    let posx = 32 * (tilenum & 0x7f);
-    let posy = 32 * (tilenum >> 7);
+    const posx = 32 * (tilenum & 0x7f);
+    const posy = 32 * (tilenum >> 7);
     return [posx, posy];
   }
 }

@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType,} from '@ngrx/effects';
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType, } from '@ngrx/effects';
+import { Observable } from 'rxjs';
 import { tap, map, switchMap} from 'rxjs/operators';
-import { DataEvenType, RoomAction } from "../actions/data.action";
-import { Action } from "@ngrx/store";
-import { GameService } from "src/app/services/game.service";
+import { DataEvenType, RoomAction } from '../actions/data.action';
+import { Action } from '@ngrx/store';
+import { GameService } from 'src/app/services/game.service';
 
 export interface PayloadAction {
   type: string;

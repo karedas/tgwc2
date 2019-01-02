@@ -1,5 +1,5 @@
 
-export class Character{ 
+export class Character {
     id?: number;
     name: string;
     race: string;
@@ -8,5 +8,5 @@ export class Character{
     strength: number;
     food: number;
     water: number;
-    description: string;  
+    description: string;
 }

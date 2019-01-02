@@ -16,7 +16,7 @@ export interface Perscont {
 	list: List[];
 }
 
-export interface Room  {
+export interface Room {
 	image: string;
 	ver: number;
 	icon: number;

@@ -7,10 +7,10 @@ export interface ClientState  {
     isAuthenticated: boolean;
     errorMessage: string | null;
     time?: string;
-    dialog: boolean
-    musicVolume: number,
-    soundVolume: number,
-    character: Character,
+    dialog: boolean;
+    musicVolume: number;
+    soundVolume: number;
+    character: Character;
 }
 
 export const initialState: ClientState = {
@@ -22,4 +22,4 @@ export const initialState: ClientState = {
     musicVolume: 70,
     soundVolume: 100,
     character: undefined
-}
+};

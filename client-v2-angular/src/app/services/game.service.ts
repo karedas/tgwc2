@@ -19,7 +19,7 @@ import { DataState } from '../store/state/data.state';
 
 export class GameService {
   netData: string;
-  
+
   private _history: BehaviorSubject<DataState[]> = new BehaviorSubject([]);
   messages$: Observable<any> =  this._history.asObservable();
 
@@ -38,7 +38,7 @@ export class GameService {
     });
     this.socketService.emit('data', '');
 
-    //dispatch data from socket and call actions
+    // dispatch data from socket and call actions
     /*
     this.dataParserService.parseUiObject$.subscribe(
       data => this.updateUi(data),
@@ -50,21 +50,19 @@ export class GameService {
     this.messages$ = this.store.select(fromSelectors.getData);
     this.messages$.subscribe(data => {
       this._history.next(data);
-    })
+    });
 
   }
 
   handleServerGameData(data) {
     this.netData += data;
-    let len = this.netData.length;
+    const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-      let data = this.netData.substr(0, len - 3);
+      const data = this.netData.substr(0, len - 3);
       this.dataParserService.parse(data);
       this.netData = '';
-    }
-
-    else if (len > 2000000) {
+    } else if (len > 2000000) {
       this.netData = '';
       this.loginService.logout();
     }
@@ -83,51 +81,51 @@ export class GameService {
       case GameMode.AUDIO:
         // this.playAudio(pdata.data);
       case GameMode.UPDATE:
-      
+
       case GameMode.IMAGEWITHGAMMA:
-      
-      case GameMode.IMAGE: 
+
+      case GameMode.IMAGE:
 
       case GameMode.PLAYERISLOGGEDIN:
-      
-      case GameMode.CLOSETEXTEDITOR: 
-      
+
+      case GameMode.CLOSETEXTEDITOR:
+
       case GameMode.MAP:
-      
+
       case GameMode.RENDERGENERIC:
-      
+
       case GameMode.RENDERTABLE:
-      
+
       case GameMode.ROOMDETAILS:
-      
+
       case GameMode.PERSONDETAILS:
-      
+
       case GameMode.OBJECTDETAILS:
-      
+
       case GameMode.EQUIP:
-      
+
       case GameMode.WORKABLELIST:
-      
+
       case GameMode.SKILLS:
-      
+
       case GameMode.PLAYERINFO:
-      
+
       case GameMode.PLAYERSTATUS:
-      
+
       case GameMode.NEWIMAGEREQUEST:
-      
+
       case GameMode.SELECTABLEGENERIC:
-      
+
       case GameMode.REFRESH:
-      
+
       case GameMode.PAUSESCROLL:
-      
+
       default:
         return;
     }
   }
 
-  getHistory(): Observable<any>{
+  getHistory(): Observable<any> {
     return this._history;
   }
 
@@ -137,7 +135,7 @@ export class GameService {
 
 
   getRoom(data) {
-    let res = '';
+    const res = '';
     /*res += '<div class="detailblock">';
 
     /*    if (data.title) {
@@ -150,8 +148,8 @@ export class GameService {
         }
 
         res += '</div>'*/
-      
-    //this.pushInHistory(data);
+
+    // this.pushInHistory(data);
   }
 /*
   updateSky(map) {
@@ -171,13 +169,13 @@ export class GameService {
   }*/
 
   /**
-   * 
+   *
    * @param val command value
    * @param isStored true or false if u need to watch history length)
    */
   processCommands(val: string, isStored?: boolean ) {
 
-    let cmds = this.dataParserService.parseInput(val); 
+    const cmds = this.dataParserService.parseInput(val);
     if (cmds) {
       /* check if cmd will be pushed in the history array */
       if (isStored) {

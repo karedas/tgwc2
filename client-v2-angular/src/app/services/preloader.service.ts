@@ -12,9 +12,9 @@ import { map, catchError, flatMap } from 'rxjs/operators';
 export class PreloaderService {
 
   private assets: Object[];
-  private stepSize: number = 0;
+  private stepSize = 0;
 
-  private workflow: any  = []
+  private workflow: any  = [];
 
 
   constructor(private http: HttpClient) {
@@ -25,14 +25,14 @@ export class PreloaderService {
           this.stepSize = 100 / res.length;
 
       })*/
-        
+
   }
 
   load(): void {
 
-    let percentage = 0;
+    const percentage = 0;
 
-        let loadImages = 0,
+        const loadImages = 0,
         images = [],
         assets = [AssetsList];
         /*function imageloadpost() {

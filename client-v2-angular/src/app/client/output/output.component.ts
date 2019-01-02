@@ -11,13 +11,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./output.component.scss']
 })
 export class OutputComponent {
-  
+
   private output = [];
 
   constructor(
-    private store: Store<DataState>, 
+    private store: Store<DataState>,
     private game: GameService) {
       this.game.getHistory().subscribe(msg  => this.output = msg );
-     
+
     }
   }

@@ -4,7 +4,7 @@ export class UI {
     room?: boolean;
     map: [];
 
-    constructor (){
+    constructor () {
         this.inventory = false;
         this.equipment = false;
         this.room = false;

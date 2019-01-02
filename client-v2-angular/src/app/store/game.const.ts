@@ -34,4 +34,4 @@ export const GameMode = {
     REFRESH: 'refresh',
     PAUSESCROLL: 'pauseScroll',
     CLEARMESSAGE: 'clearMessage',
-}
+};

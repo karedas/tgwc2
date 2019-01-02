@@ -1,6 +1,6 @@
-import { Action } from "@ngrx/store";
-import { DataState } from "../state/data.state";
-import { Room } from "src/app/models/message/room.model";
+import { Action } from '@ngrx/store';
+import { DataState } from '../state/data.state';
+import { Room } from 'src/app/models/message/room.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -27,12 +27,12 @@ export class RoomAction implements Action {
 
 export class PlayerStatus implements Action {
     readonly type = DataEvenType.PLAYERSTATUS;
-    constructor( public payload: DataState){}
+    constructor( public payload: DataState) {}
 }
 
 
 
-export type DataAction 
+export type DataAction
 = IncomingData
 | OutgoingData
 // | PlayerIsLoggedIn

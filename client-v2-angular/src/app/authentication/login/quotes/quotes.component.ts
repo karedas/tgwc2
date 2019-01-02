@@ -21,26 +21,26 @@ import { map } from 'rxjs/operators';
 
       transition( '* => *', [
 
-          query(':enter', 
+          query(':enter',
               [
                   style({ opacity: 0 })
-              ], 
+              ],
               { optional: true }
           ),
 
-          query(':leave', 
+          query(':leave',
               [
                   style({ opacity: 1 }),
                   animate('0.2s', style({ opacity: 0 }))
-              ], 
+              ],
               { optional: true }
           ),
 
-          query(':enter', 
+          query(':enter',
               [
                   style({ opacity: 0 }),
                   animate('0.2s', style({ opacity: 1 }))
-              ], 
+              ],
               { optional: true }
           )
 
@@ -49,12 +49,12 @@ import { map } from 'rxjs/operators';
   ])]
 })
 
-export class QuotesComponent{
+export class QuotesComponent {
   quotes = [
     { show: true, author: `Anonimo`, msg: `L'importante non è Guardare, occorre Vedere`},
     { show: false, author: `Una guardia cittadina`, msg: `Nuovo giorno, buon giorno!`},
     { show: false, author: `Strane creature di Ikhari`, msg: `Gnek gnek!` }
-  ]
+  ];
 
   index$: Observable<number>;
 
@@ -62,7 +62,7 @@ export class QuotesComponent{
 
     this.index$ = interval(4500).pipe(
       map((item, index) => index % this.quotes.length)
-    )
+    );
   }
 
   showQuote(i) {

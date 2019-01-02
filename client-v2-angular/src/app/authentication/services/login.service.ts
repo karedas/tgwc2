@@ -16,7 +16,7 @@ export const loginEventName = {
   REBOOT : 'reboot',
   ENTERLOGIN : 'enterlogin',
   LOGINOK: 'loginok',
-}
+};
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +24,14 @@ export const loginEventName = {
 
 export class LoginService {
 
-  public isLoggedInSubject : BehaviorSubject<boolean>;
-  public isLoggedIn$ : Observable<any>; 
+  public isLoggedInSubject: BehaviorSubject<boolean>;
+  public isLoggedIn$: Observable<any>;
 
   redirectUrl: string;
 
   private username: string;
   private password: string;
-  
+
 
   constructor(
     private socketService: SocketService,
@@ -72,8 +72,8 @@ export class LoginService {
 
   handleLoginData(data) {
 
-    
-    if (data.indexOf("&!connmsg{") == 0) {
+
+    if (data.indexOf('&!connmsg{') == 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
 
@@ -99,14 +99,14 @@ export class LoginService {
           case loginEventName.LOGINOK:
             this.onLoginOk(data);
             break;
-          
-          case loginEventName.SERVERDOWN: 
-            this.onServerDown();  
+
+          case loginEventName.SERVERDOWN:
+            this.onServerDown();
           break;
 
           default:
             let connectionError = this.getLoginReplayMessage(rep.msg);
-            if(!connectionError) {
+            if (!connectionError) {
               connectionError = this.getLoginReplayMessage('errorproto');
             }
             this.onError(connectionError);
@@ -118,7 +118,7 @@ export class LoginService {
   }
 
   onReady() {
-    let when = new Date().getTime();
+    const when = new Date().getTime();
     this.socketService.emit(socketEvent.OOB, { itime: when.toString(16) });
   }
 
@@ -129,19 +129,19 @@ export class LoginService {
 
   onLoginOk(data) {
     /** Show NEWS TODO */
-    const user = new User({state: 'Active'}); 
+    const user = new User({state: 'Active'});
     this.store.dispatch(new LoginSuccessAction(true));
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }
 
-  onShutDown() { 
+  onShutDown() {
     alert('onshutdown');
-  };
+  }
 
   onReboot() {
     alert('onReboot');
-   };
+   }
 
   onServerDown() {
     alert('onServerDown');
@@ -152,7 +152,7 @@ export class LoginService {
     this.store.dispatch(new LoginFailureAction(err));
   }
 
-  getLoginReplayMessage(what): string{
+  getLoginReplayMessage(what): string {
     return loginError[what];
   }
 
