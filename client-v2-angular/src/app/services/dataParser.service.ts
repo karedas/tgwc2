@@ -333,23 +333,23 @@ export class DataParser {
   }
 
   replaceColors(data) {
-    data = data.replace(/&B/gm, '<span class="tg-gray">');
-    data = data.replace(/&R/gm, '<span class="tg-lt-red">');
-    data = data.replace(/&G/gm, '<span class="tg-lt-green">');
-    data = data.replace(/&Y/gm, '<span class="tg-yellow">');
-    data = data.replace(/&L/gm, '<span class="tg-lt-blue">');
-    data = data.replace(/&M/gm, '<span class="tg-lt-magenta">');
-    data = data.replace(/&C/gm, '<span class="tg-lt-cyan">');
-    data = data.replace(/&W/gm, '<span class="tg-white">');
-    data = data.replace(/&b/gm, '<span class="tg-black">');
-    data = data.replace(/&r/gm, '<span class="tg-red">');
-    data = data.replace(/&g/gm, '<span class="tg-green">');
-    data = data.replace(/&y/gm, '<span class="tg-brown">');
-    data = data.replace(/&l/gm, '<span class="tg-blue">');
-    data = data.replace(/&m/gm, '<span class="tg-magenta">');
-    data = data.replace(/&c/gm, '<span class="tg-cyan">');
-    data = data.replace(/&w/gm, '<span class="tg-lt-white">');
-    data = data.replace(/&-/gm, '</span>');
+    // data = data.replace(/&B/gm, '<span class="tg-gray">');
+    // data = data.replace(/&R/gm, '<span class="tg-lt-red">');
+    // data = data.replace(/&G/gm, '<span class="tg-lt-green">');
+    // data = data.replace(/&Y/gm, '<span class="tg-yellow">');
+    // data = data.replace(/&L/gm, '<span class="tg-lt-blue">');
+    // data = data.replace(/&M/gm, '<span class="tg-lt-magenta">');
+    // data = data.replace(/&C/gm, '<span class="tg-lt-cyan">');
+    // data = data.replace(/&W/gm, '<span class="tg-white">');
+    // data = data.replace(/&b/gm, '<span class="tg-black">');
+    // data = data.replace(/&r/gm, '<span class="tg-red">');
+    // data = data.replace(/&g/gm, '<span class="tg-green">');
+    // data = data.replace(/&y/gm, '<span class="tg-brown">');
+    // data = data.replace(/&l/gm, '<span class="tg-blue">');
+    // data = data.replace(/&m/gm, '<span class="tg-magenta">');
+    // data = data.replace(/&c/gm, '<span class="tg-cyan">');
+    // data = data.replace(/&w/gm, '<span class="tg-lt-white">');
+    // data = data.replace(/&-/gm, '</span>');
 
     return data;
   }

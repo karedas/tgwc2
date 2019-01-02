@@ -54,8 +54,8 @@ export class MapComponent implements AfterViewInit {
     this.context.fill();
 
     this.mapTileImg = new Image();
-    this.mapTileImg.src = images_path + 'tiles/tiles.png';
-    console.log(images_path + 'tiles/tiles.png');
+    this.mapTileImg.src = images_path + 'tiles.png';
+    console.log(images_path + 'tiles.png');
 
 
     this.mapShadowImg[2] = new Image();

@@ -48,7 +48,7 @@ export default class MapDrawer {
         _.MAPCTX.fill();
         //Base Tiles
         _.maptileimg = new Image();
-        _.maptileimg.src = imagesPath + 'tiles/tiles.png';
+        _.maptileimg.src = imagesPath + 'tiles.png';
 
 
         // // Fog

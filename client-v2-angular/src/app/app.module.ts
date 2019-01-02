@@ -19,14 +19,12 @@ import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    HttpClientModule,
-    SharedModule,
-    ClientModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     StoreModule.forRoot(fromStore.reducers),
     EffectsModule.forRoot([DataEffects]),
     LoggerModule.forRoot({
@@ -38,7 +36,9 @@ import { environment } from 'src/environments/environment';
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    AppRoutingModule
+    SharedModule,
+    ClientModule,
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent]
 })

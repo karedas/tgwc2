@@ -1,5 +1,8 @@
+<!-- Cookie Law -->
 <tg-cookie-law (iAcceptCookie)="onCookieAccepted($event)"  *ngIf="!isCookieAccepted"></tg-cookie-law>
 <!-- Client -->
-<div class="tg-area tg-box" >
-    <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="isCookieAccepted">
+    <div class="tg-area tg-box">
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>

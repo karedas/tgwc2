@@ -18,9 +18,10 @@ import { DataState } from '../store/state/data.state';
 })
 
 export class GameService {
-  netData: string;
-
+  private netData: string;
+  
   private _history: BehaviorSubject<DataState[]> = new BehaviorSubject([]);
+    
   messages$: Observable<any> =  this._history.asObservable();
 
 
@@ -126,7 +127,7 @@ export class GameService {
   }
 
   getHistory(): Observable<any> {
-    return this._history;
+    return this._history.asObservable();
   }
 
   pushInHistory(data) {

@@ -15,6 +15,8 @@ import { MapComponent } from './map/map.component';
 import { SkyComponent } from './sky/sky.component';
 import { DirectionsComponent } from './map/directions/directions.component';
 import { TextComponent } from './output/renders/text/text.component';
+// import { PreloadBarModule } from './preload-bar/preload-bar.module';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { TextComponent } from './output/renders/text/text.component';
   ],
   imports: [
     ClientRoutingModule,
-    SharedModule
+    SharedModule,
+    // PreloadBarModule
   ],
   exports: [
     ClientComponent

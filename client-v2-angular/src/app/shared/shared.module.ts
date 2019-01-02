@@ -8,7 +8,8 @@ import {ToastModule} from 'primeng/toast';
 import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../services/socket.service';
-import { PreloaderService } from '../services/preloader.service';
+import { PreloadBarModule } from '../client/preload-bar/preload-bar.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -19,19 +20,21 @@ import { PreloaderService } from '../services/preloader.service';
     Auth2Module,
     FormsModule,
     ReactiveFormsModule,
+    PreloadBarModule,
+    PipesModule
   ],
   providers: [
     GameService,
     CookieService,
     SocketService,
-    PreloaderService
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
     Auth2Module,
-    DialogModule
+    DialogModule,
+    PipesModule
   ]
 })
 export class SharedModule {
