@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from './store';
 @Component({
   selector: 'app-root',
-  template: `<tg-client [state]="gameState$ | async"></tg-client>`,  
+  template: `<tg-client [state]="gameState$ | async"></tg-client>`,
 })
 
 export class AppComponent {
