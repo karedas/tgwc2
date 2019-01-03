@@ -5,7 +5,7 @@ import { IncomingData } from '../store/actions/data.action'; // DA TOGLIERE
 import * as DataActions from '../store/actions/data.action';
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
-import { Room } from '../models/message/room.model';
+import { Room } from '../models/data/room.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,15 +50,19 @@ export class DataParser {
     const dataState: DataState = {} as DataState;
     dataState.timestamp = new Date().getTime();
 
+    console.log(data);
+
 
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
+      console.warn('Todo: Hide Text')
       //this.parseUiObject$.next({ data, type: GameMode.HIDEINPUTTEXT });
       return '';
     });
 
     // Show text (normal input)
     data = data.replace(this.msgRegexp.showInputText, () => {
+      console.warn('Todo: Show text')
       //this.parseUiObject$.next({ data, type: GameMode.SHOWINPUTTEXT });
       return '';
     });
@@ -66,7 +70,7 @@ export class DataParser {
     // Sky picture
     data = data.replace(this.msgRegexp.updateSkyPicture, (sky) => {
       const sky_parse = sky.charAt(2);
-      //this.parseUiObject$.next({ sky_parse, type: GameMode.SKYPICTURE });
+      this.store.dispatch(new DataActions.SkyAction(sky_parse));
       return '';
     });
 
@@ -129,10 +133,10 @@ export class DataParser {
 
     // Open the text editor
     data = data.replace(/&!ed"[^"]*"\n*/gm, (options) => {
-      const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
-      const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
-      const text_editor = Object.assign({}, [options_parse, text]);
-      this.parseUiObject$.next({ text_editor, type: GameMode.CLOSETEXTEDITOR });
+      // const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
+      // const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
+      // const text_editor = Object.assign({}, [options_parse, text]);
+      // this.parseUiObject$.next({ text_editor, type: GameMode.CLOSETEXTEDITOR });
       return '';
     });
 

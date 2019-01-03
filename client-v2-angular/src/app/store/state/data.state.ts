@@ -1,15 +1,22 @@
-import { Room } from 'src/app/models/message/room.model';
+import { Map } from "src/app/models/data/map.model";
+import { Hero } from "src/app/models/data/hero.model";
 
 export interface DataState {
     default: any;
-    room: any;
+    sky: any;
+		room: any;
+		map: Map
+		hero: Hero
     lastType: string;
-    timestamp: number;
+		timestamp: number;
 }
 
 export const initialState: DataState = {
     default: '',
-    room: undefined,
+    sky: undefined,
+		room: undefined,
+		map: undefined,
+		hero: new Hero(),
     lastType: 'default',
-    timestamp: new Date().getTime()
+    timestamp: new Date().getTime(),
 };

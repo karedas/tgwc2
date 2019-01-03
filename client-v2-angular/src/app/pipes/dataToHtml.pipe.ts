@@ -23,7 +23,6 @@ export class DataToHtmlPipe implements PipeTransform {
     value = value.replace(/&c/gm, '<span class="tg-cyan">');
     value = value.replace(/&w/gm, '<span class="tg-lt-white">');
     value = value.replace(/&-/gm, '</span>');
-    console.log(value, 'piped');
 
     return  value ? String(value) : '';
   }

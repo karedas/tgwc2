@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFailed: boolean;
   loginSubscription: Subscription;
 
+  socketloginReplayMessage: string; 
+
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
@@ -39,6 +41,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       'username': ['', UsernameValidation],
       'password': ['', PasswordValidation]
     });
+
+    this.loginService.loginReplayMessage.subscribe( (err:string) => {
+      if(err !== undefined)
+        this.socketloginReplayMessage = err
+      }
+    );
   }
 
   get username() {
@@ -55,7 +63,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     const values = this.loginForm.value;
-
     this.loginSubscription = this.loginService.login(values)
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {

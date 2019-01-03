@@ -1,13 +1,14 @@
 import { Action } from '@ngrx/store';
 import { DataState } from '../state/data.state';
-import { Room } from 'src/app/models/message/room.model';
+import { Map } from 'src/app/models/data/map.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
     OUT = '[Data] Outgoing Data',
     LOGGEDIN = '[Data] Player is Logged In',
-    PLAYERSTATUS = '[Data] Update Player Status',
-    ROOM = '[Data] Room',
+    PLAYERSTATUS = '[Data] Player Status Update',
+    ROOM = '[Data] Room Update',
+    SKY = '[Data] Sky Update',
     MAP = '[Data] Map Update'
 }
 
@@ -33,8 +34,12 @@ export class PlayerStatus implements Action {
 
 export class MapAction implements Action {
     readonly type = DataEvenType.MAP;
-    constructor(public payload: any) {}
+    constructor(public payload: Map) {}
+}
 
+export class SkyAction implements Action {
+    readonly type = DataEvenType.SKY;
+    constructor(public payload: any) {}
 }
 
 

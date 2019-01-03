@@ -10,6 +10,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import * as fromSelectors from 'src/app/store/selectors';
 import { DataState } from '../store/state/data.state';
+import { Map } from '../models/data/map.model';
 
 
 
@@ -19,12 +20,11 @@ import { DataState } from '../store/state/data.state';
 
 export class GameService {
   private netData: string;
-  
   private _history: BehaviorSubject<DataState[]> = new BehaviorSubject([]);
-    
+
+  
   //socket data messages and various
   _data$: Observable<any> =  this._history.asObservable();
-
 
 
   constructor(
@@ -40,20 +40,10 @@ export class GameService {
     });
     this.socketService.emit('data', '');
 
-    // dispatch data from socket and call actions
-    /*
-    this.dataParserService.parseUiObject$.subscribe(
-      data => this.updateUi(data),
-      err => {
-        console.error('Data Error from Socket', err);
-      }
-    )*/
-
     this._data$ = this.store.select(fromSelectors.getData);
     this._data$.subscribe(data => {
       this._history.next(data);
     });
-
   }
 
   handleServerGameData(data) {

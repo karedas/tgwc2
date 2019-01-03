@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from '../../services/socket.service';
 import { socketEvent } from '../../models/socketEvent.enum';
-import { Observable, BehaviorSubject, of} from 'rxjs';
-import { NGXLogger } from 'ngx-logger';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ClientState } from '../../store/state/client.state';
 import { User } from 'src/app/models/user/user.model';
-import { LoginSuccessAction, LoginFailureAction } from 'src/app/store/actions/client.action';
+import { SocketStatusAction, LoginFailureAction } from 'src/app/store/actions/client.action';
 import { loginError } from './login-errors';
 
 export const loginEventName = {
-  READY : 'ready',
-  SHUTDOWN : 'shutdown',
+  READY: 'ready',
+  SHUTDOWN: 'shutdown',
   SERVERDOWN: 'serverdown',
-  REBOOT : 'reboot',
-  ENTERLOGIN : 'enterlogin',
+  REBOOT: 'reboot',
+  ENTERLOGIN: 'enterlogin',
   LOGINOK: 'loginok',
 };
 
@@ -26,25 +25,24 @@ export class LoginService {
 
   public isLoggedInSubject: BehaviorSubject<boolean>;
   public isLoggedIn$: Observable<any>;
-
-  redirectUrl: string;
-
+  private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;
-
+  public redirectUrl: string;
 
   constructor(
+
     private socketService: SocketService,
-    private logger: NGXLogger,
     private store: Store<ClientState>) {
 
-      this.isLoggedInSubject = new BehaviorSubject(false);
-      this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
+    this.isLoggedInSubject = new BehaviorSubject(false);
+    this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
+
+    this.loginErrorMessage$ = new BehaviorSubject('');
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
 
-    this.logger.info('LoginService:', 'Authentication Request');
 
     this.username = data.username;
     this.password = data.password;
@@ -53,7 +51,6 @@ export class LoginService {
     this.setHandleLoginData();
 
     this.socketService.emit('loginrequest');
-
     return this.isLoggedInSubject.asObservable();
   }
 
@@ -72,10 +69,12 @@ export class LoginService {
 
   handleLoginData(data) {
 
+    this.loginReplayMessage = 'Tentativo di connessione in corso...';
 
     if (data.indexOf('&!connmsg{') == 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
+
 
       if (rep.msg) {
         switch (rep.msg) {
@@ -83,34 +82,27 @@ export class LoginService {
           case loginEventName.READY:
             this.onReady();
             break;
-
           case loginEventName.ENTERLOGIN:
             this.onEnterLogin();
             break;
-
           case loginEventName.SHUTDOWN:
             this.onShutDown();
             break;
-
           case loginEventName.REBOOT:
             this.onReboot();
             break;
-
           case loginEventName.LOGINOK:
-            this.onLoginOk(data);
+           this.onLoginOk(data);
             break;
-
           case loginEventName.SERVERDOWN:
             this.onServerDown();
-          break;
-
+            break;
           default:
-            let connectionError = this.getLoginReplayMessage(rep.msg);
-            if (!connectionError) {
-              connectionError = this.getLoginReplayMessage('errorproto');
+            this.loginReplayMessage = rep.msg;
+            if (!this.loginErrorMessage$) {
+              this.loginReplayMessage = 'errorproto';
             }
-            this.onError(connectionError);
-
+            this.onError(this.loginErrorMessage$);
             break;
         }
       }
@@ -129,31 +121,36 @@ export class LoginService {
 
   onLoginOk(data) {
     /** Show NEWS TODO */
-    const user = new User({state: 'Active'});
-    this.store.dispatch(new LoginSuccessAction(true));
+    const user = new User({ state: 'Active' });
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }
 
   onShutDown() {
-    alert('onshutdown');
+    this.store.dispatch(new SocketStatusAction('shutdown'));
   }
 
   onReboot() {
-    alert('onReboot');
-   }
+    this.store.dispatch(new SocketStatusAction('reboot'));
+  }
 
   onServerDown() {
-    alert('onServerDown');
+    this.store.dispatch(new SocketStatusAction('serverdown'));
+    this.loginReplayMessage = 'serverdown';
   }
 
   onError(err) {
     this.socketService.off(socketEvent.LOGIN);
-    this.store.dispatch(new LoginFailureAction(err));
+    this.store.dispatch(new LoginFailureAction(this.loginReplayMessage));
+    this.loginReplayMessage = loginError[err];
   }
 
-  getLoginReplayMessage(what): string {
-    return loginError[what];
+  set loginReplayMessage(what: any) {
+    this.loginErrorMessage$.next(loginError[what]);
+  }
+
+  get loginReplayMessage(): any {
+    return this.loginErrorMessage$.asObservable();
   }
 
 }

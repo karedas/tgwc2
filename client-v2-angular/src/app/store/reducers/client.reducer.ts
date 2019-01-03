@@ -12,15 +12,15 @@ export function reducer(
 		case ClientEventType.CONNECT: {
 			return Object.assign( {}, state, { socketStatus: action.payload });
 		}
-
 		case ClientEventType.LOGIN_SUCCESS: {
 			return Object.assign( {}, state, { isAuthenticated: action.payload });
 		}
-
 		case ClientEventType.LOGIN_FAILURE: {
 			return { ...state, errorMessage: action.payload };
 		}
-
+		case ClientEventType.DISCONNECT: {
+			return initialState;
+		}
 		default: {
 			return state;
 		}

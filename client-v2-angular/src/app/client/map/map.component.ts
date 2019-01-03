@@ -1,4 +1,10 @@
-import { Component, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import * as fromSelectors from 'src/app/store/selectors';
+import { DataState } from 'src/app/store/state/data.state';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { Map } from 'src/app/models/data/map.model';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -12,28 +18,49 @@ export const images_path = '/assets/images/';
   styleUrls: ['./map.component.scss']
 })
 
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnDestroy, AfterViewInit{
 
   @ViewChild('map') map: ElementRef;
-  public context: CanvasRenderingContext2D;
+  
+  // private dataMap: Subject<Map> = new BehaviorSubject(null);
+  // _map$: Observable<any> = this.dataMap.asObservable();
+  private _unsubscribeAll: Subject<any>
+  private map$:Observable<Map>;
 
+  public context: CanvasRenderingContext2D;
   private layerMap: any[][];
-  private mapTileWidth = 32;
-  private mapTileHeight = 32;
+  private mapTileWidth: number;
+  private mapTileHeight: number;
   private maxMapHeight: number;
   private maxMapWidth: number;
   private canvasWidth: number;
   private canvasHeight: number;
-  private mapTileImg;
-  private mapShadowImg: any[] = [];
-  private mapShadowTile;
+  private mapTileImg: HTMLImageElement;
+  private mapShadowImg: HTMLImageElement[] = [];
+  private mapShadowTile: HTMLImageElement;
 
-  constructor() {
+  constructor(private store: Store<DataState>) {
+    this.mapTileWidth = 32;
+    this.mapTileHeight = 32;
     this.maxMapHeight = 9;
     this.maxMapWidth = 9;
-  }
 
+    this._unsubscribeAll = new Subject();
+  }
+  
   ngAfterViewInit() {
+
+    this.map$ = this.store.select(fromSelectors.getMap);
+    this.map$
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(
+      (map: Map) => {
+        if(map !== undefined) {
+          this.updateMap(map);
+        }
+      }
+    );
+
     this.layerMap = new Array(this.maxMapHeight);
     for (let y = 0; y < this.maxMapHeight; ++y) {
       this.layerMap[y] = new Array(this.maxMapWidth);
@@ -42,7 +69,7 @@ export class MapComponent implements AfterViewInit {
     this.prepareCanvas();
   }
 
-  private prepareCanvas() {
+  private prepareCanvas(): void{
     this.context = (<HTMLCanvasElement>this.map.nativeElement).getContext('2d');
     this.canvasWidth = this.maxMapWidth * this.mapTileWidth;
     this.canvasHeight = this.maxMapHeight * this.mapTileHeight;
@@ -55,8 +82,6 @@ export class MapComponent implements AfterViewInit {
 
     this.mapTileImg = new Image();
     this.mapTileImg.src = images_path + 'tiles.png';
-    console.log(images_path + 'tiles.png');
-
 
     this.mapShadowImg[2] = new Image();
     this.mapShadowImg[2].src = images_path + 'interface/shadow1.png';
@@ -82,7 +107,7 @@ export class MapComponent implements AfterViewInit {
     this.drawCanvasMap(dataMap);
   }
 
-  public drawCanvasMap(dataMap) {
+  public drawCanvasMap(dataMap): void{
     const _ = this;
     let xoff, yoff, xlim, ylim, light;
     // clip options
@@ -95,9 +120,7 @@ export class MapComponent implements AfterViewInit {
     ylim = yoff + dataMap.d;
 
     // Clear the Canvas
-
     this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-
 
     /* Cycle on the 2 layers */
     for (let l = 0; l < 2; l++) {
@@ -196,5 +219,10 @@ export class MapComponent implements AfterViewInit {
     const posx = 32 * (tilenum & 0x7f);
     const posy = 32 * (tilenum >> 7);
     return [posx, posy];
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }

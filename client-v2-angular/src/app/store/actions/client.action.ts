@@ -37,7 +37,6 @@ export class LoginFailureAction implements Action {
 	constructor(public payload: any) { }
 }
 
-
 export class UpdateUi implements Action {
 	readonly type = UIType.UPDATE;
 }

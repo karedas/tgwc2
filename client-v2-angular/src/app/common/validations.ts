@@ -8,6 +8,6 @@ export const UsernameValidation = [
 
 export const PasswordValidation = [
     Validators.required,
-    Validators.minLength(6),
+    Validators.minLength(3),
     Validators.maxLength(50),
   ];

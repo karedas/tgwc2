@@ -22,7 +22,6 @@ export class OutputComponent {
       .subscribe(data  => 
         {
           this.output.push(data);
-          console.log(data);
       });
     }
   }
