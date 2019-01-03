@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
@@ -12,7 +12,7 @@ import { getUserLevel } from 'src/app/store/selectors';
 export class DirectionsComponent {
 
   private isHoverMap: boolean;
-  
+
   dirCmd: string;
 
   private dirNames: string[] = ['nord', 'est', 'sud', 'ovest', 'alto', 'basso'];
@@ -30,10 +30,8 @@ export class DirectionsComponent {
       .subscribe(level => {
         this.userlevel = level;
       })
-
   }
   goToDirection($event, dir: number): void {
-    console.log($event, dir);
 
     $event.preventDefault();
 
@@ -49,5 +47,11 @@ export class DirectionsComponent {
       this.gameService.sendToServer(this.dirCmd);
     }
   }
+
+  @HostListener("window.keydown", ['$event'])
+    onkeydown(event:KeyboardEvent) {
+      event.preventDefault();
+      console.log(`Pressed ${event.key}`);
+    }
 
 }
