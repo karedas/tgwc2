@@ -6,10 +6,8 @@ import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
 import { GameMode } from '../store/game.const';
 import { Observable, BehaviorSubject } from 'rxjs';
-
-import * as fromSelectors from 'src/app/store/selectors';
-import { DataState } from '../store/state/data.state';
 import { State } from '../store';
+import { IHistory } from '../models/client/history.model';
 
 
 
@@ -19,12 +17,6 @@ import { State } from '../store';
 
 export class GameService {
   private netData: string;
-  private _history: BehaviorSubject<DataState[]> = new BehaviorSubject([]);
-
-  
-  //socket data messages and various
-  _data$: Observable<any> =  this._history.asObservable();
-
 
   constructor(
     private loginService: LoginService,
@@ -38,13 +30,6 @@ export class GameService {
       this.handleServerGameData(data);
     });
     this.socketService.emit('data', '');
-
-    this._data$ = this.store.select(fromSelectors.getHistory);
-    console.log(this._data$);
-    this._data$.subscribe(data => {
-      console.log(data);
-//      this._history.next(data);
-    });
   }
 
   handleServerGameData(data) {
@@ -119,12 +104,10 @@ export class GameService {
     }
   }
 
-  getHistory(): Observable<any> {
-    return this._history.asObservable();
-  }
-
-  pushInHistory(data) {
-    this._history.next(data);
+  getIcon(icon: number, mrn, cnttype, cntmrn, cmd, addclass) {
+    if(!icon) {
+      icon = 416
+    }
   }
 
 /*

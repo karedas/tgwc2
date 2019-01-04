@@ -2,38 +2,53 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DataState } from './state/data.state';
 import { ClientState } from './state/client.state';
 
+/******************* Base Search State ******************/
 export const getDataState = createFeatureSelector<DataState>('data');
 export const getClientState = createFeatureSelector<ClientState>('client');
 
 
-// DATA SELECTORS
-export const getData = createSelector(
-    getDataState,
-    data => data,
-  );
+/*********************** Individual selectors************************** */
+export const selectDataBase = (state: DataState) => state.base;
+export const selectDataRoom = (state: DataState) => state.room;
 
-export const getDataDefault = createSelector(
+/******************* Public Selector API's ******************/
+// export const getHistory = createSelector(
+//   selectDataBase, 
+//   selectDataRoom
+// );
+export const getDataBase = createSelector(
   getDataState,
-  data => data.default
+  (data: DataState) => data.base
 )
 
-export const getRoom = createSelector(
+export const getRoomBase = createSelector(
   getDataState,
-  data => data.default
+  (data: DataState) => data.room
 )
+
+
+
+
+// export const getDataDefault = createSelector(
+//   getDataState,
+//   data => data.default
+// )
+
+// export const getRoom = createSelector(
+//   getDataState,
+//   data => data.default
+// )
 
 export const getMap = createSelector(
   getDataState,
   data => data.map
 )
 
-export const selecDefault = (state: DataState) => state.default;
-export const selectRoom = (state: DataState) => state.room;
 
-export const getHistory = createSelector(
-  selecDefault,
-  selectRoom
-)
+// export const getHistory = createSelector(
+//   selecDefault,
+//   selectRoom
+// )
 
 // CLIENT SELECTORS
 export const getUserLevel = createSelector (

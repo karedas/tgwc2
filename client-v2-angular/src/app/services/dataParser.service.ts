@@ -96,7 +96,7 @@ export class DataParser {
     // Generic Update Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       dataState.lastType = 'update';
-      dataState.default = update.slice(5, status.lastIndexOf('"')).split(',');
+      dataState.base = update.slice(5, status.lastIndexOf('"')).split(',');
       // this.store.dispatch(new DataActions.PlayerStatus(dataState))
 
       return '';
@@ -325,8 +325,8 @@ export class DataParser {
     data = data.replace(/\n/gm, '<br>');
 
     if (data != 'undefined' && data !== '') {
-      dataState.lastType = 'default';
-      dataState.default = data.replace(/<p><\/p>/g, '');
+      dataState.lastType = 'base';
+      dataState.base = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new IncomingData(dataState));
       // this.parseSubject.next(data);
     }

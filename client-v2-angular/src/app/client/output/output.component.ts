@@ -1,8 +1,11 @@
-import { Component, ViewChild, ElementRef, AfterViewChecked, ViewEncapsulation } from '@angular/core';
+import { Component} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { GameService } from 'src/app/services/game.service';
-import { filter } from 'rxjs/operators';
+import * as fromSelectors from 'src/app/store/selectors';
+import { filter, skip } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { Room } from 'src/app/models/data/room.model';
 
 @Component({
   selector: 'tg-output',
@@ -10,23 +13,48 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./output.component.scss'],
 
 })
+
 export class OutputComponent {
 
   output = [];
   private outputTrimLines: number = 500;
-  test = 0;
   constructor(
     private store: Store<DataState>,
     private game: GameService) {
-    
-    
 
-    this.game.getHistory()
-      .subscribe(data => {
-        if(this.output.length > this.outputTrimLines) {
-          this.output = this.output.slice(1, this.output.length);
+  
+    
+    //Listen Base Text Data
+    this.store.select(fromSelectors.getDataBase)
+      .pipe(filter(text => text !== ''))
+      .subscribe(
+        (base: string) => {
+          const content = this.getContentObject('base', base);
+          this.output.push(content);
+          this.trimOutput();
+          console.log(this.output);
         }
-        this.output.push(data);
-      });
+      )
+      
+    this.store.select(fromSelectors.getRoomBase)
+      .pipe(filter(room => room && room !== undefined))
+      .subscribe(
+        (room: any) => {
+          const content = this.getContentObject('room', room);
+          this.output.push(content);
+          this.trimOutput();
+          console.log(this.output);
+        }
+      )
+  }
+
+  getContentObject(t: string, c: any): any {
+    return Object.assign({}, {type: t, content: c})
+  }
+
+  private trimOutput(): void {
+    if(this.output.length > this.outputTrimLines) {
+      this.output = this.output.slice(1, this.output.length);
+    }
   }
 }

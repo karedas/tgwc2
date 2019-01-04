@@ -10,17 +10,18 @@ export interface List {
 	mrn: number[];
 	desc: string;
 	mvprc: number;
+	wgt: number
 }
 
-export interface Perscont {
+export interface ObjAndPersonCont {
 	list: List[];
 }
-
 export interface Room {
-	image: string;
-	ver: number;
-	icon: number;
 	title: string;
 	desc: Desc;
-	perscont: Perscont;
+	icon: number;
+	image: string;
+	objcont: ObjAndPersonCont
+	perscont: ObjAndPersonCont;
+	ver: number;
 }

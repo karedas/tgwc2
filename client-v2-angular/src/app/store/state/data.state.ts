@@ -2,7 +2,7 @@ import { Map } from "src/app/models/data/map.model";
 import { Hero } from "src/app/models/data/hero.model";
 
 export interface DataState {
-    default: any;
+    base: any;
     sky: any;
 		room: any;
 		map: Map
@@ -12,11 +12,11 @@ export interface DataState {
 }
 
 export const initialState: DataState = {
-    default: '',
+    base: '',
     sky: undefined,
 		room: undefined,
 		map: undefined,
 		hero: new Hero(),
-    lastType: 'default',
+    lastType: 'base',
     timestamp: new Date().getTime(),
 };

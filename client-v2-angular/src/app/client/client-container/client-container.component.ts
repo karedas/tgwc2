@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { PreloaderService } from 'src/app/services/preloader.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'tg-client-container',
@@ -8,7 +7,6 @@ import { PreloaderService } from 'src/app/services/preloader.service';
 })
 
 export class ClientContainerComponent {
-  constructor(private preloadService: PreloaderService) {
-    preloadService.load();
+  constructor() {
   }
 }

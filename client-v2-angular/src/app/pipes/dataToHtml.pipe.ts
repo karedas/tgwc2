@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DataToHtmlPipe implements PipeTransform {
 
-  transform(value: any, args?: any): string {
+  transform(value: any, formaText?: boolean, styleclass?: string): string {
     value = value.replace(/&B/gm, '<span class="tg-gray">');
     value = value.replace(/&R/gm, '<span class="tg-lt-red">');
     value = value.replace(/&G/gm, '<span class="tg-lt-green">');
@@ -23,6 +23,17 @@ export class DataToHtmlPipe implements PipeTransform {
     value = value.replace(/&c/gm, '<span class="tg-cyan">');
     value = value.replace(/&w/gm, '<span class="tg-lt-white">');
     value = value.replace(/&-/gm, '</span>');
+
+    if(formaText) {
+      let page = '';
+      let parags = value = value.replace(/\r/gm, '').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
+      parags.forEach(val => {
+        if(val != '') {
+          page += '<div' + (styleclass ? ' class="' + styleclass + '"' : '') + '>' + val + '</div>';
+        }
+      })
+      return page;
+    }
 
     return  value ? String(value) : '';
   }

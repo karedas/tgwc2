@@ -143,10 +143,7 @@
       display: inline-block;
     }
   
-    .room {
-      font-size: 20px;
-      color: #ac4c55;
-      display: block !important;
+    .tg-room {
       padding-bottom: .2em;
     }
   
@@ -157,7 +154,7 @@
   
     .tg-room--desc{
       display: block;
-      padding-bottom: 1.5em;
+      // padding-bottom: 1.5em;
       display: flex;
       flex-direction: column;
   
