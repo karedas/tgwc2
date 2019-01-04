@@ -1,24 +1,23 @@
 <!-- Output History Area -->
 <div class="row tg-output tg-box b-ironlight tg-shadow">
   <div class="tg-box col-12 p-0 d-flex">
-    <div class="output-split">
-      <div class="splitter-panel">
-        <div class="tg-output-main">
-          <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
-            <i class="far fa-arrow-alt-circle-right"></i>
-          </div>
-          <!-- Output Area -->
-          <div id="output" class=" tg-output-history">
-            <div *ngFor="let data of output">
-              <div class="tg-line" [ngSwitch]="data.lastType">
-                <tg-text *ngSwitchCase="'default'" [html]="data.default"></tg-text>
-                <tg-room *ngSwitchCase="'room'" [html]="data.room"></tg-room>
-              </div>
+    <div class="tg-output-main">
+      <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
+        <i class="far fa-arrow-alt-circle-right"></i>
+      </div>
+      <!-- Output Area -->
+      <div class="tg-output-history" #list [scrollTop]="list.scrollHeight">
+          <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+          <div *ngFor="let data of output" >
+            <div class="tg-line" [ngSwitch]="data.lastType">
+              <tg-text *ngSwitchCase="'default'" [html]="data.default"></tg-text>
+              <tg-room *ngSwitchCase="'room'" [html]="data.room"></tg-room>
             </div>
           </div>
-        </div>
+          </p-scrollPanel>
       </div>
-      <!-- <div class="splitter-panel">
+    </div>
+    <!-- <div class="splitter-panel">
         <div class="tg-output-extra">
           <div id="extraoutput" class="tg-extraoutput-history">
             <div class="extraoutput-header">
@@ -36,7 +35,6 @@
           </div>
         </div>
       </div> -->
-    </div>
   </div>
   <div class="tg-border-box">
     <div class="tg-border tg-border-top"></div>

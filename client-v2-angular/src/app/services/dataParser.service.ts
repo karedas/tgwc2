@@ -50,9 +50,6 @@ export class DataParser {
     const dataState: DataState = {} as DataState;
     dataState.timestamp = new Date().getTime();
 
-    console.log(data);
-
-
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
       console.warn('Todo: Hide Text')
@@ -178,7 +175,6 @@ export class DataParser {
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
       dtls = JSON.parse(dtls.slice(6, -1)) ;
-      console.log(dtls);
       this.store.dispatch(new DataActions.RoomAction(dtls));
       return '';
     });

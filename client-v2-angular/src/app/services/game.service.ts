@@ -4,13 +4,12 @@ import { LoginService } from '../authentication/services/login.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
-import { ClientState } from 'src/app/store/state/client.state';
 import { GameMode } from '../store/game.const';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import * as fromSelectors from 'src/app/store/selectors';
 import { DataState } from '../store/state/data.state';
-import { Map } from '../models/data/map.model';
+import { State } from '../store';
 
 
 
@@ -31,7 +30,7 @@ export class GameService {
     private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
-    private store: Store<ClientState>,
+    private store: Store<State>,
   ) { }
 
   startGame() {
@@ -40,9 +39,11 @@ export class GameService {
     });
     this.socketService.emit('data', '');
 
-    this._data$ = this.store.select(fromSelectors.getData);
+    this._data$ = this.store.select(fromSelectors.getHistory);
+    console.log(this._data$);
     this._data$.subscribe(data => {
-      this._history.next(data);
+      console.log(data);
+//      this._history.next(data);
     });
   }
 
@@ -54,6 +55,7 @@ export class GameService {
       const data = this.netData.substr(0, len - 3);
       this.dataParserService.parse(data);
       this.netData = '';
+      
     } else if (len > 2000000) {
       this.netData = '';
       this.loginService.logout();

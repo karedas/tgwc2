@@ -108,249 +108,251 @@
   padding: 8px 8px 8px 8px;
   font-size: 13px;
   line-height: 1.4;
+  height: 100%;
 
   .tg-line {
-
+  
     padding-bottom: 1em;
     overflow: hidden;
-
+  
     &:first-of-type .room {
       padding-top: .5em;
     }
-
+  
     br {
       clear: both;
     }
-
+  
     >span {
       padding-top: 8px;
     }
-
-  }
-
-  p {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .iconimg {
-    margin: auto .5em auto 0;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-  .room {
-    font-size: 20px;
-    color: #ac4c55;
-    display: block !important;
-    padding-bottom: .2em;
-  }
-
-  .out-title {
-    font-size: 20px;
-    color: #ac4c55;
-  }
-
-  .out-description {
-    display: block;
-    padding-bottom: 1.5em;
-    display: flex;
-    flex-direction: column;
-
-  }
-
-  /* Description base*/
-  .out-descbase,
-  .out-descbase-last {
-    display: block;
-  }
-
-  /* LIST Mob & Object*/
-  .out-list {
-    display: block;
-    width: 100%;
-    padding-top: .5em;
-    padding-bottom: .5em;
-
-    /* Double Columns style */
-    &.col-dispose {
-      display: flex;
-      flex-wrap: wrap;
-
-      .element {
-        padding: 2px 0 0;
-        flex: 0 1 50%;
-      }
-    }
-
-    &.firstlist {
-      padding-bottom: 0;
-    }
-
-    .tg-list-object {
-      color: $tg-yellow;
-    }
-
-    .tg-list-person {
-      color: $tg-lt-green;
-    }
-
-    .poseq {
-      color: $tg-yellow;
-    }
-  }
-
-  .hstat {
-    background-position: 0 0px;
-    display: inline-block;
-    margin: auto .5em auto 0.3em;
-    background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
-    box-sizing: content-box;
-    height: 13px;
-    width: 21px;
-    flex: 1 0 21px;
-
-  }
-
-  .grpcoll {
-    display: block;
-
-    &.expanded {
-      flex: 1 1 100% !important;
-      background-color: $gray-900;
-      position: relative;
-      z-index: 2;
-      border: 1px solid $gray-700;
-    }
-  }
-
-  .grpexp {
-    border: 1px solid $gray-700;
-    flex: 1 1 100%;
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: .2em;
-    margin-top: -1px;
-    padding: .2em 0;
-    position: relative;
-    z-index: 1;
-
-    .element {
-      flex: 1 1 50%;
-    }
-  }
-
-  .out-charsubdetail {
-    padding-top: .4em;
-  }
-
-  .element {
-    cursor: pointer;
-    display: flex;
-    vertical-align: middle;
-    line-height: 14px;
-  }
-
-  .desc {
-    display: inline-block;
-    vertical-align: middle;
-    margin: auto 0;
-    flex-direction: row;
-    display: flex;
-
-    .dd-desc {
-      /*flex-direction: row;
-        display: flex;*/
-    }
-  }
-
-
-  .tg-backdetail {
-    display: flex;
-
-    .backslot {
-      cursor: pointer;
-    }
-
-    .desc {
-      color: white;
-    }
-  }
-
-  .extraoutput-header {
-    display: none;
-    overflow: hidden;
-    padding-bottom: .4em;
-    margin-bottom: 1em;
-    margin-left: -5px;
-    margin-right: -20px;
-    border-bottom: 1px solid #433b3a;
-    box-shadow: inset 0 -13px 65px 0px black;
-    background: url($imgPath + '/background/detaildesc-bg.jpg');
-
-    .out-title {
-      background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-      padding: .2em 10px 0;
-      color: #dbbf90;
-      border-bottom: 1px solid #433b3a;
-      text-shadow: 0 0 12px #dbbf90;
-      box-shadow: inset 0px 0px 20px 4px black;
-      font-size: 16px;
-      overflow: hidden;
-    }
-
-    .detaildesc {
-      padding: 0.5em 10px .2em;
-
-    }
-
-    .extra-detailimg {
-      max-width: 148px;
-      border: 1px solid #60482b;
-      padding: 2px;
-      float: left;
-      margin: .5em .5em 0 .5em;
-
-      img {
-        max-width: 100%;
-      }
-    }
-
-    .out-descbase {
-      padding: .2em 0;
-    }
-  }
-
-  // Highlight 
-  .mrn-hlight {
-    border: 1px solid $tg-yellow;
-  }
-
-  /* TABLE */
-  .out-table {
-    border: 1px solid $gray-900;
-
-    .tg-caption {
-      border-bottom: 1px solid $gray-900;
-    }
-
-    .rps-col {
-      background: #0f0f0f;
-    }
-
-    .col-4,
-    .col-5 {
-      border-left: 1px solid $gray-900;
-    }
-
-    .meter2 {
-      width: 100%;
-      height: 100%;
-    }
-
-
+  
   }
 }
+
+:host ::ng-deep{
+  
+    p {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  
+    .iconimg {
+      margin: auto .5em auto 0;
+      vertical-align: middle;
+      display: inline-block;
+    }
+  
+    .room {
+      font-size: 20px;
+      color: #ac4c55;
+      display: block !important;
+      padding-bottom: .2em;
+    }
+  
+    .tg-room--title {
+      font-size: 20px;
+      color: #ac4c55;
+    }
+  
+    .tg-room--desc{
+      display: block;
+      padding-bottom: 1.5em;
+      display: flex;
+      flex-direction: column;
+  
+    }
+  
+    /* Description base*/
+    .out-descbase,
+    .out-descbase-last {
+      display: block;
+    }
+  
+    /* LIST Mob & Object*/
+    .out-list {
+      display: block;
+      width: 100%;
+      padding-top: .5em;
+      padding-bottom: .5em;
+  
+      /* Double Columns style */
+      &.col-dispose {
+        display: flex;
+        flex-wrap: wrap;
+  
+        .element {
+          padding: 2px 0 0;
+          flex: 0 1 50%;
+        }
+      }
+  
+      &.firstlist {
+        padding-bottom: 0;
+      }
+  
+      .tg-list-object {
+        color: $tg-yellow;
+      }
+  
+      .tg-list-person {
+        color: $tg-lt-green;
+      }
+  
+      .poseq {
+        color: $tg-yellow;
+      }
+    }
+  
+    .hstat {
+      background-position: 0 0px;
+      display: inline-block;
+      margin: auto .5em auto 0.3em;
+      background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
+      box-sizing: content-box;
+      height: 13px;
+      width: 21px;
+      flex: 1 0 21px;
+  
+    }
+  
+    .grpcoll {
+      display: block;
+  
+      &.expanded {
+        flex: 1 1 100% !important;
+        background-color: $gray-900;
+        position: relative;
+        z-index: 2;
+        border: 1px solid $gray-700;
+      }
+    }
+  
+    .grpexp {
+      border: 1px solid $gray-700;
+      flex: 1 1 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: .2em;
+      margin-top: -1px;
+      padding: .2em 0;
+      position: relative;
+      z-index: 1;
+  
+      .element {
+        flex: 1 1 50%;
+      }
+    }
+  
+    .out-charsubdetail {
+      padding-top: .4em;
+    }
+  
+    .element {
+      cursor: pointer;
+      display: flex;
+      vertical-align: middle;
+      line-height: 14px;
+    }
+  
+    .desc {
+      display: inline-block;
+      vertical-align: middle;
+      margin: auto 0;
+      flex-direction: row;
+      display: flex;
+  
+      .dd-desc {
+        /*flex-direction: row;
+          display: flex;*/
+      }
+    }
+  
+  
+    .tg-backdetail {
+      display: flex;
+  
+      .backslot {
+        cursor: pointer;
+      }
+  
+      .desc {
+        color: white;
+      }
+    }
+  
+    .extraoutput-header {
+      display: none;
+      overflow: hidden;
+      padding-bottom: .4em;
+      margin-bottom: 1em;
+      margin-left: -5px;
+      margin-right: -20px;
+      border-bottom: 1px solid #433b3a;
+      box-shadow: inset 0 -13px 65px 0px black;
+      background: url($imgPath + '/background/detaildesc-bg.jpg');
+  
+      .out-title {
+        background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
+        padding: .2em 10px 0;
+        color: #dbbf90;
+        border-bottom: 1px solid #433b3a;
+        text-shadow: 0 0 12px #dbbf90;
+        box-shadow: inset 0px 0px 20px 4px black;
+        font-size: 16px;
+        overflow: hidden;
+      }
+  
+      .detaildesc {
+        padding: 0.5em 10px .2em;
+  
+      }
+  
+      .extra-detailimg {
+        max-width: 148px;
+        border: 1px solid #60482b;
+        padding: 2px;
+        float: left;
+        margin: .5em .5em 0 .5em;
+  
+        img {
+          max-width: 100%;
+        }
+      }
+  
+      .out-descbase {
+        padding: .2em 0;
+      }
+    }
+  
+    // Highlight 
+    .mrn-hlight {
+      border: 1px solid $tg-yellow;
+    }
+  
+    /* TABLE */
+    .out-table {
+      border: 1px solid $gray-900;
+  
+      .tg-caption {
+        border-bottom: 1px solid $gray-900;
+      }
+  
+      .rps-col {
+        background: #0f0f0f;
+      }
+  
+      .col-4,
+      .col-5 {
+        border-left: 1px solid $gray-900;
+      }
+  
+      .meter2 {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 
 /* Extra Output Area */
 .extranotice {

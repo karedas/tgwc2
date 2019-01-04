@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../services/socket.service';
 import { PreloadBarModule } from '../client/preload-bar/preload-bar.module';
 import { PipesModule } from '../pipes/pipes.module';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PipesModule } from '../pipes/pipes.module';
     FormsModule,
     ReactiveFormsModule,
     PreloadBarModule,
-    PipesModule
+    PipesModule,
+    ScrollPanelModule
   ],
   providers: [
     GameService,
@@ -34,7 +36,8 @@ import { PipesModule } from '../pipes/pipes.module';
     CommonModule,
     Auth2Module,
     DialogModule,
-    PipesModule
+    PipesModule,
+    ScrollPanelModule
   ]
 })
 export class SharedModule {

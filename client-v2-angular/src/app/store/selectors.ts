@@ -17,11 +17,23 @@ export const getDataDefault = createSelector(
   data => data.default
 )
 
+export const getRoom = createSelector(
+  getDataState,
+  data => data.default
+)
+
 export const getMap = createSelector(
   getDataState,
   data => data.map
 )
 
+export const selecDefault = (state: DataState) => state.default;
+export const selectRoom = (state: DataState) => state.room;
+
+export const getHistory = createSelector(
+  selecDefault,
+  selectRoom
+)
 
 // CLIENT SELECTORS
 export const getUserLevel = createSelector (
