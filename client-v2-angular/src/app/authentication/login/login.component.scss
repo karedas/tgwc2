@@ -98,11 +98,9 @@
 
     input {
       margin-bottom: .2rem;
-      border: 1px solid #403a32;
       line-height: 38px;
       width: 100%;
       height: auto;
-      box-sizing: border-box;
       color: #feece0;
       background: rgba(11, 8, 7, .8);
       background-repeat: no-repeat;
@@ -121,6 +119,11 @@
         background-image: url($imgPath + '/login/password_labelico.png');
       }
     }
+
+    input:not(.is-invalid) {
+      border: 1px solid #403a32;
+    }
+    
 
     .tg-loginbtn {
       background-color: transparent;
@@ -191,7 +194,6 @@
   .tg-login-footer {
     padding-top: .5em;
     padding-bottom: .5em;
-    font-size: .9em;
     color: $gray-500;
 
     a {

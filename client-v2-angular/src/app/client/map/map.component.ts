@@ -29,10 +29,10 @@ export class MapComponent implements OnDestroy, AfterViewInit{
 
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
-  private mapTileWidth: number;
-  private mapTileHeight: number;
-  private maxMapHeight: number;
-  private maxMapWidth: number;
+  mapTileWidth: number;
+  mapTileHeight: number;
+  maxMapHeight: number;
+  maxMapWidth: number;
   private canvasWidth: number;
   private canvasHeight: number;
   private mapTileImg: HTMLImageElement;

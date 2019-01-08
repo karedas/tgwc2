@@ -14,17 +14,15 @@
             <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off" novalidate>
               <div class="form-row">
                 <div class="col-12">
-                  <input class="form-control" formControlName="username" type="text" autocomplete="off"
-                    placeholder="Username" required autofocus />
+                  <input class="form-control" formControlName="username" type="text" autocomplete="off" placeholder="Username" required autofocus  [ngClass]="{'is-invalid': !username.valid && username.touched}" />
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-12">
-                  <input class="form-control" formControlName="password" type="password" autocomplete="off"
-                    placeholder="Password" required />
+                  <input class="form-control" formControlName="password" type="password" autocomplete="off" placeholder="Password" required  [ngClass]="{'is-invalid': !password.valid && password.touched}"/>
                 </div>
               </div>
-              <button type="submit" class="tg-loginbtn" value="accedi">Accedi</button>
+              <button type="submit" class="tg-loginbtn" value="accedi" [disabled]="!loginForm.valid">Accedi</button>
               <p class="tg-newcharacter">Sei nuovo?
                 <a href="#">Crea un Personaggio</a>
               </p>
@@ -79,7 +77,7 @@
         <a href="#" target="_blank">Contattaci</a>
       </div>
       <div class="col-4 text-center">
-        <p class="tg-version-name">TGWC v.2 -
+        <p class="tg-version-name">TGWebClient Version 2 -
           <span>
            {{ gitVersion }}
           </span>

@@ -1,11 +1,11 @@
 @import 'core';
 @import 'colors';
 /* Elements */
-@import 'elements/modal';
 @import 'borders';
 @import 'base';
 
-
+/* jqx widgets custom theme reference */
+@import 'elements/jqx_widgets_window'
 
 // @import 'utils/bootstrap-slider';
 // @import 'utils/jqx-custom';

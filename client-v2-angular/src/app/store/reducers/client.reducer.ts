@@ -21,6 +21,10 @@ export function reducer(
 		case ClientEventType.DISCONNECT: {
 			return initialState;
 		}
+
+		case ClientEventType.INGAME: {
+			return Object.assign({}, state, { ingame: !state.inGame });
+		}
 		default: {
 			return state;
 		}

@@ -11,7 +11,8 @@ export enum ClientEventType {
 	DISCONNECT = '[Authentication] User Disconnect',
 	LOGIN = '[Authentication] User Login',
 	LOGIN_SUCCESS = '[Authentication] User Login Success',
-	LOGIN_FAILURE = '[Authentication] User Login Failure'
+	LOGIN_FAILURE = '[Authentication] User Login Failure',
+	INGAME = '[Authentication] User In Game'
 }
 
 export class SocketStatusAction implements Action {
@@ -37,6 +38,10 @@ export class LoginFailureAction implements Action {
 	constructor(public payload: any) { }
 }
 
+export class InGameAction implements Action  {
+	readonly type = ClientEventType.INGAME;
+}
+
 export class UpdateUi implements Action {
 	readonly type = UIType.UPDATE;
 }
@@ -47,6 +52,7 @@ export class UpdateUi implements Action {
 
 export type ClientActions
 	= UpdateUi
+	| InGameAction
 	| SocketStatusAction
 	| LoginAction
 	| DisconnectAction

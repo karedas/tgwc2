@@ -5,9 +5,10 @@ import { Map } from 'src/app/models/data/map.model';
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
     OUT = '[Data] Outgoing Data',
-    LOGGEDIN = '[Data] Player is Logged In',
+    LOGGED = '[Data] Player is Logged In',
     PLAYERSTATUS = '[Data] Player Status Update',
     ROOM = '[Data] Room Update',
+    DOORS = '[Data] Doors update',
     SKY = '[Data] Sky Update',
     MAP = '[Data] Map Update'
 }
@@ -20,6 +21,16 @@ export class IncomingData implements Action {
 export class OutgoingData implements Action {
     readonly type = DataEvenType.OUT;
     constructor(public payload: DataState) {}
+}
+
+export class LoggedAction implements Action {
+    readonly type = DataEvenType.LOGGED;
+    constructor(public payload: any) {}
+}
+
+export class DoorsAction implements Action {
+    readonly type = DataEvenType.DOORS;
+    constructor( public payload: any) {}
 }
 
 export class RoomAction implements Action {
@@ -39,7 +50,7 @@ export class MapAction implements Action {
 
 export class SkyAction implements Action {
     readonly type = DataEvenType.SKY;
-    constructor(public payload: any) {}
+    constructor(public payload: string) {}
 }
 
 
@@ -47,7 +58,9 @@ export class SkyAction implements Action {
 export type DataAction
 = IncomingData
 | OutgoingData
+| DoorsAction
 | MapAction
 | RoomAction
 | PlayerStatus
+| SkyAction
 ;

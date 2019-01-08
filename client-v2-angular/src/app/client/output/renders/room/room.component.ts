@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_transform';
+import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 
 @Component({

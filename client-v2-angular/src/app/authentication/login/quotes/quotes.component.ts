@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, style, animate, transition, query } from '@angular/animations';
-import { Observable, interval } from 'rxjs';
+import { Observable, interval, timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -56,16 +56,11 @@ export class QuotesComponent {
     { show: false, author: `Strane creature di Ikhari`, msg: `Gnek gnek!` }
   ];
 
-  index$: Observable<number>;
+  index$: Observable<number> = new Observable();
 
   constructor() {
-
-    this.index$ = interval(4500).pipe(
+    this.index$ = timer(0, 4500).pipe(
       map((item, index) => index % this.quotes.length)
     );
-  }
-
-  showQuote(i) {
-
   }
 }

@@ -1,19 +1,22 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { GameService } from '../services/game.service';
 import { LoginService } from '../authentication/services/login.service';
+import { PreloaderService } from './common/services/preloader.service';
 
 @Component({
   selector: 'tg-client',
   templateUrl: './client.component.html',
 })
 
-export class ClientComponent implements OnInit {
+export class ClientComponent {
 
   @Input('state') gameState$;
 
+  preloadAssetsStatus = false;
+  preloadPerc:any;
   isCookieAccepted = false;
 
   constructor(
@@ -21,6 +24,9 @@ export class ClientComponent implements OnInit {
     private platform: Platform,
     private loginService: LoginService,
     private game: GameService,
+    private preloader: PreloaderService,
+
+
     @Inject(DOCUMENT) private document: any
     ) {
 
@@ -29,9 +35,22 @@ export class ClientComponent implements OnInit {
       this.document.body.className += 'is-mobile';
 
     }
+
+    this.preloader.percentage.subscribe(
+      amount => {this.preloadPerc = amount}
+    );
+
+    this.preloader.status$.subscribe(
+      status => { 
+       this.preloadAssetsStatus = status;
+       this.gameIsReady();
+      }
+    );
+
   }
 
-  ngOnInit() {
+  private gameIsReady() {
+    
     /* Mndatory verification of acceptance of the use of cookies before proceed */
     if (this.cookieService.check('tgCookieLaw')) {  this.isCookieAccepted = true; }
 

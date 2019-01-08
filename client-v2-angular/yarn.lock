@@ -4730,6 +4730,11 @@ jpeg-js@^0.3.2:
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.3.4.tgz#dc2ba501ee3d58b7bb893c5d1fab47294917e7e7"
   integrity sha512-6IzjQxvnlT8UlklNmDXIJMWxijULjqGrzgqc0OG7YadZdvm7KPQ1j0ehmQQHckgEWOfgpptzcnWgESovxudpTA==
 
+jqwidgets-scripts@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/jqwidgets-scripts/-/jqwidgets-scripts-6.2.0.tgz#5d83c1e934dc3e19722698db0a158cc15cd6b04c"
+  integrity sha512-psc8jyh2DbDGx3l148BmycnaOtKzIsVF46ymU8cB08qSwnzozg7xSga22ynPj9qX83shbjcbUpSFJef9+Bczbg==
+
 js-base64@^2.1.8:
   version "2.4.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.9.tgz#748911fb04f48a60c4771b375cac45a80df11c03"
@@ -6658,11 +6663,6 @@ primeicons@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-1.0.0.tgz#90061f168ef6227f21f0a7db8204ffa85cd27aec"
   integrity sha512-p/hzIjUVccW4eJPhuORHI3AUkDpqfvCQVrjxbFEejnTEdWY4C8fomVfjiaA9jCu83fSQnBHuRIGB96iAR8R6uA==
-
-primeng@^7.0.0:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/primeng/-/primeng-7.0.3.tgz#425ea68bc95e57d95911a05bbda65669035cec55"
-  integrity sha512-WbC8ScwpFO6iSxiTm/FGRr0T1Q6PvmbIjSFChoA9YIGXVGFK1hCG3K0xhEMdStCdS237m8SKoFoq/jcuJCZIjA==
 
 process-nextick-args@^1.0.7, process-nextick-args@~1.0.6:
   version "1.0.7"

@@ -16,7 +16,13 @@ import { SkyComponent } from './sky/sky.component';
 import { DirectionsComponent } from './map/directions/directions.component';
 import { TextComponent } from './output/renders/text/text.component';
 import { RoomComponent } from './output/renders/room/room.component';
-// import { PreloadBarModule } from './preload-bar/preload-bar.module';
+import { IconsComponent } from './common/icons/icons.component';
+
+// JQXWidgets
+import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
+import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
+import { SplashscreenComponent } from './splashscreen/splashscreen.component';
+
 
 
 @NgModule({
@@ -35,6 +41,11 @@ import { RoomComponent } from './output/renders/room/room.component';
     DirectionsComponent,
     TextComponent,
     RoomComponent,
+    IconsComponent,
+    SplashscreenComponent,
+    //jqx widgets
+    jqxWindowComponent,
+    jqxSplitterComponent
   ],
   imports: [
     ClientRoutingModule,

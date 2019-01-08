@@ -3,16 +3,4 @@
   <ng-container *ngIf="html.desc.base">
     <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc"></div>
   </ng-container>
-  <ng-container *ngIf="html.desc.details">
-    <div [innerHtml="html.desc.details | dataToHtml:true"]></div>
-  </ng-container>
-  <ng-container *ngIf="html.desc.equip">
-      <div [innerHtml="html.desc.equip | dataToHtml:true"]></div>
-  </ng-container>
-  <ng-container *ngIf="html.eqcont">
-    // --------------- eqcont
-  </ng-container>
-  <ng-container *ngIf="html.where">
-    // --------------- where
-  </ng-container>
 </div>

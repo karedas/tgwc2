@@ -12,43 +12,31 @@ export const selectDataBase = (state: DataState) => state.base;
 export const selectDataRoom = (state: DataState) => state.room;
 
 /******************* Public Selector API's ******************/
-// export const getHistory = createSelector(
-//   selectDataBase, 
-//   selectDataRoom
-// );
+
 export const getDataBase = createSelector(
   getDataState,
   (data: DataState) => data.base
-)
+);
 
 export const getRoomBase = createSelector(
   getDataState,
   (data: DataState) => data.room
+);
+
+export const getDoors = createSelector(
+  getDataState,
+  (data:DataState) => data.doors
 )
 
-
-
-
-// export const getDataDefault = createSelector(
-//   getDataState,
-//   data => data.default
-// )
-
-// export const getRoom = createSelector(
-//   getDataState,
-//   data => data.default
-// )
+export const getSky = createSelector(
+  getDataState,
+  (data:DataState)  => data.sky
+);
 
 export const getMap = createSelector(
   getDataState,
   data => data.map
 )
-
-
-// export const getHistory = createSelector(
-//   selecDefault,
-//   selectRoom
-// )
 
 // CLIENT SELECTORS
 export const getUserLevel = createSelector (

@@ -5,6 +5,7 @@ import { Character } from 'src/app/models/character/character.model';
 export interface ClientState  {
     socketStatus: string;
     isAuthenticated: boolean;
+    inGame: boolean;
     errorMessage: string | null;
     time?: string;
     userlevel: number;
@@ -17,6 +18,7 @@ export interface ClientState  {
 export const initialState: ClientState = {
     socketStatus: SocketState.INITIALIZE,
     isAuthenticated: false,
+    inGame: false,
     errorMessage: null,
     time: undefined,
     userlevel: 0,

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from '../store/state/data.state';
-import { IncomingData } from '../store/actions/data.action'; // DA TOGLIERE
 import * as DataActions from '../store/actions/data.action';
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
-import { Room } from '../models/data/room.model';
+import { InGameAction } from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +44,6 @@ export class DataParser {
   }
 
   parseForDisplay(data: string) {
-
     let pos: any;
     const dataState: DataState = {} as DataState;
     dataState.timestamp = new Date().getTime();
@@ -74,7 +72,7 @@ export class DataParser {
     // Doors Info
     data = data.replace(/&d\d{6}\n*/gm, (doors) => {
       const doors_parse = doors.substr(2, 6);
-      //this.parseUiObject$.next({ doors_parse, type: GameMode.DOORSINFO });
+      this.store.dispatch(new DataActions.DoorsAction(doors_parse));
       return '';
     });
 
@@ -118,7 +116,7 @@ export class DataParser {
 
     // Player is logged in
     data = data.replace(/&!logged"[^"]*"/gm, () => {
-      this.parseUiObject$.next({ data, type: GameMode.PLAYERISLOGGEDIN });
+      this.store.dispatch(new InGameAction());
       return '';
     });
 
@@ -301,11 +299,13 @@ export class DataParser {
 
     data = data.replace(/&!sm"[^"]*"/gm, (icon) => {
       const icon_parse = icon.slice(5, -1).split(',');
+      console.log('icon sm');
       // return _.renderIcon(icon_parse[0], icon_parse[1], 'room', null, null, 'interact pers');
       return '';
     });
 
     data = data.replace(/&!si"[^"]*"/gm, (icon) => {
+      console.log('icon sm si');
       const icon_parse = icon.slice(5, -1).split(',');
       // return _.renderIcon(icon_parse[0], null, null, null, null, "v" + icon_parse[1]);
       return '';
@@ -327,7 +327,7 @@ export class DataParser {
     if (data != 'undefined' && data !== '') {
       dataState.lastType = 'base';
       dataState.base = data.replace(/<p><\/p>/g, '');
-      this.store.dispatch(new IncomingData(dataState));
+      this.store.dispatch(new DataActions.IncomingData(dataState));
       // this.parseSubject.next(data);
     }
   }

@@ -1,16 +1,18 @@
 @import '~src/scss/colors';
 
+:host {
+  display: none!important;
+}
+
 .tg-cookielaw {
   font-size: 1em;
   max-width: 100%;
-  height: auto;
   margin: 0 auto;
   font-family: Kingthings;
 
   .tg-modal-content {
     color: #86725a;
     text-align: center;
-    overflow: hidden;
     padding: 24px 12px;
     font-size: 15px;
     line-height: 1.3;

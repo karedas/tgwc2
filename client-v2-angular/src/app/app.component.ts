@@ -10,7 +10,10 @@ export class AppComponent {
   title = 'The Gate v2 WebClient';
   gameState$: any;
 
-  constructor(private store: Store<fromRoot.State>) {
+  constructor(
+    private store: Store<fromRoot.State>,
+    ) {
+
     this.gameState$ = this.store.select<fromRoot.State>(fromRoot.selectClientState);
   }
 }

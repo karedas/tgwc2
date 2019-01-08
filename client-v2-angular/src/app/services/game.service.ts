@@ -35,7 +35,6 @@ export class GameService {
   handleServerGameData(data) {
     this.netData += data;
     const len = this.netData.length;
-
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
       const data = this.netData.substr(0, len - 3);
       this.dataParserService.parse(data);

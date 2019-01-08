@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  background: #1d1812;
+  background: #0b0807;
   color: $white;
   display: inline-block;
   vertical-align: top;
@@ -103,21 +103,19 @@ body[data-loginstatus=ready] {
   }
 }
 
-// .iconimg {
-//     background-image: url( $imgPath + '/tiles/tiles.png');
-//     background-repeat: no-repeat;
-//     width: 32px;
-//     height: 32px;
-//     min-width: 32px;
-//     display: inline-block;
-//     transform: scale(.7);
-//     vertical-align: middle;
-
-//     &.tg-dragging {
-//         transform: none;
-//     }
-// }
-
+ .iconimg {
+     background-image: url( $imgPath + '/tiles.png');
+     background-repeat: no-repeat;
+     width: 32px;
+     height: 32px;
+     min-width: 32px;
+     display: inline-block;
+     transform: scale(.7);
+     vertical-align: middle;
+     &.tg-dragging {
+         transform: none;
+     }
+ }
 // .popover-header {
 //     font-size:.6rem;
 //     padding-bottom: 0;
