@@ -1,42 +1,42 @@
 :host {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    background-color: #0b0807;
-    text-align: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background-color: #0b0807;
+  text-align: center;
 }
 
 .tg-splashscreen--percentage {
-    margin:  auto;
+  margin: auto;
 }
 
 .tg-splashscreen--logo {
-    background-image: url("/assets/images/logo/triang_int.png");
-    background-size: contain;
-    background-position: center center;
-    width: 90px;
-    height: 90px;
-    margin: 0 auto;
-} 
-
-.tg-splashscreen--percentagetext {
-    font-size: 11px;
-    text-align: center;
-    color: #67615a;
+  background-image: url("/assets/images/logo/triang_int.png");
+  background-size: contain;
+  background-position: center center;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
 }
 
-.tg-splashscreen--percentagebar{
-    height:2px;
-    width: 40vw;
-    position: relative;
-    margin-top: 5px;
+.tg-splashscreen--percentagetext {
+  font-size: 11px;
+  text-align: center;
+  color: #67615a;
+}
 
- .tg-splashscreen--percentageamount {
-        position: absolute;
-        left: 0;
-        display: block;
-        background-color: #71510b;
-        width: 0;
-        height: 100%;
-    }
+.tg-splashscreen--percentagebar {
+  height: 1px;
+  width: 40vw;
+  position: relative;
+  margin-top: 5px;
+
+  .tg-splashscreen--percentageamount {
+    position: absolute;
+    left: 0;
+    display: block;
+    background-color: #71510b;
+    width: 0;
+    height: 100%;
+  }
 }
