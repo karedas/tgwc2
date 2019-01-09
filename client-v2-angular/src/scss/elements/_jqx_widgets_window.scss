@@ -5,5 +5,8 @@
 }
 
 .jqx-widget-header {
-    display: none;
+    border: 0;
+    height: 0;
+    padding: 0;
+    visibility: hidden;
 }

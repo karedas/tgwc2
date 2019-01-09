@@ -11,7 +11,7 @@ import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwi
 export class CookieLawComponent implements AfterViewInit {
 
   @ViewChild('windowReference') windowCookieLaw: jqxWindowComponent;
-  //@ViewChild('jqxWidget') cookieLawReference: ElementRef;
+  @ViewChild('jqxWidget') jqxWidget: ElementRef;
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
   display = false;

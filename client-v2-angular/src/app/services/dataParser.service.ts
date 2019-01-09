@@ -79,6 +79,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
+      console.log(audio_parse);
       //this.parseUiObject$.next({ audio_parse, type: GameMode.AUDIO });
       return '';
     });
@@ -86,6 +87,7 @@ export class DataParser {
     // Player status
     data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
       const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
+      console.log(status_parse);
       //this.parseUiObject$.next({ status_parse, type: GameMode.UPDATE });
       return '';
     });
@@ -93,9 +95,8 @@ export class DataParser {
 
     // Generic Update Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
-      dataState.lastType = 'update';
-      dataState.base = update.slice(5, status.lastIndexOf('"')).split(',');
-      // this.store.dispatch(new DataActions.PlayerStatus(dataState))
+      const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
+      console.log(update_parse)
 
       return '';
     });
