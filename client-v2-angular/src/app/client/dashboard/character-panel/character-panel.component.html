@@ -28,25 +28,25 @@
             <!-- Character Status Bars -->
             <div class="tg-meterbar">
               <div class="barcont barbig">
-                <span id="healtBarText" class="tg-statusbar-text" rel="tooltip" title="Punti Salute">PS:
-                  <i></i> / 100</span>
-                <span class="red barC healthbar"></span>
+                <span class="tg-statusbar-text" rel="tooltip" title="Punti Salute">PS:
+                  <i>{{ status[0] }}</i> / 100</span>
+                <span class="red barC healthbar" [style.width.%]="status[0]"></span>
               </div>
               <div class="barcont barbig" rel="tooltip" title="Punti Movimento">
-                <span id="moveBarText" class="tg-statusbar-text">PM:
-                  <i></i> / 100</span>
-                <span class="green barC movebar"></span>
+                <span class="tg-statusbar-text">PM:
+                  <i>{{ status[1] }}</i> / 100</span>
+                <span class="green barC movebar" [style.width.%]="status[1]"></span>
               </div>
               <div class="tg-extrabars">
-                <div id="foodBarText" class="barcont barthin" rel="tooltip" title="Fame">
+                <div class="barcont barthin" rel="tooltip" title="Fame">
                   <span class="tg-statusbar-text">Fame:
-                    <i></i> / 100</span>
-                  <span class="orange barC hungrybar"></span>
+                    <i>{{ status[2] }}</i> / 100</span>
+                  <span class="orange barC hungrybar" [style.width.%]="status[2]"></span>
                 </div>
-                <div id="drinkBarText" class="barcont barthin" rel="tooltip" title="Sete">
+                <div class="barcont barthin" rel="tooltip" title="Sete">
                   <span class="tg-statusbar-text">Sete:
-                    <i></i> / 100</span>
-                  <span class="blue barC thirstbar"></span>
+                    <i>{{ status[3] }}</i> / 100</span>
+                  <span class="blue barC thirstbar" [style.width.%]="status[3]"></span>
                 </div>
               </div>
             </div>
@@ -101,11 +101,11 @@
           aria-controls="tg-pills-utility" aria-selected="false" title="Utility">U</a>
       </div>
       <div class="extraboard-content tab-content" id="tg-pills-extraboardContent"> -->
-        <!-- Shortcut -->
-        <!-- <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div> -->
-        <!-- Utility -->
-        <!-- <div class="tab-pane" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div> -->
-      <!-- </div>
+<!-- Shortcut -->
+<!-- <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div> -->
+<!-- Utility -->
+<!-- <div class="tab-pane" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div> -->
+<!-- </div>
     </div>
   </div>
   <div class="row">

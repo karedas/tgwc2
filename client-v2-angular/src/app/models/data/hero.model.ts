@@ -1,12 +1,12 @@
 export interface IHero {
-  name: string
-  status: number[]
+  name?: string
+  status?: any[]
 }
 
 export class Hero implements IHero {
-  name: string;
-  status: [0,0,0,0];
-  constructor(name?:string) {
+  name?: string = '';
+  status?: string[] = ["0,0,0,0"];
+  constructor(name?:string, status?: number[], ) {
       this.name = name;
   }
 }

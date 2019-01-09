@@ -14,9 +14,8 @@ import { PreloaderService } from './common/services/preloader.service';
 export class ClientComponent {
 
   @Input('state') gameState$;
-
   preloadAssetsStatus = false;
-  preloadPerc:any;
+  preloadPerc: any;
   isCookieAccepted = false;
 
   constructor(
@@ -25,40 +24,37 @@ export class ClientComponent {
     private loginService: LoginService,
     private game: GameService,
     private preloader: PreloaderService,
-
-
     @Inject(DOCUMENT) private document: any
-    ) {
-
+  )
+  {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
       this.document.body.className += 'is-mobile';
-
     }
 
     this.preloader.percentage.subscribe(
-      amount => {this.preloadPerc = amount}
+      amount => { this.preloadPerc = amount }
     );
 
     this.preloader.status$.subscribe(
-      status => { 
-       this.preloadAssetsStatus = status;
-       this.gameIsReady();
+      status => {
+        if (status == true) {
+          this.preloadAssetsStatus = status;
+          this.gameIsReady();
+        }
       }
     );
-
   }
 
   private gameIsReady() {
-    
+
     /* Mndatory verification of acceptance of the use of cookies before proceed */
-    if (this.cookieService.check('tgCookieLaw')) {  this.isCookieAccepted = true; }
+    if (this.cookieService.check('tgCookieLaw')) { this.isCookieAccepted = true; }
 
     /** Until Login Auth */
-    this.loginService.isLoggedIn$.subscribe( auth => {
-        if (auth) { this.game.startGame(); }
-      }
-    );
+    this.loginService.isLoggedIn$.subscribe(auth => {
+      if (auth) { this.game.startGame(); }
+    });
   }
 
   onCookieAccepted(status: boolean) {

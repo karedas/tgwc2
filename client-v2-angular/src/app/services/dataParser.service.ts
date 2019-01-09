@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DataState } from '../store/state/data.state';
 import * as DataActions from '../store/actions/data.action';
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
-import { InGameAction } from '../store/actions/client.action';
+import { InGameAction, AudioAction } from '../store/actions/client.action';
+import { State } from '../store';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,12 @@ export class DataParser {
   };
 
   constructor(
-    private store: Store<DataState>,
+    private store: Store<State>,
     ) {
     this.parseUiObject$.asObservable();
   }
 
-  parse(data): void {
+  parse(data: any): void {
     this.parseForDisplay(this.preParseText(data));
   }
 
@@ -39,15 +39,13 @@ export class DataParser {
     data = data.replace(/&&/gm, '&#38;');
     data = data.replace(/</gm, '&#60;');
     data = data.replace(/>/gm, '&#62;');
-
     return data;
   }
 
   parseForDisplay(data: string) {
-    let pos: any;
-    const dataState: DataState = {} as DataState;
-    dataState.timestamp = new Date().getTime();
 
+    let pos: any;
+    
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
       console.warn('Todo: Hide Text')
@@ -79,21 +77,18 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      console.log(audio_parse);
-      //this.parseUiObject$.next({ audio_parse, type: GameMode.AUDIO });
+      this.store.dispatch(new AudioAction(audio_parse));
       return '';
     });
 
     // Player status
     data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
       const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
-      console.log(status_parse);
-      //this.parseUiObject$.next({ status_parse, type: GameMode.UPDATE });
+      this.store.dispatch(new DataActions.PlayerStatus({status: status_parse}));
       return '';
     });
 
-
-    // Generic Update Status and more
+    // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
       console.log(update_parse)
@@ -139,7 +134,7 @@ export class DataParser {
     // Map data
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, (map) => {
       const map_parse = JSON.parse(map.slice(5, -1));
-      this.store.dispatch(new DataActions.MapAction(map_parse));
+      //this.store.dispatch(new DataActions.MapAction(map_parse));
       return '';
     });
 
@@ -326,9 +321,8 @@ export class DataParser {
     data = data.replace(/\n/gm, '<br>');
 
     if (data != 'undefined' && data !== '') {
-      dataState.lastType = 'base';
-      dataState.base = data.replace(/<p><\/p>/g, '');
-      this.store.dispatch(new DataActions.IncomingData(dataState));
+      data = data.replace(/<p><\/p>/g, '');
+      this.store.dispatch(new DataActions.IncomingData(data));
       // this.parseSubject.next(data);
     }
   }

@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../services/socket.service';
 import { PipesModule } from '../pipes/pipes.module';
 import { PreloaderService } from '../client/common/services/preloader.service';
+import { AudioService } from '../client/audio/audio.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PreloaderService } from '../client/common/services/preloader.service';
     GameService,
     CookieService,
     SocketService,
-    PreloaderService
+    PreloaderService,
+    AudioService
   ],
   exports: [
     FormsModule,

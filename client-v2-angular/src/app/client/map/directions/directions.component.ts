@@ -9,6 +9,7 @@ import { getUserLevel, getDoors } from 'src/app/store/selectors';
   templateUrl: './directions.component.html',
   styleUrls: ['./directions.component.scss'],
 })
+
 export class DirectionsComponent {
 
 
@@ -26,12 +27,10 @@ export class DirectionsComponent {
   ) {
 
 
-    this.store
-      .pipe(select(getDoors))
+    this.store.pipe(select(getDoors))
       .subscribe(door => this.setDoors(door))
 
-    this.store
-      .pipe(select(getUserLevel))
+    this.store.pipe(select(getUserLevel))
       .subscribe(level => {
         this.userlevel = level;
       })
@@ -41,7 +40,6 @@ export class DirectionsComponent {
   goToDirection($event, dir: number): void {
 
     $event.preventDefault();
-
 
     if (this.userlevel == 0 && this.dirStatus[dir] == '3') {
       this.dirCmd = `apri ${this.dirNames[dir]}`;

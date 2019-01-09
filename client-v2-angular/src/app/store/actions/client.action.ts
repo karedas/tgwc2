@@ -6,13 +6,14 @@ export enum UIType {
 
 
 export enum ClientEventType {
-	INITIALIZE = '[Authentication] Socket Initialize',
-	CONNECT = '[Authentication] Socket Connect',
-	DISCONNECT = '[Authentication] User Disconnect',
-	LOGIN = '[Authentication] User Login',
-	LOGIN_SUCCESS = '[Authentication] User Login Success',
-	LOGIN_FAILURE = '[Authentication] User Login Failure',
-	INGAME = '[Authentication] User In Game'
+	INITIALIZE = '[Client] Socket Initialize',
+	CONNECT = '[Client] Socket Connect',
+	DISCONNECT = '[Client] User Disconnect',
+	LOGIN = '[Client] User Login',
+	LOGIN_SUCCESS = '[Client] User Login Success',
+	LOGIN_FAILURE = '[Client] User Login Failure',
+	INGAME = '[Client] User In Game',
+	AUDIO = '[Client] Audio',
 }
 
 export class SocketStatusAction implements Action {
@@ -42,6 +43,11 @@ export class InGameAction implements Action  {
 	readonly type = ClientEventType.INGAME;
 }
 
+export class AudioAction implements Action {
+	readonly type = ClientEventType.AUDIO;
+	constructor(public payload: string) {}
+}
+
 export class UpdateUi implements Action {
 	readonly type = UIType.UPDATE;
 }
@@ -58,4 +64,5 @@ export type ClientActions
 	| DisconnectAction
 	| LoginSuccessAction
 	| LoginFailureAction
+	| AudioAction
 	;

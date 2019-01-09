@@ -49,63 +49,33 @@ export class GameService {
   updateUi(pdata: any) {
     switch (pdata.type) {
       case GameMode.HIDEINPUTTEXT:
-        // this.hideInputText();
       case GameMode.SHOWINPUTTEXT:
-        // this.showInputText();
       case GameMode.SKYPICTURE:
-        // this.updateSky(pdata[0]);
       case GameMode.DOORSINFO:
-        // this.setDoors(pdata.data);
       case GameMode.AUDIO:
-        // this.playAudio(pdata.data);
       case GameMode.UPDATE:
-
       case GameMode.IMAGEWITHGAMMA:
-
       case GameMode.IMAGE:
-
       case GameMode.PLAYERISLOGGEDIN:
-
       case GameMode.CLOSETEXTEDITOR:
-
       case GameMode.MAP:
-
       case GameMode.RENDERGENERIC:
-
       case GameMode.RENDERTABLE:
-
       case GameMode.ROOMDETAILS:
-
       case GameMode.PERSONDETAILS:
-
       case GameMode.OBJECTDETAILS:
-
       case GameMode.EQUIP:
-
       case GameMode.WORKABLELIST:
-
       case GameMode.SKILLS:
-
       case GameMode.PLAYERINFO:
-
       case GameMode.PLAYERSTATUS:
-
       case GameMode.NEWIMAGEREQUEST:
-
       case GameMode.SELECTABLEGENERIC:
-
       case GameMode.REFRESH:
-
       case GameMode.PAUSESCROLL:
 
       default:
         return;
-    }
-  }
-
-  getIcon(icon: number, mrn, cnttype, cntmrn, cmd, addclass) {
-    if(!icon) {
-      icon = 416
     }
   }
 

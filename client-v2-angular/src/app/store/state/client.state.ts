@@ -10,6 +10,7 @@ export interface ClientState  {
     time?: string;
     userlevel: number;
     dialog: boolean;
+    track?: string;
     musicVolume: number;
     soundVolume: number;
     character: Character;

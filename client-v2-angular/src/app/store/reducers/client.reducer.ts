@@ -7,17 +7,19 @@ export function reducer(
 ): ClientState {
 
 	switch (action.type) {
-
-
+		
 		case ClientEventType.CONNECT: {
 			return Object.assign( {}, state, { socketStatus: action.payload });
 		}
+
 		case ClientEventType.LOGIN_SUCCESS: {
 			return Object.assign( {}, state, { isAuthenticated: action.payload });
 		}
+
 		case ClientEventType.LOGIN_FAILURE: {
 			return { ...state, errorMessage: action.payload };
 		}
+
 		case ClientEventType.DISCONNECT: {
 			return initialState;
 		}
@@ -25,6 +27,11 @@ export function reducer(
 		case ClientEventType.INGAME: {
 			return Object.assign({}, state, { ingame: !state.inGame });
 		}
+
+		case ClientEventType.AUDIO: {
+			return Object.assign({}, state, { track: action.payload})
+		}
+
 		default: {
 			return state;
 		}
