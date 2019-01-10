@@ -1,6 +1,17 @@
-<div class="tg-room">
-  <div [innerHtml]="html.title | dataToHtml:true" class="tg-room--title"></div>
-  <ng-container *ngIf="!html.desc.repeatlast">
-    <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc"></div>
-  </ng-container>
+<div class="tg-room" *ngIf="html">
+  <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
+    <div [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
+    <div *ngIf="html.desc.base" [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc"></div>
+  </ng-template>
 </div>
+
+<ng-template #extradetail>
+    <div class="tg-extraoutput--header">
+        <div class="tg-room--title">{{ html.title | dataToHtml:true }}</div>
+        <div class="tg-room--image" *ngIf="html.image">
+          <img [src]="getRoomImage(html.image)"/>
+        </div>
+         <div class="tg-room--desc" *ngIf="html.desc.base" [innerHtml]="html.desc.base | dataToHtml:true" ></div>
+    </div>
+</ng-template>
+

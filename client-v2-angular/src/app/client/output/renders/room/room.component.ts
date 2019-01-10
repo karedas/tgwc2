@@ -1,12 +1,15 @@
-import { Component, Input, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-room',
   templateUrl: './room.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class RoomComponent implements AfterViewInit {
   @Input() html: Room;
+  @Input() withExtra: boolean;
 
   private perscont: string;
   private objcont: string;
@@ -14,9 +17,15 @@ export class RoomComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-    if (this.html.objcont) {
-      this.renderDetailsList(this.html.objcont, 'obj')
-    }
+    console.log(this.html);
+    // if (this.html.objcont) {
+    //   this.renderDetailsList(this.html.objcont, 'obj')
+    // }
+  }
+
+  getRoomImage(img:string ): string {
+     const fullPathImage = environment.media_address + img
+     return fullPathImage;
   }
 
   renderDetailsList(objs:any, objsType:string): string {

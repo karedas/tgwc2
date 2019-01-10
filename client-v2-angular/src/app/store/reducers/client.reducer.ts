@@ -32,6 +32,10 @@ export function reducer(
 			return Object.assign({}, state, { track: action.payload})
 		}
 
+		case ClientEventType.ISGOD: {
+			return Object.assign({}, state, {userlevel: action.payload }) 
+		}
+
 		default: {
 			return state;
 		}

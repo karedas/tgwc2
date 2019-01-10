@@ -15,7 +15,8 @@ export const environment = {
       'reconnectionDelay': 1500,
       'reconnectionAttempts': 'Infinity'
     }
-  }
+  },
+  media_address: 'http://play.thegatemud.it/images/'
 };
 
 /*

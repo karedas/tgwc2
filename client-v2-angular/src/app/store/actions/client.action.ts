@@ -13,6 +13,7 @@ export enum ClientEventType {
 	LOGIN_SUCCESS = '[Client] User Login Success',
 	LOGIN_FAILURE = '[Client] User Login Failure',
 	INGAME = '[Client] User In Game',
+	ISGOD = '[Client] User is a God',
 	AUDIO = '[Client] Audio',
 }
 
@@ -43,6 +44,11 @@ export class InGameAction implements Action  {
 	readonly type = ClientEventType.INGAME;
 }
 
+export class UserLevelAction implements Action {
+	readonly type = ClientEventType.ISGOD;
+	constructor (public payload: boolean) {}
+}
+
 export class AudioAction implements Action {
 	readonly type = ClientEventType.AUDIO;
 	constructor(public payload: string) {}
@@ -65,4 +71,5 @@ export type ClientActions
 	| LoginSuccessAction
 	| LoginFailureAction
 	| AudioAction
+	| UserLevelAction
 	;

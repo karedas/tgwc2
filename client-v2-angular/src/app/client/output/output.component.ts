@@ -2,10 +2,10 @@ import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
-import { filter } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'tg-output',
@@ -18,12 +18,21 @@ export class OutputComponent implements AfterViewInit {
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
   @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
 
-  output = [];
+  output: any = [];
+  lastRoom$: Observable<any>;
+  extraDetail$: BehaviorSubject<boolean>;
 
   private outputTrimLines: number = 500;
-  constructor(private store: Store<DataState>) { }
+
+
+  constructor(private store: Store<DataState>) 
+  { 
+    this.lastRoom$ = this.store.pipe(select(fromSelectors.getRoomBase))
+    this.extraDetail$ = new BehaviorSubject(true);
+  }
 
   ngAfterViewInit() {
+
     //Listen Base Text Data
     this.store.pipe(select(fromSelectors.getDataBase)).subscribe(
       (base: string[]) => {
@@ -38,19 +47,18 @@ export class OutputComponent implements AfterViewInit {
       .pipe(filter(room => room && room !== undefined))
       .subscribe(
         (room: any) => {
-          const content = this.getContentObject('room', room);
-          //if extra is active 
-          //this.lastRoom.next(content)
-          //else
-          this.output.push(content);
-          this.trimOutput();
-          this.scrollPanelToBottom();
+          if(!this.extraDetail$.value) {
+            const content = this.getContentObject('room', room);
+            this.output.push(content);
+            this.trimOutput();
+            this.scrollPanelToBottom();
+          }
         }
       )
   }
 
-  public resizeSplitterPanel(event: any) {
-    return;
+  get isWithExtra(): Observable<any> {
+    return this.extraDetail$.asObservable();
   }
 
   private getContentObject(t: string, c: any): any {

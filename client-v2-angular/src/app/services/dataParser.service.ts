@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as DataActions from '../store/actions/data.action';
+import * as ClientActions from '../store/actions/client.action';
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
-import { InGameAction, AudioAction } from '../store/actions/client.action';
 import { State } from '../store';
 
 @Injectable({
@@ -12,9 +12,11 @@ import { State } from '../store';
 
 export class DataParser {
   private cmdPrefix = '';
-  parseUiObject$$: BehaviorSubject<any> = new BehaviorSubject([]).asObservable();
+  parseUiObject$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   private msgRegexp = {
+    logged: /&!logged"[^"]*"/gm,
+    isGod: /&i/gm,
     hideInputText: /&x\n*/gm,
     showInputText: /&e\n*/gm,
     updateSkyPicture: /&o.\n*/gm,
@@ -48,6 +50,17 @@ export class DataParser {
 
     console.log(data);
     
+    // Player is logged in
+    data = data.replace(this.msgRegexp.logged, () => {
+      this.store.dispatch(new ClientActions.InGameAction());
+      return '';
+    });
+
+    data = data.replace(this.msgRegexp.isGod, () => {
+      this.store.dispatch(new ClientActions.UserLevelAction(true));
+      return '';
+    });
+
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
       console.warn('Todo: Hide Text')
@@ -79,7 +92,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.store.dispatch(new AudioAction(audio_parse));
+      this.store.dispatch(new ClientActions.AudioAction(audio_parse));
       return '';
     });
 
@@ -109,12 +122,6 @@ export class DataParser {
     data = data.replace(/&!im"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(5, image.lastIndexOf('"'));
       console.log('this.parseUiObject$.next({ image_parse, type: GameMode.IMAGE })');
-      return '';
-    });
-
-    // Player is logged in
-    data = data.replace(/&!logged"[^"]*"/gm, () => {
-      this.store.dispatch(new InGameAction());
       return '';
     });
 
@@ -307,11 +314,7 @@ export class DataParser {
       return data;
     });*/
 
-    data = data.replace(/&i/gm, function () {
-      // _.isGod = true;
-      return '';
-    });
-
+    //Visibility (God only)
     data = data.replace(/&I\d/gm, function (inv) {
       // _.godInvLev = parseInt(inv.substr(2, 3));
       return '';
