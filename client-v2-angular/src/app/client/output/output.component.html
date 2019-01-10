@@ -25,7 +25,8 @@
           </ng-scrollbar>
         </div>
         <div>
-          <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar> 
+          <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
+            {{lastRoom.title | async }}
           </ng-scrollbar>
         </div>
       </jqxSplitter>
@@ -59,7 +60,10 @@
 
 
 <ng-template #nosplit>
-
+    <div class="tg-line" [ngSwitch]="data.type">
+        <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+        <tg-room *ngSwitchCase="'room'" [html]="data.content"></tg-room>
+      </div>
 </ng-template>
 
 <ng-template #extrasplit>

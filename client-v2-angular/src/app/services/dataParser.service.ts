@@ -12,7 +12,7 @@ import { State } from '../store';
 
 export class DataParser {
   private cmdPrefix = '';
-  parseUiObject$: BehaviorSubject<any> = new BehaviorSubject([]);
+  parseUiObject$$: BehaviorSubject<any> = new BehaviorSubject([]).asObservable();
 
   private msgRegexp = {
     hideInputText: /&x\n*/gm,
