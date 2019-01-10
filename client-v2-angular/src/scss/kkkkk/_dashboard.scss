@@ -28,7 +28,7 @@
 /* TG Character Side */
 .tg-character {
     padding-top:6px;
-    padding-bottom:3px;
+    padding-bottom:6px;
     display: flex;
     .tg-characteravatar {
         display: none;
@@ -76,7 +76,8 @@
         z-index: 2;
         flex: 1 1 100%;
         flex-direction: column;
-        padding: 0;
+        padding: 0 6px;
+        
         .barcont {
             box-sizing: border-box;
             border: 1px solid #5f5c59;

@@ -5,7 +5,11 @@
 @import 'base';
 
 /* jqx widgets custom theme reference */
-@import 'elements/jqx_widgets_window'
+@import 'elements/jqx_widgets_window';
+@import 'elements/jqx_widgets_splitter';
+/*various */
+@import 'elements/ng_scrollbar';
+
 
 // @import 'utils/bootstrap-slider';
 // @import 'utils/jqx-custom';

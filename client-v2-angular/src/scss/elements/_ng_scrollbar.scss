@@ -1,0 +1,15 @@
+
+
+  .scrollbar {
+
+   .scrollbar-thumbs {
+        background: #332f25;
+        border-color: #564d37;
+
+      &:hover,
+      &:active {
+        background: #4c4535;
+        border-color: #564d37;
+      }
+    }
+  }

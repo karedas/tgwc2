@@ -1,34 +1,35 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef} from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
-import { GameService } from 'src/app/services/game.service';
 import * as fromSelectors from 'src/app/store/selectors';
-import { filter, skip, take, combineLatest } from 'rxjs/operators';
+import { filter} from 'rxjs/operators';
+import { NgScrollbar } from 'ngx-scrollbar';
+import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 
 @Component({
   selector: 'tg-output',
   templateUrl: './output.component.html',
   styleUrls: ['./output.component.scss'],
-
 })
 
-export class OutputComponent {
+export class OutputComponent implements AfterViewInit{
 
+  @ViewChild('scrollBar') scrollBar: NgScrollbar;
+  @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
+  
   output = [];
+
   private outputTrimLines: number = 500;
-  constructor(
-    private store: Store<DataState>,
-    private game: GameService) {
-    
+  constructor(private store: Store<DataState>) {}
+  
+  ngAfterViewInit() {
     //Listen Base Text Data
-    this.store.pipe(combineLatest(
-      fromSelectors.getDataBase,
-      fromSelectors.getId
-    )).subscribe(
-        (base: string) => {
-          const content = this.getContentObject('base', base);
+    this.store.pipe(select(fromSelectors.getDataBase)).subscribe(
+        (base: string[]) => {
+          const content = this.getContentObject('base', base[0]);
           this.output.push(content);
-          this.trimOutput();
+          // You might need to give a tiny delay before updating the scrollbar
+            this.scrollPanelToBottom();
         },
       )
       
@@ -39,11 +40,16 @@ export class OutputComponent {
           const content = this.getContentObject('room', room);
           this.output.push(content);
           this.trimOutput();
+          this.scrollPanelToBottom();
         }
       )
   }
 
-  getContentObject(t: string, c: any): any {
+  public resizeSplitterPanel(event: any){
+    return;
+  }
+
+  private getContentObject(t: string, c: any): any {
     return Object.assign({}, {type: t, content: c})
   }
 
@@ -51,5 +57,11 @@ export class OutputComponent {
     if(this.output.length > this.outputTrimLines) {
       this.output = this.output.slice(1, this.output.length);
     }
+  }
+
+  private scrollPanelToBottom() {
+    setTimeout(() => {
+      this.scrollBar.scrollToBottom(0);
+    }, 15);
   }
 }

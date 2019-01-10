@@ -4,7 +4,6 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   selector: 'tg-text',
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 
 

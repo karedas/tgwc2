@@ -4,7 +4,7 @@ import { Room } from "src/app/models/data/room.model";
 
 export interface DataState {
     id: number;
-    base: any;
+    base: any[];
     sky: string;
     doors?: any;
 		room: Room;
@@ -14,7 +14,7 @@ export interface DataState {
 
 export const initialState: DataState = {
     id: 0,
-    base: '',
+    base: [''],
     sky: undefined,
     doors: [],
 		room: undefined,

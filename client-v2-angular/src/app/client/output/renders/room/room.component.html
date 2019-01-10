@@ -1,6 +1,6 @@
 <div class="tg-room">
   <div [innerHtml]="html.title | dataToHtml:true" class="tg-room--title"></div>
-  <ng-container *ngIf="html.desc.base">
+  <ng-container *ngIf="!html.desc.repeatlast">
     <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc"></div>
   </ng-container>
 </div>

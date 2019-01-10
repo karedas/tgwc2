@@ -10,6 +10,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { PreloaderService } from '../client/common/services/preloader.service';
 import { AudioService } from '../client/audio/audio.service';
 
+import { NgScrollbarModule } from 'ngx-scrollbar';
+
 @NgModule({
   declarations: [
   ],
@@ -19,6 +21,8 @@ import { AudioService } from '../client/audio/audio.service';
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
+    // Various
+    NgScrollbarModule
   ],
   providers: [
     GameService,
@@ -32,6 +36,7 @@ import { AudioService } from '../client/audio/audio.service';
     ReactiveFormsModule,
     CommonModule,
     Auth2Module,
+    NgScrollbarModule,
     PipesModule,
   ],
 })

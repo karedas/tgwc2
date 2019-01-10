@@ -45,6 +45,8 @@ export class DataParser {
   parseForDisplay(data: string) {
 
     let pos: any;
+
+    console.log(data);
     
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
@@ -91,7 +93,7 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      console.log(update_parse)
+      console.log('update_parse')
 
       return '';
     });
@@ -106,7 +108,7 @@ export class DataParser {
     // Image in side frame
     data = data.replace(/&!im"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(5, image.lastIndexOf('"'));
-      this.parseUiObject$.next({ image_parse, type: GameMode.IMAGE });
+      console.log('this.parseUiObject$.next({ image_parse, type: GameMode.IMAGE })');
       return '';
     });
 
@@ -134,7 +136,7 @@ export class DataParser {
     // Map data
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, (map) => {
       const map_parse = JSON.parse(map.slice(5, -1));
-      //this.store.dispatch(new DataActions.MapAction(map_parse));
+      this.store.dispatch(new DataActions.MapAction(map_parse));
       return '';
     });
 
@@ -293,19 +295,17 @@ export class DataParser {
       return '';
     });
 
-    data = data.replace(/&!sm"[^"]*"/gm, (icon) => {
+    /*data = data.replace(/&!sm"[^"]*"/gm, (icon) => {
       const icon_parse = icon.slice(5, -1).split(',');
       console.log('icon sm');
       // return _.renderIcon(icon_parse[0], icon_parse[1], 'room', null, null, 'interact pers');
       return '';
-    });
+    });*/
 
-    data = data.replace(/&!si"[^"]*"/gm, (icon) => {
-      console.log('icon sm si');
-      const icon_parse = icon.slice(5, -1).split(',');
+    /*data = data.replace(/&!si"[^"]*"/gm, (icon) => {
       // return _.renderIcon(icon_parse[0], null, null, null, null, "v" + icon_parse[1]);
-      return '';
-    });
+      return data;
+    });*/
 
     data = data.replace(/&i/gm, function () {
       // _.isGod = true;

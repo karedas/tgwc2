@@ -21,10 +21,8 @@ import { IconsComponent } from './common/icons/icons.component';
 // JQXWidgets
 import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
-import { jqxPanelComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxpanel';
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
-
 
 
 @NgModule({
@@ -47,9 +45,8 @@ import { AudioComponent } from './audio/audio.component';
     SplashscreenComponent,
     //jqx widgets
     jqxWindowComponent,
-    jqxPanelComponent,
     jqxSplitterComponent,
-    AudioComponent
+    AudioComponent,
   ],
   imports: [
     ClientRoutingModule,

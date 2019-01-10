@@ -9,22 +9,24 @@
       <jqxSplitter #nestedSplitter 
         [width]="'100%'" 
         [height]="'100%'" 
-        [panels]="[{ size: '50%', collapsible: false}, { size: '50%', collapsible: false}]">
+        [panels]="[{ size: '50%', collapsible: false}, { size: '50%', collapsible: false}]"
+        (onResize)="resizeSplitterPanel($event)"
+        >
         <div>
-          <jqxPanel [width]="'100%'" [height]="'100%'">
-            <div class="tg-output-history" #list>
+        <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
+            <div class="tg-output-history">
               <div *ngFor="let data of output">
                 <div class="tg-line" [ngSwitch]="data.type">
                   <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+                  <tg-room *ngSwitchCase="'room'" [html]="data.content"></tg-room>
                 </div>
               </div>
             </div>
-          </jqxPanel>
+          </ng-scrollbar>
         </div>
         <div>
-          <jqxPanel [width]="'100%'" [height]="'100%'">
-            EXTRA SIDE
-          </jqxPanel>
+          <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar> 
+          </ng-scrollbar>
         </div>
       </jqxSplitter>
     </div>

@@ -4,7 +4,6 @@ import { Room } from 'src/app/models/data/room.model';
 @Component({
   selector: 'tg-room',
   templateUrl: './room.component.html',
-  encapsulation: ViewEncapsulation.None
 })
 export class RoomComponent implements AfterViewInit {
   @Input() html: Room;
@@ -17,7 +16,6 @@ export class RoomComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (this.html.objcont) {
       this.renderDetailsList(this.html.objcont, 'obj')
-      console.log(this.objcont);
     }
   }
 

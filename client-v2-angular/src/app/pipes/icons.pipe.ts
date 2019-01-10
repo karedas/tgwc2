@@ -17,7 +17,7 @@ export class IconsPipe implements PipeTransform {
 
   }
 
-  renderIcon(icon, mrn, cnttype, cntmrn, cmd, addclass): any{
+  renderIcon(icon, mrn: string, cnttype: string, cntmrn: string, cmd: string, addclass: string): any{
         if (!icon)
             icon = 416;
         //return '<div class="iconimg ico_' + icon + ' ' + (addclass ? ' ' + addclass : '') + '" style="background-position:' + this.tileBgPos(icon) + '"' + (mrn ? ' data-mrn="' + mrn + '"' : '') + (cmd ? ' data-cmd="' + cmd + '"' : '') + (cnttype ? ' data-cnttype="' + cnttype + '"' : '') + (cntmrn ? ' data-cntmrn="' + cntmrn + '"' : '') + '></div>';

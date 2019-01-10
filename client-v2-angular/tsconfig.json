@@ -25,7 +25,6 @@
       "src/app/app.module.ts",
       "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow.ts",
       "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter.ts",
-      "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxpanel.ts"
   ]
   
 }
