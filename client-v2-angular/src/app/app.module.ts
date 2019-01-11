@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
-import { ClientModule } from './client/client.module';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -16,6 +15,7 @@ import * as fromStore from './store/';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { DataEffects } from './store/effects/data.effects';
 import { environment } from 'src/environments/environment';
+import { ClientModule } from './main/client/client.module';
 
 @NgModule({
   declarations: [

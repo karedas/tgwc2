@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import AssetsList from '../../../../assets/assets_list.json';
-import { BehaviorSubject, Observable } from 'rxjs';
+import AssetsList from 'src/assets/assets_list.json';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UsernameValidation, PasswordValidation } from '../../common/validations';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/authentication/services/login.service';
-import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/main/authentication/services/login.service';
+import { Subscription, Subject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
-import gitInfo from '../../../git-version.json';
+import gitInfo from 'src/git-version.json';
+import { UsernameValidation, PasswordValidation } from 'src/app/common/validations.js';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-login',
@@ -22,6 +23,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFailed: boolean;
   loginSubscription: Subscription;
 
+  // Private
+  private _unsubscribeAll: Subject<any>;
+
   socketloginReplayMessage: string;
 
   constructor(
@@ -34,6 +38,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       username: {},
       password: {}
     };
+
+
+    this._unsubscribeAll = new Subject();
   }
 
   ngOnInit() {
@@ -42,12 +49,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage.subscribe( (err: string) => {
-      if (err !== undefined) {
-        this.socketloginReplayMessage = err;
-      }
-      }
-    );
+    this.loginService.loginReplayMessage.pipe(takeUntil(this._unsubscribeAll))
+      .subscribe( (err: string) => {
+        if (err !== undefined) {
+          this.socketloginReplayMessage = err;
+        }
+        }
+      );
   }
 
   get username() {
@@ -84,7 +92,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loginSubscription.unsubscribe();
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }
 

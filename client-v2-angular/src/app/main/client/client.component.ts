@@ -2,9 +2,9 @@ import { Component, Inject, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
-import { GameService } from '../services/game.service';
-import { LoginService } from '../authentication/services/login.service';
 import { PreloaderService } from './common/services/preloader.service';
+import { LoginService } from '../authentication/services/login.service';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-client',

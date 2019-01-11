@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../authentication/services/login.guard';
 import { ClientContainerComponent } from './client-container/client-container.component';
+import { AuthGuard } from '../authentication/services/login.guard';
 
 const clientRouting: Routes = [
   // {

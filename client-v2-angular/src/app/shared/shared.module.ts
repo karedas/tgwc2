@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Auth2Module } from '../authentication/auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../services/socket.service';
 import { PipesModule } from '../pipes/pipes.module';
-import { PreloaderService } from '../client/common/services/preloader.service';
-import { AudioService } from '../client/audio/audio.service';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { Auth2Module } from '../main/authentication/auth.module';
+import { PreloaderService } from '../main/client/common/services/preloader.service';
+import { AudioService } from '../main/client/audio/audio.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     ReactiveFormsModule,
     PipesModule,
     // Various
-    NgScrollbarModule
+    NgScrollbarModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     GameService,

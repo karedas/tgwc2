@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { SocketService } from '../../services/socket.service';
-import { socketEvent } from '../../models/socketEvent.enum';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ClientState } from '../../store/state/client.state';
-import { User } from 'src/app/models/user/user.model';
 import { SocketStatusAction, LoginFailureAction } from 'src/app/store/actions/client.action';
 import { loginError } from './login-errors';
+import { SocketService } from 'src/app/services/socket.service';
+import { ClientState } from 'src/app/store/state/client.state';
+import { socketEvent } from 'src/app/models/socketEvent.enum';
 
 export const loginEventName = {
   READY: 'ready',

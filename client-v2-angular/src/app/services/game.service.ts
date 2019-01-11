@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from './socket.service';
-import { LoginService } from '../authentication/services/login.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
@@ -8,6 +7,7 @@ import { GameMode } from '../store/game.const';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { State } from '../store';
 import { IHistory } from '../models/client/history.model';
+import { LoginService } from '../main/authentication/services/login.service';
 
 
 

@@ -10,7 +10,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InputComponent } from './dashboard/input/input.component';
 import { CharacterPanelComponent } from './dashboard/character-panel/character-panel.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { SharedModule } from '../shared/shared.module';
 import { MapComponent } from './map/map.component';
 import { SkyComponent } from './sky/sky.component';
 import { DirectionsComponent } from './map/directions/directions.component';
@@ -25,6 +24,7 @@ import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
 import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component';
 import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
