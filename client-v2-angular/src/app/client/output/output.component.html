@@ -13,7 +13,7 @@
               <div *ngFor="let data of output">
                 <div class="tg-line" [ngSwitch]="data.type">
                   <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
-                  <tg-room *ngSwitchCase="'room'" [html]="data.content"></tg-room>
+                  <tg-room *ngSwitchCase="'room'" [html]="data.content" [lastDescription]="lastRoomDescription"></tg-room>
                 </div>
               </div>
             </div>
@@ -22,30 +22,12 @@
         <div>
           <ng-scrollbar>
             <div class="tg-output--extradetail">
-              <tg-room [html]="lastRoom$ | async" [withExtra]="extraDetail$ | async"></tg-room>
+              <tg-room [html]="lastRoom$ | async" [withExtra]="isWithExtra | async" [lastDescription]="lastRoomDescription"></tg-room>
             </div>
           </ng-scrollbar>
         </div>
       </jqxSplitter>
     </div>
-    <!-- <div class="splitter-panel">
-        <div class="tg-output-extra">
-          <div id="extraoutput" class="tg-extraoutput-history">
-            <div class="extraoutput-header">
-              <div class="out-title" id="detailtitle"></div>
-              <div class="extra-detailimg">
-                <img src="" id="detailimage" />
-              </div>
-              <div class="detaildesc" id="detaildesc"></div>
-            </div>
-            <div class="extraoutput-detail">
-              <div class="extranotice">
-               <span>Guarda</span> dove ti trovi, qualcosa o qualcuno. 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
   </div>
   <div class="tg-border-box">
     <div class="tg-border tg-border-top"></div>

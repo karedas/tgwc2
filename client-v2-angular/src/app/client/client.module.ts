@@ -23,6 +23,7 @@ import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwi
 import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
+import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { AudioComponent } from './audio/audio.component';
     jqxWindowComponent,
     jqxSplitterComponent,
     AudioComponent,
+    ExtraboardComponent,
   ],
   imports: [
     ClientRoutingModule,

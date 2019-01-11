@@ -8,7 +8,7 @@
             <!-- Character Avatar -->
             <div class="tg-characteravatar b-ironlight tg-shadow" rel="tooltip" title="">
               <div class="tg-avatar-wrap">
-                <img src="#" alt="Avatar" />
+                <img src="#" alt="Avatar" *ngIf="characterImg"/>
               </div>
               <div class="tg-border-box">
                 <div class="tg-border tg-border-top"></div>
@@ -17,40 +17,44 @@
                 <div class="tg-border tg-border-bottom"></div>
               </div>
             </div>
-            <!-- Character Info Box -->
-            <div *ngIf="infoChartOpen" class="tg-infochar">
+            <div class="tg-infochar">
               <!-- Character Name & Status -->
               <div class="tg-infocharname">
-                <span class="charName"></span>
+                <span class="charName">[NAME]</span>
                 <i class="pg-status"></i>
               </div>
-            </div>
-            <!-- Character Status Bars -->
-            <div class="tg-meterbar">
-              <div class="barcont barbig">
-                <span class="tg-statusbar-text" rel="tooltip" title="Punti Salute">PS:
-                  <i>{{ status[0] }}</i> / 100</span>
-                <span class="red barC healthbar" [style.width.%]="status[0]"></span>
-              </div>
-              <div class="barcont barbig" rel="tooltip" title="Punti Movimento">
-                <span class="tg-statusbar-text">PM:
-                  <i>{{ status[1] }}</i> / 100</span>
-                <span class="green barC movebar" [style.width.%]="status[1]"></span>
-              </div>
-              <div class="tg-extrabars">
-                <div class="barcont barthin" rel="tooltip" title="Fame">
-                  <span class="tg-statusbar-text">Fame:
-                    <i>{{ status[2] }}</i> / 100</span>
-                  <span class="orange barC hungrybar" [style.width.%]="status[2]"></span>
+              <!-- Character Status Bars -->
+              <div class="tg-meterbar">
+                <div class="tg-extrabars">
+                  <div class="barcont barthin lft">
+                    <span class="tg-statusbar-text" rel="tooltip" title="Punti Salute">PS:
+                      <i>{{ status[0] }}</i> / 100</span>
+                    <span class="red barC healthbar" [style.width.%]="status[0]"></span>
+                  </div>
+                  <div class="barcont barthin" rel="tooltip" title="Punti Movimento">
+                    <span class="tg-statusbar-text">PM:
+                      <i>{{ status[1] }}</i> / 100</span>
+                    <span class="green barC movebar" [style.width.%]="status[1]"></span>
+                  </div>
                 </div>
-                <div class="barcont barthin" rel="tooltip" title="Sete">
-                  <span class="tg-statusbar-text">Sete:
-                    <i>{{ status[3] }}</i> / 100</span>
-                  <span class="blue barC thirstbar" [style.width.%]="status[3]"></span>
+                <div class="tg-extrabars">
+                  <div class="barcont barthin lft" rel="tooltip" title="Fame">
+                    <span class="tg-statusbar-text">Fame:
+                      <i>{{ status[2] }}</i> / 100</span>
+                    <span class="orange barC hungrybar" [style.width.%]="status[2]"></span>
+                  </div>
+                  <div class="barcont barthin" rel="tooltip" title="Sete">
+                    <span class="tg-statusbar-text">Sete:
+                      <i>{{ status[3] }}</i> / 100</span>
+                    <span class="blue barC thirstbar" [style.width.%]="status[3]"></span>
+                  </div>
                 </div>
               </div>
+
+              
             </div>
           </div>
+          <tg-extraboard></tg-extraboard>
         </div>
       </div>
     </div>
@@ -62,11 +66,6 @@
     <div class="tg-border tg-border-bottom"></div>
   </div>
 </div>
-
-
-
-
-
 
 
 <!-- <div class="tg-combatpanel col-auto pr-0">

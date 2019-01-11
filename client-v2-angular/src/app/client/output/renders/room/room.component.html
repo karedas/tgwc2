@@ -7,11 +7,11 @@
 
 <ng-template #extradetail>
     <div class="tg-extraoutput--header">
-        <div class="tg-room--title">{{ html.title | dataToHtml:true }}</div>
+        <div class="tg-room--title" [innerHtml]="html.title | dataToHtml:true"></div>
         <div class="tg-room--image" *ngIf="html.image">
           <img [src]="getRoomImage(html.image)"/>
         </div>
-         <div class="tg-room--desc" *ngIf="html.desc.base" [innerHtml]="html.desc.base | dataToHtml:true" ></div>
+         <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true" ></div>
     </div>
 </ng-template>
 

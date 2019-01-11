@@ -9,12 +9,16 @@ export class IconsPipe implements PipeTransform {
   }
   
   transform(value: any, ...args:any): any {
-    value = value.replace(/&!sm"[^"]*"/gm, (icon) => {
+    value = value.replace(/&!sm"[^"]*"/gm, (icon: any) => {
       let icon_parse = icon.slice(5, -1).split(',');
         return this.renderIcon(icon_parse[0], icon_parse[1], 'room', null, null, 'interact pers');
       });
-      return this._sanitizer.bypassSecurityTrustHtml(value ? String(value) : '');
+    value = value.replace(/&!si"[^"]*"/gm, (icon: any) => {
+      let icon_parse = icon.slice(5, -1).split(',');
+        return this.renderIcon(icon_parse[0], null, null, null, null, "v" + icon_parse[1]);
+    })
 
+    return this._sanitizer.bypassSecurityTrustHtml(value ? String(value) : '');
   }
 
   renderIcon(icon, mrn: string, cnttype: string, cntmrn: string, cmd: string, addclass: string): any{

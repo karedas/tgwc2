@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class RoomComponent implements AfterViewInit {
   @Input() html: Room;
   @Input() withExtra: boolean;
+  @Input() lastDescription: any = '';
 
   private perscont: string;
   private objcont: string;
@@ -17,7 +18,6 @@ export class RoomComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-    console.log(this.html);
     // if (this.html.objcont) {
     //   this.renderDetailsList(this.html.objcont, 'obj')
     // }

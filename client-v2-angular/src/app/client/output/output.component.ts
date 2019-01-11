@@ -1,8 +1,8 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -21,6 +21,7 @@ export class OutputComponent implements AfterViewInit {
   output: any = [];
   lastRoom$: Observable<any>;
   extraDetail$: BehaviorSubject<boolean>;
+  lastRoomDescription: string;
 
   private outputTrimLines: number = 500;
 
@@ -34,7 +35,8 @@ export class OutputComponent implements AfterViewInit {
   ngAfterViewInit() {
 
     //Listen Base Text Data
-    this.store.pipe(select(fromSelectors.getDataBase)).subscribe(
+    this.store.pipe(select(fromSelectors.getDataBase))
+    .subscribe(
       (base: string[]) => {
         const content = this.getContentObject('base', base[0]);
         this.output.push(content);
@@ -47,6 +49,11 @@ export class OutputComponent implements AfterViewInit {
       .pipe(filter(room => room && room !== undefined))
       .subscribe(
         (room: any) => {
+          if(room.desc.base != undefined && room.desc.base != '') {
+            this.lastRoomDescription = room.desc.base;
+          }
+          console.log(this.lastRoomDescription);
+
           if(!this.extraDetail$.value) {
             const content = this.getContentObject('room', room);
             this.output.push(content);
@@ -76,4 +83,17 @@ export class OutputComponent implements AfterViewInit {
       this.scrollBar.scrollToBottom(0);
     }, 15);
   }
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?: Event) {
+    const scrWidth = window.innerWidth;
+    console.log(scrWidth);
+    if (scrWidth < 712) {
+      this.extraDetail$.next(false);
+    }
+    else {
+      this.extraDetail$.next(true);
+    }
+  };
+
 }
