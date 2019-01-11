@@ -16,5 +16,5 @@ export class SkyComponent {
     this.store.select(getSky).subscribe(
       sky => {this.skyValue = sky; }
     );
-   }
+    }
 }

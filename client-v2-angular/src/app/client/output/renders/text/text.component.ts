@@ -9,7 +9,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 
 export class TextComponent   {
-   @Input() html: any;
+    @Input() html: any;
 
   constructor() {
   }

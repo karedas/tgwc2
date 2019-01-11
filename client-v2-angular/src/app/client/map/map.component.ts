@@ -156,30 +156,30 @@ export class MapComponent implements OnDestroy, AfterViewInit {
         }
       }
 
-      if (l == 0) {
+      if (l === 0) {
         for (let y = 0; y < this.maxMapWidth; y++) {
           for (let x = 0; x < this.maxMapHeight; x++) {
-            if (this.layerMap[y][x] == 59) {
+            if (this.layerMap[y][x] === 59) {
               let clipx = 0,
                 clipy = 0,
                 swidth = 48,
                 sheight = 48;
 
-              if (y == 0 || this.layerMap[y - 1][x] == 59) {
+              if (y === 0 || this.layerMap[y - 1][x] === 59) {
                 clipy = 8;
                 sheight -= 8;
               }
 
-              if (y == (this.maxMapHeight - 1) || this.layerMap[y + 1][x] == 59) {
+              if (y === (this.maxMapHeight - 1) || this.layerMap[y + 1][x] === 59) {
                 sheight -= 8;
               }
 
-              if (x == 0 || this.layerMap[y][x - 1] == 59) {
+              if (x === 0 || this.layerMap[y][x - 1] === 59) {
                 clipx = 8;
                 swidth -= 8;
               }
 
-              if (x == (this.maxMapWidth - 1) || this.layerMap[y][x + 1] == 59) {
+              if (x === (this.maxMapWidth - 1) || this.layerMap[y][x + 1] === 59) {
                 swidth -= 8;
               }
               this.context.drawImage(this.mapShadowTile, clipx, clipy, swidth, sheight, x * this.mapTileWidth - 8 + clipx, y * this.mapTileHeight - 8 + clipy, swidth, sheight);
@@ -206,11 +206,11 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     if (dataMap.s) {
       // Start Snow effect
 //      this.context.snow.start();
-     // $('#snowCanvas').show();
+      // $('#snowCanvas').show();
     } else {
       // Stop Snow effect
       // this.context.snow.stop();
-     // $('#snowCanvas').hide();
+      // $('#snowCanvas').hide();
     }
   }
 

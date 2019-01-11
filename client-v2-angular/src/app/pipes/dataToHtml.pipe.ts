@@ -28,7 +28,7 @@ export class DataToHtmlPipe implements PipeTransform {
       let page = '';
       const parags = value = value.replace(/\r/gm, '').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);
       parags.forEach(val => {
-        if (val != '') {
+        if (val !== '') {
           page += '<div' + (styleclass ? ' class="' + styleclass + '"' : '') + '>' + val + '</div>';
         }
       });

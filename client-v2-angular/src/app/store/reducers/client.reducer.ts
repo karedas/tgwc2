@@ -2,44 +2,44 @@ import { ClientState, initialState } from '../state/client.state';
 import { ClientEventType, ClientActions } from '../actions/client.action';
 
 export function reducer(
-	state = initialState,
-	action: ClientActions
+  state = initialState,
+  action: ClientActions
 ): ClientState {
 
-	switch (action.type) {
+  switch (action.type) {
 
-		case ClientEventType.CONNECT: {
-			return Object.assign( {}, state, { socketStatus: action.payload });
-		}
+    case ClientEventType.CONNECT: {
+      return Object.assign( {}, state, { socketStatus: action.payload });
+    }
 
-		case ClientEventType.LOGIN_SUCCESS: {
-			return Object.assign( {}, state, { isAuthenticated: action.payload });
-		}
+    case ClientEventType.LOGIN_SUCCESS: {
+      return Object.assign( {}, state, { isAuthenticated: action.payload });
+    }
 
-		case ClientEventType.LOGIN_FAILURE: {
-			return { ...state, errorMessage: action.payload };
-		}
+    case ClientEventType.LOGIN_FAILURE: {
+      return { ...state, errorMessage: action.payload };
+    }
 
-		case ClientEventType.DISCONNECT: {
-			return initialState;
-		}
+    case ClientEventType.DISCONNECT: {
+      return initialState;
+    }
 
-		case ClientEventType.INGAME: {
-			return Object.assign({}, state, { ingame: !state.inGame });
-		}
+    case ClientEventType.INGAME: {
+      return Object.assign({}, state, { ingame: !state.inGame });
+    }
 
-		case ClientEventType.AUDIO: {
-			return Object.assign({}, state, { track: action.payload});
-		}
+    case ClientEventType.AUDIO: {
+      return Object.assign({}, state, { track: action.payload});
+    }
 
-		case ClientEventType.ISGOD: {
-			return Object.assign({}, state, {userlevel: action.payload });
-		}
+    case ClientEventType.ISGOD: {
+      return Object.assign({}, state, {userlevel: action.payload });
+    }
 
-		default: {
-			return state;
-		}
-	}
+    default: {
+      return state;
+    }
+  }
 }
 
 export const getSocketStatus = (state: ClientState): string => state.socketStatus;

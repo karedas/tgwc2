@@ -24,8 +24,8 @@ export class RoomComponent implements AfterViewInit {
   }
 
   getRoomImage(img: string ): string {
-     const fullPathImage = environment.media_address + img;
-     return fullPathImage;
+      const fullPathImage = environment.media_address + img;
+      return fullPathImage;
   }
 
   renderDetailsList(objs: any, objsType: string): string {

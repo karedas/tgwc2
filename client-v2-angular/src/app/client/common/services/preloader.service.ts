@@ -22,18 +22,18 @@ export class PreloaderService {
     this.totalAssets = AssetsList.length;
 
     AssetsList.forEach((urlimg: string, i: any) => {
-       this.images[i] = new Image();
-       this.images[i].src = 'assets/images/' + urlimg;
-       this.images[i].onload = () => {
+        this.images[i] = new Image();
+        this.images[i].src = 'assets/images/' + urlimg;
+        this.images[i].onload = () => {
         this.percentage$.next(this.percentage$.value);
         this.imageLoadPost();
-       };
+        };
 
-       this.images[i].onerror = () => {
+        this.images[i].onerror = () => {
 
-         this.percentage$.next(this.percentage$.value);
-         this.imageLoadPost();
-       };
+          this.percentage$.next(this.percentage$.value);
+          this.imageLoadPost();
+        };
     });
   }
 
@@ -53,8 +53,8 @@ export class PreloaderService {
   }
 
   onComplete () {
-   this.status$.next(true);
-   this.status$.complete();
+    this.status$.next(true);
+    this.status$.complete();
   }
 
 }

@@ -25,7 +25,6 @@ export class IconsPipe implements PipeTransform {
         if (!icon) {
             icon = 416;
         }
-        // return '<div class="iconimg ico_' + icon + ' ' + (addclass ? ' ' + addclass : '') + '" style="background-position:' + this.tileBgPos(icon) + '"' + (mrn ? ' data-mrn="' + mrn + '"' : '') + (cmd ? ' data-cmd="' + cmd + '"' : '') + (cnttype ? ' data-cnttype="' + cnttype + '"' : '') + (cntmrn ? ' data-cntmrn="' + cntmrn + '"' : '') + '></div>';
         return '<div class="iconimg ico_' + icon + '" style="background-position:' + this.tileBgPos(icon) + '"></div>';
   }
 

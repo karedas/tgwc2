@@ -6,7 +6,7 @@ export interface IHero {
 export class Hero implements IHero {
   name = '';
   status?: string[] = ['0,0,0,0'];
-  constructor(name?: string, status?: number[], ) {
+  constructor(name?: any, status?: any[], ) {
       this.name = name;
   }
 }

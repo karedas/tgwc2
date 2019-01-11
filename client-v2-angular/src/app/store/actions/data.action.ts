@@ -39,7 +39,7 @@ export class RoomAction implements Action {
 
 export class PlayerStatus implements Action {
     readonly type = DataEvenType.PLAYERSTATUS;
-    constructor( public payload: Hero) {}
+    constructor( public payload: any) {}
 }
 
 export class MapAction implements Action {

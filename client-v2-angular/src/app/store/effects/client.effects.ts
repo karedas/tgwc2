@@ -5,15 +5,15 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ClientEffects {
-	constructor(
-		private actions$: Actions
-	) { }
+  constructor(
+    private actions$: Actions
+  ) { }
 
-	// @Effect({ dispatch: false })
-	// 	playerUpdate$ = this.actions$.pipe(
-	// 		ofType(ClientEventType),
-	// // 	tap(action => {
-	// // 		console.log(action);
-	// // 	})
-	// )
+  // @Effect({ dispatch: false })
+  // 	playerUpdate$ = this.actions$.pipe(
+  // 		ofType(ClientEventType),
+  // // 	tap(action => {
+  // // 		console.log(action);
+  // // 	})
+  // )
 }

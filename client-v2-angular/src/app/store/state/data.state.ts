@@ -7,9 +7,9 @@ export interface DataState {
     base: any[];
     sky: string;
     doors?: any;
-		room: Room;
-		map: Map;
-		hero: Hero;
+    room: Room;
+    map: Map;
+    hero: Hero;
 }
 
 export const initialState: DataState = {
@@ -17,7 +17,7 @@ export const initialState: DataState = {
     base: [''],
     sky: undefined,
     doors: [],
-		room: undefined,
-		map: undefined,
-		hero: new Hero(),
+    room: undefined,
+    map: undefined,
+    hero: new Hero(),
 };

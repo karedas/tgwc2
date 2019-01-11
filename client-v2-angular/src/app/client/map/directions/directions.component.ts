@@ -41,9 +41,9 @@ export class DirectionsComponent {
 
     $event.preventDefault();
 
-    if (this.userlevel == 0 && this.dirStatus[dir] == '3') {
+    if (this.userlevel === 0 && this.dirStatus[dir] === '3') {
       this.dirCmd = `apri ${this.dirNames[dir]}`;
-    } else if (this.userlevel == 0 && this.dirStatus[dir] == '4') {
+    } else if (this.userlevel === 0 && this.dirStatus[dir] === '4') {
       this.dirCmd = 'sblocca ' + this.dirNames[dir];
     } else {
       this.dirCmd = this.dirNames[dir];
