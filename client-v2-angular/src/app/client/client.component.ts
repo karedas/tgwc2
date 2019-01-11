@@ -25,15 +25,14 @@ export class ClientComponent {
     private game: GameService,
     private preloader: PreloaderService,
     @Inject(DOCUMENT) private document: any
-  )
-  {
+  ) {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
       this.document.body.className += 'is-mobile';
     }
 
     this.preloader.percentage.subscribe(
-      amount => { this.preloadPerc = amount }
+      amount => { this.preloadPerc = amount; }
     );
 
     this.preloader.status$.subscribe(

@@ -7,8 +7,8 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./input.component.scss']
 })
 
-export class InputComponent implements AfterViewInit{
-  @ViewChild('inputCommand') ic:ElementRef;
+export class InputComponent implements AfterViewInit {
+  @ViewChild('inputCommand') ic: ElementRef;
 
   constructor(private game: GameService) { }
 

@@ -23,18 +23,17 @@ export class OutputComponent implements AfterViewInit {
   extraDetail$: BehaviorSubject<boolean>;
   lastRoomDescription: string;
 
-  private outputTrimLines: number = 500;
+  private outputTrimLines = 500;
 
 
-  constructor(private store: Store<DataState>) 
-  { 
-    this.lastRoom$ = this.store.pipe(select(fromSelectors.getRoomBase))
+  constructor(private store: Store<DataState>) {
+    this.lastRoom$ = this.store.pipe(select(fromSelectors.getRoomBase));
     this.extraDetail$ = new BehaviorSubject(true);
   }
 
   ngAfterViewInit() {
 
-    //Listen Base Text Data
+    // Listen Base Text Data
     this.store.pipe(select(fromSelectors.getDataBase))
     .subscribe(
       (base: string[]) => {
@@ -43,25 +42,25 @@ export class OutputComponent implements AfterViewInit {
         // You might need to give a tiny delay before updating the scrollbar
         this.scrollPanelToBottom();
       },
-    )
+    );
 
     this.store.select(fromSelectors.getRoomBase)
       .pipe(filter(room => room && room !== undefined))
       .subscribe(
         (room: any) => {
-          if(room.desc.base != undefined && room.desc.base != '') {
+          if (room.desc.base != undefined && room.desc.base != '') {
             this.lastRoomDescription = room.desc.base;
           }
           console.log(this.lastRoomDescription);
 
-          if(!this.extraDetail$.value) {
+          if (!this.extraDetail$.value) {
             const content = this.getContentObject('room', room);
             this.output.push(content);
             this.trimOutput();
             this.scrollPanelToBottom();
           }
         }
-      )
+      );
   }
 
   get isWithExtra(): Observable<any> {
@@ -69,7 +68,7 @@ export class OutputComponent implements AfterViewInit {
   }
 
   private getContentObject(t: string, c: any): any {
-    return Object.assign({}, { type: t, content: c })
+    return Object.assign({}, { type: t, content: c });
   }
 
   private trimOutput(): void {
@@ -90,10 +89,9 @@ export class OutputComponent implements AfterViewInit {
     console.log(scrWidth);
     if (scrWidth < 712) {
       this.extraDetail$.next(false);
-    }
-    else {
+    } else {
       this.extraDetail$.next(true);
     }
-  };
+  }
 
 }

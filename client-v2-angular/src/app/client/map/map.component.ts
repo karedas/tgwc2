@@ -18,14 +18,14 @@ export const images_path = '/assets/images/';
   styleUrls: ['./map.component.scss']
 })
 
-export class MapComponent implements OnDestroy, AfterViewInit{
+export class MapComponent implements OnDestroy, AfterViewInit {
 
   @ViewChild('map') map: ElementRef;
-  
+
   // private dataMap: Subject<Map> = new BehaviorSubject(null);
   // _map$: Observable<any> = this.dataMap.asObservable();
-  private _unsubscribeAll: Subject<any>
-  private map$:Observable<Map>;
+  private _unsubscribeAll: Subject<any>;
+  private map$: Observable<Map>;
 
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
@@ -47,7 +47,7 @@ export class MapComponent implements OnDestroy, AfterViewInit{
 
     this._unsubscribeAll = new Subject();
   }
-  
+
   ngAfterViewInit() {
 
     this.map$ = this.store.select(fromSelectors.getMap);
@@ -55,7 +55,7 @@ export class MapComponent implements OnDestroy, AfterViewInit{
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(
       (map: Map) => {
-        if(map !== undefined) {
+        if (map !== undefined) {
           this.updateMap(map);
         }
       }
@@ -69,7 +69,7 @@ export class MapComponent implements OnDestroy, AfterViewInit{
     this.prepareCanvas();
   }
 
-  private prepareCanvas(): void{
+  private prepareCanvas(): void {
     this.context = (<HTMLCanvasElement>this.map.nativeElement).getContext('2d');
     this.canvasWidth = this.maxMapWidth * this.mapTileWidth;
     this.canvasHeight = this.maxMapHeight * this.mapTileHeight;
@@ -107,7 +107,7 @@ export class MapComponent implements OnDestroy, AfterViewInit{
     this.drawCanvasMap(dataMap);
   }
 
-  public drawCanvasMap(dataMap): void{
+  public drawCanvasMap(dataMap): void {
     const _ = this;
     let xoff, yoff, xlim, ylim, light;
     // clip options

@@ -7,7 +7,7 @@ export function reducer(
 ): ClientState {
 
 	switch (action.type) {
-		
+
 		case ClientEventType.CONNECT: {
 			return Object.assign( {}, state, { socketStatus: action.payload });
 		}
@@ -29,11 +29,11 @@ export function reducer(
 		}
 
 		case ClientEventType.AUDIO: {
-			return Object.assign({}, state, { track: action.payload})
+			return Object.assign({}, state, { track: action.payload});
 		}
 
 		case ClientEventType.ISGOD: {
-			return Object.assign({}, state, {userlevel: action.payload }) 
+			return Object.assign({}, state, {userlevel: action.payload });
 		}
 
 		default: {

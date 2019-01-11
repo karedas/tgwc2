@@ -121,7 +121,7 @@ export class LoginService {
 
   onLoginOk(data) {
     /** Show NEWS TODO */
-    //const user = new User({ state: 'Active' });
+    // const user = new User({ state: 'Active' });
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }

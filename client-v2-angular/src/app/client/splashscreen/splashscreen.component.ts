@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SplashscreenComponent implements OnInit {
 
-  @Input('preloadPerc') preloadPerc:number; 
+  @Input('preloadPerc') preloadPerc: number;
   constructor() { }
 
   ngOnInit() {

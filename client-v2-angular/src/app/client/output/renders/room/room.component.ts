@@ -23,15 +23,15 @@ export class RoomComponent implements AfterViewInit {
     // }
   }
 
-  getRoomImage(img:string ): string {
-     const fullPathImage = environment.media_address + img
+  getRoomImage(img: string ): string {
+     const fullPathImage = environment.media_address + img;
      return fullPathImage;
   }
 
-  renderDetailsList(objs:any, objsType:string): string {
-    let html = '';
-    let res = '';
-    let interactClass = '';
+  renderDetailsList(objs: any, objsType: string): string {
+    const html = '';
+    const res = '';
+    const interactClass = '';
 
     if (objs.list) {
       if (objsType == 'pers' || objsType == 'equip') { }
@@ -39,13 +39,13 @@ export class RoomComponent implements AfterViewInit {
 
     for (let n = 0; n < objs.list.length; n++) {
 
-      let l = objs.list[n];
+      const l = objs.list[n];
       // let is_group = (l.mrn && l.mrn.length) > 1;
       // let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]);
-      let grp_attribute = '';
-      let exp_attribute = '';
-      let tooltip = '';
-      let expicon = '';
+      const grp_attribute = '';
+      const exp_attribute = '';
+      const tooltip = '';
+      const expicon = '';
 
 
       /* if object/person type is more then 1 */
@@ -63,11 +63,11 @@ export class RoomComponent implements AfterViewInit {
 
 
       /* print header triggerable element */
-      //html += `<div class="element${grp_attribute} ">`;
+      // html += `<div class="element${grp_attribute} ">`;
       // mob/obj icon
       // this.objcont += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, interactClass + ' ' + type);
       // this.objcont += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b class="poseq">' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
-      //html += '</div>';
+      // html += '</div>';
 
       /* Start Collapsable Obj/Mob Container */
       // if (is_group) {

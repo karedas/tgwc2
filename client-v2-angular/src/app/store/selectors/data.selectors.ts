@@ -21,7 +21,7 @@ export const getDataBase = createSelector(
   (data: DataState) => data.base
 );
 
-/* Hero Selectors */ 
+/* Hero Selectors */
 export const getStatus = createSelector(
   getDataState,
   (data: DataState) => data.hero.status
@@ -35,15 +35,15 @@ export const getRoomBase = createSelector(
 
 export const getDoors = createSelector(
   getDataState,
-  (data:DataState) => data.doors
-)
+  (data: DataState) => data.doors
+);
 
 export const getSky = createSelector(
   getDataState,
-  (data:DataState)  => data.sky
+  (data: DataState)  => data.sky
 );
 
 export const getMap = createSelector(
   getDataState,
   data => data.map
-)
+);

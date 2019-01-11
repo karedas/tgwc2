@@ -19,7 +19,7 @@ export class DirectionsComponent {
   private dirNames: string[] = ['nord', 'est', 'sud', 'ovest', 'alto', 'basso'];
   private dirStatus: string[] = ['00000'];
 
-  userlevel: number = 0;
+  userlevel = 0;
 
   constructor(
     private gameService: GameService,
@@ -28,12 +28,12 @@ export class DirectionsComponent {
 
 
     this.store.pipe(select(getDoors))
-      .subscribe(door => this.setDoors(door))
+      .subscribe(door => this.setDoors(door));
 
     this.store.pipe(select(getUserLevel))
       .subscribe(level => {
         this.userlevel = level;
-      })
+      });
 
 
   }
@@ -44,7 +44,7 @@ export class DirectionsComponent {
     if (this.userlevel == 0 && this.dirStatus[dir] == '3') {
       this.dirCmd = `apri ${this.dirNames[dir]}`;
     } else if (this.userlevel == 0 && this.dirStatus[dir] == '4') {
-      this.dirCmd = 'sblocca ' + this.dirNames[dir]
+      this.dirCmd = 'sblocca ' + this.dirNames[dir];
     } else {
       this.dirCmd = this.dirNames[dir];
     }
@@ -57,12 +57,12 @@ export class DirectionsComponent {
     for (let d = 0; d < this.dirNames.length; ++d) {
       this.doorsStyle[this.dirNames[d]] = {
         'background-position': (-26 * doors[d] + 'px center')
-      }
+      };
     }
     this.dirStatus = doors;
   }
 
-  @HostListener("window:keydown", ['$event'])
+  @HostListener('window:keydown', ['$event'])
   onkeydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowUp':

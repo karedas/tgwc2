@@ -1,0 +1,22 @@
+.jqx-menu {
+  background: transparent;
+  border: none;
+
+  .jqx-menu ul {
+    margin: 0;
+  }
+
+  .jqx-menu-item-top-hover, 
+  .jqx-fill-state-hover,
+  .jqx-menu-item-hover,
+  .jqx-menu-item a:hover,
+  .jqx-menu-item-top a:hover,
+  .jqx-menu-disabled a:hover{
+    background: transparent;
+    border: none;
+  }
+
+  .jqx-menu-item-top{
+    border: none;
+  }
+}

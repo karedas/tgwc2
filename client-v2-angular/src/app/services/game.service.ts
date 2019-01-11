@@ -39,7 +39,7 @@ export class GameService {
       const data = this.netData.substr(0, len - 3);
       this.dataParserService.parse(data);
       this.netData = '';
-      
+
     } else if (len > 2000000) {
       this.netData = '';
       this.loginService.logout();

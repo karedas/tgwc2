@@ -17,7 +17,7 @@ export function reducer(
 		case DataEvenType.PLAYERSTATUS:
 			return Object.assign({}, state, {
 				hero: action.payload
-			})
+			});
 		case DataEvenType.DOORS:
 			return Object.assign({}, state, {
 				doors: action.payload,
@@ -33,7 +33,7 @@ export function reducer(
 		case DataEvenType.SKY:
 			return Object.assign({}, state, {
 				sky: action.payload,
-			})
+			});
 		default:
 			return state;
 	}

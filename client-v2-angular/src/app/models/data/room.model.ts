@@ -11,7 +11,7 @@ export interface List {
 	mrn: number[];
 	desc: string;
 	mvprc: number;
-	wgt: number
+	wgt: number;
 }
 
 export interface ObjAndPersonCont {
@@ -22,7 +22,7 @@ export interface Room {
 	desc: Desc;
 	icon: number;
 	image: string;
-	objcont: ObjAndPersonCont
+	objcont: ObjAndPersonCont;
 	perscont: ObjAndPersonCont;
 	ver: number;
 }

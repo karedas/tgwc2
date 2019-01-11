@@ -10,11 +10,11 @@ import { Store } from '@ngrx/store';
 })
 export class SkyComponent {
 
-  skyValue:string;
+  skyValue: string;
 
   constructor( private store: Store<DataState>) {
     this.store.select(getSky).subscribe(
-      sky => {this.skyValue = sky}
+      sky => {this.skyValue = sky; }
     );
    }
 }

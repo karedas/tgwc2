@@ -47,18 +47,18 @@ export class DataParser {
     let pos: any;
 
     console.log(data);
-    
+
     // Hide text (password)
     data = data.replace(this.msgRegexp.hideInputText, (msg) => {
-      console.warn('Todo: Hide Text')
-      //this.parseUiObject$.next({ data, type: GameMode.HIDEINPUTTEXT });
+      console.warn('Todo: Hide Text');
+      // this.parseUiObject$.next({ data, type: GameMode.HIDEINPUTTEXT });
       return '';
     });
 
     // Show text (normal input)
     data = data.replace(this.msgRegexp.showInputText, () => {
-      console.warn('Todo: Show text')
-      //this.parseUiObject$.next({ data, type: GameMode.SHOWINPUTTEXT });
+      console.warn('Todo: Show text');
+      // this.parseUiObject$.next({ data, type: GameMode.SHOWINPUTTEXT });
       return '';
     });
 
@@ -93,7 +93,7 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      console.log('update_parse')
+      console.log('update_parse');
 
       return '';
     });

@@ -1,35 +1,44 @@
-<!-- Main NavBar-->
-<div class="row">
-  <nav class="tg-navbar navbar-expand navbar">
-    <ul class="navbar-nav">
-      <li class="nav-item h-100">
+<jqxMenu #tgMainMenu [width]="'100%'" [height]="28" [autoOpen]="true">
+    <ul>
+      <li>
         <a href="#" class="tg-brand">
           <img src="assets/images/logo/tgminilogo.png" alt="The Gate Mud" />
         </a>
       </li>
+      <li>
+        <a href="#" id="tgNavBarOpzioniDropDown">
+          <i class="fas fa-user-circle"></i> Profilo
+        </a>
+        <ul>
+          <a href="#opzioni">Opzioni</a>
+          <a href="#log">Log di gioco</a>
+          <a id="userDisconnect" href="#esci">Esci</a>
+        </ul>
+      </li>
+      <li>
+        <a href="#" id="tgNavBarGuidaDropDown">
+          <i class="fas fa-question-circle"></i> Guida
+        </a>
+        <ul>
+          <li>
+              <a class="dropdown-item" href="#">Guida al gioco</a>
+          </li>
+          <li>
+              <a class="dropdown-item" href="#">Ultime Novità di gioco</a>
+          </li>
+          <li>
+              <a class="dropdown-item" href="#">Note di rilascio Webclient</a>
+          </li>
+          <li>
+              <a class="dropdown-item" href="#">Segnala un problema</a>
+          </li>
+          <li>
+              <a class="dropdown-item" href="#">Riferimento ai tasti di scelta rapida</a>
+          </li>
+          <li>
+              <a class="dropdown-item" href="#">Informazioni su The Gate</a>
+          </li>
+        </ul>
+      </li>
     </ul>
-    <ul class="navbar-nav">
-
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <!-- <li class="nav-item dropdown">
-        <button class="tg-fnt-button no-feature dropdown-toggle" id="tgNavBartriggerAudio" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-volume-up"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="tgNavBarTriggerAudio">
-          <div class="tg-audiobox">
-            <span class="tg-audiotoggle"></span>
-            <div class="tg-audiolabel">55</div>
-          </div>
-        </div>
-      </li> -->
-    </ul>
-    <form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider d-none" autocomplete="off">
-      <input class="form-control" id="tgSearchInput" type="search" placeholder="Cerca" aria-label="Cerca">
-      <button class="tg-fnt-button" type="submit" id="tgSearchSubmit">
-        <i class="fas fa-search"></i>
-      </button>
-    </form>
-  </nav>
-</div>
+  </jqxMenu>

@@ -11,7 +11,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 export class TextComponent   {
    @Input() html: any;
 
-  constructor() { 
+  constructor() {
   }
 
 

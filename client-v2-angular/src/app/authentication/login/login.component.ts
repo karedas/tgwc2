@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFailed: boolean;
   loginSubscription: Subscription;
 
-  socketloginReplayMessage: string; 
+  socketloginReplayMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,9 +42,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage.subscribe( (err:string) => {
-      if(err !== undefined)
-        this.socketloginReplayMessage = err
+    this.loginService.loginReplayMessage.subscribe( (err: string) => {
+      if (err !== undefined) {
+        this.socketloginReplayMessage = err;
+      }
       }
     );
   }

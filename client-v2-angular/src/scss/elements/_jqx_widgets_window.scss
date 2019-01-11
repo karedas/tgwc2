@@ -1,12 +1,17 @@
+.jqx-window {
 
-.jqx-widget-content  {
+	border: 0;
+	background-color: transparent;
+
+  .jqx-widget-content {
     border: none;
     background: transparent;
-}
+  }
 
-.jqx-widget-header {
+  .jqx-widget-header {
     border: 0;
     height: 0;
     padding: 0;
     visibility: hidden;
+  }
 }

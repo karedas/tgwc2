@@ -15,13 +15,13 @@ export class CharacterPanelComponent {
   constructor(private store: Store<DataState>) {
     this.store.pipe(select(getStatus)).subscribe(values => {
       this.status = values;
-    })
+    });
   }
 
-  setStatusBar(key:number): any {
-    let styles = {
+  setStatusBar(key: number): any {
+    const styles = {
       'width': this.status[key]
-    }
+    };
     return styles;
   }
 }

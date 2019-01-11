@@ -11,7 +11,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AudioComponent {
 
-  constructor(private audioService: AudioService, private store: Store<ClientState>) { 
+  constructor(private audioService: AudioService, private store: Store<ClientState>) {
 
     this.store.pipe(select(getAudioTrack), filter(state => !!state ))
         .subscribe(

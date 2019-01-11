@@ -46,19 +46,16 @@ export class AudioService {
 
 
   setAudio(src: string): void {
-    let mp3 = '.mp3';
-    let mid = '.mid';
+    const mp3 = '.mp3';
+    const mid = '.mid';
 
 
     /** Music Channel */
     if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
       this.setMusic(src);
-    }
-    /** Sound Channel */
-    else if (src.indexOf(mid, src.length - mid.length) !== -1) {
+    } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
       this.setSound(src.replace('.mid', '.mp3'));
-    }
-    else {
+    } else {
       this.setSound(src.replace('.wav', '.mp3'));
     }
   }
@@ -68,7 +65,7 @@ export class AudioService {
   }
 
   public setMusic(src: string): void {
-    this.music.src = "assets/audio/" + src;
+    this.music.src = 'assets/audio/' + src;
     this.playMusic();
   }
 
@@ -87,14 +84,14 @@ export class AudioService {
 
   public setSound(src: string): void {
 
-    this.sound.src = "assets/audio/" + src;
+    this.sound.src = 'assets/audio/' + src;
     this.playSound();
   }
 
   public playSound(): void {
     this.sound.play();
   }
-  
+
 
 
   public getPlayerStatus(): Observable<string> {

@@ -1,6 +1,5 @@
 import { SocketState } from '../game.const';
-import { User } from 'src/app/models/user/user.model';
-import { Character } from 'src/app/models/character/character.model';
+import { UI } from 'src/app/models/client/ui.model';
 
 export interface ClientState  {
     socketStatus: string;
@@ -9,11 +8,8 @@ export interface ClientState  {
     errorMessage: string | null;
     time?: string;
     userlevel: number;
-    dialog: boolean;
     track?: string;
-    musicVolume: number;
-    soundVolume: number;
-    character: Character;
+    ui: UI;
 }
 
 export const initialState: ClientState = {
@@ -23,8 +19,5 @@ export const initialState: ClientState = {
     errorMessage: null,
     time: undefined,
     userlevel: 0,
-    dialog: false,
-    musicVolume: 70,
-    soundVolume: 100,
-    character: undefined
+    ui: new UI()
 };

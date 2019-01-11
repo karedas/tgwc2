@@ -24,6 +24,7 @@ import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jq
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
 import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component';
+import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
 
 
 @NgModule({
@@ -44,16 +45,16 @@ import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component
     RoomComponent,
     IconsComponent,
     SplashscreenComponent,
-    //jqx widgets
-    jqxWindowComponent,
-    jqxSplitterComponent,
     AudioComponent,
     ExtraboardComponent,
+    // jqx widgets
+    jqxWindowComponent,
+    jqxSplitterComponent,
+    jqxMenuComponent,
   ],
   imports: [
     ClientRoutingModule,
     SharedModule,
-    // PreloadBarModule
   ],
   exports: [
     ClientComponent

@@ -63,6 +63,7 @@ body[data-loginstatus=ready] {
   min-height: 600px;
   display: flex;
   overflow: hidden;
+  padding: 0;
 
   &.expanded {
     padding: 0;

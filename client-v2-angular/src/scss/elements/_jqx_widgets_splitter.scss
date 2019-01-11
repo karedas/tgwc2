@@ -1,9 +1,18 @@
-// Splitter 
-.jqx-splitter-splitbar-vertical {
+.jqx-splitter {
+	background-color: transparent;
+	border: 0;	
+	
+	.jqx-widget-content {
+		background-color: transparent;
+		border: 0;	
+	}
+
+  .jqx-splitter-splitbar-vertical {
     border: none;
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+  }
+
+  .jqx-splitter-collapse-button-vertical {
+    display: none;
+  }
 }
-    // ===  Splitter Collapse button
-    .jqx-splitter-collapse-button-vertical {
-        display: none;
-    }
