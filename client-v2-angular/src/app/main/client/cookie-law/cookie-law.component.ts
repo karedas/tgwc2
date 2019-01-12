@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
+import { ModalConfiguration } from 'src/app/models/client/modal.interface';
+import { ModalsService } from 'src/app/directives/modal/modal.service';
 
 @Component ({
   selector: 'tg-cookie-law',
@@ -10,17 +11,24 @@ import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwi
 
 export class CookieLawComponent implements AfterViewInit {
 
-  @ViewChild('windowReference') windowCookieLaw: jqxWindowComponent;
-  @ViewChild('jqxWidget') jqxWidget: ElementRef;
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
+
+  modalId: string = 'cookieLaw';
+  modalConfig: ModalConfiguration;
 
   display = false;
   showButton = false;
-  constructor(private cookieService: CookieService) {
+  constructor(private cookieService: CookieService, private modalService: ModalsService) {
+    this.modalConfig = {
+      width: 420,
+      height: 'auto',
+      resizable: false,
+      showCloseButton: false
+    }
   }
 
   ngAfterViewInit(): void {
-    this.windowCookieLaw.open();
+    this.modalService.open(this.modalId);
   }
 
   showDialog() {
@@ -30,7 +38,7 @@ export class CookieLawComponent implements AfterViewInit {
   onContinue() {
     this.cookieService.set('tgCookieLaw', '1');
     this.iAcceptCookie.emit(true);
-    this.windowCookieLaw.destroy();
+    this.modalService.close(this.modalId);
   }
 
   toggle(): void {

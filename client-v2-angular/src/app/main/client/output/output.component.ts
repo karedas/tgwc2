@@ -1,11 +1,12 @@
-import { Component, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, HostListener, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { UI } from 'src/app/models/client/ui.model';
 
 @Component({
   selector: 'tg-output',
@@ -13,7 +14,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
   styleUrls: ['./output.component.scss'],
 })
 
-export class OutputComponent implements AfterViewInit {
+export class OutputComponent implements AfterViewInit, OnInit {
 
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
   @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
@@ -31,18 +32,30 @@ export class OutputComponent implements AfterViewInit {
     this.extraDetail$ = new BehaviorSubject(true);
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
+
+    /** Toggle Splitter Output  view  */
+    this.store.pipe(
+      select(fromSelectors.getUI),
+      map((ui: UI) => ui.extraOutput)
+    ).subscribe(
+      toggleStatus => {
+        this.extraDetail$.next(toggleStatus)
+        this.scrollPanelToBottom();
+      }
+    );
+
 
     // Listen Base Text Data
     this.store.pipe(select(fromSelectors.getDataBase))
-    .subscribe(
-      (base: string[]) => {
-        const content = this.getContentObject('base', base[0]);
-        this.output.push(content);
-        // You might need to give a tiny delay before updating the scrollbar
-        this.scrollPanelToBottom();
-      },
-    );
+      .subscribe(
+        (base: string[]) => {
+          const content = this.getContentObject('base', base[0]);
+          this.output.push(content);
+          // You might need to give a tiny delay before updating the scrollbar
+          this.scrollPanelToBottom();
+        },
+      );
 
     this.store.select(fromSelectors.getRoomBase)
       .pipe(filter(room => room && room !== undefined))
@@ -51,16 +64,19 @@ export class OutputComponent implements AfterViewInit {
           if (room.desc.base != undefined && room.desc.base != '') {
             this.lastRoomDescription = room.desc.base;
           }
-          console.log(this.lastRoomDescription);
-
+          const content = this.getContentObject('room', room);
           if (!this.extraDetail$.value) {
-            const content = this.getContentObject('room', room);
             this.output.push(content);
             this.trimOutput();
-            this.scrollPanelToBottom();
           }
+          
+          this.scrollPanelToBottom();
         }
       );
+  }
+
+
+  ngAfterViewInit() {
   }
 
   get isWithExtra(): Observable<any> {

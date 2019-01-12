@@ -20,3 +20,13 @@ export const getAudioTrack = createSelector(
   client => client.track
 );
 
+export const getWelcomeNews = createSelector(
+  getClientState,
+  client => client.ui.welcomeNews
+);
+
+
+export const getUI = createSelector(
+  getClientState,
+  client => client.ui
+)

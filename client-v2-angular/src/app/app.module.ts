@@ -17,6 +17,7 @@ import { DataEffects } from './store/effects/data.effects';
 import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { ClientModule } from './main/client/client.module';
     SharedModule,
     ClientModule,
     AppRoutingModule,
+
   ],
   bootstrap: [AppComponent]
 })

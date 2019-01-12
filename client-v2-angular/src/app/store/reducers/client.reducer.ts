@@ -36,6 +36,19 @@ export function reducer(
       return Object.assign({}, state, {userlevel: action.payload });
     }
 
+    case ClientEventType.WELCOMENEWS: {
+      return Object.assign({}, state, {ui:{welcomeNews: action.payload}})
+    }
+
+    case ClientEventType.TOGGLEOUTPUT: {
+      return Object.assign({}, state, {ui:{ extraOutput: !state.ui.extraOutput}})
+    }
+
+    case ClientEventType.UI: {
+      return Object.assign({}, state, {ui: action.payload });
+    }
+
+
     default: {
       return state;
     }

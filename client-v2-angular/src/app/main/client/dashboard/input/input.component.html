@@ -4,14 +4,14 @@
     <b class="tg-yellow">Comando:
       <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
   <div class="tg-inputcommand d-none d-sm-flex">
-    <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
-      <i class="fas fa-columns"></i>
+    <button  type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia" (click)="collapseInterface()">
+      <fa-icon [icon]="facolumns"></fa-icon>
     </button>
-    <button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo">
-      <i class="fas fa-solar-panel"></i>
+    <button type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo" (click)="toggleControlPanel()">
+      <fa-icon [icon]="faSolarPanel"></fa-icon>
     </button>
-    <button id="triggerZenModality" type="button" class="tg-fnt-button" rel="tooltip" title="Modalit&agrave; Zen">
-      <i class="fas fa-bullseye"></i>
+    <button type="button" class="tg-fnt-button" rel="tooltip" title="Modalit&agrave; Zen" (click)="toggleZen()">
+      <fa-icon [icon]="faBullseye"></fa-icon>
     </button>
   </div>
   <div class="tg-border-box">

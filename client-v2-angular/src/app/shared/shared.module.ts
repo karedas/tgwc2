@@ -12,6 +12,8 @@ import { Auth2Module } from '../main/authentication/auth.module';
 import { PreloaderService } from '../main/client/common/services/preloader.service';
 import { AudioService } from '../main/client/audio/audio.service';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+
 @NgModule({
   declarations: [
   ],
@@ -25,6 +27,8 @@ import { AudioService } from '../main/client/audio/audio.service';
     NgScrollbarModule,
     FormsModule,
     ReactiveFormsModule,
+    //font awesome
+    FontAwesomeModule
   ],
   providers: [
     GameService,
@@ -37,15 +41,17 @@ import { AudioService } from '../main/client/audio/audio.service';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    Auth2Module,
     NgScrollbarModule,
     PipesModule,
+    FontAwesomeModule,
+    
   ],
 })
 export class SharedModule {
   static forRoot() {
     return {
-        ngModule: SharedModule,
+      ngModule: SharedModule,
     };
   }
- }
+
+}

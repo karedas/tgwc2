@@ -18,14 +18,14 @@ import { RoomComponent } from './output/renders/room/room.component';
 import { IconsComponent } from './common/icons/icons.component';
 
 // JQXWidgets
-import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
 import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component';
 import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
+import { ModalModule } from 'src/app/directives/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -47,17 +47,18 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SplashscreenComponent,
     AudioComponent,
     ExtraboardComponent,
+    WelcomeNewsComponent,
     // jqx widgets
-    jqxWindowComponent,
     jqxSplitterComponent,
     jqxMenuComponent,
   ],
   imports: [
     ClientRoutingModule,
+    ModalModule,
     SharedModule,
   ],
   exports: [
-    ClientComponent
+    ClientComponent,
   ]
 })
 export class ClientModule {

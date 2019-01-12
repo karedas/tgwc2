@@ -1,44 +1,46 @@
 <jqxMenu #tgMainMenu [width]="'100%'" [height]="28" [autoOpen]="true">
-    <ul>
-      <li>
-        <a href="#tg" class="tg-brand">
-          <img src="assets/images/logo/tgminilogo.png" alt="The Gate Mud" />
-        </a>
-      </li>
-      <li>
-        <a href="#profile" id="tgNavBarOpzioniDropDown">
-          <i class="fas fa-user-circle"></i> Profilo
-        </a>
-        <ul>
+  <ul>
+    <li>
+      <a href="#profile" id="tgNavBarOpzioniDropDown">
+        <i class="fas fa-user-circle"></i> Profilo
+      </a>
+      <ul style="width:200px">
+        <li>
           <a href="#opzioni">Opzioni</a>
+        </li>
+        <li>
           <a href="#log">Log di gioco</a>
+        </li>
+        <li type='separator'></li>
+        <li>
           <a id="userDisconnect" href="#esci">Esci</a>
-        </ul>
-      </li>
-      <li>
-        <a href="#guida" id="tgNavBarGuidaDropDown">
-          <i class="fas fa-question-circle"></i> Guida
-        </a>
-        <ul>
-          <li>
-              <a class="dropdown-item" href="#guidagioco">Guida al gioco</a>
-          </li>
-          <li>
-              <a class="dropdown-item" href="#news">Ultime Novità di gioco</a>
-          </li>
-          <li>
-              <a class="dropdown-item" href="#releasenote">Note di rilascio Webclient</a>
-          </li>
-          <li>
-              <a class="dropdown-item" href="#bugfix">Segnala un problema</a>
-          </li>
-          <li>
-              <a class="dropdown-item" href="#hotkeyference">Riferimento ai tasti di scelta rapida</a>
-          </li>
-          <li>
-              <a class="dropdown-item" href="#infotg">Informazioni su The Gate</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </jqxMenu>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#guida" id="tgNavBarGuidaDropDown">
+        <i class="fas fa-question-circle"></i> Guida
+      </a>
+      <ul style="width:250px">
+        <li>
+          <a class="dropdown-item" href="#guidagioco">Guida al gioco</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#news">Ultime Novità di gioco</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#releasenote">Note di rilascio Webclient</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#bugfix">Segnala un problema</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#hotkeyference">Riferimento ai tasti di scelta rapida</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#infotg">Informazioni su The Gate</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</jqxMenu>

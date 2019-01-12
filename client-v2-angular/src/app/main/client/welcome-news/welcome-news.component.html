@@ -1,0 +1,64 @@
+
+<tg-modal [id]="modalId" [config]="modalConfig"> 
+  <div class="tg-notizie">
+    <div class="g-shadow b-ironlight-mini tg-box tg-modal-content">
+      <div class="tg-box b-paper">
+        <div class="tg-box container-fluid">
+          <div class="row">
+            <!-- ## Menu ## -->
+            <div class="col-4 d-flex">
+              <div class="tg-mnch-img"></div>
+            </div>
+            <!-- ## End Menu ## -->
+            <!-- Init Content ## -->
+            <div id="contentNews" class="col-8">
+              <h2>
+                Webclient 2.0
+              </h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus ultricies.
+                Curabitur luctus
+                ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
+                lectus. Cras
+                convallis justo nec lectus aliquam pharetra. </p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus ultricies.
+                Curabitur luctus
+                ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
+                lectus. Cras
+                convallis justo nec lectus aliquam pharetra. </p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus ultricies.
+                Curabitur luctus
+                ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
+                lectus. Cras
+                convallis justo nec lectus aliquam pharetra. </p>
+            </div>
+            <!-- ## End Content ## -->
+          </div>
+          <div class="tg-box text-center notizie-action">
+            <button  class="tg-button tg-button-continua tg-shadow" (click)="onContinue()">Continua</button>
+            <div class="input-group-prepend mt-2">
+              <div class="input-group-text m-auto">
+                <input type="checkbox" aria-label="Non mostrare" (change)="onCheckbox($event)">
+                <label>Non mostrare piu' questa notizia.</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+  </div>
+</tg-modal>

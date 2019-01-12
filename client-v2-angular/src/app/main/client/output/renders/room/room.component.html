@@ -1,7 +1,7 @@
 <div class="tg-room" *ngIf="html">
   <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
     <div [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
-    <div *ngIf="html.desc.base" [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc"></div>
+    <div [innerHtml]="html.desc.base  ? html.desc.base : lastDescription | dataToHtml:true" class="tg-room--desc"></div>
   </ng-template>
 </div>
 

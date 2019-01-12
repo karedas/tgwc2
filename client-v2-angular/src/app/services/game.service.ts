@@ -3,11 +3,9 @@ import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
-import { GameMode } from '../store/game.const';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { State } from '../store';
-import { IHistory } from '../models/client/history.model';
 import { LoginService } from '../main/authentication/services/login.service';
+import { ClientState } from '../store/state/client.state';
+import { WelcomeNewsAction } from '../store/actions/client.action';
 
 
 
@@ -22,13 +20,24 @@ export class GameService {
     private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
-    private store: Store<State>,
+    private store: Store<ClientState>,
   ) { }
 
   startGame() {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
+    // this.store.dispatch(new WelcomeNewsAction());
+    if(!localStorage.getItem('welcomenews')) {
+      this.showWelcomeNews();
+    }
+    else {
+      this.goInGame();
+    }
+
+  }
+
+  goInGame():void {
     this.socketService.emit('data', '');
   }
 
@@ -46,39 +55,9 @@ export class GameService {
     }
   }
 
-  updateUi(pdata: any) {
-    switch (pdata.type) {
-      case GameMode.HIDEINPUTTEXT:
-      case GameMode.SHOWINPUTTEXT:
-      case GameMode.SKYPICTURE:
-      case GameMode.DOORSINFO:
-      case GameMode.AUDIO:
-      case GameMode.UPDATE:
-      case GameMode.IMAGEWITHGAMMA:
-      case GameMode.IMAGE:
-      case GameMode.PLAYERISLOGGEDIN:
-      case GameMode.CLOSETEXTEDITOR:
-      case GameMode.MAP:
-      case GameMode.RENDERGENERIC:
-      case GameMode.RENDERTABLE:
-      case GameMode.ROOMDETAILS:
-      case GameMode.PERSONDETAILS:
-      case GameMode.OBJECTDETAILS:
-      case GameMode.EQUIP:
-      case GameMode.WORKABLELIST:
-      case GameMode.SKILLS:
-      case GameMode.PLAYERINFO:
-      case GameMode.PLAYERSTATUS:
-      case GameMode.NEWIMAGEREQUEST:
-      case GameMode.SELECTABLEGENERIC:
-      case GameMode.REFRESH:
-      case GameMode.PAUSESCROLL:
-
-      default:
-        return;
-    }
+  showWelcomeNews() {
+    this.store.dispatch(new WelcomeNewsAction(true));
   }
-
 /*
   updateSky(map) {
   }

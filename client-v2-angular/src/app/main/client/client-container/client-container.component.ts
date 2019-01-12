@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { ClientState } from 'src/app/store/state/client.state';
+import { getWelcomeNews } from 'src/app/store/selectors';
 
 @Component({
   selector: 'tg-client-container',
@@ -7,6 +11,14 @@ import { Component } from '@angular/core';
 })
 
 export class ClientContainerComponent {
-  constructor() {
+
+  showWelcomeNews: boolean;
+
+  constructor(private store: Store<ClientState>) {
+    this.store.pipe(select(getWelcomeNews)).subscribe(
+      show => { this.showWelcomeNews = show; 
+        console.log(show);
+      }
+    );
   }
 }

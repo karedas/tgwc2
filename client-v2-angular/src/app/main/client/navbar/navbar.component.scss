@@ -1,39 +1,28 @@
 @import '~src/scss/colors';
-
-:host {
-  width: 100%;
+tg-navbar {
   background-image: url($imgPath + '/interface/navbar_background.png');
   background-repeat: repeat-x;
   padding: 0 .5rem 8px;
   text-transform: uppercase;
   font-size: 9px;
-
-  a {
-    color: #110601;
-    text-decoration: none;
-    z-index: 10;
-    position: relative;
-
-    &:hover {
-      color: #1c0c04;
-    }
-
-    &:hover {
-      color: #2d2c2a;
-    }
-  }
-
+  
   /*Logo */
+  .brand {
+    background-color: transparent!important;
+  }
+  
   .tg-brand {
     display: block;
     font-weight: bold;
     margin-right: 1rem;
 
     img {
-      height: 18px;
+      height: 20px;
+      margin-top: 2px;
     }
   }
 }
+
 
 // /* Main Navbar */
 

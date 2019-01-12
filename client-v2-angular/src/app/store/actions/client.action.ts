@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { UI } from 'src/app/models/client/ui.model';
 
 export enum UIType {
   UPDATE = '[UI] Update',
@@ -15,6 +16,9 @@ export enum ClientEventType {
   INGAME = '[Client] User In Game',
   ISGOD = '[Client] User is a God',
   AUDIO = '[Client] Audio',
+  UI = '[Client] Ui Updated',
+  WELCOMENEWS = '[Client] Welcome News',
+  TOGGLEOUTPUT = '[Client] Toggle Extra Output'
 }
 
 export class SocketStatusAction implements Action {
@@ -40,6 +44,11 @@ export class LoginFailureAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class WelcomeNewsAction implements Action {
+  readonly type =  ClientEventType.WELCOMENEWS;
+  constructor(public payload: boolean) {}
+}
+
 export class InGameAction implements Action  {
   readonly type = ClientEventType.INGAME;
 }
@@ -54,16 +63,22 @@ export class AudioAction implements Action {
   constructor(public payload: string) {}
 }
 
-export class UpdateUi implements Action {
-  readonly type = UIType.UPDATE;
+export class toggleExtraOutput implements Action {
+  readonly type = ClientEventType.TOGGLEOUTPUT;
 }
+
+export class updateUI implements Action {
+  readonly type = ClientEventType.UI;
+  constructor(public payload: any) {}
+}
+
 
 // export class UpdateInventory implements Action {
 
 // }
 
 export type ClientActions
-  = UpdateUi
+  = updateUI
   | InGameAction
   | SocketStatusAction
   | LoginAction
@@ -72,4 +87,6 @@ export type ClientActions
   | LoginFailureAction
   | AudioAction
   | UserLevelAction
+  | WelcomeNewsAction
+  | toggleExtraOutput
   ;

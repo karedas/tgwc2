@@ -2,6 +2,7 @@
 
 
 export class UI {
+    welcomeNews: boolean;
     musicVolume: number;
     soundVolume: number;
     inventory: {
@@ -15,12 +16,16 @@ export class UI {
     room: {
         version: number;
         needed: boolean;
-    };
-    cursorOnMap: false; // Remove?
+    }; 
+    cursorOnMap: false; // Remove
     editorIsopen: boolean;
+    extraOutput: boolean;
+    controlPanel: number;
+    zen: boolean;
 
 
     constructor() {
+        this.welcomeNews = false;
         this.musicVolume = 100;
         this.soundVolume = 70;
         this.inventory = {
@@ -37,5 +42,7 @@ export class UI {
         };
         this.cursorOnMap = false;
         this.editorIsopen = false;
+        this.extraOutput = false;
+        this.controlPanel = 0;
     }
 }

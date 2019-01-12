@@ -6,27 +6,28 @@
         <i class="far fa-arrow-alt-circle-right"></i>
       </div> -->
       <!-- Output Area -->
-      <jqxSplitter #nestedSplitter [width]="'100%'" [height]="'100%'">
-        <div>
-          <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
-            <div class="tg-output--history">
-              <div *ngFor="let data of output">
-                <div class="tg-line" [ngSwitch]="data.type">
-                  <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
-                  <tg-room *ngSwitchCase="'room'" [html]="data.content" [lastDescription]="lastRoomDescription"></tg-room>
+      <ng-container *ngIf="extraDetail$ | async; else noextra">
+        <jqxSplitter #nestedSplitter [width]="'100%'" [height]="'100%'">
+          <div style="height: 100%; overflow:hidden;">
+            <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
+              <div class="tg-output--history">
+                <div *ngFor="let data of output">
+                  <div class="tg-line" [ngSwitch]="data.type">
+                    <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ng-scrollbar>
-        </div>
-        <div>
-          <ng-scrollbar>
-            <div class="tg-output--extradetail">
-              <tg-room [html]="lastRoom$ | async" [withExtra]="isWithExtra | async" [lastDescription]="lastRoomDescription"></tg-room>
-            </div>
-          </ng-scrollbar>
-        </div>
-      </jqxSplitter>
+            </ng-scrollbar>
+          </div>
+          <div  style="height: 100%; overflow:hidden;">
+            <ng-scrollbar>
+              <div class="tg-output--extradetail">
+                <tg-room [html]="lastRoom$ | async" [withExtra]="extraDetail$ | async" [lastDescription]="lastRoomDescription"></tg-room>
+              </div>
+            </ng-scrollbar>
+          </div>
+        </jqxSplitter>
+      </ng-container>
     </div>
   </div>
   <div class="tg-border-box">
@@ -36,3 +37,18 @@
     <div class="tg-border tg-border-bottom"></div>
   </div>
 </div>
+
+<ng-template #noextra>
+  <div style="height: 100%; overflow:hidden;"> 
+    <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
+      <div class="tg-output--history">
+        <div *ngFor="let data of output">
+          <div class="tg-line" [ngSwitch]="data.type">
+            <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+            <tg-room *ngSwitchCase="'room'" [withExtra]="extraDetail$ | async" [html]="data.content" [lastDescription]="lastRoomDescription"></tg-room>
+          </div>
+        </div>
+      </div>
+    </ng-scrollbar>
+  </div>
+</ng-template>

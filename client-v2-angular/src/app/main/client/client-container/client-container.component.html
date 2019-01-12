@@ -1,26 +1,30 @@
-<div class="tg-border-box">
-  <div class="tg-border tg-border-top"></div>
-  <div class="tg-border tg-border-left"></div>
-  <div class="tg-border tg-border-right"></div>
-  <div class="tg-border tg-border-bottom"></div>
-  <!-- Main Panel -->
-  <div class="tg-main container-fluid">
-    <div class="row">
-      <tg-navbar class="col-12"></tg-navbar> 
+<ng-container *ngIf="showWelcomeNews === true;">
+  <tg-welcome-news></tg-welcome-news>
+</ng-container>
+<div class="tg-area tg-box b-area">
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
-    <div class="tg-main-row row">
-      <div class="tg-leftside col">
-        <tg-output></tg-output>
-        <tg-dashboard></tg-dashboard>
+    <!-- Main Panel -->
+    <div class="tg-main container-fluid">
+      <div class="row">
+        <tg-navbar class="col-12"></tg-navbar>
       </div>
-      <div class="tg-rightside">
-        <div class="tg-rightside-wrap">
-          <tg-sky></tg-sky>
-          <tg-map></tg-map>
+      <div class="tg-main-row row">
+        <div class="tg-leftside col">
+          <tg-output></tg-output>
+          <tg-dashboard></tg-dashboard>
+        </div>
+        <div class="tg-rightside">
+          <div class="tg-rightside-wrap">
+            <tg-sky></tg-sky>
+            <tg-map></tg-map>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div> 
-
-<tg-audio></tg-audio>
+  <tg-audio></tg-audio>
+</div>

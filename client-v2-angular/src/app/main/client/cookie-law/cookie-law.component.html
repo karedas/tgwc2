@@ -1,33 +1,33 @@
-<jqxWindow #windowReference [isModal]="true" [width]="420" [height]="'auto'" [resizable]="false" [autoOpen]="false"
-  [showCloseButton]="false" [resizable]="false" styleClass="dialog-overflow">
-  <div style="overflow: hidden;" #windowContent>
-    <div class="tg-cookielaw">
-      <div class="tg-shadow b-ironlight-mini tg-box">
-        <div class="tg-cookielawcontent tg-modal-content tg-shadow-inset tg-box">
-          <h4 class="tg-title">Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
-          <div>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della
-            propria configurazione e il riconoscimento dell'utente per il conseguente accesso automatico. Le
-            funzionalità di "Login tramite
-            Facebook" e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. <br> Maggiori
-            informazioni sono disponibili
-            <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
-            <b class="cookie-lastalert">Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
+
+  <tg-modal [id]="modalId" [config]="modalConfig">
+    <div style="overflow: hidden;" #windowContent>
+      <div class="tg-cookielaw">
+        <div class="tg-shadow b-ironlight-mini tg-box">
+          <div class="tg-cookielawcontent tg-modal-content tg-shadow-inset tg-box">
+            <h4 class="tg-title">Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
+            <div>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della
+              propria configurazione e il riconoscimento dell'utente per il conseguente accesso automatico. Le
+              funzionalità di "Login tramite
+              Facebook" e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. <br> Maggiori
+              informazioni sono disponibili
+              <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
+              <b class="cookie-lastalert">Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="cookieCheckbox" (click)="toggle()">
+              <label class="custom-control-label" for="cookieCheckbox">Ho letto e accetto.</label>
+            </div>
+              <p [style.visibility]="showButton ? 'visible' : 'hidden'">
+                <button class="tg-btn btn-default tg-btn-cookieconsent" (click)="onContinue()">Continua</button>
+              </p>
           </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="cookieCheckbox" (click)="toggle()">
-            <label class="custom-control-label" for="cookieCheckbox">Ho letto e accetto.</label>
+          <div class="tg-border-box">
+            <div class="tg-border tg-border-top"></div>
+            <div class="tg-border tg-border-left"></div>
+            <div class="tg-border tg-border-right"></div>
+            <div class="tg-border tg-border-bottom"></div>
           </div>
-            <p [style.visibility]="showButton ? 'visible' : 'hidden'">
-              <button class="tg-btn btn-default tg-btn-cookieconsent" (click)="onContinue()">Continua</button>
-            </p>
-        </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
         </div>
       </div>
     </div>
-  </div>
-</jqxWindow>
+  </tg-modal>

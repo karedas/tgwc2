@@ -7,14 +7,6 @@
     <tg-cookie-law (iAcceptCookie)="onCookieAccepted($event)"  *ngIf="!isCookieAccepted"></tg-cookie-law>
     <!-- Client -->
     <ng-container *ngIf="isCookieAccepted">
-        <div class="tg-area tg-box b-area">
-        <div class="tg-border-box">
-            <div class="tg-border tg-border-top"></div>
-            <div class="tg-border tg-border-left"></div>
-            <div class="tg-border tg-border-right"></div>
-            <div class="tg-border tg-border-bottom"></div>
-        </div>
-            <router-outlet></router-outlet>
-        </div>
+        <router-outlet></router-outlet>
     </ng-container>
 </ng-template>

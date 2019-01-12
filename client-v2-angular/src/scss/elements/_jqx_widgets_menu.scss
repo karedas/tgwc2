@@ -1,13 +1,20 @@
 .jqx-menu {
   background: transparent;
   border: none;
+  padding: 0;
+  font-size: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 700;
 
-  .jqx-menu-item-top-hover, 
-  .jqx-fill-state-hover,
+  li {
+    padding-top:6px;
+  }
+  
   .jqx-menu-item-hover,
   .jqx-menu-item a:hover,
   .jqx-menu-item-top a:hover,
-  .jqx-menu-disabled a:hover{
+  .jqx-menu-disabled a:hover
+  {
     background: transparent;
     border: none;
   }
@@ -21,11 +28,50 @@
   }
 }
 
-.jqx-menu-dropdown {
-  .jqx-widget-content, .jqx-menu-dropdown {
-    background: transparent;
-    border: none;
+.jqx-menu-popup {
+  .jqx-widget-content {
+    font-size: 9px;
+    text-transform: uppercase;
+    border: 1px solid #71624e;
+    border-top: 0;
   }
 
-  
+  ul {
+    background: #2f2314;
+  }
+
+  .dropdown-item{
+    padding-left:0;
+  }
+
+  .jqx-menu-item, .jqx-menu-item-hover{
+    margin-left:0;
+    border: none;
+    padding: 4px 8px 4px 6px;
+    margin-right: 0;
+  }
+
+  .jqx-fill-state-hover {
+    background: white;
+    a {
+      color: #110601!important;
+    }
+  }
 }
+
+.jqx-item {
+  border-radius: 0!important;
+}
+
+.jqx-menu-item-top-hover a, .jqx-fill-state-pressed a {
+  color: white!important;
+}
+
+.jqx-menu-item-top-hover, .jqx-menu-item-top-pressed, .jqx-fill-state-pressed{
+   background: #2f2314;
+}
+
+.jqx-menu-item-separator {
+  background-color: #71624e;
+}
+
