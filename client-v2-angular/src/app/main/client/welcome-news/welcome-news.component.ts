@@ -10,7 +10,8 @@ import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 export class WelcomeNewsComponent implements AfterViewInit {
   modalId: string = 'welcomeNews';
   modalConfig: ModalConfiguration = new ModalConfiguration();
-
+  private dontShowNextTime: boolean = false;
+  
   constructor(private modalService: ModalsService) { 
     this.modalConfig.width = 800;
   }
@@ -19,10 +20,14 @@ export class WelcomeNewsComponent implements AfterViewInit {
     this.modalService.open(this.modalId);
   }
 
-  onContinue(): void{}
+  onContinue(): void{
+    if(this.dontShowNextTime) {
+      localStorage.setItem('welcomenews', '1');
+    }
+  }
 
-  onCheckbox ($event): void {
-    console.log($event);
+  onCheckbox(event): void {
+    this.dontShowNextTime = !this.dontShowNextTime;
   }
 
 }

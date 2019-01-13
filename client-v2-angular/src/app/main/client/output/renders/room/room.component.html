@@ -1,7 +1,7 @@
 <div class="tg-room" *ngIf="html">
   <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
     <div [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
-    <div [innerHtml]="html.desc.base  ? html.desc.base : lastDescription | dataToHtml:true" class="tg-room--desc"></div>
+    <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true" class="tg-room--desc"></div>
   </ng-template>
 </div>
 
@@ -11,7 +11,7 @@
         <div class="tg-room--image" *ngIf="html.image">
           <img [src]="getRoomImage(html.image)"/>
         </div>
-         <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true" ></div>
+         <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
     </div>
 </ng-template>
 

@@ -22,7 +22,7 @@ export class OutputComponent implements AfterViewInit, OnInit {
   output: any = [];
   lastRoom$: Observable<any>;
   extraDetail$: BehaviorSubject<boolean>;
-  lastRoomDescription: string;
+  lastRoomDescription: string = '';
 
   private outputTrimLines = 500;
 
@@ -65,11 +65,8 @@ export class OutputComponent implements AfterViewInit, OnInit {
             this.lastRoomDescription = room.desc.base;
           }
           const content = this.getContentObject('room', room);
-          if (!this.extraDetail$.value) {
-            this.output.push(content);
-            this.trimOutput();
-          }
-          
+          this.output.push(content);
+          this.trimOutput();
           this.scrollPanelToBottom();
         }
       );
