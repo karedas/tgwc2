@@ -1,6 +1,6 @@
 <!-- Mini Mappa -->
-<tg-directions></tg-directions>
-<div class="tg-map-box">
+<tg-directions [isOnMap]="isOnMap" ></tg-directions>
+<div class="tg-map-box" (mouseenter)="onMouseEvent($event)" (mouseleave)="onMouseEvent($event)">
   <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>
   </canvas>
   <canvas id="snowCanvas" class="canvas-snow"></canvas>

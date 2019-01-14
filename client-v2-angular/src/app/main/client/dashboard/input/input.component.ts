@@ -3,8 +3,8 @@ import { GameService } from 'src/app/services/game.service';
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
-import { updateUI, toggleExtraOutput } from 'src/app/store/actions/client.action';
-import { UI } from 'src/app/models/client/ui.model';
+import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
+import { HistoryService } from 'src/app/services/history.service';
 
 @Component({
   selector: 'tg-input',
@@ -23,23 +23,39 @@ export class InputComponent implements AfterViewInit {
 
   constructor(
     private game: GameService,
-    private store: Store<ClientState>) { }
+    private store: Store<ClientState>,
+    private historyService: HistoryService
+    ) { }
 
   ngAfterViewInit() {
     this.ic.nativeElement.focus();
   }
 
-  onKeyDown(event: any, val: string) {
+  onEnter(event: any, val: string) {
     event.target.value = '';
     this.game.processCommands(val, true);
   }
 
+  onUpKey(event: any) {
+    const cmd = this.historyService.getPrevious();
+    if(cmd) {
+      event.target.value = cmd;
+    }
+  }
+
+  onDownKey(event: any) {
+    const cmd =  this.historyService.getNext();
+    if(cmd) { 
+      event.target.value =  cmd;
+    }
+  }
+
   collapseInterface(){
-    this.store.dispatch(new toggleExtraOutput()); 
+    this.store.dispatch(new ToggleExtraOutput()); 
   }
   
   toggleControlPanel(){
-    console.log('toggle control panel action');
+    this.store.dispatch(new ToggleDashboard());
   }
   
   toggleZen(){

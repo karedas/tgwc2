@@ -3,8 +3,10 @@ import { Store } from '@ngrx/store';
 import * as DataActions from '../store/actions/data.action';
 import { GameMode } from '../store/game.const';
 import { BehaviorSubject } from 'rxjs';
-import { InGameAction, AudioAction } from '../store/actions/client.action';
+import { InGameAction } from '../store/actions/client.action';
+
 import { State } from '../store';
+import { AudioAction } from '../store/actions/ui.action';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +47,8 @@ export class DataParser {
   parseForDisplay(data: string) {
 
     let pos: any;
+
+    console.log(data);
 
 
     // Hide text (password)

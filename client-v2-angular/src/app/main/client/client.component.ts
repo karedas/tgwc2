@@ -13,7 +13,6 @@ import { GameService } from 'src/app/services/game.service';
 
 export class ClientComponent {
 
-  @Input('state') gameState$;
   preloadAssetsStatus = false;
   preloadPerc: any;
   isCookieAccepted = false;

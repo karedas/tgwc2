@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input, EventEmitter } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
@@ -12,7 +12,7 @@ import { getUserLevel, getDoors } from 'src/app/store/selectors';
 
 export class DirectionsComponent {
 
-
+  @Input('isOnMap') isOnMap: boolean;
   dirCmd: string;
   doorsStyle: any[] = [];
 
@@ -64,26 +64,27 @@ export class DirectionsComponent {
 
   @HostListener('window:keydown', ['$event'])
   onkeydown(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowUp':
-        this.goToDirection(event, 0);
-        break;
-      case 'ArrowDown':
-        this.goToDirection(event, 2);
-        break;
-      case 'ArrowLeft':
-        this.goToDirection(event, 3);
-        break;
-      case 'ArrowRight':
-        this.goToDirection(event, 1);
-        break;
-      case 'PageUp':
-        this.goToDirection(event, 4);
-        break;
-      case 'PageDown':
-        this.goToDirection(event, 5);
-        break;
+    if(this.isOnMap) {
+      switch (event.key) {
+        case 'ArrowUp':
+          this.goToDirection(event, 0);
+          break;
+        case 'ArrowDown':
+          this.goToDirection(event, 2);
+          break;
+        case 'ArrowLeft':
+          this.goToDirection(event, 3);
+          break;
+        case 'ArrowRight':
+          this.goToDirection(event, 1);
+          break;
+        case 'PageUp':
+          this.goToDirection(event, 4);
+          break;
+        case 'PageDown':
+          this.goToDirection(event, 5);
+          break;
+      }
     }
   }
-
 }

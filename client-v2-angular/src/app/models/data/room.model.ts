@@ -1,9 +1,13 @@
+
+import { List} from 'immutable';
+
+
 export interface Desc {
   base: string;
   repeatlast: boolean;
 }
 
-export interface List {
+export interface RoomList {
   type: string;
   icon: number;
   cond: number;
@@ -15,11 +19,11 @@ export interface List {
 }
 
 export interface ObjAndPersonCont {
-  list: List[];
+  list: RoomList[];
 }
 export interface Room {
   title: string;
-  desc: Desc;
+  desc: List<Desc>;
   icon: number;
   image: string;
   objcont: ObjAndPersonCont;

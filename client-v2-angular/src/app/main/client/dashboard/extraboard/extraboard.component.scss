@@ -4,13 +4,10 @@
 @import '~src/scss/colors';
 
 
-tg-extraboard{
-    width: 50%;
-}
-
 /* Tg Extra Board */
 .tg-extraboard {
     width: 100%;
+    min-width: 33%;
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
 
     .tg-extraboard-wrap {

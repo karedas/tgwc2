@@ -1,4 +1,4 @@
-import { Component, AfterContentChecked, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { ModalsService } from 'src/app/directives/modal/modal.service';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 
@@ -24,10 +24,11 @@ export class WelcomeNewsComponent implements AfterViewInit {
     if(this.dontShowNextTime) {
       localStorage.setItem('welcomenews', '1');
     }
+
+    this.modalService.close(this.modalId);
   }
 
-  onCheckbox(event): void {
+  onCheckbox(event: any): void {
     this.dontShowNextTime = !this.dontShowNextTime;
   }
-
 }

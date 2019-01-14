@@ -1,5 +1,4 @@
 import { SocketState } from '../game.const';
-import { UI } from 'src/app/models/client/ui.model';
 
 export interface ClientState  {
     socketStatus: string;
@@ -9,7 +8,6 @@ export interface ClientState  {
     time?: string;
     userlevel: number;
     track?: string;
-    ui: UI;
 }
 
 export const initialState: ClientState = {
@@ -19,5 +17,4 @@ export const initialState: ClientState = {
     errorMessage: null,
     time: undefined,
     userlevel: 0,
-    ui: new UI()
 };

@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import * as fromSelectors from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store } from '@ngrx/store';
@@ -9,9 +9,6 @@ import { takeUntil } from 'rxjs/operators';
 
 
 export const images_path = '/assets/images/';
-
-
-
 @Component({
   selector: 'tg-map',
   templateUrl: './map.component.html',
@@ -19,20 +16,23 @@ export const images_path = '/assets/images/';
 })
 
 export class MapComponent implements OnDestroy, AfterViewInit {
-
   @ViewChild('map') map: ElementRef;
 
-  // private dataMap: Subject<Map> = new BehaviorSubject(null);
-  // _map$: Observable<any> = this.dataMap.asObservable();
+
   private _unsubscribeAll: Subject<any>;
+  isOnMap: boolean = false;
+
+  
   private map$: Observable<Map>;
 
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
+
   mapTileWidth: number;
   mapTileHeight: number;
   maxMapHeight: number;
   maxMapWidth: number;
+
   private canvasWidth: number;
   private canvasHeight: number;
   private mapTileImg: HTMLImageElement;
@@ -46,13 +46,18 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     this.maxMapWidth = 9;
 
     this._unsubscribeAll = new Subject();
+    
+  }
+
+  onMouseEvent() {
+    this.isOnMap = !this.isOnMap;
+    console.log('mouseevent');
   }
 
   ngAfterViewInit() {
 
     this.map$ = this.store.select(fromSelectors.getMap);
-    this.map$
-    .pipe(takeUntil(this._unsubscribeAll))
+    this.map$.pipe(takeUntil(this._unsubscribeAll))
     .subscribe(
       (map: Map) => {
         if (map !== undefined) {
@@ -213,7 +218,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
       // $('#snowCanvas').hide();
     }
   }
-
 
   private tileCoords(tilenum: number): number[] {
     const posx = 32 * (tilenum & 0x7f);

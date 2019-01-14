@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { getWelcomeNews } from 'src/app/store/selectors';

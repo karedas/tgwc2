@@ -5,7 +5,8 @@ import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
 import { LoginService } from '../main/authentication/services/login.service';
 import { ClientState } from '../store/state/client.state';
-import { WelcomeNewsAction } from '../store/actions/client.action';
+import { HistoryService } from './history.service';
+import { WelcomeNewsAction } from '../store/actions/ui.action';
 
 
 
@@ -21,20 +22,23 @@ export class GameService {
     private socketService: SocketService,
     private dataParserService: DataParser,
     private store: Store<ClientState>,
+    private historyService: HistoryService
   ) { }
 
   startGame() {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
-    // this.store.dispatch(new WelcomeNewsAction());
     if(!localStorage.getItem('welcomenews')) {
       this.showWelcomeNews();
     }
     else {
       this.goInGame();
     }
+  }
 
+  disconnectGame() {
+    //this.historyPush('Fine');
   }
 
   goInGame():void {
@@ -58,35 +62,20 @@ export class GameService {
   showWelcomeNews() {
     this.store.dispatch(new WelcomeNewsAction(true));
   }
-/*
-  updateSky(map) {
-  }
-/*
-  hideInputText() { }
-
-  showInputText() { }
-
-  setDoors(data) { }
-
-  playAudio(data) { }*/
-/*
-  gameState(mode) {
-    // let hideText = () => {
-    // }
-  }*/
 
   /**
    *
    * @param val command value
    * @param isStored true or false if u need to watch history length)
    */
-  processCommands(val: string, isStored?: boolean ) {
+  processCommands(val: string, isStored: boolean = true ) {
 
     const cmds = this.dataParserService.parseInput(val);
+
     if (cmds) {
       /* check if cmd will be pushed in the history array */
       if (isStored) {
-    //         //_.historyPush(text);
+        this.historyService.push(val);
       }
       for (let i = 0; i < cmds.length; i++) {
         this.sendToServer(cmds[i]);
@@ -97,4 +86,10 @@ export class GameService {
   sendToServer(cmd) {
     this.socketService.emit('data', cmd);
   }
+
+  // historyUpKey() {}
+
+  // historyDownKey() {}
+
+
 }

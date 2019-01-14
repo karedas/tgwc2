@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from './store';
 @Component({
   selector: 'app-root',
-  template: `<tg-client [state]="gameState$ | async"></tg-client>`,
+  // template: `<tg-client [state]="gameState$ | async"></tg-client>`,
+  template: `<tg-client></tg-client>`,
 })
 
 export class AppComponent {
@@ -11,9 +12,9 @@ export class AppComponent {
   gameState$: any;
 
   constructor(
-    private store: Store<fromRoot.State>,
+    // private store: Store<fromRoot.State>,
     ) {
 
-    this.gameState$ = this.store.select<fromRoot.State>(fromRoot.selectClientState);
+    // this.gameState$ = this.store.select<fromRoot.State>();
   }
 }

@@ -10,9 +10,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InputComponent } from './dashboard/input/input.component';
 import { CharacterPanelComponent } from './dashboard/character-panel/character-panel.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { MapComponent } from './map/map.component';
-import { SkyComponent } from './sky/sky.component';
-import { DirectionsComponent } from './map/directions/directions.component';
 import { TextComponent } from './output/renders/text/text.component';
 import { RoomComponent } from './output/renders/room/room.component';
 import { IconsComponent } from './common/icons/icons.component';
@@ -26,9 +23,20 @@ import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { ModalModule } from 'src/app/directives/modal/modal.module';
+import { HistoryService } from 'src/app/services/history.service';
+import { CombatPanelComponent } from './dashboard/combat-panel/combat-panel.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { MapComponent } from './right-sidebar/map/map.component';
+import { SkyComponent } from './right-sidebar/sky/sky.component';
+import { DirectionsComponent } from './right-sidebar/map/directions/directions.component';
+import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.component';
 
 @NgModule({
   declarations: [
+    // jqx widgets
+    jqxSplitterComponent,
+    jqxMenuComponent,
+    // Client Components
     ClientComponent,
     CookieLawComponent,
     ClientContainerComponent,
@@ -48,9 +56,9 @@ import { ModalModule } from 'src/app/directives/modal/modal.module';
     AudioComponent,
     ExtraboardComponent,
     WelcomeNewsComponent,
-    // jqx widgets
-    jqxSplitterComponent,
-    jqxMenuComponent,
+    CombatPanelComponent,
+    RightSidebarComponent,
+    MonitorBoxComponent
   ],
   imports: [
     ClientRoutingModule,
@@ -59,6 +67,9 @@ import { ModalModule } from 'src/app/directives/modal/modal.module';
   ],
   exports: [
     ClientComponent,
+  ],
+  providers: [
+    HistoryService
   ]
 })
 export class ClientModule {

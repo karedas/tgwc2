@@ -12,10 +12,6 @@ export function reducer(
       return Object.assign( {}, state, { socketStatus: action.payload });
     }
 
-    case ClientEventType.LOGIN_SUCCESS: {
-      return Object.assign( {}, state, { isAuthenticated: action.payload });
-    }
-
     case ClientEventType.LOGIN_FAILURE: {
       return { ...state, errorMessage: action.payload };
     }
@@ -28,26 +24,10 @@ export function reducer(
       return Object.assign({}, state, { ingame: !state.inGame });
     }
 
-    case ClientEventType.AUDIO: {
-      return Object.assign({}, state, { track: action.payload});
-    }
 
     case ClientEventType.ISGOD: {
       return Object.assign({}, state, {userlevel: action.payload });
     }
-
-    case ClientEventType.WELCOMENEWS: {
-      return Object.assign({}, state, {ui:{welcomeNews: action.payload}})
-    }
-
-    case ClientEventType.TOGGLEOUTPUT: {
-      return Object.assign({}, state, {ui:{ extraOutput: !state.ui.extraOutput}})
-    }
-
-    case ClientEventType.UI: {
-      return Object.assign({}, state, {ui: action.payload });
-    }
-
 
     default: {
       return state;

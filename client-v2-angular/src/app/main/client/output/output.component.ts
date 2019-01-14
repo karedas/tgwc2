@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { UI } from 'src/app/models/client/ui.model';
+import { UIState } from 'src/app/store/state/ui.state';
 
 @Component({
   selector: 'tg-output',
@@ -36,8 +36,8 @@ export class OutputComponent implements AfterViewInit, OnInit {
 
     /** Toggle Splitter Output  view  */
     this.store.pipe(
-      select(fromSelectors.getUI),
-      map((ui: UI) => ui.extraOutput)
+      select(fromSelectors.getUIState),
+      map((ui: UIState) => ui.extraOutput)
     ).subscribe(
       toggleStatus => {
         this.extraDetail$.next(toggleStatus)
@@ -99,7 +99,6 @@ export class OutputComponent implements AfterViewInit, OnInit {
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?: Event) {
     const scrWidth = window.innerWidth;
-    console.log(scrWidth);
     if (scrWidth < 712) {
       this.extraDetail$.next(false);
     } else {
