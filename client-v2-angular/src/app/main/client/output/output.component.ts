@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, HostListener, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
@@ -14,7 +14,7 @@ import { UIState } from 'src/app/store/state/ui.state';
   styleUrls: ['./output.component.scss'],
 })
 
-export class OutputComponent implements AfterViewInit, OnInit {
+export class OutputComponent implements OnInit {
 
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
   @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
@@ -27,7 +27,7 @@ export class OutputComponent implements AfterViewInit, OnInit {
   private outputTrimLines = 500;
 
 
-  constructor(private store: Store<DataState>) {
+  constructor(private store: Store<DataState>, private cd: ChangeDetectorRef) {
     this.lastRoom$ = this.store.pipe(select(fromSelectors.getRoomBase));
     this.extraDetail$ = new BehaviorSubject(true);
   }
@@ -50,7 +50,7 @@ export class OutputComponent implements AfterViewInit, OnInit {
     this.store.pipe(select(fromSelectors.getDataBase))
       .subscribe(
         (base: string[]) => {
-          const content = this.getContentObject('base', base[0]);
+          const content = this.setContent('base', base[0]);
           this.output.push(content);
           // You might need to give a tiny delay before updating the scrollbar
           this.scrollPanelToBottom();
@@ -64,7 +64,7 @@ export class OutputComponent implements AfterViewInit, OnInit {
           if (room.desc.base != undefined && room.desc.base != '') {
             this.lastRoomDescription = room.desc.base;
           }
-          const content = this.getContentObject('room', room);
+          const content = this.setContent('room', room);
           this.output.push(content);
           this.trimOutput();
           this.scrollPanelToBottom();
@@ -73,14 +73,11 @@ export class OutputComponent implements AfterViewInit, OnInit {
   }
 
 
-  ngAfterViewInit() {
-  }
-
   get isWithExtra(): Observable<any> {
     return this.extraDetail$.asObservable();
   }
 
-  private getContentObject(t: string, c: any): any {
+  private setContent(t: string, c: any): any {
     return Object.assign({}, { type: t, content: c });
   }
 

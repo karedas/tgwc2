@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, ViewEncapsulation } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { getSky } from 'src/app/store/selectors';
 import { Store } from '@ngrx/store';
@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'tg-sky',
   templateUrl: './sky.component.html',
-  styleUrls: ['./sky.component.scss']
+  styleUrls: ['./sky.component.scss'],
 })
 export class SkyComponent {
 

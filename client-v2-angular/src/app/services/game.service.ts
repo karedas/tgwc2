@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { LoginService } from '../main/authentication/services/login.service';
-import { ClientState } from '../store/state/client.state';
 import { HistoryService } from './history.service';
-import { WelcomeNewsAction } from '../store/actions/ui.action';
+import { State } from '../store';
 
 
 
@@ -16,33 +15,31 @@ import { WelcomeNewsAction } from '../store/actions/ui.action';
 
 export class GameService {
   private netData: string;
-
+  newsNeeded: boolean = false;
+  
   constructor(
     private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
-    private store: Store<ClientState>,
+    private store: Store<State>,
     private historyService: HistoryService
   ) { }
 
   startGame() {
+    
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
-    if(!localStorage.getItem('welcomenews')) {
-      this.showWelcomeNews();
+
+    if(localStorage.getItem('welcomenews')) {
+      this.sendToServer('@rimappa');
     }
-    else {
-      this.goInGame();
-    }
+    // else {
+    // }
   }
 
   disconnectGame() {
     //this.historyPush('Fine');
-  }
-
-  goInGame():void {
-    this.socketService.emit('data', '');
   }
 
   handleServerGameData(data) {
@@ -57,10 +54,6 @@ export class GameService {
       this.netData = '';
       this.loginService.logout();
     }
-  }
-
-  showWelcomeNews() {
-    this.store.dispatch(new WelcomeNewsAction(true));
   }
 
   /**

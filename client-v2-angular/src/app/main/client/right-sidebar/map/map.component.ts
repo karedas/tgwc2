@@ -51,7 +51,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   onMouseEvent() {
     this.isOnMap = !this.isOnMap;
-    console.log('mouseevent');
   }
 
   ngAfterViewInit() {

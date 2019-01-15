@@ -23,12 +23,15 @@ export const loginEventName = {
 export class LoginService {
 
   public isLoggedInSubject: BehaviorSubject<boolean>;
+  public withNews: boolean = false;
   public isLoggedIn$: Observable<any>;
   private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;
   public redirectUrl: string;
 
+
+  
   constructor(
 
     private socketService: SocketService,
@@ -66,7 +69,7 @@ export class LoginService {
     this.socketService.addListener(socketEvent.LOGIN, (data) => this.handleLoginData(data));
   }
 
-  handleLoginData(data) {
+  handleLoginData(data:any) {
 
     this.loginReplayMessage = 'Tentativo di connessione in corso...';
 
@@ -120,6 +123,10 @@ export class LoginService {
 
   onLoginOk(data) {
     /** Show NEWS TODO */
+    if(data.indexOf('&!news{') !== -1) {
+      this.withNews = true;
+      // this.sto
+    }
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }

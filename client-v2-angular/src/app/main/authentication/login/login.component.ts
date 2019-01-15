@@ -8,6 +8,7 @@ import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import gitInfo from 'src/git-version.json';
 import { UsernameValidation, PasswordValidation } from 'src/app/common/validations.js';
 import { takeUntil } from 'rxjs/operators';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFormErrors: any;
   loginFailed: boolean;
   loginSubscription: Subscription;
+  
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private game: GameService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.loginFormErrors = {
@@ -72,13 +75,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     const values = this.loginForm.value;
+
     this.loginSubscription = this.loginService.login(values)
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
-          // Get the redirect URL from our auth service
-          // If no redirect has been set, use the default
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
-          // Redirect the user
+
+          if(this.loginService.withNews === true) {
+            this.game.newsNeeded = this.loginService.withNews;
+          }
+
           this.router.navigate([redirect]);
         } else {
           this.loginFailed = true;

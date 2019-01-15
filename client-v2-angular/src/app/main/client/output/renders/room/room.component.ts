@@ -1,26 +1,35 @@
-import { Component, Input, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'tg-room',
   templateUrl: './room.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class RoomComponent implements AfterViewInit {
+export class RoomComponent implements OnInit {
   @Input() html: Room;
   @Input() withExtra: boolean;
   @Input() lastDescription: any = '';
 
-  private perscont: string;
-  private objcont: string;
+  // private perscont: string;
+  // private objslist: string;
 
-  constructor() { }
+  inRoomContent: boolean;
 
-  ngAfterViewInit() {
-    // if (this.html.objcont) {
-    //   this.renderDetailsList(this.html.objcont, 'obj')
-    // }
+  constructor() { 
+  }
+
+  ngOnInit(): void {
+
+    if (this.html.perscont || this.html.objcont) {
+      
+      this.inRoomContent = true;
+    }
+    else {
+      this.inRoomContent = false;
+    }
   }
 
   getRoomImage(img: string ): string {
@@ -28,77 +37,30 @@ export class RoomComponent implements AfterViewInit {
       return fullPathImage;
   }
 
-  renderDetailsList(objs: any, objsType: string): string {
-    const html = '';
-    const res = '';
-    const interactClass = '';
-
-    if (objs.list) {
-      if (objsType == 'pers' || objsType == 'equip') { }
-    }
-
-    for (let n = 0; n < objs.list.length; n++) {
-
-      const l = objs.list[n];
-      // let is_group = (l.mrn && l.mrn.length) > 1;
-      // let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]);
-      const grp_attribute = '';
-      const exp_attribute = '';
-      const tooltip = '';
-      const expicon = '';
+  // renderDetailsList(objs: any, objsType: string): string {
+  //   const html = '';
+  //   const res = '';
 
 
-      /* if object/person type is more then 1 */
-      // if (is_group) {
-      //   interactClass = '';
-      //   grp_attribute = ' grpcoll';
+  //   if (objs.list) {
+  //     if (objsType == 'pers' || objsType == 'equip') { 
 
-      //   // if (opened) {
-      //   //   grp_attribute += ' d-none';
-      //   // }
-      //   expicon = '<div class="expicon"></div>';
-      // } else {
-      //   interactClass = ' interact'
-      // }
+  //     }
+  
+  //     for (let n = 0; n < objs.list.length; n++) {
+  
+  //       const l = objs.list[n];
+  //       // let is_group = (l.mrn && l.mrn.length) > 1;
+  //       // let opened = (l.mrn && _.exp_grp_list[l.mrn[l.mrn.length - 1]]);
+  //       const grp_attribute = '';
+  //       const exp_attribute = '';
+  //       const tooltip = '';
+  //       const expicon = '';
 
-
-      /* print header triggerable element */
-      // html += `<div class="element${grp_attribute} ">`;
-      // mob/obj icon
-      // this.objcont += _.renderIcon(l.icon, l.mrn ? l.mrn[0] : null, cont_type, l.cntnum, null, interactClass + ' ' + type);
-      // this.objcont += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz ? l.sz : 1, (l.eq ? '<b class="poseq">' + _.equip_positions_by_num[l.eq[0]] + '</b>: ' : '') + l.desc) + '</div>';
-      // html += '</div>';
-
-      /* Start Collapsable Obj/Mob Container */
-      // if (is_group) {
-
-      //   // if (!opened) {
-      //   //   exp_attribute = ' style="display:none"';
-      //   // }
-
-      //   html += '<div class="grpexp"' + exp_attribute + '>';
-
-      //   for (let m = 0; m < l.mrn.length; m++) {
-      //     html += '<div class="element">'
-      //     // this.objcont += (m == 0 ? '<div class="collicon"></div>' : '') + _.renderIcon(l.icon, l.mrn[m], cont_type, l.cntnum, null, 'interact ' + type);
-      //     // this.objcont += '<div class="desc">' + _.decoratedDescription(l.condprc, l.mvprc, l.wgt, 1, l.desc) + '</div>';
-      //     html += '</div>';
-      //   }
-
-      //   if (l.sz && l.sz > l.mrn.length) {
-      //     html += '<div class="element">';
-      //     // this.objcont += _.renderIcon(l.icon, null, cont_type, l.cntnum, null, null);
-      //     html += '<div class="desc">';
-      //     // this.objcont += _.decoratedDescription(l.condprc, l.mvprc, l.wgt, l.sz - l.mrn.length, l.desc);
-      //     html += '</div>';
-      //     html += '</div>';
-      //   }
-
-      //   html += '</div>';
-      // }
-    }
+  //     }
+  //   }
 
 
-    return html;
-  }
+  //   return html;
+  // }
 }

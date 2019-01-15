@@ -29,7 +29,6 @@ export class AudioAction implements Action {
 
 export class WelcomeNewsAction implements Action {
   readonly type =  UIEventType.WELCOMENEWS;
-  constructor(public payload: boolean) {}
 }
 
 export type UIActions

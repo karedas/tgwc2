@@ -30,6 +30,7 @@ import { MapComponent } from './right-sidebar/map/map.component';
 import { SkyComponent } from './right-sidebar/sky/sky.component';
 import { DirectionsComponent } from './right-sidebar/map/directions/directions.component';
 import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.component';
+import { DetailsRoomComponent } from './output/renders/details-room/details-room.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.com
     WelcomeNewsComponent,
     CombatPanelComponent,
     RightSidebarComponent,
-    MonitorBoxComponent
+    MonitorBoxComponent,
+    DetailsRoomComponent
   ],
   imports: [
     ClientRoutingModule,

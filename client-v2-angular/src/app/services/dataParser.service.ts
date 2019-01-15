@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { InGameAction } from '../store/actions/client.action';
 
 import { State } from '../store';
-import { AudioAction } from '../store/actions/ui.action';
+import { AudioAction, WelcomeNewsAction } from '../store/actions/ui.action';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +47,6 @@ export class DataParser {
   parseForDisplay(data: string) {
 
     let pos: any;
-
-    console.log(data);
 
 
     // Hide text (password)

@@ -13,7 +13,7 @@ export function reducer(
     }
     
     case UIEventType.WELCOMENEWS: {
-      return Object.assign({}, state, { welcomeNews: action.payload})
+      return Object.assign({}, state, { welcomeNews: !state.welcomeNews})
     }
 
     case UIEventType.TOGGLEOUTPUT: {

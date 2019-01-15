@@ -1,17 +1,21 @@
-<div class="tg-room" *ngIf="html">
-  <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
-    <div [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
-    <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true" class="tg-room--desc"></div>
-  </ng-template>
+<div class="tg-line">
+  <div class="tg-room" *ngIf="html">
+    <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
+      <div *ngIf="html.title" [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
+      <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true" class="tg-room--desc"></div>
+    </ng-template>
+    <ng-container *ngIf="inRoomContent">
+      <tg-details-room></tg-details-room>
+    </ng-container>
+  </div>
 </div>
 
 <ng-template #extradetail>
     <div class="tg-extraoutput--header">
-        <div class="tg-room--title" [innerHtml]="html.title | dataToHtml:true"></div>
+        <div *ngIf="html.title" class="tg-room--title" [innerHtml]="html.title | dataToHtml:true"></div>
         <div class="tg-room--image" *ngIf="html.image">
           <img [src]="getRoomImage(html.image)"/>
         </div>
          <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
     </div>
 </ng-template>
-

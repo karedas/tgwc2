@@ -5,22 +5,19 @@
 
 
 /* Tg Extra Board */
-.tg-extraboard {
-    width: 100%;
+:host {
     min-width: 33%;
+    max-width: 50%;
     background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
 
     .tg-extraboard-wrap {
         height: 100%;
-        width: 100%; //TEMP
         text-transform: uppercase;
         color: $gray-500;
         font-size: 11px;
     }
 
     .extraboard-content {
-        display: flex;
-        flex: 1 1 100%;
         max-height: 80px;
         height: 75px;
         overflow-y: auto;

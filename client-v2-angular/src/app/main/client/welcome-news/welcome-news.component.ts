@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ModalsService } from 'src/app/directives/modal/modal.service';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-welcome-news',
@@ -12,12 +13,14 @@ export class WelcomeNewsComponent implements AfterViewInit {
   modalConfig: ModalConfiguration = new ModalConfiguration();
   private dontShowNextTime: boolean = false;
   
-  constructor(private modalService: ModalsService) { 
+  constructor(private modalService: ModalsService, private game: GameService) { 
     this.modalConfig.width = 800;
   }
 
   ngAfterViewInit(): void {
-    this.modalService.open(this.modalId);
+    if(!localStorage.getItem('welcomenews')) {
+      this.open();
+    }
   }
 
   onContinue(): void{
@@ -26,9 +29,14 @@ export class WelcomeNewsComponent implements AfterViewInit {
     }
 
     this.modalService.close(this.modalId);
+    this.game.sendToServer('');
   }
 
   onCheckbox(event: any): void {
     this.dontShowNextTime = !this.dontShowNextTime;
+  }
+
+  open() {
+    this.modalService.open(this.modalId);
   }
 }

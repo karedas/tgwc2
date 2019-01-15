@@ -14,9 +14,9 @@
             <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
               <div class="tg-output--history">
                 <div *ngFor="let data of output">
-                  <div class="tg-line" [ngSwitch]="data.type">
+                  <ng-container [ngSwitch]="data.type">
                     <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
-                  </div>
+                  </ng-container>
                 </div>
               </div>
             </ng-scrollbar>
@@ -45,13 +45,13 @@
     <ng-scrollbar class="scrollbar" barClass="scrollbar" thumbClass="scrollbar-thumbs" #scrollBar>
       <div class="tg-output--history">
         <div *ngFor="let data of output">
-          <div class="tg-line" [ngSwitch]="data.type">
-            <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+          <ng-container [ngSwitch]="data.type">
             <tg-room *ngSwitchCase="'room'" 
               [withExtra]="false" 
               [html]="data.content" 
               [lastDescription]="lastRoomDescription"></tg-room>
-          </div>
+            <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+          </ng-container>
         </div>
       </div>
     </ng-scrollbar>

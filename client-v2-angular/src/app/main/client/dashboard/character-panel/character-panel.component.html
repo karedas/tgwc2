@@ -52,16 +52,10 @@
               </div>
             </div>
           </div>
-          <div class="tg-combatpanel col-auto pr-0">
+          <div class="tg-combatpanel col-auto pr-0" *ngIf="inCombat">
             <tg-combat-panel></tg-combat-panel>
           </div>
-          <div class="tg-extraboard col-auto d-none d-sm-flex flex-column">
-            <div class="row h-100">
-              <div class="col-12 d-flex flex-row pl-1">
-                <tg-extraboard></tg-extraboard>
-            </div>
-          </div>
-        </div>
+          <tg-extraboard class="col-auto d-none d-sm-flex flex-column"></tg-extraboard>
         </div>
       </div>
     </div>
