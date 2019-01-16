@@ -11,7 +11,6 @@ export enum ClientEventType {
   LOGIN = '[Client] User Login',
   LOGIN_FAILURE = '[Client] User Login Failure',
   INGAME = '[Client] User In Game',
-  ISGOD = '[Client] User is a God',
 }
 
 export class SocketStatusAction implements Action {
@@ -36,12 +35,6 @@ export class InGameAction implements Action  {
   readonly type = ClientEventType.INGAME;
 }
 
-export class UserLevelAction implements Action {
-  readonly type = ClientEventType.ISGOD;
-  constructor (public payload: boolean) {}
-}
-
-
 
 export type ClientActions
   = InGameAction
@@ -49,4 +42,3 @@ export type ClientActions
   | LoginAction
   | DisconnectAction
   | LoginFailureAction
-  | UserLevelAction

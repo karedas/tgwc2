@@ -7,7 +7,10 @@ export function reducer(
 ): UIState {
   switch (action.type) {
 
-    
+    case UIEventType.UI: {
+      return Object.assign({}, state, action.payload );
+    }
+
     case UIEventType.AUDIO: {
       return Object.assign({}, state, { track: action.payload});
     }
@@ -22,6 +25,12 @@ export function reducer(
     case UIEventType.UI: {
       return Object.assign({}, state, action.payload);
     }
+    
+    // case UIEventType.UPDATENEEDED: {
+    //   return Object.assign({}, state, {
+    //     inventory
+    //   })
+    // }
 
     default:
       return state;

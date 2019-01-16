@@ -13,7 +13,7 @@
   .tg-output {
     flex: 1;
 
-    > div {
+    >div {
       overflow: hidden;
     }
   }
@@ -72,7 +72,7 @@
   }
 }
 
-.tg-output--history{
+.tg-output--history {
   padding: 8px 8px 8px 8px;
 }
 
@@ -111,7 +111,7 @@ tg-text {
   }
 
 
-  > span {
+  >span {
     padding-top: 8px;
   }
 }
@@ -157,42 +157,51 @@ tg-text {
 
 
   /* LIST Mob & Object*/
-  .tg-objects {
+  .tg-objects,
+  .tg-persons {
     display: flex;
     padding-bottom: .5em;
     flex-direction: column;
   }
 
-  .tg-objects--line {
+  .tg-objects--line,
+  .tg-persons--line {
     color: $tg-lt-green;
     padding-top: 2px;
   }
 
-  .tg-objects--hstat {
-    background-position: 0 0px;
+  /* Double Columns style */
+  .total-50 {
+    width: 50%;
     display: inline-block;
-    margin: auto .5em auto 0.3em;
-    background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
-    box-sizing: content-box;
-    height: 13px;
-    width: 21px;
-    flex: 1 0 21px;
   }
+
+  .total-50-50 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    > div {
+      flex: 1 0 50%;
+    }
+  }
+
+  // .tg-objects--hstat {
+  //   background-position: 0 0px;
+  //   display: inline-block;
+  //   margin: auto .5em auto 0.3em;
+  //   background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
+  //   box-sizing: content-box;
+  //   height: 13px;
+  //   width: 21px;
+  //   flex: 1 0 21px;
+  // }
   // .out-list {
   //   display: block;
   //   width: 100%;
   //   padding-top: .5em;
 
-  //   /* Double Columns style */
-  //   &.col-dispose {
-  //     display: flex;
-  //     flex-wrap: wrap;
 
-  //     .element {
-  //       padding: 2px 0 0;
-  //       flex: 0 1 50%;
-  //     }
-  //   }
 
   //   &.firstlist {
   //     padding-bottom: 0;
@@ -269,10 +278,10 @@ tg-text {
   //   flex-direction: row;
   //   display: flex;
 
-    // .dd-desc {
-    //   /*flex-direction: row;
-    //       display: flex;*/
-    // }
+  // .dd-desc {
+  //   /*flex-direction: row;
+  //       display: flex;*/
+  // }
   // }
 
 
@@ -287,7 +296,7 @@ tg-text {
   //     color: white;
   //   }
   // }
-    
+
   .tg-extraoutput--header {
     overflow: hidden;
     padding-bottom: .4em;
@@ -313,7 +322,7 @@ tg-text {
       padding: 0.5em 10px .2em;
       line-height: 1.4;
       font-size: 13px;
-      color:#e2d6c7;
+      color: #e2d6c7;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 

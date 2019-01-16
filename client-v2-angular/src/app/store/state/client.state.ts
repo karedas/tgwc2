@@ -6,7 +6,6 @@ export interface ClientState  {
     inGame: boolean;
     errorMessage: string | null;
     time?: string;
-    userlevel: number;
     track?: string;
 }
 
@@ -16,5 +15,4 @@ export const initialState: ClientState = {
     inGame: false,
     errorMessage: null,
     time: undefined,
-    userlevel: 0,
 };

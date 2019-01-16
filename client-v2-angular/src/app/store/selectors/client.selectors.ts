@@ -9,11 +9,6 @@ export const getClientState = createFeatureSelector<ClientState>('client');
 
 /******************* Public Selector API's ******************/
 
-export const getUserLevel = createSelector (
-  getClientState,
-  client => client.userlevel
-);
-
 export const getErrorMessage  = createSelector(
   getClientState,
   client => client.errorMessage

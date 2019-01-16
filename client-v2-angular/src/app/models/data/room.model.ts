@@ -15,6 +15,7 @@ export interface RoomList {
   mrn: number[];
   desc: string;
   mvprc: number;
+  sz: number;
   wgt: number;
 }
 

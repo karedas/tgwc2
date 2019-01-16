@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as DataActions from '../store/actions/data.action';
 import { GameMode } from '../store/game.const';
-import { BehaviorSubject } from 'rxjs';
 import { InGameAction } from '../store/actions/client.action';
 
 import { State } from '../store';
-import { AudioAction, WelcomeNewsAction } from '../store/actions/ui.action';
+import * as DataActions from '../store/actions/data.action';
+import * as UiActions from '../store/actions/ui.action';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +13,8 @@ import { AudioAction, WelcomeNewsAction } from '../store/actions/ui.action';
 
 export class DataParser {
   private cmdPrefix = '';
-  parseUiObject$: BehaviorSubject<any> = new BehaviorSubject([]);
 
-  private msgRegexp = {
-    hideInputText: /&x\n*/gm,
-    showInputText: /&e\n*/gm,
-    updateSkyPicture: /&o.\n*/gm,
-  };
-
-  constructor(
-    private store: Store<State>,
-    ) {
-    this.parseUiObject$.asObservable();
+  constructor( private store: Store<State> ) {
   }
 
   parse(data: any): void {
@@ -50,21 +39,20 @@ export class DataParser {
 
 
     // Hide text (password)
-    data = data.replace(this.msgRegexp.hideInputText, (msg) => {
+    data = data.replace(/&x\n*/gm, (msg) => {
       console.warn('Todo: Hide Text');
-      // this.parseUiObject$.next({ data, type: GameMode.HIDEINPUTTEXT });
+      this.store.dispatch(new UiActions.UpdateUI({inputVisible: false}));
       return '';
     });
 
     // Show text (normal input)
-    data = data.replace(this.msgRegexp.showInputText, () => {
-      console.warn('Todo: Show text');
-      // this.parseUiObject$.next({ data, type: GameMode.SHOWINPUTTEXT });
+    data = data.replace(/&e\n*/gm, () => {
+      this.store.dispatch(new UiActions.UpdateUI({inputVisible: true}));
       return '';
     });
 
     // Sky picture
-    data = data.replace(this.msgRegexp.updateSkyPicture, (sky) => {
+    data = data.replace(/&o.\n*/gm, (sky) => {
       const sky_parse = sky.charAt(2);
       this.store.dispatch(new DataActions.SkyAction(sky_parse));
       return '';
@@ -80,7 +68,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.store.dispatch(new AudioAction(audio_parse));
+      this.store.dispatch(new UiActions.AudioAction(audio_parse));
       return '';
     });
 
@@ -94,7 +82,12 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      console.log('update_parse');
+      console.group('update parse')
+      console.log(update_parse);
+      console.groupEnd();
+      // this.store.dispatch(new UiActions.UpdateUI({
+      //   //inventory: update_parse[0] > 
+      // }));
 
       return '';
     });
@@ -102,14 +95,14 @@ export class DataParser {
     // Image in side frame (with gamma)
     data = data.replace(/&!img"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(6, image.lastIndexOf('"')).split(',');
-      this.parseUiObject$.next({ image_parse, type: GameMode.IMAGEWITHGAMMA });
+      console.log('image in side frame with gamma:', image_parse)
       return '';
     });
 
     // Image in side frame
     data = data.replace(/&!im"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(5, image.lastIndexOf('"'));
-      console.log('this.parseUiObject$.next({ image_parse, type: GameMode.IMAGE })');
+      console.log('image in side frame', image_parse);
       return '';
     });
 
@@ -121,7 +114,7 @@ export class DataParser {
 
     // Close the text editor
     data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      this.parseUiObject$.next({ data, type: GameMode.CLOSETEXTEDITOR });
+      console.log('close text editor');
       return '';
     });
 
@@ -131,6 +124,7 @@ export class DataParser {
       // const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
       // const text_editor = Object.assign({}, [options_parse, text]);
       // this.parseUiObject$.next({ text_editor, type: GameMode.CLOSETEXTEDITOR });
+      console.log('open text editor');
       return '';
     });
 
@@ -144,28 +138,28 @@ export class DataParser {
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      this.parseUiObject$.next({ cmd_parse, type: GameMode.MAP });
+      console.log('command list');
       return '';
     });
 
     // Generic page (title, text)
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-      this.parseUiObject$.next({ page_parse, type: GameMode.RENDERGENERIC });
+      console.log('generic page', page_parse);
       return '';
     });
 
     // Generic table (title, head, data)
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
       const gtable_parse = JSON.parse(t.slice(7, -1));
-      this.parseUiObject$.next({ gtable_parse, type: GameMode.RENDERTABLE });
+      console.log('generic table');
       return '';
     });
 
     // Inventory
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
       const inv_parse = JSON.parse(inv.slice(5, -1));
-      this.parseUiObject$.next({ inv_parse, type: GameMode.RENDERINVENTORY });
+      console.log('render inventory', inv_parse);
       return '';
     });
 
@@ -179,35 +173,35 @@ export class DataParser {
     // Person details
     data = data.replace(/&!pers\{[\s\S]*?\}!/gm, (dtls) => {
       const dtls_parse = JSON.parse(dtls.slice(6, -1));
-      this.parseUiObject$.next({ dtls_parse, type: GameMode.PERSONDETAILS });
+      console.log('person detail', dtls_parse);
       return '';
     });
 
     // Object details
     data = data.replace(/&!obj\{[\s\S]*?\}!/gm, (dtls) => {
       const dtls_parse = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
-      this.parseUiObject$.next({ dtls_parse, type: GameMode.OBJECTDETAILS });
+      console.log('object details', dtls_parse);
       return '';
     });
 
     // Equipment
     data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
       const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-      this.parseUiObject$.next({ eq_parse, type: GameMode.EQUIP });
+      console.log('equipment', eq_parse);
       return '';
     });
 
     // Workable lists
     data = data.replace(/&!wklst\{[\s\S]*?\}!/gm, (wk) => {
       const wk_parse = JSON.parse(wk.slice(7, -1));
-      this.parseUiObject$.next({ wk_parse, type: GameMode.WORKABLELIST });
+      console.log('workable list', wk_parse);
       return '';
     });
 
     // Skill list
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-      this.parseUiObject$.next({ skinfo_parse, type: GameMode.SKILLS });
+      console.log('skill list', skinfo_parse);
       return '';
 
     });
@@ -215,41 +209,41 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      this.parseUiObject$.next({ info_parse, type: GameMode.PLAYERINFO });
+      console.log('player info', info_parse);
       return '';
     });
 
     // Player status
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      this.parseUiObject$.next({ status_parse, type: GameMode.PLAYERSTATUS });
+      console.log('player status', status_parse);
       return '';
     });
 
-    // (New) Image Request Box
-    data = data.replace(/&!imgreq\{[\s\S]*?\}!/gm, (imgreq) => {
-      imgreq = JSON.parse(imgreq.slice());
-      this.parseUiObject$.next({ imgreq, type: GameMode.NEWIMAGEREQUEST });
-      return '';
-    });
+    // // (New) Image Request Box
+    // data = data.replace(/&!imgreq\{[\s\S]*?\}!/gm, (imgreq) => {
+    //   imgreq = JSON.parse(imgreq.slice());
+    //   this.parseUiObject$.next({ imgreq, type: GameMode.NEWIMAGEREQUEST });
+    //   return '';
+    // });
 
     // Selectable generic
     data = data.replace(/&!select\{[\s\S]*?\}!/gm, (s) => {
       s = JSON.parse(s.slice(8, -1));
-      this.parseUiObject$.next({ s, type: GameMode.SELECTABLEGENERIC });
+      console.log('selectable generic', s);
       return '';
     });
 
     // Refresh command
     data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
       const rcommand_parse = JSON.parse(t.slice(9, -1));
-      this.parseUiObject$.next({ rcommand_parse, type: GameMode.REFRESH });
+      console.log('refresh command', rcommand_parse);
       return '';
     });
 
     // Pause scroll
     data = data.replace(/&!crlf"[^"]*"/gm, () => {
-      this.parseUiObject$.next({ type: GameMode.PAUSESCROLL });
+      console.log('pause scroll?');
       return '';
     });
 
@@ -258,7 +252,6 @@ export class DataParser {
     if (pos >= 0) {
       data = data.slice(pos + 2);
     }
-
 
     // Filterable messages
     data = data.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, (line, type, msg) => {
@@ -269,13 +262,14 @@ export class DataParser {
 
     data = data.replace(/&!ce"[^"]*"/gm, (image) => {
       const image_parse = image.slice(5, -1);
-      console.log('renderEmbeddedImage');
+      console.log('renderEmbeddedImage', image_parse);
       return '';
       // return renderEmbeddedImage(image_parse);
     });
 
     data = data.replace(/&!ulink"[^"]*"/gm, (link) => {
       const link_parse = link.slice(8, -1).split(',');
+      console.log('render link', link_parse);
       // return _.renderLink(link_parse[0], link_parse[1]);
       return '';
     });
@@ -285,6 +279,8 @@ export class DataParser {
     data = data.replace(/&!(ad|a)?m"[^"]*"/gm, (mob) => {
       const mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
       const desc_parse = mob.slice(5).toString();
+
+      console.log('???', mob_parse, desc_parse);
       // return _.renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
       return '';
     });
@@ -292,29 +288,20 @@ export class DataParser {
     data = data.replace(/&!(ad|a)?o"[^"]*"/gm, (obj) => {
       const obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
       const desc_parse = obj.slice(5).toString();
+      console.log('???', obj_parse, desc_parse);
       // return _.renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
       return '';
     });
 
-    /*data = data.replace(/&!sm"[^"]*"/gm, (icon) => {
-      const icon_parse = icon.slice(5, -1).split(',');
-      console.log('icon sm');
-      // return _.renderIcon(icon_parse[0], icon_parse[1], 'room', null, null, 'interact pers');
-      return '';
-    });*/
-
-    /*data = data.replace(/&!si"[^"]*"/gm, (icon) => {
-      // return _.renderIcon(icon_parse[0], null, null, null, null, "v" + icon_parse[1]);
-      return data;
-    });*/
-
-    data = data.replace(/&i/gm, function () {
-      // _.isGod = true;
+    //Invisibility Level (only God)
+    data = data.replace(/&i/gm, () => {
+      this.store.dispatch(new UiActions.UpdateUI({isGod: true}))
       return '';
     });
 
-    data = data.replace(/&I\d/gm, function (inv) {
-      // _.godInvLev = parseInt(inv.substr(2, 3));
+    data = data.replace(/&I\d/gm, (inv) => {
+      const godInvLev = parseInt(inv.substr(2, 3));
+      this.store.dispatch( new UiActions.UpdateUI({invLevel: godInvLev}))
       return '';
     });
 
@@ -324,7 +311,6 @@ export class DataParser {
     if (data != 'undefined' && data !== '') {
       data = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new DataActions.IncomingData(data));
-      // this.parseSubject.next(data);
     }
   }
 

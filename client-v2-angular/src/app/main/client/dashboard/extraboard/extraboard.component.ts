@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'tg-extraboard',
@@ -7,8 +7,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ExtraboardComponent implements OnInit {
 
-  shortcutsNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
-  shortcuts = Array;
+  @ViewChild('#shortcutOpen') shortcutLink: ElementRef;
 
   constructor() { }
 

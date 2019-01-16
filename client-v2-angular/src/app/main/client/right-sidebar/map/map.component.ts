@@ -49,7 +49,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     
   }
 
-  onMouseEvent() {
+  onMouseEvent($event) {
     this.isOnMap = !this.isOnMap;
   }
 

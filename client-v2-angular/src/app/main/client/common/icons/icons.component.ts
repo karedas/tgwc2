@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { IconsService } from './icons.service';
 import { MIcons } from './icons.model';
 
 @Component({
@@ -33,7 +32,6 @@ export class IconsComponent implements OnInit {
       'background-position':`-${tc[0]}px -${tc[1]}px`
     }
     this.bgPositionStyle = bgPos;
-    console.log('ok');
   }
 
   private tileCoords(): number[] {

@@ -96,7 +96,6 @@ export class OutputComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?: Event) {
     const scrWidth = window.innerWidth;
-    console.log(this.extraDetail$.value);
     if(this.extraDetail$.value === true) {
       if (scrWidth < 712 ) {
         this.extraDetail$.next(false);

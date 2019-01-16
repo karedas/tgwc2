@@ -1,8 +1,10 @@
-import { Component, HostListener, Input, EventEmitter } from '@angular/core';
+import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
-import { getUserLevel, getDoors } from 'src/app/store/selectors';
+import { getDoors, getUserLevel } from 'src/app/store/selectors';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-directions',
@@ -10,33 +12,41 @@ import { getUserLevel, getDoors } from 'src/app/store/selectors';
   styleUrls: ['./directions.component.scss'],
 })
 
-export class DirectionsComponent {
+export class DirectionsComponent implements OnInit, OnDestroy{
 
   @Input('isOnMap') isOnMap: boolean;
+  
   dirCmd: string;
   doorsStyle: any[] = [];
+  userlevel: number;
 
   private dirNames: string[] = ['nord', 'est', 'sud', 'ovest', 'alto', 'basso'];
   private dirStatus: string[] = ['00000'];
 
-  userlevel = 0;
-
+  private _unsubscribeAll: Subject<any>;
+  
   constructor(
     private gameService: GameService,
     private store: Store<DataState>
   ) {
 
-
-    this.store.pipe(select(getDoors))
-      .subscribe(door => this.setDoors(door));
-
-    this.store.pipe(select(getUserLevel))
-      .subscribe(level => {
-        this.userlevel = level;
-      });
-
-
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
   }
+  
+  ngOnInit(): void {
+    this.store.pipe(
+      select(getDoors),
+      takeUntil(this._unsubscribeAll)).subscribe(
+      door => this.setDoors(door)
+    );
+
+    this.store.pipe(select(getUserLevel)).subscribe(
+      level => { this.userlevel = level;}
+    );
+  }
+
+
   goToDirection($event, dir: number): void {
 
     $event.preventDefault();
@@ -86,5 +96,11 @@ export class DirectionsComponent {
           break;
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }

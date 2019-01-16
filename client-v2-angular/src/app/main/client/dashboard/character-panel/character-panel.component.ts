@@ -11,6 +11,7 @@ import { getStatus } from 'src/app/store/selectors';
 export class CharacterPanelComponent {
 
   status: any;
+  inCombat: boolean = false;
 
   constructor(private store: Store<DataState>) {
     this.store.pipe(select(getStatus)).subscribe(values => {

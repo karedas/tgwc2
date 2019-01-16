@@ -13,7 +13,6 @@ import { PreloaderService } from '../main/client/common/services/preloader.servi
 import { AudioService } from '../main/client/audio/audio.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { IconsService } from '../main/client/common/icons/icons.service';
 
 @NgModule({
   declarations: [],
@@ -36,7 +35,6 @@ import { IconsService } from '../main/client/common/icons/icons.service';
     SocketService,
     PreloaderService,
     AudioService,
-    IconsService
   ],
   exports: [
     FormsModule,

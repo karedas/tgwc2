@@ -24,11 +24,6 @@ export function reducer(
       return Object.assign({}, state, { ingame: !state.inGame });
     }
 
-
-    case ClientEventType.ISGOD: {
-      return Object.assign({}, state, {userlevel: action.payload });
-    }
-
     default: {
       return state;
     }
