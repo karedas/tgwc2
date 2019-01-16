@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
@@ -96,10 +96,13 @@ export class OutputComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?: Event) {
     const scrWidth = window.innerWidth;
-    if (scrWidth < 712) {
-      this.extraDetail$.next(false);
-    } else {
-      this.extraDetail$.next(true);
+    console.log(this.extraDetail$.value);
+    if(this.extraDetail$.value === true) {
+      if (scrWidth < 712 ) {
+        this.extraDetail$.next(false);
+      } else {
+        this.extraDetail$.next(true);
+      }
     }
   }
 

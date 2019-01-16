@@ -1,3 +1,10 @@
-<p>
-  details-room works!
-</p>
+<div class="tg-objects">
+  <div class="tg-objects--line" *ngFor="let person of persons">
+    <div class="tg-objects--item" [attr.mrn]="person.mrn">
+      <!-- [{{person.cond}}] [{{person.condprc}}] [{{person.mvprc}}] -->
+        <!-- <div class="tg-objects--hstat" [style.background-position]="getHsStatBgPos(person.condprc)"></div> -->
+        <tg-icons [icon]="person.icon"></tg-icons>
+        <div class="desc" [innerHtml]="person.desc | dataToHtml"></div>
+    </div>
+  </div>
+</div>

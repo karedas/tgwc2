@@ -1,5 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DataState } from '../state/data.state';
+import { Room } from 'src/app/models/data/room.model';
+import { MPersons } from 'src/app/main/client/output/renders/details-room/models/persons.model';
 
 /******************* Base Search State ******************/
 export const getDataState = createFeatureSelector<DataState>('data');
@@ -32,6 +34,16 @@ export const getRoomBase = createSelector(
   getDataState,
   (data: DataState) => data.room
 );
+
+export const getObjectsInRoom = createSelector(
+  getRoomBase,
+  (room:Room) => room.objcont.list
+)
+
+export const getPersonsInRoom = createSelector(
+  getRoomBase,
+  (room:Room) => room.perscont.list
+)
 
 export const getDoors = createSelector(
   getDataState,

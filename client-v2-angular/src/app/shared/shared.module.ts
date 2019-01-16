@@ -12,11 +12,11 @@ import { Auth2Module } from '../main/authentication/auth.module';
 import { PreloaderService } from '../main/client/common/services/preloader.service';
 import { AudioService } from '../main/client/audio/audio.service';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconsService } from '../main/client/common/icons/icons.service';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     Auth2Module,
@@ -35,7 +35,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CookieService,
     SocketService,
     PreloaderService,
-    AudioService
+    AudioService,
+    IconsService
   ],
   exports: [
     FormsModule,

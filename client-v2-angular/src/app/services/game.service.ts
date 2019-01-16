@@ -30,12 +30,6 @@ export class GameService {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
-
-    if(localStorage.getItem('welcomenews')) {
-      this.sendToServer('@rimappa');
-    }
-    // else {
-    // }
   }
 
   disconnectGame() {

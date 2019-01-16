@@ -129,7 +129,7 @@ tg-text {
     clear: both;
   }
 
-  .iconimg {
+  .tg-icon {
     margin: -8px 0.5em auto 0;
     vertical-align: middle;
     float: left;
@@ -140,7 +140,7 @@ tg-text {
   }
 
   .tg-room--title {
-    font-size: 12px;
+    font-size: 14px;
     color: #ac4c55;
     font-family: kingthings;
   }
@@ -155,14 +155,33 @@ tg-text {
     margin-bottom: .5em;
   }
 
-  /* Description base*/
 
   /* LIST Mob & Object*/
+  .tg-objects {
+    display: flex;
+    padding-bottom: .5em;
+    flex-direction: column;
+  }
+
+  .tg-objects--line {
+    color: $tg-lt-green;
+    padding-top: 2px;
+  }
+
+  .tg-objects--hstat {
+    background-position: 0 0px;
+    display: inline-block;
+    margin: auto .5em auto 0.3em;
+    background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
+    box-sizing: content-box;
+    height: 13px;
+    width: 21px;
+    flex: 1 0 21px;
+  }
   // .out-list {
   //   display: block;
   //   width: 100%;
   //   padding-top: .5em;
-  //   padding-bottom: .5em;
 
   //   /* Double Columns style */
   //   &.col-dispose {
@@ -293,7 +312,9 @@ tg-text {
     .tg-room--desc {
       padding: 0.5em 10px .2em;
       line-height: 1.4;
-      font-size: 11px;
+      font-size: 13px;
+      color:#e2d6c7;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
     .tg-room--image {
@@ -301,7 +322,7 @@ tg-text {
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: .5em 1em 1em .5em;
+      margin: 6px 1em 1em 4px;
 
       img {
         max-width: 100%;

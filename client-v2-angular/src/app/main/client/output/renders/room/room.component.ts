@@ -24,7 +24,6 @@ export class RoomComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.html.perscont || this.html.objcont) {
-      
       this.inRoomContent = true;
     }
     else {
