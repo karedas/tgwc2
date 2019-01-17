@@ -1,12 +1,20 @@
+export interface IHeroRace{
+  code: string;
+  name: string;
+}
+
 export interface IHero {
   name?: string;
-  status?: any[];
+  adjective?: string;
+  image?: string;
+  race?: IHeroRace;
+  title?: string;
+  status: any[];
 }
 
 export class Hero implements IHero {
-  name = '';
-  status?: string[] = ['0,0,0,0'];
-  constructor(name?: any, status?: any[], ) {
-      this.name = name;
+  status: any[] = [0,0,0,0];
+  constructor(...args ) {
+    this.status = [0,0,0,0]
   }
 }

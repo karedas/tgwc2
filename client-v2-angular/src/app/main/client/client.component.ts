@@ -53,6 +53,7 @@ export class ClientComponent {
       this.isCookieAccepted = true; 
     }
 
+
     /** Until Login Auth */
     // this.loginService.isLoggedIn$.subscribe(auth => {
     //   if (auth) { 

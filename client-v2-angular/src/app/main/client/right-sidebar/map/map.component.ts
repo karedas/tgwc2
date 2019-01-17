@@ -46,7 +46,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     this.maxMapWidth = 9;
 
     this._unsubscribeAll = new Subject();
-    
   }
 
   onMouseEvent($event) {
@@ -56,14 +55,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit() {
 
     this.map$ = this.store.select(fromSelectors.getMap);
-    this.map$.pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(
-      (map: Map) => {
-        if (map !== undefined) {
-          this.updateMap(map);
-        }
-      }
-    );
 
     this.layerMap = new Array(this.maxMapHeight);
     for (let y = 0; y < this.maxMapHeight; ++y) {
@@ -71,6 +62,14 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     }
 
     this.prepareCanvas();
+    
+    this.map$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
+      (map: Map) => {
+        if (map !== undefined) {
+          this.updateMap(map);
+        }
+      }
+    );
   }
 
   private prepareCanvas(): void {

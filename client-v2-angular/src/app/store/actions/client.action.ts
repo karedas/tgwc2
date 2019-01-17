@@ -20,7 +20,7 @@ export class SocketStatusAction implements Action {
 
 export class LoginSuccessAction implements Action {
   readonly type = ClientEventType.LOGINSUCCESS;
-  constructor(public payload: string) {}
+  constructor(public payload?: {}) {}
 }
 
 export class DisconnectAction implements Action {

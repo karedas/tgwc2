@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getStatus } from 'src/app/store/selectors';
+import { getStatus, getHero } from 'src/app/store/selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-character-panel',
@@ -12,8 +13,13 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class CharacterPanelComponent implements OnInit, OnDestroy{
 
-  status: any[];
+  status: any[] = [0,0,0,0];
   inCombat: boolean = false;
+
+
+  heroName: string;
+  heroAdjective: string;
+  heroImage: string;
 
   enemyHealt: number = 0;
   enemyMove: number = 0;
@@ -29,18 +35,27 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
 
     this.store.pipe(
-      select(getStatus), 
+      select(getHero), 
       takeUntil(this._unsubscribeAll)).subscribe(
-        values => { this.setStatus(values)}
+        hero => { 
+          this.setStatus(hero.status);
+          this.heroName = hero.name;
+          this.heroAdjective = hero.adjective;
+          this.heroImage = environment.media_address + hero.image;
+        }
       );
   }
 
-  private setStatus(status) {
-    this.status = status;
-    this.setCombatPanel();
+  private setStatus(status: any[]) {
+    if(status != undefined) {
+      this.status = status;
+      this.setCombatPanel();
+    }
   }
 
   setCombatPanel() {
+
+    console.log(this.status);
     if (this.status.length > 4) {
 
       this.inCombat = true;

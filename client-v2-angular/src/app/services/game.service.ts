@@ -6,7 +6,9 @@ import { Store, select } from '@ngrx/store';
 import { LoginService } from '../main/authentication/services/login.service';
 import { HistoryService } from './history.service';
 import { State } from '../store';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { getAuthenticatedState } from '../store/selectors';
+import { BehaviorSubject } from 'rxjs';
+import { takeWhile, takeUntil } from 'rxjs/operators';
 
 
 @Injectable({
@@ -17,23 +19,23 @@ export class GameService {
 
   private netData: string;
 
-  // private showNewsSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  // showNews = this.showNewsSubject$.asObservable();
+  private showNewsSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  showNews = this.showNewsSubject$.asObservable();
 
   constructor(
-    private loginService: LoginService,
+    //private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
     private store: Store<State>,
     private historyService: HistoryService,
 
   ) {
-   }
+
+    this.store.pipe(select(getAuthenticatedState)).subscribe(
+    )
+  }
 
   startGame() {
-    console.log('start game');
-    // check and set if the news popup should be shown (initial login only)
-    // this.showNewsSubject$.next(this.loginService.withNews);
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
@@ -43,7 +45,7 @@ export class GameService {
     //this.historyPush('Fine');
   }
 
-  handleServerGameData(data) {
+  handleServerGameData(data:any) {
     this.netData += data;
     const len = this.netData.length;
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
@@ -53,7 +55,7 @@ export class GameService {
 
     } else if (len > 2000000) {
       this.netData = '';
-      this.loginService.logout();
+   //   this.loginService.logout();
     }
   }
 
@@ -81,6 +83,9 @@ export class GameService {
     this.socketService.emit('data', cmd);
   }
 
+  showWelcomeNews() {
+    this.showNewsSubject$.next(true);
+  }
 
   // showGeneralNews(value: boolean) {
   //   this.showNewsSubject$.next(value);

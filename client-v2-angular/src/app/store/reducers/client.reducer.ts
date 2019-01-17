@@ -20,6 +20,12 @@ export function reducer(
       return initialState;
     }
 
+    case ClientEventType.LOGINSUCCESS: {
+      return Object.assign({}, state, action.payload, {
+        isAuthenticated: !state.isAuthenticated,
+      });
+    }
+
     case ClientEventType.INGAME: {
       return Object.assign({}, state, { ingame: !state.inGame });
     }

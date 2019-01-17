@@ -15,9 +15,12 @@ export function reducer(
     case DataEvenType.OUT:
       return Object.assign({}, state, action.payload);
     case DataEvenType.PLAYERSTATUS:
-      return Object.assign({}, state, {
-        hero: action.payload
-      });
+      // return Object.assign({}, state, {hero: {status: action.payload}});
+      return {...state, hero: { ...state.hero, status: action.payload}}
+    
+    case DataEvenType.HERODATA:
+      return {...state, hero: action.payload}
+
     case DataEvenType.DOORS:
       return Object.assign({}, state, {
         doors: action.payload,

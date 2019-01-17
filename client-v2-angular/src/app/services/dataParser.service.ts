@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GameMode } from '../store/game.const';
 import { InGameAction } from '../store/actions/client.action';
 
 import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
+import { IHero } from '../models/data/hero.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +37,18 @@ export class DataParser {
 
     let pos: any;
 
-    console.log(data);
-
+    // News
+    data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
+      this.store.dispatch(new UiActions.WelcomeNewsAction);
+      return '';
+    });
+    
+    //Character base Data
+    data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
+      const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
+      this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
+      return '';
+    });
 
     // Hide text (password)
     data = data.replace(/&x\n*/gm, (msg) => {
@@ -77,7 +87,7 @@ export class DataParser {
     // Player status
     data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
       const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
-      this.store.dispatch(new DataActions.PlayerStatus({status: status_parse}));
+      this.store.dispatch(new DataActions.PlayerStatus(status_parse));
       return '';
     });
 
@@ -310,7 +320,7 @@ export class DataParser {
     /* \r is already removed at top */
     data = data.replace(/\n/gm, '<div class="breakline"></div>');
 
-    if (data != 'undefined' && data !== '') {
+    if (data != 'undefined' && data != undefined && data !== '') {
       data = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new DataActions.IncomingData(data));
     }

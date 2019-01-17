@@ -17,6 +17,7 @@ export class WelcomeNewsComponent implements AfterViewInit {
   
   constructor(private dialogService: DialogService, private game: GameService) { 
     this.modalConfig.width = 800;
+    this.modalConfig.modalOpacity = 0.8;
   }
 
   ngAfterViewInit(): void {

@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
 import { DataState } from '../state/data.state';
 import { Map } from 'src/app/models/data/map.model';
-import { Hero } from 'src/app/models/data/hero.model';
+import { Hero, IHero } from 'src/app/models/data/hero.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
     OUT = '[Data] Outgoing Data',
     LOGGED = '[Data] Player is Logged In',
+    HERODATA = '[Data] Update Hero Data',
     PLAYERSTATUS = '[Data] Player Status Update',
     ROOM = '[Data] Room Update',
     DOORS = '[Data] Doors update',
@@ -42,6 +43,11 @@ export class PlayerStatus implements Action {
     constructor( public payload: any) {}
 }
 
+export class HeroAction implements Action {
+    readonly type = DataEvenType.HERODATA;
+    constructor(public payload: IHero) { }
+}
+
 export class MapAction implements Action {
     readonly type = DataEvenType.MAP;
     constructor(public payload: Map) {}
@@ -61,5 +67,6 @@ export type DataAction
 | MapAction
 | RoomAction
 | PlayerStatus
+| HeroAction
 | SkyAction
 ;

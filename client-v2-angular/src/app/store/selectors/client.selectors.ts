@@ -18,3 +18,19 @@ export const getAudioTrack = createSelector(
   getClientState,
   client => client.track
 );
+
+
+export const getAuthenticatedState = createSelector(
+  getClientState,
+  client  => { 
+    if(client.reconnect && client.isAuthenticated) {
+     return {auth: true, reconnect: true}
+    }
+    else if (!client.reconnect && client.isAuthenticated) {
+      return {auth: true, reconnect: false}
+    }
+    else {
+      return {auth: false, reconnect: false}
+    }
+  }
+);

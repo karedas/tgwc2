@@ -7,6 +7,7 @@ import { SocketService } from 'src/app/services/socket.service';
 import { ClientState } from 'src/app/store/state/client.state';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { WelcomeNewsAction } from 'src/app/store/actions/ui.action';
+import { GameService } from 'src/app/services/game.service';
 
 export const loginEventName = {
   READY: 'ready',
@@ -35,6 +36,7 @@ export class LoginService {
   constructor(
 
     private socketService: SocketService,
+    private game: GameService,
     private store: Store<ClientState>) {
 
     this.isLoggedInSubject = new BehaviorSubject(false);
@@ -57,7 +59,7 @@ export class LoginService {
   }
 
   public logout() {
-    this.isLoggedInSubject.next(false);
+    //this.isLoggedInSubject.next(false);
   }
 
   public get IsLoggedInStatus(): boolean {
@@ -72,7 +74,7 @@ export class LoginService {
   handleLoginData(data:any) {
 
     this.loginReplayMessage = 'Tentativo di connessione in corso...';
-
+    
     if (data.indexOf('&!connmsg{') == 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
@@ -94,7 +96,7 @@ export class LoginService {
             this.onReboot();
             break;
           case loginEventName.LOGINOK:
-            this.onLoginOk(data);
+            this.onLoginOk(data.slice(end+2));
             break;
           case loginEventName.SERVERDOWN:
             this.onServerDown();
@@ -121,17 +123,16 @@ export class LoginService {
     this.socketService.emit(socketEvent.DATA, credentials);
   }
 
-  onLoginOk(data) {
-    console.log('attempt');
+  onLoginOk(data: any) {    
+    this.completeHandShake();
+    this.game.startGame();
+    this.game.handleServerGameData(data);
+    this.store.dispatch(new LoginSuccessAction());
+  }
+
+  completeHandShake() {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
-    /** if !news , we will be at first login attempt  */
-    if(data.indexOf('&!news{') !== -1) {
-      this.store.dispatch(new LoginSuccessAction('login'));
-    }
-    else {
-      this.store.dispatch(new LoginSuccessAction('reconnect'));
-    }
   }
 
   onShutDown() {

@@ -1,5 +1,5 @@
 import { Map } from 'src/app/models/data/map.model';
-import { Hero } from 'src/app/models/data/hero.model';
+import { Hero, IHero } from 'src/app/models/data/hero.model';
 import { Room } from 'src/app/models/data/room.model';
 
 export interface DataState {
@@ -9,7 +9,7 @@ export interface DataState {
     doors?: any;
     room: Room;
     map: Map;
-    hero: Hero;
+    hero: IHero;
 }
 
 export const initialState: DataState = {
@@ -21,3 +21,4 @@ export const initialState: DataState = {
     map: undefined,
     hero: new Hero(),
 };
+
