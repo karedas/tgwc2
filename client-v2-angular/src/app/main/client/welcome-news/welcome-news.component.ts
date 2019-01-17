@@ -20,9 +20,7 @@ export class WelcomeNewsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // if(!localStorage.getItem('welcomenews')) {
-    //   this.open();
-    // }
+    this.dialogService.open(this.dialogID);
   }
 
   onContinue(): void{
