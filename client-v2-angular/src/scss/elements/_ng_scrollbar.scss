@@ -1,15 +1,12 @@
 
-
-  .scrollbar {
-
-   .scrollbar-thumbs {
-        background: #332f25;
-        border-color: #564d37;
-
-      &:hover,
-      &:active {
-        background: #4c4535;
-        border-color: #564d37;
-      }
-    }
+  ng-scrollbar.scrollbar {
+    --scrollbar-color: transparent;
+    --scrollbar-container-color: transparent;
+    --scrollbar-thumb-color: #332f25;
+    --scrollbar-thumb-hover-color: #4c4535;
+    --scrollbar-border-radius: 0;
+    --scrollbar-size: 6px;
+    --scrollbar-padding: 4px;
+    --scroll-view-margin: 0;
+    --scroll-view-color: transparent;
   }

@@ -59,7 +59,7 @@ export class DirectionsComponent implements OnInit, OnDestroy{
       this.dirCmd = this.dirNames[dir];
     }
     if (this.dirCmd) {
-      this.gameService.sendToServer(this.dirCmd);
+      this.gameService.processCommands(this.dirCmd);
     }
   }
 

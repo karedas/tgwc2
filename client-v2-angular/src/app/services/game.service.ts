@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { LoginService } from '../main/authentication/services/login.service';
 import { HistoryService } from './history.service';
 import { State } from '../store';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,19 +14,26 @@ import { State } from '../store';
 })
 
 export class GameService {
+
   private netData: string;
-  newsNeeded: boolean = false;
-  
+
+  // private showNewsSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // showNews = this.showNewsSubject$.asObservable();
+
   constructor(
     private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
     private store: Store<State>,
-    private historyService: HistoryService
-  ) { }
+    private historyService: HistoryService,
+
+  ) {
+   }
 
   startGame() {
-    
+    console.log('start game');
+    // check and set if the news popup should be shown (initial login only)
+    // this.showNewsSubject$.next(this.loginService.withNews);
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
@@ -74,9 +81,9 @@ export class GameService {
     this.socketService.emit('data', cmd);
   }
 
-  // historyUpKey() {}
 
-  // historyDownKey() {}
-
+  // showGeneralNews(value: boolean) {
+  //   this.showNewsSubject$.next(value);
+  // }
 
 }

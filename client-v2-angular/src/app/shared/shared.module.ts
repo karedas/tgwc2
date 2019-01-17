@@ -27,7 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
     //font awesome
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     GameService,

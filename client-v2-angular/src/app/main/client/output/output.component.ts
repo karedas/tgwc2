@@ -29,7 +29,7 @@ export class OutputComponent implements OnInit {
 
   constructor(private store: Store<DataState>, private cd: ChangeDetectorRef) {
     this.lastRoom$ = this.store.pipe(select(fromSelectors.getRoomBase));
-    this.extraDetail$ = new BehaviorSubject(true);
+    this.extraDetail$ = new BehaviorSubject(false);
   }
 
   ngOnInit(): void {
@@ -47,8 +47,7 @@ export class OutputComponent implements OnInit {
 
 
     // Listen Base Text Data
-    this.store.pipe(select(fromSelectors.getDataBase))
-      .subscribe(
+    this.store.pipe(select(fromSelectors.getDataBase)).subscribe(
         (base: string[]) => {
           const content = this.setContent('base', base[0]);
           this.output.push(content);
@@ -89,7 +88,7 @@ export class OutputComponent implements OnInit {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.scrollToBottom(0);
+      this.scrollBar.scrollToBottom(0).subscribe();
     }, 15);
   }
 

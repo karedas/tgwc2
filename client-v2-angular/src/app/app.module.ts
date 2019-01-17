@@ -16,6 +16,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { DataEffects } from './store/effects/data.effects';
 import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
+import { ClientEffects } from './store/effects/client.effects';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { ClientModule } from './main/client/client.module';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(fromStore.reducers),
-    EffectsModule.forRoot([DataEffects]),
+    EffectsModule.forRoot([DataEffects, ClientEffects]),
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,

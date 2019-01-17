@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
-import { ModalsService } from 'src/app/directives/modal/modal.service';
+import { DialogService } from '../../common/dialog/dialog.service';
 
 @Component ({
   selector: 'tg-cookie-law',
@@ -13,12 +13,12 @@ export class CookieLawComponent implements AfterViewInit {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
-  modalId: string = 'cookieLaw';
+  dialogID: string = 'cookieLaw';
   modalConfig: ModalConfiguration;
 
   display = false;
   showButton = false;
-  constructor(private cookieService: CookieService, private modalService: ModalsService) {
+  constructor(private cookieService: CookieService, private dialogService: DialogService) {
     this.modalConfig = {
       width: 420,
       height: 'auto',
@@ -28,7 +28,7 @@ export class CookieLawComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.modalService.open(this.modalId);
+    this.dialogService.open(this.dialogID);
   }
 
   showDialog() {
@@ -38,7 +38,7 @@ export class CookieLawComponent implements AfterViewInit {
   onContinue() {
     this.cookieService.set('tgCookieLaw', '1');
     this.iAcceptCookie.emit(true);
-    this.modalService.close(this.modalId);
+    this.dialogService.close(this.dialogID);
   }
 
   toggle(): void {

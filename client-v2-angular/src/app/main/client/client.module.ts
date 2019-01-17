@@ -22,7 +22,6 @@ import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component
 import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
-import { ModalModule } from 'src/app/directives/modal/modal.module';
 import { HistoryService } from 'src/app/services/history.service';
 import { CombatPanelComponent } from './dashboard/combat-panel/combat-panel.component';
 import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
@@ -32,6 +31,8 @@ import { DirectionsComponent } from './right-sidebar/map/directions/directions.c
 import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.component';
 import { DetailsRoomComponent } from './output/renders/details-room/details-room.component';
 import { RegistrationComponent } from '../registration/registration.component';
+import { DialogModule } from '../common/dialog/dialog.module';
+import { DialogComponent } from '../common/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,16 +58,16 @@ import { RegistrationComponent } from '../registration/registration.component';
     SplashscreenComponent,
     AudioComponent,
     ExtraboardComponent,
-    WelcomeNewsComponent,
     CombatPanelComponent,
     RightSidebarComponent,
     MonitorBoxComponent,
     DetailsRoomComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    WelcomeNewsComponent,
   ],
   imports: [
     ClientRoutingModule,
-    ModalModule,
+    DialogModule,
     SharedModule,
   ],
   exports: [
@@ -74,6 +75,9 @@ import { RegistrationComponent } from '../registration/registration.component';
   ],
   providers: [
     HistoryService
+  ],
+  entryComponents: [
+    WelcomeNewsComponent
   ]
 })
 export class ClientModule {

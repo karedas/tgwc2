@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { ClientState } from 'src/app/store/state/client.state';
-import { getWelcomeNews } from 'src/app/store/selectors';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -12,9 +9,8 @@ import { GameService } from 'src/app/services/game.service';
 
 export class ClientContainerComponent {
 
-  showWelcomeNews: boolean;
+  showNews: boolean;
 
-  constructor(private store: Store<ClientState>, private game: GameService) {
-    this.showWelcomeNews = this.game.newsNeeded;
+  constructor(private game: GameService) {
   }
 }

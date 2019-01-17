@@ -5,6 +5,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from './common/services/preloader.service';
 import { LoginService } from '../authentication/services/login.service';
 import { GameService } from 'src/app/services/game.service';
+import { ModalsService } from 'src/app/directives/modal/modal.service';
+import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
+import { DialogService } from '../common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-client',
@@ -20,9 +23,8 @@ export class ClientComponent {
   constructor(
     private cookieService: CookieService,
     private platform: Platform,
-    private loginService: LoginService,
-    private game: GameService,
     private preloader: PreloaderService,
+    private dialogService: DialogService,
     @Inject(DOCUMENT) private document: any
   ) {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
@@ -47,12 +49,18 @@ export class ClientComponent {
   private gameIsReady() {
 
     /* Mndatory verification of acceptance of the use of cookies before proceed */
-    if (this.cookieService.check('tgCookieLaw')) { this.isCookieAccepted = true; }
+    if (this.cookieService.check('tgCookieLaw')) { 
+      this.isCookieAccepted = true; 
+    }
 
     /** Until Login Auth */
-    this.loginService.isLoggedIn$.subscribe(auth => {
-      if (auth) { this.game.startGame(); }
-    });
+    // this.loginService.isLoggedIn$.subscribe(auth => {
+    //   if (auth) { 
+    //     // Start the Magic
+    //     this.game.startGame(); }
+    // });
+
+    
   }
 
   onCookieAccepted(status: boolean) {

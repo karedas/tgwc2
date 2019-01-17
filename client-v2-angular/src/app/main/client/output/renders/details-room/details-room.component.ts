@@ -20,6 +20,8 @@ export class DetailsRoomComponent implements OnInit{
 
   personsHtStat: Object[] = [];
   objsHtStat: Object[] = [];
+  personsClass: string = '';
+  objsClass: string = '';
   
   constructor(private store: Store<DataState>) { 
   }
@@ -42,6 +44,7 @@ export class DetailsRoomComponent implements OnInit{
     }
 
     this.total = this.totalObjs + this.totalPersons;
+    console.log("LOG:", this.totalPersons, this.totalObjs);
   }
 
   getHsStatBgPos(condprc:number) {

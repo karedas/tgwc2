@@ -6,7 +6,7 @@ import { Subscription, Subject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
 import gitInfo from 'src/git-version.json';
-import { UsernameValidation, PasswordValidation } from 'src/app/common/validations.js';
+import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFormErrors: any;
   loginFailed: boolean;
   loginSubscription: Subscription;
-  
+
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     this.loginService.loginReplayMessage.pipe(takeUntil(this._unsubscribeAll))
-      .subscribe( (err: string) => {
+      .subscribe((err: string) => {
         if (err !== undefined) {
           this.socketloginReplayMessage = err;
         }
-        }
+      }
       );
   }
 
@@ -79,22 +79,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSubscription = this.loginService.login(values)
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
+
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
-
-          if(this.loginService.withNews === true) {
-            this.game.newsNeeded = this.loginService.withNews;
-          }
-
           this.router.navigate([redirect]);
+
         } else {
           this.loginFailed = true;
         }
-    }, (error) => {
+      }, (error) => {
         console.log(error);
         if (error instanceof NotAuthorizeError) {
           this.loginFailed = false;
         }
-    });
+      });
   }
 
   ngOnDestroy() {

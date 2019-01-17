@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { SocketStatusAction, LoginFailureAction } from 'src/app/store/actions/client.action';
+import { SocketStatusAction, LoginFailureAction, LoginSuccessAction } from 'src/app/store/actions/client.action';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
 import { ClientState } from 'src/app/store/state/client.state';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
+import { WelcomeNewsAction } from 'src/app/store/actions/ui.action';
 
 export const loginEventName = {
   READY: 'ready',
@@ -22,15 +23,14 @@ export const loginEventName = {
 
 export class LoginService {
 
-  public isLoggedInSubject: BehaviorSubject<boolean>;
-  public withNews: boolean = false;
   public isLoggedIn$: Observable<any>;
+  public isLoggedInSubject: BehaviorSubject<boolean>;
+
+  public withNews: boolean = false;
   private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;
   public redirectUrl: string;
-
-
   
   constructor(
 
@@ -122,13 +122,16 @@ export class LoginService {
   }
 
   onLoginOk(data) {
-    /** Show NEWS TODO */
-    if(data.indexOf('&!news{') !== -1) {
-      this.withNews = true;
-      // this.sto
-    }
+    console.log('attempt');
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
+    /** if !news , we will be at first login attempt  */
+    if(data.indexOf('&!news{') !== -1) {
+      this.store.dispatch(new LoginSuccessAction('login'));
+    }
+    else {
+      this.store.dispatch(new LoginSuccessAction('reconnect'));
+    }
   }
 
   onShutDown() {

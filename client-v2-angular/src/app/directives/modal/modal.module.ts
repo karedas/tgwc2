@@ -6,13 +6,13 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     ModalComponent,
-    jqxWindowComponent,
+    // jqxWindowComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
-    jqxWindowComponent,
+    // jqxWindowComponent,
     ModalComponent
   ]
 })

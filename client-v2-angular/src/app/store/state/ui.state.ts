@@ -47,7 +47,7 @@ export const initialState: UIState = {
 	},
 	cursorOnMap: false,
 	editorIsopen: false,
-	extraOutput: true,
+	extraOutput: false,
 	controlPanel: 0,
 	zen: false
 };

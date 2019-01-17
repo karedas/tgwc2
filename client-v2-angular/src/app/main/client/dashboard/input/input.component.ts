@@ -33,7 +33,7 @@ export class InputComponent implements AfterViewInit {
     private historyService: HistoryService
     ) { 
       this.store.pipe(select(getUIState), map( ui => ui.extraOutput )).subscribe(
-        status  => { this.extraStatus = status; console.log(this.extraStatus); }
+        status  => { this.extraStatus = status; }
       );
     }
 

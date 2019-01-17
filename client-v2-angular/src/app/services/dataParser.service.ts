@@ -37,6 +37,8 @@ export class DataParser {
 
     let pos: any;
 
+    console.log(data);
+
 
     // Hide text (password)
     data = data.replace(/&x\n*/gm, (msg) => {

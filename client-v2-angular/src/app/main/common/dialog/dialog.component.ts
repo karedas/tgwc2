@@ -1,25 +1,28 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
-import { ModalsService } from './modal.service';
+import { DialogService } from './dialog.service';
 import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
+import { InsertionDirective } from './insertion.directive';
 
 
 @Component({
-  selector: 'tg-modal',
-  templateUrl: './modal.component.html',
+  selector: 'tg-dialog',
+  templateUrl: './dialog.component.html',
  //  styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent  implements OnInit, OnDestroy {
+export class DialogComponent  implements OnInit, OnDestroy {
 
   @ViewChild('jqxWidget') jqxWindow: jqxWindowComponent;
+  
   @Input() id: string;
-  @Input() config: ModalConfiguration = new ModalConfiguration();
+  @Input('config') config: ModalConfiguration = new ModalConfiguration();
+
+  insertionPoint: InsertionDirective;
+
 
   constructor(
-    private modalService: ModalsService, 
-    ) { 
-
-  }
+    private modalService: DialogService, 
+    ) {}
 
   ngOnInit(): void{
     let modal = this;

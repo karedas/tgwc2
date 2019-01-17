@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ModalsService } from 'src/app/directives/modal/modal.service';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { GameService } from 'src/app/services/game.service';
+import { DialogService } from '../../common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-welcome-news',
@@ -9,18 +9,20 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./welcome-news.component.scss'],
 })
 export class WelcomeNewsComponent implements AfterViewInit {
-  modalId: string = 'welcomeNews';
+  
+  dialogID: string = 'welcomeNews';
   modalConfig: ModalConfiguration = new ModalConfiguration();
+
   private dontShowNextTime: boolean = false;
   
-  constructor(private modalService: ModalsService, private game: GameService) { 
+  constructor(private dialogService: DialogService, private game: GameService) { 
     this.modalConfig.width = 800;
   }
 
   ngAfterViewInit(): void {
-    if(!localStorage.getItem('welcomenews')) {
-      this.open();
-    }
+    // if(!localStorage.getItem('welcomenews')) {
+    //   this.open();
+    // }
   }
 
   onContinue(): void{
@@ -28,7 +30,7 @@ export class WelcomeNewsComponent implements AfterViewInit {
       localStorage.setItem('welcomenews', '1');
     }
 
-    this.modalService.close(this.modalId);
+    this.dialogService.close(this.dialogID);
     this.game.sendToServer('');
   }
 
@@ -37,6 +39,6 @@ export class WelcomeNewsComponent implements AfterViewInit {
   }
 
   open() {
-    this.modalService.open(this.modalId);
+    this.dialogService.open(this.dialogID);
   }
 }
