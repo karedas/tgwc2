@@ -18,7 +18,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
   enemyHealt: number = 0;
   enemyMove: number = 0;
   enemyName: string = '';
-  enemyIcon: number = 416;
+  enemyIcon: number = null;
 
   private _unsubscribeAll: Subject<any>;
   

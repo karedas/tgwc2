@@ -102,6 +102,10 @@ tg-text {
   padding-bottom: .4em;
   line-height: 1.4;
 
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
   &:first-of-type .room {
     padding-top: .5em;
   }
@@ -340,7 +344,7 @@ tg-text {
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: 6px 1em 1em 4px;
+      margin: 6px 1em .5em 4px;
 
       img {
         max-width: 100%;
