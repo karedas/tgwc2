@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
 @Component({
   selector: 'tg-combat-panel',
@@ -7,6 +7,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class CombatPanelComponent implements OnInit {
+
+
+  @Input('enemyHealt') healt: number;
+  @Input('enemyMove') move: number;
+  @Input('enemyIcon') icon: number | null;
+  @Input('enemyName') name: string;
 
   constructor() { }
 

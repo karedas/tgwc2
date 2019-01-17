@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './room.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, AfterViewInit {
   @Input() html: Room;
   @Input() withExtra: boolean;
   @Input() lastDescription: any = '';
@@ -22,13 +22,20 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.html) {
+      if (this.html.perscont || this.html.objcont) {
+        this.inRoomContent = true;
+      }
+      else {
+        this.inRoomContent = false;
+      }
+    }
+  }
 
-    if (this.html.perscont || this.html.objcont) {
-      this.inRoomContent = true;
-    }
-    else {
-      this.inRoomContent = false;
-    }
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    
   }
 
   getRoomImage(img: string ): string {

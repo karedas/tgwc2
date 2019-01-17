@@ -8,7 +8,9 @@
     <b class="tg-yellow">Comando:
       <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
   <div class="tg-inputcommand d-none d-sm-flex">
-    <button  type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia" (click)="collapseInterface()">
+    <button  type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia"
+      (click)="collapseInterface()"
+      [ngClass]="{'isActive': extraStatus}">
       <fa-icon [icon]="facolumns"></fa-icon>
     </button>
     <button type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo" (click)="toggleControlPanel()">

@@ -8,10 +8,17 @@ export const getUIState = createFeatureSelector<UIState>('ui');
 /*********************** Individual selectors************************** */
 
 /******************* Public Selector API's ******************/
+
+
 export const getUserLevel = createSelector (
   getUIState,
   ui => ui.isgod
 );
+
+export const getInvisibilityLevel = createSelector(
+  getUIState,
+  ui => ui.invlevel
+)
 
 export const getWelcomeNews = createSelector(
   getUIState,

@@ -42,8 +42,6 @@ export class DetailsRoomComponent implements OnInit{
     }
 
     this.total = this.totalObjs + this.totalPersons;
-
-    console.log("LOG:", this.totalPersons, this.totalObjs);
   }
 
   getHsStatBgPos(condprc:number) {

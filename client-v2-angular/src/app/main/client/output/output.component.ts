@@ -93,16 +93,16 @@ export class OutputComponent implements OnInit {
     }, 15);
   }
 
-  @HostListener('window:resize', ['$event'])
-  getScreenSize(event?: Event) {
-    const scrWidth = window.innerWidth;
-    if(this.extraDetail$.value === true) {
-      if (scrWidth < 712 ) {
-        this.extraDetail$.next(false);
-      } else {
-        this.extraDetail$.next(true);
-      }
-    }
-  }
+  // @HostListener('window:resize', ['$event'])
+  // getScreenSize(event?: Event) {
+  //   const scrWidth = window.innerWidth;
+  //   if(this.extraDetail$.value === true) {
+  //     if (scrWidth < 712 ) {
+  //       this.extraDetail$.next(false);
+  //     } else {
+  //       this.extraDetail$.next(true);
+  //     }
+  //   }
+  // }
 
 }

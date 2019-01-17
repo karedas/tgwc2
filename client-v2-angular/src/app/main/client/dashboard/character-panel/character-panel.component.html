@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="tg-combatpanel col-auto pr-0" *ngIf="inCombat">
-            <tg-combat-panel></tg-combat-panel>
+            <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
           </div>
           <tg-extraboard class="col-auto d-none d-sm-flex flex-column"></tg-extraboard>
         </div>

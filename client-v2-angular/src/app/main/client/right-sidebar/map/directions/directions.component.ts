@@ -2,7 +2,7 @@ import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core
 import { GameService } from 'src/app/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
-import { getDoors, getUserLevel } from 'src/app/store/selectors';
+import { getDoors, getUserLevel, getInvisibilityLevel } from 'src/app/store/selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class DirectionsComponent implements OnInit, OnDestroy{
   
   dirCmd: string;
   doorsStyle: any[] = [];
-  userlevel: number;
+  invisibilityLevel: number;
 
   private dirNames: string[] = ['nord', 'est', 'sud', 'ovest', 'alto', 'basso'];
   private dirStatus: string[] = ['00000'];
@@ -41,8 +41,8 @@ export class DirectionsComponent implements OnInit, OnDestroy{
       door => this.setDoors(door)
     );
 
-    this.store.pipe(select(getUserLevel)).subscribe(
-      level => { this.userlevel = level;}
+    this.store.pipe(select(getInvisibilityLevel)).subscribe(
+      level => { this.invisibilityLevel = level;}
     );
   }
 
@@ -51,9 +51,9 @@ export class DirectionsComponent implements OnInit, OnDestroy{
 
     $event.preventDefault();
 
-    if (this.userlevel === 0 && this.dirStatus[dir] === '3') {
+    if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '3') {
       this.dirCmd = `apri ${this.dirNames[dir]}`;
-    } else if (this.userlevel === 0 && this.dirStatus[dir] === '4') {
+    } else if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '4') {
       this.dirCmd = 'sblocca ' + this.dirNames[dir];
     } else {
       this.dirCmd = this.dirNames[dir];

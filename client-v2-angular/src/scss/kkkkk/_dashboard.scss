@@ -301,7 +301,7 @@
             color: #54544d;
             box-shadow: none;
 
-            &:hover {
+            &:hover, &.active {
                 color: #cc6f17;
             }
         }

@@ -41,49 +41,57 @@
       width: 39px;
       height: 39px;
       position: absolute;
-      top: 14px;
+      top: 8px;
       left: 6px;
       z-index: 2;
       background: url($imgPath + '/frame/enemy-target-icon-box.png') no-repeat;
+
+      .tg-icon {
+          transform: none;
+          margin-top: 3px;
+      }
   }
   
   .enemyname {
       color: #d5cbad;
       text-transform: uppercase;
       font-size: 9px;
+      padding-top:5px;
   }
   
   .tg-enemy-m, .tg-enemy-h {
       height: 11px;
       position: absolute;
       left: 39px;
-      width: 172px;
+      width: 182px;
+      border:1px solid #5f5c59;
 
       .enemy-bar {
           display: block;
           height: 100%;    
+          width: 0;
           background-size: cover;
           background-repeat: repeat-x;
           transition: width .2s linear; 
       }
   }
   .tg-enemy-h {
-      top: 25px;
+      top: 20px;
   }
   .tg-enemy-m {
-      top: 38px;
+      top: 34px;
   }
 
   .tg-enemy-h .enemy-bar {
-      background: url($imgPath + '/bars/healt.jpg') center;
+      background: url($imgPath + '/bars/healt.jpg') top;
   }
   .tg-enemy-m .enemy-bar {
-      background: url($imgPath + '/bars/stamina.jpg') center;
+      background: url($imgPath + '/bars/stamina.jpg') top;
   }
 
   .enemy-h-prc {
       position: absolute;
-      top: 24px;
+      top: 20px;
       right: 8px;
       font-size: 9px;
       color: $tg-lt-red;
@@ -91,7 +99,7 @@
 
   .enemy-m-prc {
       position: absolute;
-      top: 38px;
+      top: 34px;
       right: 8px;
       font-size: 9px;
       color: $tg-green;

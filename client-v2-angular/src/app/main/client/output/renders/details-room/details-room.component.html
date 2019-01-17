@@ -1,8 +1,8 @@
-<ng-container *ngIf="persons">
-  <ng-container *ngTemplateOutlet="withPersons"></ng-container>
-</ng-container>
 <ng-container *ngIf="objs">
   <ng-container *ngTemplateOutlet="withObjects"></ng-container>
+</ng-container>
+<ng-container *ngIf="persons">
+  <ng-container *ngTemplateOutlet="withPersons"></ng-container>
 </ng-container>
 
 <ng-template #withPersons>
@@ -22,12 +22,11 @@
   <div class="tg-objects" [ngClass]="
     {'list-50-50': (totalObjs > 6 && totalPersons < 6),
     'list-50': (totalObjs > 6 && totalPersons > 6)}">
-    <ng-container *ngFor="let obj of objects">
-      <div class="tg-objects--line" [attr.mrn]="obj.mrn">
-        <tg-icons [icon]="obj.icon"></tg-icons>
-        <div class="tg-objects--item_desc" [innerHtml]="obj.desc | dataToHtml"></div>
+    <ng-container *ngFor="let object of objs">
+      <div class="tg-objects--line">
+        <tg-icons [icon]="object.icon"></tg-icons>
+        <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
       </div>
     </ng-container>
   </div>
 </ng-template>
-g

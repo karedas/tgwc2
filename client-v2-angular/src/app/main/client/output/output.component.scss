@@ -8,7 +8,7 @@
   background: black;
   display: flex;
   flex: 1 1 auto;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 
   .tg-output {
     flex: 1;
@@ -72,13 +72,6 @@
   }
 }
 
-.tg-output--history {
-  padding: 8px 8px 8px 8px;
-}
-
-.tg-output--extradetail {
-  padding: 0 8px 8px 8px;
-}
 
 .tg-output--history,
 .tg-output--extradetail {
@@ -86,8 +79,17 @@
   z-index: 2;
   color: #d2d2d2; //  default color
   box-sizing: border-box;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1;
+}
+
+
+.tg-output--history {
+  padding: 8px 8px 8px 8px;
+}
+
+.tg-output--extradetail {
+  padding: 0 8px 8px 8px;
 }
 
 tg-text {
@@ -125,7 +127,7 @@ tg-text {
 
   .breakline {
     width: 100%;
-    height: .5em;
+    height: 1em;
     clear: both;
   }
 
@@ -166,19 +168,26 @@ tg-text {
 
   .tg-objects--line,
   .tg-persons--line {
+    padding-top: 6px;
+  }
+
+  .tg-objects--line {
+    color: $tg-yellow;
+
+  }
+  .tg-persons--line {
     color: $tg-lt-green;
-    padding-top: 2px;
   }
 
   /* Double Columns style */
-  .total-50 {
+  .list-50 {
     width: 50%;
     display: inline-block;
   }
 
-  .total-50-50 {
+  .list-50-50 {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
 
     > div {
@@ -321,7 +330,7 @@ tg-text {
     .tg-room--desc {
       padding: 0.5em 10px .2em;
       line-height: 1.4;
-      font-size: 13px;
+      font-size: 11px;
       color: #e2d6c7;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
