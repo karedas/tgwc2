@@ -20,6 +20,7 @@ export class GameService {
   private showNewsSubject$: BehaviorSubject<boolean>;
   showNews: any;
 
+  
   constructor(
     //private loginService: LoginService,
     private socketService: SocketService,

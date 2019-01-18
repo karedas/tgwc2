@@ -13,7 +13,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SharedModule } from './shared/shared.module';
 import * as fromStore from './store/';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { DataEffects } from './store/effects/data.effects';
 import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
 import { ClientEffects } from './store/effects/client.effects';
