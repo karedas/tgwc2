@@ -34,6 +34,7 @@ import { RegistrationComponent } from '../registration/registration.component';
 import { DialogModule } from '../common/dialog/dialog.module';
 import { DialogComponent } from '../common/dialog/dialog.component';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
+import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geolocal-box.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { LoginSmartComponent } from './login-smart/login-smart.component';
     RegistrationComponent,
     WelcomeNewsComponent,
     LoginSmartComponent,
+    GeolocalBoxComponent,
   ],
   imports: [
     ClientRoutingModule,

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'tg-text',
@@ -13,6 +13,4 @@ export class TextComponent   {
 
   constructor() {
   }
-
-
 }

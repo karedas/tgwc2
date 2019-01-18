@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
-import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'tg-monitor-box',
@@ -16,14 +15,17 @@ export class MonitorBoxComponent implements OnInit {
 
   ngOnInit() {
     this.toastrService.overlayContainer = this.toastContainer;
-    setInterval(() => {
-      this.toastrService.success('hello im the monitor box', 'toaster fun!');
-    }, 2500);
-    setInterval(() => {
-      this.toastrService.info('hello im the monitor box', 'toaster fun!');
-    }, 5500);
-    setInterval(() => {
-      this.toastrService.error('hello im the monitor box', 'toaster fun!');
+    setTimeout(() => {
+      this.toastrService.info('Benvenuto su The Gate e le terre di Ikhari!', "", {
+        closeButton: true,
+        disableTimeOut: true
+      });
+    });
+    setTimeout(() => {
+      this.toastrService.error('Sei stato attaccato!', "", {
+        closeButton: true,
+        disableTimeOut: true
+      });
     }, 10000);
   }
 

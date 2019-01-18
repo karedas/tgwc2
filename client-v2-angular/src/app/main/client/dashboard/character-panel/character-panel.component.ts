@@ -76,7 +76,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
   private updateEnemyIcon(){}
 
   ngOnDestroy() {
-    console.log('on destroy');
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }

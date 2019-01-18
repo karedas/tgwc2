@@ -26,15 +26,18 @@ export class ClientComponent {
       this.document.body.className += 'is-mobile';
     }
 
-    this.preloader.percentage.subscribe(
+    //TODO: moves in a separate component for better implementation
+    const percentageSubscribe = this.preloader.percentage.subscribe(
       amount => { this.preloadPerc = amount; }
     );
 
-    this.preloader.status$.subscribe(
+    const statusSubscribe = this.preloader.status$.subscribe(
       status => {
         if (status == true) {
           this.preloadAssetsStatus = status;
           this.gameIsReady();
+          percentageSubscribe.unsubscribe();
+          statusSubscribe.unsubscribe();
         }
       }
     );

@@ -21,7 +21,12 @@ export class WelcomeNewsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dialogService.open(this.dialogID);
+    if(!localStorage.getItem('welcomenews')) {
+      this.dialogService.open(this.dialogID);
+      return;
+    }
+    
+    this.game.sendToServer('');
   }
 
   onContinue(): void{
@@ -38,6 +43,6 @@ export class WelcomeNewsComponent implements AfterViewInit {
   }
 
   open() {
-    this.dialogService.open(this.dialogID);
+      this.dialogService.open(this.dialogID);
   }
 }

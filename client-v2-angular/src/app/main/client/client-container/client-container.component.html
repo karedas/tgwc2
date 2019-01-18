@@ -1,24 +1,24 @@
 <div class="tg-area tg-box b-area">
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
+  <div class="tg-border-box">
+    <div class="tg-border tg-border-top"></div>
+    <div class="tg-border tg-border-left"></div>
+    <div class="tg-border tg-border-right"></div>
+    <div class="tg-border tg-border-bottom"></div>
+  </div>
+  <!-- Main Panel -->
+  <div class="tg-main container-fluid">
+    <div class="row">
+      <tg-navbar class="col-12"></tg-navbar>
     </div>
-    <!-- Main Panel -->
-    <div class="tg-main container-fluid">
-      <div class="row">
-        <tg-navbar class="col-12"></tg-navbar>
+    <div class="tg-main-row row">
+      <div class="tg-leftside col">
+        <tg-output></tg-output>
+        <tg-dashboard></tg-dashboard>
       </div>
-      <div class="tg-main-row row">
-        <div class="tg-leftside col">
-          <tg-output></tg-output>
-          <tg-dashboard></tg-dashboard>
-        </div>
-          <tg-right-sidebar></tg-right-sidebar>
-      </div>
+      <tg-right-sidebar></tg-right-sidebar>
     </div>
+  </div>
   <tg-audio></tg-audio>
 </div>
 <tg-login-smart></tg-login-smart>
-<!-- <tg-welcome-news *ngIf="showNews"></tg-welcome-news> -->
+<tg-welcome-news></tg-welcome-news>
