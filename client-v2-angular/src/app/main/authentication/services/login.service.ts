@@ -6,7 +6,6 @@ import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
 import { ClientState } from 'src/app/store/state/client.state';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
-import { WelcomeNewsAction } from 'src/app/store/actions/ui.action';
 import { GameService } from 'src/app/services/game.service';
 
 export const loginEventName = {

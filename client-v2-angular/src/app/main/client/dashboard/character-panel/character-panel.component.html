@@ -6,9 +6,9 @@
           <!-- Character Detail -->
           <div class="tg-character col">
             <!-- Character Avatar -->
-            <div class="tg-characteravatar b-ironlight tg-shadow" rel="tooltip" title="">
+            <div class="tg-characteravatar b-ironlight tg-shadow" title="">
               <div class="tg-avatar-wrap">
-                <img [src]="heroImage" alt="Avatar" *ngIf="heroImage"/>
+                <img [src]="heroImage" alt="Avatar" *ngIf="heroImage" />
               </div>
               <div class="tg-border-box">
                 <div class="tg-border tg-border-top"></div>
@@ -27,24 +27,24 @@
               <div class="tg-meterbar">
                 <div class="tg-extrabars">
                   <div class="barcont barthin lft">
-                    <span class="tg-statusbar-text" rel="tooltip" title="Punti Salute">PS:
+                    <span class="tg-statusbar-text" title="Punti Salute">
                       <i>{{ status[0] }}</i> / 100</span>
                     <span class="red barC healthbar" [style.width.%]="status[0]"></span>
                   </div>
-                  <div class="barcont barthin" rel="tooltip" title="Punti Movimento">
-                    <span class="tg-statusbar-text">PM:
+                  <div class="barcont barthin" title="Punti Movimento">
+                    <span class="tg-statusbar-text">
                       <i>{{ status[1] }}</i> / 100</span>
                     <span class="green barC movebar" [style.width.%]="status[1]"></span>
                   </div>
                 </div>
                 <div class="tg-extrabars">
-                  <div class="barcont barthin lft" rel="tooltip" title="Fame">
-                    <span class="tg-statusbar-text">Fame:
+                  <div class="barcont barthin lft" title="Fame">
+                    <span class="tg-statusbar-text">
                       <i>{{ status[2] }}</i> / 100</span>
                     <span class="orange barC hungrybar" [style.width.%]="status[2]"></span>
                   </div>
-                  <div class="barcont barthin" rel="tooltip" title="Sete">
-                    <span class="tg-statusbar-text">Sete:
+                  <div class="barcont barthin" title="Sete">
+                    <span class="tg-statusbar-text">
                       <i>{{ status[3] }}</i> / 100</span>
                     <span class="blue barC thirstbar" [style.width.%]="status[3]"></span>
                   </div>

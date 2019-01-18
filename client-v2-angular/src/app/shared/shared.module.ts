@@ -12,7 +12,10 @@ import { Auth2Module } from '../main/authentication/auth.module';
 import { PreloaderService } from '../main/client/common/services/preloader.service';
 import { AudioService } from '../main/client/audio/audio.service';
 
+
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastContainerModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -28,6 +31,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     //font awesome
     FontAwesomeModule,
+    ToastContainerModule,
   ],
   providers: [
     GameService,
@@ -42,6 +46,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     NgScrollbarModule,
     PipesModule,
+    ToastContainerModule,
     FontAwesomeModule,
     
   ],

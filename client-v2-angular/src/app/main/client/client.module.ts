@@ -33,6 +33,7 @@ import { DetailsRoomComponent } from './output/renders/details-room/details-room
 import { RegistrationComponent } from '../registration/registration.component';
 import { DialogModule } from '../common/dialog/dialog.module';
 import { DialogComponent } from '../common/dialog/dialog.component';
+import { LoginSmartComponent } from './login-smart/login-smart.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DialogComponent } from '../common/dialog/dialog.component';
     DetailsRoomComponent,
     RegistrationComponent,
     WelcomeNewsComponent,
+    LoginSmartComponent,
   ],
   imports: [
     ClientRoutingModule,

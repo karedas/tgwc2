@@ -6,21 +6,19 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 export const getUIState = createFeatureSelector<UIState>('ui');
 
 /*********************** Individual selectors************************** */
+function fetchUserLevel(state: UIState) {
+  return state.isgod;
+}
+
+function fetchInvisibilityLevel(state: UIState) {
+  return state.invlevel;
+}
+
+function fetchWelcomeNews(state: UIState) {
+  return state.welcomeNews;
+}
 
 /******************* Public Selector API's ******************/
-
-
-export const getUserLevel = createSelector (
-  getUIState,
-  ui => ui.isgod
-);
-
-export const getInvisibilityLevel = createSelector(
-  getUIState,
-  ui => ui.invlevel
-)
-
-export const getWelcomeNews = createSelector(
-  getUIState,
-  ui => ui.welcomeNews
-);
+export const getUserLevel = createSelector (getUIState, fetchUserLevel);
+export const getInvisibilityLevel = createSelector(getUIState, fetchInvisibilityLevel)
+export const getWelcomeNews = createSelector(getUIState, fetchWelcomeNews);

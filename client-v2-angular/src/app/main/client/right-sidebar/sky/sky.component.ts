@@ -1,4 +1,4 @@
-import { Component, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { getSky } from 'src/app/store/selectors';
 import { Store } from '@ngrx/store';

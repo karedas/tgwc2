@@ -7,7 +7,7 @@ import { LoginService } from '../main/authentication/services/login.service';
 import { HistoryService } from './history.service';
 import { State } from '../store';
 import { getAuthenticatedState } from '../store/selectors';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { takeWhile, takeUntil } from 'rxjs/operators';
 
 
@@ -16,11 +16,9 @@ import { takeWhile, takeUntil } from 'rxjs/operators';
 })
 
 export class GameService {
-
   private netData: string;
-
-  private showNewsSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  showNews = this.showNewsSubject$.asObservable();
+  private showNewsSubject$: BehaviorSubject<boolean>;
+  showNews: any;
 
   constructor(
     //private loginService: LoginService,
@@ -30,9 +28,8 @@ export class GameService {
     private historyService: HistoryService,
 
   ) {
-
-    this.store.pipe(select(getAuthenticatedState)).subscribe(
-    )
+    this.showNewsSubject$ = new BehaviorSubject<boolean>(false)
+    this.showNewsSubject$.asObservable();
   }
 
   startGame() {

@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
-import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 
 @Component({
   selector: 'tg-navbar',

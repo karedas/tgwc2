@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getStatus, getHero } from 'src/app/store/selectors';
+import { getHero } from 'src/app/store/selectors';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -55,7 +55,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
 
   setCombatPanel() {
 
-    console.log(this.status);
     if (this.status.length > 4) {
 
       this.inCombat = true;

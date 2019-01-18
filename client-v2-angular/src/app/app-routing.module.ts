@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './main/authentication/login/login.component';
 import { RegistrationComponent } from './main/registration/registration.component';
+import { AppPreloadingStrategy } from './app.preloading-strategiy';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,7 +20,7 @@ const appRoutes: Routes = [
       appRoutes,
       {
         enableTracing: false, // <-- debugging purposes only
-        // preloadingStrategy: SelectivePreloadingStrategyService,
+        preloadingStrategy: AppPreloadingStrategy,
       }
     )
   ],

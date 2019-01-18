@@ -18,6 +18,9 @@ import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
 import { ClientEffects } from './store/effects/client.effects';
 
+import { ToastrModule } from 'ngx-toastr';
+import { AppPreloadingStrategy } from './app.preloading-strategiy';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ClientEffects } from './store/effects/client.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(fromStore.reducers),
-    EffectsModule.forRoot([DataEffects, ClientEffects]),
+    EffectsModule.forRoot([ClientEffects]),
+    ToastrModule.forRoot({ 
+      positionClass: 'inline',
+    }),
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
@@ -43,6 +49,7 @@ import { ClientEffects } from './store/effects/client.effects';
     AppRoutingModule,
 
   ],
+  providers: [AppPreloadingStrategy],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

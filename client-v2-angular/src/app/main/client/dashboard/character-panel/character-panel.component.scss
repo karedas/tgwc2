@@ -74,6 +74,7 @@
     flex: 1 1 100%;
     flex-direction: column;
     padding: 0;
+    
 
     .barcont {
       box-sizing: border-box;
@@ -93,6 +94,8 @@
       height: 100%;
       width: 50%;
       display: inline-block;
+      text-align: left;
+      margin-right: 58px;
     }
 
     .tg-extrabars {
@@ -101,23 +104,12 @@
       flex-direction: row;
       margin-bottom: 2px;
       display: flex;
-      
-      .lft {
-        margin-right: 2px;
-      }
     }
 
     .tg-statusbar-text {
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      right: 10px;
-      transform: translateY(-50%);
-      padding-left: .5em;
-      text-shadow: 0 1px 0px black;
-      white-space: nowrap;
-      text-overflow: ellipsis;
       overflow: hidden;
+      position: absolute;
+      right: -50px;
 
       i {
         font-style: normal;

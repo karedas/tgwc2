@@ -5,32 +5,19 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 export const getClientState = createFeatureSelector<ClientState>('client');
 
 /*********************** Individual selectors************************** */
+function fetchErrorMessage(state: ClientState) {
+  return state.errorMessage;
+}
 
+function fetchAuthentication(state: ClientState) {
+  return state.isAuthenticated;
+}
+
+function fetchInGame(state: ClientState) {
+  return state.inGame;
+}
 
 /******************* Public Selector API's ******************/
-
-export const getErrorMessage  = createSelector(
-  getClientState,
-  client => client.errorMessage
-);
-
-export const getAudioTrack = createSelector(
-  getClientState,
-  client => client.track
-);
-
-
-export const getAuthenticatedState = createSelector(
-  getClientState,
-  client  => { 
-    if(client.reconnect && client.isAuthenticated) {
-     return {auth: true, reconnect: true}
-    }
-    else if (!client.reconnect && client.isAuthenticated) {
-      return {auth: true, reconnect: false}
-    }
-    else {
-      return {auth: false, reconnect: false}
-    }
-  }
-);
+export const getErrorMessage  = createSelector(getClientState, fetchErrorMessage);
+export const getAuthenticatedState = createSelector(getClientState, fetchAuthentication);
+export const getInGameStatus = createSelector(getClientState, fetchInGame);

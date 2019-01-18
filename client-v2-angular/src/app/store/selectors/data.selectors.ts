@@ -1,8 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DataState } from '../state/data.state';
-import { Room } from 'src/app/models/data/room.model';
-import { MPersons } from 'src/app/main/client/output/renders/details-room/models/persons.model';
-import { IHero } from 'src/app/models/data/hero.model';
 
 /******************* Base Search State ******************/
 export const getDataState = createFeatureSelector<DataState>('data');
@@ -13,56 +10,51 @@ export const selectDataBase = (state: DataState) => state.base;
 export const selectDataRoom = (state: DataState) => state.room;
 export const selectDataHero = (state: DataState) => state.hero;
 
-/******************* Public Selector API's ******************/
+function fetchDataId(state: DataState) {
+  return state.id;
+}
 
-export const getId = createSelector(
-  getDataState,
-  (data: DataState) => data.id
-);
+function fetchDataBase(state: DataState) {
+  return state.base;
+}
 
-export const getDataBase = createSelector(
-  getDataState,
-  (data: DataState) => data.base
-);
+function fetchHero(state: DataState) {
+  return state.hero;
+}
 
-export const getHero = createSelector(
-  getDataState,
-  data => data.hero 
-)
+function fetchRoom(state: DataState) {
+  return state.room;
+}
 
-/* Hero Selectors */
-export const getStatus = createSelector(
-  getHero,
-  data => data.status
-);
+function fetchObjectsInRoom(state: DataState) {
+  return state.room.objcont.list;
+}
 
-/* Generics Selectors */
-export const getRoomBase = createSelector(
-  getDataState,
-  (data: DataState) => data.room
-);
+function fetchPersonsInRoom(state: DataState) {
+  return state.room.perscont.list;
+}
 
-export const getObjectsInRoom = createSelector(
-  getRoomBase,
-  (room:Room) => room.objcont.list
-)
+function fetchDoors(state: DataState) {
+  return state.doors;
+}
 
-export const getPersonsInRoom = createSelector(
-  getRoomBase,
-  (room:Room) => room.perscont.list
-)
+function fetchSky(state: DataState) {
+  return state.sky;
+}
 
-export const getDoors = createSelector(
-  getDataState,
-  (data: DataState) => data.doors
-);
+function feetchMap(state: DataState) {
+  return state.map;
+}
 
-export const getSky = createSelector(
-  getDataState,
-  (data: DataState)  => data.sky
-);
+/******************* Public API's ******************/
+export const getId = createSelector(getDataState, fetchDataId);
+export const getDataBase = createSelector(getDataState, fetchDataBase);
+export const getHero = createSelector(getDataState, fetchHero); 
+export const getRoomBase = createSelector(getDataState, fetchRoom);
+export const getObjectsInRoom = createSelector(getDataState ,fetchObjectsInRoom);
+export const getPersonsInRoom = createSelector(getDataState, fetchPersonsInRoom)
+export const getDoors = createSelector(getDataState, fetchDoors);
+export const getSky = createSelector(getDataState, fetchSky);
+export const getMap = createSelector(getDataState, feetchMap);
 
-export const getMap = createSelector(
-  getDataState,
-  data => data.map
-);
+

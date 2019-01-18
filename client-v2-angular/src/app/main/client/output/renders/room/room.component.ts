@@ -1,7 +1,6 @@
 import { Component, Input, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'tg-room',

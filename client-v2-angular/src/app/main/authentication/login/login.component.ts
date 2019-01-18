@@ -5,10 +5,10 @@ import { LoginService } from 'src/app/main/authentication/services/login.service
 import { Subscription, Subject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
-import gitInfo from 'src/git-version.json';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
 import { takeUntil } from 'rxjs/operators';
-import { GameService } from 'src/app/services/game.service';
+
+import gitInfo from 'src/git-version.json';
 
 @Component({
   selector: 'tg-login',
@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private game: GameService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.loginFormErrors = {
@@ -42,8 +41,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: {}
     };
 
-
     this._unsubscribeAll = new Subject();
+    
   }
 
   ngOnInit() {
@@ -57,8 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (err !== undefined) {
           this.socketloginReplayMessage = err;
         }
-      }
-      );
+      });
   }
 
   get username() {
