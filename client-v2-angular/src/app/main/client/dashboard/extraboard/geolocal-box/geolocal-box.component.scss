@@ -8,18 +8,41 @@
     flex-direction: column;
     height: 100%;
     max-height: 100%;
-    overflow: hidden;
     width: 185px;
+
+    .tg-geolocal--title {
+        @include sprite($territorio-title-box-sprite);
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &:after, &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &:after {
+        left:0;
+        @include sprite($input-right-decoration-sprite);
+    }
+    &:before {
+        @include sprite($input-left-decoration-sprite);
+        right: 0;
+    }
 }
 
 .tg-geolocal--image, .tg-geolocal--data {
     height: 50%;
     flex: 1 1 50%;
+    overflow: hidden;
 }
 
 .tg-geolocal--image {
     background: url("/assets/images/borders/border-002-tiny.png") repeat-x bottom left;
-    padding-bottom: 2px;
+    padding-bottom: 4px;
 
     div {
       @include sprite($collina-sprite);

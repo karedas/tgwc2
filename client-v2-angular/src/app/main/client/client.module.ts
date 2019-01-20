@@ -30,9 +30,7 @@ import { SkyComponent } from './right-sidebar/sky/sky.component';
 import { DirectionsComponent } from './right-sidebar/map/directions/directions.component';
 import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.component';
 import { DetailsRoomComponent } from './output/renders/details-room/details-room.component';
-import { RegistrationComponent } from '../registration/registration.component';
 import { DialogModule } from '../common/dialog/dialog.module';
-import { DialogComponent } from '../common/dialog/dialog.component';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geolocal-box.component';
 
@@ -64,7 +62,6 @@ import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geoloc
     RightSidebarComponent,
     MonitorBoxComponent,
     DetailsRoomComponent,
-    RegistrationComponent,
     WelcomeNewsComponent,
     LoginSmartComponent,
     GeolocalBoxComponent,
@@ -76,12 +73,12 @@ import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geoloc
   ],
   exports: [
     ClientComponent,
+    DialogModule
   ],
   providers: [
     HistoryService
   ],
   entryComponents: [
-    WelcomeNewsComponent
   ]
 })
 export class ClientModule {

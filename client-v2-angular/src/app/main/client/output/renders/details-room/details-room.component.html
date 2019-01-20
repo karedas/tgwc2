@@ -7,8 +7,8 @@
 
 <ng-template #withPersons>
   <div class="tg-persons" [ngClass]="
-        {'list-50-50': (totalPersons > 6 && totalObjs < 6),
-         'list-50': (totalPersons > 6 && totalObjs > 6)}">
+        {'list-50-50': (totalPersons > 6 && totalObjs <  6), 'list-50': (totalPersons > 6 && totalObjs > 6)}">
+        {{totalObjs}}
     <ng-container *ngFor="let person of persons">
       <div class="tg-persons--line">
         <tg-icons [icon]="person.icon"></tg-icons>
@@ -20,8 +20,7 @@
 
 <ng-template #withObjects>
   <div class="tg-objects" [ngClass]="
-    {'list-50-50': (totalObjs > 6 && totalPersons < 6),
-    'list-50': (totalObjs > 6 && totalPersons > 6)}">
+    {'list-50-50': (totalObjs > 6 && totalPersons  <  6), 'list-50': (totalObjs > 6 && totalPersons > 6)}">
     <ng-container *ngFor="let object of objs">
       <div class="tg-objects--line">
         <tg-icons [icon]="object.icon"></tg-icons>

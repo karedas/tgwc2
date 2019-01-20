@@ -21,4 +21,4 @@
   <tg-audio></tg-audio>
 </div>
 <tg-login-smart></tg-login-smart>
-<tg-welcome-news></tg-welcome-news>
+<tg-welcome-news *ngIf="!(welcomeNews$ | async);"></tg-welcome-news>

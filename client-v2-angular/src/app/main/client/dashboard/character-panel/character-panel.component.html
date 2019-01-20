@@ -4,9 +4,9 @@
       <div class="col">
         <div class="row">
           <!-- Character Detail -->
-          <div class="tg-character col pr-0">
+          <div class="tg-character col pr-lg-0">
             <!-- Character Avatar -->
-            <div class="tg-characteravatar b-ironlight tg-shadow" title="">
+            <div class="tg-characteravatar b-ironlight" title="{{heroName}}">
               <div class="tg-avatar-wrap">
                 <img [src]="heroImage" alt="Avatar" *ngIf="heroImage" />
               </div>
@@ -52,10 +52,10 @@
               </div>
             </div>
           </div>
-          <div class="tg-combatpanel col-auto pr-0" *ngIf="inCombat">
+          <div class="tg-combatpanel col-auto pr-lg-0" *ngIf="inCombat">
             <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
           </div>
-          <tg-extraboard class="col-auto d-none d-sm-flex flex-column"></tg-extraboard>
+          <tg-extraboard class="col-auto d-none d-lg-flex flex-column"></tg-extraboard>
         </div>
       </div>
     </div>

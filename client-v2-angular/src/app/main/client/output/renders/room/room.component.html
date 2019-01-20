@@ -16,5 +16,9 @@
     </div>
     <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
   </div>
-  <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
+  <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
+</ng-template>
+
+<ng-template #noobjpers>
+  Non vedi niente di particolare.
 </ng-template>

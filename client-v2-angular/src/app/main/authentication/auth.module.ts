@@ -11,6 +11,7 @@ import { RegistrationComponent } from '../registration/registration.component';
   declarations: [
     LoginComponent,
     QuotesComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule,

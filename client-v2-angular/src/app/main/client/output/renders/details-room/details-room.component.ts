@@ -37,11 +37,14 @@ export class DetailsRoomComponent implements OnInit{
         return prev + (!isNaN(cur.sz) ? cur.sz : 0);
       }, 0 );
     }
+    console.log(this.totalObjs);
     if(this.persons) {
       this.totalPersons = this.persons.reduce((prev, cur) => {
         return prev + (!isNaN(cur.sz) ? cur.sz : 0);
       }, 0 );
     }
+
+    console.log(this.totalPersons, this.totalObjs);
 
     this.total = this.totalObjs + this.totalPersons;
   }
