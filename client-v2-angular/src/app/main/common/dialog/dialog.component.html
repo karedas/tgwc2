@@ -5,6 +5,20 @@
         [resizable]="config.resizable" 
         [autoOpen]="false"
         [modalOpacity]="config.modalOpacity"
-        [showCloseButton]="config.showCloseButton"  styleClass="dialog-overflow">
-    <ng-content appInsertion></ng-content>
+				[showCloseButton]="config.showCloseButton"
+				[position]="center"
+        styleClass="dialog-overflow">
+        <div style="overflow: hidden;">
+					<div class="b-ironlight-mini tg-box">
+						<div class="tg-dialog-inside tg-shadow-inset">
+							<ng-content appInsertion></ng-content>
+						</div>
+							<div class="tg-border-box">
+									<div class="tg-border tg-border-top"></div>
+									<div class="tg-border tg-border-left"></div>
+									<div class="tg-border tg-border-right"></div>
+									<div class="tg-border tg-border-bottom"></div>
+							</div>
+					</div>
+        </div>
 </jqxWindow>

@@ -3,11 +3,11 @@ import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getInGameStatus } from 'src/app/store/selectors';
 import { ClientState } from 'src/app/store/state/client.state';
-import { DialogService } from '../../common/dialog/dialog.service';
 import { skip, takeUntil } from 'rxjs/operators';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { Router } from '@angular/router';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-login-smart',

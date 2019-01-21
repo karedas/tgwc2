@@ -20,7 +20,7 @@ export interface UIState {
 	cursorOnMap: false; // Remove
 	editorIsopen: boolean;
 	extraOutput: boolean;
-	controlPanel: number;
+	showDashBoard: boolean;
 	zen: boolean;
 
 
@@ -47,7 +47,7 @@ export const initialState: UIState = {
 	},
 	cursorOnMap: false,
 	editorIsopen: false,
-	extraOutput: false,
-	controlPanel: 0,
+	extraOutput: true,
+	showDashBoard: true,
 	zen: false
 };

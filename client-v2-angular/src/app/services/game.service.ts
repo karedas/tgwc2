@@ -84,9 +84,4 @@ export class GameService {
   showWelcomeNews() {
     this.showNewsSubject$.next(true);
   }
-
-  // showGeneralNews(value: boolean) {
-  //   this.showNewsSubject$.next(value);
-  // }
-
 }

@@ -1,23 +1,12 @@
 @import '~src/scss/colors';
 
-:host {
-  display: none!important;
-}
-
 .tg-cookielaw {
   font-size: 1em;
   max-width: 100%;
   margin: 0 auto;
   font-family: Kingthings;
-
-  .tg-modal-content {
-    color: #86725a;
-    text-align: center;
-    padding: 24px 12px;
-    font-size: 15px;
-    line-height: 1.3;
-    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-  }
+  text-align: center;
+  color: #86725a;
 
   a {
     text-decoration: underline;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { RoomList } from 'src/app/models/data/room.model';
@@ -6,6 +6,7 @@ import { RoomList } from 'src/app/models/data/room.model';
 @Component({
   selector: 'tg-details-room',
   templateUrl: './details-room.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
@@ -17,9 +18,6 @@ export class DetailsRoomComponent implements OnInit {
   totalObjs: number = 0;
   totalPersons: number = 0;
   total: number;
-
-  personsHtStat: Object[] = [];
-  objsHtStat: Object[] = [];
 
   objsClass50: boolean = false;
   objsClass50_50: boolean = false;
@@ -54,7 +52,7 @@ export class DetailsRoomComponent implements OnInit {
     this.setContentClass();
   }
 
-  getHsStatBgPos(condprc: number) {
+  getHsStatBgPos(condprc: number): string{
     const pos = -13 * Math.floor(12 * (100 - condprc) / 100);
     const styleValue = `0 ${pos}px`;
     return styleValue;

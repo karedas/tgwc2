@@ -16,9 +16,9 @@ export function reducer(
       return { ...state, errorMessage: action.payload };
     }
 
-    case ClientEventType.DISCONNECT: {
-      return initialState;
-    }
+    // case ClientEventType.DISCONNECT: {
+    //   return initialState;
+    // }
 
     case ClientEventType.LOGINSUCCESS: {
       return Object.assign({}, state, action.payload, {

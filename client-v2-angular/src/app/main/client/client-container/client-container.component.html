@@ -20,18 +20,8 @@
   </div>
   <tg-audio></tg-audio>
 </div>
+
 <tg-login-smart></tg-login-smart>
 <tg-welcome-news *ngIf="!(welcomeNews$ | async);"></tg-welcome-news>
-
-<!-- Temporary Modal no Feature ready -->
-<tg-dialog id="noFeatureDialog"> 
-  <div class="b-ironlight-mini tg-box tg-modal-content">
-        Funzionalit&agrave; non ancora implementata
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
-  </div>
-</tg-dialog>
+<!-- Temporary Modal for "Application aren't ready"  -->
+<tg-no-feature></tg-no-feature>

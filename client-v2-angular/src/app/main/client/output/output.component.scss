@@ -168,6 +168,7 @@ tg-text {
   .tg-persons {
     display: flex;
     padding-bottom: .5em;
+    flex-direction: column;
   }
 
   .tg-objects--line,
@@ -236,6 +237,7 @@ tg-text {
   .list-50 {
     width: 50%;
     display: inline-block;
+    flex-direction: row;
 
     > div {
       flex: 1 0 50%;
@@ -263,104 +265,17 @@ tg-text {
     display: inline-block;
   }
 
-  // .tg-objects--hstat {
-  //   background-position: 0 0px;
-  //   display: inline-block;
-  //   margin: auto .5em auto 0.3em;
-  //   background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
-  //   box-sizing: content-box;
-  //   height: 13px;
-  //   width: 21px;
-  //   flex: 1 0 21px;
-  // }
-  // .out-list {
-  //   display: block;
-  //   width: 100%;
-  //   padding-top: .5em;
-
-
-
-  //   &.firstlist {
-  //     padding-bottom: 0;
-  //   }
-
-  //   .tg-list-object {
-  //     color: $tg-yellow;
-  //   }
-
-  //   .tg-list-person {
-  //     color: $tg-lt-green;
-  //   }
-
-  //   .poseq {
-  //     color: $tg-yellow;
-  //   }
-  // }
-
-  // .hstat {
-  //   background-position: 0 0px;
-  //   display: inline-block;
-  //   margin: auto .5em auto 0.3em;
-  //   background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
-  //   box-sizing: content-box;
-  //   height: 13px;
-  //   width: 21px;
-  //   flex: 1 0 21px;
-
-  // }
-
-  // .grpcoll {
-  //   display: block;
-
-  //   &.expanded {
-  //     flex: 1 1 100% !important;
-  //     background-color: $gray-900;
-  //     position: relative;
-  //     z-index: 2;
-  //     border: 1px solid $gray-700;
-  //   }
-  // }
-
-  // .grpexp {
-  //   border: 1px solid $gray-700;
-  //   flex: 1 1 100%;
-  //   display: flex;
-  //   flex-wrap: wrap;
-  //   margin-bottom: .2em;
-  //   margin-top: -1px;
-  //   padding: .2em 0;
-  //   position: relative;
-  //   z-index: 1;
-
-  //   .element {
-  //     flex: 1 1 50%;
-  //   }
-  // }
-
-  // .out-charsubdetail {
-  //   padding-top: .4em;
-  // }
-
-  // .element {
-  //   cursor: pointer;
-  //   display: flex;
-  //   vertical-align: middle;
-  //   line-height: 14px;
-  // }
-
-  // .desc {
-  //   display: inline-block;
-  //   vertical-align: middle;
-  //   margin: auto 0;
-  //   flex-direction: row;
-  //   display: flex;
-
-  // .dd-desc {
-  //   /*flex-direction: row;
-  //       display: flex;*/
-  // }
-  // }
-
+  .hstat {
+    background-position: 0 0px;
+    display: inline-block;
+    margin: auto 2px;
+    background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
+    box-sizing: content-box;
+    height: 13px;
+    width: 21px;
+    flex: 1 0 21px;
+  }
+  
 
   // .tg-backdetail {
   //   display: flex;
@@ -468,3 +383,10 @@ tg-text {
 //     color: #e0df9d;
 //   }
 // }
+
+
+@include media-breakpoint-down(sm) {
+  .hstat {
+    display: none;
+  }
+}

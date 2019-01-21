@@ -9,7 +9,6 @@ export function reducer(
   switch (action.type) {
     case DataEvenType.IN:
       return Object.assign({}, state, {
-        id: ++state.id,
         base: [action.payload]
       });
     case DataEvenType.OUT:

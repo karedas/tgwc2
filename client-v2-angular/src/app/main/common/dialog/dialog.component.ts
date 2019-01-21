@@ -8,7 +8,7 @@ import { InsertionDirective } from './insertion.directive';
 @Component({
   selector: 'tg-dialog',
   templateUrl: './dialog.component.html',
- //  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent  implements OnInit, OnDestroy {
 

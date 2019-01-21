@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
-import { DialogService } from '../../common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component ({
   selector: 'tg-cookie-law',
@@ -15,9 +15,9 @@ export class CookieLawComponent implements AfterViewInit {
 
   dialogID: string = 'cookieLaw';
   modalConfig: ModalConfiguration;
-
   display = false;
   showButton = false;
+
   constructor(private cookieService: CookieService, private dialogService: DialogService) {
     this.modalConfig = {
       width: 420,

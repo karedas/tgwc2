@@ -3,12 +3,13 @@ import { GameService } from 'src/app/services/game.service';
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
 import { Store, select } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
-import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
+import { ToggleExtraOutput, ToggleDashboard, UpdateUI } from 'src/app/store/actions/ui.action';
 import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { getUIState } from 'src/app/store/selectors';
 import { map } from 'rxjs/operators';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { UIState } from 'src/app/store/state/ui.state';
 
 @Component({
   selector: 'tg-input',
@@ -23,7 +24,9 @@ export class InputComponent implements AfterViewInit {
   faSolarPanel = faSolarPanel;
   faBullseye = faBullseye;
 
-  extraStatus: boolean;
+  extraOutputStatus$: Observable<boolean>;
+  dashboardStatus$: Observable<boolean>;
+
   zenStatus$: BehaviorSubject<boolean>;
 
   @ViewChild('inputCommand') ic: ElementRef;
@@ -34,9 +37,8 @@ export class InputComponent implements AfterViewInit {
     private historyService: HistoryService,
     private dialogService: DialogService
     ) { 
-      this.store.pipe(select(getUIState), map( ui => ui.extraOutput )).subscribe(
-        status  => { this.extraStatus = status; }
-      );
+      this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.extraOutput));
+      this.dashboardStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.showDashBoard));
     }
 
   ngAfterViewInit() {
@@ -62,11 +64,11 @@ export class InputComponent implements AfterViewInit {
     }
   }
 
-  collapseInterface(){
+  toggleExtraOutput(){
     this.store.dispatch(new ToggleExtraOutput()); 
   }
   
-  toggleControlPanel(){
+  toggleDashboard(){
     this.store.dispatch(new ToggleDashboard());
   }
   

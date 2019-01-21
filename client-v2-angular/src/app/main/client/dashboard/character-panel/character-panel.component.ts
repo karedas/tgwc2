@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getHero } from 'src/app/store/selectors';
-import { Subject } from 'rxjs';
+import { getHero, getDashboardVisibility } from 'src/app/store/selectors';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -15,27 +15,28 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
 
   status: any[] = [0,0,0,0];
   inCombat: boolean = false;
-
-
   heroName: string;
   heroAdjective: string;
   heroImage: string;
-
   enemyHealt: number = 0;
   enemyMove: number = 0;
   enemyName: string = '';
   enemyIcon: number = null;
 
+  toggleStatus$: Observable<boolean>;
+
   private _unsubscribeAll: Subject<any>;
   
   constructor(private store: Store<DataState>) {
+
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
 
-    this.store.pipe(
-      select(getHero), 
+    this.toggleStatus$ = this.store.pipe(select(getDashboardVisibility));
+
+    this.store.pipe(select(getHero),
       takeUntil(this._unsubscribeAll)).subscribe(
         hero => { 
           this.setStatus(hero.status);

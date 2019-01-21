@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
-import { PreloaderService } from './common/services/preloader.service';
+import { PreloaderService } from '../common/services/preloader.service';
 
 @Component({
   selector: 'tg-client',

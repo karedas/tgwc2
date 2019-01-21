@@ -5,7 +5,7 @@ import { IconsPipe } from './icons.pipe';
 @NgModule({
   declarations: [
     DataToHtmlPipe,
-    IconsPipe
+    IconsPipe,
   ],
   imports: [],
   exports: [

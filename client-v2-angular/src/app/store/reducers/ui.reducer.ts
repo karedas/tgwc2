@@ -22,6 +22,12 @@ export function reducer(
     case UIEventType.TOGGLEOUTPUT: {
       return Object.assign({}, state, { extraOutput: !state.extraOutput})
     }
+
+    case UIEventType.TOGGLEDASHBOARD: {
+      console.log('yo');
+      return Object.assign({}, state,  {showDashBoard: !state.showDashBoard})
+    }
+    
     case UIEventType.UI: {
       return Object.assign({}, state, action.payload);
     }

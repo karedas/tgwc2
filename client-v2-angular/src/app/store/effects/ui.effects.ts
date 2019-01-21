@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
 import { tap } from 'rxjs/operators';
-
-export interface PayloadAction {
-  type: string;
-  payload: any;
-}
+import { UIEventType } from '../actions/ui.action';
 
 
 @Injectable()
-export class DataEffects {
+export class UiEffects {
 
   constructor(
     private actions$: Actions,
-    private game: GameService
   ) { }
 
+    @Effect({dispatch: false})
+    updateUI: Observable<Action> = this.actions$.pipe(
+      ofType(UIEventType.UPDATENEEDED),
+      tap(data => console.log(data))
+    )
 }

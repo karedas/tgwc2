@@ -11,14 +11,14 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from './shared/shared.module';
-import * as fromStore from './store/';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
-import { ClientEffects } from './store/effects/client.effects';
 
 import { ToastrModule } from 'ngx-toastr';
-import { AppPreloadingStrategy } from './app.preloading-strategiy';
+import { AppPreloadingStrategy } from './app.preloading-strategy';
+import { appReducer, clearState } from './store';
+import { UiEffects } from './store/effects/ui.effects';
 
 
 @NgModule({
@@ -29,8 +29,8 @@ import { AppPreloadingStrategy } from './app.preloading-strategiy';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot(fromStore.reducers),
-    EffectsModule.forRoot([ClientEffects]),
+    StoreModule.forRoot(appReducer, { metaReducers: [clearState] } ),
+    EffectsModule.forRoot([UiEffects]),
     ToastrModule.forRoot({ 
       positionClass: 'inline',
     }),

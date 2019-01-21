@@ -1,4 +1,4 @@
-<div class="tg-characterpanel b-controlpanel">
+<div class="tg-characterpanel b-controlpanel" *ngIf="toggleStatus$ | async">
   <div class="tg-characterpanel-wrap">
     <div class="row">
       <div class="col">
@@ -67,53 +67,3 @@
     <div class="tg-border tg-border-bottom"></div>
   </div>
 </div>
-
-
-<!-- <div class="tg-combatpanel col-auto pr-0">
-  <div class="tg-combatpanel-wrap">
-    <div class="tg-combatpanel-box">
-      <div class="enemyname"></div>
-      <div class="tg-enemyicon">
-        <div class="iconimg enemyicon"></div>
-      </div>
-      <div class="enemy-h-prc">0%</div>
-      <div class="tg-enemy-h">
-        <div class="enemy-bar enemyH"></div>
-      </div>
-      <div class="enemy-m-prc">0%</div>
-      <div class="tg-enemy-m">
-        <div class="enemy-bar enemyM"></div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- Extra Board in Dashboard -->
-<!-- <div class="tg-extraboard col-auto d-none d-sm-flex flex-column">
-  <div class="row h-100">
-    <div class="col-12 d-flex flex-row pl-1">
-      <div class="extraboard-btnmenu nav flex-column nav-pills order-2" id="tg-pills-extraboard" role="tablist"
-        aria-orientation="vertical">
-        <a class="nav-link active" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab"
-          aria-controls="tg-pills-shortcut" aria-selected="false" title="Scorciatoie">
-          <i class="ra ra-rune-stone"></i>
-        </a>
-        <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab"
-          aria-controls="tg-pills-utility" aria-selected="false" title="Utility">U</a>
-      </div>
-      <div class="extraboard-content tab-content" id="tg-pills-extraboardContent"> -->
-<!-- Shortcut -->
-<!-- <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div> -->
-<!-- Utility -->
-<!-- <div class="tab-pane" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div> -->
-<!-- </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 mt-auto pl-0">
-      <div class="extraboard-caption d-flex">
-        <div class="extraboard-addin"></div>
-        <div id="extraboardCaption" class="ml-auto"></div>
-      </div>
-    </div>
-  </div>
-</div> -->

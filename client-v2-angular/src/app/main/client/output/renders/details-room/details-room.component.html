@@ -3,7 +3,7 @@
 </ng-container>
 <ng-container *ngIf="persons">
   <ng-container *ngTemplateOutlet="withPersons"></ng-container>
-</ng-container>
+</ng-container> 
 
 <ng-template #withPersons>
   <div class="tg-persons" [ngClass]="{'list-50-50': personsClass50_50, 'list-50': personsClass50}">
@@ -15,6 +15,7 @@
         }"
         (click)="person.sz && togglePanel[i] = !togglePanel[i]">
         <tg-icons [icon]="person.icon"></tg-icons>
+        <div class="hstat" [style.background.position.px]="getHsStatBgPos(person.condprc)"></div>
         <div class="tg-persons--item_desc" [innerHtml]="person.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
       </div>
@@ -34,10 +35,10 @@
       <div class="tg-objects--line" 
         [ngClass]="{
           'expandlist': object.sz,
-          'open': togglePanel[i]
-        }"
+          'open': togglePanel[i]}"
         (click)="object.sz && togglePanel[i] = !togglePanel[i]">
         <tg-icons [icon]="object.icon"></tg-icons>
+        <div class="hstat" [style.background.position.px]="getHsStatBgPos(object.condprc)"></div>
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
       </div>

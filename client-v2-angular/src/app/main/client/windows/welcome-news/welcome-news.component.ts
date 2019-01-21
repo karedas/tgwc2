@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { GameService } from 'src/app/services/game.service';
-import { DialogService } from '../../common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-welcome-news',
