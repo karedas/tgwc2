@@ -8,6 +8,7 @@ import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { getUIState } from 'src/app/store/selectors';
 import { map } from 'rxjs/operators';
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-input',
@@ -30,7 +31,8 @@ export class InputComponent implements AfterViewInit {
   constructor(
     private game: GameService,
     private store: Store<ClientState>,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private dialogService: DialogService
     ) { 
       this.store.pipe(select(getUIState), map( ui => ui.extraOutput )).subscribe(
         status  => { this.extraStatus = status; }
@@ -70,6 +72,7 @@ export class InputComponent implements AfterViewInit {
   
   toggleZen(){
     //this.store.dispatch(new updateUI({zen: true})); 
+    this.dialogService.open('noFeatureDialog');
   }
 
 }

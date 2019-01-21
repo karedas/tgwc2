@@ -6,25 +6,46 @@
 </ng-container>
 
 <ng-template #withPersons>
-  <div class="tg-persons" [ngClass]="
-        {'list-50-50': (totalPersons > 6 && totalObjs <  6), 'list-50': (totalPersons > 6 && totalObjs > 6)}">
-        {{totalObjs}}
-    <ng-container *ngFor="let person of persons">
-      <div class="tg-persons--line">
+  <div class="tg-persons" [ngClass]="{'list-50-50': personsClass50_50, 'list-50': personsClass50}">
+    <ng-container *ngFor="let person of persons; let i=index">
+      <div class="tg-persons--line"
+        [ngClass]="{
+          'expandlist': person.sz,
+          'open': togglePanel[i]
+        }"
+        (click)="person.sz && togglePanel[i] = !togglePanel[i]">
         <tg-icons [icon]="person.icon"></tg-icons>
         <div class="tg-persons--item_desc" [innerHtml]="person.desc | dataToHtml"></div>
+        <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
+      </div>
+      <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]">
+        <div class="tg-persons--line"  *ngFor="let sz of person.mrn; let indexSz=index">
+          <tg-icons [icon]="person.icon"></tg-icons>
+          <div class="tg-persons--item_desc" [innerHtml]="person.desc | dataToHtml" [attr.mrn]="person.mrn[indexSz]"></div>
+      </div>
       </div>
     </ng-container>
   </div>
 </ng-template>
 
 <ng-template #withObjects>
-  <div class="tg-objects" [ngClass]="
-    {'list-50-50': (totalObjs > 6 && totalPersons  <  6), 'list-50': (totalObjs > 6 && totalPersons > 6)}">
-    <ng-container *ngFor="let object of objs">
-      <div class="tg-objects--line">
+  <div class="tg-objects" [ngClass]="{'list-50-50': objsClass50_50, 'list-50': objsClass50}">
+    <ng-container *ngFor="let object of objs let i=index">
+      <div class="tg-objects--line" 
+        [ngClass]="{
+          'expandlist': object.sz,
+          'open': togglePanel[i]
+        }"
+        (click)="object.sz && togglePanel[i] = !togglePanel[i]">
         <tg-icons [icon]="object.icon"></tg-icons>
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
+        <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
+      </div>
+      <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]">
+        <div class="tg-objects--line"  *ngFor="let sz of object.mrn; let indexSz=index">
+            <tg-icons [icon]="object.icon"></tg-icons>
+            <div class="tg-persons--item_desc" [innerHtml]="object.desc | dataToHtml" [attr.mrn]="object.mrn[indexSz]"></div>
+        </div>
       </div>
     </ng-container>
   </div>

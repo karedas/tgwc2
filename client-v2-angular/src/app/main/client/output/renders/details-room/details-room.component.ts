@@ -9,7 +9,7 @@ import { RoomList } from 'src/app/models/data/room.model';
 })
 
 
-export class DetailsRoomComponent implements OnInit{
+export class DetailsRoomComponent implements OnInit {
 
   @Input('objs') objs: RoomList[];
   @Input('persons') persons: RoomList[];
@@ -20,10 +20,16 @@ export class DetailsRoomComponent implements OnInit{
 
   personsHtStat: Object[] = [];
   objsHtStat: Object[] = [];
-  personsClass: string = '';
-  objsClass: string = '';
-  
-  constructor(private store: Store<DataState>) { 
+
+  objsClass50: boolean = false;
+  objsClass50_50: boolean = false;
+  personsClass50: boolean = false;
+  personsClass50_50: boolean = false;
+
+  togglePanel: any = {};
+
+
+  constructor(private store: Store<DataState>) {
   }
 
   ngOnInit(): void {
@@ -32,26 +38,49 @@ export class DetailsRoomComponent implements OnInit{
 
   private getTotalByType() {
 
-    if(this.objs) {
-      this.totalObjs = this.objs.reduce((prev, cur) => {
-        return prev + (!isNaN(cur.sz) ? cur.sz : 0);
-      }, 0 );
+    if (this.objs) {
+      this.totalObjs = this.objs.length;
     }
-    console.log(this.totalObjs);
-    if(this.persons) {
-      this.totalPersons = this.persons.reduce((prev, cur) => {
-        return prev + (!isNaN(cur.sz) ? cur.sz : 0);
-      }, 0 );
+    if (this.persons) {
+      this.totalPersons = this.persons.length;
     }
 
-    console.log(this.totalPersons, this.totalObjs);
+    const total = this.totalObjs + this.totalPersons;
 
-    this.total = this.totalObjs + this.totalPersons;
+    for(let i = 0; i < total; i++) {
+      this.togglePanel[i] = false;
+    }
+
+    this.setContentClass();
   }
 
-  getHsStatBgPos(condprc:number) {
+  getHsStatBgPos(condprc: number) {
     const pos = -13 * Math.floor(12 * (100 - condprc) / 100);
-    const styleValue =  `0 ${pos}px`;
+    const styleValue = `0 ${pos}px`;
     return styleValue;
+  }
+
+  private setContentClass() {
+    this.getObjsContentClass();
+    this.getPersosnsContentClass();
+  }
+
+
+  private getObjsContentClass() {
+    if(this.totalObjs >= 6 && this.totalPersons <= 6) {
+      this.objsClass50_50 = true;
+    }
+    else if(this.totalObjs >= 6 && this.totalPersons >= 6) {
+      this.objsClass50 = true;
+    }
+  }
+
+  private getPersosnsContentClass() {
+    if(this.totalPersons >= 6 && this.totalObjs <= 6) {
+      this.personsClass50_50 = true;
+    }
+    else if(this.totalPersons >= 6 && this.totalObjs >= 6) {
+      this.personsClass50 = true;
+    }
   }
 }

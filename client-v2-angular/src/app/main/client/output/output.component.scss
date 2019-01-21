@@ -2,7 +2,8 @@
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 @import '~src/scss/colors';
-
+@import 'sprites';
+@import 'utils/sprites-mixins';
 
 :host {
   background: black;
@@ -167,15 +168,62 @@ tg-text {
   .tg-persons {
     display: flex;
     padding-bottom: .5em;
-    flex-direction: column;
   }
 
   .tg-objects--line,
   .tg-persons--line {
-    padding-top: 6px;
+    display: flex;
+    padding-right: 5px;
+    user-select: none;
+
+    > div {
+      margin: auto 0;
+    }
+
+    .tg-icon {
+      margin: 0 0 auto;
+    }
+
+    &.expandlist {
+      cursor: pointer;
+      display: flex;
+    }
+    
+    &.expandlist:after {
+      content: '';
+      display: block;
+      @include sprite($input-right-decoration-sprite);
+      margin: auto 0 auto 9px;
+      flex: 0 0 9px;
+    }
+  
+    &.open {
+      flex: 1 1 100%!important;
+    }
+  
+    &.expandlist.open:after {
+      transform: rotate(90deg);
+    }
   }
 
-  .tg-objects--line {
+  .tg-expandedlist {
+    padding-left: 9px;
+    flex-direction: row;
+    display: flex;
+    flex: 1 0 100% !important;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    border: 1px solid #2d2d29;
+    margin-bottom: 1em;
+    padding: .5em 0 .5em  0;
+    
+    .tg-persons--line, .tg-objects--line {
+      flex: 0 1 auto;
+    }
+  }
+
+
+  .tg-objects--line{
     color: $tg-yellow;
 
   }
@@ -183,10 +231,15 @@ tg-text {
     color: $tg-lt-green;
   }
 
+  
   /* Double Columns style */
   .list-50 {
     width: 50%;
     display: inline-block;
+
+    > div {
+      flex: 1 0 50%;
+    }
   }
 
   .list-50-50 {
@@ -197,6 +250,17 @@ tg-text {
     > div {
       flex: 1 0 50%;
     }
+  }
+
+  .size-qty {
+    margin-left: 5px!important;
+    background: #2a1f15;
+    color: white;
+    height: auto;
+    border-radius: 4px;
+    padding: 0px 4px;
+    border: 1px solid #5f5c59;
+    display: inline-block;
   }
 
   // .tg-objects--hstat {
