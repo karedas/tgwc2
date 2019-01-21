@@ -1,33 +1,39 @@
-<!-- Editor Dialog -->
-<div id="editorDialog" class="tg-window">
-    <div class="editor-dialog tg-shadow b-ironlight-mini tg-box">
+<ng-container *ngIf="editorRequest$ | async">
+  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="dialogTitle">
+    <!-- Editor Dialog -->
+    <div id="editorDialog" style="height: 100%">
+      <div class="editor-dialog">
         <div class="tg-modal-contentwrap tg-box b-paper tg-box">
-            <div class="container-fluid tg-box h-100">
-                <div class="row h-100">
-                    <div class="col-12 flex-column d-flex">
-                        <div class="textarea-cont">
-                            <textarea name="editor" id="editorTextArea" cols="30" rows="10"></textarea>
-                        </div>
-                        <div id="editorMaxCharsCount" class="tg-txt-maxcharcount"></div>
-                        <div class="tg-modal-buttons-group">
-                            <button type="button" id="abortEditor" class="tg-button tg-button-annulla ml-auto tg-shadow-light">Annulla</button>
-                            <button type="button" id="saveEditor" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light">Salva</button>
-                        </div>
-                    </div>
+          <div class="container-fluid tg-box h-100">
+            <div class="row h-100">
+              <div class="col-12 flex-column d-flex">
+                <div class="textarea-cont">
+									<textarea #textareaDescription name="editor" cols="30" rows="10" autofocus 
+										[maxLength]="maxChars"
+										(input)="onDescrChange($event.target.value)">{{description}}</textarea>
                 </div>
+              </div>
             </div>
-            <div class="tg-border-box">
-                <div class="tg-border tg-border-top"></div>
-                <div class="tg-border tg-border-left"></div>
-                <div class="tg-border tg-border-right"></div>
-                <div class="tg-border tg-border-bottom"></div>
-            </div>
-        </div>
-        <div class="tg-border-box">
+          </div>
+          <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
             <div class="tg-border tg-border-left"></div>
             <div class="tg-border tg-border-right"></div>
             <div class="tg-border tg-border-bottom"></div>
+          </div>
+				</div>
+				<div id="editorMaxCharsCount" class="tg-txt-maxcharcount">{{totalChars}}</div>
+				<div class="tg-modal-buttons-group">
+					<button type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel()">Annulla</button>
+					<button type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
+				</div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
         </div>
+      </div>
     </div>
-</div>
+  </tg-dialog>
+</ng-container>

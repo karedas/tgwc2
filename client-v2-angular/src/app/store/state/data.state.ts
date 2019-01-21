@@ -1,6 +1,7 @@
 import { Map } from 'src/app/models/data/map.model';
 import { Hero, IHero } from 'src/app/models/data/hero.model';
 import { Room } from 'src/app/models/data/room.model';
+import { IEditor } from 'src/app/models/data/editor.model';
 
 export interface DataState {
     id: number;
@@ -10,6 +11,7 @@ export interface DataState {
     room: Room;
     map: Map;
     hero: IHero;
+    editor?: IEditor;
 }
 
 export const initialState: DataState = {

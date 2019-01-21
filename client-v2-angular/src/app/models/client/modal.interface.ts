@@ -5,6 +5,8 @@ export class ModalConfiguration  {
     resizable?: boolean;
     showCloseButton?: boolean;
     modalOpacity?: number;
+    minHeight?: any;
+    minWidth?:any;
 
     constructor() {
         this.isModal = true;

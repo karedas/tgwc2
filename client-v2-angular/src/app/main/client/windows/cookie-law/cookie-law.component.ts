@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
@@ -6,7 +6,7 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 @Component ({
   selector: 'tg-cookie-law',
   templateUrl: './cookie-law.component.html',
-  styleUrls: ['./cookie-law.component.scss']
+  styleUrls: ['./cookie-law.component.scss'],
 })
 
 export class CookieLawComponent implements AfterViewInit {

@@ -11,13 +11,12 @@ import { RegistrationComponent } from '../registration/registration.component';
   declarations: [
     LoginComponent,
     QuotesComponent,
-    RegistrationComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-  ]
+  ],
 })
 export class Auth2Module { }

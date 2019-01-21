@@ -17,6 +17,7 @@ function fetchInGame(state: ClientState) {
   return state.inGame;
 }
 
+
 /******************* Public Selector API's ******************/
 export const getErrorMessage  = createSelector(getClientState, fetchErrorMessage);
 export const getAuthenticatedState = createSelector(getClientState, fetchAuthentication);

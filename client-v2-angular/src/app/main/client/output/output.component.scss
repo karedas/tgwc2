@@ -268,12 +268,12 @@ tg-text {
   .hstat {
     background-position: 0 0px;
     display: inline-block;
-    margin: auto 2px;
+    margin: auto 2px!important;
     background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
     box-sizing: content-box;
     height: 13px;
     width: 21px;
-    flex: 1 0 21px;
+    flex: 0 0 21px;
   }
   
 

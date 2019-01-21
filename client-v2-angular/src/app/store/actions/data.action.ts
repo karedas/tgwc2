@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { DataState } from '../state/data.state';
 import { Map } from 'src/app/models/data/map.model';
 import { Hero, IHero } from 'src/app/models/data/hero.model';
+import { IEditor, Editor } from 'src/app/models/data/editor.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -12,7 +13,8 @@ export enum DataEvenType {
     ROOM = '[Data] Room Update',
     DOORS = '[Data] Doors update',
     SKY = '[Data] Sky Update',
-    MAP = '[Data] Map Update'
+    MAP = '[Data] Map Update',
+    EDITOR = '[Data] Editor Request'
 }
 
 export class IncomingData implements Action {
@@ -58,6 +60,11 @@ export class SkyAction implements Action {
     constructor(public payload: string) {}
 }
 
+export class EditorAction implements Action {
+    readonly type = DataEvenType.EDITOR;
+    constructor(public payload: Editor){}
+}
+
 
 
 export type DataAction
@@ -69,4 +76,5 @@ export type DataAction
 | PlayerStatus
 | HeroAction
 | SkyAction
+| EditorAction
 ;

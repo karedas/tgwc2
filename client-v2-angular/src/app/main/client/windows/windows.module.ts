@@ -25,7 +25,8 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
     WelcomeNewsComponent,
     CookieLawComponent,
     NoFeatureComponent,
-    LoginSmartComponent
+    LoginSmartComponent,
+    EditorComponent
   ]
 })
 export class WindowsModule { }

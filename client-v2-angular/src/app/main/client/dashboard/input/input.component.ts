@@ -25,7 +25,7 @@ export class InputComponent implements AfterViewInit {
   faBullseye = faBullseye;
 
   extraOutputStatus$: Observable<boolean>;
-  dashboardStatus$: Observable<boolean>;
+  dashBoardStatus$: Observable<boolean>;
 
   zenStatus$: BehaviorSubject<boolean>;
 
@@ -38,7 +38,7 @@ export class InputComponent implements AfterViewInit {
     private dialogService: DialogService
     ) { 
       this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.extraOutput));
-      this.dashboardStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.showDashBoard));
+      this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.showDashBoard));
     }
 
   ngAfterViewInit() {

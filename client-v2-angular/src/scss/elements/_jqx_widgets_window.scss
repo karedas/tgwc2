@@ -6,6 +6,7 @@
   .jqx-widget-content {
     border: none;
     background: transparent;
+    padding: 0;
   }
 
   .jqx-widget-header {
@@ -14,4 +15,52 @@
     padding: 0;
     visibility: hidden;
   }
+
+  .jqx-window-close-button-background {
+    display: none;
+  }
+
+  &.show-title {
+    .jqx-window-header {
+      visibility: visible!important;
+    }
+    .jqx-window-close-button-background {
+      display: block;
+    }
+  }
+
+  .jqx-window-header {
+    margin: 0 auto;
+    visibility: hidden;
+    display: table;
+    height: auto;
+    border: none;
+    width: auto!important;
+    color: #FFF;
+    line-height: 24px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    text-align: center;
+    padding: 0 8px 0;
+    box-sizing: content-box;
+    color: #dcdac8;
+    font-family: kingthinks;
+    background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 4px 0;
+    
+    > div:first-child {
+        width: 100%;
+        background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
+        padding: 0 32px;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 100%;
+        background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
+    }
+}
+
 }

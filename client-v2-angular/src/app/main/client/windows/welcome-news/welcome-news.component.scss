@@ -1,28 +1,32 @@
 @import 'variables';
 
-  
-h2 {
-    font-size: 30px;
-    color: #ac4c55;
-    font-family: kingthinks;
-}
-
-//vertical scrollbar
-.ps__rail-y {
-opacity: 1;
-}
-
-.notizie-action {
-margin-top: 1.5em;
-label {
-    margin-left: 5px;
+.tg-notizie {
     color: black;
-}
-}
-
-.tg-mnch-img {
-margin-top: 5em;
-width: 100%;
-background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
-background-size: contain;
+    text-align: left;
+    
+    h2 {
+        font-size: 30px;
+        color: #ac4c55;
+        font-family: kingthinks;
+    }
+    
+    //vertical scrollbar
+    .ps__rail-y {
+    opacity: 1;
+    }
+    
+    .notizie-action {
+    margin-top: 1.5em;
+    label {
+        margin-left: 5px;
+        color: black;
+    }
+    }
+    
+    .tg-mnch-img {
+    margin-top: 5em;
+    width: 100%;
+    background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
+    background-size: contain;
+    }
 }

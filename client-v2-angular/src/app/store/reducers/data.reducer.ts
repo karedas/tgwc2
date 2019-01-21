@@ -36,6 +36,12 @@ export function reducer(
       return Object.assign({}, state, {
         sky: action.payload,
       });
+
+    case DataEvenType.EDITOR:
+      return Object.assign({}, state, {
+        editor: action.payload
+      })
+
     default:
       return state;
   }

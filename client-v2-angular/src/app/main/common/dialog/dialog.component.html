@@ -1,24 +1,16 @@
-<jqxWindow #jqxWidget
-        [isModal]="config.isModal" 
-        [width]="config.width" 
-        [height]="config.height" 
-        [resizable]="config.resizable" 
-        [autoOpen]="false"
-        [modalOpacity]="config.modalOpacity"
-				[showCloseButton]="config.showCloseButton"
-				[position]="center"
-        styleClass="dialog-overflow">
-        <div style="overflow: hidden;">
-					<div class="b-ironlight-mini tg-box">
-						<div class="tg-dialog-inside tg-shadow-inset">
-							<ng-content appInsertion></ng-content>
-						</div>
-							<div class="tg-border-box">
-									<div class="tg-border tg-border-top"></div>
-									<div class="tg-border tg-border-left"></div>
-									<div class="tg-border tg-border-right"></div>
-									<div class="tg-border tg-border-bottom"></div>
-							</div>
-					</div>
-        </div>
+<jqxWindow #jqxWidget [isModal]="config.isModal" [width]="config.width" [height]="config.height" [resizable]="config.resizable"
+  [autoOpen]="false" [modalOpacity]="config.modalOpacity" [showCloseButton]="config.showCloseButton" 
+  [minHeight]="config.minHeight" [minWidth]="config.minWidth" [position]="'center'" [title]="titleDialog"
+  styleClass="dialog-overflow" [ngClass]="{'show-title': titleDialog}">
+  <div style="overflow: hidden;">
+    <div class="b-ironlight-mini tg-box">
+      <ng-content appInsertion></ng-content>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+  </div>
 </jqxWindow>

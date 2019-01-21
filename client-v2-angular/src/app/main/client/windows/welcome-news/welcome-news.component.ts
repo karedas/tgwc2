@@ -25,8 +25,10 @@ export class WelcomeNewsComponent implements AfterViewInit {
       this.dialogService.open(this.dialogID);
       return;
     }
-    // else send an empty emit
-    this.game.sendToServer('');
+    else {
+      // else send an empty emit
+      this.game.sendToServer('');
+    }
   }
 
   onContinue(): void{

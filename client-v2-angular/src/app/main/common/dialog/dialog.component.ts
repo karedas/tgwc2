@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DialogService } from './dialog.service';
 import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { ModalConfiguration } from 'src/app/models/client/modal.interface';
@@ -8,13 +8,15 @@ import { InsertionDirective } from './insertion.directive';
 @Component({
   selector: 'tg-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  styleUrls: ['./dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent  implements OnInit, OnDestroy {
 
   @ViewChild('jqxWidget') jqxWindow: jqxWindowComponent;
   
   @Input() id: string;
+  @Input('titleDialog') titleDialog: string;
   @Input('config') config: ModalConfiguration = new ModalConfiguration();
 
   insertionPoint: InsertionDirective;

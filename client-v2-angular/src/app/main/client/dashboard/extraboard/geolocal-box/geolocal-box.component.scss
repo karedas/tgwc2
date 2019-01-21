@@ -13,7 +13,7 @@
     .tg-geolocal--title {
         @include sprite($territorio-title-box-sprite);
         position: absolute;
-        top: -15px;
+        top: -10px;
         left: 50%;
         transform: translateX(-50%);
     }

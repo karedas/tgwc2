@@ -22,7 +22,8 @@
       <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]">
         <div class="tg-persons--line"  *ngFor="let sz of person.mrn; let indexSz=index">
           <tg-icons [icon]="person.icon"></tg-icons>
-          <div class="tg-persons--item_desc" [innerHtml]="person.desc | dataToHtml" [attr.mrn]="person.mrn[indexSz]"></div>
+          <div class="hstat" [style.background.position.px]="getHsStatBgPos(person.condprc)"></div>
+          <div class="tg-persons--item_desc" [innerHtml]="indexSz" [attr.mrn]="person.mrn[indexSz]"></div>
       </div>
       </div>
     </ng-container>
@@ -45,7 +46,8 @@
       <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]">
         <div class="tg-objects--line"  *ngFor="let sz of object.mrn; let indexSz=index">
             <tg-icons [icon]="object.icon"></tg-icons>
-            <div class="tg-persons--item_desc" [innerHtml]="object.desc | dataToHtml" [attr.mrn]="object.mrn[indexSz]"></div>
+            <div class="hstat" [style.background.position.px]="getHsStatBgPos(object.condprc)"></div>
+            <div class="tg-persons--item_desc" [innerHtml]="indexSz" [attr.mrn]="object.mrn[indexSz]"></div>
         </div>
       </div>
     </ng-container>

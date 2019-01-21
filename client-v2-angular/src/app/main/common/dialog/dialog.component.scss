@@ -6,6 +6,10 @@
   font-size: 1em;
   color: #e2cbaf;
   line-height: 1.3;
+
+  > div {
+    height: 100%;
+  }
 }
 
 .tg-dialog-inside {
