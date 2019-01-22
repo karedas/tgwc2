@@ -24,6 +24,9 @@
   <ng-container *ngIf="type === 'room'">
     <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
   </ng-container>
+  <ng-container *ngIf="type === 'objPers'">
+    <tg-details-room [equip]="html?.eqcont"></tg-details-room>
+  </ng-container>
 </ng-template>
 
 <ng-template #noobjpers>

@@ -7,7 +7,6 @@ import { NgScrollbar } from 'ngx-scrollbar';
 import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { UIState } from 'src/app/store/state/ui.state';
-import { IObjPersDesc } from 'src/app/models/data/objpers.model';
 
 @Component({
   selector: 'tg-output',
@@ -59,7 +58,8 @@ export class OutputComponent implements OnInit, OnDestroy {
     // Listen Base Text Data
     this.store.pipe(
       takeUntil(this._unsubscribeAll),
-      select(fromSelectors.getDataBase))
+      select(fromSelectors.getDataBase),
+      filter(text => text && text !== undefined))
       .subscribe(
         (base: string[]) => {
           const content = this.setContent('base', base[0]);

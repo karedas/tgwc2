@@ -13,7 +13,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 
 export class GameService {
-  private netData: string;
+  private netData: string = '';
   private showNewsSubject$: BehaviorSubject<boolean>;
   private commandsList$: Subject<any> = new Subject();;
   

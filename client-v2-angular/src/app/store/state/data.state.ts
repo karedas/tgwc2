@@ -18,7 +18,7 @@ export interface DataState {
 
 export const initialState: DataState = {
     id: 0,
-    base: [''],
+    base: [' '],
     sky: undefined,
     doors: [],
     room: undefined,

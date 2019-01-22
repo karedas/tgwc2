@@ -2,6 +2,9 @@ import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { RoomList } from 'src/app/models/data/room.model';
+import { IObjPersEqcont } from 'src/app/models/data/objpers.model';
+
+import { equip_positions_by_name } from 'src/app/main/common/constants'; 
 
 @Component({
   selector: 'tg-details-room',
@@ -9,11 +12,11 @@ import { RoomList } from 'src/app/models/data/room.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-
 export class DetailsRoomComponent implements OnInit {
 
   @Input('objs') objs: RoomList[];
   @Input('persons') persons: RoomList[];
+  @Input('equip') equip: IObjPersEqcont[];
 
   totalObjs: number = 0;
   totalPersons: number = 0;

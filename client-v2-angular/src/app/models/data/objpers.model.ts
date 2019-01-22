@@ -4,6 +4,11 @@ export interface IObjPersDesc{
     equip: any;
 }
 
+export interface IObjPersObjcont {
+    title: string;
+    list: any[];
+}
+
 export interface IObjPersEqcont {
     cntnum: number;
     cond: number;
@@ -20,6 +25,7 @@ export interface IObjPerson{
     cmd1: any;
     desc: IObjPersDesc;
     eqcont: IObjPersEqcont;
+    objcont: IObjPersObjcont;
     icon: number;
     num: number;
     title: string;

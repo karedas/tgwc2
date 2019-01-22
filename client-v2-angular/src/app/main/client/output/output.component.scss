@@ -288,8 +288,6 @@ tg-text {
     flex-direction: column;
     padding: .5em 0;
     margin-bottom: 1em;
-    border-bottom: 1px solid #191919;
-    border-top: 1px solid #191919;
   }
 
   .tg-objperson--action {
@@ -312,6 +310,9 @@ tg-text {
     vertical-align: middle;
     color: #9a9a9a;
     line-height: 18px;
+  }
+
+  .tg-objpers--line {
   }
 
   // .tg-backdetail {

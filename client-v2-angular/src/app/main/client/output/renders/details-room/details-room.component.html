@@ -4,6 +4,9 @@
 <ng-container *ngIf="persons">
   <ng-container *ngTemplateOutlet="withPersons"></ng-container>
 </ng-container> 
+<ng-container *ngIf="equip">
+    <ng-container *ngTemplateOutlet="withObjPersDetail"></ng-container>
+</ng-container>
 
 <ng-template #withPersons>
   <div class="tg-persons" [ngClass]="{'list-50-50': personsClass50_50, 'list-50': personsClass50}">
@@ -47,8 +50,21 @@
         <div class="tg-objects--line"  *ngFor="let sz of object.mrn; let indexSz=index">
             <tg-icons [icon]="object.icon"></tg-icons>
             <div class="hstat" [style.background.position.px]="getHsStatBgPos(object.condprc)"></div>
-            <div class="tg-persons--item_desc" [innerHtml]="indexSz" [attr.mrn]="object.mrn[indexSz]"></div>
+            <div class="tg-persons--itemdesc" [innerHtml]="indexSz" [attr.mrn]="object.mrn[indexSz]"></div>
         </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #withObjPersDetail>
+  {{equip.title}}
+  <div class="tg-objperson">
+    <ng-container *ngFor="let item of equip.list">
+      <div class="tg-objperson--line">
+          <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
+          <div class="hstat" [style.background.position.px]="getHsStatBgPos(item.condprc)"></div>
+        <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
       </div>
     </ng-container>
   </div>
