@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DialogComponent } from './dialog.component';
 import { InsertionDirective } from './insertion.directive';
 import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
@@ -11,11 +12,14 @@ import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwi
     InsertionDirective,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgScrollbarModule,
+
   ],
   exports: [
     DialogComponent,
-    jqxWindowComponent
+    jqxWindowComponent,
+    NgScrollbarModule,
   ],
   entryComponents: [DialogComponent]
 })

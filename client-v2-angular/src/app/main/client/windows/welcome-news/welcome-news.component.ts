@@ -16,8 +16,10 @@ export class WelcomeNewsComponent implements AfterViewInit {
   private dontShowNextTime: boolean = false;
   
   constructor(private dialogService: DialogService, private game: GameService) { 
-    this.modalConfig.width = 800;
+    this.modalConfig.width = 'auto';
+    this.modalConfig.minWidth = 400;
     this.modalConfig.modalOpacity = 0.8;
+    this.modalConfig.resizable = false;
   }
 
   ngAfterViewInit(): void {

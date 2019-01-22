@@ -1,0 +1,12 @@
+
+<ng-container *ngIf="commands$ | async; let cmds">
+<tg-dialog [id]="'commandsList'" [config]="modalConfig" [titleDialog]="cmds.title">
+      <div class="tg-dialog-inside tg-shadow-inset">
+        <table class="cmd">
+          <tr *ngFor="let group of cmds">
+            <!-- <th colspan="cols">{{groupKey}}</th> -->
+          </tr>
+        </table>
+      </div>
+  </tg-dialog>
+</ng-container>

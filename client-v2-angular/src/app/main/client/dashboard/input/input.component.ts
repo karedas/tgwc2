@@ -42,6 +42,10 @@ export class InputComponent implements AfterViewInit {
     }
 
   ngAfterViewInit() {
+    this.focus();
+  }
+
+  focus() {
     this.ic.nativeElement.focus();
   }
 

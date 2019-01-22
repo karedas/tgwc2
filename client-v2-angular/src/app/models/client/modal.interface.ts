@@ -7,6 +7,8 @@ export class ModalConfiguration  {
     modalOpacity?: number;
     minHeight?: any;
     minWidth?:any;
+    maxWidth?: any;
+    maxHeight?: any;
 
     constructor() {
         this.isModal = true;

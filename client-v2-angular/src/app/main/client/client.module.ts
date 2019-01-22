@@ -1,4 +1,4 @@
-import { NgModule, } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
@@ -29,7 +29,6 @@ import { SkyComponent } from './right-sidebar/sky/sky.component';
 import { DirectionsComponent } from './right-sidebar/map/directions/directions.component';
 import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.component';
 import { DetailsRoomComponent } from './output/renders/details-room/details-room.component';
-import { DialogModule } from '../common/dialog/dialog.module';
 import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geolocal-box.component';
 import { WindowsModule } from './windows/windows.module';
 

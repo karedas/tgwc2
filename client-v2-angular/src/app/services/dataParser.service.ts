@@ -50,14 +50,18 @@ export class DataParser {
       return '';
     });
 
-    // Hide text (password)
+    /**
+     * DEPRECATED
+     * Hide text (password) */
+
     data = data.replace(/&x\n*/gm, (msg) => {
       console.warn('Todo: Hide Text');
       this.store.dispatch(new UiActions.UpdateUI({inputVisible: false}));
       return '';
     });
 
-    // Show text (normal input)
+    /**
+     * DEPRECATED(normal input) */
     data = data.replace(/&e\n*/gm, () => {
       this.store.dispatch(new UiActions.UpdateUI({inputVisible: true}));
       return '';
@@ -104,7 +108,8 @@ export class DataParser {
       return '';
     });
 
-    // Image in side frame (with gamma)
+    /**DEPRECATED
+     * Image in side frame (with gamma)*/
     data = data.replace(/&!img"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(6, image.lastIndexOf('"')).split(',');
       console.log('image in side frame with gamma:', image_parse)
@@ -126,7 +131,7 @@ export class DataParser {
 
     // Close the text editor
     data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      console.log('close text editor');
+      this.store.dispatch(new UiActions.CloseTextEditor());
       return '';
     });
 
@@ -134,13 +139,11 @@ export class DataParser {
     data = data.replace(/&!ed"[^"]*"\n*/gm, (options) => {
       const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
       const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
-      
       this.store.dispatch(new DataActions.EditorAction({
         maxChars: options_parse[0],
         title: options_parse[1],
         description: text
       }))
-
       return '';
     });
 
@@ -154,7 +157,7 @@ export class DataParser {
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      console.log('command list');
+      this.store.dispatch(new UiActions.ShowCommandsActions(cmd_parse));
       return '';
     });
 

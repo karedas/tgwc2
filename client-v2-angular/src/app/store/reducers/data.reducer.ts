@@ -48,7 +48,6 @@ export function reducer(
       return Object.assign({}, state, {
         editor: action.payload
       })
-
     case DataEvenType.PLAYERSTATUSINLINE: 
       return {...state, hero: action.payload}
 

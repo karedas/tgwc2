@@ -7,6 +7,7 @@ import { DialogModule } from '../../common/dialog/dialog.module';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { EditorComponent } from './editor/editor.component';
 import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
+import { CommandsListComponent } from './commands-list/commands-list.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
     NoFeatureComponent,
     LoginSmartComponent,
     EditorComponent,
-    CharacterSheetComponent
+    CharacterSheetComponent,
+    CommandsListComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
     CookieLawComponent,
     NoFeatureComponent,
     LoginSmartComponent,
-    EditorComponent
+    EditorComponent,
+    CommandsListComponent
   ]
 })
 export class WindowsModule { }

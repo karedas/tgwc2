@@ -1,14 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
-import { Store, select } from '@ngrx/store';
-import { LoginService } from '../main/authentication/services/login.service';
+import { Store } from '@ngrx/store';
 import { HistoryService } from './history.service';
 import { State } from '../store';
-import { getAuthenticatedState } from '../store/selectors';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { takeWhile, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -18,18 +15,20 @@ import { takeWhile, takeUntil } from 'rxjs/operators';
 export class GameService {
   private netData: string;
   private showNewsSubject$: BehaviorSubject<boolean>;
+  private commandsList$: Subject<any> = new Subject();;
+  
   showNews: any;
-
   
   constructor(
-    //private loginService: LoginService,
     private socketService: SocketService,
     private dataParserService: DataParser,
     private store: Store<State>,
     private historyService: HistoryService,
+    //private loginService: LoginService,
+
 
   ) {
-    this.showNewsSubject$ = new BehaviorSubject<boolean>(false)
+    this.showNewsSubject$ = new BehaviorSubject<boolean>(false);
     this.showNewsSubject$.asObservable();
   }
 
@@ -84,4 +83,13 @@ export class GameService {
   showWelcomeNews() {
     this.showNewsSubject$.next(true);
   }
+
+  setCommands(cmds:any) {
+    this.commandsList$.next(cmds);
+  }
+
+  getCommands(): Observable<any> {
+    return this.commandsList$.asObservable();
+  }
+  
 }

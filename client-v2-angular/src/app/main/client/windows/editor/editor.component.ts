@@ -83,17 +83,14 @@ export class EditorComponent implements OnInit, OnDestroy {
                     currline = remText;
                     remText = '';
                 }
-                console.log(currline);
                 this.gameService.sendToServer(`##ce${currline}`)
             }
         }
         this.gameService.sendToServer('##ce_save');
-        this.dialogService.close(this.dialogID);
   }
 
   onCancel() { 
     this.gameService.sendToServer('##ce_abort');
-    this.dialogService.close(this.dialogID);
   }
 
   onDescrChange($event) {
