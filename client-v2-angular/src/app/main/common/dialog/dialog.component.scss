@@ -1,5 +1,8 @@
 @import '~src/scss/colors';
 
+.jqx-window {
+  overflow: unset;
+}
 .jqx-window-content {
   text-align: center;
   font-family: Kingthings;
@@ -18,4 +21,11 @@
   z-index: 3;
   overflow: hidden;
   padding: 24px 12px;
+}
+
+.tg-dialog-inside-nopadding {
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
 }

@@ -3,6 +3,7 @@ import { DataState } from '../state/data.state';
 import { Map } from 'src/app/models/data/map.model';
 import { Hero, IHero, IStatus } from 'src/app/models/data/hero.model';
 import { IEditor, Editor } from 'src/app/models/data/editor.model';
+import { IObjPerson } from 'src/app/models/data/objpers.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -15,7 +16,8 @@ export enum DataEvenType {
     DOORS = '[Data] Doors update',
     SKY = '[Data] Sky Update',
     MAP = '[Data] Map Update',
-    EDITOR = '[Data] Editor Request'
+    EDITOR = '[Data] Editor Request',
+    OBJPERSON = '[Data] Object or Person'
 }
 
 export class IncomingData implements Action {
@@ -39,6 +41,11 @@ export class DoorsAction implements Action {
 export class RoomAction implements Action {
     readonly type = DataEvenType.ROOM;
     constructor(public payload: any) {}
+}
+
+export class ObjAndPersAction implements Action{
+    readonly type = DataEvenType.OBJPERSON;
+    constructor(public payload: IObjPerson) {}
 }
 
 export class PlayerStatus implements Action {
@@ -73,6 +80,7 @@ export class PlayerStatusInlineAction implements Action {
 
 
 
+
 export type DataAction
 = IncomingData
 | OutgoingData
@@ -84,4 +92,5 @@ export type DataAction
 | SkyAction
 | EditorAction
 | PlayerStatusInlineAction
+| ObjAndPersAction;
 ;

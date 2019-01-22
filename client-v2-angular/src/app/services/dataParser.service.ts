@@ -192,14 +192,14 @@ export class DataParser {
     // Person details
     data = data.replace(/&!pers\{[\s\S]*?\}!/gm, (dtls) => {
       const dtls_parse = JSON.parse(dtls.slice(6, -1));
-      console.log('person detail', dtls_parse);
+      this.store.dispatch(new DataActions.ObjAndPersAction(dtls_parse));
       return '';
     });
 
     // Object details
     data = data.replace(/&!obj\{[\s\S]*?\}!/gm, (dtls) => {
       const dtls_parse = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
-      console.log('object details', dtls_parse);
+      this.store.dispatch(new DataActions.ObjAndPersAction(dtls_parse));
       return '';
     });
 

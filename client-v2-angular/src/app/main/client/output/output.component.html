@@ -10,6 +10,7 @@
           <div style="height: 100%; overflow:hidden;">
             <ng-scrollbar 
               class="scrollbar" 
+              [autoUpdate]="true"
               #scrollBar>
               <div class="tg-output--history">
                 <div *ngFor="let data of output">
@@ -24,7 +25,10 @@
             <ng-scrollbar
               class="scrollbar">
               <div class="tg-output--extradetail">
-                <tg-room [html]="lastRoom$ | async" [withExtra]="extraDetail$ | async" [lastDescription]="lastRoomDescription"></tg-room>
+                <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail"  
+                  [withExtra]="extraDetail$ | async" 
+                  [lastDescription]="lastRoomDescription"
+                  [type]="typeDetail"></tg-room>
               </div>
             </ng-scrollbar>
           </div>
@@ -53,6 +57,7 @@
               [html]="data.content" 
               [lastDescription]="lastRoomDescription"></tg-room>
             <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+            <tg-objpers-detail *ngSwitchCase="'objpersdetail'" [html]="data.content"></tg-objpers-detail>
           </ng-container>
         </div>
       </div>

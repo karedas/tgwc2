@@ -1,8 +1,8 @@
 <div class="tg-line">
   <div class="tg-room" *ngIf="html">
     <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
-      <div *ngIf="html.title" [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
-      <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true" class="tg-room--desc"></div>
+      <div *ngIf="html.title" [innerHtml]="html.title |  dataToHtml:true | capitalizeFirst" class="tg-room--title"></div>
+      <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" class="tg-room--desc"></div>
       <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
     </ng-template>
   </div>
@@ -14,9 +14,16 @@
     <div class="tg-room--image" *ngIf="html.image">
       <img [src]="getRoomImage(html.image)" />
     </div>
-    <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
+    <ng-container *ngIf="type === 'room'">
+      <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
+    </ng-container>
+    <ng-container *ngIf="type ==='objPers'">
+      <div [innerHtml]="html.desc.base | dataToHtml:true | capitalizeFirst" class="tg-room--desc"></div>
+    </ng-container>
   </div>
-  <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
+  <ng-container *ngIf="type === 'room'">
+    <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
+  </ng-container>
 </ng-template>
 
 <ng-template #noobjpers>

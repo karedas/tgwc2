@@ -31,6 +31,7 @@ import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.com
 import { DetailsRoomComponent } from './output/renders/details-room/details-room.component';
 import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geolocal-box.component';
 import { WindowsModule } from './windows/windows.module';
+import { ObjpersDetailComponent } from './output/renders/objpers-detail/objpers-detail.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { WindowsModule } from './windows/windows.module';
     MonitorBoxComponent,
     DetailsRoomComponent,
     GeolocalBoxComponent,
+    ObjpersDetailComponent,
   ],
   imports: [
     ClientRoutingModule,

@@ -26,6 +26,10 @@ function fetchRoom(state: DataState) {
   return state.room;
 }
 
+function fetchObjOrPerson(state: DataState) {
+  return state.objPers;
+}
+
 function fetchObjectsInRoom(state: DataState) {
   return state.room.objcont.list;
 }
@@ -55,6 +59,7 @@ export const getId = createSelector(getDataState, fetchDataId);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
 export const getHero = createSelector(getDataState, fetchHero); 
 export const getRoomBase = createSelector(getDataState, fetchRoom);
+export const getObjOrPerson = createSelector(getDataState, fetchObjOrPerson);
 export const getObjectsInRoom = createSelector(getDataState ,fetchObjectsInRoom);
 export const getPersonsInRoom = createSelector(getDataState, fetchPersonsInRoom)
 export const getDoors = createSelector(getDataState, fetchDoors);

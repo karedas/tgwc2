@@ -165,14 +165,17 @@ tg-text {
 
   /* LIST Mob & Object*/
   .tg-objects,
-  .tg-persons {
+  .tg-persons,
+  {
     display: flex;
     padding-bottom: .5em;
     flex-direction: column;
   }
 
   .tg-objects--line,
-  .tg-persons--line {
+  .tg-persons--line,
+  .tg-objperson--line
+  {
     display: flex;
     padding-right: 5px;
     user-select: none;
@@ -275,7 +278,41 @@ tg-text {
     width: 21px;
     flex: 0 0 21px;
   }
-  
+
+
+
+  /* Object or Person Detail */
+  .tg-objperson {
+    display: flex;
+    padding-bottom: .5em;
+    flex-direction: column;
+    padding: .5em 0;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #191919;
+    border-top: 1px solid #191919;
+  }
+
+  .tg-objperson--action {
+    display: flex;
+    padding-bottom: .2em;
+    font-size: 14px;
+    font-family: kingthings;
+  }
+
+  .tg-objperson--descbase {
+    font-family: kingthings;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: .5em;
+  }
+
+  .tg-objperson--where {
+    font-size: 12px;
+    margin-left: 6px;
+    vertical-align: middle;
+    color: #9a9a9a;
+    line-height: 18px;
+  }
 
   // .tg-backdetail {
   //   display: flex;

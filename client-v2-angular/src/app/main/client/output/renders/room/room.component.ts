@@ -9,11 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class RoomComponent implements OnInit {
   @Input() html: Room;
+  @Input() type: string;
   @Input() withExtra: boolean;
   @Input() lastDescription: any = '';
-
-  // private perscont: string;
-  // private objslist: string;
 
   inRoomContent: boolean;
 

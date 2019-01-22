@@ -14,7 +14,7 @@ export class CookieLawComponent implements AfterViewInit {
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
   dialogID: string = 'cookieLaw';
-  modalConfig: ModalConfiguration;
+  modalConfig: ModalConfiguration = new ModalConfiguration;
   display = false;
   showButton = false;
 

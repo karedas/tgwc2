@@ -37,6 +37,11 @@ export class UiEffects {
     showCommands: Observable<Action> = this.actions$.pipe(
       ofType<PayloadAction>(UIEventType.SHOWCOMMANDS),
       map(action => action.payload),
-      tap( cmds => this.game.setCommands(cmds))
+      tap( cmds => {
+        this.game.setCommands(cmds);
+        setTimeout(() => {
+          this.dialogService.open('commandsList');
+        }, 100);;
+      })
     );
 }

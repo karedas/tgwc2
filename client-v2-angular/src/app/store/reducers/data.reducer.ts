@@ -35,6 +35,12 @@ export function reducer(
       return Object.assign({}, state, {
         room: action.payload,
       });
+
+    case DataEvenType.OBJPERSON:
+      return Object.assign({}, state, {
+        objPers: action.payload
+      })
+
     case DataEvenType.MAP:
       return Object.assign({}, state, {
         map: action.payload,

@@ -9,6 +9,7 @@ export class ModalConfiguration  {
     minWidth?:any;
     maxWidth?: any;
     maxHeight?: any;
+    draggable?: boolean;
 
     constructor() {
         this.isModal = true;
