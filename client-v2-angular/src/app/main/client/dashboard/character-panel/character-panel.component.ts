@@ -5,6 +5,7 @@ import { getHero, getDashboardVisibility } from 'src/app/store/selectors';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IStatus, IHero } from 'src/app/models/data/hero.model';
 
 @Component({
   selector: 'tg-character-panel',
@@ -13,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CharacterPanelComponent implements OnInit, OnDestroy{
 
-  status: any[] = [0,0,0,0];
+  status: {} = {drink: 0, food: 0, hit:0, move:0};
   inCombat: boolean = false;
   heroName: string;
   heroAdjective: string;
@@ -47,7 +48,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
       );
   }
 
-  private setStatus(status: any[]) {
+  private setStatus(status: IStatus) {
     if(status != undefined) {
       this.status = status;
       this.setCombatPanel();
@@ -56,7 +57,9 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
 
   setCombatPanel() {
 
-    if (this.status.length > 4) {
+    const lengthKeys = Object.keys(this.status).length;
+    
+    if (lengthKeys > 4) {
 
       this.inCombat = true;
       this.updateEnemyIcon();

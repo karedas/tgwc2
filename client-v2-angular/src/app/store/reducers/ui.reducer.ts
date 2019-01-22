@@ -24,7 +24,6 @@ export function reducer(
     }
 
     case UIEventType.TOGGLEDASHBOARD: {
-      console.log('yo');
       return Object.assign({}, state,  {showDashBoard: !state.showDashBoard})
     }
     

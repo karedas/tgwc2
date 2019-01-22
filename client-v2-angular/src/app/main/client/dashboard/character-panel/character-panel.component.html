@@ -28,25 +28,25 @@
                 <div class="tg-extrabars">
                   <div class="barcont barthin lft">
                     <span class="tg-statusbar-text" title="Punti Salute">
-                      <i>{{ status[0] }}</i> / 100</span>
-                    <span class="red barC healthbar" [style.width.%]="status[0]"></span>
+                      <i>{{ status.hit }}</i> / 100</span>
+                    <span class="red barC healthbar" [style.width.%]="status.hit"></span>
                   </div>
                   <div class="barcont barthin" title="Punti Movimento">
                     <span class="tg-statusbar-text">
-                      <i>{{ status[1] }}</i> / 100</span>
-                    <span class="green barC movebar" [style.width.%]="status[1]"></span>
+                      <i>{{ status.move }}</i> / 100</span>
+                    <span class="green barC movebar" [style.width.%]="status.move"></span>
                   </div>
                 </div>
                 <div class="tg-extrabars">
                   <div class="barcont barthin lft" title="Fame">
                     <span class="tg-statusbar-text">
-                      <i>{{ status[2] }}</i> / 100</span>
-                    <span class="orange barC hungrybar" [style.width.%]="status[2]"></span>
+                      <i>{{ status.food }}</i> / 100</span>
+                    <span class="orange barC hungrybar" [style.width.%]="status.food"></span>
                   </div>
                   <div class="barcont barthin" title="Sete">
                     <span class="tg-statusbar-text">
-                      <i>{{ status[3] }}</i> / 100</span>
-                    <span class="blue barC thirstbar" [style.width.%]="status[3]"></span>
+                      <i>{{ status.drink}}</i> / 100</span>
+                    <span class="blue barC thirstbar" [style.width.%]="status.drink"></span>
                   </div>
                 </div>
               </div>

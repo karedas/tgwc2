@@ -6,6 +6,9 @@ import { RegistrationComponent } from './registration.component';
     RegistrationComponent
   ],
   imports: [
+  ],
+  exports: [
+    RegistrationComponent
   ]
 })
 export class RegistrationModule { }

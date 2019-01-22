@@ -10,6 +10,7 @@ import { RegistrationComponent } from '../registration/registration.component';
 @NgModule({
   declarations: [
     LoginComponent,
+    RegistrationComponent,
     QuotesComponent,
   ],
   imports: [
@@ -18,5 +19,8 @@ import { RegistrationComponent } from '../registration/registration.component';
     ReactiveFormsModule,
     AuthRoutingModule,
   ],
+  exports: [
+    RegistrationComponent
+  ]
 })
 export class Auth2Module { }

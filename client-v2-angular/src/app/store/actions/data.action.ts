@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { DataState } from '../state/data.state';
 import { Map } from 'src/app/models/data/map.model';
-import { Hero, IHero } from 'src/app/models/data/hero.model';
+import { Hero, IHero, IStatus } from 'src/app/models/data/hero.model';
 import { IEditor, Editor } from 'src/app/models/data/editor.model';
 
 export enum DataEvenType {
@@ -10,6 +10,7 @@ export enum DataEvenType {
     LOGGED = '[Data] Player is Logged In',
     HERODATA = '[Data] Update Hero Data',
     PLAYERSTATUS = '[Data] Player Status Update',
+    PLAYERSTATUSINLINE = '[Data] Player Status Inline',
     ROOM = '[Data] Room Update',
     DOORS = '[Data] Doors update',
     SKY = '[Data] Sky Update',
@@ -65,6 +66,11 @@ export class EditorAction implements Action {
     constructor(public payload: Editor){}
 }
 
+export class PlayerStatusInlineAction implements Action {
+    readonly type = DataEvenType.PLAYERSTATUSINLINE;
+    constructor(public payload: IHero) {}
+}
+
 
 
 export type DataAction
@@ -77,4 +83,5 @@ export type DataAction
 | HeroAction
 | SkyAction
 | EditorAction
+| PlayerStatusInlineAction
 ;

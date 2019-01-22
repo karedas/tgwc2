@@ -8,7 +8,8 @@ import { takeUntil } from 'rxjs/operators';
 
 
 
-export const images_path = '/assets/images/';
+export const images_path = './assets/images/';
+
 @Component({
   selector: 'tg-map',
   templateUrl: './map.component.html',

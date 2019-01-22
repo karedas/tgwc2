@@ -3,18 +3,33 @@ export interface IHeroRace{
   name: string;
 }
 
+export interface IStatus{
+  drink?: number,
+  food?: number,
+  hit?: number,
+  move?: number
+}
+
 export interface IHero {
   name?: string;
   adjective?: string;
   image?: string;
   race?: IHeroRace;
   title?: string;
-  status: any[];
+  status: IStatus;
+  attitude?: string;
 }
 
 export class Hero implements IHero {
-  status: any[] = [0,0,0,0];
+
+  status: IStatus;
+
   constructor(...args ) {
-    this.status = [0,0,0,0]
+    this.status = {
+      drink: 0,
+      food: 0,
+      hit: 0,
+      move: 0
+    }
   }
 }
