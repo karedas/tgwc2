@@ -3,6 +3,6 @@
 <div class="tg-map-box" (mouseenter)="onMouseEvent($event)" (mouseleave)="onMouseEvent($event)">
   <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>
   </canvas>
-  <canvas id="snowCanvas" class="canvas-snow"></canvas>
+  <canvas class="canvas-snow" width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}"  #snow></canvas>
   <canvas id="rainCanvas" class="canvas-rain"></canvas>
 </div>

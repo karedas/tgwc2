@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { Map } from 'src/app/models/data/map.model';
 import { takeUntil } from 'rxjs/operators';
+import { MapSnowService } from './map-snow.service';
 
 
 
@@ -18,6 +19,8 @@ export const images_path = './assets/images/';
 
 export class MapComponent implements OnDestroy, AfterViewInit {
   @ViewChild('map') map: ElementRef;
+  @ViewChild('snow') snow: ElementRef;
+
 
 
   private _unsubscribeAll: Subject<any>;
@@ -40,7 +43,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   private mapShadowImg: HTMLImageElement[] = [];
   private mapShadowTile: HTMLImageElement;
 
-  constructor(private store: Store<DataState>) {
+  constructor(private store: Store<DataState>, private mapSnowService: MapSnowService) {
     this.mapTileWidth = 32;
     this.mapTileHeight = 32;
     this.maxMapHeight = 9;
@@ -101,11 +104,14 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
     this.mapShadowTile = new Image();
     this.mapShadowTile.src = images_path + 'interface/shadowtile.png';
+
+
+    this.mapSnowService.make(this.snow);
+
+
   }
 
   private fog() { }
-
-  private snow() { }
 
   public updateMap(dataMap): void {
     this.drawCanvasMap(dataMap);
@@ -206,23 +212,25 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     //  _.MAPCTX.drawImage(mapfogimg, 0, 0);
     // }
 
+    this.mapSnowService.start();
 
-    if (dataMap.s) {
+    if (!dataMap.s) {
       // Start Snow effect
-//      this.context.snow.start();
-      // $('#snowCanvas').show();
     } else {
       // Stop Snow effect
-      // this.context.snow.stop();
-      // $('#snowCanvas').hide();
+      this.mapSnowService.stop();
     }
   }
+
+  
 
   private tileCoords(tilenum: number): number[] {
     const posx = 32 * (tilenum & 0x7f);
     const posy = 32 * (tilenum >> 7);
     return [posx, posy];
   }
+
+  
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
