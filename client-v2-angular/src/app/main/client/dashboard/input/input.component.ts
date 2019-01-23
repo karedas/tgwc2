@@ -68,15 +68,18 @@ export class InputComponent implements AfterViewInit {
     }
   }
 
-  toggleExtraOutput() {
+  toggleExtraOutput(event: Event) {
+    event.preventDefault();
     this.store.dispatch(new ToggleExtraOutput());
   }
 
-  toggleDashboard() {
+  toggleDashboard(event: Event) {
+    event.preventDefault();
     this.store.dispatch(new ToggleDashboard());
   }
 
-  toggleZen() {
+  toggleZen(event: Event) {
+    event.preventDefault();
     // this.store.dispatch(new updateUI({zen: true}));
     this.dialogService.open('noFeatureDialog');
   }

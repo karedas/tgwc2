@@ -19,7 +19,7 @@ export class HistoryService {
       if (this.cmd_history.length >= this.max_history_length) {
         this.cmd_history.shift();
       }
-      if (this.cmd_history.length == 0 || this.cmd_history[this.cmd_history.length - 1] != value) {
+      if (this.cmd_history.length === 0 || this.cmd_history[this.cmd_history.length - 1] !== value) {
         this.cmd_history.push(value);
       }
       this.cmd_history_pos = this.cmd_history.length;

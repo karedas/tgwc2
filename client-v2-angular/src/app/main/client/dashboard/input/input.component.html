@@ -9,16 +9,17 @@
       <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
   <div class="tg-inputcommand d-none d-sm-flex">
     <button  type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia"
-      (click)="toggleExtraOutput()"
+      (mousedown)="toggleExtraOutput($event)"
       [ngClass]="{'isActive': extraOutputStatus$ | async}">
       <fa-icon [icon]="facolumns"></fa-icon>
     </button>
     <button type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri la tua Dashboard" 
-      (click)="toggleDashboard()"
+      (mousedown)="toggleDashboard($event)"
       [ngClass]="{'isActive': dashBoardStatus$ | async}">
       <fa-icon [icon]="faSolarPanel"></fa-icon>
     </button>
-    <button type="button" class="tg-fnt-button" rel="tooltip" title="Modalit&agrave; Zen" (click)="toggleZen()">
+    <button type="button" class="tg-fnt-button" rel="tooltip" title="Modalit&agrave; Zen" 
+      (mousedown)="toggleZen($event)">
       <fa-icon [icon]="faBullseye"></fa-icon>
     </button>
   </div>

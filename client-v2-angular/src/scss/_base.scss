@@ -110,6 +110,7 @@ body[data-loginstatus=ready] {
      min-width: 32px;
      transform: scale(.7);
      vertical-align: middle;
+     display: block;
      &.tg-dragging {
          transform: none;
      }

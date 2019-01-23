@@ -2,7 +2,7 @@ import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, Input } fro
 import * as fromSelectors from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Map } from 'src/app/models/data/map.model';
 import { takeUntil } from 'rxjs/operators';
 import { MapSnowService } from './map-snow.service';
@@ -25,23 +25,23 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   private _unsubscribeAll: Subject<any>;
   isOnMap = false;
-
+  
   private map$: Observable<Map>;
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
-
+  
   mapTileWidth: number;
   mapTileHeight: number;
   maxMapHeight: number;
   maxMapWidth: number;
-
+  
   private canvasWidth: number;
   private canvasHeight: number;
   private mapTileImg: HTMLImageElement;
   private mapShadowImg: HTMLImageElement[] = [];
   private mapShadowTile: HTMLImageElement;
-
-  showSnow = false;
+  
+  showSnow: boolean = false;
 
   constructor(
     private store: Store<DataState>,
@@ -108,7 +108,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     this.mapShadowTile = new Image();
     this.mapShadowTile.src = images_path + 'interface/shadowtile.png';
 
-
+    
     this.mapSnowService.make(this.snow);
 
 
@@ -122,6 +122,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   public drawCanvasMap(dataMap): void {
     const _ = this;
+
     let xoff, yoff, xlim, ylim, light;
     // clip options
     const radius = 75;
@@ -217,10 +218,13 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
     this.mapSnowService.start();
 
-    if (!dataMap.s) {
-      // Start Snow effect
-      this.showSnow = !this.showSnow;
-      this.mapSnowService.start();
+    if (dataMap.s) {
+      setTimeout(() => {
+        // Start Snow effect
+        this.showSnow = !this.showSnow;
+        this.mapSnowService.start();
+        
+      });
     } else {
       // Stop Snow effect
       this.showSnow = !this.showSnow;

@@ -20,7 +20,13 @@ export function reducer(
           drink: action.payload[3],
           food: action.payload[2],
           hit: action.payload[0],
-          move: action.payload[1]
+          move: action.payload[1],
+        },
+        target: {
+          hit: action.payload[4],
+          move: action.payload[5],
+          icon: action.payload[6],
+          name: action.payload[7]
         }
       }};
 

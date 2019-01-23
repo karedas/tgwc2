@@ -5,7 +5,7 @@ import { getHero, getDashboardVisibility } from 'src/app/store/selectors';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { IStatus, IHero } from 'src/app/models/data/hero.model';
+import { IStatus, IHero, ITarget } from 'src/app/models/data/hero.model';
 
 @Component({
   selector: 'tg-character-panel',
@@ -15,7 +15,7 @@ import { IStatus, IHero } from 'src/app/models/data/hero.model';
 export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   status: {} = {drink: 0, food: 0, hit: 0, move: 0};
-  inCombat = false;
+  inCombat: boolean = false;
   heroName: string;
   heroAdjective: string;
   heroImage: string;
@@ -41,6 +41,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       takeUntil(this._unsubscribeAll)).subscribe(
         hero => {
           this.setStatus(hero.status);
+          this.setCombatPanel(hero.target);
           this.heroName = hero.name;
           this.heroAdjective = hero.adjective;
           this.heroImage = environment.media_address + hero.image;
@@ -51,28 +52,26 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   private setStatus(status: IStatus) {
     if (status != undefined) {
       this.status = status;
-      this.setCombatPanel();
     }
   }
 
-  setCombatPanel() {
-
-    const lengthKeys = Object.keys(this.status).length;
-
-    if (lengthKeys > 4) {
-
-      this.inCombat = true;
-      this.updateEnemyIcon();
-
-      this.enemyHealt = this.status[4];
-      this.enemyMove = this.status[5];
-      this.enemyIcon = this.status[6];
-      this.enemyName = this.status[7];
-    } else {
-      this.inCombat = false;
-      this.enemyHealt = 0;
-      this.enemyMove = 0;
-      this.enemyName = '';
+  private setCombatPanel(target?:ITarget) {
+    if(target && typeof target.hit !== 'undefined') {
+      const lengthKeys = Object.keys(target).length;
+      if (lengthKeys > 0) {
+        this.inCombat = true;
+        this.updateEnemyIcon();
+  
+        this.enemyHealt = target.hit;
+        this.enemyMove = target.move;
+        this.enemyIcon = target.icon;
+        this.enemyName = target.name;
+      } else {
+        this.inCombat = false;
+        this.enemyHealt = 0;
+        this.enemyMove = 0;
+        this.enemyName = '';
+      }
     }
   }
 

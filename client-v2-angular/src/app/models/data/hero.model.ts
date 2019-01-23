@@ -10,6 +10,13 @@ export interface IStatus {
   move?: number;
 }
 
+export interface ITarget {
+  hit?: number;
+  move?: number;
+  icon?: number;
+  name?: string;
+}
+
 export interface IHero {
   name?: string;
   adjective?: string;
@@ -18,6 +25,7 @@ export interface IHero {
   title?: string;
   status: IStatus;
   attitude?: string;
+  target?: ITarget | null
 }
 
 export class Hero implements IHero {

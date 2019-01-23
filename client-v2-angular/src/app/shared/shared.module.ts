@@ -14,6 +14,7 @@ import { AudioService } from '../main/client/audio/audio.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastContainerModule } from 'ngx-toastr';
+import { CapitalizeFirstPipe } from '../pipes/capitalizeFirst';
 
 @NgModule({
   declarations: [],

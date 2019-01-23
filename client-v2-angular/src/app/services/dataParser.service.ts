@@ -6,6 +6,7 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
 import { IHero } from '../models/data/hero.model';
+import { CapitalizeFirstPipe } from '../pipes/capitalizeFirst';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { IHero } from '../models/data/hero.model';
 export class DataParser {
   private cmdPrefix = '';
 
-  constructor( private store: Store<State> ) {
+  constructor( private store: Store<State>) {
   }
 
   parse(data: any): void {
@@ -91,7 +92,6 @@ export class DataParser {
     // Player status
     data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
       const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
-      console.log(status_parse);
       this.store.dispatch(new DataActions.PlayerStatus(status_parse));
       return '';
     });
