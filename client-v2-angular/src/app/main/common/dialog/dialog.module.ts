@@ -7,7 +7,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
-    DialogComponent, 
+    DialogComponent,
     jqxWindowComponent,
     InsertionDirective,
   ],

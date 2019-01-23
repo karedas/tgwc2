@@ -8,5 +8,5 @@ export interface IEditor {
     maxChars: any;
     title: string;
     description: string;
-    constructor(...args:any){}
+    constructor(...args: any) {}
   }

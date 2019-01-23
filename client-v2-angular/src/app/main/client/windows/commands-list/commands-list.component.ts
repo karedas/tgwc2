@@ -20,13 +20,13 @@ export class CommandsListComponent implements OnInit {
   modalConfig: ModalConfiguration = new ModalConfiguration;
   title: string;
 
-  groupOpen: number = 0;
+  groupOpen = 0;
 
   constructor(private game: GameService, private dialogService: DialogService) {
     this.modalConfig.draggable = true;
     this.modalConfig.isModal = false;
   }
-  
+
   ngOnInit() {
     this.commands$ =  this.game.getCommands();
   }
@@ -37,7 +37,7 @@ export class CommandsListComponent implements OnInit {
 
   }
 
-  setOpenedGroup(index:number) {
+  setOpenedGroup(index: number) {
     this.groupOpen = index;
     setTimeout(() => {
       this.scrollbar.update();

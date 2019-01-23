@@ -12,22 +12,22 @@ import { IStatus, IHero } from 'src/app/models/data/hero.model';
   templateUrl: './character-panel.component.html',
   styleUrls: ['./character-panel.component.scss']
 })
-export class CharacterPanelComponent implements OnInit, OnDestroy{
+export class CharacterPanelComponent implements OnInit, OnDestroy {
 
-  status: {} = {drink: 0, food: 0, hit:0, move:0};
-  inCombat: boolean = false;
+  status: {} = {drink: 0, food: 0, hit: 0, move: 0};
+  inCombat = false;
   heroName: string;
   heroAdjective: string;
   heroImage: string;
-  enemyHealt: number = 0;
-  enemyMove: number = 0;
-  enemyName: string = '';
+  enemyHealt = 0;
+  enemyMove = 0;
+  enemyName = '';
   enemyIcon: number = null;
 
   toggleStatus$: Observable<boolean>;
 
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(private store: Store<DataState>) {
 
     this._unsubscribeAll = new Subject();
@@ -39,7 +39,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
 
     this.store.pipe(select(getHero),
       takeUntil(this._unsubscribeAll)).subscribe(
-        hero => { 
+        hero => {
           this.setStatus(hero.status);
           this.heroName = hero.name;
           this.heroAdjective = hero.adjective;
@@ -49,7 +49,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
   }
 
   private setStatus(status: IStatus) {
-    if(status != undefined) {
+    if (status != undefined) {
       this.status = status;
       this.setCombatPanel();
     }
@@ -58,7 +58,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
   setCombatPanel() {
 
     const lengthKeys = Object.keys(this.status).length;
-    
+
     if (lengthKeys > 4) {
 
       this.inCombat = true;
@@ -67,9 +67,8 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
       this.enemyHealt = this.status[4];
       this.enemyMove = this.status[5];
       this.enemyIcon = this.status[6];
-      this.enemyName = this.status[7]; 
-    }
-    else {
+      this.enemyName = this.status[7];
+    } else {
       this.inCombat = false;
       this.enemyHealt = 0;
       this.enemyMove = 0;
@@ -77,7 +76,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy{
     }
   }
 
-  private updateEnemyIcon(){}
+  private updateEnemyIcon() {}
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

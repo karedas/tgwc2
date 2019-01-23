@@ -1,5 +1,5 @@
-import { UIState } from "../state/ui.state";
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { UIState } from '../state/ui.state';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 
 /******************* Base Search State ******************/
@@ -24,6 +24,6 @@ function fetchDashboardVisibility(state: UIState) {
 
 /******************* Public Selector API's ******************/
 export const getUserLevel = createSelector (getUIState, fetchUserLevel);
-export const getInvisibilityLevel = createSelector(getUIState, fetchInvisibilityLevel)
+export const getInvisibilityLevel = createSelector(getUIState, fetchInvisibilityLevel);
 export const getWelcomeNews = createSelector(getUIState, fetchWelcomeNews);
 export const getDashboardVisibility = createSelector(getUIState, fetchDashboardVisibility);

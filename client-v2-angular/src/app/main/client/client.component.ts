@@ -26,7 +26,7 @@ export class ClientComponent {
       this.document.body.className += 'is-mobile';
     }
 
-    //TODO: moves in a separate component for better implementation
+    // TODO: moves in a separate component for better implementation
     const percentageSubscribe = this.preloader.percentage.subscribe(
       amount => { this.preloadPerc = amount; }
     );
@@ -46,8 +46,8 @@ export class ClientComponent {
   private gameIsReady() {
 
     /* Mndatory verification of acceptance of the use of cookies before proceed */
-    if (this.cookieService.check('tgCookieLaw')) { 
-      this.isCookieAccepted = true; 
+    if (this.cookieService.check('tgCookieLaw')) {
+      this.isCookieAccepted = true;
     }
   }
 

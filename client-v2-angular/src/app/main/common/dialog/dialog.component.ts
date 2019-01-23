@@ -14,7 +14,7 @@ import { InsertionDirective } from './insertion.directive';
 export class DialogComponent  implements OnInit, OnDestroy {
 
   @ViewChild('jqxWidget') jqxWindow: jqxWindowComponent;
-  
+
   @Input() id: string;
   @Input('titleDialog') titleDialog: string;
   @Input('config') config: ModalConfiguration = new ModalConfiguration();
@@ -23,11 +23,11 @@ export class DialogComponent  implements OnInit, OnDestroy {
 
 
   constructor(
-    private modalService: DialogService, 
+    private modalService: DialogService,
     ) {}
 
-  ngOnInit(): void{
-    let modal = this;
+  ngOnInit(): void {
+    const modal = this;
     // ensure id attribute exists
     if (!this.id) {
       console.error('modal must have an id');
@@ -46,7 +46,7 @@ export class DialogComponent  implements OnInit, OnDestroy {
   }
 
   onResize(): void {
-    
+
   }
 
   ngOnDestroy(): void {

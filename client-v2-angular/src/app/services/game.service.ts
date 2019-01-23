@@ -13,18 +13,18 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 
 export class GameService {
-  private netData: string = '';
+  private netData = '';
   private showNewsSubject$: BehaviorSubject<boolean>;
-  private commandsList$: Subject<any> = new Subject();;
-  
+  private commandsList$: Subject<any> = new Subject();
+
   showNews: any;
-  
+
   constructor(
     private socketService: SocketService,
     private dataParserService: DataParser,
     private store: Store<State>,
     private historyService: HistoryService,
-    //private loginService: LoginService,
+    // private loginService: LoginService,
 
 
   ) {
@@ -39,10 +39,10 @@ export class GameService {
   }
 
   disconnectGame() {
-    //this.historyPush('Fine');
+    // this.historyPush('Fine');
   }
 
-  handleServerGameData(data:any) {
+  handleServerGameData(data: any) {
     this.netData += data;
     const len = this.netData.length;
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
@@ -84,12 +84,12 @@ export class GameService {
     this.showNewsSubject$.next(true);
   }
 
-  setCommands(cmds:any) {
+  setCommands(cmds: any) {
     this.commandsList$.next(cmds);
   }
 
   getCommands(): Observable<any> {
     return this.commandsList$.asObservable();
   }
-  
+
 }

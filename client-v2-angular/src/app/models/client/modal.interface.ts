@@ -6,7 +6,7 @@ export class ModalConfiguration  {
     showCloseButton?: boolean;
     modalOpacity?: number;
     minHeight?: any;
-    minWidth?:any;
+    minWidth?: any;
     maxWidth?: any;
     maxHeight?: any;
     draggable?: boolean;

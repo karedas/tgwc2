@@ -4,7 +4,7 @@ import { Injectable, ElementRef, ViewChild } from '@angular/core';
   providedIn: 'root'
 })
 export class MapSnowService {
-  
+
   canvas: HTMLCanvasElement | null;
   canvasID: string;
   context: CanvasRenderingContext2D;
@@ -19,7 +19,7 @@ export class MapSnowService {
   radHeight: number;
   tickHandler: any;
 
-  make(snowElement:ElementRef) {
+  make(snowElement: ElementRef) {
     /* --- config start --- */
     this.canvasID = 'snowCanvas';
     this.context = null;
@@ -30,7 +30,7 @@ export class MapSnowService {
     this.height = 0;
     this.numFlakes = null;
     this.flakes = [];
-    this.flake =  <HTMLCanvasElement>document.createElement("CANVAS");
+    this.flake =  <HTMLCanvasElement>document.createElement('CANVAS');
     this.radHeight = 40;
     this.context =  (<HTMLCanvasElement>snowElement.nativeElement).getContext('2d');
     this.width = snowElement.nativeElement.width;
@@ -38,12 +38,12 @@ export class MapSnowService {
     this.numFlakes = Math.min(this.width, 300) * this.height / 400 * this.flakeNumberModifier;
 
     const TWO_PI = Math.PI * 2;
-    const flakeContext = this.flake.getContext("2d");
+    const flakeContext = this.flake.getContext('2d');
 
     // create flake grafic
     this.flake.width = 8;
     this.flake.height = 8;
-    flakeContext.fillStyle = "#fff";
+    flakeContext.fillStyle = '#fff';
     flakeContext.beginPath();
     flakeContext.arc(4, 4, 4, 0, TWO_PI);
     flakeContext.fill();
@@ -65,7 +65,7 @@ export class MapSnowService {
 
     for (let x = 0; x < this.numFlakes; x++) {
       // calculate changes to snowflake
-      let posX = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight * (5 - this.flakes[x].size)) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
+      const posX = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight * (5 - this.flakes[x].size)) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
       this.flakes[x].y += this.flakes[x].size * this.fallSpeedModifier; // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
 
       // if snowflake is out of bounds, reset
@@ -82,14 +82,14 @@ export class MapSnowService {
     if (this.width > 300) {
       this.context.globalAlpha = 1;
       this.context.drawImage(this.canvas, 300, 0);
-      if (this.width > 600) this.context.drawImage(this.canvas, 600, 0);
-      if (this.width > 1200) this.context.drawImage(this.canvas, 1200, 0);
-      if (this.width > 2400) this.context.drawImage(this.canvas, 2400, 0);
+      if (this.width > 600) { this.context.drawImage(this.canvas, 600, 0); }
+      if (this.width > 1200) { this.context.drawImage(this.canvas, 1200, 0); }
+      if (this.width > 2400) { this.context.drawImage(this.canvas, 2400, 0); }
     }
   }
 
   // randomize flake data
-  private getRandomFlake(init?:any) {
+  private getRandomFlake(init?: any) {
     return {
       x: this.range(10, 310),
       y: init ? this.range(-5, this.height + 5) : -5,
@@ -100,7 +100,7 @@ export class MapSnowService {
   }
 
   // get a random number inside a range
-  private range(start: number, end:number) {
+  private range(start: number, end: number) {
     return Math.random() * (end - start) + start;
   }
 
@@ -109,7 +109,7 @@ export class MapSnowService {
     this.tickHandler = setInterval(this.tick.bind(this), Math.floor(1000 / this.framerate));
   }
   public stop() {
-    let _ = this;
+    const _ = this;
     clearInterval(this.tickHandler);
   }
 }

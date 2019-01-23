@@ -8,7 +8,7 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 })
 export class NoFeatureComponent implements OnInit {
 
-  dialogID: string = 'noFeatureDialog';
+  dialogID = 'noFeatureDialog';
 
   constructor(private dialogService: DialogService) { }
 

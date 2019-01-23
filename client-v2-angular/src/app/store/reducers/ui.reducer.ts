@@ -1,5 +1,5 @@
-import { UIActions, UIEventType } from "../actions/ui.action";
-import { UIState, initialState} from "../state/ui.state";
+import { UIActions, UIEventType } from '../actions/ui.action';
+import { UIState, initialState} from '../state/ui.state';
 
 export function reducer(
   state = initialState,
@@ -14,23 +14,23 @@ export function reducer(
     case UIEventType.AUDIO: {
       return Object.assign({}, state, { track: action.payload});
     }
-    
+
     case UIEventType.WELCOMENEWS: {
-      return Object.assign({}, state, { welcomeNews: !state.welcomeNews})
+      return Object.assign({}, state, { welcomeNews: !state.welcomeNews});
     }
 
     case UIEventType.TOGGLEOUTPUT: {
-      return Object.assign({}, state, { extraOutput: !state.extraOutput})
+      return Object.assign({}, state, { extraOutput: !state.extraOutput});
     }
 
     case UIEventType.TOGGLEDASHBOARD: {
-      return Object.assign({}, state,  {showDashBoard: !state.showDashBoard})
+      return Object.assign({}, state,  {showDashBoard: !state.showDashBoard});
     }
-    
+
     case UIEventType.UI: {
       return Object.assign({}, state, action.payload);
     }
-    
+
     // case UIEventType.UPDATENEEDED: {
     //   return Object.assign({}, state, {
     //     inventory

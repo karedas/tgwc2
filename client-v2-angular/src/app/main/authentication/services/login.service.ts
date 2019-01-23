@@ -26,12 +26,12 @@ export class LoginService {
   public isLoggedIn$: Observable<any>;
   public isLoggedInSubject: BehaviorSubject<boolean>;
 
-  public withNews: boolean = false;
+  public withNews = false;
   private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;
   public redirectUrl: string;
-  
+
   constructor(
 
     private socketService: SocketService,
@@ -58,7 +58,7 @@ export class LoginService {
   }
 
   public logout() {
-    //this.isLoggedInSubject.next(false);
+    // this.isLoggedInSubject.next(false);
   }
 
   public get IsLoggedInStatus(): boolean {
@@ -70,10 +70,10 @@ export class LoginService {
     this.socketService.addListener(socketEvent.LOGIN, (data) => this.handleLoginData(data));
   }
 
-  handleLoginData(data:any) {
+  handleLoginData(data: any) {
 
     this.loginReplayMessage = 'Tentativo di connessione in corso...';
-    
+
     if (data.indexOf('&!connmsg{') == 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
@@ -95,7 +95,7 @@ export class LoginService {
             this.onReboot();
             break;
           case loginEventName.LOGINOK:
-            this.onLoginOk(data.slice(end+2));
+            this.onLoginOk(data.slice(end + 2));
             break;
           case loginEventName.SERVERDOWN:
             this.onServerDown();
@@ -122,7 +122,7 @@ export class LoginService {
     this.socketService.emit(socketEvent.DATA, credentials);
   }
 
-  onLoginOk(data: any) {    
+  onLoginOk(data: any) {
     this.completeHandShake();
     this.game.startGame();
     this.game.handleServerGameData(data);

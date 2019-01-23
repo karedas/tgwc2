@@ -42,8 +42,8 @@ export class DataParser {
       this.store.dispatch(new UiActions.WelcomeNewsAction);
       return '';
     });
-    
-    //Character base Data
+
+    // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
       const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
       this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
@@ -112,7 +112,7 @@ export class DataParser {
      * Image in side frame (with gamma)*/
     data = data.replace(/&!img"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(6, image.lastIndexOf('"')).split(',');
-      console.log('image in side frame with gamma:', image_parse)
+      console.log('image in side frame with gamma:', image_parse);
       return '';
     });
 
@@ -143,7 +143,7 @@ export class DataParser {
         maxChars: options_parse[0],
         title: options_parse[1],
         description: text
-      }))
+      }));
       return '';
     });
 
@@ -314,15 +314,15 @@ export class DataParser {
       return '';
     });
 
-    //Invisibility Level (only God)
+    // Invisibility Level (only God)
     data = data.replace(/&i/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({isGod: true}))
+      this.store.dispatch(new UiActions.UpdateUI({isGod: true}));
       return '';
     });
 
     data = data.replace(/&I\d/gm, (inv) => {
       const godInvLev = parseInt(inv.substr(2, 3));
-      this.store.dispatch( new UiActions.UpdateUI({invLevel: godInvLev}))
+      this.store.dispatch( new UiActions.UpdateUI({invLevel: godInvLev}));
       return '';
     });
 

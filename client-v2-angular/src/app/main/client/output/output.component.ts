@@ -24,7 +24,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   lastRoom$: Observable<any>;
   objPersDetail: any[];
   extraDetail$: BehaviorSubject<boolean>;
-  lastRoomDescription: string = '';
+  lastRoomDescription = '';
 
   private _unsubscribeAll: Subject<any>;
 
@@ -36,7 +36,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.lastRoom$ = this.store.pipe(select(fromSelectors.getRoomBase));
     this.extraDetail$ = new BehaviorSubject(false);
 
-    
+
     this._unsubscribeAll = new Subject();
   }
 
@@ -49,7 +49,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       map((ui: UIState) => ui.extraOutput)
     ).subscribe(
       toggleStatus => {
-        this.extraDetail$.next(toggleStatus)
+        this.extraDetail$.next(toggleStatus);
         this.scrollPanelToBottom();
       }
     );

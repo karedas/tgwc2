@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DataToHtmlPipe implements PipeTransform {
 
   transform(value: any, formaText?: boolean, styleclass?: string): string {
-    
+
     value = value.replace(/&B/gm, '<span class="tg-gray">');
     value = value.replace(/&R/gm, '<span class="tg-lt-red">');
     value = value.replace(/&G/gm, '<span class="tg-lt-green">');

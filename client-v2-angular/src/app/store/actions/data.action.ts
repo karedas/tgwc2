@@ -43,7 +43,7 @@ export class RoomAction implements Action {
     constructor(public payload: any) {}
 }
 
-export class ObjAndPersAction implements Action{
+export class ObjAndPersAction implements Action {
     readonly type = DataEvenType.OBJPERSON;
     constructor(public payload: IObjPerson) {}
 }
@@ -70,7 +70,7 @@ export class SkyAction implements Action {
 
 export class EditorAction implements Action {
     readonly type = DataEvenType.EDITOR;
-    constructor(public payload: Editor){}
+    constructor(public payload: Editor) {}
 }
 
 export class PlayerStatusInlineAction implements Action {
@@ -93,4 +93,4 @@ export type DataAction
 | EditorAction
 | PlayerStatusInlineAction
 | ObjAndPersAction;
-;
+

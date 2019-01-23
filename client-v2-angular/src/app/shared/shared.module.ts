@@ -27,7 +27,7 @@ import { ToastContainerModule } from 'ngx-toastr';
     NgScrollbarModule,
     FormsModule,
     ReactiveFormsModule,
-    //font awesome
+    // font awesome
     FontAwesomeModule,
     ToastContainerModule,
   ],
@@ -46,7 +46,7 @@ import { ToastContainerModule } from 'ngx-toastr';
     PipesModule,
     ToastContainerModule,
     FontAwesomeModule,
-    
+
   ],
 })
 export class SharedModule {

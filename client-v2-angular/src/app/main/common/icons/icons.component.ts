@@ -28,10 +28,10 @@ export class IconsComponent implements OnInit {
 
   public tileBgPos() {
     const tc = this.tileCoords();
-    
-    let bgPos = {
-      'background-position':`-${tc[0]}px -${tc[1]}px`
-    }
+
+    const bgPos = {
+      'background-position': `-${tc[0]}px -${tc[1]}px`
+    };
     this.bgPositionStyle = bgPos;
   }
 
@@ -39,7 +39,7 @@ export class IconsComponent implements OnInit {
     const posx = 32 * (this.iconObj & 0x7f);
     const posy = 32 * (this.iconObj >> 7);
 
-    return [posx, posy]
+    return [posx, posy];
   }
 
   getIcon(objIcon: MIcons) {

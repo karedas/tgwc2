@@ -31,7 +31,7 @@ import { UiEffects } from './store/effects/ui.effects';
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] } ),
     EffectsModule.forRoot([UiEffects]),
-    ToastrModule.forRoot({ 
+    ToastrModule.forRoot({
       positionClass: 'inline',
     }),
     LoggerModule.forRoot({

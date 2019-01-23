@@ -1,13 +1,13 @@
-export interface IHeroRace{
+export interface IHeroRace {
   code: string;
   name: string;
 }
 
-export interface IStatus{
-  drink?: number,
-  food?: number,
-  hit?: number,
-  move?: number
+export interface IStatus {
+  drink?: number;
+  food?: number;
+  hit?: number;
+  move?: number;
 }
 
 export interface IHero {
@@ -30,6 +30,6 @@ export class Hero implements IHero {
       food: 0,
       hit: 0,
       move: 0
-    }
+    };
   }
 }

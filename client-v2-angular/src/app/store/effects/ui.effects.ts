@@ -27,13 +27,13 @@ export class UiEffects {
       tap(data => console.log(data))
     );
 
-    @Effect({dispatch:false})
+    @Effect({dispatch: false})
     closeTextEditor: Observable<Action> = this.actions$.pipe(
       ofType(UIEventType.CLOSETEXTEDITOR),
       tap(() => this.dialogService.close('editor'))
     );
 
-    @Effect({dispatch:false})
+    @Effect({dispatch: false})
     showCommands: Observable<Action> = this.actions$.pipe(
       ofType<PayloadAction>(UIEventType.SHOWCOMMANDS),
       map(action => action.payload),
@@ -41,7 +41,7 @@ export class UiEffects {
         this.game.setCommands(cmds);
         setTimeout(() => {
           this.dialogService.open('commandsList');
-        }, 100);;
+        }, 100);
       })
     );
 }

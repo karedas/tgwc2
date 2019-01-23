@@ -9,13 +9,13 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
   styleUrls: ['./welcome-news.component.scss'],
 })
 export class WelcomeNewsComponent implements AfterViewInit {
-  
-  dialogID: string = 'welcomeNews';
+
+  dialogID = 'welcomeNews';
   modalConfig: ModalConfiguration = new ModalConfiguration();
 
-  private dontShowNextTime: boolean = false;
-  
-  constructor(private dialogService: DialogService, private game: GameService) { 
+  private dontShowNextTime = false;
+
+  constructor(private dialogService: DialogService, private game: GameService) {
     this.modalConfig.width = 'auto';
     this.modalConfig.minWidth = 400;
     this.modalConfig.modalOpacity = 0.8;
@@ -23,18 +23,17 @@ export class WelcomeNewsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if(!localStorage.getItem('welcomenews')) {
+    if (!localStorage.getItem('welcomenews')) {
       this.dialogService.open(this.dialogID);
       return;
-    }
-    else {
+    } else {
       // else send an empty emit
       this.game.sendToServer('');
     }
   }
 
-  onContinue(): void{
-    if(this.dontShowNextTime) {
+  onContinue(): void {
+    if (this.dontShowNextTime) {
       localStorage.setItem('welcomenews', '1');
     }
 

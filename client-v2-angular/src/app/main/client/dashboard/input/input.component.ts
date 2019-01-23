@@ -19,7 +19,7 @@ import { UIState } from 'src/app/store/state/ui.state';
 })
 
 export class InputComponent implements AfterViewInit {
-  
+
   facolumns = faColumns;
   faSolarPanel = faSolarPanel;
   faBullseye = faBullseye;
@@ -36,9 +36,9 @@ export class InputComponent implements AfterViewInit {
     private store: Store<ClientState>,
     private historyService: HistoryService,
     private dialogService: DialogService
-    ) { 
-      this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.extraOutput));
-      this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state:UIState) => state.showDashBoard));
+    ) {
+      this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
+      this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
     }
 
   ngAfterViewInit() {
@@ -56,28 +56,28 @@ export class InputComponent implements AfterViewInit {
 
   onUpKey(event: any) {
     const cmd = this.historyService.getPrevious();
-    if(cmd) {
+    if (cmd) {
       event.target.value = cmd;
     }
   }
 
   onDownKey(event: any) {
     const cmd =  this.historyService.getNext();
-    if(cmd) { 
+    if (cmd) {
       event.target.value =  cmd;
     }
   }
 
-  toggleExtraOutput(){
-    this.store.dispatch(new ToggleExtraOutput()); 
+  toggleExtraOutput() {
+    this.store.dispatch(new ToggleExtraOutput());
   }
-  
-  toggleDashboard(){
+
+  toggleDashboard() {
     this.store.dispatch(new ToggleDashboard());
   }
-  
-  toggleZen(){
-    //this.store.dispatch(new updateUI({zen: true})); 
+
+  toggleZen() {
+    // this.store.dispatch(new updateUI({zen: true}));
     this.dialogService.open('noFeatureDialog');
   }
 

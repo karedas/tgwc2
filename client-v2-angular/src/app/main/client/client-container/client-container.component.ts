@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './client-container.component.html',
 
 })
-export class ClientContainerComponent implements  OnDestroy{
+export class ClientContainerComponent implements  OnDestroy {
   private _unsubscribeAll: Subject<any>;
   welcomeNews$: Observable<boolean>;
 

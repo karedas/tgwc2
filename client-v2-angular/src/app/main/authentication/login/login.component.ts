@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this._unsubscribeAll = new Subject();
-    
+
   }
 
   ngOnInit() {

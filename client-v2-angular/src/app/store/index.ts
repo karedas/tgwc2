@@ -22,12 +22,12 @@ export const appReducer: ActionReducerMap<State> = {
 
 export function clearState(reducer) {
     return (state, action) => {
-        if(action.type === ClientEventType.DISCONNECT) {
+        if (action.type === ClientEventType.DISCONNECT) {
             state = undefined;
         }
 
         return reducer(state, action);
-    }
+    };
 }
 
 

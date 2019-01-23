@@ -18,17 +18,15 @@ export const images_path = './assets/images/';
 })
 
 export class MapComponent implements OnDestroy, AfterViewInit {
+
   @ViewChild('map') map: ElementRef;
   @ViewChild('snow') snow: ElementRef;
 
 
-
   private _unsubscribeAll: Subject<any>;
-  isOnMap: boolean = false;
+  isOnMap = false;
 
-  
   private map$: Observable<Map>;
-
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
 
@@ -43,7 +41,12 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   private mapShadowImg: HTMLImageElement[] = [];
   private mapShadowTile: HTMLImageElement;
 
-  constructor(private store: Store<DataState>, private mapSnowService: MapSnowService) {
+  showSnow = false;
+
+  constructor(
+    private store: Store<DataState>,
+    private mapSnowService: MapSnowService
+    ) {
     this.mapTileWidth = 32;
     this.mapTileHeight = 32;
     this.maxMapHeight = 9;
@@ -66,7 +69,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     }
 
     this.prepareCanvas();
-    
+
     this.map$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (map: Map) => {
         if (map !== undefined) {
@@ -216,13 +219,16 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
     if (!dataMap.s) {
       // Start Snow effect
+      this.showSnow = !this.showSnow;
+      this.mapSnowService.start();
     } else {
       // Stop Snow effect
+      this.showSnow = !this.showSnow;
       this.mapSnowService.stop();
     }
   }
 
-  
+
 
   private tileCoords(tilenum: number): number[] {
     const posx = 32 * (tilenum & 0x7f);
@@ -230,7 +236,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     return [posx, posy];
   }
 
-  
+
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

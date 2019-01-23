@@ -1,4 +1,4 @@
-export interface IObjPersDesc{
+export interface IObjPersDesc {
     base: string;
     details: string;
     equip: any;
@@ -21,7 +21,7 @@ export interface IObjPersEqcont {
     wgt: number;
 }
 
-export interface IObjPerson{
+export interface IObjPerson {
     cmd1: any;
     desc: IObjPersDesc;
     eqcont: IObjPersEqcont;

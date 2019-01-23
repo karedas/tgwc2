@@ -51,17 +51,17 @@ function feetchMap(state: DataState) {
 }
 
 function fetchEditor(state: DataState) {
-  return state.editor
+  return state.editor;
 }
 
 /******************* Public API's ******************/
 export const getId = createSelector(getDataState, fetchDataId);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
-export const getHero = createSelector(getDataState, fetchHero); 
+export const getHero = createSelector(getDataState, fetchHero);
 export const getRoomBase = createSelector(getDataState, fetchRoom);
 export const getObjOrPerson = createSelector(getDataState, fetchObjOrPerson);
-export const getObjectsInRoom = createSelector(getDataState ,fetchObjectsInRoom);
-export const getPersonsInRoom = createSelector(getDataState, fetchPersonsInRoom)
+export const getObjectsInRoom = createSelector(getDataState , fetchObjectsInRoom);
+export const getPersonsInRoom = createSelector(getDataState, fetchPersonsInRoom);
 export const getDoors = createSelector(getDataState, fetchDoors);
 export const getSky = createSelector(getDataState, fetchSky);
 export const getMap = createSelector(getDataState, feetchMap);

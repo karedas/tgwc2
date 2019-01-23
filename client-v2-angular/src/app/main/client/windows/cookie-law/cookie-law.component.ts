@@ -13,7 +13,7 @@ export class CookieLawComponent implements AfterViewInit {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
-  dialogID: string = 'cookieLaw';
+  dialogID = 'cookieLaw';
   modalConfig: ModalConfiguration = new ModalConfiguration;
   display = false;
   showButton = false;
@@ -24,7 +24,7 @@ export class CookieLawComponent implements AfterViewInit {
       height: 'auto',
       resizable: false,
       showCloseButton: false
-    }
+    };
   }
 
   ngAfterViewInit(): void {

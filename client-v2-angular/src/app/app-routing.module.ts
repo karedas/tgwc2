@@ -6,8 +6,8 @@ import { AppPreloadingStrategy } from './app.preloading-strategy';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  { 
-    path: 'registration', 
+  {
+    path: 'registration',
     component: RegistrationComponent
   },
   { path: '**', redirectTo: 'login'}

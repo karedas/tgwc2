@@ -4,7 +4,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { RoomList } from 'src/app/models/data/room.model';
 import { IObjPersEqcont } from 'src/app/models/data/objpers.model';
 
-import { equip_positions_by_name } from 'src/app/main/common/constants'; 
+import { equip_positions_by_name } from 'src/app/main/common/constants';
 
 @Component({
   selector: 'tg-details-room',
@@ -18,14 +18,14 @@ export class DetailsRoomComponent implements OnInit {
   @Input('persons') persons: RoomList[];
   @Input('equip') equip: IObjPersEqcont[];
 
-  totalObjs: number = 0;
-  totalPersons: number = 0;
+  totalObjs = 0;
+  totalPersons = 0;
   total: number;
 
-  objsClass50: boolean = false;
-  objsClass50_50: boolean = false;
-  personsClass50: boolean = false;
-  personsClass50_50: boolean = false;
+  objsClass50 = false;
+  objsClass50_50 = false;
+  personsClass50 = false;
+  personsClass50_50 = false;
 
   togglePanel: any = {};
 
@@ -48,14 +48,14 @@ export class DetailsRoomComponent implements OnInit {
 
     const total = this.totalObjs + this.totalPersons;
 
-    for(let i = 0; i < total; i++) {
+    for (let i = 0; i < total; i++) {
       this.togglePanel[i] = false;
     }
 
     this.setContentClass();
   }
 
-  getHsStatBgPos(condprc: number): string{
+  getHsStatBgPos(condprc: number): string {
     const pos = -13 * Math.floor(12 * (100 - condprc) / 100);
     const styleValue = `0 ${pos}px`;
     return styleValue;
@@ -68,19 +68,17 @@ export class DetailsRoomComponent implements OnInit {
 
 
   private getObjsContentClass() {
-    if(this.totalObjs >= 6 && this.totalPersons <= 6) {
+    if (this.totalObjs >= 6 && this.totalPersons <= 6) {
       this.objsClass50_50 = true;
-    }
-    else if(this.totalObjs >= 6 && this.totalPersons >= 6) {
+    } else if (this.totalObjs >= 6 && this.totalPersons >= 6) {
       this.objsClass50 = true;
     }
   }
 
   private getPersosnsContentClass() {
-    if(this.totalPersons >= 6 && this.totalObjs <= 6) {
+    if (this.totalPersons >= 6 && this.totalObjs <= 6) {
       this.personsClass50_50 = true;
-    }
-    else if(this.totalPersons >= 6 && this.totalObjs >= 6) {
+    } else if (this.totalPersons >= 6 && this.totalObjs >= 6) {
       this.personsClass50 = true;
     }
   }

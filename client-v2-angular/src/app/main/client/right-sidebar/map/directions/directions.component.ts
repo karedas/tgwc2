@@ -12,10 +12,10 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./directions.component.scss'],
 })
 
-export class DirectionsComponent implements OnInit, OnDestroy{
+export class DirectionsComponent implements OnInit, OnDestroy {
 
   @Input('isOnMap') isOnMap: boolean;
-  
+
   dirCmd: string;
   doorsStyle: any[] = [];
   invisibilityLevel: number;
@@ -24,7 +24,7 @@ export class DirectionsComponent implements OnInit, OnDestroy{
   private dirStatus: string[] = ['00000'];
 
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private gameService: GameService,
     private store: Store<DataState>
@@ -33,7 +33,7 @@ export class DirectionsComponent implements OnInit, OnDestroy{
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
-  
+
   ngOnInit(): void {
     this.store.pipe(
       select(getDoors),
@@ -42,7 +42,7 @@ export class DirectionsComponent implements OnInit, OnDestroy{
     );
 
     this.store.pipe(select(getInvisibilityLevel)).subscribe(
-      level => { this.invisibilityLevel = level;}
+      level => { this.invisibilityLevel = level; }
     );
   }
 
@@ -74,7 +74,7 @@ export class DirectionsComponent implements OnInit, OnDestroy{
 
   @HostListener('window:keydown', ['$event'])
   onkeydown(event: KeyboardEvent) {
-    if(this.isOnMap) {
+    if (this.isOnMap) {
       switch (event.key) {
         case 'ArrowUp':
           this.goToDirection(event, 0);

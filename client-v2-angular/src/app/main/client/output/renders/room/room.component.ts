@@ -15,15 +15,14 @@ export class RoomComponent implements OnInit {
 
   inRoomContent: boolean;
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit(): void {
-    if(this.html) {
+    if (this.html) {
       if (this.html.perscont || this.html.objcont) {
         this.inRoomContent = true;
-      }
-      else {
+      } else {
         this.inRoomContent = false;
       }
     }

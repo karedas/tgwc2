@@ -15,21 +15,21 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
   styleUrls: ['./login-smart.component.scss']
 })
 export class LoginSmartComponent implements OnInit, OnDestroy  {
-  
+
   inGameState$: Observable<boolean>;
   modalConfig: ModalConfiguration = new ModalConfiguration;
   private _unsubscribeAll: Subject<any>;
 
 
   constructor(
-    private store: Store<ClientState>, 
-    private dialogService: DialogService, 
+    private store: Store<ClientState>,
+    private dialogService: DialogService,
     private router: Router) {
 
-    this.modalConfig.width = 'auto'
+    this.modalConfig.width = 'auto';
     this.modalConfig.modalOpacity = 0.9;
     this.modalConfig.resizable = false;
-    
+
     this.inGameState$ = this.store.select(getInGameStatus);
     this._unsubscribeAll = new Subject();
   }
@@ -38,10 +38,10 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     this.inGameState$.pipe(
       takeUntil(this._unsubscribeAll),
       skip(1)).subscribe(
-      ingame => { 
-        if(ingame == false) { this.open()}
+      ingame => {
+        if (ingame == false) { this.open(); }
       }
-    )
+    );
   }
 
   private open () {

@@ -1,4 +1,4 @@
-import { Action } from "@ngrx/store";
+import { Action } from '@ngrx/store';
 
 export enum UIEventType {
   UI = '[UI] Ui Updated',
@@ -44,11 +44,11 @@ export class CloseTextEditor implements Action {
 
 export class ShowCommandsActions implements Action {
   readonly type = UIEventType.SHOWCOMMANDS;
-  constructor( public payload: []){}
+  constructor( public payload: []) {}
 }
 
 export type UIActions
-  = 
+  =
   | UpdateUI
   | ToggleExtraOutput
   | ToggleDashboard

@@ -18,14 +18,14 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   editorRequest$: Observable<any>;
   modalConfig: ModalConfiguration = new ModalConfiguration;
-  dialogID: string = 'editor';
+  dialogID = 'editor';
 
-  description: string = '';
-  dialogTitle: string = '';
-  totalChars:number;
+  description = '';
+  dialogTitle = '';
+  totalChars: number;
 
   private maxChars: number ;
-  private maxLineLength: number = 80;
+  private maxLineLength = 80;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -70,7 +70,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
         for (let l = 0; l < text.length; l++) {
 
-            let remText = text[l]
+            let remText = text[l];
             while (remText.length > 0) {
 
                 let currline: any,
@@ -83,13 +83,13 @@ export class EditorComponent implements OnInit, OnDestroy {
                     currline = remText;
                     remText = '';
                 }
-                this.gameService.sendToServer(`##ce${currline}`)
+                this.gameService.sendToServer(`##ce${currline}`);
             }
         }
         this.gameService.sendToServer('##ce_save');
   }
 
-  onCancel() { 
+  onCancel() {
     this.gameService.sendToServer('##ce_abort');
   }
 

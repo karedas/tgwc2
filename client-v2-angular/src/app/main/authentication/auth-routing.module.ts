@@ -4,12 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from '../registration/registration.component';
 
 const authRoutes: Routes = [
-  { 
-    path: 'login', 
+  {
+    path: 'login',
     component: LoginComponent
   },
   {
-    path: 'registration', 
+    path: 'registration',
     component: RegistrationComponent,
     pathMatch: 'full'
   }
