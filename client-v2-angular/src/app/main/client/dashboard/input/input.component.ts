@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
 import { Store, select } from '@ngrx/store';
@@ -36,10 +36,10 @@ export class InputComponent implements AfterViewInit {
     private store: Store<ClientState>,
     private historyService: HistoryService,
     private dialogService: DialogService
-    ) {
-      this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
-      this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
-    }
+  ) {
+    this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
+    this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
+  }
 
   ngAfterViewInit() {
     this.focus();
@@ -62,9 +62,9 @@ export class InputComponent implements AfterViewInit {
   }
 
   onDownKey(event: any) {
-    const cmd =  this.historyService.getNext();
+    const cmd = this.historyService.getNext();
     if (cmd) {
-      event.target.value =  cmd;
+      event.target.value = cmd;
     }
   }
 
@@ -84,4 +84,14 @@ export class InputComponent implements AfterViewInit {
     this.dialogService.open('noFeatureDialog');
   }
 
+  @HostListener('window:keydown', ['$event'])
+  onLastCommandSend(event: KeyboardEvent) {
+    if (event.which == 49 && event.shiftKey === true && this.ic.nativeElement.value == 0) {
+      let l = this.historyService.cmd_history.length;
+
+      if (l > 0)
+        this.game.processCommands(this.historyService.cmd_history[l - 1]);
+      return false;
+    }
+  }
 }

@@ -1,0 +1,37 @@
+<ng-container *ngIf="eqcont">
+  <ng-container *ngTemplateOutlet="withEquipCont"></ng-container>
+</ng-container>
+<ng-container *ngIf="objcont">
+  <ng-container *ngTemplateOutlet="withObjCont"></ng-container>
+</ng-container>
+
+
+<ng-template #withEquipCont>
+  <div class="tg-objperson">
+    <ng-container *ngIf="eqcont.list.length > 0">
+        {{eqcont.title}}
+    </ng-container>
+    <ng-container *ngFor="let item of eqcont.list">
+      <div class="tg-objperson--line">
+        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
+        <div class="hstat" [style.background.position.px]="getHstat(item.condprc)"></div>
+        <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #withObjCont>
+  <div class="tg-objperson">
+    <ng-container *ngIf="objcont.list.length > 0">
+      {{objcont.title}}
+    </ng-container>
+    <ng-container *ngFor="let item of objcont.list">
+      <div class="tg-objperson--line">
+        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
+        <div class="hstat" [style.background.position.px]="getHstat(item.condprc)"></div>
+        <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

@@ -90,7 +90,8 @@
 }
 
 .tg-output--extradetail {
-  padding: 0 12px 8px 8px;
+  height: 100%;
+  padding: 0 0 8px 8px;
 }
 
 tg-text {
@@ -144,6 +145,7 @@ tg-text {
 
   .tg-room {
     padding-bottom: .2em;
+    height: 100%;
   }
 
   .tg-room--title {
@@ -169,6 +171,7 @@ tg-text {
   {
     display: flex;
     padding-bottom: .5em;
+    padding-right: .5em;
     flex-direction: column;
   }
 
@@ -186,6 +189,10 @@ tg-text {
 
     .tg-icon {
       margin: 0 0 auto;
+    }
+
+    .tg-persons--itemdesc, .tg-objects--itemdesc {
+      flex: 0 1 auto;
     }
 
     &.expandlist {
@@ -280,41 +287,6 @@ tg-text {
   }
 
 
-
-  /* Object or Person Detail */
-  .tg-objperson {
-    display: flex;
-    padding-bottom: .5em;
-    flex-direction: column;
-    padding: .5em 0;
-    margin-bottom: 1em;
-  }
-
-  .tg-objperson--action {
-    display: flex;
-    padding-bottom: .2em;
-    font-size: 14px;
-    font-family: kingthings;
-  }
-
-  .tg-objperson--descbase {
-    font-family: kingthings;
-    font-size: 12px;
-    line-height: 14px;
-    margin-bottom: .5em;
-  }
-
-  .tg-objperson--where {
-    font-size: 12px;
-    margin-left: 6px;
-    vertical-align: middle;
-    color: #9a9a9a;
-    line-height: 18px;
-  }
-
-  .tg-objpers--line {
-  }
-
   // .tg-backdetail {
   //   display: flex;
 
@@ -341,7 +313,6 @@ tg-text {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
       padding: 6px 10px 6px;
       color: #dbbf90;
-      border-bottom: 1px solid #433b3a;
       text-shadow: 0 0 12px #dbbf90;
       box-shadow: inset 0px 0px 20px 4px black;
       font-size: 16px;
@@ -353,6 +324,7 @@ tg-text {
       line-height: 1.4;
       font-size: 11px;
       color: #e2d6c7;
+      border-top: 1px solid #433b3a;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 

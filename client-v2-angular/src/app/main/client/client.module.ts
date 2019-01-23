@@ -32,6 +32,7 @@ import { DetailsRoomComponent } from './output/renders/details-room/details-room
 import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geolocal-box.component';
 import { WindowsModule } from './windows/windows.module';
 import { ObjpersDetailComponent } from './output/renders/objpers-detail/objpers-detail.component';
+import { ObjPersContainerComponent } from './output/renders/obj-pers-container/obj-pers-container.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ObjpersDetailComponent } from './output/renders/objpers-detail/objpers-
     DetailsRoomComponent,
     GeolocalBoxComponent,
     ObjpersDetailComponent,
+    ObjPersContainerComponent,
   ],
   imports: [
     ClientRoutingModule,

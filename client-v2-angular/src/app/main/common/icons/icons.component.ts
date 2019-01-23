@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, SimpleChange } from '@angular/core';
 import { MIcons } from './icons.model';
 
 @Component({
@@ -7,7 +7,7 @@ import { MIcons } from './icons.model';
   styles: ['tg-icons{margin: auto 2px; display:block;}'],
   encapsulation: ViewEncapsulation.None
 })
-export class IconsComponent implements OnInit {
+export class IconsComponent {
   @Input('icon') iconObj: number;
 
   _icon: number;
@@ -22,7 +22,7 @@ export class IconsComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChange): void {
     this.tileBgPos();
   }
 

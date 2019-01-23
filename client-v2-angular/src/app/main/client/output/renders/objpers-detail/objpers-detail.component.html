@@ -7,8 +7,15 @@
         <div class="tg-objperson--where" [innerHtml]="'('+ html.where.title + ')'"></div>
       </ng-container>
     </div>
-      <div class="tg-objperson--descbase" [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
-      <div class="tg-objperson--descdetail" [innerHtml]="html.desc.details | dataToHtml | capitalizeFirst" class="tg-green"></div>
+    <ng-container *ngIf="html.desc">
+      <div class="tg-objperson--descbase" 
+        [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
+      <div class="tg-objperson--descdetail tg-green" 
+        [innerHtml]="html.desc.details | dataToHtml | capitalizeFirst"></div>
+    </ng-container>
+
+    <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
   </div>
 </div>
+
 

@@ -58,6 +58,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   private setCombatPanel(target?:ITarget) {
     if(target && typeof target.hit !== 'undefined') {
       const lengthKeys = Object.keys(target).length;
+      console.log(target);
       if (lengthKeys > 0) {
         this.inCombat = true;
         this.updateEnemyIcon();
@@ -66,12 +67,13 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
         this.enemyMove = target.move;
         this.enemyIcon = target.icon;
         this.enemyName = target.name;
-      } else {
-        this.inCombat = false;
-        this.enemyHealt = 0;
-        this.enemyMove = 0;
-        this.enemyName = '';
       }
+    } else {
+      this.inCombat = false;
+      this.enemyHealt = 0;
+      this.enemyMove = 0;
+      this.enemyIcon = null;
+      this.enemyName = '';
     }
   }
 

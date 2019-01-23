@@ -1,11 +1,13 @@
 import { Component, Input, ViewEncapsulation, OnInit, AfterViewInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 import { environment } from 'src/environments/environment';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'tg-room',
   templateUrl: './room.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class RoomComponent implements OnInit {
   @Input() html: Room;

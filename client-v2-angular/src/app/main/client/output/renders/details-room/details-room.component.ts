@@ -2,9 +2,10 @@ import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { RoomList } from 'src/app/models/data/room.model';
-import { IObjPersEqcont } from 'src/app/models/data/objpers.model';
+import { IObjPersEqcont, IObjPersObjcont } from 'src/app/models/data/objpers.model';
 
 import { equip_positions_by_name } from 'src/app/main/common/constants';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-details-room',
@@ -16,7 +17,6 @@ export class DetailsRoomComponent implements OnInit {
 
   @Input('objs') objs: RoomList[];
   @Input('persons') persons: RoomList[];
-  @Input('equip') equip: IObjPersEqcont[];
 
   totalObjs = 0;
   totalPersons = 0;
@@ -30,7 +30,7 @@ export class DetailsRoomComponent implements OnInit {
   togglePanel: any = {};
 
 
-  constructor(private store: Store<DataState>) {
+  constructor(private store: Store<DataState>, private game: GameService) {
   }
 
   ngOnInit(): void {
@@ -55,10 +55,8 @@ export class DetailsRoomComponent implements OnInit {
     this.setContentClass();
   }
 
-  getHsStatBgPos(condprc: number): string {
-    const pos = -13 * Math.floor(12 * (100 - condprc) / 100);
-    const styleValue = `0 ${pos}px`;
-    return styleValue;
+  getHstat(condprc: number): string {
+    return this.game.getHsStatBgPos(condprc);
   }
 
   private setContentClass() {

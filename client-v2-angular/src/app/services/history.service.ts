@@ -9,7 +9,7 @@ export class HistoryService {
   /** Cmd History */
   private max_history_length = 40;
   private cmd_history_pos = 0;
-  private cmd_history: any[] = [];
+  public cmd_history: any[] = [];
 
   constructor() {
   }

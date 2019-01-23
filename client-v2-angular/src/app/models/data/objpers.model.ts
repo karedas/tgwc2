@@ -9,7 +9,9 @@ export interface IObjPersObjcont {
     list: any[];
 }
 
-export interface IObjPersEqcont {
+
+
+export interface Eqcont {
     cntnum: number;
     cond: number;
     condprc: number;
@@ -21,8 +23,14 @@ export interface IObjPersEqcont {
     wgt: number;
 }
 
+export interface IObjPersEqcont {
+    title: string;
+    list: Eqcont[];
+}
+
 export interface IObjPerson {
     cmd1: any;
+    cmd2: any;
     desc: IObjPersDesc;
     eqcont: IObjPersEqcont;
     objcont: IObjPersObjcont;

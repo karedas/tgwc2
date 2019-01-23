@@ -48,12 +48,18 @@
     .canvas-snow,
     .canvas-rain {
       left: 0;
+      top: 0;
       position: absolute;
       z-index: 5;
       height: 100%;
       width: 100%;
       background-color: transparent;
       border-radius: 50%;
+      display: none;
+    }
+
+    .canvas-snow.run {
+      display: block;
     }
   }
 

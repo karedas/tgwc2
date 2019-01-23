@@ -23,8 +23,8 @@ export function reducer(
           move: action.payload[1],
         },
         target: {
-          hit: action.payload[4],
           move: action.payload[5],
+          hit: action.payload[4],
           icon: action.payload[6],
           name: action.payload[7]
         }

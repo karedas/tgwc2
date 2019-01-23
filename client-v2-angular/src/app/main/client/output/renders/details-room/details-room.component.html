@@ -1,12 +1,11 @@
-<ng-container *ngIf="objs">
-  <ng-container *ngTemplateOutlet="withObjects"></ng-container>
-</ng-container>
-<ng-container *ngIf="persons">
-  <ng-container *ngTemplateOutlet="withPersons"></ng-container>
-</ng-container> 
-<ng-container *ngIf="equip">
-    <ng-container *ngTemplateOutlet="withEquipDetail"></ng-container>
-</ng-container>
+  <ng-container *ngIf="objs">
+    <ng-container *ngTemplateOutlet="withObjects"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="persons">
+    <ng-container *ngTemplateOutlet="withPersons"></ng-container>
+  </ng-container> 
+
+
 
 
 <ng-template #withPersons>
@@ -19,15 +18,15 @@
         }"
         (click)="person.sz && togglePanel[i] = !togglePanel[i]">
         <tg-icons [icon]="person.icon"></tg-icons>
-        <div class="hstat" [style.background.position.px]="getHsStatBgPos(person.condprc)"></div>
-        <div class="tg-persons--item_desc" [innerHtml]="person.desc | dataToHtml"></div>
+        <div class="hstat" [style.background.position.px]="getHstat(person.condprc)"></div>
+        <div class="tg-persons--itemdesc" [innerHtml]="person.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
       </div>
       <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]">
         <div class="tg-persons--line"  *ngFor="let sz of person.mrn; let indexSz=index">
           <tg-icons [icon]="person.icon"></tg-icons>
-          <div class="hstat" [style.background.position.px]="getHsStatBgPos(person.condprc)"></div>
-          <div class="tg-persons--item_desc" [innerHtml]="indexSz" [attr.mrn]="person.mrn[indexSz]"></div>
+          <div class="hstat" [style.background.position.px]="getHstat(person.condprc)"></div>
+          <div class="tg-persons--itemdesc" [innerHtml]="indexSz" [attr.mrn]="person.mrn[indexSz]"></div>
       </div>
       </div>
     </ng-container>
@@ -43,29 +42,16 @@
           'open': togglePanel[i]}"
         (click)="object.sz && togglePanel[i] = !togglePanel[i]">
         <tg-icons [icon]="object.icon"></tg-icons>
-        <div class="hstat" [style.background.position.px]="getHsStatBgPos(object.condprc)"></div>
+        <div class="hstat" [style.background.position.px]="getHstat(object.condprc)"></div>
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
       </div>
       <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]">
         <div class="tg-objects--line"  *ngFor="let sz of object.mrn; let indexSz=index" [attr.mrn]="object.mrn">
             <tg-icons [icon]="object.icon"></tg-icons>
-            <div class="hstat" [style.background.position.px]="getHsStatBgPos(object.condprc)"></div>
+            <div class="hstat" [style.background.position.px]="getHstat(object.condprc)"></div>
             <div class="tg-object--itemdesc" [innerHtml]="indexSz" [attr.mrn]="object.mrn[indexSz]"></div>
         </div>
-      </div>
-    </ng-container>
-  </div>
-</ng-template>
-
-<ng-template #withEquipDetail>
-  {{equip.title}}
-  <div class="tg-objperson">
-    <ng-container *ngFor="let item of equip.list">
-      <div class="tg-objperson--line">
-          <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
-          <div class="hstat" [style.background.position.px]="getHsStatBgPos(item.condprc)"></div>
-        <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
       </div>
     </ng-container>
   </div>

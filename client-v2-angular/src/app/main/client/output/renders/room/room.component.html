@@ -1,34 +1,45 @@
-<div class="tg-line">
-  <div class="tg-room" *ngIf="html">
-    <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
-      <div *ngIf="html.title" [innerHtml]="html.title |  dataToHtml:true | capitalizeFirst" class="tg-room--title"></div>
-      <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" class="tg-room--desc"></div>
-      <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
-    </ng-template>
-  </div>
+<div class="tg-room" *ngIf="html">
+  <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
+    <div class="tg-line">
+      <ng-container *ngIf="!type">
+        <div *ngIf="html.title" 
+          [innerHtml]="html.title |  dataToHtml:true | capitalizeFirst" class="tg-room--title"></div>
+        <div 
+          [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" 
+          class="tg-room--desc"></div>
+        <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
+      </ng-container>
+    </div>
+  </ng-template>
 </div>
 
 <ng-template #extradetail>
+  
   <div class="tg-extraoutput--header">
     <div *ngIf="html.title" class="tg-room--title" [innerHtml]="html.title | dataToHtml:true"></div>
     <div class="tg-room--image" *ngIf="html.image">
       <img [src]="getRoomImage(html.image)" />
     </div>
+
     <ng-container *ngIf="type === 'room'">
       <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
     </ng-container>
-    <ng-container *ngIf="type ==='objPers'">
-      <div [innerHtml]="html.desc.base | dataToHtml:true | capitalizeFirst" class="tg-room--desc"></div>
-    </ng-container>
-  </div>
-  <ng-container *ngIf="type === 'room'">
-    <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
-  </ng-container>
-  <ng-container *ngIf="type === 'objPers'">
-    <tg-details-room [equip]="html?.eqcont"></tg-details-room>
-  </ng-container>
-</ng-template>
 
-<ng-template #noobjpers>
-  Non vedi niente di particolare.
+    <ng-container *ngIf="type ==='objPers'">
+      <div [innerHtml]="html.desc.base | dataToHtml:true | capitalizeFirst" class="tg-room--desc" *ngIf="html.desc"></div>
+    </ng-container>
+
+  </div>
+
+  <ng-scrollbar class="scrollbar" #scrollBar>
+    <ng-container *ngIf="type === 'room'">
+      <tg-details-room 
+        [objs]="html.objcont?.list" 
+        [persons]="html.perscont?.list" 
+        *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
+    </ng-container>
+    <ng-container *ngIf="type === 'objPers'">
+        <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
+    </ng-container>
+  </ng-scrollbar>
 </ng-template>

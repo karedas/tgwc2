@@ -1,6 +1,6 @@
-<tg-dialog [id]="dialogID">
-    <div class="tg-box">
+<tg-dialog [id]="dialogID" [config]="modalConfig">
+    <div class="tg-box tg-dialog-inside">
         Funzionalit&agrave; non ancora implementata
+        <button class="tg-button tg-button-continua d-block mx-auto" (click)="onClose()">Continua</button>
     </div>
-    <button class="tg-button tg-button-continua" (click)="onClose()">Continua</button>
 </tg-dialog>

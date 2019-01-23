@@ -25,28 +25,28 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   private _unsubscribeAll: Subject<any>;
   isOnMap = false;
-  
+
   private map$: Observable<Map>;
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
-  
+
   mapTileWidth: number;
   mapTileHeight: number;
   maxMapHeight: number;
   maxMapWidth: number;
-  
+
   private canvasWidth: number;
   private canvasHeight: number;
   private mapTileImg: HTMLImageElement;
   private mapShadowImg: HTMLImageElement[] = [];
   private mapShadowTile: HTMLImageElement;
-  
+
   showSnow: boolean = false;
 
   constructor(
     private store: Store<DataState>,
     private mapSnowService: MapSnowService
-    ) {
+  ) {
     this.mapTileWidth = 32;
     this.mapTileHeight = 32;
     this.maxMapHeight = 9;
@@ -108,7 +108,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     this.mapShadowTile = new Image();
     this.mapShadowTile.src = images_path + 'interface/shadowtile.png';
 
-    
+
     this.mapSnowService.make(this.snow);
 
 
@@ -216,19 +216,18 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     //  _.MAPCTX.drawImage(mapfogimg, 0, 0);
     // }
 
-    this.mapSnowService.start();
-
     if (dataMap.s) {
       setTimeout(() => {
         // Start Snow effect
-        this.showSnow = !this.showSnow;
+        this.showSnow = true;
         this.mapSnowService.start();
-        
-      });
+      }, 100);
     } else {
-      // Stop Snow effect
-      this.showSnow = !this.showSnow;
-      this.mapSnowService.stop();
+      setTimeout(() => {
+        // Stop Snow effect
+        this.showSnow = false;
+        this.mapSnowService.stop();
+      }, 100);
     }
   }
 
