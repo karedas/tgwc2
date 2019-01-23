@@ -63,6 +63,11 @@ export function reducer(
     case DataEvenType.PLAYERSTATUSINLINE:
       return {...state, hero: action.payload};
 
+    case DataEvenType.GENERICTABLE:
+      return Object.assign({}, state, {
+        genericTable: action.payload}
+      )
+
     default:
       return state;
   }

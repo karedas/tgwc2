@@ -9,12 +9,12 @@
 <ng-template #withEquipCont>
   <div class="tg-objperson">
     <ng-container *ngIf="eqcont.list.length > 0">
-        {{eqcont.title}}
+        {{eqcont.title}}c
     </ng-container>
     <ng-container *ngFor="let item of eqcont.list">
       <div class="tg-objperson--line">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
-        <div class="hstat" [style.background.position.px]="getHstat(item.condprc)"></div>
+        <div class="hstat" [style.background-position]="getHstat(item.condprc)"></div>
         <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
       </div>
     </ng-container>
@@ -29,7 +29,7 @@
     <ng-container *ngFor="let item of objcont.list">
       <div class="tg-objperson--line">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
-        <div class="hstat" [style.background.position.px]="getHstat(item.condprc)"></div>
+        <div class="hstat" [style.background-position]="getHstat(item.condprc)"></div>
         <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
       </div>
     </ng-container>

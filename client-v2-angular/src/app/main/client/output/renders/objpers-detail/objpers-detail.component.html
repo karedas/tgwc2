@@ -1,21 +1,20 @@
-<div class="tg-line">
-  <div class="tg-objperson" *ngIf="html">
-    <div class="tg-objperson--action">
-      <span class="tg-green">Esamini</span>&nbsp;<div class="tg-objperson--item_desc tg-yellow"[attr.mrn]="html.num[indexSz]" [innerHtml]="html.title | dataToHtml | capitalizeFirst"></div>
-      <div class="hstat"></div>
-      <ng-container *ngIf="html.where">
-        <div class="tg-objperson--where" [innerHtml]="'('+ html.where.title + ')'"></div>
-      </ng-container>
-    </div>
-    <ng-container *ngIf="html.desc">
-      <div class="tg-objperson--descbase" 
-        [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
-      <div class="tg-objperson--descdetail tg-green" 
-        [innerHtml]="html.desc.details | dataToHtml | capitalizeFirst"></div>
+<div class="tg-objperson" *ngIf="html">
+  <div class="tg-objperson--action">
+    <span class="tg-green">Esamini</span>&nbsp;<div class="tg-objperson--item_desc tg-yellow"[attr.mrn]="html.num[indexSz]" [innerHtml]="html.title | dataToHtml | capitalizeFirst"></div>
+    <div class="hstat" *ngIf="html.objcont" [style.background-position]="getHstat(html.objcont.list[0].condprc)"></div>
+    <div class="hstat" *ngIf="html.eqcont" [style.background-position]="getHstat(html.eqcont.list[0].condprc)"></div>
+    <ng-container *ngIf="html.where">
+      <div class="tg-objperson--where" [innerHtml]="'('+ html.where.title + ')'"></div>
     </ng-container>
-
-    <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
   </div>
+  <ng-container *ngIf="html.desc">
+    <div class="tg-objperson--descbase" 
+      [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
+    <div class="tg-objperson--descdetail tg-green" 
+      [innerHtml]="html.desc.details | dataToHtml | capitalizeFirst"></div>
+  </ng-container>
+
+  <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
 </div>
 
 

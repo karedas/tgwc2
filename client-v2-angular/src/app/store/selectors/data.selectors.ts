@@ -54,6 +54,10 @@ function fetchEditor(state: DataState) {
   return state.editor;
 }
 
+function fetchGenericTable(state: DataState) {
+  return state.genericTable;
+}
+
 /******************* Public API's ******************/
 export const getId = createSelector(getDataState, fetchDataId);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
@@ -66,5 +70,6 @@ export const getDoors = createSelector(getDataState, fetchDoors);
 export const getSky = createSelector(getDataState, fetchSky);
 export const getMap = createSelector(getDataState, feetchMap);
 export const getEditor = createSelector(getDataState, fetchEditor);
+export const getGenericTable = createSelector(getDataState, fetchGenericTable);
 
 

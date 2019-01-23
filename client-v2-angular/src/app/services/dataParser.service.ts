@@ -171,7 +171,8 @@ export class DataParser {
     // Generic table (title, head, data)
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
       const gtable_parse = JSON.parse(t.slice(7, -1));
-      console.log('generic table');
+      console.log(gtable_parse);
+      this.store.dispatch(new DataActions.GenericTableAction(gtable_parse));
       return '';
     });
 

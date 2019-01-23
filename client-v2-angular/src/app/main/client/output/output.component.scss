@@ -278,7 +278,7 @@ tg-text {
   .hstat {
     background-position: 0 0px;
     display: inline-block;
-    margin: auto 2px!important;
+    margin: auto 8px auto 0 !important;
     background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
     box-sizing: content-box;
     height: 13px;

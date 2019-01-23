@@ -1,0 +1,50 @@
+<ng-container *ngIf="dataTable$ | async as datatable">
+  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="'Utenti Online'">
+
+    <div class="tg-generictable h-100">
+      <div class="tg-dialog-inside-nopadding h-100">
+        <div class="table-cont tg-shadow-inset tg-box tg-modal-content h-100">
+          <!-- <table class="tg-rendetable table table-sm table-striped table-hover mb-0 h-100">
+            <thead *ngIf="datatable.head">
+              <th *ngFor="let head of datatable.head" scope="col">
+                  {{ head.title || head }}
+              </th>
+            </thead>
+            <tr *ngFor="let row of datatable.data">
+              <td *ngFor="let col of row">
+                {{col}}
+              </td>
+            </tr>
+          </table> -->
+          <div style="overflow: hidden">
+            <ngx-datatable
+              #tgdatatable
+              [limit]="15"
+              [rows]="datatable.data"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              style="min-height: 300px"
+              class="tg-rendetable table table-sm table-striped table-hover">
+
+              <ng-container *ngFor="let head of datatable.head; let i=index">
+                <ngx-datatable-column
+                  name="TITOLO_{{i}}">
+                    <ng-template ngx-datatable-header-template let-sort="sortFn" let-row="row">
+                        <span (click)="sort()">{{head.title || head}}</span>
+                    </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template  let-rowIndex="rowIndex">
+                      <strong>{{row[i]}}</strong>
+                    </ng-template>
+                </ngx-datatable-column>
+              </ng-container>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </tg-dialog>
+</ng-container>
+
+

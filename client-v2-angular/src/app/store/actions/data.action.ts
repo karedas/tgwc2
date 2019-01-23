@@ -4,6 +4,7 @@ import { Map } from 'src/app/models/data/map.model';
 import { Hero, IHero, IStatus } from 'src/app/models/data/hero.model';
 import { IEditor, Editor } from 'src/app/models/data/editor.model';
 import { IObjPerson } from 'src/app/models/data/objpers.model';
+import { IGtable } from 'src/app/models/data/generictable.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -17,7 +18,8 @@ export enum DataEvenType {
     SKY = '[Data] Sky Update',
     MAP = '[Data] Map Update',
     EDITOR = '[Data] Editor Request',
-    OBJPERSON = '[Data] Object or Person'
+    OBJPERSON = '[Data] Object or Person',
+    GENERICTABLE = '[Data] Generic Table'
 }
 
 export class IncomingData implements Action {
@@ -78,6 +80,11 @@ export class PlayerStatusInlineAction implements Action {
     constructor(public payload: IHero) {}
 }
 
+export class GenericTableAction implements Action {
+    readonly type = DataEvenType.GENERICTABLE;
+    constructor(public payload: IGtable) {}
+}
+
 
 
 
@@ -92,5 +99,6 @@ export type DataAction
 | SkyAction
 | EditorAction
 | PlayerStatusInlineAction
-| ObjAndPersAction;
+| ObjAndPersAction
+| GenericTableAction;
 

@@ -9,8 +9,6 @@ export interface IObjPersObjcont {
     list: any[];
 }
 
-
-
 export interface Eqcont {
     cntnum: number;
     cond: number;

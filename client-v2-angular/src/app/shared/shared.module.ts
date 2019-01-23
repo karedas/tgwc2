@@ -14,7 +14,7 @@ import { AudioService } from '../main/client/audio/audio.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastContainerModule } from 'ngx-toastr';
-import { CapitalizeFirstPipe } from '../pipes/capitalizeFirst';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [],
@@ -47,7 +47,6 @@ import { CapitalizeFirstPipe } from '../pipes/capitalizeFirst';
     PipesModule,
     ToastContainerModule,
     FontAwesomeModule,
-
   ],
 })
 export class SharedModule {

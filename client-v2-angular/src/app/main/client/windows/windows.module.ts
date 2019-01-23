@@ -8,6 +8,7 @@ import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { EditorComponent } from './editor/editor.component';
 import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 import { CommandsListComponent } from './commands-list/commands-list.component';
+import { GenericTableComponent } from './generic-table/generic-table.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CommandsListComponent } from './commands-list/commands-list.component';
     LoginSmartComponent,
     EditorComponent,
     CharacterSheetComponent,
-    CommandsListComponent
+    CommandsListComponent,
+    GenericTableComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { CommandsListComponent } from './commands-list/commands-list.component';
     NoFeatureComponent,
     LoginSmartComponent,
     EditorComponent,
-    CommandsListComponent
+    CommandsListComponent,
+    GenericTableComponent
   ]
 })
 export class WindowsModule { }
