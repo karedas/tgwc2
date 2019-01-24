@@ -6,7 +6,7 @@ import { IObjPerson } from 'src/app/models/data/objpers.model';
 import { IGtable } from 'src/app/models/data/generictable.model';
 
 export interface DataState {
-    id: number;
+    date: number;
     base: any[];
     sky: string;
     doors?: any;
@@ -19,7 +19,7 @@ export interface DataState {
 }
 
 export const initialState: DataState = {
-    id: 0,
+    date: Date.now(),
     base: [''],
     sky: undefined,
     doors: [],

@@ -54,7 +54,6 @@ export class OutputComponent implements OnInit, OnDestroy {
       }
     );
 
-
     // Listen Base Text Data
     this.store.pipe(
       takeUntil(this._unsubscribeAll),
@@ -64,7 +63,6 @@ export class OutputComponent implements OnInit, OnDestroy {
         (base: string[]) => {
           const content = this.setContent('base', base[0]);
           this.output.push(content);
-          console.log(this.output);
           // You might need to give a tiny delay before updating the scrollbar
           this.trimOutput();
           this.scrollPanelToBottom();
@@ -90,7 +88,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
     /** Object or Person Detail */
     this.store.pipe(
-      takeUntil(this._unsubscribeAll),
+     
       select(fromSelectors.getObjOrPerson),
       filter(elements => elements && elements !== undefined ))
       .subscribe(
@@ -98,7 +96,6 @@ export class OutputComponent implements OnInit, OnDestroy {
           this.objPersDetail = elements;
           const content = this.setContent('objpersdetail', elements);
           this.output.push(content);
-          console.log(this.output);
           this.typeDetail = 'objPers';
           this.trimOutput();
           this.scrollPanelToBottom();

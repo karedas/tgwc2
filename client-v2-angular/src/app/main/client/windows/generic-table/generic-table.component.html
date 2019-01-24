@@ -20,16 +20,16 @@
             <ngx-datatable
               #tgdatatable
               [limit]="15"
-              [rows]="datatable.data"
+              [rows]="rows"
+              [columns]="columns"
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50"
               style="min-height: 300px"
               class="tg-rendetable table table-sm table-striped table-hover">
 
-              <ng-container *ngFor="let head of datatable.head; let i=index">
-                <ngx-datatable-column
-                  name="TITOLO_{{i}}">
+              <!-- <ng-container *ngFor="let head of datatable.head; let i=index">
+                <ngx-datatable-column name="">
                     <ng-template ngx-datatable-header-template let-sort="sortFn" let-row="row">
                         <span (click)="sort()">{{head.title || head}}</span>
                     </ng-template>
@@ -37,7 +37,8 @@
                       <strong>{{row[i]}}</strong>
                     </ng-template>
                 </ngx-datatable-column>
-              </ng-container>
+              </ng-container> -->
+              
             </ngx-datatable>
           </div>
         </div>

@@ -25,6 +25,8 @@ export interface IHero {
   title?: string;
   status: IStatus;
   attitude?: string;
+  equipment?: [];
+  inventory?: [];
   target?: ITarget | null
 }
 

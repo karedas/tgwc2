@@ -5,6 +5,7 @@ export interface UIState {
   musicVolume: number;
   soundVolume: number;
   inputVisible: boolean;
+
   inventory: {
     version: number;
     needed: boolean;
@@ -17,6 +18,7 @@ export interface UIState {
     version: number;
     needed: boolean;
   };
+  
   cursorOnMap: false; // Remove
   editorIsopen: boolean;
   extraOutput: boolean;
@@ -33,6 +35,7 @@ export const initialState: UIState = {
   musicVolume: 100,
   soundVolume: 70,
   inputVisible: true,
+  
   inventory: {
     version: -1,
     needed: false
@@ -45,6 +48,7 @@ export const initialState: UIState = {
     version: -1,
     needed: false
   },
+
   cursorOnMap: false,
   editorIsopen: false,
   extraOutput: false,

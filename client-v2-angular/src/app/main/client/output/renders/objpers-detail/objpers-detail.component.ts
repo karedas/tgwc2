@@ -18,7 +18,6 @@ export class ObjpersDetailComponent implements OnInit {
   }
 
   getHstat(condprc: number): string {
-    console.log(condprc);
     return this.game.getHsStatBgPos(condprc);
   }
 }

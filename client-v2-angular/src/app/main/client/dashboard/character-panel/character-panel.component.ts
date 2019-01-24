@@ -58,7 +58,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   private setCombatPanel(target?:ITarget) {
     if(target && typeof target.hit !== 'undefined') {
       const lengthKeys = Object.keys(target).length;
-      console.log(target);
       if (lengthKeys > 0) {
         this.inCombat = true;
         this.updateEnemyIcon();

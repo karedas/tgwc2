@@ -54,7 +54,6 @@ export class DataParser {
     /**
      * DEPRECATED
      * Hide text (password) */
-
     data = data.replace(/&x\n*/gm, (msg) => {
       console.warn('Todo: Hide Text');
       this.store.dispatch(new UiActions.UpdateUI({inputVisible: false}));
@@ -62,7 +61,8 @@ export class DataParser {
     });
 
     /**
-     * DEPRECATED(normal input) */
+     * DEPRECATED(normal input) 
+     * */
     data = data.replace(/&e\n*/gm, () => {
       this.store.dispatch(new UiActions.UpdateUI({inputVisible: true}));
       return '';
@@ -185,7 +185,7 @@ export class DataParser {
 
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
-      dtls = JSON.parse(dtls.slice(6, -1)) ;
+      dtls = JSON.parse(dtls.slice(6, -1));
       this.store.dispatch(new DataActions.RoomAction(dtls));
       return '';
     });
@@ -237,7 +237,6 @@ export class DataParser {
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
       // this.store.dispatch(new DataActions.HeroAction(<IHero>status_parse));
-
       console.log('player status', status_parse);
       return '';
     });
@@ -302,7 +301,7 @@ export class DataParser {
       const mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
       const desc_parse = mob.slice(5).toString();
 
-      console.log('???', mob_parse, desc_parse);
+      console.log('render mob..?', mob_parse, desc_parse);
       // return _.renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
       return '';
     });
@@ -310,17 +309,18 @@ export class DataParser {
     data = data.replace(/&!(ad|a)?o"[^"]*"/gm, (obj) => {
       const obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
       const desc_parse = obj.slice(5).toString();
-      console.log('???', obj_parse, desc_parse);
+      console.log('render object...?', obj_parse, desc_parse);
       // return _.renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
       return '';
     });
 
-    // Invisibility Level (only God)
+    // Is God
     data = data.replace(/&i/gm, () => {
       this.store.dispatch(new UiActions.UpdateUI({isGod: true}));
       return '';
     });
 
+    // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
       const godInvLev = parseInt(inv.substr(2, 3));
       this.store.dispatch( new UiActions.UpdateUI({invLevel: godInvLev}));
@@ -329,7 +329,6 @@ export class DataParser {
 
     /* \r is already removed at top */
     data = data.replace(/\n/gm, '<div class="breakline"></div>');
-
     if (data != 'undefined' && data != undefined && data !== '') {
       data = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new DataActions.IncomingData(data));

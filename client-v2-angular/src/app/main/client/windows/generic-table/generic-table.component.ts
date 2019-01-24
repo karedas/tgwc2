@@ -21,7 +21,8 @@ export class GenericTableComponent implements OnInit {
   dataTable$: Observable<any>;
   modalConfig: ModalConfiguration = new ModalConfiguration;
 
-  rows = {};
+  rows = [];
+  columns = [];
 
 
   constructor(
@@ -39,13 +40,37 @@ export class GenericTableComponent implements OnInit {
         
     this.dataTable$.subscribe(
       (dt: IGtable) => {
-        console.log(dt);
         if(dt) {
-          this.rows = dt.data
+          this.populateColumns(dt.head);
+          this.populateRows = dt.data;
           this.open();
         }
-      }
-    );
+    });
+  }
+
+  private populateColumns(head: any) {
+    if (head) {
+      head.forEach((v:any) => {
+        switch(typeof v) {
+          case 'object':
+            this.columns.push({'name': v.title});
+            break;
+          default:
+            this.columns.push({'name': v});
+            break;
+        }
+      });
+    }
+  }
+
+  set populateRows(rows: any) {
+    let  mappedRow = [];
+    rows.map((val) => {
+     mappedRow.push({data: val});
+    });
+
+    this.rows = mappedRow;
+    console.log(this.rows);
   }
 
   private open() {
@@ -53,9 +78,4 @@ export class GenericTableComponent implements OnInit {
       this.dialogService.open(this.dialogID);
     }, 200);
   }
-
-  ngOnChanges(changes: SimpleChange): void {
-    console.log(changes);    
-  }
-
 }

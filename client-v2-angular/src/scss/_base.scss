@@ -9,7 +9,8 @@ html {
 body {
   background: #0b0807;
   color: $white;
-  display: block;
+  min-height: 100%;
+  display: table;
 }
 
 a,
