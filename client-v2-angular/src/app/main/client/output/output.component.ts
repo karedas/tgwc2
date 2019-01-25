@@ -24,7 +24,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   lastRoom$: Observable<any>;
 
 
-  private extraOutputOpenStatus$: Observable<any>
+  extraOutputOpenStatus$: Observable<any>
   private baseText: Observable<any>;
   private roomBase: Observable<any>;
   private objOrPerson: Observable<any>;

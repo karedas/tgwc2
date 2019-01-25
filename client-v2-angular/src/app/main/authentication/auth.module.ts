@@ -10,7 +10,6 @@ import { RegistrationComponent } from '../registration/registration.component';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrationComponent,
     QuotesComponent,
   ],
   imports: [
@@ -20,7 +19,6 @@ import { RegistrationComponent } from '../registration/registration.component';
     AuthRoutingModule,
   ],
   exports: [
-    RegistrationComponent
   ]
 })
 export class Auth2Module { }
