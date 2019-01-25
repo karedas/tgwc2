@@ -24,12 +24,12 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
             ],
             "styles": [
               "node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css",
-              "src/scss/client.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/scss/client.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

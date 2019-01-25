@@ -1,0 +1,21 @@
+@import 'variables';
+
+tg-icons{
+  margin: auto 2px;
+  display: inline-block;
+  border: 1px solid #906507;
+  border-radius: 6px;
+  background-color: #332727;
+  width: 25px;
+  height: 25px;
+  box-sizing: content-box;
+
+  .tg-icon {
+    background-image: url( $imgPath + '/tiles.png');
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    // transform: scale(.7);
+    // vertical-align: middle;
+  }
+}

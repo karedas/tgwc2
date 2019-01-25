@@ -1,26 +1,26 @@
 <ng-container *ngIf="!(inGameState$ | async);">
-  <tg-dialog [id]="'loginWidget'" [config]="modalConfig">
+  <tg-dialog [id]="'loginWidget'" [config]="modalConfig" [titleDialog]="Accesso">
     <div class="tg-box">
       <div class="tg-loginwidget">
         <div class="tg-widgetlogin-status">
           Sei stato disconnesso.
         </div>
-        <div class="tg-widgetlogin-menu">
+        <div class="tg-widgetlogin-menu" *ngIf="!showForm">
           <div class="row">
             <div class="col">
-              <button type="button" class="btn-reconnect tg-button">Riconnetti
+              <button type="button" class="btn-reconnect tg-button" (click)="onReconnect()">Riconnetti
                 <span></span>
               </button>
-              <button type="button" class="btn-newlogin tg-button">Accedi con un personaggio diverso.</button>
+              <button type="button" class="btn-newlogin tg-button" (click)="toggle()">Accedi con un personaggio diverso.</button>
               <button type="button" class="btn-backtohome tg-button" (click)="navigateToHome()">Torna alla Home</button>
             </div>
           </div>
         </div>
-        <form action="#" autocomplete="off">
+        <form action="#" autocomplete="off" *ngIf="showForm">
           <input class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
           <input class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
           <button type="submit" class="form-control btn-loginwidget tg-button" value="accedi">Accedi</button>
-          <a href="#" class="back-to-root">Torna indietro</a>
+          <a href="#" class="back-to-root" (click)="toggle($event)">Torna indietro</a>
         </form>
       </div>
     </div>

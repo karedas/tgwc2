@@ -16,7 +16,7 @@
     .hstat {
       margin-left:8px;
     }
-  }
+ }
 
   .tg-objperson--where {
     font-size: 12px;
@@ -32,5 +32,10 @@
     line-height: 14px;
     margin-bottom: .5em;
   }
+}
 
+:host .tg-objperson--action ::ng-deep {
+  .tg-icon {
+    margin-right: 0 !important;
+  }
 }

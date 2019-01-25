@@ -4,7 +4,7 @@ import { MIcons } from './icons.model';
 @Component({
   selector: 'tg-icons',
   templateUrl: './icons.component.html',
-  styles: ['tg-icons{margin: auto 2px; display:block;}'],
+  styleUrls: ['./icons.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class IconsComponent {

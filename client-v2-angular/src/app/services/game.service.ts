@@ -89,14 +89,7 @@ export class GameService {
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;
       }
-
     }
-      // const now = Date.now();
-      // if (now > this.lastDataTime + 1000 ) {
-      //   if(state.roomVer > this.clientUpdateNeeded.room) {
-      //     this.processCommands('@agg');
-      //     console.log('ROOM UPDATE');
-      //   }
   }
 
   /**

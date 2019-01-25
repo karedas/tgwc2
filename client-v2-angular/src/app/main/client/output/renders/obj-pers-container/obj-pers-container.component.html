@@ -5,11 +5,10 @@
   <ng-container *ngTemplateOutlet="withObjCont"></ng-container>
 </ng-container>
 
-
 <ng-template #withEquipCont>
   <div class="tg-objperson">
     <ng-container *ngIf="eqcont.list.length > 0">
-        {{eqcont.title}}c
+      {{eqcont.title}}
     </ng-container>
     <ng-container *ngFor="let item of eqcont.list">
       <div class="tg-objperson--line">

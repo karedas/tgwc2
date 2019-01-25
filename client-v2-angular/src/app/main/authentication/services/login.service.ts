@@ -26,7 +26,6 @@ export class LoginService {
   public isLoggedIn$: Observable<any>;
   public isLoggedInSubject: BehaviorSubject<boolean>;
 
-  public withNews = false;
   private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;
@@ -42,6 +41,7 @@ export class LoginService {
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
     this.loginErrorMessage$ = new BehaviorSubject('');
+
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
@@ -50,15 +50,24 @@ export class LoginService {
     this.username = data.username;
     this.password = data.password;
 
-    this.socketService.connect();
+    this.resetHandler();
+    this.socketService.connect(); 
     this.setHandleLoginData();
-
     this.socketService.emit('loginrequest');
     return this.isLoggedInSubject.asObservable();
   }
 
   public logout() {
     // this.isLoggedInSubject.next(false);
+  }
+
+  public reconnect() {
+    this.login({username: this.username, password: this.password})
+  }
+
+  private resetHandler() {
+    this.socketService.off(socketEvent.LOGIN);
+    this.socketService.off(socketEvent.DATA);
   }
 
   public get IsLoggedInStatus(): boolean {

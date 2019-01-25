@@ -19,7 +19,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { appReducer, clearState } from './store';
 import { UiEffects } from './store/effects/ui.effects';
-import { DataEffects } from './store/effects/data.effects';
+import { ClientEffects } from './store/effects/client.effects';
+import { Auth2Module } from './main/authentication/auth.module';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { DataEffects } from './store/effects/data.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] } ),
-    EffectsModule.forRoot([UiEffects, DataEffects]),
+    EffectsModule.forRoot([UiEffects, ClientEffects]),
     ToastrModule.forRoot({
       positionClass: 'inline',
     }),
@@ -46,6 +47,7 @@ import { DataEffects } from './store/effects/data.effects';
     }),
     SharedModule,
     ClientModule,
+    Auth2Module,
     AppRoutingModule,
 
   ],

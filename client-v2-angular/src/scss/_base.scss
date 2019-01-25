@@ -103,18 +103,6 @@ body[data-loginstatus=ready] {
   }
 }
 
- .tg-icon {
-     background-image: url( $imgPath + '/tiles.png');
-     background-repeat: no-repeat;
-     width: 32px;
-     height: 32px;
-     min-width: 32px;
-     transform: scale(.7);
-     vertical-align: middle;
-     &.tg-dragging {
-         transform: none;
-     }
- }
 // .popover-header {
 //     font-size:.6rem;
 //     padding-bottom: 0;

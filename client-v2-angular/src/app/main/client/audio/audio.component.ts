@@ -26,4 +26,8 @@ export class AudioComponent implements OnInit {
       track => this.audioService.setAudio(track)
     );    
   }
+
+  ngOnDestroy(): void {
+  
+  }
 }

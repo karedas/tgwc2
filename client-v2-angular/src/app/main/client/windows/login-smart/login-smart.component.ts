@@ -8,6 +8,7 @@ import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { Router } from '@angular/router';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { LoginService } from 'src/app/main/authentication/services/login.service';
 
 @Component({
   selector: 'tg-login-smart',
@@ -21,9 +22,12 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   private _unsubscribeAll: Subject<any>;
 
 
+  showForm: boolean = false;
+
   constructor(
     private store: Store<ClientState>,
     private dialogService: DialogService,
+    private loginService: LoginService,
     private router: Router) {
 
     this.modalConfig.width = 'auto';
@@ -39,7 +43,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
       takeUntil(this._unsubscribeAll),
       skip(1)).subscribe(
       ingame => {
-        if (ingame == false) { this.open(); }
+        if (ingame == false) { this.open();}
       }
     );
   }
@@ -50,11 +54,24 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     });
   }
 
+  onReconnect() {
+    this.loginService.reconnect();
+  }
+
+  toggle(event?:Event) {
+    
+    if(event) {
+      event.preventDefault();
+    }
+      
+    this.showForm = !this.showForm;
+  }
 
   navigateToHome() {
     this.store.dispatch(new DisconnectAction);
     this.router.navigate(['/login']);
   }
+  
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

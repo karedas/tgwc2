@@ -76,8 +76,6 @@ import { ObjPersContainerComponent } from './output/renders/obj-pers-container/o
   providers: [
     HistoryService
   ],
-  entryComponents: [
-  ]
 })
 export class ClientModule {
  }

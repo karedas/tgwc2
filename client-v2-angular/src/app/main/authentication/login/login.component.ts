@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const values = this.loginForm.value;
 
     this.loginSubscription = this.loginService.login(values)
+      .pipe( takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
 
@@ -85,7 +86,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loginFailed = true;
         }
       }, (error) => {
-        console.log(error);
         if (error instanceof NotAuthorizeError) {
           this.loginFailed = false;
         }

@@ -49,13 +49,14 @@ export class AudioService {
     const mp3 = '.mp3';
     const mid = '.mid';
 
-
     /** Music Channel */
     if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
       this.setMusic(src);
     } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
+      console.log('sound1');
       this.setSound(src.replace('.mid', '.mp3'));
     } else {
+      console.log('sound2');
       this.setSound(src.replace('.wav', '.mp3'));
     }
   }
@@ -73,10 +74,13 @@ export class AudioService {
     this.music.play();
   }
 
-  public pauseMusic(): void {
-    this.music.pause();
-  }
+  public pauseAudio(): void {
 
+    this.music.pause();
+    this.music.currentTime = 0;
+    this.sound.pause();
+    this.sound.currentTime = 0;
+  }
 
   public getSound(): HTMLAudioElement {
     return this.sound;

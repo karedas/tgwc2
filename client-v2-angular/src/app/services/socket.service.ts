@@ -76,6 +76,8 @@ export class SocketService {
   }
 
   public off(event: socketEvent): void {
-    this.socket.off(event);
+    if(this.socket) {
+      this.socket.off(event);
+    }
   }
 }
