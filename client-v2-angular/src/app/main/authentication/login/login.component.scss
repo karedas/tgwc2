@@ -13,7 +13,8 @@
 }
 
 .tg-loginpanel {
-  height: 100%;
+  height: 100vh;
+  min-height: 710px;
   background-color: #0b0807;
   background-image: url($imgPath + '/login/login_background_01.jpg');
   background-position: top center;

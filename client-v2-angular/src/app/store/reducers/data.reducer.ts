@@ -1,6 +1,5 @@
 import { initialState, DataState } from '../state/data.state';
 import { DataAction, DataEvenType } from '../actions/data.action';
-import { Hero } from 'src/app/models/data/hero.model';
 
 export function reducer(
   state = initialState,

@@ -1,13 +1,11 @@
-import { Injectable, ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { HistoryService } from './history.service';
 import { State } from '../store';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { getDateNow } from '../store/selectors';
-import { last } from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,7 +16,16 @@ export class GameService {
   private netData = '';
   private showNewsSubject$: BehaviorSubject<boolean>;
   private commandsList$: Subject<any> = new Subject();
-  private lastDataTime: number;
+
+  private lastDataTime: number = 0;
+  clientUpdateNeeded = {
+    inventory: 0,
+    equipment: 0,
+    room: 0
+  };
+
+  private extraOutput: boolean = false
+
 
   showNews: any;
 
@@ -27,30 +34,25 @@ export class GameService {
     private dataParserService: DataParser,
     private store: Store<State>,
     private historyService: HistoryService,
-  )
-  {
+  ) {
     this._init();
   }
 
 
   _init() {
 
+
     this.showNewsSubject$ = new BehaviorSubject<boolean>(false);
     this.showNewsSubject$.asObservable();
 
-    this.store.pipe(select(getDateNow))
-      .subscribe(
-        (dateLast:number) => {
-          this.lastDataTime = dateLast;
-        }
-      );
+
   }
 
   startGame() {
+
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.handleServerGameData(data);
     });
-
   }
 
   disconnectGame() {
@@ -76,15 +78,32 @@ export class GameService {
     }
   }
 
-  updateUIByData() {
-    console.log('ok');
+  updateUIByData(what: any) {
+
+    let now = Date.now();
+    console.log(what);
+    if(now > this.lastDataTime + 1000 ) {
+
+      if(what.room && what.room  >  this.clientUpdateNeeded.room ) {
+        this.sendToServer('@agg');
+        this.clientUpdateNeeded.room = what.room;
+        this.lastDataTime = now;
+      }
+
+    }
+      // const now = Date.now();
+      // if (now > this.lastDataTime + 1000 ) {
+      //   if(state.roomVer > this.clientUpdateNeeded.room) {
+      //     this.processCommands('@agg');
+      //     console.log('ROOM UPDATE');
+      //   }
   }
 
-/**
- * @param val command value
- * @param isStored true or false if u need to watch history length)
- */
-  public processCommands(val: string, isStored: boolean = true ) {
+  /**
+   * @param val command value
+   * @param isStored true or false if u need to watch history length)
+   */
+  public processCommands(val: string, isStored: boolean = true) {
 
     const cmds = this.dataParserService.parseInput(val);
 
@@ -124,7 +143,5 @@ export class GameService {
   public setDisconnect() {
     this.socketService.disconnect();
   }
-
-  private
 
 }

@@ -3,7 +3,7 @@
     <div class="tg-line">
       <ng-container *ngIf="!type">
         <div *ngIf="html.title" 
-          [innerHtml]="html.title |  dataToHtml:true | capitalizeFirst" class="tg-room--title"></div>
+          [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
         <div 
           [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" 
           class="tg-room--desc"></div>
@@ -26,7 +26,7 @@
     </ng-container>
 
     <ng-container *ngIf="type ==='objPers'">
-      <div [innerHtml]="html.desc.base | dataToHtml:true | capitalizeFirst" class="tg-room--desc" *ngIf="html.desc"></div>
+      <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc"></div>
     </ng-container>
 
   </div>

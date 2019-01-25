@@ -13,7 +13,7 @@ export interface RoomList {
   cond: number;
   condprc: number;
   mrn: number[];
-  desc: string;
+  desc: string[];
   mvprc: number;
   sz: number;
   wgt: number;

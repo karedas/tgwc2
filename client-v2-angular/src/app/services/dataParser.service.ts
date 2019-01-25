@@ -99,6 +99,7 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
+      console.log('updateneeded');
       this.store.dispatch(new UiActions.UpdateNeeded({
         inventory: update_parse[0],
         equipment: update_parse[1],

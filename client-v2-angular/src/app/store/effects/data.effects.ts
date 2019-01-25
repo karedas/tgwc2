@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType, } from '@ngrx/effects';
-import { Observable } from 'rxjs';
-import { Action } from '@ngrx/store';
-import { GameService } from 'src/app/services/game.service';
-import { tap } from 'rxjs/operators';
+import { Actions } from '@ngrx/effects';
 
-export interface PayloadAction {
+export interface PayloadActionData {
   type: string;
   payload: any;
 }
@@ -14,9 +10,22 @@ export interface PayloadAction {
 @Injectable()
 export class DataEffects {
 
+  // private last: number =  0;
+
+  // @Effect({dispatch: false})
+  // updateNeeded$: Observable<Action> = this.actions$.pipe(
+  //   ofType(DataEvenType.UPDATENEEDED),
+  //   withLatestFrom(()  => {
+  //       this.store.select(getVersions);
+  //   }),
+  //   tap((action: any )  => {
+  //     console.log(action);
+  //   }),
+  // );
+
   constructor(
     private actions$: Actions,
-    private game: GameService
+    // private game: GameService,
+    // private store: Store<DataState>
   ) { }
-
 }

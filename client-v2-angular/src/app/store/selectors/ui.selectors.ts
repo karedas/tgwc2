@@ -22,8 +22,13 @@ function fetchDashboardVisibility(state: UIState) {
   return state.showDashBoard;
 }
 
+function fetchExtraOutput(state: UIState) {
+  return state.extraOutput;
+}
+
 /******************* Public Selector API's ******************/
 export const getUserLevel = createSelector (getUIState, fetchUserLevel);
 export const getInvisibilityLevel = createSelector(getUIState, fetchInvisibilityLevel);
 export const getWelcomeNews = createSelector(getUIState, fetchWelcomeNews);
 export const getDashboardVisibility = createSelector(getUIState, fetchDashboardVisibility);
+export const getExtraOutputStatus = createSelector(getUIState, fetchExtraOutput);

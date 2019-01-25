@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { Action } from '@ngrx/store';
+import { Action, Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
-import { tap, switchMap, map } from 'rxjs/operators';
+import { tap, map, withLatestFrom, filter, catchError } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { getExtraOutputStatus } from '../selectors';
+import { UIState } from '../state/ui.state';
 
 export interface PayloadAction {
   type: string;
@@ -18,13 +20,20 @@ export class UiEffects {
   constructor(
     private actions$: Actions,
     private game: GameService,
+    private store: Store<UIState>,
     private dialogService: DialogService
   ) { }
 
-    @Effect({dispatch: false})
-    updateUI: Observable<Action> = this.actions$.pipe(
+    @Effect({dispatch: false}) 
+    $updateUI$: Observable<any> = this.actions$.pipe(
       ofType(UIEventType.UPDATENEEDED),
-      tap(data => console.log(data))
+      withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
+      filter(([action, status]) => status === true ),
+      map(([action, status]) => action),
+      tap(
+        what => {
+          this.game.updateUIByData(what.payload)
+        })
     );
 
     @Effect({dispatch: false})

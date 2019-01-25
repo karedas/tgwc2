@@ -3,7 +3,6 @@ import { Store, select } from '@ngrx/store';
 import { UIState } from 'src/app/store/state/ui.state';
 import { getWelcomeNews } from 'src/app/store/selectors';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-client-container',
@@ -18,7 +17,7 @@ export class ClientContainerComponent implements  OnDestroy {
   constructor(private store: Store<UIState>) {
 
     this._unsubscribeAll = new Subject();
-    this.welcomeNews$ = this.store.pipe(select(getWelcomeNews));
+    this.welcomeNews$ = this.store.select(getWelcomeNews);
   }
 
   ngOnInit(): void {

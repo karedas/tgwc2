@@ -9,6 +9,7 @@ export enum UIEventType {
   UPDATENEEDED = '[UI] Update Needed Data',
   CLOSETEXTEDITOR = '[UI] Close Text Editor',
   SHOWCOMMANDS = '[UI] Show Commands List'
+
 }
 
 export class UpdateUI implements Action {
@@ -33,11 +34,6 @@ export class WelcomeNewsAction implements Action {
   readonly type =  UIEventType.WELCOMENEWS;
 }
 
-export class UpdateNeeded implements Action {
-  readonly type = UIEventType.UPDATENEEDED;
-  constructor( public payload: any) {}
-}
-
 export class CloseTextEditor implements Action {
   readonly type = UIEventType.CLOSETEXTEDITOR;
 }
@@ -46,6 +42,13 @@ export class ShowCommandsActions implements Action {
   readonly type = UIEventType.SHOWCOMMANDS;
   constructor( public payload: []) {}
 }
+
+
+export class UpdateNeeded implements Action {
+  readonly type = UIEventType.UPDATENEEDED;
+  constructor( public payload: any) {}
+}
+
 
 export type UIActions
   =
@@ -56,4 +59,5 @@ export type UIActions
   | AudioAction
   | WelcomeNewsAction
   | CloseTextEditor
-  | ShowCommandsActions;
+  | ShowCommandsActions
+  | UpdateNeeded;

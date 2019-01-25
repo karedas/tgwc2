@@ -19,6 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { appReducer, clearState } from './store';
 import { UiEffects } from './store/effects/ui.effects';
+import { DataEffects } from './store/effects/data.effects';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { UiEffects } from './store/effects/ui.effects';
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] } ),
-    EffectsModule.forRoot([UiEffects]),
+    EffectsModule.forRoot([UiEffects, DataEffects]),
     ToastrModule.forRoot({
       positionClass: 'inline',
     }),

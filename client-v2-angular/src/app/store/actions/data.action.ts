@@ -19,7 +19,7 @@ export enum DataEvenType {
     MAP = '[Data] Map Update',
     EDITOR = '[Data] Editor Request',
     OBJPERSON = '[Data] Object or Person',
-    GENERICTABLE = '[Data] Generic Table'
+    GENERICTABLE = '[Data] Generic Table',
 }
 
 export class IncomingData implements Action {
@@ -84,6 +84,7 @@ export class GenericTableAction implements Action {
     readonly type = DataEvenType.GENERICTABLE;
     constructor(public payload: IGtable) {}
 }
+
 
 
 
