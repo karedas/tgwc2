@@ -5,6 +5,7 @@ export interface UIState {
   welcomeNews: boolean;
   musicVolume: number;
   soundVolume: number;
+  track?: any;
   inputVisible: boolean;
   cursorOnMap: false; // Remove
   editorIsopen: boolean;
