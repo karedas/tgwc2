@@ -22,6 +22,7 @@ export const initialState: UIState = {
   welcomeNews: false,
   musicVolume: 100,
   soundVolume: 70,
+  track: undefined,
   inputVisible: true,
   cursorOnMap: false,
   editorIsopen: false,
