@@ -21,6 +21,7 @@ export interface IHero {
   name?: string;
   adjective?: string;
   image?: string;
+  conva: number;
   race?: IHeroRace;
   title?: string;
   status: IStatus;
@@ -33,6 +34,7 @@ export interface IHero {
 export class Hero implements IHero {
 
   status: IStatus;
+  conva: 0;
 
   constructor(...args ) {
     this.status = {

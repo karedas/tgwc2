@@ -11,7 +11,7 @@ export enum DataEvenType {
     OUT = '[Data] Outgoing Data',
     LOGGED = '[Data] Player is Logged In',
     HERODATA = '[Data] Update Hero Data',
-    PLAYERSTATUS = '[Data] Player Status Update',
+    AUTOUPDATESTATUSHERO = '[Data] Auto Update Hero Status',
     PLAYERSTATUSINLINE = '[Data] Player Status Inline',
     ROOM = '[Data] Room Update',
     DOORS = '[Data] Doors update',
@@ -50,9 +50,9 @@ export class ObjAndPersAction implements Action {
     constructor(public payload: IObjPerson) {}
 }
 
-export class PlayerStatus implements Action {
-    readonly type = DataEvenType.PLAYERSTATUS;
-    constructor( public payload: any) {}
+export class UpdateStatusHero implements Action {
+    readonly type = DataEvenType.AUTOUPDATESTATUSHERO;
+    constructor( public payload: any[]) {}
 }
 
 export class HeroAction implements Action {
@@ -77,7 +77,7 @@ export class EditorAction implements Action {
 
 export class PlayerStatusInlineAction implements Action {
     readonly type = DataEvenType.PLAYERSTATUSINLINE;
-    constructor(public payload: IHero) {}
+    constructor(public payload: any[]) {}
 }
 
 export class GenericTableAction implements Action {
@@ -95,7 +95,7 @@ export type DataAction
 | DoorsAction
 | MapAction
 | RoomAction
-| PlayerStatus
+| UpdateStatusHero
 | HeroAction
 | SkyAction
 | EditorAction

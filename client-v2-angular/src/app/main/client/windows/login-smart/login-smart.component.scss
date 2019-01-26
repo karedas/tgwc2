@@ -2,7 +2,7 @@
 
 .tg-loginwidget {
   text-align: center;
-  height: auto !important;
+  height: 100%;
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
 
 
@@ -29,10 +29,6 @@
     }
   }
 
-  form {
-    display: none;
-  }
-
   .form-control {
     border: none;
   }
@@ -49,10 +45,11 @@
 
   .back-to-root {
     text-decoration: underline;
-    margin-bottom: .5em;
+    padding: 1.5em;
     display: block;
     font-size: 11px;
     color: #dcdac8;
+    cursor: pointer;
   }
 
   .btn-loginwidget {

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero, getDashboardVisibility } from 'src/app/store/selectors';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IStatus, IHero, ITarget } from 'src/app/models/data/hero.model';
@@ -14,11 +14,19 @@ import { IStatus, IHero, ITarget } from 'src/app/models/data/hero.model';
 })
 export class CharacterPanelComponent implements OnInit, OnDestroy {
 
+
+  heroDashboard$: Observable<any>;
+
   status: {} = {drink: 0, food: 0, hit: 0, move: 0};
+
   inCombat: boolean = false;
   heroName: string;
   heroAdjective: string;
   heroImage: string;
+
+  conva: number;
+
+  // Enemy Target Values
   enemyHealt = 0;
   enemyMove = 0;
   enemyName = '';
@@ -39,11 +47,12 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
     this.store.pipe(select(getHero),
       takeUntil(this._unsubscribeAll)).subscribe(
-        hero => {
+        (hero:IHero) => {
           this.setStatus(hero.status);
           this.setCombatPanel(hero.target);
           this.heroName = hero.name;
           this.heroAdjective = hero.adjective;
+          this.conva = hero.conva;
           this.heroImage = environment.media_address + hero.image;
         }
       );

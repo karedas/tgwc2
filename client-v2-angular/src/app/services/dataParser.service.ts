@@ -6,7 +6,6 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
 import { IHero } from '../models/data/hero.model';
-import { CapitalizeFirstPipe } from '../pipes/capitalizeFirst';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +46,7 @@ export class DataParser {
     // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
       const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
+      console.log(pgdata_parse);
       this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
       return '';
     });
@@ -89,10 +89,10 @@ export class DataParser {
       return '';
     });
 
-    // Player status
+    // Auto Update Hero Status
     data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
       const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
-      this.store.dispatch(new DataActions.PlayerStatus(status_parse));
+      this.store.dispatch(new DataActions.UpdateStatusHero(status_parse));
       return '';
     });
 
@@ -233,10 +233,10 @@ export class DataParser {
       return '';
     });
 
-    // Player status
+    // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      // this.store.dispatch(new DataActions.HeroAction(<IHero>status_parse));
+      // this.store.dispatch(new DataActions.PlayerStatusInline({status: status_parse}));
       console.log('player status', status_parse);
       return '';
     });

@@ -7,6 +7,9 @@
           <div class="container-fluid tg-box h-100">
             <div class="row h-100">
               <div class="col-12 flex-column d-flex">
+                <div class="tg-editor--heroname">
+                  {{HeroName$ | async}}
+                </div>
                 <div class="textarea-cont">
 									<textarea #textareaDescription name="editor" cols="30" rows="10" autofocus 
 										[maxLength]="maxChars"

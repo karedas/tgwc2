@@ -1,7 +1,7 @@
 <div class="tg-objperson" *ngIf="html">
   <div class="tg-objperson--action">
     <span class="tg-green">Esamini</span>&nbsp;<div class="tg-objperson--item_desc tg-yellow"[attr.mrn]="html.num[indexSz]" [innerHtml]="html.title | dataToHtml | capitalizeFirst"></div>
-    <tg-icons [icon]="html.icon"></tg-icons>
+    <tg-icons [icon]="html.icon" class="squared"></tg-icons>
     <ng-container *ngIf="html.where">
       <div class="tg-objperson--where" [innerHtml]="'('+ html.where.title + ')'"></div>
     </ng-container>

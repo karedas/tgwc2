@@ -33,6 +33,7 @@ import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geoloc
 import { WindowsModule } from './windows/windows.module';
 import { ObjpersDetailComponent } from './output/renders/objpers-detail/objpers-detail.component';
 import { ObjPersContainerComponent } from './output/renders/obj-pers-container/obj-pers-container.component';
+import { StatusComponent } from './output/renders/status/status.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ObjPersContainerComponent } from './output/renders/obj-pers-container/o
     GeolocalBoxComponent,
     ObjpersDetailComponent,
     ObjPersContainerComponent,
+    StatusComponent,
   ],
   imports: [
     ClientRoutingModule,

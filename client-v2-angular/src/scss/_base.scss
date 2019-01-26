@@ -91,6 +91,24 @@ body[data-loginstatus=ready] {
 }
 
 
+/* Icons & Stuff */
+
+.tg-icon {
+  margin: auto auto;
+  background-image: url( $imgPath + '/tiles_s.png');
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+}
+
+
+.squared{
+  @include sprite($base-square-sprite);
+  display: flex;
+}
+
+
+
 @include media-breakpoint-down(md) {
   .tg-area {
     padding: 0;

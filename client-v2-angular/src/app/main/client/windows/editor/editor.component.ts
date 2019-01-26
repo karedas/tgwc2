@@ -4,9 +4,9 @@ import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
-import { getEditor } from 'src/app/store/selectors';
+import { getEditor, getHero } from 'src/app/store/selectors';
 import { IEditor } from 'src/app/models/data/editor.model';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -17,6 +17,7 @@ import { GameService } from 'src/app/services/game.service';
 export class EditorComponent implements OnInit, OnDestroy {
 
   editorRequest$: Observable<any>;
+  HeroName$: Observable<string>;
   modalConfig: ModalConfiguration = new ModalConfiguration;
   dialogID = 'editor';
 
@@ -41,6 +42,7 @@ export class EditorComponent implements OnInit, OnDestroy {
      }
 
   ngOnInit(): void {
+    
     this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
 
     this.editorRequest$.subscribe(
@@ -53,6 +55,8 @@ export class EditorComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
   }
 
   private openEditor() {

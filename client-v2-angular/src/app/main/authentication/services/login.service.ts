@@ -169,5 +169,4 @@ export class LoginService {
   get loginReplayMessage(): any {
     return this.loginErrorMessage$.asObservable();
   }
-
 }

@@ -16,7 +16,9 @@
 <ng-template #extradetail>
   
   <div class="tg-extraoutput--header">
-    <div *ngIf="html.title" class="tg-room--title" [innerHtml]="html.title | dataToHtml:true"></div>
+    <div *ngIf="html.title" class="tg-room--title">
+      <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
+    </div>
     <div class="tg-room--image" *ngIf="html.image">
       <img [src]="getRoomImage(html.image)" />
     </div>
@@ -31,15 +33,17 @@
 
   </div>
 
-  <ng-scrollbar class="scrollbar" #scrollBar>
-    <ng-container *ngIf="type === 'room'">
-      <tg-details-room 
-        [objs]="html.objcont?.list" 
-        [persons]="html.perscont?.list" 
-        *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
-    </ng-container>
-    <ng-container *ngIf="type === 'objPers'">
-        <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
-    </ng-container>
-  </ng-scrollbar>
+  <div>
+    <ng-scrollbar class="scrollbar" #scrollBar>
+      <ng-container *ngIf="type === 'room'">
+        <tg-details-room 
+          [objs]="html.objcont?.list" 
+          [persons]="html.perscont?.list" 
+          *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
+      </ng-container>
+      <ng-container *ngIf="type === 'objPers'">
+          <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
+      </ng-container>
+    </ng-scrollbar>
+  </div>
 </ng-template>

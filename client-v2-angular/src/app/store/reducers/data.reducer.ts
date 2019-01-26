@@ -12,14 +12,16 @@ export function reducer(
       });
     case DataEvenType.OUT:
       return Object.assign({}, state, action.payload);
-    case DataEvenType.PLAYERSTATUS:
+    case DataEvenType.AUTOUPDATESTATUSHERO:
+      console.log(action.payload);
       // return Object.assign({}, state, {hero: {status: action.payload}});
       return {...state, hero: { ...state.hero,
+        
         status: {
           drink: action.payload[3],
           food: action.payload[2],
           hit: action.payload[0],
-          move: action.payload[1],
+          move: action.payload[1]
         },
         target: {
           move: action.payload[5],
@@ -59,8 +61,9 @@ export function reducer(
       return Object.assign({}, state, {
         editor: action.payload
       });
-    case DataEvenType.PLAYERSTATUSINLINE:
-      return {...state, hero: action.payload};
+      
+    // case DataEvenType.PLAYERSTATUSINLINE:
+    //   return {...state, hero: action.payload};
 
     case DataEvenType.GENERICTABLE:
       return Object.assign({}, state, {

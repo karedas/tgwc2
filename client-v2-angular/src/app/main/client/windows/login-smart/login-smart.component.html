@@ -1,6 +1,6 @@
 <ng-container *ngIf="!(inGameState$ | async);">
   <tg-dialog [id]="'loginWidget'" [config]="modalConfig" [titleDialog]="Accesso">
-    <div class="tg-box">
+    <div class="tg-box h-100">
       <div class="tg-loginwidget">
         <div class="tg-widgetlogin-status">
           Sei stato disconnesso.
@@ -20,7 +20,7 @@
           <input class="form-control" name="username" type="text" autocomplete="off" placeholder="Username">
           <input class="form-control" name="password" type="password" autocomplete="off" placeholder="Password">
           <button type="submit" class="form-control btn-loginwidget tg-button" value="accedi">Accedi</button>
-          <a href="#" class="back-to-root" (click)="toggle($event)">Torna indietro</a>
+          <span href="#" class="back-to-root" (click)="toggle()">Torna indietro</span>
         </form>
       </div>
     </div>

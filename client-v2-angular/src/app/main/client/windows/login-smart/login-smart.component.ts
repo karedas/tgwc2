@@ -31,6 +31,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     private router: Router) {
 
     this.modalConfig.width = 'auto';
+    this.modalConfig.height = '250px'
     this.modalConfig.modalOpacity = 0.9;
     this.modalConfig.resizable = false;
 

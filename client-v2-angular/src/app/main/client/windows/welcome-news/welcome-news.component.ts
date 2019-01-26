@@ -17,8 +17,10 @@ export class WelcomeNewsComponent implements AfterViewInit {
 
   constructor(private dialogService: DialogService, private game: GameService) {
     this.modalConfig.width = 'auto';
-    this.modalConfig.minWidth = 400;
+    // this.modalConfig.minWidth = 550;
+    this.modalConfig.maxWidth = 700;
     this.modalConfig.modalOpacity = 0.8;
+    this.modalConfig.height = 'auto';
     this.modalConfig.resizable = false;
   }
 

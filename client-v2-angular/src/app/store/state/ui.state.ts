@@ -26,7 +26,7 @@ export const initialState: UIState = {
   inputVisible: true,
   cursorOnMap: false,
   editorIsopen: false,
-  extraOutput: false,
+  extraOutput: true,
   showDashBoard: true,
   zen: false
 };

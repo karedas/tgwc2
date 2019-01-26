@@ -8,11 +8,22 @@
         flex-direction: column;
       }
   
+      .tg-editor--heroname {
+        padding: 0;
+        text-align: center;
+        font-size: 37px;
+        font-family: kingthings;
+        color: #3a2e19;
+        line-height: 1;
+        margin-bottom: 0.2em;
+      }
+
       .textarea-cont {
         flex: 0 1 100%;
       }
       
       textarea {
+        font-family: kingthings;
         background: #cbb48d;
         border: none;
         width: 100%;

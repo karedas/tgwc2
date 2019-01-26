@@ -8,26 +8,32 @@
     
     h2 {
         font-size: 30px;
-        color: #ac4c55;
+        color: #3a2e19;
         font-family: kingthinks;
     }
-    
-    //vertical scrollbar
-    .ps__rail-y {
-    opacity: 1;
+
+    .tg-notizie--container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tg-notizie--content {
+        flex: 1;
     }
     
     .notizie-action {
-    margin-top: 1.5em;
-    label {
-        margin-left: 5px;
-        color: black;
-    }
+        flex: 0 0 auto;
+        justify-content: center;
+        padding:2em 0 0;
+        label {
+            margin-left: 5px;
+            color: black;
+        }
     }
     
     .tg-mnch-img {
-    margin-top: 5em;
     width: 100%;
+    min-height: 175px;
     background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
     background-size: contain;
     }
