@@ -14,9 +14,12 @@ import { AudioService } from '../main/client/audio/audio.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastContainerModule } from 'ngx-toastr';
 import { LoginService } from '../main/authentication/services/login.service';
+import { IconsComponent } from '../main/common/icons/icons.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    IconsComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -46,6 +49,7 @@ import { LoginService } from '../main/authentication/services/login.service';
     PipesModule,
     ToastContainerModule,
     FontAwesomeModule,
+    IconsComponent
   ],
 })
 export class SharedModule {

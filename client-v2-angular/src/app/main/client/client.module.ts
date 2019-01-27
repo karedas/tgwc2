@@ -11,7 +11,6 @@ import { CharacterPanelComponent } from './dashboard/character-panel/character-p
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { TextComponent } from './output/renders/text/text.component';
 import { RoomComponent } from './output/renders/room/room.component';
-import { IconsComponent } from '../common/icons/icons.component';
 
 // JQXWidgets
 import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
@@ -54,7 +53,6 @@ import { StatusComponent } from './output/renders/status/status.component';
     DirectionsComponent,
     TextComponent,
     RoomComponent,
-    IconsComponent,
     SplashscreenComponent,
     AudioComponent,
     ExtraboardComponent,

@@ -5,59 +5,112 @@
 @import 'utils/sprites-mixins';
 
 
+.datatable-header {
+    background-color: #30241d;
+    border: 1px solid  #42342c!important;
+}
+
+.datatable-body {
+    color: black;
+    
+    .datatable-row-wrapper {
+        background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
+        border-bottom: 1px solid #7c5f4e;
+    }
+    // border-right: 1px solid #7c5f4e;
+
+    // tbody tr:nth-of-type(even) {
+    //     background: url($imgPath + '/interface/trow-bg-dark.jpg') repeat-x bottom left;
+    //     background-color: #bcb190;
+    
+    // }
+
+    .datatable-row-wrapper:hover{
+        background-color: #ebdaa4;
+    }
+
+    .datatable-body-cell {
+        display: flex!important;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .datatable-body-cell-label {
+        margin: 0 auto!important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.datatable-footer {
+    overflow: hidden;
+    .page-count {
+        margin-left: 1.5em;
+        text-align: left;
+    }
+
+    .datatable-pager {
+        float: right;
+        height: 50%;
+        text-align: right;
+        width: 50%;
+    }
+
+    // .paginate_button {
+    //     padding:0 .2em;
+    //     &.current {
+    //         color: $tg-yellow;
+    //     }
+    // }
+}
+
+.datatable-scroll {
+    width:  100%!important;
+}
+
+
 
 .tg-generictable {
 
-    .table-cont {
-        height: 100%;
-        overflow: hidden;
-    }
+    // .table-cont {
+    //     height: 100%;
+    //     overflow: hidden;
+    // }
 
-    a {
-        cursor: pointer;
-    }
-
-    tbody tr:nth-of-type(odd) {
-        background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
-        background-color: #d0c49e;
-    }
-    tbody tr:nth-of-type(even) {
-        background: url($imgPath + '/interface/trow-bg-dark.jpg') repeat-x bottom left;
-        background-color: #bcb190;
-    }
-    tbody tr:hover{
-        background: url($imgPath + '/interface/trow-bg-hover.jpg') repeat-x bottom left;
-        background-color: #b1a784;
-    }
+    // a {
+    //     cursor: pointer;
+    // }
 
 
-    th {
-        border: none;
-        border: 1px solid  #42342c!important;
-        padding-left:20px;
-        font-weight: normal;
-        font-size: 12px;
-    }
 
-    th, td {
-        text-align: center;
-        vertical-align: middle;
-        border-right: 1px solid $table-dark-bg;
-        border-top: 1px solid  $table-dark-bg;
-    }
+    // th {
+    //     border: none;
+    //     border: 1px solid  #42342c!important;
+    //     padding-left:20px;
+    //     font-weight: normal;
+    //     font-size: 12px;
+    // }
 
-    td {
-        color: black;
-    }
+    // th, td {
+    //     text-align: center;
+    //     vertical-align: middle;
+    //     border-right: 1px solid $table-dark-bg;
+    //     border-top: 1px solid  $table-dark-bg;
+    // }
+
+    // td {
+    //     color: black;
+    // }
 
 
-    .checkbox {
-        margin: 0 auto;
-        @include sprite($notchecked-sprite);
-    }
+    // .checkbox {
+    //     margin: 0 auto;
+    //     @include sprite($notchecked-sprite);
+    // }
     
     
-    .checkbox.checked {
-        @include sprite($checked-sprite);
-    }
+    // .checkbox.checked {
+    //     @include sprite($checked-sprite);
+    // }
 }

@@ -5,6 +5,7 @@ import { InsertionDirective } from './insertion.directive';
 import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DataToHtmlPipe } from 'src/app/pipes/dataToHtml.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   imports: [
     CommonModule,
     NgScrollbarModule,
-    NgxDatatableModule
+    NgxDatatableModule,
 
   ],
   exports: [

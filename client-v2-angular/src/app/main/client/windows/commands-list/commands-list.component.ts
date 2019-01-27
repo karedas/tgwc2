@@ -25,6 +25,7 @@ export class CommandsListComponent implements OnInit {
   constructor(private game: GameService, private dialogService: DialogService) {
     this.modalConfig.draggable = true;
     this.modalConfig.isModal = false;
+    this.modalConfig.width = 750;
   }
 
   ngOnInit() {

@@ -4,7 +4,7 @@
       <div class="tg-dialog-inside-nopadding tg-shadow-inset h-100">
         <div class="container-fluid h-100">
           <div class="row h-100">
-            <div class="col-3 cmd-group px-0">
+            <div class="col-auto cmd-group px-0">
               <div *ngFor="let group of (removeTitleObject(cmds)) | keyvalue ; let i = index" 
                 (click)="setOpenedGroup(i)"
                 class="cmd-group--item">
@@ -13,7 +13,7 @@
                 </span>
               </div>
             </div>
-            <div class="col-9 cmd-values-container">
+            <div class="col cmd-values-container">
               <ng-scrollbar class="scrollbar" #commandsScrollbar>
                 <div *ngFor="let cmdvalue of (removeTitleObject(cmds)) | keyvalue; let ii = index" class="cmd-valuegroup">
                   <div class="cmd-value col" *ngFor="let item of cmdvalue.value" [ngClass]="{'showlist': ii === groupOpen}">

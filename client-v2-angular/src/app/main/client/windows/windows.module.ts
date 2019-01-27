@@ -9,6 +9,8 @@ import { EditorComponent } from './editor/editor.component';
 import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 import { CommandsListComponent } from './commands-list/commands-list.component';
 import { GenericTableComponent } from './generic-table/generic-table.component';
+import { IconsComponent } from '../../common/icons/icons.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,13 @@ import { GenericTableComponent } from './generic-table/generic-table.component';
     EditorComponent,
     CharacterSheetComponent,
     CommandsListComponent,
-    GenericTableComponent
+    GenericTableComponent,
+    
   ],
   imports: [
     CommonModule,
-    DialogModule
+    DialogModule,
+    SharedModule
   ],
   exports: [
     WelcomeNewsComponent,

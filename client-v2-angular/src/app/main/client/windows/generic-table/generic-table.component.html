@@ -1,5 +1,5 @@
 <ng-container *ngIf="dataTable$ | async as datatable">
-  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="'Utenti Online'">
+  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="'Informazioni'">
 
     <div class="tg-generictable h-100">
       <div class="tg-dialog-inside-nopadding h-100">
@@ -21,25 +21,43 @@
               #tgdatatable
               [limit]="15"
               [rows]="rows"
-              [columns]="columns"
-              [columnMode]="'force'"
-              [headerHeight]="50"
-              [footerHeight]="50"
-              style="min-height: 300px"
-              class="tg-rendetable table table-sm table-striped table-hover">
+              [columnMode]="'flex'"
+              [sortType]='"single"'
+              [messages]="messages"
+              [footerHeight]="30"
+              [scrollbarV]="false"
+              class="tg-rendetable fullscreen table-sm table-striped table-hover">
+              <ng-container *ngFor="let col of columns; let i = index">
+                  <ng-container *ngIf="col.name === 'icona'">
+                    <ngx-datatable-column
+                      [prop]="col.prop" 
+                      [name]="col.name"
+                      [flexGrow]="1">
+                        <ng-template 
+                          let-value="value" 
+                          let-row="row" 
+                          ngx-datatable-cell-template>
+                          <tg-icons [icon]="value"></tg-icons>
+                        </ng-template>
+                     </ngx-datatable-column>
+                  </ng-container>
 
-              <!-- <ng-container *ngFor="let head of datatable.head; let i=index">
-                <ngx-datatable-column name="">
-                    <ng-template ngx-datatable-header-template let-sort="sortFn" let-row="row">
-                        <span (click)="sort()">{{head.title || head}}</span>
-                    </ng-template>
-                    <ng-template let-row="row" ngx-datatable-cell-template  let-rowIndex="rowIndex">
-                      <strong>{{row[i]}}</strong>
-                    </ng-template>
-                </ngx-datatable-column>
-              </ng-container> -->
-              
+                  <ng-container *ngIf="col.name !== 'icona'">>
+                    <ngx-datatable-column 
+                      [prop]="col.prop" 
+                      [flexGrow]="2"
+                      [name]="col.name">
+                      <ng-template 
+                        let-value="value" 
+                        let-row="row" 
+                        ngx-datatable-cell-template>
+                          {{ value | dataToHtml}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ng-container>
+              </ng-container>
             </ngx-datatable>
+
           </div>
         </div>
       </div>

@@ -13,7 +13,6 @@ export function reducer(
     case DataEvenType.OUT:
       return Object.assign({}, state, action.payload);
     case DataEvenType.AUTOUPDATESTATUSHERO:
-      console.log(action.payload);
       // return Object.assign({}, state, {hero: {status: action.payload}});
       return {...state, hero: { ...state.hero,
         

@@ -145,6 +145,8 @@ tg-text {
   .tg-room {
     padding-bottom: .2em;
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .tg-room--title {
@@ -310,6 +312,7 @@ tg-text {
     border-bottom: 1px solid #433b3a;
     box-shadow: inset 0 -13px 65px 0px black;
     background: url($imgPath + '/background/detaildesc-bg.jpg');
+    flex: 0 0 auto;
 
     .tg-room--title {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;

@@ -33,8 +33,8 @@ export interface IHero {
 
 export class Hero implements IHero {
 
-  status: IStatus;
   conva: 0;
+  status: IStatus;
 
   constructor(...args ) {
     this.status = {
