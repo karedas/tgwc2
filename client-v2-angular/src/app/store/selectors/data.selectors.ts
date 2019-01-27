@@ -11,7 +11,7 @@ export const selectDataRoom = (state: DataState) => state.room;
 export const selectDataHero = (state: DataState) => state.hero;
 
 function fetchDateNow(state: DataState) {
-  return state.date
+  return state.date;
 }
 
 function fetchDataBase(state: DataState) {
