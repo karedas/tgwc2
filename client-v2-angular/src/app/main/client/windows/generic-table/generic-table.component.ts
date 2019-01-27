@@ -5,8 +5,8 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
-import { skip, skipWhile, filter } from 'rxjs/operators';
 import { IGtable } from 'src/app/models/data/generictable.model';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'tg-generic-table',
@@ -16,17 +16,33 @@ import { IGtable } from 'src/app/models/data/generictable.model';
 })
 export class GenericTableComponent implements OnInit {
 
-  @ViewChild('tgdatatable') table: any;
-  dialogID: string = 'genericTable';
-  dataTable$: Observable<any>;
-  modalConfig: ModalConfiguration = new ModalConfiguration;
+  @ViewChild('tgdatatable') table: DatatableComponent;
+  public readonly dialogID: string = 'genericTable';
+  public dataTable$: Observable<any>;
+  public modalConfig: ModalConfiguration = new ModalConfiguration;
 
-  rows = [];
-  columns = [];
-  messages = {
+  public rows = [];
+  public columns = [];
+  public currentPageLimit = 10;
+  public currentVisible = 3;
+  public messages = {
       // Footer total message
       totalMessage: 'Totali'
-    }
+    };
+
+  public readonly pageLimitOptions = [
+    {value: 5},
+    {value: 10},
+    {value: 25},
+    {value: 50},
+    {value: 100},
+  ];
+  public readonly visibleOptions = [
+    {value: 1},
+    {value: 3},
+    {value: 5},
+    {value: 10},
+  ];
 
 
 
@@ -37,7 +53,7 @@ export class GenericTableComponent implements OnInit {
     this.modalConfig.draggable = true;
     this.modalConfig.isModal = false;
     this.modalConfig.minHeight = 300;
-    this.modalConfig.height = "auto";
+    this.modalConfig.height = 'auto';
   }
 
   ngOnInit() {
@@ -56,12 +72,12 @@ export class GenericTableComponent implements OnInit {
   }
 
   private populate(dataTable: any) {
-    
+
     this.rows = [];
     this.columns = [];
 
     if (dataTable.head) {
-      dataTable.head.forEach((v: any, i:number) => {
+      dataTable.head.forEach((v: any, i: number) => {
         switch (typeof v) {
           case 'object':
             this.columns.push({ prop: 'prop_' + i, 'name': v.title.toLowerCase() });
@@ -70,7 +86,7 @@ export class GenericTableComponent implements OnInit {
             this.columns.push({ prop: 'prop_' + i, 'name': v.toLowerCase() });
             break;
         }
-      })
+      });
     }
     if (dataTable.data) {
       dataTable.data.forEach((d: any) => {
@@ -91,6 +107,8 @@ export class GenericTableComponent implements OnInit {
   private open() {
     setTimeout(() => {
       this.dialogService.open(this.dialogID);
+      this.dialogService.toFront(this.dialogID);
     }, 200);
+
   }
 }

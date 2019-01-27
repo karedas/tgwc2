@@ -24,7 +24,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   lastRoom$: Observable<any>;
 
 
-  extraOutputOpenStatus$: Observable<any>
+  extraOutputOpenStatus$: Observable<any>;
   private baseText: Observable<any>;
   private roomBase: Observable<any>;
   private objOrPerson: Observable<any>;
@@ -39,14 +39,14 @@ export class OutputComponent implements OnInit, OnDestroy {
   private outputTrimLines = 500;
 
   constructor(
-    private store: Store<DataState>, 
+    private store: Store<DataState>,
     private game: GameService) {
 
     this.extraOutputOpenStatus$ = this.store.select(getExtraOutputStatus);
 
     this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
     // this.autoUpdateNeeded = this.store.select(getVersions);
-    
+
     this.baseText = this.store.select(getDataBase);
     this.roomBase = this.store.select(getRoomBase);
     this.objOrPerson = this.store.select(getObjOrPerson);

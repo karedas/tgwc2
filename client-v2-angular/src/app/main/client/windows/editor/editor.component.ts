@@ -42,7 +42,7 @@ export class EditorComponent implements OnInit, OnDestroy {
      }
 
   ngOnInit(): void {
-    
+
     this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
 
     this.editorRequest$.subscribe(

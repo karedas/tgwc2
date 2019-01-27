@@ -61,7 +61,7 @@ export class DataParser {
     });
 
     /**
-     * DEPRECATED(normal input) 
+     * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
       this.store.dispatch(new UiActions.UpdateUI({inputVisible: true}));

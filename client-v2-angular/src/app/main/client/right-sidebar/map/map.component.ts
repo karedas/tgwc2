@@ -41,7 +41,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   private mapShadowImg: HTMLImageElement[] = [];
   private mapShadowTile: HTMLImageElement;
 
-  showSnow: boolean = false;
+  showSnow = false;
 
   constructor(
     private store: Store<DataState>,

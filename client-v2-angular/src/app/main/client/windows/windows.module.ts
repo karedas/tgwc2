@@ -22,7 +22,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CharacterSheetComponent,
     CommandsListComponent,
     GenericTableComponent,
-    
+
   ],
   imports: [
     CommonModule,

@@ -87,10 +87,11 @@ export class InputComponent implements AfterViewInit {
   @HostListener('window:keydown', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
     if (event.which == 49 && event.shiftKey === true && this.ic.nativeElement.value == 0) {
-      let l = this.historyService.cmd_history.length;
+      const l = this.historyService.cmd_history.length;
 
-      if (l > 0)
+      if (l > 0) {
         this.game.processCommands(this.historyService.cmd_history[l - 1]);
+      }
       return false;
     }
   }

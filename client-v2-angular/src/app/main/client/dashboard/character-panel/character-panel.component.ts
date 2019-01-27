@@ -19,7 +19,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   status: {} = {drink: 0, food: 0, hit: 0, move: 0};
 
-  inCombat: boolean = false;
+  inCombat = false;
   heroName: string;
   heroAdjective: string;
   heroImage: string;
@@ -47,7 +47,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
     this.store.pipe(select(getHero),
       takeUntil(this._unsubscribeAll)).subscribe(
-        (hero:IHero) => {
+        (hero: IHero) => {
           this.setStatus(hero.status);
           this.setCombatPanel(hero.target);
           this.heroName = hero.name;
@@ -64,13 +64,13 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  private setCombatPanel(target?:ITarget) {
-    if(target && typeof target.hit !== 'undefined') {
+  private setCombatPanel(target?: ITarget) {
+    if (target && typeof target.hit !== 'undefined') {
       const lengthKeys = Object.keys(target).length;
       if (lengthKeys > 0) {
         this.inCombat = true;
         this.updateEnemyIcon();
-  
+
         this.enemyHealt = target.hit;
         this.enemyMove = target.move;
         this.enemyIcon = target.icon;

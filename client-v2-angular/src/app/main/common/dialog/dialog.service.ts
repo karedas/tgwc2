@@ -28,4 +28,9 @@ export class DialogService {
       // remove modal from array of active modals
       this.modals = this.modals.filter(x => x.id !== id);
   }
+
+  toFront(id: string) {
+    const modal: any = this.modals.filter(x => x.id === id)[0];
+    modal.toFront();
+  }
 }

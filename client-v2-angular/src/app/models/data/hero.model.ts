@@ -28,7 +28,7 @@ export interface IHero {
   attitude?: string;
   equipment?: [];
   inventory?: [];
-  target?: ITarget | null
+  target?: ITarget | null;
 }
 
 export class Hero implements IHero {

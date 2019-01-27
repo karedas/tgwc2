@@ -24,7 +24,7 @@ export class UiEffects {
     private dialogService: DialogService
   ) { }
 
-    @Effect({dispatch: false}) 
+    @Effect({dispatch: false})
     $updateUI$: Observable<any> = this.actions$.pipe(
       ofType(UIEventType.UPDATENEEDED),
       withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
@@ -32,7 +32,7 @@ export class UiEffects {
       map(([action, status]) => action),
       tap(
         what => {
-          this.game.updateUIByData(what.payload)
+          this.game.updateUIByData(what.payload);
         })
     );
 
@@ -55,6 +55,6 @@ export class UiEffects {
     );
 
 
-    
+
 
 }

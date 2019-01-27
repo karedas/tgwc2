@@ -17,14 +17,14 @@ export class GameService {
   private showNewsSubject$: BehaviorSubject<boolean>;
   private commandsList$: Subject<any> = new Subject();
 
-  private lastDataTime: number = 0;
+  private lastDataTime = 0;
   clientUpdateNeeded = {
     inventory: 0,
     equipment: 0,
     room: 0
   };
 
-  private extraOutput: boolean = false
+  private extraOutput = false;
 
 
   showNews: any;
@@ -80,11 +80,11 @@ export class GameService {
 
   updateUIByData(what: any) {
 
-    let now = Date.now();
+    const now = Date.now();
     console.log(what);
-    if(now > this.lastDataTime + 1000 ) {
+    if (now > this.lastDataTime + 1000 ) {
 
-      if(what.room && what.room  >  this.clientUpdateNeeded.room ) {
+      if (what.room && what.room  >  this.clientUpdateNeeded.room ) {
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;

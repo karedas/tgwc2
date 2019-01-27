@@ -1,6 +1,6 @@
 export interface IGtable {
     title?: string;
-    data: {}
-    head: any[]
+    data: {};
+    head: any[];
     plain: boolean;
 }

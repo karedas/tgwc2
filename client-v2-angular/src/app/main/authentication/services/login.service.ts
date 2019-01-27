@@ -51,7 +51,7 @@ export class LoginService {
     this.password = data.password;
 
     this.resetHandler();
-    this.socketService.connect(); 
+    this.socketService.connect();
     this.setHandleLoginData();
     this.socketService.emit('loginrequest');
     return this.isLoggedInSubject.asObservable();
@@ -62,7 +62,7 @@ export class LoginService {
   }
 
   public reconnect() {
-    this.login({username: this.username, password: this.password})
+    this.login({username: this.username, password: this.password});
   }
 
   private resetHandler() {

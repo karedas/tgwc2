@@ -13,17 +13,17 @@ export class ObjPersContainerComponent implements OnInit {
 
   equipPositionValue: {} = equip_positions_by_name;
   newListEquip: any[];
-  
+
   @Input('eqcont') eqcont: IObjPersEqcont[];
   @Input('objcont') objcont: IObjPersObjcont[];
 
-  constructor(private game: GameService) { 
+  constructor(private game: GameService) {
 
      const keysAndProperty = Object.keys( equip_positions_by_name );
-     
+
      this.newListEquip = keysAndProperty.map((val, k) => {
         return equip_positions_by_name[keysAndProperty[k]];
-     } )
+     } );
 
      console.log(this.newListEquip);
 
@@ -32,7 +32,7 @@ export class ObjPersContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+
   getHstat(condprc: number): string {
     return this.game.getHsStatBgPos(condprc);
   }

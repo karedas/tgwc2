@@ -22,7 +22,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   private _unsubscribeAll: Subject<any>;
 
 
-  showForm: boolean = false;
+  showForm = false;
 
   constructor(
     private store: Store<ClientState>,
@@ -31,7 +31,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     private router: Router) {
 
     this.modalConfig.width = 'auto';
-    this.modalConfig.height = '250px'
+    this.modalConfig.height = '250px';
     this.modalConfig.modalOpacity = 0.9;
     this.modalConfig.resizable = false;
 
@@ -44,7 +44,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
       takeUntil(this._unsubscribeAll),
       skip(1)).subscribe(
       ingame => {
-        if (ingame == false) { this.open();}
+        if (ingame == false) { this.open(); }
       }
     );
   }
@@ -59,12 +59,12 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     this.loginService.reconnect();
   }
 
-  toggle(event?:Event) {
-    
-    if(event) {
+  toggle(event?: Event) {
+
+    if (event) {
       event.preventDefault();
     }
-      
+
     this.showForm = !this.showForm;
   }
 
@@ -72,7 +72,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     this.store.dispatch(new DisconnectAction);
     this.router.navigate(['/login']);
   }
-  
+
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

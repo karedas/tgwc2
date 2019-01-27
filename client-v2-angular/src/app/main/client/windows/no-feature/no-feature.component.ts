@@ -13,7 +13,7 @@ export class NoFeatureComponent implements OnInit {
   modalConfig: ModalConfiguration = new ModalConfiguration();
 
 
-  constructor(private dialogService: DialogService) { 
+  constructor(private dialogService: DialogService) {
     this.modalConfig.width = 'auto';
   }
 

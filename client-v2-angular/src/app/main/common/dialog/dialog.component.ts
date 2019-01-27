@@ -45,8 +45,8 @@ export class DialogComponent  implements OnInit, OnDestroy {
     this.jqxWindow.close();
   }
 
-  onResize(): void {
-
+  toFront(): void {
+    this.jqxWindow.bringToFront();
   }
 
   ngOnDestroy(): void {

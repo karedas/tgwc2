@@ -24,10 +24,10 @@ export class AudioComponent implements OnInit {
   ngOnInit(): void {
     this.music$.pipe(filter(state => !!state )).subscribe(
       track => this.audioService.setAudio(track)
-    );    
+    );
   }
 
   ngOnDestroy(): void {
-  
+
   }
 }

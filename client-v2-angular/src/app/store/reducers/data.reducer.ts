@@ -15,7 +15,7 @@ export function reducer(
     case DataEvenType.AUTOUPDATESTATUSHERO:
       // return Object.assign({}, state, {hero: {status: action.payload}});
       return {...state, hero: { ...state.hero,
-        
+
         status: {
           drink: action.payload[3],
           food: action.payload[2],
@@ -60,14 +60,14 @@ export function reducer(
       return Object.assign({}, state, {
         editor: action.payload
       });
-      
+
     // case DataEvenType.PLAYERSTATUSINLINE:
     //   return {...state, hero: action.payload};
 
     case DataEvenType.GENERICTABLE:
       return Object.assign({}, state, {
         genericTable: action.payload}
-      )
+      );
 
     default:
       return state;
