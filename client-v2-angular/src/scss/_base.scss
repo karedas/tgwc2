@@ -70,16 +70,8 @@ body[data-loginstatus=ready] {
 }
 
 .tg-main {
-  display: flex;
-  min-height: 100%;
-  max-height: 100%;
-  flex-direction: column;
   z-index: 10;
   position: relative;
-
-  .tg-main-row {
-    flex: 1;
-  }
 }
 
 .tg-leftside {

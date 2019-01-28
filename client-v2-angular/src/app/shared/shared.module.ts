@@ -16,6 +16,7 @@ import { ToastContainerModule } from 'ngx-toastr';
 import { TooltipModule } from 'ngx-tooltip';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { IconsComponent } from '../main/common/icons/icons.component';
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
+    FlexLayoutModule,
     // font awesome
     FontAwesomeModule,
     // Various
@@ -44,6 +46,7 @@ import { IconsComponent } from '../main/common/icons/icons.component';
     LoginService
   ],
   exports: [
+    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     TooltipModule,

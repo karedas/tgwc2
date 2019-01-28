@@ -8,8 +8,6 @@
 :host {
     background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
     overflow: hidden;
-    flex: 0  1 auto;
-    display: flex;
   
     .tg-rightside-wrap {
         height: 100%;

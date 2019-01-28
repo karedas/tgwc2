@@ -109,10 +109,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/cdk@^7.2.1":
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.2.1.tgz#f3673d026a0a38f93629bbd67039bbbb50a36f1c"
-  integrity sha512-oU1Pjq3JkDtkXquLxWK84A2jOCeYRf352dVGbQCxWoSOQ5KBtMAd42huGidPiOSHN6/f7xZwL3n4fq3fVIut8A==
+"@angular/cdk@^7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.2.2.tgz#f80bb3e54fe7db2c6957570d2ae1b7a24c4b1f13"
+  integrity sha512-DG4Ip9COZuQngG31gNFrJRtVPYC8H938dCHuqVjHrLEKfdsKzvprI/y0W+tr/sUnIbIJWEPSvnzmS3XYOgmFyg==
   dependencies:
     tslib "^1.7.1"
   optionalDependencies:
@@ -170,6 +170,13 @@
   integrity sha512-FYNAf4chxBoIVGCW2+fwR2MB2Ur5v1aG9L6zCcMXlZLbR64bu5j2m4e70RhXk/VptKvYWJ45od3xE5KfcaeEig==
   dependencies:
     tslib "^1.9.0"
+
+"@angular/flex-layout@^7.0.0-beta.23":
+  version "7.0.0-beta.23"
+  resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-7.0.0-beta.23.tgz#eff267584284bf534932deac513827d1b059c92e"
+  integrity sha512-jH2i3i/M7SbK6scVlj2urVL5OhzwavbQ7KwvUjyc/UwccKnnzuOuWEGCINLja/aoaUO3I35LluCLv6a6VN0olA==
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/forms@~7.2.1":
   version "7.2.1"

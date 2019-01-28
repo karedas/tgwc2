@@ -6,16 +6,14 @@
     <div class="tg-border tg-border-bottom"></div>
   </div>
   <!-- Main Panel -->
-  <div class="tg-main container-fluid">
-    <div class="row">
-      <tg-navbar class="col-12"></tg-navbar>
-    </div>
-    <div class="tg-main-row row">
+  <div class="tg-main" fxLayout="column" fxFill>
+    <tg-navbar fxFlex="0 0 auto"></tg-navbar>
+    <div fxLayout="column" fxFlex="1 1 0%" class="tg-main-row">
       <div class="tg-leftside col">
         <tg-output></tg-output>
         <tg-dashboard></tg-dashboard>
       </div>
-      <tg-right-sidebar></tg-right-sidebar>
+      <tg-right-sidebar fxLayout fxFlex="0 1 auto" fxHide.xs="true"></tg-right-sidebar>
     </div>
   </div>
   <tg-audio></tg-audio>

@@ -1,7 +1,9 @@
-<div class="tg-loginpanel">
+<div class="tg-loginpanel" fxLayout="column" fxFill>
   <!-- Login Panel -->
-  <div class="justify-content-center align-self-top w-100 d-flex h-100">
-    <div class="mx-auto tg-login-container my-auto">
+  <!-- <div class="justify-content-center align-self-top w-100 d-flex h-100"> -->
+  <div fxLayout="column" fxFlex="1 1 0%" fxLayoutAlign="center">
+    
+    <div class="tg-login-container">
       <div class="tg-logo-composit">
       </div>
       <div class="tg-loginform">
@@ -59,16 +61,16 @@
     </div>
   </div>
   <!-- Copyright and Usefull Links -->
-  <div class="tg-login-footer align-self-baseline mt-auto w-100">
-    <div class="row">
-      <div class="col-12 text-center">
+  <div  fxLayout="column" fxFlex="0 0 auto" class="tg-login-footer">
+    <div fxLayout="row" fxFlexFill>
+      <div fxFlex="100">
         <div class="tg-serverstatus">
           <!-- {{ serverStatusText }} -->
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-4 text-center">
+    <div fxLayout="row" fxFlexFill>
+      <div fxFlex="33.33">
         <i class="fab fa-facebook"></i>
         <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
         <i class="fab fa-wpforms"></i>
@@ -76,14 +78,14 @@
         <i class="fas fa-envelope"></i>
         <a href="#" target="_blank">Contattaci</a>
       </div>
-      <div class="col-4 text-center">
+      <div fxFlex="33.33">
         <p class="tg-version-name">TGWebClient Version 2 -
           <span>
            {{ gitVersion }}
           </span>
         </p>
       </div>
-      <div class="col-4 text-center">
+      <div fxFlex="33.33">
         &copy; 2013-2018 The Gate MUD |
         <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a>
       </div>
