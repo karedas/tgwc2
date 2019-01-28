@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { getInGameStatus } from 'src/app/store/selectors';
 import { ClientState } from 'src/app/store/state/client.state';
 import { skip, takeUntil } from 'rxjs/operators';
-import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { Router } from '@angular/router';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
+import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-login-smart',

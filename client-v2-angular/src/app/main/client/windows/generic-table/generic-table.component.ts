@@ -1,12 +1,12 @@
 import { Component, OnInit, SimpleChange, ChangeDetectionStrategy, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGtable } from 'src/app/models/data/generictable.model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-generic-table',

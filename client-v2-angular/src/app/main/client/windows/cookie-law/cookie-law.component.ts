@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component ({
   selector: 'tg-cookie-law',

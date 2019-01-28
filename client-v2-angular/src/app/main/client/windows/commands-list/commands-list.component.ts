@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, HostListener, ViewChild, Input, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
-import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-commands-list',

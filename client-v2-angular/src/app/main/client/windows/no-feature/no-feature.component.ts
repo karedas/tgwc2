@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
-import { ModalConfiguration } from 'src/app/models/client/modal.interface';
+import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-no-feature',

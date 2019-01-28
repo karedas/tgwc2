@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ModalConfiguration } from 'src/app/models/client/modal.interface';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
@@ -8,6 +7,7 @@ import { getEditor, getHero } from 'src/app/store/selectors';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { takeUntil, map } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
+import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-editor',
