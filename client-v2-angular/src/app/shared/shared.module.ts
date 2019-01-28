@@ -13,6 +13,7 @@ import { AudioService } from '../main/client/audio/audio.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastContainerModule } from 'ngx-toastr';
+import { TooltipModule } from 'ngx-tooltip';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 
@@ -25,13 +26,14 @@ import { IconsComponent } from '../main/common/icons/icons.component';
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
+    // font awesome
+    FontAwesomeModule,
     // Various
     NgScrollbarModule,
     FormsModule,
     ReactiveFormsModule,
-    // font awesome
-    FontAwesomeModule,
     ToastContainerModule,
+    TooltipModule
   ],
   providers: [
     GameService,
@@ -44,6 +46,7 @@ import { IconsComponent } from '../main/common/icons/icons.component';
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule,
     CommonModule,
     NgScrollbarModule,
     PipesModule,

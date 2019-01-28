@@ -51,6 +51,7 @@
     "ngx-scrollbar": "^4.1.1",
     "ngx-socket-io": "^2.0.0",
     "ngx-toastr": "^9.1.1",
+    "ngx-tooltip": "^0.0.9",
     "normalize.css": "^8.0.1",
     "primeicons": "^1.0.0",
     "rxjs": "^6.3.3",

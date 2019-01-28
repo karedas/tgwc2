@@ -133,8 +133,7 @@ export class LoginService {
 
   onLoginOk(data: any) {
     this.completeHandShake();
-    this.game.startGame();
-    this.game.handleServerGameData(data);
+    this.game.startGame(data);
     this.store.dispatch(new LoginSuccessAction());
   }
 
@@ -156,7 +155,7 @@ export class LoginService {
     this.loginReplayMessage = 'serverdown';
   }
 
-  onError(err) {
+  onError(err: any) {
     this.socketService.off(socketEvent.LOGIN);
     this.store.dispatch(new LoginFailureAction(this.loginReplayMessage));
     this.loginReplayMessage = loginError[err];

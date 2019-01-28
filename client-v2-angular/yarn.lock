@@ -5760,6 +5760,11 @@ ngx-toastr@^9.1.1:
   dependencies:
     tslib "^1.9.0"
 
+ngx-tooltip@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/ngx-tooltip/-/ngx-tooltip-0.0.9.tgz#9821693e7d91c57dae8189c5d6a810526890b6f6"
+  integrity sha1-mCFpPn2RxX2ugYnF1qgQUmiQtvY=
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

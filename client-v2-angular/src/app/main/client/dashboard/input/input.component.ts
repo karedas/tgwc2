@@ -1,9 +1,11 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
+
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
+
 import { Store, select } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
-import { ToggleExtraOutput, ToggleDashboard, UpdateUI } from 'src/app/store/actions/ui.action';
+import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
 import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { getUIState } from 'src/app/store/selectors';
@@ -35,7 +37,7 @@ export class InputComponent implements AfterViewInit {
     private game: GameService,
     private store: Store<ClientState>,
     private historyService: HistoryService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
   ) {
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));

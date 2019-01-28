@@ -8,17 +8,27 @@
     <b class="tg-yellow">Comando:
       <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
   <div class="tg-inputcommand">
-    <button  type="button" class="tg-fnt-button  d-none d-sm-inline-block" rel="tooltip" title="Espandi/Comprimi l'Interfaccia"
+    <button
+      class="tg-fnt-button  d-none d-sm-inline-block"
+      type="button"
+      tooltip="Tipo de condición en la que se realiza la venta." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top"
       (mousedown)="toggleExtraOutput($event)"
       [ngClass]="{'isActive': extraOutputStatus$ | async}">
       <fa-icon [icon]="facolumns"></fa-icon>
     </button>
-    <button type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri la tua Dashboard" 
+    <button 
+      class="tg-fnt-button"
+      type="button" 
+      tooltip="Espandi / Comprimi la tua Dashboard"
+      tooltipPlacement="top"
       (mousedown)="toggleDashboard($event)"
       [ngClass]="{'isActive': dashBoardStatus$ | async}">
       <fa-icon [icon]="faSolarPanel"></fa-icon>
     </button>
-    <button type="button" class="tg-fnt-button d-none d-sm-inline-block" rel="tooltip" title="Modalit&agrave; Zen" 
+    <button 
+      class="tg-fnt-button d-none d-sm-inline-block"
+      type="button"
+      title="Modalit&agrave; Zen" 
       (mousedown)="toggleZen($event)">
       <fa-icon [icon]="faBullseye"></fa-icon>
     </button>

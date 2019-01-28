@@ -1,5 +1,5 @@
-import { UIState } from '../state/ui.state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { UIState } from '../state/ui.state';
 
 
 /******************* Base Search State ******************/

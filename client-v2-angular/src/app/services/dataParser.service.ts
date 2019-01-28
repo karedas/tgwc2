@@ -6,19 +6,38 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
 import { IHero } from '../models/data/hero.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataParser {
-  private cmdPrefix = '';
 
-  constructor( private store: Store<State>) {
+  private cmdPrefix: string = '';
+  private netData: string = '';
+  private shortcuts = {};
+
+  constructor(private store: Store<State>)
+  { 
   }
 
-  parse(data: any): void {
-    this.parseForDisplay(this.preParseText(data));
+  handlerGameData(data: any) {
+
+    this.netData += data;
+    const len = this.netData.length;
+
+    if (this.netData.indexOf('&!!', len - 3) !== -1) {
+
+      const data = this.netData.substr(0, len - 3);
+
+      this.parseForDisplay(this.preParseText(data));
+      this.netData = '';
+
+    } else if (len > 2000000) {
+      this.netData = '';
+      // this.setDisconnect(); //TODO
+    }
   }
 
   preParseText(data: string): string {
@@ -346,49 +365,47 @@ export class DataParser {
     let res = [];
     /* Substitute shortcuts on each command and join results */
     for (let i = 0; i < inputs.length; ++i) {
-      const subs = this.substShort(inputs[i]).split(/\s*;\s*/);
+      const subs = inputs[i].split(/\s*;\s*/);
       res = res.concat(subs);
     }
     /* Return the resulting array */
     return res;
   }
 
-  substShort(input) {
+  // substShort(input: string): any {
 
-    /* Split into arguments */
-    // const args = input.split(/\s+/);
+  //   /* Split into arguments */
+  //   let args = input.split(/\s+/);
+  //   /* Get the shortcut index */
+  //   let shortcut_key = args.shift();
+  //   let shortcut_num = parseInt(shortcut_key);
+  //   let shortcut_cmd;
+  //   if (!isNaN(shortcut_num)) {
+  //       shortcut_cmd = _.client_options.shortcuts[shortcut_num];
+  //   } else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {
+  //       shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
+  //   }
 
-    /* Get the shortcut index */
-    // const shortcut_key = args.shift();
-    // const shortcut_num = parseInt(shortcut_key, 10);
-    // //const shortcut_cmd;
-    // if (!isNaN(shortcut_num)) {
-    //   // shortcut_cmd = _.client_options.shortcuts[shortcut_num];
-    //   // } else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {
-    //   // shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
-    // }
+  //   /* Check if the shortcut is defined */
+  //   if (shortcut_cmd) {
+  //       /* Use the shortcut text as command */
+  //       input = shortcut_cmd.cmd;
+  //       if (/\$\d+/.test(input)) {
+  //           /* Substitute the arguments */
+  //           for (let arg = 0; arg < args.length; ++arg) {
+  //               let rx = new RegExp("\\$" + (arg + 1), 'g');
+  //               input = input.replace(rx, args[arg]);
+  //           }
+  //           /* Remove remaining letiables */
+  //           input = input.replace(/\$\d+/g, '');
+  //       } else
+  //           input += " " + args.join(" ");
+  //   }
 
-    // /* Check if the shortcut is defined */
-    // if (shortcut_cmd) {
-    //   /* Use the shortcut text as command */
-    //   input = shortcut_cmd.cmd;
-    //   if (/\$\d+/.test(input)) {
-    //     /* Substitute the arguments */
-    //     for (let arg = 0; arg < args.length; ++arg) {
-    //       const rx = new RegExp('\\$' + (arg + 1), 'g');
-    //       input = input.replace(rx, args[arg]);
-    //     }
-    //     /* Remove remaining letiables */
-    //     input = input.replace(/\$\d+/g, '');
-    //   } else {
-    //     input += ' ' + args.join(' ');
-    //   }
-    // }
-
-    // if (this.cmdPrefix.length > 0) {
-    //   input = this.cmdPrefix + ' ' + input;
-    // }
-    return input;
-  }
+  //       if (_.cmd_prefix.length > 0) {
+  //           input = _.cmd_prefix + " " + input;
+  //       }
+  //       return input;
+  //   }
 
 }
