@@ -39,13 +39,11 @@
           <!-- ## End Content ## -->
         </div>
         <!-- ## End Menu ## -->
-        <div class="notizie-action" fxFlex="0 0 auto" fxFlexAlign="center center">
-          <div fxFlex="100">
-            <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
-            <div class="input-checkbox">
-                <input type="checkbox" aria-label="Non mostrare" (change)="onCheckbox($event)">
-                <label>Non mostrare piu' questa notizia.</label>
-            </div>
+        <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
+          <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
+          <div class="input-checkbox">
+              <input type="checkbox" aria-label="Non mostrare" (change)="onCheckbox($event)">
+              <label>Non mostrare piu' questa notizia.</label>
           </div>
         </div>
       </div>

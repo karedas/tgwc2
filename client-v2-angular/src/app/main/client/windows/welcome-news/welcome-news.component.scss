@@ -1,30 +1,35 @@
 @import 'variables';
 
 .tg-notizie {
-    color: black;
-    text-align: left;
-    height: 100%;
-    overflow: hidden;
-    
-    h2 {
-        font-size: 30px;
-        color: #3a2e19;
-        font-family: kingthinks;
-    }
+  color: black;
+  text-align: left;
+  height: 100%;
+  overflow: hidden;
 
-    
-    .notizie-action {
-        padding:2em 0 0;
-        label {
-            margin-left: 5px;
-            color: black;
-        }
+  h2 {
+    font-size: 30px;
+    color: #3a2e19;
+    font-family: kingthinks;
+  }
+
+
+  .notizie-action {
+    padding: 2em 0 0;
+
+    label {
+      margin-left: 5px;
+      color: black;
     }
-    
-    .tg-mnch-img {
+  }
+
+  .tg-mnch-img {
     width: 100%;
     min-height: 175px;
     background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
     background-size: contain;
-    }
+  }
+
+  .input-checkbox {
+      padding-top: 1em;
+  }
 }
