@@ -1,67 +1,61 @@
 <div class="tg-characterpanel b-controlpanel" *ngIf="toggleStatus$ | async">
-  <div class="tg-characterpanel-wrap">
-    <div class="row">
-      <div class="col">
-        <div class="row">
-          <!-- Character Detail -->
-          <div class="tg-character col pr-lg-0">
-            <!-- Character Avatar -->
-            <div class="tg-characteravatar b-ironlight" title="{{heroName}}">
-              <div class="tg-avatar-wrap">
-                <img [src]="heroImage" alt="Avatar" *ngIf="heroImage" />
+  <div class="tg-characterpanel-wrap" fxFlex="100" fxLayout="row">
+    <!-- Character Detail -->
+      <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
+        <!-- Character Avatar -->
+        <div class="tg-characteravatar b-ironlight" title="{{heroName}}" fxHide fxShow.gt-sm>
+          <div class="tg-avatar-wrap">
+            <img [src]="heroImage" alt="Avatar" *ngIf="heroImage" />
+          </div>
+          <div class="tg-border-box">
+            <div class="tg-border tg-border-top"></div>
+            <div class="tg-border tg-border-left"></div>
+            <div class="tg-border tg-border-right"></div>
+            <div class="tg-border tg-border-bottom"></div>
+          </div>
+        </div>
+        <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto"> 
+          <!-- Character Name & Status -->
+          <div class="tg-infocharname">
+            <span class="charName">{{heroName}}</span>
+            <!-- <i class="pg-status"></i> -->
+            <!-- <div class="hero-genericstatus">
+              <span *ngIf="conva === 1"> OK </span>
+            </div> -->
+          </div>
+          <!-- Character Status Bars -->
+          <div class="tg-meterbar">
+            <div class="tg-extrabars" fxLayout="row">
+              <div class="barcont barthin lft">
+                <span class="tg-statusbar-text" title="Punti Salute">
+                  <i>{{ status.hit }}</i> / 100</span>
+                <span class="red barC healthbar" [style.width.%]="status.hit"></span>
               </div>
-              <div class="tg-border-box">
-                <div class="tg-border tg-border-top"></div>
-                <div class="tg-border tg-border-left"></div>
-                <div class="tg-border tg-border-right"></div>
-                <div class="tg-border tg-border-bottom"></div>
+              <div class="barcont barthin" title="Punti Movimento">
+                <span class="tg-statusbar-text">
+                  <i>{{ status.move }}</i> / 100</span>
+                <span class="green barC movebar" [style.width.%]="status.move"></span>
               </div>
             </div>
-            <div class="tg-infochar">
-              <!-- Character Name & Status -->
-              <div class="tg-infocharname">
-                <span class="charName">{{heroName}}</span>
-                <!-- <i class="pg-status"></i> -->
-                <!-- <div class="hero-genericstatus">
-                  <span *ngIf="conva === 1"> OK </span>
-                </div> -->
+            <div class="tg-extrabars"  fxLayout="row">
+              <div class="barcont barthin lft" title="Fame">
+                <span class="tg-statusbar-text">
+                  <i>{{ status.food }}</i> / 100</span>
+                <span class="orange barC hungrybar" [style.width.%]="status.food"></span>
               </div>
-              <!-- Character Status Bars -->
-              <div class="tg-meterbar">
-                <div class="tg-extrabars">
-                  <div class="barcont barthin lft">
-                    <span class="tg-statusbar-text" title="Punti Salute">
-                      <i>{{ status.hit }}</i> / 100</span>
-                    <span class="red barC healthbar" [style.width.%]="status.hit"></span>
-                  </div>
-                  <div class="barcont barthin" title="Punti Movimento">
-                    <span class="tg-statusbar-text">
-                      <i>{{ status.move }}</i> / 100</span>
-                    <span class="green barC movebar" [style.width.%]="status.move"></span>
-                  </div>
-                </div>
-                <div class="tg-extrabars">
-                  <div class="barcont barthin lft" title="Fame">
-                    <span class="tg-statusbar-text">
-                      <i>{{ status.food }}</i> / 100</span>
-                    <span class="orange barC hungrybar" [style.width.%]="status.food"></span>
-                  </div>
-                  <div class="barcont barthin" title="Sete">
-                    <span class="tg-statusbar-text">
-                      <i>{{ status.drink}}</i> / 100</span>
-                    <span class="blue barC thirstbar" [style.width.%]="status.drink"></span>
-                  </div>
-                </div>
+              <div class="barcont barthin" title="Sete">
+                <span class="tg-statusbar-text">
+                  <i>{{ status.drink}}</i> / 100</span>
+                <span class="blue barC thirstbar" [style.width.%]="status.drink"></span>
               </div>
             </div>
           </div>
-          <div class="tg-combatpanel col-auto pr-lg-0" *ngIf="inCombat">
-            <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
-          </div>
-          <tg-extraboard class="col-auto d-none d-lg-flex flex-column"></tg-extraboard>
         </div>
       </div>
-    </div>
+      <div class="tg-combatpanel" *ngIf="inCombat" fxFlex="0 0 auto">
+        <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
+      </div>
+      <tg-extraboard fxLayout="column" fxFlex="0 0 auto"></tg-extraboard>
   </div>
   <div class="tg-border-box">
     <div class="tg-border tg-border-top"></div>

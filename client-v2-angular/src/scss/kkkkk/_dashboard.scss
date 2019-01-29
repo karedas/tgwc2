@@ -11,10 +11,10 @@
         margin-left: 3px;
         margin-right: 3px;
         background: url($imgPath + '/background/background-rock-dark.jpg') repeat top left;
+        
         .tg-characterpanel-wrap {
             position: relative;
             z-index: 2;
-            flex: 1 1 100%;
         }
     }
 

@@ -16,7 +16,6 @@
   .tg-extraboard-wrap {
     height: 100%;
     text-transform: uppercase;
-    color: $gray-500;
     font-size: 11px;
   }
 
@@ -83,15 +82,8 @@
 .tg-main-buttons{
   background: black url($imgPath + "/borders/border-002-tiny-v.png") repeat-y top left;
 	box-sizing: content-box;
-	display: flex;
-	flex-direction: row;
 	height: 100%;
-	flex: 1;
-	flex-wrap: wrap;
 	width: 102px;
-	margin-left: auto;
-	align-items: center;
-	align-content: right;
 
   // Buttons 
   button {

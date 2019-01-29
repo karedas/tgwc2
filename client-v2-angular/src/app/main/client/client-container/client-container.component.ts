@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { UIState } from 'src/app/store/state/ui.state';
 import { getWelcomeNews } from 'src/app/store/selectors';
@@ -7,6 +7,7 @@ import { Subject, Observable } from 'rxjs';
 @Component({
   selector: 'tg-client-container',
   templateUrl: './client-container.component.html',
+  encapsulation: ViewEncapsulation.None
 
 })
 export class ClientContainerComponent implements  OnDestroy {

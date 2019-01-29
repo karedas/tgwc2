@@ -4,11 +4,9 @@
 @import 'utils/sprites-mixins';
 
 .tg-geolocal {
-    display: flex;
-    flex-direction: column;
     height: 100%;
-    max-height: 100%;
-    width: 185px;
+    width: 100%;
+    position: relative;
 
     .tg-geolocal--title {
         @include sprite($territorio-title-box-sprite);
@@ -52,11 +50,7 @@
     }
 }
 .tg-geolocal--data {
-    
-    flex-direction: column;
     text-align: center;
-    display: flex;
-    flex-direction: column;
     
     .tg-geolocal--region {
         font-size: 12px;

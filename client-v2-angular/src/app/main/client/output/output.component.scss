@@ -7,17 +7,7 @@
 
 :host {
   background: black;
-  display: flex;
-  flex: 1 1 auto;
   margin-bottom: 3px;
-
-  .tg-output {
-    flex: 1;
-
-    >div {
-      overflow: hidden;
-    }
-  }
 
   .tg-output-main {
     height: 100%;
