@@ -1,20 +1,17 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 @import '~src/scss/colors';
-
 /* Others */
 @import 'sprites';
 @import 'utils/sprites-mixins';
+@import '~@angular/flex-layout/mq';
 
 :host {
+  
   background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
   background-size: contain;
   box-sizing: content-box;
   position: relative;
   z-index: 3;
   width: 288px;
-  flex: 1 0 516px;
   padding-left: 47px;
   padding-right: 47px;
 
@@ -26,7 +23,6 @@
     width: 288px;
     height: 288px;
     top: 116px;
-
     &:after {
       display: block;
       content: '';
@@ -38,7 +34,7 @@
       z-index: 6;
       box-shadow: inset 0 0 20px 2px black;
     }
-
+    
     canvas {
       background-color: transparent;
       max-width: 100%;
@@ -57,23 +53,19 @@
       border-radius: 50%;
       display: none;
     }
-
     .canvas-snow.run {
       display: block;
     }
   }
 
-
-  @include media-breakpoint-down(lg) {
+  @include layout-bp(gt-md) {
     width: 222px;
-    flex: 1 0 394px;
     padding-left: 35px;
     padding-right: 35px;
-
     .tg-map-box {
       top: 85px;
       width: 222px;
       height: 222px;
     }
-  }
+  } 
 }

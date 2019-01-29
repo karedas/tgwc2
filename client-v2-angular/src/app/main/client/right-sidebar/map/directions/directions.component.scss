@@ -1,11 +1,9 @@
 @import 'variables';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 /* Others */
 @import 'sprites';
 @import 'utils/sprites-mixins';
 
+@import '~@angular/flex-layout/mq';
 
 .dir-ico {
     background-image: url($imgPath + '/interface/pass_sprite.png');
@@ -111,7 +109,8 @@
   }
   
   
-  @include media-breakpoint-up(xl) {
+  @include layout-bp(lt-lg) {
+
     .tg-dir {
       transform: scale(1);
     }

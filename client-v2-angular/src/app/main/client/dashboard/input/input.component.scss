@@ -1,100 +1,107 @@
-@import "~bootstrap/scss/mixins";
 @import '~src/scss/colors';
 @import '~src/scss/utils/sprites-mixins';
 @import '~src/scss/utils/sprites';
 
+@import '~@angular/flex-layout/mq';
+
 .tg-input {
+  position: relative;
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+  flex-direction: row;
+  height: 25px;
+  box-sizing: content-box;
+
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  &:before {
+    //@include sprite($input-left-decoration-sprite);
+    left: -10px;
+  }
+
+  &:after {
+    //@include sprite($input-right-decoration-sprite);
+    right: -10px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    background-color: $inputbackground;
+    border: none;
+    z-index: 10;
     position: relative;
-    margin-left: 0;
-    margin-right: 0;
+    outline: 0;
+    font-size: 1rem;
+    padding: 2px 4px 4px !important;
+    box-shadow: inset 0 0 4px 1px black;
+    flex: 1 1 auto;
+    transition: box-shadow .2s linear;
+  }
+
+  .drop-alert {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    background: #343434;
+    color: #fafafa;
+    right: 8px;
+    line-height: 2em;
+    left: 8px;
+    margin: auto 0;
+    box-shadow: inset 0 0 7px black;
+    padding: 0 4px;
+    font-size: .8rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .ui-droppable-active+.drop-alert {
+    display: block;
+  }
+
+  .tg-inputcommand {
+    z-index: 2;
+    margin-right: 1px;
+    font-size: 13px;
+    background-color: #0f0e0e;
     display: flex;
-    flex-direction: row;
-    height: 25px;
-    box-sizing: content-box;
 
-    &:after,
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-    }
-    &:before {
-        //@include sprite($input-left-decoration-sprite);
-        left: -10px;
-    }
-    &:after {
-        //@include sprite($input-right-decoration-sprite);
-        right: -10px;
-    }
-    input[type="text"], input[type="password"] {
-        width: 100%;
-        background-color: $inputbackground;
-        border: none;
-        z-index: 10;
-        position: relative;
-        outline: 0;
-        font-size: 1rem;
-        padding: 2px 4px 4px !important;
-        box-shadow: inset 0 0 4px 1px black;
-        flex: 1 1 auto;
-        transition: box-shadow .2s linear;
-    }
+    .tg-fnt-button {
+      background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+      padding-left: 8px;
+      color: #54544d;
+      box-shadow: none;
 
-    .drop-alert {
-        display: none;
-        position: absolute;
-        z-index: 20;
-        background: #343434;
-        color: #fafafa;
-        right: 8px;
-        line-height: 2em;
-        left: 8px;
-        margin: auto 0;
-        box-shadow: inset 0 0 7px black;
-        padding: 0 4px;
-        font-size: .8rem;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
+
+      &:hover,
+      &.isActive {
+        color: #cc6f17;
+      }
+
+      &:active {
+        color: $tg-yellow;
+      }
     }
+  }
 
-    .ui-droppable-active + .drop-alert {
-        display: block;
-    }
-
-    .tg-inputcommand {
-        z-index: 2;
-        margin-right: 1px;
-        font-size: 13px;
-        background-color: #0f0e0e;
-        display: flex;
-
-        .tg-fnt-button {
-            background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-            padding-left:8px;
-            color: #54544d;
-            box-shadow: none;
-
-           
-            &:hover, &.isActive {
-                color: #cc6f17;
-            }
-            &:active {
-                color: $tg-yellow;
-            }
-        }
-    }
-
-    @include media-breakpoint-down(md) {
-        margin-bottom: 0;
-    }
+  @include layout-bp(gt-md) {
+    margin-bottom: 0;
+  }
 }
 
 .zen {
-    #triggerToggleCharacterPanel {
-        display: none;
-    }
+  #triggerToggleCharacterPanel {
+    display: none;
+  }
 }

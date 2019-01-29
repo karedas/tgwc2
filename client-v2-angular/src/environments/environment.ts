@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  media_address: 'http://play.thegatemud.it/images/',
   socket : {
     url : 'http://51.38.185.84:3335',
     options : {
@@ -15,8 +16,7 @@ export const environment = {
       'reconnectionDelay': 1500,
       'reconnectionAttempts': 'Infinity'
     }
-  },
-  media_address: 'http://play.thegatemud.it/images/'
+  }
 };
 
 /*

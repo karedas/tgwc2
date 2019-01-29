@@ -14,19 +14,19 @@ export function reducer(
       return Object.assign({}, state, action.payload);
     case DataEvenType.AUTOUPDATESTATUSHERO:
       // return Object.assign({}, state, {hero: {status: action.payload}});
+      console.log(action.payload);
       return {...state, hero: { ...state.hero,
-
         status: {
-          drink: action.payload[3],
-          food: action.payload[2],
-          hit: action.payload[0],
-          move: action.payload[1]
+          drink: action.payload.drink,
+          food: action.payload.food,
+          hit: action.payload.healt,
+          move: action.payload.move
         },
         target: {
-          move: action.payload[5],
-          hit: action.payload[4],
-          icon: action.payload[6],
-          name: action.payload[7]
+          move: action.payload['enemymove'],
+          hit: action.payload['enemyhealt'],
+          icon: action.payload['enemyicon'],
+          name: action.payload['enemyname']
         }
       }};
 
@@ -61,8 +61,6 @@ export function reducer(
         editor: action.payload
       });
 
-    // case DataEvenType.PLAYERSTATUSINLINE:
-    //   return {...state, hero: action.payload};
 
     case DataEvenType.GENERICTABLE:
       return Object.assign({}, state, {

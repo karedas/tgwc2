@@ -6,13 +6,11 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'tg-quotes',
   template: `
-  <div class="tg-intro-rotatext row text-center">
-      <div class="col-12">
-      <ng-container [@crossFadeQuote]>
-        {{ (quotes[index$ | async])?.msg  }}
-        <div class="auth">- {{ (quotes[index$ | async])?.author }} -</div>
-      </ng-container>
-      </div>
+  <div class="tg-intro-rotatext" fxLayout="column" fxLayoutAlign="center center">
+    <ng-container [@crossFadeQuote]>
+    {{ (quotes[index$ | async])?.msg  }}
+    <div class="auth">- {{ (quotes[index$ | async])?.author }} -</div>
+    </ng-container>
   </div>`,
   styleUrls: ['./quotes.component.scss'],
 

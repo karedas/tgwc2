@@ -1,11 +1,9 @@
 @import 'variables';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 
 /* Others */
 @import 'sprites';
 @import 'utils/sprites-mixins';
+@import '~@angular/flex-layout/mq';
 
 $skyPath : $imgPath+'/sky/';
 
@@ -236,7 +234,8 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
     }
   }
 
-  @include media-breakpoint-down(lg) {
+  @include layout-bp(lt-lg) {
+
     width: 275px;
     height: 162px;
     top: 10px;

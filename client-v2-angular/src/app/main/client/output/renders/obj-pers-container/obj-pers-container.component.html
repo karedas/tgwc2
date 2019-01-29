@@ -6,7 +6,7 @@
 </ng-container>
 
 <ng-template #withEquipCont>
-  <div class="tg-objperson">
+  <div class="tg-objperson" fxLayout="column">
     <div class="tg-objperson--title" *ngIf="eqcont.list.length > 0">
       {{eqcont.title}}
     </div>
@@ -31,7 +31,7 @@
 </ng-template>
 
 <ng-template #withObjCont>
-  <div class="tg-objperson">
+  <div class="tg-objperson" fxLayout="column">
     <div class="tg-objperson--title" *ngIf="objcont.list.length > 0">
       {{objcont.title}}
     </div>

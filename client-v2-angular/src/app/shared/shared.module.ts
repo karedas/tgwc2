@@ -13,10 +13,10 @@ import { AudioService } from '../main/client/audio/audio.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastContainerModule } from 'ngx-toastr';
-import { TooltipModule } from 'ngx-tooltip';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 @NgModule({
   declarations: [
@@ -27,13 +27,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
-    FlexLayoutModule,
+    FlexLayoutModule.withConfig({
+      useColumnBasisZero: false,
+    }),
     // font awesome
     FontAwesomeModule,
     // Various
     NgScrollbarModule,
     FormsModule,
-    ReactiveFormsModule,
     ToastContainerModule,
     TooltipModule
   ],
@@ -49,12 +50,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    TooltipModule,
     CommonModule,
     NgScrollbarModule,
     PipesModule,
     ToastContainerModule,
     FontAwesomeModule,
+    TooltipModule,
     IconsComponent
   ],
 })

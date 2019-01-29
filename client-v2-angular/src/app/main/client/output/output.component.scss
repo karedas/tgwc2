@@ -1,9 +1,9 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 @import '~src/scss/colors';
 @import 'sprites';
 @import 'utils/sprites-mixins';
+
+@import '~@angular/flex-layout/mq';
+
 
 :host {
   background: black;
@@ -58,7 +58,7 @@
   //   }
   // }
 
-  @include media-breakpoint-down(md) {
+  @include layout-bp(gt-md) {
     margin-bottom: 0;
   }
 }
@@ -212,7 +212,6 @@ tg-text {
 
   .tg-expandedlist {
     padding-left: 9px;
-    flex-direction: row;
     display: flex;
     flex: 1 0 100% !important;
     flex-wrap: wrap;
@@ -400,7 +399,7 @@ tg-text {
 // }
 
 
-@include media-breakpoint-down(sm) {
+@include layout-bp(gt-sm) {
   .hstat {
     display: none;
   }

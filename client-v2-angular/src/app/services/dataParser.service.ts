@@ -65,7 +65,6 @@ export class DataParser {
     // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
       const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
-      console.log(pgdata_parse);
       this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
       return '';
     });
@@ -107,10 +106,9 @@ export class DataParser {
       this.store.dispatch(new UiActions.AudioAction(audio_parse));
       return '';
     });
-
     // Auto Update Hero Status
-    data = data.replace(/&!st"[^"]*"\n*/gm, (status) => {
-      const status_parse = status.slice(5, status.lastIndexOf('"')).split(',');
+    data = data.replace(/&!st\{[\s\S]*?\}!/gm, (status) => {
+      const status_parse = JSON.parse(status.slice(4, -1));
       this.store.dispatch(new DataActions.UpdateStatusHero(status_parse));
       return '';
     });
@@ -183,7 +181,7 @@ export class DataParser {
     // Generic page (title, text)
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-      console.log('generic page', page_parse);
+      console.log('---------- generic page ------------', page_parse);
       return '';
     });
 

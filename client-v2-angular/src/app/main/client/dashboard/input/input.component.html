@@ -11,17 +11,16 @@
     <button
       class="tg-fnt-button  d-none d-sm-inline-block"
       type="button"
-      tooltip="Tipo de condición en la que se realiza la venta." [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top"
       (mousedown)="toggleExtraOutput($event)"
+      tooltip="Attiva / Disattiva Output extra" placement="top" show-delay="500"
       [ngClass]="{'isActive': extraOutputStatus$ | async}">
       <fa-icon [icon]="facolumns"></fa-icon>
     </button>
     <button 
       class="tg-fnt-button"
       type="button" 
-      tooltip="Espandi / Comprimi la tua Dashboard"
-      tooltipPlacement="top"
       (mousedown)="toggleDashboard($event)"
+      tooltip="Apri/Chiudi la tua Dashboard" placement="top" show-delay="500"
       [ngClass]="{'isActive': dashBoardStatus$ | async}">
       <fa-icon [icon]="faSolarPanel"></fa-icon>
     </button>
@@ -29,6 +28,7 @@
       class="tg-fnt-button d-none d-sm-inline-block"
       type="button"
       title="Modalit&agrave; Zen" 
+      tooltip="Attiva / Disattiva Modalità Zen" placement="top" show-delay="500"
       (mousedown)="toggleZen($event)">
       <fa-icon [icon]="faBullseye"></fa-icon>
     </button>

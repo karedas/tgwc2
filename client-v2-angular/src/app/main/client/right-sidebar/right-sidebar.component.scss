@@ -1,7 +1,4 @@
 @import 'variables';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
 
 
 // RIGHT SIDE AREA
@@ -16,11 +13,5 @@
         padding-left: 15px;
         box-shadow: inset 3px -2px 112px 7px black;
         position: relative;
-        display: flex;
-        flex-direction: column;
-    }
-  
-    @include media-breakpoint-down(xs) {
-      display: none;
     }
   }

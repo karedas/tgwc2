@@ -52,7 +52,7 @@ export class ObjAndPersAction implements Action {
 
 export class UpdateStatusHero implements Action {
     readonly type = DataEvenType.AUTOUPDATESTATUSHERO;
-    constructor( public payload: any[]) {}
+    constructor( public payload: any) {}
 }
 
 export class HeroAction implements Action {

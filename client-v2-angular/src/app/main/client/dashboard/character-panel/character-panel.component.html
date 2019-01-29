@@ -3,7 +3,9 @@
     <!-- Character Detail -->
       <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
         <!-- Character Avatar -->
-        <div class="tg-characteravatar b-ironlight" title="{{heroName}}" fxHide fxShow.gt-sm>
+        <div class="tg-characteravatar b-ironlight" 
+          tooltip="Scheda personaggio" placement="top" show-delay="500" 
+          fxHide fxShow.gt-sm>
           <div class="tg-avatar-wrap">
             <img [src]="heroImage" alt="Avatar" *ngIf="heroImage" />
           </div>
@@ -27,23 +29,23 @@
           <div class="tg-meterbar">
             <div class="tg-extrabars" fxLayout="row">
               <div class="barcont barthin lft">
-                <span class="tg-statusbar-text" title="Punti Salute">
+                <span class="tg-statusbar-text" tooltip="Salute" placement="top" show-delay="500">
                   <i>{{ status.hit }}</i> / 100</span>
                 <span class="red barC healthbar" [style.width.%]="status.hit"></span>
               </div>
-              <div class="barcont barthin" title="Punti Movimento">
+              <div class="barcont barthin" tooltip="Movimento" placement="top" show-delay="500">
                 <span class="tg-statusbar-text">
                   <i>{{ status.move }}</i> / 100</span>
                 <span class="green barC movebar" [style.width.%]="status.move"></span>
               </div>
             </div>
             <div class="tg-extrabars"  fxLayout="row">
-              <div class="barcont barthin lft" title="Fame">
+              <div class="barcont barthin lft" tooltip="Fame" placement="top" show-delay="500">
                 <span class="tg-statusbar-text">
                   <i>{{ status.food }}</i> / 100</span>
                 <span class="orange barC hungrybar" [style.width.%]="status.food"></span>
               </div>
-              <div class="barcont barthin" title="Sete">
+              <div class="barcont barthin" tooltip="Sete" placement="top" show-delay="500">
                 <span class="tg-statusbar-text">
                   <i>{{ status.drink}}</i> / 100</span>
                 <span class="blue barC thirstbar" [style.width.%]="status.drink"></span>

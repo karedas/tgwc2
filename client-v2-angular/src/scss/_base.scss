@@ -1,5 +1,10 @@
 
-@include font-face(kingthinks, '/assets/fonts/Kingthings_Foundation', null, null, ttf );
+@import '~@angular/flex-layout/mq';
+
+@include font-face(
+  kingthinks, '/assets/fonts/Kingthings_Foundation', null, null, ttf
+);
+
 body,
 html {
   height: 100%;
@@ -8,9 +13,10 @@ html {
 
 body {
   background: #0b0807;
-  color: $white;
+  color: white;
   min-height: 100%;
   display: table;
+  font-size: 11px;
 }
 
 a,
@@ -40,12 +46,12 @@ body[data-loginstatus=ready] {
 
 /* BOX SHADOWS */
 .tg-shadow {
-  box-shadow: 0px 6px 11px 0 $black;
+  box-shadow: 0px 6px 11px 0 black;
   background-color: black;
 }
 
 .tg-shadow-light {
-  box-shadow: 0px 3px 5px 0 $black;
+  box-shadow: 0px 3px 5px 0 black;
 }
 
 .tg-shadow-dialog {
@@ -71,6 +77,7 @@ body[data-loginstatus=ready] {
 
 .tg-main {
   z-index: 10;
+  overflow: hidden;
   position: relative;
 }
 
@@ -98,42 +105,17 @@ body[data-loginstatus=ready] {
 }
 
 
-
-@include media-breakpoint-down(md) {
+@include layout-bp(lt-md) {
   .tg-area {
     padding: 0;
   }
-
+  
   .tg-main {
     .tg-controlpanel {
       margin-left: 0;
     }
   }
 }
-
-// .popover-header {
-//     font-size:.6rem;
-//     padding-bottom: 0;
-// }
-
-// .popover-body {
-//     padding-top: 0;
-//     a {
-//         text-decoration: underline;
-//         color: $tg-yellow;
-//     }
-// }
-
-// .nav-tabs {
-//     border-bottom: none;
-// }
-// .nav-tabs .nav-link {
-//     border: none;
-// }
-
-// .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-//     border: none;
-// }
 
 
 // // Custom Form Elements

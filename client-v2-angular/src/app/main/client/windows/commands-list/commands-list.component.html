@@ -1,29 +1,24 @@
 <ng-container *ngIf="commands$ | async as cmds">
   <tg-dialog [id]="'commandsList'" [config]="modalConfig" [titleDialog]="cmds.title">
-    <div class="tg-commands-list  h-100">
-      <div class="tg-dialog-inside-nopadding tg-shadow-inset h-100">
-        <div class="container-fluid h-100">
-          <div class="row h-100">
-            <div class="col-auto cmd-group px-0">
-              <div *ngFor="let group of (removeTitleObject(cmds)) | keyvalue ; let i = index" 
-                (click)="setOpenedGroup(i)"
-                class="cmd-group--item">
-                <span [ngClass]="{'active': i === groupOpen}">
-                  {{group.key}}
-                </span>
-              </div>
-            </div>
-            <div class="col cmd-values-container">
-              <ng-scrollbar class="scrollbar" #commandsScrollbar>
-                <div *ngFor="let cmdvalue of (removeTitleObject(cmds)) | keyvalue; let ii = index" class="cmd-valuegroup">
-                  <div class="cmd-value col" *ngFor="let item of cmdvalue.value" [ngClass]="{'showlist': ii === groupOpen}">
-                    {{item}}
-                  </div>
-                </div>
-              </ng-scrollbar>
+    <div class="tg-commands-list">
+      <div class="tg-dialog-inside-nopadding tg-shadow-inset">
+          <div class="cmd-group" fxFlex="0 0 auto">
+            <div *ngFor="let group of (removeTitleObject(cmds)) | keyvalue ; let i = index" (click)="setOpenedGroup(i)"
+              class="cmd-group--item">
+              <span [ngClass]="{'active': i === groupOpen}">
+                {{group.key}}
+              </span>
             </div>
           </div>
-        </div>
+          <div class="cmd-values-container" fxFlex="1 0 0">
+            <ng-scrollbar class="scrollbar" #commandsScrollbar>
+              <div *ngFor="let cmdvalue of (removeTitleObject(cmds)) | keyvalue; let ii = index" class="cmd-valuegroup">
+                <div class="cmd-value " fxFlex="1 0 0" *ngFor="let item of cmdvalue.value" [ngClass]="{'showlist': ii === groupOpen}">
+                  {{item}}
+                </div>
+              </div>
+            </ng-scrollbar>
+          </div>
       </div>
     </div>
   </tg-dialog>

@@ -27,6 +27,7 @@
               "src/assets",
             ],
             "styles": [
+              "node_modules/normalize.css/normalize.css",
               "node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css",
               "src/scss/client.scss",
               "node_modules/ngx-toastr/toastr.css"

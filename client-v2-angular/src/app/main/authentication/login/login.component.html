@@ -1,6 +1,5 @@
 <div class="tg-loginpanel" fxLayout="column" fxFill>
   <!-- Login Panel -->
-  <!-- <div class="justify-content-center align-self-top w-100 d-flex h-100"> -->
   <div fxLayout="column" fxFlex="1 1 0%" fxLayoutAlign="center center">
     
     <div class="tg-login-container">
@@ -14,13 +13,13 @@
               <span>gratis</span> al mondo di Ikhari!
             </h2> 
             <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off" novalidate>
-              <div class="form-row">
-                <div class="col-12">
+              <div fxLayout="row wrap">
+                <div fxFlex="100">
                   <input class="form-control" formControlName="username" type="text" autocomplete="off" placeholder="Username" required autofocus  [ngClass]="{'is-invalid': !username.valid && username.touched}" />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-12">
+              <div fxLayout="row wrap">
+                <div fxFlex="100">
                   <input class="form-control" formControlName="password" type="password" autocomplete="off" placeholder="Password" required  [ngClass]="{'is-invalid': !password.valid && password.touched}"/>
                 </div>
               </div>

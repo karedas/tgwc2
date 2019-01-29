@@ -22,7 +22,7 @@
         <div class="tg-persons--itemdesc" [innerHtml]="person.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
       </div>
-      <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]">
+      <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]" fxLayout="row">
         <div class="tg-persons--line"  *ngFor="let sz of person.mrn; let indexSz=index">
           <tg-icons [icon]="person.icon"></tg-icons>
           <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
@@ -46,7 +46,7 @@
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
       </div>
-      <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]">
+      <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="row">
         <div class="tg-objects--line"  *ngFor="let sz of object.mrn; let indexSz=index" [attr.mrn]="object.mrn">
             <tg-icons [icon]="object.icon"></tg-icons>
             <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>

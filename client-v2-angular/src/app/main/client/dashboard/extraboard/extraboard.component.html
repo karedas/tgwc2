@@ -3,22 +3,40 @@
   <div fxFlex="0 0 auto">
     <div class="tg-main-buttons" fxLayout="row wrap">
       <div class="wrap-btnend-box">
-        <button id="infoRightBtn" class="tg-button btn-info-graph" rel="tooltip" title="Informazioni">Info</button>
+        <button 
+          class="tg-button btn-info-graph" 
+          (mouseup)="buttonClick('info')"
+          tooltip="Informazioni" placement="top" show-delay="500">Info</button>
       </div>
       <div class="wrap-btnend-box">
-        <button id="equipRightBtn" class="tg-button btn-equip-graph" rel="tooltip" title="Equipaggiamento">Equip</button>
+        <button 
+          class="tg-button btn-equip-graph" 
+          (mouseup)="buttonClick('equip')"
+          tooltip="Equipaggiamento" placement="top" show-delay="500">Equip</button>
       </div>
       <div class="wrap-btnend-box">
-        <button id="invRightBtn" class="tg-button btn-inventario-graph" rel="tooltip" title="Inventario">Inventario</button>
+        <button 
+          class="tg-button btn-inventario-graph" 
+          (mouseup)="buttonClick('invent')"
+          tooltip="Inventario" placement="top" show-delay="500">Inventario</button>
       </div>
       <div class="wrap-btnend-box">
-        <button id="skillRightBtn" class="tg-button btn-skill-graph" rel="tooltip" title="Abilita'">abilit&agrave;</button>
+        <button 
+          class="tg-button btn-skill-graph" 
+          (mouseup)="buttonClick('abilita')"
+          tooltip="Abilità" placement="top" show-delay="500">abilit&agrave;</button>
       </div>
       <div class="wrap-btnend-box">
-        <button id="statoRightBtn" class="tg-button btn-stato-graph" rel="tooltip" title="Stato">Stato</button>
+        <button 
+          class="tg-button btn-stato-graph" 
+          (mouseup)="buttonClick('stato')"
+          tooltip="Stato" placement="top" show-delay="500">Stato</button>
       </div>
       <div class="wrap-btnend-box">
-        <button id="configRightBtn" class="tg-button btn-config-graph" rel="tooltip" title="Configurazione">Configurazione</button>
+        <button 
+          class="tg-button btn-config-graph"
+          (mouseup)="openShortcutsPanel()"
+          tooltip="Apri pannello scorciatoie" placement="top" show-delay="500">Scorciatoie</button>
       </div>
     </div>
   </div>

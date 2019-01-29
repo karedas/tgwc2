@@ -12,18 +12,8 @@
         font-family: kingthinks;
     }
 
-    .tg-notizie--container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tg-notizie--content {
-        flex: 1;
-    }
     
     .notizie-action {
-        flex: 0 0 auto;
-        justify-content: center;
         padding:2em 0 0;
         label {
             margin-left: 5px;
