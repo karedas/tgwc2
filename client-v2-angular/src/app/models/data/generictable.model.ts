@@ -1,4 +1,4 @@
-export interface IGtable {
+export interface IGenericTable {
     title?: string;
     data: {};
     head: any[];

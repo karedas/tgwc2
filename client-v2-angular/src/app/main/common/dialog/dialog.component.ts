@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy, ViewChild, ViewEncapsulation } fro
 import { DialogService } from './dialog.service';
 import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { ModalConfiguration } from './model/modal.interface';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class DialogComponent  implements OnInit, OnDestroy {
   @Input('config') config: ModalConfiguration = new ModalConfiguration();
 
   constructor(
-    private modalService: DialogService,
+    private dialogService: DialogService,
     ) {}
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class DialogComponent  implements OnInit, OnDestroy {
       return;
     }
     // add self (this modal instance) to the modal service so it's accessible from controllers
-    this.modalService.add(this);
+    this.dialogService.add(this);
   }
 
   open(): void {
@@ -45,8 +46,12 @@ export class DialogComponent  implements OnInit, OnDestroy {
     this.jqxWindow.bringToFront();
   }
 
+  // Resize(event): void {
+  //   this.dialogService.resizing();
+  // }
+
   ngOnDestroy(): void {
-    this.modalService.remove(this.id);
+    this.dialogService.remove(this.id);
     this.jqxWindow.destroy();
   }
 }

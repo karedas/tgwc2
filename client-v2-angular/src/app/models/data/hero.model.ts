@@ -1,6 +1,6 @@
 export interface IHeroRace {
-  code: string;
   name: string;
+  code: string;
 }
 
 export interface IStatus {
@@ -20,12 +20,13 @@ export interface ITarget {
 export interface IHero {
   name?: string;
   adjective?: string;
+  race?: IHeroRace;
   image?: string;
   conva: number;
-  race?: IHeroRace;
+  combat?: any;
+  walk?: string;
   title?: string;
   status: IStatus;
-  attitude?: string;
   equipment?: [];
   inventory?: [];
   target?: ITarget | null;

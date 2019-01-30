@@ -3,7 +3,9 @@
   [minHeight]="config.minHeight" [minWidth]="config.minWidth" [position]="'center'" [title]="titleDialog"
   [maxHeight]="config.maxHeight" [maxWidth]="config.maxWidth"
   [draggable]="config.draggable"
-  styleClass="dialog-overflow" [ngClass]="{'show-title': titleDialog}">
+  styleClass="dialog-overflow" 
+  [ngClass]="{'show-title': titleDialog}"
+  (onResize)="onResize()">
   <div style="overflow: hidden;" class="tg-shadow-dialog">
     <div class="b-ironlight-mini tg-box" style="overflow: hidden">
       <ng-content></ng-content>

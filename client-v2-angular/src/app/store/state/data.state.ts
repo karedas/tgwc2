@@ -3,7 +3,7 @@ import { Hero, IHero } from 'src/app/models/data/hero.model';
 import { Room } from 'src/app/models/data/room.model';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { IObjPerson } from 'src/app/models/data/objpers.model';
-import { IGtable } from 'src/app/models/data/generictable.model';
+import { IGenericTable } from 'src/app/models/data/generictable.model';
 
 export interface DataState {
     date: number;
@@ -15,7 +15,7 @@ export interface DataState {
     hero: IHero;
     editor?: IEditor;
     objPers?: IObjPerson;
-    genericTable?: IGtable;
+    genericTable?: IGenericTable;
 }
 
 export const initialState: DataState = {

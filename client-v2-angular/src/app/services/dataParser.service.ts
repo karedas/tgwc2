@@ -65,8 +65,8 @@ export class DataParser {
 
     // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
-      const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
-      this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
+      // const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
+      // this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
       return '';
     });
 
@@ -110,7 +110,6 @@ export class DataParser {
     // Auto Update Hero Status
     data = data.replace(/&!st\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(4, -1));
-      console.log('yo');
       this.store.dispatch(new DataActions.UpdateStatusHero(status_parse));
       return '';
     });

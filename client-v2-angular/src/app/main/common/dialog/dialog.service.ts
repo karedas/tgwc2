@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
+
+  private resizingEvent$: Subject<any> = new Subject<any>();
+  private resizedEvent$: Subject<any> = new Subject<any>();
 
   private modals: any[] = [];
 
@@ -33,4 +37,12 @@ export class DialogService {
     const modal: any = this.modals.filter(x => x.id === id)[0];
     modal.toFront();
   }
+
+  onResizing(id: string): Observable<any> {
+    return this.resizingEvent$.asObservable();
+  }
+  onResized(id: string) {
+    return this.resizedEvent$.asObservable();
+  }
+
 }
