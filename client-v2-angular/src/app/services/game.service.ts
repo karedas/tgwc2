@@ -31,12 +31,14 @@ export class GameService{
     private historyService: HistoryService,
   ) {}
 
-  startGame(initialData: any) {
+  init(initialData: any) {
+    this.dataParserService.handlerGameData(initialData);
+  }
+
+  startGame() {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.dataParserService.handlerGameData(data);
     });
-
-    this.dataParserService.handlerGameData(initialData);
   }
 
 

@@ -23,6 +23,7 @@
     cursor: pointer;
     width: 78px;
     height: 68px;
+    box-sizing: border-box;
     overflow: hidden;
     position: relative;
     margin-left: -2px;
@@ -47,7 +48,7 @@
   }
 
   .tg-infocharname {
-    padding: 0 2px 1px 4px;
+    padding: 0 0 1px 0;
     line-height: 18px;
     text-align: left;
     font-family: kingthings;
@@ -56,7 +57,6 @@
     color: #ccc1b1;
     display: inline-block;
     width: 100%;
-    margin-top: -2px;
 
     /* status icons */
     .pg-status {
@@ -80,6 +80,7 @@
       position: relative;
       background-color: #171614;
       box-shadow: inset 0 0 5px 2px #53371c;
+      cursor: pointer;
     }
 
     .barbig {

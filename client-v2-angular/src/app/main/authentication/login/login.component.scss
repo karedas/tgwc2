@@ -105,6 +105,7 @@
       border: none;
       position: relative;
       box-sizing: border-box;
+      border: 1px solid #403a32;
 
       &[type="text"] {
         background-image: url($imgPath + '/login/username_labelico.png');
@@ -119,8 +120,9 @@
       box-shadow .15s ease-in-out;
     }
 
-    input:not(.is-invalid) {
-      border: 1px solid #403a32;
+
+    input.is-invalid {
+      border: 1px solid #9e5022;
     }
 
     .tg-loginbtn {

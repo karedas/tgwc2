@@ -25,8 +25,8 @@ export class DataParser {
   handlerGameData(data: any) {
 
     this.netData += data;
+    
     const len = this.netData.length;
-
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
 
       const data = this.netData.substr(0, len - 3);
@@ -41,7 +41,7 @@ export class DataParser {
   }
 
   preParseText(data: string): string {
-    /* Remove -not-tags- */
+
     data = data.replace(/\r/gm, '');
     data = data.replace(/&!!/gm, '');
     data = data.replace(/\$\$/gm, '$');
@@ -49,11 +49,12 @@ export class DataParser {
     data = data.replace(/&&/gm, '&#38;');
     data = data.replace(/</gm, '&#60;');
     data = data.replace(/>/gm, '&#62;');
+
     return data;
+
   }
 
   parseForDisplay(data: string) {
-
     let pos: any;
 
     // News
@@ -109,6 +110,7 @@ export class DataParser {
     // Auto Update Hero Status
     data = data.replace(/&!st\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(4, -1));
+      console.log('yo');
       this.store.dispatch(new DataActions.UpdateStatusHero(status_parse));
       return '';
     });

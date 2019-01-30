@@ -5,6 +5,15 @@
 @import 'utils/sprites-mixins';
 
 
+.tg-generictable {
+    height: 100%;
+    overflow: hidden;
+}
+
+ngx-datatable {
+    min-height: 300px;
+}
+
 .datatable-header {
     background-color: #30241d;
     border: 1px solid  #42342c!important;
@@ -29,18 +38,18 @@
         background-color: #ebdaa4;
     }
 
-    .datatable-body-cell {
-        display: flex!important;
-        flex-direction: column;
-        justify-content: center;
-    }
+    // .datatable-body-cell {
+    //     display: flex!important;
+    //     flex-direction: column;
+    //     justify-content: center;
+    // }
 
-    .datatable-body-cell-label {
-        margin: 0 auto!important;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    // .datatable-body-cell-label {
+    //     margin: 0 auto!important;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    // }
 }
 
 .datatable-footer {
@@ -65,9 +74,9 @@
     // }
 }
 
-.datatable-scroll {
-    width:  100%!important;
-}
+// .datatable-scroll {
+//     width:  100%!important;
+// }
 
 
 

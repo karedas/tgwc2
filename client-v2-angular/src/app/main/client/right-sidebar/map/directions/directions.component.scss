@@ -109,7 +109,7 @@
   }
   
   
-  @include layout-bp(lt-lg) {
+  @include layout-bp(gt-md) {
 
     .tg-dir {
       transform: scale(1);

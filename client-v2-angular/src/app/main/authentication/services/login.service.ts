@@ -133,7 +133,8 @@ export class LoginService {
 
   onLoginOk(data: any) {
     this.completeHandShake();
-    this.game.startGame(data);
+    this.game.init(data);
+    this.game.startGame();
     this.store.dispatch(new LoginSuccessAction());
   }
 

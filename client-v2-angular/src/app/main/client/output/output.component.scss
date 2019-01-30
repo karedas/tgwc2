@@ -175,6 +175,7 @@ tg-text {
     user-select: none;
     padding-bottom: .4em;
     margin-right: auto;
+    box-sizing: border-box;
 
     > div {
       margin: auto 0;

@@ -44,6 +44,8 @@ export class GenericTableComponent implements OnInit {
     {value: 10},
   ];
 
+  public readonly headerHeight = 30;
+  public readonly footerHeight = 50;
 
 
   constructor(
@@ -52,7 +54,6 @@ export class GenericTableComponent implements OnInit {
   ) {
     this.modalConfig.draggable = true;
     this.modalConfig.isModal = false;
-    this.modalConfig.minHeight = 300;
     this.modalConfig.height = 'auto';
   }
 

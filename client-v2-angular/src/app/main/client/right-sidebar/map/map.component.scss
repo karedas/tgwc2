@@ -11,7 +11,7 @@
   box-sizing: content-box;
   position: relative;
   z-index: 3;
-  width: 288px;
+  width: 382px;
   padding-left: 47px;
   padding-right: 47px;
 
@@ -58,8 +58,8 @@
     }
   }
 
-  @include layout-bp(gt-md) {
-    width: 222px;
+  @include layout-bp(lt-lg) {
+    width: 292px;
     padding-left: 35px;
     padding-right: 35px;
     .tg-map-box {

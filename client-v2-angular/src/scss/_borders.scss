@@ -74,7 +74,6 @@
 /* BORDER TYPE */
 
 .b-ironlight {
-    
     padding: $ironlight-border-size;  
     > .tg-border-box {
         .tg-border-top, .tg-border-bottom {
@@ -124,6 +123,9 @@
 
 .b-ironlight-mini {
     padding: $ironlight-mini-border-size;  
+    box-sizing: border-box;
+    height: 100%;
+
     > .tg-border-box {
         overflow: hidden;
         .tg-border-top, .tg-border-bottom {
@@ -279,10 +281,11 @@
 .b-paper {
     background: #0b0a0a;
     padding: 32px;  
-    border: 5px solid transparent;
-    height: 100%;
+    border: 2px solid transparent;
     box-sizing: border-box;
+    height: 100%;
     .tg-box {
+        height: 100%;
         background-color:#cbb48d;
         box-shadow: 0 0 10px 8px #cbb48d;
 

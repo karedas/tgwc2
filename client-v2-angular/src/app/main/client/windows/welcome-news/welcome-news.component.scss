@@ -3,8 +3,8 @@
 .tg-notizie {
   color: black;
   text-align: left;
-  height: 100%;
   overflow: hidden;
+  height: 100%;
 
   h2 {
     font-size: 30px;
@@ -27,6 +27,7 @@
     min-height: 175px;
     background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
     background-size: contain;
+    margin:  auto;
   }
 
   .input-checkbox {

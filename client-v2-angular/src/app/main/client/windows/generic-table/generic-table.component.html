@@ -1,87 +1,77 @@
 <ng-container *ngIf="dataTable$ | async as datatable">
   <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="'Informazioni'">
-
-    <div class="tg-generictable h-100">
-      <div class="tg-dialog-inside-nopadding h-100">
-        <div class="table-cont tg-shadow-inset tg-box tg-modal-content h-100">
-          <!-- <table class="tg-rendetable table table-sm table-striped table-hover mb-0 h-100">
-            <thead *ngIf="datatable.head">
-              <th *ngFor="let head of datatable.head" scope="col">
-                  {{ head.title || head }}
-              </th>
-            </thead>
-            <tr *ngFor="let row of datatable.data">
-              <td *ngFor="let col of row">
-                {{col}}
-              </td>
-            </tr>
-          </table> -->
-          <div style="overflow: hidden">
-            <ngx-datatable
-              #tgdatatable
-              [limit]="15"
-              [rows]="rows"
-              [columnMode]="'flex'"
-              [sortType]='"single"'
-              [messages]="messages"
-              [footerHeight]="30"
-              [scrollbarV]="false"
-              class="tg-rendetable fullscreen table-sm table-striped table-hover">
-              <ng-container *ngFor="let col of columns; let i = index">
-                  <ng-container *ngIf="col.name === 'icona'">
-                    <ngx-datatable-column
-                      [prop]="col.prop" 
-                      [name]="col.name"
-                      [flexGrow]="1">
-                        <ng-template 
-                          let-value="value" 
-                          let-row="row" 
-                          ngx-datatable-cell-template>
-                          <tg-icons [icon]="value"></tg-icons>
-                        </ng-template>
-                     </ngx-datatable-column>
-                  </ng-container>
-
-                  <ng-container *ngIf="col.name !== 'icona'">>
-                    <ngx-datatable-column 
-                      [prop]="col.prop" 
-                      [flexGrow]="2"
-                      [name]="col.name">
+    <div class="tg-generictable">
+      <div class="tg-dialog-inside-nopadding">
+        <!-- <table class="tg-rendetable table table-sm table-striped table-hover mb-0 h-100">
+          <thead *ngIf="datatable.head">
+            <th *ngFor="let head of datatable.head" scope="col">
+                {{ head.title || head }}
+            </th>
+          </thead>
+          <tr *ngFor="let row of datatable.data">
+            <td *ngFor="let col of row">
+              {{col}}
+            </td>
+          </tr>
+        </table> -->
+          <ngx-datatable
+            #tgdatatable
+            [limit]="15"
+            [rows]="rows"
+            [sortType]='"single"'
+            [rowHeight]="'auto'"
+            [messages]="messages"
+            [headerHeight]="headerHeight"
+            [footerHeight]="footerHeight"
+            class="tg-rendetable table-hover material"
+            style="height: 300px">
+            <ng-container *ngFor="let col of columns; let i = index">
+                <ng-container *ngIf="col.name === 'icona'">
+                  <ngx-datatable-column
+                    [prop]="col.prop" 
+                    [name]="col.name">
                       <ng-template 
                         let-value="value" 
                         let-row="row" 
                         ngx-datatable-cell-template>
-                          {{ value | dataToHtml}}
+                        <tg-icons [icon]="value"></tg-icons>
                       </ng-template>
                     </ngx-datatable-column>
-                  </ng-container>
-              </ng-container>
+                </ng-container>
+                <ng-container *ngIf="col.name !== 'icona'">>
+                  <ngx-datatable-column 
+                    [prop]="col.prop" 
+                    [name]="col.name">
+                    <ng-template 
+                      let-value="value" 
+                      let-row="row" 
+                      ngx-datatable-cell-template>
+                        {{ value | dataToHtml}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ng-container>
+            </ng-container>
 <!-- 
-              <ngx-datatable-footer>
-                  <ng-template
-                    let-rowCount="rowCount"
-                    let-pageSize="pageSize"
-                    let-selectedCount="selectedCount"
-                    let-curPage="curPage"
-                    let-offset="offset"
-                    ngx-datatable-footer-template
-                  >
-                    <app-datatable-pager
-                      [page]="curPage"
-                      [visiblePagesCount]="currentVisible"
-                      [size]="pageSize"
-                      [count]="rowCount"
-                      [hidden]="false"
-                      (change)="table.onFooterPage($event)">
-                    </app-datatable-pager>
-                  </ng-template>
-                </ngx-datatable-footer> -->
-
-                
-            </ngx-datatable>
-
-          </div>
-        </div>
+            <ngx-datatable-footer>
+                <ng-template
+                  let-rowCount="rowCount"
+                  let-pageSize="pageSize"
+                  let-selectedCount="selectedCount"
+                  let-curPage="curPage"
+                  let-offset="offset"
+                  ngx-datatable-footer-template
+                >
+                  <app-datatable-pager
+                    [page]="curPage"
+                    [visiblePagesCount]="currentVisible"
+                    [size]="pageSize"
+                    [count]="rowCount"
+                    [hidden]="false"
+                    (change)="table.onFooterPage($event)">
+                  </app-datatable-pager>
+                </ng-template>
+              </ngx-datatable-footer> -->
+          </ngx-datatable>
       </div>
     </div>
 

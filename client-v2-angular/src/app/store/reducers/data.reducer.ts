@@ -14,7 +14,6 @@ export function reducer(
       return Object.assign({}, state, action.payload);
     case DataEvenType.AUTOUPDATESTATUSHERO:
       // return Object.assign({}, state, {hero: {status: action.payload}});
-      console.log(action.payload);
       return {...state, hero: { ...state.hero,
         status: {
           drink: action.payload.drink,
@@ -31,7 +30,7 @@ export function reducer(
       }};
 
     case DataEvenType.HERODATA:
-      return {...state, hero: action.payload};
+      return Object.assign({}, state, action.payload);
 
     case DataEvenType.DOORS:
       return Object.assign({}, state, {
