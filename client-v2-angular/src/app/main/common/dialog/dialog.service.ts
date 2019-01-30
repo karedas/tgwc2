@@ -6,8 +6,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class DialogService {
 
-  private resizingEvent$: Subject<any> = new Subject<any>();
-  private resizedEvent$: Subject<any> = new Subject<any>();
+  private resizingEvent$: Subject<any[]> = new Subject<any[]>();
+  private resizedEvent$: Subject<any[]> = new Subject<any[]>();
 
   private modals: any[] = [];
 
@@ -38,11 +38,17 @@ export class DialogService {
     modal.toFront();
   }
 
-  onResizing(id: string): Observable<any> {
-    return this.resizingEvent$.asObservable();
-  }
-  onResized(id: string) {
-    return this.resizedEvent$.asObservable();
-  }
+  // setResizing(event) {
+  //   this.resizedEvent$.next(
+  // }
+
+  // setResized(event) {}
+
+  // onResizing(id: string): Observable<any> {
+  //   return this.resizingEvent$.asObservable();
+  // }
+  // onResized(id: string): Observable<any> {
+  //   return this.resizedEvent$.asObservable();
+  // }
 
 }
