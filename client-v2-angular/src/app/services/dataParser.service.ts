@@ -23,7 +23,6 @@ export class DataParser {
   }
 
   handlerGameData(data: any) {
-
     this.netData += data;
     
     const len = this.netData.length;

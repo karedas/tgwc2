@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { select, Store } from '@ngrx/store';
@@ -15,10 +15,11 @@ import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwi
   styleUrls: ['./generic-table.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GenericTableComponent implements  AfterViewInit {
+export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   @ViewChild('tgdatatable') table: DatatableComponent;
   @ViewChild('tgDialog') dialog: jqxWindowComponent;
+  @ViewChild('windowContent') windowContent: ElementRef;
 
   public readonly dialogID: string = 'genericTable';
 
@@ -27,8 +28,10 @@ export class GenericTableComponent implements  AfterViewInit {
 
   public rows = [];
   public columns = [];
-  public currentPageLimit = 10;
+  public currentPageLimit = 15;
   public currentVisible = 3;
+  
+  contentHeight: number;
 
   public readonly messages = {
     // Footer total message
@@ -50,7 +53,7 @@ export class GenericTableComponent implements  AfterViewInit {
   // ];
 
   public readonly headerHeight = 30;
-  public readonly footerHeight = 50;
+  public readonly footerHeight = 44;
   public readonly rowHeight = 30;
 
 
@@ -61,6 +64,9 @@ export class GenericTableComponent implements  AfterViewInit {
 
     this.modalConfig.draggable = true;
     this.modalConfig.isModal = false;
+    this.modalConfig.height = 'auto';
+    this.modalConfig.width = 740;
+
 
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
@@ -68,7 +74,6 @@ export class GenericTableComponent implements  AfterViewInit {
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-
     this.dataTable$.subscribe(
       (dt: IGenericTable) => {
         if (dt) {
@@ -111,9 +116,6 @@ export class GenericTableComponent implements  AfterViewInit {
   }
 
   private open() {
-
-    this.modalConfig.height = this.contentHeight;
-
     setTimeout(() => {
       this.dialogService.open(this.dialogID);
       this.dialogService.toFront(this.dialogID);
@@ -125,15 +127,19 @@ export class GenericTableComponent implements  AfterViewInit {
    * Get the content Height based on Header, Body and Footer 
    * of ngx-datatable, then return @number value
    */
-  get contentHeight(): number {
-
+  setContentHeight() {
     let bodyHeight = 0;
     if (this.rows.length < this.currentPageLimit) {
       bodyHeight = this.rows.length * this.rowHeight;
     } else {
       bodyHeight = this.currentPageLimit * this.rowHeight;
     }
-    return (this.footerHeight + this.headerHeight) + bodyHeight;
+    this.contentHeight = this.footerHeight + this.headerHeight + bodyHeight;
   }
-
+  
+  
+  ngOnDestroy(): void {
+   
+  }
 }
+

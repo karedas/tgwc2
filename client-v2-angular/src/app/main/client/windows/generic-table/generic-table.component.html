@@ -1,43 +1,51 @@
 <ng-container *ngIf="dataTable$ | async as datatable">
-  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="'Informazioni'" #tgDialog>
-    <div class="tg-generictable">
-      <div class="tg-dialog-inside-nopadding">
-
-        <ngx-datatable #tgdatatable [limit]="15" [rows]="rows" [sortType]='"single"' [rowHeight]="'auto'" [messages]="messages"
-          [headerHeight]="headerHeight" [footerHeight]="footerHeight" class="tg-rendetable table-hover material">
-
-          <ng-container *ngFor="let col of columns; let i = index">
+  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="'Informazioni'">
+    <div style="overflow: hidden;" #windowContent>
+      <div class="tg-generictable" style="overflow:hidden">
+        <div class="tg-dialog-inside-nopadding">
+          <ngx-datatable
+            #tgdatatable
             
-            <ng-container *ngIf="col.name === 'icona'">
-              <!-- icona -->
-              <ngx-datatable-column [prop]="col.prop" [name]="col.name">
-                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                  <tg-icons [icon]="value"></tg-icons>
-                </ng-template>
-              </ngx-datatable-column>
+            [columnMode]="'force'"
+            [limit]="currentPageLimit"
+            [rows]="rows"
+            [sortType]='"single"'
+            [rowHeight]="rowHeight"
+            [messages]="messages"
+            [headerHeight]="headerHeight"
+            [footerHeight]="footerHeight"
+            class="tg-rendetable table-hover material"
+            [style.height.px]="contentHeight">
+            <ng-container *ngFor="let col of columns; let i = index">
+                <ng-container *ngIf="col.name === 'icona'">
+                  <ngx-datatable-column
+                    [prop]="col.prop" 
+                    [name]="col.name">
+                      <ng-template 
+                        let-value="value" 
+                        let-row="row" 
+                        ngx-datatable-cell-template>
+                        <tg-icons [icon]="value"></tg-icons>
+                      </ng-template>
+                    </ngx-datatable-column>
+                </ng-container>
+                <ng-container *ngIf="col.name !== 'icona'">>
+                  <ngx-datatable-column 
+                    [prop]="col.prop" 
+                    [name]="col.name">
+                    <ng-template 
+                      let-value="value" 
+                      let-row="row" 
+                      ngx-datatable-cell-template>
+                        {{ value | dataToHtml}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ng-container>
             </ng-container>
-            <ng-container *ngIf="col.name === 'ipaddr'">
-              <!-- Ip Address -->
-              <ngx-datatable-column [prop]="col.prop" [name]="col.name">
-                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                    <a target="_blank" href="http://www.infosniper.net/index.php?ip_address=' + {{value}} + '">{{value}}</a>
-                </ng-template>
-              </ngx-datatable-column>
-            </ng-container>
-            <ng-container *ngIf="col.name !== 'icona'">
-              <!-- Default -->
-              <ngx-datatable-column [prop]="col.prop" [name]="col.name">
-                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                  {{ value | dataToHtml}}
-                </ng-template>
-              </ngx-datatable-column>
-            </ng-container>
-
-          </ng-container>
-        </ngx-datatable>
-
+          </ngx-datatable>
+        </div>
       </div>
     </div>
-
   </tg-dialog>
 </ng-container>
+

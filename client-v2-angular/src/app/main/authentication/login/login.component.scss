@@ -61,7 +61,7 @@
     background: url($imgPath + '/login/border-top-mainbox.png') no-repeat top left;
     background-size: 100%;
     text-align: center;
-    padding-top: 42px;
+    padding-top: 40px;
     margin-top: -28px;
     position: relative;
 
@@ -155,11 +155,12 @@
     border-top: 1px solid #55584d;
     border-bottom: 1px solid #55584d;
     display: inline-block;
+    font-size: 14px;
 
     a,
     a:hover {
       text-decoration: underline;
-      color: $tg-yellow;
+      color: white;
     }
   }
 

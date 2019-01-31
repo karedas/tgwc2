@@ -47,7 +47,6 @@ export class GameService{
   }
 
   updateUIByData(what: any) {
-
     const now = Date.now();
     if (now > this.lastDataTime + 1000 ) {
 

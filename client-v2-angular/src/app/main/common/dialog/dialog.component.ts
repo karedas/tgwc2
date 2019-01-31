@@ -34,6 +34,11 @@ export class DialogComponent  implements OnInit, OnDestroy {
     this.dialogService.add(this);
   }
 
+
+  setOptions(args: any) {
+    this.jqxWindow.setOptions(args);
+  }
+
   open(): void {
     this.jqxWindow.open();
   }

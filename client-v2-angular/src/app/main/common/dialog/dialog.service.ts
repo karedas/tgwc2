@@ -38,6 +38,12 @@ export class DialogService {
     modal.toFront();
   }
 
+  options(id:string, args: any) {
+    const modal: any = this.modals.filter(x => x.id === id)[0];
+    console.log(modal);
+    modal.setOptions(args);
+  }
+
   // setResizing(event) {
   //   this.resizedEvent$.next(
   // }
