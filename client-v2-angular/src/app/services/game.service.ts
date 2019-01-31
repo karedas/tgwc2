@@ -32,8 +32,9 @@ export class GameService{
   ) {}
 
   init(initialData: any) {
-    this.dataParserService.parseForDisplay(initialData);
+    this.dataParserService.handlerGameData(initialData);
   }
+
 
   startGame() {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {

@@ -28,13 +28,20 @@ export class ClientContainerComponent implements  OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    if(!localStorage.getItem('welcomenews')) {
-      this.store.select(getWelcomeNews).subscribe(
-        () => setTimeout(() => {
-          this.dialogService.openWelcomeNews()
-        })
-      );
-    } 
+    if(localStorage.getItem('welcomenews')) {
+      return;
+    }
+      
+    this.store.select(getWelcomeNews)
+      .subscribe(
+        (request: boolean) => { 
+          console.log(request);
+          if(request === true) { setTimeout(() => {
+            this.dialogService.openWelcomeNews();
+            })
+          }
+        }
+      )
   }
 
   ngOnDestroy() {

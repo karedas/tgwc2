@@ -87,7 +87,6 @@ export class LoginService {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
 
-
       if (rep.msg) {
         switch (rep.msg) {
 
@@ -104,7 +103,9 @@ export class LoginService {
             this.onReboot();
             break;
           case loginEventName.LOGINOK:
+          console.log('pre',data);
             this.onLoginOk(data.slice(end + 2));
+            console.log(end)
             break;
           case loginEventName.SERVERDOWN:
             this.onServerDown();
@@ -134,13 +135,13 @@ export class LoginService {
   onLoginOk(data: any) {
     this.completeHandShake();
     this.game.init(data);
-    this.game.startGame();
     this.store.dispatch(new LoginSuccessAction());
   }
-
+  
   completeHandShake() {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
+    this.game.startGame();
   }
 
   onShutDown() {

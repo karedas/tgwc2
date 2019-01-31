@@ -16,6 +16,7 @@
   padding-right: 47px;
 
   .tg-map-box {
+
     position: relative;
     border-radius: 50%;
     position: absolute;
@@ -23,6 +24,7 @@
     width: 288px;
     height: 288px;
     top: 116px;
+
     &:after {
       display: block;
       content: '';
@@ -62,6 +64,7 @@
     width: 292px;
     padding-left: 35px;
     padding-right: 35px;
+    
     .tg-map-box {
       top: 85px;
       width: 222px;

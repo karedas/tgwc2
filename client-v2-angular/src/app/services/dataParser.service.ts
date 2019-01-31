@@ -29,10 +29,15 @@ export class DataParser {
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
       const data = this.netData.substr(0, len - 3);
 
-      this.parseForDisplay(this.preParseText(data));
+      try {
+        this.parseForDisplay(this.preParseText(data));
+      } catch (err) {
+        console.log(err);
+      };
+
       this.netData = '';
 
-    } else if (len > 2000000) {
+    } else if (len > 200000) {
       this.netData = '';
       // this.setDisconnect(); //TODO
     }
