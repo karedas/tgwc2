@@ -1,60 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
+import { Observable } from 'rxjs';
+import { WelcomeNewsComponent } from '../../client/windows/welcome-news/welcome-news.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
 
-  private resizingEvent$: Subject<any[]> = new Subject<any[]>();
-  private resizedEvent$: Subject<any[]> = new Subject<any[]>();
+  constructor(public dialog: MatDialog) { }
 
-  private modals: any[] = [];
+  /** Cookie Law  */
+  openCookieModal(): Observable<any> {
+    const dialogRef = this.dialog.open(CookieLawComponent, {
+      width: '450px',
+      disableClose: true,
+      autoFocus: true,
+      panelClass: 'tg-dialog'
+    });
 
-  add (modal: any) {
-    // add modal to array of active modals
-    this.modals.push(modal);
+    return dialogRef.afterClosed();
   }
 
-  open (id: string) {
-    // open modal specified by id
-    const modal: any = this.modals.filter(x => x.id === id)[0];
-    modal.open();
+  /** Welcome News */
+  openWelcomeNews() {
+
+    if (!localStorage.getItem('welcomenews')) {
+      const dialogRef = this.dialog.open(WelcomeNewsComponent, {
+        width: 'auto',
+        disableClose: true,
+        maxWidth: '700px'
+      });
+    }
   }
-
-  close (id: string) {
-    // close modal specified by id
-    const modal: any = this.modals.filter(x => x.id === id)[0];
-    modal.close();
-  }
-
-  remove(id: string) {
-      // remove modal from array of active modals
-      this.modals = this.modals.filter(x => x.id !== id);
-  }
-
-  toFront(id: string) {
-    const modal: any = this.modals.filter(x => x.id === id)[0];
-    modal.toFront();
-  }
-
-  options(id:string, args: any) {
-    const modal: any = this.modals.filter(x => x.id === id)[0];
-    console.log(modal);
-    modal.setOptions(args);
-  }
-
-  // setResizing(event) {
-  //   this.resizedEvent$.next(
-  // }
-
-  // setResized(event) {}
-
-  // onResizing(id: string): Observable<any> {
-  //   return this.resizingEvent$.asObservable();
-  // }
-  // onResized(id: string): Observable<any> {
-  //   return this.resizedEvent$.asObservable();
-  // }
 
 }

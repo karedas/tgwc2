@@ -3,8 +3,6 @@
 </ng-container>
 
 <ng-template #clientReady>
-    <!-- Cookie Law -->
-    <tg-cookie-law (iAcceptCookie)="onCookieAccepted($event)"  *ngIf="!isCookieAccepted"></tg-cookie-law>
     <!-- Client -->
     <ng-container *ngIf="isCookieAccepted">
         <router-outlet></router-outlet>

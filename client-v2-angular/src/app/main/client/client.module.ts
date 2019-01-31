@@ -13,12 +13,10 @@ import { TextComponent } from './output/renders/text/text.component';
 import { RoomComponent } from './output/renders/room/room.component';
 
 // JQXWidgets
-import { jqxSplitterComponent  } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
 import { ExtraboardComponent } from './dashboard/extraboard/extraboard.component';
-import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HistoryService } from 'src/app/services/history.service';
 import { CombatPanelComponent } from './dashboard/combat-panel/combat-panel.component';
@@ -33,12 +31,11 @@ import { WindowsModule } from './windows/windows.module';
 import { ObjpersDetailComponent } from './output/renders/objpers-detail/objpers-detail.component';
 import { ObjPersContainerComponent } from './output/renders/obj-pers-container/obj-pers-container.component';
 import { StatusComponent } from './output/renders/status/status.component';
+import { AngularSplitModule } from 'angular-split';
 
 @NgModule({
   declarations: [
     // jqx widgets
-    jqxSplitterComponent,
-    jqxMenuComponent,
     // Client Components
     ClientComponent,
     ClientContainerComponent,
@@ -69,6 +66,7 @@ import { StatusComponent } from './output/renders/status/status.component';
     ClientRoutingModule,
     WindowsModule,
     SharedModule,
+    AngularSplitModule.forRoot()
   ],
   exports: [
     ClientComponent,

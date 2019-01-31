@@ -10,7 +10,7 @@ import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { getUIState } from 'src/app/store/selectors';
 import { map } from 'rxjs/operators';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { UIState } from 'src/app/store/state/ui.state';
 
 @Component({

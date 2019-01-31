@@ -737,6 +737,13 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular-split@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/angular-split/-/angular-split-2.0.1.tgz#11dcf8951933109dc307813ada1dfe9c173ea4b4"
+  integrity sha512-5VWm6LWcjmL178XapWlyGsXMtc7UVNnQoz1rGo3VZrjQwyAJ4RFUKpmqkzUqnU7v/+Gsa/PD369bgRTJnhx1OA==
+  dependencies:
+    tslib "^1.9.0"
+
 ansi-colors@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-1.1.0.tgz#6374b4dd5d4718ff3ce27a671a3b1cad077132a9"
@@ -4791,11 +4798,6 @@ jpeg-js@^0.3.2:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.3.4.tgz#dc2ba501ee3d58b7bb893c5d1fab47294917e7e7"
   integrity sha512-6IzjQxvnlT8UlklNmDXIJMWxijULjqGrzgqc0OG7YadZdvm7KPQ1j0ehmQQHckgEWOfgpptzcnWgESovxudpTA==
-
-jqwidgets-scripts@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/jqwidgets-scripts/-/jqwidgets-scripts-7.0.0.tgz#80e834cf453bda4cb4ea1ab7af06c50ee4b1e8fa"
-  integrity sha512-R6hVPtumO33o+QcHXcYIQBNLb7gF9s9aamlxxfF7hx/bERBXYI5BarPYLzEnlXV1Or1DEp7DlM2WCt/Av1Isww==
 
 js-base64@^2.1.8:
   version "2.4.9"

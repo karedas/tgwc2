@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
@@ -21,7 +21,7 @@ export class NoFeatureComponent implements OnInit {
   }
 
   onClose(): void {
-    this.dialogService.close(this.dialogID);
+    // this.dialogService.close(this.dialogID);
   }
 
 }

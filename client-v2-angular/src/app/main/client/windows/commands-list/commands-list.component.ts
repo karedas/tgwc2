@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, HostListener, ViewChild, In
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({

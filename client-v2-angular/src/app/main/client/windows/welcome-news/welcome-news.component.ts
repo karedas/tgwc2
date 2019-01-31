@@ -1,53 +1,31 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
-import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tg-welcome-news',
   templateUrl: './welcome-news.component.html',
   styleUrls: ['./welcome-news.component.scss'],
 })
-export class WelcomeNewsComponent implements AfterViewInit {
-
-  dialogID = 'welcomeNews';
-  modalConfig: ModalConfiguration = new ModalConfiguration();
+export class WelcomeNewsComponent  {
 
   private dontShowNextTime = false;
 
-  constructor(private dialogService: DialogService, private game: GameService) {
-    this.modalConfig.width = 'auto';
-    // this.modalConfig.minWidth = 550;
-    this.modalConfig.maxWidth = 700;
-    this.modalConfig.modalOpacity = 0.8;
-    this.modalConfig.height = 'auto';
-    this.modalConfig.resizable = false;
-  }
-
-  ngAfterViewInit(): void {
-    if (!localStorage.getItem('welcomenews')) {
-      this.dialogService.open(this.dialogID);
-      return;
-    } else {
-      // else send an empty emit
-      this.game.sendToServer('');
-    }
-  }
+  constructor(
+    private game: GameService,
+    public dialogRef: MatDialogRef<WelcomeNewsComponent>
+    ) {}
 
   onContinue(): void {
     if (this.dontShowNextTime) {
       localStorage.setItem('welcomenews', '1');
     }
 
-    this.dialogService.close(this.dialogID);
+    this.dialogRef.close();
     this.game.sendToServer('');
   }
 
   onCheckbox(event: any): void {
     this.dontShowNextTime = !this.dontShowNextTime;
-  }
-
-  open() {
-      this.dialogService.open(this.dialogID);
   }
 }

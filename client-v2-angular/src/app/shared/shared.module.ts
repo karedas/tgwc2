@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -18,6 +19,12 @@ import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TooltipModule } from 'ng2-tooltip-directive';
 
+import {MatDialogModule, MatCheckboxModule, MatDialogRef} from "@angular/material";
+import { DialogModule } from '../main/common/dialog/dialog.module';
+import { DialogService } from '../main/common/dialog/dialog.service';
+
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     IconsComponent,
@@ -26,6 +33,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     PipesModule,
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
@@ -36,7 +44,12 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     NgScrollbarModule,
     FormsModule,
     ToastContainerModule,
-    TooltipModule
+    TooltipModule,
+    DialogModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    DragDropModule
+    
   ],
   providers: [
     GameService,
@@ -44,7 +57,8 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     SocketService,
     PreloaderService,
     AudioService,
-    LoginService
+    LoginService,
+    DialogService, {provide: MatDialogRef}
   ],
   exports: [
     FlexLayoutModule,
@@ -56,7 +70,10 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     ToastContainerModule,
     FontAwesomeModule,
     TooltipModule,
-    IconsComponent
+    IconsComponent,
+    MatDialogModule,
+    MatCheckboxModule,
+    DragDropModule
   ],
 })
 export class SharedModule {

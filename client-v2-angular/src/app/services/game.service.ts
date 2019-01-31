@@ -32,7 +32,7 @@ export class GameService{
   ) {}
 
   init(initialData: any) {
-    this.dataParserService.handlerGameData(initialData);
+    this.dataParserService.parseForDisplay(initialData);
   }
 
   startGame() {

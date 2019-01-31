@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +28,6 @@ import { Auth2Module } from './main/authentication/auth.module';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] } ),
     EffectsModule.forRoot([UiEffects, ClientEffects]),
@@ -48,8 +46,7 @@ import { Auth2Module } from './main/authentication/auth.module';
     SharedModule,
     ClientModule,
     Auth2Module,
-    AppRoutingModule,
-
+    AppRoutingModule
   ],
   providers: [AppPreloadingStrategy],
   bootstrap: [AppComponent]

@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from './dialog.component';
-import { jqxWindowComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxwindow';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
+import { WelcomeNewsComponent } from '../../client/windows/welcome-news/welcome-news.component';
 
 @NgModule({
   declarations: [
-    DialogComponent,
-    jqxWindowComponent,
   ],
   imports: [
     CommonModule,
@@ -17,11 +15,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
   ],
   exports: [
-    DialogComponent,
-    jqxWindowComponent,
     NgScrollbarModule,
     NgxDatatableModule
   ],
-  entryComponents: [DialogComponent]
+  entryComponents: [CookieLawComponent, WelcomeNewsComponent]
 })
 export class DialogModule { }

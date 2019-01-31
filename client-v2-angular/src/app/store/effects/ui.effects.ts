@@ -5,7 +5,7 @@ import { Action, Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
 import { tap, map, withLatestFrom, filter, catchError } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 
@@ -39,7 +39,7 @@ export class UiEffects {
     @Effect({dispatch: false})
     closeTextEditor: Observable<Action> = this.actions$.pipe(
       ofType(UIEventType.CLOSETEXTEDITOR),
-      tap(() => this.dialogService.close('editor'))
+      // tap(() => this.dialogService.close('editor'))
     );
 
     @Effect({dispatch: false})
@@ -49,7 +49,7 @@ export class UiEffects {
       tap( cmds => {
         this.game.setCommands(cmds);
         setTimeout(() => {
-          this.dialogService.open('commandsList');
+          // this.dialogService.open('commandsList');
         }, 100);
       })
     );

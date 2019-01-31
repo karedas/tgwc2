@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
 
 @Component({
   selector: 'tg-navbar',
@@ -9,7 +8,7 @@ import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu
 })
 export class NavbarComponent implements AfterViewInit {
 
-  @ViewChild('tgMainMenu') mainMenu: jqxMenuComponent;
+  // @ViewChild('tgMainMenu') mainMenu: jqxMenuComponent;
 
   settings: {};
 
@@ -23,6 +22,6 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.mainMenu.setOptions(this.settings);
+    // this.mainMenu.setOptions(this.settings);
   }
 }

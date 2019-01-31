@@ -5,10 +5,12 @@
 @import 'base';
 @import 'buttons';
 
+@import 'utils/angular-material';
+
 /* jqx widgets custom theme reference */
-@import 'elements/jqx_widgets_window';
-@import 'elements/jqx_widgets_splitter';
-@import 'elements/jqx_widgets_menu';
+// @import 'elements/jqx_widgets_window';
+// @import 'elements/jqx_widgets_splitter';
+// @import 'elements/jqx_widgets_menu';
 /*various */
 @import 'elements/ng_scrollbar';
 @import 'elements/ngx_toastr';

@@ -27,7 +27,6 @@ export class DataParser {
     
     const len = this.netData.length;
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-
       const data = this.netData.substr(0, len - 3);
 
       this.parseForDisplay(this.preParseText(data));
@@ -58,14 +57,16 @@ export class DataParser {
 
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
+      console.log('news');
       this.store.dispatch(new UiActions.WelcomeNewsAction);
       return '';
     });
 
     // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
-      // const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
-      // this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
+      const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
+      console.log('herodata', pgdata_parse);
+      this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
       return '';
     });
 

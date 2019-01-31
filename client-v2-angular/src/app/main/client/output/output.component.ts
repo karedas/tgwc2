@@ -1,10 +1,10 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
-import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
+// import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, Subject } from 'rxjs';
 import { getExtraOutputStatus, getDataBase, getRoomBase, getObjOrPerson } from 'src/app/store/selectors';
 import { GameService } from 'src/app/services/game.service';
@@ -19,7 +19,7 @@ import { Room } from 'src/app/models/data/room.model';
 export class OutputComponent implements OnInit, OnDestroy {
 
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
-  @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
+  // @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
 
   lastRoom$: Observable<any>;
 

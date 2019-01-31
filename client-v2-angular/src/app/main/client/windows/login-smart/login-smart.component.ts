@@ -6,7 +6,7 @@ import { ClientState } from 'src/app/store/state/client.state';
 import { skip, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
 import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
@@ -40,38 +40,38 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   }
 
   ngOnInit(): void {
-    this.inGameState$.pipe(
-      takeUntil(this._unsubscribeAll),
-      skip(1)).subscribe(
-      ingame => {
-        if (ingame == false) { this.open(); }
-      }
-    );
+    // this.inGameState$.pipe(
+    //   takeUntil(this._unsubscribeAll),
+    //   skip(1)).subscribe(
+    //   ingame => {
+    //     if (ingame == false) { this.open(); }
+    //   }
+    // );
   }
 
-  private open () {
-    setTimeout(() => {
-      this.dialogService.open('loginWidget');
-    });
-  }
+  // private open () {
+  //   setTimeout(() => {
+  //     this.dialogService.open('loginWidget');
+  //   });
+  // }
 
-  onReconnect() {
-    this.loginService.reconnect();
-  }
+  // onReconnect() {
+  //   this.loginService.reconnect();
+  // }
 
-  toggle(event?: Event) {
+  // toggle(event?: Event) {
 
-    if (event) {
-      event.preventDefault();
-    }
+  //   if (event) {
+  //     event.preventDefault();
+  //   }
 
-    this.showForm = !this.showForm;
-  }
+  //   this.showForm = !this.showForm;
+  // }
 
-  navigateToHome() {
-    this.store.dispatch(new DisconnectAction);
-    this.router.navigate(['/login']);
-  }
+  // navigateToHome() {
+  //   this.store.dispatch(new DisconnectAction);
+  //   this.router.navigate(['/login']);
+  // }
 
 
   ngOnDestroy() {
