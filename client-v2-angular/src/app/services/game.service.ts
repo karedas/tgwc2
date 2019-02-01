@@ -32,11 +32,12 @@ export class GameService{
   ) {}
 
   startGame(initialData) {
+    this.dataParserService.handlerGameData(initialData);
+    
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.dataParserService.handlerGameData(data);
     });
 
-    this.dataParserService.handlerGameData(initialData);
 
   }
 

@@ -22,7 +22,7 @@
               </ng-scrollbar>
             </div>
           </as-split-area>
-          <as-split-area size="40" [visible]="extraOutputOpenStatus | async">
+          <as-split-area size="40">
             <div style="height: 100%; overflow:hidden;">
               <div class="tg-output--extradetail">
                 <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extraOutputOpenStatus$ | async"

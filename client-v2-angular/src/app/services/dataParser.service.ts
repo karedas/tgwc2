@@ -65,9 +65,9 @@ export class DataParser {
   parseForDisplay(data: string) {
     let pos: any;
 
+    console.log('--------------------------------------------------------- data', data)
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      console.log('news');
       this.store.dispatch(new UiActions.WelcomeNewsAction);
       return '';
     });
@@ -117,6 +117,7 @@ export class DataParser {
       this.store.dispatch(new UiActions.AudioAction(audio_parse));
       return '';
     });
+
     // Auto Update Hero Status
     data = data.replace(/&!st\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(4, -1));

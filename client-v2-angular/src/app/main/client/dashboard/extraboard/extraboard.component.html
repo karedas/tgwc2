@@ -1,42 +1,42 @@
 <div fxLayout="row" class="extraboard-content">
   <tg-geolocal-box fxHide fxShow.gt-md></tg-geolocal-box>
-  <div fxFlex="0 0 auto">
-    <div class="tg-main-buttons" fxLayout="row wrap">
+  <div fxFlex="0 0 auto" fxHide fxShow.gt-sm>
+    <div class="tg-main-buttons" fxLayout="row wrap" >
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-info-graph" 
           (mouseup)="buttonClick('info')"
-          tooltip="Informazioni" placement="top" show-delay="500">Info</button>
+          matTooltip="Scheda Personaggio (info)" [matTooltipPosition]="'above'">Info</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-equip-graph" 
           (mouseup)="buttonClick('equip')"
-          tooltip="Equipaggiamento" placement="top" show-delay="500">Equip</button>
+          matTooltip="Equipaggiamento" [matTooltipPosition]="'above'">Equip</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-inventario-graph" 
           (mouseup)="buttonClick('invent')"
-          tooltip="Inventario" placement="top" show-delay="500">Inventario</button>
+          matTooltip="Inventario" [matTooltipPosition]="'above'">Inventario</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-skill-graph" 
           (mouseup)="buttonClick('abilita')"
-          tooltip="Abilità" placement="top" show-delay="500">abilit&agrave;</button>
+          matTooltip="Abilit&agrave;" [matTooltipPosition]="'above'">abilit&agrave;</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-stato-graph" 
           (mouseup)="buttonClick('stato')"
-          tooltip="Stato" placement="top" show-delay="500">Stato</button>
+          matTooltip="Stato" [matTooltipPosition]="'above'">Stato</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-config-graph"
           (mouseup)="openShortcutsPanel()"
-          tooltip="Apri pannello scorciatoie" placement="top" show-delay="500">Scorciatoie</button>
+          matTooltip="Pannello Scorciatoie" [matTooltipPosition]="'above'">Scorciatoie</button>
       </div>
     </div>
   </div>

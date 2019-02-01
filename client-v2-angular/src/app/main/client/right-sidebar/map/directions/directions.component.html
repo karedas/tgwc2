@@ -1,24 +1,30 @@
-<button class="tg-dir dir-nord" rel="tooltip" title="Vai a nord" 
+<button class="tg-dir dir-nord" 
+  matTooltip="Vai a nord" [matTooltipPosition]="'left'"
   (click)="goToDirection($event, 0)">
   <span class="dir-ico" [ngStyle]="doorsStyle['nord']"></span>
 </button>
-<button class="tg-dir dir-est" rel="tooltip" title="Vai a est" 
+<button class="tg-dir dir-est" 
+  matTooltip="Vai a est" [matTooltipPosition]="'left'"
   (click)="goToDirection($event, 1)">
   <span class="dir-ico" [ngStyle]="doorsStyle['est']"></span>
 </button>
-<button class="tg-dir dir-sud" rel="tooltip" title="Vai a sud" 
+<button class="tg-dir dir-sud" 
+  matTooltip="Vai a sud" [matTooltipPosition]="'below'"
   (click)="goToDirection($event, 2)">
   <span class="dir-ico" [ngStyle]="doorsStyle['sud']"></span>
 </button>
-<button class="tg-dir dir-ovest" rel="tooltip" title="Vai a ovest"
+<button class="tg-dir dir-ovest" 
+  matTooltip="Vai a ovest" [matTooltipPosition]="'left'"
   (click)="goToDirection($event, 3)">
   <span class="dir-ico" [ngStyle]="doorsStyle['ovest']"></span>
 </button>
-<button class="tg-dir dir-alto" rel="tooltip" title="Vai verso l'alto" data-label="Alto" 
+<button class="tg-dir dir-alto" 
+  matTooltip="Vai verso l'alto" [matTooltipPosition]="'above'"
   (click)="goToDirection($event, 4)">
   <span class="dir-ico" [ngStyle]="doorsStyle['alto']"></span>
 </button>
-<button class="tg-dir dir-basso" rel="tooltip" title="Vai verso il basso" data-label="Basso" 
+<button class="tg-dir dir-basso" 
+  matTooltip="Vai verso il basso" [matTooltipPosition]="'above'"
   (click)="goToDirection($event, 5)">
   <span class="dir-ico" [ngStyle]="doorsStyle['basso']"></span>
 </button>

@@ -17,13 +17,13 @@ import { ToastContainerModule } from 'ngx-toastr';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { TooltipModule } from 'ng2-tooltip-directive';
 
-import {MatDialogModule, MatCheckboxModule, MatDialogRef, MatMenuModule} from "@angular/material";
+import {MatDialogModule, MatCheckboxModule, MatDialogRef, MatMenuModule, MatTooltipModule, MatToolbarModule} from "@angular/material";
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 import { DialogModule } from '../main/common/dialog/dialog.module';
 import { DialogService } from '../main/common/dialog/dialog.service';
 
-import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -45,11 +45,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     
     FormsModule,
     ToastContainerModule,
-    TooltipModule,
     DialogModule,
     MatDialogModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatTooltipModule,
+    MatToolbarModule,
     DragDropModule
     
   ],
@@ -71,12 +72,13 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     PipesModule,
     ToastContainerModule,
     FontAwesomeModule,
-    TooltipModule,
     IconsComponent,
     MatDialogModule,
     MatCheckboxModule,
     MatMenuModule,
-    DragDropModule
+    MatTooltipModule,
+    DragDropModule,
+    MatToolbarModule
   ],
 })
 export class SharedModule {

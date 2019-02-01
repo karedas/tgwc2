@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import 'hammerjs';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +21,6 @@ import { appReducer, clearState } from './store';
 import { UiEffects } from './store/effects/ui.effects';
 import { ClientEffects } from './store/effects/client.effects';
 import { Auth2Module } from './main/authentication/auth.module';
-
 
 @NgModule({
   declarations: [

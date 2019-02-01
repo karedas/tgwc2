@@ -4,8 +4,7 @@
       <ng-container *ngIf="!type">
         <div *ngIf="html.title" 
           [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
-        <div 
-          [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" 
+        <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" 
           class="tg-room--desc"></div>
         <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
       </ng-container>
@@ -24,7 +23,7 @@
     </div>
 
     <ng-container *ngIf="type === 'room'">
-      <div class="tg-room--desc" [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true"></div>
+      <div class="tg-room--desc" [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
     </ng-container>
 
     <ng-container *ngIf="type ==='objPers'">

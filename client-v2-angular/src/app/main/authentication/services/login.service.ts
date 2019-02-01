@@ -135,11 +135,11 @@ export class LoginService {
     this.store.dispatch(new LoginSuccessAction());
   }
   
-  completeHandShake(data) {
+  completeHandShake(data: any) {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
-    const test = '&*&!news{"title":"Notizie", "text":"Novità 27-11-2018:\r\n==================================================================\r\n\r\nxxx\r\n\r\n\r\n---------------------------------------------\r\nBuon gioco a tutti.\r\n"}!&!crlf""&!!'
-    this.game.startGame(test);
+    console.log(data);
+    this.game.startGame(data);
   }
 
   onShutDown() {

@@ -12,7 +12,7 @@
       class="tg-fnt-button  d-none d-sm-inline-block"
       type="button"
       (mousedown)="toggleExtraOutput($event)"
-      tooltip="Attiva / Disattiva Output extra" placement="top" show-delay="500"
+      matTooltip="Attiva / Disattiva Output extra" [matTooltipPosition]="'above'"
       [ngClass]="{'isActive': extraOutputStatus$ | async}">
       <fa-icon [icon]="facolumns"></fa-icon>
     </button>
@@ -20,14 +20,14 @@
       class="tg-fnt-button"
       type="button" 
       (mousedown)="toggleDashboard($event)"
-      tooltip="Apri/Chiudi la tua Dashboard" placement="top" show-delay="500"
+      matTooltip="Apri / Chiudi la tua Dashboard" [matTooltipPosition]="'above'"
       [ngClass]="{'isActive': dashBoardStatus$ | async}">
       <fa-icon [icon]="faSolarPanel"></fa-icon>
     </button>
     <button 
       class="tg-fnt-button d-none d-sm-inline-block"
       type="button"
-      tooltip="Attiva / Disattiva Modalità Zen" placement="top" show-delay="500"
+      matTooltip="Attiva / Disattiva Modalità Zen" [matTooltipPosition]="'above'"
       (mousedown)="toggleZen($event)">
       <fa-icon [icon]="faBullseye"></fa-icon>
     </button>

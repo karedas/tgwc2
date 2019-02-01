@@ -1,4 +1,5 @@
-import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material';
 
 @Component({
   selector: 'tg-navbar',
@@ -6,15 +7,11 @@ import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent {
 
-  // @ViewChild('tgMainMenu') mainMenu: jqxMenuComponent;
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger
+  
+  constructor() {}
 
-  constructor() {
 
-  }
-
-  ngAfterViewInit(): void {
-    // this.mainMenu.setOptions(this.settings);
-  }
 }

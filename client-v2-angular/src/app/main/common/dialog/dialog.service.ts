@@ -28,7 +28,7 @@ export class DialogService {
   openWelcomeNews() {
 
     if (!localStorage.getItem('welcomenews')) {
-      const dialogRef = this.dialog.open(WelcomeNewsComponent, {
+      this.dialog.open(WelcomeNewsComponent, {
         panelClass: 'tg-dialog',
         width: 'auto',
         disableClose: true,
@@ -38,7 +38,7 @@ export class DialogService {
   }
 
   openNoFeature() {
-    const dialogRef = this.dialog.open(NoFeatureComponent, {
+    this.dialog.open(NoFeatureComponent, {
       panelClass: 'tg-dialog', 
       width: 'auto',
     })
