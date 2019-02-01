@@ -1,34 +1,31 @@
-<!-- <ng-container *ngIf="editorRequest$ | async">
-  <tg-dialog [id]="dialogID" [config]="modalConfig" [titleDialog]="dialogTitle">
-    <div id="editorDialog" style="height: 100%">
+<div class="b-ironlight-mini tg-box">
+  <div class="tg-dialog-inside-nopadding tg-shadow-inset">
+    <div id="editorDialog" mat-dialog-content>
       <div class="editor-dialog">
-        <div class="tg-modal-contentwrap tg-box b-paper tg-box">
-          <div class="container-fluid tg-box h-100">
-            <div class="row h-100">
-              <div class="col-12 flex-column d-flex">
+        <div class="tg-modal-contentwrap b-paper tg-box">
+            <div fxLayout>
+              <div fxFlex="100">
                 <div class="tg-editor--heroname">
                   {{HeroName$ | async}}
                 </div>
                 <div class="textarea-cont">
-									<textarea #textareaDescription name="editor" cols="30" rows="10" autofocus 
-										[maxLength]="maxChars"
-										(input)="onDescrChange($event.target.value)">{{description}}</textarea>
+                  <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
+                    (input)="onDescrChange($event.target.value)">{{description}}</textarea>
                 </div>
               </div>
             </div>
-          </div>
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
             <div class="tg-border tg-border-left"></div>
             <div class="tg-border tg-border-right"></div>
             <div class="tg-border tg-border-bottom"></div>
           </div>
-				</div>
-				<div id="editorMaxCharsCount" class="tg-txt-maxcharcount">{{totalChars}}</div>
-				<div class="tg-modal-buttons-group">
-					<button type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel()">Annulla</button>
-					<button type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
-				</div>
+        </div>
+        <div id="editorMaxCharsCount" class="tg-txt-maxcharcount">{{totalChars}}</div>
+        <div class="tg-modal-buttons-group">
+          <button type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel()">Annulla</button>
+          <button type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
+        </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>
           <div class="tg-border tg-border-left"></div>
@@ -37,5 +34,11 @@
         </div>
       </div>
     </div>
-  </tg-dialog>
-</ng-container> -->
+  </div>
+  <div class="tg-border-box">
+    <div class="tg-border tg-border-top"></div>
+    <div class="tg-border tg-border-left"></div>
+    <div class="tg-border tg-border-right"></div>
+    <div class="tg-border tg-border-bottom"></div>
+  </div>
+</div>

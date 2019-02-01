@@ -1,13 +1,8 @@
-import { Component, OnInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataState } from 'src/app/store/state/data.state';
-import { Store, select } from '@ngrx/store';
-import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
-import { getEditor, getHero } from 'src/app/store/selectors';
-import { IEditor } from 'src/app/models/data/editor.model';
-import { takeUntil, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
-import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-editor',
@@ -18,7 +13,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   editorRequest$: Observable<any>;
   HeroName$: Observable<string>;
-  modalConfig: ModalConfiguration = new ModalConfiguration;
   dialogID = 'editor';
 
   description = '';
@@ -31,14 +25,10 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private dialogService: DialogService,
     private gameService: GameService) {
 
       this._unsubscribeAll = new Subject<any>();
 
-      this.modalConfig.showCloseButton = false;
-      this.modalConfig.minHeight = 400;
-      this.modalConfig.minWidth = 450;
      }
 
   ngOnInit(): void {

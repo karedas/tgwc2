@@ -27,9 +27,8 @@ export class DataParser {
     this.netData += data;
     
     const len = this.netData.length;
+
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-
-
       const data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
@@ -65,7 +64,6 @@ export class DataParser {
   parseForDisplay(data: string) {
     let pos: any;
 
-    console.log('--------------------------------------------------------- data', data)
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
       this.store.dispatch(new UiActions.WelcomeNewsAction);

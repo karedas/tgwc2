@@ -4,6 +4,7 @@ import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.c
 import { Observable } from 'rxjs';
 import { WelcomeNewsComponent } from '../../client/windows/welcome-news/welcome-news.component';
 import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.component';
+import { EditorComponent } from '../../client/windows/editor/editor.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,16 @@ export class DialogService {
         maxWidth: '700px'
       });
     }
+  }
+
+  /** Generic Editor */
+  openEditor(data) {
+    console.log(data);
+    this.dialog.open(EditorComponent, {
+      data: data,
+      panelClass: 'tg-dialog',
+      width: '450px',
+    });
   }
 
   openNoFeature() {

@@ -22,6 +22,10 @@
       }
     }
     
+    .tg-navbar-item--container {
+      height: 100%;
+    }
+
     .tg-navbar--item {
       color: black;
       height: 100%;
@@ -29,6 +33,8 @@
       margin: 0 .4em;
       font-weight: bold;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
       font-size: 11px;
     }
 

@@ -1,5 +1,5 @@
 <div fxLayout="row" fxFlexFill fxLayoutAlign="space-between center">
-  <div fxFlex="">
+  <div class="tg-navbar-item--container" fxLayoutAlign="center center">
     <!-- First Level  -->
     <button mat-button
       [matMenuTriggerFor]="gameMenu"
@@ -15,7 +15,7 @@
         <button mat-menu-item>Scheda personaggio</button>
         <button mat-menu-item>Log di Sessione</button>
         <button mat-menu-item>Preferenze</button>
-        <button mat-button>Disconnetti</button>
+        <button mat-menu-item>Disconnetti</button>
     </mat-menu>
     <!-- Second Level: Menu Guida -->
     <mat-menu #guidaMenu="matMenu">
@@ -28,10 +28,10 @@
       <button mat-menu-item>Informazioni su The Gate</button>
     </mat-menu>
   </div>
-  <div>
+  <div class="tg-navbar-item--container" fxLayoutAlign="center center">
     [sky short image]
   </div>
-  <div class="tg-navbar--right">
+  <div class="tg-navbar-item--container" fxLayoutAlign="center center">
     <button mat-button class="tg-navbar--item">[&#x266B;] Volume</button>
   </div>
 </div>

@@ -10,8 +10,8 @@ import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { getUIState } from 'src/app/store/selectors';
 import { map } from 'rxjs/operators';
-import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { UIState } from 'src/app/store/state/ui.state';
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-input',
@@ -83,7 +83,7 @@ export class InputComponent implements AfterViewInit {
   toggleZen(event: Event) {
     event.preventDefault();
     // this.store.dispatch(new updateUI({zen: true}));
-    this.dialogService.open('noFeatureDialog');
+    this.dialogService.openNoFeature();
   }
 
   @HostListener('window:keydown', ['$event'])

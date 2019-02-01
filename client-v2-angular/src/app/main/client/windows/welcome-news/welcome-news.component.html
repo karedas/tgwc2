@@ -1,5 +1,5 @@
 <div class="b-ironlight-mini tg-box">
-  <div class="tg-dialog-inside tg-shadow-inset">
+  <div class="tg-dialog-inside-nopadding tg-shadow-inset">
     <div class="tg-box b-paper">
       <div class="tg-box" fxLayout="column no-wrap">
 
@@ -40,8 +40,7 @@
           <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
             <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
             <div class="input-checkbox">
-              <input type="checkbox" aria-label="Non mostrare" (change)="onCheckbox($event)">
-              <label>Non mostrare piu' questa notizia.</label>
+              <mat-checkbox class="custom-control-input" (change)="onCheckbox($event)" [color]="'primary'">Non mostrare piu' questa notizia.</mat-checkbox>
             </div>
           </div>
         </div>

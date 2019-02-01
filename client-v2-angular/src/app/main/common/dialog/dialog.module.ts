@@ -5,6 +5,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { WelcomeNewsComponent } from '../../client/windows/welcome-news/welcome-news.component';
 import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.component';
+import { EditorComponent } from '../../client/windows/editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.c
   entryComponents: [
     CookieLawComponent, 
     WelcomeNewsComponent,
-    NoFeatureComponent
+    NoFeatureComponent,
+    EditorComponent
   ]
 })
 export class DialogModule { }

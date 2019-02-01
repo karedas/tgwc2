@@ -138,7 +138,6 @@ export class LoginService {
   completeHandShake(data: any) {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
-    console.log(data);
     this.game.startGame(data);
   }
 

@@ -37,8 +37,6 @@ export class GameService{
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.dataParserService.handlerGameData(data);
     });
-
-
   }
 
 
