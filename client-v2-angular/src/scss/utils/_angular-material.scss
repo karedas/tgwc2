@@ -28,7 +28,11 @@
 
 // DIALOG
 
-.tg-dialog {
+mat-dialog-container {
+    font-size:13px;
+}
+
+.tg-dialog {    
     .tg-dialog-inside {
         background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
         position: relative;
@@ -38,7 +42,6 @@
     mat-dialog-container {
         padding: 0;
     }
-
 }
 
 mat-checkbox {

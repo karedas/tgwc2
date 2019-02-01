@@ -19,7 +19,7 @@ import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TooltipModule } from 'ng2-tooltip-directive';
 
-import {MatDialogModule, MatCheckboxModule, MatDialogRef} from "@angular/material";
+import {MatDialogModule, MatCheckboxModule, MatDialogRef, MatMenuModule} from "@angular/material";
 import { DialogModule } from '../main/common/dialog/dialog.module';
 import { DialogService } from '../main/common/dialog/dialog.service';
 
@@ -42,12 +42,14 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     FontAwesomeModule,
     // Various
     NgScrollbarModule,
+    
     FormsModule,
     ToastContainerModule,
     TooltipModule,
     DialogModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatMenuModule,
     DragDropModule
     
   ],
@@ -73,6 +75,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     IconsComponent,
     MatDialogModule,
     MatCheckboxModule,
+    MatMenuModule,
     DragDropModule
   ],
 })

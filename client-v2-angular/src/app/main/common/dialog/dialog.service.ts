@@ -14,10 +14,10 @@ export class DialogService {
   /** Cookie Law  */
   openCookieModal(): Observable<any> {
     const dialogRef = this.dialog.open(CookieLawComponent, {
+      panelClass: 'tg-dialog',
       width: '450px',
       disableClose: true,
-      autoFocus: true,
-      panelClass: 'tg-dialog'
+      autoFocus: true
     });
 
     return dialogRef.afterClosed();
@@ -28,6 +28,7 @@ export class DialogService {
 
     if (!localStorage.getItem('welcomenews')) {
       const dialogRef = this.dialog.open(WelcomeNewsComponent, {
+        panelClass: 'tg-dialog',
         width: 'auto',
         disableClose: true,
         maxWidth: '700px'

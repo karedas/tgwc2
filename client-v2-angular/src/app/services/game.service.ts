@@ -31,15 +31,13 @@ export class GameService{
     private historyService: HistoryService,
   ) {}
 
-  init(initialData: any) {
-    this.dataParserService.handlerGameData(initialData);
-  }
-
-
-  startGame() {
+  startGame(initialData) {
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.dataParserService.handlerGameData(data);
     });
+
+    this.dataParserService.handlerGameData(initialData);
+
   }
 
 

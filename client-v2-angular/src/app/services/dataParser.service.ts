@@ -23,14 +23,19 @@ export class DataParser {
   }
 
   handlerGameData(data: any) {
+
     this.netData += data;
     
     const len = this.netData.length;
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-      const data = this.netData.substr(0, len - 3);
+
+
+      const data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
-        this.parseForDisplay(this.preParseText(data));
+
+        this.parseForDisplay(data);
+
       } catch (err) {
         console.log(err);
       };

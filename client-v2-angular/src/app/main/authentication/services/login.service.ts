@@ -103,9 +103,7 @@ export class LoginService {
             this.onReboot();
             break;
           case loginEventName.LOGINOK:
-          console.log('pre',data);
             this.onLoginOk(data.slice(end + 2));
-            console.log(end)
             break;
           case loginEventName.SERVERDOWN:
             this.onServerDown();
@@ -133,15 +131,15 @@ export class LoginService {
   }
 
   onLoginOk(data: any) {
-    this.completeHandShake();
-    this.game.init(data);
+    this.completeHandShake(data);
     this.store.dispatch(new LoginSuccessAction());
   }
   
-  completeHandShake() {
+  completeHandShake(data) {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
-    this.game.startGame();
+    const test = '&*&!news{"title":"Notizie", "text":"Novità 27-11-2018:\r\n==================================================================\r\n\r\nxxx\r\n\r\n\r\n---------------------------------------------\r\nBuon gioco a tutti.\r\n"}!&!crlf""&!!'
+    this.game.startGame(test);
   }
 
   onShutDown() {
