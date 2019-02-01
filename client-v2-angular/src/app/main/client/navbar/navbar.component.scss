@@ -1,40 +1,65 @@
 @import '~src/scss/colors';
-tg-navbar {
-  background-image: url($imgPath + '/interface/navbar_background.png');
-  background-repeat: repeat-x;
-  padding: 0 .5rem 8px;
-  text-transform: uppercase;
-  font-size: 12px;
-  
-  /*Logo */
-  .brand {
-    background-color: transparent!important;
-  }
-  
-  .tg-brand {
-    display: block;
-    font-weight: bold;
-    margin-right: 1rem;
 
-    img {
-      height: 20px;
-      margin-top: 2px;
+  tg-navbar {
+    background-image: url($imgPath + '/interface/navbar_background.png');
+    background-repeat: repeat-x;
+    padding: 0 .5rem 8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    
+    /*Logo */
+    .brand {
+      background-color: transparent!important;
+    }
+    
+    .tg-brand {
+      display: block;
+      font-weight: bold;
+      margin-right: 1rem;
+  
+      img {
+        height: 20px;
+        margin-top: 2px;
+      }
+    }
+    
+    .tg-navbar--item {
+      color: black;
+      height: 100%;
+      background-color: transparent;
+      margin: 0 .4em;
+      font-weight: bold;
+    }
+
+    .tg-navbar--item[aria-expanded="true"] {
+      background: #2f2314;
+      border-left: 1px solid #71624e;
+      border-right: 1px solid #71624e;
+      color: wheat;
     }
   }
-  
-  .tg-navbar--item {
-    margin: auto 0;
-    color: black;
-    height: 100%;
-    background-color: transparent;
-    margin: 0 .5em;
-    font-weight: bold;
-  }
 
-  .mat-menu-content {
-    padding: 0;
-  }
+.mat-menu-below{
+    background-color: #2f2314;
+    border: 1px solid #71624e;
+    border-top: 0;
+    
+    .mat-menu-item {
+      font-size: 12px;
+      background: transparent;
+      color: wheat;
+      line-height: 24px;
+      height: 24px;
+      padding:0 6px;
+
+      .mat-menu-item {
+        border-left: 0;
+      }
+    }
 }
+ 
+
+
 
 
 // /* Main Navbar */

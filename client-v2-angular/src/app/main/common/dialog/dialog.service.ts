@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { Observable } from 'rxjs';
 import { WelcomeNewsComponent } from '../../client/windows/welcome-news/welcome-news.component';
+import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,13 @@ export class DialogService {
         maxWidth: '700px'
       });
     }
+  }
+
+  openNoFeature() {
+    const dialogRef = this.dialog.open(NoFeatureComponent, {
+      panelClass: 'tg-dialog', 
+      width: 'auto',
+    })
   }
 
 }

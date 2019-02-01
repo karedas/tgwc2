@@ -1,10 +1,11 @@
-<div class="b-ironlight-mini tg-box" style="overflow: hidden;">
+<div class="b-ironlight-mini tg-box">
   <div class="tg-dialog-inside tg-shadow-inset">
-    <div class="tg-notizie" mat-dialog-content>
-      <div class="tg-box b-paper" style="overflow: hidden;">
-        <div class="tg-box" fxLayout="column">
+    <div class="tg-box b-paper">
+      <div class="tg-box" fxLayout="column no-wrap">
+
+        <div class="tg-notizie" mat-dialog-content fxLayout="column">
           <div class="tg-notizie--content" fxFlex="1 1 auto">
-            <div fxFlex="80">
+            <div fxFlex="80" fxFlex.lt-sm="100">
               <ng-scrollbar class="scrollbar-light" #scrollBar [disableOnBreakpoints]="false">
                 <h2>
                   Webclient 2.0
@@ -32,7 +33,7 @@
                   convallis justo nec lectus aliquam pharetra. </p>
               </ng-scrollbar>
             </div>
-            <div fxFlex="20" fxLayout="column">
+            <div fxFlex="20" fxLayout="column" fxHide.lt-sm>
               <div class="tg-mnch-img"></div>
             </div>
           </div>
@@ -44,12 +45,13 @@
             </div>
           </div>
         </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
+
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
       </div>
     </div>
   </div>

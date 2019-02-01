@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'tg-navbar',
@@ -10,15 +10,8 @@ export class NavbarComponent implements AfterViewInit {
 
   // @ViewChild('tgMainMenu') mainMenu: jqxMenuComponent;
 
-  settings: {};
-
   constructor() {
-    this.settings = {
-      animationShowDuration: 0,
-      animationHideDuration: 0,
-      animationShowDelay: 0,
-      showTopLevelArrows: true
-    };
+
   }
 
   ngAfterViewInit(): void {
