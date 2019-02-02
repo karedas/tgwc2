@@ -17,12 +17,11 @@ import { ToastContainerModule } from 'ngx-toastr';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DialogGenericModule } from '../main/common/dialog/dialog.module';
 
-import {MatDialogModule, MatCheckboxModule, MatDialogRef, MatMenuModule, MatTooltipModule, MatToolbarModule} from "@angular/material";
-import {DragDropModule} from '@angular/cdk/drag-drop';
 
-import { DialogModule } from '../main/common/dialog/dialog.module';
-import { DialogService } from '../main/common/dialog/dialog.service';
+import {CheckboxModule} from 'primeng/checkbox';
+import {MenubarModule} from 'primeng/menubar';
 
 
 @NgModule({
@@ -42,16 +41,11 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     FontAwesomeModule,
     // Various
     NgScrollbarModule,
-    
-    FormsModule,
     ToastContainerModule,
-    DialogModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatToolbarModule,
-    DragDropModule
+    /* Prime NG Modules (TODO: Moves in another file) */
+    DialogGenericModule,
+    CheckboxModule,
+    MenubarModule,
     
   ],
   providers: [
@@ -61,24 +55,21 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     PreloaderService,
     AudioService,
     LoginService,
-    DialogService, {provide: MatDialogRef}
+    // DialogService, {provide: MatDialogRef}
   ],
   exports: [
+    CommonModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
     NgScrollbarModule,
     PipesModule,
     ToastContainerModule,
     FontAwesomeModule,
     IconsComponent,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatTooltipModule,
-    DragDropModule,
-    MatToolbarModule
+    DialogGenericModule,
+    CheckboxModule,
+    MenubarModule
   ],
 })
 export class SharedModule {

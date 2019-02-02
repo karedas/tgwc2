@@ -3,9 +3,8 @@ import { Actions, Effect, ofType, } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action, Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
-import { tap, map, withLatestFrom, filter, catchError } from 'rxjs/operators';
+import { tap, map, withLatestFrom, filter } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
-import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 
@@ -21,7 +20,6 @@ export class UiEffects {
     private actions$: Actions,
     private game: GameService,
     private store: Store<UIState>,
-    private dialogService: DialogService
   ) { }
 
     @Effect({dispatch: false})

@@ -54,6 +54,7 @@
     "ngx-toastr": "^9.1.1",
     "normalize.css": "^8.0.1",
     "primeicons": "^1.0.0",
+    "primeng": "^7.0.5",
     "rxjs": "^6.3.3",
     "socket.io": "^2.1.1",
     "typescript": "^3.2.2",

@@ -1,7 +1,8 @@
-<div fxLayout="row" fxFlexFill fxLayoutAlign="space-between center">
-  <div class="tg-navbar-item--container" fxLayoutAlign="center center">
+<p-menubar [model]="menuItems"></p-menubar>
+<!-- <div fxLayout="row" fxFlexFill fxLayoutAlign="space-between center">
+  <div class="tg-navbar-item--container" fxLayoutAlign="center center"> -->
     <!-- First Level  -->
-    <button mat-button
+    <!-- <button mat-button
       [matMenuTriggerFor]="gameMenu"
       class="tg-navbar--item">Gioco</button>
     
@@ -9,16 +10,16 @@
       [matMenuTriggerFor]="guidaMenu"
       class="tg-navbar--item">Guida</button>
     
-      
+       -->
       <!-- Second Level; Gioco -->
-      <mat-menu #gameMenu="matMenu">
+      <!-- <mat-menu #gameMenu="matMenu">
         <button mat-menu-item>Scheda personaggio</button>
         <button mat-menu-item>Log di Sessione</button>
         <button mat-menu-item>Preferenze</button>
         <button mat-menu-item>Disconnetti</button>
-    </mat-menu>
+    </mat-menu> -->
     <!-- Second Level: Menu Guida -->
-    <mat-menu #guidaMenu="matMenu">
+    <!-- <mat-menu #guidaMenu="matMenu">
       <button mat-menu-item>Guida al gioco</button>
       <button mat-menu-item>Ultime Novità di gioco</button>
       <button mat-menu-item>Note di rilascio Webclient</button>
@@ -34,4 +35,4 @@
   <div class="tg-navbar-item--container" fxLayoutAlign="center center">
     <button mat-button class="tg-navbar--item">[&#x266B;] Volume</button>
   </div>
-</div>
+</div> -->

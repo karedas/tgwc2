@@ -1,20 +1,12 @@
-<!-- <jqxWindow #jqxWidget [isModal]="config.isModal" [width]="config.width" [height]="config.height" [resizable]="config.resizable"
-  [autoOpen]="false" [modalOpacity]="config.modalOpacity" [showCloseButton]="config.showCloseButton" 
-  [minHeight]="config.minHeight" [minWidth]="config.minWidth" [position]="'center'" [title]="titleDialog"
-  [maxHeight]="config.maxHeight" [maxWidth]="config.maxWidth"
-  [draggable]="config.draggable"
-  styleClass="dialog-overflow" 
-  [ngClass]="{'show-title': titleDialog}"
-  (onResize)="onResize()">
-  <div style="overflow: hidden;" class="tg-shadow-dialog">
-      <div class="b-ironlight-mini tg-box" style="overflow: hidden;">
-      <ng-content></ng-content>
-      <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-      </div>
-    </div>
-  </div>
-</jqxWindow> -->
+<p-dialog #dialog header="test" 
+  [(visible)]="visible" 
+  [showHeader]="false"
+  [modal]="config.modal" 
+  [responsive]="true" 
+  [resizable]="false"
+  [maximizable]="true" 
+  [baseZIndex]="10000"
+  [appendTo]='config.appendTo'
+  [style]="{width: config.width, height: config.height}">
+    <ng-content></ng-content>
+</p-dialog>

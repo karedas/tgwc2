@@ -4,7 +4,11 @@
 
 <ng-template #clientReady>
     <!-- Client -->
-    <ng-container *ngIf="isCookieAccepted">
+    <ng-container *ngIf="isCookieAccepted; else cookieLaw">
         <router-outlet></router-outlet>
     </ng-container>
+</ng-template>
+
+<ng-template #cookieLaw>
+    <tg-cookie-law (iAcceptCookie)="onCookieAccepted($event)"></tg-cookie-law>
 </ng-template>

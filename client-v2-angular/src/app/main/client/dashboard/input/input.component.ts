@@ -83,7 +83,7 @@ export class InputComponent implements AfterViewInit {
   toggleZen(event: Event) {
     event.preventDefault();
     // this.store.dispatch(new updateUI({zen: true}));
-    this.dialogService.openNoFeature();
+    // this.dialogService.openNoFeature();
   }
 
   @HostListener('window:keydown', ['$event'])

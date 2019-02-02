@@ -1,58 +1,34 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
-import { Observable } from 'rxjs';
-import { WelcomeNewsComponent } from '../../client/windows/welcome-news/welcome-news.component';
-import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.component';
-import { EditorComponent } from '../../client/windows/editor/editor.component';
+import { DialogConfiguration } from './model/dialog.interface';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DialogService {
 
-  constructor(public dialog: MatDialog) { }
+  private modals: any[] = [];
 
-  /** Cookie Law  */
-  openCookieModal(): Observable<any> {
-    const dialogRef = this.dialog.open(CookieLawComponent, {
-      panelClass: 'tg-dialog',
-      width: '450px',
-      disableClose: true,
-      autoFocus: true
-    });
-
-    return dialogRef.afterClosed();
+  add(modal: any) {
+      // add modal to array of active modals
+      this.modals.push(modal);
+      console.log(this.modals);
   }
 
-  /** Welcome News */
-  openWelcomeNews() {
-
-    if (!localStorage.getItem('welcomenews')) {
-      this.dialog.open(WelcomeNewsComponent, {
-        panelClass: 'tg-dialog',
-        width: 'auto',
-        disableClose: true,
-        maxWidth: '700px'
-      });
-    }
+  remove(id: string) {
+      // remove modal from array of active modals
+      this.modals = this.modals.filter(x => x.id !== id);
   }
 
-  /** Generic Editor */
-  openEditor(data) {
-    console.log(data);
-    this.dialog.open(EditorComponent, {
-      data: data,
-      panelClass: 'tg-dialog',
-      width: '450px',
-    });
+  open(id: string, config?: DialogConfiguration) {
+      // open modal specified by id
+      let modal: any = this.modals.filter(x => x.id === id)[0];
+      modal.open(config);
   }
 
-  openNoFeature() {
-    this.dialog.open(NoFeatureComponent, {
-      panelClass: 'tg-dialog', 
-      width: 'auto',
-    })
+  close(id: string) {
+      // close modal specified by id
+      let modal: any = this.modals.filter(x => x.id === id)[0];
+      modal.close();
   }
-
 }

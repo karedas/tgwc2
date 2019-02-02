@@ -1,31 +1,47 @@
-import { Component} from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { MatDialogRef} from "@angular/material";
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
-@Component ({
+@Component({
   selector: 'tg-cookie-law',
   templateUrl: './cookie-law.component.html',
   styleUrls: ['./cookie-law.component.scss'],
 })
 
-export class CookieLawComponent {
+export class CookieLawComponent implements AfterViewInit {
 
-  showButton = false;
-  checked = false;
+  @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
+
+  dialogID: string = 'cookielaw';
+  showButton: boolean = false;
 
   constructor(
-    private cookieService: CookieService, 
-    private dialogRef: MatDialogRef<CookieLawComponent>,  
+    private cookieService: CookieService,
+    private dialogService: DialogService
   ) {
 
   }
 
-  onContinue() {
-    this.cookieService.set('tgCookieLaw', '1');
-    this.dialogRef.close();
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dialogService.open(this.dialogID, {
+        width: '450px',
+        height: 'auto',
+        modal: true
+      });
+
+    });
+
   }
 
-  toggle(): void {
-    this.showButton = !this.showButton;
+
+  onContinue() {
+    this.dialogService.close(this.dialogID);
+    this.cookieService.set('tgCookieLaw', '1');
+
+    setTimeout(() => {
+      this.iAcceptCookie.emit(true);
+    }, 500);
   }
+
 }

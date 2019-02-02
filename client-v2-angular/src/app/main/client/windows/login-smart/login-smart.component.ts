@@ -3,12 +3,8 @@ import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { getInGameStatus } from 'src/app/store/selectors';
 import { ClientState } from 'src/app/store/state/client.state';
-import { skip, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { DisconnectAction } from 'src/app/store/actions/client.action';
-import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
-import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-login-smart',
@@ -18,7 +14,6 @@ import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.inter
 export class LoginSmartComponent implements OnInit, OnDestroy  {
 
   inGameState$: Observable<boolean>;
-  modalConfig: ModalConfiguration = new ModalConfiguration;
   private _unsubscribeAll: Subject<any>;
 
 
@@ -26,14 +21,13 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
 
   constructor(
     private store: Store<ClientState>,
-    private dialogService: DialogService,
     private loginService: LoginService,
     private router: Router) {
 
-    this.modalConfig.width = 'auto';
-    this.modalConfig.height = '250px';
-    this.modalConfig.modalOpacity = 0.9;
-    this.modalConfig.resizable = false;
+    // this.modalConfig.width = 'auto';
+    // this.modalConfig.height = '250px';
+    // this.modalConfig.modalOpacity = 0.9;
+    // this.modalConfig.resizable = false;
 
     this.inGameState$ = this.store.select(getInGameStatus);
     this._unsubscribeAll = new Subject();

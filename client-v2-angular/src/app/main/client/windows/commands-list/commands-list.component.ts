@@ -1,9 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, HostListener, ViewChild, Input, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
-import { DialogService } from 'src/app/main/common/dialog/trash/dialog.service';
-import { ModalConfiguration } from 'src/app/main/common/dialog/model/modal.interface';
 
 @Component({
   selector: 'tg-commands-list',
@@ -17,15 +15,15 @@ export class CommandsListComponent implements OnInit {
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
   commands$: Observable<any>;
-  modalConfig: ModalConfiguration = new ModalConfiguration;
+  // modalConfig: ModalConfiguration = new ModalConfiguration;
   title: string;
 
   groupOpen = 0;
 
-  constructor(private game: GameService, private dialogService: DialogService) {
-    this.modalConfig.draggable = true;
-    this.modalConfig.isModal = false;
-    this.modalConfig.width = 750;
+  constructor(private game: GameService) {
+    // this.modalConfig.draggable = true;
+    // this.modalConfig.isModal = false;
+    // this.modalConfig.width = 750;
   }
 
   ngOnInit() {

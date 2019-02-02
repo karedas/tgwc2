@@ -1,63 +1,71 @@
-<div class="b-ironlight-mini tg-box">
-  <div class="tg-dialog-inside-nopadding tg-shadow-inset">
-    <div class="tg-box b-paper">
-      <div class="tg-box" fxLayout="column no-wrap">
+<tg-dialog [id]="dialogID">
+<div class="tg-notizie">
+  <div class="b-ironlight-mini tg-box">
+      <div class="tg-dialog-content-nopadding tg-shadow-inset">
+        <div class="tg-box b-paper">
+          <div class="tg-box" fxLayout="column no-wrap">
 
-        <div class="tg-notizie" mat-dialog-content fxLayout="column">
-          <div class="tg-notizie--content" fxFlex="1 1 auto">
-            <div fxFlex="80" fxFlex.lt-sm="100">
-              <ng-scrollbar class="scrollbar-light" #scrollBar [disableOnBreakpoints]="false">
-                <h2>
-                  Webclient 2.0
-                </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus
-                  ultricies.
-                  Curabitur luctus
-                  ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
-                  lectus. Cras
-                  convallis justo nec lectus aliquam pharetra. </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus
-                  ultricies.
-                  Curabitur luctus
-                  ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
-                  lectus. Cras
-                  convallis justo nec lectus aliquam pharetra. </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus
-                  ultricies.
-                  Curabitur luctus
-                  ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
-                  lectus. Cras
-                  convallis justo nec lectus aliquam pharetra. </p>
-              </ng-scrollbar>
+          <div fxLayout="column">
+            <div class="tg-notizie--content" fxFlex="1 1 auto">
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <ng-scrollbar class="scrollbar-light" #scrollBar [disableOnBreakpoints]="false">
+                  <div #scrollable>
+                    <h2>
+                      Webclient 2.0
+                    </h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus
+                      ultricies.
+                      Curabitur luctus
+                      ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
+                      lectus. Cras
+                      convallis justo nec lectus aliquam pharetra. </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus
+                      ultricies.
+                      Curabitur luctus
+                      ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
+                      lectus. Cras
+                      convallis justo nec lectus aliquam pharetra. </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      <br /> Morbi consequat augue vitae orci ornare faucibus. In non urna sit amet libero dapibus
+                      ultricies.
+                      Curabitur luctus
+                      ultrices nunc non viverra. Phasellus ullamcorper tincidunt dolor rutrum faucibus. Etiam sed egestas
+                      lectus. Cras
+                      convallis justo nec lectus aliquam pharetra. </p>
+                  </div>
+                  </ng-scrollbar>
+              </div>
+              <div fxFlex="30" fxLayout="column" fxHide.lt-sm>
+                <div class="tg-mnch-img" fxFlex="1 1 100%"></div>
+              </div>
             </div>
-            <div fxFlex="20" fxLayout="column" fxHide.lt-sm>
-              <div class="tg-mnch-img"></div>
-            </div>
-          </div>
-          <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
-            <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
-            <div class="input-checkbox">
-              <mat-checkbox class="custom-control-input" (change)="onCheckbox($event)" [color]="'primary'">Non mostrare piu' questa notizia.</mat-checkbox>
+            <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
+              <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
+              <div class="input-checkbox">
+                  <p-checkbox 
+                  [(ngModel)]="dontShowNextTime"
+                  label="Non mostrare piu' questa notizia" 
+                  binary="true"></p-checkbox>
+              </div>
             </div>
           </div>
         </div>
-
-      </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="tg-border-box">
-    <div class="tg-border tg-border-top"></div>
-    <div class="tg-border tg-border-left"></div>
-    <div class="tg-border tg-border-right"></div>
-    <div class="tg-border tg-border-bottom"></div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
   </div>
 </div>
+</tg-dialog>

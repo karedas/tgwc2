@@ -1,29 +1,34 @@
-<div class="b-ironlight-mini tg-box" style="overflow: hidden;">
-  <div class="tg-dialog-inside-nopadding  tg-shadow-inset">
-    <div mat-dialog-content class="tg-cookielaw">
-      <div class="tg-cookielawcontent">
-        <h4 class="tg-title">Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
-        <div>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della
-          propria configurazione e il riconoscimento dell'utente per il conseguente accesso automatico. Le
-          funzionalità di "Login tramite
-          Facebook" e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. <br> Maggiori
-          informazioni sono disponibili
-          <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
-          <b class="cookie-lastalert">Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
-        </div>
-        <div class="custom-checkbox">
-          <mat-checkbox class="custom-control-input" [(ngModel)]="D" (click)="toggle()">Ho letto e accetto</mat-checkbox>
-        </div>
-        <div [style.visibility]="showButton ? 'visible' : 'hidden'">
-          <button class="tg-btn btn-default tg-btn-cookieconsent" (click)="onContinue()">Continua</button>
+<tg-dialog [id]="dialogID">
+  <div class="tg-cookielaw">
+    <div class="b-ironlight-mini tg-box">
+      <div class="tg-dialog-content-nopadding tg-shadow-inset">
+        <div class="tg-dialog-content tg-shadow-inset">
+          <div class="tg-cookielawcontent">
+            <h4 class="tg-title">Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
+            <div>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della
+              propria configurazione e il riconoscimento dell'utente per il conseguente accesso automatico. Le
+              funzionalità di "Login tramite
+              Facebook" e i pulsanti social "Mi piace" richiedono il salvataggio di cookie di terze parti. <br>
+              Maggiori
+              informazioni sono disponibili
+              <a target="_blank" href="http://www.thegatemud.it/documenti-e-aiuto/documenti/209-termini-e-condizioni-d-uso-del-servizio#cookie">qui</a>.
+              <b class="cookie-lastalert">Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
+            </div>
+            <div class="custom-checkbox">
+              <p-checkbox [(ngModel)]="showButton" binary="true" label="Ho letto e accetto"></p-checkbox>
+            </div>
+            <div [style.visibility]="showButton ? 'visible' : 'hidden'">
+              <button class="tg-btn btn-default tg-btn-cookieconsent" (click)="onContinue()">Continua</button>
+            </div>
+          </div>
         </div>
       </div>
+          <div class="tg-border-box">
+            <div class="tg-border tg-border-top"></div>
+            <div class="tg-border tg-border-left"></div>
+            <div class="tg-border tg-border-right"></div>
+            <div class="tg-border tg-border-bottom"></div>
+          </div>
     </div>
   </div>
-  <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-  </div>
-</div>
+</tg-dialog>

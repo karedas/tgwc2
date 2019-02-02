@@ -1,0 +1,22 @@
+//dialog
+body .ui-dialog .ui-dialog-content {
+    background: transparent;
+    border: none;
+    height: 100%;
+}
+
+/* CheckBox */
+p-checkbox {
+    .ui-chkbox-box {
+        box-shadow: none!important;
+    }
+}
+
+/* MenuBar */
+p-menubar {
+    .ui-menubar {
+        background-color: transparent;
+        border: 0;
+        font-size: 10px;
+    }
+}
