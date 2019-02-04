@@ -14,6 +14,7 @@ export class CommandsListComponent implements OnInit {
 
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
+  dialogID: string = 'commandsList';
   commands$: Observable<any>;
   // modalConfig: ModalConfiguration = new ModalConfiguration;
   title: string;
@@ -21,9 +22,6 @@ export class CommandsListComponent implements OnInit {
   groupOpen = 0;
 
   constructor(private game: GameService) {
-    // this.modalConfig.draggable = true;
-    // this.modalConfig.isModal = false;
-    // this.modalConfig.width = 750;
   }
 
   ngOnInit() {
@@ -41,5 +39,9 @@ export class CommandsListComponent implements OnInit {
     setTimeout(() => {
       this.scrollbar.update();
     }, 200);
+  }
+
+  sendCmd(cmd) {
+    this.game.processCommands(cmd);
   }
 }

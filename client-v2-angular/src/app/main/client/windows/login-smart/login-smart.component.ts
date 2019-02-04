@@ -70,6 +70,8 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
 
   onReconnect() {
     this.loginService.reconnect();
+    // TODO: Wait OK from Server
+    this.dialogService.close(this.dialogID);
   }
 
   toggle(event?: Event) {

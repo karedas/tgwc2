@@ -32,7 +32,9 @@ body {
     box-sizing: content-box;
     color: #ccaa31;
     font-family: kingthinks;
+    border-radius: 0;
     background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
+    transition: width .3s linear;
 
     
     &:before {
@@ -73,6 +75,12 @@ body {
   }
 
 }
+body .ui-dialog.ui-dialog-maximized {
+  .ui-dialog-titlebar {
+    width: 100%!important;
+    padding:0 8px;
+  }
+}
 
   /* CheckBox */
   p-checkbox {
@@ -95,4 +103,9 @@ body {
     .pi-caret-down:before {
       vertical-align: middle;
     }
+  }
+
+  /* Tooltip */
+  body .ui-tooltip .ui-tooltip-text {
+    background: black;
   }

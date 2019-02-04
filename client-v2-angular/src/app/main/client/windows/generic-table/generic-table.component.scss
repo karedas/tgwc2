@@ -9,9 +9,6 @@
     text-align: left;
 }
 
-ngx-datatable {
-}
-
 datatable-header {
     background-color: #30241d;
     box-sizing: border-box;
@@ -31,9 +28,9 @@ datatable-body {
     color: black;
     
     datatable-row-wrapper {
-        background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
     }
     datatable-body-row {
+        background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
         box-sizing: border-box;
         border-top: 1px solid  #42342c!important;
         transition: background .4s linear;
@@ -48,10 +45,10 @@ datatable-body {
         border-right: 1px solid #a79a73;
     }
 
-    datatable-selection {
-        height: 1px;
-        display: inline-block;
-    }
+    // datatable-selection {
+    //     height: 1px;
+    //     display: inline-block;
+    // }
     // tbody tr:nth-of-type(even) {
     //     background: url($imgPath + '/interface/trow-bg-dark.jpg') repeat-x bottom left;
     //     background-color: #bcb190;

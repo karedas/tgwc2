@@ -61,8 +61,5 @@ export class DialogsComponent implements OnInit {
     // this.dialogService.remove(this.id);
   }
 
-  resize() {
-    console.log('yo');
-  }
 
 }

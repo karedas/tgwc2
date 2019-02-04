@@ -22,7 +22,8 @@ import { DialogGenericModule } from '../main/common/dialog/dialog.module';
 
 import {CheckboxModule} from 'primeng/checkbox';
 import {MenubarModule} from 'primeng/menubar';
-
+import {TooltipModule} from 'primeng/tooltip';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,14 @@ import {MenubarModule} from 'primeng/menubar';
     // font awesome
     FontAwesomeModule,
     // Various
+    NgxDatatableModule,
     NgScrollbarModule,
     ToastContainerModule,
     /* Prime NG Modules (TODO: Moves in another file) */
     DialogGenericModule,
     CheckboxModule,
     MenubarModule,
+    TooltipModule
     
   ],
   providers: [
@@ -69,7 +72,9 @@ import {MenubarModule} from 'primeng/menubar';
     IconsComponent,
     DialogGenericModule,
     CheckboxModule,
-    MenubarModule
+    MenubarModule,
+    TooltipModule,
+    NgxDatatableModule
   ],
 })
 export class SharedModule {
