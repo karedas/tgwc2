@@ -41,7 +41,7 @@ export class GameService{
 
 
   disconnectGame() {
-    // this.historyPush('Fine');
+    this.sendToServer('fine');
   }
 
   updateUIByData(what: any) {

@@ -1,158 +1,111 @@
 @import '~src/scss/colors';
 
-  tg-navbar {
-    background-image: url($imgPath + '/interface/navbar_background.png');
-    background-repeat: repeat-x;
-    padding: 0 .5rem 8px;
-    font-size: 12px;
-    
-    /*Logo */
-    .brand {
-      background-color: transparent!important;
-    }
-    
-    .tg-brand {
-      display: block;
-      font-weight: bold;
-      margin-right: 1rem;
-  
-      img {
-        height: 20px;
-        margin-top: 2px;
-      }
-    }
-    
-    .tg-navbar-item--container {
-      height: 100%;
-    }
+tg-navbar {
+  background-image: url($imgPath + '/interface/navbar_background.png');
+  background-repeat: repeat-x;
+  padding: 0 .5rem 8px;
 
-    .tg-navbar--item {
-      color: black;
-      height: 100%;
-      background-color: transparent;
-      margin: 0 .4em;
-      font-weight: bold;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      border-left: 1px solid transparent;
-      border-right: 1px solid transparent;
-      font-size: 11px;
-    }
+  /*Logo */
+  .brand {
+    display: inline-block;
+    padding: 5px;
 
-    .tg-navbar--item[aria-expanded="true"] {
-      background: #2f2314;
-      border-left: 1px solid #71624e;
-      border-right: 1px solid #71624e;
-      color: wheat;
+    img {
+      height: 100%;
     }
   }
+}
 
-.mat-menu-below{
-    background-color: #2f2314;
-    border: 1px solid #71624e;
-    border-top: 0;
-    
-    .mat-menu-item {
-      font-size: 11px;
-      background: transparent;
-      color: wheat;
-      line-height: 24px;
-      height: 24px;
-      padding:0 6px;
+p-menubar {
+  .ui-menubar {
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
 
-      .mat-menu-item {
-        border-left: 0;
+    .ui-menubar-root-list {
+
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .ui-menuitem {
+
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        > .ui-menuitem-link {
+          color: black;
+          background-color: transparent;
+          font-weight: bold;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          font-size: 10px;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 0.857em;
+          border-left: 1px solid transparent;
+          border-right: 1px solid transparent;
+
+          .ui-menuitem-text,
+          .ui-menuitem-icon {
+            color: black;
+          }
+        }
+      }
+
+      > .ui-menuitem-active {
+        background-color: #2f2314;
+        
+         .pi-caret-down:before {
+           color: #d3ccb1;
+         }
+
+        > .ui-menuitem-link {
+
+            border-left: 1px solid #71624e;
+            border-right: 1px solid #71624e;
+
+            .ui-menuitem-text,
+            .ui-menuitem-icon {
+              color: #d3ccb1;
+            }
+        }
       }
     }
+
+    .ui-submenu-list {
+      background-color: #2f2314;
+      border: 1px solid #71624e;
+      border-top: 0;
+      box-shadow: 0 10px 7px 1px black;
+
+    }
+    .ui-submenu-list .ui-menuitem {
+      box-sizing: border-box;
+      
+
+      .ui-menuitem-link {
+        padding:0 ;
+        border: 0;
+        width: 100%;
+        box-sizing: border-box;
+
+        .ui-menuitem-text,
+        .ui-menuitem-icon {
+          font-size: 10px;
+          padding: 0.714em 0.857em;
+          color: #d3ccb1;
+          font-weight: normal;
+        }
+      }
+
+      &:hover {
+        background: #41301c;
+      }
+    }
+  }
 }
- 
-
-
-
-
-// /* Main Navbar */
-
-// .tg-navbar {
-
-//   ul {
-//     margin: auto 0;
-//     color: black;
-//     height: 100%;
-//   }
-
-
-//     &[aria-expanded="true"] {
-//       background: #2f2314;
-//       color: white;
-//     }
-//   }
-
-//   .nav-item {
-//     margin: auto 0;
-//   }
-
-//   .nav-link {
-//     padding: 0 1rem;
-//     font-weight: bold;
-//     box-sizing: border-box;
-//     display: block;
-//     line-height: 28px;
-//     z-index: 2;
-//     position: relative;
-//   }
-
-//   .tg-fnt-button {
-//     padding: 0;
-//     font-size: 9px;
-//     text-transform: uppercase;
-//   }
-
-//   i {
-//     font-size: 13px;
-//     margin-left: 2px;
-//     vertical-align: middle;
-//   }
-
-//   .v-divider:before {
-//     content: '';
-//     background-color: #1c0c04;
-//     width: 1px;
-//     height: 14px;
-//     margin: 0 10px;
-//     max-height: 100%;
-//     display: inline-block;
-//   }
-
-//   .dropdown-toggle:after {
-//     font-size: 16px;
-//     vertical-align: middle;
-//   }
-
-//   .dropdown-menu {
-//     background-color: #2f2314;
-//     color: wheat;
-//     border: 1px solid #71624e;
-//     border-top: 0;
-//     top: 27px;
-//     box-shadow: 0px 5px 12px #000;
-//     font-size: 9px;
-//     margin: 0;
-
-//     .dropdown-divider {
-//       border-top: 1px solid #4c3b26;
-//     }
-
-//     a {
-//       font-weight: normal;
-//       text-shadow: none;
-//       color: white;
-
-//       &:hover {
-//         background: white;
-//         color: #2f2314;
-//       }
-//     }
-//   }
-// }
 
 
 // /*SKY*/

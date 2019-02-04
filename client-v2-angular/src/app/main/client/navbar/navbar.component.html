@@ -1,38 +1,4 @@
-<p-menubar [model]="menuItems"></p-menubar>
-<!-- <div fxLayout="row" fxFlexFill fxLayoutAlign="space-between center">
-  <div class="tg-navbar-item--container" fxLayoutAlign="center center"> -->
-    <!-- First Level  -->
-    <!-- <button mat-button
-      [matMenuTriggerFor]="gameMenu"
-      class="tg-navbar--item">Gioco</button>
-    
-    <button mat-button
-      [matMenuTriggerFor]="guidaMenu"
-      class="tg-navbar--item">Guida</button>
-    
-       -->
-      <!-- Second Level; Gioco -->
-      <!-- <mat-menu #gameMenu="matMenu">
-        <button mat-menu-item>Scheda personaggio</button>
-        <button mat-menu-item>Log di Sessione</button>
-        <button mat-menu-item>Preferenze</button>
-        <button mat-menu-item>Disconnetti</button>
-    </mat-menu> -->
-    <!-- Second Level: Menu Guida -->
-    <!-- <mat-menu #guidaMenu="matMenu">
-      <button mat-menu-item>Guida al gioco</button>
-      <button mat-menu-item>Ultime Novità di gioco</button>
-      <button mat-menu-item>Note di rilascio Webclient</button>
-      <button mat-menu-item>Segnala un problema</button>
-      <button mat-menu-item>Riferimento ai tasti di scelta rapida</button>
-      <button mat-menu-item>Forum</button>
-      <button mat-menu-item>Informazioni su The Gate</button>
-    </mat-menu>
-  </div>
-  <div class="tg-navbar-item--container" fxLayoutAlign="center center">
-    [sky short image]
-  </div>
-  <div class="tg-navbar-item--container" fxLayoutAlign="center center">
-    <button mat-button class="tg-navbar--item">[&#x266B;] Volume</button>
-  </div>
-</div> -->
+<div class="brand">
+    <img src="assets/images/logo/tgminilogo.png" />
+</div>
+<p-menubar [model]="menuItems" [styleClass]="'tg-menubar'"></p-menubar>

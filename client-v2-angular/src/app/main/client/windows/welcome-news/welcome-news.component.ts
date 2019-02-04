@@ -17,13 +17,11 @@ import { NgScrollbar } from 'ngx-scrollbar';
 })
 export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
 
-  @Output() newsIsNeeded: EventEmitter<boolean> = new EventEmitter();
-
-
-  dialogID: string = 'welcomenews';
   
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
-
+  
+  dialogID: string = 'welcomenews';
+  
   private welcomeNews: Observable<boolean>;
   private _unsubscribeAll: Subject<any>;
   private dontShowNextTime: boolean = false;
@@ -40,12 +38,13 @@ export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
 
     this.welcomeNews.pipe(
-        takeUntil(this._unsubscribeAll))
-      .subscribe((req: boolean)=> {
-          if (localStorage.getItem('welcomenews') && req === true) {
-              this.newsIsNeeded.emit(false);
-              this.game.sendToServer('');
-          } else { 
+      takeUntil(this._unsubscribeAll),
+      filter((r) => r === true)
+      ).subscribe(
+        (req: boolean) => {
+          if (localStorage.getItem('welcomenews')) {
+            this.game.sendToServer('');
+          } else {
             this.openDialog();
           }
         }
@@ -54,11 +53,12 @@ export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
 
   openDialog() {
     setTimeout(() => {
-      
+
       this.dialogService.open('welcomenews', <DialogConfiguration>{
         visible: true,
         width: '750px',
         height: '500px',
+        styleClass: 'op-100',
         modal: true
       });
 
@@ -72,7 +72,6 @@ export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
     }
 
     this.dialogService.close(this.dialogID);
-    this.newsIsNeeded.emit(false);
     this.game.sendToServer('');
   }
 
@@ -80,7 +79,7 @@ export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
     this.dontShowNextTime = !this.dontShowNextTime;
   }
 
-  
+
   ngOnDestroy() {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();

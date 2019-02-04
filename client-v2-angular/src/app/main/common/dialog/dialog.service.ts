@@ -12,7 +12,6 @@ export class DialogService {
   add(modal: any) {
       // add modal to array of active modals
       this.modals.push(modal);
-      console.log(this.modals);
   }
 
   remove(id: string) {
