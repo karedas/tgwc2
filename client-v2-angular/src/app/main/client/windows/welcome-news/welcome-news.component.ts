@@ -59,6 +59,7 @@ export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
         width: '750px',
         height: '500px',
         styleClass: 'op-100',
+        blockScroll: true,
         modal: true
       });
 

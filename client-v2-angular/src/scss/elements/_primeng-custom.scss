@@ -1,10 +1,8 @@
 //dialog
-p-dialog {
-    .ui-dialog .ui-dialog-content {
-        background: transparent;
-        border: none;
-        height: 100%;
-    }
+body .ui-dialog .ui-dialog-content {
+    background: transparent;
+    border: none;
+    height: 100%;
 }
 
 /* CheckBox */

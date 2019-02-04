@@ -7,6 +7,7 @@ export class DialogConfiguration  {
     modal?: boolean;
     appendTo?: string;
     styleClass?: string;
+    blockScroll?: boolean;
 
     constructor() {
         this.modal = false;
