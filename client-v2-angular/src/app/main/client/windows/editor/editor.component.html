@@ -1,38 +1,39 @@
 <tg-dialog [id]="dialogID" (isClosed)="onCancel()">
-      <div class="editor-dialog">
+  <div class="editor-dialog">
 
     <div class="b-ironlight-mini tg-box">
-      <div class="tg-dialog-inside-nopadding tg-shadow-inset">
-        <div class="tg-modal-contentwrap b-paper tg-box">
-          <div fxLayout style="z-index: 2">
-            <div fxFlex="100">
-              <div class="tg-editor--heroname">
-                {{HeroName$ | async}}
-              </div>
-              <div class="textarea-cont">
-                <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
-                  (input)="onDescrChange($event.target.value)">{{description}}</textarea>
+      <div class="tg-dialog-inside-nopadding tg-shadow-inset tg-box" style="height: 100%">
+          <div class="tg-modal-contentwrap b-paper tg-box">
+            <div fxLayout style="z-index: 2"  class="tg-editor-container">
+              <div fxFlex="100" fxLayout="column">
+                <div class="tg-editor--heroname" fxFlex="0 0 auto" fxLayoutAlign="center center">
+                  {{HeroName$ | async}}
+                </div>
+                <div class="textarea-cont" fxFlex="0 1 auto">
+                  <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
+                    (input)="onDescrChange($event.target.value)">{{description}}</textarea>
+                </div>
+                <div id="editorMaxCharsCount" class="tg-txt-maxcharcount" fxFlex="0 0 auto" fxLayoutAlign="center center">{{totalChars}}</div>
+                <div class="tg-modal-buttons-group" fxFlex="0 0 auto" fxLayoutAlign="center center">
+                    <button type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel()">Annulla</button>
+                    <button type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
+                </div>
               </div>
             </div>
+            <div class="tg-border-box">
+              <div class="tg-border tg-border-top"></div>
+              <div class="tg-border tg-border-left"></div>
+              <div class="tg-border tg-border-right"></div>
+              <div class="tg-border tg-border-bottom"></div>
+            </div>
           </div>
+
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
             <div class="tg-border tg-border-left"></div>
             <div class="tg-border tg-border-right"></div>
             <div class="tg-border tg-border-bottom"></div>
           </div>
-        </div>
-        <div id="editorMaxCharsCount" class="tg-txt-maxcharcount">{{totalChars}}</div>
-        <div class="tg-modal-buttons-group">
-          <button type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel()">Annulla</button>
-          <button type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
-        </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
       </div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>

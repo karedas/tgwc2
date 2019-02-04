@@ -94,10 +94,13 @@ export class EditorComponent implements OnInit, OnDestroy {
       }
     }
     this.gameService.sendToServer('##ce_save');
+    this.dialogService.close(this.dialogID);
+
   }
 
   onCancel() {
     this.gameService.sendToServer('##ce_abort');
+    this.dialogService.close(this.dialogID);
   }
 
   onDescrChange($event) {
