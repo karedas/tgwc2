@@ -20,6 +20,6 @@ export class ExtraboardComponent implements OnInit {
   }
 
   openShortcutsPanel() {
-    
+
   }
 }

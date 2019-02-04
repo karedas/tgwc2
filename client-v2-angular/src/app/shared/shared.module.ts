@@ -24,7 +24,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
 
-import { DialogService as DynamicDialogService } from 'primeng/api'
+import { DialogService as DynamicDialogService } from 'primeng/api';
 import { DialogService } from '../main/common/dialog/dialog.service';
 
 
@@ -50,7 +50,7 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     /* Prime NG Modules (TODO: Moves in another file) */
     CheckboxModule,
     MenubarModule,
-    TooltipModule,    
+    TooltipModule,
   ],
   providers: [
     GameService,
@@ -61,7 +61,7 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     LoginService,
     DynamicDialogService,
     DialogService
-    
+
     // DialogService, {provide: MatDialogRef}
   ],
   exports: [

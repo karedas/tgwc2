@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Log di gioco' },
         { label: 'Preferenze' },
         {
-          label: 'Disconnetti', icon: "pi pi-fw pi-sign-out", command: (onclick) => {
+          label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', command: (onclick) => {
             this.disconnect();
           }
         }
@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Forum', disabled: true },
         { label: 'Informazioni su The Gate', disabled: true },
       ]
-    }]
+    }];
   }
 
   disconnect() {

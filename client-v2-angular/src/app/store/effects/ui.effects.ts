@@ -55,7 +55,7 @@ export class UiEffects {
             header: 'Lista comandi',
             width: '750px',
             height: '500px',
-            style: {"max-width": "100%", "max-height": "100%"},
+            style: {'max-width': '100%', 'max-height': '100%'},
             styleClass: 'op-100',
             blockScroll: true,
             modal: false,

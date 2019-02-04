@@ -13,7 +13,7 @@ export class CommandsListComponent implements OnInit {
   @Input('data') data: any;
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
-  dialogID: string = 'commandsList';
+  dialogID = 'commandsList';
   commands$: Observable<any>;
   // modalConfig: ModalConfiguration = new ModalConfiguration;
   title: string;

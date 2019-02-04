@@ -9,13 +9,13 @@ import { DynamicDialogRef } from 'primeng/api';
   templateUrl: './welcome-news.component.html',
   styleUrls: ['./welcome-news.component.scss'],
 })
-export class WelcomeNewsComponent  implements AfterViewInit{
+export class WelcomeNewsComponent  implements AfterViewInit {
 
-  
+
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
-  
-  
-  private dontShowNextTime: boolean = false;
+
+
+  private dontShowNextTime = false;
 
   constructor(
     private game: GameService,

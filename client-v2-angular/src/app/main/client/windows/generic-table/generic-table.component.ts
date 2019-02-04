@@ -26,7 +26,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   public columns = [];
   public currentPageLimit = 15;
   public currentVisible = 3;
-  
+
   contentHeight: number;
 
   public readonly messages = {
@@ -62,7 +62,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     this.dataTable$.subscribe(
       (dt: IGenericTable) => {
         if (dt) {
@@ -122,7 +122,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   }
 
   // /**
-  //  * Get the content Height based on Header, Body and Footer 
+  //  * Get the content Height based on Header, Body and Footer
   //  * of ngx-datatable, then return @number value
   //  */
   setContentHeight() {
@@ -134,9 +134,9 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     }
     this.contentHeight = this.footerHeight + this.headerHeight + bodyHeight;
   }
-  
+
   ngOnDestroy(): void {
-   
+
   }
 }
 

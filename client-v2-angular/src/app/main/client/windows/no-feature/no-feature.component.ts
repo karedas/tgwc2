@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class NoFeatureComponent {
 
-  dialogID: string = 'nofeature';
+  dialogID = 'nofeature';
 
   constructor() {
   }

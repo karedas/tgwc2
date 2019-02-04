@@ -12,8 +12,8 @@ export class CookieLawComponent {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
-  dialogID: string = 'cookielaw';
-  showButton: boolean = false;
+  dialogID = 'cookielaw';
+  showButton = false;
 
   constructor(private ref: DynamicDialogRef, private cookieService: CookieService) {}
 

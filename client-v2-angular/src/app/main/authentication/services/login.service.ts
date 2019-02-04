@@ -134,7 +134,7 @@ export class LoginService {
     this.completeHandShake(data);
     this.store.dispatch(new LoginSuccessAction());
   }
-  
+
   completeHandShake(data: any) {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);

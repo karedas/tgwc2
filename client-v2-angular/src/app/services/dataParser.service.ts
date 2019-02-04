@@ -14,18 +14,17 @@ import { BehaviorSubject } from 'rxjs';
 
 export class DataParser {
 
-  private cmdPrefix: string = '';
-  private netData: string = '';
+  private cmdPrefix = '';
+  private netData = '';
   private shortcuts = {};
 
-  constructor(private store: Store<State>)
-  { 
+  constructor(private store: Store<State>) {
   }
 
   handlerGameData(data: any) {
 
     this.netData += data;
-    
+
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
@@ -37,7 +36,7 @@ export class DataParser {
 
       } catch (err) {
         console.log(err);
-      };
+      }
 
       this.netData = '';
 

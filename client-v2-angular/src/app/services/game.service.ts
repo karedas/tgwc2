@@ -12,7 +12,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 
-export class GameService{
+export class GameService {
 
   private commandsList$: Subject<any> = new Subject();
 
@@ -33,7 +33,7 @@ export class GameService{
 
   startGame(initialData) {
     this.dataParserService.handlerGameData(initialData);
-    
+
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.dataParserService.handlerGameData(data);
     });

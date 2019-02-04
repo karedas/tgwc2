@@ -23,7 +23,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   // private loginForm: FormGroup;
 
   inGameState$: Observable<boolean>;
-  dialogID: string = 'loginwidget';
+  dialogID = 'loginwidget';
 
   private _unsubscribeAll: Subject<any>;
 

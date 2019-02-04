@@ -13,7 +13,7 @@ import { WelcomeNewsComponent } from '../windows/welcome-news/welcome-news.compo
   templateUrl: './client-container.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class ClientContainerComponent implements OnDestroy{
+export class ClientContainerComponent implements OnDestroy {
 
 
   private _unsubscribeAll: Subject<any>;
@@ -46,7 +46,7 @@ export class ClientContainerComponent implements OnDestroy{
             this.openWelcomeNews();
           }
         }
-      )
+      );
   }
 
 
@@ -60,15 +60,15 @@ export class ClientContainerComponent implements OnDestroy{
         closable: false,
         width: '750px',
         height: '500px',
-        style: {"max-width": "100%", "max-height": "100%"},
-        contentStyle: { "max-height": "100%", "max-width": "100%", "overflow": "auto" }
+        style: {'max-width': '100%', 'max-height': '100%'},
+        contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
 
-    }, 100)
+    }, 100);
   }
 
 
-  
+
   ngOnDestroy() {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();

@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from '../common/services/preloader.service';
-import { DialogService } from 'primeng/api'
+import { DialogService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CookieLawComponent } from './windows/cookie-law/cookie-law.component';
@@ -65,26 +65,25 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   // Cookie Law Behaviour
-  showCookieLaw() { 
+  showCookieLaw() {
     setTimeout(() => {
       const ref = this.dialogService.open(CookieLawComponent, {
         showHeader: false,
         closeOnEscape: false,
-        contentStyle: {"max-height": "450px", "overflow": "auto"}
+        contentStyle: {'max-height': '450px', 'overflow': 'auto'}
       });
 
       ref.onClose.subscribe(() => {
         this.isCookieAccepted = true;
-      } )
+      } );
 
     }, 100);
   }
 
   private gameIsReady() {
-    if(!this.cookieService.check('tgCookieLaw')) {
+    if (!this.cookieService.check('tgCookieLaw')) {
       this.showCookieLaw();
-    }
-    else {
+    } else {
       this.isCookieAccepted = true;
     }
   }
