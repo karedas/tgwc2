@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { DialogConfiguration } from './model/dialog.interface';
 export class DialogService {
 
   private modals: any[] = [];
+
 
   add(modal: any) {
       // add modal to array of active modals
@@ -19,10 +21,10 @@ export class DialogService {
       this.modals = this.modals.filter(x => x.id !== id);
   }
 
-  open(id: string, config?: DialogConfiguration) {
+  open(id: string, config?: DialogConfiguration): any {
       // open modal specified by id
       let modal: any = this.modals.filter(x => x.id === id)[0];
-      modal.open(config);
+      const thismodal =  modal.open(config);
   }
 
   close(id: string) {
@@ -30,4 +32,9 @@ export class DialogService {
       let modal: any = this.modals.filter(x => x.id === id)[0];
       modal.close();
   }
+
+  onHide() {
+    
+  }
+
 }

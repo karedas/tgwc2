@@ -27,6 +27,7 @@ export function reducer(
     }
 
     case ClientEventType.INGAME: {
+      console.log(state.inGame);
       return Object.assign({}, state, { inGame: !state.inGame });
     }
 

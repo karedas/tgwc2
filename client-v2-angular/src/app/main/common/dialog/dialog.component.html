@@ -1,14 +1,17 @@
-<p-dialog #dialog header="test" 
+<p-dialog #dialog 
   [(visible)]="visible" 
-  [showHeader]="false"
+  [header]="config.header"
+  [showHeader]="config.header ? true : false"
   [modal]="config.modal" 
   [responsive]="true" 
-  [resizable]="false"
-  [maximizable]="true" 
+  [resizable]="config.resizable"
+  [draggable]="config.draggable"
+  [maximizable]="config.maximizable"
   [baseZIndex]="10000"
   [styleClass]="config.styleClass"
-  [appendTo]='config.appendTo'
+  [appendTo]="'body'"
   [blockScroll]="config.blockScroll"
+  (onHide)="onHide($event)" 
   [style]="{width: config.width, height: config.height}">
     <ng-content></ng-content>
 </p-dialog>

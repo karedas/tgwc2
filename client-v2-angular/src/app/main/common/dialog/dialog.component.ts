@@ -1,19 +1,26 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
 import { DialogService } from './dialog.service';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Dialog } from 'primeng/dialog';
 
 @Component({
   selector: 'tg-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class DialogsComponent implements OnInit {
 
   @Input() id: string;
-  config: DialogConfiguration  = new DialogConfiguration;
+  @Output() isClosed: EventEmitter<boolean> = new EventEmitter();
 
+
+  config: DialogConfiguration  = new DialogConfiguration;
   visible: boolean = false;
+
+  private dialog: Dialog;
+  
 
   constructor(
     private dialogService: DialogService,
@@ -32,21 +39,26 @@ export class DialogsComponent implements OnInit {
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.dialogService.add(this);
   }
+  
+  // open modal
+  open(config: DialogConfiguration) {
+    this.visible = true;
+    this.config = Object.assign({}, this.config, config);
+  }
+  
+  // close modal
+  close(): void {
+    this.visible = false;
+  }
+  
+
+  onHide() {
+    this.isClosed.emit(true);
+  }
 
   // remove self from modal service when directive is destroyed
   ngOnDestroy(): void {
     // this.dialogService.remove(this.id);
-  }
-
-  // open modal
-  open(config: DialogConfiguration): void {
-    this.config = Object.assign({}, this.config, config);
-    this.visible = true;
-  }
-
-  // close modal
-  close(): void {
-    this.visible = false;
   }
 
 }

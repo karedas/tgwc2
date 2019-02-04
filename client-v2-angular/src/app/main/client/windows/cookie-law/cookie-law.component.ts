@@ -24,14 +24,12 @@ export class CookieLawComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.dialogService.open(this.dialogID, {
+      const dialog = this.dialogService.open(this.dialogID, {
         width: '450px',
         height: 'auto',
         modal: true
       });
-
     });
-
   }
 
 
@@ -42,6 +40,10 @@ export class CookieLawComponent implements AfterViewInit {
     setTimeout(() => {
       this.iAcceptCookie.emit(true);
     }, 500);
+  }
+
+  yes() {
+    console.log('YESSS');
   }
 
 }

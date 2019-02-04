@@ -54,8 +54,7 @@ export class WelcomeNewsComponent implements AfterViewInit, OnDestroy {
   openDialog() {
     setTimeout(() => {
 
-      this.dialogService.open('welcomenews', <DialogConfiguration>{
-        visible: true,
+      this.dialogService.open(this.dialogID, <DialogConfiguration>{
         width: '750px',
         height: '500px',
         styleClass: 'op-100',

@@ -1,10 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { getInGameStatus } from 'src/app/store/selectors';
 import { ClientState } from 'src/app/store/state/client.state';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
+import { takeUntil, skip } from 'rxjs/operators';
+import { DisconnectAction } from 'src/app/store/actions/client.action';
+
+import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 
 @Component({
   selector: 'tg-login-smart',
@@ -13,59 +20,71 @@ import { LoginService } from 'src/app/main/authentication/services/login.service
 })
 export class LoginSmartComponent implements OnInit, OnDestroy  {
 
+  // private loginForm: FormGroup;
+
   inGameState$: Observable<boolean>;
+  dialogID: string = 'loginwidget';
+
   private _unsubscribeAll: Subject<any>;
 
 
   showForm = false;
 
   constructor(
+    // private form: FormBuilder,
     private store: Store<ClientState>,
     private loginService: LoginService,
-    private router: Router) {
+    private router: Router,
+    private dialogService: DialogService) {
 
-    // this.modalConfig.width = 'auto';
-    // this.modalConfig.height = '250px';
-    // this.modalConfig.modalOpacity = 0.9;
-    // this.modalConfig.resizable = false;
-
-    this.inGameState$ = this.store.select(getInGameStatus);
+    this.inGameState$ = this.store.pipe(select(getInGameStatus));
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-    // this.inGameState$.pipe(
-    //   takeUntil(this._unsubscribeAll),
-    //   skip(1)).subscribe(
-    //   ingame => {
-    //     if (ingame == false) { this.open(); }
-    //   }
-    // );
+
+    // this.loginForm = this.form.group({
+    //   'username': ['', UsernameValidation],
+    //   'password': ['', PasswordValidation]
+    // });
+
+    this.inGameState$.pipe(
+      takeUntil(this._unsubscribeAll),
+      skip(1)).subscribe (
+        ingame => {
+        if (ingame == false) { this.open(); }
+      }
+    );
   }
 
-  // private open () {
-  //   setTimeout(() => {
-  //     this.dialogService.open('loginWidget');
-  //   });
-  // }
+  private open () {
 
-  // onReconnect() {
-  //   this.loginService.reconnect();
-  // }
+    setTimeout(() => {
+      this.dialogService.open(this.dialogID, <DialogConfiguration>{
+        blockScroll: true,
+        modal: true
+      });
+    });
 
-  // toggle(event?: Event) {
+  }
 
-  //   if (event) {
-  //     event.preventDefault();
-  //   }
+  onReconnect() {
+    this.loginService.reconnect();
+  }
 
-  //   this.showForm = !this.showForm;
-  // }
+  toggle(event?: Event) {
 
-  // navigateToHome() {
-  //   this.store.dispatch(new DisconnectAction);
-  //   this.router.navigate(['/login']);
-  // }
+    if (event) {
+      event.preventDefault();
+    }
+
+    this.showForm = !this.showForm;
+  }
+
+  navigateToHome() {
+    this.store.dispatch(new DisconnectAction);
+    this.router.navigate(['/login']);
+  }
 
 
   ngOnDestroy() {

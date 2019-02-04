@@ -1,19 +1,20 @@
-<div class="b-ironlight-mini tg-box">
-  <div class="tg-dialog-inside-nopadding tg-shadow-inset">
-    <div id="editorDialog" mat-dialog-content>
+<tg-dialog [id]="dialogID" (isClosed)="onCancel()">
       <div class="editor-dialog">
+
+    <div class="b-ironlight-mini tg-box">
+      <div class="tg-dialog-inside-nopadding tg-shadow-inset">
         <div class="tg-modal-contentwrap b-paper tg-box">
-            <div fxLayout>
-              <div fxFlex="100">
-                <div class="tg-editor--heroname">
-                  {{HeroName$ | async}}
-                </div>
-                <div class="textarea-cont">
-                  <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
-                    (input)="onDescrChange($event.target.value)">{{description}}</textarea>
-                </div>
+          <div fxLayout style="z-index: 2">
+            <div fxFlex="100">
+              <div class="tg-editor--heroname">
+                {{HeroName$ | async}}
+              </div>
+              <div class="textarea-cont">
+                <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
+                  (input)="onDescrChange($event.target.value)">{{description}}</textarea>
               </div>
             </div>
+          </div>
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
             <div class="tg-border tg-border-left"></div>
@@ -33,12 +34,12 @@
           <div class="tg-border tg-border-bottom"></div>
         </div>
       </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
     </div>
   </div>
-  <div class="tg-border-box">
-    <div class="tg-border tg-border-top"></div>
-    <div class="tg-border tg-border-left"></div>
-    <div class="tg-border tg-border-right"></div>
-    <div class="tg-border tg-border-bottom"></div>
-  </div>
-</div>
+</tg-dialog>
