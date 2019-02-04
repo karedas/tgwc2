@@ -15,7 +15,7 @@ export class DialogsComponent implements OnInit {
   @Input() id: string;
   @Output() isClosed: EventEmitter<boolean> = new EventEmitter();
 
-
+  data : any;
   config: DialogConfiguration  = new DialogConfiguration;
   visible: boolean = false;
 

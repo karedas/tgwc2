@@ -1,6 +1,6 @@
-import { Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component , Output, EventEmitter } from '@angular/core';
+import { DynamicDialogRef } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-cookie-law',
@@ -8,42 +8,18 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
   styleUrls: ['./cookie-law.component.scss'],
 })
 
-export class CookieLawComponent implements AfterViewInit {
+export class CookieLawComponent {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
   dialogID: string = 'cookielaw';
   showButton: boolean = false;
 
-  constructor(
-    private cookieService: CookieService,
-    private dialogService: DialogService
-  ) {
-
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      const dialog = this.dialogService.open(this.dialogID, {
-        width: '450px',
-        height: 'auto',
-        modal: true
-      });
-    });
-  }
+  constructor(private ref: DynamicDialogRef, private cookieService: CookieService) {}
 
 
   onContinue() {
-    this.dialogService.close(this.dialogID);
+    this.ref.close(true);
     this.cookieService.set('tgCookieLaw', '1');
-
-    setTimeout(() => {
-      this.iAcceptCookie.emit(true);
-    }, 500);
   }
-
-  yes() {
-    console.log('YESSS');
-  }
-
 }

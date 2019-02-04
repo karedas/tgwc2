@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
@@ -7,11 +7,10 @@ import { NgScrollbar } from 'ngx-scrollbar';
   selector: 'tg-commands-list',
   templateUrl: './commands-list.component.html',
   styleUrls: ['./commands-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class CommandsListComponent implements OnInit {
-
+  @Input('data') data: any;
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
   dialogID: string = 'commandsList';

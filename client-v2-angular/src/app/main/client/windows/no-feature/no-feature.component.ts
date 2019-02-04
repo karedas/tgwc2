@@ -10,10 +10,10 @@ export class NoFeatureComponent {
 
   dialogID: string = 'nofeature';
 
-  constructor( private dialogRef: MatDialogRef<NoFeatureComponent>) {
+  constructor() {
   }
 
-  onClose(): void {
-    this.dialogRef.close();
-  }
+  // onClose(): void {
+  //   this.dialogRef.close();
+  // }
 }

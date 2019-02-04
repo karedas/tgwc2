@@ -3,9 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from '../common/services/preloader.service';
-import { DialogService } from '../common/dialog/dialog.service';
-import { Subject, Observable } from 'rxjs';
+import { DialogService } from 'primeng/api'
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CookieLawComponent } from './windows/cookie-law/cookie-law.component';
 
 @Component({
   selector: 'tg-client',
@@ -25,6 +26,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private platform: Platform,
     private preloader: PreloaderService,
+    private dialogService: DialogService,
     @Inject(DOCUMENT) private document: any
   ) {
 
@@ -60,12 +62,31 @@ export class ClientComponent implements OnInit, OnDestroy {
           }
         }
       );
+  }
 
+  // Cookie Law Behaviour
+  showCookieLaw() { 
+    setTimeout(() => {
+      const ref = this.dialogService.open(CookieLawComponent, {
+        showHeader: false,
+        closeOnEscape: false,
+        contentStyle: {"max-height": "450px", "overflow": "auto"}
+      });
+
+      ref.onClose.subscribe(() => {
+        this.isCookieAccepted = true;
+      } )
+
+    }, 100);
   }
 
   private gameIsReady() {
-    /* Mndatory verification of acceptance of the use of cookies before proceed */
-    this.isCookieAccepted = !this.cookieService.check('tgCookieLaw') ? false : true;
+    if(!this.cookieService.check('tgCookieLaw')) {
+      this.showCookieLaw();
+    }
+    else {
+      this.isCookieAccepted = true;
+    }
   }
 
   onCookieAccepted(status: boolean) {

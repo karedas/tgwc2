@@ -6,7 +6,7 @@ import { GameService } from 'src/app/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { DialogService } from 'src/app/main/common/dialog/basedialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 
 @Component({

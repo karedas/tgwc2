@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="cmd-values-container" fxFlex="1 0 0">
-            <ng-scrollbar class="scrollbar" #commandsScrollbar>
+            <ng-scrollbar class="scrollbar" #commandsScrollbar [shown]="'always'">
               <div *ngFor="let cmdvalue of (removeTitleObject(cmds)) | keyvalue; let ii = index" fxLayout="row wrap">
                 <div class="cmd-value " 
                   fxFlex="1 0 25%" 

@@ -27,11 +27,11 @@ import { DirectionsComponent } from './right-sidebar/map/directions/directions.c
 import { MonitorBoxComponent } from './right-sidebar/monitor-box/monitor-box.component';
 import { DetailsRoomComponent } from './output/renders/details-room/details-room.component';
 import { GeolocalBoxComponent } from './dashboard/extraboard/geolocal-box/geolocal-box.component';
-import { WindowsModule } from './windows/windows.module';
 import { ObjpersDetailComponent } from './output/renders/objpers-detail/objpers-detail.component';
 import { ObjPersContainerComponent } from './output/renders/obj-pers-container/obj-pers-container.component';
 import { StatusComponent } from './output/renders/status/status.component';
 import { AngularSplitModule } from 'angular-split';
+import { WindowsModule } from './windows/windows.module';
 
 @NgModule({
   declarations: [

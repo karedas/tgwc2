@@ -7,6 +7,7 @@ import { tap, map, withLatestFrom, filter } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
+import { CommandsListComponent } from 'src/app/main/client/windows/commands-list/commands-list.component';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 
@@ -50,13 +51,14 @@ export class UiEffects {
       tap( cmds => {
         this.game.setCommands(cmds);
         setTimeout(() => {
-          this.dialogService.open('commandsList', <DialogConfiguration>{
+          this.dialogService.open( 'commandsList', <DialogConfiguration>{
+            header: 'Lista comandi',
             width: '750px',
             height: '500px',
+            style: {"max-width": "100%", "max-height": "100%"},
             styleClass: 'op-100',
             blockScroll: true,
             modal: false,
-            header: 'Comandi di gioco',
             draggable: true,
             resizable: true
           });

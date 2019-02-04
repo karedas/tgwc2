@@ -17,13 +17,16 @@ import { ToastContainerModule } from 'ngx-toastr';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DialogGenericModule } from '../main/common/dialog/dialog.module';
-
-
-import {CheckboxModule} from 'primeng/checkbox';
-import {MenubarModule} from 'primeng/menubar';
-import {TooltipModule} from 'primeng/tooltip';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+
+import { CheckboxModule } from 'primeng/checkbox';
+import { MenubarModule } from 'primeng/menubar';
+import { TooltipModule } from 'primeng/tooltip';
+
+import { DialogService as DynamicDialogService } from 'primeng/api'
+import { DialogService } from '../main/common/dialog/dialog.service';
+
 
 @NgModule({
   declarations: [
@@ -45,11 +48,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgScrollbarModule,
     ToastContainerModule,
     /* Prime NG Modules (TODO: Moves in another file) */
-    DialogGenericModule,
     CheckboxModule,
     MenubarModule,
-    TooltipModule
-    
+    TooltipModule,    
   ],
   providers: [
     GameService,
@@ -58,6 +59,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     PreloaderService,
     AudioService,
     LoginService,
+    DynamicDialogService,
+    DialogService
+    
     // DialogService, {provide: MatDialogRef}
   ],
   exports: [
@@ -70,11 +74,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     ToastContainerModule,
     FontAwesomeModule,
     IconsComponent,
-    DialogGenericModule,
     CheckboxModule,
     MenubarModule,
     TooltipModule,
-    NgxDatatableModule
+    NgxDatatableModule,
   ],
 })
 export class SharedModule {

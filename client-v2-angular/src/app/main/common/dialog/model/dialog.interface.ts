@@ -13,6 +13,7 @@ export class DialogConfiguration  {
     draggable?: boolean;
     maximizable?: boolean;
     closeOnEscape?: boolean;
+    style?: any;
 
     constructor() {
         this.width = 'auto',
