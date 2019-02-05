@@ -19,8 +19,6 @@ import { Room } from 'src/app/models/data/room.model';
 export class OutputComponent implements OnInit, OnDestroy {
 
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
-  // @ViewChild('nestedSplitter') splitterpanel: jqxSplitterComponent;
-
   lastRoom$: Observable<any>;
 
 

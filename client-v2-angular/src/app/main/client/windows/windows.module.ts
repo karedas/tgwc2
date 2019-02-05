@@ -6,35 +6,40 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { CommandsListComponent } from './commands-list/commands-list.component';
-import { DialogModule } from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';  
 import { DialogsComponent } from '../../common/dialog/dialog.component';
+import { EditorComponent } from './editor/editor.component';
 
+import { GenericTableComponent } from './generic-table/generic-table.component';
 @NgModule({
   declarations: [
-    // GenericTableComponent,
+    GenericTableComponent,
     // NoFeatureComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
     CookieLawComponent,
     CommandsListComponent,
-    DialogsComponent
+    EditorComponent,
+    DialogsComponent,
   ],
   imports: [
     DynamicDialogModule,
     DialogModule,
     CommonModule,
     CheckboxModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
-    CommandsListComponent
+    EditorComponent,
+    CommandsListComponent,
+    GenericTableComponent
   ],
   entryComponents: [
-    // GenericTableComponent,
     // NoFeatureComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
-    CookieLawComponent
+    CookieLawComponent,
+    
   ],
 })
 export class WindowsModule { }

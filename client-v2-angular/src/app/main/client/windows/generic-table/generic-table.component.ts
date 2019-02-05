@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
@@ -6,6 +6,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { ResizedEvent } from 'angular-resize-event';
 
 @Component({
   selector: 'tg-generic-table',
@@ -18,40 +19,21 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   @ViewChild('tgdatatable') table: DatatableComponent;
 
   public readonly dialogID: string = 'genericTable';
-
   public dataTable$: Observable<any>;
-  // public modalConfig: ModalConfiguration = new ModalConfiguration;
-
   public rows = [];
   public columns = [];
   public currentPageLimit = 15;
   public currentVisible = 3;
 
-  contentHeight: number;
-
   public readonly messages = {
-    // Footer total message
     totalMessage: 'Totali'
   };
-
-  // public readonly pageLimitOptions = [
-  //   {value: 5},
-  //   {value: 10},
-  //   {value: 25},
-  //   {value: 50},
-  //   {value: 100},
-  // ];
-  // public readonly visibleOptions = [
-  //   {value: 1},
-  //   {value: 3},
-  //   {value: 5},
-  //   {value: 10},
-  // ];
-
+  
   public readonly headerHeight = 30;
   public readonly footerHeight = 44;
   public readonly rowHeight = 30;
-
+  
+  contentHeight: number;
 
   constructor(
     private store: Store<DataState>,
@@ -81,10 +63,10 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
       dataTable.head.forEach((v: any, i: number) => {
         switch (typeof v) {
           case 'object':
-            this.columns.push({ prop: 'prop_' + i, 'name': v.title.toLowerCase() });
+            this.columns.push({ field: 'prop_' + i, 'name': v.title.toLowerCase() });
             break;
           default:
-            this.columns.push({ prop: 'prop_' + i, 'name': v.toLowerCase() });
+            this.columns.push({ field: 'prop_' + i, 'name': v.toLowerCase() });
             break;
         }
       });
@@ -93,10 +75,11 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
       dataTable.data.forEach((d: any) => {
         const obj = {};
         d.map((row: string, rowIndex: number) => {
-          obj[this.columns[rowIndex].prop] = row;
+          obj[this.columns[rowIndex].field] = row;
         });
         this.rows.push(obj);
       });
+
     }
   }
 
@@ -105,7 +88,6 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   }
 
   private open() {
-    console.log('open');
     setTimeout(() => {
       this.dialogService.open(this.dialogID, {
         draggable: true,
@@ -116,7 +98,6 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
         maximizable: true,
         header: 'Informazioni'
       });
-      // this.dialogService.toFront(this.dialogID);
     }, 200);
 
   }
@@ -125,6 +106,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   //  * Get the content Height based on Header, Body and Footer
   //  * of ngx-datatable, then return @number value
   //  */
+
   setContentHeight() {
     let bodyHeight = 0;
     if (this.rows.length < this.currentPageLimit) {
@@ -134,9 +116,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     }
     this.contentHeight = this.footerHeight + this.headerHeight + bodyHeight;
   }
-
   ngOnDestroy(): void {
-
   }
 }
 

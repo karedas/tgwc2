@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { RoomList } from 'src/app/models/data/room.model';
@@ -35,6 +35,7 @@ export class DetailsRoomComponent implements OnInit {
     this.getTotalByType();
   }
 
+
   private getTotalByType() {
 
     if (this.objs) {
@@ -50,18 +51,9 @@ export class DetailsRoomComponent implements OnInit {
       this.togglePanel[i] = false;
     }
 
-    this.setContentClass();
-  }
-
-  getHstat(condprc: number): string {
-    return this.game.getHsStatBgPos(condprc);
-  }
-
-  private setContentClass() {
     this.getObjsContentClass();
     this.getPersosnsContentClass();
   }
-
 
   private getObjsContentClass() {
     if (this.totalObjs >= 6 && this.totalPersons <= 6) {
@@ -76,6 +68,26 @@ export class DetailsRoomComponent implements OnInit {
       this.personsClass50_50 = true;
     } else if (this.totalPersons >= 6 && this.totalObjs >= 6) {
       this.personsClass50 = true;
+    }
+  }
+
+  public getHstat(condprc: number): string {
+    return this.game.getHsStatBgPos(condprc);
+  }
+
+  /**
+  * Expand or send Command to Server after click 
+  * based on content type, list or single obj / person
+   */ 
+
+  onInteract(item, index) {
+
+    //  Is Expandable
+    if(item.sz && this.togglePanel[index]) {
+      !this.togglePanel[index];
+    }
+    else {
+      this.game.processCommands(`guarda &${item.mrn}`)
     }
   }
 }

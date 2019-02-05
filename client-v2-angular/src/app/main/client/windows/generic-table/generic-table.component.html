@@ -1,47 +1,35 @@
-<!-- <ng-container *ngIf="dataTable$ | async as datatable"> -->
+<ng-container *ngIf="dataTable$ | async as datatable">
+  <tg-dialog [id]="dialogID">
     <div class="tg-generictable">
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <!-- <ngx-datatable
-            #tgdatatable
-            
-            [columnMode]="'force'"
-            [limit]="currentPageLimit"
-            [rows]="rows"
-            [sortType]='"single"'
-            [rowHeight]="rowHeight"
-            [messages]="messages"
-            [headerHeight]="headerHeight"
-            [footerHeight]="footerHeight"
-            class="tg-rendetable table-hover material"
-            >
-            <ng-container *ngFor="let col of columns; let i = index">
-                <ng-container *ngIf="col.name === 'icona'">
-                  <ngx-datatable-column
-                    [prop]="col.prop" 
-                    [name]="col.name">
-                      <ng-template 
-                        let-value="value" 
-                        let-row="row" 
-                        ngx-datatable-cell-template>
-                        <tg-icons [icon]="value"></tg-icons>
-                      </ng-template>
-                    </ngx-datatable-column>
-                </ng-container>
-                <ng-container *ngIf="col.name !== 'icona'">>
-                  <ngx-datatable-column 
-                    [prop]="col.prop" 
-                    [name]="col.name">
-                    <ng-template 
-                      let-value="value" 
-                      let-row="row" 
-                      ngx-datatable-cell-template>
-                        {{ value | dataToHtml}}
-                    </ng-template>
-                  </ngx-datatable-column>
-                </ng-container>
-            </ng-container>
-          </ngx-datatable> -->
+          <p-table [value]="rows" [columns]="columns" [autoLayout]="true" [paginator]="true" [rows]="15" [reorderableColumns]="true">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.name}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+              <tr [pReorderableRow]="index">
+                <td *ngFor="let col of columns">
+                  <ng-container *ngIf="col.name ==='icona'; else ipaddr">
+                    <tg-icons [icon]="rowData[col.field]"></tg-icons>
+                  </ng-container>
+                  <ng-template *ngIf="col.name ==='ipaddr'; else defaultRow" #ipaddr>
+                      <a target="_blank" href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{rowData[col.field]}}</a>
+                  </ng-template>
+                  <ng-template #defaultRow>
+                    <span [innerHtml]="rowData[col.field]"  pReorderableRowHandle></span>
+                  </ng-template>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              Visualizzati {{rows.length }} risultati
+            </ng-template>
+          </p-table>
         </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>
@@ -51,4 +39,5 @@
         </div>
       </div>
     </div>
-<!-- </ng-container> -->
+  </tg-dialog>
+</ng-container>

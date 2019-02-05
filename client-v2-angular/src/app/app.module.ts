@@ -29,7 +29,7 @@ import { Auth2Module } from './main/authentication/auth.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducer, { metaReducers: [clearState] } ),
+    StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([UiEffects, ClientEffects]),
     ToastrModule.forRoot({
       positionClass: 'inline',

@@ -53,10 +53,8 @@ export class AudioService {
     if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
       this.setMusic(src);
     } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
-      console.log('sound1');
       this.setSound(src.replace('.mid', '.mp3'));
     } else {
-      console.log('sound2');
       this.setSound(src.replace('.wav', '.mp3'));
     }
   }

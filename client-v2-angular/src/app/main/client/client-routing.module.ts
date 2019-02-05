@@ -4,11 +4,6 @@ import { ClientContainerComponent } from './client-container/client-container.co
 import { AuthGuard } from '../authentication/services/login.guard';
 
 const clientRouting: Routes = [
-  // {
-  // 	path: '',
-  // 	redirectTo: 'login',
-  // 	pathMatch: 'full'
-  // },
   {
     path: 'webclient',
     component: ClientContainerComponent,

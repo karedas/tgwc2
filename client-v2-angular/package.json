@@ -33,6 +33,7 @@
     "@ngrx/store": "^7.1.0",
     "@ngrx/store-devtools": "^7.1.0",
     "@swimlane/ngx-datatable": "^14.0.0",
+    "angular-resize-event": "^1.0.0",
     "angular-split": "^2.0.1",
     "core-js": "^2.5.4",
     "dedent": "^0.7.0",
@@ -57,7 +58,7 @@
     "primeng": "^7.0.5",
     "rxjs": "^6.3.3",
     "socket.io": "^2.1.1",
-    "typescript": "^3.2.2",
+    "typescript": "^3.2.1",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {

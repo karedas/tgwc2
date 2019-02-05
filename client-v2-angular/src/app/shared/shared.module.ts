@@ -17,12 +17,15 @@ import { ToastContainerModule } from 'ngx-toastr';
 import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+/* Prime NG */
 import { CheckboxModule } from 'primeng/checkbox';
 import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
+import { ButtonModule } from 'primeng/button'; 
+import { TableModule } from 'primeng/table';
 
 import { DialogService as DynamicDialogService } from 'primeng/api';
 import { DialogService } from '../main/common/dialog/dialog.service';
@@ -44,13 +47,15 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     // font awesome
     FontAwesomeModule,
     // Various
-    NgxDatatableModule,
+    // NgxDatatableModule,
     NgScrollbarModule,
     ToastContainerModule,
     /* Prime NG Modules (TODO: Moves in another file) */
     CheckboxModule,
+    TableModule,
     MenubarModule,
     TooltipModule,
+    ButtonModule,
   ],
   providers: [
     GameService,
@@ -61,8 +66,6 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     LoginService,
     DynamicDialogService,
     DialogService
-
-    // DialogService, {provide: MatDialogRef}
   ],
   exports: [
     CommonModule,
@@ -77,7 +80,9 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     CheckboxModule,
     MenubarModule,
     TooltipModule,
-    NgxDatatableModule,
+    ButtonModule,
+    TableModule
+    // NgxDatatableModule,
   ],
 })
 export class SharedModule {

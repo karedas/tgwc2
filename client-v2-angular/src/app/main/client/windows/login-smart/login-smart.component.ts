@@ -20,15 +20,10 @@ import { UsernameValidation, PasswordValidation } from 'src/app/main/common/vali
 })
 export class LoginSmartComponent implements OnInit, OnDestroy  {
 
-  // private loginForm: FormGroup;
-
-  inGameState$: Observable<boolean>;
-  dialogID = 'loginwidget';
-
+  public readonly dialogID: string = 'loginwidget';
+  public inGameState$: Observable<boolean>;
   private _unsubscribeAll: Subject<any>;
-
-
-  showForm = false;
+  public showForm = false;
 
   constructor(
     // private form: FormBuilder,

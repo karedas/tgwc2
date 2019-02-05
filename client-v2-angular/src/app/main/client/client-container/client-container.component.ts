@@ -49,11 +49,8 @@ export class ClientContainerComponent implements OnDestroy {
       );
   }
 
-
   openWelcomeNews() {
-
     setTimeout(() => {
-
       const ref = this.dialogService.open(WelcomeNewsComponent, {
         header: 'Notizie',
         styleClass: 'op-100',
@@ -66,8 +63,6 @@ export class ClientContainerComponent implements OnDestroy {
 
     }, 100);
   }
-
-
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

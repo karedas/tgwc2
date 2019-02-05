@@ -8,14 +8,13 @@ import { MIcons } from './icons.model';
   encapsulation: ViewEncapsulation.None
 })
 export class IconsComponent {
-  @Input('icon') iconObj: number;
+  @Input('icon') icon: number;
 
-  _icon: number;
-  _mrn: number;
-  _cnttype: string;
-  _cntmrn: number;
-  _cmd: string;
-  _addclass: string;
+  mrn: number;
+  cnttype: string;
+  cntmrn: number;
+  cmd: string;
+  addclass: string;
 
   bgPositionStyle: Object;
 
@@ -23,28 +22,24 @@ export class IconsComponent {
   }
 
   ngOnChanges(changes: SimpleChange): void {
-    this.tileBgPos();
+
+    if(!this.icon) {
+      this.icon = 416;
+    }
+    this.setTileBackgroundPosition();
   }
-
-  public tileBgPos() {
+  
+  private setTileBackgroundPosition() {
     const tc = this.tileCoords();
-
-    const bgPos = {
+    this.bgPositionStyle = {
       'background-position': `-${tc[0]}px -${tc[1]}px`
     };
-    this.bgPositionStyle = bgPos;
   }
 
   private tileCoords(): number[] {
-    const posx = 32 * (this.iconObj & 0x7f);
-    const posy = 32 * (this.iconObj >> 7);
+    const posx = 32 * (this.icon & 0x7f);
+    const posy = 32 * (this.icon >> 7);
 
     return [posx, posy];
-  }
-
-  getIcon(objIcon: MIcons) {
-    if (!objIcon.icon) {
-      objIcon.icon = 416;
-    }
   }
 }

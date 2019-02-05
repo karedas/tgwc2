@@ -23,21 +23,13 @@ export class NavbarComponent implements OnInit {
     this.menuItems = [{
       label: 'Gioco',
       items: [
-        { label: 'Log di gioco' },
-        { label: 'Preferenze' },
+        { label: 'Log di gioco', disabled: true},
+        { label: 'Preferenze', disabled: true},
         {
-          label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', command: (onclick) => {
+          label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', separator: false, command: (onclick) => {
             this.disconnect();
           }
         }
-      ]
-    },
-    {
-      label: 'Preferenze',
-      icon: 'pi pi-fw pi-pencil',
-      items: [
-        { label: 'Delete', icon: 'pi pi-fw pi-trash' },
-        { label: 'Refresh', icon: 'pi pi-fw pi-refresh' }
       ]
     },
     {
@@ -54,6 +46,8 @@ export class NavbarComponent implements OnInit {
       ]
     }];
   }
+
+  
 
   disconnect() {
     this.game.disconnectGame();

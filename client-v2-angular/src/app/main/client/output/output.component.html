@@ -6,10 +6,8 @@
       </div> -->
       <!-- Output Area -->
       <ng-container *ngIf="extraOutputOpenStatus$ | async; else noextra">
-        <as-split 
-        [direction]="'horizontal'" 
-        class="tg-output--splitter">
-          <as-split-area size="60" >
+        <as-split [direction]="'horizontal'" class="tg-output--splitter">
+          <as-split-area size="60">
             <div style="height: 100%; overflow:hidden;">
               <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar>
                 <div class="tg-output--history">

@@ -13,11 +13,9 @@ export class CommandsListComponent implements OnInit {
   @Input('data') data: any;
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
-  dialogID = 'commandsList';
+  public readonly dialogID: string = 'commandsList';
   commands$: Observable<any>;
-  // modalConfig: ModalConfiguration = new ModalConfiguration;
   title: string;
-
   groupOpen = 0;
 
   constructor(private game: GameService) {
@@ -30,7 +28,6 @@ export class CommandsListComponent implements OnInit {
   removeTitleObject(commands) {
     delete commands.title;
     return commands;
-
   }
 
   setOpenedGroup(index: number) {

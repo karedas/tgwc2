@@ -1,25 +1,25 @@
-import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
 import { DialogService } from './dialog.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Dialog } from 'primeng/dialog';
+import { Dialog } from 'primeng/dialog'; 
 
 @Component({
   selector: 'tg-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss'],
+  // styleUrls: ['./dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class DialogsComponent implements OnInit {
 
   @Input() id: string;
+  @ViewChild('dialog') dialog: Dialog;
   @Output() isClosed: EventEmitter<boolean> = new EventEmitter();
 
   data: any;
   config: DialogConfiguration  = new DialogConfiguration;
   visible = false;
 
-  private dialog: Dialog;
+  // private dialog: Dialog;
 
 
   constructor(
@@ -44,6 +44,7 @@ export class DialogsComponent implements OnInit {
   open(config: DialogConfiguration) {
     this.visible = true;
     this.config = Object.assign({}, this.config, config);
+
   }
 
   // close modal
@@ -60,6 +61,4 @@ export class DialogsComponent implements OnInit {
   ngOnDestroy(): void {
     // this.dialogService.remove(this.id);
   }
-
-
 }

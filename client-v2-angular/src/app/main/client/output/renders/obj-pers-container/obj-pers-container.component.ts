@@ -24,9 +24,6 @@ export class ObjPersContainerComponent implements OnInit {
      this.newListEquip = keysAndProperty.map((val, k) => {
         return equip_positions_by_name[keysAndProperty[k]];
      } );
-
-     console.log(this.newListEquip);
-
   }
 
   ngOnInit() {
