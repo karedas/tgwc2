@@ -1,9 +1,17 @@
-<ng-container *ngIf="dataTable$ | async as datatable">
+<ng-container *ngIf="dataTable$ | async">
   <tg-dialog [id]="dialogID">
     <div class="tg-generictable">
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <p-table [value]="rows" [columns]="columns" [autoLayout]="true" [paginator]="true"  [rows]="15" [reorderableColumns]="true">
+          <!-- Generic Table content start -->
+          <p-table 
+            [value]="rows" 
+            [columns]="columns" 
+            [autoLayout]="true" 
+            [paginator]="true"  
+            [rows]="currentPageLimit"
+            [rowHover]="true"
+            [reorderableColumns]="true">
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th *ngFor="let col of columns">
@@ -34,6 +42,7 @@
               Visualizzati {{rows.length }} risultati
             </ng-template>
           </p-table>
+          <!-- Generic Table content end -->
         </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>

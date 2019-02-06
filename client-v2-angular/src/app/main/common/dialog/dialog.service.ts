@@ -9,7 +9,6 @@ export class DialogService {
 
   private modals: any[] = [];
 
-
   add(modal: any) {
       // add modal to array of active modals
       this.modals.push(modal);
@@ -31,6 +30,4 @@ export class DialogService {
       const modal: any = this.modals.filter(x => x.id === id)[0];
       modal.close();
   }
-
-
 }

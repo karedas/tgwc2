@@ -7,7 +7,6 @@ import { tap, map, withLatestFrom, filter } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
-import { CommandsListComponent } from 'src/app/main/client/windows/commands-list/commands-list.component';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 

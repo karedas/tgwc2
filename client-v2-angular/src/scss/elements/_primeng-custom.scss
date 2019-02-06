@@ -144,7 +144,7 @@ p-button {
 
 /* Table */
 p-table {
-  > .ui-widget {
+  >.ui-widget {
     font-size: 11px;
   }
 
@@ -152,9 +152,12 @@ p-table {
     display: flex;
     flex-direction: column;
     height: 100%;
-   
-    .ui-table-thead > tr > th {
+
+    .ui-table-thead>tr>th {
       color: #FFB300;
+      position: sticky;
+      top: 0;
+      border: 0;
     }
   }
 
@@ -163,7 +166,7 @@ p-table {
   .ui-table-wrapper {
     flex: 1 1 auto;
   }
-  
+
   tbody {
     text-align: center;
   }
@@ -177,11 +180,16 @@ p-table {
 p-paginator {
   .ui-paginator {
     padding: 8px 0;
-  }
-  .ui-paginator .ui-paginator-pages .ui-paginator-page {
-    height: 1.5em;
-    min-width: 1.5em;
-    line-height: 1.5em;
+
+    .ui-paginator-pages .ui-paginator-page,
+    .ui-paginator-first,
+    .ui-paginator-prev,
+    .ui-paginator-next,
+    .ui-paginator-last {
+      height: 1.5em;
+      min-width: 1.5em;
+      line-height: 1.5em;
+    }
+
   }
 }
-

@@ -81,12 +81,6 @@ body[data-loginstatus=ready] {
   position: relative;
 }
 
-.tg-leftside {
-  background: #0a0806;
-  overflow: hidden;
-
-}
-
 
 /* Icons & Stuff */
 
@@ -116,6 +110,18 @@ body[data-loginstatus=ready] {
     }
   }
 }
+
+
+/* Various Sprite, Effects and State */
+.cando {
+  display: inline-block;
+  @include sprite($checkbox-checked-sprite);
+}
+.cantdo {
+  display: inline-block;
+  @include sprite($notchecked-sprite);
+}
+
 
 
 // // Custom Form Elements

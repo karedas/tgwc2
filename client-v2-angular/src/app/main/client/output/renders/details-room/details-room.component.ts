@@ -81,7 +81,8 @@ export class DetailsRoomComponent implements OnInit {
   * based on content type, list or single obj / person
    */
 
-  onInteract(item: any, index: number, list?: boolean) {
+  onInteract(event: Event, item: any, index: number, list?: boolean) {
+    event.preventDefault();
     if (!item.sz) {
       if (!item.cntnum) {
         this.game.processCommands(`guarda &${item.mrn[0]}`);
@@ -90,14 +91,14 @@ export class DetailsRoomComponent implements OnInit {
       else if (item.cntnum && item.mrn.length > 0) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       }
-    }
-    else if (list) {
+    } else if (list) {
       const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
       this.game.processCommands(`guarda &${mrn}`);
     }
   }
 
-  onExpand(item: any, index: number) {
+  onExpand(event: Event, item: any, index: number) {
+    event.preventDefault();
     //  Is Expandable
     if (item.sz) {
       this.togglePanel[index] = !this.togglePanel[index];

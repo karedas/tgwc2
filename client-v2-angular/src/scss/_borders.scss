@@ -1,72 +1,75 @@
 .tg-box-content {
-    position: relative;
-    z-index: 3;
-    overflow: hidden;
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
 }
 
 .tg-box {
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
 
-     .tg-border-box {
-       position: absolute;
-       left: 0;
-       right: 0;
-       top: 0;
-       bottom: 0;
-    
-       .tg-border {
-           position: absolute;
-           background-position: 0 0;
-       }
-    
-       .tg-border-top, .tg-border-bottom {
-           position: absolute;
-           background-repeat: repeat-x;
-           left: 0;
-           right: 0;
-    
-           // Corners
-           &::after, &::before {
-               content: '';
-               position: absolute;
-               display: block;
-               background-repeat: no-repeat;
-           }
-    
-           &::before {
-               right: 0;
-               left: 0;
-           }
-    
-           &::after {
-               top: 0;
-               right: 0;
-           }
-        }
-       
-       .tg-border-left, .tg-border-right{
-           position: absolute;
-           background-repeat: repeat-y;
-       }
-       
-       .tg-border-top {
-           top: 0;
-       }
-    
-       .tg-border-bottom {
-           bottom: 0;
-       }
-       
-       .tg-border-right {
-           right: 0;
-       }
-    
-       .tg-border-left {
-           left: 0;
-       }
+  .tg-border-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    .tg-border {
+      position: absolute;
+      background-position: 0 0;
     }
+
+    .tg-border-top,
+    .tg-border-bottom {
+      position: absolute;
+      background-repeat: repeat-x;
+      left: 0;
+      right: 0;
+
+      // Corners
+      &::after,
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        background-repeat: no-repeat;
+      }
+
+      &::before {
+        right: 0;
+        left: 0;
+      }
+
+      &::after {
+        top: 0;
+        right: 0;
+      }
+    }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      background-repeat: repeat-y;
+    }
+
+    .tg-border-top {
+      top: 0;
+    }
+
+    .tg-border-bottom {
+      bottom: 0;
+    }
+
+    .tg-border-right {
+      right: 0;
+    }
+
+    .tg-border-left {
+      left: 0;
+    }
+  }
 }
 
 
@@ -74,338 +77,397 @@
 /* BORDER TYPE */
 
 .b-ironlight {
-    padding: $ironlight-border-size;  
-    > .tg-border-box {
-        .tg-border-top, .tg-border-bottom {
-            height: $ironlight-border-size;
-            &::after, &::before {
-                width: $ironlight-border-size;
-                height: $ironlight-border-size;
-            }
-        }
-    
-        .tg-border-left, .tg-border-right{
-            position: absolute;
-            width: $ironlight-border-size;
-            top: $ironlight-border-size;
-            bottom: $ironlight-border-size;
-        }
-    
-        .tg-border-top {
-            background-image: url($imgPath + '/borders/stone-horizontal-top.jpg');
-            &::after {
-                background-image: url($imgPath + '/borders/stone-corner-topright.jpg');
-            }
-            &::before {
-                background-image: url($imgPath + '/borders/stone-corner-topleft.jpg');
-            }
-        }
-        
-        .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/stone-horizontal-bottom.jpg');
-            &::after {
-                background-image: url($imgPath + '/borders/stone-corner-bottomright.jpg');
-            }
-            &::before {
-                background-image:  url($imgPath + '/borders/stone-corner-bottomleft.jpg');
-            }
-        }
-        
-        .tg-border-right {
-            background-image: url($imgPath + '/borders/stone-vertical-right.jpg');
-        }
-    
-        .tg-border-left {
-            background-image: url($imgPath + '/borders/stone-vertical-left.jpg');
-        }
+  padding: $ironlight-border-size;
+
+  >.tg-border-box {
+
+    .tg-border-top,
+    .tg-border-bottom {
+      height: $ironlight-border-size;
+
+      &::after,
+      &::before {
+        width: $ironlight-border-size;
+        height: $ironlight-border-size;
+      }
     }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $ironlight-border-size;
+      top: $ironlight-border-size;
+      bottom: $ironlight-border-size;
+    }
+
+    .tg-border-top {
+      background-image: url($imgPath + '/borders/stone-horizontal-top.jpg');
+
+      &::after {
+        background-image: url($imgPath + '/borders/stone-corner-topright.jpg');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/stone-corner-topleft.jpg');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/stone-horizontal-bottom.jpg');
+
+      &::after {
+        background-image: url($imgPath + '/borders/stone-corner-bottomright.jpg');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/stone-corner-bottomleft.jpg');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/stone-vertical-right.jpg');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/stone-vertical-left.jpg');
+    }
+  }
 }
 
 .b-ironlight-mini {
-    padding: $ironlight-mini-border-size;  
-    box-sizing: border-box;
-    height: 100%;
+  padding: $ironlight-mini-border-size;
+  box-sizing: border-box;
+  height: 100%;
 
-    > .tg-border-box {
-        overflow: hidden;
-        .tg-border-top, .tg-border-bottom {
-            height: $ironlight-mini-border-size;
-            &::after, &::before {
-                width: $ironlight-mini-border-size;
-                height: $ironlight-mini-border-size;
-            }
-        }
-    
-        .tg-border-left, .tg-border-right{
-            position: absolute;
-            width: $ironlight-mini-border-size;
-            top: $ironlight-mini-border-size;
-            bottom: $ironlight-mini-border-size;
-        }
-    
-        .tg-border-top {
-            left: 4px;
-            right: 4px;
-            background-image: url($imgPath + '/borders/border_ministone_top.png');
-            &::after {
-                right:-4px;
-                background-image: url($imgPath + '/borders/border_ministone_topright.png');
-            }
-            &::before {
-                left: -4px;
-                background-image: url($imgPath + '/borders/border_ministone_topleft.png');
-            }
-        }
-        
-        .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border_ministone_bottom.png');
-            left: 4px;
-            right: 4px;
-            &::after {
-                right: -4px;
-                background-image: url($imgPath + '/borders/border_ministone_bottomright.png');
-            }
-            &::before {
-                left: -4px;
-                background-image:  url($imgPath + '/borders/border_ministone_bottomleft.png');
-            }
-        }
-        
-        .tg-border-right {
-            background-image: url($imgPath + '/borders/border_ministone_right.png');
-        }
-    
-        .tg-border-left {
-            background-image: url($imgPath + '/borders/border_ministone_left.png');
-        }
+  >.tg-border-box {
+    overflow: hidden;
+
+    .tg-border-top,
+    .tg-border-bottom {
+      height: $ironlight-mini-border-size;
+
+      &::after,
+      &::before {
+        width: $ironlight-mini-border-size;
+        height: $ironlight-mini-border-size;
+      }
     }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $ironlight-mini-border-size;
+      top: $ironlight-mini-border-size;
+      bottom: $ironlight-mini-border-size;
+    }
+
+    .tg-border-top {
+      left: 4px;
+      right: 4px;
+      background-image: url($imgPath + '/borders/border_ministone_top.png');
+
+      &::after {
+        right: -4px;
+        background-image: url($imgPath + '/borders/border_ministone_topright.png');
+      }
+
+      &::before {
+        left: -4px;
+        background-image: url($imgPath + '/borders/border_ministone_topleft.png');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/border_ministone_bottom.png');
+      left: 4px;
+      right: 4px;
+
+      &::after {
+        right: -4px;
+        background-image: url($imgPath + '/borders/border_ministone_bottomright.png');
+      }
+
+      &::before {
+        left: -4px;
+        background-image: url($imgPath + '/borders/border_ministone_bottomleft.png');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/border_ministone_right.png');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/border_ministone_left.png');
+    }
+  }
 }
 
 .b-controlpanel {
-    padding: $controlpanel-border-size;  
-    > .tg-border-box {
-        .tg-border-top, .tg-border-bottom {
-            height: $controlpanel-border-size;
-            &::after, &::before {
-                width: $controlpanel-border-size;
-                height: $controlpanel-border-size;
-            }
-        }
-    
-        .tg-border-left, .tg-border-right{
-            position: absolute;
-            width: $controlpanel-border-size;
-            top: $controlpanel-border-size;
-            bottom: $controlpanel-border-size;
-        }
-    
-        .tg-border-top {
-            background-image: url($imgPath + '/borders/border-controlpanel-top.png');
-            &::after {
-                background-image: url($imgPath + '/borders/border-controlpanel-topright.png');
-            }
-            &::before {
-                background-image: url($imgPath + '/borders/border-controlpanel-topleft.png');
-            }
-        }
-        
-        .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border-controlpanel-bottom.png');
-            &::after {
-                background-image: url($imgPath + '/borders/border-controlpanel-bottomright.png');
-            }
-            &::before {
-                background-image:  url($imgPath + '/borders/border-controlpanel-bottomleft.png');
-            }
-        }
-        
-        .tg-border-right {
-            background-image: url($imgPath + '/borders/border-controlpanel-right.png');
-        }
-    
-        .tg-border-left {
-            background-image: url($imgPath + '/borders/border-controlpanel-left.png');
-        }
+  padding: $controlpanel-border-size;
+
+  >.tg-border-box {
+
+    .tg-border-top,
+    .tg-border-bottom {
+      height: $controlpanel-border-size;
+
+      &::after,
+      &::before {
+        width: $controlpanel-border-size;
+        height: $controlpanel-border-size;
+      }
     }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $controlpanel-border-size;
+      top: $controlpanel-border-size;
+      bottom: $controlpanel-border-size;
+    }
+
+    .tg-border-top {
+      background-image: url($imgPath + '/borders/border-controlpanel-top.png');
+
+      &::after {
+        background-image: url($imgPath + '/borders/border-controlpanel-topright.png');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/border-controlpanel-topleft.png');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/border-controlpanel-bottom.png');
+
+      &::after {
+        background-image: url($imgPath + '/borders/border-controlpanel-bottomright.png');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/border-controlpanel-bottomleft.png');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/border-controlpanel-right.png');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/border-controlpanel-left.png');
+    }
+  }
 }
 
 .b-modal {
-    padding: $modal-border-size;  
-    > .tg-border-box {
-        .tg-border-top, .tg-border-bottom {
-            height: $modal-border-size;
-            &::after, &::before {
-                width: $modal-border-size;
-                height: $modal-border-size;
-            }
-        }
-    
-        .tg-border-left, .tg-border-right{
-            position: absolute;
-            width: $modal-border-size;
-            top: $modal-border-size;
-            bottom: $modal-border-size;
-        }
-    
-        .tg-border-top {
-            background-image: url($imgPath + '/borders/border-modal-top.png');
-            &::after {
-                background-image: url($imgPath + '/borders/border-modal-topright.png');
-            }
-            &::before {
-                background-image: url($imgPath + '/borders/border-modal-topleft.png');
-            }
-        }
-        
-        .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border-modal-bottom.png');
-            &::after {
-                background-image: url($imgPath + '/borders/border-modal-bottomright.png');
-            }
-            &::before {
-                background-image:  url($imgPath + '/borders/border-modal-bottomleft.png');
-            }
-        }
-        
-        .tg-border-right {
-            background-image: url($imgPath + '/borders/border-modal-right.png');
-        }
-    
-        .tg-border-left {
-            background-image: url($imgPath + '/borders/border-modal-left.png');
-        }
+  padding: $modal-border-size;
+
+  >.tg-border-box {
+
+    .tg-border-top,
+    .tg-border-bottom {
+      height: $modal-border-size;
+
+      &::after,
+      &::before {
+        width: $modal-border-size;
+        height: $modal-border-size;
+      }
     }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $modal-border-size;
+      top: $modal-border-size;
+      bottom: $modal-border-size;
+    }
+
+    .tg-border-top {
+      background-image: url($imgPath + '/borders/border-modal-top.png');
+
+      &::after {
+        background-image: url($imgPath + '/borders/border-modal-topright.png');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/border-modal-topleft.png');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/border-modal-bottom.png');
+
+      &::after {
+        background-image: url($imgPath + '/borders/border-modal-bottomright.png');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/border-modal-bottomleft.png');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/border-modal-right.png');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/border-modal-left.png');
+    }
+  }
 }
 
 
 .b-paper {
-    background: #0b0a0a;
-    padding: 32px;  
-    border: 2px solid transparent;
-    box-sizing: border-box;
-    height: 100%;
-    .tg-box {
-        height: 100%;
-        background-color:#cbb48d;
-        box-shadow: 0 0 10px 8px #cbb48d;
+  background: #0b0a0a;
+  padding: 32px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  height: 100%;
 
+  .tg-box {
+    height: 100%;
+    background-color: #cbb48d;
+    box-shadow: 0 0 10px 8px #cbb48d;
+
+  }
+
+  >.tg-border-box {
+
+    .tg-border-top,
+    .tg-border-bottom {
+      background-position: left;
+      height: $modalpaper-border-size;
+      left: 80px;
+      right: 80px;
+
+      &::after,
+      &::before {
+        width: $modalpaper-border-size;
+        height: $modalpaper-border-size;
+      }
     }
-    > .tg-border-box {
-        .tg-border-top, .tg-border-bottom {
-            background-position: left;
-            height: $modalpaper-border-size;
-            left: 80px;
-            right: 80px;
-            &::after, &::before {
-                width: $modalpaper-border-size;
-                height: $modalpaper-border-size;
-            }
-        }
-    
-        .tg-border-left, .tg-border-right{
-            position: absolute;
-            width: $modalpaper-border-size;
-            top: $modalpaper-border-size;
-            bottom: $modalpaper-border-size;
-        }
-    
-        .tg-border-top {
-            background-image: url($imgPath + '/borders/border-modal-paper-top.png');
-            &::after {
-                right:-80px;
-                background-image: url($imgPath + '/borders/border-modal-paper-topright.png');
-            }
-            &::before {
-                left: -80px;
-                background-image: url($imgPath + '/borders/border-modal-paper-topleft.png');
-            }
-        }
-        
-        .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border-modal-paper-bottom.png');
-            &::after {
-                right:-80px;
-                background-image: url($imgPath + '/borders/border-modal-paper-bottomright.png');
-            }
-            &::before {
-                left: -80px;
-                background-image:  url($imgPath + '/borders/border-modal-paper-bottomleft.png');
-            }
-        }
-        
-        .tg-border-right {
-            background-image: url($imgPath + '/borders/border-modal-paper-right.png');
-        }
-    
-        .tg-border-left {
-            background-image: url($imgPath + '/borders/border-modal-paper-left.png');
-        }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $modalpaper-border-size;
+      top: $modalpaper-border-size;
+      bottom: $modalpaper-border-size;
     }
+
+    .tg-border-top {
+      background-image: url($imgPath + '/borders/border-modal-paper-top.png');
+
+      &::after {
+        right: -80px;
+        background-image: url($imgPath + '/borders/border-modal-paper-topright.png');
+      }
+
+      &::before {
+        left: -80px;
+        background-image: url($imgPath + '/borders/border-modal-paper-topleft.png');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/border-modal-paper-bottom.png');
+
+      &::after {
+        right: -80px;
+        background-image: url($imgPath + '/borders/border-modal-paper-bottomright.png');
+      }
+
+      &::before {
+        left: -80px;
+        background-image: url($imgPath + '/borders/border-modal-paper-bottomleft.png');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/border-modal-paper-right.png');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/border-modal-paper-left.png');
+    }
+  }
 }
 
 .b-area {
-    padding: $area-border-size;  
-    > .tg-border-box {
-        .tg-border-top, > .tg-border-bottom {
-            height: $area-border-size;
-            &::after, &::before {
-                width: $area-border-size;
-                height: $area-border-size;
-            }
-        }
-    
-        .tg-border-left, .tg-border-right{
-            position: absolute;
-            width: $area-border-size;
-            top: $area-border-size;
-            bottom: $area-border-size;
-        }
-    
-        .tg-border-top {
-            background-image: url($imgPath + '/borders/border-wc-area-t.jpg');
-            &::after {
-                background-image: url($imgPath + '/borders/corner-wc-area-tr.jpg');
-            }
-            &::before {
-                background-image: url($imgPath + '/borders/corner-wc-area-tl.jpg');
-            }
-        }
-        
-        .tg-border-bottom {
-            background-image:  url($imgPath + '/borders/border-wc-area-b.jpg');
-            &::after {
-                background-image: url($imgPath + '/borders/corner-wc-area-br.jpg');
-            }
-            &::before {
-                background-image:  url($imgPath + '/borders/corner-wc-area-bl.jpg');
-            }
-        }
-        
-        .tg-border-right {
-            background-image: url($imgPath + '/borders/border-wc-area-r.jpg');
-        }
-    
-        .tg-border-left {
-            background-image: url($imgPath + '/borders/border-wc-area-l.jpg');
-        }        
+  padding: $area-border-size;
+
+  >.tg-border-box {
+
+    .tg-border-top,
+    >.tg-border-bottom {
+      height: $area-border-size;
+
+      &::after,
+      &::before {
+        width: $area-border-size;
+        height: $area-border-size;
+      }
     }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $area-border-size;
+      top: $area-border-size;
+      bottom: $area-border-size;
+    }
+
+    .tg-border-top {
+      background-image: url($imgPath + '/borders/border-wc-area-t.jpg');
+
+      &::after {
+        background-image: url($imgPath + '/borders/corner-wc-area-tr.jpg');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/corner-wc-area-tl.jpg');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/border-wc-area-b.jpg');
+
+      &::after {
+        background-image: url($imgPath + '/borders/corner-wc-area-br.jpg');
+      }
+
+      &::before {
+        background-image: url($imgPath + '/borders/corner-wc-area-bl.jpg');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/border-wc-area-r.jpg');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/border-wc-area-l.jpg');
+    }
+  }
 }
 
 .zen .b-area {
-    padding: 0;
+  padding: 0;
 }
 
 
 // Borders with JQUERY UI DIALOG
-.tg-dialog-box { 
-    padding: 0;  
-    position: absolute;
+.tg-dialog-box {
+  padding: 0;
+  position: absolute;
 
-    .tg-border-box {
-        left: - $ironlight-border-size;
-        top: - $ironlight-border-size;
-        right: - $ironlight-border-size;
-        bottom: - $ironlight-border-size;
-    }
+  .tg-border-box {
+    left: - $ironlight-border-size;
+    top: - $ironlight-border-size;
+    right: - $ironlight-border-size;
+    bottom: - $ironlight-border-size;
+  }
 }
-

@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from '../common/services/preloader.service';
-import { DialogService } from 'primeng/api';
+import { DialogService as DynamicDialogService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CookieLawComponent } from './windows/cookie-law/cookie-law.component';
@@ -26,7 +26,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private platform: Platform,
     private preloader: PreloaderService,
-    private dialogService: DialogService,
+    private dialogService: DynamicDialogService,
     @Inject(DOCUMENT) private document: any
   ) {
 

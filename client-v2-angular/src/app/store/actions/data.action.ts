@@ -4,6 +4,7 @@ import { IHero } from 'src/app/models/data/hero.model';
 import { Editor } from 'src/app/models/data/editor.model';
 import { IObjPerson } from 'src/app/models/data/objpers.model';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
+import { IWorks } from 'src/app/models/data/workslist.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -19,6 +20,7 @@ export enum DataEvenType {
     EDITOR = '[Data] Editor Request',
     OBJPERSON = '[Data] Object or Person',
     GENERICTABLE = '[Data] Generic Table',
+    WORKSLIST = '[Data] Works List'
 }
 
 export class IncomingData implements Action {
@@ -84,8 +86,10 @@ export class GenericTableAction implements Action {
     constructor(public payload: IGenericTable) {}
 }
 
-
-
+export class WorksListAction implements Action {
+    readonly type = DataEvenType.WORKSLIST;
+    constructor(public payload: IWorks) {}
+}
 
 
 export type DataAction
@@ -100,5 +104,6 @@ export type DataAction
 | EditorAction
 | PlayerStatusInlineAction
 | ObjAndPersAction
-| GenericTableAction;
+| GenericTableAction
+| WorksListAction;
 

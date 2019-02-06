@@ -11,6 +11,7 @@ import { DialogsComponent } from '../../common/dialog/dialog.component';
 import { EditorComponent } from './editor/editor.component';
 
 import { GenericTableComponent } from './generic-table/generic-table.component';
+import { WorkslistComponent } from './workslist/workslist.component';
 @NgModule({
   declarations: [
     GenericTableComponent,
@@ -21,6 +22,7 @@ import { GenericTableComponent } from './generic-table/generic-table.component';
     CommandsListComponent,
     EditorComponent,
     DialogsComponent,
+    WorkslistComponent,
   ],
   imports: [
     DynamicDialogModule,
@@ -32,7 +34,8 @@ import { GenericTableComponent } from './generic-table/generic-table.component';
   exports: [
     EditorComponent,
     CommandsListComponent,
-    GenericTableComponent
+    GenericTableComponent,
+    WorkslistComponent
   ],
   entryComponents: [
     // NoFeatureComponent,

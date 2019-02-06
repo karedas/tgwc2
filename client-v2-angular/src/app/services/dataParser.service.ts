@@ -6,7 +6,7 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
 import { IHero } from '../models/data/hero.model';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +24,13 @@ export class DataParser {
   handlerGameData(data: any) {
 
     this.netData += data;
-
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
       const data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
-
         this.parseForDisplay(data);
-
       } catch (err) {
         console.log(err);
       }
@@ -42,7 +39,9 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-      // this.setDisconnect(); //TODO
+      /*
+      * TODO: dispatch disconnection
+      */
     }
   }
 
@@ -196,7 +195,6 @@ export class DataParser {
 
     // Generic table (title, head, data)
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
-      console.log(t);
       const gtable_parse = JSON.parse(t.slice(7, -1));
       this.store.dispatch(new DataActions.GenericTableAction(gtable_parse));
       return '';
@@ -240,7 +238,7 @@ export class DataParser {
     // Workable lists
     data = data.replace(/&!wklst\{[\s\S]*?\}!/gm, (wk) => {
       const wk_parse = JSON.parse(wk.slice(7, -1));
-      console.log('workable list', wk_parse);
+      this.store.dispatch(new DataActions.WorksListAction(wk_parse));
       return '';
     });
 

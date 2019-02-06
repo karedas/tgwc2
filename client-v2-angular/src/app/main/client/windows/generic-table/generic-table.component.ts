@@ -1,11 +1,11 @@
-import { Component, ViewEncapsulation, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Observable, pipe } from 'rxjs';
+import { Component, ViewEncapsulation, AfterViewInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-generic-table',
@@ -14,25 +14,14 @@ import { DialogService } from 'src/app/main/common/dialog/dialog.service';
   encapsulation: ViewEncapsulation.None
 })
 export class GenericTableComponent implements  AfterViewInit, OnDestroy {
-
-  @ViewChild('tgdatatable') table: DatatableComponent;
-
   public readonly dialogID: string = 'genericTable';
+  
   public dataTable$: Observable<any>;
   public rows = [];
   public columns = [];
   public currentPageLimit = 15;
-  public currentVisible = 3;
 
-  public readonly messages = {
-    totalMessage: 'Totali'
-  };
-  
-  public readonly headerHeight = 30;
-  public readonly footerHeight = 44;
-  public readonly rowHeight = 30;
-  
-  contentHeight: number;
+  private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
@@ -40,11 +29,13 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   ) {
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
+
+    this._unsubscribeAll = new Subject;
   }
 
   ngAfterViewInit(): void {
     // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    this.dataTable$.subscribe(
+    this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (dt: IGenericTable) => {
         if (dt) {
           this.populate(dt);
@@ -82,10 +73,6 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     }
   }
 
-  private close() {
-    this.dialogService.close(this.dialogID);
-  }
-
   private open() {
     setTimeout(() => {
       this.dialogService.open(this.dialogID, {
@@ -93,29 +80,15 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
         modal: false,
         width: 'auto',
         height: 'auto',
-        // resizable: true,
-        // maximizable: true,
         header: 'Informazioni'
       });
     }, 200);
 
   }
 
-  // /**
-  //  * Get the content Height based on Header, Body and Footer
-  //  * of ngx-datatable, then return @number value
-  //  */
-
-  setContentHeight() {
-    let bodyHeight = 0;
-    if (this.rows.length < this.currentPageLimit) {
-      bodyHeight = this.rows.length * this.rowHeight;
-    } else {
-      bodyHeight = this.currentPageLimit * this.rowHeight;
-    }
-    this.contentHeight = this.footerHeight + this.headerHeight + bodyHeight;
-  }
   ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }
 

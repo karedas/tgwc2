@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { getWelcomeNews } from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
-import { DialogService } from 'primeng/api';
+import { DialogService as DynamicDialogService} from 'primeng/api';
 import { WelcomeNewsComponent } from '../windows/welcome-news/welcome-news.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class ClientContainerComponent implements OnDestroy {
   constructor(
     private store: Store<UIState>,
     private game: GameService,
-    private dialogService: DialogService
+    private dymamicDialogService: DynamicDialogService
   ) {
 
     this.welcomeNews = this.store.pipe(select(getWelcomeNews));
@@ -51,7 +51,7 @@ export class ClientContainerComponent implements OnDestroy {
 
   openWelcomeNews() {
     setTimeout(() => {
-      const ref = this.dialogService.open(WelcomeNewsComponent, {
+      const ref = this.dymamicDialogService.open(WelcomeNewsComponent, {
         header: 'Notizie',
         styleClass: 'op-100',
         closable: false,

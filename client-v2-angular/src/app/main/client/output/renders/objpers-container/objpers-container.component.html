@@ -12,9 +12,10 @@
     </div>
 
 
-    <ng-container *ngFor="let item of eqcont.list">
+    <ng-container *ngFor="let item of eqcont.list; let i=index">
       <div class="tg-objperson--line">
-        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
+        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"
+          (mousedown)="onInteract($event, item, i)"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(item.condprc)"></div>
 
         <!-- Equip Position Name  -->
@@ -42,11 +43,11 @@
     <ng-container *ngFor="let obj of objcont.list; let i=index">
       <div class="tg-objperson--line interact" 
         [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
-        (mouseup)="onExpand(obj, i)">
+        (mousedown)="onExpand($event, obj, i)">
         <tg-icons 
           [icon]="obj.icon" 
           [attr.cntnum]="obj.cntnum"
-          (mouseup)="onInteract(obj, i, obj.sz)"
+          (mousedown)="onInteract($event, obj, i, obj.sz)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(obj.condprc)"></div>
         <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
@@ -55,7 +56,7 @@
       <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
           <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
             <tg-icons [icon]="obj.icon" 
-              (mouseup)="onInteract(obj, indexSz)"
+              (mousedown)="onInteract($event, obj, indexSz)"
               pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
             <div class="hstat" [style.background-position]="getHstat(sz.condprc)"></div>
             <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>

@@ -11,9 +11,9 @@
 
       <div class="tg-persons--line interact" 
       [ngClass]="{'expandlist': person.sz, 'open': togglePanel[i]}"
-      (mouseup)="onExpand(person, i, person.sz)"> 
+      (mousedown)="onExpand($event, person, i, person.sz)"> 
         <tg-icons [icon]="person.icon"
-          (mouseup)="onInteract(person, i)"
+          (mousedown)="onInteract($event, person, i)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
         <div class="tg-persons--itemdesc" [innerHtml]="person.desc | dataToHtml"></div>
@@ -22,7 +22,7 @@
 
       <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]" fxLayout="row">
         <div class="tg-persons--line" *ngFor="let sz of person.mrn; let indexSz=index"
-          (mouseup)="onInteract(person, indexSz, true)"
+          (mousedown)="onInteract($event, person, indexSz, true)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
           <tg-icons [icon]="person.icon" ></tg-icons>
           <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
@@ -41,9 +41,9 @@
 
       <div class="tg-objects--line interact" 
         [ngClass]="{'expandlist': object.sz, 'open': togglePanel[i]}"
-        (mouseup)="onExpand(object, i)"> 
+        (mousedown)="onExpand($event, object, i)"> 
         <tg-icons [icon]="object.icon" 
-          (mouseup)="onInteract(object, i)"
+          (mousedown)="onInteract($event, object, i)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
@@ -53,7 +53,7 @@
       <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="row">
         
         <div class="tg-objects--line" *ngFor="let sz of object.mrn; let indexSz=index"
-          (mouseup)="onInteract(object, indexSz, true)"
+          (mousedown)="onInteract($event, object, indexSz, true)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
           
           <tg-icons [icon]="object.icon"></tg-icons>

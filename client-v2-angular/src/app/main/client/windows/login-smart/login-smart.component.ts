@@ -10,8 +10,6 @@ import { DisconnectAction } from 'src/app/store/actions/client.action';
 
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 
 @Component({
   selector: 'tg-login-smart',

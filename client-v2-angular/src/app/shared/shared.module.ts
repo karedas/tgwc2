@@ -18,8 +18,6 @@ import { LoginService } from '../main/authentication/services/login.service';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
 /* Prime NG */
 import { CheckboxModule } from 'primeng/checkbox';
 import { MenubarModule } from 'primeng/menubar';

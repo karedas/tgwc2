@@ -5,9 +5,9 @@ import { GameService } from 'src/app/services/game.service';
 import { equip_positions_by_name } from 'src/app/main/common/constants';
 
 @Component({
-  selector: 'tg-obj-pers-container',
-  templateUrl: './obj-pers-container.component.html',
-  styleUrls: ['./obj-pers-container.component.scss'],
+  selector: 'tg-objpers-container',
+  templateUrl: './objpers-container.component.html',
+  styleUrls: ['./objpers-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjPersContainerComponent implements OnInit  {
@@ -47,21 +47,25 @@ export class ObjPersContainerComponent implements OnInit  {
     return this.game.getHsStatBgPos(condprc);
   }
 
-  onInteract(item: any, index: number, list?: boolean) {
-    
-    if(item.sz && !item.cntnum && list !== false) {
-      this.game.processCommands(`guarda &${item.mrn[0]}`);
-    }
+  onInteract(event:Event, item: any, index: number, list?: boolean) {
+    event.preventDefault();
+    if (!item.sz) {
+      if (!item.cntnum) {
+        console.log('a');
+        this.game.processCommands(`guarda &${item.mrn[0]}`);
+      }
 
-    else if(item.cntnum && item.mrn.length > 0 ) {
-      this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
-    }
-    else if (!item.sz) {
-      this.game.processCommands(`guarda &${item.mrn}`);
+      else if (item.cntnum && item.mrn.length > 0) {
+        this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
+      }
+    } else if (list) {
+      const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
+      this.game.processCommands(`guarda &${mrn}`);
     }
   }
 
-  onExpand(item: any, index: number) {
+  onExpand(event:Event, item: any, index: number) {
+    event.preventDefault();
     //  Is Expandable
     if (item.sz) {
       this.togglePanel[index] = !this.togglePanel[index];

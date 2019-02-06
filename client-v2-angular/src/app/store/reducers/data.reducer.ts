@@ -66,6 +66,11 @@ export function reducer(
         genericTable: action.payload}
       );
 
+    case DataEvenType.WORKSLIST:
+      return Object.assign({}, state, {
+        workslist: action.payload
+      });
+
     default:
       return state;
   }

@@ -147,6 +147,7 @@ export class LoginService {
 
   onReboot() {
     this.store.dispatch(new SocketStatusAction('reboot'));
+    console.log('TGLOG: Attenzione, Reboot del server in corso, impossibile effettuare attualmente l\'accesso');
   }
 
   onServerDown() {
