@@ -8,17 +8,21 @@
 <ng-template #withEquipCont>
   <div class="tg-objperson" fxLayout="column">
     <div class="tg-objperson--title" *ngIf="eqcont.list.length > 0">
-      {{eqcont.title}}
+      {{eqcont.title}} 
     </div>
+
+
     <ng-container *ngFor="let item of eqcont.list">
       <div class="tg-objperson--line">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(item.condprc)"></div>
-        
+
         <!-- Equip Position Name  -->
-        <div class="tg-objperson--equippos" *ngIf="item.eq[0] && item.eq[0] < 100; else modifierEq">[ <span class="tg-yellow">{{newListEquip[item.eq[0]-1] }} </span>] </div>
+        <div class="tg-objperson--equippos " 
+          *ngIf="item.eq[0] && item.eq[0] < 100; else modifierEq"
+          fxFlex="0 0 auto">[ <span class="tg-yellow">{{newListEquip[item.eq[0]-1] }} </span>] </div>
         <ng-template #modifierEq>
-          <div class="tg-objperson--equippos">
+          <div class="tg-objperson--equippos" fxFlex="0 0 auto">
             [&nbsp;<span class="tg-green">Modificatore</span>&nbsp;]
           </div>
         </ng-template>
@@ -35,12 +39,28 @@
     <div class="tg-objperson--title" *ngIf="objcont.list.length > 0">
       {{objcont.title}}
     </div>
-    <ng-container *ngFor="let item of objcont.list">
-      <div class="tg-objperson--line">
-        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"></tg-icons>
-        <div class="hstat" [style.background-position]="getHstat(item.condprc)"></div>
-        <div class="tg-objpers--itemdesc" [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></div>
+    <ng-container *ngFor="let obj of objcont.list; let i=index">
+      <div class="tg-objperson--line interact" 
+        [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
+        (mouseup)="onExpand(obj, i)">
+        <tg-icons 
+          [icon]="obj.icon" 
+          [attr.cntnum]="obj.cntnum"
+          (mouseup)="onInteract(obj, i, obj.sz)"
+          pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
+        <div class="hstat" [style.background-position]="getHstat(obj.condprc)"></div>
+        <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
+        <div class="size-qty" *ngIf="obj.sz">{{obj.sz}}</div>
       </div>
+      <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
+          <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
+            <tg-icons [icon]="obj.icon" 
+              (mouseup)="onInteract(obj, indexSz)"
+              pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
+            <div class="hstat" [style.background-position]="getHstat(sz.condprc)"></div>
+            <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
+          </div>
+        </div>
     </ng-container>
   </div>
 </ng-template>

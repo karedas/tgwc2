@@ -2,7 +2,9 @@
 /* Others */
 @import 'sprites';
 @import 'utils/sprites-mixins';
-@import '~@angular/flex-layout/mq';
+// @import '~@angular/flex-layout/mq';
+@import 'utils/fix';
+
 
 :host {
   

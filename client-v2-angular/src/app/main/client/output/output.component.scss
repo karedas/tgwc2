@@ -14,55 +14,10 @@
     width: 100%;
   }
 
-
-  // .tg-output-options {
-  //   height: 36px;
-  //   position: absolute;
-  //   top: 0;
-  //   left: 2px;
-  //   right: 0;
-  //   z-index: 2;
-  //   padding: 0 .5em 10px;
-  //   text-align: right;
-  //   box-shadow: inset 0 0 9px 5px black;
-  //   background: #15100c url($imgPath + '/borders/border-001-horizontal.png') repeat-x bottom left;
-
-  //   ul {
-  //     margin: 0;
-  //   }
-
-  //   .tg-tabdetail {
-  //     font-size: 12px;
-
-  //     // color: $gray-600;
-  //     li {
-  //       margin: 0 1px;
-  //       position: relative;
-  //       width: 25px;
-  //       height: 24px;
-  //       padding: 4px 0;
-  //       text-align: center;
-  //       background: url($imgPath + '/interface/iconbg-25.png') no-repeat top left;
-
-  //     }
-
-  //     .iconimg {
-  //       position: absolute;
-  //       top: 0;
-  //       left: 0;
-  //     }
-
-  //     i {
-  //       padding: 2px;
-  //     }
-  //   }
-  // }
-
   @include layout-bp(gt-md) {
     margin-bottom: 0;
   }
 }
-
 
 .tg-output--history,
 .tg-output--extradetail {
@@ -127,6 +82,42 @@ tg-text {
     clear: both;
   }
 
+
+
+
+  .tg-backdetail {
+
+    cursor: pointer;
+    display: flex;
+    flex: 1 0 auto;
+    margin-top: -2.45em;
+    padding-bottom: 0.5em;
+
+    tg-icons {
+      margin-right: 0;
+    }
+
+    span {
+      background-color: #191816;
+      border: 1px solid #433b3a;
+      border-left: 0;
+      border-radius: 0 5px 5px 0;
+      padding: 2px 8px 2px 9px;
+      color: #aea495;
+      vertical-align: middle;
+      display: flex;
+      margin: 1px 0 2px;
+      place-content: center center;
+      align-items: center;
+
+    }
+
+    &:hover  span{
+      color: $tg-yellow;
+    }
+  }
+
+
   .tg-icon {
     vertical-align: middle;
     float: left;
@@ -159,7 +150,7 @@ tg-text {
   /* LIST Mob & Object*/
   .tg-objects,
   .tg-persons,
-  {
+    {
     display: flex;
     padding-bottom: .5em;
     padding-right: .5em;
@@ -168,16 +159,15 @@ tg-text {
 
   .tg-objects--line,
   .tg-persons--line,
-  .tg-objperson--line
-  {
+  .tg-objperson--line {
     display: flex;
     padding-right: 5px;
     user-select: none;
-    padding-bottom: .4em;
+    padding-bottom: .8em;
     margin-right: auto;
     box-sizing: border-box;
 
-    > div {
+    >div {
       margin: auto 0;
     }
 
@@ -186,7 +176,8 @@ tg-text {
       cursor: pointer;
     }
 
-    .tg-persons--itemdesc, .tg-objects--itemdesc {
+    .tg-persons--itemdesc,
+    .tg-objects--itemdesc {
       flex: 0 1 auto;
     }
 
@@ -194,7 +185,7 @@ tg-text {
       cursor: pointer;
       display: flex;
     }
-    
+
     &.expandlist:after {
       content: '';
       display: block;
@@ -202,11 +193,11 @@ tg-text {
       margin: auto 0 auto 9px;
       flex: 0 0 9px;
     }
-  
+
     &.open {
-      flex: 1 1 100%!important;
+      flex: 1 1 100% !important;
     }
-  
+
     &.expandlist.open:after {
       transform: rotate(90deg);
     }
@@ -220,31 +211,33 @@ tg-text {
     box-sizing: border-box;
     border: 1px solid #2d2d29;
     margin-bottom: 1em;
-    padding: .5em 0 .5em  0;
+    padding: .5em 0 .5em 0;
     margin-right: auto;
-    
-    .tg-persons--line, .tg-objects--line {
+
+    .tg-persons--line,
+    .tg-objects--line {
       flex: 0 1 auto;
     }
   }
 
 
-  .tg-objects--line{
+  .tg-objects--line {
     color: $tg-yellow;
 
   }
+
   .tg-persons--line {
     color: $tg-lt-green;
   }
 
-  
+
   /* Double Columns style */
   .list-50 {
     width: 50%;
     display: inline-block;
     flex-direction: row;
 
-    > div {
+    >div {
       flex: 1 0 50%;
     }
   }
@@ -254,13 +247,13 @@ tg-text {
     flex-direction: row;
     flex-wrap: wrap;
 
-    > div {
+    >div {
       flex: 1 0 50%;
     }
   }
 
   .size-qty {
-    margin-left: 5px!important;
+    margin-left: 5px !important;
     background: #2a1f15;
     color: white;
     height: auto;
@@ -296,8 +289,8 @@ tg-text {
 
   .tg-extraoutput--header {
     overflow: hidden;
-    padding-bottom: .4em;
-    margin-bottom: 1em;
+    padding-bottom: 1.4em;
+    margin-bottom: 1.5em;
     margin-left: -10px;
     margin-right: -6px;
     border-bottom: 1px solid #433b3a;
@@ -315,11 +308,11 @@ tg-text {
       overflow: hidden;
       display: flex;
 
-      .squared{
+      .squared {
         margin-right: .5em;
       }
 
-      > span {
+      >span {
         margin: auto 0;
       }
 

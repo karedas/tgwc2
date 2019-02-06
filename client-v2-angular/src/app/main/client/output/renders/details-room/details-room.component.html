@@ -11,19 +11,23 @@
 
       <div class="tg-persons--line interact" 
       [ngClass]="{'expandlist': person.sz, 'open': togglePanel[i]}"
-      (mouseup)="(person.sz && togglePanel[i] = !togglePanel[i])"> 
-
-        <tg-icons [icon]="person.icon" (mouseup)="onInteract(person, i)"></tg-icons>
+      (mouseup)="onExpand(person, i, person.sz)"> 
+        <tg-icons [icon]="person.icon"
+          (mouseup)="onInteract(person, i)"
+          pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
         <div class="tg-persons--itemdesc" [innerHtml]="person.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
       </div>
 
       <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]" fxLayout="row">
-        <div class="tg-persons--line" *ngFor="let sz of person.mrn; let indexSz=index">
-          <tg-icons [icon]="person.icon"></tg-icons>
+        <div class="tg-persons--line" *ngFor="let sz of person.mrn; let indexSz=index"
+          (mouseup)="onInteract(person, indexSz, true)"
+          pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
+          <tg-icons [icon]="person.icon" ></tg-icons>
           <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
           <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
+          <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
         </div>
       </div>
 
@@ -36,17 +40,22 @@
     <ng-container *ngFor="let object of objs let i=index">
 
       <div class="tg-objects--line interact" 
-      [ngClass]="{'expandlist': object.sz, 'open': togglePanel[i]}"
-      (mouseup)="object.sz && togglePanel[i] = !togglePanel[i]"> 
-
-        <tg-icons [icon]="object.icon" (mouseup)="onInteract(object, i)"></tg-icons>
+        [ngClass]="{'expandlist': object.sz, 'open': togglePanel[i]}"
+        (mouseup)="onExpand(object, i)"> 
+        <tg-icons [icon]="object.icon" 
+          (mouseup)="onInteract(object, i)"
+          pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
         <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
       </div>
 
       <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="row">
-        <div class="tg-objects--line" *ngFor="let sz of object.mrn; let indexSz=index">
+        
+        <div class="tg-objects--line" *ngFor="let sz of object.mrn; let indexSz=index"
+          (mouseup)="onInteract(object, indexSz, true)"
+          pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
+          
           <tg-icons [icon]="object.icon"></tg-icons>
           <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>
           <div class="tg-object--itemdesc" [innerHtml]="(indexSz + 1)" [attr.mrn]="object.mrn[indexSz]"></div>

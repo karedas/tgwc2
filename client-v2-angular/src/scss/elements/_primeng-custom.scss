@@ -128,6 +128,7 @@ p-menubar {
 /* Tooltip */
 body .ui-tooltip .ui-tooltip-text {
   background: black;
+  font-size: 11px;
 }
 
 /* Buttons */
@@ -151,7 +152,13 @@ p-table {
     display: flex;
     flex-direction: column;
     height: 100%;
+   
+    .ui-table-thead > tr > th {
+      color: #FFB300;
+    }
   }
+
+
 
   .ui-table-wrapper {
     flex: 1 1 auto;
@@ -167,4 +174,14 @@ p-table {
   }
 }
 
+p-paginator {
+  .ui-paginator {
+    padding: 8px 0;
+  }
+  .ui-paginator .ui-paginator-pages .ui-paginator-page {
+    height: 1.5em;
+    min-width: 1.5em;
+    line-height: 1.5em;
+  }
+}
 

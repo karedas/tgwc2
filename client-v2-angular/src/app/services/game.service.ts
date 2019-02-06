@@ -98,5 +98,4 @@ export class GameService {
   public getCommands(): Observable<any> {
     return this.commandsList$.asObservable();
   }
-
 }

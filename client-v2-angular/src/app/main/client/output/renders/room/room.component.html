@@ -16,7 +16,7 @@
   
   <div class="tg-extraoutput--header">
     <div *ngIf="html.title" class="tg-room--title">
-      <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
+      <tg-icons [icon]="html.icon" class="squared" ></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
     </div>
     <div class="tg-room--image" *ngIf="html.image">
       <img [src]="getRoomImage(html.image)" />
@@ -31,7 +31,9 @@
     </ng-container>
 
   </div>
-
+  <div class="tg-backdetail" *ngIf="html.where">
+      <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova &nbsp;<b>{{html.where.title}}</b></span>
+  </div>
   <div style="height: 100%; overflow:hidden;">
     <ng-scrollbar class="scrollbar" #scrollBar [shown]="always">
       <ng-container *ngIf="type === 'room'">
@@ -39,7 +41,7 @@
           [objs]="html.objcont?.list" 
           [persons]="html.perscont?.list" 
           *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
-      </ng-container>
+      </ng-container>      
       <ng-container *ngIf="type === 'objPers'">
           <tg-obj-pers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-obj-pers-container>
       </ng-container>

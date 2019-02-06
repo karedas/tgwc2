@@ -6,7 +6,6 @@ import { DataState } from 'src/app/store/state/data.state';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { DialogService } from 'src/app/main/common/dialog/dialog.service';
-import { ResizedEvent } from 'angular-resize-event';
 
 @Component({
   selector: 'tg-generic-table',
@@ -94,8 +93,8 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
         modal: false,
         width: 'auto',
         height: 'auto',
-        resizable: true,
-        maximizable: true,
+        // resizable: true,
+        // maximizable: true,
         header: 'Informazioni'
       });
     }, 200);

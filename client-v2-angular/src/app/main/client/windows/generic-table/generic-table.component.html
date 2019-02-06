@@ -3,7 +3,7 @@
     <div class="tg-generictable">
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <p-table [value]="rows" [columns]="columns" [autoLayout]="true" [paginator]="true" [rows]="15" [reorderableColumns]="true">
+          <p-table [value]="rows" [columns]="columns" [autoLayout]="true" [paginator]="true"  [rows]="15" [reorderableColumns]="true">
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th *ngFor="let col of columns">
@@ -14,15 +14,19 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
               <tr [pReorderableRow]="index">
                 <td *ngFor="let col of columns">
-                  <ng-container *ngIf="col.name ==='icona'; else ipaddr">
+
+
+                  <ng-container *ngIf="col.name ==='icona'">
                     <tg-icons [icon]="rowData[col.field]"></tg-icons>
                   </ng-container>
-                  <ng-template *ngIf="col.name ==='ipaddr'; else defaultRow" #ipaddr>
+
+                  <ng-container *ngIf="col.name ==='ipaddr'">
                       <a target="_blank" href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{rowData[col.field]}}</a>
-                  </ng-template>
-                  <ng-template #defaultRow>
+                  </ng-container>
+
+                  <ng-container *ngIf="col.name !== 'icona' && col.name !=='ipaddr'">
                     <span [innerHtml]="rowData[col.field]"  pReorderableRowHandle></span>
-                  </ng-template>
+                  </ng-container>
                 </td>
               </tr>
             </ng-template>

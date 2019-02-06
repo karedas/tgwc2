@@ -9,6 +9,7 @@ import { GameService } from 'src/app/services/game.service';
 @Component({
   selector: 'tg-details-room',
   templateUrl: './details-room.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class DetailsRoomComponent implements OnInit {
@@ -78,16 +79,28 @@ export class DetailsRoomComponent implements OnInit {
   /**
   * Expand or send Command to Server after click 
   * based on content type, list or single obj / person
-   */ 
+   */
 
-  onInteract(item, index) {
+  onInteract(item: any, index: number, list?: boolean) {
+    if (!item.sz) {
+      if (!item.cntnum) {
+        this.game.processCommands(`guarda &${item.mrn[0]}`);
+      }
 
-    //  Is Expandable
-    if(item.sz && this.togglePanel[index]) {
-      !this.togglePanel[index];
+      else if (item.cntnum && item.mrn.length > 0) {
+        this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
+      }
     }
-    else {
-      this.game.processCommands(`guarda &${item.mrn}`)
+    else if (list) {
+      const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
+      this.game.processCommands(`guarda &${mrn}`);
+    }
+  }
+
+  onExpand(item: any, index: number) {
+    //  Is Expandable
+    if (item.sz) {
+      this.togglePanel[index] = !this.togglePanel[index];
     }
   }
 }

@@ -5,6 +5,7 @@ import { MonitorBoxComponent } from './monitor-box/monitor-box.component';
 import { SkyComponent } from './sky/sky.component';
 import { RightSidebarComponent } from './right-sidebar.component';
 import { DirectionsComponent } from './map/directions/directions.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DirectionsComponent } from './map/directions/directions.component';
   ],
   imports: [
     CommonModule,
+    SharedModule
   ],
   exports: [
     RightSidebarComponent
