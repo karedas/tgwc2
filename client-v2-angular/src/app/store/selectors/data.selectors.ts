@@ -62,6 +62,10 @@ function fetchWorksList(state: DataState) {
   return state.workslist;
 }
 
+function fetchRegion(state: DataState) {
+  return state.region;
+}
+
 /******************* Public API's ******************/
 export const getDateNow = createSelector(getDataState, fetchDateNow);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
@@ -76,4 +80,5 @@ export const getMap = createSelector(getDataState, feetchMap);
 export const getEditor = createSelector(getDataState, fetchEditor);
 export const getGenericTable = createSelector(getDataState, fetchGenericTable);
 export const getWorksList = createSelector(getDataState, fetchWorksList);
+export const getRegion = createSelector(getDataState, fetchRegion);
 

@@ -1,10 +1,23 @@
-<div class="tg-geolocal"  fxLayout="column" fxFlex="1 1 185px">
-  <div class="tg-geolocal--title"></div>
-  <div class="tg-geolocal--image">
-    <div></div>
-  </div>
-  <div class="tg-geolocal--data" fxLayout="column">
-    <span class="tg-geolocal--region">Terra di Bran</span>
-    <span class="tg-geolocal--control">La città fortezza di Bran Ator</span>
-  </div>
+<div [@simpleFadeAnimation]="'in'">
+  <ng-container *ngIf="region$ | async as region">
+    <div class="tg-geolocal"  fxLayout="column" fxFlex="1 1 185px">
+      {{region.name.length}}
+      <div class="tg-geolocal--title"></div>
+      <div class="tg-geolocal--image">
+        <div></div>
+      </div>
+      <div class="tg-geolocal--data" fxLayout="column">
+        <span class="tg-geolocal--region">
+          <ng-container>
+            {{region.name}}
+          </ng-container>
+        </span>
+        <span class="tg-geolocal--control">
+          <ng-container>
+            {{region.clan_name}}
+          </ng-container>
+        </span>
+      </div>
+    </div>
+  </ng-container>
 </div>

@@ -37,8 +37,8 @@ import { GenericDialogService } from '../main/common/dialog/dialog.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     PipesModule,
+    BrowserAnimationsModule,
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
     }),
@@ -54,6 +54,7 @@ import { GenericDialogService } from '../main/common/dialog/dialog.service';
     MenubarModule,
     TooltipModule,
     ButtonModule,
+    BrowserAnimationsModule
   ],
   providers: [
     GameService,

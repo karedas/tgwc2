@@ -60,7 +60,6 @@ export function reducer(
         editor: action.payload
       });
 
-
     case DataEvenType.GENERICTABLE:
       return Object.assign({}, state, {
         genericTable: action.payload}
@@ -69,6 +68,11 @@ export function reducer(
     case DataEvenType.WORKSLIST:
       return Object.assign({}, state, {
         workslist: action.payload
+      });
+
+    case DataEvenType.REGION:
+      return Object.assign({}, state, {
+        region: action.payload
       });
 
     default:

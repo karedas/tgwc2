@@ -7,6 +7,7 @@ import { InputComponent } from './input/input.component';
 import { GeolocalBoxComponent } from './extraboard/geolocal-box/geolocal-box.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { DashboardComponent } from './dashboard.component';
     CombatPanelComponent,
     ExtraboardComponent,
     GeolocalBoxComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

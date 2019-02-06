@@ -21,6 +21,7 @@ import { appReducer, clearState } from './store';
 import { UiEffects } from './store/effects/ui.effects';
 import { ClientEffects } from './store/effects/client.effects';
 import { Auth2Module } from './main/authentication/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [

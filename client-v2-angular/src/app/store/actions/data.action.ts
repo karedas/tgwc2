@@ -5,6 +5,7 @@ import { Editor } from 'src/app/models/data/editor.model';
 import { IObjPerson } from 'src/app/models/data/objpers.model';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { IWorks } from 'src/app/models/data/workslist.model';
+import { IRegion } from 'src/app/models/data/region.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -20,7 +21,8 @@ export enum DataEvenType {
     EDITOR = '[Data] Editor Request',
     OBJPERSON = '[Data] Object or Person',
     GENERICTABLE = '[Data] Generic Table',
-    WORKSLIST = '[Data] Works List'
+    WORKSLIST = '[Data] Works List',
+    REGION = '[Data] Region'
 }
 
 export class IncomingData implements Action {
@@ -91,6 +93,11 @@ export class WorksListAction implements Action {
     constructor(public payload: IWorks) {}
 }
 
+export class RegionAction implements Action {
+    readonly type = DataEvenType.REGION;
+    constructor(public payload: IRegion) {}
+}
+
 
 export type DataAction
 = IncomingData
@@ -105,5 +112,6 @@ export type DataAction
 | PlayerStatusInlineAction
 | ObjAndPersAction
 | GenericTableAction
-| WorksListAction;
+| WorksListAction
+| RegionAction;
 

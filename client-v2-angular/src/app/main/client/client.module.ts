@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
-
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
-
 import { NavbarComponent } from './navbar/navbar.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-
 import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
 import { SharedModule } from 'src/app/shared/shared.module';
