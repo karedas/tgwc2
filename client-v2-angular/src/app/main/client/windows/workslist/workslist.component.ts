@@ -29,7 +29,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   ];
 
   public rows = [];
-  public currentPageLimit = 15;
+  public currentPageLimit = 10;
   private cmd: string;
 
 

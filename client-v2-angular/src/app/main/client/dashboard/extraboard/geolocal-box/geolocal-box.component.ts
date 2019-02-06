@@ -12,31 +12,31 @@ import { trigger, style, state, transition, animate, query, stagger } from '@ang
   styleUrls: ['./geolocal-box.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-    // the fade-in/fade-out animation.
-    trigger('simpleFadeAnimation', [
-
-      // the "in" style determines the "resting" state of the element when it is visible.
-      state('in', style({opacity: 1})),
-
-      // fade in when created. this could also be written as transition('void => *')
-      transition(':enter', [
-        style({opacity: 0}),
-        animate(600 )
+    trigger('fadeInFadeOut', [
+      // ...
+      state('in', style({
+        opacity: 1,
+      })),
+      state('out', style({
+        opacity: 0,
+      })),
+      transition('* => out', [
+        animate('1s')
       ]),
-
-      // fade out when destroyed. this could also be written as transition('void => *')
-      transition(':leave',
-        animate(600, style({opacity: 0})))
-    ])
+      transition('* => in', [
+        animate('1s')
+      ]),
+    ]),
   ]
 })
 
 
 export class GeolocalBoxComponent implements OnInit {
 
-  test: number = 1;
+  changeState: string = '';
 
-  animationChange: string = 'state1';
+  clanName: string;
+  regionName: string;
 
   region$: Observable<IRegion>;
   private _unsubscribeAll: Subject<any>;
@@ -47,9 +47,21 @@ export class GeolocalBoxComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.region$.subscribe(
+      (region: IRegion) => {
+        this.newRegionfadeInOut(region);
+      }
+    )
+  }
+
+  newRegionfadeInOut(region: IRegion){
+    this.changeState = 'out';
     setTimeout(() => {
-      this.test = 5;
-    }, 3000);
+      this.regionName = region.name;
+      this.clanName = region.clan_name;
+      this.changeState = 'in';
+    }, 1000);
   }
 
 }

@@ -45,10 +45,16 @@
       left: 6px;
       z-index: 2;
       background: url($imgPath + '/frame/enemy-target-icon-box.png') no-repeat;
-
+      display: flex;
+      
+      tg-icons {
+        margin: auto auto;
+      }
       .tg-icon {
           transform: none;
           margin:3px auto;
+          width: 32px;
+          height: 32px;
       }
   }
   

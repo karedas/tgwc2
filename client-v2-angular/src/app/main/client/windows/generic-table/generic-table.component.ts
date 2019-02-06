@@ -19,7 +19,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   public dataTable$: Observable<any>;
   public rows = [];
   public columns = [];
-  public currentPageLimit = 15;
+  public currentPageLimit = 10;
 
   private _unsubscribeAll: Subject<any>;
 

@@ -70,7 +70,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       const ref = this.dialogService.open(CookieLawComponent, {
         showHeader: false,
         closeOnEscape: false,
-        contentStyle: {'max-height': '450px', 'overflow': 'auto'}
+        contentStyle: {'max-width': '450px',  'overflow': 'auto'}
       });
 
       ref.onClose.subscribe(() => {

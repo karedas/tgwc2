@@ -152,6 +152,7 @@ p-table {
     display: flex;
     flex-direction: column;
     height: 100%;
+    border-collapse: collapse;
 
     .ui-table-thead>tr>th {
       color: #FFB300;
@@ -161,6 +162,12 @@ p-table {
     }
   }
 
+  thead {
+    th {
+      padding-top:.5em;
+      padding-bottom:.5em;
+    }
+  }
 
 
   .ui-table-wrapper {
@@ -169,12 +176,22 @@ p-table {
 
   tbody {
     text-align: center;
+    td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0.571em 1.857em!important;
+    }
+
+    td:first-child {
+      border-left: 0!important
+    }
+
+    td:last-child {
+      border-right: 0!important;
+    }
+    
   }
 
-  td {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 }
 
 p-paginator {
