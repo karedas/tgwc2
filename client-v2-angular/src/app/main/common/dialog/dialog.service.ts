@@ -5,7 +5,7 @@ import { DialogConfiguration } from './model/dialog.interface';
   providedIn: 'root'
 })
 
-export class DialogService {
+export class GenericDialogService {
 
   private modals: any[] = [];
 

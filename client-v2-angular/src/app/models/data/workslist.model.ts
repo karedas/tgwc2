@@ -8,5 +8,5 @@ export interface IWorksList {
 export interface IWorks {
   cmd: string;
   verb: string;
-  list: IWorksList
+  list: IWorksList;
 }

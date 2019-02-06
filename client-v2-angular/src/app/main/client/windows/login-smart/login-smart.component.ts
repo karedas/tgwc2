@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/main/authentication/services/login.service
 import { takeUntil, skip } from 'rxjs/operators';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
 
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     private store: Store<ClientState>,
     private loginService: LoginService,
     private router: Router,
-    private dialogService: DialogService) {
+    private genericDialogService: GenericDialogService) {
 
     this.inGameState$ = this.store.pipe(select(getInGameStatus));
     this._unsubscribeAll = new Subject();
@@ -53,7 +53,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   private open () {
 
     setTimeout(() => {
-      this.dialogService.open(this.dialogID, <DialogConfiguration>{
+      this.genericDialogService.open(this.dialogID, <DialogConfiguration>{
         blockScroll: true,
         modal: true
       });
@@ -64,7 +64,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   onReconnect() {
     this.loginService.reconnect();
     // TODO: Wait OK from Server
-    this.dialogService.close(this.dialogID);
+    this.genericDialogService.close(this.dialogID);
   }
 
   toggle(event?: Event) {

@@ -29,13 +29,13 @@ export class ObjPersContainerComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-    if(this.objcont) {
+    if (this.objcont) {
       this.populateToggleExpandable();
     }
   }
 
   populateToggleExpandable() {
-    if(this.objcont.list ) {
+    if (this.objcont.list ) {
       const total = this.objcont.list.length;
       for (let i = 0; i < total; i++) {
         this.togglePanel[i] = false;
@@ -47,15 +47,13 @@ export class ObjPersContainerComponent implements OnInit  {
     return this.game.getHsStatBgPos(condprc);
   }
 
-  onInteract(event:Event, item: any, index: number, list?: boolean) {
+  onInteract(event: Event, item: any, index: number, list?: boolean) {
     event.preventDefault();
     if (!item.sz) {
       if (!item.cntnum) {
         console.log('a');
         this.game.processCommands(`guarda &${item.mrn[0]}`);
-      }
-
-      else if (item.cntnum && item.mrn.length > 0) {
+      } else if (item.cntnum && item.mrn.length > 0) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       }
     } else if (list) {
@@ -64,7 +62,7 @@ export class ObjPersContainerComponent implements OnInit  {
     }
   }
 
-  onExpand(event:Event, item: any, index: number) {
+  onExpand(event: Event, item: any, index: number) {
     event.preventDefault();
     //  Is Expandable
     if (item.sz) {

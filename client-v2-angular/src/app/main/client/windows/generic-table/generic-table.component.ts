@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   public readonly dialogID: string = 'genericTable';
-  
+
   public dataTable$: Observable<any>;
   public rows = [];
   public columns = [];
@@ -25,7 +25,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private dialogService: DialogService
+    private genericDialogService: GenericDialogService
   ) {
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
@@ -75,7 +75,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   private open() {
     setTimeout(() => {
-      this.dialogService.open(this.dialogID, {
+      this.genericDialogService.open(this.dialogID, {
         draggable: true,
         modal: false,
         width: 'auto',

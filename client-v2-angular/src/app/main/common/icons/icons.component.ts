@@ -23,12 +23,12 @@ export class IconsComponent {
 
   ngOnChanges(changes: SimpleChange): void {
 
-    if(!this.icon) {
+    if (!this.icon) {
       this.icon = 416;
     }
     this.setTileBackgroundPosition();
   }
-  
+
   private setTileBackgroundPosition() {
     const tc = this.tileCoords();
     this.bgPositionStyle = {

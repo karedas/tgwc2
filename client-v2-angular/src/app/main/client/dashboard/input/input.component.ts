@@ -11,7 +11,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { getUIState } from 'src/app/store/selectors';
 import { map } from 'rxjs/operators';
 import { UIState } from 'src/app/store/state/ui.state';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 
 @Component({
   selector: 'tg-input',
@@ -37,7 +37,7 @@ export class InputComponent implements AfterViewInit {
     private game: GameService,
     private store: Store<ClientState>,
     private historyService: HistoryService,
-    private dialogService: DialogService,
+    private genericDialogService: GenericDialogService,
   ) {
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
@@ -82,8 +82,6 @@ export class InputComponent implements AfterViewInit {
 
   toggleZen(event: Event) {
     event.preventDefault();
-    // this.store.dispatch(new updateUI({zen: true}));
-    // this.dialogService.openNoFeature();
   }
 
   @HostListener('window:keydown', ['$event'])

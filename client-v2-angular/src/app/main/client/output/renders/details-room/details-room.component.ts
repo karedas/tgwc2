@@ -77,7 +77,7 @@ export class DetailsRoomComponent implements OnInit {
   }
 
   /**
-  * Expand or send Command to Server after click 
+  * Expand or send Command to Server after click
   * based on content type, list or single obj / person
    */
 
@@ -86,9 +86,7 @@ export class DetailsRoomComponent implements OnInit {
     if (!item.sz) {
       if (!item.cntnum) {
         this.game.processCommands(`guarda &${item.mrn[0]}`);
-      }
-
-      else if (item.cntnum && item.mrn.length > 0) {
+      } else if (item.cntnum && item.mrn.length > 0) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       }
     } else if (list) {

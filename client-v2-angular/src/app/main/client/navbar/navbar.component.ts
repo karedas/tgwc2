@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
     }];
   }
 
-  
+
 
   disconnect() {
     this.game.disconnectGame();

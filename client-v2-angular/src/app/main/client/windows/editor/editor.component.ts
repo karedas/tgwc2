@@ -6,7 +6,7 @@ import { GameService } from 'src/app/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 
 @Component({
@@ -24,14 +24,14 @@ export class EditorComponent implements OnInit, OnDestroy {
   description = '';
   dialogTitle = '';
   totalChars: number;
+  maxChars: number;
 
-  private maxChars: number;
   private maxLineLength = 80;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    private dialogService: DialogService,
+    private genericDialogService: GenericDialogService,
     private gameService: GameService) {
 
     this._unsubscribeAll = new Subject<any>();
@@ -61,7 +61,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.totalChars = this.maxChars - this.description.length;
 
     setTimeout(() => {
-      this.dialogService.open(this.dialogID, <DialogConfiguration>{
+      this.genericDialogService.open(this.dialogID, <DialogConfiguration>{
         width: '500px',
         height: '450px',
         resizable: true,
@@ -94,13 +94,13 @@ export class EditorComponent implements OnInit, OnDestroy {
       }
     }
     this.gameService.sendToServer('##ce_save');
-    this.dialogService.close(this.dialogID);
+    this.genericDialogService.close(this.dialogID);
 
   }
 
   onCancel() {
     this.gameService.sendToServer('##ce_abort');
-    this.dialogService.close(this.dialogID);
+    this.genericDialogService.close(this.dialogID);
   }
 
   onDescrChange($event) {

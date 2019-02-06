@@ -7,7 +7,7 @@ import { tap, map, withLatestFrom, filter } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
-import { DialogService } from 'src/app/main/common/dialog/dialog.service';
+import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 
 export interface PayloadAction {
@@ -22,7 +22,7 @@ export class UiEffects {
     private actions$: Actions,
     private game: GameService,
     private store: Store<UIState>,
-    private dialogService: DialogService
+    private genericDialogService: GenericDialogService
   ) { }
 
     @Effect({dispatch: false})
@@ -50,7 +50,7 @@ export class UiEffects {
       tap( cmds => {
         this.game.setCommands(cmds);
         setTimeout(() => {
-          this.dialogService.open( 'commandsList', <DialogConfiguration>{
+          this.genericDialogService.open( 'commandsList', <DialogConfiguration>{
             header: 'Lista comandi',
             width: '750px',
             height: '500px',

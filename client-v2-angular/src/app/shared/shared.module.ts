@@ -22,11 +22,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
-import { ButtonModule } from 'primeng/button'; 
+import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 
 import { DialogService as DynamicDialogService } from 'primeng/api';
-import { DialogService } from '../main/common/dialog/dialog.service';
+import { GenericDialogService } from '../main/common/dialog/dialog.service';
 
 
 @NgModule({
@@ -63,7 +63,7 @@ import { DialogService } from '../main/common/dialog/dialog.service';
     AudioService,
     LoginService,
     DynamicDialogService,
-    DialogService
+    GenericDialogService
   ],
   exports: [
     CommonModule,

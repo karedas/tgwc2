@@ -46,7 +46,6 @@ export class DataParser {
   }
 
   preParseText(data: string): string {
-
     data = data.replace(/\r/gm, '');
     data = data.replace(/&!!/gm, '');
     data = data.replace(/\$\$/gm, '$');
@@ -54,9 +53,7 @@ export class DataParser {
     data = data.replace(/&&/gm, '&#38;');
     data = data.replace(/</gm, '&#60;');
     data = data.replace(/>/gm, '&#62;');
-
     return data;
-
   }
 
   parseForDisplay(data: string) {
@@ -129,7 +126,6 @@ export class DataParser {
         equipment: update_parse[1],
         room: update_parse[2]
       }));
-
       return '';
     });
 

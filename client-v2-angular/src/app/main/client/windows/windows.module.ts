@@ -6,26 +6,29 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { CommandsListComponent } from './commands-list/commands-list.component';
-import { DialogModule } from 'primeng/dialog';  
-import { DialogsComponent } from '../../common/dialog/dialog.component';
+import { DialogModule } from 'primeng/dialog';
 import { EditorComponent } from './editor/editor.component';
 
 import { GenericTableComponent } from './generic-table/generic-table.component';
 import { WorkslistComponent } from './workslist/workslist.component';
+import { DialogGenericModule } from '../../common/dialog/dialog.module';
+import { LoginSmartComponent } from './login-smart/login-smart.component';
+import { NoFeatureComponent } from './no-feature/no-feature.component';
 @NgModule({
   declarations: [
     GenericTableComponent,
-    // NoFeatureComponent,
+    NoFeatureComponent,
+    LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
     CookieLawComponent,
     CommandsListComponent,
     EditorComponent,
-    DialogsComponent,
     WorkslistComponent,
   ],
   imports: [
     DynamicDialogModule,
+    DialogGenericModule,
     DialogModule,
     CommonModule,
     CheckboxModule,
@@ -35,14 +38,15 @@ import { WorkslistComponent } from './workslist/workslist.component';
     EditorComponent,
     CommandsListComponent,
     GenericTableComponent,
-    WorkslistComponent
+    WorkslistComponent,
   ],
   entryComponents: [
-    // NoFeatureComponent,
+    NoFeatureComponent,
+    LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
     CookieLawComponent,
-    
+
   ],
 })
 export class WindowsModule { }

@@ -24,9 +24,10 @@
                     <tg-icons [icon]="work.icon"></tg-icons>
                   </td>
                   <td [ngClass]="
-                    {'tg-green': (work.diff == 'routine' || work.diff =='banale' || work.diff == 'molto facile'),
-                    'tg-brown': (work.diff == 'impegnativa' || work.diff =='difficile' || work.diff == 'difficile'),
-                    'tg-red': (work.diff == 'molto difficile' || work.diff == 'arduo' || work.diff == 'quasi impossibile' || work.diff == 'miracolo')}">
+                    {'tg-green': (work.diff == 'facile' || work.diff =='normale'),
+                    'tg-yellow': (work.diff == 'impegantiva' || work.diff =='difficile'),
+                    'tg-brown': (work.diff == 'molto difficile'),
+                    'tg-red': (work.diff == 'arduo' || work.diff == 'quasi impossibile' || work.diff == 'miracolo')}">
                     {{work.diff}}
                   </td>
                   <td><div [ngClass]="work.cando === true ? 'cando' : 'cantdo'"></div></td>

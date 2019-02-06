@@ -1,15 +1,14 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
-import { DialogService } from './dialog.service';
-import { Dialog } from 'primeng/dialog'; 
+import { Dialog } from 'primeng/dialog';
+import { GenericDialogService } from './dialog.service';
 
 @Component({
   selector: 'tg-dialog',
   templateUrl: './dialog.component.html',
-  // styleUrls: ['./dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DialogsComponent implements OnInit {
+export class GenericDialogcomponent implements OnInit {
 
   @Input() id: string;
   @ViewChild('dialog') dialog: Dialog;
@@ -23,7 +22,7 @@ export class DialogsComponent implements OnInit {
 
 
   constructor(
-    private dialogService: DialogService,
+    private genericDialogService: GenericDialogService,
     ) { }
 
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class DialogsComponent implements OnInit {
     }
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
-    this.dialogService.add(this);
+    this.genericDialogService.add(this);
   }
 
   // open modal
@@ -53,7 +52,7 @@ export class DialogsComponent implements OnInit {
   }
 
 
-  onHide() {
+  onHide(event: Event) {
     this.isClosed.emit(true);
   }
 

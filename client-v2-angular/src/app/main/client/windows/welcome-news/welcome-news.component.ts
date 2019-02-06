@@ -15,7 +15,7 @@ export class WelcomeNewsComponent  implements AfterViewInit {
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
 
 
-  private dontShowNextTime = false;
+  dontShowNextTime = false;
 
   constructor(
     private game: GameService,
