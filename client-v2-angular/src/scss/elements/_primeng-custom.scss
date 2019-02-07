@@ -126,9 +126,11 @@ p-menubar {
 }
 
 /* Tooltip */
-body .ui-tooltip .ui-tooltip-text {
-  background: black;
-  font-size: 11px;
+body {
+  .ui-tooltip .ui-tooltip-text {
+    background: black;
+    font-size: 11px;
+  }
 }
 
 /* Buttons */

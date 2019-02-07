@@ -1,21 +1,21 @@
 <div class="tg-output tg-box b-ironlight tg-shadow" fxFlex="1 1 100%">
   <div class="tg-box" fxFlex="100">
-    <div class="tg-output-main">
+    <div class="tg-output-main" #mainOutputArea>
       <!-- <div class="tg-output--toast">Vista aggiornata
         <i class="far fa-arrow-alt-circle-right"></i>
       </div> -->
       <!-- Output Area -->
       <ng-container *ngIf="extraOutputOpenStatus$ | async; else noextra">
-        <as-split [direction]="'horizontal'" class="tg-output--splitter">
+        <as-split [direction]="'horizontal'" class="tg-output--splitter" #splitArea>
           <as-split-area size="60">
             <div style="height: 100%; overflow:hidden;">
-              <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar>
+              <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
                 <div class="tg-output--history">
-                  <div *ngFor="let data of output">
+                  <ng-container *ngFor="let data of output">
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
                     </ng-container>
-                  </div>
+                  </ng-container>
                 </div>
               </ng-scrollbar>
             </div>
@@ -42,7 +42,7 @@
 
 <ng-template #noextra>
   <div style="height: 100%; overflow:hidden;">
-    <ng-scrollbar class="scrollbar" #scrollBar>
+    <ng-scrollbar class="scrollbar" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
       <div class="tg-output--history">
         <div *ngFor="let data of output">
           <ng-container [ngSwitch]="data.type">

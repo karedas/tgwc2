@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, PlatformLocation } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from '../common/services/preloader.service';
@@ -27,6 +27,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     private platform: Platform,
     private preloader: PreloaderService,
     private dialogService: DynamicDialogService,
+    private location: PlatformLocation,
     @Inject(DOCUMENT) private document: any
   ) {
 
@@ -37,6 +38,10 @@ export class ClientComponent implements OnInit, OnDestroy {
     }
 
     this._unsubscribeAll = new Subject();
+
+    window.onpopstate = () => {}
+
+
 
   }
 

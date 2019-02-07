@@ -37,6 +37,9 @@ export class GeolocalBoxComponent implements OnInit {
 
   clanName: string;
   regionName: string;
+  icon: number;
+  clan_icon: number;
+  interaz_color: string;
 
   region$: Observable<IRegion>;
   private _unsubscribeAll: Subject<any>;
@@ -50,7 +53,9 @@ export class GeolocalBoxComponent implements OnInit {
 
     this.region$.subscribe(
       (region: IRegion) => {
-        this.newRegionfadeInOut(region);
+        if(region) {
+          this.newRegionfadeInOut(region);
+        }
       }
     )
   }
@@ -60,7 +65,12 @@ export class GeolocalBoxComponent implements OnInit {
     setTimeout(() => {
       this.regionName = region.name;
       this.clanName = region.clan_name;
+      this.icon =  region.icon;
+      this.clan_icon = region.clan_icon;
+      this.interaz_color = region.type;
       this.changeState = 'in';
+
+
     }, 1000);
   }
 

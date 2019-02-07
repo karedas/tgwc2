@@ -72,7 +72,7 @@ export class InputComponent implements AfterViewInit {
 
   toggleExtraOutput(event: Event) {
     event.preventDefault();
-    this.store.dispatch(new ToggleExtraOutput());
+    this.store.dispatch(new ToggleExtraOutput(null));
   }
 
   toggleDashboard(event: Event) {

@@ -20,7 +20,13 @@ export function reducer(
     }
 
     case UIEventType.TOGGLEOUTPUT: {
-      return Object.assign({}, state, { extraOutput: !state.extraOutput});
+      let newState = action.payload;
+      if(typeof action.payload !== "boolean" ) {
+        newState = !state.extraOutput;
+      }
+
+      console.log(newState);
+      return Object.assign({}, state, { extraOutput: newState});
     }
 
     case UIEventType.TOGGLEDASHBOARD: {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   // template: `<tg-client [state]="gameState$ | async"></tg-client>`,
-  template: `<tg-client fxLayout="column" fxFlexFill></tg-client>`,
+  template: `<tg-client fxLayout="column" fxFlexFill class="min-h-0"></tg-client>`,
   styles: [`:host {
     position: relative;
     display: flex;

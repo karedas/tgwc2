@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy, ViewEncapsulation, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
@@ -9,6 +9,8 @@ import { Observable, Subject } from 'rxjs';
 import { getExtraOutputStatus, getDataBase, getRoomBase, getObjOrPerson } from 'src/app/store/selectors';
 import { GameService } from 'src/app/services/game.service';
 import { Room } from 'src/app/models/data/room.model';
+import { SplitComponent } from 'angular-split';
+import { ToggleExtraOutput } from 'src/app/store/actions/ui.action';
 
 @Component({
   selector: 'tg-output',
@@ -16,9 +18,12 @@ import { Room } from 'src/app/models/data/room.model';
   styleUrls: ['./output.component.scss'],
 })
 
-export class OutputComponent implements OnInit, OnDestroy {
+export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
+  @ViewChild('mainOutputArea') mainOutputArea: ElementRef;
+  @ViewChild('splitArea') splitArea: SplitComponent;
+
   lastRoom$: Observable<any>;
 
 
@@ -60,7 +65,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       takeUntil(this._unsubscribeAll))
         .subscribe(
         () => {
-          this.scrollPanelToBottom();
+          // this.scrollPanelToBottom();
         }
     );
 
@@ -113,6 +118,9 @@ export class OutputComponent implements OnInit, OnDestroy {
         );
   }
 
+  ngAfterViewInit() {
+  }
+
   private setContent(t: string, c: any): any {
     return Object.assign({}, { type: t, content: c });
   }
@@ -126,8 +134,24 @@ export class OutputComponent implements OnInit, OnDestroy {
   private scrollPanelToBottom() {
     setTimeout(() => {
       this.scrollBar.scrollToBottom(0).subscribe();
-    }, 15);
+    }, 50);
   }
+
+  @HostListener('window:resize', ['$event.target']) 
+  onResize() { 
+      this.setOutputSplit();
+  }
+
+  setOutputSplit() {
+    console.log(this.mainOutputArea.nativeElement.offsetWidth );
+    if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
+      this.store.dispatch(new ToggleExtraOutput(false));
+    }
+    else {
+      this.store.dispatch(new ToggleExtraOutput(true));
+    }
+  }
+
 
 
   ngOnDestroy() {

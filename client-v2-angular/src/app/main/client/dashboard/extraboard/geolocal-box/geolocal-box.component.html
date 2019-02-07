@@ -1,15 +1,21 @@
   <ng-container *ngIf="region$ | async as region">
-    <div class="tg-geolocal"  fxLayout="column" fxFlex="1 1 185px">
+    <div class="tg-geolocal"  fxLayout="column" fxFlex="1 1 218px" 
+    [pTooltip]="tooltip_text" tooltipPosition="left" showDelay="500" hideDelay="100">
       <div class="tg-geolocal--title"></div>
       <div class="tg-geolocal--image">
         <div></div>
       </div>
-      <div class="tg-geolocal--data" fxLayout="column">
-        <span class="tg-geolocal--region" [@fadeInFadeOut]="changeState">
-          {{regionName}}
+      <div class="tg-geolocal--data" fxLayout="column" [@fadeInFadeOut]="changeState">
+        <span class="tg-geolocal--region" 
+        [ngClass]="
+        {'tg-green': interaz_color == 'pacifica',
+         'tg-brown': interaz_color == 'selvaggia', 
+         'tg-red': interaz_color == 'guerra'}"
+        >
+          <tg-icons [icon]="icon"></tg-icons> {{regionName}}
         </span>
-        <span class="tg-geolocal--control"  [@fadeInFadeOut]="changeState">
-          {{clanName}}
+        <span class="tg-geolocal--control">
+          <tg-icons [icon]="clan_icon"></tg-icons> {{clanName}}
         </span>
       </div>
     </div>

@@ -9,6 +9,8 @@
     --scrollbar-padding: 2px;
     --scroll-view-margin: 0;
     --scroll-view-color: transparent;
+    max-height: 100%;
+
   }
 
   ng-scrollbar.scrollbar-light {
@@ -21,4 +23,5 @@
     --scrollbar-padding: 4px;
     --scroll-view-margin: 0;
     --scroll-view-color: transparent;
+    max-height: 100%;
   }

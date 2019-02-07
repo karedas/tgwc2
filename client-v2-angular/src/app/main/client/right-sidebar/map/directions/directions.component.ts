@@ -74,6 +74,8 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   onkeydown(event: KeyboardEvent) {
+    
+
     if (this.isOnMap) {
       switch (event.key) {
         case 'ArrowUp':
