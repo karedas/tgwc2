@@ -5,8 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { getWelcomeNews } from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
-import { DialogService as DynamicDialogService} from 'primeng/api';
 import { WelcomeNewsComponent } from '../windows/welcome-news/welcome-news.component';
+import { WindowsService } from '../windows/windows.service';
 
 @Component({
   selector: 'tg-client-container',
@@ -24,14 +24,11 @@ export class ClientContainerComponent implements OnDestroy {
   constructor(
     private store: Store<UIState>,
     private game: GameService,
-    private dymamicDialogService: DynamicDialogService
+    private windowsService: WindowsService
   ) {
-
     this.welcomeNews = this.store.pipe(select(getWelcomeNews));
-
     this._unsubscribeAll = new Subject<any>();
   }
-
 
   ngAfterViewInit(): void {
 
@@ -39,28 +36,19 @@ export class ClientContainerComponent implements OnDestroy {
     this.welcomeNews.pipe(
       takeUntil(this._unsubscribeAll),
       filter((r) => r === true)).subscribe(
-        (req: boolean) => {
+        () => {
           if (localStorage.getItem('welcomenews')) {
             this.game.sendToServer('');
           } else {
-            this.openWelcomeNews();
+            this.showNews();
           }
         }
       );
   }
 
-  openWelcomeNews() {
+  showNews() {
     setTimeout(() => {
-      const ref = this.dymamicDialogService.open(WelcomeNewsComponent, {
-        header: 'Notizie',
-        styleClass: 'op-100',
-        closable: false,
-        width: '750px',
-        height: '500px',
-        style: {'max-width': '100%', 'max-height': '100%'},
-        contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
-      });
-
+      this.windowsService.openWelcomeNews();
     }, 100);
   }
 

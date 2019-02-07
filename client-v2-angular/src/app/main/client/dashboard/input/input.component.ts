@@ -37,7 +37,6 @@ export class InputComponent implements AfterViewInit {
     private game: GameService,
     private store: Store<ClientState>,
     private historyService: HistoryService,
-    private genericDialogService: GenericDialogService,
   ) {
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
@@ -57,16 +56,36 @@ export class InputComponent implements AfterViewInit {
   }
 
   onUpKey(event: any) {
+    event.preventDefault();
     const cmd = this.historyService.getPrevious();
     if (cmd) {
       event.target.value = cmd;
+      this.moveCursorAtEnd(event.target);
     }
   }
-
+  
   onDownKey(event: any) {
+    event.preventDefault();
     const cmd = this.historyService.getNext();
     if (cmd) {
       event.target.value = cmd;
+      this.moveCursorAtEnd(event.target);
+    }
+  }
+
+  moveCursorAtEnd(target) {
+    console.log( target.selectionStart);
+    console.log( target.selectionEnd);
+    console.log( target.createTextRange);
+    if (typeof target.selectionStart == 'number' ) {
+      target.selectionStart = target.selectionEnd = target.value.length;
+      console.log('bo', target.selectionStart);
+    } else if (typeof target.createTextRange != 'undefined') {
+      console.log('no', target.createTextRange);
+      this.focus();
+      let range = target.createTextRange();
+      range.collapse(false);
+      range.selec();
     }
   }
 

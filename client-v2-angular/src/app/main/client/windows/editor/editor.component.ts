@@ -8,6 +8,7 @@ import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'tg-editor',
@@ -26,12 +27,14 @@ export class EditorComponent implements OnInit, OnDestroy {
   totalChars: number;
   maxChars: number;
 
+  private dialogRef: any;
+
   private maxLineLength = 80;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    private genericDialogService: GenericDialogService,
+    private windowsService: WindowsService,
     private gameService: GameService) {
 
     this._unsubscribeAll = new Subject<any>();
@@ -57,18 +60,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   private openEditor() {
-
     this.totalChars = this.maxChars - this.description.length;
-
     setTimeout(() => {
-      this.genericDialogService.open(this.dialogID, <DialogConfiguration>{
-        width: '500px',
-        height: '450px',
-        resizable: true,
-        draggable: true,
-        maximizable: true,
-        header: this.dialogTitle
-      });
+      this.dialogRef = this.windowsService.openEditor(this.dialogID, this.dialogTitle);
     });
   }
 
@@ -94,13 +88,13 @@ export class EditorComponent implements OnInit, OnDestroy {
       }
     }
     this.gameService.sendToServer('##ce_save');
-    this.genericDialogService.close(this.dialogID);
+    this.dialogRef.close(this.dialogID);
 
   }
 
   onCancel() {
     this.gameService.sendToServer('##ce_abort');
-    this.genericDialogService.close(this.dialogID);
+    this.dialogRef.close(this.dialogID);
   }
 
   onDescrChange($event) {

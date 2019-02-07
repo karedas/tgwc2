@@ -33,7 +33,7 @@
     </ng-container>
 
   </div>
-  <div class="tg-backdetail" *ngIf="html.where">
+  <div class="tg-backdetail" *ngIf="html.where" (click)="onBackDetail(html.where.num)">
     <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova &nbsp;<b>{{html.where.title}}</b></span>
   </div>
   <div style="height: 100%; overflow:hidden;">

@@ -14,6 +14,7 @@ import { WorkslistComponent } from './workslist/workslist.component';
 import { DialogGenericModule } from '../../common/dialog/dialog.module';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { NoFeatureComponent } from './no-feature/no-feature.component';
+import { WindowsService } from './windows.service';
 @NgModule({
   declarations: [
     GenericTableComponent,
@@ -46,7 +47,9 @@ import { NoFeatureComponent } from './no-feature/no-feature.component';
     CommandsListComponent,
     WelcomeNewsComponent,
     CookieLawComponent,
-
   ],
+  providers: [
+    WindowsService
+  ]
 })
 export class WindowsModule { }

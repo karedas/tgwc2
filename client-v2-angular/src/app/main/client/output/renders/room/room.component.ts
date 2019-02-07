@@ -1,6 +1,7 @@
 import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 import { environment } from 'src/environments/environment';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-room',
@@ -14,7 +15,7 @@ export class RoomComponent implements OnInit {
 
   inRoomContent: boolean;
 
-  constructor() {
+  constructor(private game: GameService) {
   }
 
   ngOnInit(): void {
@@ -25,6 +26,14 @@ export class RoomComponent implements OnInit {
         this.inRoomContent = false;
       }
     }
+  }
+
+  onBackDetail(num: number) {
+    console.log(num);
+    if(num) {
+      this.game.processCommands(`guarda &${num}`)
+    }
+    else this.game.processCommands('guarda');
   }
 
   getRoomImage(img: string ): string {

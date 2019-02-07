@@ -9,6 +9,7 @@ import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
+import { WindowsService } from 'src/app/main/client/windows/windows.service';
 
 export interface PayloadAction {
   type: string;
@@ -22,7 +23,7 @@ export class UiEffects {
     private actions$: Actions,
     private game: GameService,
     private store: Store<UIState>,
-    private genericDialogService: GenericDialogService
+    private windowsService: WindowsService
   ) { }
 
     @Effect({dispatch: false})
@@ -50,17 +51,7 @@ export class UiEffects {
       tap( cmds => {
         this.game.setCommands(cmds);
         setTimeout(() => {
-          this.genericDialogService.open( 'commandsList', <DialogConfiguration>{
-            header: 'Lista comandi',
-            width: '750px',
-            height: '500px',
-            style: {'max-width': '100%', 'max-height': '100%'},
-            styleClass: 'op-100',
-            blockScroll: true,
-            modal: false,
-            draggable: true,
-            resizable: true
-          });
+          this.windowsService.openCommandsList();
         }, 100);
       })
     );

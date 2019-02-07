@@ -7,6 +7,7 @@ import { getWorksList } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/models/data/workslist.model';
 import { GameService } from 'src/app/services/game.service';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'tg-workslist',
@@ -40,7 +41,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    private genericDialogService: GenericDialogService
+    private windowsService: WindowsService
     ) {
 
       this.dataTable$ = this.store.pipe(select(getWorksList));
@@ -68,15 +69,10 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private open(title) {
+  private open(verb) {
+    const title = `Cosa sai ${verb}`;
     setTimeout(() => {
-      this.genericDialogService.open(this.dialogID, {
-        draggable: true,
-        modal: false,
-        width: 'auto',
-        height: 'auto',
-        header: `Cosa sai ${title}`
-      }, 200);
+      this.windowsService.openDialogTable(this.dialogID, title);
     });
   }
 

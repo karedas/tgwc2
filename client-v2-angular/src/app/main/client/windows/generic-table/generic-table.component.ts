@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
-import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { takeUntil } from 'rxjs/operators';
+import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'tg-generic-table',
@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class GenericTableComponent implements  AfterViewInit, OnDestroy {
+  
   public readonly dialogID: string = 'genericTable';
 
   public dataTable$: Observable<any>;
@@ -25,7 +26,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private genericDialogService: GenericDialogService
+    private windowsService: WindowsService
   ) {
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
@@ -69,19 +70,12 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
         });
         this.rows.push(obj);
       });
-
     }
   }
 
   private open() {
     setTimeout(() => {
-      this.genericDialogService.open(this.dialogID, {
-        draggable: true,
-        modal: false,
-        width: 'auto',
-        height: 'auto',
-        header: 'Informazioni'
-      });
+      this.windowsService.openDialogTable(this.dialogID, 'Informazioni');
     }, 200);
 
   }

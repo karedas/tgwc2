@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { DOCUMENT, PlatformLocation } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
 import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from '../common/services/preloader.service';
-import { DialogService as DynamicDialogService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CookieLawComponent } from './windows/cookie-law/cookie-law.component';
+import { WindowsService } from './windows/windows.service';
 
 @Component({
   selector: 'tg-client',
@@ -26,8 +26,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private platform: Platform,
     private preloader: PreloaderService,
-    private dialogService: DynamicDialogService,
-    private location: PlatformLocation,
+    private windowsService: WindowsService,
     @Inject(DOCUMENT) private document: any
   ) {
 
@@ -71,23 +70,18 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   // Cookie Law Behaviour
   showCookieLaw() {
-    setTimeout(() => {
-      const ref = this.dialogService.open(CookieLawComponent, {
-        showHeader: false,
-        closeOnEscape: false,
-        contentStyle: {'max-width': '450px',  'overflow': 'auto'}
-      });
-
-      ref.onClose.subscribe(() => {
-        this.isCookieAccepted = true;
-      } );
-
-    }, 100);
+    this.windowsService.openCookieLaw().subscribe(
+      (accept: boolean) => { this.isCookieAccepted = accept}
+    )
   }
 
   private gameIsReady() {
     if (!this.cookieService.check('tgCookieLaw')) {
-      this.showCookieLaw();
+      setTimeout(() => {
+      this.windowsService.openCookieLaw().subscribe(
+        (accept: boolean) => { this.isCookieAccepted = accept}
+      )
+    }, 100);
     } else {
       this.isCookieAccepted = true;
     }
