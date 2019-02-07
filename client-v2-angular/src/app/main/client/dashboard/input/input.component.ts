@@ -74,14 +74,9 @@ export class InputComponent implements AfterViewInit {
   }
 
   moveCursorAtEnd(target) {
-    console.log( target.selectionStart);
-    console.log( target.selectionEnd);
-    console.log( target.createTextRange);
     if (typeof target.selectionStart == 'number' ) {
       target.selectionStart = target.selectionEnd = target.value.length;
-      console.log('bo', target.selectionStart);
     } else if (typeof target.createTextRange != 'undefined') {
-      console.log('no', target.createTextRange);
       this.focus();
       let range = target.createTextRange();
       range.collapse(false);

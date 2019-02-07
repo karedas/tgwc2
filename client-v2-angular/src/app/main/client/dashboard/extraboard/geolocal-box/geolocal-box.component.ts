@@ -40,6 +40,7 @@ export class GeolocalBoxComponent implements OnInit {
   icon: number;
   clan_icon: number;
   interaz_color: string;
+  idreg: number;
 
   region$: Observable<IRegion>;
   private _unsubscribeAll: Subject<any>;
@@ -68,6 +69,7 @@ export class GeolocalBoxComponent implements OnInit {
       this.icon =  region.icon;
       this.clan_icon = region.clan_icon;
       this.interaz_color = region.type;
+      this.idreg = region.idreg;
       this.changeState = 'in';
 
 

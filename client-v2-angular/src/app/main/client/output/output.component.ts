@@ -39,6 +39,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
+  private resizeID: any;
   private outputTrimLines = 500;
 
   constructor(
@@ -65,7 +66,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this._unsubscribeAll))
         .subscribe(
         () => {
-          // this.scrollPanelToBottom();
+          this.scrollPanelToBottom();
         }
     );
 
@@ -140,7 +141,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:resize', ['$event.target']) 
   onResize() { 
-      this.setOutputSplit();
+      clearInterval(this.resizeID);
+      this.resizeID = setTimeout(() => {
+        this.setOutputSplit();
+      }, 1000);
   }
 
   setOutputSplit() {
@@ -151,8 +155,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.store.dispatch(new ToggleExtraOutput(true));
     }
   }
-
-
 
   ngOnDestroy() {
     this._unsubscribeAll.next();
