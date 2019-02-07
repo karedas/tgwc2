@@ -119,6 +119,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.setOutputSplit();
   }
 
   private setContent(t: string, c: any): any {
@@ -143,7 +144,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setOutputSplit() {
-    console.log(this.mainOutputArea.nativeElement.offsetWidth );
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
       this.store.dispatch(new ToggleExtraOutput(false));
     }
