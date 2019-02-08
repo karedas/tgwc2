@@ -285,6 +285,7 @@ export class DataParser {
     // Refresh command
     data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
       const rcommand_parse = JSON.parse(t.slice(9, -1));
+      this.store.dispatch(new UiActions.RefreshCommandAction());
       console.log('refresh command', rcommand_parse);
       return '';
     });

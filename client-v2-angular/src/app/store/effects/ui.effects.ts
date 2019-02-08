@@ -10,6 +10,7 @@ import { UIState } from '../state/ui.state';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { HeroAction } from '../actions/data.action';
 import { IHero } from 'src/app/models/data/hero.model';
+import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 
 export interface PayloadAction {
   type: string;
@@ -23,7 +24,7 @@ export class UiEffects {
     private actions$: Actions,
     private game: GameService,
     private store: Store<UIState>,
-    private windowsService: WindowsService
+    private windowsService: WindowsService,
   ) { }
 
     @Effect({dispatch: false})
@@ -66,6 +67,13 @@ export class UiEffects {
         this.windowsService.openCharacterSheet();
       })
     );
+
+    @Effect({dispatch: false})
+    refreshCommand$ = this.actions$.pipe(
+      ofType(UIEventType.REFRESH),
+      tap(()  => {
+        this.game.processCommands('info');
+      }))
 
 
 

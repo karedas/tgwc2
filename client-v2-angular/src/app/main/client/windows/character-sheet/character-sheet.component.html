@@ -14,9 +14,9 @@
                 <div class="info-title">{{hero.title}}</div>
               </div>
               <nav class="info-menu flex-column">
-                <a href="#infoGeneralData" class="btn-i-generale tg-button tg-shadow nav-item nav-link active" id="infoTabGenerale">Generalit&agrave;</a>
-                <a href="#infoDescriptionData" class="btn-i-descr tg-button tg-shadow nav-item nav-link" id="infoTabGenerale">Descrizione</a>
-                <a href="#infoBaseStatsData" class="btn-i-stats tg-button tg-shadow nav-item nav-link" id="infoTabGenerale">Statistiche</a>
+                <button class="btn-i-generale tg-button tg-shadow nav-item nav-link active">Generalit&agrave;</button>
+                <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link">Descrizione</button>
+                <button class="btn-i-ability tg-button tg-shadow nav-item nav-link">Statistiche</button>
               </nav>
             </div>
             <div class="info-right-data" fxLayout="column" fxFlex="0 1 100%">
@@ -27,14 +27,14 @@
                     <div class="info-textarea--container">
 
                       <ng-scrollbar class="scrollbar" #scrollBar [autoUpdate]="true" style="height: 200px;">
-                        <div name="editor" cols="30" autofocus contenteditable="true" class="textarea" (input)="onDescrChange($event.target.value)"
+                        <div name="editor" cols="30" autofocus class="textarea"
                           [innerHtml]="parseDesc(hero.desc)"></div>
                       </ng-scrollbar>
                     </div>
                     <div class="info-textarea--action">
                       <div id="editorMaxCharsCount" class="tg-txt-maxcharcount"><b>Max.
                           Caratteri {{totalChars}}/max</b></div>
-                      <button type="button" class="btn-i-modifica tg-button tg-shadow">Modifica</button>
+                      <button type="button" class="btn-i-modifica tg-button tg-shadow" (click)="changeDescription()">Modifica</button>
                     </div>
                   </div>
                   <div class="tg-border-box">

@@ -13,11 +13,17 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
   providedIn: 'root'
 })
 export class WindowsService {
+  
+  private dialogs: any;
 
   constructor(
+
     private dynamicDialogService: DynamicDialogService,
     private genericDialogService: GenericDialogService
-  ) { }
+  ) {
+
+    this.dialogs = new Map();
+   }
 
   openWelcomeNews() {
     const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
@@ -55,15 +61,25 @@ export class WindowsService {
   }
 
   openCharacterSheet() {
-    const ref = this.dynamicDialogService.open(CharacterSheetComponent, 
-      <DynamicDialogConfig>{
-        showHeader: true,
-        modal: false,
-        header: 'Scheda Personaggio',
-        width: '750px',
-        height: 'auto',
-        style: { 'max-width': '100%', 'max-height': '100%' },
-      });
+
+    if(!this.dialogs.has('charactersheet')) {
+      const ref = this.dynamicDialogService.open(CharacterSheetComponent, 
+        <DynamicDialogConfig>{
+          showHeader: true,
+          modal: false,
+          header: 'Scheda Personaggio',
+          width: '750px',
+          height: 'auto',
+          style: { 'max-width': '100%', 'max-height': '100%' },
+        });
+  
+        this.dialogs.set('charactersheet', true);
+
+        ref.onClose.subscribe(() => {
+          this.dialogs.delete('charactersheet');
+        })
+    }
+ 
   }
 
 
@@ -82,7 +98,7 @@ export class WindowsService {
       });
   }
 
-  openEditor(dialogID: string, ...data: any): Observable<any> {
+  openEditor(dialogID: string, ...data: any): any {
     const ref = this.genericDialogService.open(dialogID, 
       <DialogConfiguration>{
         width: '500px',
@@ -105,6 +121,10 @@ export class WindowsService {
         height: 'auto',
         header: data[0]
       });
+  }
+
+  closeGenericDialog(dialogID:string) {
+    this.genericDialogService.close(dialogID);
   }
 }
 

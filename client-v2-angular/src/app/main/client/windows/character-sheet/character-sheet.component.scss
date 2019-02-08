@@ -45,7 +45,7 @@
 
     margin-top: auto;
 
-    a {
+    button {
       margin: 0 auto 12px;
       display: block;
       border: none;
@@ -54,29 +54,29 @@
     }
 
     .btn-i-generale {
-      @include sprite($generalita-btn-sprite);
+      @include sprite($generale-btn-sprite);
 
       &.active,
       &:hover {
-        @include sprite($generalita-btn-active-sprite);
+        @include sprite($generale-btn-active-sprite);
       }
     }
 
-    .btn-i-descr {
-      @include sprite($descr-btn-sprite);
+    .btn-i-equipinv {
+      @include sprite($equipinv-btn-sprite);
 
       &.active,
       &:hover {
-        @include sprite($descr-btn-active-sprite);
+        @include sprite($equipinv-btn-active-sprite);
       }
     }
 
-    .btn-i-stats {
-      @include sprite($carat-btn-sprite);
+    .btn-i-ability {
+      @include sprite($abilita-btn-sprite);
 
       &.active,
       &:hover {
-        @include sprite($carat-btn-active-sprite);
+        @include sprite($abilita-btn-active-sprite);
       }
     }
   }
@@ -172,14 +172,14 @@
 
   .info-description {
     background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
-    padding: 1.5em 1em;
+    padding: 1em;
     color: #3a2e19;
 
     &:before {
       content: '';
       @include sprite($descr-title-box-sprite);
       position: absolute;
-      top: 0;
+      top: 10px;
       right: 21px;
       z-index: 5;
     }
@@ -281,7 +281,7 @@
         font-style: normal;
         left: 50%;
         transform: translateX(-50%);
-        top: 4px;
+        top: 2px;
       }
     }
 
@@ -453,56 +453,6 @@
   //   }
   // }
 
-
-
-  .tg-character-nav {
-    justify-content: center;
-    display: flex;
-
-    a {
-      border: none;
-    }
-
-    .btn-info-tab {
-      background-color: transparent;
-      @include sprite($btn-info-sprite);
-
-      &.active,
-      &:hover {
-        @include sprite($btn-info-active-sprite);
-      }
-    }
-
-    .btn-equip-tab {
-      background-color: transparent;
-      @include sprite($btn-equip-sprite);
-
-      &.active,
-      &:hover {
-        @include sprite($btn-equip-active-sprite);
-      }
-    }
-
-    .btn-inv-tab {
-      background-color: transparent;
-      @include sprite($btn-inventario-sprite);
-
-      &.active,
-      &:hover {
-        @include sprite($btn-inventario-active-sprite);
-      }
-    }
-
-    .btn-skill-tab {
-      background-color: transparent;
-      @include sprite($btn-skill-sprite);
-
-      &.active,
-      &:hover {
-        @include sprite($btn-skill-active-sprite);
-      }
-    }
-  }
 
 
   /* Skill Panel */

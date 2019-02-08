@@ -6,8 +6,6 @@ import { GameService } from 'src/app/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';
-import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
-import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 import { WindowsService } from '../windows.service';
 
 @Component({
@@ -27,23 +25,26 @@ export class EditorComponent implements OnInit, OnDestroy {
   totalChars: number;
   maxChars: number;
 
-  private dialogRef: any;
 
   private maxLineLength = 80;
   private _unsubscribeAll: Subject<any>;
+
+  private dialogRef: any;
 
   constructor(
     private store: Store<DataState>,
     private windowsService: WindowsService,
     private gameService: GameService) {
+      
+    this._unsubscribeAll = new Subject<any>()
+    
+    this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
 
-    this._unsubscribeAll = new Subject<any>();
 
+    
   }
 
   ngOnInit(): void {
-
-    this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
 
     this.editorRequest$.subscribe(
       (editorState: IEditor) => {
@@ -51,7 +52,7 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.description = editorState.description;
           this.dialogTitle = editorState.title;
           this.maxChars = editorState.maxChars;
-          this.openEditor();
+          this.dialogRef = this.openEditor();
         }
       }
     );
@@ -62,7 +63,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   private openEditor() {
     this.totalChars = this.maxChars - this.description.length;
     setTimeout(() => {
-      this.dialogRef = this.windowsService.openEditor(this.dialogID, this.dialogTitle);
+      this.windowsService.openEditor(this.dialogID, this.dialogTitle);
     });
   }
 
@@ -88,13 +89,13 @@ export class EditorComponent implements OnInit, OnDestroy {
       }
     }
     this.gameService.sendToServer('##ce_save');
-    this.dialogRef.close(this.dialogID);
+    this.windowsService.closeGenericDialog(this.dialogID);
 
   }
 
   onCancel() {
     this.gameService.sendToServer('##ce_abort');
-    this.dialogRef.close(this.dialogID);
+    this.windowsService.closeGenericDialog(this.dialogID);
   }
 
   onDescrChange($event) {

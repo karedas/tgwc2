@@ -10,7 +10,8 @@ export enum UIEventType {
   UPDATENEEDED = '[UI] Update Needed Data',
   CLOSETEXTEDITOR = '[UI] Close Text Editor',
   SHOWCOMMANDS = '[UI] Show Commands List',
-  SHOWCHARACTERSHEET = '[UI] Show Character Sheet'
+  SHOWCHARACTERSHEET = '[UI] Show Character Sheet',
+  REFRESH = '[UI] Refresh server command'
 
 }
 
@@ -55,6 +56,10 @@ export class ShowCharacterSheetActions implements Action {
 export class UpdateNeeded implements Action {
   readonly type = UIEventType.UPDATENEEDED;
   constructor( public payload: any) {}
+}
+
+export class RefreshCommandAction implements Action {
+    readonly type = UIEventType.REFRESH;
 }
 
 

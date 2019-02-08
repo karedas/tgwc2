@@ -23,11 +23,17 @@ export class GenericDialogService {
       // open modal specified by id
       const modal: any = this.modals.filter(x => x.id === id)[0];
       modal.open(config);
+      console.log(this.modals);
   }
 
   close(id: string) {
       // close modal specified by id
       const modal: any = this.modals.filter(x => x.id === id)[0];
       modal.close();
+  }
+
+  isClosed(id:string): boolean {
+    const modal: any = this.modals.filter(x => x.id === id)[0];
+    return modal.isClosed();
   }
 }
