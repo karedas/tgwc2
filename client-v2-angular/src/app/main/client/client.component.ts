@@ -21,7 +21,6 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll = new Subject();
 
-
   constructor(
     private cookieService: CookieService,
     private platform: Platform,
@@ -37,11 +36,6 @@ export class ClientComponent implements OnInit, OnDestroy {
     }
 
     this._unsubscribeAll = new Subject();
-
-    window.onpopstate = () => {}
-
-
-
   }
 
   ngOnInit(): void {

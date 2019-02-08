@@ -1,7 +1,8 @@
 @import '~src/scss/colors';
 
 :host {
-  padding-top: .5em;
+  padding: .5em .5em 0;
+  display: block;
 }
 
 .tg-objperson--title {

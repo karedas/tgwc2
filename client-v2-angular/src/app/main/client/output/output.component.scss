@@ -2,8 +2,7 @@
 @import 'sprites';
 @import 'utils/sprites-mixins';
 
-@import '~@angular/flex-layout/mq';
-
+@import 'utils/fix';
 
 :host {
   background: black;
@@ -36,7 +35,7 @@
 
 .tg-output--extradetail {
   height: 100%;
-  padding: 0 0 8px 8px;
+  padding: 0 0 8px 0;
 }
 
 tg-text {
@@ -83,15 +82,12 @@ tg-text {
     height: 14px;
   }
 
-
-
-
   .tg-backdetail {
 
     cursor: pointer;
     display: flex;
     flex: 1 0 auto;
-    margin-top: -2.45em;
+    margin-top: -1.45em;
     padding-bottom: 0.5em;
 
     tg-icons {
@@ -113,7 +109,7 @@ tg-text {
 
     }
 
-    &:hover  span{
+    &:hover span {
       color: $tg-yellow;
     }
   }
@@ -150,8 +146,7 @@ tg-text {
 
   /* LIST Mob & Object*/
   .tg-objects,
-  .tg-persons,
-    {
+  .tg-persons {
     display: flex;
     padding-bottom: .5em;
     padding-right: .5em;
@@ -167,6 +162,7 @@ tg-text {
     padding-bottom: .8em;
     margin-right: auto;
     box-sizing: border-box;
+    line-height: 1.4;
 
     >div {
       margin: auto 0;
@@ -253,6 +249,22 @@ tg-text {
     }
   }
 
+  @include layout-bp(lt-md) {
+    .list-50 {
+      width: 100%;
+
+      >div {
+        flex: 1 0 100% !important;
+      }
+    }
+
+    .list-50-50 {
+      >div {
+        flex: 1 0 100% !important;
+      }
+    }
+  }
+
   .size-qty {
     margin-left: 5px !important;
     background: #2a1f15;
@@ -275,25 +287,11 @@ tg-text {
     flex: 0 0 21px;
   }
 
-
-  // .tg-backdetail {
-  //   display: flex;
-
-  //   .backslot {
-  //     cursor: pointer;
-  //   }
-
-  //   .desc {
-  //     color: white;
-  //   }
-  // }
-
   .tg-extraoutput--header {
     overflow: hidden;
     padding-bottom: 1.4em;
-    margin-bottom: 1.5em;
-    margin-left: -10px;
-    margin-right: -6px;
+    margin-left: 0;
+    margin-right: 0;
     border-bottom: 1px solid #433b3a;
     box-shadow: inset 0 -13px 65px 0px black;
     background: url($imgPath + '/background/detaildesc-bg.jpg');
@@ -301,7 +299,7 @@ tg-text {
 
     .tg-room--title {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-      padding: 6px 10px 6px;
+      padding: 6px 10px 6px 0;
       color: #dbbf90;
       text-shadow: 0 0 12px #dbbf90;
       box-shadow: inset 0px 0px 20px 4px black;
@@ -320,7 +318,7 @@ tg-text {
     }
 
     .tg-room--desc {
-      padding: 0.5em 10px .2em;
+      padding: 0.5em .5em .2em;
       line-height: 1.4;
       font-size: 11px;
       color: #e2d6c7;
@@ -341,59 +339,31 @@ tg-text {
     }
   }
 
-  // // Highlight 
-  // .mrn-hlight {
-  //   border: 1px solid $tg-yellow;
-  // }
 
-  // /* TABLE */
-  // .out-table {
-  //   border: 1px solid $gray-900;
+  // /* Extra Output Area */
+  // .extranotice {
+  //   display: table;
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   z-index: 2;
+  //   max-width: 90%;
+  //   transform: translateX(-50%);
+  //   text-align: center;
+  //   font-size: 12px;
+  //   padding: 10px 10px;
+  //   border-bottom: 1px solid #222;
+  //   border-top: 1px solid #222;
+  //   box-sizing: border-box;
+  //   color: #9e9e9e;
+  //   letter-spacing: 1px;
+  //   white-space: nowrap;
 
-  //   .tg-caption {
-  //     border-bottom: 1px solid $gray-900;
-  //   }
-
-  //   .rps-col {
-  //     background: #0f0f0f;
-  //   }
-
-  //   .col-4,
-  //   .col-5 {
-  //     border-left: 1px solid $gray-900;
-  //   }
-
-  //   .meter2 {
-  //     width: 100%;
-  //     height: 100%;
+  //   span {
+  //     color: #e0df9d;
   //   }
   // }
 }
-
-// /* Extra Output Area */
-// .extranotice {
-//   display: table;
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   z-index: 2;
-//   max-width: 90%;
-//   transform: translateX(-50%);
-//   text-align: center;
-//   font-size: 12px;
-//   padding: 10px 10px;
-//   border-bottom: 1px solid #222;
-//   border-top: 1px solid #222;
-//   box-sizing: border-box;
-//   color: #9e9e9e;
-//   letter-spacing: 1px;
-//   white-space: nowrap;
-
-//   span {
-//     color: #e0df9d;
-//   }
-// }
-
 
 @include layout-bp(gt-sm) {
   .hstat {

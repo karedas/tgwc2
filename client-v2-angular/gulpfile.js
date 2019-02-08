@@ -73,11 +73,12 @@ function generateSprites(done) {
 }
 
 function generateAssetsList() {
-	let fileList = require('gulp-filelist');
+	let fileList = require('gulp-filelist');	
+	console.log();
 
-	console.log(config.src.img + '!tiles/*/**/*');
 	return gulp.src([
 			config.src.img + '**/*.{png,jpg,gif}', 
+			'!'+config.src.img + 'sprites/*/**'
 		])
 		.pipe(fileList('assets_list.json', {
 			relative: true

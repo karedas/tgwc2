@@ -53,10 +53,8 @@
       <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="row">
         
         <div class="tg-objects--line" *ngFor="let sz of object.mrn; let indexSz=index"
-          (mousedown)="onInteract($event, object, indexSz, true)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
-          
-          <tg-icons [icon]="object.icon"></tg-icons>
+          <tg-icons [icon]="object.icon" (mousedown)="onInteract($event, object, indexSz, true)"></tg-icons>
           <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>
           <div class="tg-object--itemdesc" [innerHtml]="(indexSz + 1)" [attr.mrn]="object.mrn[indexSz]"></div>
         </div>

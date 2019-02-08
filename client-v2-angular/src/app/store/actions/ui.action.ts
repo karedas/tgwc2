@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { IHero } from 'src/app/models/data/hero.model';
 
 export enum UIEventType {
   UI = '[UI] Ui Updated',
@@ -8,7 +9,8 @@ export enum UIEventType {
   TOGGLEDASHBOARD = '[UI] Toggle Dashboard',
   UPDATENEEDED = '[UI] Update Needed Data',
   CLOSETEXTEDITOR = '[UI] Close Text Editor',
-  SHOWCOMMANDS = '[UI] Show Commands List'
+  SHOWCOMMANDS = '[UI] Show Commands List',
+  SHOWCHARACTERSHEET = '[UI] Show Character Sheet'
 
 }
 
@@ -42,6 +44,11 @@ export class CloseTextEditor implements Action {
 export class ShowCommandsActions implements Action {
   readonly type = UIEventType.SHOWCOMMANDS;
   constructor( public payload: []) {}
+}
+
+export class ShowCharacterSheetActions implements Action {
+  readonly type = UIEventType.SHOWCHARACTERSHEET;
+  constructor (public payload: IHero) {}
 }
 
 

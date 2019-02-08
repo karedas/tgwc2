@@ -6,6 +6,7 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IStatus, IHero, ITarget } from 'src/app/models/data/hero.model';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-character-panel',
@@ -36,7 +37,9 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private store: Store<DataState>) {
+  constructor(
+    private store: Store<DataState>,
+    private game: GameService) {
 
     this._unsubscribeAll = new Subject();
   }
@@ -83,6 +86,10 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       this.enemyIcon = null;
       this.enemyName = '';
     }
+  }
+
+  openInfo() {
+    this.game.processCommands('info');
   }
 
   private updateEnemyIcon() {}

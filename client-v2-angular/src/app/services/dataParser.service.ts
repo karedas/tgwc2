@@ -6,7 +6,6 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
 import { IHero } from '../models/data/hero.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +58,7 @@ export class DataParser {
   parseForDisplay(data: string) {
     let pos: any;
 
+
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
       this.store.dispatch(new UiActions.WelcomeNewsAction);
@@ -68,7 +68,6 @@ export class DataParser {
     // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
       const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
-      console.log('herodata', pgdata_parse);
       this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
       return '';
     });
@@ -193,6 +192,7 @@ export class DataParser {
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
       console.log('---------- generic page ------------', page_parse);
+      this.store.dispatch(new DataActions.IncomingData(page_parse));
       return '';
     });
 
@@ -256,7 +256,7 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      console.log('player info', info_parse);
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions(info_parse));
       return '';
     });
 

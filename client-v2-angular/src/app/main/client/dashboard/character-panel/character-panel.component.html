@@ -3,10 +3,10 @@
     <!-- Character Detail -->
       <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
         <!-- Character Avatar -->
-        <div class="tg-characteravatar b-ironlight" 
+        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()"
           fxHide fxShow.gt-sm>
           <div class="tg-avatar-wrap">
-            <img [src]="heroImage" alt="Avatar" *ngIf="heroImage" />
+            <img [src]="heroImage" alt="Avatar" *ngIf="heroImage"  />
           </div>
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>

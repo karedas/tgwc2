@@ -10,6 +10,7 @@ import { DisconnectAction } from 'src/app/store/actions/client.action';
 
 import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
+import { DynamicDialogRef } from 'primeng/api';
 
 @Component({
   selector: 'tg-login-smart',
@@ -26,9 +27,9 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   constructor(
     // private form: FormBuilder,
     private store: Store<ClientState>,
-    private loginService: LoginService,
     private router: Router,
-    private genericDialogService: GenericDialogService) {
+    private dialogRef: DynamicDialogRef,
+    private loginService: LoginService) {
 
     this.inGameState$ = this.store.pipe(select(getInGameStatus));
     this._unsubscribeAll = new Subject();
@@ -41,30 +42,30 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     //   'password': ['', PasswordValidation]
     // });
 
-    this.inGameState$.pipe(
-      takeUntil(this._unsubscribeAll),
-      skip(1)).subscribe (
-        ingame => {
-        if (ingame == false) { this.open(); }
-      }
-    );
+    // this.inGameState$.pipe(
+    //   takeUntil(this._unsubscribeAll),
+    //   skip(1)).subscribe (
+    //     ingame => {
+    //     if (ingame == false) { this.open(); }
+    //   }
+    // );
   }
 
-  private open () {
+  // private open () {
 
-    setTimeout(() => {
-      this.genericDialogService.open(this.dialogID, <DialogConfiguration>{
-        blockScroll: true,
-        modal: true
-      });
-    });
+  //   setTimeout(() => {
+  //     this.genericDialogService.open(this.dialogID, <DialogConfiguration>{
+  //       blockScroll: true,
+  //       modal: true
+  //     });
+  //   });
 
-  }
+  // }
 
   onReconnect() {
     this.loginService.reconnect();
     // TODO: Wait OK from Server
-    this.genericDialogService.close(this.dialogID);
+    this.dialogRef.close();
   }
 
   toggle(event?: Event) {
@@ -77,8 +78,10 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
   }
 
   navigateToHome() {
-    this.store.dispatch(new DisconnectAction);
-    this.router.navigate(['/login']);
+    this.dialogRef.close();
+    this.router.navigate(['/login']).then(() => {
+      this.store.dispatch(new DisconnectAction);
+    });
   }
 
 

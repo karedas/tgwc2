@@ -30,6 +30,7 @@ export function reducer(
       }};
 
     case DataEvenType.HERODATA:
+    console.log(action.payload);
       return Object.assign({}, state, {hero: action.payload});
 
     case DataEvenType.DOORS:

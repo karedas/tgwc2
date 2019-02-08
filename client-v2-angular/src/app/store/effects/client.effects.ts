@@ -3,8 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
 import { Action } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
+import { tap, skip } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/audio/audio.service';
+import { WindowsService } from 'src/app/main/client/windows/windows.service';
+import { LoginService } from 'src/app/main/authentication/services/login.service';
+import { Router } from '@angular/router';
 
 export interface PayloadAction {
   type: string;
@@ -16,13 +19,22 @@ export class ClientEffects {
 
   constructor(
     private actions$: Actions,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private loginService: LoginService,
+    private windowsService: WindowsService,
+    private router: Router
   ) { }
 
   @Effect({dispatch: false})
-  closeTextEditor: Observable<Action> = this.actions$.pipe(
+  onDisconnect: Observable<Action> = this.actions$.pipe(
     ofType(ClientEventType.DISCONNECT),
-    tap(() => this.audioService.pauseAudio() )
-  );
+    tap((a) => {
+      if(this.router.url == '/webclient'){
+        this.loginService.logout();
+        this.audioService.pauseAudio();
+        this.windowsService.openSmartLogin();
+      } 
+    }
+  ));
 
 }

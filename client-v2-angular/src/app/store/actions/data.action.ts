@@ -98,7 +98,6 @@ export class RegionAction implements Action {
     constructor(public payload: IRegion) {}
 }
 
-
 export type DataAction
 = IncomingData
 | OutgoingData

@@ -24,8 +24,6 @@ export function reducer(
       if(typeof action.payload !== "boolean" ) {
         newState = !state.extraOutput;
       }
-
-      console.log(newState);
       return Object.assign({}, state, { extraOutput: newState});
     }
 

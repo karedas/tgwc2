@@ -15,6 +15,7 @@ import { DialogGenericModule } from '../../common/dialog/dialog.module';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { NoFeatureComponent } from './no-feature/no-feature.component';
 import { WindowsService } from './windows.service';
+import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 @NgModule({
   declarations: [
     GenericTableComponent,
@@ -26,6 +27,7 @@ import { WindowsService } from './windows.service';
     CommandsListComponent,
     EditorComponent,
     WorkslistComponent,
+    CharacterSheetComponent
   ],
   imports: [
     DynamicDialogModule,
@@ -47,6 +49,7 @@ import { WindowsService } from './windows.service';
     CommandsListComponent,
     WelcomeNewsComponent,
     CookieLawComponent,
+    CharacterSheetComponent
   ],
   providers: [
     WindowsService

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { CookieLawComponent } from './cookie-law/cookie-law.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
+import { LoginSmartComponent } from './login-smart/login-smart.component';
+import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 
 
 @Injectable({
@@ -41,7 +43,29 @@ export class WindowsService {
     return ref.onClose;
   }
 
-  openSmartLogin() { }
+  openSmartLogin() { 
+    const ref = this.dynamicDialogService.open(LoginSmartComponent, 
+      <DynamicDialogConfig>{
+        blockScroll: true,
+        showHeader: false,
+        modal: true,
+        width: 'auto',
+        height: 'auto',
+      });
+  }
+
+  openCharacterSheet() {
+    const ref = this.dynamicDialogService.open(CharacterSheetComponent, 
+      <DynamicDialogConfig>{
+        showHeader: true,
+        modal: false,
+        header: 'Scheda Personaggio',
+        width: '750px',
+        height: 'auto',
+        style: { 'max-width': '100%', 'max-height': '100%' },
+      });
+  }
+
 
   openCommandsList() {
     this.genericDialogService.open('commandsList',

@@ -15,6 +15,7 @@
     top: -11px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 10;
   }
 
   &:after,
@@ -46,8 +47,9 @@
 .tg-geolocal--image {
   background: url("/assets/images/borders/border-002-tiny.png") repeat-x bottom left;
   padding-bottom: 3px;
-
+  
   div {
+    opacity: 0;
     box-shadow: inset 0 0 10px 2px black;
     max-height: 100%;
     //temp
@@ -90,6 +92,7 @@
 .regimg {
     @include sprite($r1-sprite);
 }
+
 .region-img-1 {
   @include sprite($r1-sprite);
 }
@@ -372,4 +375,64 @@
 
 .region-img-71 {
   @include sprite($r71-sprite);
+}
+
+.region-img-72 {
+  @include sprite($r72-sprite);
+}
+
+.region-img-73 {
+  @include sprite($r73-sprite);
+}
+
+.region-img-74 {
+  @include sprite($r74-sprite);
+}
+
+.region-img-75 {
+  @include sprite($r75-sprite);
+}
+
+.region-img-76 {
+  @include sprite($r76-sprite);
+}
+
+.region-img-77 {
+  @include sprite($r77-sprite);
+}
+
+.region-img-78 {
+  @include sprite($r78-sprite);
+}
+
+.region-img-79 {
+  @include sprite($r79-sprite);
+}
+
+.region-img-80 {
+  @include sprite($r80-sprite);
+}
+
+.region-img-81 {
+  @include sprite($r81-sprite);
+}
+
+.region-img-82 {
+  @include sprite($r82-sprite);
+}
+
+.region-img-83 {
+  @include sprite($r83-sprite);
+}
+
+.region-img-84 {
+  @include sprite($r84-sprite);
+}
+
+.region-img-85 {
+  @include sprite($r85-sprite);
+}
+
+.region-img-86 {
+  @include sprite($r86-sprite);
 }

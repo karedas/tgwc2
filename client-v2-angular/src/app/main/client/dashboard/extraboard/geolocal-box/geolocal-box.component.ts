@@ -5,6 +5,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getRegion } from 'src/app/store/selectors';
 import { trigger, style, state, transition, animate, query, stagger } from '@angular/animations';
+import { skip } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-geolocal-box',
@@ -52,7 +53,7 @@ export class GeolocalBoxComponent implements OnInit {
 
   ngOnInit() {
 
-    this.region$.subscribe(
+    this.region$.pipe().subscribe(
       (region: IRegion) => {
         if(region) {
           this.newRegionfadeInOut(region);

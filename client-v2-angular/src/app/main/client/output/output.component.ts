@@ -11,6 +11,7 @@ import { GameService } from 'src/app/services/game.service';
 import { Room } from 'src/app/models/data/room.model';
 import { SplitComponent } from 'angular-split';
 import { ToggleExtraOutput } from 'src/app/store/actions/ui.action';
+import { LoginService } from '../../authentication/services/login.service';
 
 @Component({
   selector: 'tg-output',
@@ -44,6 +45,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
+    private loginService: LoginService,
     private game: GameService) {
 
     this.extraOutputOpenStatus$ = this.store.select(getExtraOutputStatus);
@@ -54,12 +56,21 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.baseText = this.store.select(getDataBase);
     this.roomBase = this.store.select(getRoomBase);
     this.objOrPerson = this.store.select(getObjOrPerson);
-
-
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
+
+    /* Check login status and if is disconnect cleaning the output messages */
+    this.loginService.isLoggedIn.pipe(
+      takeUntil(this._unsubscribeAll)
+    ).subscribe(
+      (status) =>  {
+       if(status === false) {
+         this.output = [];
+       }
+      }
+    )
 
     /** Toggle Splitter Output  view  */
     this.extraOutputOpenStatus$.pipe(
@@ -120,7 +131,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.setOutputSplit();
+    setTimeout(() => {
+      this.setOutputSplit();
+    });
   }
 
   private setContent(t: string, c: any): any {
@@ -144,7 +157,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       clearInterval(this.resizeID);
       this.resizeID = setTimeout(() => {
         this.setOutputSplit();
-      }, 1000);
+      }, 500);
   }
 
   setOutputSplit() {

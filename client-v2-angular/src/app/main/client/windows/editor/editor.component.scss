@@ -5,6 +5,8 @@
   .tg-editor-container {
     height: 100%;
     background-color: #cbb48d;
+    z-index: 10;
+    position: relative;
   }
 
   .tg-modal-contentwrap {

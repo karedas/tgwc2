@@ -22,6 +22,8 @@ import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service'
 
 export class InputComponent implements AfterViewInit {
 
+  @ViewChild('inputCommand') ic: ElementRef;
+
   facolumns = faColumns;
   faSolarPanel = faSolarPanel;
   faBullseye = faBullseye;
@@ -31,15 +33,16 @@ export class InputComponent implements AfterViewInit {
 
   zenStatus$: BehaviorSubject<boolean>;
 
-  @ViewChild('inputCommand') ic: ElementRef;
 
   constructor(
     private game: GameService,
     private store: Store<ClientState>,
     private historyService: HistoryService,
   ) {
+
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
+
   }
 
   ngAfterViewInit() {
@@ -63,7 +66,7 @@ export class InputComponent implements AfterViewInit {
       this.moveCursorAtEnd(event.target);
     }
   }
-  
+
   onDownKey(event: any) {
     event.preventDefault();
     const cmd = this.historyService.getNext();
@@ -74,7 +77,7 @@ export class InputComponent implements AfterViewInit {
   }
 
   moveCursorAtEnd(target) {
-    if (typeof target.selectionStart == 'number' ) {
+    if (typeof target.selectionStart == 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
     } else if (typeof target.createTextRange != 'undefined') {
       this.focus();

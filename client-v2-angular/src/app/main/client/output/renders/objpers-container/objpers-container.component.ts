@@ -51,7 +51,6 @@ export class ObjPersContainerComponent implements OnInit  {
     event.preventDefault();
     if (!item.sz) {
       if (!item.cntnum) {
-        console.log('a');
         this.game.processCommands(`guarda &${item.mrn[0]}`);
       } else if (item.cntnum && item.mrn.length > 0) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);

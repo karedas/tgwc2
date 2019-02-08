@@ -9,6 +9,7 @@ import { GameService } from 'src/app/services/game.service';
 @Component({
   selector: 'tg-details-room',
   templateUrl: './details-room.component.html',
+  styleUrls: ['./details-room.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

@@ -17,19 +17,37 @@ export interface ITarget {
   name?: string;
 }
 
+export interface ISex {
+  name: string;
+  code: string;
+}
+
 export interface IHero {
   name?: string;
   adjective?: string;
+  desc?: string;
   race?: IHeroRace;
+  cult?: string;
+  ethn?: string;
   image?: string;
-  conva: number;
+  conva?: number;
   combat?: any;
   walk?: string;
   title?: string;
-  status: IStatus;
+  status?: IStatus;
+  relig?: string;
+  sex?: ISex;
   equipment?: [];
   inventory?: [];
   target?: ITarget | null;
+  lang?: string;
+  weight?: number;
+  height?: number;
+  born?: string;
+  age?: number;
+  icon?: number;
+  city?: string;
+  abil?: any;
 }
 
 export class Hero implements IHero {

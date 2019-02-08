@@ -1,0 +1,572 @@
+@import 'variables';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+
+.tg-character-card {
+  color: #c4c0aa;
+  max-width: 100%;
+  max-height: 100%;
+  font-family: kingthings;
+  font-size: 12px;
+
+  .tg-character-content {
+    // height: 502px;
+    // background: url($imgPath + '/interface/playerinfo-mainbackground_default.jpg') no-repeat top left;
+    // padding: 29px 28px 24px;
+    box-sizing: border-box;
+  }
+
+  // .btn-g-close {
+  //   position: absolute;
+  //   right: 35px;
+  //   top: 44px;
+  // }
+
+  // .btn-g-back {
+  //   position: absolute;
+  //   right: 66px;
+  //   top: 44px;
+  //   display: none;
+  // }
+
+  // .tab-pane {
+  //   height: 100%;
+  //   overflow: hidden;
+  // }
+
+  .info-main {
+    // padding-top: 15px;
+    padding: 1em;
+    position: relative;
+  }
+
+  .info-menu {
+
+    margin-top: auto;
+
+    a {
+      margin: 0 auto 12px;
+      display: block;
+      border: none;
+      border-radius: 0;
+      background-color: transparent !important;
+    }
+
+    .btn-i-generale {
+      @include sprite($generalita-btn-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($generalita-btn-active-sprite);
+      }
+    }
+
+    .btn-i-descr {
+      @include sprite($descr-btn-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($descr-btn-active-sprite);
+      }
+    }
+
+    .btn-i-stats {
+      @include sprite($carat-btn-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($carat-btn-active-sprite);
+      }
+    }
+  }
+
+  /* Avatar */
+  .info-avatar {
+    cursor: pointer;
+    background: url($imgPath + '/interface/riquadro-avatar-big.jpg') no-repeat top left;
+    width: 220px;
+    height: 190px;
+    margin: 0 auto;
+    position: relative;
+
+    img {
+      position: absolute;
+      box-shadow: 0px 2px 12px #231c16 inset;
+      top: 15px;
+      left: 15px;
+
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      bottom: 15px;
+      right: 15px;
+      z-index: 2;
+      box-shadow: inset 0 0 20px 1px black;
+      transition: background-color .1s linear;
+    }
+
+    &:hover {
+
+      &:after {
+        content: 'CAMBIA IMMAGINE';
+        display: inline-block;
+        color: white;
+        position: absolute;
+        margin: auto auto;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        left: 50%;
+        top: 50%;
+        color: #c4c0aa;
+      }
+
+      &:before {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+    }
+  }
+
+  .info-nametitle {
+    padding: 1em 0;
+    text-align: center;
+  }
+
+  .info-name {
+    display: flex;
+    flex: 0 1 auto;
+    justify-content: center;
+    font-size: 30px;
+    color: #ccb58f;
+    letter-spacing: 2px;
+    line-height: 48px;
+    align-items: center;
+
+    &:before,
+    &:after {
+      flex: 0 1 100px;
+      margin: 0 .5em;
+      content: '';
+      display: inline-block;
+      height: 1px;
+      background-color: #5e583b;
+    }
+  }
+
+  .info-title {
+    font-style: italic;
+    font-size: 15px;
+    color: #85816a;
+    text-transform: capitalize;
+  }
+
+
+  .info-right-data {
+    background: url($imgPath + '/borders/border-002-tiny-v.png') repeat-y left;
+  }
+
+  .info-description {
+    background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+    padding: 1.5em 1em;
+    color: #3a2e19;
+
+    &:before {
+      content: '';
+      @include sprite($descr-title-box-sprite);
+      position: absolute;
+      top: 0;
+      right: 21px;
+      z-index: 5;
+    }
+
+    .info-textarea--wrap {
+      background: #ccb58f;
+    }
+
+    .info-textarea--container {
+      margin-bottom: 1em;
+
+      .textarea {
+        outline: none;
+        min-height: 196px;
+        font-family: kingthings;
+        font-size: 14px;
+        line-height: 1.2;
+        border: none;
+        resize: none;
+        box-sizing: border-box;
+        background-color: transparent;
+        color: #d6d6d6;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: auto;
+        color: #3a2e19;
+      }
+    }
+
+    .info-textarea--action {
+      margin-bottom: -18px;
+      text-align: center;
+      place-content: center;
+
+      .btn-i-modifica {
+        @include sprite($btn-modifica-sprite);
+        margin-left: 1em;
+      }
+    }
+  }
+
+
+  .info-base {
+    position: relative;
+    padding: 1em 1.5em;
+    background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+
+    &:before {
+      content: '';
+      @include sprite($info-title-box-sprite);
+      position: absolute;
+      top: -1em;
+      right: 21px;
+      z-index: 5;
+    }
+  
+    .data-born {
+      padding: 1em 0 0;
+    }
+  }
+
+  .info-stats {
+    position: relative;
+    padding: 1.5em 1em;
+
+    &:before {
+      content: '';
+      @include sprite($carat-title-box-sprite);
+      position: absolute;
+      top: -1em;
+      right: 21px;
+      z-index: 5;
+    }
+
+
+    .data-skill-box {
+      width: 100%;
+      height: 19px;
+      border: 1px solid #59564c;
+      margin-bottom: 10px;
+      background-color: #0f0f0e;
+      padding: 2px;
+      position: relative;
+      text-shadow: 0 0px 5px black;
+
+      span {
+        display: block;
+        height: 13px;
+        max-width: 100%;
+        background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top right;
+        transition: width .4s ease-out;
+      }
+
+
+      i {
+        color: white;
+        position: absolute;
+        font-style: normal;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 4px;
+      }
+    }
+
+    .info-data:not(.show) .data-skill-box span {
+      width: 0 !important;
+    }
+
+
+
+    .name-skill {
+      margin-bottom: 10px;
+      height: 20px;
+      font-size: 14px;
+    }
+
+  }
+
+  /* Avatar Upload */
+  // .upload-avatar {
+  //   display: none;
+  //   width: 100%;
+  //   height: 100%;
+  //   flex-direction: column;
+  //   justify-content: start;
+  //   color: #c4c0aa;
+  //   text-align: center;
+
+  //   h3 {
+  //     font-size: 14px;
+  //     color: $tg-yellow;
+  //     text-transform: uppercase;
+  //     padding-top: .5em;
+  //   }
+
+  //   .avatar-crop {
+  //     background: url($imgPath + '/interface/riquadro-avatar-big.jpg') no-repeat top left;
+  //     width: 220px;
+  //     height: 190px;
+  //     margin: 15px auto 36px;
+  //     position: relative;
+  //     box-sizing: content-box;
+  //   }
+
+  //   .cr-boundary,
+  //   .croppy-result {
+  //     display: none;
+  //     position: absolute;
+  //     top: 15px;
+  //     left: 15px;
+  //     z-index: 2;
+  //     overflow: hidden;
+  //   }
+
+  //   .cr-overlay {
+  //     z-index: 1;
+  //     position: absolute;
+  //     cursor: move;
+  //     touch-action: none;
+  //   }
+
+  //   .cr-slider-wrap {
+  //     position: absolute;
+  //     top: 195px;
+  //     left: 50%;
+  //     transform: translateX(-50%);
+  //     z-index: 3;
+  //     display: none;
+
+  //     .cr-slider {
+  //       cursor: pointer;
+  //     }
+  //   }
+
+  //   .cr-boundary img {
+  //     z-index: -1;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     transform-origin: 0 0;
+  //     max-height: none;
+  //     max-width: none;
+  //   }
+
+  //   .cr-image {
+  //     display: none;
+  //   }
+
+  //   .custom-file,
+  //   .custom-file-input {
+  //     width: auto;
+  //     vertical-align: middle;
+  //     cursor: pointer;
+  //   }
+
+  //   .custom-file-label {
+  //     border: none;
+  //     height: auto;
+  //     text-align: left;
+
+  //     &:after {
+  //       content: 'Sfoglia';
+  //       border-left: 1px solid #59564c;
+  //       background: #48433d;
+  //       color: white;
+  //     }
+  //   }
+
+  //   .btn-crop,
+  //   .btn-sendcrop {
+  //     display: none;
+  //     vertical-align: middle;
+  //     height: 1.8rem;
+  //     border: none;
+  //     color: white;
+  //   }
+
+  //   .btn-crop {
+  //     background-color: $tg-brown;
+  //   }
+
+  //   .btn-sendcrop {
+  //     background-color: $tg-red;
+  //   }
+
+  //   &.ready {
+  //     .btn-crop {
+  //       display: inline-block;
+  //     }
+
+  //     .cr-slider-wrap {
+  //       display: initial;
+  //     }
+
+  //     .cr-boundary,
+  //     .croppy-result,
+  //     .cr-image {
+  //       display: block;
+  //     }
+  //   }
+
+  //   &.sendable {
+
+  //     .cr-boundary,
+  //     .croppy-result,
+  //     .cr-image {
+  //       display: block;
+  //     }
+
+  //     .btn-sendcrop {
+  //       display: inline-block;
+  //     }
+
+  //   }
+  // }
+
+  // &.upimg {
+  //   .btn-g-back {
+  //     display: block;
+  //   }
+
+  //   .upload-avatar {
+  //     display: flex;
+  //   }
+
+  //   .info-main,
+  //   .info-nametitle,
+  //   .info-databox {
+  //     display: none;
+  //   }
+  // }
+
+
+
+  .tg-character-nav {
+    justify-content: center;
+    display: flex;
+
+    a {
+      border: none;
+    }
+
+    .btn-info-tab {
+      background-color: transparent;
+      @include sprite($btn-info-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($btn-info-active-sprite);
+      }
+    }
+
+    .btn-equip-tab {
+      background-color: transparent;
+      @include sprite($btn-equip-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($btn-equip-active-sprite);
+      }
+    }
+
+    .btn-inv-tab {
+      background-color: transparent;
+      @include sprite($btn-inventario-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($btn-inventario-active-sprite);
+      }
+    }
+
+    .btn-skill-tab {
+      background-color: transparent;
+      @include sprite($btn-skill-sprite);
+
+      &.active,
+      &:hover {
+        @include sprite($btn-skill-active-sprite);
+      }
+    }
+  }
+
+
+  /* Skill Panel */
+  .skill-cont {
+    padding: 0 0 15px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      border-bottom: 1px solid #444236;
+      text-align: center;
+      color: #c4c0aa;
+      padding: 12px 20px;
+      margin-bottom: 0;
+      font-family: kingthings;
+    }
+
+    .skill-list {
+      background: #2b292882;
+      padding: 0 15px;
+      height: 100%;
+      box-shadow: 0px 0px 40px #000000 inset;
+      margin: 2px 0;
+    }
+
+    table th,
+    table td {
+      vertical-align: middle;
+    }
+
+    .meter2 {
+      min-width: 153px;
+      border: 1px solid #59564c;
+      background: #0f0f0e;
+      position: relative;
+      padding: 2px;
+
+      span:first-child {
+        margin-bottom: 2px;
+      }
+
+      span {
+        display: block;
+        width: 0;
+        height: 13px;
+        max-width: 100%;
+        background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top right;
+        transition: width .4s ease-out;
+      }
+
+      i {
+        position: absolute;
+        font-style: normal;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 1px;
+      }
+    }
+  }
+
+  .skillsep {
+    color: #e6deb2;
+    font-size: 2em;
+  }
+}

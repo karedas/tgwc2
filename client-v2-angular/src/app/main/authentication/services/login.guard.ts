@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     checkLogin(url: string): boolean {
-        if (this.loginService.IsLoggedInStatus) {
+        if (this.loginService.isLoggedinStatusValue) {
             return true;
         }
 

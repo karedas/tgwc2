@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { Action, Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
-import { tap, map, withLatestFrom, filter } from 'rxjs/operators';
+import { tap, map, withLatestFrom, filter, switchMap } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
-import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
-import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
+import { HeroAction } from '../actions/data.action';
+import { IHero } from 'src/app/models/data/hero.model';
 
 export interface PayloadAction {
   type: string;
@@ -53,6 +53,17 @@ export class UiEffects {
         setTimeout(() => {
           this.windowsService.openCommandsList();
         }, 100);
+      })
+    );
+
+    @Effect()
+    showCharacterSheet =  this.actions$.pipe(
+      ofType<PayloadAction>(UIEventType.SHOWCHARACTERSHEET),
+      switchMap((res) => [
+         new HeroAction(res.payload)
+      ]),
+      tap(() => {
+        this.windowsService.openCharacterSheet();
       })
     );
 

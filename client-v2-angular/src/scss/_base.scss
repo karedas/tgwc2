@@ -2,7 +2,7 @@
 @import '~@angular/flex-layout/mq';
 
 @include font-face(
-  kingthinks, '/assets/fonts/Kingthings_Foundation', null, null, ttf
+  kingthings, '/assets/fonts/Kingthings_Foundation', null, null, ttf
 );
 
 body,
@@ -15,6 +15,7 @@ body {
   background: #0b0807;
   color: white;
   min-height: 100%;
+  line-height: normal;
   font-size: 11px;
 }
 

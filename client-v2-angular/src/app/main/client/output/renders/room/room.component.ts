@@ -29,7 +29,6 @@ export class RoomComponent implements OnInit {
   }
 
   onBackDetail(num: number) {
-    console.log(num);
     if(num) {
       this.game.processCommands(`guarda &${num}`)
     }

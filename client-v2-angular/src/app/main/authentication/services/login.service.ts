@@ -58,7 +58,7 @@ export class LoginService {
   }
 
   public logout() {
-    // this.isLoggedInSubject.next(false);
+    this.isLoggedInSubject.next(false);
   }
 
   public reconnect() {
@@ -70,8 +70,12 @@ export class LoginService {
     this.socketService.off(socketEvent.DATA);
   }
 
-  public get IsLoggedInStatus(): boolean {
+  public get isLoggedinStatusValue(): boolean {
     return this.isLoggedInSubject.value;
+  }
+
+  public get isLoggedIn(): Observable<any> {
+    return this.isLoggedInSubject;
   }
 
   setHandleLoginData() {
