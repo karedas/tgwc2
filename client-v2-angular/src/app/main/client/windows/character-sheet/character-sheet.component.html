@@ -34,7 +34,9 @@
                     <div class="info-textarea--action">
                       <div id="editorMaxCharsCount" class="tg-txt-maxcharcount"><b>Max.
                           Caratteri {{totalChars}}/max</b></div>
-                      <button type="button" class="btn-i-modifica tg-button tg-shadow" (click)="changeDescription()">Modifica</button>
+                      <button type="button" class="btn-i-modifica tg-button tg-shadow" 
+                        (click)="changeDescription()"
+                        pTooltip="Cambia la descrizione" tooltipPosition="top" showDelay="500" hideDelay="100">Modifica</button>
                     </div>
                   </div>
                   <div class="tg-border-box">

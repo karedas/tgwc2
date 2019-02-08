@@ -61,7 +61,7 @@ export class WindowsService {
   }
 
   openCharacterSheet() {
-
+    //TODO: move method in another place for a global use
     if(!this.dialogs.has('charactersheet')) {
       const ref = this.dynamicDialogService.open(CharacterSheetComponent, 
         <DynamicDialogConfig>{
