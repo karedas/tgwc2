@@ -5,7 +5,6 @@ import { Store, select } from '@ngrx/store';
 import { getWelcomeNews } from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
-import { WelcomeNewsComponent } from '../windows/welcome-news/welcome-news.component';
 import { WindowsService } from '../windows/windows.service';
 
 @Component({

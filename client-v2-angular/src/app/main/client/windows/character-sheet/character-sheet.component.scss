@@ -153,6 +153,8 @@
 
   .right-data {
     padding-left: 2px;
+    height: 100%;
+    overflow: hidden;
     background: url($imgPath + '/borders/border-002-tiny-v.png') repeat-y left;
   }
 

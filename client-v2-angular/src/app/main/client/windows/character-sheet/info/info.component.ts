@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IHero } from 'src/app/models/data/hero.model';
 import { DataState } from 'src/app/store/state/data.state';
@@ -6,18 +6,21 @@ import { Store, select } from '@ngrx/store';
 import { getHero } from 'src/app/store/selectors';
 import { GameService } from 'src/app/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoComponent implements AfterViewInit {
 
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
   
   heroInfo$: Observable<IHero>;
+  description: string;
 
   constructor(
     private store: Store<DataState>,
@@ -27,7 +30,11 @@ export class InfoComponent implements AfterViewInit {
    }
 
   ngAfterViewInit() {
-    this.textAreaScrollbar.update();
+    this.heroInfo$.pipe(
+      map(( hero:IHero ) => {
+        this.parseDesc(hero.desc);
+        this.textAreaScrollbar.update();
+      })).subscribe();
   }
 
     
@@ -35,8 +42,8 @@ export class InfoComponent implements AfterViewInit {
     this.game.processCommands('cambia desc');
   }
 
-  parseDesc(value: string): string {
-    return value.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, '');
+  parseDesc(value: string) {
+    this.description = value.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, '');
   }
 
 

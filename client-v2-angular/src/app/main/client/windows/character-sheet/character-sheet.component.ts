@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
+import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation, Input, AfterViewInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { Observable } from 'rxjs';
 import { IHero } from 'src/app/models/data/hero.model';
 import { getHero } from 'src/app/store/selectors';
-import { map } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -17,12 +16,15 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class CharacterSheetComponent implements OnInit {
 
-  private heroBase$: Observable<IHero>;
+  dialogID: string = 'charactersheet';
+  imagepath: string = environment.media_address;
+  
+  heroBase$: Observable<IHero>;
   public heroImageUrl: string;
   public heroName: string;
   public heroTitle: string;
 
-  public openedTab: string = 'skills';
+  public openedTab: string = '';
 
   constructor(
     private store: Store<DataState>,
@@ -34,16 +36,12 @@ export class CharacterSheetComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.heroBase$.pipe(
-      map(( hero:IHero ) => {
-        this.setBaseHeroData(hero);
-      })).subscribe()
   }
 
-  private setBaseHeroData(hero: IHero) {
-    this.heroName = hero.name;
-    this.heroTitle = hero.title;
-    this.heroImageUrl = environment.media_address + hero.image;
+  onRequest(data) {
+    if(data !== this.openedTab) {
+      this.openedTab = data;
+    }
   }
 
   switchPanel(tab: string) {

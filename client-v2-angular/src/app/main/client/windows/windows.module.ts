@@ -49,6 +49,7 @@ import { SkillsComponent } from './character-sheet/skills/skills.component';
     CommandsListComponent,
     GenericTableComponent,
     WorkslistComponent,
+    CharacterSheetComponent
   ],
   entryComponents: [
     NoFeatureComponent,
@@ -56,7 +57,6 @@ import { SkillsComponent } from './character-sheet/skills/skills.component';
     CommandsListComponent,
     WelcomeNewsComponent,
     CookieLawComponent,
-    CharacterSheetComponent
   ],
   providers: [
     WindowsService

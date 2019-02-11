@@ -49,7 +49,7 @@ export class ShowCommandsActions implements Action {
 
 export class ShowCharacterSheetActions implements Action {
   readonly type = UIEventType.SHOWCHARACTERSHEET;
-  constructor (public payload: IHero) {}
+  constructor (public payload: any) {}
 }
 
 

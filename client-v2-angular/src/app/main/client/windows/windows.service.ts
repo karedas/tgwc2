@@ -6,7 +6,6 @@ import { CookieLawComponent } from './cookie-law/cookie-law.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
-import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 
 
 @Injectable({
@@ -60,28 +59,29 @@ export class WindowsService {
       });
   }
 
-  openCharacterSheet() {
-
+  openCharacterSheet(detail?: string) {
     //TODO: move method in another place for a global use
-    
-    if(!this.dialogs.has('charactersheet')) {
-      const ref = this.dynamicDialogService.open(CharacterSheetComponent, 
-        <DynamicDialogConfig>{
-          showHeader: true,
+    // if(!this.dialogs.has('charactersheet')) {
+      const ref = this.genericDialogService.open('charactersheet', 
+        <DialogConfiguration>{
+          // showHeader: true,
+          draggable: true,
+          resizable: true,
           modal: false,
           header: 'Scheda Personaggio',
           width: '750px',
           height: '650px',
+          data: detail,
           style: { 'max-width': '100%', 'max-height': '100%' },
           contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
         });
   
-        this.dialogs.set('charactersheet', true);
+        // this.dialogs.set('charactersheet', true);
 
-        ref.onClose.subscribe(() => {
-          this.dialogs.delete('charactersheet');
-        })
-    }
+        // ref.onHide.subscribe(() => {
+        //   this.dialogs.delete('charactersheet');
+        // })
+    // }
   }
 
 

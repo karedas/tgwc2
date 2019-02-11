@@ -8,7 +8,7 @@ import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
-import { HeroAction } from '../actions/data.action';
+import { HeroAction, SkillsAction } from '../actions/data.action';
 import { IHero } from 'src/app/models/data/hero.model';
 import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 
@@ -60,12 +60,22 @@ export class UiEffects {
     @Effect()
     showCharacterSheet =  this.actions$.pipe(
       ofType<PayloadAction>(UIEventType.SHOWCHARACTERSHEET),
-      switchMap((res) => [
-         new HeroAction(res.payload)
-      ]),
-      tap(() => {
-        this.windowsService.openCharacterSheet();
-      })
+      map((res) => {
+        this.windowsService.openCharacterSheet(res.payload[1]);
+        return res;
+      }), 
+      switchMap((res) => {
+        if(res.payload[1] === 'info') {
+          return [
+            new HeroAction(res.payload[0])
+          ];
+        }
+        else if(res.payload[1] === 'skills') {
+          return [
+            new SkillsAction(res.payload[0])
+          ]
+        }
+      }),
     );
 
     @Effect({dispatch: false})

@@ -7,6 +7,7 @@ export class DialogConfiguration  {
     modal?: boolean;
     appendTo?: string;
     styleClass?: string;
+    data?: any;
     blockScroll?: boolean;
     visible?: boolean;
     resizable?: boolean;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
 import { Dialog } from 'primeng/dialog';
 import { GenericDialogService } from './dialog.service';
@@ -12,9 +12,9 @@ export class GenericDialogcomponent implements OnInit {
 
   @Input() id: string;
   @ViewChild('dialog') dialog: Dialog;
+  @Output() data: EventEmitter<any> = new EventEmitter<any>();
   @Output() isClosed: EventEmitter<boolean> = new EventEmitter();
 
-  data: any;
   config: DialogConfiguration  = new DialogConfiguration;
   visible = false;
 
@@ -44,6 +44,9 @@ export class GenericDialogcomponent implements OnInit {
     this.visible = true;
     this.config = Object.assign({}, this.config, config);
 
+    if(this.config.data) {
+      this.data.emit(this.config.data);
+    }
   }
 
   // close modal

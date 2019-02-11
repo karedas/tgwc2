@@ -248,8 +248,7 @@ export class DataParser {
     // Skill list
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-      this.store.dispatch(new DataActions.SkillsAction(skinfo_parse));
-      console.log('skill list', skinfo_parse);
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [skinfo_parse, 'skills'] ));
       return '';
 
     });
@@ -257,7 +256,7 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions(info_parse));
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [info_parse, 'info']));
       return '';
     });
 

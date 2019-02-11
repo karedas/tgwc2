@@ -1,18 +1,17 @@
 <ng-container  *ngIf="heroInfo$ | async as hero">
-<div fxLayout="column">
-
+<div fxLayout="column" style="height: 100%;">
   <!-- Info Description -->
   <div class="info-description" 
     fxFlex="0 1 100%" fxLayout="column">
   
     <div class="b-paper tg-box" style="background-color: transparent;">
-      <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap">
-        <div class="info-textarea--container">
+      <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap" fxLayout="column">
+        <div class="info-textarea--container" fxFlex="0 1 100%">
           <ng-scrollbar class="scrollbar" #scrollBar [autoUpdate]="true" style="height: 200px;">
-            <div name="editor" cols="30" autofocus class="textarea" [innerHtml]="parseDesc(hero.desc)"></div>
+            <div name="editor" cols="30" autofocus class="textarea" [innerHtml]="description"></div>
           </ng-scrollbar>
         </div>
-        <div class="info-textarea--action">
+        <div class="info-textarea--action" fxFlex="0 0 auto">
           <button type="button" class="btn-i-modifica tg-button tg-shadow" (click)="sendChangeDescriptionRequest()"
             pTooltip="Cambia la descrizione" tooltipPosition="top" showDelay="500" hideDelay="100">Modifica</button>
         </div>
@@ -43,7 +42,7 @@
       <div class="tg-brown" fxFlex="1 0 50%">{{hero.city || 'Nessuna'}}</div>
   
       <div class="data-name" fxFlex="1 0 50%">Religione:</div>
-      <div class="tg-brown" fxFlex="1 0 50%">{{hero.relig}}</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.relig || 'Nessuna'}}</div>
   
     </div>
     <div fxFlex="1 0 50%" fxLayout="row wrap">

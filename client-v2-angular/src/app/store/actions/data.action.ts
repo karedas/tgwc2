@@ -101,7 +101,7 @@ export class RegionAction implements Action {
 
 export class SkillsAction implements Action {
     readonly type = DataEvenType.SKILLS; 
-    constructor(public payload: any[]) {}
+    constructor(public payload: any) {}
 }
 
 export type DataAction

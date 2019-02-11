@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
+import { EventEmitter } from 'selenium-webdriver';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class GenericDialogService {
       // open modal specified by id
       const modal: any = this.modals.filter(x => x.id === id)[0];
       modal.open(config);
-      console.log(this.modals);
   }
 
   close(id: string) {
