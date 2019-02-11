@@ -22,7 +22,8 @@ export enum DataEvenType {
     OBJPERSON = '[Data] Object or Person',
     GENERICTABLE = '[Data] Generic Table',
     WORKSLIST = '[Data] Works List',
-    REGION = '[Data] Region'
+    REGION = '[Data] Region',
+    SKILLS = '[Data] Skills List'
 }
 
 export class IncomingData implements Action {
@@ -98,6 +99,11 @@ export class RegionAction implements Action {
     constructor(public payload: IRegion) {}
 }
 
+export class SkillsAction implements Action {
+    readonly type = DataEvenType.SKILLS; 
+    constructor(public payload: any[]) {}
+}
+
 export type DataAction
 = IncomingData
 | OutgoingData
@@ -112,5 +118,6 @@ export type DataAction
 | ObjAndPersAction
 | GenericTableAction
 | WorksListAction
+| SkillsAction
 | RegionAction;
 

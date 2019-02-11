@@ -76,6 +76,11 @@ export function reducer(
         region: action.payload
       });
 
+    case DataEvenType.SKILLS:
+      return {...state, hero: { ...state.hero,
+        skills: action.payload
+      }}
+
     default:
       return state;
   }

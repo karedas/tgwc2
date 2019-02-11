@@ -1,4 +1,8 @@
 //DynamicDialog 
+.ui-dialog {
+  display: flex;
+  flex-direction: column;
+}
 
 .ui-dynamicdialog .ui-resizable-se {
   width: 14px;

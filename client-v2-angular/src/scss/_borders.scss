@@ -354,8 +354,8 @@
     .tg-border-right {
       position: absolute;
       width: $modalpaper-border-size;
-      top: $modalpaper-border-size;
-      bottom: $modalpaper-border-size;
+      top: $modalpaper-border-size - 1;
+      bottom: $modalpaper-border-size - 1;
     }
 
     .tg-border-top {

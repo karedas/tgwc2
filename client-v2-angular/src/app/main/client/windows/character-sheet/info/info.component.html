@@ -1,0 +1,100 @@
+<ng-container  *ngIf="heroInfo$ | async as hero">
+<div fxLayout="column">
+
+  <!-- Info Description -->
+  <div class="info-description" 
+    fxFlex="0 1 100%" fxLayout="column">
+  
+    <div class="b-paper tg-box" style="background-color: transparent;">
+      <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap">
+        <div class="info-textarea--container">
+          <ng-scrollbar class="scrollbar" #scrollBar [autoUpdate]="true" style="height: 200px;">
+            <div name="editor" cols="30" autofocus class="textarea" [innerHtml]="parseDesc(hero.desc)"></div>
+          </ng-scrollbar>
+        </div>
+        <div class="info-textarea--action">
+          <button type="button" class="btn-i-modifica tg-button tg-shadow" (click)="sendChangeDescriptionRequest()"
+            pTooltip="Cambia la descrizione" tooltipPosition="top" showDelay="500" hideDelay="100">Modifica</button>
+        </div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Base Character Data -->
+  <div class="info-base" fxLayout="row wrap" fxFlex="0 0 auto">
+    <div fxFlex="1 0 50%" fxLayout="row wrap">
+  
+      <div class="data-name" fxFlex="1 0 50%">Razza:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.race.name}}</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Cultura:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.cult}}</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Etnia:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.ethn}}</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Citt&agrave;:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.city || 'Nessuna'}}</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Religione:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.relig}}</div>
+  
+    </div>
+    <div fxFlex="1 0 50%" fxLayout="row wrap">
+  
+      <div class="data-name" fxFlex="1 0 50%">Sesso:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.sex.name}}</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Età:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.age}} anni</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Aggettivo:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.adjective || 'Nessuno'}}</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Peso:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.weight}} pietre</div>
+  
+      <div class="data-name" fxFlex="1 0 50%">Altezza&agrave;:</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.height}} cm.</div>
+  
+    </div>
+    <div fxFlex="1 0 100%" class="data-born">Sei nato il
+      <span class="tg-brown">{{hero.born}}</span>
+    </div>
+  </div>
+  
+  <!-- Base Stats Character -->
+  <div class="info-stats" fxLayout="row" fxFlex="0 0 auto">
+    <div fxFlex="1 0 auto" style="padding-right: .5em;">
+      <div class="data-name name-skill">Volont&agrave;</div>
+      <div class="data-name name-skill">Intelligenza</div>
+      <div class="data-name name-skill">Empatia</div>
+      <div class="data-name name-skill">Taglia</div>
+    </div>
+    <div fxFlex="1 1 100%" style="padding-right: .5em;">
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.wil.prc"></span><i>{{hero.abil.wil.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.int.prc"></span><i>{{hero.abil.int.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.emp.prc"></span><i>{{hero.abil.emp.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.siz.prc"></span><i>{{hero.abil.siz.prc}}</i></div>
+    </div>
+    <div fxFlex="1 0 auto" style="padding-right: .5em;">
+      <div class="data-name name-skill">Forza</div>
+      <div class="data-name name-skill">Costituzione</div>
+      <div class="data-name name-skill">Destrezza</div>
+      <div class="data-name name-skill">Velocit&agrave;</div>
+    </div>
+    <div fxFlex="1 1 100%">
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.str.prc"></span><i>{{hero.abil.str.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.con.prc"></span><i>{{hero.abil.con.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.dex.prc"></span><i>{{hero.abil.dex.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil.spd.prc"></span><i>{{hero.abil.spd.prc}}</i></div>
+    </div>
+  </div>
+</div>
+</ng-container>

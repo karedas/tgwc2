@@ -16,6 +16,10 @@ import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { NoFeatureComponent } from './no-feature/no-feature.component';
 import { WindowsService } from './windows.service';
 import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
+import { InfoComponent } from './character-sheet/info/info.component';
+import { EquipInventoryComponent } from './character-sheet/equip-inventory/equip-inventory.component';
+import { SkillsComponent } from './character-sheet/skills/skills.component';
+
 @NgModule({
   declarations: [
     GenericTableComponent,
@@ -27,7 +31,10 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
     CommandsListComponent,
     EditorComponent,
     WorkslistComponent,
-    CharacterSheetComponent
+    CharacterSheetComponent,
+    InfoComponent,
+    EquipInventoryComponent,
+    SkillsComponent
   ],
   imports: [
     DynamicDialogModule,

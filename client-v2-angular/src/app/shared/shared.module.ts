@@ -80,7 +80,7 @@ import { GenericDialogService } from '../main/common/dialog/dialog.service';
     MenubarModule,
     TooltipModule,
     ButtonModule,
-    TableModule
+    TableModule,
     // NgxDatatableModule,
   ],
 })

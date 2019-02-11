@@ -1,0 +1,27 @@
+<div fxLayout="column" style="height: 100%">
+  <!-- ######## Ability ########  -->
+  <h3>Abilità conosciute</h3>
+  <div class="skill-list" fxLayout="column">
+    <div style="overflow: hidden; height: 100%;">
+      <ng-scrollbar class="scrollbar" [autoUpdate]="true">
+        <div class="skill-group" *ngFor="let skill of skills$ | async | keyvalue">
+          <div class="skill-groupname"> {{skill.key}} </div>
+          <div class="skill-subdetail-container">
+            <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" fxLayout="row">
+              <div class="skill-name" fxFlex="0 0 25%">
+                {{subskill.key}}
+              </div>
+              <div fxFlex="0 1 100%" class="meter2">
+                <span [style.width.%]="subskill.value.prac">
+                </span>
+              </div>
+              <!-- <div fxFlex="0 1 25%">{{subskill.value.theo}}</div>
+                <div fxFlex="0 1 25%">{{subskill.value.exp}}</div> -->
+              <div fxFlex="0 0 15%">{{subskill.value.prac}} / 100</div>
+            </div>
+          </div>
+        </div>
+      </ng-scrollbar>
+    </div>
+  </div>
+</div>

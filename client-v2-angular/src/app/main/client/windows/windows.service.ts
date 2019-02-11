@@ -61,7 +61,9 @@ export class WindowsService {
   }
 
   openCharacterSheet() {
+
     //TODO: move method in another place for a global use
+    
     if(!this.dialogs.has('charactersheet')) {
       const ref = this.dynamicDialogService.open(CharacterSheetComponent, 
         <DynamicDialogConfig>{
@@ -69,8 +71,9 @@ export class WindowsService {
           modal: false,
           header: 'Scheda Personaggio',
           width: '750px',
-          height: 'auto',
+          height: '650px',
           style: { 'max-width': '100%', 'max-height': '100%' },
+          contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
         });
   
         this.dialogs.set('charactersheet', true);
@@ -79,7 +82,6 @@ export class WindowsService {
           this.dialogs.delete('charactersheet');
         })
     }
- 
   }
 
 

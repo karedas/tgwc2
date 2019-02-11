@@ -22,8 +22,6 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
               <tr [pReorderableRow]="index">
                 <td *ngFor="let col of columns">
-
-
                   <ng-container *ngIf="col.name ==='icona'">
                     <tg-icons [icon]="rowData[col.field]"></tg-icons>
                   </ng-container>

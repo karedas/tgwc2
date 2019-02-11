@@ -66,6 +66,10 @@ function fetchRegion(state: DataState) {
   return state.region;
 }
 
+function fetchSkills(state: DataState) {
+  return state.hero.skills;
+}
+
 /******************* Public API's ******************/
 export const getDateNow = createSelector(getDataState, fetchDateNow);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
@@ -81,4 +85,4 @@ export const getEditor = createSelector(getDataState, fetchEditor);
 export const getGenericTable = createSelector(getDataState, fetchGenericTable);
 export const getWorksList = createSelector(getDataState, fetchWorksList);
 export const getRegion = createSelector(getDataState, fetchRegion);
-
+export const getSkills = createSelector(getDataState, fetchSkills);

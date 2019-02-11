@@ -248,6 +248,7 @@ export class DataParser {
     // Skill list
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
+      this.store.dispatch(new DataActions.SkillsAction(skinfo_parse));
       console.log('skill list', skinfo_parse);
       return '';
 

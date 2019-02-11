@@ -48,6 +48,7 @@ export interface IHero {
   icon?: number;
   city?: string;
   abil?: any;
+  skills?: any;
 }
 
 export class Hero implements IHero {
