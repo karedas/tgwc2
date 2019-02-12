@@ -12,7 +12,6 @@ import { GameService } from 'src/app/services/game.service';
   templateUrl: './character-sheet.component.html',
   styleUrls: ['./character-sheet.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharacterSheetComponent implements OnInit {
 
@@ -47,13 +46,15 @@ export class CharacterSheetComponent implements OnInit {
   switchPanel(tab: string) {
     switch(tab) {
       case 'info':
-        this.game.processCommands('info');
+        this.game.sendToServer('info');
       break;
-      case 'eqinv':
-        this.game.processCommands('equip; invent');
+      case 'inventory':
+      case 'equip':
+        this.game.sendToServer('equip');
+        this.game.sendToServer('invent');
       break;
       case 'skills':
-        this.game.processCommands('abilita');
+        this.game.sendToServer('abilita');
       break;
     }
     this.openedTab = tab;

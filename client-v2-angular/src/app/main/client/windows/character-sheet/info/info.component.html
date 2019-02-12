@@ -48,7 +48,7 @@
     <div fxFlex="1 0 50%" fxLayout="row wrap">
   
       <div class="data-name" fxFlex="1 0 50%">Sesso:</div>
-      <div class="tg-brown" fxFlex="1 0 50%">{{hero.sex.name}}</div>
+      <div class="tg-brown" fxFlex="1 0 50%">{{hero.sex?.name}}</div>
   
       <div class="data-name" fxFlex="1 0 50%">Età:</div>
       <div class="tg-brown" fxFlex="1 0 50%">{{hero.age}} anni</div>
@@ -77,10 +77,10 @@
       <div class="data-name name-skill">Taglia</div>
     </div>
     <div fxFlex="1 1 100%" style="padding-right: .5em;">
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.wil.prc"></span><i>{{hero.abil.wil.prc}}</i></div>
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.int.prc"></span><i>{{hero.abil.int.prc}}</i></div>
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.emp.prc"></span><i>{{hero.abil.emp.prc}}</i></div>
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.siz.prc"></span><i>{{hero.abil.siz.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.wil.prc"></span><i>{{hero.abil?.wil.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.int.prc"></span><i>{{hero.abil?.int.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.emp.prc"></span><i>{{hero.abil?.emp.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.siz.prc"></span><i>{{hero.abil?.siz.prc}}</i></div>
     </div>
     <div fxFlex="1 0 auto" style="padding-right: .5em;">
       <div class="data-name name-skill">Forza</div>
@@ -89,10 +89,10 @@
       <div class="data-name name-skill">Velocit&agrave;</div>
     </div>
     <div fxFlex="1 1 100%">
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.str.prc"></span><i>{{hero.abil.str.prc}}</i></div>
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.con.prc"></span><i>{{hero.abil.con.prc}}</i></div>
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.dex.prc"></span><i>{{hero.abil.dex.prc}}</i></div>
-      <div class="data-skill-box"><span [style.width.%]="hero.abil.spd.prc"></span><i>{{hero.abil.spd.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.str.prc"></span><i>{{hero.abil?.str.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.con.prc"></span><i>{{hero.abil?.con.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.dex.prc"></span><i>{{hero.abil?.dex.prc}}</i></div>
+      <div class="data-skill-box"><span [style.width.%]="hero.abil?.spd.prc"></span><i>{{hero.abil?.spd.prc}}</i></div>
     </div>
   </div>
 </div>

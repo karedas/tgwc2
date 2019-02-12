@@ -20,9 +20,9 @@
   }
 
   .info-main {
-    // padding-top: 15px;
     padding: 1em;
     position: relative;
+    background: url($imgPath + '/borders/border-002-tiny-v.png') repeat-y right;
   }
 
   .info-menu {
@@ -152,10 +152,8 @@
 
 
   .right-data {
-    padding-left: 2px;
     height: 100%;
     overflow: hidden;
-    background: url($imgPath + '/borders/border-002-tiny-v.png') repeat-y left;
   }
 
   

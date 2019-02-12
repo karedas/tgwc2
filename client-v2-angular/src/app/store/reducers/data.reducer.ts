@@ -80,6 +80,16 @@ export function reducer(
         skills: action.payload
       }}
 
+    case DataEvenType.INVENTORY:
+    return {...state, hero: { ...state.hero,
+      inventory: action.payload
+      }}
+
+    case DataEvenType.EQUIP:
+    return {...state, hero: { ...state.hero,
+      equipment: action.payload
+    }}
+
     default:
       return state;
   }

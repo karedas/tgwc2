@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { IHero } from 'src/app/models/data/hero.model';
 
 export enum UIEventType {
   UI = '[UI] Ui Updated',

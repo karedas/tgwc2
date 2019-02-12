@@ -105,6 +105,7 @@ export class WindowsService {
       <DialogConfiguration>{
         width: '500px',
         height: '450px',
+        modal: true,
         resizable: true,
         draggable: true,
         maximizable: true,

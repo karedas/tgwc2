@@ -206,7 +206,7 @@ export class DataParser {
     // Inventory
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
       const inv_parse = JSON.parse(inv.slice(5, -1));
-      console.log('render inventory', inv_parse);
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [inv_parse, 'inventory'] ));
       return '';
     });
 
@@ -234,7 +234,7 @@ export class DataParser {
     // Equipment
     data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
       const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-      console.log('equipment', eq_parse);
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [eq_parse, 'equip'] ));
       return '';
     });
 

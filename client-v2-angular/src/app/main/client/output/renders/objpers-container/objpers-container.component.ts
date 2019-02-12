@@ -14,7 +14,7 @@ export class ObjPersContainerComponent implements OnInit  {
 
   togglePanel: any = [];
 
-  equipPositionValue: {} = equip_positions_by_name;
+  equipPositionValue  = equip_positions_by_name;
   newListEquip: any[];
 
   @Input('eqcont') eqcont: IObjPersEqcont;

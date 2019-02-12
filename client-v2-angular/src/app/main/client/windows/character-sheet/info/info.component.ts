@@ -20,7 +20,7 @@ export class InfoComponent implements AfterViewInit {
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
   
   heroInfo$: Observable<IHero>;
-  description: string;
+  description: string = '';
 
   constructor(
     private store: Store<DataState>,
@@ -32,6 +32,7 @@ export class InfoComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.heroInfo$.pipe(
       map(( hero:IHero ) => {
+        console.log(hero);
         this.parseDesc(hero.desc);
         this.textAreaScrollbar.update();
       })).subscribe();

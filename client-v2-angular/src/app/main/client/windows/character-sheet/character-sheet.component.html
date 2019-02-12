@@ -16,7 +16,7 @@
                 <nav class="info-menu flex-column">
                   <button class="btn-i-generale tg-button tg-shadow nav-item nav-link active" (click)="openedTab !== 'info' && switchPanel('info')"
                     [ngClass]="{'active': openedTab =='info'}">Generalit&agrave;</button>
-                  <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link" (click)="openedTab !== 'eqinv' && switchPanel('eqinv')"
+                  <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link" (click)="openedTab != 'eqinv' && switchPanel('eqinv')"
                     [ngClass]="{'active': openedTab =='eqinv'}">Equip &amp; Inventario</button>
                   <button class="btn-i-ability tg-button tg-shadow nav-item nav-link" (click)="openedTab !== 'skills' && switchPanel('skills')"
                     [ngClass]="{'active': openedTab =='skills'}">Abilità Personali</button>
@@ -24,7 +24,7 @@
               </div>
               <div class="right-data" fxLayout="column" fxFlex="0 1 100%" style="height:100%;">
                 <tg-info *ngIf="openedTab == 'info'" style="height: 100%;"></tg-info>
-                <tg-equip-inventory *ngIf="openedTab == ''eqinv" style="height:100%;"></tg-equip-inventory>
+                <tg-equip-inventory *ngIf="openedTab == 'eqinv'"  style="height:100%;"></tg-equip-inventory>
                 <tg-skills *ngIf="openedTab == 'skills'" style="height:100%;"></tg-skills>
               </div>
             </div>

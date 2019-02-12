@@ -8,7 +8,7 @@ import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
-import { HeroAction, SkillsAction } from '../actions/data.action';
+import { HeroAction, SkillsAction, InventoryAction, EquipAction } from '../actions/data.action';
 import { IHero } from 'src/app/models/data/hero.model';
 import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 
@@ -27,63 +27,73 @@ export class UiEffects {
     private windowsService: WindowsService,
   ) { }
 
-    @Effect({dispatch: false})
-    $updateUI$: Observable<any> = this.actions$.pipe(
-      ofType(UIEventType.UPDATENEEDED),
-      withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
-      filter(([action, status]) => status === true ),
-      map(([action, status]) => action),
-      tap(
-        what => {
-          this.game.updateUIByData(what.payload);
-        })
-    );
-
-    @Effect({dispatch: false})
-    closeTextEditor: Observable<Action> = this.actions$.pipe(
-      ofType(UIEventType.CLOSETEXTEDITOR),
-      // tap(() => this.dialogService.close('editor'))
-    );
-
-    @Effect({dispatch: false})
-    showCommands: Observable<Action> = this.actions$.pipe(
-      ofType<PayloadAction>(UIEventType.SHOWCOMMANDS),
-      map(action => action.payload),
-      tap( cmds => {
-        this.game.setCommands(cmds);
-        setTimeout(() => {
-          this.windowsService.openCommandsList();
-        }, 100);
+  @Effect({ dispatch: false })
+  $updateUI$: Observable<any> = this.actions$.pipe(
+    ofType(UIEventType.UPDATENEEDED),
+    withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
+    filter(([action, status]) => status === true),
+    map(([action, status]) => action),
+    tap(
+      what => {
+        this.game.updateUIByData(what.payload);
       })
-    );
+  );
 
-    @Effect()
-    showCharacterSheet =  this.actions$.pipe(
-      ofType<PayloadAction>(UIEventType.SHOWCHARACTERSHEET),
-      map((res) => {
+  @Effect({ dispatch: false })
+  closeTextEditor: Observable<Action> = this.actions$.pipe(
+    ofType(UIEventType.CLOSETEXTEDITOR),
+    // tap(() => this.dialogService.close('editor'))
+  );
+
+  @Effect({ dispatch: false })
+  showCommands: Observable<Action> = this.actions$.pipe(
+    ofType<PayloadAction>(UIEventType.SHOWCOMMANDS),
+    map(action => action.payload),
+    tap(cmds => {
+      this.game.setCommands(cmds);
+      setTimeout(() => {
+        this.windowsService.openCommandsList();
+      }, 100);
+    })
+  );
+
+  @Effect()
+  showCharacterSheet = this.actions$.pipe(
+    ofType<PayloadAction>(UIEventType.SHOWCHARACTERSHEET),
+    switchMap((res) => {
+      this.windowsService.openCharacterSheet(res.payload[1]);
+      if (res.payload[1] === 'info') {
+        return [
+          new HeroAction(res.payload[0])
+        ];
+      }
+      else if (res.payload[1] === 'skills') {
         this.windowsService.openCharacterSheet(res.payload[1]);
-        return res;
-      }), 
-      switchMap((res) => {
-        if(res.payload[1] === 'info') {
-          return [
-            new HeroAction(res.payload[0])
-          ];
-        }
-        else if(res.payload[1] === 'skills') {
-          return [
-            new SkillsAction(res.payload[0])
-          ]
-        }
-      }),
-    );
+        return [
+          new SkillsAction(res.payload[0])
+        ]
+      }
+      else if (res.payload[1] === 'inventory') {
+        this.windowsService.openCharacterSheet('eqinv');
+        return [
+          new InventoryAction(res.payload[0])
+        ]
+      }
+      else if (res.payload[1] === 'equip') {
+        this.windowsService.openCharacterSheet('eqinv');
+        return [
+          new EquipAction(res.payload[0])
+        ]
+      }
+    }),
+  );
 
-    @Effect({dispatch: false})
-    refreshCommand$ = this.actions$.pipe(
-      ofType(UIEventType.REFRESH),
-      tap(()  => {
-        this.game.processCommands('info');
-      }))
+  @Effect({ dispatch: false })
+  refreshCommand$ = this.actions$.pipe(
+    ofType(UIEventType.REFRESH),
+    tap(() => {
+      this.game.processCommands('info');
+    }))
 
 
 
