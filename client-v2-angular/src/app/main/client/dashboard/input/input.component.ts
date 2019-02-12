@@ -46,7 +46,13 @@ export class InputComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.focus();
+
+    this.game._focusInput.subscribe(
+      (focusRequest) => {
+        console.log(focusRequest);
+        this.focus();
+      }
+    );
   }
 
   focus() {

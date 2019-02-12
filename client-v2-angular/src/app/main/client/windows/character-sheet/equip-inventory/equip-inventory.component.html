@@ -3,7 +3,7 @@
   <div class="eqinv-container" fxLayout="column">
     <div fxFlex="0 1 50%" class="equip-list">
       <h3>
-        Nel tuo equipaggiamento
+        Equipaggiamento
       </h3>
       <div class="eqinv-wrapper-list" fxLayout="row wrap">
         <ng-container *ngFor="let item of equipment$ | async | keyvalue" >
@@ -50,7 +50,7 @@
       </div>
     </div>
     <div fxFlex="0 1 50%" class="inventory-list">
-      <h3>Nel tuo inventario</h3>
+      <h3>Inventario</h3>
       <div class="eqinv-wrapper-list">
         <div *ngFor="let item of inventory$ | async | keyvalue">
           {{item.key}}

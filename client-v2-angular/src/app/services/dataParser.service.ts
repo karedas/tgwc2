@@ -59,6 +59,13 @@ export class DataParser {
     let pos: any;
 
 
+    // Player is logged in
+    data = data.replace(/&!logged"[^"]*"/gm, () => {
+      this.store.dispatch(new InGameAction());
+      return '';
+    });
+
+    
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
       this.store.dispatch(new UiActions.WelcomeNewsAction);
@@ -147,12 +154,6 @@ export class DataParser {
     data = data.replace(/&!im"[^"]*"\n*/gm, (image) => {
       const image_parse = image.slice(5, image.lastIndexOf('"'));
       console.log('image in side frame', image_parse);
-      return '';
-    });
-
-    // Player is logged in
-    data = data.replace(/&!logged"[^"]*"/gm, () => {
-      this.store.dispatch(new InGameAction());
       return '';
     });
 

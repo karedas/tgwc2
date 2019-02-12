@@ -13,13 +13,13 @@ export function reducer(
     case DataEvenType.OUT:
       return Object.assign({}, state, action.payload);
     case DataEvenType.AUTOUPDATESTATUSHERO:
-      // return Object.assign({}, state, {hero: {status: action.payload}});
-      return {...state, hero: { ...state.hero,
+      return Object.assign({}, state, {hero: {
+        ...state.hero,
         status: {
           drink: action.payload.drink,
           food: action.payload.food,
           hit: action.payload.healt,
-          move: action.payload.move
+          move: action.payload.move  
         },
         target: {
           move: action.payload['enemymove'],
@@ -27,10 +27,12 @@ export function reducer(
           icon: action.payload['enemyicon'],
           name: action.payload['enemyname']
         }
-      }};
+      }}
+      );
 
     case DataEvenType.HERODATA:
-      return Object.assign({}, state, {hero: action.payload});
+      let hero = Object.assign({}, state.hero, action.payload);
+      return Object.assign({}, state, {hero: hero});
 
     case DataEvenType.DOORS:
       return Object.assign({}, state, {

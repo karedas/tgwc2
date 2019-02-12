@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewEncapsulation, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
@@ -37,7 +37,7 @@ export class CharacterSheetComponent implements OnInit {
 
   }
 
-  onRequest(data) {
+  onRequest(data: any) {
     if(data !== this.openedTab) {
       this.openedTab = data;
     }
@@ -46,15 +46,13 @@ export class CharacterSheetComponent implements OnInit {
   switchPanel(tab: string) {
     switch(tab) {
       case 'info':
-        this.game.sendToServer('info');
+        this.game.processCommands('info');
       break;
-      case 'inventory':
-      case 'equip':
-        this.game.sendToServer('equip');
-        this.game.sendToServer('invent');
+      case 'eqinv':
+        this.game.processCommands('equip;inventario');
       break;
       case 'skills':
-        this.game.sendToServer('abilita');
+        this.game.processCommands('abilita');
       break;
     }
     this.openedTab = tab;

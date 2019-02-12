@@ -5,7 +5,7 @@ import { DataParser } from './dataParser.service';
 import { Store } from '@ngrx/store';
 import { HistoryService } from './history.service';
 import { State } from '../store';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -14,8 +14,11 @@ import { Observable, Subject } from 'rxjs';
 
 export class GameService {
 
-  private commandsList$: Subject<any> = new Subject();
-
+  _focusInput: Subject<any> = new Subject();
+  
+  private commandsList$: BehaviorSubject<any>;
+  
+  
   clientUpdateNeeded = {
     inventory: 0,
     equipment: 0,
@@ -23,13 +26,17 @@ export class GameService {
   };
 
   private lastDataTime = 0;
+  
 
   constructor(
     private socketService: SocketService,
     private dataParserService: DataParser,
-    private store: Store<State>,
     private historyService: HistoryService,
-  ) {}
+  ) {
+
+    this._focusInput = new Subject();
+    
+  }
 
   startGame(initialData) {
     this.dataParserService.handlerGameData(initialData);

@@ -73,7 +73,7 @@ export class WindowsService {
           height: '650px',
           data: detail,
           style: { 'max-width': '100%', 'max-height': '100%' },
-          contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
+          contentStyle: { 'max-height': '100%', 'max-width': '100%', 'min-height': '400px', 'overflow': 'auto' }
         });
   
         // this.dialogs.set('charactersheet', true);

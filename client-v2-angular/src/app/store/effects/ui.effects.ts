@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, } from '@ngrx/effects';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Action, Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
 import { tap, map, withLatestFrom, filter, switchMap } from 'rxjs/operators';
@@ -8,9 +8,7 @@ import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
-import { HeroAction, SkillsAction, InventoryAction, EquipAction } from '../actions/data.action';
-import { IHero } from 'src/app/models/data/hero.model';
-import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
+import { HeroAction, SkillsAction, InventoryAction, EquipAction, InfoCharacterAction } from '../actions/data.action';
 
 export interface PayloadAction {
   type: string;
@@ -64,6 +62,7 @@ export class UiEffects {
       this.windowsService.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
+          new InfoCharacterAction(),
           new HeroAction(res.payload[0])
         ];
       }
