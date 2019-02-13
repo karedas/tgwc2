@@ -3,27 +3,45 @@
 @import 'utils/sprites-mixins';
 
 .eqinv-container {
-    text-align: center;
+    height: 100%;
     
     h3 {
         margin: 0;
+        text-align: center;
         padding: 0.5em 0;
         background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
         box-shadow: inset 0 -2px 11px 0px black;
     }
 }
 
+.eqinv-wrapper-list {
+    padding-top: 2px;
+}
+
 .equip-list, .inventory-list {
-    background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+    background: rgba(0,0,0, 0.8);
+    padding-bottom: 5px;
+
     .eqinv-wrapper-list {
-        padding: 1em 1em 2em;
-        background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+        padding: 1em;
+        border-top: 1px solid #433b3a;
 
     }
 }
 
 .equip-list {
-    padding-right: 2px;
+    padding-right: 4px;
+    background-image: url($imgPath + '/borders/border-002-tiny-v.png');
+    background-repeat: repeat-y;
+    background-position:  right;
+}
+
+.eqinv-item-wrap {
+    padding-bottom: .5em;
+    text-align: left;
+}
+
+.equip-list {
 }
 
 .inventory-list {

@@ -30,7 +30,6 @@ export class ClientContainerComponent implements OnDestroy {
   }
 
   ngAfterViewInit(): void {
-
     //  Welcome News
     this.welcomeNews.pipe(
       takeUntil(this._unsubscribeAll),
@@ -38,6 +37,8 @@ export class ClientContainerComponent implements OnDestroy {
         () => {
           if (localStorage.getItem('welcomenews')) {
             this.game.sendToServer('');
+            console.log('qui arriva');
+            this.game._focusInput.next();
           } else {
             this.showNews();
           }

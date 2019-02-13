@@ -1,17 +1,20 @@
 <div style="height: 100%">
   <!-- ######## Ability ########  -->
-  <div class="eqinv-container" fxLayout="column">
+  <div class="eqinv-container" fxLayout="row">
     <div fxFlex="0 1 50%" class="equip-list">
       <h3>
         Equipaggiamento
       </h3>
-      <div class="eqinv-wrapper-list" fxLayout="row wrap">
+      <div class="eqinv-wrapper-list" fxLayout="column wrap">
         <ng-container *ngFor="let item of equipment$ | async | keyvalue" >
-          <div fxFlex="0 0 50%" 
-            *ngIf="equipPositionValue[item.key]">
-            
-            [ <span class="tg-yellow">{{equipPositionValue[item.key]}}</span> ]
-            <tg-icons [icon]="item.value[0].icon"></tg-icons> [barra] <span> {{item.value[0].desc}}</span>
+          <div fxFlex="0 0 100%" 
+            *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
+            <div class="eqinv-item-position">
+               <span class="tg-yellow">{{equipPositionValue[item.key]}}</span> 
+            </div>
+            <div class="eqinv-item">
+              <tg-icons [icon]="item.value[0].icon"></tg-icons> [barra] <span> {{item.value[0].desc}}</span>
+            </div> 
           </div>
           <!-- {{equipPositionValue['feet']}} -->
           <!-- <ng-container *ngIf="equipPositionValue[item.key]">{{item.key}}</ng-container> -->

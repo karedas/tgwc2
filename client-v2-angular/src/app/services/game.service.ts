@@ -14,7 +14,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 export class GameService {
 
-  _focusInput: Subject<any> = new Subject();
+  _focusInput: Subject<any>;
   
   private commandsList$: BehaviorSubject<any>;
   
@@ -35,6 +35,7 @@ export class GameService {
   ) {
 
     this._focusInput = new Subject();
+    this.commandsList$ = new BehaviorSubject(null);
     
   }
 

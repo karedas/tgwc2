@@ -137,7 +137,7 @@ tg-text {
     flex-direction: column;
     font-family: kingthings;
     font-size: 12px;
-    line-height: 16px;
+    line-height: 14px;
     color: #989898;
     padding-bottom: 0.5em;
     margin-bottom: .5em;
@@ -320,10 +320,10 @@ tg-text {
     .tg-room--desc {
       padding: 0.5em .5em .2em;
       line-height: 1.4;
-      font-size: 11px;
+      font-size: 12px;
       color: #e2d6c7;
       border-top: 1px solid #433b3a;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-family: kingthings;
     }
 
     .tg-room--image {
