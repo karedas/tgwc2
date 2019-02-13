@@ -19,7 +19,7 @@ export interface DataState {
     objPers?: IObjPerson;
     genericTable?: IGenericTable;
     workslist?: IWorks;
-    region?: IRegion
+    region?: IRegion;
 }
 
 export const initialState: DataState = {

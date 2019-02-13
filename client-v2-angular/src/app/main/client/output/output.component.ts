@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy, ViewEncapsulation, AfterViewInit, ElementRef, HostListener } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
@@ -65,11 +65,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this._unsubscribeAll)
     ).subscribe(
       (status) =>  {
-       if(status === false) {
+       if (status === false) {
          this.output = [];
        }
       }
-    )
+    );
 
     /** Toggle Splitter Output  view  */
     this.extraOutputOpenStatus$.pipe(
@@ -99,7 +99,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       filter(room => room && room !== undefined))
         .subscribe(
           (room: Room) => {
-            if (room.desc['base'] != undefined && room.desc['base'] != '') {
+            if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
               this.lastRoomDescription = room.desc['base'];
             }
             this.typeDetail = 'room';
@@ -151,8 +151,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 50);
   }
 
-  @HostListener('window:resize', ['$event.target']) 
-  onResize() { 
+  @HostListener('window:resize', ['$event.target'])
+  onResize() {
       clearInterval(this.resizeID);
       this.resizeID = setTimeout(() => {
         this.setOutputSplit();
@@ -162,8 +162,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   setOutputSplit() {
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
       this.store.dispatch(new ToggleExtraOutput(false));
-    }
-    else {
+    } else {
       this.store.dispatch(new ToggleExtraOutput(true));
     }
   }

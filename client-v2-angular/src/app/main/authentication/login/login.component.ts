@@ -51,12 +51,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage.pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((err: string) => {
-        if (err !== undefined) {
-          this.socketloginReplayMessage = err;
-        }
-      });
+    this.loginService.loginReplayMessage
+      .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((err: string) => {
+          if (err !== undefined) {
+            this.socketloginReplayMessage = err;
+          }
+        });
   }
 
   get username() {
@@ -75,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const values = this.loginForm.value;
 
     this.loginSubscription = this.loginService.login(values)
-      .pipe( takeUntil(this._unsubscribeAll))
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
 

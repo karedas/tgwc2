@@ -44,7 +44,7 @@ export class GenericDialogcomponent implements OnInit {
     this.visible = true;
     this.config = Object.assign({}, this.config, config);
 
-    if(this.config.data) {
+    if (this.config.data) {
       this.data.emit(this.config.data);
     }
   }

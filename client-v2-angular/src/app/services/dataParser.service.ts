@@ -6,6 +6,7 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
 import { IHero } from '../models/data/hero.model';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,15 @@ import { IHero } from '../models/data/hero.model';
 
 export class DataParser {
 
+
   private cmdPrefix = '';
   private netData = '';
   private shortcuts = {};
 
+  private _updateNeeded: Subject<any>;
+
   constructor(private store: Store<State>) {
+    this._updateNeeded = new Subject<any>();
   }
 
   handlerGameData(data: any) {
@@ -65,7 +70,6 @@ export class DataParser {
       return '';
     });
 
-    
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
       this.store.dispatch(new UiActions.WelcomeNewsAction);
@@ -74,14 +78,13 @@ export class DataParser {
 
     // Character base Data
     data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
-      const pgdata_parse = JSON.parse( pgdata.slice(8 , -1) );
+      const pgdata_parse = JSON.parse(pgdata.slice(8, -1));
       this.store.dispatch(new DataActions.HeroAction(<IHero>pgdata_parse));
       return '';
     });
 
-
     data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
-      const region_parse = JSON.parse(region.slice(8, -1 ));
+      const region_parse = JSON.parse(region.slice(8, -1));
       this.store.dispatch(new DataActions.RegionAction(region_parse));
       return '';
     });
@@ -91,7 +94,7 @@ export class DataParser {
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
       console.warn('Todo: Hide Text');
-      this.store.dispatch(new UiActions.UpdateUI({inputVisible: false}));
+      this.store.dispatch(new UiActions.UpdateUI({ inputVisible: false }));
       return '';
     });
 
@@ -99,7 +102,7 @@ export class DataParser {
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({inputVisible: true}));
+      this.store.dispatch(new UiActions.UpdateUI({ inputVisible: true }));
       return '';
     });
 
@@ -134,11 +137,19 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      this.store.dispatch(new UiActions.UpdateNeeded({
+      console.log('update', update_parse);
+      const up = {
         inventory: update_parse[0],
         equipment: update_parse[1],
         room: update_parse[2]
-      }));
+      };
+      this.setUpdateNeeded(up);
+
+      // this.store.dispatch(new UiActions.UpdateNeeded({
+      //   inventory: update_parse[0],
+      //   equipment: update_parse[1],
+      //   room: update_parse[2]
+      // }));
       return '';
     });
 
@@ -207,7 +218,7 @@ export class DataParser {
     // Inventory
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
       const inv_parse = JSON.parse(inv.slice(5, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [inv_parse, 'inventory'] ));
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions([inv_parse, 'inventory']));
       return '';
     });
 
@@ -235,7 +246,7 @@ export class DataParser {
     // Equipment
     data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
       const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [eq_parse, 'equip'] ));
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions([eq_parse, 'equip']));
       return '';
     });
 
@@ -249,7 +260,7 @@ export class DataParser {
     // Skill list
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [skinfo_parse, 'skills'] ));
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions([skinfo_parse, 'skills']));
       return '';
 
     });
@@ -257,7 +268,7 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions( [info_parse, 'info']));
+      this.store.dispatch(new UiActions.ShowCharacterSheetActions([info_parse, 'info']));
       return '';
     });
 
@@ -309,7 +320,6 @@ export class DataParser {
       return '';
     });
 
-
     data = data.replace(/&!ce"[^"]*"/gm, (image) => {
       const image_parse = image.slice(5, -1);
       console.log('renderEmbeddedImage', image_parse);
@@ -345,14 +355,14 @@ export class DataParser {
 
     // Is God
     data = data.replace(/&i/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({isGod: true}));
+      this.store.dispatch(new UiActions.UpdateUI({ isGod: true }));
       return '';
     });
 
     // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
       const godInvLev = parseInt(inv.substr(2, 3));
-      this.store.dispatch( new UiActions.UpdateUI({invLevel: godInvLev}));
+      this.store.dispatch(new UiActions.UpdateUI({ invLevel: godInvLev }));
       return '';
     });
 
@@ -380,6 +390,14 @@ export class DataParser {
     }
     /* Return the resulting array */
     return res;
+  }
+
+  setUpdateNeeded(what: any) {
+    this._updateNeeded.next(what);
+  }
+
+  get updateNeeded(): Observable<any> {
+    return this._updateNeeded.asObservable();
   }
 
   // substShort(input: string): any {

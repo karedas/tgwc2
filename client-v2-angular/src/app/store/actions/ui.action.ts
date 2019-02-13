@@ -21,7 +21,7 @@ export class UpdateUI implements Action {
 
 export class ToggleExtraOutput implements Action {
   readonly type = UIEventType.TOGGLEOUTPUT;
-  constructor(public payload: boolean | null) {} 
+  constructor(public payload: boolean | null) {}
 }
 
 export class ToggleDashboard implements Action {

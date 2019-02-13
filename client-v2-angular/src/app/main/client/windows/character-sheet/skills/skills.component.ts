@@ -12,16 +12,16 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./skills.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SkillsComponent implements OnInit, OnDestroy{
+export class SkillsComponent implements OnInit, OnDestroy {
 
   skills$: Observable<any>;
-  
+
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private game: GameService,
     private store: Store<DataState>
-  ) { 
+  ) {
 
     this.skills$ = this.store.pipe(select(getSkills));
 

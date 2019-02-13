@@ -82,11 +82,11 @@ export class InputComponent implements AfterViewInit {
   }
 
   moveCursorAtEnd(target) {
-    if (typeof target.selectionStart == 'number') {
+    if (typeof target.selectionStart === 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
-    } else if (typeof target.createTextRange != 'undefined') {
+    } else if (typeof target.createTextRange !== 'undefined') {
       this.focus();
-      let range = target.createTextRange();
+      const range = target.createTextRange();
       range.collapse(false);
       range.selec();
     }
@@ -108,7 +108,7 @@ export class InputComponent implements AfterViewInit {
 
   @HostListener('window:keydown', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
-    if (event.which == 49 && event.shiftKey === true && this.ic.nativeElement.value == 0) {
+    if (event.which === 49 && event.shiftKey === true && this.ic.nativeElement.value === 0) {
       const l = this.historyService.cmd_history.length;
 
       if (l > 0) {

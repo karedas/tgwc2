@@ -35,18 +35,20 @@ export class EditorComponent implements OnInit, OnDestroy {
     private store: Store<DataState>,
     private windowsService: WindowsService,
     private gameService: GameService) {
-      
-    this._unsubscribeAll = new Subject<any>()
-    
+
+    this._unsubscribeAll = new Subject<any>();
+
     this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
 
 
-    
+
   }
 
   ngOnInit(): void {
 
-    this.editorRequest$.subscribe(
+    this.editorRequest$.pipe(
+      takeUntil(this._unsubscribeAll)
+    ).subscribe(
       (editorState: IEditor) => {
         if (editorState) {
           this.description = editorState.description;

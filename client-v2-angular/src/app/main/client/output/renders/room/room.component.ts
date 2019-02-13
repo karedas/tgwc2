@@ -29,10 +29,9 @@ export class RoomComponent implements OnInit {
   }
 
   onBackDetail(num: number) {
-    if(num) {
-      this.game.processCommands(`guarda &${num}`)
-    }
-    else this.game.processCommands('guarda');
+    if (num) {
+      this.game.processCommands(`guarda &${num}`);
+    } else { this.game.processCommands('guarda'); }
   }
 
   getRoomImage(img: string ): string {

@@ -12,7 +12,7 @@ import { LoginSmartComponent } from './login-smart/login-smart.component';
   providedIn: 'root'
 })
 export class WindowsService {
-  
+
   private dialogs: any;
 
   constructor(
@@ -48,8 +48,8 @@ export class WindowsService {
     return ref.onClose;
   }
 
-  openSmartLogin() { 
-    const ref = this.dynamicDialogService.open(LoginSmartComponent, 
+  openSmartLogin() {
+    const ref = this.dynamicDialogService.open(LoginSmartComponent,
       <DynamicDialogConfig>{
         blockScroll: true,
         showHeader: false,
@@ -60,9 +60,9 @@ export class WindowsService {
   }
 
   openCharacterSheet(detail?: string) {
-    //TODO: move method in another place for a global use
+    // TODO: move method in another place for a global use
     // if(!this.dialogs.has('charactersheet')) {
-      const ref = this.genericDialogService.open('charactersheet', 
+      const ref = this.genericDialogService.open('charactersheet',
         <DialogConfiguration>{
           // showHeader: true,
           draggable: true,
@@ -75,7 +75,7 @@ export class WindowsService {
           style: { 'max-width': '100%', 'max-height': '100%' },
           contentStyle: { 'max-height': '100%', 'max-width': '100%', 'min-height': '400px', 'overflow': 'auto' }
         });
-  
+
         // this.dialogs.set('charactersheet', true);
 
         // ref.onHide.subscribe(() => {
@@ -101,7 +101,7 @@ export class WindowsService {
   }
 
   openEditor(dialogID: string, ...data: any): any {
-    const ref = this.genericDialogService.open(dialogID, 
+    const ref = this.genericDialogService.open(dialogID,
       <DialogConfiguration>{
         width: '500px',
         height: '450px',
@@ -116,7 +116,7 @@ export class WindowsService {
   }
 
   openDialogTable(dialogID: string, ...data: any) {
-    const ref = this.genericDialogService.open(dialogID, 
+    const ref = this.genericDialogService.open(dialogID,
       <DialogConfiguration> {
         draggable: true,
         modal: false,
@@ -126,7 +126,7 @@ export class WindowsService {
       });
   }
 
-  closeGenericDialog(dialogID:string) {
+  closeGenericDialog(dialogID: string) {
     this.genericDialogService.close(dialogID);
   }
 }

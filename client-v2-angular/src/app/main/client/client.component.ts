@@ -64,18 +64,22 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   // Cookie Law Behaviour
   showCookieLaw() {
-    this.windowsService.openCookieLaw().subscribe(
-      (accept: boolean) => { this.isCookieAccepted = accept}
-    )
+    this.windowsService.openCookieLaw().pipe(
+      takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (accept: boolean) => { this.isCookieAccepted = accept; }
+      );
   }
 
   private gameIsReady() {
     if (!this.cookieService.check('tgCookieLaw')) {
       setTimeout(() => {
-      this.windowsService.openCookieLaw().subscribe(
-        (accept: boolean) => { this.isCookieAccepted = accept}
-      )
-    }, 100);
+        this.windowsService.openCookieLaw().pipe(
+          takeUntil(this._unsubscribeAll))
+          .subscribe(
+            (accept: boolean) => { this.isCookieAccepted = accept; }
+          );
+      }, 100);
     } else {
       this.isCookieAccepted = true;
     }

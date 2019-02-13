@@ -19,7 +19,7 @@ export function reducer(
           drink: action.payload.drink,
           food: action.payload.food,
           hit: action.payload.healt,
-          move: action.payload.move  
+          move: action.payload.move
         },
         target: {
           move: action.payload['enemymove'],
@@ -31,7 +31,7 @@ export function reducer(
       );
 
     case DataEvenType.HERODATA:
-      let hero = Object.assign({}, state.hero, action.payload);
+      const hero = Object.assign({}, state.hero, action.payload);
       return Object.assign({}, state, {hero: hero});
 
     case DataEvenType.DOORS:
@@ -80,17 +80,17 @@ export function reducer(
     case DataEvenType.SKILLS:
       return {...state, hero: { ...state.hero,
         skills: action.payload
-      }}
+      }};
 
     case DataEvenType.INVENTORY:
     return {...state, hero: { ...state.hero,
       inventory: action.payload
-      }}
+      }};
 
     case DataEvenType.EQUIP:
     return {...state, hero: { ...state.hero,
       equipment: action.payload
-    }}
+    }};
 
     default:
       return state;

@@ -26,7 +26,7 @@ export enum DataEvenType {
     INFO = '[Data] Info Character',
     SKILLS = '[Data] Skills List',
     INVENTORY = '[Data] Inventory',
-    EQUIP = '[Data] Equip' 
+    EQUIP = '[Data] Equip'
 }
 
 export class IncomingData implements Action {
@@ -103,7 +103,7 @@ export class RegionAction implements Action {
 }
 
 export class SkillsAction implements Action {
-    readonly type = DataEvenType.SKILLS; 
+    readonly type = DataEvenType.SKILLS;
     constructor(public payload: any[]) {}
 }
 
@@ -113,12 +113,12 @@ export class InfoCharacterAction implements Action {
 
 export class InventoryAction implements Action {
     readonly type = DataEvenType.INVENTORY;
-    constructor(public payload: any) {};
+    constructor(public payload: any) {}
 }
 
 export class EquipAction implements Action {
     readonly type = DataEvenType.EQUIP;
-    constructor(public payload: any) {};
+    constructor(public payload: any) {}
 }
 
 export type DataAction

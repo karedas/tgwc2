@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
-import { Store } from '@ngrx/store';
 import { HistoryService } from './history.service';
-import { State } from '../store';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 
@@ -15,10 +13,10 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 export class GameService {
 
   _focusInput: Subject<any>;
-  
+
   private commandsList$: BehaviorSubject<any>;
-  
-  
+
+
   clientUpdateNeeded = {
     inventory: 0,
     equipment: 0,
@@ -26,7 +24,7 @@ export class GameService {
   };
 
   private lastDataTime = 0;
-  
+
 
   constructor(
     private socketService: SocketService,
@@ -36,7 +34,7 @@ export class GameService {
 
     this._focusInput = new Subject();
     this.commandsList$ = new BehaviorSubject(null);
-    
+
   }
 
   startGame(initialData) {
@@ -44,6 +42,10 @@ export class GameService {
 
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
       this.dataParserService.handlerGameData(data);
+    });
+
+    this.dataParserService.updateNeeded.subscribe((up) => {
+      this.updateUIByData(up);
     });
   }
 
@@ -53,8 +55,23 @@ export class GameService {
   }
 
   updateUIByData(what: any) {
+
     const now = Date.now();
+
     if (now > this.lastDataTime + 1000 ) {
+
+      console.log('updateUIByData', what);
+      if (what.inventory) {
+        this.sendToServer('@inv');
+        this.clientUpdateNeeded.inventory = what.inventory;
+        this.lastDataTime = now;
+      }
+
+      if (what.equipment) {
+        this.sendToServer('@equip');
+        this.clientUpdateNeeded.equipment = what.equipment;
+        this.lastDataTime = now;
+      }
 
       if (what.room && what.room  >  this.clientUpdateNeeded.room ) {
         this.sendToServer('@agg');

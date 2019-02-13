@@ -14,7 +14,7 @@ import { WindowsService } from '../windows.service';
   encapsulation: ViewEncapsulation.None
 })
 export class GenericTableComponent implements  AfterViewInit, OnDestroy {
-  
+
   public readonly dialogID: string = 'genericTable';
 
   public dataTable$: Observable<any>;

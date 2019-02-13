@@ -18,9 +18,9 @@ import { map, takeUntil, take } from 'rxjs/operators';
 export class InfoComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
-  
+
   heroInfo$: Observable<IHero>;
-  description: string = '';
+  description = '';
 
   private _unsubscribeAll: Subject<any>;
 
@@ -37,20 +37,22 @@ export class InfoComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.heroInfo$.pipe(
       takeUntil(this._unsubscribeAll),
-      map(( hero:IHero ) => {
+      map(( hero: IHero ) => {
         console.log(hero);
         this.parseDesc(hero.desc);
         this.textAreaScrollbar.update();
       })).subscribe();
   }
 
-    
+
   sendChangeDescriptionRequest() {
     this.game.processCommands('cambia desc');
   }
 
   parseDesc(value: string) {
-    this.description = value.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, '');
+    if (value) {
+      this.description = value.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, '');
+    }
   }
 
   ngOnDestroy() {

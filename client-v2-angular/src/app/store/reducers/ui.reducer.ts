@@ -21,7 +21,7 @@ export function reducer(
 
     case UIEventType.TOGGLEOUTPUT: {
       let newState = action.payload;
-      if(typeof action.payload !== "boolean" ) {
+      if (typeof action.payload !== 'boolean' ) {
         newState = !state.extraOutput;
       }
       return Object.assign({}, state, { extraOutput: newState});
@@ -34,12 +34,6 @@ export function reducer(
     case UIEventType.UI: {
       return Object.assign({}, state, action.payload);
     }
-
-    // case UIEventType.UPDATENEEDED: {
-    //   return Object.assign({}, state, {
-    //     inventory
-    //   })
-    // }
 
     default:
       return state;

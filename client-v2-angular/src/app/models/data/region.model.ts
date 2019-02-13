@@ -20,6 +20,6 @@ export class Region {
     this.icon = undefined;
     this.idreg = undefined;
     this.name = undefined;
-    this.type = undefined; 
+    this.type = undefined;
   }
 }

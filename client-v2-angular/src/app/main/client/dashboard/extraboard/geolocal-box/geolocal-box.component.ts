@@ -5,7 +5,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getRegion } from 'src/app/store/selectors';
 import { trigger, style, state, transition, animate, query, stagger } from '@angular/animations';
-import { skip } from 'rxjs/operators';
+import { skip, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-geolocal-box',
@@ -34,7 +34,7 @@ import { skip } from 'rxjs/operators';
 
 export class GeolocalBoxComponent implements OnInit {
 
-  changeState: string = '';
+  changeState = '';
 
   clanName: string;
   regionName: string;
@@ -53,17 +53,19 @@ export class GeolocalBoxComponent implements OnInit {
 
   ngOnInit() {
 
-    this.region$.pipe().subscribe(
-      (region: IRegion) => {
-        if(region) {
+    this.region$.pipe(takeUntil(this._unsubscribeAll))
+      .subscribe( (region: IRegion) => {
+        if (region) {
           this.newRegionfadeInOut(region);
         }
       }
-    )
+    );
   }
 
-  newRegionfadeInOut(region: IRegion){
+  newRegionfadeInOut(region: IRegion) {
+
     this.changeState = 'out';
+
     setTimeout(() => {
       this.regionName = region.name;
       this.clanName = region.clan_name;

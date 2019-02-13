@@ -15,15 +15,15 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class CharacterSheetComponent implements OnInit {
 
-  dialogID: string = 'charactersheet';
+  dialogID = 'charactersheet';
   imagepath: string = environment.media_address;
-  
+
   heroBase$: Observable<IHero>;
   public heroImageUrl: string;
   public heroName: string;
   public heroTitle: string;
 
-  public openedTab: string = '';
+  public openedTab = '';
 
   constructor(
     private store: Store<DataState>,
@@ -38,13 +38,13 @@ export class CharacterSheetComponent implements OnInit {
   }
 
   onRequest(data: any) {
-    if(data !== this.openedTab) {
+    if (data !== this.openedTab) {
       this.openedTab = data;
     }
   }
 
   switchPanel(tab: string) {
-    switch(tab) {
+    switch (tab) {
       case 'info':
         this.game.processCommands('info');
       break;

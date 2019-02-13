@@ -11,20 +11,20 @@ import { map, takeUntil } from 'rxjs/operators';
   templateUrl: './equip-inventory.component.html',
   styleUrls: ['./equip-inventory.component.scss']
 })
-export class EquipInventoryComponent implements OnInit, OnDestroy{
+export class EquipInventoryComponent implements OnInit, OnDestroy {
 
   equipPositionValue: {} = equip_positions_by_name;
 
   equipment$: Observable<any>;
   inventory$: Observable<any>;
-  
+
   private _unsubscribeAll: Subject<any>;
 
   constructor(private store: Store<DataState>) {
-    
+
     this.equipment$ = this.store.pipe(select(getEquip));
     this.inventory$ = this.store.pipe(select(getInventory));
-    
+
     this._unsubscribeAll = new Subject<any>();
    }
 

@@ -32,7 +32,7 @@ export class GenericDialogService {
       modal.close();
   }
 
-  isClosed(id:string): boolean {
+  isClosed(id: string): boolean {
     const modal: any = this.modals.filter(x => x.id === id)[0];
     return modal.isClosed();
   }

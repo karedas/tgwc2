@@ -3,7 +3,7 @@ import { GameService } from 'src/app/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getDoors, getUserLevel, getInvisibilityLevel } from 'src/app/store/selectors';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -23,6 +23,9 @@ export class DirectionsComponent implements OnInit, OnDestroy {
   private dirNames: string[] = ['nord', 'est', 'sud', 'ovest', 'alto', 'basso'];
   private dirStatus: string[] = ['00000'];
 
+
+  private doors$: Observable<any>;
+  private invisibilityLevel$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -30,18 +33,18 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     private store: Store<DataState>
   ) {
 
-    // Set the private defaults
+    this.doors$ = this.store.pipe(select(getDoors));
+    this.invisibilityLevel$ = this.store.pipe(select(getInvisibilityLevel));
+
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-    this.store.pipe(
-      select(getDoors),
-      takeUntil(this._unsubscribeAll)).subscribe(
+    this.doors$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       door => this.setDoors(door)
     );
 
-    this.store.pipe(select(getInvisibilityLevel)).subscribe(
+    this.invisibilityLevel$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       level => { this.invisibilityLevel = level; }
     );
   }
@@ -74,7 +77,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   onkeydown(event: KeyboardEvent) {
-    
+
 
     if (this.isOnMap) {
       switch (event.key) {

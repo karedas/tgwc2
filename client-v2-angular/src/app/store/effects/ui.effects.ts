@@ -33,6 +33,7 @@ export class UiEffects {
     map(([action, status]) => action),
     tap(
       what => {
+        console.log('effect', what);
         this.game.updateUIByData(what.payload);
       })
   );
@@ -65,24 +66,21 @@ export class UiEffects {
           new InfoCharacterAction(),
           new HeroAction(res.payload[0])
         ];
-      }
-      else if (res.payload[1] === 'skills') {
+      } else if (res.payload[1] === 'skills') {
         this.windowsService.openCharacterSheet(res.payload[1]);
         return [
           new SkillsAction(res.payload[0])
-        ]
-      }
-      else if (res.payload[1] === 'inventory') {
+        ];
+      } else if (res.payload[1] === 'inventory') {
         this.windowsService.openCharacterSheet('eqinv');
         return [
           new InventoryAction(res.payload[0])
-        ]
-      }
-      else if (res.payload[1] === 'equip') {
+        ];
+      } else if (res.payload[1] === 'equip') {
         this.windowsService.openCharacterSheet('eqinv');
         return [
           new EquipAction(res.payload[0])
-        ]
+        ];
       }
     }),
   );
@@ -92,7 +90,7 @@ export class UiEffects {
     ofType(UIEventType.REFRESH),
     tap(() => {
       this.game.processCommands('info');
-    }))
+    }));
 
 
 
