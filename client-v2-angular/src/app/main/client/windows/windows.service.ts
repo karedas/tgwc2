@@ -61,7 +61,7 @@ export class WindowsService {
 
   openCharacterSheet(detail?: string) {
     // TODO: move method in another place for a global use
-    // if(!this.dialogs.has('charactersheet')) {
+    if(!this.dialogs.has('charactersheet')) {
       const ref = this.genericDialogService.open('charactersheet',
         <DialogConfiguration>{
           // showHeader: true,
@@ -76,12 +76,10 @@ export class WindowsService {
           contentStyle: { 'max-height': '100%', 'max-width': '100%', 'min-height': '400px', 'overflow': 'auto' }
         });
 
-        // this.dialogs.set('charactersheet', true);
+        this.dialogs.set('charactersheet', true);
 
-        // ref.onHide.subscribe(() => {
-        //   this.dialogs.delete('charactersheet');
-        // })
-    // }
+        ref.onHide(() => {console.log('hide')});
+    }
   }
 
 

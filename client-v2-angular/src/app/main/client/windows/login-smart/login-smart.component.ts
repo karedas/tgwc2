@@ -1,15 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { getInGameStatus } from 'src/app/store/selectors';
+import { Store } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
-import { takeUntil, skip } from 'rxjs/operators';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
 
-import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
-import { DialogConfiguration } from 'src/app/main/common/dialog/model/dialog.interface';
 import { DynamicDialogRef } from 'primeng/api';
 
 @Component({
@@ -31,36 +27,12 @@ export class LoginSmartComponent implements OnInit, OnDestroy  {
     private dialogRef: DynamicDialogRef,
     private loginService: LoginService) {
 
-    this.inGameState$ = this.store.pipe(select(getInGameStatus));
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
 
-    // this.loginForm = this.form.group({
-    //   'username': ['', UsernameValidation],
-    //   'password': ['', PasswordValidation]
-    // });
-
-    // this.inGameState$.pipe(
-    //   takeUntil(this._unsubscribeAll),
-    //   skip(1)).subscribe (
-    //     ingame => {
-    //     if (ingame == false) { this.open(); }
-    //   }
-    // );
   }
-
-  // private open () {
-
-  //   setTimeout(() => {
-  //     this.genericDialogService.open(this.dialogID, <DialogConfiguration>{
-  //       blockScroll: true,
-  //       modal: true
-  //     });
-  //   });
-
-  // }
 
   onReconnect() {
     this.loginService.reconnect();

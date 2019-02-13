@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { IRegion } from 'src/app/models/data/region.model';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getRegion } from 'src/app/store/selectors';
-import { trigger, style, state, transition, animate, query, stagger } from '@angular/animations';
-import { skip, takeUntil } from 'rxjs/operators';
+import { trigger, style, state, transition, animate } from '@angular/animations';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-geolocal-box',
@@ -32,7 +32,7 @@ import { skip, takeUntil } from 'rxjs/operators';
 })
 
 
-export class GeolocalBoxComponent implements OnInit {
+export class GeolocalBoxComponent implements OnInit, OnDestroy{
 
   changeState = '';
 
@@ -49,6 +49,8 @@ export class GeolocalBoxComponent implements OnInit {
   constructor(private store: Store<DataState>) {
 
     this.region$ = this.store.pipe(select(getRegion));
+
+    this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
@@ -77,6 +79,11 @@ export class GeolocalBoxComponent implements OnInit {
 
 
     }, 1000);
+  }
+
+  ngOnDestroy(): void {
+   this._unsubscribeAll.next();
+   this._unsubscribeAll.complete();
   }
 
 }

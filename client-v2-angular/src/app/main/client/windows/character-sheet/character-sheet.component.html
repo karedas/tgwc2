@@ -1,4 +1,4 @@
-<tg-dialog [id]="dialogID" (data)="onRequest($event)" *ngIf="heroBase$ | async as hero" >
+<tg-dialog [id]="dialogID" (data)="onRequest($event)" (isClosed)="isClosed($event)" *ngIf="heroBase$ | async as hero" >
   <div class="tg-character-card">
     <div class="b-ironlight-mini tg-box">
       <div class="tg-dialog-content-nopadding tg-shadow-inset">

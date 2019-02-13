@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -6,20 +6,14 @@ import { GameService } from 'src/app/services/game.service';
   templateUrl: './extraboard.component.html',
   styleUrls: ['./extraboard.component.scss'],
 })
-export class ExtraboardComponent implements OnInit {
+export class ExtraboardComponent {
 
   @ViewChild('#shortcutOpen') shortcutLink: ElementRef;
 
   constructor(private game: GameService) { }
 
-  ngOnInit() {
-  }
 
   buttonClick(cmd: string) {
     this.game.sendToServer(cmd);
-  }
-
-  openShortcutsPanel() {
-
   }
 }

@@ -60,20 +60,22 @@ export class GameService {
 
     if (now > this.lastDataTime + 1000 ) {
 
-      console.log('updateUIByData', what);
-      if (what.inventory) {
+      if (what.inventory > 0) {
         this.sendToServer('@inv');
+        console.log('Update Call: @inv', what.inventory);
         this.clientUpdateNeeded.inventory = what.inventory;
         this.lastDataTime = now;
       }
 
-      if (what.equipment) {
+      if (what.equipment > 0) {
         this.sendToServer('@equip');
+        console.log('Update Call: @equip', what.equipment);
         this.clientUpdateNeeded.equipment = what.equipment;
         this.lastDataTime = now;
       }
 
-      if (what.room && what.room  >  this.clientUpdateNeeded.room ) {
+      if (what.room > 0 && what.room  >  this.clientUpdateNeeded.room ) {
+        console.log('Update Call: @agg', what.room);
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;

@@ -16,6 +16,9 @@ export class SkyComponent implements OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor( private store: Store<DataState>) {
+
+    this._unsubscribeAll = new Subject<any>();
+
     this.store.pipe(
       select(getSky),
       takeUntil(this._unsubscribeAll)

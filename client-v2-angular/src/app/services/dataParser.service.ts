@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { InGameAction } from '../store/actions/client.action';
 
 import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as UiActions from '../store/actions/ui.action';
+import * as GameActions from '../store/actions/client.action';
+
 import { IHero } from '../models/data/hero.model';
 import { Observable, Subject } from 'rxjs';
 
@@ -14,13 +15,10 @@ import { Observable, Subject } from 'rxjs';
 
 export class DataParser {
 
-
-  private cmdPrefix = '';
   private netData = '';
-  private shortcuts = {};
 
   private _updateNeeded: Subject<any>;
-
+  
   constructor(private store: Store<State>) {
     this._updateNeeded = new Subject<any>();
   }
@@ -66,7 +64,8 @@ export class DataParser {
 
     // Player is logged in
     data = data.replace(/&!logged"[^"]*"/gm, () => {
-      this.store.dispatch(new InGameAction());
+      this.store.dispatch(new GameActions.InGameAction());
+
       return '';
     });
 

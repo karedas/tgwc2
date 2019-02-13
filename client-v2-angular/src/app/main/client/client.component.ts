@@ -5,7 +5,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { PreloaderService } from '../common/services/preloader.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CookieLawComponent } from './windows/cookie-law/cookie-law.component';
 import { WindowsService } from './windows/windows.service';
 
 @Component({
@@ -42,42 +41,38 @@ export class ClientComponent implements OnInit, OnDestroy {
 
     // TODO: moves in a separate component for better implementation
     const percentageSubscribe = this.preloader.percentage
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(
-        amount => { this.preloadPerc = amount; }
-      );
+      .pipe(takeUntil(this._unsubscribeAll)).subscribe(amount => {
+        this.preloadPerc = amount;
+      });
 
 
     const statusSubscribe = this.preloader.status$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(
-        status => {
-          if (status == true) {
-            this.preloadAssetsStatus = status;
-            this.gameIsReady();
-            percentageSubscribe.unsubscribe();
-            statusSubscribe.unsubscribe();
-          }
+      .pipe(takeUntil(this._unsubscribeAll)).subscribe(status => {
+        if (status == true) {
+          this.preloadAssetsStatus = status;
+          this.gameIsReady();
+          percentageSubscribe.unsubscribe();
+          statusSubscribe.unsubscribe();
         }
-      );
+      });
   }
 
   // Cookie Law Behaviour
   showCookieLaw() {
     this.windowsService.openCookieLaw().pipe(
       takeUntil(this._unsubscribeAll))
-      .subscribe(
-        (accept: boolean) => { this.isCookieAccepted = accept; }
-      );
+      .subscribe((accept: boolean) => {
+        this.isCookieAccepted = accept;
+      });
   }
 
   private gameIsReady() {
     if (!this.cookieService.check('tgCookieLaw')) {
       setTimeout(() => {
         this.windowsService.openCookieLaw().pipe(
-          takeUntil(this._unsubscribeAll))
-          .subscribe(
-            (accept: boolean) => { this.isCookieAccepted = accept; }
+          takeUntil(this._unsubscribeAll)).subscribe((accept: boolean) => {
+            this.isCookieAccepted = accept;
+          }
           );
       }, 100);
     } else {

@@ -39,7 +39,7 @@ export class InputComponent implements AfterViewInit {
     private store: Store<ClientState>,
     private historyService: HistoryService,
   ) {
-
+    
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
 

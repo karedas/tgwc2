@@ -16,6 +16,7 @@ import { GameService } from 'src/app/services/game.service';
 export class CharacterSheetComponent implements OnInit {
 
   dialogID = 'charactersheet';
+  closed: boolean = true;
   imagepath: string = environment.media_address;
 
   heroBase$: Observable<IHero>;
@@ -56,5 +57,9 @@ export class CharacterSheetComponent implements OnInit {
       break;
     }
     this.openedTab = tab;
+  }
+
+  isClosed($event) {
+    console.log($event);
   }
 }

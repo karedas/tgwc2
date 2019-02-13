@@ -14,11 +14,8 @@ import { WindowsService } from '../windows/windows.service';
 })
 export class ClientContainerComponent implements OnDestroy {
 
-
   private _unsubscribeAll: Subject<any>;
   private welcomeNews: Observable<boolean>;
-
-
 
   constructor(
     private store: Store<UIState>,
@@ -30,20 +27,18 @@ export class ClientContainerComponent implements OnDestroy {
   }
 
   ngAfterViewInit(): void {
+
     //  Welcome News
     this.welcomeNews.pipe(
       takeUntil(this._unsubscribeAll),
-      filter((r) => r === true)).subscribe(
-        () => {
-          if (localStorage.getItem('welcomenews')) {
-            this.game.sendToServer('');
-            console.log('qui arriva');
-            this.game._focusInput.next();
-          } else {
-            this.showNews();
-          }
+      filter((r) => r === true)).subscribe(() => {
+        if (localStorage.getItem('welcomenews')) {
+          this.game.sendToServer('');
+          this.game._focusInput.next();
+        } else {
+          this.showNews();
         }
-      );
+      });
   }
 
   showNews() {

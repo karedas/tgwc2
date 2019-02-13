@@ -8,6 +8,7 @@ import { AudioService } from 'src/app/main/client/audio/audio.service';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
 import { Router } from '@angular/router';
+import { GameService } from 'src/app/services/game.service';
 
 export interface PayloadAction {
   type: string;
@@ -17,15 +18,7 @@ export interface PayloadAction {
 @Injectable()
 export class ClientEffects {
 
-  constructor(
-    private actions$: Actions,
-    private audioService: AudioService,
-    private loginService: LoginService,
-    private windowsService: WindowsService,
-    private router: Router
-  ) { }
-
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   onDisconnect: Observable<Action> = this.actions$.pipe(
     ofType(ClientEventType.DISCONNECT),
     tap((a) => {
@@ -35,6 +28,25 @@ export class ClientEffects {
         this.windowsService.openSmartLogin();
       }
     }
-  ));
+    ));
+
+  @Effect({ dispatch: false })
+  refreshCommand$ = this.actions$.pipe(
+    ofType(ClientEventType.INGAME),
+    tap((val) => {
+      if(val === true) {
+        this.game._focusInput.next();
+      }
+    }));
+
+
+  constructor(
+    private actions$: Actions,
+    private audioService: AudioService,
+    private loginService: LoginService,
+    private windowsService: WindowsService,
+    private router: Router,
+    private game: GameService
+  ) { }
 
 }
