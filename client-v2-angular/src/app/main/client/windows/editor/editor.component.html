@@ -9,7 +9,7 @@
                 <div class="tg-editor--heroname" fxFlex="0 0 auto" fxLayoutAlign="center center">
                   {{HeroName$ | async}}
                 </div>
-                <div class="textarea-cont" fxFlex="0 1 auto">
+                <div class="textarea-cont" fxFlex="1 1 auto">
                   <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
                     (input)="onDescrChange($event.target.value)">{{description}}</textarea>
                 </div>

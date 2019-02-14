@@ -23,7 +23,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   inCombat = false;
   heroName: string;
   heroAdjective: string;
-  heroImage: string;
+  heroImage: string = 'assets/images/interface/default_avatar.png';
 
   conva: number;
 
@@ -51,12 +51,14 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
     this.store.pipe(select(getHero),
       takeUntil(this._unsubscribeAll)).subscribe(
         (hero: IHero) => {
-          this.setStatus(hero.status);
-          this.setCombatPanel(hero.target);
-          this.heroName = hero.name;
-          this.heroAdjective = hero.adjective;
-          this.conva = hero.conva;
-          this.heroImage = environment.media_address + hero.image;
+          if(hero) {
+            this.setStatus(hero.status);
+            this.setCombatPanel(hero.target);
+            this.heroName = hero.name;
+            this.heroAdjective = hero.adjective;
+            this.conva = hero.conva;
+            this.heroImage = environment.media_address + hero.image;
+          }
         }
       );
   }

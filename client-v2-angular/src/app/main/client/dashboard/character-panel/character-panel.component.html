@@ -6,7 +6,8 @@
         <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()"
           fxHide fxShow.gt-sm>
           <div class="tg-avatar-wrap">
-            <img [src]="heroImage" alt="Avatar" *ngIf="heroImage"  />
+              <img src="{{heroImage ||'assets/images/interface/default_avatar.png'}}" alt="Avatar"/>
+
           </div>
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
@@ -25,7 +26,7 @@
             </div> -->
           </div>
           <!-- Character Status Bars -->
-          <div class="tg-meterbar">
+          <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">
               <div class="barcont barthin lft" >
                 <span class="tg-statusbar-text">

@@ -51,17 +51,17 @@ export interface IHero {
   skills?: any;
 }
 
-export class Hero implements IHero {
+// export class Hero implements IHero {
 
-  conva: 0;
-  status: IStatus;
+  // conva: 0;
+  // status: IStatus;
 
-  constructor(...args ) {
-    this.status = {
-      drink: 0,
-      food: 0,
-      hit: 0,
-      move: 0
-    };
-  }
-}
+  // constructor(...args ) {
+    // this.status = {
+    //   drink: 0,
+    //   food: 0,
+    //   hit: 0,
+    //   move: 0
+    // };
+//   }
+// }

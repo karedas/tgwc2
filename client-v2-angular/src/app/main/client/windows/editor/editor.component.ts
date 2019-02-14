@@ -39,18 +39,14 @@ export class EditorComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject<any>();
 
     this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
-
-
-
   }
 
   ngOnInit(): void {
-
     this.editorRequest$.pipe(
       takeUntil(this._unsubscribeAll)
     ).subscribe(
       (editorState: IEditor) => {
-        if (editorState) {
+        if (editorState !== undefined) {
           this.description = editorState.description;
           this.dialogTitle = editorState.title;
           this.maxChars = editorState.maxChars;

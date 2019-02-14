@@ -29,6 +29,11 @@
     }
 }
 
+.eqinv-caption {
+    background-color: #0c0c0c;
+    color: white;
+}
+
 .equip-list {
     padding-right: 4px;
     background-image: url($imgPath + '/borders/border-002-tiny-v.png');
@@ -39,9 +44,6 @@
 .eqinv-item-wrap {
     padding-bottom: .5em;
     text-align: left;
-}
-
-.equip-list {
 }
 
 .inventory-list {

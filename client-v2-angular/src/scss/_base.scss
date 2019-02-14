@@ -86,10 +86,13 @@ body[data-loginstatus=ready] {
 
 .tg-icon {
   margin: auto auto;
-  background-image: url( $imgPath + '/tiles_s.png');
+  background-image: url( $imgPath + '/tiles.png');
   background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
+  transform: scale(.5);
+  margin-top: -8px;
+  width: 32px;
+  height: 32px;
+  line-height: 16px;
 }
 
 

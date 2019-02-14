@@ -1,5 +1,5 @@
 import { Map } from 'src/app/models/data/map.model';
-import { Hero, IHero } from 'src/app/models/data/hero.model';
+import { IHero } from 'src/app/models/data/hero.model';
 import { Room } from 'src/app/models/data/room.model';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { IObjPerson } from 'src/app/models/data/objpers.model';
@@ -14,7 +14,7 @@ export interface DataState {
     doors?: any;
     room: Room;
     map: Map;
-    hero: IHero;
+    hero?: IHero;
     editor?: IEditor;
     objPers?: IObjPerson;
     genericTable?: IGenericTable;
@@ -28,7 +28,8 @@ export const initialState: DataState = {
     sky: undefined,
     doors: [],
     room: undefined,
+    editor: undefined,
     map: undefined,
-    hero: new Hero(),
+    hero: undefined,
 };
 

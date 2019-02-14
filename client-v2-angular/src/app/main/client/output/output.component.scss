@@ -45,7 +45,7 @@ tg-text {
 
 ::ng-deep.tg-line {
   display: block;
-  padding-bottom: .4em;
+  padding-bottom: 1em;
   line-height: 1.4;
 
   &::first-letter {
@@ -78,8 +78,8 @@ tg-text {
   .breakline {
     width: 100%;
     display: flex;
-    line-height: 14px;
-    height: 14px;
+    line-height: 1px;
+    height: .4em;
   }
 
   .tg-backdetail {
@@ -135,9 +135,8 @@ tg-text {
 
   .tg-room--desc {
     flex-direction: column;
-    font-family: kingthings;
-    font-size: 12px;
-    line-height: 14px;
+    // font-family: kingthings;
+    line-height: 1.4em;
     color: #989898;
     padding-bottom: 0.5em;
     margin-bottom: .5em;
@@ -148,7 +147,7 @@ tg-text {
   .tg-objects,
   .tg-persons {
     display: flex;
-    padding-bottom: .5em;
+    // padding-bottom: .5em;
     padding-right: .5em;
     flex-direction: column;
   }
@@ -320,10 +319,8 @@ tg-text {
     .tg-room--desc {
       padding: 0.5em .5em .2em;
       line-height: 1.4;
-      font-size: 12px;
       color: #e2d6c7;
       border-top: 1px solid #433b3a;
-      font-family: kingthings;
     }
 
     .tg-room--image {

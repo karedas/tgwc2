@@ -6,6 +6,11 @@
         Equipaggiamento
       </h3>
       <div class="eqinv-wrapper-list" fxLayout="column wrap">
+        <div class="eqinv-caption" fxLayout="row">
+          <div>Dove</div>
+          <div>Oggetto</div>
+          <div>Peso</div>
+        </div>
         <ng-container *ngFor="let item of equipment$ | async | keyvalue" >
           <div fxFlex="0 0 100%" 
             *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
@@ -16,39 +21,6 @@
               <tg-icons [icon]="item.value[0].icon"></tg-icons> [barra] <span> {{item.value[0].desc}}</span>
             </div> 
           </div>
-          <!-- {{equipPositionValue['feet']}} -->
-          <!-- <ng-container *ngIf="equipPositionValue[item.key]">{{item.key}}</ng-container> -->
-          <!-- <ng-container *ngIf="item.key == 'r_finger'">1</ng-container>
-            <ng-container *ngIf="item.key == 'l_finger'">2</ng-container>
-            <ng-container *ngIf="item.key == 'neck'">3</ng-container>
-            <ng-container *ngIf="item.key == 'body'">4</ng-container>
-            <ng-container *ngIf="item.key == 'head'">5</ng-container>
-            <ng-container *ngIf="item.key == 'legs'">6</ng-container>
-            <ng-container *ngIf="item.key == 'feet'">
-              <tg-icons [icon]="item.value[0].icon"></tg-icons>
-            </ng-container>
-            <ng-container *ngIf="item.key == 'hands'">8</ng-container>
-            <ng-container *ngIf="item.key == 'arms'">9</ng-container>
-            <ng-container *ngIf="item.key == 'around'">10</ng-container>
-            <ng-container *ngIf="item.key == 'waist'">
-                <tg-icons [icon]="item.value[0].icon"></tg-icons>
-            </ng-container>
-            <ng-container *ngIf="item.key == 'r_wrist'">12</ng-container>
-            <ng-container *ngIf="item.key == 'l_wrist'">13</ng-container>
-            <ng-container *ngIf="item.key == 'r_hand'">
-                <tg-icons [icon]="item.value[0].icon"></tg-icons>
-            </ng-container>
-            <ng-container *ngIf="item.key == 'l_hand'">15</ng-container>
-            <ng-container *ngIf="item.key == 'back'">16</ng-container>
-            <ng-container *ngIf="item.key == 'r_ear'">17</ng-container>
-            <ng-container *ngIf="item.key == 'l_ear'">18</ng-container>
-            <ng-container *ngIf="item.key == 'eyes'">19</ng-container>
-            <ng-container *ngIf="item.key == 'sheath'">20</ng-container>
-            <ng-container *ngIf="item.key == 'belt'">21</ng-container>
-            <ng-container *ngIf="item.key == 'over'">22</ng-container>
-            <ng-container *ngIf="item.key == 'r_shoulder'">23</ng-container>
-            <ng-container *ngIf="item.key == 'l_shoulder'">24</ng-container>
-            <ng-container *ngIf="item.key == 'tied'">25</ng-container> -->
         </ng-container>
       </div>
     </div>

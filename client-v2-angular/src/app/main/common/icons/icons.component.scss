@@ -5,13 +5,21 @@ tg-icons{
   display: inline-block;
   width: 16px;
   height: 16px;
+  min-width: 16px;
+  min-height: 16px;
   box-sizing: content-box;
+  line-height: 16px;
+  position: relative;
+
 
   .tg-icon {
-    margin: auto auto;
-    background-image: url( $imgPath + '/tiles_s.png');
+    background-image: url( $imgPath + '/tiles.png');
     background-repeat: no-repeat;
-    width: 16px;
-    height: 16px;
+    transform: scale(.5);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: -8px;
+    top: -8px;
   }
 }
