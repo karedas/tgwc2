@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { PreloaderService } from '../../common/services/preloader.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-splashscreen',
@@ -6,12 +9,41 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./splashscreen.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SplashscreenComponent implements OnInit {
+export class SplashscreenComponent implements OnInit, OnDestroy {
 
-  @Input('preloadPerc') preloadPerc: number;
-  constructor() { }
+  @Output() preloadDone: EventEmitter<any> = new EventEmitter<any>();
+  preloadPerc: any;
 
-  ngOnInit() {
+  private _unsubscribeAll: Subject<any>;
+
+  // @Input('preloadPerc') preloadPerc: number;
+
+  constructor(
+    private preloader: PreloaderService
+  ) { 
+    this._unsubscribeAll = new Subject<any>();
   }
 
+
+  ngOnInit() {
+
+    this.preloader.percentage.pipe(
+      takeUntil(this._unsubscribeAll)).subscribe(amount => {
+        this.preloadPerc = amount;
+      });
+
+
+    this.preloader.status$
+      .pipe(takeUntil(this._unsubscribeAll)).subscribe(status => {
+        if (status == true) {
+          this.preloadDone.emit(status);
+          // this.gameIsReady();
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
 }

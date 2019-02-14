@@ -30,9 +30,7 @@ export class WelcomeNewsComponent  implements AfterViewInit {
     if (this.dontShowNextTime) {
       localStorage.setItem('welcomenews', '1');
     }
-
     this.ref.close();
-    this.game._focusInput.next();
     this.game.sendToServer('');
   }
 

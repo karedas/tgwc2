@@ -34,7 +34,6 @@ export class ClientContainerComponent implements OnDestroy {
       filter((r) => r === true)).subscribe(() => {
         if (localStorage.getItem('welcomenews')) {
           this.game.sendToServer('');
-          this.game._focusInput.next();
         } else {
           this.showNews();
         }

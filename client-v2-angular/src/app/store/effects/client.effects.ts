@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
 import { Action } from '@ngrx/store';
-import { tap, skip } from 'rxjs/operators';
+import { tap, skip, filter } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/audio/audio.service';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
@@ -30,15 +30,23 @@ export class ClientEffects {
     }
     ));
 
-  @Effect({ dispatch: false })
-  refreshCommand$ = this.actions$.pipe(
-    ofType(ClientEventType.INGAME),
-    tap((val) => {
-      if(val === true) {
-        this.game._focusInput.next();
-      }
-    }));
+  // @Effect({ dispatch: false })
+  // refreshCommand$ = this.actions$.pipe(
+  //   ofType(ClientEventType.INGAME),
+  //   tap((val) => {
+  //     if(val === true) {
+  //       this.game._focusInput.next();
+  //     }
+  //   }));
 
+  @Effect({dispatch: false})
+  onGameStatus$ = this.actions$.pipe(
+    ofType(ClientEventType.INGAME),
+    filter((status) => status === true),
+    tap(() => {
+      this.game._focusInput.next();
+    })
+  );
 
   constructor(
     private actions$: Actions,

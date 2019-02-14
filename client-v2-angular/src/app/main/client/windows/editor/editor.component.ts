@@ -50,12 +50,12 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.description = editorState.description;
           this.dialogTitle = editorState.title;
           this.maxChars = editorState.maxChars;
+          this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
           this.dialogRef = this.openEditor();
         }
       }
     );
 
-    this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
   }
 
   private openEditor() {
