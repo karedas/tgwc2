@@ -78,7 +78,7 @@
           width: 0;
           background-size: cover;
           background-repeat: repeat-x;
-          transition: width .2s linear; 
+          transition: width .2s ease-in; 
       }
   }
   .tg-enemy-h {

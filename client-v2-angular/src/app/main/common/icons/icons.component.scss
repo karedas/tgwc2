@@ -1,6 +1,9 @@
 @import 'variables';
+@import '~src/scss/utils/sprites-mixins';
+@import '~src/scss/sprites';
 
-tg-icons{
+
+tg-icons {
   margin: auto 2px;
   display: inline-block;
   width: 16px;
@@ -13,7 +16,7 @@ tg-icons{
 
 
   .tg-icon {
-    background-image: url( $imgPath + '/tiles.png');
+    background-image: url($imgPath + '/tiles.png');
     background-repeat: no-repeat;
     transform: scale(.5);
     width: 32px;
@@ -21,5 +24,17 @@ tg-icons{
     position: absolute;
     left: -8px;
     top: -8px;
+  }
+}
+
+
+
+tg-icons.squared {
+  @include sprite($base-square-sprite);
+  display: flex;
+
+  .tg-icon {
+    top: 4px;
+    left: -4px;
   }
 }
