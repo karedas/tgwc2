@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
@@ -13,7 +13,7 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./character-sheet.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CharacterSheetComponent implements OnInit {
+export class CharacterSheetComponent  {
 
   dialogID = 'charactersheet';
   closed: boolean = true;
@@ -32,10 +32,6 @@ export class CharacterSheetComponent implements OnInit {
   ) {
 
     this.heroBase$ = this.store.pipe(select(getHero));
-  }
-
-  ngOnInit(): void {
-
   }
 
   onRequest(data: any) {
@@ -57,9 +53,5 @@ export class CharacterSheetComponent implements OnInit {
       break;
     }
     this.openedTab = tab;
-  }
-
-  isClosed($event) {
-    console.log($event);
   }
 }

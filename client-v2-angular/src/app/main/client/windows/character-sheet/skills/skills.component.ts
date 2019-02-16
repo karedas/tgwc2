@@ -31,7 +31,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.skills$.pipe(
       takeUntil(this._unsubscribeAll)
-    ).subscribe((a) => console.log(a, 'test unsubscribe'));
+    ).subscribe();
   }
 
   ngOnDestroy() {

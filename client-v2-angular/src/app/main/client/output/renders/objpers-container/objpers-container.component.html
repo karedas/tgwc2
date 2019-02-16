@@ -16,7 +16,8 @@
       <div class="tg-objperson--line">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"
           (mousedown)="onInteract($event, item, i)"></tg-icons>
-        <div class="hstat" [style.background-position]="getHstat(item.condprc)"></div>
+
+        <tg-hstat [condprc]="object.condprc"></tg-hstat>
 
         <!-- Equip Position Name  -->
         <div class="tg-objperson--equippos " 
@@ -49,7 +50,9 @@
           [attr.cntnum]="obj.cntnum"
           (mousedown)="onInteract($event, obj, i, obj.sz)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
-        <div class="hstat" [style.background-position]="getHstat(obj.condprc)"></div>
+
+        <tg-hstat [condprc]="obj.condprc"></tg-hstat>
+        
         <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
         <div class="size-qty" *ngIf="obj.sz">{{obj.sz}}</div>
       </div>
@@ -58,7 +61,9 @@
             <tg-icons [icon]="obj.icon" 
               (mousedown)="onInteract($event, obj, indexSz)"
               pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
-            <div class="hstat" [style.background-position]="getHstat(sz.condprc)"></div>
+
+            <tg-hstat [condprc]="sz.condprc"></tg-hstat>
+
             <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
           </div>
         </div>

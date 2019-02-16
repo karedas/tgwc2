@@ -217,7 +217,7 @@ export class DataParser {
     // Inventory
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
       const inv_parse = JSON.parse(inv.slice(5, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions([inv_parse, 'inventory']));
+      // this.store.dispatch(new UiActions.ShowCharacterSheetActions([inv_parse, 'inventory']));
       return '';
     });
 
@@ -245,7 +245,8 @@ export class DataParser {
     // Equipment
     data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
       const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions([eq_parse, 'equip']));
+      this.store.dispatch(new DataActions.EquipAction(eq_parse));
+      // this.store.dispatch(new UiActions.ShowCharacterSheetActions([eq_parse, 'equip']));
       return '';
     });
 
@@ -259,7 +260,8 @@ export class DataParser {
     // Skill list
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions([skinfo_parse, 'skills']));
+      this.store.dispatch(new DataActions.SkillsAction(skinfo_parse));
+      // this.store.dispatch(new UiActions.ShowCharacterSheetActions([skinfo_parse, 'skills']));
       return '';
 
     });

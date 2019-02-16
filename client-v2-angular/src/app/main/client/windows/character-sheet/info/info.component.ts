@@ -38,7 +38,6 @@ export class InfoComponent implements AfterViewInit, OnDestroy {
     this.heroInfo$.pipe(
       takeUntil(this._unsubscribeAll),
       map(( hero: IHero ) => {
-        console.log(hero);
         this.parseDesc(hero.desc);
         this.textAreaScrollbar.update();
       })).subscribe();

@@ -26,14 +26,13 @@ export class UiEffects {
   ) { }
 
   @Effect({ dispatch: false })
-  $updateUI$: Observable<any> = this.actions$.pipe(
+  $updateUI: Observable<any> = this.actions$.pipe(
     ofType(UIEventType.UPDATENEEDED),
     withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
     filter(([action, status]) => status === true),
     map(([action, status]) => action),
     tap(
       what => {
-        console.log('effect', what);
         this.game.updateUIByData(what.payload);
       })
   );
@@ -45,7 +44,7 @@ export class UiEffects {
   );
 
   @Effect({ dispatch: false })
-  showCommands: Observable<Action> = this.actions$.pipe(
+  showCommande$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadAction>(UIEventType.SHOWCOMMANDS),
     map(action => action.payload),
     tap(cmds => {
@@ -57,31 +56,33 @@ export class UiEffects {
   );
 
   @Effect()
-  showCharacterSheet = this.actions$.pipe(
+  showCharacterSheet$ = this.actions$.pipe(
     ofType<PayloadAction>(UIEventType.SHOWCHARACTERSHEET),
     switchMap((res) => {
+
       this.windowsService.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
           new InfoCharacterAction(),
           new HeroAction(res.payload[0])
         ];
-      } else if (res.payload[1] === 'skills') {
-        this.windowsService.openCharacterSheet(res.payload[1]);
-        return [
-          new SkillsAction(res.payload[0])
-        ];
-      } else if (res.payload[1] === 'inventory') {
-        this.windowsService.openCharacterSheet('eqinv');
-        return [
-          new InventoryAction(res.payload[0])
-        ];
-      } else if (res.payload[1] === 'equip') {
-        this.windowsService.openCharacterSheet('eqinv');
-        return [
-          new EquipAction(res.payload[0])
-        ];
-      }
+      } 
+      // else if (res.payload[1] === 'skills') {
+      //   this.windowsService.openCharacterSheet(res.payload[1]);
+      //   return [
+      //     new SkillsAction(res.payload[0])
+      //   ];
+      // } else if (res.payload[1] === 'inventory') {
+      //   this.windowsService.openCharacterSheet('eqinv');
+      //   return [
+      //     new InventoryAction(res.payload[0])
+      //   ];
+      // } else if (res.payload[1] === 'equip') {
+      //   this.windowsService.openCharacterSheet('eqinv');
+      //   return [
+      //     new EquipAction(res.payload[0])
+      //   ];
+      // }
     }),
   );
 

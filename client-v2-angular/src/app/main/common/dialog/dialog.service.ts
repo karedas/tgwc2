@@ -34,6 +34,6 @@ export class GenericDialogService {
 
   isClosed(id: string): boolean {
     const modal: any = this.modals.filter(x => x.id === id)[0];
-    return modal.isClosed();
+    return !modal.visible;
   }
 }

@@ -21,6 +21,7 @@ import { appReducer, clearState } from './store';
 import { UiEffects } from './store/effects/ui.effects';
 import { ClientEffects } from './store/effects/client.effects';
 import { Auth2Module } from './main/authentication/auth.module';
+import { DataEffects } from './store/effects/data.effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { Auth2Module } from './main/authentication/auth.module';
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
-    EffectsModule.forRoot([UiEffects, ClientEffects]),
+    EffectsModule.forRoot([UiEffects, ClientEffects, DataEffects]),
     ToastrModule.forRoot({
       positionClass: 'inline',
     }),

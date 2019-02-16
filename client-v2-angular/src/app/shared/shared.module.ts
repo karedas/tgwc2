@@ -27,11 +27,13 @@ import { TableModule } from 'primeng/table';
 
 import { DialogService as DynamicDialogService } from 'primeng/api';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
+import { HstatComponent } from '../main/common/hstat/hstat.component';
 
 
 @NgModule({
   declarations: [
     IconsComponent,
+    HstatComponent
   ],
   imports: [
     CommonModule,
@@ -76,6 +78,7 @@ import { GenericDialogService } from '../main/common/dialog/dialog.service';
     ToastContainerModule,
     FontAwesomeModule,
     IconsComponent,
+    HstatComponent,
     CheckboxModule,
     MenubarModule,
     TooltipModule,

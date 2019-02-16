@@ -275,16 +275,16 @@ tg-text {
     display: inline-block;
   }
 
-  .hstat {
-    background-position: 0 0px;
-    display: inline-block;
-    margin: auto 8px auto 0 !important;
-    background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
-    box-sizing: content-box;
-    height: 13px;
-    width: 21px;
-    flex: 0 0 21px;
-  }
+  // .hstat {
+  //   background-position: 0 0px;
+  //   display: inline-block;
+  //   margin: auto 8px auto 0 !important;
+  //   background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
+  //   box-sizing: content-box;
+  //   height: 13px;
+  //   width: 21px;
+  //   flex: 0 0 21px;
+  // }
 
   .tg-extraoutput--header {
     overflow: hidden;
@@ -362,8 +362,8 @@ tg-text {
   // }
 }
 
-@include layout-bp(gt-sm) {
-  .hstat {
-    display: none;
-  }
-}
+// @include layout-bp(gt-sm) {
+//   .hstat {
+//     display: none;
+//   }
+// }

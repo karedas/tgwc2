@@ -22,7 +22,7 @@ export class WindowsService {
   ) {
 
     this.dialogs = new Map();
-   }
+  }
 
   openWelcomeNews() {
     const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
@@ -61,25 +61,19 @@ export class WindowsService {
 
   openCharacterSheet(detail?: string) {
     // TODO: move method in another place for a global use
-    if(!this.dialogs.has('charactersheet')) {
-      const ref = this.genericDialogService.open('charactersheet',
-        <DialogConfiguration>{
-          // showHeader: true,
-          draggable: true,
-          resizable: true,
-          modal: false,
-          header: 'Scheda Personaggio',
-          width: '750px',
-          height: '650px',
-          data: detail,
-          style: { 'max-width': '100%', 'max-height': '100%' },
-          contentStyle: { 'max-height': '100%', 'max-width': '100%', 'min-height': '400px', 'overflow': 'auto' }
-        });
-
-        this.dialogs.set('charactersheet', true);
-
-        ref.onHide(() => {console.log('hide')});
-    }
+    const ref = this.genericDialogService.open('charactersheet',
+      <DialogConfiguration>{
+        // showHeader: true,
+        draggable: true,
+        resizable: true,
+        modal: false,
+        header: 'Scheda Personaggio',
+        width: '750px',
+        height: '650px',
+        data: detail,
+        style: { 'max-width': '100%', 'max-height': '100%' },
+        contentStyle: { 'max-height': '100%', 'max-width': '100%', 'min-height': '400px', 'overflow': 'auto' }
+      });
   }
 
 
@@ -110,12 +104,12 @@ export class WindowsService {
         header: data[0]
       });
 
-      return ref;
+    return ref;
   }
 
   openDialogTable(dialogID: string, ...data: any) {
     const ref = this.genericDialogService.open(dialogID,
-      <DialogConfiguration> {
+      <DialogConfiguration>{
         draggable: true,
         modal: false,
         width: 'auto',

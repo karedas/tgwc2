@@ -1,36 +1,38 @@
 <div style="height: 100%">
   <!-- ######## Ability ########  -->
   <div class="eqinv-container" fxLayout="row">
-    <div fxFlex="0 1 50%" class="equip-list">
+    <div fxFlex="0 1 100%" class="equip-list">
       <h3>
         Equipaggiamento
       </h3>
       <div class="eqinv-wrapper-list" fxLayout="column wrap">
         <div class="eqinv-caption" fxLayout="row">
-          <div>Dove</div>
-          <div>Oggetto</div>
-          <div>Peso</div>
+          <div fxFlex="0 0 25%">Dove</div>
+          <div fxFlex="0 0 60%">Oggetto</div>
+          <div fxFlex="0 0 15%">Peso</div>
         </div>
-        <ng-container *ngFor="let item of equipment$ | async | keyvalue" >
-          <div fxFlex="0 0 100%" 
-            *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
-            <div class="eqinv-item-position">
-               <span class="tg-yellow">{{equipPositionValue[item.key]}}</span> 
+        <ng-container *ngFor="let item of equipment$ | async | keyvalue">
+          <div fxFlex="0 0 100%" *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
+            <div class="eqinv-item-position" fxFlex="0 0 25%">
+              <span class="tg-yellow">{{equipPositionValue[item.key]}}</span>
             </div>
-            <div class="eqinv-item">
-              <tg-icons [icon]="item.value[0].icon"></tg-icons> [barra] <span> {{item.value[0].desc}}</span>
-            </div> 
+            <div class="eqinv-item" fxFlex="0 0 60%">
+              <tg-icons [icon]="item.value[0].icon"></tg-icons> 
+              <tg-hstat [condprc]="item.value[0].condprc"></tg-hstat>
+              <span> {{item.value[0].desc}}</span>
+            </div>
+            <div class="eqinv-item-weight" fxFlex="0 0 15%">{{item.value[0].wgt}} pt</div>
           </div>
         </ng-container>
       </div>
     </div>
-    <div fxFlex="0 1 50%" class="inventory-list">
+    <!-- <div fxFlex="0 1 50%" class="inventory-list">
       <h3>Inventario</h3>
       <div class="eqinv-wrapper-list">
         <div *ngFor="let item of inventory$ | async | keyvalue">
           {{item.key}}
         </div>
-    </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
 </div>

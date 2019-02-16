@@ -15,7 +15,7 @@
         <tg-icons [icon]="person.icon"
           (mousedown)="onInteract($event, person, i)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
-        <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
+        <tg-hstat [condprc]="person.condprc"></tg-hstat>
         <div class="tg-persons--itemdesc" [innerHtml]="person.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
       </div>
@@ -25,7 +25,9 @@
           (mousedown)="onInteract($event, person, indexSz, true)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
           <tg-icons [icon]="person.icon" ></tg-icons>
-          <div class="hstat" [style.background-position]="getHstat(person.condprc)"></div>
+
+          <tg-hstat [condprc]="person.condprc"></tg-hstat>
+
           <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
           <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
         </div>
@@ -45,7 +47,9 @@
         <tg-icons [icon]="object.icon" 
           (mousedown)="onInteract($event, object, i)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
-        <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>
+
+        <tg-hstat [condprc]="object.condprc"></tg-hstat>
+
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
         <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
       </div>
@@ -55,7 +59,9 @@
         <div class="tg-objects--line" *ngFor="let sz of object.mrn; let indexSz=index"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
           <tg-icons [icon]="object.icon" (mousedown)="onInteract($event, object, indexSz, true)"></tg-icons>
-          <div class="hstat" [style.background-position]="getHstat(object.condprc)"></div>
+
+          <tg-hstat [condprc]="object.condprc"></tg-hstat>
+
           <div class="tg-object--itemdesc" [innerHtml]="(indexSz + 1)" [attr.mrn]="object.mrn[indexSz]"></div>
         </div>
       </div>

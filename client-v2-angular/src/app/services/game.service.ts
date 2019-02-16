@@ -4,6 +4,8 @@ import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { WindowsService } from '../main/client/windows/windows.service';
+import { GenericDialogService } from '../main/common/dialog/dialog.service';
 
 
 @Injectable({
@@ -30,6 +32,7 @@ export class GameService {
     private socketService: SocketService,
     private dataParserService: DataParser,
     private historyService: HistoryService,
+    private genericDialogService: GenericDialogService
   ) {
 
     this._focusInput = new Subject();
@@ -57,24 +60,23 @@ export class GameService {
   updateUIByData(what: any) {
 
     const now = Date.now();
-
+    console.log(what.inventory ,  this.clientUpdateNeeded.inventory );
     if (now > this.lastDataTime + 1000 ) {
-
-      if (what.inventory > 0) {
+      if (what.inventory > this.clientUpdateNeeded.inventory && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@inv');
         console.log('Update Call: @inv', what.inventory);
         this.clientUpdateNeeded.inventory = what.inventory;
         this.lastDataTime = now;
       }
 
-      if (what.equipment > 0) {
+      if (what.equipment > this.clientUpdateNeeded.equipment && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@equip');
         console.log('Update Call: @equip', what.equipment);
         this.clientUpdateNeeded.equipment = what.equipment;
         this.lastDataTime = now;
       }
 
-      if (what.room > 0 && what.room  >  this.clientUpdateNeeded.room ) {
+      if (what.room > this.clientUpdateNeeded.room && what.room  >  this.clientUpdateNeeded.room ) {
         console.log('Update Call: @agg', what.room);
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
