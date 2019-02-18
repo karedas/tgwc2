@@ -24,6 +24,7 @@ tg-icons {
     position: absolute;
     left: -8px;
     top: -8px;
+    margin: auto;
   }
 }
 
@@ -34,7 +35,7 @@ tg-icons.squared {
   display: flex;
 
   .tg-icon {
-    top: 4px;
+    top: -4px;
     left: -4px;
   }
 }

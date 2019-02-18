@@ -109,12 +109,6 @@ export class GameService {
     this.socketService.emit('data', cmd);
   }
 
-  public getHsStatBgPos(condprc: number): string {
-    const pos = -13 * Math.floor(12 * (100 - condprc) / 100);
-    const styleValue = `0 ${pos}px`;
-    return styleValue;
-  }
-
   public setDisconnect() {
     this.socketService.disconnect();
   }

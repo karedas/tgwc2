@@ -19,7 +19,6 @@ export class HstatComponent {
   setHsStatBgPos() {
     const pos = -13 * Math.floor(12 * (100 - this.condprc) / 100);
     this.bgPos = `0 ${pos}px`;
-    console.log(this.bgPos);
   }
 
 

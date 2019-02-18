@@ -1,29 +1,39 @@
 <div style="height: 100%">
   <!-- ######## Ability ########  -->
-  <div class="eqinv-container" fxLayout="row">
-    <div fxFlex="0 1 100%" class="equip-list">
+  <div class="eqinv-container">
+    <div class="equip-list tg-shadow-inset" fxLayout="column wrap"  *ngIf="equipment$ | async; let equip">
       <h3>
         Equipaggiamento
       </h3>
-      <div class="eqinv-wrapper-list" fxLayout="column wrap">
-        <div class="eqinv-caption" fxLayout="row">
-          <div fxFlex="0 0 25%">Dove</div>
-          <div fxFlex="0 0 60%">Oggetto</div>
-          <div fxFlex="0 0 15%">Peso</div>
-        </div>
-        <ng-container *ngFor="let item of equipment$ | async | keyvalue">
-          <div fxFlex="0 0 100%" *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
-            <div class="eqinv-item-position" fxFlex="0 0 25%">
-              <span class="tg-yellow">{{equipPositionValue[item.key]}}</span>
-            </div>
-            <div class="eqinv-item" fxFlex="0 0 60%">
-              <tg-icons [icon]="item.value[0].icon"></tg-icons> 
-              <tg-hstat [condprc]="item.value[0].condprc"></tg-hstat>
-              <span> {{item.value[0].desc}}</span>
-            </div>
-            <div class="eqinv-item-weight" fxFlex="0 0 15%">{{item.value[0].wgt}} pt</div>
+      <div fxLayout="column wrap">
+        <div class="eqinv-wrapper-list"  fxLayout="column wrap">
+          <div class="eqinv-caption" fxLayout="row" fxFlex="0 0 auto">
+            <div fxFlex="0 0 25%" fxLayoutAlign="flex-end center">Dove</div>
+            <div fxFlex="0 0 60%" fxLayoutAlign="center center">Oggetto</div>
+            <div fxFlex="0 0 15%" fxLayoutAlign="center center">Peso</div>
           </div>
-        </ng-container>
+          <ng-container *ngFor="let item of equip | keyvalue">
+            <div fxFlex="0 0 auto" *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
+              <div class="eqinv-item-position" fxFlex="0 0 25%" fxLayoutAlign="flex-end center">
+                <span class="tg-yellow">{{ equipPositionValue[item.key] }}</span>
+              </div>
+              <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
+                <tg-icons [icon]="item.value[0].icon"></tg-icons> 
+                <tg-hstat [condprc]="item.value[0].condprc"></tg-hstat>
+                <span> {{item.value[0].desc}}</span>
+              </div>
+              <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="center center">{{item.value[0].wgt}} pt</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="eqinv-totalweight" fxFlex="0 0 auto">
+        <div class="eqinv-totalweight-label" fxFlex="0 0 85%" fxLayoutAlign="flex-end center">
+          Ingombro:&nbsp;<span class="tg-red">{{equip.wprc}} / 100 </span>&nbsp;- Peso Totale:
+        </div>
+        <div class="eqinv-totalweight-value tg-brown" fxFlex="0 0 15%" fxLayoutAlign="center center">
+          <b>{{equip.weight}} pt</b>
+        </div>
       </div>
     </div>
     <!-- <div fxFlex="0 1 50%" class="inventory-list">

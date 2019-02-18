@@ -43,10 +43,6 @@ export class ObjPersContainerComponent implements OnInit  {
     }
   }
 
-  getHstat(condprc: number): string {
-    return this.game.getHsStatBgPos(condprc);
-  }
-
   onInteract(event: Event, item: any, index: number, list?: boolean) {
     event.preventDefault();
     if (!item.sz) {

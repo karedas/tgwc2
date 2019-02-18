@@ -16,8 +16,4 @@ export class ObjpersDetailComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  getHstat(condprc: number): string {
-    return this.game.getHsStatBgPos(condprc);
-  }
 }

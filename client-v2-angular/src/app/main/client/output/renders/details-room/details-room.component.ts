@@ -72,11 +72,7 @@ export class DetailsRoomComponent implements OnInit {
       this.personsClass50 = true;
     }
   }
-
-  public getHstat(condprc: number): string {
-    return this.game.getHsStatBgPos(condprc);
-  }
-
+  
   /**
   * Expand or send Command to Server after click
   * based on content type, list or single obj / person

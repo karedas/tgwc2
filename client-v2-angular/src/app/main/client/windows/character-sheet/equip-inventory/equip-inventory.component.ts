@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getEquip, getInventory } from 'src/app/store/selectors';
 import { equip_positions_by_name } from 'src/app/main/common/constants';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-equip-inventory',
   templateUrl: './equip-inventory.component.html',
-  styleUrls: ['./equip-inventory.component.scss']
+  styleUrls: ['./equip-inventory.component.scss'],
 })
 export class EquipInventoryComponent implements OnInit, OnDestroy {
 
