@@ -1,81 +1,121 @@
-.tg-button{
-    text-indent: -9999px;
+.tg-button {
+  text-indent: -9999px;
 }
 
-.tg-button, .tg-fnt-button {
-    background-color: transparent;
-    background-repeat: no-repeat;
-    display: inline-block;
-    cursor: pointer;
-    z-index: 20;
+.tg-button,
+.tg-fnt-button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  display: inline-block;
+  cursor: pointer;
+  z-index: 20;
 
-    &.b-round {
-        border-radius: 50%;
-        @include sprite($base-brown-sprite);
-    }
+  &.b-round {
+    border-radius: 50%;
+    @include sprite($base-brown-sprite);
+  }
 
-    &.b-square {
-        @include sprite($base-square-sprite);
-    }
+  &.b-square {
+    @include sprite($base-square-sprite);
+  }
 
-    &.tg-button-annulla {
-        @include sprite($btn-annulla-sprite);
-    }
-    &.tg-button-salva {
-        @include sprite($btn-salva-sprite);
-    }
-    &.tg-button-continua {
-        @include sprite($btn-continua-sprite);
-    }
-    &.tg-button-tregua {
-        @include sprite($btn-tregua-sprite);
-    }
-    &.tg-button-pieta {
-        @include sprite($btn-pieta-sprite);
-    }
+  &.tg-button-annulla {
+    @include sprite($btn-annulla-sprite);
+  }
 
-    &.btn-g-close {
-        @include sprite($close-square-sprite);
-    }
-    
-    &.btn-g-back {
-        @include sprite($back-square-sprite);
-    }
+  &.tg-button-salva {
+    @include sprite($btn-salva-sprite);
+  }
 
-    &.btn-backtohome {
-        @include sprite($btn-backhome-sprite);
-        &:hover {
-            @include sprite($btn-backhome-hover-sprite);
-        }
+  &.tg-button-continua {
+    @include sprite($btn-continua-sprite);
+  }
+
+  &.tg-button-tregua {
+    @include sprite($btn-tregua-sprite);
+  }
+
+  &.tg-button-pieta {
+    @include sprite($btn-pieta-sprite);
+  }
+
+  &.btn-g-close {
+    @include sprite($close-square-sprite);
+  }
+
+  &.btn-g-back {
+    @include sprite($back-square-sprite);
+  }
+
+  &.btn-backtohome {
+    @include sprite($btn-backhome-sprite);
+
+    &:hover {
+      @include sprite($btn-backhome-hover-sprite);
     }
-    &.btn-reconnect {
-        @include sprite($btn-reconnect-sprite);
-        &:hover {
-            @include sprite($btn-reconnect-hover-sprite);
-        }
+  }
+
+  &.btn-reconnect {
+    @include sprite($btn-reconnect-sprite);
+
+    &:hover {
+      @include sprite($btn-reconnect-hover-sprite);
     }
-    &.btn-newlogin {
-        @include sprite($btn-newlogin-sprite);
-        &:hover {
-            @include sprite($btn-newlogin-hover-sprite);
-        }
+  }
+
+  &.btn-newlogin {
+    @include sprite($btn-newlogin-sprite);
+
+    &:hover {
+      @include sprite($btn-newlogin-hover-sprite);
     }
-    &.btn-loginwidget {
-        @include sprite($btn-wlogin-sprite);
-        &:hover {
-            @include sprite($btn-wlogin-hover-sprite);
-        }
+  }
+
+  &.btn-loginwidget {
+    @include sprite($btn-wlogin-sprite);
+
+    &:hover {
+      @include sprite($btn-wlogin-hover-sprite);
     }
-    &.btn-annulla {
-        @include sprite($btn-wlogin-sprite);
-        &:hover {
-            @include sprite($btn-wlogin-hover-sprite);
-        }
+  }
+
+  &.btn-annulla {
+    @include sprite($btn-wlogin-sprite);
+
+    &:hover {
+      @include sprite($btn-wlogin-hover-sprite);
     }
-    &.btn-workcmd {
-        @include sprite($btn-lavora-sprite);
-        &:hover {
-            @include sprite($btn-lavora-hover-sprite);
-        }
+  }
+
+  &.btn-workcmd {
+    @include sprite($btn-lavora-sprite);
+
+    &:hover {
+      @include sprite($btn-lavora-hover-sprite);
     }
+  }
+
+  &.btn-inventario-graph {
+    @include sprite($btn-inventario-graph-sprite);
+  }
+
+  &.btn-stato-graph {
+    @include sprite($btn-stato-graph-sprite);
+  }
+
+  &.btn-info-graph {
+    @include sprite($btn-info-graph-sprite);
+  }
+
+  &.btn-equip-graph {
+    @include sprite($btn-equip-graph-sprite);
+  }
+
+  &.btn-skill-graph {
+    @include sprite($btn-skill-graph-sprite);
+  }
+
+  &.btn-config-graph {
+    @include sprite($btn-config-graph-sprite);
+  }
 }

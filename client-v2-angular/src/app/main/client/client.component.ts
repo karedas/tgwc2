@@ -50,7 +50,7 @@ export class ClientComponent implements OnDestroy {
 
     this.preloaded = event;
 
-    
+
     if (!this.cookieService.check('tgCookieLaw')) {
       setTimeout(() => {
         this.windowsService.openCookieLaw().pipe(

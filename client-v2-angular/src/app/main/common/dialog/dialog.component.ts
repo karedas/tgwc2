@@ -57,7 +57,7 @@ export class GenericDialogcomponent implements OnInit {
   }
 
   closeAll() {
-    this.dialog.close
+    this.dialog.close;
   }
 
   // remove self from modal service when directive is destroyed

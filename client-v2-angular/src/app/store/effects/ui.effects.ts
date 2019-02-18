@@ -66,7 +66,7 @@ export class UiEffects {
           new InfoCharacterAction(),
           new HeroAction(res.payload[0])
         ];
-      } 
+      }
       // else if (res.payload[1] === 'skills') {
       //   this.windowsService.openCharacterSheet(res.payload[1]);
       //   return [

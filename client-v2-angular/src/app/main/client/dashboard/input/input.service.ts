@@ -8,7 +8,7 @@ export class InputService {
 
   private _isFocussed: ReplaySubject<any>;
 
-  constructor() { 
+  constructor() {
     console.log('constructor monitor');
     this._isFocussed = new ReplaySubject();
   }
@@ -16,7 +16,7 @@ export class InputService {
   get isFocussed(): Observable<any> {
     return this._isFocussed;
   }
-  
+
   focus() {
     this._isFocussed.next();
   }

@@ -44,7 +44,6 @@ export class ClientEffects {
   onGameStatus$ = this.actions$.pipe(
     ofType(ClientEventType.INGAME),
     tap(() => {
-      console.log('tappo');
       this.inputService.focus();
     })
   );

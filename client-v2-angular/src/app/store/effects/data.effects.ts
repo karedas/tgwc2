@@ -26,21 +26,32 @@ export class DataEffects {
   skillsRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SKILLS),
     switchMap((res) => {
-      this.windowsService.openCharacterSheet('skills')
+      this.windowsService.openCharacterSheet('skills');
       return [
         new HeroAction({skills: res.payload})
-      ]
+      ];
     })
   );
 
   @Effect()
-  equipRequest: Observable<Action> = this.actions$.pipe(
+  equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
     switchMap((res) => {
-        this.windowsService.openCharacterSheet('eqinv')
+        this.windowsService.openCharacterSheet('equip');
         return [
           new HeroAction({equipment: res.payload})
-        ]
+        ];
+    }),
+  );
+
+  @Effect()
+  inventoryRequest$: Observable<Action> = this.actions$.pipe(
+    ofType<PayloadActionData>(DataEvenType.INVENTORY),
+    switchMap((res) => {
+        this.windowsService.openCharacterSheet('inv');
+        return [
+          new HeroAction({inventory: res.payload})
+        ];
     }),
   );
 }

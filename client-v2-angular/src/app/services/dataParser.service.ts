@@ -18,7 +18,7 @@ export class DataParser {
   private netData = '';
 
   private _updateNeeded: Subject<any>;
-  
+
   constructor(private store: Store<State>) {
     this._updateNeeded = new Subject<any>();
   }
@@ -142,12 +142,6 @@ export class DataParser {
         room: update_parse[2]
       };
       this.setUpdateNeeded(up);
-
-      // this.store.dispatch(new UiActions.UpdateNeeded({
-      //   inventory: update_parse[0],
-      //   equipment: update_parse[1],
-      //   room: update_parse[2]
-      // }));
       return '';
     });
 
@@ -216,7 +210,7 @@ export class DataParser {
     // Inventory
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
       const inv_parse = JSON.parse(inv.slice(5, -1));
-      // this.store.dispatch(new UiActions.ShowCharacterSheetActions([inv_parse, 'inventory']));
+      this.store.dispatch(new DataActions.InventoryAction(inv_parse));
       return '';
     });
 

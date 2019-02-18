@@ -14,8 +14,10 @@ import { map } from 'rxjs/operators';
 })
 export class WindowsService {
 
-
+  // dynamic Dialogs list
   private dd: any;
+  // Generic Dialogs list
+  private gd: any;
 
 
   constructor(
@@ -24,6 +26,7 @@ export class WindowsService {
     private genericDialogService: GenericDialogService
   ) {
     this.dd = new Map();
+    this.gd = new Map();
   }
 
   openWelcomeNews() {
@@ -40,10 +43,6 @@ export class WindowsService {
 
       this.dd.set(ref, 'welcomenews');
 
-      setTimeout(() => {
-        console.log('taccc');
-        this.closeAllDialogs();
-      }, 1200);
   }
 
   openCookieLaw(): Observable<any> {
@@ -58,6 +57,9 @@ export class WindowsService {
   }
 
   openSmartLogin() {
+
+    this.closeAllDialogs();
+
     const ref = this.dynamicDialogService.open(LoginSmartComponent,
       <DynamicDialogConfig>{
         blockScroll: true,
@@ -78,25 +80,28 @@ export class WindowsService {
         modal: false,
         header: 'Scheda Personaggio',
         data: detail,
-        style: { 
+        style: {
           'width': '750px',
           'height': '650px',
-          'max-width': '100%', 
-          'max-height': '100%', 
+          'max-width': '100%',
+          'max-height': '100%',
           'min-height': '550px'},
       });
+
+      this.gd.set(ref);
+
   }
 
 
   openCommandsList() {
-    this.genericDialogService.open('commandsList',
+    const ref = this.genericDialogService.open('commandsList',
       <DialogConfiguration>{
         header: 'Lista comandi',
-        style: { 
+        style: {
           'width': '750px',
           'height': '500px',
-          'max-width': '100%', 
-          'max-height': '100%' 
+          'max-width': '100%',
+          'max-height': '100%'
         },
         styleClass: 'op-100',
         blockScroll: true,
@@ -104,6 +109,8 @@ export class WindowsService {
         draggable: true,
         resizable: true
       });
+
+      this.gd.set(ref);
   }
 
   openEditor(dialogID: string, ...data: any): any {
@@ -120,6 +127,8 @@ export class WindowsService {
         }
       });
 
+      this.gd.set(ref);
+
     return ref;
   }
 
@@ -134,6 +143,9 @@ export class WindowsService {
           'height': 'auto',
         }
       });
+
+      this.gd.set(ref);
+
   }
 
   closeGenericDialog(dialogID: string) {
@@ -142,6 +154,13 @@ export class WindowsService {
 
   closeAllDialogs() {
     this.dd.forEach((name, diag) => {
+      diag.close();
+      this.dd.delete(name);
+    });
+
+    this.gd.forEach((name, diag) => {
+      diag.visible = false;
+      this.gd.delete(name);
     });
 
   }

@@ -32,7 +32,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 
-export class GeolocalBoxComponent implements OnInit, OnDestroy{
+export class GeolocalBoxComponent implements OnInit, OnDestroy {
 
   changeState = '';
 

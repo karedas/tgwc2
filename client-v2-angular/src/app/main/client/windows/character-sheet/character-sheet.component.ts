@@ -16,7 +16,7 @@ import { GameService } from 'src/app/services/game.service';
 export class CharacterSheetComponent  {
 
   dialogID = 'charactersheet';
-  closed: boolean = true;
+  closed = true;
   imagepath: string = environment.media_address;
 
   heroBase$: Observable<IHero>;
@@ -45,8 +45,11 @@ export class CharacterSheetComponent  {
       case 'info':
         this.game.processCommands('info');
       break;
-      case 'eqinv':
-        this.game.processCommands('equip;inventario');
+      case 'equip':
+        this.game.processCommands('equip');
+      break;
+      case 'inv':
+        this.game.processCommands('inventario');
       break;
       case 'skills':
         this.game.processCommands('abilita');

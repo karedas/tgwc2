@@ -20,7 +20,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
 
   constructor(
     private preloader: PreloaderService
-  ) { 
+  ) {
     this._unsubscribeAll = new Subject<any>();
   }
 

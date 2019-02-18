@@ -72,7 +72,7 @@ export class DetailsRoomComponent implements OnInit {
       this.personsClass50 = true;
     }
   }
-  
+
   /**
   * Expand or send Command to Server after click
   * based on content type, list or single obj / person

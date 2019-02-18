@@ -91,28 +91,4 @@
   button:hover {
     box-shadow: inset 0 0 17px 0px #8e5f18;
   }
-
-  .btn-inventario-graph {
-    @include sprite($btn-inventario-graph-sprite);
-  }
-
-  .btn-stato-graph {
-    @include sprite($btn-stato-graph-sprite);
-  }
-
-  .btn-info-graph {
-    @include sprite($btn-info-graph-sprite);
-  }
-
-  .btn-equip-graph {
-    @include sprite($btn-equip-graph-sprite);
-  }
-
-  .btn-skill-graph {
-    @include sprite($btn-skill-graph-sprite);
-  }
-
-  .btn-config-graph {
-    @include sprite($btn-config-graph-sprite);
-  }
 }
