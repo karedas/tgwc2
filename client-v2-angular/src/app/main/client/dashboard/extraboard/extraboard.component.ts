@@ -17,4 +17,8 @@ export class ExtraboardComponent {
   buttonClick(cmd: string) {
     this.game.sendToServer(cmd);
   }
+
+  
+  openShortcutsPanel() {}
+
 }
