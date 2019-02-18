@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { DataEvenType, HeroAction } from '../actions/data.action';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
@@ -20,6 +20,7 @@ export class DataEffects {
     private windowsService: WindowsService,
     // private game: GameService,
   ) { }
+
 
   @Effect()
   skillsRequest$: Observable<Action> = this.actions$.pipe(

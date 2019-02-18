@@ -8,10 +8,10 @@ import { GeolocalBoxComponent } from './extraboard/geolocal-box/geolocal-box.com
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputModule } from './input/input.module';
 
 @NgModule({
   declarations: [
-    InputComponent,
     CharacterPanelComponent,
     CombatPanelComponent,
     ExtraboardComponent,
@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
   ],
   imports: [
-    CommonModule,
+    InputModule,
     SharedModule
   ],
   exports: [

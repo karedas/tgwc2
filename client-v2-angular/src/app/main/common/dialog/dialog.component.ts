@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
 import { Dialog } from 'primeng/dialog';
 import { GenericDialogService } from './dialog.service';
@@ -17,9 +17,6 @@ export class GenericDialogcomponent implements OnInit {
 
   config: DialogConfiguration  = new DialogConfiguration;
   visible = false;
-
-  // private dialog: Dialog;
-
 
   constructor(
     private genericDialogService: GenericDialogService,
@@ -57,6 +54,10 @@ export class GenericDialogcomponent implements OnInit {
 
   onHide(event: Event) {
     this.isClosed.emit(true);
+  }
+
+  closeAll() {
+    this.dialog.close
   }
 
   // remove self from modal service when directive is destroyed

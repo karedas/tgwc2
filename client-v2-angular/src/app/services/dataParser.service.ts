@@ -65,7 +65,6 @@ export class DataParser {
     // Player is logged in
     data = data.replace(/&!logged"[^"]*"/gm, () => {
       this.store.dispatch(new GameActions.InGameAction());
-
       return '';
     });
 

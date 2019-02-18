@@ -8,9 +8,10 @@ import { ClientState } from 'src/app/store/state/client.state';
 import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
 import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { getUIState, getInGameStatus } from 'src/app/store/selectors';
+import { getUIState } from 'src/app/store/selectors';
 import { map } from 'rxjs/operators';
 import { UIState } from 'src/app/store/state/ui.state';
+import { InputService } from './input.service';
 
 @Component({
   selector: 'tg-input',
@@ -36,19 +37,19 @@ export class InputComponent implements AfterViewInit {
     private game: GameService,
     private store: Store<ClientState>,
     private historyService: HistoryService,
+    private inputService: InputService
   ) {
-    
+
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
 
   }
 
   ngAfterViewInit() {
-    this.game._focusInput.subscribe(
-      () => {
-        this.focus();
-      }
-    );
+    // Listen focus Call from another component
+    this.inputService.isFocussed.subscribe(() => {
+      this.focus();
+    });
   }
 
   focus() {

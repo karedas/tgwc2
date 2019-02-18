@@ -12,6 +12,6 @@
   [appendTo]="'body'"
   [blockScroll]="config.blockScroll"
   (onHide)="onHide($event)"
-  [style]="{width: config.width, height: config.height}">
+  [style]="config.style">
     <ng-content></ng-content>
 </p-dialog>

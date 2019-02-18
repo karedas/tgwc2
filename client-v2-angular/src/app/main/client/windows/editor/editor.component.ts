@@ -7,6 +7,7 @@ import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { WindowsService } from '../windows.service';
+import { InputService } from '../../dashboard/input/input.service';
 
 @Component({
   selector: 'tg-editor',
@@ -34,6 +35,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<DataState>,
     private windowsService: WindowsService,
+    private inputService: InputService,
     private gameService: GameService) {
 
     this._unsubscribeAll = new Subject<any>();
@@ -88,12 +90,13 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
     this.gameService.sendToServer('##ce_save');
     this.windowsService.closeGenericDialog(this.dialogID);
-
+    this.inputService.focus();
   }
 
   onCancel() {
     this.gameService.sendToServer('##ce_abort');
     this.windowsService.closeGenericDialog(this.dialogID);
+    this.inputService.focus();
   }
 
   onDescrChange($event) {

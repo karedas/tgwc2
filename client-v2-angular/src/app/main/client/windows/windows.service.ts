@@ -6,6 +6,7 @@ import { CookieLawComponent } from './cookie-law/cookie-law.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -13,15 +14,16 @@ import { LoginSmartComponent } from './login-smart/login-smart.component';
 })
 export class WindowsService {
 
-  private dialogs: any;
+
+  private dd: any;
+
 
   constructor(
 
     private dynamicDialogService: DynamicDialogService,
     private genericDialogService: GenericDialogService
   ) {
-
-    this.dialogs = new Map();
+    this.dd = new Map();
   }
 
   openWelcomeNews() {
@@ -35,6 +37,13 @@ export class WindowsService {
         style: { 'max-width': '100%', 'max-height': '100%' },
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
+
+      this.dd.set(ref, 'welcomenews');
+
+      setTimeout(() => {
+        console.log('taccc');
+        this.closeAllDialogs();
+      }, 1200);
   }
 
   openCookieLaw(): Observable<any> {
@@ -68,10 +77,13 @@ export class WindowsService {
         resizable: true,
         modal: false,
         header: 'Scheda Personaggio',
-        width: '750px',
-        height: '650px',
         data: detail,
-        style: { 'max-width': '100%', 'max-height': '100%', 'min-height': '550px'},
+        style: { 
+          'width': '750px',
+          'height': '650px',
+          'max-width': '100%', 
+          'max-height': '100%', 
+          'min-height': '550px'},
       });
   }
 
@@ -80,9 +92,12 @@ export class WindowsService {
     this.genericDialogService.open('commandsList',
       <DialogConfiguration>{
         header: 'Lista comandi',
-        width: '750px',
-        height: '500px',
-        style: { 'max-width': '100%', 'max-height': '100%' },
+        style: { 
+          'width': '750px',
+          'height': '500px',
+          'max-width': '100%', 
+          'max-height': '100%' 
+        },
         styleClass: 'op-100',
         blockScroll: true,
         modal: false,
@@ -94,13 +109,15 @@ export class WindowsService {
   openEditor(dialogID: string, ...data: any): any {
     const ref = this.genericDialogService.open(dialogID,
       <DialogConfiguration>{
-        width: '500px',
-        height: '450px',
         modal: true,
         resizable: true,
         draggable: true,
         maximizable: true,
-        header: data[0]
+        header: data[0],
+        style: {
+          'width': '500px',
+          'height': '450px',
+        }
       });
 
     return ref;
@@ -111,14 +128,22 @@ export class WindowsService {
       <DialogConfiguration>{
         draggable: true,
         modal: false,
-        width: 'auto',
-        height: 'auto',
-        header: data[0]
+        header: data[0],
+        style: {
+          'width': 'auto',
+          'height': 'auto',
+        }
       });
   }
 
   closeGenericDialog(dialogID: string) {
     this.genericDialogService.close(dialogID);
+  }
+
+  closeAllDialogs() {
+    this.dd.forEach((name, diag) => {
+    });
+
   }
 }
 
