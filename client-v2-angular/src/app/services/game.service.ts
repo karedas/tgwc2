@@ -60,7 +60,6 @@ export class GameService {
   updateUIByData(what: any) {
 
     const now = Date.now();
-    console.log(what.inventory ,  this.clientUpdateNeeded.inventory );
     if (now > this.lastDataTime + 1000 ) {
       if (what.inventory > this.clientUpdateNeeded.inventory && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@inv');

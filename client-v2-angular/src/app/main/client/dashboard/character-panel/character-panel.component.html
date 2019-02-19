@@ -1,97 +1,114 @@
 <div class="tg-characterpanel b-controlpanel" *ngIf="toggleStatus$ | async">
   <div class="tg-characterpanel-wrap" fxFlex="100" fxLayout="row">
     <!-- Character Detail -->
-      <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
-        <!-- Character Avatar -->
-        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()"
-          fxHide fxShow.gt-sm>
-          <div class="tg-avatar-wrap">
-              <img src="{{heroImage ||'assets/images/interface/default_avatar.png'}}" alt="Avatar"/>
-          </div>
-          <div class="tg-border-box">
-            <div class="tg-border tg-border-top"></div>
-            <div class="tg-border tg-border-left"></div>
-            <div class="tg-border tg-border-right"></div>
-            <div class="tg-border tg-border-bottom"></div>
+    <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
+      <!-- Character Avatar -->
+      <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm>
+        <div class="tg-avatar-wrap">
+          <img src="{{heroImage ||'assets/images/interface/default_avatar.png'}}" alt="Avatar" />
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+      <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto">
+
+        <!-- Character Name & Status -->
+        <div class="tg-infocharname" fxLayout="row">
+          <span class="charName" fxHide fxShow.gt-sm>{{heroName}}</span>
+
+          <div class="hero-infostatus" fxLayout fxFlex="0 1 auto">
+
+            <div *ngIf="conva === '1'" class="status-conva infostatus-block tg-red" fxLayout>
+              <div class="status-icon-box">
+                <i></i>
+              </div>
+              <span>Sei convalescente!</span>
+            </div>
+
+            <div class="status-money infostatus-block" fxLayout>
+              <div class="status-icon-box">
+                <i></i>
+              </div>
+              <span class="tg-yellow">{{money}}&nbsp;M</span>
+            </div>
+
+            <div *ngIf="walk" class="status-walk" fxLayout [ngClass]="{
+                'walk-0': (walk == 'passeggio'),
+                'walk-1': (walk == 'camminata'),
+                'walk-2': (walk == 'marcia'),
+                'walk-3': (walk == 'corsa'),
+                'walk-4': (walk == 'scatto')
+              }">
+              <div class="status-icon-box">
+                <i></i>
+              </div>
+              <span class="tg-green">{{ walk | slice:0:3}}</span>
+            </div>
+
+            <div *ngIf="combatSet" class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
+                'mod-par-a': (combatSet?.mod == 'deflettere'),
+                'mod-par-s': (combatSet?.mod == 'parare'),
+                'mod-sch': (combatSet?.mod == 'schivare')
+              }">
+              <div class="status-icon-box">
+                <i></i>
+              </div>
+              <span>{{combatSet.mod | slice:0:3}}</span>
+            </div>
+
+            <div *ngIf="combatSet" class="status-combat-attegg" fxLayout>
+              <div class="status-icon-box">
+                <i></i>
+              </div>
+              <span>{{combatSet.atteg | slice:0:3}}</span>
+            </div>
+
           </div>
         </div>
-        <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto"> 
-
-          <!-- Character Name & Status -->
-          <div class="tg-infocharname" fxLayout="row">
-            <span class="charName">{{heroName}}</span>
-
-            <div class="hero-infostatus"  fxLayout  fxFlex="0 1 auto">
-              <div *ngIf="conva === '1'" class="status-conva tg-red" fxLayout> 
-                <div class="status-icon-box">
-                  <i></i>
-                </div>
-                <span>Sei convalescente!</span>
-              </div>
-              <div class="status-conva" fxLayout> 
-                <div class="status-icon-box">
-                  <i></i>
-                </div>
-                <span class="tg-yellow">{{money}}</span>&nbsp; Monete
-              </div>
-              <div *ngIf="walk" class="status-walk" fxLayout>
-                <div class="status-icon-box"
-                [ngClass]="{
-                  'walk-0': (walk == 'passeggio'),
-                  'walk-1': (walk == 'camminata'),
-                  'walk-2': (walk == 'marcia'),
-                  'walk-3': (walk == 'corsa'),
-                  'walk-4': (walk == 'scatto')
-                }">
-                  <i></i>
-                </div>
-                <span>{{ walk }}</span></div>
-              <div *ngIf="combatSet" class="status-combat-mod" fxLayout>
-                <div class="status-icon-box"
-                [ngClass]="{
-                  'mod-par-a': (combatSet?.mod == 'schivare'),
-                  'mod-par-s': (combatSet?.mod == 'parare'),
-                  'mod-sch': (combatSet?.mod == 'deflettere')
-                }">
-                  <i></i>
-                </div>
-                <span>{{combatSet.mod}}</span>
-              </div>
+        <!-- Character Status Bars -->
+        <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
+          <div class="tg-extrabars" fxLayout="row">
+            <div class="barcont barthin lft">
+              <span class="tg-statusbar-text">
+                <i>{{ status.hit }}</i> / 100</span>
+              <span class="red barC healthbar" [style.width.%]="status.hit"></span>
+            </div>
+            <div class="barcont barthin">
+              <span class="tg-statusbar-text">
+                <i>{{ status.move }}</i> / 100</span>
+              <span class="green barC movebar" [style.width.%]="status.move"></span>
             </div>
           </div>
-          <!-- Character Status Bars -->
-          <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
-            <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" >
-                <span class="tg-statusbar-text">
-                  <i>{{ status.hit }}</i> / 100</span>
-                <span class="red barC healthbar" [style.width.%]="status.hit"></span>
-              </div>
-              <div class="barcont barthin">
-                <span class="tg-statusbar-text">
-                  <i>{{ status.move }}</i> / 100</span>
-                <span class="green barC movebar" [style.width.%]="status.move"></span>
-              </div>
+          <div class="tg-extrabars" fxLayout="row">
+            <div class="barcont barthin lft">
+              <span class="tg-statusbar-text">
+                <i>{{ status.food }}</i> / 100</span>
+              <span class="orange barC hungrybar" [style.width.%]="status.food"></span>
             </div>
-            <div class="tg-extrabars"  fxLayout="row">
-              <div class="barcont barthin lft">
-                <span class="tg-statusbar-text">
-                  <i>{{ status.food }}</i> / 100</span>
-                <span class="orange barC hungrybar" [style.width.%]="status.food"></span>
-              </div>
-              <div class="barcont barthin">
-                <span class="tg-statusbar-text">
-                  <i>{{ status.drink}}</i> / 100</span>
-                <span class="blue barC thirstbar" [style.width.%]="status.drink"></span>
-              </div>
+            <div class="barcont barthin">
+              <span class="tg-statusbar-text">
+                <i>{{ status.drink}}</i> / 100</span>
+              <span class="blue barC thirstbar" [style.width.%]="status.drink"></span>
             </div>
           </div>
         </div>
       </div>
-      <div class="tg-combatpanel" *ngIf="inCombat" fxFlex="0 0 auto">
-        <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
-      </div>
-      <tg-extraboard fxLayout="column" fxFlex="0 0 auto"></tg-extraboard>
+    </div>
+    <div class="tg-combatpanel" *ngIf="inCombat" fxFlex="0 0 auto" fxHide fxShow.gt-xs>
+      <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
+    </div>
+
+    <ng-container *ngIf="inCombat; else extraboardDisplayStandard">
+      <tg-extraboard fxLayout="column" fxFlex="0 0 auto" *ngIf="activeMediaQuery === 'xl'"></tg-extraboard>
+    </ng-container>
+    <ng-template #extraboardDisplayStandard>
+      <tg-extraboard fxLayout="column" fxFlex="0 0 auto" fxHide fxShow.gt-md></tg-extraboard>
+    </ng-template>
+
   </div>
   <div class="tg-border-box">
     <div class="tg-border tg-border-top"></div>

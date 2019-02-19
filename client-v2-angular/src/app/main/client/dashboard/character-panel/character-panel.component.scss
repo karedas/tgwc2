@@ -1,6 +1,7 @@
 @import '~src/scss/colors';
 @import 'sprites';
 @import 'utils/sprites-mixins';
+@import 'utils/fix';
 
 
 .tg-characterpanel {
@@ -59,7 +60,7 @@
     color: white;
     box-shadow: inset 0px -7px 15px black;
     border-bottom: 1px solid #5f5c59;
-    padding: 1px 6px 1px 6px;
+    padding: 1px 0 1px 6px;
   }
 
   /* status icons */
@@ -72,25 +73,20 @@
     color: #ccc1b1;
     text-transform: uppercase;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 9px;
+    font-size: 8.5px;
+
 
 
     > div {
       padding-right: 6px;
       margin-right: .5em;
-      margin: auto .5em;
+      margin: auto .5em auto 0;
       cursor: pointer;
     }
 
-    i {
-      display: block;
-      margin: auto;
-      white-space: nowrap;
-      background-size: cover;
-      background-repeat:  no-repeat;
-      background-position: center center;
-      width: 100%;
-      height: 100%;
+    .infostatus-block {
+      padding-left: 6px;
+      background:  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
     }
 
     span {
@@ -106,8 +102,26 @@
       height: 16px;
     }
 
+    .status-walk, .status-combat-mod, .status-combat-attegg, .status-money {
+      i {
+        display: block;
+        margin: auto;
+        white-space: nowrap;
+        background-size: cover;
+        background-repeat:  no-repeat;
+        background-position: center center;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    /* MONEY */
+    .status-money i{
+      background-image: url($imgPath + '/icons/_monete.svg');
+    }
+
     //* WALK
-    .status-walk .status-icon-box {
+    .status-walk{
       &.walk-0 i{
         background-image: url($imgPath + '/icons/0_passeggio.svg');
       }
@@ -127,15 +141,17 @@
 
     // CONV
     .status-conva {
+      padding-left: 1.5em;
       .status-icon-box i {
         @include sprite($conva-ng-sprite);
         margin-top: 2px;
+        display: block;
       }
     }
 
     // COMBATSET
 
-    .status-combat-mod .status-icon-box {
+    .status-combat-mod {
       &.mod-par-a i{
         background-image: url($imgPath + '/icons/c_parataA.svg');
       }
@@ -146,18 +162,21 @@
         background-image: url($imgPath + '/icons/c_schivata.svg');
       }
     }
-    .status-combat-att .status-icon-box {
-      &.att-par-a i{
-        background-image: url($imgPath + '/icons/c_parataA.svg');
-      }
-      &.att-par-s i{
-        background-image: url($imgPath + '/icons/c_parataS.svg');
-      }
-      &.att-sch i{
-        background-image: url($imgPath + '/icons/c_schivata.svg');
-      }
+    
+    .status-combat-attegg i{
+      background-image: url($imgPath + '/icons/_atteggiamento.svg');
     }
+  }
 
+  
+    
+  @include layout-bp(lt-sm) {
+    .tg-infocharname {
+      padding-left: 0;
+    }
+    .hero-infostatus {
+      margin-left: 0;
+    }
   }
 
   // BARS

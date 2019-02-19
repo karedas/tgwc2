@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero, getDashboardVisibility } from 'src/app/store/selectors';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IStatus, IHero, ITarget } from 'src/app/models/data/hero.model';
 import { GameService } from 'src/app/services/game.service';
+
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 @Component({
   selector: 'tg-character-panel',
@@ -36,15 +38,29 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   enemyName = '';
   enemyIcon: number = null;
 
+
   toggleStatus$: Observable<boolean>;
+
+  private watcherMedia: Subscription;
+  activeMediaQuery = '';
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    private game: GameService) {
+    private game: GameService,
+    private mediaObserver: MediaObserver) {
+
+    // TODO, MOVE IN APP ROOT COMPONENT
+    this.watcherMedia = this.mediaObserver.media$.subscribe((change: MediaChange) => {
+      this.activeMediaQuery = change ? change.mqAlias : '';
+      console.log(this.activeMediaQuery);
+    });
 
     this._unsubscribeAll = new Subject();
+    
+
+
   }
 
   ngOnInit(): void {
@@ -60,7 +76,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
             this.heroName = hero.name;
             this.heroAdjective = hero.adjective;
             this.heroImage = environment.media_address + hero.image;
-            
+
             this.money = hero.money;
             this.walk = hero.walk;
             this.conva = hero.conva;
@@ -100,6 +116,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.watcherMedia.unsubscribe();
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
