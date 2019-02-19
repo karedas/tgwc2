@@ -26,6 +26,8 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   heroImage = 'assets/images/interface/default_avatar.png';
 
   conva: number;
+  walk: string;
+  combatSet: {};
 
   // Enemy Target Values
   enemyHealt = 0;
@@ -56,15 +58,18 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
             this.setCombatPanel(hero.target);
             this.heroName = hero.name;
             this.heroAdjective = hero.adjective;
-            this.conva = hero.conva;
             this.heroImage = environment.media_address + hero.image;
+            
+            this.walk = hero.walk;
+            this.conva = hero.conva;
+            this.combatSet = hero.combat;
           }
         }
       );
   }
 
   private setStatus(status: IStatus) {
-    if (status != undefined) {
+    if (status !== undefined) {
       this.status = status;
     }
   }
@@ -74,8 +79,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       const lengthKeys = Object.keys(target).length;
       if (lengthKeys > 0) {
         this.inCombat = true;
-        this.updateEnemyIcon();
-
         this.enemyHealt = target.hit;
         this.enemyMove = target.move;
         this.enemyIcon = target.icon;
@@ -93,8 +96,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   openInfo() {
     this.game.processCommands('info');
   }
-
-  private updateEnemyIcon() {}
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

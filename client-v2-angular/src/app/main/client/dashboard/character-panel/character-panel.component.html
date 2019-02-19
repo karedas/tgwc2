@@ -7,7 +7,6 @@
           fxHide fxShow.gt-sm>
           <div class="tg-avatar-wrap">
               <img src="{{heroImage ||'assets/images/interface/default_avatar.png'}}" alt="Avatar"/>
-
           </div>
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
@@ -18,12 +17,13 @@
         </div>
         <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto"> 
           <!-- Character Name & Status -->
-          <div class="tg-infocharname">
+          <div class="tg-infocharname" fxLayout="row">
             <span class="charName">{{heroName}}</span>
-            <!-- <i class="pg-status"></i> -->
-            <!-- <div class="hero-genericstatus">
-              <span *ngIf="conva === 1"> OK </span>
-            </div> -->
+            <div class="hero-infostatus"  fxLayout  fxFlex="0 1 auto">
+              <div *ngIf="conva" class="staus-conva tg-red" fxLayout><i></i> Sei convalescente!</div>
+              <div *ngIf="walk" class="staus-walk squared-label" fxLayout><i></i>{{ walk }}</div>
+              <div *ngIf="combatSet" class="staus-combat squared-label" fxLayout><i></i> mod: {{combatSet.mod}} | att: {{combatSet.atteg}}</div>
+            </div>
           </div>
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
