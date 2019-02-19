@@ -68,7 +68,6 @@
   .hero-infostatus {
     vertical-align: middle;
     display: inline-block;
-    margin-left: auto;
     letter-spacing: 0;
     color: #ccc1b1;
     text-transform: uppercase;
@@ -142,6 +141,7 @@
     // CONV
     .status-conva {
       padding-left: 1.5em;
+      margin-right: auto;
       .status-icon-box i {
         @include sprite($conva-ng-sprite);
         margin-top: 2px;
@@ -176,6 +176,7 @@
     }
     .hero-infostatus {
       margin-left: 0;
+      padding-left: 0;
     }
   }
 

@@ -20,13 +20,12 @@
         <div class="tg-infocharname" fxLayout="row">
           <span class="charName" fxHide fxShow.gt-sm>{{heroName}}</span>
 
-          <div class="hero-infostatus" fxLayout fxFlex="0 1 auto">
+          <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="center end">
 
-            <div *ngIf="conva === '1'" class="status-conva infostatus-block tg-red" fxLayout>
+            <div *ngIf="conva === '1'" class="status-conva" fxLayout>
               <div class="status-icon-box">
                 <i></i>
               </div>
-              <span>Sei convalescente!</span>
             </div>
 
             <div class="status-money infostatus-block" fxLayout>
