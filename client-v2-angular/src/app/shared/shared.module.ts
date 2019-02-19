@@ -6,17 +6,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketService } from '../services/socket.service';
+import { LoginService } from '../main/authentication/services/login.service';
+import { AudioService } from '../main/client/audio/audio.service';
+import { PreloaderService } from '../main/common/services/preloader.service';
+import { GenericDialogService } from '../main/common/dialog/dialog.service';
+
+import { IconsComponent } from '../main/common/icons/icons.component';
+import { HstatComponent } from '../main/common/hstat/hstat.component';
+
 import { PipesModule } from '../pipes/pipes.module';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { PreloaderService } from '../main/common/services/preloader.service';
-import { AudioService } from '../main/client/audio/audio.service';
-
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastContainerModule } from 'ngx-toastr';
-import { LoginService } from '../main/authentication/services/login.service';
-import { IconsComponent } from '../main/common/icons/icons.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 /* Prime NG */
 import { CheckboxModule } from 'primeng/checkbox';
@@ -24,10 +28,9 @@ import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
-import { DialogService as DynamicDialogService } from 'primeng/api';
-import { GenericDialogService } from '../main/common/dialog/dialog.service';
-import { HstatComponent } from '../main/common/hstat/hstat.component';
+import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
 
 
 @NgModule({
@@ -37,17 +40,14 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
-    BrowserAnimationsModule,
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
     }),
-    // font awesome
     FontAwesomeModule,
-    // Various
-    // NgxDatatableModule,
     NgScrollbarModule,
     ToastContainerModule,
     /* Prime NG Modules (TODO: Moves in another file) */
@@ -56,7 +56,7 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
     MenubarModule,
     TooltipModule,
     ButtonModule,
-    BrowserAnimationsModule
+    ContextMenuModule
   ],
   providers: [
     GameService,
@@ -84,7 +84,7 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
     TooltipModule,
     ButtonModule,
     TableModule,
-    // NgxDatatableModule,
+    ContextMenuModule
   ],
 })
 export class SharedModule {

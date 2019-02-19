@@ -16,15 +16,19 @@
           </div>
         </div>
         <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto"> 
+
           <!-- Character Name & Status -->
           <div class="tg-infocharname" fxLayout="row">
             <span class="charName">{{heroName}}</span>
+
             <div class="hero-infostatus"  fxLayout  fxFlex="0 1 auto">
-              <div *ngIf="conva" class="staus-conva tg-red" fxLayout><i></i> Sei convalescente!</div>
-              <div *ngIf="walk" class="staus-walk squared-label" fxLayout><i></i>{{ walk }}</div>
-              <div *ngIf="combatSet" class="staus-combat squared-label" fxLayout><i></i> mod: {{combatSet.mod}} | att: {{combatSet.atteg}}</div>
+              <div *ngIf="conva" class="status-conva tg-red" fxLayout><i></i><span>Sei convalescente!</span></div>
+              <div *ngIf="walk" class="status-walk" fxLayout><i></i><span>{{ walk }}</span></div>
+              <div *ngIf="combatSet" class="status-combat" fxLayout><i></i><span>mod: {{combatSet.mod}} | att: {{combatSet.atteg}}</span></div>
             </div>
+
           </div>
+
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">

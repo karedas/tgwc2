@@ -54,15 +54,15 @@
     line-height: 18px;
     text-align: left;
     font-family: kingthings;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-size: 12px;
-    color: #ccc1b1;
-    display: inline-block;
     width: 100%;
     color: white;
     margin-top: 2px;
   }
+
   /* status icons */
+
   .hero-infostatus {
     vertical-align: middle;
     display: inline-block;
@@ -71,26 +71,38 @@
     color: #ccc1b1;
     font-size: 12px;
 
-    .staus-conva {
-      margin: auto .5em auto .5em;
+    > div {
       padding-right: 6px;
+      margin-right: .5em;
+      margin: auto .5em;
+    }
+
+    i {
+      display: block;
+      margin: auto 6px auto 2px;
+      white-space: nowrap;
+    }
+
+    span {
+      flex: 1;
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-conva {
       i {
-        display: block;
-        margin: auto 6px auto 2px;
         @include sprite($conva-ng-sprite);
       }
     }
 
-    .squared-label {
-      padding-right: 6px;
-      margin-right: .5em;
+    .status-walk, .status-combat {
       i {
-        display: block;
-        margin: auto 6px auto 2px;
         @include sprite($default-statuslabel-sprite);
       }
     }
+
+
 
   }
 

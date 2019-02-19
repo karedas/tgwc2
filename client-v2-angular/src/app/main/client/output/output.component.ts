@@ -12,6 +12,7 @@ import { Room } from 'src/app/models/data/room.model';
 import { SplitComponent } from 'angular-split';
 import { ToggleExtraOutput } from 'src/app/store/actions/ui.action';
 import { LoginService } from '../../authentication/services/login.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'tg-output',
@@ -24,6 +25,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
   @ViewChild('mainOutputArea') mainOutputArea: ElementRef;
   @ViewChild('splitArea') splitArea: SplitComponent;
+
+  private TEST: MenuItem[];
 
   lastRoom$: Observable<any>;
 
@@ -62,13 +65,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /* Check login status and if is disconnect cleaning the output messages */
     this.loginService.isLoggedIn.pipe(
-      takeUntil(this._unsubscribeAll)
-    ).subscribe(
-      (status) =>  {
+      takeUntil(this._unsubscribeAll)).subscribe((status) =>  {
        if (status === false) {
          this.output = [];
-       }
-      }
+       }}
     );
 
     /** Toggle Splitter Output  view  */
@@ -99,15 +99,16 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       filter(room => room && room !== undefined))
         .subscribe(
           (room: Room) => {
+
             if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
               this.lastRoomDescription = room.desc['base'];
             }
+
             this.typeDetail = 'room';
             const content = this.setContent('room', room);
             this.output.push(content);
             this.trimOutput();
             this.scrollPanelToBottom();
-
             this.game.clientUpdateNeeded.room = room.ver;
 
           }
@@ -117,16 +118,14 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.objOrPerson.pipe(
       takeUntil(this._unsubscribeAll),
       filter(elements => elements && elements !== undefined ))
-        .subscribe(
-          (elements: any) => {
-            this.objPersDetail = elements;
-            const content = this.setContent('objpersdetail', elements);
-            this.output.push(content);
-            this.typeDetail = 'objPers';
-            this.trimOutput();
-            this.scrollPanelToBottom();
-          }
-        );
+        .subscribe( (elements: any) => {
+          this.objPersDetail = elements;
+          const content = this.setContent('objpersdetail', elements);
+          this.output.push(content);
+          this.typeDetail = 'objPers';
+          this.trimOutput();
+          this.scrollPanelToBottom();
+        });
   }
 
   ngAfterViewInit() {
@@ -171,5 +170,4 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
 }
