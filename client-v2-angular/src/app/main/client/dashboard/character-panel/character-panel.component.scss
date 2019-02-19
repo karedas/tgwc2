@@ -45,12 +45,11 @@
   }
 
   .tg-infochar {
-    padding-left: 6px;
     padding-right: 0;
   }
 
   .tg-infocharname {
-    padding: 1px 0 4px 0;
+    height: 100%;
     line-height: 18px;
     text-align: left;
     font-family: kingthings;
@@ -58,7 +57,9 @@
     font-size: 12px;
     width: 100%;
     color: white;
-    margin-top: 2px;
+    box-shadow: inset 0px -7px 15px black;
+    border-bottom: 1px solid #5f5c59;
+    padding: 1px 6px 1px 6px;
   }
 
   /* status icons */
@@ -66,21 +67,30 @@
   .hero-infostatus {
     vertical-align: middle;
     display: inline-block;
-    margin-left: 16px;
+    margin-left: auto;
     letter-spacing: 0;
     color: #ccc1b1;
-    font-size: 12px;
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 9px;
+
 
     > div {
       padding-right: 6px;
       margin-right: .5em;
       margin: auto .5em;
+      cursor: pointer;
     }
 
     i {
       display: block;
-      margin: auto 6px auto 2px;
+      margin: auto;
       white-space: nowrap;
+      background-size: cover;
+      background-repeat:  no-repeat;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
     }
 
     span {
@@ -90,19 +100,63 @@
       text-overflow: ellipsis;
     }
 
+    .status-icon-box {
+      margin: auto 2px auto 0;
+      width: 16px;
+      height: 16px;
+    }
+
+    //* WALK
+    .status-walk .status-icon-box {
+      &.walk-0 i{
+        background-image: url($imgPath + '/icons/0_passeggio.svg');
+      }
+      &.walk-1 i{
+        background-image: url($imgPath + '/icons/1_camminata.svg');
+      }
+      &.walk-2 i{
+        background-image: url($imgPath + '/icons/2_marcia.svg');
+      }
+      &.walk-3 i{
+        background-image: url($imgPath + '/icons/3_corsa.svg');
+      }
+      &.walk-4 i{
+        background-image: url($imgPath + '/icons/4_scatto.svg');
+      }
+    }
+
+    // CONV
     .status-conva {
-      i {
+      .status-icon-box i {
         @include sprite($conva-ng-sprite);
+        margin-top: 2px;
       }
     }
 
-    .status-walk, .status-combat {
-      i {
-        @include sprite($default-statuslabel-sprite);
+    // COMBATSET
+
+    .status-combat-mod .status-icon-box {
+      &.mod-par-a i{
+        background-image: url($imgPath + '/icons/c_parataA.svg');
+      }
+      &.mod-par-s i{
+        background-image: url($imgPath + '/icons/c_parataS.svg');
+      }
+      &.mod-sch i{
+        background-image: url($imgPath + '/icons/c_schivata.svg');
       }
     }
-
-
+    .status-combat-att .status-icon-box {
+      &.att-par-a i{
+        background-image: url($imgPath + '/icons/c_parataA.svg');
+      }
+      &.att-par-s i{
+        background-image: url($imgPath + '/icons/c_parataS.svg');
+      }
+      &.att-sch i{
+        background-image: url($imgPath + '/icons/c_schivata.svg');
+      }
+    }
 
   }
 
@@ -111,9 +165,9 @@
     z-index: 2;
     flex: 1 1 100%;
     flex-direction: column;
-    padding: 0;
     margin-top: auto;
     margin-bottom: 2px;
+    padding: 4px 0 0 6px;
     
 
     .barcont {

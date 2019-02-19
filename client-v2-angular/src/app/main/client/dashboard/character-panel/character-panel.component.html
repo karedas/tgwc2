@@ -22,13 +22,43 @@
             <span class="charName">{{heroName}}</span>
 
             <div class="hero-infostatus"  fxLayout  fxFlex="0 1 auto">
-              <div *ngIf="conva" class="status-conva tg-red" fxLayout><i></i><span>Sei convalescente!</span></div>
-              <div *ngIf="walk" class="status-walk" fxLayout><i></i><span>{{ walk }}</span></div>
-              <div *ngIf="combatSet" class="status-combat" fxLayout><i></i><span>mod: {{combatSet.mod}} | att: {{combatSet.atteg}}</span></div>
+              <div *ngIf="conva === '1'" class="status-conva tg-red" fxLayout> 
+                <div class="status-icon-box">
+                  <i></i>
+                </div>
+                <span>Sei convalescente!</span>
+              </div>
+              <div class="status-conva" fxLayout> 
+                <div class="status-icon-box">
+                  <i></i>
+                </div>
+                <span class="tg-yellow">{{money}}</span>&nbsp; Monete
+              </div>
+              <div *ngIf="walk" class="status-walk" fxLayout>
+                <div class="status-icon-box"
+                [ngClass]="{
+                  'walk-0': (walk == 'passeggio'),
+                  'walk-1': (walk == 'camminata'),
+                  'walk-2': (walk == 'marcia'),
+                  'walk-3': (walk == 'corsa'),
+                  'walk-4': (walk == 'scatto')
+                }">
+                  <i></i>
+                </div>
+                <span>{{ walk }}</span></div>
+              <div *ngIf="combatSet" class="status-combat-mod" fxLayout>
+                <div class="status-icon-box"
+                [ngClass]="{
+                  'mod-par-a': (combatSet?.mod == 'schivare'),
+                  'mod-par-s': (combatSet?.mod == 'parare'),
+                  'mod-sch': (combatSet?.mod == 'deflettere')
+                }">
+                  <i></i>
+                </div>
+                <span>{{combatSet.mod}}</span>
+              </div>
             </div>
-
           </div>
-
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">

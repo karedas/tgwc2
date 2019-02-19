@@ -49,6 +49,7 @@ export interface IHero {
   city?: string;
   abil?: any;
   skills?: any;
+  money?: number;
 }
 
 // export class Hero implements IHero {

@@ -26,7 +26,11 @@ export function reducer(
           hit: action.payload['enemyhealt'],
           icon: action.payload['enemyicon'],
           name: action.payload['enemyname']
-        }
+        },
+        conva: action.payload.conva,
+        combat: action.payload.combat,
+        walk: action.payload.walk,
+        money: action.payload.money
       }}
       );
 

@@ -27,7 +27,8 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   conva: number;
   walk: string;
-  combatSet: {};
+  combatSet: any;
+  money: number;
 
   // Enemy Target Values
   enemyHealt = 0;
@@ -60,6 +61,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
             this.heroAdjective = hero.adjective;
             this.heroImage = environment.media_address + hero.image;
             
+            this.money = hero.money;
             this.walk = hero.walk;
             this.conva = hero.conva;
             this.combatSet = hero.combat;
