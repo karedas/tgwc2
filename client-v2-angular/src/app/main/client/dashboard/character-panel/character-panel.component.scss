@@ -102,7 +102,7 @@
       height: 16px;
     }
 
-    .status-walk, .status-combat-mod, .status-combat-attegg, .status-money {
+    .status-walk, .status-combat-mod, .status-combat-attegg, .status-money, .status-position {
       i {
         display: block;
         margin: auto;
@@ -120,7 +120,12 @@
       background-image: url($imgPath + '/icons/_monete.svg');
     }
 
-    //* WALK
+    /* POSITION */
+    .status-position i {
+      background-image: url($imgPath + '/icons/_position.svg');
+    }
+
+    /* WALK */
     .status-walk{
       &.walk-0 i{
         background-image: url($imgPath + '/icons/0_passeggio.svg');

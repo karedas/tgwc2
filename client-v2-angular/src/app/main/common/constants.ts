@@ -25,3 +25,13 @@ export const equip_positions_by_name = {
     'l_shoulder': 'Sulla spalla sinistra',
     'tied': 'Imprigionato'
   };
+
+export const hero_position = [
+  'morto', 
+  'ferito mortalmente',
+  'bloccato',
+  'addormentato',
+  'a riposo',
+  'seduto',
+  'STANDING'
+]

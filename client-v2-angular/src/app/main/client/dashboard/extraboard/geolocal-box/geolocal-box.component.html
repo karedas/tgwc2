@@ -1,6 +1,6 @@
   <ng-container *ngIf="region$ | async as region">
     <div class="tg-geolocal"  fxLayout="column" fxFlex="1 1 218px" 
-    [pTooltip]="'Regione / Controllo territoriale'" tooltipPosition="top" showDelay="500" hideDelay="100">
+    pTooltip="'Regione / Controllo territoriale'" tooltipPosition="top" showDelay="500" hideDelay="100">
       <div class="tg-geolocal--title"></div>
       <div class="tg-geolocal--image">
         <div class="regimg" [className]="'regimg region-img-'+idreg" [@fadeInFadeOut]="changeState"></div>

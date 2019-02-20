@@ -50,19 +50,6 @@ export interface IHero {
   abil?: any;
   skills?: any;
   money?: number;
+  pietoso?: number;
+  position?: number;
 }
-
-// export class Hero implements IHero {
-
-  // conva: 0;
-  // status: IStatus;
-
-  // constructor(...args ) {
-    // this.status = {
-    //   drink: 0,
-    //   food: 0,
-    //   hit: 0,
-    //   move: 0
-    // };
-//   }
-// }

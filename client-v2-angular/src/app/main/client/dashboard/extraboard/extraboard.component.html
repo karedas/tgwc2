@@ -5,32 +5,38 @@
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-info-graph" 
-          (mouseup)="buttonClick('info')">Info</button>
+          (mouseup)="buttonClick('info')"
+          [pTooltip]="'Scheda Personaggio'" tooltipPosition="top" showDelay="300" hideDelay="100">Info</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-equip-graph" 
-          (mouseup)="buttonClick('equip')">Equip</button>
+          (mouseup)="buttonClick('equip')"
+          [pTooltip]="'Equipaggiamento'" tooltipPosition="top" showDelay="300" hideDelay="100">Equip</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-inventario-graph" 
-          (mouseup)="buttonClick('invent')">Inventario</button>
+          (mouseup)="buttonClick('invent')"
+          [pTooltip]="'Inventario'" tooltipPosition="top" showDelay="300" hideDelay="100">Inventario</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-skill-graph" 
-          (mouseup)="buttonClick('abilita')">abilit&agrave;</button>
+          (mouseup)="buttonClick('abilita')"
+          [pTooltip]="'Abilità'" tooltipPosition="top" showDelay="300" hideDelay="100">abilit&agrave;</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-stato-graph" 
-          (mouseup)="buttonClick('stato')">Stato</button>
+          (mouseup)="buttonClick('stato')"
+          [pTooltip]="'Stato'" tooltipPosition="top" showDelay="300" hideDelay="100">Stato</button>
       </div>
       <div class="wrap-btnend-box">
         <button 
           class="tg-button btn-config-graph"
-          (mouseup)="openShortcutsPanel()">Scorciatoie</button>
+          (mouseup)="openShortcutsPanel()"
+          [pTooltip]="'Scorciatoie'" tooltipPosition="top" showDelay="300" hideDelay="100">Scorciatoie</button>
       </div>
     </div>
   </div>

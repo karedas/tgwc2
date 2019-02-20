@@ -6,12 +6,15 @@ export function reducer(
   action: DataAction
 ): DataState {
   switch (action.type) {
+    
     case DataEvenType.IN:
       return Object.assign({}, state, {
         base: [action.payload]
       });
+      
     case DataEvenType.OUT:
       return Object.assign({}, state, action.payload);
+
     case DataEvenType.AUTOUPDATESTATUSHERO:
       return Object.assign({}, state, {hero: {
         ...state.hero,
@@ -29,8 +32,11 @@ export function reducer(
         },
         conva: action.payload.conva,
         combat: action.payload.combat,
+        position: action.payload.position,
         walk: action.payload.walk,
-        money: action.payload.money
+        money: action.payload.money,
+        pietoso: action.payload.pietoso,
+        nosfodera: action.payload.nosfodera
       }}
       );
 

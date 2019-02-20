@@ -8,27 +8,35 @@
     <b class="tg-yellow">Comando:
       <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
   <div class="tg-inputcommand">
-    <button
-      fxHide fxShow.gt-sm
-      class="tg-fnt-button  d-none d-sm-inline-block"
-      type="button"
-      (mousedown)="toggleExtraOutput($event)"
-      [ngClass]="{'isActive': extraOutputStatus$ | async}">
-      <fa-icon [icon]="facolumns"></fa-icon>
-    </button>
-    <button 
-      class="tg-fnt-button"
-      type="button" 
-      (mousedown)="toggleDashboard($event)"
-      [ngClass]="{'isActive': dashBoardStatus$ | async}">
-      <fa-icon [icon]="faSolarPanel"></fa-icon>
-    </button>
-    <button 
-      class="tg-fnt-button d-none d-sm-inline-block"
-      type="button"
-      (mousedown)="toggleZen($event)">
-      <fa-icon [icon]="faBullseye"></fa-icon>
-    </button>
+    <div fxHide fxShow.gt-sm
+      pTooltip="Apri/Chiudi Dettagli" tooltipPosition="top" showDelay="300" hideDelay="100">
+      <button
+        type="button"
+        class="tg-fnt-button"
+        (mousedown)="toggleExtraOutput($event)"
+        [ngClass]="{'isActive': extraOutputStatus$ | async}">
+        <fa-icon [icon]="facolumns"></fa-icon>
+      </button>
+    </div>
+    <div
+      pTooltip="Apri/Chiudi Dashboard" tooltipPosition="top" showDelay="300" hideDelay="100">
+      <button
+        type="button" 
+        class="tg-fnt-button"
+        (mousedown)="toggleDashboard($event)"
+        [ngClass]="{'isActive': dashBoardStatus$ | async}">
+        <fa-icon [icon]="faSolarPanel"></fa-icon>
+      </button>
+    </div>
+    <div
+      pTooltip="Modalità Zen" tooltipPosition="top" showDelay="300" hideDelay="100">
+      <button 
+        type="button"
+        class="tg-fnt-button"
+        (mousedown)="toggleZen($event)">
+        <fa-icon [icon]="faBullseye"></fa-icon>
+      </button>
+    </div>
   </div>
   <div class="tg-border-box">
     <div class="tg-border tg-border-top"></div>
@@ -37,3 +45,5 @@
     <div class="tg-border tg-border-bottom"></div>
   </div>
 </div>
+
+
