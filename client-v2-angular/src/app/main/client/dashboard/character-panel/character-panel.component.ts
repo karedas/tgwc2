@@ -20,7 +20,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   heroDashboard$: Observable<any>;
 
-  status: {} = {drink: 0, food: 0, hit: 0, move: 0};
+  status: {} = { drink: 0, food: 0, hit: 0, move: 0 };
 
   inCombat = false;
   heroName: string;
@@ -30,7 +30,8 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   conva: number;
   walk: string;
   combatSet: any;
-  money: number;
+  money: number = 0;
+  moneyValue: string = '';
 
   // Enemy Target Values
   enemyHealt = 0;
@@ -54,11 +55,10 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
     // TODO, MOVE IN APP ROOT COMPONENT
     this.watcherMedia = this.mediaObserver.media$.subscribe((change: MediaChange) => {
       this.activeMediaQuery = change ? change.mqAlias : '';
-      console.log(this.activeMediaQuery);
     });
 
     this._unsubscribeAll = new Subject();
-    
+
 
 
   }
@@ -76,8 +76,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
             this.heroName = hero.name;
             this.heroAdjective = hero.adjective;
             this.heroImage = environment.media_address + hero.image;
-
-            this.money = hero.money;
+            this.setMoneyAmountLabel(hero.money);
             this.walk = hero.walk;
             this.conva = hero.conva;
             this.combatSet = hero.combat;
@@ -90,6 +89,38 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
     if (status !== undefined) {
       this.status = status;
     }
+  }
+
+  setMoneyAmountLabel(money: any) {
+
+    let dividend = 1;
+    money = parseInt(money);
+
+    if (money < 10) {
+      this.moneyValue = 'mr'
+
+    }
+    if (money >= 10 && money < 100) {
+      this.moneyValue = 'ma'
+      dividend = 10;
+
+    }
+    else if (money >= 100 && money < 1000) {
+      dividend = 100;
+      this.moneyValue = 'mo'
+    }
+    else if (money >= 1000) {
+      dividend = 1000;
+      this.moneyValue = 'co'
+    }
+
+    if (money > 0) {
+      money = parseFloat(money);
+      money = Math.round(money) / dividend;
+      money.toFixed(2).replace('.', ',');
+    }
+
+    this.money = money;
   }
 
   private setCombatPanel(target?: ITarget) {

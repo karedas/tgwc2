@@ -20,22 +20,27 @@
         <div class="tg-infocharname" fxLayout="row">
           <span class="charName" fxHide fxShow.gt-sm>{{heroName}}</span>
 
-          <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="center end">
+          <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
 
-            <div *ngIf="conva === '1'" class="status-conva" fxLayout>
+            <div 
+              *ngIf="conva === '1'" class="status-conva" fxLayout
+              [pTooltip]="'Sei convalescente!'" tooltipPosition="top" showDelay="300" hideDelay="100">
               <div class="status-icon-box">
                 <i></i>
               </div>
             </div>
 
-            <div class="status-money infostatus-block" fxLayout>
+            <div *ngIf="money" class="status-money infostatus-block" fxLayout
+              [pTooltip]="'I tuoi averi (cmd: monete)'" tooltipPosition="top" showDelay="300" hideDelay="100">
               <div class="status-icon-box">
                 <i></i>
               </div>
-              <span class="tg-yellow">{{money}}&nbsp;M</span>
+              <span class="tg-yellow">{{money}}&nbsp;{{moneyValue}}</span>
             </div>
 
-            <div *ngIf="walk" class="status-walk" fxLayout [ngClass]="{
+            <div 
+              [pTooltip]="'Velocità di movimento'" tooltipPosition="top" showDelay="300" hideDelay="100"
+              *ngIf="walk" class="status-walk" fxLayout [ngClass]="{
                 'walk-0': (walk == 'passeggio'),
                 'walk-1': (walk == 'camminata'),
                 'walk-2': (walk == 'marcia'),
@@ -48,7 +53,9 @@
               <span class="tg-green">{{ walk | slice:0:3}}</span>
             </div>
 
-            <div *ngIf="combatSet" class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
+            <div 
+              [pTooltip]="'Tipo di difesa'" tooltipPosition="top" showDelay="300" hideDelay="100"
+              *ngIf="combatSet" class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
                 'mod-par-a': (combatSet?.mod == 'deflettere'),
                 'mod-par-s': (combatSet?.mod == 'parare'),
                 'mod-sch': (combatSet?.mod == 'schivare')
@@ -59,7 +66,9 @@
               <span>{{combatSet.mod | slice:0:3}}</span>
             </div>
 
-            <div *ngIf="combatSet" class="status-combat-attegg" fxLayout>
+            <div 
+              [pTooltip]="'Atteggiamento'" tooltipPosition="top" showDelay="300" hideDelay="100"
+              *ngIf="combatSet" class="status-combat-attegg" fxLayout>
               <div class="status-icon-box">
                 <i></i>
               </div>

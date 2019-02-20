@@ -17,7 +17,7 @@
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"
           (mousedown)="onInteract($event, item, i)"></tg-icons>
 
-        <tg-hstat [condprc]="object.condprc"></tg-hstat>
+        <tg-hstat [condprc]="item.condprc" *ngIf="expression"></tg-hstat>
 
         <!-- Equip Position Name  -->
         <div class="tg-objperson--equippos " 
