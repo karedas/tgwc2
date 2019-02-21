@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
@@ -8,7 +8,7 @@ import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
 import { takeUntil } from 'rxjs/operators';
 
-import gitInfo from 'src/git-version.json';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-login',
@@ -18,7 +18,7 @@ import gitInfo from 'src/git-version.json';
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  gitVersion = gitInfo.raw;
+  gitVersion = environment.gitVersion;
   loginForm: FormGroup;
   loginFormErrors: any;
   loginFailed: boolean;

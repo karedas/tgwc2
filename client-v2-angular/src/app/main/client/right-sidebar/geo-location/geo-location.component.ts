@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { getRegion } from 'src/app/store/selectors';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { takeUntil } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'tg-geo-location',
@@ -31,52 +32,47 @@ import { takeUntil } from 'rxjs/operators';
 
 })
 export class GeoLocationComponent implements OnInit, OnDestroy {
-
   
   changeState = '';
-  clanName: string;
-  regionName: string;
-  icon: number;
-  clan_icon: number;
-  interaz_color: string;
-  idreg: number;
-
   region$: Observable<IRegion>;
 
   private _unsubscribeAll: Subject<any>;
 
-
-
-  constructor(private store: Store<DataState>) { 
+  constructor(
+    private store: Store<DataState>,
+    private http: HttpClient
+    ) { 
     this.region$ = this.store.pipe(select(getRegion));
     this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
-
     this.region$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (region: IRegion) => {
         if (region) {
-          this.newRegionfadeInOut(region);
+          this.loadRegionImage('assets/images/regions_default.jpg');
+          this.newRegionfadeInOut();
         }
       }
     );
   }
 
-  newRegionfadeInOut(region: IRegion) {
+  showRegionImage(img) {
+    this.loadRegionImage(img).subscribe(
+      () => { 
+        console.log('hide spinner'); /*hide spinner*/
+      }
+    )
+  }
 
+  loadRegionImage(img): Observable<Blob>{
+    return this.http.get(img, {responseType: 'blob'})
+  }
+
+  newRegionfadeInOut() {
     this.changeState = 'out';
-
     setTimeout(() => {
-      this.regionName = region.name;
-      this.clanName = region.clan_name;
-      this.icon =  region.icon;
-      this.clan_icon = region.clan_icon;
-      this.interaz_color = region.type;
-      this.idreg = region.idreg;
       this.changeState = 'in';
-
-
     }, 1000);
   }
 
@@ -84,5 +80,5 @@ export class GeoLocationComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
    }
-
 }
+

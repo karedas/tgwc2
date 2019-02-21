@@ -2,7 +2,10 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { GameService } from 'src/app/services/game.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
+
   selector: 'tg-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
@@ -10,9 +13,9 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class NavbarComponent implements OnInit {
 
-
-
+  gitVersion = environment.gitVersion;
   menuItems: MenuItem[];
+  
   constructor(
     private game: GameService
   ) {

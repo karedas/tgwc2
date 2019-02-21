@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import AssetsList from 'src/assets/assets_list.json';
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,7 +14,7 @@ export class PreloaderService {
 
   public percentage$: BehaviorSubject<any> =  new BehaviorSubject<any>(0);
 
-  constructor(private http: HttpClient) {
+  constructor() {
 
     this.status$ = new BehaviorSubject<boolean>(false);
 

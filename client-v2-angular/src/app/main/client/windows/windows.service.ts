@@ -89,9 +89,7 @@ export class WindowsService {
       });
 
       this.gd.set(ref);
-
   }
-
 
   openCommandsList() {
     const ref = this.genericDialogService.open('commandsList',
@@ -127,8 +125,7 @@ export class WindowsService {
         }
       });
 
-      this.gd.set(ref);
-
+    this.gd.set(ref);
     return ref;
   }
 
@@ -145,7 +142,18 @@ export class WindowsService {
       });
 
       this.gd.set(ref);
+  }
 
+  openBook(dialogID: string, ...data: any) {
+    const ref = this.genericDialogService.open(dialogID,
+      <DialogConfiguration>{
+        draggable: true,
+        modal: false,
+        style: {
+          'width': 'auto',
+          'height': 'auto'
+        }
+      })
   }
 
   closeGenericDialog(dialogID: string) {

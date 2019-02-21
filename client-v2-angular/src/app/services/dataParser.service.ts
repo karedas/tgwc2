@@ -81,6 +81,14 @@ export class DataParser {
       return '';
     });
 
+    // Book
+    data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, (time) => {
+      console.log(time);
+      const parse_time = JSON.parse(time.slice(10, -1));
+      console.log(parse_time);
+      return '';
+    });
+
     data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
       const region_parse = JSON.parse(region.slice(8, -1));
       this.store.dispatch(new DataActions.RegionAction(region_parse));
@@ -185,6 +193,14 @@ export class DataParser {
       return '';
     });
 
+    // Book
+    data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
+        let b_parse = JSON.parse(book.slice(6, -1));
+        this.store.dispatch(new DataActions.BookAction(b_parse));
+        console.log(b_parse);
+        return '';
+    });
+
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
@@ -196,7 +212,7 @@ export class DataParser {
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
       console.log('---------- generic page ------------', page_parse);
-      this.store.dispatch(new DataActions.IncomingData(page_parse));
+      // this.store.dispatch(new DataActions.IncomingData(page_parse));
       return '';
     });
 

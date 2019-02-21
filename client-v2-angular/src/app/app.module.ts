@@ -15,7 +15,6 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
 
-import { ToastrModule } from 'ngx-toastr';
 import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { appReducer, clearState } from './store';
 import { UiEffects } from './store/effects/ui.effects';
@@ -32,9 +31,6 @@ import { DataEffects } from './store/effects/data.effects';
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([UiEffects, ClientEffects, DataEffects]),
-    ToastrModule.forRoot({
-      positionClass: 'inline',
-    }),
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,

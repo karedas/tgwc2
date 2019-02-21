@@ -1,0 +1,29 @@
+<ng-container *ngIf="book$ | async as book">
+  <tg-dialog [id]="dialogID">
+    <div class="tg-book">
+      <div class="b-ironlight-mini tg-box">
+        <div class="tg-dialog-content-nopadding tg-shadow-inset">
+          <div class="tg-book-title" *ngIf="book.title">
+              {{book.title}}
+          </div>
+          <ng-container *ngFor="let page of book.pages; let i=index">
+            <div class="page" *ngIf="i === 0">
+              <div class="tg-book-pagetitle">
+                {{page.title}}
+              </div>
+              <div class="tg-book-pagetext">
+                {{page.text}}
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </tg-dialog>
+</ng-container>

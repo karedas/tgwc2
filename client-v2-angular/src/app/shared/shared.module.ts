@@ -17,7 +17,6 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
 import { PipesModule } from '../pipes/pipes.module';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { ToastContainerModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -49,7 +48,6 @@ import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
     }),
     FontAwesomeModule,
     NgScrollbarModule,
-    ToastContainerModule,
     /* Prime NG Modules (TODO: Moves in another file) */
     CheckboxModule,
     TableModule,
@@ -75,7 +73,6 @@ import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
     ReactiveFormsModule,
     NgScrollbarModule,
     PipesModule,
-    ToastContainerModule,
     FontAwesomeModule,
     IconsComponent,
     HstatComponent,

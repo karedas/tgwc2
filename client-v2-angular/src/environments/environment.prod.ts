@@ -1,4 +1,7 @@
+import gitInfo from 'src/git-version.json';
+
 export const environment = {
+  gitVersion: gitInfo.raw,
   production: true,
   media_address: 'http://play.thegatemud.it/images/',
   socket : {

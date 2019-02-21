@@ -78,6 +78,10 @@ function fetchInventory(state: DataState) {
   return state.hero.inventory;
 }
 
+function fetchBook(state: DataState) {
+  return state.book;
+}
+
 /******************* Public API's ******************/
 export const getDateNow = createSelector(getDataState, fetchDateNow);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
@@ -96,3 +100,4 @@ export const getRegion = createSelector(getDataState, fetchRegion);
 export const getSkills = createSelector(getDataState, fetchSkills);
 export const getEquip = createSelector(getDataState, fetchEquip);
 export const getInventory = createSelector(getDataState, fetchInventory);
+export const getBook = createSelector(getDataState, fetchBook);

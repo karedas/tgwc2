@@ -102,6 +102,11 @@ export function reducer(
       equipment: action.payload
     }};
 
+    case DataEvenType.BOOK:
+    return Object.assign({}, state, {
+      book: action.payload
+    })
+
     default:
       return state;
   }

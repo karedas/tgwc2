@@ -6,6 +6,7 @@ import { IObjPerson } from 'src/app/models/data/objpers.model';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { IWorks } from 'src/app/models/data/workslist.model';
 import { IRegion } from 'src/app/models/data/region.model';
+import { IBook } from 'src/app/models/data/book.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -26,7 +27,8 @@ export enum DataEvenType {
     INFO = '[Data] Info Character',
     SKILLS = '[Data] Skills List',
     INVENTORY = '[Data] Inventory',
-    EQUIP = '[Data] Equip'
+    EQUIP = '[Data] Equip',
+    BOOK = '[Data] Book'
 }
 
 export class IncomingData implements Action {
@@ -121,6 +123,11 @@ export class EquipAction implements Action {
     constructor(public payload: any) {}
 }
 
+export class BookAction implements Action {
+    readonly type = DataEvenType.BOOK;
+    constructor(public payload: IBook) {}
+}
+
 export type DataAction
 = IncomingData
 | OutgoingData
@@ -139,5 +146,6 @@ export type DataAction
 | InfoCharacterAction
 | InventoryAction
 | EquipAction
-| RegionAction;
+| RegionAction
+| BookAction;
 

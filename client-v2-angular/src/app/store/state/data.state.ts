@@ -6,6 +6,7 @@ import { IObjPerson } from 'src/app/models/data/objpers.model';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { IWorks } from 'src/app/models/data/workslist.model';
 import { IRegion } from 'src/app/models/data/region.model';
+import { IBook } from 'src/app/models/data/book.model';
 
 export interface DataState {
     date: number;
@@ -20,6 +21,7 @@ export interface DataState {
     genericTable?: IGenericTable;
     workslist?: IWorks;
     region?: IRegion;
+    book?: IBook
 }
 
 export const initialState: DataState = {

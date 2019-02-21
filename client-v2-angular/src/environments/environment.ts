@@ -1,8 +1,10 @@
+import gitInfo from 'src/git-version.json';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  gitVersion: gitInfo.version,
   production: false,
   media_address: 'http://play.thegatemud.it/images/',
   socket : {

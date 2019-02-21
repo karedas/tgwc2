@@ -11,15 +11,15 @@
           <div class="tg-geolocal--databox" fxFlex="0 0 auto" fxLayout="column">
             Ti trovi in
             <span class="tg-geolocal--region" [ngClass]="
-                        {'tg-green': interaz_color == 'pacifica',
-                         'tg-brown': interaz_color == 'selvaggia', 
-                         'tg-red': interaz_color == 'guerra'}">
-              <tg-icons [icon]="icon"></tg-icons> {{regionName}}
+                        {'tg-green': region.type == 'pacifica',
+                         'tg-brown': region.type == 'selvaggia', 
+                         'tg-red': region.type == 'guerra'}">
+              <tg-icons [icon]="region.icon"></tg-icons> {{region.name}}
             </span>
             Controllata da
             <span class="tg-geolocal--control">
-              <tg-icons [icon]="clan_icon"></tg-icons>
-              {{clanName || "Landa selvaggia"}}
+              <tg-icons [icon]="region.clan_icon"></tg-icons>
+              {{region.clan_name || "Landa selvaggia"}}
             </span>
 
           </div>

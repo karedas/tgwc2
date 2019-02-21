@@ -31,8 +31,7 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/luna-amber/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "src/scss/client.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "src/scss/client.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

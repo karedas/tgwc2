@@ -121,8 +121,22 @@
     }
 
     /* POSITION */
-    .status-position i {
-      background-image: url($imgPath + '/icons/_inpiedi.svg');
+    .status-position  {
+      i {
+        background-image: url($imgPath + '/icons/_inpiedi.svg');
+      }
+      //sdraiato
+      &.pos-4 i{
+        background-image: url($imgPath + '/icons/_sdraiato.svg');
+      }
+      //seduto
+      &.pos-5 i{
+        background-image: url($imgPath + '/icons/_seduto.svg');
+      }
+      //in piedi
+      &.pos-6 i{
+        background-image: url($imgPath + '/icons/_inpiedi.svg');
+      }
     }
 
     /* WALK */

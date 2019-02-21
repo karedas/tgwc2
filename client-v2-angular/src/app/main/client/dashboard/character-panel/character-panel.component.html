@@ -43,7 +43,11 @@
             <!-- Position -->
             <div 
               pTooltip="Sei <b class='tg-yellow'>{{hero.position}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
-              *ngIf="hero.position" class="status-position" fxLayout>
+              *ngIf="hero.position" class="status-position" fxLayout [ngClass]="{
+                'pos-4': (hero.position == '4'),
+                'pos-5': (hero.position == '5'),
+                'pos-6': (hero.position == '6')
+              }">
               <div class="status-icon-box">
                 <i></i>
               </div>

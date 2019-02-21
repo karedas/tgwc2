@@ -19,6 +19,7 @@ import { CharacterSheetComponent } from './character-sheet/character-sheet.compo
 import { InfoComponent } from './character-sheet/info/info.component';
 import { EquipInventoryComponent } from './character-sheet/equip-inventory/equip-inventory.component';
 import { SkillsComponent } from './character-sheet/skills/skills.component';
+import { BookComponent } from './book/book.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SkillsComponent } from './character-sheet/skills/skills.component';
     CharacterSheetComponent,
     InfoComponent,
     EquipInventoryComponent,
-    SkillsComponent
+    SkillsComponent,
+    BookComponent
   ],
   imports: [
     DynamicDialogModule,
@@ -49,7 +51,8 @@ import { SkillsComponent } from './character-sheet/skills/skills.component';
     CommandsListComponent,
     GenericTableComponent,
     WorkslistComponent,
-    CharacterSheetComponent
+    CharacterSheetComponent,
+    BookComponent
   ],
   entryComponents: [
     NoFeatureComponent,
