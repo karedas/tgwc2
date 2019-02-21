@@ -63,20 +63,17 @@ export class GameService {
     if (now > this.lastDataTime + 1000 ) {
       if (what.inventory > this.clientUpdateNeeded.inventory && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@inv');
-        console.log('Update Call: @inv', what.inventory);
         this.clientUpdateNeeded.inventory = what.inventory;
         this.lastDataTime = now;
       }
 
       if (what.equipment > this.clientUpdateNeeded.equipment && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@equip');
-        console.log('Update Call: @equip', what.equipment);
         this.clientUpdateNeeded.equipment = what.equipment;
         this.lastDataTime = now;
       }
 
       if (what.room > this.clientUpdateNeeded.room && what.room  >  this.clientUpdateNeeded.room ) {
-        console.log('Update Call: @agg', what.room);
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;

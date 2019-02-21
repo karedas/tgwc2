@@ -31,7 +31,7 @@ export const hero_position = [
   'ferito mortalmente',
   'bloccato',
   'addormentato',
-  'a riposo',
+  'sdraiato',
   'seduto',
-  'STANDING'
+  'in piedi'
 ]

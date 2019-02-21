@@ -8,10 +8,9 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'tg-geolocal-box',
-  templateUrl: './geolocal-box.component.html',
-  styleUrls: ['./geolocal-box.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
+  selector: 'tg-geo-location',
+  templateUrl: './geo-location.component.html',
+  styleUrls: ['./geo-location.component.scss'],
   animations: [
     trigger('fadeInFadeOut', [
       // ...
@@ -29,13 +28,12 @@ import { takeUntil } from 'rxjs/operators';
       ]),
     ]),
   ]
+
 })
+export class GeoLocationComponent implements OnInit, OnDestroy {
 
-
-export class GeolocalBoxComponent implements OnInit, OnDestroy {
-
+  
   changeState = '';
-
   clanName: string;
   regionName: string;
   icon: number;
@@ -44,12 +42,13 @@ export class GeolocalBoxComponent implements OnInit, OnDestroy {
   idreg: number;
 
   region$: Observable<IRegion>;
+
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private store: Store<DataState>) {
 
+
+  constructor(private store: Store<DataState>) { 
     this.region$ = this.store.pipe(select(getRegion));
-
     this._unsubscribeAll = new Subject<any>();
   }
 
@@ -82,8 +81,8 @@ export class GeolocalBoxComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-   this._unsubscribeAll.next();
-   this._unsubscribeAll.complete();
-  }
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+   }
 
 }

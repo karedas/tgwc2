@@ -9,8 +9,7 @@
 :host {
   
   background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
-  background-size: contain;
-  box-sizing: content-box;
+  background-size: cover;
   position: relative;
   z-index: 3;
   width: 382px;

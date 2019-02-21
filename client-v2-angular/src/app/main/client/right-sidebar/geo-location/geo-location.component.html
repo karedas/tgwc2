@@ -1,0 +1,30 @@
+<ng-container *ngIf="region$ | async as region">
+  <div class="tg-geolocal tg-shadow-inset">
+    <ng-scrollbar [compact]="true" class="scrollbar">
+      <div fxLayout="column">
+        <div class="tg-geolocal--title"></div>
+        <div class="tg-geolocal--imagecnt">
+          <div class="tg-geolocal--image tg-shadow-inset" [@fadeInFadeOut]="changeState">
+          </div>
+        </div>
+        <div class="tg-geolocal--data" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
+          <div class="tg-geolocal--databox" fxFlex="0 0 auto" fxLayout="column">
+            Ti trovi in
+            <span class="tg-geolocal--region" [ngClass]="
+                        {'tg-green': interaz_color == 'pacifica',
+                         'tg-brown': interaz_color == 'selvaggia', 
+                         'tg-red': interaz_color == 'guerra'}">
+              <tg-icons [icon]="icon"></tg-icons> {{regionName}}
+            </span>
+            Controllata da
+            <span class="tg-geolocal--control">
+              <tg-icons [icon]="clan_icon"></tg-icons>
+              {{clanName || "Landa selvaggia"}}
+            </span>
+
+          </div>
+        </div>
+      </div>
+    </ng-scrollbar>
+  </div>
+</ng-container>
