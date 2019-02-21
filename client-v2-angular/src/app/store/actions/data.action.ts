@@ -7,6 +7,7 @@ import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { IWorks } from 'src/app/models/data/workslist.model';
 import { IRegion } from 'src/app/models/data/region.model';
 import { IBook } from 'src/app/models/data/book.model';
+import { IDateTime } from 'src/app/models/data/dateTime.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -28,7 +29,8 @@ export enum DataEvenType {
     SKILLS = '[Data] Skills List',
     INVENTORY = '[Data] Inventory',
     EQUIP = '[Data] Equip',
-    BOOK = '[Data] Book'
+    BOOK = '[Data] Book',
+    DATE = '[Data] Date Time'
 }
 
 export class IncomingData implements Action {
@@ -128,6 +130,11 @@ export class BookAction implements Action {
     constructor(public payload: IBook) {}
 }
 
+export class DateTimeAction implements Action {
+    readonly type = DataEvenType.DATE;
+    constructor(public payload: IDateTime) {}
+}
+
 export type DataAction
 = IncomingData
 | OutgoingData
@@ -147,5 +154,6 @@ export type DataAction
 | InventoryAction
 | EquipAction
 | RegionAction
+| DateTimeAction
 | BookAction;
 

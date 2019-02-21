@@ -1,3 +1,13 @@
+
+$area-border-size: 26px;
+$ironlight-border-size : 6px;
+$ironlight-mini-border-size: 16px;
+$controlpanel-border-size: 11px;
+$modal-border-size: 6px;
+$modalpaper-border-size: 80px;
+$regions-border-size: 30px;
+
+
 .tg-box-content {
   position: relative;
   z-index: 3;
@@ -395,6 +405,92 @@
     }
   }
 }
+
+.b-regions {
+  padding: 14px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  height: 100%;
+
+  .tg-box {
+    height: 100%;
+  }
+
+  >.tg-border-box {
+
+    .tg-border-area {
+      background: url($imgPath + '/regions/bg_dataregions.jpg') no-repeat center center; 
+      background-size: cover;
+      z-index: 0;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      box-shadow: 0px 0px 30px 6px black inset;
+      margin: 9px;
+    }
+    .tg-border-top,
+    .tg-border-bottom {
+      background-position: left;
+      height: $regions-border-size;
+      left: $regions-border-size;
+      right: $regions-border-size;
+
+      &::after,
+      &::before {
+        width: $regions-border-size;
+        height: $regions-border-size;
+      }
+    }
+
+    .tg-border-left,
+    .tg-border-right {
+      position: absolute;
+      width: $regions-border-size;
+      top: $regions-border-size - 1;
+      bottom: $regions-border-size - 1;
+    }
+
+    .tg-border-top {
+      background-image: url($imgPath + '/borders/border_regions_top.png');
+
+      &::after {
+        right: -$regions-border-size;
+        background-image: url($imgPath + '/borders/border_regions_topright.png');
+      }
+
+      &::before {
+        left: -$regions-border-size;
+        background-image: url($imgPath + '/borders/border_regions_topleft.png');
+      }
+    }
+
+    .tg-border-bottom {
+      background-image: url($imgPath + '/borders/border_regions_bottom.png');
+
+      &::after {
+        right: -$regions-border-size;
+        background-image: url($imgPath + '/borders/border_regions_bottomright.png');
+      }
+
+      &::before {
+        left: -$regions-border-size;
+        background-image: url($imgPath + '/borders/border_regions_bottomleft.png');
+      }
+    }
+
+    .tg-border-right {
+      background-image: url($imgPath + '/borders/border_regions_right.png');
+    }
+
+    .tg-border-left {
+      background-image: url($imgPath + '/borders/border_regions_left.png');
+    }
+  }
+}
+
 
 .b-area {
   padding: $area-border-size;

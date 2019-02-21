@@ -122,16 +122,44 @@
 
     /* POSITION */
     .status-position  {
+      color: white;
       i {
         background-image: url($imgPath + '/icons/_inpiedi.svg');
       }
-      //sdraiato
-      &.pos-4 i{
-        background-image: url($imgPath + '/icons/_sdraiato.svg');
+      //Morto
+      &.pos-0 {
+        color: $tg-red;
+        i {
+        background-image: url($imgPath + '/icons/_morto.svg');
+        }
       }
+      //bloccato
+      &.pos-2 {
+        color: $tg-yellow;
+        i {
+          background-image: url($imgPath + '/icons/_bloccato.svg');
+        }
+      }
+      //addormentato
+      &.pos-3 {
+        color: $tg-gray;
+        i {
+          background-image: url($imgPath + '/icons/_dormiente.svg');
+        }
+      }
+      //sdraiato
+      &.pos-4 {
+        color: $tg-brown;
+        i {
+          background-image: url($imgPath + '/icons/_sdraiato.svg');
+        }
+     }
       //seduto
-      &.pos-5 i{
-        background-image: url($imgPath + '/icons/_seduto.svg');
+      &.pos-5 {
+        color: $tg-lt-cyan;
+        i {
+          background-image: url($imgPath + '/icons/_seduto.svg');
+        }
       }
       //in piedi
       &.pos-6 i{

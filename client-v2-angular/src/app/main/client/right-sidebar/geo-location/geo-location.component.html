@@ -1,30 +1,41 @@
 <ng-container *ngIf="region$ | async as region">
   <div class="tg-geolocal tg-shadow-inset">
-    <ng-scrollbar [compact]="true" class="scrollbar">
-      <div fxLayout="column">
-        <div class="tg-geolocal--title"></div>
-        <div class="tg-geolocal--imagecnt">
-          <div class="tg-geolocal--image tg-shadow-inset" [@fadeInFadeOut]="changeState">
-          </div>
-        </div>
-        <div class="tg-geolocal--data" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
-          <div class="tg-geolocal--databox" fxFlex="0 0 auto" fxLayout="column">
-            Ti trovi in
-            <span class="tg-geolocal--region" [ngClass]="
-                        {'tg-green': region.type == 'pacifica',
-                         'tg-brown': region.type == 'selvaggia', 
-                         'tg-red': region.type == 'guerra'}">
-              <tg-icons [icon]="region.icon"></tg-icons> {{region.name}}
-            </span>
-            Controllata da
-            <span class="tg-geolocal--control">
-              <tg-icons [icon]="region.clan_icon"></tg-icons>
-              {{region.clan_name || "Landa selvaggia"}}
-            </span>
-
-          </div>
+    <div class="tg-geolocal--title"></div>
+    <div fxLayout="column" style="height: 100%">
+      <div class="tg-geolocal--imagecnt tg-shadow">
+        <div class="tg-geolocal--image tg-shadow-inset" [@fadeInFadeOut]="changeState">
         </div>
       </div>
-    </ng-scrollbar>
+      <div class="b-regions tg-box" style="margin-top: 5px;">
+        <div style="position:relative; z-index: 1; height: 100%;">
+          <ng-scrollbar [compact]="true" class="scrollbar">
+            <div class="tg-geolocal--data" fxLayout="column" fxLayoutAlign="center center" fxFlex="0 1 auto">
+              <div class="tg-geolocal--databox" fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="center center">
+                Ti trovi in
+                <span class="tg-geolocal--region" [ngClass]="
+                            {'tg-green': region.type == 'pacifica',
+                              'tg-brown': region.type == 'selvaggia', 
+                              'tg-red': region.type == 'guerra'}">
+                  <tg-icons [icon]="region.icon"></tg-icons> {{region.name}}
+                </span>
+                Controllata da
+                <span class="tg-geolocal--control">
+                  <tg-icons [icon]="region.clan_icon"></tg-icons>
+                  {{region.clan_name || "Landa selvaggia"}}
+                </span>
+  
+              </div>
+            </div>
+          </ng-scrollbar>
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+          <div class="tg-border tg-border-area"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>

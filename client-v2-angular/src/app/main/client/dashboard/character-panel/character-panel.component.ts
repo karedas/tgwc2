@@ -48,7 +48,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
     private store: Store<DataState>,
     private game: GameService,
     private mediaObserver: MediaObserver) {
-      console.log(this.hero_pos[0]);
 
     // TODO, MOVE IN APP ROOT COMPONENT
     this.watcherMedia = this.mediaObserver.media$.subscribe((change: MediaChange) => {

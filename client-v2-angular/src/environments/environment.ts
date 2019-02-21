@@ -4,7 +4,6 @@ import gitInfo from 'src/git-version.json';
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  gitVersion: gitInfo.version,
   production: false,
   media_address: 'http://play.thegatemud.it/images/',
   socket : {

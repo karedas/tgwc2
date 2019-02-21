@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'tg-geo-location',
   templateUrl: './geo-location.component.html',
   styleUrls: ['./geo-location.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('fadeInFadeOut', [
       // ...

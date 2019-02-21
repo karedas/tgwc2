@@ -42,8 +42,11 @@
             </div>
             <!-- Position -->
             <div 
-              pTooltip="Sei <b class='tg-yellow'>{{hero.position}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
+              pTooltip="Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
               *ngIf="hero.position" class="status-position" fxLayout [ngClass]="{
+                'pos-0': (hero.position == '0'),
+                'pos-2': (hero.position == '2'),
+                'pos-3': (hero.position == '3'),
                 'pos-4': (hero.position == '4'),
                 'pos-5': (hero.position == '5'),
                 'pos-6': (hero.position == '6')
@@ -51,7 +54,7 @@
               <div class="status-icon-box">
                 <i></i>
               </div>
-              <span class="tg-green">{{ hero_pos[hero.position] }}</span>
+              <span>{{ hero_pos[hero.position] }}</span>
             </div>
             <!-- Speed -->
             <div 

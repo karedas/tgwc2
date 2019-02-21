@@ -9,49 +9,106 @@
 }
 
 .tg-geolocal {
-    position: relative;
-    padding: 8px;
-    background: #190f06 url($imgPath + "/background/bg-ironbrown.jpg") repeat;
-    height: 100%;
+  position: relative;
+  padding: 8px;
+  background: #190f06 url($imgPath + "/background/bg-ironbrown.jpg") repeat;
+  height: 100%;
 }
 
 .tg-geolocal--title {
-    @include sprite($territorio-title-box-sprite);
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-  }
-
-.tg-geolocal--imagecnt{
-    border: 2px solid #4b3d2b;
-    border-radius: 2px;
-    height: 143px;
-    background: black;
+  @include sprite($territorio-title-box-sprite);
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
-.tg-geolocal--image{
-    background: url($imgPath + '/regions/region_default.jpg') no-repeat center center;
-    background-size: contain;
-    height: 100%;
-    width: 100%;
+.tg-geolocal--imagecnt {
+  border: 2px solid #4b3d2b;
+  border-radius: 2px;
+  height: 143px;
+	background: black;
+	position: relative;
+	z-index: 3;
+
+  &:after,
+  &:before {
+    content: '';
+		display: block;
+		@include sprite($clip-img-region-sprite);
+		position: absolute;
+		z-index: 2;
+    bottom: -20px;
+	}
+	
+	&:after {
+    left: 20px;
+	}
+	&:before {
+		right: 20px;
+	}
+}
+
+.tg-geolocal--image {
+  background: url($imgPath + '/regions/region_default.jpg') no-repeat center center;
+  height: 100%;
+  width: 100%;
 }
 
 .tg-geolocal--data {
-    background: url($imgPath + '/regions/bg_dataregions.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 1em 0 0;
+	position: relative;
+	z-index: 10;
+	margin: auto;
+	min-width: 70%;
 }
 
 .tg-geolocal--databox {
-    border:1px solid #593f29;
-    margin: auto 1em;
-    padding: 2em;
-    background: rgba(9,7,6, 0.6);
-    margin: 10% auto 4%;
-    text-align: center;
+	color: #6e5f50;
+	text-align: center;
+	font-size: 14px;
+	font-family: kingthings;
+	width: 100%;
+	margin: auto;
 
-    span {
-    }
+	tg-icons {
+		width: 24px;
+		height: 24px;
+		line-height: 24px;
+		vertical-align: middle;
+	
+		.tg-icon {
+			transform: scale(.8);
+			left: -4px;
+			top: -4px;
+		}
+	}
+
+}
+
+.tg-geolocal--region, .tg-geolocal--control {
+	font-size: 14px;
+	color: #9b8c7d;
+}
+
+.tg-geolocal--region:after {
+	content: '';
+	width: 40px;
+	height: 0;
+	border-top: 1px solid #593f29;
+	margin: .5em auto;
+	display: block;
+}
+
+@media  screen and (max-height: 850px) {
+	.tg-geolocal--databox {
+		padding: 8px;
+	}
+
+	.tg-geolocal--imagecnt {
+		height: 70px;
+	}
+	.tg-geolocal--region, .tg-geolocal--control {
+		font-size: 12px;
+	}
 }

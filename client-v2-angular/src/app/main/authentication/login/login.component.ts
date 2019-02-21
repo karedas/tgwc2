@@ -8,7 +8,7 @@ import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
 import { takeUntil } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
+import gitInfo from 'src/git-version.json';
 
 @Component({
   selector: 'tg-login',
@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  gitVersion = environment.gitVersion;
+  gitVersion = gitInfo.raw;
   loginForm: FormGroup;
   loginFormErrors: any;
   loginFailed: boolean;

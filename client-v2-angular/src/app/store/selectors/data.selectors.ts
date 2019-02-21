@@ -10,9 +10,6 @@ export const selectDataBase = (state: DataState) => state.base;
 export const selectDataRoom = (state: DataState) => state.room;
 export const selectDataHero = (state: DataState) => state.hero;
 
-function fetchDateNow(state: DataState) {
-  return state.date;
-}
 
 function fetchDataBase(state: DataState) {
   return state.base;
@@ -82,8 +79,11 @@ function fetchBook(state: DataState) {
   return state.book;
 }
 
+function fetchDateTime(state: DataState) {
+  return state.date;
+}
+
 /******************* Public API's ******************/
-export const getDateNow = createSelector(getDataState, fetchDateNow);
 export const getDataBase = createSelector(getDataState, fetchDataBase);
 export const getHero = createSelector(getDataState, fetchHero);
 export const getRoomBase = createSelector(getDataState, fetchRoom);
@@ -101,3 +101,4 @@ export const getSkills = createSelector(getDataState, fetchSkills);
 export const getEquip = createSelector(getDataState, fetchEquip);
 export const getInventory = createSelector(getDataState, fetchInventory);
 export const getBook = createSelector(getDataState, fetchBook);
+export const getDateTime = createSelector(getDataState, fetchDateTime);

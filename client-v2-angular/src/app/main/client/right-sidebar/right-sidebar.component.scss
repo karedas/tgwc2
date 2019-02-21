@@ -1,5 +1,5 @@
 @import 'variables';
-
+@import 'utils/fix';
 
 // RIGHT SIDE AREA
 :host {
@@ -9,9 +9,17 @@
     .tg-rightside-wrap {
         height: 100%;
         width: 100%;
+        max-width: 396px;
         background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
         padding-left: 14px;
         box-shadow: inset 3px -2px 112px 7px black;
         position: relative;
+    }
+    
+    
+    @include layout-bp(lt-lg) {
+      .tg-rightside-wrap {
+          max-width: 310px;
+      }
     }
   }

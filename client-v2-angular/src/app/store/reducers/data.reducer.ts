@@ -93,19 +93,24 @@ export function reducer(
       }};
 
     case DataEvenType.INVENTORY:
-    return {...state, hero: { ...state.hero,
+      return {...state, hero: { ...state.hero,
       inventory: action.payload
       }};
 
     case DataEvenType.EQUIP:
-    return {...state, hero: { ...state.hero,
+      return {...state, hero: { ...state.hero,
       equipment: action.payload
     }};
 
     case DataEvenType.BOOK:
-    return Object.assign({}, state, {
+      return Object.assign({}, state, {
       book: action.payload
-    })
+    });
+
+    case DataEvenType.DATE:
+      return Object.assign({}, state, {
+        date: action.payload
+      })
 
     default:
       return state;

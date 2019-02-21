@@ -3,6 +3,14 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 import { GameService } from 'src/app/services/game.service';
 
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { DataState } from 'src/app/store/state/data.state';
+import { getDateTime } from 'src/app/store/selectors';
+
+import gitInfo from 'src/git-version.json';
+import { IDateTime } from 'src/app/models/data/dateTime.model';
+
 
 @Component({
 
@@ -13,10 +21,12 @@ import { environment } from 'src/environments/environment';
 })
 export class NavbarComponent implements OnInit {
 
-  gitVersion = environment.gitVersion;
+  gitVersion = gitInfo.raw;
   menuItems: MenuItem[];
+
   
   constructor(
+    private store: Store<DataState>,   
     private game: GameService
   ) {
   }

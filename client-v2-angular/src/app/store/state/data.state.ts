@@ -7,9 +7,10 @@ import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { IWorks } from 'src/app/models/data/workslist.model';
 import { IRegion } from 'src/app/models/data/region.model';
 import { IBook } from 'src/app/models/data/book.model';
+import { IDateTime } from 'src/app/models/data/dateTime.model';
 
 export interface DataState {
-    date: number;
+    date?: IDateTime;
     base: any[];
     sky: string;
     doors?: any;
@@ -25,7 +26,7 @@ export interface DataState {
 }
 
 export const initialState: DataState = {
-    date: Date.now(),
+    date: undefined,
     base: [''],
     sky: undefined,
     doors: [],

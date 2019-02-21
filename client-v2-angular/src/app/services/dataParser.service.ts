@@ -81,13 +81,14 @@ export class DataParser {
       return '';
     });
 
-    // Book
+    // Data Time
     data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, (time) => {
-      console.log(time);
       const parse_time = JSON.parse(time.slice(10, -1));
-      console.log(parse_time);
+      this.store.dispatch(new DataActions.DateTimeAction(parse_time));
       return '';
     });
+
+    // Region
 
     data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
       const region_parse = JSON.parse(region.slice(8, -1));
