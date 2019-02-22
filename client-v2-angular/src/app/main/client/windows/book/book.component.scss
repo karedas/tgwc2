@@ -28,4 +28,12 @@
 
 .tg-book-pagetext {
   text-align: justify;
+
+  .pager-btns {
+    margin-right: auto;
+  }
+
+  button {
+    background: transparent;
+  }
 }

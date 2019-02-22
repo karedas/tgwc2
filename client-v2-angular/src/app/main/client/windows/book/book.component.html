@@ -24,9 +24,11 @@
               </ng-scrollbar>
 
               <div class="tg-book-pager" *ngIf="book.pages.length > 1">
-                  {{openedIndexPage + 1}} di {{book.pages.length }} pagine
+                <div class="pager-btns">
                   <button (click)="previousPage()">Dietro</button>
                   <button (click)="nextPage()">Avanti</button>
+                </div>
+                  {{openedIndexPage + 1}} di {{book.pages.length }} pagine
               </div>
               
             </div>
