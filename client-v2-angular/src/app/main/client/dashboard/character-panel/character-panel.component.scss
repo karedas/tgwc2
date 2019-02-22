@@ -31,7 +31,7 @@
     position: relative;
     box-shadow: 0px 2px 11px 0 #000;
     margin-top: 3px;
-    margin: auto 0 auto 3px;
+    margin: auto 0 ;
 
     .tg-avatar-wrap {
       border: 1px solid #705611;
@@ -60,7 +60,13 @@
     color: white;
     box-shadow: inset 0px -7px 15px black;
     border-bottom: 1px solid #5f5c59;
-    padding: 1px 0 1px 6px;
+    padding: 1px 0;
+  }
+
+  .charName {
+    padding-left:  6px;
+    padding-right: 6px;
+    margin-right: 1em;
   }
 
   /* status icons */
@@ -73,9 +79,6 @@
     text-transform: uppercase;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 8.5px;
-    margin-left: 1.5em;
-
-
 
     > div {
       padding-right: 6px;

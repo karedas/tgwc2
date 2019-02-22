@@ -34,7 +34,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GeoLocationComponent implements OnInit, OnDestroy {
   
-  changeState = '';
+  changeState = 'out';
   region$: Observable<IRegion>;
 
   private _unsubscribeAll: Subject<any>;

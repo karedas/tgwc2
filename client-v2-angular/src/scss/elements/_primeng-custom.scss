@@ -22,6 +22,7 @@
   height: 100%;
   max-height: 100%;
   overflow: auto;
+  border-radius: 5px;
 }
 
 .tg-dialog-content {
@@ -30,7 +31,7 @@
 
 body {
   .ui-dialog {
-    box-shadow: -8px 8px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: none;
   }
   .ui-dialog .ui-dialog-content {
     background: transparent;
@@ -44,32 +45,33 @@ body {
   .ui-dialog .ui-dialog-titlebar {
     cursor: pointer;
     margin: 0 auto;
-    display: table;
     max-height: 24px !important;
     border: none;
     width: auto !important;
-    color: #FFF;
     line-height: 24px;
     font-size: 13px;
+    font-family: kingthings;
     letter-spacing: 1px;
     text-transform: capitalize;
     text-align: center;
     padding: 0 44px 0;
     box-sizing: content-box;
     color: #ccaa31;
-    font-family: kingthings;
     border-radius: 0;
     background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
     transition: width .3s linear;
     box-shadow: inset 0px -3px 10px 0px black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 
     &:before {
-      background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 4px 0;
+      background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 0 0;
       position: absolute;
       width: 6px;
       display: block;
-      left: -4px;
+      left: 0;
       top: 0;
       height: 100%;
     }
@@ -78,7 +80,7 @@ body {
       position: absolute;
       width: 6px;
       display: block;
-      right: -4px;
+      right: 0px;
       top: 0;
       height: 100%;
       background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
@@ -136,6 +138,9 @@ p-menubar {
 
 /* Tooltip */
 body {
+  .ui-tooltip .ui-tooltip-arrow {
+    border-color: black!important;
+  }
   .ui-tooltip .ui-tooltip-text {
     background: black;
     font-size: 11px;

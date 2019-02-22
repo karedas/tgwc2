@@ -11,7 +11,7 @@ tg-geo-location {
 
 .tg-geolocal {
   position: relative;
-	padding: 8px;
+	padding: 8px 4px 0px;
 	height: 100%;
   background: #190f06 url($imgPath + "/background/bg-ironbrown.jpg") repeat;
 }
@@ -54,7 +54,8 @@ tg-geo-location {
 .tg-geolocal--image {
   background: url($imgPath + '/regions/region_default.jpg') no-repeat center center;
   height: 100%;
-  width: 100%;
+	width: 100%;
+	opacity: 0;
 }
 
 .tg-geolocal--data {
@@ -66,7 +67,7 @@ tg-geo-location {
 }
 
 .tg-geolocal--databox {
-	color: #6e5f50;
+	color: #9b8c7d;
 	text-align: center;
 	font-size: 14px;
 	font-family: kingthings;
@@ -90,7 +91,7 @@ tg-geo-location {
 
 .tg-geolocal--region, .tg-geolocal--control {
 	font-size: 14px;
-	color: #9b8c7d;
+	color: #aca49b;
 }
 
 .tg-geolocal--region:after {

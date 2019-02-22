@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
@@ -20,7 +20,7 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
   equipment$: Observable<any>;
   inventory$: Observable<any>;
 
-  openedSubTab = 'equip';
+  @Input('subTab') openedSubTab = 'equip';
 
   private _unsubscribeAll: Subject<any>;
 

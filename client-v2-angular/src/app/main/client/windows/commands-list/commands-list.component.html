@@ -1,7 +1,7 @@
 <ng-container *ngIf="commands$ | async as cmds">
   <tg-dialog [id]="'commandsList'">
     <div class="tg-commands-list" fxLayout>
-      <div class="b-ironlight-mini tg-box">
+      <div class="b-ironlight-mini b-ironlight-thin tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
           <div class="cmd-group" fxFlex="0 0 auto">
             <div *ngFor="let group of (removeTitleObject(cmds)) | keyvalue ; let i = index" (click)="setOpenedGroup(i)"

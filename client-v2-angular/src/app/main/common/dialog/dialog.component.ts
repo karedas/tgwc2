@@ -38,16 +38,18 @@ export class GenericDialogcomponent implements OnInit {
 
   // open modal
   open(config: DialogConfiguration) {
+    // this.visible = true;
     this.visible = true;
-    this.dialog.visible = true;
-    this.dialog.style = {
-      'z-index': this.genericDialogService.updateZIndex()
-    }
     this.config = Object.assign({}, this.config, config);
-
+    
     if (this.config.data) {
       this.data.emit(this.config.data);
     }
+
+    setTimeout(() => {
+      this.dialog.moveOnTop();
+    }, 100);
+
   }
 
   // close modal
@@ -60,14 +62,9 @@ export class GenericDialogcomponent implements OnInit {
     this.isClosed.emit(true);
   }
 
-  closeAll() {
-    this.dialog.close;
-  }
 
   bringToFront() {
-    this.dialog.style = {
-      'z-index': this.genericDialogService.updateZIndex()
-    }
+    this.dialog.moveOnTop();
   }
 
   // remove self from modal service when directive is destroyed

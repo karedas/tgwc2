@@ -48,7 +48,7 @@ export class DataEffects {
   inventoryRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.INVENTORY),
     switchMap((res) => {
-        this.windowsService.openCharacterSheet('inv');
+        this.windowsService.openCharacterSheet('inventory');
         return [
           new HeroAction({inventory: res.payload})
         ];

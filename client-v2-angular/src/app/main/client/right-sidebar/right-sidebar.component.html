@@ -1,10 +1,10 @@
+<div class="tg-date-game"
+  *ngIf="gameData$ | async as time" 
+  pTooltip="E' {{time.datestr}}" tooltipPosition="left" showDelay="500" hideDelay="100">
+  Anno {{time.year}}
+</div>
 <div class="tg-rightside-wrap" fxLayout="column" fxHide fxShow.gt-xs>
-  <div class="tg-date-game"
-    *ngIf="gameData$ | async as time" 
-    pTooltip="E' {{time.datestr}}" tooltipPosition="left" showDelay="500" hideDelay="100">
-    Anno {{time.year}}
-  </div>
   <tg-sky></tg-sky>
-  <tg-map fxFlex="0 0 486px" fxFlex.lt-lg="0 0 388px"></tg-map>
+  <tg-map fxFlex="0 0 502px" fxFlex.lt-lg="0 0 388px"></tg-map>
   <tg-geo-location fxLayout="column"></tg-geo-location>
 </div>

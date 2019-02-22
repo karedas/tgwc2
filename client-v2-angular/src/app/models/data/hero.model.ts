@@ -39,7 +39,7 @@ export interface IHero {
   sex?: ISex;
   equipment?: [];
   inventory?: [];
-  target?: ITarget | null;
+  target?: ITarget;
   lang?: string;
   weight?: number;
   height?: number;

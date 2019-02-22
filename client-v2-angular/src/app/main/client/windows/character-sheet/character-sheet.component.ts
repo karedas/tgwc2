@@ -40,7 +40,11 @@ export class CharacterSheetComponent  {
     }
   }
 
-  switchPanel(tab: string) {
+  switchPanel(tab: string, event: Event) {
+    
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
     switch (tab) {
       case 'info':
         this.game.processCommands('info');
@@ -48,7 +52,7 @@ export class CharacterSheetComponent  {
       case 'equip':
         this.game.processCommands('equip');
       break;
-      case 'inv':
+      case 'inventory':
         this.game.processCommands('inventario');
       break;
       case 'skills':

@@ -7,22 +7,25 @@
 }
 
 .tg-book * {
-	outline: none;
+  outline: none;
+}
+
+.tg-book-inset {
+  z-index: 2;
+  position: relative;
+  height: 100%
 }
 
 .tg-book-title {
-	font-size: 1.8em;
-	text-align: center;
-	padding-bottom:  .5em;
+  font-size: 1.8em;
+  text-align: center;
+  padding-bottom: .5em;
 }
 
 .tg-book-pagetitle {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .tg-book-pagetext {
-	text-align: justify;
+  text-align: justify;
 }
-
-
-

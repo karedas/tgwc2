@@ -16,7 +16,8 @@ export class BookComponent implements AfterViewInit, OnDestroy {
 
   dialogID: string = 'book';
 
-  page: 0;
+  total: number;
+  openedIndexPage: number = 0;
   book$: Observable<IBook>;
 
   private _unsubscribeAll: Subject<any>;
@@ -33,13 +34,29 @@ export class BookComponent implements AfterViewInit, OnDestroy {
     this.book$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (book: IBook) => {
         if (book) {
+          this.openedIndexPage = 0;
+          this.total = book.pages.length;
           setTimeout(() => {
-            this.windowsService.openBook(this.dialogID)
+            this.windowsService.openBook(this.dialogID, book.title);
           });
         }
       }
     );
   }
+
+
+  nextPage(){
+    if((this.openedIndexPage + 1) < this.total) {
+      ++this.openedIndexPage;
+      console.log(this.openedIndexPage);
+    }
+  }
+  previousPage(){
+    if(this.openedIndexPage !== 0 && this.openedIndexPage <= this.total) {
+      this.openedIndexPage--;
+    }
+  }
+
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

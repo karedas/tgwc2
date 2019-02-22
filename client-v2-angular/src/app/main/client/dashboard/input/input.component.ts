@@ -8,7 +8,7 @@ import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.act
 import { HistoryService } from 'src/app/services/history.service';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { getUIState, getHero } from 'src/app/store/selectors';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, filter } from 'rxjs/operators';
 import { UIState } from 'src/app/store/state/ui.state';
 import { InputService } from './input.service';
 import { State } from 'src/app/store';
@@ -57,7 +57,9 @@ export class InputComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
 
-    this._inCombat$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
+    this._inCombat$.pipe(
+      takeUntil(this._unsubscribeAll),
+      filter(state => !!state)).subscribe(
       (cc) => { 
         if(cc.target && typeof cc.target.hit !== 'undefined') {
           this.inCombat = Object.keys(cc).length ? true : false;

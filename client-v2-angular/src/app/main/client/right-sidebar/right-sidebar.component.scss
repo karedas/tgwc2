@@ -5,7 +5,8 @@
 :host {
   background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
   overflow: hidden;
-
+  position: relative;
+  
   .tg-rightside-wrap {
     height: 100%;
     width: 100%;
@@ -13,7 +14,6 @@
     background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
     padding-left: 14px;
     box-shadow: inset 3px -2px 112px 7px black;
-    position: relative;
   }
 
   .tg-date-game {
@@ -25,7 +25,7 @@
     padding: 2px 12px;
     background: #190f06 url($imgPath +'/background/bg-ironbrown.jpg') repeat;
     position: absolute;
-    top: 0;
+    top: 4px;
     left: 50%;
     z-index: 10;
     transform: translateX(-50%);

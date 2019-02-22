@@ -77,6 +77,7 @@ export class WindowsService {
         // showHeader: true,
         draggable: true,
         resizable: true,
+        dismissableMask: true,
         modal: false,
         header: 'Scheda Personaggio',
         data: detail,
@@ -144,19 +145,25 @@ export class WindowsService {
       this.gd.set(ref);
   }
 
-  openBook(dialogID: string, ...data: any) {
+  openBook(dialogID: string, ...data: any): any {
     const ref = this.genericDialogService.open(dialogID,
       <DialogConfiguration>{
         draggable: true,
         resizable: false,
-        header: "Cosa stai leggendo",
+        header: data[0],
         closeOnEscape: true,
         modal: false,
         style: {
           'width': '450px',
-          'min-height': '550px'
+          'height': '550px',
+          'max-height': '90%'
+        },
+        contentStyle: {
+          'height': '100%'
         }
-      })
+      });
+      this.gd.set(ref);
+      return ref;
   }
 
   closeGenericDialog(dialogID: string) {
