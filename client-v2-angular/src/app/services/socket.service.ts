@@ -22,13 +22,17 @@ export class SocketService {
   constructor(private store: Store<State>) {
   }
 
-  public connect(): void {
+  destroy() {
     if (this.socket) {
+      this.disconnect();
       this.socket.destroy();
       delete this.socket;
       this.socket = null;
     }
+  }
 
+  public connect(): void {
+    this.destroy();
     this.socket = io(environment.socket.url, environment.socket.options);
     this.startSocketEvent();
   }

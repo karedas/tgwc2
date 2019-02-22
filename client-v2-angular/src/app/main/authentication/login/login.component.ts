@@ -9,6 +9,7 @@ import { UsernameValidation, PasswordValidation } from 'src/app/main/common/vali
 import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'tg-login',
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private socketService: SocketService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.loginFormErrors = {
@@ -46,6 +48,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.resetLoginState();
+
     this.loginForm = this.formBuilder.group({
       'username': ['', UsernameValidation],
       'password': ['', PasswordValidation]
@@ -58,6 +62,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.socketloginReplayMessage = err;
           }
         });
+  }
+
+  resetLoginState() {
+    this.socketService.destroy();
+    this.loginService.logout();
   }
 
   get username() {

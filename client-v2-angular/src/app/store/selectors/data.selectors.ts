@@ -20,7 +20,9 @@ function fetchHero(state: DataState) {
 }
 
 function fetchHeroInCombatState(state: DataState) {
-  return state.hero.target;
+  if(typeof state.hero.target !== 'undefined') {
+    return state.hero.target;
+  }
 }
 
 function fetchRoom(state: DataState) {
