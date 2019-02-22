@@ -16,8 +16,8 @@ export class NavbarComponent implements OnInit {
   gitVersion = gitInfo.raw;
   menuItems: MenuItem[];
 
-  
-  constructor(  
+
+  constructor(
     private game: GameService
   ) {
   }
@@ -27,8 +27,8 @@ export class NavbarComponent implements OnInit {
     this.menuItems = [{
       label: 'Gioco',
       items: [
-        { label: 'Log di gioco', disabled: true},
-        { label: 'Preferenze', disabled: true},
+        { label: 'Log di gioco', disabled: true },
+        { label: 'Preferenze', disabled: true },
         {
           label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', separator: false, command: (onclick) => {
             this.disconnect();
@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Note di rilascio Webclient', disabled: true },
         { label: 'Segnala un problema', disabled: true },
         { label: 'Tasti rapidi', disabled: true },
-        { label: 'Forum', disabled: true },
+        { label: 'Forum', url: 'http://forum.thegatemud.it', target: '_blank'},
         { label: 'Informazioni su The Gate', disabled: true },
       ]
     }];
