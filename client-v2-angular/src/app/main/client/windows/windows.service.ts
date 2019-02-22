@@ -148,10 +148,14 @@ export class WindowsService {
     const ref = this.genericDialogService.open(dialogID,
       <DialogConfiguration>{
         draggable: true,
+        resizable: false,
+        header: "Cosa stai leggendo",
+        closeOnEscape: true,
         modal: false,
         style: {
-          'width': 'auto',
-          'height': 'auto'
+          'width': '450px',
+          'height': 'auto',
+          'min-height': '550px'
         }
       })
   }

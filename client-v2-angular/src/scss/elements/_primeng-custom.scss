@@ -58,6 +58,7 @@ body {
     border-radius: 0;
     background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
     transition: width .3s linear;
+    box-shadow: inset 0px -3px 10px 0px black;
 
 
     &:before {

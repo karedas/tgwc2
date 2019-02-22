@@ -346,6 +346,18 @@ $regions-border-size: 30px;
 
   >.tg-border-box {
 
+    .tg-border-area {
+      background-color: #cbb48d;
+      z-index: 0;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: 30px;
+    }
+
     .tg-border-top,
     .tg-border-bottom {
       background-position: left;

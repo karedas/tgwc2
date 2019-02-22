@@ -3,19 +3,30 @@
     <div class="tg-book">
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <div class="tg-book-title" *ngIf="book.title">
-              {{book.title}}
-          </div>
-          <ng-container *ngFor="let page of book.pages; let i=index">
-            <div class="page" *ngIf="i === 0">
-              <div class="tg-book-pagetitle">
-                {{page.title}}
-              </div>
-              <div class="tg-book-pagetext">
-                {{page.text}}
-              </div>
+          <div class="b-paper tg-box">
+            <div style="z-index: 2; position: relative;">
+                <div class="tg-book-title" *ngIf="book.title">
+                    {{book.title | capitalizeFirst}}
+                </div>
+                <ng-container *ngFor="let page of book.pages; let i=index">
+                  <div class="page" *ngIf="i === 0">
+                    <div class="tg-book-pagetitle">
+                      {{page.title | capitalizeFirst}}
+                    </div>
+                    <div class="tg-book-pagetext">
+                      {{page.text}}
+                    </div>
+                  </div>
+                </ng-container>
             </div>
-          </ng-container>
+            <div class="tg-border-box">
+              <div class="tg-border tg-border-top"></div>
+              <div class="tg-border tg-border-left"></div>
+              <div class="tg-border tg-border-right"></div>
+              <div class="tg-border tg-border-bottom"></div>
+              <div class="tg-border tg-border-area"></div>
+            </div>
+          </div>
         </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>
