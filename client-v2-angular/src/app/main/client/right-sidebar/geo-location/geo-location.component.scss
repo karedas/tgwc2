@@ -62,6 +62,7 @@ tg-geo-location {
 	z-index: 10;
 	margin: auto;
 	min-width: 70%;
+	padding: 22px 0;
 }
 
 .tg-geolocal--databox {
@@ -101,16 +102,21 @@ tg-geo-location {
 	display: block;
 }
 
-@media  screen and (max-height: 850px) {
+@media  screen and (max-height: 800px) {
+	
+	.tg-geolocal--data  {
+		padding: 0;
+	}
+
 	.tg-geolocal--databox {
 		padding: 8px;
 	}
 
 	.tg-geolocal--imagecnt {
-		height: 70px;
+		height: 110px;
 	}
 	.tg-geolocal--region, .tg-geolocal--control {
-		font-size: 12px;
+		font-size: 14px;
 	}
 }
 

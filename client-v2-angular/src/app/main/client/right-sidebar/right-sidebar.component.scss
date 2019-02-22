@@ -3,23 +3,39 @@
 
 // RIGHT SIDE AREA
 :host {
-    background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
-    overflow: hidden;
-  
+  background: url($imgPath + '/background/wood_rightside.jpg') repeat top left;
+  overflow: hidden;
+
+  .tg-rightside-wrap {
+    height: 100%;
+    width: 100%;
+    max-width: 396px;
+    background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
+    padding-left: 14px;
+    box-shadow: inset 3px -2px 112px 7px black;
+    position: relative;
+  }
+
+  .tg-date-game {
+    border: 1px solid #947d66;
+    border-radius: 5px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-family: kingthings;
+    padding: 2px 12px;
+    background: #190f06 url($imgPath +'/background/bg-ironbrown.jpg")') repeat;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 10;
+    transform: translateX(-50%);
+    cursor: help;
+  }
+
+
+  @include layout-bp(lt-lg) {
     .tg-rightside-wrap {
-        height: 100%;
-        width: 100%;
-        max-width: 396px;
-        background: url($imgPath + '/borders/border-paneleft-left.png') repeat-y top left;
-        padding-left: 14px;
-        box-shadow: inset 3px -2px 112px 7px black;
-        position: relative;
-    }
-    
-    
-    @include layout-bp(lt-lg) {
-      .tg-rightside-wrap {
-          max-width: 310px;
-      }
+      max-width: 310px;
     }
   }
+}
