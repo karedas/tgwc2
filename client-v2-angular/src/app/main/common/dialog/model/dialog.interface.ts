@@ -14,6 +14,7 @@ export class DialogConfiguration  {
     draggable?: boolean;
     maximizable?: boolean;
     closeOnEscape?: boolean;
+    contentStyle?: any;
     style?: any;
 
     constructor() {

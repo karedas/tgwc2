@@ -154,7 +154,6 @@ export class WindowsService {
         modal: false,
         style: {
           'width': '450px',
-          'height': 'auto',
           'min-height': '550px'
         }
       })

@@ -7,6 +7,7 @@ import { DialogConfiguration } from './model/dialog.interface';
 
 export class GenericDialogService {
 
+  private _baseZIndex: number = 1000;
   private modals: any[] = [];
 
   add(modal: any) {
@@ -36,4 +37,10 @@ export class GenericDialogService {
     const modal: any = this.modals.filter(x => x.id === id)[0];
     return !modal.visible;
   }
+
+  updateZIndex(): number{
+    this._baseZIndex = this._baseZIndex + 1;
+    return this._baseZIndex;
+  }
+
 }

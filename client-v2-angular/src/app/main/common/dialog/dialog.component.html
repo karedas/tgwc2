@@ -7,11 +7,12 @@
   [resizable]="config.resizable"
   [draggable]="config.draggable"
   [maximizable]="config.maximizable"
-  [baseZIndex]="10000"
   [styleClass]="config.styleClass"
   [appendTo]="'body'"
   [blockScroll]="config.blockScroll"
   (onHide)="onHide($event)"
   [style]="config.style">
+  <div style="overflow:hidden;"(click)="bringToFront()">
     <ng-content></ng-content>
+  </div>
 </p-dialog>

@@ -4,20 +4,28 @@
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
           <div class="b-paper tg-box">
-            <div style="z-index: 2; position: relative;">
+            <div style="z-index: 2; position: relative; max-height: 100%">
+              <ng-scrollbar class="scrollbar">
                 <div class="tg-book-title" *ngIf="book.title">
                     {{book.title | capitalizeFirst}}
                 </div>
-                <ng-container *ngFor="let page of book.pages; let i=index">
-                  <div class="page" *ngIf="i === 0">
+                <ng-container *ngIf="book.pages; else noPage">
+                  <div class="page" [attr.pagenumber]="i"  *ngFor="let page of book.pages let i=index">
+
                     <div class="tg-book-pagetitle">
                       {{page.title | capitalizeFirst}}
                     </div>
-                    <div class="tg-book-pagetext">
-                      {{page.text}}
+                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml">
                     </div>
+
                   </div>
                 </ng-container>
+
+                <ng-template #noPage>
+                  <div class="tg-book-pagetext">Non ci sono Pagine</div>
+                </ng-template>
+              </ng-scrollbar>
+              
             </div>
             <div class="tg-border-box">
               <div class="tg-border tg-border-top"></div>

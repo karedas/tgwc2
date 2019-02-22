@@ -19,12 +19,6 @@ function fetchHero(state: DataState) {
   return state.hero;
 }
 
-function fetchHeroInCombatState(state: DataState) {
-  if(typeof state.hero.target !== 'undefined') {
-    return state.hero.target;
-  }
-}
-
 function fetchRoom(state: DataState) {
   return state.room;
 }
@@ -92,7 +86,6 @@ function fetchDateTime(state: DataState) {
 /******************* Public API's ******************/
 export const getDataBase = createSelector(getDataState, fetchDataBase);
 export const getHero = createSelector(getDataState, fetchHero);
-export const getHeroInCombat = createSelector(getDataState, fetchHeroInCombatState);
 export const getRoomBase = createSelector(getDataState, fetchRoom);
 export const getObjOrPerson = createSelector(getDataState, fetchObjOrPerson);
 export const getObjectsInRoom = createSelector(getDataState , fetchObjectsInRoom);

@@ -256,7 +256,6 @@ export class DataParser {
     data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
       const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
       this.store.dispatch(new DataActions.EquipAction(eq_parse));
-      // this.store.dispatch(new UiActions.ShowCharacterSheetActions([eq_parse, 'equip']));
       return '';
     });
 
@@ -271,7 +270,6 @@ export class DataParser {
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
       this.store.dispatch(new DataActions.SkillsAction(skinfo_parse));
-      // this.store.dispatch(new UiActions.ShowCharacterSheetActions([skinfo_parse, 'skills']));
       return '';
 
     });

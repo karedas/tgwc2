@@ -46,7 +46,6 @@ export class LoginService {
 
   public login(data: { username: string, password: string }): Observable<boolean> {
 
-
     this.username = data.username;
     this.password = data.password;
 

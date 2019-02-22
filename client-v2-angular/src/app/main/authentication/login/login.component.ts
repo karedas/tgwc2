@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.resetLoginState();
 
     this.loginForm = this.formBuilder.group({
