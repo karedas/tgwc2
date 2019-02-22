@@ -84,13 +84,9 @@ function SocketServer() {
 	// Handle incoming websocket  connections
 
 	io.on('connection', function(socket) {
-	console.log(socket.handshake);
-		
 		socket.on('loginrequest', function(){
 			socket.emit('data', '&!connmsg{"msg":"ready"}!');
 		})
-
-		socket.join('culo');
 
 		socket.on('oob', function(msg) {
 			// Handle a login request
@@ -108,6 +104,7 @@ function SocketServer() {
 				let codeitime = msg["itime"];
 
 				// Client code
+				
 				let clientcode = codeitime + '-' + codeHeaders;
 				logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, clientcode, account_id);
 				// Conect to game server

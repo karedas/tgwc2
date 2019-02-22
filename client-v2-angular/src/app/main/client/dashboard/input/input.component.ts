@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener, OnDestroy } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
@@ -7,9 +7,9 @@ import { Store, select } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
 import { HistoryService } from 'src/app/services/history.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { getUIState } from 'src/app/store/selectors';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { getUIState, getHeroInCombat } from 'src/app/store/selectors';
+import { map, takeUntil } from 'rxjs/operators';
 import { UIState } from 'src/app/store/state/ui.state';
 import { InputService } from './input.service';
 
@@ -20,7 +20,7 @@ import { InputService } from './input.service';
   encapsulation: ViewEncapsulation.None
 })
 
-export class InputComponent implements AfterViewInit {
+export class InputComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('inputCommand') ic: ElementRef;
 
@@ -30,8 +30,15 @@ export class InputComponent implements AfterViewInit {
 
   extraOutputStatus$: Observable<boolean>;
   dashBoardStatus$: Observable<boolean>;
-  zenStatus$: BehaviorSubject<boolean>;
 
+  
+  zenStatus$: BehaviorSubject<boolean>;
+  
+  private _inCombat$: Observable<any>;
+  inCombat: boolean = false;
+
+
+  private _unsubscribeAll: Subject<any>;
 
   constructor(
     private game: GameService,
@@ -42,14 +49,29 @@ export class InputComponent implements AfterViewInit {
 
     this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
     this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
+    this._inCombat$ = this.store.pipe(select(getHeroInCombat));
 
+    this._unsubscribeAll = new Subject();
   }
 
   ngAfterViewInit() {
+
+    this._inCombat$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
+      (cc) => { 
+        if(cc && typeof cc.hit !== 'undefined') {
+          this.inCombat = Object.keys(cc).length ? true : false;
+        }
+        else {
+          this.inCombat = false;
+        }
+      }
+    );
+
     // Listen focus Call from another component
-    this.inputService.isFocussed.subscribe(() => {
-      this.focus();
-    });
+    this.inputService.isFocussed.pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        this.focus();
+      });
   }
 
   focus() {
@@ -104,9 +126,15 @@ export class InputComponent implements AfterViewInit {
     event.preventDefault();
   }
 
+
+  sendCmd(cmd: string) {
+    this.game.processCommands(cmd);
+  }
+
   @HostListener('window:keydown', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
-    if (event.which === 49 && event.shiftKey === true && this.ic.nativeElement.value === 0) {
+
+    if (event.which === 49 && event.shiftKey === true && (this.ic.nativeElement.value).length === 0) {
       const l = this.historyService.cmd_history.length;
 
       if (l > 0) {
@@ -114,5 +142,11 @@ export class InputComponent implements AfterViewInit {
       }
       return false;
     }
+  }
+
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }

@@ -115,6 +115,11 @@ tg-geo-location {
 	.tg-geolocal--imagecnt {
 		height: 110px;
 	}
+	
+	.tg-geolocal--image{
+		opacity: 0;
+	}
+
 	.tg-geolocal--region, .tg-geolocal--control {
 		font-size: 14px;
 	}
