@@ -4,8 +4,9 @@ import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { WindowsService } from '../main/client/windows/windows.service';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -32,12 +33,24 @@ export class GameService {
     private socketService: SocketService,
     private dataParserService: DataParser,
     private historyService: HistoryService,
-    private genericDialogService: GenericDialogService
+    private genericDialogService: GenericDialogService,
+    private http: HttpClient
   ) {
 
     this._focusInput = new Subject();
     this.commandsList$ = new BehaviorSubject(null);
 
+    this.init();
+  }
+
+  init(){
+    this.loadServerStat();
+  }
+
+  loadServerStat() {
+    this.http.get(environment.serverstatAddress).subscribe(
+      resource => console.log(resource))
+    
   }
 
   startGame(initialData) {

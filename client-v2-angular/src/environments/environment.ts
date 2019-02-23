@@ -5,6 +5,7 @@ import gitInfo from 'src/git-version.json';
 
 export const environment = {
   production: false,
+  serverstatAddress: 'http://51.38.185.84/wclientv2/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
   socket : {
     url : 'http://51.38.185.84:3335',

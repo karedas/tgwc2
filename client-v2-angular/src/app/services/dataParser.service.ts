@@ -144,7 +144,6 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      console.log('update', update_parse);
       const up = {
         inventory: update_parse[0],
         equipment: update_parse[1],
@@ -198,7 +197,6 @@ export class DataParser {
     data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
         let b_parse = JSON.parse(book.slice(6, -1));
         this.store.dispatch(new DataActions.BookAction(b_parse));
-        console.log(b_parse);
         return '';
     });
 

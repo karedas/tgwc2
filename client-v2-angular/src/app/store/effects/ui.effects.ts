@@ -67,22 +67,6 @@ export class UiEffects {
           new HeroAction(res.payload[0])
         ];
       }
-      // else if (res.payload[1] === 'skills') {
-      //   this.windowsService.openCharacterSheet(res.payload[1]);
-      //   return [
-      //     new SkillsAction(res.payload[0])
-      //   ];
-      // } else if (res.payload[1] === 'inventory') {
-      //   this.windowsService.openCharacterSheet('eqinv');
-      //   return [
-      //     new InventoryAction(res.payload[0])
-      //   ];
-      // } else if (res.payload[1] === 'equip') {
-      //   this.windowsService.openCharacterSheet('eqinv');
-      //   return [
-      //     new EquipAction(res.payload[0])
-      //   ];
-      // }
     }),
   );
 

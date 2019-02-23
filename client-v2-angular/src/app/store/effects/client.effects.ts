@@ -31,15 +31,6 @@ export class ClientEffects {
     }
     ));
 
-  // @Effect({ dispatch: false })
-  // refreshCommand$ = this.actions$.pipe(
-  //   ofType(ClientEventType.INGAME),
-  //   tap((val) => {
-  //     if(val === true) {
-  //       this.game._focusInput.next();
-  //     }
-  //   }));
-
   @Effect({dispatch: false})
   onGameStatus$ = this.actions$.pipe(
     ofType(ClientEventType.INGAME),

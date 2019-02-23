@@ -61,7 +61,6 @@ export class GeoLocationComponent implements OnInit, OnDestroy {
   showRegionImage(img) {
     this.loadRegionImage(img).subscribe(
       () => { 
-        console.log('hide spinner'); /*hide spinner*/
       }
     )
   }
