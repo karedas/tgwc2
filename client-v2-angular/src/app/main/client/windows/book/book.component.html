@@ -12,6 +12,7 @@
                     <div class="tg-book-title" *ngIf="book?.title">
                       {{page.title | capitalizeFirst}}
                     </div>
+                    <i class="tg-book-language" *ngIf="page.language">({{page.language}})</i>
                     <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml">
                     </div>
 
@@ -23,7 +24,7 @@
                 </ng-template>
               </ng-scrollbar>
 
-              <div class="tg-book-pager" *ngIf="book.pages.length > 1">
+              <div class="tg-book-pager" *ngIf="book.pages.length > 1" fxLayout>
                 <div class="pager-btns">
                   <button (click)="previousPage()">Dietro</button>
                   <button (click)="nextPage()">Avanti</button>
