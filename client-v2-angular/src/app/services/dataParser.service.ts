@@ -212,8 +212,7 @@ export class DataParser {
     // Generic page (title, text)
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-      console.log('---------- generic page ------------', page_parse);
-      // this.store.dispatch(new DataActions.IncomingData(page_parse));
+      this.store.dispatch(new DataActions.GenericPageAction(page_parse));
       return '';
     });
 

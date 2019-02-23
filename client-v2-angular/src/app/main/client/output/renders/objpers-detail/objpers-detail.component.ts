@@ -8,12 +8,9 @@ import { GameService } from 'src/app/services/game.service';
   styleUrls: ['./objpers-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ObjpersDetailComponent implements OnInit {
+export class ObjpersDetailComponent {
 
   @Input() html: IObjPersDesc;
 
-  constructor(private game: GameService) { }
-
-  ngOnInit() {
-  }
+  constructor() { }
 }

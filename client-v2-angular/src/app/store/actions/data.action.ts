@@ -8,6 +8,7 @@ import { IWorks } from 'src/app/models/data/workslist.model';
 import { IRegion } from 'src/app/models/data/region.model';
 import { IBook } from 'src/app/models/data/book.model';
 import { IDateTime } from 'src/app/models/data/dateTime.model';
+import { IGenericPage } from 'src/app/models/data/genericpage.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
@@ -30,7 +31,8 @@ export enum DataEvenType {
     INVENTORY = '[Data] Inventory',
     EQUIP = '[Data] Equip',
     BOOK = '[Data] Book',
-    DATE = '[Data] Date Time'
+    DATE = '[Data] Date Time',
+    GENERICPAGE = '[Data] Generic Page'
 }
 
 export class IncomingData implements Action {
@@ -135,6 +137,11 @@ export class DateTimeAction implements Action {
     constructor(public payload: IDateTime) {}
 }
 
+export class GenericPageAction implements Action {
+    readonly type = DataEvenType.GENERICPAGE;
+    constructor(public payload: IGenericPage) {}
+}
+
 export type DataAction
 = IncomingData
 | OutgoingData
@@ -155,5 +162,6 @@ export type DataAction
 | EquipAction
 | RegionAction
 | DateTimeAction
-| BookAction;
+| BookAction
+| GenericPageAction;
 

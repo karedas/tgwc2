@@ -16,7 +16,23 @@
   <title>The Gate Mud Game (Webclient 2.0)</title>
 </head>
 
-<body ng-app = "TGWebClient">
+<body ng-app="TGWebClient">
   <app-root></app-root>
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=122402371"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', '122402371', {
+      'page_title': 'Login',
+      'page_path': '/login'
+    });
+
+  </script>
 </body>
+
 </html>

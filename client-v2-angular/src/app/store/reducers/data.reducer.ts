@@ -112,6 +112,11 @@ export function reducer(
         date: action.payload
       })
 
+    case DataEvenType.GENERICPAGE:
+      return Object.assign({}, state, {
+        genericpage: action.payload
+      })
+
     default:
       return state;
   }

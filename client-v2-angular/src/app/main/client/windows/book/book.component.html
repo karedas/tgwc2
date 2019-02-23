@@ -9,10 +9,10 @@
                 <ng-container  *ngFor="let page of book.pages let i=index">
                   <div class="page" [attr.pagenumber]="i" *ngIf="openedIndexPage == i">
                     
-                    <div class="tg-book-title" *ngIf="book?.title">
+                    <div class="tg-book-title" *ngIf="book.title">
                       {{page.title | capitalizeFirst}}
                     </div>
-                    <i class="tg-book-language" *ngIf="page.language">({{page.language}})</i>
+                    <i class="tg-book-language" *ngIf="page.language">(C'è scritto qualcosa in {{page.language}})</i>
                     <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml">
                     </div>
 

@@ -6,13 +6,14 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 // import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, Subject } from 'rxjs';
-import { getExtraOutputStatus, getDataBase, getRoomBase, getObjOrPerson } from 'src/app/store/selectors';
+import { getExtraOutputStatus, getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
 import { GameService } from 'src/app/services/game.service';
 import { Room } from 'src/app/models/data/room.model';
 import { SplitComponent } from 'angular-split';
 import { ToggleExtraOutput } from 'src/app/store/actions/ui.action';
 import { LoginService } from '../../authentication/services/login.service';
 import { MenuItem } from 'primeng/api';
+import { IGenericPage } from 'src/app/models/data/genericpage.model';
 
 @Component({
   selector: 'tg-output',
@@ -31,14 +32,16 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   lastRoom$: Observable<any>;
 
   extraOutputOpenStatus$: Observable<any>;
-  private baseText: Observable<any>;
-  private roomBase: Observable<any>;
-  private objOrPerson: Observable<any>;
+  private _baseText$: Observable<any>;
+  private _roomBase$: Observable<any>;
+  private _objOrPerson$: Observable<any>;
+  private _genericPage$: Observable<any>;
 
   output: any = [];
   lastRoomDescription = '';
   typeDetail: string;
   objPersDetail: any[];
+  genericPage: IGenericPage;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -55,9 +58,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
     // this.autoUpdateNeeded = this.store.select(getVersions);
 
-    this.baseText = this.store.select(getDataBase);
-    this.roomBase = this.store.select(getRoomBase);
-    this.objOrPerson = this.store.select(getObjOrPerson);
+    this._baseText$ = this.store.select(getDataBase);
+    this._roomBase$ = this.store.select(getRoomBase);
+    this._objOrPerson$ = this.store.select(getObjOrPerson);
+    this._genericPage$ = this.store.select(getGenericPage);
     this._unsubscribeAll = new Subject();
   }
 
@@ -81,7 +85,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     // Listen Base Text Data
-    this.baseText.pipe(
+    this._baseText$.pipe(
       takeUntil(this._unsubscribeAll),
       filter(text => text && text !== undefined))
         .subscribe(
@@ -89,12 +93,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
             const content = this.setContent('base', base[0]);
             this.output.push(content);
             // You might need to give a tiny delay before updating the scrollbar
-            this.trimOutput();
-            this.scrollPanelToBottom();
+            this.endOutputStore();
           },
         );
 
-    this.roomBase.pipe(
+    this._roomBase$.pipe(
       takeUntil(this._unsubscribeAll),
       filter(room => room && room !== undefined))
         .subscribe(
@@ -107,26 +110,33 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
             this.typeDetail = 'room';
             const content = this.setContent('room', room);
             this.output.push(content);
-            this.trimOutput();
-            this.scrollPanelToBottom();
+            this.endOutputStore();
             this.game.clientUpdateNeeded.room = room.ver;
 
           }
         );
 
     /** Object or Person Detail */
-    this.objOrPerson.pipe(
+    this._objOrPerson$.pipe(
       takeUntil(this._unsubscribeAll),
       filter(elements => elements && elements !== undefined ))
         .subscribe( (elements: any) => {
           this.objPersDetail = elements;
-          const content = this.setContent('objpersdetail', elements);
+          const content = this.setContent('objpersdetail', this.objPersDetail);
           this.output.push(content);
           this.typeDetail = 'objPers';
-          this.trimOutput();
-          this.scrollPanelToBottom();
+          this.endOutputStore();
         });
-  }
+    
+    this._genericPage$.pipe(
+      takeUntil(this._unsubscribeAll),
+      filter(data => !!data)).subscribe(data => {
+        this.genericPage = data;
+        const content = this.setContent('genericpage', this.genericPage);
+        this.output.push(content);
+        this.endOutputStore();
+      })
+  } 
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -148,6 +158,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.scrollBar.scrollToBottom(0).subscribe();
     }, 50);
+  }
+
+  private endOutputStore() {
+    this.trimOutput();
+    this.scrollPanelToBottom();
   }
 
   @HostListener('window:resize', ['$event.target'])

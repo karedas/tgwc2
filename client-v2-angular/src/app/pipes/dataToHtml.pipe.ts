@@ -24,6 +24,8 @@ export class DataToHtmlPipe implements PipeTransform {
     value = value.replace(/&w/gm, '<span class="tg-lt-white">');
     value = value.replace(/&-/gm, '</span>');
 
+    value = value.replace(/\n/gm, '<br>');
+
     if (formaText) {
       let page = '';
       const parags = value = value.replace(/\r/gm, '').replace(/([^.:?!,])\s*\n/gm, '$1 ').split(/\n/);

@@ -9,6 +9,7 @@ import { DetailsRoomComponent } from './renders/details-room/details-room.compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularSplitModule } from 'angular-split';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { GenericPageComponent } from './renders/generic-page/generic-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
     TextComponent,
     OutputComponent,
     DetailsRoomComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    GenericPageComponent
   ],
   imports: [
     CommonModule,

@@ -14,6 +14,7 @@
                   <ng-container *ngFor="let data of output">
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+                      <tg-generic-page *ngSwitchCase="'genericpage'" [html]='data.content'></tg-generic-page>
                     </ng-container>
                   </ng-container>
                 </div>
@@ -49,6 +50,7 @@
             <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content" [lastDescription]="lastRoomDescription"></tg-room>
             <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
             <tg-objpers-detail *ngSwitchCase="'objpersdetail'" [html]="data.content"></tg-objpers-detail>
+            <tg-generic-page *ngSwitchCase="'genericpage'" [html]='data.content'></tg-generic-page>
           </ng-container>
         </div>
       </div>

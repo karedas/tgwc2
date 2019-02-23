@@ -8,6 +8,7 @@ import { IWorks } from 'src/app/models/data/workslist.model';
 import { IRegion } from 'src/app/models/data/region.model';
 import { IBook } from 'src/app/models/data/book.model';
 import { IDateTime } from 'src/app/models/data/dateTime.model';
+import { IGenericPage } from 'src/app/models/data/genericpage.model';
 
 export interface DataState {
     date?: IDateTime;
@@ -22,7 +23,8 @@ export interface DataState {
     genericTable?: IGenericTable;
     workslist?: IWorks;
     region?: IRegion;
-    book?: IBook
+    book?: IBook;
+    genericpage: IGenericPage[];
 }
 
 export const initialState: DataState = {
@@ -34,5 +36,6 @@ export const initialState: DataState = {
     editor: undefined,
     map: undefined,
     hero: undefined,
+    genericpage: undefined
 };
 
