@@ -1,0 +1,12 @@
+<div (mouseenter)="onMouseEvent($event)" (mouseleave)="onMouseEvent($event)">
+  <!-- Mini Mappa -->
+  <tg-directions [isOnMap]="isOnMap"></tg-directions>
+  <div class="tg-map-box">
+    <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>
+    </canvas>
+    <canvas [ngClass]="{'run': showSnow}" class="canvas-snow" width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #snow></canvas>
+    <canvas id="rainCanvas" class="canvas-rain"></canvas>
+  </div>
+</div>
+
+<button class="tg-button"></button>

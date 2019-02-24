@@ -1,0 +1,39 @@
+.tg-notizie{
+    color: black;
+    max-width: 100%;
+    margin: 0 auto;
+ 
+  p {
+    color: black;
+  }
+  
+  h2 {
+      font-size: 30px;
+      color: #ac4c55;
+      font-family: kingthinks;
+  }
+
+  .scrollable {
+    max-height: 300px;
+  }
+
+  //vertical scrollbar
+  .ps__rail-y {
+    opacity: 1;
+  }
+
+  .notizie-action {
+    margin-top: 1.5em;
+    label {
+      margin-left: 5px;
+      color: black;
+    }
+  }
+
+  .tg-mnch-img {
+    margin-top: 5em;
+    width: 100%;
+    background: url($imgPath + '/frame/munchkin_news.jpg') no-repeat center;
+    background-size: contain;
+  }
+}

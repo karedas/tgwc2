@@ -1,0 +1,153 @@
+@import 'variables';
+/* Others */
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+// @import '~@angular/flex-layout/mq';
+@import 'utils/fix';
+
+.dir-ico {
+    background-image: url($imgPath + '/interface/pass_sprite.png');
+    background-repeat: no-repeat;
+    width: 26px;
+    height: 26px;
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    background-position: -26px;
+  }
+  
+  .tg-dir {
+    position: absolute;
+    transform: scale(.8);
+    cursor: pointer;
+    z-index: 12;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .dir-nord .dir-ico {
+    top: 11px;
+    left: 22px;
+  }
+  
+  .dir-ovest .dir-ico {
+    top: 21px;
+    left: 10px;
+  }
+  
+  .dir-sud .dir-ico {
+    top: 18px;
+    left: 22px;
+  }
+  
+  .dir-est .dir-ico {
+    top: 21px;
+    left: 17px;
+  }
+  
+  .dir-basso,
+  .dir-alto {
+    &:before {
+      content: attr(data-label);
+      position: absolute;
+      top: -16px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #d3c6ae;
+      text-shadow: 0 0 4px black;
+      font-family: kingthings;
+      white-space: nowrap;
+    }
+  
+    .dir-ico {
+      top: 4px;
+      left: 4px;
+      border-radius: 0;
+    }
+  }
+  
+  .dir-basso:before {
+    top: auto;
+    bottom: -16px;
+  }
+  
+  .dir-nord {
+    @include sprite($nord-dir-sprite);
+    top: 48px;
+    left: 112px;
+  }
+  
+  .dir-est {
+    @include sprite($est-dir-sprite);
+    top: 164px;
+    right: 0px;
+  }
+  
+  .dir-sud {
+    @include sprite($sud-dir-sprite);
+    top: 291px;
+    left: 112px;
+  }
+  
+  .dir-ovest {
+    @include sprite($ovest-dir-sprite);
+    top: 164px;
+    left: 0;
+  }
+  
+  .dir-alto {
+    @include sprite($alto-dir-sprite);
+    top: 265px;
+    left: 15px;
+  }
+  
+  .dir-basso {
+    @include sprite($basso-dir-sprite);
+    top: 284px;
+    left: 46px;
+  }
+  
+  
+  @include layout-bp(gt-md) {
+
+    .tg-dir {
+      transform: scale(1);
+    }
+  
+    .dir-nord {
+      @include sprite($nord-dir-sprite);
+      top: 72px;
+      left: 155px;
+    }
+  
+    .dir-est {
+      @include sprite($est-dir-sprite);
+      top: 226px;
+      right: 6px;
+    }
+  
+    .dir-sud {
+      @include sprite($sud-dir-sprite);
+      top: 388px;
+      left: 155px;
+    }
+  
+    .dir-ovest {
+      @include sprite($ovest-dir-sprite);
+      top: 226px;
+      left: 4px;
+    }
+  
+    .dir-alto {
+      top: 344px;
+      left: 16px;
+    }
+  
+    .dir-basso {
+      top: 376px;
+      left: 53px;
+    }
+  }
+  

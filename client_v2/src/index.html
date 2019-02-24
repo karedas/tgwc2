@@ -1,0 +1,567 @@
+<!doctype html>
+<html class="no-js" lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>The Gate Mud Game (Webclient 2.0)</title>
+  <meta name="description" content="The Gate MUD è un gioco di ruolo online gratuito (davvero!) che ti permetterà di vivere straordinarie avventure in un dettagliato mondo virtuale di ambientazione fantasy. Prendendo le parti di un abitante della terra di Ikhari, potrai forgiare la sua storia con le tue gesta!">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- <link rel="apple-touch-icon" href="icon.png"> //-->
+
+  <link rel="stylesheet" href="lib/jqx/jqx.base.css">
+  <link rel="stylesheet" href="css/tgwebclient.css">
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+    crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122402371-1"></script>
+
+</head>
+
+<body data-serverstatus="9999" data-loginstatus="0">
+  <div class="tg-area tg-box b-area">
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
+    <!-- Main Panel -->
+    <div class="tg-main container-fluid">
+      <!-- Main NavBar -->
+      <div class="row">
+        <nav class="tg-navbar navbar-expand navbar">
+          <ul class="navbar-nav">
+            <li class="nav-item h-100">
+              <a href="#" class="tg-bcdrand">
+                <img src="images/logo/tgminilogo.png" />
+              </a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="tgNavBarOpzioniDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user-circle"></i> Profilo
+              </a>
+              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="tgNavBarOpzioniDropDown">
+                <a class="dropdown-item" href="#">Opzioni</a>
+                <a class="dropdown-item" href="#">Log di gioco</a>
+                <a id="userDisconnect" href="#" class="dropdown-item">Esci
+                  <i class="fas fa-sign-out-alt"></i>
+                </a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="tgNavBarGuidaDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-question-circle"></i> Guida
+              </a>
+              <div class="dropdown-menu dropdown-menu-left" aria-labelledby="tgNavBarGuidaDropDown">
+                <a class="dropdown-item" href="#">Guida al gioco</a>
+                <a class="dropdown-item" href="#">Ultime Novità di gioco</a>
+                <a class="dropdown-item" href="#">Note di rilascio Webclient</a>
+                <a class="dropdown-item" href="#">Segnala un problema</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Riferimento ai tasti di scelta rapida</a>
+                <a class="dropdown-item" href="#">Informazioni su The Gate</a>
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav mx-auto">
+            <!--<li class="nav-item">
+						<a href="#" class="no-feature">
+							<i class="tg-icon icon-monete"></i>Sei al Verde!</a>
+						</li>
+						<li class="nav-item">
+						<a href="#" class="no-feature">E' il giorno ...</a>
+						</li>
+						<li class="nav-item">
+						<a href="#" class="no-feature">Ti trovi nella regione ...</a>
+						</li>//-->
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item" rel="tooltip" title="Utenti Online">
+              <i class="fas fa-user"></i> 0
+            </li> -->
+            <li class="nav-item dropdown">
+              <button class="tg-fnt-button no-feature dropdown-toggle" id="tgNavBartriggerAudio" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-volume-up"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="tgNavBarTriggerAudio">
+                <div class="tg-audiobox">
+                  <span class="tg-audiotoggle"></span>
+                  <div class="tg-audiolabel">55</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <form id="tgSearchHelp" class="form-inline tg-helpsearch v-divider d-none" autocomplete="off">
+            <input class="form-control" id="tgSearchInput" type="search" placeholder="Cerca" aria-label="Cerca">
+            <button class="tg-fnt-button" type="submit" id="tgSearchSubmit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </nav>
+      </div>
+      <div class="row tg-main-row">
+        <div class="tg-leftside col">
+          <!-- Output History Area -->
+          <div class="row tg-output tg-box b-ironlight tg-shadow">
+            <div class="tg-box col-12 p-0 d-flex">
+              <div class="output-split">
+                <div class="splitter-panel">
+                  <div class="tg-output-main">
+                    <div id="updateRoomNotify" class="output-notify-bottom">Vista aggiornata
+                      <i class="far fa-arrow-alt-circle-right"></i>
+                    </div>
+                    <!-- Output Area -->
+                    <div id="output" class=" tg-output-history">
+                    </div>
+                  </div>
+                </div>
+                <div class="splitter-panel">
+                  <div class="tg-output-extra">
+                    <div id="extraoutput" class="tg-extraoutput-history">
+                      <div class="extraoutput-header">
+                        <div class="out-title" id="detailtitle"></div>
+                        <div class="extra-detailimg">
+                          <img src="" id="detailimage" />
+                        </div>
+                        <div class="detaildesc" id="detaildesc"></div>
+                      </div>
+                      <div class="extraoutput-detail">
+                        <div class="extranotice">
+                          <span>Guarda</span> dove ti trovi, qualcosa o qualcuno.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tg-border-box">
+              <div class="tg-border tg-border-top"></div>
+              <div class="tg-border tg-border-left"></div>
+              <div class="tg-border tg-border-right"></div>
+              <div class="tg-border tg-border-bottom"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="tg-dashboard col-12 tg-box">
+              <!-- Character CPanel-->
+              <div class="tg-characterpanel b-controlpanel">
+                <div class="tg-characterpanel-wrap">
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <div class="tg-character col">
+                          <!-- Character avatar -->
+                          <div class="tg-characteravatar b-ironlight tg-shadow" rel="tooltip" title "">
+                            <div class="tg-avatar-wrap">
+                              <img src="#" alt="Avatar" />
+                            </div>
+                            <div class="tg-border-box">
+                              <div class="tg-border tg-border-top"></div>
+                              <div class="tg-border tg-border-left"></div>
+                              <div class="tg-border tg-border-right"></div>
+                              <div class="tg-border tg-border-bottom"></div>
+                            </div>
+                          </div>
+                          <div class="tg-infochar">
+                            <!-- Character Name & Status -->
+                            <div class="tg-infocharname">
+                              <span id="charName"></span>
+                              <i class="pg-status"></i>
+                            </div>
+                            <!-- Character Status Bars -->
+                            <div class="tg-meterbar">
+                              <div class="barcont barbig">
+                                <span id="healtBarText" class="tg-statusbar-text" rel="tooltip" title="Punti Salute">PS:
+                                  <i></i> / 100</span>
+                                <span class="red barC healthbar"></span>
+                              </div>
+                              <div class="barcont barbig" rel="tooltip" title="Punti Movimento">
+                                <span id="moveBarText" class="tg-statusbar-text">PM:
+                                  <i></i> / 100</span>
+                                <span class="green barC movebar"></span>
+                              </div>
+                              <div class="tg-extrabars">
+                                <div id="foodBarText" class="barcont barthin" rel="tooltip" title="Fame">
+                                  <span class="tg-statusbar-text">Fame:
+                                    <i></i> / 100</span>
+                                  <span class="orange barC hungrybar"></span>
+                                </div>
+                                <div id="drinkBarText" class="barcont barthin" rel="tooltip" title="Sete">
+                                  <span class="tg-statusbar-text">Sete:
+                                    <i></i> / 100</span>
+                                  <span class="blue barC thirstbar"></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tg-combatpanel col-auto pr-0">
+                          <div class="tg-combatpanel-wrap">
+                            <div class="tg-combatpanel-box">
+                              <div class="enemyname"></div>
+                              <div class="tg-enemyicon">
+                                <div class="iconimg enemyicon"></div>
+                              </div>
+                              <div class="enemy-h-prc">0%</div>
+                              <div class="tg-enemy-h">
+                                <div class="enemy-bar enemyH"></div>
+                              </div>
+                              <div class="enemy-m-prc">0%</div>
+                              <div class="tg-enemy-m">
+                                <div class="enemy-bar enemyM"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Extra Board in Dashboard -->
+                    <div class="tg-extraboard col-auto d-none d-sm-flex flex-column">
+                      <div class="row h-100">
+                        <div class="col-12 d-flex flex-row pl-1">
+                          <div class="extraboard-btnmenu nav flex-column nav-pills order-2" id="tg-pills-extraboard" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="tg-pills-tab-shortcut" data-toggle="pill" href="#tg-pills-shortcut" role="tab" aria-controls="tg-pills-shortcut"
+                              aria-selected="false" title="Scorciatoie">
+                              <i class="ra ra-rune-stone"></i>
+                            </a>
+                            <a class="nav-link" id="tg-pills-tab-utility" data-toggle="pill" href="#tg-pills-utility" role="tab" aria-controls="tg-pills-utility"
+                              aria-selected="false" title="Utility">U</a>
+                          </div>
+                          <div class="extraboard-content tab-content" id="tg-pills-extraboardContent">
+                            <!-- Shortcut -->
+                            <div class="tab-pane active" id="tg-pills-shortcut" role="tabpanel" aria-labelledby="tg-pills-shortcut-tab"></div>
+                            <!-- Utility -->
+                            <div class="tab-pane" id="tg-pills-utility" role="tabpanel" aria-labelledby="tg-pills-utility">Utility</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 mt-auto pl-0">
+                          <div class="extraboard-caption d-flex">
+                            <div class="extraboard-addin"></div>
+                            <div id="extraboardCaption" class="ml-auto"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Extra Board in Dashboard -->
+                  </div>
+                </div>
+                <div class="tg-border-box">
+                  <div class="tg-border tg-border-top"></div>
+                  <div class="tg-border tg-border-left"></div>
+                  <div class="tg-border tg-border-right"></div>
+                  <div class="tg-border tg-border-bottom"></div>
+                </div>
+              </div>
+              <!-- Input Line -->
+              <div class="tg-input tg-box b-ironlight tg-shadow">
+                <input id="tgInputUser" type="text" placeholder="Scrivi qualcosa" />
+                <span class="drop-alert">
+                  <b class="tg-yellow">Comando:
+                    <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span>
+                <div class="tg-inputcommand d-none d-sm-flex">
+                  <button id="triggerToggleExtraOutput" type="button" class="tg-fnt-button" rel="tooltip" title="Espandi/Comprimi l'Interfaccia">
+                    <i class="fas fa-columns"></i>
+                  </button>
+                  <button id="triggerToggleCharacterPanel" type="button" class="tg-fnt-button" rel="tooltip" title="Chiudi/Apri Il pannello di controllo">
+                    <i class="fas fa-solar-panel"></i>
+                  </button>
+                  <button id="triggerZenModality" type="button" class="tg-fnt-button" rel="tooltip" title="Modalit&agrave; Zen">
+                    <i class="fas fa-bullseye"></i>
+                  </button>
+                </div>
+                <div class="tg-border-box">
+                  <div class="tg-border tg-border-top"></div>
+                  <div class="tg-border tg-border-left"></div>
+                  <div class="tg-border tg-border-right"></div>
+                  <div class="tg-border tg-border-bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tg-rightside">
+          <div class="tg-rightside-wrap">
+            <!-- Sky -->
+            <div class="tg-sky">
+              <div id="sky"></div>
+            </div>
+            <!-- Mini Mappa -->
+            <div class="tg-map">
+              <div id="nord" class="tg-dir dir-nord" rel="tooltip" title="Vai a nord">
+                <span class="dir-ico"></span>
+              </div>
+              <div id="est" class="tg-dir dir-est" rel="tooltip" title="Vai a est">
+                <span class="dir-ico"></span>
+              </div>
+              <div id="sud" class="tg-dir dir-sud" rel="tooltip" title="Vai a sud">
+                <span class="dir-ico"></span>
+              </div>
+              <div id="ovest" class="tg-dir dir-ovest" rel="tooltip" title="Vai a ovest">
+                <span class="dir-ico"></span>
+              </div>
+              <div id="alto" class="tg-dir dir-alto" rel="tooltip" title="Vai verso l'alto" data-label="Alto">
+                <span class="dir-ico"></span>
+              </div>
+              <div id="basso" class="tg-dir dir-basso" rel="tooltip" title="Vai verso il basso" data-label="Basso">
+                <span class="dir-ico"></span>
+              </div>
+              <div class="tg-directions">
+              </div>
+              <div id="tgMap" class="tg-map-box">
+                <canvas id="snowCanvas" class="canvas-snow"></canvas>
+                <canvas id="rainCanvas" class="canvas-rain"></canvas>
+              </div>
+            </div>
+            <div class="tg-right-board">
+              <div class="tg-right-board-wrap d-flex flex-column">
+                <div class="tg-board-activity">
+                  <div class="tg-board-activity-wrap">
+                    <span class="no-activity">
+                      <i class="far fa-bell"></i>Non ci sono attivit&agrave; recenti</span>
+                  </div>
+                </div>
+                <div class="tg-right-board-end">
+                  <div class="wrap-btnend-box">
+                    <button id="infoRightBtn" class="tg-button btn-info-graph" rel="tooltip" title="Informazioni">Info</button>
+                  </div>
+                  <div class="wrap-btnend-box">
+                    <button id="equipRightBtn" class="tg-button btn-equip-graph" rel="tooltip" title="Equipaggiamento">Equip</button>
+                  </div>
+                  <div class="wrap-btnend-box">
+                    <button id="invRightBtn" class="tg-button btn-inventario-graph" rel="tooltip" title="Inventario">Inventario</button>
+                  </div>
+                  <div class="wrap-btnend-box">
+                    <button id="skillRightBtn" class="tg-button btn-skill-graph" rel="tooltip" title="Abilita'">abilit&agrave;</button>
+                  </div>
+                  <div class="wrap-btnend-box">
+                    <button id="statoRightBtn" class="tg-button btn-stato-graph" rel="tooltip" title="Stato">Stato</button>
+                  </div>
+                  <div class="wrap-btnend-box">
+                    <button id="configRightBtn" class="tg-button btn-config-graph" rel="tooltip" title="Configurazione">Configurazione</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Interact Box  -->
+    <div id="interactBox" class="tg-interactbox tg-shadow b-modal tg-box">
+      <div id="interactbox-cont">
+        <div class="interact-elem eqp-in">Indossa</div>
+        <div class="interact-elem eqp-out">Rimuovi</div>
+        <div class="interact-elem meq-in">Barda</div>
+        <div class="interact-elem meq-out">Rimuovi</div>
+        <div class="interact-elem inv-in">Prendi</div>
+        <div class="interact-elem inv-out">Posa</div>
+        <div class="interact-elem wpn-in">Impugna</div>
+        <div class="interact-elem wpn-out">Riponi</div>
+        <div class="interact-elem input-concat">Comando personale</div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+    <div id="interactBoxEvent" class="container tg-interactevent tg-shadow tg-box b-modal">
+      <div class="tg-boxcontent tg-box">
+        <div class="row">
+          <div class="col d-flex flex-column">
+            <div class="c-caption mx-auto">Pre: </div>
+            <div class="d-flex d-flex mt-auto">
+              <div class="interact-inputbar pre" contenteditable="true"></div>
+              <span>+</span>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="c-caption">Selezione:</div>
+            <div class="d-flex">
+              <div class="interact-placeicon mx-auto"></div>
+            </div>
+          </div>
+          <div class="col d-flex flex-column">
+            <div class="c-caption mx-auto">Post:</div>
+            <div class="d-flex mt-auto">
+              <span>+</span>
+              <div class="interact-inputbar post" contenteditable="true"></div>
+            </div>
+          </div>
+          <div class="col d-flex">
+            <button type="button" id="interactSendButton" class="mt-auto">Invia</button>
+          </div>
+        </div>
+        <div class="example">Es. Carica + [selezione] + carro </div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+    <!-- End Interact Box -->
+    <div class="tg-loginpanel align-middle container-fluid">
+      <!-- Login Panel -->
+      <div class="justify-content-center align-self-top w-100 d-flex h-100">
+        <div class="mx-auto tg-login-container my-auto">
+          <div class="tg-logo-composit">
+          </div>
+          <div class="tg-loginform">
+            <div class="tg-loginform-wrap">
+              <div class="tg-loginform-content">
+                <h2>Gioco di Ruolo Fantasy Online
+                  <br> Accedi
+                  <span>gratis</span> al mondo di Ikhari!
+                </h2>
+                <form id="loginForm" action="#" autocomplete="off" novalidate>
+                  <div class="form-row">
+                    <div class="col-12">
+                      <input id="login_username" class="form-control" name="username" type="text" autocomplete="off" placeholder="Username" required
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-12">
+                      <input id="login_password" class="form-control" name="password" type="password" autocomplete="off" placeholder="Password"
+                        required />
+                    </div>
+                  </div>
+                  <button type="submit" class="tg-loginbtn" value="accedi" id="doLocalLogin">Accedi</button>
+                  <p class="tg-newcharacter">Sei nuovo?
+                    <a href="#" id="doNewCharacter">Crea un Personaggio</a>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div id="loginNetworkActivityMessage" class="tg-loginstatus"></div>
+          <div id="rotateText" class="tg-intro-rotatext row text-center">
+            <div class="col-12">
+              <div class="phrase">
+                "L'importante non è Guardare, occorre Vedere."
+                <span class="auth">- Anonimo -</span>
+              </div>
+              <div class="phrase">"Nuovo giorno, buon giorno!"
+                <span class="auth">- Una guardia cittadina -</span>
+              </div>
+              <div class="phrase">"Gnek gnek!"
+                <span class="auth">- Strane creature di Ikhari -</span>
+              </div>
+            </div>
+          </div>
+          <div id="tgPreloader" class="tg-preloader">
+            <span>0</span>%
+            <div class="pbar"></div>
+          </div>
+        </div>
+        <!-- glow Effect ### //-->
+        <div class="glow_container">
+          <div class="glow_wamp glow_box"></div>
+          <div class="glow_box _spectral">
+            <div class="glow_stream _type_1">
+              <div class="glow_slide">
+                <div class="shake">
+                  <div class="glow_item _type_1"></div>
+                  <div class="glow_item _type_2"></div>
+                  <div class="glow_item _type_3"></div>
+                  <div class="glow_item _type_4"></div>
+                </div>
+              </div>
+              <div class="glow_slide _delay_1">
+                <div class="shake _delay_1">
+                  <div class="glow_item _type_1"></div>
+                  <div class="glow_item _type_2"></div>
+                  <div class="glow_item _type_3"></div>
+                  <div class="glow_item _type_4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright and Usefull Links -->
+      <div class="tg-login-footer align-self-baseline mt-auto w-100">
+        <div class="row">
+          <div class="col-12 text-center">
+            <div id="networkActivityMessage" class="tg-serverstatus">Connessione al server in corso...</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 text-center">
+            <i class="fab fa-facebook"></i>
+            <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a> |
+            <i class="fab fa-wpforms"></i>
+            <a href="http://forum.thegatemud.it/" target="_blank">Forum</a> |
+            <i class="fas fa-envelope"></i>
+            <a href="#" target="_blank">Contattaci</a>
+          </div>
+          <div class="col-4 text-center">
+            <p class="tg-version-name">TGWC v.2 -
+              <span>
+                <%= htmlWebpackPlugin.options.git_version %>
+              </span>
+            </p>
+          </div>
+          <div class="col-4 text-center">
+            &copy; 2013-2018 The Gate MUD |
+            <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dialogs -->
+    <div id="combatPanelWidget" class="combatwidget-modal tg-shadow b-modal tg-box">
+      <div id="combatBoxWidget" class="tg-box incnt"></div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+    <div id="tabledialog" class="tg-window tg-generictable">
+      <div class="tg-shadow tg-box b-ironlight-mini">
+        <div id="tablecont" class="table-cont tg-shadow-inset tg-box tg-modal-content">
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+    </div>
+    <div id="bookdialog" class="tg-shadow tg-dialog-box tg-box b-ironlight">
+      <div id="book" class="tg-bookpage"></div>
+    </div>
+    <!-- // End dialogs -->
+  </div>
+  <!-- Audio & Music -->
+  <audio id="music" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
+  <audio id="sound" autoplay="autoplay" preload="auto" height="0" width="0" src=""></audio>
+</body>
+
+</html>

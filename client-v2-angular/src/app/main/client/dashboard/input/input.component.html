@@ -1,0 +1,59 @@
+<div class="tg-input tg-box b-ironlight tg-shadow">
+  <input type="text" autofocus placeholder="Scrivi qualcosa" 
+    #inputCommand (keydown.enter)="onEnter($event, inputCommand.value)" 
+    (keydown.arrowUp)="onUpKey($event)"
+    (keydown.arrowDown)="onDownKey($event)"
+    autocomplete="off"
+    name="sendinput"/>
+  <!-- <span class="drop-alert">
+    <b class="tg-yellow">Comando:
+      <span id="dropcmd"></span> [#selezione]</b> - Trascina qui per aggiungere alla fine del comando la tua selezione.</span> -->
+  <div class="tg-inputcommand">
+    <ng-container *ngIf="inCombat === true">
+      <div>
+        <button type="button" class="tg-button tg-button-pieta" (mousedown)="sendCmd('pieta')"></button>
+      </div>
+      <div>
+        <button type="button" class="tg-button tg-button-tregua"  (mousedown)="sendCmd('tregua')"></button>
+      </div>
+    </ng-container>
+
+    <div fxHide fxShow.gt-sm
+      pTooltip="Apri/Chiudi Dettagli" tooltipPosition="top" showDelay="8 00" hideDelay="100">
+      <button
+        type="button"
+        class="tg-fnt-button"
+        (mousedown)="toggleExtraOutput($event)"
+        [ngClass]="{'isActive': extraOutputStatus$ | async}">
+        <fa-icon [icon]="facolumns"></fa-icon>
+      </button>
+    </div>
+    <div
+      pTooltip="Apri/Chiudi Dashboard" tooltipPosition="top" showDelay="800" hideDelay="100">
+      <button
+        type="button" 
+        class="tg-fnt-button"
+        (mousedown)="toggleDashboard($event)"
+        [ngClass]="{'isActive': dashBoardStatus$ | async}">
+        <fa-icon [icon]="faSolarPanel"></fa-icon>
+      </button>
+    </div>
+    <div
+      pTooltip="Modalità Zen" tooltipPosition="top" showDelay="800" hideDelay="100">
+      <button 
+        type="button"
+        class="tg-fnt-button"
+        (mousedown)="toggleZen($event)">
+        <fa-icon [icon]="faBullseye"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="tg-border-box">
+    <div class="tg-border tg-border-top"></div>
+    <div class="tg-border tg-border-left"></div>
+    <div class="tg-border tg-border-right"></div>
+    <div class="tg-border tg-border-bottom"></div>
+  </div>
+</div>
+
+

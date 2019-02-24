@@ -1,0 +1,54 @@
+<div class="tg-room" *ngIf="html">
+  <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
+    <div class="tg-line">
+
+      <ng-container *ngIf="!type">
+        <div *ngIf="html.title" [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
+        <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" class="tg-room--desc"></div>
+        <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
+      </ng-container>
+
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #extradetail>
+
+  <div class="tg-extraoutput--header">
+    <div *ngIf="html.title" class="tg-room--title">
+      <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
+    </div>
+    <div class="tg-room--image" *ngIf="html.image">
+      <img [src]="getRoomImage(html.image)" />
+    </div>
+
+    <ng-container 
+      *ngIf="type === 'room'">
+      <div class="tg-room--desc" [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
+    </ng-container>
+
+    <ng-container 
+      *ngIf="type ==='objPers'">
+      <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc"></div>
+    </ng-container>
+
+  </div>
+  <div class="tg-backdetail" *ngIf="html.where" (click)="onBackDetail(html.where.num)">
+    <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova &nbsp;<b>{{html.where.title}}</b></span>
+  </div>
+  <div style="height: 100%; overflow:hidden;">
+    <ng-scrollbar class="scrollbar" #scrollBar [shown]="always">
+
+      <ng-container *ngIf="type === 'room'">
+        <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" 
+          *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
+      </ng-container>
+
+      <ng-container *ngIf="type === 'objPers'">
+        <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont" 
+          *ngIf="html.eqcont || html.objcont"></tg-objpers-container>
+      </ng-container>
+    </ng-scrollbar>
+
+  </div>
+</ng-template>

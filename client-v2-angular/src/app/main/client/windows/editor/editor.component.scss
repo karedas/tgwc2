@@ -1,0 +1,74 @@
+/* ==== Editor */
+.editor-dialog {
+  height: 100%;
+
+  .tg-editor-container {
+    height: 100%;
+    background-color: #cbb48d;
+    z-index: 10;
+    position: relative;
+  }
+
+  .tg-modal-contentwrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .tg-editor--heroname {
+    padding: 0;
+    text-align: center;
+    font-size: 37px;
+    font-family: kingthings;
+    color: #3a2e19;
+    line-height: 1;
+    margin-bottom: 0.2em;
+  }
+
+  .textarea-cont {
+    overflow: hidden;
+    background-color: #cbb48d;
+  }
+
+  textarea {
+    font-family: kingthings;
+    font-size: 1.2em;
+    line-height: 1.4;
+    background: #cbb48d;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    box-shadow: 0 0 11px 4px #cbb48d;
+    position: relative;
+    z-index: 3;
+    flex: 0 1 100%;
+    padding: 0;
+    max-height: 100%;
+  }
+
+  .tg-modal-buttons-group {
+    z-index: 4;
+    width: 100%;
+    padding-top: 15px;
+    margin: 0 auto;
+
+    button {
+      margin: 0 0.5em;
+    }
+  }
+
+
+  .tg-txt-maxcharcount {
+    background: #c6a779;
+    border-radius: 6px;
+    display: table;
+    color: black;
+    padding: 2px 12px;
+    margin: 16px auto 0;
+    font-size: 11px;
+    z-index: 4;
+  }
+
+}

@@ -1,0 +1,129 @@
+@import 'variables';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+.info-description {
+  background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+  padding: 1em;
+  color: #3a2e19;
+
+  &:before {
+    content: '';
+    @include sprite($descr-title-box-sprite);
+    position: absolute;
+    top: 10px;
+    right: 21px;
+    z-index: 5;
+  }
+
+  .info-textarea--wrap {
+    background: #ccb58f;
+  }
+
+  .info-textarea--container {
+    margin-bottom: 1em;
+
+    .textarea {
+      outline: none;
+      min-height: 196px;
+      font-family: kingthings;
+      font-size: 14px;
+      line-height: 1.2;
+      border: none;
+      resize: none;
+      box-sizing: border-box;
+      background-color: transparent;
+      color: #d6d6d6;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: auto;
+      color: #3a2e19;
+    }
+  }
+
+  .info-textarea--action {
+    margin-bottom: -18px;
+    text-align: center;
+    place-content: center;
+
+    .btn-i-modifica {
+      @include sprite($btn-modifica-sprite);
+      margin-left: 1em;
+    }
+  }
+}
+
+
+.info-base {
+  position: relative;
+  padding: 1em 1.5em;
+  background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
+
+  &:before {
+    content: '';
+    @include sprite($info-title-box-sprite);
+    position: absolute;
+    top: -1em;
+    right: 21px;
+    z-index: 5;
+  }
+
+  .data-born {
+    padding: 1em 0 0;
+  }
+}
+
+.info-stats {
+  position: relative;
+  padding: 1.5em 1em;
+
+  &:before {
+    content: '';
+    @include sprite($carat-title-box-sprite);
+    position: absolute;
+    top: -1em;
+    right: 21px;
+    z-index: 5;
+  }
+
+
+  .data-skill-box {
+    width: 100%;
+    height: 19px;
+    border: 1px solid #59564c;
+    margin-bottom: 10px;
+    background-color: #0f0f0e;
+    padding: 2px;
+    position: relative;
+    text-shadow: 0 0px 5px black;
+
+    span {
+      display: block;
+      height: 13px;
+      max-width: 100%;
+      background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top right;
+      transition: width .4s ease-out;
+    }
+
+
+    i {
+      color: white;
+      position: absolute;
+      font-style: normal;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 2px;
+    }
+  }
+
+  .info-data:not(.show) .data-skill-box span {
+    width: 0 !important;
+  }
+
+  .name-skill {
+    margin-bottom: 10px;
+    height: 20px;
+    font-size: 14px;
+  }
+}

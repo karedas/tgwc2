@@ -1,0 +1,138 @@
+@import '~src/scss/colors';
+
+tg-navbar {
+  background-image: url($imgPath + '/interface/navbar_background.png');
+  background-repeat: repeat-x;
+  padding: 0 .5rem 8px;
+
+  /*Logo */
+  .brand {
+    display: inline-block;
+    padding: 5px;
+
+    img {
+      height: 100%;
+    }
+  }
+}
+
+p-menubar {
+  .ui-menubar {
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+
+    .ui-menubar-root-list {
+
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      .ui-menuitem {
+
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        > .ui-menuitem-link {
+          color: black;
+          background-color: transparent;
+          font-weight: bold;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          font-size: 10px;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 0.857em;
+          border-left: 1px solid transparent;
+          border-right: 1px solid transparent;
+
+          .ui-menuitem-text,
+          .ui-menuitem-icon {
+            color: black;
+          }
+        }
+      }
+
+      > .ui-menuitem-active {
+        background-color: #2f2314;
+        
+         .pi-caret-down:before {
+           color: #d3ccb1;
+         }
+
+        > .ui-menuitem-link {
+
+            border-left: 1px solid #71624e;
+            border-right: 1px solid #71624e;
+
+            .ui-menuitem-text,
+            .ui-menuitem-icon {
+              color: #d3ccb1;
+            }
+        }
+      }
+    }
+
+    .ui-submenu-list {
+      background-color: #2f2314;
+      border: 1px solid #71624e;
+      border-top: 0;
+      box-shadow: 0 10px 7px 1px black;
+
+    }
+    .ui-submenu-list .ui-menuitem {
+      box-sizing: border-box;
+      
+
+      .ui-menuitem-link {
+        padding:0 ;
+        border: 0;
+        width: 100%;
+        box-sizing: border-box;
+
+        .ui-menuitem-text,
+        .ui-menuitem-icon {
+          font-size: 10px;
+          padding: 0.714em 0.857em;
+          color: #d3ccb1;
+          font-weight: normal;
+        }
+      }
+
+      &:hover {
+        background: #41301c;
+      }
+    }
+  }
+}
+
+
+// /*SKY*/
+// .tg-sky-mini {
+//   background-color: rgb(205, 242, 253);
+//   width: 150px;
+//   height: 18px;
+//   border-radius: 10px;
+//   cursor: pointer;
+// }
+
+// /* Search Form*/
+// .tg-helpsearch {
+
+//   input[type="search"],
+//   button {
+//     padding: 0 .35rem;
+//     border: 0;
+//   }
+
+//   input,
+//   input:focus {
+//     background-color: #2f2314;
+//     color: white;
+//   }
+
+//   button[type="submit"] {
+//     color: #2f2314;
+//   }
+// }

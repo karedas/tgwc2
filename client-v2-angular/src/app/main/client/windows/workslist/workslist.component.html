@@ -1,0 +1,53 @@
+<ng-container *ngIf="dataTable$ | async">
+  <tg-dialog [id]="dialogID">
+    <div class="tg-workslist">
+      <div class="b-ironlight-mini tg-box">
+        <div class="tg-dialog-content-nopadding tg-shadow-inset">
+          <!-- Workslist content start -->
+          <p-table 
+            [value]="rows" 
+            [autoLayout]="true" 
+            [paginator]="true"
+            [rows]="currentPageLimit"
+            [rowHover]="true"
+            [reorderableColumns]="true">
+            <ng-template pTemplate="header" let-columns>
+              <th *ngFor="let col of cols">
+                  {{col.header}}
+              </th>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-work let-rowIndex="rowIndex">
+              <tr>
+                  <td>{{rowIndex + 1}}</td>
+                  <td>
+                    <tg-icons [icon]="work.icon"></tg-icons>
+                  </td>
+                  <td [ngClass]="
+                    {'tg-green': (work.diff == 'facile' || work.diff =='normale'),
+                    'tg-yellow': (work.diff == 'impegantiva' || work.diff =='difficile'),
+                    'tg-brown': (work.diff == 'molto difficile'),
+                    'tg-red': (work.diff == 'arduo' || work.diff == 'quasi impossibile' || work.diff == 'miracolo')}">
+                    {{work.diff}}
+                  </td>
+                  <td><div [ngClass]="work.cando === true ? 'cando' : 'cantdo'"></div></td>
+                  <td>{{work.desc}}</td>
+                  <td><button class="tg-button btn-workcmd" (click)="onAction(rowIndex, $event)">{{work.cmd}}</button></td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              Visualizzati {{rows.length }} risultati
+            </ng-template>
+          </p-table>
+          <!-- Workslist content end -->
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
+        </div>
+      </div>
+    </div>
+  </tg-dialog>
+</ng-container>

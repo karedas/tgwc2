@@ -1,0 +1,474 @@
+@import 'variables';
+@import '~src/scss/colors';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+tg-geo-location {
+  background: url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
+	padding-top: 2px;
+	margin-top: auto;
+}
+
+.tg-geolocal {
+  position: relative;
+	padding: 8px 4px 0px;
+	height: 100%;
+  background: #190f06 url($imgPath + "/background/bg-ironbrown.jpg") repeat;
+}
+
+.tg-geolocal--title {
+  @include sprite($territorio-title-box-sprite);
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.tg-geolocal--imagecnt {
+  border: 2px solid #4b3d2b;
+  border-radius: 2px;
+  height: 143px;
+	background: black;
+	position: relative;
+	z-index: 3;
+
+  &:after,
+  &:before {
+    content: '';
+		display: block;
+		@include sprite($clip-img-region-sprite);
+		position: absolute;
+		z-index: 2;
+    bottom: -20px;
+	}
+	
+	&:after {
+    left: 20px;
+	}
+	&:before {
+		right: 20px;
+	}
+}
+
+.tg-geolocal--image {
+  background: url($imgPath + '/regions/region_default.jpg') no-repeat center center;
+  height: 100%;
+	width: 100%;
+	opacity: 0;
+}
+
+.tg-geolocal--data {
+	position: relative;
+	z-index: 10;
+	margin: auto;
+	min-width: 70%;
+	padding: 22px 0;
+}
+
+.tg-geolocal--databox {
+	color: #9b8c7d;
+	text-align: center;
+	font-size: 14px;
+	font-family: kingthings;
+	width: 100%;
+	margin: auto;
+
+	tg-icons {
+		width: 24px;
+		height: 24px;
+		line-height: 24px;
+		vertical-align: middle;
+	
+		.tg-icon {
+			transform: scale(.8);
+			left: -4px;
+			top: -4px;
+		}
+	}
+
+}
+
+.tg-geolocal--region, .tg-geolocal--control {
+	font-size: 14px;
+	color: #aca49b;
+}
+
+.tg-geolocal--region:after {
+	content: '';
+	width: 40px;
+	height: 0;
+	border-top: 1px solid #593f29;
+	margin: .5em auto;
+	display: block;
+}
+
+@media  screen and (max-height: 800px) {
+	
+	.tg-geolocal--data  {
+		padding: 0;
+	}
+
+	.tg-geolocal--databox {
+		padding: 8px;
+	}
+
+	.tg-geolocal--imagecnt {
+		height: 110px;
+	}
+	
+	.tg-geolocal--image{
+		opacity: 0;
+	}
+
+	.tg-geolocal--region, .tg-geolocal--control {
+		font-size: 14px;
+	}
+}
+
+
+/* Images Region List*/
+
+.region-img-1 {
+@include sprite($r1-sprite);
+}
+
+.region-img-2 {
+@include sprite($r2-sprite);
+}
+
+.region-img-3 {
+@include sprite($r3-sprite);
+}
+
+.region-img-4 {
+@include sprite($r4-sprite);
+}
+
+.region-img-5 {
+@include sprite($r5-sprite);
+}
+
+.region-img-6 {
+@include sprite($r6-sprite);
+}
+
+.region-img-7 {
+@include sprite($r7-sprite);
+}
+
+.region-img-8 {
+@include sprite($r8-sprite);
+}
+
+.region-img-9 {
+@include sprite($r9-sprite);
+}
+
+.region-img-10 {
+@include sprite($r10-sprite);
+}
+
+.region-img-11 {
+@include sprite($r11-sprite);
+}
+
+.region-img-12 {
+@include sprite($r12-sprite);
+}
+
+.region-img-13 {
+@include sprite($r13-sprite);
+}
+
+.region-img-14 {
+@include sprite($r14-sprite);
+}
+
+.region-img-15 {
+@include sprite($r15-sprite);
+}
+
+.region-img-16 {
+@include sprite($r16-sprite);
+}
+
+.region-img-17 {
+@include sprite($r17-sprite);
+}
+
+.region-img-18 {
+@include sprite($r18-sprite);
+}
+
+.region-img-19 {
+@include sprite($r19-sprite);
+}
+
+.region-img-20 {
+@include sprite($r20-sprite);
+}
+
+.region-img-21 {
+@include sprite($r21-sprite);
+}
+
+.region-img-22 {
+@include sprite($r22-sprite);
+}
+
+.region-img-23 {
+@include sprite($r23-sprite);
+}
+
+.region-img-24 {
+@include sprite($r24-sprite);
+}
+
+.region-img-25 {
+@include sprite($r25-sprite);
+}
+
+.region-img-26 {
+@include sprite($r26-sprite);
+}
+
+.region-img-27 {
+@include sprite($r27-sprite);
+}
+
+.region-img-28 {
+@include sprite($r28-sprite);
+}
+
+.region-img-29 {
+@include sprite($r29-sprite);
+}
+
+.region-img-30 {
+@include sprite($r30-sprite);
+}
+
+.region-img-31 {
+@include sprite($r31-sprite);
+}
+
+.region-img-32 {
+@include sprite($r32-sprite);
+}
+
+.region-img-33 {
+@include sprite($r33-sprite);
+}
+
+.region-img-34 {
+@include sprite($r34-sprite);
+}
+
+.region-img-35 {
+@include sprite($r35-sprite);
+}
+
+.region-img-36 {
+@include sprite($r36-sprite);
+}
+
+.region-img-37 {
+@include sprite($r37-sprite);
+}
+
+.region-img-38 {
+@include sprite($r38-sprite);
+}
+
+.region-img-39 {
+@include sprite($r39-sprite);
+}
+
+.region-img-40 {
+@include sprite($r40-sprite);
+}
+
+.region-img-41 {
+@include sprite($r41-sprite);
+}
+
+.region-img-42 {
+@include sprite($r42-sprite);
+}
+
+.region-img-43 {
+@include sprite($r43-sprite);
+}
+
+.region-img-44 {
+@include sprite($r44-sprite);
+}
+
+.region-img-45 {
+@include sprite($r45-sprite);
+}
+
+.region-img-46 {
+@include sprite($r46-sprite);
+}
+
+.region-img-47 {
+@include sprite($r47-sprite);
+}
+
+.region-img-48 {
+@include sprite($r48-sprite);
+}
+
+.region-img-49 {
+@include sprite($r49-sprite);
+}
+
+.region-img-50 {
+@include sprite($r50-sprite);
+}
+
+.region-img-51 {
+@include sprite($r51-sprite);
+}
+
+.region-img-52 {
+@include sprite($r52-sprite);
+}
+
+.region-img-53 {
+@include sprite($r53-sprite);
+}
+
+.region-img-54 {
+@include sprite($r54-sprite);
+}
+
+.region-img-55 {
+@include sprite($r55-sprite);
+}
+
+.region-img-56 {
+@include sprite($r56-sprite);
+}
+
+.region-img-57 {
+@include sprite($r57-sprite);
+}
+
+.region-img-58 {
+@include sprite($r58-sprite);
+}
+
+.region-img-59 {
+@include sprite($r59-sprite);
+}
+
+.region-img-60 {
+@include sprite($r60-sprite);
+}
+
+.region-img-61 {
+@include sprite($r61-sprite);
+}
+
+.region-img-62 {
+@include sprite($r62-sprite);
+}
+
+.region-img-63 {
+@include sprite($r63-sprite);
+}
+
+.region-img-64 {
+@include sprite($r64-sprite);
+}
+
+.region-img-65 {
+@include sprite($r65-sprite);
+}
+
+.region-img-66 {
+@include sprite($r66-sprite);
+}
+
+.region-img-67 {
+@include sprite($r67-sprite);
+}
+
+.region-img-68 {
+@include sprite($r68-sprite);
+}
+
+.region-img-69 {
+@include sprite($r69-sprite);
+}
+
+.region-img-70 {
+@include sprite($r70-sprite);
+}
+
+.region-img-71 {
+@include sprite($r71-sprite);
+}
+
+.region-img-72 {
+@include sprite($r72-sprite);
+}
+
+.region-img-73 {
+@include sprite($r73-sprite);
+}
+
+.region-img-74 {
+@include sprite($r74-sprite);
+}
+
+.region-img-75 {
+@include sprite($r75-sprite);
+}
+
+.region-img-76 {
+@include sprite($r76-sprite);
+}
+
+.region-img-77 {
+@include sprite($r77-sprite);
+}
+
+.region-img-78 {
+@include sprite($r78-sprite);
+}
+
+.region-img-79 {
+@include sprite($r79-sprite);
+}
+
+.region-img-80 {
+@include sprite($r80-sprite);
+}
+
+.region-img-81 {
+@include sprite($r81-sprite);
+}
+
+.region-img-82 {
+@include sprite($r82-sprite);
+}
+
+.region-img-83 {
+@include sprite($r83-sprite);
+}
+
+.region-img-84 {
+@include sprite($r84-sprite);
+}
+
+.region-img-85 {
+@include sprite($r85-sprite);
+}
+
+.region-img-86 {
+@include sprite($r86-sprite);
+}

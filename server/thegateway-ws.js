@@ -9,50 +9,32 @@
 const log = console.log;
 const path = require('path');
 const winston = require('winston');
-const passport = require('passport');
 const chalk = require('chalk');
 const Convert = require('ansi-to-html');
 const crypto = require('crypto');
+const bodyParser = require ('body-parser');
 const dotenv = require('dotenv').load({
 	path: '.env'
-});;
+});
+const cors = require('cors');
+
 
 const net = require('net');
-
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-const expressSession = require('express-session');
-
-
-
-const socketSession = require("express-socket.io-session");
-const SQLiteStore = require('connect-sqlite3')(expressSession);
-
-const session = expressSession({
-	store: new SQLiteStore(),
-	secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
+const io = require('socket.io')(server, {
+	'pingInterval': 2000, 'pingTimeout': 5000
 });
-
-
-// Attach session
-
-
-let convert = new Convert();
-
-let socket_transports = [
-	'polling', 
-	'websocket'
-];
+const cookieParser = require('cookie-parser');
+const sharedsession = require('express-socket.io-session');
 
 
 
 /**
  * Logging configuration.
  */
-let fileLogger = new winston.transports.File({
+const fileLogger = new winston.transports.File({
 	level: 'info',
 	timestamp: true,
 	filename: 'thegateway-ws',
@@ -62,102 +44,84 @@ let fileLogger = new winston.transports.File({
 	json: false
 });
 
-let logger = new(winston.Logger)({
+const logger = winston.createLogger({
 	transports: [
 		fileLogger
 	]
 });
 
+let session = require("express-session")({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+});
+
 
 // start Session DB
-
-let db =  require('./models')({
-	storage: process.env.DATABASEPATH,
-	logging: logger.debug
-});
-
-
 app.set('trust proxy', 1);
-// Attach session
-app.use(session);
-// Share session with io sockets
-io.use(socketSession(session));
+app.set('max_requests_per_ip', 20);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(cors());
+app.use(session, cookieParser(process.env.SESSION_SECRET));
+app.use('/static', express.static(__dirname + '/public'));
 
+// Use shared session middleware for socket.io
+// setting autoSave:true
+io.use(sharedsession(session, {
+    autoSave:true
+})); 
 
-db.sequelize.sync().done(function(err){
-	let sio = server.listen(process.env.WS_PORT, () => {
-		SocketServer(db);
-		log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
-		logger.info('Websocket server listening on port %d', process.env.WS_PORT);
-	});
+server.listen(process.env.WS_PORT, () => {
+	SocketServer();
+	log('%s Websocket server listening on port %d', chalk.green('✓'), process.env.WS_PORT);
+	logger.info('Websocket server listening on port %d', process.env.WS_PORT);
+
 });
 
-function SocketServer(db) {
-
+function SocketServer() {
+	
 	// Handle incoming websocket  connections
+
 	io.on('connection', function(socket) {
-		
+		socket.on('loginrequest', function(){
+			socket.emit('data', '&!connmsg{"msg":"ready"}!');
+		})
+
 		socket.on('oob', function(msg) {
 			// Handle a login request
-			
-			if (msg["itime"])
-			{
+			if (msg["itime"]) {
+				let account_id =  0;
+				// Get the request headers
+				let headers =  socket.handshake.headers;
 				
-				GetUserFromSession(function(err, user) {
-					let account_id = ( err != null || user == null ) ? 0 : user.id;
-					
-					// Get the actual transport type
-	
-					// Get the request headers
-					let headers =  socket.handshake.headers;
+				let codeHeaders = CalcCodeFromHeaders(headers);
 
-//					let transport = io.transports[socket.id].name;
-					
-					//Calculate coded headers
-					
-					let codeHeaders = CalcCodeFromHeaders(headers);
+				// Get the real client IP address
+				let client_ip = GetClientIp(headers);
 
-					// Get the real client IP address
-					let client_ip = GetClientIp(headers);
+				// Get the 'itime' code value
+				let codeitime = msg["itime"];
 
-					// Get the 'itime' code value
-					var codeitime = msg["itime"];
+				// Client code
+				
+				let clientcode = codeitime + '-' + codeHeaders;
+				logger.info('New connection %s from:%s, code:%s, account:%d', socket.id, client_ip, clientcode, account_id);
+				// Conect to game server
 
-					// Client code
-					var clientcode = codeitime + '-' + codeHeaders;
+				let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
 
-					logger.info('New connection %s from:%s, transport:%s, code:%s, account:%d', socket.id, client_ip, "", clientcode, account_id);
-					// Conect to game server
-					let tgconn = ConnectToGameServer(socket, client_ip, codeitime, codeHeaders, account_id);
-
-
-					socket.on('disconnect', function() {
-						logger.info('Closing %s', socket.id);
-						// Disconnect from game server
-						tgconn.destroy();
-					});
+				socket.on('disconnect', function() {
+					logger.info('Closing %s', socket.id);
+					// Disconnect from game server
+					tgconn.destroy();
 				});
-			}
+			};
 
 		});
-
-		io.emit('data', '&!connmsg{"msg":"ready"}!');
-
 	});
 
-	function GetUserFromSession(done)
-	{	
-
-		try
-		{
-			db.Account.find(session.passport.user).complete(done)
-		}
-		catch(e) {
-			done('Error getting session');
-		}
-	};
-
-// 	// Get real client IP address from headers
+  	// Get real client IP address from headers
 	function GetClientIp(headers) {
 		let ipAddress;
 		let forwardedIpsStr = headers['x-forwarded-for'];
@@ -176,19 +140,17 @@ function SocketServer(db) {
 		return ipAddress;
 	}
 
-// 	// Calculate a code from headers
+	// Calculate a code from headers
 	function CalcCodeFromHeaders(headers){
 		let hash = crypto.createHash('md5');
-
 		if(headers['user-agent'])
 			hash.update(headers['user-agent']);
-
 		if(headers['accept'])
 			hash.update(headers['accept']);
-
+		
 		if(headers['accept-language'])
 			hash.update(headers['accept-language']);
-
+		
 		if(headers['accept-encoding'])
 			hash.update(headers['accept-encoding']);
 
@@ -196,30 +158,66 @@ function SocketServer(db) {
 	}
 
 	function ConnectToGameServer(websocket, from_host, code_itime, code_headers, account_id) {
+//		let port =  process.env.SERVER_GAME_PORT;
+		let	host = process.env.SERVER_GAME_HOST;
 
-		let tgconn = net.connect({ host: process.env.TGGAMEHOST, port: process.env.TGAPI_TELNET_PORT});
-
-	
+		let tgconn = net.Socket(host);
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
+<<<<<<< HEAD
 
 			tgconn.write(msg +'\n');
+=======
+			tgconn.write(msg + '\n');
+>>>>>>> 86e5a0d49ea26266b823e03b913250e5fdad6b48
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
+<<<<<<< HEAD
 
 
 			// Copy the data to the client
 			websocket.emit('data', convert.toHtml(msg.toString()));
+=======
+			let godpath = /&i/gm;
+			if(godpath.test(msg.toString())) {
+				tgconn.join('gods');
+			}
+			websocket.emit('data', msg.toString());
+>>>>>>> 86e5a0d49ea26266b823e03b913250e5fdad6b48
 		};
 
 		// Socket close event handler
 		tgconn.on('close', function(){
+<<<<<<< HEAD
 			websocket.disconnect();
 			// Close the websocket
 		});
 
+=======
+			// Close the websocket
+			websocket.disconnect();
+		});
+
+		// Connection/transmission event error handler
+		tgconn.on('error', function(){
+			// Tell the client the server is down
+			sendToClient('&!connmsg{"msg":"serverdown"}!');
+			// Close the websocket
+			websocket.disconnect();
+		});
+
+
+		tgconn.on("end", function(err){
+			websocket.disconnect();
+		});
+
+		tgconn.on("timeout",  function(){
+			websocket.disconnect();
+		});
+		
+>>>>>>> 86e5a0d49ea26266b823e03b913250e5fdad6b48
 		// Handshaking server->client handler data handler
 		// This is used only until login
 		function handshake(msg) {
@@ -229,16 +227,15 @@ function SocketServer(db) {
 				tgconn.on('data', sendToClient);
 				// Add handler for client->server data
 				websocket.on('data', sendToServer);
-
-
 				// Reply to challenge with webclient signature: ip, code
-				sendToServer('WEBCLIENT(0.0.0.0,'+ code_itime +'-'+ code_headers +','+account_id+')\n');
+				sendToServer('WEBCLIENT('+ from_host +','+ code_itime +'-'+ code_headers +','+account_id+')\n');
 
 			} else {
 				sendToClient(msg);
 			}
-		}
+		};
 
+			
 		tgconn.on('data', handshake);
 
 		return tgconn;

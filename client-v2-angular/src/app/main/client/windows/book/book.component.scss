@@ -1,0 +1,48 @@
+.tg-book {
+  height: 100%;
+  font-family: kingthings;
+  font-size: 1em;
+  line-height: 1.4;
+  color: #3a2e19;
+}
+
+.tg-book * {
+  outline: none;
+}
+
+.tg-book-inset {
+  z-index: 2;
+  position: relative;
+  height: 100%
+}
+
+.tg-book-title {
+  font-size: 1.8em;
+  line-height: 1;
+  text-align: center;
+  padding-bottom: .5em;
+}
+
+.tg-book-language {
+  padding-bottom: .5em;
+}
+
+.tg-book-pagetext {
+  text-align: justify;
+}
+
+.tg-book-pager {
+  .pager-btns {
+    margin-right: auto;
+  }
+
+  button {
+    background: transparent;
+    margin-right: 6px;
+    background: #d9c5a5;
+  
+    &:hover {
+      background: #e7d5b9;
+    }
+  }
+}

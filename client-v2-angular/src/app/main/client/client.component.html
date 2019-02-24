@@ -1,0 +1,11 @@
+<ng-container *ngIf="!preloaded; else clientReady">
+  <tg-splashscreen fxLayout (preloadDone)="clientIsReady($event)"></tg-splashscreen>
+</ng-container>
+
+
+<ng-template #clientReady>
+  <!-- Client -->
+  <ng-container *ngIf="isCookieAccepted">
+    <router-outlet></router-outlet>
+  </ng-container>
+</ng-template>

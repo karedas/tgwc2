@@ -1,0 +1,75 @@
+
+.dataheader {
+    overflow: hidden;
+    padding:1em .5em;
+    border-bottom: 1px solid #343a40;
+
+    .dataTables_filter, .dataTables_length {
+        display: inline-block;
+    }
+
+    input[type="search"], select {
+        color: white;
+        background: #30241d;
+        border: 1px solid #42342c;
+    }
+
+    .dataTables_filter {
+        float:right;
+        text-align: right;
+        width: 50%;
+        height: 50%;
+        input[type="search"] {
+            background:black;
+            color: white;
+            border: 1px solid $gray-800;
+            margin-left:4px;
+        }
+    }
+    .dataTables_length {
+        float:left;
+        height: 50%;
+        width: 50%;
+    }
+}
+
+.datafooter {
+    overflow: hidden;
+    padding: 1em .5em;
+
+
+    .dataTables_info {
+        float:left;
+        padding: 0!important;
+        height: 50%;
+        width: 50%;
+    }
+
+    .paging_simple_numbers {
+        float: right;
+        height: 50%;
+        text-align: right;
+        width: 50%;
+    }
+
+    .paginate_button {
+        padding:0 .2em;
+        &.current {
+            color: $tg-yellow;
+        }
+    }
+}
+
+.dataTables_scrollHead {
+    background: #1c1510;
+}
+
+.dataTables_scrollBody {
+    background-color: #d9cca4;
+    color: black;
+    margin-bottom: 0;
+
+    a {
+        color: black;
+    }
+}

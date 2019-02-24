@@ -1,0 +1,19 @@
+<div class="tg-objperson" *ngIf="html">
+  <div class="tg-objperson--action">
+    <span class="tg-green">Esamini</span>&nbsp;<div class="tg-objperson--item_desc tg-yellow"[attr.mrn]="html.num[indexSz]" [innerHtml]="html.title | dataToHtml | capitalizeFirst"></div>
+    <tg-icons [icon]="html.icon" class="squared"></tg-icons>
+    <ng-container *ngIf="html.where">
+      <div class="tg-objperson--where" [innerHtml]="'('+ html.where.title + ')'"></div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="html.desc">
+    <div class="tg-objperson--descbase" 
+      [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
+    <div class="tg-objperson--descdetail tg-green" 
+      [innerHtml]="html.desc.details | dataToHtml | capitalizeFirst"></div>
+  </ng-container>
+
+  <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-objpers-container>
+</div>
+
+

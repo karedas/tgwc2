@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+:host {
+    flex: 0 0 21px;
+    margin: auto 8px auto 0 !important;
+}
+
+  .hstat {
+    background-position: 0 0px;
+    display: inline-block;
+    background: url($imgPath + '/interface/obj_mob_health_small.png') no-repeat;
+    box-sizing: content-box;
+    height: 13px;
+    width: 21px;
+  }

@@ -1,0 +1,25 @@
+.tg-generic-page {
+    margin-bottom: 1em;
+    line-height: 1.2em;
+    display: flex;
+
+    .tg-generic-page--container {
+        border: 1px solid #066101;
+        padding: 1em;
+        position: relative;
+    }
+
+    .tg-generic-page--title {
+
+        left: 50%;
+        transform: translateX(-50%);
+        background: black;
+        padding: 0 1em;
+        white-space: nowrap;
+        margin-top: -17px;
+        margin-bottom: 1em;
+        position: relative;
+        text-align: center;
+        display: table;
+    }
+}

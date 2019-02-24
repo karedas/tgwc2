@@ -1,0 +1,27 @@
+
+  ng-scrollbar.scrollbar {
+    --scrollbar-color: transparent;
+    --scrollbar-container-color: transparent;
+    --scrollbar-thumb-color: #332f25;
+    --scrollbar-thumb-hover-color: #4c4535;
+    --scrollbar-border-radius: 0;
+    --scrollbar-size: 6px;
+    --scrollbar-padding: 2px;
+    --scroll-view-margin: 0;
+    --scroll-view-color: transparent;
+    max-height: 100%;
+
+  }
+
+  ng-scrollbar.scrollbar-light {
+    --scrollbar-color: transparent;
+    --scrollbar-container-color: #c3a87c;
+    --scrollbar-thumb-color: #332f25;
+    --scrollbar-thumb-hover-color: #4c4535;
+    --scrollbar-border-radius: 0;
+    --scrollbar-size: 6px;
+    --scrollbar-padding: 4px;
+    --scroll-view-margin: 0;
+    --scroll-view-color: transparent;
+    max-height: 100%;
+  }

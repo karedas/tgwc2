@@ -1,0 +1,19 @@
+<p-dialog #dialog 
+  [(visible)]="visible" 
+  [header]="config.header"
+  [showHeader]="config.header ? true : false"
+  [modal]="config.modal"
+  [responsive]="true" 
+  [resizable]="config.resizable"
+  [draggable]="config.draggable"
+  [maximizable]="config.maximizable"
+  [styleClass]="config.styleClass"
+  [appendTo]="'body'"
+  [blockScroll]="config.blockScroll"
+  [contentStyle]="config.contentStyle"
+  (onHide)="onHide($event)"
+  [style]="config.style">
+  <div style="overflow:hidden; height: 100%;"(click)="bringToFront()" >
+    <ng-content></ng-content>
+  </div>
+</p-dialog>

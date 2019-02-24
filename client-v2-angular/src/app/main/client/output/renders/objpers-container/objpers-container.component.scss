@@ -1,0 +1,14 @@
+@import '~src/scss/colors';
+
+:host {
+  padding: .5em .5em 0;
+  display: block;
+}
+
+.tg-objperson--title {
+  padding:1em 0;
+}
+
+.tg-objperson--equippos {
+  margin-right: .5em!important;
+}

@@ -1,0 +1,13 @@
+
+as-split.tg-output--splitter {
+	&.is-horizontal {
+		> .as-split-gutter {
+			border: 0;
+			background: url($imgPath + '/borders/border-002-tiny-v.png') center center repeat-y;
+			background-color: transparent;
+		}
+		.as-split-gutter-icon {
+			background-image: none!important;
+		}
+	}
+}

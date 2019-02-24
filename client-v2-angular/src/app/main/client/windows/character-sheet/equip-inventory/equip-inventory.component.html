@@ -1,0 +1,102 @@
+<div style="height: 100%">
+  <!-- ######## Ability ########  -->
+  <div class="eqinv-container">
+    <ng-container *ngIf="openedSubTab == 'inventory'">
+      <div class="inventory-list tg-shadow-inset" fxLayout="column" *ngIf="inventory$ | async; let inventory">
+        <h3>
+          Inventario
+        </h3>
+        <div fxLayout="column">
+          <div class="eqinv-caption" fxLayout="row" fxFlex="0 0 auto">
+            <div fxFlex="0 0 60%" fxLayoutAlign="center center">Oggetto</div>
+            <div fxFlex="0 0 20%" fxLayoutAlign="center center">Quantità</div>
+            <div fxFlex="0 0 20%" fxLayoutAlign="center center">Peso</div>
+          </div>
+          <ng-scrollbar class="scrollbar" [shown]="'always'" [compact]="true">
+            <div class="eqinv-wrapper-list" fxLayout="column">
+              <ng-container *ngFor="let item of inventory.list">
+                <div fxFlex="1 0 auto" class="eqinv-item-wrap">
+                  <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
+                    <tg-icons [icon]="item.icon"></tg-icons>
+                    <tg-hstat [condprc]="item.condprc"></tg-hstat>
+                    <span> {{item.desc}}</span>
+                  </div>
+                  <div class="eqinv-item-qty" fxFlex="0 0 20%" fxLayoutAlign="center center">
+                    {{item.sz || '1'}}
+                  </div>
+                  <div class="eqinv-item-weight" fxFlex="0 0 20%" fxLayoutAlign="center center">
+                    {{item.wgt}} pt</div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-scrollbar>
+        </div>
+        <ng-container 
+          [ngTemplateOutlet]="equipInvAction"
+          [ngTemplateOutletContext]="{wprc: inventory.wprc, weight: inventory.weight}">
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="openedSubTab == 'equip'">
+      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equipment$ | async; let equip">
+        <h3>
+          Equipaggiamento
+        </h3>
+        <div fxLayout="column">
+          <div class="eqinv-caption" fxLayout="row" fxFlex="0 0 auto">
+            <div fxFlex="0 0 30%" fxLayoutAlign="flex-end center">Dove</div>
+            <div fxFlex="0 0 55%" fxLayoutAlign="center center">Oggetto</div>
+            <div fxFlex="0 0 15%" fxLayoutAlign="center center">Peso</div>
+          </div>
+          <ng-scrollbar class="scrollbar" [shown]="'always'" [compact]="true">
+            <div class="eqinv-wrapper-list" fxLayout="column">
+              <ng-container *ngFor="let item of equip | keyvalue">
+                <div fxFlex="1 0 auto" *ngIf="equipPositionValue[item.key]" class="eqinv-item-wrap">
+                  <div class="eqinv-item-position" fxFlex="0 0 30%" fxLayoutAlign="flex-end center">
+                    <span class="tg-yellow">{{ equipPositionValue[item.key] }}</span>
+                  </div>
+                  <div class="eqinv-item" fxFlex="0 0 55%" fxLayoutAlign="start center">
+                    <tg-icons [icon]="item.value[0].icon"></tg-icons>
+                    <tg-hstat [condprc]="item.value[0].condprc"></tg-hstat>
+                    <span> {{item.value[0].desc}}</span>
+                  </div>
+                  <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="center center">{{item.value[0].wgt}}
+                    pt</div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-scrollbar>
+        </div>
+        <ng-container 
+          [ngTemplateOutlet]="equipInvAction"
+          [ngTemplateOutletContext]="{wprc: equip.wprc, weight: equip.weight}">
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+
+<ng-template #equipInvAction let-wprc="wprc" let-weight="weight">
+  <div class="eqinv-totalweight" fxFlex="0 1 auto">
+    <div class="eqinv-switch-action">
+      <div class="wrap-btnend-box"
+        [ngClass]="{'active': openedSubTab == 'equip'}">
+        <button class="tg-button btn-equip-graph"
+          (mouseup)="buttonClick('equip')"
+          >Equip</button>
+      </div>
+      <div class="wrap-btnend-box"
+        [ngClass]="{'active': openedSubTab == 'inventory'}">
+        <button class="tg-button btn-inventario-graph" 
+          (mouseup)="buttonClick('inventory')">Inventario</button>
+      </div>
+    </div>
+    <div class="eqinv-totalweight-label" fxFlex="1 0 auto" fxLayoutAlign="flex-end center">
+      Ingombro:&nbsp;<span class="tg-red">{{wprc}} / 100 </span>
+    </div>
+    <div class="eqinv-totalweight-value" fxFlex="0 0 auto" fxLayoutAlign="center center">
+      - Peso Totale:&nbsp;<b class="tg-brown">{{weight}} pt</b>
+    </div>
+  </div>
+</ng-template>
