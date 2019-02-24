@@ -202,14 +202,23 @@ function SocketServer(db) {
 	
 		// Normal server->client data handler. Move received data to websocket
 		function sendToServer(msg) {
+
 			tgconn.write(msg +'\n');
 		}
 
 		// Normal server->client data handler. Move received data to websocket
 		function sendToClient(msg) {
+
+
 			// Copy the data to the client
 			websocket.emit('data', convert.toHtml(msg.toString()));
 		};
+
+		// Socket close event handler
+		tgconn.on('close', function(){
+			websocket.disconnect();
+			// Close the websocket
+		});
 
 		// Handshaking server->client handler data handler
 		// This is used only until login
