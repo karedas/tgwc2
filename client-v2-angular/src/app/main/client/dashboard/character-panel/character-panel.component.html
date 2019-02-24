@@ -1,155 +1,158 @@
-<div class="tg-characterpanel b-controlpanel" *ngIf="toggleStatus$ | async">
-  <div 
-    class="tg-characterpanel-wrap"  
-    *ngIf="hero$ | async as hero" 
-    fxFlex="100" 
-    fxLayout="row">
-    <!-- Character Detail -->
-    <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
-      <!-- Character Avatar -->
-      <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm>
-        <div class="tg-avatar-wrap">
-          <img src="{{env.media_address + hero.image ||'assets/images/interface/default_avatar.png'}}" alt="Avatar" />
+<ng-container *ngIf="hero$ | async as hero" >
+  
+  <div class="tg-characterpanel b-controlpanel" *ngIf="toggleStatus$ | async">
+    <div 
+      class="tg-characterpanel-wrap"  
+      fxFlex="100" 
+      fxLayout="row">
+      <!-- Character Detail -->
+      <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
+        <!-- Character Avatar -->
+        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm>
+          <div class="tg-avatar-wrap">
+            <img src="{{env.media_address + hero.image ||'assets/images/interface/default_avatar.png'}}" alt="Avatar" />
+          </div>
+          <div class="tg-border-box">
+            <div class="tg-border tg-border-top"></div>
+            <div class="tg-border tg-border-left"></div>
+            <div class="tg-border tg-border-right"></div>
+            <div class="tg-border tg-border-bottom"></div>
+          </div>
         </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
-      </div>
-
-      <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto">
-
-        <!-- Character Name & Status -->
-        <div class="tg-infocharname" fxLayout="row">
-          <span class="charName" fxHide fxShow.gt-sm>{{hero.name}}</span>
-          <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
-            <!-- Conva -->
-            <div *ngIf="hero.conva === '1'" class="status-conva" fxLayout
-              pTooltip="Sei <b class='tg-yellow'>convalescente!</b>" tooltipPosition="top" showDelay="300" hideDelay="100" escape="false" [escape]="false">
-              <div class="status-icon-box">
-                <i></i>
+  
+        <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto">
+  
+          <!-- Character Name & Status -->
+          <div class="tg-infocharname" fxLayout="row">
+            <span class="charName" fxHide fxShow.gt-sm>{{hero.name}}</span>
+            <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
+              <!-- Conva -->
+              <div *ngIf="hero.conva === '1'" class="status-conva" fxLayout
+                pTooltip="Sei <b class='tg-yellow'>convalescente!</b>" tooltipPosition="top" showDelay="300" hideDelay="100" escape="false" [escape]="false">
+                <div class="status-icon-box">
+                  <i></i>
+                </div>
               </div>
-            </div>
-            <!-- Money -->
-            <div *ngIf="money" class="status-money infostatus-block" fxLayout
-              pTooltip="I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false">
-              <div class="status-icon-box">
-                <i></i>
+              <!-- Money -->
+              <div *ngIf="money" class="status-money infostatus-block" fxLayout
+                pTooltip="I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false">
+                <div class="status-icon-box">
+                  <i></i>
+                </div>
+                <span class="tg-yellow">{{money}}&nbsp;{{moneyValue}}</span>
               </div>
-              <span class="tg-yellow">{{money}}&nbsp;{{moneyValue}}</span>
-            </div>
-            <!-- Position -->
-            <div 
-              pTooltip="Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
-              *ngIf="hero.position" class="status-position" fxLayout [ngClass]="{
-                'pos-0': (hero.position == '0'),
-                'pos-2': (hero.position == '2'),
-                'pos-3': (hero.position == '3'),
-                'pos-4': (hero.position == '4'),
-                'pos-5': (hero.position == '5'),
-                'pos-6': (hero.position == '6')
-              }">
-              <div class="status-icon-box">
-                <i></i>
-              </div>
-              <span>{{ hero_pos[hero.position] }}</span>
-            </div>
-            <!-- Speed -->
-            <div 
-              pTooltip="Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
-              *ngIf="hero.walk; let walk;" class="status-walk" fxLayout [ngClass]="{
-                'walk-0': (walk == 'passeggio'),
-                'walk-1': (walk == 'camminata'),
-                'walk-2': (walk == 'marcia'),
-                'walk-3': (walk == 'corsa'),
-                'walk-4': (walk == 'scatto')
-              }">
-              <div class="status-icon-box">
-                <i></i>
-              </div>
-              <span class="tg-green">{{ walk | slice:0:3}}</span>
-            </div>
-            <ng-container *ngIf="hero.combat; let combatSet">
-                <!-- Combat: Difesa -->
+              <!-- Position -->
               <div 
-                pTooltip="Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
-                class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
-                  'mod-par-a': (combatSet?.mod == 'deflettere'),
-                  'mod-par-s': (combatSet?.mod == 'parare'),
-                  'mod-sch': (combatSet?.mod == 'schivare')
+                pTooltip="Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
+                *ngIf="hero.position" class="status-position" fxLayout [ngClass]="{
+                  'pos-0': (hero.position == '0'),
+                  'pos-2': (hero.position == '2'),
+                  'pos-3': (hero.position == '3'),
+                  'pos-4': (hero.position == '4'),
+                  'pos-5': (hero.position == '5'),
+                  'pos-6': (hero.position == '6')
                 }">
                 <div class="status-icon-box">
                   <i></i>
                 </div>
-                <span>{{combatSet.mod | slice:0:3}}</span>
+                <span>{{ hero_pos[hero.position] }}</span>
               </div>
-              <!-- Combat: Atteggiamento -->
+              <!-- Speed -->
               <div 
-                pTooltip="Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
-                class="status-combat-attegg" fxLayout>
+                pTooltip="Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
+                *ngIf="hero.walk; let walk;" class="status-walk" fxLayout [ngClass]="{
+                  'walk-0': (walk == 'passeggio'),
+                  'walk-1': (walk == 'camminata'),
+                  'walk-2': (walk == 'marcia'),
+                  'walk-3': (walk == 'corsa'),
+                  'walk-4': (walk == 'scatto')
+                }">
                 <div class="status-icon-box">
                   <i></i>
                 </div>
-                <span>{{combatSet.atteg | slice:0:3}}</span>
+                <span class="tg-green">{{ walk | slice:0:3}}</span>
               </div>
-            </ng-container>
-
+              <ng-container *ngIf="hero.combat; let combatSet">
+                  <!-- Combat: Difesa -->
+                <div 
+                  pTooltip="Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
+                  class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
+                    'mod-par-a': (combatSet?.mod == 'deflettere'),
+                    'mod-par-s': (combatSet?.mod == 'parare'),
+                    'mod-sch': (combatSet?.mod == 'schivare')
+                  }">
+                  <div class="status-icon-box">
+                    <i></i>
+                  </div>
+                  <span>{{combatSet.mod | slice:0:3}}</span>
+                </div>
+                <!-- Combat: Atteggiamento -->
+                <div 
+                  pTooltip="Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>" tooltipPosition="top" showDelay="300" hideDelay="100" [escape]="false"
+                  class="status-combat-attegg" fxLayout>
+                  <div class="status-icon-box">
+                    <i></i>
+                  </div>
+                  <span>{{combatSet.atteg | slice:0:3}}</span>
+                </div>
+              </ng-container>
+  
+            </div>
           </div>
+  
+          <!-- Character Status Bars -->
+          <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
+            <div class="tg-extrabars" fxLayout="row">
+              <div class="barcont barthin lft"
+                pTooltip="Vita" tooltipPosition="top" showDelay="300" hideDelay="100">
+                <span class="tg-statusbar-text">
+                  <i>{{ hero.status?.hit }}</i> / 100</span>
+                <span class="red barC healthbar" [style.width.%]="hero.status?.hit"></span>
+              </div>
+              <div class="barcont barthin"
+                pTooltip="Salute" tooltipPosition="top" showDelay="300" hideDelay="100">
+                <span class="tg-statusbar-text">
+                  <i>{{ hero.status?.move }}</i> / 100</span>
+                <span class="green barC movebar" [style.width.%]="hero.status?.move"></span>
+              </div>
+            </div>
+            <div class="tg-extrabars" fxLayout="row">
+              <div class="barcont barthin lft"
+                pTooltip="Fame" tooltipPosition="top" showDelay="300" hideDelay="100">
+                <span class="tg-statusbar-text">
+                  <i>{{ hero.status?.food }}</i> / 100</span>
+                <span class="orange barC hungrybar" [style.width.%]="hero.status?.food"></span>
+              </div>
+              <div class="barcont barthin"
+                pTooltip="Sete" tooltipPosition="top" showDelay="300" hideDelay="100">
+                <span class="tg-statusbar-text">
+                  <i>{{ hero.status?.drink}}</i> / 100</span>
+                <span class="blue barC thirstbar" [style.width.%]="hero.status?.drink"></span>
+              </div>
+            </div>
+          </div>
+  
         </div>
-
-        <!-- Character Status Bars -->
-        <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
-          <div class="tg-extrabars" fxLayout="row">
-            <div class="barcont barthin lft"
-              pTooltip="Vita" tooltipPosition="top" showDelay="300" hideDelay="100">
-              <span class="tg-statusbar-text">
-                <i>{{ hero.status?.hit }}</i> / 100</span>
-              <span class="red barC healthbar" [style.width.%]="hero.status?.hit"></span>
-            </div>
-            <div class="barcont barthin"
-              pTooltip="Salute" tooltipPosition="top" showDelay="300" hideDelay="100">
-              <span class="tg-statusbar-text">
-                <i>{{ hero.status?.move }}</i> / 100</span>
-              <span class="green barC movebar" [style.width.%]="hero.status?.move"></span>
-            </div>
-          </div>
-          <div class="tg-extrabars" fxLayout="row">
-            <div class="barcont barthin lft"
-              pTooltip="Fame" tooltipPosition="top" showDelay="300" hideDelay="100">
-              <span class="tg-statusbar-text">
-                <i>{{ hero.status?.food }}</i> / 100</span>
-              <span class="orange barC hungrybar" [style.width.%]="hero.status?.food"></span>
-            </div>
-            <div class="barcont barthin"
-              pTooltip="Sete" tooltipPosition="top" showDelay="300" hideDelay="100">
-              <span class="tg-statusbar-text">
-                <i>{{ hero.status?.drink}}</i> / 100</span>
-              <span class="blue barC thirstbar" [style.width.%]="hero.status?.drink"></span>
-            </div>
-          </div>
-        </div>
-
       </div>
+      <!-- Combat Panel -->
+      <div class="tg-combatpanel" *ngIf="inCombat" fxFlex="0 0 auto" fxHide fxShow.gt-sm>
+        <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
+      </div>
+  
+      <ng-container *ngIf="inCombat; else extraboardDisplayStandard">
+        <tg-extraboard fxLayout="column" fxFlex="0 0 auto" *ngIf="activeMediaQuery === 'xl'"></tg-extraboard>
+      </ng-container>
+      <ng-template #extraboardDisplayStandard>
+        <tg-extraboard fxLayout="column" fxFlex="0 0 auto" fxHide fxShow.gt-md></tg-extraboard>
+      </ng-template>
+  
     </div>
-    <!-- Combat Panel -->
-    <div class="tg-combatpanel" *ngIf="inCombat" fxFlex="0 0 auto" fxHide fxShow.gt-sm>
-      <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon" [enemyName]="enemyName"></tg-combat-panel>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
-
-    <ng-container *ngIf="inCombat; else extraboardDisplayStandard">
-      <tg-extraboard fxLayout="column" fxFlex="0 0 auto" *ngIf="activeMediaQuery === 'xl'"></tg-extraboard>
-    </ng-container>
-    <ng-template #extraboardDisplayStandard>
-      <tg-extraboard fxLayout="column" fxFlex="0 0 auto" fxHide fxShow.gt-md></tg-extraboard>
-    </ng-template>
-
   </div>
-  <div class="tg-border-box">
-    <div class="tg-border tg-border-top"></div>
-    <div class="tg-border tg-border-left"></div>
-    <div class="tg-border tg-border-right"></div>
-    <div class="tg-border tg-border-bottom"></div>
-  </div>
-</div>
+  
+</ng-container>

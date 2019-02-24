@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { DialogService as DynamicDialogService, DynamicDialogConfig } from 'primeng/api';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { Observable } from 'rxjs';
@@ -6,7 +6,6 @@ import { CookieLawComponent } from './cookie-law/cookie-law.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
-import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,15 +17,20 @@ export class WindowsService {
   private dd: any;
   // Generic Dialogs list
   private gd: any;
+  
 
+  private render: Renderer2
 
   constructor(
-
     private dynamicDialogService: DynamicDialogService,
-    private genericDialogService: GenericDialogService
+    private genericDialogService: GenericDialogService,
+    rendererFactory: RendererFactory2
   ) {
+    
     this.dd = new Map();
     this.gd = new Map();
+    this.render = rendererFactory.createRenderer(null, null);
+ 
   }
 
   openWelcomeNews() {
@@ -41,6 +45,12 @@ export class WindowsService {
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
 
+      this.render.addClass(document.body, 'overlay-dark');
+
+      ref.onClose.subscribe(
+       () => this.render.removeClass(document.body, 'overlay-dark')
+      )
+      
       this.dd.set(ref, 'welcomenews');
 
   }
@@ -64,10 +74,18 @@ export class WindowsService {
       <DynamicDialogConfig>{
         blockScroll: true,
         showHeader: false,
+        styleClass: 'smartlogin',
         modal: true,
         width: 'auto',
         height: 'auto',
       });
+
+      this.render.addClass(document.body, 'overlay-dark');
+
+      ref.onClose.subscribe(
+       () => this.render.removeClass(document.body, 'overlay-dark')
+      )
+
   }
 
   openCharacterSheet(detail?: string) {
@@ -162,7 +180,9 @@ export class WindowsService {
           'height': '100%'
         }
       });
+
       this.gd.set(ref);
+      
       return ref;
   }
 

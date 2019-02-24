@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DataToHtmlPipe implements PipeTransform {
 
-  transform(value: any, formaText?: boolean, styleclass?: string): string {
+  transform(value: any, formaText?: boolean, brParse?: boolean, styleclass?: string): string {
     value = value.replace(/&B/gm, '<span class="tg-gray">');
     value = value.replace(/&R/gm, '<span class="tg-lt-red">');
     value = value.replace(/&G/gm, '<span class="tg-lt-green">');
@@ -24,7 +24,9 @@ export class DataToHtmlPipe implements PipeTransform {
     value = value.replace(/&w/gm, '<span class="tg-lt-white">');
     value = value.replace(/&-/gm, '</span>');
 
-    value = value.replace(/\n/gm, '<br>');
+    if(brParse) {
+      value = value.replace(/\n/gm, '<br>');
+    }
 
     if (formaText) {
       let page = '';

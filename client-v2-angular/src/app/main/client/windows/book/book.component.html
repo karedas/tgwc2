@@ -13,7 +13,7 @@
                       {{page.title | capitalizeFirst}}
                     </div>
                     <i class="tg-book-language" *ngIf="page.language">(C'è scritto qualcosa in {{page.language}})</i>
-                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml">
+                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true">
                     </div>
 
                   </div>

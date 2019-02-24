@@ -53,3 +53,7 @@ export interface IHero {
   pietoso?: number;
   position?: number;
 }
+
+export class Hero implements IHero {
+  constructor() {}
+}

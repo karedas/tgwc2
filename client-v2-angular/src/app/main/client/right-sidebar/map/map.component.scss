@@ -5,9 +5,12 @@
 // @import '~@angular/flex-layout/mq';
 @import 'utils/fix';
 
+@import 'fog';
+@import 'rain';
 
 :host {
-  
+ 
+
   background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
   background-size: 100%;
   position: relative;

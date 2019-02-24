@@ -186,9 +186,7 @@ tg-text {
       flex: 1 1 100% !important;
     }
 
-    &.expandlist.open:after {
-      transform: rotate(90deg);
-    }
+
   }
 
   .tg-expandedlist {
@@ -257,7 +255,7 @@ tg-text {
   }
 
   .size-qty {
-    margin-right: 16px !important;
+    margin-right: 20px !important;
     background: #2a1f15;
     color: white;
     height: auto;
@@ -288,6 +286,11 @@ tg-text {
       right: -16px;
       position: absolute;
     }
+
+  }
+
+  &.expandlist.open .size-qty:after {
+    transform: rotate(90deg);
   }
 
   .tg-extraoutput--header {

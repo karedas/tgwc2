@@ -191,8 +191,6 @@
 
     // CONV
     .status-conva {
-      padding-left: 1.5em;
-      margin-right: auto;
       .status-icon-box i {
         @include sprite($conva-ng-sprite);
         margin-top: 2px;

@@ -1,6 +1,6 @@
 <div class="tg-generic-page" *ngIf="html as content">
   <div class="tg-generic-page--container">
     <div class="tg-generic-page--title tg-yellow">{{content.title}}</div>
-    <div class="tg-generic-page--text" [innerHtml]="content.text | dataToHtml"></div>
+    <div class="tg-generic-page--text" [innerHtml]="content.text | dataToHtml: false : true"></div>
   </div>
 </div>

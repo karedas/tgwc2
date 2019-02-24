@@ -1,0 +1,17 @@
+@import 'variables';
+/* Others */
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+  // Fog
+  .rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border-radius: 50%;
+    overflow: hidden;
+    background: url($imgPath + '/mapobj/rain.gif') repeat-x;
+    background-size: cover;
+    background-position: center;
+  }

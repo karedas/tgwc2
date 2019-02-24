@@ -1,10 +1,10 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import * as fromSelectors from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Map } from 'src/app/models/data/map.model';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, delay } from 'rxjs/operators';
 import { MapSnowService } from './map-snow.service';
 
 
@@ -14,7 +14,8 @@ export const images_path = './assets/images/';
 @Component({
   selector: 'tg-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MapComponent implements OnDestroy, AfterViewInit {
@@ -26,7 +27,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   private _unsubscribeAll: Subject<any>;
   isOnMap = false;
 
-  private map$: Observable<Map>;
+  map$: Observable<Map>;
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
 
@@ -41,7 +42,9 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   private mapShadowImg: HTMLImageElement[] = [];
   private mapShadowTile: HTMLImageElement;
 
-  showSnow = false;
+  showSnow: boolean;
+  showRain: boolean;
+  showFog: boolean;
 
   constructor(
     private store: Store<DataState>,
@@ -52,7 +55,11 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     this.maxMapHeight = 9;
     this.maxMapWidth = 9;
 
+
+    this.map$ = this.store.select(fromSelectors.getMap);
+
     this._unsubscribeAll = new Subject();
+
   }
 
   onMouseEvent($event) {
@@ -61,7 +68,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
 
-    this.map$ = this.store.select(fromSelectors.getMap);
 
     this.layerMap = new Array(this.maxMapHeight);
     for (let y = 0; y < this.maxMapHeight; ++y) {
@@ -70,7 +76,9 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
     this.prepareCanvas();
 
-    this.map$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
+    this.map$.pipe(
+      delay(100),
+      takeUntil(this._unsubscribeAll)).subscribe(
       (map: Map) => {
         if (map !== undefined) {
           this.updateMap(map);
@@ -113,8 +121,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
 
   }
-
-  private fog() { }
 
   public updateMap(dataMap): void {
     this.drawCanvasMap(dataMap);
@@ -208,13 +214,18 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     }
 
     // Fog
-    // if(map.f) {
-    //  _.MAPCTX.drawImage(mapfogimg, 0, 0);
-    // }
+    if(dataMap.f) {
+      this.showFog = true;
+    } else {
+      this.showFog = false;
+    }
+
     // Rain
-    // if(map.r) {
-    //  _.MAPCTX.drawImage(mapfogimg, 0, 0);
-    // }
+    if(dataMap.r) {
+      this.showRain = true;
+    } else {
+      this.showRain = false;
+    }
 
     if (dataMap.s) {
       setTimeout(() => {

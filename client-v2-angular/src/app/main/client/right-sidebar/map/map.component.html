@@ -1,10 +1,13 @@
 <div (mouseenter)="onMouseEvent($event)" (mouseleave)="onMouseEvent($event)">
   <!-- Mini Mappa -->
   <tg-directions [isOnMap]="isOnMap"></tg-directions>
-  <div class="tg-map-box">
+  <div class="tg-map-box" *ngIf="map$ | async">
+    <div class="rain" *ngIf="showRain"></div>
+    <div class="fog" *ngIf="showFog"></div>
     <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>
     </canvas>
-    <canvas [ngClass]="{'run': showSnow}" class="canvas-snow" width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #snow></canvas>
+    <canvas [ngClass]="{'run': showSnow}" class="canvas-snow" width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}"
+      #snow></canvas>
     <canvas id="rainCanvas" class="canvas-rain"></canvas>
   </div>
 </div>
