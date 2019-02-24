@@ -3,10 +3,11 @@ import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, interval, timer } from 'rxjs';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { switchMap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,9 +19,8 @@ export class GameService {
   _focusInput: Subject<any>;
 
   private commandsList$: BehaviorSubject<any>;
-
-
-  clientUpdateNeeded = {
+  public serverStat: Observable<any>;
+  public clientUpdateNeeded = {
     inventory: 0,
     equipment: 0,
     room: 0
@@ -37,8 +37,9 @@ export class GameService {
     private http: HttpClient
   ) {
 
-    this._focusInput = new Subject();
+    this.serverStat = new BehaviorSubject<any>(null);
     this.commandsList$ = new BehaviorSubject(null);
+    this._focusInput = new Subject();
 
     this.init();
   }
@@ -48,9 +49,9 @@ export class GameService {
   }
 
   loadServerStat() {
-    this.http.get(environment.serverstatAddress).subscribe(
-      resource => console.log(resource))
-    
+    this.serverStat = timer(0, 25000).pipe(
+      switchMap(() =>  this.http.get(environment.serverstatAddress)),
+    )
   }
 
   startGame(initialData) {

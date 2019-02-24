@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';
 import { SocketService } from 'src/app/services/socket.service';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-login',
@@ -19,10 +20,12 @@ import { SocketService } from 'src/app/services/socket.service';
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  gitVersion = gitInfo.raw;
+  gitVersion = gitInfo.hash;
+  serverStat: any ;
+
   loginForm: FormGroup;
   loginFormErrors: any;
-  loginFailed: boolean;
+  loginFailed: boolean;1
   loginSubscription: Subscription;
 
 
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private game: GameService,
     private socketService: SocketService,
     @Inject(PLATFORM_ID) private platformId: any
   ) {
@@ -63,6 +67,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.socketloginReplayMessage = err;
           }
         });
+
+    this.game.serverStat.subscribe(
+      (stat: string) => { this.serverStat = stat}
+    ) 
+    
   }
 
   resetLoginState() {
