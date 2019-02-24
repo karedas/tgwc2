@@ -12,9 +12,11 @@
       <div class="tg-persons--line interact" [ngClass]="{'expandlist': person.sz, 'open': togglePanel[i]}" (mousedown)="onExpand($event, person, i, person.sz)">
         <tg-icons [icon]="person.icon" (mousedown)="onInteract($event, person, i)" pTooltip="Guarda" tooltipPosition="left"
           showDelay="500" hideDelay="100"></tg-icons>
-        <tg-hstat [condprc]="person.condprc"></tg-hstat>
+          <tg-hstat [condprc]="person.condprc" *ngIf="!person.sz; else quantity"></tg-hstat>
+          <ng-template #quantity>
+            <div class="size-qty"><span>{{person.sz}}</span></div>
+          </ng-template>
         <div class="tg-persons--itemdesc" [innerHtml]="person.desc | dataToHtml"></div>
-        <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
       </div>
 
       <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[i]" fxLayout="row">
@@ -22,10 +24,12 @@
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
           <tg-icons [icon]="person.icon"></tg-icons>
 
-          <tg-hstat [condprc]="person.condprc"></tg-hstat>
+          <tg-hstat [condprc]="person.condprc" *ngIf="!person.sz; else quantity_2"></tg-hstat>
+          <ng-template #quantity_2>
+              <div class="size-qty"><span>{{person.sz}}</span></div>
+          </ng-template>
 
           <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
-          <div class="size-qty" *ngIf="person.sz">{{person.sz}}</div>
         </div>
       </div>
 
@@ -41,10 +45,11 @@
         <tg-icons [icon]="object.icon" (mousedown)="onInteract($event, object, i)" pTooltip="Guarda" tooltipPosition="left"
           showDelay="500" hideDelay="100"></tg-icons>
 
-        <tg-hstat [condprc]="object.condprc"></tg-hstat>
-
+        <tg-hstat [condprc]="object.condprc" *ngIf="!object.sz; else quantity_3"></tg-hstat>
+        <ng-template #quantity_3>
+          <div class="size-qty"><span>{{object.sz}}</span></div>
+        </ng-template>
         <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
-        <div class="size-qty" *ngIf="object.sz">{{object.sz}}</div>
       </div>
 
       <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="row">

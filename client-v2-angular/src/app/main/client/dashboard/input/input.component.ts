@@ -12,7 +12,6 @@ import { map, takeUntil, filter } from 'rxjs/operators';
 import { UIState } from 'src/app/store/state/ui.state';
 import { InputService } from './input.service';
 import { State } from 'src/app/store';
-import { IHero } from 'src/app/models/data/hero.model';
 
 @Component({
   selector: 'tg-input',

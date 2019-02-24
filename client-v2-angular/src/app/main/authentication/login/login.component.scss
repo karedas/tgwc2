@@ -84,8 +84,11 @@
     }
 
     h2 {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.2;
+      font-weight: normal;
+      color: #a79c8c;
+
 
       span {
         color: white;
@@ -158,6 +161,7 @@
     border-top: 1px solid #55584d;
     border-bottom: 1px solid #55584d;
     display: inline-block;
+    font-size: 12px;
 
     a,
     a:hover {
@@ -203,7 +207,7 @@
 
     a {
       color: #bdb3a3;
-      ;
+      text-decoration: underline;
     }
   }
 }

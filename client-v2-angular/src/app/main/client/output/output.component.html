@@ -7,7 +7,7 @@
       <!-- Output Area -->
       <ng-container *ngIf="extraOutputOpenStatus$ | async; else noextra">
         <as-split [direction]="'horizontal'" class="tg-output--splitter" #splitArea>
-          <as-split-area size="60">
+          <as-split-area size="50">
             <div style="height: 100%; overflow:hidden;">
               <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
                 <div class="tg-output--history">
@@ -21,7 +21,7 @@
               </ng-scrollbar>
             </div>
           </as-split-area>
-          <as-split-area size="40">
+          <as-split-area size="50">
             <div style="height: 100%; overflow:hidden;">
               <div class="tg-output--extradetail">
                 <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extraOutputOpenStatus$ | async"

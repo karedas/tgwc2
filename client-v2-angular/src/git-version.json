@@ -1,10 +1,25 @@
 {
   "dirty": true,
-  "raw": "cf85c88-dirty",
-  "hash": "cf85c88",
-  "distance": null,
-  "tag": null,
-  "semver": null,
-  "suffix": "cf85c88-dirty",
-  "semverString": null
+  "raw": "v2.0.0-beta-0-gbaa2a57-dirty",
+  "hash": "gbaa2a57",
+  "distance": 0,
+  "tag": "v2.0.0-beta",
+  "semver": {
+    "options": {
+      "loose": false,
+      "includePrerelease": false
+    },
+    "loose": false,
+    "raw": "v2.0.0-beta",
+    "major": 2,
+    "minor": 0,
+    "patch": 0,
+    "prerelease": [
+      "beta"
+    ],
+    "build": [],
+    "version": "2.0.0-beta"
+  },
+  "suffix": "0-gbaa2a57-dirty",
+  "semverString": "2.0.0-beta+0.gbaa2a57.dirty"
 }

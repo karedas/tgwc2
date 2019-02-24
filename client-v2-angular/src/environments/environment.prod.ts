@@ -1,4 +1,3 @@
-import gitInfo from 'src/git-version.json';
 
 export const environment = {
   production: true,

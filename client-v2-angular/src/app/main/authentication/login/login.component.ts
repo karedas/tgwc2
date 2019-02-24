@@ -20,7 +20,7 @@ import { GameService } from 'src/app/services/game.service';
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  gitVersion = gitInfo.hash;
+  gitVersion = gitInfo.tag;
   serverStat: any ;
 
   loginForm: FormGroup;
@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.resetLoginState();
 
     this.loginForm = this.formBuilder.group({

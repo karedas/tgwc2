@@ -51,10 +51,12 @@
           (mousedown)="onInteract($event, obj, i, obj.sz)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
 
-        <tg-hstat [condprc]="obj.condprc"></tg-hstat>
+        <tg-hstat [condprc]="obj.condprc" *ngIf="!obj.sz;else objquantity"></tg-hstat>
+        <ng-template #objquantity>
+          <div class="size-qty"><span>{{obj.sz}}</span></div>
+        </ng-template>
         
         <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
-        <div class="size-qty" *ngIf="obj.sz">{{obj.sz}}</div>
       </div>
       <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
           <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
