@@ -5,7 +5,7 @@
         <i class="far fa-arrow-alt-circle-right"></i>
       </div> -->
       <!-- Output Area -->
-      <ng-container *ngIf="extraOutputOpenStatus | async as extra; else noextra">
+      <ng-container *ngIf="extraOutputOpenStatus$ | async as extra; else noextra">
         <as-split [direction]="'horizontal'" class="tg-output--splitter" #splitArea>
           <as-split-area size="50">
             <div style="height: 100%; overflow:hidden;">
