@@ -6,12 +6,12 @@ export function reducer(
   action: DataAction
 ): DataState {
   switch (action.type) {
-    
+
     case DataEvenType.IN:
       return Object.assign({}, state, {
         base: [action.payload]
       });
-      
+
     case DataEvenType.OUT:
       return Object.assign({}, state, action.payload);
 
@@ -110,12 +110,12 @@ export function reducer(
     case DataEvenType.DATE:
       return Object.assign({}, state, {
         date: action.payload
-      })
+      });
 
     case DataEvenType.GENERICPAGE:
       return Object.assign({}, state, {
         genericpage: action.payload
-      })
+      });
 
     default:
       return state;

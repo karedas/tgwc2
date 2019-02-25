@@ -54,8 +54,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     this.mapTileHeight = 32;
     this.maxMapHeight = 9;
     this.maxMapWidth = 9;
-
-
     this.map$ = this.store.select(fromSelectors.getMap);
 
     this._unsubscribeAll = new Subject();
@@ -67,15 +65,14 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-
-
     this.layerMap = new Array(this.maxMapHeight);
     for (let y = 0; y < this.maxMapHeight; ++y) {
       this.layerMap[y] = new Array(this.maxMapWidth);
     }
 
+    this.prepareCanvas();
+
     setTimeout(() => {
-      this.prepareCanvas();
       this.map$.pipe(
         takeUntil(this._unsubscribeAll)).subscribe(
         (map: Map) => {
@@ -90,6 +87,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   }
 
   private prepareCanvas(): void {
+    console.log(this.map);
     this.context = (<HTMLCanvasElement>this.map.nativeElement).getContext('2d');
     this.canvasWidth = this.maxMapWidth * this.mapTileWidth;
     this.canvasHeight = this.maxMapHeight * this.mapTileHeight;
@@ -131,10 +129,8 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   public drawCanvasMap(dataMap): void {
     const _ = this;
 
-    let xoff, yoff, xlim, ylim, light;
+    let xoff: number, yoff: number, xlim: number, ylim: number;
     // clip options
-    const radius = 75;
-    const offset = 0;
 
     xoff = (this.maxMapWidth - dataMap.d) / 2;
     yoff = (this.maxMapHeight - dataMap.d) / 2;
@@ -216,14 +212,14 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     }
 
     // Fog
-    if(dataMap.f) {
+    if (dataMap.f) {
       this.showFog = true;
     } else {
       this.showFog = false;
     }
 
     // Rain
-    if(dataMap.r) {
+    if (dataMap.r) {
       this.showRain = true;
     } else {
       this.showRain = false;

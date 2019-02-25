@@ -14,10 +14,10 @@ import { WindowsService } from '../windows.service';
 })
 export class BookComponent implements AfterViewInit, OnDestroy {
 
-  dialogID: string = 'book';
+  dialogID = 'book';
 
   total: number;
-  openedIndexPage: number = 0;
+  openedIndexPage = 0;
   book$: Observable<IBook>;
 
   private _unsubscribeAll: Subject<any>;
@@ -45,14 +45,13 @@ export class BookComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  nextPage(){
-    if((this.openedIndexPage + 1) < this.total) {
+  nextPage() {
+    if ((this.openedIndexPage + 1) < this.total) {
       ++this.openedIndexPage;
-      console.log(this.openedIndexPage);
     }
   }
-  previousPage(){
-    if(this.openedIndexPage !== 0 && this.openedIndexPage <= this.total) {
+  previousPage() {
+    if (this.openedIndexPage !== 0 && this.openedIndexPage <= this.total) {
       this.openedIndexPage--;
     }
   }

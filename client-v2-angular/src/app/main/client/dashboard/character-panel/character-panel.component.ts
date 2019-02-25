@@ -25,12 +25,12 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   hero_pos = hero_position;
 
   inCombat = false;
-  
+
   // Hero Values
   heroImage = 'assets/images/interface/default_avatar.png';
-  money: number = 0;
-  moneyValue: string = '';
-  
+  money = 0;
+  moneyValue = '';
+
   // Enemy Target Values
   enemyHealt = 0;
   enemyMove = 0;
@@ -79,21 +79,19 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
     money = parseInt(money);
 
     if (money < 10) {
-      this.moneyValue = 'mr'
+      this.moneyValue = 'mr';
 
     }
     if (money >= 10 && money < 100) {
-      this.moneyValue = 'ma'
+      this.moneyValue = 'ma';
       dividend = 10;
 
-    }
-    else if (money >= 100 && money < 1000) {
+    } else if (money >= 100 && money < 1000) {
       dividend = 100;
-      this.moneyValue = 'mo'
-    }
-    else if (money >= 1000) {
+      this.moneyValue = 'mo';
+    } else if (money >= 1000) {
       dividend = 1000;
-      this.moneyValue = 'co'
+      this.moneyValue = 'co';
     }
 
     if (money > 0) {

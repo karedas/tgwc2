@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IObjPersEqcont, IObjPersObjcont } from 'src/app/models/data/objpers.model';
-import { GameService } from 'src/app/services/game.service';
 
 import { equip_positions_by_name } from 'src/app/main/common/constants';
+import { InteractService } from '../../services/interact.service';
 
 @Component({
   selector: 'tg-objpers-container',
@@ -20,9 +20,10 @@ export class ObjPersContainerComponent implements OnInit  {
   @Input('eqcont') eqcont: IObjPersEqcont;
   @Input('objcont') objcont: IObjPersObjcont;
 
-  constructor(private game: GameService) {
+  constructor(
+    public interactService: InteractService
+    ) {
      const keysAndProperty = Object.keys( equip_positions_by_name );
-
      this.newListEquip = keysAndProperty.map((val, k) => {
         return equip_positions_by_name[keysAndProperty[k]];
      } );
@@ -44,23 +45,11 @@ export class ObjPersContainerComponent implements OnInit  {
   }
 
   onInteract(event: Event, item: any, index: number, list?: boolean) {
-    event.preventDefault();
-    if (!item.sz) {
-      if (!item.cntnum) {
-        this.game.processCommands(`guarda &${item.mrn[0]}`);
-      } else if (item.cntnum && item.mrn.length > 0) {
-        this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
-      }
-    } else if (list) {
-      const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
-      this.game.processCommands(`guarda &${mrn}`);
-    }
+    this.interactService.interact(event, item, index, list);
   }
 
   onExpand(event: Event, item: any, index: number) {
-    event.preventDefault();
-    //  Is Expandable
-    if (item.sz) {
+    if (this.interactService.isExpandeable(event, item, index)) {
       this.togglePanel[index] = !this.togglePanel[index];
     }
   }

@@ -1,4 +1,4 @@
-export interface IDateTime{
+export interface IDateTime {
     datastr: string;
     year: number;
     month: number;

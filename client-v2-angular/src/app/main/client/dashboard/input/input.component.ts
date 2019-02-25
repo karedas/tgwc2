@@ -30,9 +30,9 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   _extraOutputStatus$: Observable<boolean>;
   _dashBoardStatus$: Observable<boolean>;
   _zenStatus$: BehaviorSubject<boolean>;
-  
+
   private _inCombat$: Observable<any>;
-  inCombat: boolean = false;
+  inCombat = false;
 
 
   private _unsubscribeAll: Subject<any>;
@@ -56,11 +56,10 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     this._inCombat$.pipe(
       takeUntil(this._unsubscribeAll),
       filter(state => !!state)).subscribe(
-      (cc) => { 
-        if(cc.target && typeof cc.target.hit !== 'undefined') {
+      (cc) => {
+        if (cc.target && typeof cc.target.hit !== 'undefined') {
           this.inCombat = Object.keys(cc).length ? true : false;
-        }
-        else {
+        } else {
           this.inCombat = false;
         }
       }

@@ -27,11 +27,11 @@ export const equip_positions_by_name = {
   };
 
 export const hero_position = [
-  'morto', 
+  'morto',
   'ferito mortalmente',
   'bloccato',
   'addormentato',
   'sdraiato',
   'seduto',
   'in piedi'
-]
+];

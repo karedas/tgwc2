@@ -1,7 +1,7 @@
 <div (mouseenter)="onMouseEvent($event)" (mouseleave)="onMouseEvent($event)">
   <!-- Mini Mappa -->
   <tg-directions [isOnMap]="isOnMap"></tg-directions>
-  <div class="tg-map-box" *ngIf="map$ | async">
+  <div class="tg-map-box">
     <div class="rain" *ngIf="showRain"></div>
     <div class="fog" *ngIf="showFog"></div>
     <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>

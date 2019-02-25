@@ -24,7 +24,7 @@ export class DataToHtmlPipe implements PipeTransform {
     value = value.replace(/&w/gm, '<span class="tg-lt-white">');
     value = value.replace(/&-/gm, '</span>');
 
-    if(brParse) {
+    if (brParse) {
       value = value.replace(/\n/gm, '<br>');
     }
 

@@ -1,10 +1,6 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { DataState } from 'src/app/store/state/data.state';
+import { Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { RoomList } from 'src/app/models/data/room.model';
-
-import { equip_positions_by_name } from 'src/app/main/common/constants';
-import { GameService } from 'src/app/services/game.service';
+import { InteractService } from '../../services/interact.service';
 
 @Component({
   selector: 'tg-details-room',
@@ -30,7 +26,7 @@ export class DetailsRoomComponent implements OnInit {
   togglePanel: any = {};
 
 
-  constructor(private store: Store<DataState>, private game: GameService) {
+  constructor(public interactService: InteractService) {
   }
 
   ngOnInit(): void {
@@ -73,29 +69,12 @@ export class DetailsRoomComponent implements OnInit {
     }
   }
 
-  /**
-  * Expand or send Command to Server after click
-  * based on content type, list or single obj / person
-   */
-
   onInteract(event: Event, item: any, index: number, list?: boolean) {
-    event.preventDefault();
-    if (!item.sz) {
-      if (!item.cntnum) {
-        this.game.processCommands(`guarda &${item.mrn[0]}`);
-      } else if (item.cntnum && item.mrn.length > 0) {
-        this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
-      }
-    } else if (list) {
-      const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
-      this.game.processCommands(`guarda &${mrn}`);
-    }
+    this.interactService.interact(event, item, index, list);
   }
 
   onExpand(event: Event, item: any, index: number) {
-    event.preventDefault();
-    //  Is Expandable
-    if (item.sz) {
+    if (this.interactService.isExpandeable(event, item, index)) {
       this.togglePanel[index] = !this.togglePanel[index];
     }
   }

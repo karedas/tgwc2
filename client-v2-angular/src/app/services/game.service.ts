@@ -46,14 +46,14 @@ export class GameService {
     this.init();
   }
 
-  init(){
+  init() {
     this.loadServerStat();
   }
 
   loadServerStat() {
     this.serverStat = timer(0, 25000).pipe(
       switchMap(() =>  this.http.get(environment.serverstatAddress)),
-    )
+    );
   }
 
   startGame(initialData) {
@@ -89,9 +89,7 @@ export class GameService {
         this.lastDataTime = now;
       }
 
-      console.log(this.extraIsOpen);
       if (what.room > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
-        console.log('update room!');
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;

@@ -17,20 +17,20 @@ export class WindowsService {
   private dd: any;
   // Generic Dialogs list
   private gd: any;
-  
 
-  private render: Renderer2
+
+  private render: Renderer2;
 
   constructor(
     private dynamicDialogService: DynamicDialogService,
     private genericDialogService: GenericDialogService,
     rendererFactory: RendererFactory2
   ) {
-    
+
     this.dd = new Map();
     this.gd = new Map();
     this.render = rendererFactory.createRenderer(null, null);
- 
+
   }
 
   openWelcomeNews() {
@@ -49,8 +49,8 @@ export class WindowsService {
 
       ref.onClose.subscribe(
        () => this.render.removeClass(document.body, 'overlay-dark')
-      )
-      
+      );
+
       this.dd.set(ref, 'welcomenews');
 
   }
@@ -84,7 +84,7 @@ export class WindowsService {
 
       ref.onClose.subscribe(
        () => this.render.removeClass(document.body, 'overlay-dark')
-      )
+      );
 
   }
 
@@ -182,7 +182,7 @@ export class WindowsService {
       });
 
       this.gd.set(ref);
-      
+
       return ref;
   }
 

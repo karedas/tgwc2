@@ -11,14 +11,14 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './right-sidebar.component.html',
   styleUrls: ['./right-sidebar.component.scss']
 })
-export class RightSidebarComponent implements OnInit, OnDestroy{
+export class RightSidebarComponent implements OnInit, OnDestroy {
 
   gameData$: Observable<IDateTime>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>
-  ) { 
+  ) {
     this.gameData$ = this.store.pipe(select(getDateTime));
     this._unsubscribeAll = new Subject<any>();
   }

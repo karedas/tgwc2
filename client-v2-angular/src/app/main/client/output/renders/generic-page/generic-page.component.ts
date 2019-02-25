@@ -11,7 +11,7 @@ import { IGenericPage } from 'src/app/models/data/genericpage.model';
 export class GenericPageComponent implements OnInit {
 
   @Input('html') html: IGenericPage;
-  
+
   constructor() { }
 
   ngOnInit() {

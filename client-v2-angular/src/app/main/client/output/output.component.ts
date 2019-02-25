@@ -126,7 +126,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
           this.typeDetail = 'objPers';
           this.endOutputStore();
         });
-    
+
     this._genericPage$.pipe(
       takeUntil(this._unsubscribeAll),
       filter(data => !!data)).subscribe(data => {
@@ -134,8 +134,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         const content = this.setContent('genericpage', this.genericPage);
         this.output.push(content);
         this.endOutputStore();
-      })
-  } 
+      });
+  }
 
   ngAfterViewInit() {
     setTimeout(() => {

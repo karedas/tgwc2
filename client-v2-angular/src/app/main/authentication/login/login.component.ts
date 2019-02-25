@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
   loginFormErrors: any;
-  loginFailed: boolean;1
+  loginFailed: boolean; 1;
   loginSubscription: Subscription;
 
 
@@ -68,9 +68,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
 
     this.game.serverStat.subscribe(
-      (stat: string) => { this.serverStat = stat}
-    ) 
-    
+      (stat: string) => { this.serverStat = stat; }
+    );
+
   }
 
   resetLoginState() {

@@ -195,7 +195,7 @@ export class DataParser {
 
     // Book
     data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
-        let b_parse = JSON.parse(book.slice(6, -1));
+        const b_parse = JSON.parse(book.slice(6, -1));
         this.store.dispatch(new DataActions.BookAction(b_parse));
         return '';
     });

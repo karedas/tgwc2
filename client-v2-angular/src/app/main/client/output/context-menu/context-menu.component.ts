@@ -13,13 +13,13 @@ export class ContextMenuComponent implements OnInit {
   public items: MenuItem[];
   public readonly target: string;
 
-  constructor() { 
+  constructor() {
 
     this.items = [
       { label: 'Prendi', icon: 'pi pi-fw pi-times' },
       { label: 'Indossa', icon: 'pi pi-fw pi-times'},
       { label: 'Posa', icon: 'pi pi-fw pi-times'}
-    ]
+    ];
 
   }
 

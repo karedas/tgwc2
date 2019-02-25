@@ -7,7 +7,7 @@ import { GameService } from 'src/app/services/game.service';
 export class InteractService {
   constructor(private game: GameService) {}
 
-  onInteract(event: Event, item: any, index: number, list?: boolean) {
+  interact(event: Event, item: any, index: number, list?: boolean) {
     event.preventDefault();
     if (!item.sz) {
       if (!item.cntnum) {
@@ -21,11 +21,11 @@ export class InteractService {
     }
   }
 
-  onExpand(event: Event, item: any, index: number) {
+  isExpandeable(event: Event, item: any, index: number): boolean {
     event.preventDefault();
     //  Is Expandable
     if (item.sz) {
-      // this.togglePanel[index] = !this.togglePanel[index];
-    }
+      return true;
+    } else { false; }
   }
 }

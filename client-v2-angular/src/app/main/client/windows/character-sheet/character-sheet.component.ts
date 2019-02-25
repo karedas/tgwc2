@@ -41,7 +41,7 @@ export class CharacterSheetComponent  {
   }
 
   switchPanel(tab: string, event: Event) {
-    
+
     event.stopPropagation();
     event.stopImmediatePropagation();
 
