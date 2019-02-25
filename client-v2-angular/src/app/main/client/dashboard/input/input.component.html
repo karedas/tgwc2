@@ -24,7 +24,7 @@
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleExtraOutput($event)"
-        [ngClass]="{'isActive': extraOutputStatus$ | async}">
+        [ngClass]="{'isActive': _extraOutputStatus$ | async }">
         <fa-icon [icon]="facolumns"></fa-icon>
       </button>
     </div>
@@ -34,7 +34,7 @@
         type="button" 
         class="tg-fnt-button"
         (mousedown)="toggleDashboard($event)"
-        [ngClass]="{'isActive': dashBoardStatus$ | async}">
+        [ngClass]="{'isActive': _dashBoardStatus$ | async}">
         <fa-icon [icon]="faSolarPanel"></fa-icon>
       </button>
     </div>

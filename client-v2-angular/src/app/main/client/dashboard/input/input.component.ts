@@ -1,17 +1,16 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
-
+import { Store, select } from '@ngrx/store';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil, filter } from 'rxjs/operators';
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
 
-import { Store, select } from '@ngrx/store';
-import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
-import { HistoryService } from 'src/app/services/history.service';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { getUIState, getHero } from 'src/app/store/selectors';
-import { map, takeUntil, filter } from 'rxjs/operators';
-import { UIState } from 'src/app/store/state/ui.state';
-import { InputService } from './input.service';
 import { State } from 'src/app/store';
+import { getHero, getExtraOutputStatus, getDashboardVisibility } from 'src/app/store/selectors';
+
+import { HistoryService } from 'src/app/services/history.service';
+import { GameService } from 'src/app/services/game.service';
+import { InputService } from './input.service';
+import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
 
 @Component({
   selector: 'tg-input',
@@ -28,11 +27,9 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   faSolarPanel = faSolarPanel;
   faBullseye = faBullseye;
 
-  extraOutputStatus$: Observable<boolean>;
-  dashBoardStatus$: Observable<boolean>;
-
-  
-  zenStatus$: BehaviorSubject<boolean>;
+  _extraOutputStatus$: Observable<boolean>;
+  _dashBoardStatus$: Observable<boolean>;
+  _zenStatus$: BehaviorSubject<boolean>;
   
   private _inCombat$: Observable<any>;
   inCombat: boolean = false;
@@ -47,8 +44,8 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     private inputService: InputService
   ) {
 
-    this.extraOutputStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.extraOutput));
-    this.dashBoardStatus$ = this.store.pipe(select(getUIState), map((state: UIState) => state.showDashBoard));
+    this._extraOutputStatus$ = this.store.pipe(select(getExtraOutputStatus));
+    this._dashBoardStatus$ = this.store.pipe(select(getDashboardVisibility));
     this._inCombat$ = this.store.pipe(select(getHero));
 
     this._unsubscribeAll = new Subject();

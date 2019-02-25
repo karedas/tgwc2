@@ -5,7 +5,7 @@
         <i class="far fa-arrow-alt-circle-right"></i>
       </div> -->
       <!-- Output Area -->
-      <ng-container *ngIf="extraOutputOpenStatus$ | async; else noextra">
+      <ng-container *ngIf="extraOutputOpenStatus | async as extra; else noextra">
         <as-split [direction]="'horizontal'" class="tg-output--splitter" #splitArea>
           <as-split-area size="50">
             <div style="height: 100%; overflow:hidden;">
@@ -24,7 +24,7 @@
           <as-split-area size="50">
             <div style="height: 100%; overflow:hidden;">
               <div class="tg-output--extradetail">
-                <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extraOutputOpenStatus$ | async"
+                <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extra"
                   [lastDescription]="lastRoomDescription" [type]="typeDetail"></tg-room>
               </div>
             </div>

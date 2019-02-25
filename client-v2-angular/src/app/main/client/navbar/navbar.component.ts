@@ -25,15 +25,23 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     this.menuItems = [{
-      label: 'Gioco',
+      label: 'Client',
       items: [
         { label: 'Log di gioco', disabled: true },
         { label: 'Preferenze', disabled: true },
         {
           label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', separator: false, command: (onclick) => {
-            this.disconnect();
+            this.game.disconnectGame();
           }
         }
+      ]
+    },
+    {
+      label: 'Gioco',
+      items: [
+        { label: 'Lista completa dei comandi', command: (onclick) => {
+          this.game.processCommands('comandi');
+        }}
       ]
     },
     {
@@ -50,12 +58,4 @@ export class NavbarComponent implements OnInit {
       ]
     }];
   }
-
-
-
-  disconnect() {
-    this.game.disconnectGame();
-  }
-
-
 }

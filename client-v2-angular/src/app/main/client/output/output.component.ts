@@ -31,7 +31,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   lastRoom$: Observable<any>;
 
-  extraOutputOpenStatus$: Observable<any>;
+  private extraOutputOpenStatus$: Observable<any>;
   private _baseText$: Observable<any>;
   private _roomBase$: Observable<any>;
   private _objOrPerson$: Observable<any>;
@@ -78,11 +78,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     /** Toggle Splitter Output  view  */
     this.extraOutputOpenStatus$.pipe(
       takeUntil(this._unsubscribeAll))
-        .subscribe(
-        () => {
+        .subscribe((extra_status) => {
+          this.game.extraIsOpen = extra_status;
           this.scrollPanelToBottom();
-        }
-    );
+        });
 
     // Listen Base Text Data
     this._baseText$.pipe(

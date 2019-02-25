@@ -26,6 +26,8 @@ export class GameService {
     room: 0
   };
 
+  public extraIsOpen: boolean;
+
   private lastDataTime = 0;
 
 
@@ -87,7 +89,9 @@ export class GameService {
         this.lastDataTime = now;
       }
 
-      if (what.room > this.clientUpdateNeeded.room && what.room  >  this.clientUpdateNeeded.room ) {
+      console.log(this.extraIsOpen);
+      if (what.room > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
+        console.log('update room!');
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;

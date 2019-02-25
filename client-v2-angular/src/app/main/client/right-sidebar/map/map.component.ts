@@ -74,17 +74,19 @@ export class MapComponent implements OnDestroy, AfterViewInit {
       this.layerMap[y] = new Array(this.maxMapWidth);
     }
 
-    this.prepareCanvas();
-
-    this.map$.pipe(
-      delay(100),
-      takeUntil(this._unsubscribeAll)).subscribe(
-      (map: Map) => {
-        if (map !== undefined) {
-          this.updateMap(map);
+    setTimeout(() => {
+      this.prepareCanvas();
+      this.map$.pipe(
+        takeUntil(this._unsubscribeAll)).subscribe(
+        (map: Map) => {
+          if (map !== undefined) {
+            this.updateMap(map);
+          }
         }
-      }
-    );
+      );
+    }, 100);
+
+
   }
 
   private prepareCanvas(): void {
