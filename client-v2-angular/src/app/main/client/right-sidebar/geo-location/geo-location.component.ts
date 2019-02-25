@@ -33,7 +33,7 @@ import { HttpClient } from '@angular/common/http';
 
 })
 export class GeoLocationComponent implements OnInit, OnDestroy {
-  
+
   changeState = 'out';
   region$: Observable<IRegion>;
 
@@ -42,7 +42,7 @@ export class GeoLocationComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<DataState>,
     private http: HttpClient
-    ) { 
+    ) {
     this.region$ = this.store.pipe(select(getRegion));
     this._unsubscribeAll = new Subject<any>();
   }
@@ -60,13 +60,13 @@ export class GeoLocationComponent implements OnInit, OnDestroy {
 
   showRegionImage(img) {
     this.loadRegionImage(img).subscribe(
-      () => { 
+      () => {
       }
-    )
+    );
   }
 
-  loadRegionImage(img): Observable<Blob>{
-    return this.http.get(img, {responseType: 'blob'})
+  loadRegionImage(img): Observable<Blob> {
+    return this.http.get(img, {responseType: 'blob'});
   }
 
   newRegionfadeInOut() {
