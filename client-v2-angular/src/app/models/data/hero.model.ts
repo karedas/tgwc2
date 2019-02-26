@@ -8,6 +8,7 @@ export interface IStatus {
   food?: number;
   hit?: number;
   move?: number;
+  msg?: string;
 }
 
 export interface ITarget {

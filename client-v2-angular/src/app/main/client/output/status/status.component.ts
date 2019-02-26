@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusComponent implements OnInit {
 
+  showed: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.showed = !this.showed;
+    }, 3000);
   }
 
 }

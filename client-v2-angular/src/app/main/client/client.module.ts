@@ -8,7 +8,6 @@ import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 import { AudioComponent } from './audio/audio.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HistoryService } from 'src/app/services/history.service';
-import { StatusComponent } from './output/renders/status/status.component';
 import { WindowsModule } from './windows/windows.module';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -22,7 +21,6 @@ import { OutputModule } from './output/output.module';
     ControlPanelComponent,
     SplashscreenComponent,
     AudioComponent,
-    StatusComponent,
   ],
   imports: [
     ClientRoutingModule,

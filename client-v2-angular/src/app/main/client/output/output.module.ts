@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularSplitModule } from 'angular-split';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
+import { StatusComponent } from './status/status.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { GenericPageComponent } from './renders/generic-page/generic-page.compon
     OutputComponent,
     DetailsRoomComponent,
     ContextMenuComponent,
-    GenericPageComponent
+    GenericPageComponent,
+    StatusComponent
   ],
   imports: [
     CommonModule,
