@@ -21,9 +21,9 @@ export class GameService {
   private commandsList$: BehaviorSubject<any>;
   public serverStat: Observable<any>;
   public clientUpdateNeeded = {
-    inventory: 0,
-    equipment: 0,
-    room: 0
+    inventory: -1,
+    equipment: -1,
+    room: -1
   };
 
   public extraIsOpen: boolean;
@@ -76,23 +76,29 @@ export class GameService {
   updateUIByData(what: any) {
 
     const now = Date.now();
-    if (now > this.lastDataTime + 1000 ) {
-      if (what.inventory > this.clientUpdateNeeded.inventory && !this.genericDialogService.isClosed('charactersheet')) {
+    if (now > this.lastDataTime ) {
+      if (Number(what.inventory) > this.clientUpdateNeeded.inventory && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@inv');
         this.clientUpdateNeeded.inventory = what.inventory;
         this.lastDataTime = now;
+      } else if (what.inventory < this.clientUpdateNeeded.inventory) {
+        what.inventory = this.clientUpdateNeeded.inventory;
       }
 
-      if (what.equipment > this.clientUpdateNeeded.equipment && !this.genericDialogService.isClosed('charactersheet')) {
+      if (Number(what.equipment) > this.clientUpdateNeeded.equipment && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@equip');
         this.clientUpdateNeeded.equipment = what.equipment;
         this.lastDataTime = now;
+      } else if (what.equipment < this.clientUpdateNeeded.equipment) {
+        what.equipment = this.clientUpdateNeeded.equipment;
       }
 
-      if (what.room > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
+      if (Number(what.room) > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;
+      } else if (what.room < this.clientUpdateNeeded.room) {
+        what.room = this.clientUpdateNeeded.room;
       }
     }
   }

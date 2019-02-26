@@ -98,6 +98,7 @@ export class WindowsService {
         dismissableMask: true,
         modal: false,
         header: 'Scheda Personaggio',
+        focusOnShow: false,
         data: detail,
         style: {
           'width': '750px',
@@ -124,7 +125,9 @@ export class WindowsService {
         blockScroll: true,
         modal: false,
         draggable: true,
-        resizable: true
+        resizable: true,
+        focusOnShow: false,
+
       });
 
       this.gd.set(ref);
@@ -154,6 +157,7 @@ export class WindowsService {
         draggable: true,
         modal: false,
         header: data[0],
+        focusOnShow: false,
         style: {
           'width': 'auto',
           'height': 'auto',
@@ -170,6 +174,7 @@ export class WindowsService {
         resizable: false,
         header: data[0],
         closeOnEscape: true,
+        focusOnShow: false,
         modal: false,
         style: {
           'width': '450px',
