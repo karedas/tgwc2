@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private game: GameService,
     private socketService: SocketService,
-    @Inject(PLATFORM_ID) private platformId: any
   ) {
     this.loginFormErrors = {
       username: {},
@@ -52,6 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.resetLoginState();
 
     this.loginForm = this.formBuilder.group({

@@ -82,8 +82,7 @@
 
     > div {
       padding-right: 6px;
-      margin-right: .5em;
-      margin: auto .5em auto 0;
+      margin: auto .5em auto;
       cursor: pointer;
     }
 
@@ -100,7 +99,7 @@
     }
 
     .status-icon-box {
-      margin: auto 2px auto 0;
+      margin: auto;
       width: 16px;
       height: 16px;
     }
