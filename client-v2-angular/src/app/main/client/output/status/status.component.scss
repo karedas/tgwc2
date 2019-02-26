@@ -19,13 +19,47 @@
   }
 
   .tg-status-row {
-    > div {
-      padding:0.2em 1em .2em 0;
+    .tg-status-name {
+      padding:0.2em 1em .2em;
+    }
+  }
+
+  .tg-meterbar {
+    box-sizing: border-box;
+    border: 1px solid #5f5c59;
+    padding: 2px 3px;
+    position: relative;
+    background-color: #171614;
+    box-shadow: inset 0 0 5px 2px #53371c;
+    text-align: center;
+
+    .barC {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background-repeat: repeat-x;
+      background-position: top left;
+      transition: width 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+
+    .barC.red {
+      background: url($imgPath + '/bars/healt.jpg') repeat-x left top;
+    }
+    .barC.green {
+      background: url($imgPath + '/bars/stamina.jpg') repeat-x left top;
+    }
+    .barC.orange {
+      background: url($imgPath + '/bars/fame.jpg') repeat-x left top;
+    }
+    .barC.blue {
+      background: url($imgPath + '/bars/sete.jpg') repeat-x left top;
     }
   }
 
   .tg-status-msg {
     padding: .5em 0;
+    display: block;
+    text-align: center;
   }
 }
 

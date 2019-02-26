@@ -22,7 +22,7 @@ export function reducer(
           drink: action.payload.drink,
           food: action.payload.food,
           hit: action.payload.healt,
-          move: action.payload.move
+          move: action.payload.move,
         },
         target: {
           move: action.payload['enemymove'],

@@ -6,8 +6,8 @@
       </div> -->
       <!-- Output Area -->
       <ng-container *ngIf="extraOutputOpenStatus$ | async as extra; else noextra">
-        <as-split [direction]="'horizontal'" class="tg-output--splitter" #splitArea>
-          <as-split-area size="50">
+        <as-split [direction]="'horizontal'" class="tg-output--splitter"#splitArea>
+          <as-split-area size="50" style="position:relative">
             <tg-status></tg-status>
             <div style="height: 100%; overflow:hidden;">
               <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">

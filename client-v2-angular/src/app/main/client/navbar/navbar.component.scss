@@ -107,32 +107,6 @@ p-menubar {
   }
 }
 
-
-// /*SKY*/
-// .tg-sky-mini {
-//   background-color: rgb(205, 242, 253);
-//   width: 150px;
-//   height: 18px;
-//   border-radius: 10px;
-//   cursor: pointer;
-// }
-
-// /* Search Form*/
-// .tg-helpsearch {
-
-//   input[type="search"],
-//   button {
-//     padding: 0 .35rem;
-//     border: 0;
-//   }
-
-//   input,
-//   input:focus {
-//     background-color: #2f2314;
-//     color: white;
-//   }
-
-//   button[type="submit"] {
-//     color: #2f2314;
-//   }
-// }
+body.zen tg-navbar {
+  display: none!important;
+}

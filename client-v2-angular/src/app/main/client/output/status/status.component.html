@@ -1,15 +1,31 @@
-<div class="tg-status-inline" [ngClass]="{'show': showed}">
+<div class="tg-status-inline tg-shadow-inset tg-shadow" [ngClass]="{'show': showed}" *ngIf="hero$ | async as hero">
   <div class="tg-status-inline--wrap">
-    <div fxLayout="row" class="tg-status-row">
-      <div class="tg-yellow">Vita:</div>
-      <div>100/100</div>
-      <div class="tg-yellow">Salute:</div>
-      <div>70/100</div>
-      <div class="tg-yellow">Fame:</div>
-      <div>0/100</div>
-      <div class="tg-yellow">Sete:</div>
-      <div>20/100</div>
+    <div fxLayout="row wrap" class="tg-status-row">
+      <div fxLayout fxFlex="1 1 auto">
+        <div class="tg-status-name tg-yellow">Vita:</div>
+        <div class="tg-meterbar" fxFlex="1 0 auto">
+          <span _ngcontent-c21="" class="red barC healthbar" [style.width.%]="hero.status?.hit">{{ hero.status?.hit }}/100</span>
+        </div>
+      </div>
+      <div fxLayout fxFlex="1 1 auto">
+        <div class="tg-status-name tg-yellow">Salute:</div>
+        <div class="tg-meterbar" fxFlex="1 0 auto">
+          <span _ngcontent-c21="" class="green barC healthbar" [style.width.%]="hero.status?.move">{{ hero.status?.move }}/100</span>
+        </div>
+      </div>
+      <div fxLayout fxFlex="1 1 auto">
+        <div class="tg-status-name tg-yellow">Fame:</div>
+        <div class="tg-meterbar" fxFlex="1 0 auto">
+          <span _ngcontent-c21="" class="orange barC healthbar" [style.width.%]="hero.status?.food">{{ hero.status?.food }}/100</span>
+        </div>
+      </div>
+      <div fxLayout fxFlex="1 1 auto">
+        <div class="tg-status-name tg-yellow">Sete:</div>
+        <div class="tg-meterbar" fxFlex="1 0 auto">
+          <span _ngcontent-c21="" class="blue barC healthbar" [style.width.%]="hero.status?.drink">{{ hero.status?.drink}}/100</span>
+        </div>
+      </div>
     </div>
-    <div class="tg-status-msg">Il tuo atteggiamento è guerrafondaio.  Ultimo luogo di preghiera: Il villaggio della Cala.</div>
+    <div class="tg-status-msg tg-gray">{{ hero.status?.msg}}</div>
   </div>
 </div>

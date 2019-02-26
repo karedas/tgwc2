@@ -16,7 +16,6 @@ import { switchMap } from 'rxjs/operators';
 
 export class GameService {
 
-  _focusInput: Subject<any>;
 
   private commandsList$: BehaviorSubject<any>;
   public serverStat: Observable<any>;
@@ -27,6 +26,7 @@ export class GameService {
   };
 
   public extraIsOpen: boolean;
+  public _showStatus: BehaviorSubject<(boolean)>;
 
   private lastDataTime = 0;
 
@@ -41,7 +41,7 @@ export class GameService {
 
     this.serverStat = new BehaviorSubject<any>(null);
     this.commandsList$ = new BehaviorSubject(null);
-    this._focusInput = new Subject();
+    this._showStatus = new BehaviorSubject(null);
 
     this.init();
   }
@@ -138,5 +138,17 @@ export class GameService {
 
   public getCommands(): Observable<any> {
     return this.commandsList$.asObservable();
+  }
+
+  public setStatusInline(val: boolean) {
+    this._showStatus.next(val);
+    setTimeout(() => {
+      this._showStatus.next(false);
+    }, 5000);
+  }
+
+
+  getStatusInline(): Observable<any> {
+    return this._showStatus.asObservable();
   }
 }
