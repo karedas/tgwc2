@@ -11,7 +11,6 @@ export interface UIState {
   editorIsopen: boolean;
   extraOutput: boolean;
   showDashBoard: boolean;
-  zen: boolean;
 
 
 }
@@ -28,5 +27,4 @@ export const initialState: UIState = {
   editorIsopen: false,
   extraOutput: true,
   showDashBoard: true,
-  zen: false
 };

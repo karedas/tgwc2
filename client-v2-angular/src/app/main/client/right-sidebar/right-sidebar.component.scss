@@ -39,3 +39,7 @@
     }
   }
 }
+
+body.zen :host {
+  display: none!important;
+}

@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener, OnDestroy, Renderer2 } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
 
@@ -29,7 +29,8 @@ export class InputComponent implements AfterViewInit, OnDestroy {
 
   _extraOutputStatus$: Observable<boolean>;
   _dashBoardStatus$: Observable<boolean>;
-  _zenStatus$: BehaviorSubject<boolean>;
+  
+  public zenStatus: boolean = false;
 
   private _inCombat$: Observable<any>;
   inCombat = false;
@@ -41,11 +42,13 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     private game: GameService,
     private store: Store<State>,
     private historyService: HistoryService,
-    private inputService: InputService
+    private inputService: InputService,
+    private render: Renderer2
   ) {
 
     this._extraOutputStatus$ = this.store.pipe(select(getExtraOutputStatus));
     this._dashBoardStatus$ = this.store.pipe(select(getDashboardVisibility));
+
     this._inCombat$ = this.store.pipe(select(getHero));
 
     this._unsubscribeAll = new Subject();
@@ -99,7 +102,7 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  moveCursorAtEnd(target) {
+  private moveCursorAtEnd(target) {
     if (typeof target.selectionStart === 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
     } else if (typeof target.createTextRange !== 'undefined') {
@@ -111,19 +114,21 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   }
 
   toggleExtraOutput(event: Event) {
-    event.preventDefault();
     this.store.dispatch(new ToggleExtraOutput(null));
   }
 
   toggleDashboard(event: Event) {
-    event.preventDefault();
     this.store.dispatch(new ToggleDashboard());
   }
 
   toggleZen(event: Event) {
-    event.preventDefault();
+    this.zenStatus = !this.zenStatus;
+    if(this.zenStatus) {
+      this.render.addClass(document.body,'zen');
+    } else {
+      this.render.removeClass(document.body, 'zen');
+    }
   }
-
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);

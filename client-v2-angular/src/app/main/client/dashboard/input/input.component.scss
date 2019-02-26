@@ -99,13 +99,11 @@
   }
 }
 
-.zen {
-  #triggerToggleCharacterPanel {
-    display: none;
-  }
-}
-
 
 .tg-button-tregua, .tg-button-pieta {
   margin: 2px;
+}
+
+body.zen .tg-btn-dashboard {
+  display: none!important;
 }

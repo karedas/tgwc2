@@ -17,290 +17,294 @@
     position: relative;
     z-index: 2;
   }
-}
-
-/* TG Character Side */
-.tg-character {
-
-  .tg-characteravatar {
-    cursor: pointer;
-    width: 78px;
-    height: 68px;
-    box-sizing: border-box;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0px 2px 11px 0 #000;
-    margin-top: 3px;
-    margin: auto 0 ;
-
-    .tg-avatar-wrap {
-      border: 1px solid #705611;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    img {
-      max-height: 100%;
-    }
-  }
-
-  .tg-infochar {
-    padding-right: 0;
-  }
-
-  .tg-infocharname {
-    height: 100%;
-    line-height: 18px;
-    text-align: left;
-    font-family: kingthings;
-    letter-spacing: 1px;
-    font-size: 12px;
-    width: 100%;
-    color: white;
-    box-shadow: inset 0px -7px 15px black;
-    border-bottom: 1px solid #5f5c59;
-    padding: 1px 0;
-  }
-
-  .charName {
-    padding-left:  6px;
-    padding-right: 6px;
-    margin-right: 1em;
-  }
-
-  /* status icons */
-
-  .hero-infostatus {
-    vertical-align: middle;
-    display: inline-block;
-    letter-spacing: 0;
-    color: #ccc1b1;
-    text-transform: uppercase;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 8.5px;
-
-    > div {
-      padding-right: 6px;
-      margin: auto .5em auto;
+  
+  /* TG Character Side */
+  .tg-character {
+  
+    .tg-characteravatar {
       cursor: pointer;
-    }
-
-    .infostatus-block {
-      padding-left: 6px;
-      background:  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-    }
-
-    span {
-      flex: 1;
-      white-space: nowrap;
+      width: 78px;
+      height: 68px;
+      box-sizing: border-box;
       overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .status-icon-box {
-      margin: auto;
-      width: 16px;
-      height: 16px;
-    }
-
-    .status-walk, .status-combat-mod, .status-combat-attegg, .status-money, .status-position {
-      i {
-        display: block;
-        margin: auto;
-        white-space: nowrap;
-        background-size: cover;
-        background-repeat:  no-repeat;
-        background-position: center center;
+      position: relative;
+      box-shadow: 0px 2px 11px 0 #000;
+      margin-top: 3px;
+      margin: auto 0 ;
+  
+      .tg-avatar-wrap {
+        border: 1px solid #705611;
         width: 100%;
         height: 100%;
+        overflow: hidden;
+      }
+  
+      img {
+        max-height: 100%;
       }
     }
-
-    /* MONEY */
-    .status-money i{
-      background-image: url($imgPath + '/icons/_monete.svg');
+  
+    .tg-infochar {
+      padding-right: 0;
     }
-
-    /* POSITION */
-    .status-position  {
+  
+    .tg-infocharname {
+      height: 100%;
+      line-height: 18px;
+      text-align: left;
+      font-family: kingthings;
+      letter-spacing: 1px;
+      font-size: 12px;
+      width: 100%;
       color: white;
-      i {
-        background-image: url($imgPath + '/icons/_inpiedi.svg');
+      box-shadow: inset 0px -7px 15px black;
+      border-bottom: 1px solid #5f5c59;
+      padding: 1px 0;
+    }
+  
+    .charName {
+      padding-left:  6px;
+      padding-right: 6px;
+      margin-right: 1em;
+    }
+  
+    /* status icons */
+  
+    .hero-infostatus {
+      vertical-align: middle;
+      display: inline-block;
+      letter-spacing: 0;
+      color: #ccc1b1;
+      text-transform: uppercase;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 8.5px;
+  
+      > div {
+        padding-right: 6px;
+        margin: auto .5em auto;
+        cursor: pointer;
       }
-      //Morto
-      &.pos-0 {
-        color: $tg-red;
+  
+      .infostatus-block {
+        padding-left: 6px;
+        background:  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+      }
+  
+      span {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+  
+      .status-icon-box {
+        margin: auto;
+        width: 16px;
+        height: 16px;
+      }
+  
+      .status-walk, .status-combat-mod, .status-combat-attegg, .status-money, .status-position {
         i {
-        background-image: url($imgPath + '/icons/_morto.svg');
+          display: block;
+          margin: auto;
+          white-space: nowrap;
+          background-size: cover;
+          background-repeat:  no-repeat;
+          background-position: center center;
+          width: 100%;
+          height: 100%;
         }
       }
-      //bloccato
-      &.pos-2 {
-        color: $tg-yellow;
+  
+      /* MONEY */
+      .status-money i{
+        background-image: url($imgPath + '/icons/_monete.svg');
+      }
+  
+      /* POSITION */
+      .status-position  {
+        color: white;
         i {
-          background-image: url($imgPath + '/icons/_bloccato.svg');
+          background-image: url($imgPath + '/icons/_inpiedi.svg');
+        }
+        //Morto
+        &.pos-0 {
+          color: $tg-red;
+          i {
+          background-image: url($imgPath + '/icons/_morto.svg');
+          }
+        }
+        //bloccato
+        &.pos-2 {
+          color: $tg-yellow;
+          i {
+            background-image: url($imgPath + '/icons/_bloccato.svg');
+          }
+        }
+        //addormentato
+        &.pos-3 {
+          color: $tg-gray;
+          i {
+            background-image: url($imgPath + '/icons/_dormiente.svg');
+          }
+        }
+        //sdraiato
+        &.pos-4 {
+          color: $tg-brown;
+          i {
+            background-image: url($imgPath + '/icons/_sdraiato.svg');
+          }
+       }
+        //seduto
+        &.pos-5 {
+          color: $tg-lt-cyan;
+          i {
+            background-image: url($imgPath + '/icons/_seduto.svg');
+          }
+        }
+        //in piedi
+        &.pos-6 i{
+          background-image: url($imgPath + '/icons/_inpiedi.svg');
         }
       }
-      //addormentato
-      &.pos-3 {
-        color: $tg-gray;
-        i {
-          background-image: url($imgPath + '/icons/_dormiente.svg');
+  
+      /* WALK */
+      .status-walk{
+        &.walk-0 i{
+          background-image: url($imgPath + '/icons/0_passeggio.svg');
+        }
+        &.walk-1 i{
+          background-image: url($imgPath + '/icons/1_camminata.svg');
+        }
+        &.walk-2 i{
+          background-image: url($imgPath + '/icons/2_marcia.svg');
+        }
+        &.walk-3 i{
+          background-image: url($imgPath + '/icons/3_corsa.svg');
+        }
+        &.walk-4 i{
+          background-image: url($imgPath + '/icons/4_scatto.svg');
         }
       }
-      //sdraiato
-      &.pos-4 {
-        color: $tg-brown;
-        i {
-          background-image: url($imgPath + '/icons/_sdraiato.svg');
-        }
-     }
-      //seduto
-      &.pos-5 {
-        color: $tg-lt-cyan;
-        i {
-          background-image: url($imgPath + '/icons/_seduto.svg');
+  
+      // CONV
+      .status-conva {
+        .status-icon-box i {
+          @include sprite($conva-ng-sprite);
+          margin-top: 2px;
+          display: block;
         }
       }
-      //in piedi
-      &.pos-6 i{
-        background-image: url($imgPath + '/icons/_inpiedi.svg');
+  
+      // COMBATSET
+  
+      .status-combat-mod {
+        &.mod-par-a i{
+          background-image: url($imgPath + '/icons/c_parataA.svg');
+        }
+        &.mod-par-s i{
+          background-image: url($imgPath + '/icons/c_parataS.svg');
+        }
+        &.mod-sch i{
+          background-image: url($imgPath + '/icons/c_schivata.svg');
+        }
+      }
+      
+      .status-combat-attegg i{
+        background-image: url($imgPath + '/icons/_atteggiamento.svg');
       }
     }
-
-    /* WALK */
-    .status-walk{
-      &.walk-0 i{
-        background-image: url($imgPath + '/icons/0_passeggio.svg');
-      }
-      &.walk-1 i{
-        background-image: url($imgPath + '/icons/1_camminata.svg');
-      }
-      &.walk-2 i{
-        background-image: url($imgPath + '/icons/2_marcia.svg');
-      }
-      &.walk-3 i{
-        background-image: url($imgPath + '/icons/3_corsa.svg');
-      }
-      &.walk-4 i{
-        background-image: url($imgPath + '/icons/4_scatto.svg');
-      }
-    }
-
-    // CONV
-    .status-conva {
-      .status-icon-box i {
-        @include sprite($conva-ng-sprite);
-        margin-top: 2px;
-        display: block;
-      }
-    }
-
-    // COMBATSET
-
-    .status-combat-mod {
-      &.mod-par-a i{
-        background-image: url($imgPath + '/icons/c_parataA.svg');
-      }
-      &.mod-par-s i{
-        background-image: url($imgPath + '/icons/c_parataS.svg');
-      }
-      &.mod-sch i{
-        background-image: url($imgPath + '/icons/c_schivata.svg');
-      }
-    }
-    
-    .status-combat-attegg i{
-      background-image: url($imgPath + '/icons/_atteggiamento.svg');
-    }
-  }
-
   
     
-  @include layout-bp(lt-sm) {
-    .tg-infocharname {
-      padding-left: 0;
+      
+    @include layout-bp(lt-sm) {
+      .tg-infocharname {
+        padding-left: 0;
+      }
+      .hero-infostatus {
+        margin-left: 0;
+        padding-left: 0;
+      }
     }
-    .hero-infostatus {
-      margin-left: 0;
-      padding-left: 0;
-    }
-  }
-
-  // BARS
-  .tg-meterbar {
-    z-index: 2;
-    flex: 1 1 100%;
-    flex-direction: column;
-    margin-top: auto;
-    margin-bottom: 2px;
-    padding: 4px 0 0 6px;
-    
-
-    .barcont {
-      box-sizing: border-box;
-      border: 1px solid #5f5c59;
-      padding: 2px 3px;
-      position: relative;
-      background-color: #171614;
-      box-shadow: inset 0 0 5px 2px #53371c;
-      cursor: help;
-    }
-
-    .barbig {
-      height: 20px;
-      margin-bottom: 4px;
-    }
-
-    .barthin {
-      height: 100%;
-      width: 50%;
-      display: inline-block;
-      text-align: left;
-      margin-right: 58px;
-    }
-
-    .tg-extrabars {
-      width: 100%;
-      height: 18px;
+  
+    // BARS
+    .tg-meterbar {
+      z-index: 2;
+      flex: 1 1 100%;
+      flex-direction: column;
+      margin-top: auto;
       margin-bottom: 2px;
-    }
-
-    .tg-statusbar-text {
-      overflow: hidden;
-      position: absolute;
-      right: -50px;
-      font-size: 9px;
-
-      i {
-        font-style: normal;
+      padding: 4px 0 0 6px;
+      
+  
+      .barcont {
+        box-sizing: border-box;
+        border: 1px solid #5f5c59;
+        padding: 2px 3px;
+        position: relative;
+        background-color: #171614;
+        box-shadow: inset 0 0 5px 2px #53371c;
+        cursor: help;
       }
-    }
-
-    .barC {
-      display: block;
-      width: 0%;
-      height: 100%;
-      background-repeat: repeat-x;
-      background-position: top left;
-      transition: width .2s cubic-bezier(0.65, 0.05, 0.36, 1);
-
-      &.red {
-        background-image: url($imgPath + '/bars/healt.jpg' );
+  
+      .barbig {
+        height: 20px;
+        margin-bottom: 4px;
       }
-
-      &.green {
-        background-image: url($imgPath + '/bars/stamina.jpg' );
+  
+      .barthin {
+        height: 100%;
+        width: 50%;
+        display: inline-block;
+        text-align: left;
+        margin-right: 58px;
       }
-
-      &.orange {
-        background-image: url($imgPath + '/bars/fame.jpg' );
+  
+      .tg-extrabars {
+        width: 100%;
+        height: 18px;
+        margin-bottom: 2px;
       }
-
-      &.blue {
-        background-image: url($imgPath + '/bars/sete.jpg' );
+  
+      .tg-statusbar-text {
+        overflow: hidden;
+        position: absolute;
+        right: -50px;
+        font-size: 9px;
+  
+        i {
+          font-style: normal;
+        }
+      }
+  
+      .barC {
+        display: block;
+        width: 0%;
+        height: 100%;
+        background-repeat: repeat-x;
+        background-position: top left;
+        transition: width .2s cubic-bezier(0.65, 0.05, 0.36, 1);
+  
+        &.red {
+          background-image: url($imgPath + '/bars/healt.jpg' );
+        }
+  
+        &.green {
+          background-image: url($imgPath + '/bars/stamina.jpg' );
+        }
+  
+        &.orange {
+          background-image: url($imgPath + '/bars/fame.jpg' );
+        }
+  
+        &.blue {
+          background-image: url($imgPath + '/bars/sete.jpg' );
+        }
       }
     }
   }
+}
+
+body.zen :host{
+  display: none!important;
 }

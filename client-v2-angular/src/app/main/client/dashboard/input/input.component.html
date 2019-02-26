@@ -18,7 +18,7 @@
       </div>
     </ng-container>
 
-    <div fxHide fxShow.gt-sm
+    <div class="tg-btn-extraboard" fxHide fxShow.gt-sm
       pTooltip="Apri/Chiudi Dettagli" tooltipPosition="top" showDelay="8 00" hideDelay="100">
       <button
         type="button"
@@ -28,7 +28,7 @@
         <fa-icon [icon]="facolumns"></fa-icon>
       </button>
     </div>
-    <div
+    <div class="tg-btn-dashboard"
       pTooltip="Apri/Chiudi Dashboard" tooltipPosition="top" showDelay="800" hideDelay="100">
       <button
         type="button" 
@@ -38,12 +38,13 @@
         <fa-icon [icon]="faSolarPanel"></fa-icon>
       </button>
     </div>
-    <div
+    <div class="tg-btn-zen"
       pTooltip="Modalità Zen" tooltipPosition="top" showDelay="800" hideDelay="100">
       <button 
         type="button"
         class="tg-fnt-button"
-        (mousedown)="toggleZen($event)">
+        (mousedown)="toggleZen($event)"
+        [ngClass]="{'isActive': zenStatus}">
         <fa-icon [icon]="faBullseye"></fa-icon>
       </button>
     </div>
