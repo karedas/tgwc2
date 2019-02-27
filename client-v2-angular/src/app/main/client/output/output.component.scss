@@ -87,7 +87,6 @@ tg-text {
     cursor: pointer;
     display: flex;
     flex: 1 0 auto;
-    margin-top: -1.45em;
     padding-bottom: 0.5em;
 
     tg-icons {
@@ -97,6 +96,7 @@ tg-text {
     span {
       background-color: #191816;
       border: 1px solid #433b3a;
+      border-top: 0;
       border-left: 0;
       border-radius: 0 5px 5px 0;
       padding: 2px 8px 2px 9px;
@@ -104,8 +104,9 @@ tg-text {
       vertical-align: middle;
       display: flex;
       margin: 1px 0 2px;
-      place-content: center center;
+      place-content: center left;
       align-items: center;
+      width: 100%;
 
     }
 
@@ -135,7 +136,6 @@ tg-text {
 
   .tg-room--desc {
     flex-direction: column;
-    // font-family: kingthings;
     line-height: 1.4em;
     color: #989898;
     padding-bottom: 0.5em;

@@ -3,6 +3,7 @@ import { GameService } from 'src/app/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';
 import { DynamicDialogRef } from 'primeng/api';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tg-welcome-news',

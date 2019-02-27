@@ -281,7 +281,6 @@ export class DataParser {
     // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      console.log(status_parse);
       this.store.dispatch(new UiActions.ShowStatusBoxAction({status: status_parse}));
       return '';
     });

@@ -29,7 +29,8 @@
 
     <ng-container 
       *ngIf="type ==='objPers'">
-      <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc"></div>
+      <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc.base"></div>
+      <div class="tg-objperson--descdetail tg-green" [innerHtml]="(html.desc.details) | dataToHtml:true" *ngIf="html.desc.details"></div>
     </ng-container>
 
   </div>

@@ -17,18 +17,17 @@ import { switchMap } from 'rxjs/operators';
 export class GameService {
 
 
-  private commandsList$: BehaviorSubject<any>;
   public serverStat: Observable<any>;
+  private lastDataTime = 0;
   public clientUpdateNeeded = {
     inventory: -1,
     equipment: -1,
     room: -1
   };
-
   public extraIsOpen: boolean;
-  public _showStatus: BehaviorSubject<(boolean)>;
+  private _commandsList$: BehaviorSubject<any>;
+  private _showStatus: BehaviorSubject<(boolean)>;
 
-  private lastDataTime = 0;
 
 
   constructor(
@@ -40,7 +39,7 @@ export class GameService {
   ) {
 
     this.serverStat = new BehaviorSubject<any>(null);
-    this.commandsList$ = new BehaviorSubject(null);
+    this._commandsList$ = new BehaviorSubject(null);
     this._showStatus = new BehaviorSubject(null);
 
     this.init();
@@ -94,6 +93,7 @@ export class GameService {
       }
 
       if (Number(what.room) > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
+        console.log('aggiorna!!');
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;
@@ -133,17 +133,16 @@ export class GameService {
 
   /* Commands List request */
   public setCommands(cmds: any) {
-    this.commandsList$.next(cmds);
+    this._commandsList$.next(cmds);
   }
 
   public getCommands(): Observable<any> {
-    return this.commandsList$.asObservable();
+    return this._commandsList$.asObservable();
   }
 
   public setStatusInline(val: boolean) {
     this._showStatus.next(val);
-    setTimeout(() => {
-      this._showStatus.next(false);
+      setTimeout(() => { this._showStatus.next(false);
     }, 5000);
   }
 

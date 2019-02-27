@@ -61,7 +61,10 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  private populate(wl) {
+  private populate(wl: any) {
+    
+    this.rows = [];
+
     if (wl) {
       wl.forEach((dataRow: IWorksList) => {
         this.rows.push(dataRow);
