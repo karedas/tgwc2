@@ -29,8 +29,8 @@ export class InputComponent implements AfterViewInit, OnDestroy {
 
   _extraOutputStatus$: Observable<boolean>;
   _dashBoardStatus$: Observable<boolean>;
-  
-  public zenStatus: boolean = false;
+
+  public zenStatus = false;
 
   private _inCombat$: Observable<any>;
   inCombat = false;
@@ -123,8 +123,8 @@ export class InputComponent implements AfterViewInit, OnDestroy {
 
   toggleZen(event: Event) {
     this.zenStatus = !this.zenStatus;
-    if(this.zenStatus) {
-      this.render.addClass(document.body,'zen');
+    if (this.zenStatus) {
+      this.render.addClass(document.body, 'zen');
     } else {
       this.render.removeClass(document.body, 'zen');
     }

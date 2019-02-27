@@ -11,6 +11,7 @@ export enum ClientEventType {
   LOGINSUCCESS = '[Client] User Login Success',
   LOGIN_FAILURE = '[Client] User Login Failure',
   INGAME = '[Client] User In Game',
+  RESET = '[Client] Reset for New Login'
 }
 
 export class SocketStatusAction implements Action {
@@ -25,6 +26,10 @@ export class LoginSuccessAction implements Action {
 
 export class DisconnectAction implements Action {
   readonly type = ClientEventType.DISCONNECT;
+}
+
+export class ResetAction implements Action {
+  readonly type = ClientEventType.RESET;
 }
 
 export class LoginFailureAction implements Action {
@@ -42,4 +47,5 @@ export type ClientActions
   | SocketStatusAction
   | LoginSuccessAction
   | DisconnectAction
+  | ResetAction
   | LoginFailureAction;

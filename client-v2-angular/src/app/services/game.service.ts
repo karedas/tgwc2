@@ -93,7 +93,6 @@ export class GameService {
       }
 
       if (Number(what.room) > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
-        console.log('aggiorna!!');
         this.sendToServer('@agg');
         this.clientUpdateNeeded.room = what.room;
         this.lastDataTime = now;

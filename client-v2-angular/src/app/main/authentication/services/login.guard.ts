@@ -4,8 +4,7 @@ import {
     CanLoad, CanActivate,
     ActivatedRouteSnapshot,
     RouterStateSnapshot, Router, Route
-}
-    from '@angular/router';
+} from '@angular/router';
 
 import { LoginService } from './login.service';
 

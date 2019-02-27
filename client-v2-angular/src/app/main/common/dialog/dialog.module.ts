@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenericDialogcomponent } from './dialog.component';
+import { GenericDialogComponent } from './dialog.component';
 import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
-    GenericDialogcomponent
+    GenericDialogComponent
   ],
   imports: [
     CommonModule,
     DialogModule,
   ],
   exports: [
-    GenericDialogcomponent,
+    GenericDialogComponent,
   ],
 
 })

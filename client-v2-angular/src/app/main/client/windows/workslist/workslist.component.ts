@@ -62,7 +62,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   }
 
   private populate(wl: any) {
-    
+
     this.rows = [];
 
     if (wl) {

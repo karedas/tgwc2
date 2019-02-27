@@ -73,7 +73,7 @@ export class UiEffects {
   @Effect()
   showStatusInline$ = this.actions$.pipe(
     ofType<PayloadAction>(UIEventType.SHOWSTATUSHERO),
-    switchMap((res) => { 
+    switchMap((res) => {
         return [
           new HeroAction(res.payload)
         ];

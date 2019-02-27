@@ -309,7 +309,7 @@ export class DataParser {
 
     // Pause scroll
     data = data.replace(/&!crlf"[^"]*"/gm, () => {
-      console.log('pause scroll?');
+      // console.log('pause scroll?');
       return '';
     });
 

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
-import { DisconnectAction } from 'src/app/store/actions/client.action';
+import { DisconnectAction, ResetAction } from 'src/app/store/actions/client.action';
 
 import { DynamicDialogRef } from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -42,7 +42,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     this.loginFormErrors = {
       username: {},
       password: {}
-    }
+    };
 
     this._unsubscribeAll = new Subject();
   }
@@ -112,7 +112,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   navigateToHome() {
     this.dialogRef.close();
     this.router.navigate(['/login']).then(() => {
-      this.store.dispatch(new DisconnectAction);
+      this.store.dispatch(new ResetAction);
     });
   }
 

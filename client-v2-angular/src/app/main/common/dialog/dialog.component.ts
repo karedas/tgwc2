@@ -8,7 +8,7 @@ import { GenericDialogService } from './dialog.service';
   templateUrl: './dialog.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class GenericDialogcomponent implements OnInit {
+export class GenericDialogComponent implements OnInit {
 
   @Input() id: string;
   @ViewChild('dialog') dialog: Dialog;

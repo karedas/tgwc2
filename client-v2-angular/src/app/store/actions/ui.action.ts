@@ -62,7 +62,7 @@ export class RefreshCommandAction implements Action {
     readonly type = UIEventType.REFRESH;
 }
 
-export class ShowStatusBoxAction implements Action{
+export class ShowStatusBoxAction implements Action {
   readonly type = UIEventType.SHOWSTATUSHERO;
   constructor( public payload: any) {}
 }

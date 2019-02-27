@@ -60,7 +60,7 @@ export class WindowsService {
       <DynamicDialogConfig>{
         showHeader: false,
         closeOnEscape: false,
-        styleClass: "tg-dialog",
+        styleClass: 'tg-dialog',
         width: '450px',
         height: 'auto',
         style: { 'max-width': '100%', 'max-height': '100%' },

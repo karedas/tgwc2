@@ -19,7 +19,7 @@ export class StatusComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
-  showed: boolean = false;
+  showed = false;
 
   constructor(
     private game: GameService,
@@ -28,7 +28,7 @@ export class StatusComponent implements OnInit, OnDestroy {
 
     this.hero$ = this.store.pipe(select(getHero));
     this.showStatus$ = this.game.getStatusInline();
-    
+
     this._unsubscribeAll = new Subject<any>();
   }
 

@@ -86,7 +86,7 @@ export class LoginService {
 
     this.loginReplayMessage = 'Tentativo di connessione in corso...';
 
-    if (data.indexOf('&!connmsg{') == 0) {
+    if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
 
