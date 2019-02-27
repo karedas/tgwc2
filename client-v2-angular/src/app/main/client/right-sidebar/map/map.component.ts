@@ -87,7 +87,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   }
 
   private prepareCanvas(): void {
-    console.log(this.map);
     this.context = (<HTMLCanvasElement>this.map.nativeElement).getContext('2d');
     this.canvasWidth = this.maxMapWidth * this.mapTileWidth;
     this.canvasHeight = this.maxMapHeight * this.mapTileHeight;
