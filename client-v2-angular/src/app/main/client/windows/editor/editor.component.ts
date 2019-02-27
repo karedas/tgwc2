@@ -75,8 +75,8 @@ export class EditorComponent implements OnInit, OnDestroy {
       let remText = text[l];
       while (remText.length > 0) {
 
-        let currline: any,
-          slicepos = remText.lastIndexOf(' ', this.maxLineLength);
+        let currline: any;
+        const slicepos = remText.lastIndexOf(' ', this.maxLineLength);
 
         if (slicepos > 0) {
           currline = remText.slice(0, slicepos) + '\\';

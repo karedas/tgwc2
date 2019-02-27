@@ -58,14 +58,14 @@ export class MapSnowService {
   // main routine
   private tick() {
 
-    const posX = 0;
+    let posX = 0;
 
     // reset canvas for next frame
     this.context.clearRect(0, 0, this.width, this.height);
 
     for (let x = 0; x < this.numFlakes; x++) {
       // calculate changes to snowflake
-      const posX = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight * (5 - this.flakes[x].size)) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
+      posX = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight * (5 - this.flakes[x].size)) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
       this.flakes[x].y += this.flakes[x].size * this.fallSpeedModifier; // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
 
       // if snowflake is out of bounds, reset

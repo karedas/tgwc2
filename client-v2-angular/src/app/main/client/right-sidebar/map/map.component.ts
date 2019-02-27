@@ -155,7 +155,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
       for (let y = 0; y < this.maxMapWidth; y++) {
         for (let x = 0; x < this.maxMapHeight; x++) {
           const d = this.layerMap[y][x];
-          if (d != 59) {
+          if (d !== 59) {
             const tpos = this.tileCoords(d);
 
             // Clip inside circle then draw.

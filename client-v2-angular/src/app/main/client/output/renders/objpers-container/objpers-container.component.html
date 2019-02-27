@@ -6,7 +6,7 @@
 </ng-container>
 
 <ng-template #withEquipCont>
-  <div class="tg-objperson" fxLayout="column">
+  <div class="tg-objperson" fxLayout="row">
     <div class="tg-objperson--title" *ngIf="eqcont.list.length > 0">
       {{eqcont.title}} 
     </div>
@@ -37,18 +37,19 @@
 </ng-template>
 
 <ng-template #withObjCont>
-  <div class="tg-objperson" fxLayout="column">
-    <div class="tg-objperson--title" *ngIf="objcont.list.length > 0">
+  <div class="tg-objperson" fxLayout="row wrap">
+    <div class="tg-objperson--title" *ngIf="objcont.list.length > 0" fxFlex="1 1 100%">
       {{objcont.title}}
     </div>
     <ng-container *ngFor="let obj of objcont.list; let i=index">
       <div class="tg-objperson--line interact" 
         [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
-        (mousedown)="onExpand($event, obj, i)">
+        (mousedown)="onExpand($event, obj, i)"
+        fxFlex="0 0 50%">
         <tg-icons 
           [icon]="obj.icon" 
           [attr.cntnum]="obj.cntnum"
-          (mousedown)="onInteract($event, obj, i, obj.sz)"
+          (mousedown)="onInteract($event, obj, i, false)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
 
         <tg-hstat [condprc]="obj.condprc" *ngIf="!obj.sz;else objquantity"></tg-hstat>
@@ -61,7 +62,7 @@
       <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
           <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
             <tg-icons [icon]="obj.icon" 
-              (mousedown)="onInteract($event, obj, indexSz)"
+              (mousedown)="onInteract($event, obj, indexSz, true)"
               pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
 
             <tg-hstat [condprc]="sz.condprc"></tg-hstat>

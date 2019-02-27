@@ -29,7 +29,7 @@ export class DataParser {
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-      const data = this.preParseText(this.netData.substr(0, len - 3));
+       data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
         this.parseForDisplay(data);
