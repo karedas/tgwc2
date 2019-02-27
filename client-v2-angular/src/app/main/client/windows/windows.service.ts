@@ -40,7 +40,7 @@ export class WindowsService {
         styleClass: 'op-100',
         closable: false,
         width: '750px',
-        height: '500px',
+        height: '600px',
         style: { 'max-width': '100%', 'max-height': '100%' },
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });

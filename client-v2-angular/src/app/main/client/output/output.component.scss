@@ -98,7 +98,6 @@ tg-text {
       border: 1px solid #433b3a;
       border-top: 0;
       border-left: 0;
-      border-radius: 0 5px 5px 0;
       padding: 2px 8px 2px 9px;
       color: #aea495;
       vertical-align: middle;
@@ -141,6 +140,7 @@ tg-text {
     padding-bottom: 0.5em;
     margin-bottom: .5em;
   }
+
 
 
   /* LIST Mob & Object*/
@@ -295,7 +295,6 @@ tg-text {
 
   .tg-extraoutput--header {
     overflow: hidden;
-    padding-bottom: 1.4em;
     margin-left: 0;
     margin-right: 0;
     border-bottom: 1px solid #433b3a;
@@ -328,6 +327,12 @@ tg-text {
       line-height: 1.4;
       color: #e2d6c7;
       border-top: 1px solid #433b3a;
+    }
+
+    
+    .tg-objperson--descdetail {
+      display: block;
+      padding: 0.5em .5em .2em;
     }
 
     .tg-room--image {
