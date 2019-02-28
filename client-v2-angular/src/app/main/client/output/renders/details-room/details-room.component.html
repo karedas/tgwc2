@@ -49,7 +49,7 @@
         [ngClass]="{'expandlist': object.sz, 'open': togglePanel[i]}" 
         (mousedown)="onExpand($event, object, i, object.sz)">
 
-        <tg-icons [icon]="object.icon" (mousedown)="onInteract($event, object, i, object.sz)" pTooltip="Guarda" tooltipPosition="left"
+        <tg-icons [icon]="object.icon" (mousedown)="onInteract($event, object, i, false)" pTooltip="Guarda" tooltipPosition="left"
           showDelay="500" hideDelay="100"></tg-icons>
         <tg-hstat [condprc]="object.condprc" *ngIf="!object.sz; else quantity_3"></tg-hstat>
 

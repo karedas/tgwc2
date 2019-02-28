@@ -11,7 +11,7 @@ function fetchUserLevel(state: UIState) {
 }
 
 function fetchInvisibilityLevel(state: UIState) {
-  return state.invlevel;
+  return state.invLevel;
 }
 
 function fetchWelcomeNews(state: UIState) {

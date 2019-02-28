@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
+import { Reset } from '@ngrx/store-devtools/src/actions';
 
 @Component({
   selector: 'tg-login-smart',
@@ -82,6 +83,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
+          this.store.dispatch(new ResetAction());
           this.dialogRef.close();
         } else {
           this.loginFailed = true;

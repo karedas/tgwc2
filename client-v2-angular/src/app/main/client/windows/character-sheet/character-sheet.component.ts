@@ -47,6 +47,8 @@ export class CharacterSheetComponent  {
 
     switch (tab) {
       case 'info':
+        this.game.client_update.invOpen = false;
+        this.game.client_update.equipOpen  = false;
         this.game.processCommands('info');
       break;
       case 'equip':
@@ -56,6 +58,8 @@ export class CharacterSheetComponent  {
         this.game.processCommands('inventario');
       break;
       case 'skills':
+        this.game.client_update.invOpen = false;
+        this.game.client_update.equipOpen  = false;
         this.game.processCommands('abilita');
       break;
     }

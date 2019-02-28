@@ -1,7 +1,7 @@
 
 export interface UIState {
   isgod: number;
-  invlevel: number;
+  invLevel: number;
   welcomeNews: boolean;
   musicVolume: number;
   soundVolume: number;
@@ -17,7 +17,7 @@ export interface UIState {
 
 export const initialState: UIState = {
   isgod: 0,
-  invlevel: undefined,
+  invLevel: 0,
   welcomeNews: false,
   musicVolume: 100,
   soundVolume: 70,

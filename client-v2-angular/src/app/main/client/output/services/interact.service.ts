@@ -16,14 +16,13 @@ export class InteractService {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       }
     } else if (list) {
-      const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
+      const mrn = item.mrn.length ? item.mrn[index] : item.mrn[0] ;
       this.game.processCommands(`guarda &${mrn}`);
     }
   }
 
   isExpandeable(event: Event, item: any, index: number): boolean {
     event.preventDefault();
-    //  Is Expandable
     if (item.sz) {
       return true;
     } else { false; }

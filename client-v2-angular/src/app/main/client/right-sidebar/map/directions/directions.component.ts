@@ -51,9 +51,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
 
   goToDirection(event, dir: number): void {
-
     event.preventDefault();
-
     if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '3') {
       this.dirCmd = `apri ${this.dirNames[dir]}`;
     } else if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '4') {

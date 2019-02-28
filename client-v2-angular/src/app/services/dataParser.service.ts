@@ -367,6 +367,7 @@ export class DataParser {
     // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
       const godInvLev = parseInt(inv.substr(2, 3));
+      console.log(godInvLev);
       this.store.dispatch(new UiActions.UpdateUI({ invLevel: godInvLev }));
       return '';
     });

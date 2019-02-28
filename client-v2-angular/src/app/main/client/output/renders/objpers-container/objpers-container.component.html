@@ -52,7 +52,7 @@
 
         <tg-icons [icon]="obj.icon" 
           [attr.cntnum]="obj.cntnum"
-          (mousedown)="onInteract($event, obj, i, false)"
+          (mousedown)="onInteract($event, obj, i, true)"
           pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
 
         <tg-hstat [condprc]="obj.condprc" *ngIf="!obj.sz;else objquantity"></tg-hstat>
