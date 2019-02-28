@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, OnDestroy, Renderer2 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { UIState } from 'src/app/store/state/ui.state';
 import { Store, select } from '@ngrx/store';
@@ -14,17 +14,19 @@ import { WindowsService } from '../windows/windows.service';
 })
 export class ClientContainerComponent implements OnDestroy {
 
-  private _unsubscribeAll: Subject<any>;
   private welcomeNews: Observable<boolean>;
+  private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<UIState>,
     private game: GameService,
+    private render: Renderer2,
     private windowsService: WindowsService
   ) {
     this.welcomeNews = this.store.pipe(select(getWelcomeNews));
     this._unsubscribeAll = new Subject<any>();
   }
+  
 
   ngAfterViewInit(): void {
 
@@ -35,6 +37,7 @@ export class ClientContainerComponent implements OnDestroy {
         if (localStorage.getItem('welcomenews')) {
           this.game.sendToServer('');
         } else {
+          this.render.addClass(document.body, 'overlay-dark');
           this.showNews();
         }
       });

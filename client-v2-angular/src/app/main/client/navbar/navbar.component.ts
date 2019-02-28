@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { GameService } from 'src/app/services/game.service';
 import gitInfo from 'src/git-version.json';
+import { WindowsService } from '../windows/windows.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(
-    private game: GameService
+    private game: GameService,
+    private windowsService: WindowsService
   ) {
   }
 
@@ -39,9 +41,11 @@ export class NavbarComponent implements OnInit {
     {
       label: 'Gioco',
       items: [
-        { label: 'Lista completa dei comandi', command: (onclick) => {
-          this.game.processCommands('comandi');
-        }}
+        {
+          label: 'Lista completa dei comandi', command: (onclick) => {
+            this.game.processCommands('comandi');
+          }
+        }
       ]
     },
     {
@@ -49,11 +53,14 @@ export class NavbarComponent implements OnInit {
       icon: 'pi pi-fw pi-pencil',
       items: [
         { label: 'Guida al gioco', disabled: true },
-        { label: 'Ultime Novità di gioco', disabled: true },
-        { label: 'Note di rilascio Webclient', disabled: true },
+        {
+          label: 'Ultime novità', disabled: true, command: (onclick) => {
+            this.windowsService.openWelcomeNews();
+          }
+        },
         { label: 'Segnala un problema', disabled: true },
         { label: 'Tasti rapidi', disabled: true },
-        { label: 'Forum', url: 'http://forum.thegatemud.it', target: '_blank'},
+        { label: 'Forum', url: 'http://forum.thegatemud.it', target: '_blank' },
         { label: 'Informazioni su The Gate', disabled: true },
       ]
     }];

@@ -8,7 +8,7 @@ import { UIState } from 'src/app/store/state/ui.state';
 
 @Component({
   selector: 'tg-audio',
-  templateUrl: './audio.component.html',
+  template: ''
 })
 export class AudioComponent implements OnInit, OnDestroy {
 

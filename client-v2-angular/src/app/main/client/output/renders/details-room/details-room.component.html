@@ -5,6 +5,7 @@
   <ng-container *ngTemplateOutlet="withPersons"></ng-container>
 </ng-container>
 
+<!-- ## Persons ## -->
 <ng-template #withPersons>
   <div class="tg-persons" [ngClass]="{'list-50-50': personsClass50_50, 'list-50': personsClass50}">
     <ng-container *ngFor="let person of persons; let i=index">
@@ -39,6 +40,7 @@
   </div>
 </ng-template>
 
+<!-- ## Objects ## -->
 <ng-template #withObjects>
   <div class="tg-objects" [ngClass]="{'list-50-50': objsClass50_50, 'list-50': objsClass50}">
     <ng-container *ngFor="let object of objs let i=index">

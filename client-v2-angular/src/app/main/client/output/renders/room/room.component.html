@@ -34,10 +34,13 @@
     </ng-container>
 
   </div>
+  <!-- ## Button Back to Previous  -->
   <div class="tg-backdetail" *ngIf="html.where" (click)="onBackDetail(html.where.num)">
-    <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova &nbsp;<b>{{html.where.title}}</b></span>
+    <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span><b>{{html.where.title}}</b></span>
   </div>
+
   <div style="height: 100%; overflow:hidden;">
+    
     <ng-scrollbar class="scrollbar" #scrollBar [shown]="always">
 
       <ng-container *ngIf="type === 'room'">

@@ -145,9 +145,9 @@ export class DataParser {
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
       const up = {
-        inventory: update_parse[0],
-        equipment: update_parse[1],
-        room: update_parse[2]
+        inventory: Number(update_parse[0]),
+        equipment: Number(update_parse[1]),
+        room: Number(update_parse[2])
       };
       this.setUpdateNeeded(up);
       return '';

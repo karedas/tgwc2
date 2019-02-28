@@ -56,7 +56,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.extraOutputOpenStatus$ = this.store.select(getExtraOutputStatus);
 
     this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
-    // this.autoUpdateNeeded = this.store.select(getVersions);
 
     this._baseText$ = this.store.select(getDataBase);
     this._roomBase$ = this.store.select(getRoomBase);
@@ -102,16 +101,22 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         .subscribe(
           (room: Room) => {
 
+            console.log('room REQUEST', room);
+
             if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
               this.lastRoomDescription = room.desc['base'];
             }
-
             this.typeDetail = 'room';
             const content = this.setContent('room', room);
             this.output.push(content);
             this.endOutputStore();
-            this.game.clientUpdateNeeded.room = room.ver;
+            
+            if(this.game.client_update.room.version < room.ver) {
+              this.game.client_update.room.version = room.ver;
+              this.game.client_update.room.needed = false;
+            }
 
+            this.game.client_update.inContainer = false;
           }
         );
 
@@ -120,11 +125,25 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this._unsubscribeAll),
       filter(elements => elements && elements !== undefined ))
         .subscribe( (elements: any) => {
+
+          console.log('im in objorPerson!!'); 
+
           this.objPersDetail = elements;
           const content = this.setContent('objpersdetail', this.objPersDetail);
           this.output.push(content);
           this.typeDetail = 'objPers';
           this.endOutputStore();
+          
+          this.game.client_update.inContainer = true;
+
+          // if(this.game.client_update.equipment.version < elements.ver) {
+          //   this.game.client_update.room.version = elements..ver;
+          //   this.game.client_update.room.needed = false;
+          // }
+          // if(this.game.client_update.inventory.version < room.ver) {
+          //   this.game.client_update.room.version = room.ver;
+          //   this.game.client_update.room.needed = false;
+          // }
         });
 
     this._genericPage$.pipe(

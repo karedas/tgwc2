@@ -45,8 +45,6 @@ export class WindowsService {
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
 
-      this.render.addClass(document.body, 'overlay-dark');
-
       ref.onClose.subscribe(
        () => this.render.removeClass(document.body, 'overlay-dark')
       );

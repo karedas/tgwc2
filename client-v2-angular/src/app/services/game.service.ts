@@ -8,6 +8,7 @@ import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { switchMap } from 'rxjs/operators';
+import { faCarrot } from '@fortawesome/free-solid-svg-icons';
 
 
 @Injectable({
@@ -18,11 +19,21 @@ export class GameService {
 
 
   public serverStat: Observable<any>;
-  private lastDataTime = 0;
-  public clientUpdateNeeded = {
-    inventory: -1,
-    equipment: -1,
-    room: -1
+  public client_update = {
+    lastDataTime: 0,
+    inContainer: false,
+    inventory: {
+      version: -1,
+      needed: false
+    },
+    equipment: {
+      version: -1,
+      needed: false
+    },
+    room: {
+      version: -1,
+      needed: false
+    }
   };
   public extraIsOpen: boolean;
   private _commandsList$: BehaviorSubject<any>;
@@ -51,11 +62,12 @@ export class GameService {
 
   loadServerStat() {
     this.serverStat = timer(0, 25000).pipe(
-      switchMap(() =>  this.http.get(environment.serverstatAddress)),
+      switchMap(() => this.http.get(environment.serverstatAddress)),
     );
   }
 
   startGame(initialData) {
+    this.clearUpdate();
     this.dataParserService.handlerGameData(initialData);
 
     this.socketService.listen(socketEvent.DATA).subscribe(data => {
@@ -63,7 +75,7 @@ export class GameService {
     });
 
     this.dataParserService.updateNeeded.subscribe((up) => {
-      this.updateUIByData(up);
+      this.updateNeeded(up);
     });
   }
 
@@ -72,34 +84,57 @@ export class GameService {
     this.sendToServer('fine');
   }
 
-  updateUIByData(what: any) {
+  updateNeeded(what: any) {
+    
+    console.group("Update needed");
+    console.log("room:",  this.client_update.room);
+    console.log("room:",  this.client_update.equipment);
+    console.log("room:",  this.client_update.inventory);
+    console.log("what:", what);
+    console.groupEnd();
 
     const now = Date.now();
-    if (now > this.lastDataTime ) {
-      if (Number(what.inventory) > this.clientUpdateNeeded.inventory && !this.genericDialogService.isClosed('charactersheet')) {
+
+    if(what.inventory > this.client_update.inventory.version) {
+      this.client_update.inventory.needed = true;
+    }
+
+    if(what.equipment > this.client_update.equipment.version) {
+      this.client_update.equipment.needed = true;
+    }
+
+    if(what.room > this.client_update.room.version) {
+      this.client_update.room.needed = true;
+    }
+
+    if (now > this.client_update.lastDataTime) {
+
+      if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@inv');
-        this.clientUpdateNeeded.inventory = what.inventory;
-        this.lastDataTime = now;
-      } else if (what.inventory < this.clientUpdateNeeded.inventory) {
-        what.inventory = this.clientUpdateNeeded.inventory;
+        this.client_update.inventory.needed = false;
+        this.client_update.lastDataTime = now;
       }
 
-      if (Number(what.equipment) > this.clientUpdateNeeded.equipment && !this.genericDialogService.isClosed('charactersheet')) {
+      if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet')) {
         this.sendToServer('@equip');
-        this.clientUpdateNeeded.equipment = what.equipment;
-        this.lastDataTime = now;
-      } else if (what.equipment < this.clientUpdateNeeded.equipment) {
-        what.equipment = this.clientUpdateNeeded.equipment;
+        this.client_update.lastDataTime = now;
       }
 
-      if (Number(what.room) > this.clientUpdateNeeded.room &&  this.extraIsOpen === true) {
+      if (this.client_update.room.needed && this.extraIsOpen && !this.client_update.inContainer) {
         this.sendToServer('@agg');
-        this.clientUpdateNeeded.room = what.room;
-        this.lastDataTime = now;
-      } else if (what.room < this.clientUpdateNeeded.room) {
-        what.room = this.clientUpdateNeeded.room;
+        this.client_update.room.needed = false;
+        this.client_update.lastDataTime = now;
       }
     }
+  }
+
+  clearUpdate() {
+    this.client_update.inventory.version = -1;
+    this.client_update.inventory.needed = false;
+    this.client_update.equipment.version = -1;
+    this.client_update.equipment.needed = false;
+    this.client_update.room.version = -1;
+    this.client_update.room.needed = false;
   }
 
   /**
@@ -141,7 +176,8 @@ export class GameService {
 
   public setStatusInline(val: boolean) {
     this._showStatus.next(val);
-      setTimeout(() => { this._showStatus.next(false);
+    setTimeout(() => {
+      this._showStatus.next(false);
     }, 5000);
   }
 

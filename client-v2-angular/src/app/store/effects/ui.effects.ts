@@ -33,7 +33,7 @@ export class UiEffects {
     map(([action, status]) => action),
     tap(
       what => {
-        this.game.updateUIByData(what.payload);
+        this.game.updateNeeded(what.payload);
       })
   );
 

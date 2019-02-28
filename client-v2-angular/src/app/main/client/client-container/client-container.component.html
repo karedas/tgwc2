@@ -4,16 +4,22 @@
     <tg-navbar fxFlex="0 0 36px" fxLayout></tg-navbar>
     <div fxLayout="row" fxFlex="1 1 0%" class="tg-main-row min-h-0">
       <div class="tg-leftside" fxFlex="1 1 auto" fxLayout="column">
+        <!-- Output -->
         <tg-output fxLayout fxFlex="1 1 100%" class="min-h-0"></tg-output>
+        <!-- Hero Dashboard -->
         <tg-dashboard></tg-dashboard>
+
       </div>
+      <!-- Right Sidebar -->
       <tg-right-sidebar fxLayout fxFlex="0 0 auto" fxHide.xs="true"></tg-right-sidebar>
+
     </div>
   </div>
-  <tg-audio></tg-audio> 
-</div>
 
-<!-- <tg-login-smart></tg-login-smart> -->
+  <!-- AUDIO & MUSIC -->
+  <tg-audio></tg-audio> 
+
+</div>
 
 <tg-commands-list></tg-commands-list>
 
