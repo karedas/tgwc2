@@ -5,6 +5,20 @@
 @import 'utils/sprites-mixins';
 @import './glow';
 
+
+
+
+
+@keyframes birds {
+  0% {
+    right: -100px;
+  }
+  100% {
+    right: 100%;
+  }
+}
+
+
 :host {
   display: flex;
   flex: 1 1 auto;
@@ -20,6 +34,20 @@
   position: relative;
   padding: .5rem;
   z-index: 10;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    display: block;
+    background: url($imgPath + '/login/birds.gif') no-repeat top left;
+    background-size: contain;
+    width: 100px;
+    height: 46.8px;
+    position: absolute;
+    right: 0;
+    background-size: contain;
+    animation: birds 45s  infinite linear;
+  }
 
   >.row {
     padding-top: 1em;
