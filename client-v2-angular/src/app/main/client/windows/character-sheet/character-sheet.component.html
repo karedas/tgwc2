@@ -7,7 +7,7 @@
               <!-- ######## Info Main Character ########  -->
               <div class="info-main" fxLayout="column" fxFlex="1 1 auto">
                 <div class="info-avatar tg-shadow">
-                  <img id="infoimage" src="{{ imagepath + hero.image }}" />
+                  <img id="infoimage" src="{{ imagepath + hero.image }}" *ngIf="hero.image"/>
                 </div>
                 <div class="info-nametitle">
                   <div class="info-name">{{ hero.name }}</div>
