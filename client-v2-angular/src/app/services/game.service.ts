@@ -22,6 +22,8 @@ export class GameService {
   public client_update = {
     lastDataTime: 0,
     inContainer: false,
+    invOpen: false,
+    equipOpen: false,
     inventory: {
       version: -1,
       needed: false
@@ -85,14 +87,6 @@ export class GameService {
   }
 
   updateNeeded(what: any) {
-    
-    console.group("Update needed");
-    console.log("room:",  this.client_update.room);
-    console.log("room:",  this.client_update.equipment);
-    console.log("room:",  this.client_update.inventory);
-    console.log("what:", what);
-    console.groupEnd();
-
     const now = Date.now();
 
     if(what.inventory > this.client_update.inventory.version) {
@@ -109,13 +103,13 @@ export class GameService {
 
     if (now > this.client_update.lastDataTime) {
 
-      if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet')) {
+      if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.invOpen) {
         this.sendToServer('@inv');
         this.client_update.inventory.needed = false;
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet')) {
+      if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.equipOpen) {
         this.sendToServer('@equip');
         this.client_update.lastDataTime = now;
       }

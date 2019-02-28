@@ -16,8 +16,6 @@ export class InteractService {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       }
     } else if (list) {
-      console.log(list);
-      console.log(item);
       const mrn = item.mrn.length ? item.mrn[0] : item.mrn;
       this.game.processCommands(`guarda &${mrn}`);
     }

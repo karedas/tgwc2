@@ -100,9 +100,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       filter(room => room && room !== undefined))
         .subscribe(
           (room: Room) => {
-
-            console.log('room REQUEST', room);
-
             if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
               this.lastRoomDescription = room.desc['base'];
             }
@@ -125,25 +122,12 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this._unsubscribeAll),
       filter(elements => elements && elements !== undefined ))
         .subscribe( (elements: any) => {
-
-          console.log('im in objorPerson!!'); 
-
           this.objPersDetail = elements;
           const content = this.setContent('objpersdetail', this.objPersDetail);
           this.output.push(content);
           this.typeDetail = 'objPers';
           this.endOutputStore();
-          
           this.game.client_update.inContainer = true;
-
-          // if(this.game.client_update.equipment.version < elements.ver) {
-          //   this.game.client_update.room.version = elements..ver;
-          //   this.game.client_update.room.needed = false;
-          // }
-          // if(this.game.client_update.inventory.version < room.ver) {
-          //   this.game.client_update.room.version = room.ver;
-          //   this.game.client_update.room.needed = false;
-          // }
         });
 
     this._genericPage$.pipe(

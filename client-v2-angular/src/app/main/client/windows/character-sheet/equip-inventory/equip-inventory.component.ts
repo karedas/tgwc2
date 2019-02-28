@@ -6,6 +6,7 @@ import { getEquip, getInventory } from 'src/app/store/selectors';
 import { equip_positions_by_name } from 'src/app/main/common/constants';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
+import { InputService } from '../../../dashboard/input/input.service';
 
 @Component({
   selector: 'tg-equip-inventory',
@@ -26,7 +27,8 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private game: GameService
+    private game: GameService,
+    private inputService: InputService
      ) {
 
     this.equipment$ = this.store.pipe(select(getEquip));
@@ -36,19 +38,41 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    
     this.equipment$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
     this.inventory$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
+    
+    this.resetUpdateBeforeProceed();
+
+    if(this.openedSubTab === 'equip') {
+      this.game.client_update.equipOpen = true;
+    }
+    if(this.openedSubTab === 'inventory') {
+      this.game.client_update.invOpen = true;
+    }
   }
 
-  buttonClick(what: string) {
+  buttonClick(what: string, event: Event) {
+
+    this.resetUpdateBeforeProceed();
+    this.inputService.focus();
+
     if (what === 'equip') {
       this.openedSubTab = what;
       this.game.processCommands('equip');
+      this.game.client_update.equipOpen  = true;
+
     }
     if (what === 'inventory') {
       this.openedSubTab = what;
       this.game.processCommands('inv');
+      this.game.client_update.invOpen = true; 
     }
+  }
+
+  resetUpdateBeforeProceed() {
+    this.game.client_update.invOpen = false; 
+    this.game.client_update.equipOpen  = false;  
   }
 
   ngOnDestroy() {

@@ -83,13 +83,13 @@
       <div class="wrap-btnend-box"
         [ngClass]="{'active': openedSubTab == 'equip'}">
         <button class="tg-button btn-equip-graph"
-          (mouseup)="buttonClick('equip')"
+          (mousedown)="buttonClick('equip', $event)"
           >Equip</button>
       </div>
       <div class="wrap-btnend-box"
         [ngClass]="{'active': openedSubTab == 'inventory'}">
         <button class="tg-button btn-inventario-graph" 
-          (mouseup)="buttonClick('inventory')">Inventario</button>
+          (mousedown)="buttonClick('inventory', $event)">Inventario</button>
       </div>
     </div>
     <div class="eqinv-totalweight-label" fxFlex="1 0 auto" fxLayoutAlign="flex-end center">

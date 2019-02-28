@@ -23,6 +23,7 @@ export function reducer(
           food: action.payload.food,
           hit: action.payload.healt,
           move: action.payload.move,
+          msg: action.payload.msg
         },
         target: {
           move: action.payload['enemymove'],
