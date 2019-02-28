@@ -1,10 +1,10 @@
 {
   "dirty": false,
-  "raw": "v2.0.0.1-beta-1-g36c10d0f",
-  "hash": "g36c10d0f",
-  "distance": 1,
-  "tag": "v2.0.0.1-beta",
+  "raw": "v2.0.0.2-beta-0-g63f1cf1e",
+  "hash": "g63f1cf1e",
+  "distance": 0,
+  "tag": "v2.0.0.2-beta",
   "semver": null,
-  "suffix": "1-g36c10d0f",
+  "suffix": "0-g63f1cf1e",
   "semverString": ""
 }
