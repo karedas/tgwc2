@@ -10,7 +10,13 @@
         <!-- Character Avatar -->
         <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm>
           <div class="tg-avatar-wrap">
-            <img src="{{env.media_address + hero.image ||'assets/images/interface/default_avatar.png'}}" alt="Avatar" />
+            <ng-container *ngIf="hero.image; else heroImage">
+              <img src="{{env.media_address + hero.image}}" alt="Avatar" />
+            </ng-container>
+            <ng-template #heroImage>
+                <img src="assets/images/interface/default_avatar.png" alt="Avatar" />
+            </ng-template>
+
           </div>
           <div class="tg-border-box">
             <div class="tg-border tg-border-top"></div>
