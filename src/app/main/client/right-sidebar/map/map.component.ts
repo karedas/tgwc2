@@ -6,6 +6,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Map } from 'src/app/models/data/map.model';
 import { takeUntil, delay } from 'rxjs/operators';
 import { MapSnowService } from './map-snow.service';
+import { GameService } from 'src/app/services/game.service';
 
 
 
@@ -48,7 +49,8 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   constructor(
     private store: Store<DataState>,
-    private mapSnowService: MapSnowService
+    private mapSnowService: MapSnowService,
+    private game: GameService
   ) {
     this.mapTileWidth = 32;
     this.mapTileHeight = 32;
@@ -60,8 +62,8 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
   }
 
-  onMouseEvent($event) {
-    this.isOnMap = !this.isOnMap;
+  onMouseEvent() {
+    this.isOnMap = this.game.mouseIsOnMap = !this.game.mouseIsOnMap;
   }
 
   ngAfterViewInit() {
@@ -82,8 +84,6 @@ export class MapComponent implements OnDestroy, AfterViewInit {
         }
       );
     }, 100);
-
-
   }
 
   private prepareCanvas(): void {

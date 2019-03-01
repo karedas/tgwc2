@@ -85,20 +85,28 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   }
 
   onUpKey(event: any) {
+    
     event.preventDefault();
-    const cmd = this.historyService.getPrevious();
-    if (cmd) {
-      event.target.value = cmd;
-      this.moveCursorAtEnd(event.target);
+
+    if(!this.game.mouseIsOnMap) {
+      const cmd = this.historyService.getPrevious();
+      if (cmd) {
+        event.target.value = cmd;
+        this.moveCursorAtEnd(event.target);
+      }
     }
   }
 
   onDownKey(event: any) {
+    
     event.preventDefault();
-    const cmd = this.historyService.getNext();
-    if (cmd) {
-      event.target.value = cmd;
-      this.moveCursorAtEnd(event.target);
+
+    if(!this.game.mouseIsOnMap) {
+      const cmd = this.historyService.getNext();
+      if (cmd) {
+        event.target.value = cmd;
+        this.moveCursorAtEnd(event.target);
+      }
     }
   }
 

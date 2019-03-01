@@ -39,7 +39,6 @@ h3 {
 
 
 .meter2 {
-  min-width: 153px;
   border: 1px solid #59564c;
   background: #0f0f0e;
   position: relative;
@@ -51,7 +50,8 @@ h3 {
     width: 0;
     height: 13px;
     max-width: 100%;
-    background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top right;
+    background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top left;
+    background-size: 100% 100%;
     transition: width .4s ease-out;
   }
 

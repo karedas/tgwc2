@@ -17,8 +17,13 @@ import { faCarrot } from '@fortawesome/free-solid-svg-icons';
 
 export class GameService {
 
-
+  
+  private _commandsList$: BehaviorSubject<any>;
+  private _showStatus: BehaviorSubject<(boolean)>;
   public serverStat: Observable<any>;
+  public mouseIsOnMap: boolean= false;
+  public extraIsOpen: boolean;
+  //Client Data Needed Updates
   public client_update = {
     lastDataTime: 0,
     inContainer: false,
@@ -37,9 +42,6 @@ export class GameService {
       needed: false
     }
   };
-  public extraIsOpen: boolean;
-  private _commandsList$: BehaviorSubject<any>;
-  private _showStatus: BehaviorSubject<(boolean)>;
 
 
 
