@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
         });
 
-    this.game.serverStat.subscribe(
+    this.game.serverStat.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (stat: string) => { this.serverStat = stat; }
     );
 
