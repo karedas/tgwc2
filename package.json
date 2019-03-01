@@ -1,6 +1,6 @@
 {
   "name": "client-v2-angular",
-  "version": "v2.0.0-2-beta",
+  "version": "2.0.0-2.0.0.3-beta.7637f9e",
   "scripts": {
     "ng": "ng",
     "start": "ng serve ",
