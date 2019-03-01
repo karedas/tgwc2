@@ -16,7 +16,6 @@ export const images_path = './assets/images/';
   selector: 'tg-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MapComponent implements OnDestroy, AfterViewInit {
@@ -63,7 +62,7 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   }
 
   onMouseEvent() {
-    this.isOnMap = this.game.mouseIsOnMap = !this.game.mouseIsOnMap;
+    this.isOnMap = (this.game.mouseIsOnMap = !this.game.mouseIsOnMap);
   }
 
   ngAfterViewInit() {

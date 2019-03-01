@@ -26,6 +26,7 @@
   box-sizing: border-box;
   font-size: 100%;
   line-height: 1;
+  font-size: 12px;
 }
 
 
@@ -46,7 +47,7 @@ tg-text {
 ::ng-deep.tg-line {
   display: block;
   padding-bottom: 1em;
-  line-height: 1.4;
+  line-height: 1.2;
 
   &::first-letter {
     text-transform: uppercase;
@@ -130,12 +131,11 @@ tg-text {
   .tg-room--title {
     font-size: 14px;
     color: #ac4c55;
-    font-family: kingthings;
   }
 
   .tg-room--desc {
     flex-direction: column;
-    line-height: 1.4em;
+    line-height: 1;
     color: #989898;
     padding-bottom: 0.5em;
     margin-bottom: .5em;
@@ -157,11 +157,11 @@ tg-text {
   .tg-objperson--line {
     display: flex;
     padding-right: 5px;
+    padding-bottom: .5em;
     user-select: none;
-    padding-bottom: .8em;
     margin-right: auto;
     box-sizing: border-box;
-    line-height: 1.4;
+    line-height: 1;
 
     >div {
       margin: auto 0;
@@ -266,7 +266,7 @@ tg-text {
     position: relative;
     
     span {
-      font-size: 9px;
+      font-size: 12px;
       min-width: 30px;
       text-align: center;
       text-overflow: ellipsis;

@@ -21,12 +21,10 @@
   }
 
   .info-textarea--container {
-    margin-bottom: 1em;
 
     .textarea {
       outline: none;
       min-height: 196px;
-      font-family: kingthings;
       font-size: 14px;
       line-height: 1.2;
       border: none;
@@ -43,13 +41,11 @@
   }
 
   .info-textarea--action {
-    margin-bottom: -18px;
     text-align: center;
     place-content: center;
 
     .btn-i-modifica {
       @include sprite($btn-modifica-sprite);
-      margin-left: 1em;
     }
   }
 }
@@ -57,7 +53,7 @@
 
 .info-base {
   position: relative;
-  padding: 1em 1.5em;
+  padding: 2em 1.5em;
   background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
 
   &:before {

@@ -55,9 +55,11 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     event.preventDefault();
     event.stopImmediatePropagation();
 
-    let cmd: string;
+    if (event.which !== 3) {
 
-    // Go to Dir or open The Door with Left Click
+      let cmd: string;
+
+      // Go to Dir or open The Door with Left Click
       if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '3') {
         cmd = `apri ${this.dirNames[dir]}`;
       } else if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '4') {
@@ -68,25 +70,28 @@ export class DirectionsComponent implements OnInit, OnDestroy {
       if (cmd) {
         this.game.sendToServer(cmd);
       }
+    }
   }
 
   closeLockDoor(event: any, dir: number): boolean {
 
-    let cmd: string;
+    if (event.which === 3) {
+      let cmd: string;
 
-    // Close The Door with Right Click
-        if (this.dirStatus[dir] == '2') {
-          cmd = `chiudi ${this.dirNames[dir]}`;
-        } else if (this.dirStatus[dir] == '3') {
-          cmd = `blocca ${this.dirNames[dir]}`;
-        }
-        if (cmd) {
-          this.game.sendToServer(cmd);
-        }
-  
-        return false;
-   }
-      
+      // Close The Door with Right Click
+      if (this.dirStatus[dir] == '2') {
+        cmd = `chiudi ${this.dirNames[dir]}`;
+      } else if (this.dirStatus[dir] == '3') {
+        cmd = `blocca ${this.dirNames[dir]}`;
+      }
+      if (cmd) {
+        this.game.sendToServer(cmd);
+      }
+
+      return false;
+    }
+  }
+
 
 
   setDoors(doors: any): void {
@@ -100,7 +105,6 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   onkeydown(event: KeyboardEvent) {
-
 
     if (this.isOnMap) {
       switch (event.key) {
