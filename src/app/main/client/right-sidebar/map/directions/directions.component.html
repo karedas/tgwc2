@@ -1,31 +1,37 @@
 <button class="tg-dir dir-nord" 
-  pTooltip="Vai a nord" tooltipPosition="left" showDelay="300" hideDelay="500"
-  (mousedown)="goToDirection($event, 0)">
+  pTooltip="Vai a nord" tooltipPosition="left" showDelay="800" hideDelay="500"
+  (mousedown)="goToDirection($event, 0)"
+  (contextmenu)="closeLockDoor($event, 0)">
   <span class="dir-ico" [ngStyle]="doorsStyle['nord']"></span>
 </button>
 <button class="tg-dir dir-est" 
-  pTooltip="Vai a est" tooltipPosition="left" showDelay="300" hideDelay="500"
-  (mousedown)="goToDirection($event, 1)">
+  pTooltip="Vai a est" tooltipPosition="left" showDelay="800" hideDelay="500"
+  (mousedown)="goToDirection($event, 1)"
+  (contextmenu)="closeLockDoor($event, 1)">
   <span class="dir-ico" [ngStyle]="doorsStyle['est']"></span>
 </button>
 <button class="tg-dir dir-sud" 
-  pTooltip="Vai a sud" tooltipPosition="bottom" showDelay="300" hideDelay="500"
-  (mousedown)="goToDirection($event, 2)">
+  pTooltip="Vai a sud" tooltipPosition="bottom" showDelay="800" hideDelay="500"
+  (mousedown)="goToDirection($event, 2)"
+  (contextmenu)="closeLockDoor($event, 2)">
   <span class="dir-ico" [ngStyle]="doorsStyle['sud']"></span>
 </button>
 <button class="tg-dir dir-ovest" 
-  pTooltip="Vai a ovest" tooltipPosition="left" showDelay="300" hideDelay="500"
-  (mousedown)="goToDirection($event, 3)">
+  pTooltip="Vai a ovest" tooltipPosition="left" showDelay="800" hideDelay="500"
+  (mousedown)="goToDirection($event, 3)"
+  (contextmenu)="closeLockDoor($event, 3)">
   <span class="dir-ico" [ngStyle]="doorsStyle['ovest']"></span>
 </button>
 <button class="tg-dir dir-alto" data-label="alto" 
-  pTooltip="Vai verso l'alto" tooltipPosition="top" showDelay="300" hideDelay="500"
-  (mousedown)="goToDirection($event, 4)">
+  pTooltip="Vai verso l'alto" tooltipPosition="top" showDelay="800" hideDelay="500"
+  (mousedown)="goToDirection($event, 4)"
+  (contextmenu)="closeLockDoor($event, 4)">
   <span class="dir-ico" [ngStyle]="doorsStyle['alto']"></span>
 </button>
 <button class="tg-dir dir-basso" data-label="basso"
-  pTooltip="Vai verso il basso" tooltipPosition="top" showDelay="300" hideDelay="500"
-  (mousedown)="goToDirection($event, 5)">
+  pTooltip="Vai verso il basso" tooltipPosition="top" showDelay="800" hideDelay="500"
+  (mousedown)="goToDirection($event, 5)"
+  (contextmenu)="closeLockDoor($event, 5)">
   <span class="dir-ico" [ngStyle]="doorsStyle['basso']"></span>
 </button>
 <div class="tg-sub-directions">

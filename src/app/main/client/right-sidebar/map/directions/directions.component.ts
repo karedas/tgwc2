@@ -29,7 +29,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private gameService: GameService,
+    private game: GameService,
     private store: Store<DataState>
   ) {
 
@@ -50,19 +50,44 @@ export class DirectionsComponent implements OnInit, OnDestroy {
   }
 
 
-  goToDirection(event, dir: number): void {
+  goToDirection(event: any, dir: number): void {
+
     event.preventDefault();
-    if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '3') {
-      this.dirCmd = `apri ${this.dirNames[dir]}`;
-    } else if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '4') {
-      this.dirCmd = 'sblocca ' + this.dirNames[dir];
-    } else {
-      this.dirCmd = this.dirNames[dir];
-    }
-    if (this.dirCmd) {
-      this.gameService.processCommands(this.dirCmd);
-    }
+    event.stopImmediatePropagation();
+
+    let cmd: string;
+
+    // Go to Dir or open The Door with Left Click
+      if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '3') {
+        cmd = `apri ${this.dirNames[dir]}`;
+      } else if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '4') {
+        cmd = 'sblocca ' + this.dirNames[dir];
+      } else {
+        cmd = this.dirNames[dir];
+      }
+      if (cmd) {
+        this.game.sendToServer(cmd);
+      }
   }
+
+  closeLockDoor(event: any, dir: number): boolean {
+
+    let cmd: string;
+
+    // Close The Door with Right Click
+        if (this.dirStatus[dir] == '2') {
+          cmd = `chiudi ${this.dirNames[dir]}`;
+        } else if (this.dirStatus[dir] == '3') {
+          cmd = `blocca ${this.dirNames[dir]}`;
+        }
+        if (cmd) {
+          this.game.sendToServer(cmd);
+        }
+  
+        return false;
+   }
+      
+
 
   setDoors(doors: any): void {
     for (let d = 0; d < this.dirNames.length; ++d) {
