@@ -20,13 +20,13 @@
 
 .tg-output--history,
 .tg-output--extradetail {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Open Sans', sans-serif;
   z-index: 2;
   color: #d2d2d2; //  default color
   box-sizing: border-box;
   font-size: 100%;
-  line-height: 1;
-  font-size: 12px;
+  line-height: 1.4;
+  font-size: 11px;
 }
 
 
@@ -135,7 +135,7 @@ tg-text {
 
   .tg-room--desc {
     flex-direction: column;
-    line-height: 1;
+    line-height: 1.4;
     color: #989898;
     padding-bottom: 0.5em;
     margin-bottom: .5em;
@@ -161,7 +161,6 @@ tg-text {
     user-select: none;
     margin-right: auto;
     box-sizing: border-box;
-    line-height: 1;
 
     >div {
       margin: auto 0;

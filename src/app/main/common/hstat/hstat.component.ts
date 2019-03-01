@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, SimpleChange } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'tg-hstat',
