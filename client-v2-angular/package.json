@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve ",
-    "build": "gulp generate-sprites && gulp generate-assetslist && node git.version && ng build",
+    "build": "node git.version gulp generate-sprites && gulp generate-assetslist && ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

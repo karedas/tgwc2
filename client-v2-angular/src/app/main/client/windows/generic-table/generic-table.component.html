@@ -12,13 +12,15 @@
             [rows]="currentPageLimit"
             [rowHover]="true"
             [reorderableColumns]="true">
+
             <ng-template pTemplate="header" let-columns>
+              <!-- Caption-->
               <tr>
-                <th *ngFor="let col of columns">
-                  {{col.name}}
+                <th *ngFor="let col of columns" [innerHtml]="col.name | dataToHtml">
                 </th>
               </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
               <tr [pReorderableRow]="index">
                 <td *ngFor="let col of columns">
@@ -31,11 +33,12 @@
                   </ng-container>
 
                   <ng-container *ngIf="col.name !== 'icona' && col.name !=='ipaddr'">
-                    <span [innerHtml]="rowData[col.field]"  pReorderableRowHandle></span>
+                    <span [innerHtml]="rowData[col.field] | dataToHtml"  pReorderableRowHandle></span>
                   </ng-container>
                 </td>
               </tr>
             </ng-template>
+            
             <ng-template pTemplate="summary">
               Visualizzati {{rows.length }} risultati
             </ng-template>

@@ -105,9 +105,10 @@ export class WindowsService {
         style: {
           'width': '750px',
           'height': '650px',
-          'max-width': '100%',
-          'max-height': '100%',
-          'min-height': '550px'},
+          // 'max-width': '100%',
+          // 'max-height': '100%',
+        },
+        contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
 
       this.gd.set(ref);

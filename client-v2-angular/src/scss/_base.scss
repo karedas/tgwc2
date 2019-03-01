@@ -1,9 +1,12 @@
 
 @import '~@angular/flex-layout/mq';
 
+/**** FONTS *****/
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 @include font-face(
   kingthings, '/assets/fonts/Kingthings_Foundation', null, null, ttf
 );
+/********************/
 
 body,
 html {
@@ -16,8 +19,8 @@ body {
   color: white;
   min-height: 100%;
   line-height: normal;
-  font-size: 11px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  font-family: 'Inconsolata', monospace;
   display: flex;
 }
 
