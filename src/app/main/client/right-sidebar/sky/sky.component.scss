@@ -142,7 +142,7 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
     }
 
     /* Mattina */
-    &.sky-6 {
+    &.sky-6, &.sky-o {
       background-image: url($skyPath + 'mattina.jpg');
     }
 
@@ -162,9 +162,6 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
     }
 
     /* Notte (no luna) */
-    &.sky-N {
-      background-image: url($skyPath + 'notte.jpg');
-    }
 
     /* giorno con pioggia e fulmini */
     &.sky-d {
@@ -192,7 +189,7 @@ $lightining_color2: rgba(255, 255, 255, 0.6);
     }
 
     /* Aurora */
-    &.sky-o {
+    &.sky-N {
       background-image: url($skyPath + 'aurora.jpg');
     }
 
