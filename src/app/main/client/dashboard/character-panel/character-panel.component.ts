@@ -91,7 +91,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       this.moneyValue = 'mo';
     } else if (money >= 1000) {
       dividend = 1000;
-      this.moneyValue = 'co';
+      this.moneyValue = 'mp';
     }
 
     if (money > 0) {

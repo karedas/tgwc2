@@ -24,7 +24,6 @@
 
     .textarea {
       outline: none;
-      min-height: 196px;
       font-size: 14px;
       line-height: 1.2;
       border: none;
@@ -110,6 +109,7 @@
       left: 50%;
       transform: translateX(-50%);
       top: 2px;
+      line-height: 13px;
     }
   }
 

@@ -64,7 +64,9 @@ export class GenericDialogComponent implements OnInit {
 
 
   bringToFront() {
-    this.dialog.moveOnTop();
+    if(this.dialog) {
+      this.dialog.moveOnTop();
+    }
   }
 
   // remove self from modal service when directive is destroyed

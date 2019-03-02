@@ -30,12 +30,14 @@ import { TableModule } from 'primeng/table';
 import { ContextMenuModule } from 'primeng/contextmenu';
 
 import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
+import { ClickStopPropagation } from './directives/click-stop-propagation.directive';
 
 
 @NgModule({
   declarations: [
     IconsComponent,
-    HstatComponent
+    HstatComponent,
+    ClickStopPropagation
   ],
   imports: [
     CommonModule,
@@ -81,7 +83,8 @@ import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
     TooltipModule,
     ButtonModule,
     TableModule,
-    ContextMenuModule
+    ContextMenuModule,
+    ClickStopPropagation
   ],
 })
 export class SharedModule {

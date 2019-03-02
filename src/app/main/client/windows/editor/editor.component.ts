@@ -49,7 +49,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     ).subscribe(
       (editorState: IEditor) => {
         if (editorState !== undefined) {
-          this.description = editorState.description;
+          this.description = editorState.description.replace(/\n/gm, ' ');
           this.dialogTitle = editorState.title;
           this.maxChars = editorState.maxChars;
           this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
@@ -93,7 +93,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.inputService.focus();
   }
 
-  onCancel() {
+  onCancel(event: any) {
     this.gameService.sendToServer('##ce_abort');
     this.windowsService.closeGenericDialog(this.dialogID);
     this.inputService.focus();

@@ -26,6 +26,7 @@ export class GameService {
   //Client Data Needed Updates
   public client_update = {
     lastDataTime: 0,
+    mrnContainer: undefined,
     inContainer: false,
     invOpen: false,
     equipOpen: false,
@@ -120,7 +121,11 @@ export class GameService {
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
-      }
+      } else if (this.client_update.inContainer) {
+
+        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`)
+      } 
+      
     }
   }
 

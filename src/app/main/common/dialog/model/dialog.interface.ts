@@ -16,7 +16,7 @@ export class DialogConfiguration  {
     closeOnEscape?: boolean;
     focusOnShow?: boolean;
     contentStyle?: any;
-    style?: any;
+    style?: {};
 
     constructor() {
         this.width = 'auto',
@@ -27,6 +27,7 @@ export class DialogConfiguration  {
         this.draggable = false;
         this.maximizable = false;
         this.closeOnEscape = false;
+        this.style = {}
     }
 }
 

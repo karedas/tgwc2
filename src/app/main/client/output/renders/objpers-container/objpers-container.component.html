@@ -8,18 +8,24 @@
 <!-- ## Equipment as Container ## -->
 <ng-template #withEquipCont>
   <div class="tg-objperson" fxLayout="row wrap">
-    <div class="tg-objperson--title" *ngIf="eqcont.list.length > 0" fxFlex="1 1 100%">
-      {{eqcont.title}} 
-    </div>
 
-
-    <ng-container *ngFor="let item of eqcont.list; let i=index">
-      <div class="tg-objperson--line" fxFlex="1 1 100%">
+    <!-- Obj or Person Title -->
+      <div class="tg-objperson--title" *ngIf="objcont?.title" fxFlex="1 1 100%">
+        {{eqcont.title | capitalizeFirst}} 
+      </div>
+    
+    <ng-container *ngIf="eqcont.list.length === 0; else equipmentList">
+        <div class="tg-objperson--line tg-brown" fxFlex="1 1 100%">
+          Non indossa niente di particolare.
+        </div>
+    </ng-container>
+    <ng-template #equipmentList>
+      <div class="tg-objperson--line" fxFlex="1 1 100%" *ngFor="let item of eqcont.list; let i=index">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"
           (mousedown)="onInteract($event, item, i)"></tg-icons>
-
+  
         <tg-hstat [condprc]="item.condprc" *ngIf="expression"></tg-hstat>
-
+  
         <!-- Equip Position Name  -->
         <div class="tg-objperson--equippos " 
           *ngIf="item.eq[0] && item.eq[0] < 100; else modifierEq"
@@ -29,10 +35,11 @@
             [&nbsp;<span class="tg-green">Modificatore</span>&nbsp;]
           </div>
         </ng-template>
-
+  
         <div class="tg-objpers--itemdesc" [innerHtml]="item.desc + '.' | dataToHtml | capitalizeFirst"></div>
       </div>
-    </ng-container>
+    </ng-template>
+
   </div>
 
 </ng-template>
@@ -40,40 +47,49 @@
 <!-- ## Objects as Container ## -->
 <ng-template #withObjCont>
   <div class="tg-objperson" fxLayout="row wrap">
-    <div class="tg-objperson--title" *ngIf="objcont.list.length > 0" fxFlex="1 1 100%">
-      {{objcont.title}}
+    <div class="tg-objperson--title" *ngIf="objcont?.title" fxFlex="1 1 100%">
+      {{objcont.title | capitalizeFirst}}
     </div>
-
-    <ng-container *ngFor="let obj of objcont.list; let i=index">
-      <div class="tg-objperson--line interact" 
-        [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
-        (mousedown)="onExpand($event, obj, i)"
-        fxFlex="0 0 50%">
-
-        <tg-icons [icon]="obj.icon" 
-          [attr.cntnum]="obj.cntnum"
-          (mousedown)="onInteract($event, obj, i, true)"
-          pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
-
-        <tg-hstat [condprc]="obj.condprc" *ngIf="!obj.sz;else objquantity"></tg-hstat>
-        <ng-template #objquantity>
-          <div class="size-qty"><span>{{obj.sz}}</span></div>
-        </ng-template>
-        
-        <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
+    <ng-container *ngIf="objcont.list.length === 0; else objectList">
+      <div class="tg-objperson--line tg-brown">
+        Niente di particolare.
       </div>
-      <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
-          <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
-            <tg-icons [icon]="obj.icon" 
-              (mousedown)="onInteract($event, obj, indexSz, true)"
-              pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
-
-            <tg-hstat [condprc]="sz.condprc"></tg-hstat>
-
-            <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
-          </div>
-        </div>
     </ng-container>
+    
+    <ng-template #objectList let-objects>
+      <ng-container *ngFor="let obj of objcont.list; let i=index">
+        <div class="tg-objperson--line interact" 
+          [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
+          (mousedown)="onExpand($event, obj, i)"
+          fxFlex="0 0 50%">
+  
+          <tg-icons [icon]="obj.icon" 
+            [attr.cntnum]="obj.cntnum"
+            (mousedown)="onInteract($event, obj, i, true)"
+            pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
+          </tg-icons>
+  
+          <tg-hstat [condprc]="obj.condprc" *ngIf="!obj.sz;else objquantity"></tg-hstat>
+  
+          <ng-template #objquantity>
+            <div class="size-qty"><span>{{obj.sz}}</span></div>
+          </ng-template>
+          
+          <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
+        </div>
+        <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
+            <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
+              <tg-icons [icon]="obj.icon" 
+                (mousedown)="onInteract($event, obj, indexSz, true)"
+                pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
+  
+              <tg-hstat [condprc]="sz.condprc"></tg-hstat>
+  
+              <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
+            </div>
+          </div>
+      </ng-container>
+    </ng-template>
 
   </div>
 </ng-template>
