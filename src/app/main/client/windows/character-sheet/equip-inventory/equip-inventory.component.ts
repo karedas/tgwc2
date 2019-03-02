@@ -46,7 +46,9 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     this.inventory$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
     this.equipment$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe(equipment => {
-        this.equipUpdate(equipment);
+        if(equipment !== undefined) {
+          this.equipUpdate(equipment);
+        }
       });
       
     
