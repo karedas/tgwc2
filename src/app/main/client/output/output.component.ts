@@ -127,6 +127,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
           this.output.push(content);
           this.typeDetail = 'objPers';
           this.endOutputStore();
+          // save last container if we need to update his view
+          this.game.client_update.mrnContainer = elements.num;
           this.game.client_update.inContainer = true;
         });
 

@@ -10,7 +10,7 @@
                   <div class="page" [attr.pagenumber]="i" *ngIf="openedIndexPage == i">
                     
                     <div class="tg-book-title" *ngIf="book.title">
-                      {{page.title | capitalizeFirst}}
+                      {{book.title | capitalizeFirst}}
                     </div>
                     <i class="tg-book-language" *ngIf="page.language">(C'è scritto qualcosa in {{page.language}})</i>
                     <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true">

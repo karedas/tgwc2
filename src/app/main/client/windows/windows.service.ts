@@ -174,15 +174,15 @@ export class WindowsService {
     const ref = this.genericDialogService.open(dialogID,
       <DialogConfiguration>{
         draggable: true,
-        resizable: false,
+        resizable: true,
         header: data[0],
         closeOnEscape: true,
         focusOnShow: false,
+        maximizable: true,
         modal: false,
         style: {
-          'width': '450px',
-          'height': '550px',
-          'max-height': '90%'
+          'width': '500px',
+          'height': '600px',
         },
         contentStyle: {
           'height': '100%'

@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getEquip, getInventory } from 'src/app/store/selectors';
-import { equip_positions_by_name } from 'src/app/main/common/constants';
+import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 import { InputService } from '../../../dashboard/input/input.service';
@@ -16,10 +16,13 @@ import { InputService } from '../../../dashboard/input/input.service';
 })
 export class EquipInventoryComponent implements OnInit, OnDestroy {
 
-  equipPositionValue: {} = equip_positions_by_name;
+  equipPositionValue: {};
+  equip_by_pos = pos_to_order;
 
   equipment$: Observable<any>;
   inventory$: Observable<any>;
+
+  equip = [];
 
   @Input('subTab') openedSubTab = 'equip';
 
@@ -34,13 +37,18 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     this.equipment$ = this.store.pipe(select(getEquip));
     this.inventory$ = this.store.pipe(select(getInventory));
 
+    this.equipPositionValue = Object.entries(equip_positions_by_name);
     this._unsubscribeAll = new Subject<any>();
    }
 
   ngOnInit() {
     
-    this.equipment$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
     this.inventory$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
+    this.equipment$.pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(equipment => {
+        this.equipUpdate(equipment);
+      });
+      
     
     this.resetUpdateBeforeProceed();
 
@@ -50,6 +58,27 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     if(this.openedSubTab === 'inventory') {
       this.game.client_update.invOpen = true;
     }
+  }
+
+  equipUpdate(eq: any) {
+    let cont = {
+      list: []
+    };
+
+    Object.keys(eq).forEach( (poskey: any, eqData:any) => {
+      let where = equip_positions_by_name[poskey];
+      if(where) {
+        cont.list = cont.list.concat(eq[poskey][0]);
+      }
+
+    });
+    cont.list.sort((a,b) => {
+      let eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
+      let eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
+        return <number>eq_pos_a - <number>eq_pos_b;
+    })
+
+    this.equip = cont.list;
   }
 
   buttonClick(what: string, event: Event) {
