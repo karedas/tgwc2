@@ -103,7 +103,7 @@
         height: 16px;
       }
   
-      .status-walk, .status-combat-mod, .status-combat-attegg, .status-money, .status-position {
+      .status-walk, .status-combat-mod, .status-combat-attegg, .status-position {
         i {
           display: block;
           margin: auto;
@@ -118,7 +118,9 @@
   
       /* MONEY */
       .status-money i{
-        background-image: url($imgPath + '/icons/_monete.svg');
+        // background-image: url($imgPath + '/icons/_monete.svg');
+        display: block;
+        @include sprite($coins-ico-sprite);
       }
   
       /* POSITION */

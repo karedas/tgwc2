@@ -1,7 +1,7 @@
 
 export const environment = {
   production: true,
-  serverstatAddress: 'http://play.thegatemud.it/wclientv2/serverstat',
+  serverstatAddress: 'http://play.thegatemud.it/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
   socket : {
     url : 'http://play.thegatemud.it:3335',

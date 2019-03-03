@@ -19,12 +19,18 @@
           Non indossa niente di particolare.
         </div>
     </ng-container>
+    
     <ng-template #equipmentList>
+      <!-- Obj or Person Title -->
+      <div class="tg-objperson--title" *ngIf="eqcont?.title" fxFlex="1 1 100%">
+        {{eqcont.title | capitalizeFirst}} 
+      </div>
+      
       <div class="tg-objperson--line" fxFlex="1 1 100%" *ngFor="let item of eqcont.list; let i=index">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum"
           (mousedown)="onInteract($event, item, i)"></tg-icons>
   
-        <tg-hstat [condprc]="item.condprc" *ngIf="expression"></tg-hstat>
+        <tg-hstat [condprc]="item.condprc"></tg-hstat>
   
         <!-- Equip Position Name  -->
         <div class="tg-objperson--equippos " 
@@ -38,6 +44,7 @@
   
         <div class="tg-objpers--itemdesc" [innerHtml]="item.desc + '.' | dataToHtml | capitalizeFirst"></div>
       </div>
+
     </ng-template>
 
   </div>
@@ -58,6 +65,7 @@
     
     <ng-template #objectList let-objects>
       <ng-container *ngFor="let obj of objcont.list; let i=index">
+        
         <div class="tg-objperson--line interact" 
           [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
           (mousedown)="onExpand($event, obj, i)"
@@ -77,6 +85,7 @@
           
           <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
         </div>
+        
         <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
             <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
               <tg-icons [icon]="obj.icon" 

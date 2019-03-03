@@ -33,7 +33,7 @@
                   </ng-container>
 
                   <ng-container *ngIf="col.name !== 'icona' && col.name !=='ipaddr'">
-                    <span [innerHtml]="rowData[col.field] | dataToHtml"  pReorderableRowHandle></span>
+                    <span [innerHtml]="rowData[col.field] | dataToHtml"  pReorderableRowHandle *ngIf="rowData[col.field]"></span>
                   </ng-container>
                 </td>
               </tr>
