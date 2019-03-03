@@ -83,7 +83,6 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
-          this.store.dispatch(new ResetAction());
           this.dialogRef.close();
         } else {
           this.loginFailed = true;

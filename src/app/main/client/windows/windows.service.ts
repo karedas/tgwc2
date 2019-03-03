@@ -165,6 +165,9 @@ export class WindowsService {
         style: {
           'width': 'auto',
           'height': 'auto',
+        },
+        contentStyle: {
+          'min-width': '400px'
         }
       });
 

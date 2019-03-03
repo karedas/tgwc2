@@ -19,7 +19,7 @@
                   <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
-                    <span> {{item.desc}}</span>
+                    <span> {{item.desc | dataToHtml}}</span>
                   </div>
                   <div class="eqinv-item-qty" fxFlex="0 0 20%" fxLayoutAlign="center center">
                     {{item.sz || '1'}}
@@ -40,7 +40,7 @@
 
     
     <ng-container *ngIf="openedSubTab == 'equip'">
-      <div class="equip-list tg-shadow-inset" fxLayout="column">
+      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equipment$ | async; let equip$">
         <h3>
           Equipaggiamento
         </h3>
@@ -71,7 +71,7 @@
         </div>
         <ng-container 
           [ngTemplateOutlet]="equipInvAction"
-          [ngTemplateOutletContext]="{wprc: equip.wprc, weight: equip.weight}">
+          [ngTemplateOutletContext]="{wprc: equip$.wprc, weight: equip$.weight}">
         </ng-container>
       </div>
     </ng-container>

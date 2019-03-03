@@ -1,11 +1,31 @@
 <div class="tg-room" *ngIf="html">
   <ng-template [ngIf]="!withExtra" [ngIfElse]="extradetail">
     <div class="tg-line">
-
       <ng-container *ngIf="!type">
-        <div *ngIf="html.title" [innerHtml]="html.title |  dataToHtml:true" class="tg-room--title"></div>
-        <div [innerHtml]="html.desc.base ? html.desc.base : lastDescription | dataToHtml:true | capitalizeFirst" class="tg-room--desc"></div>
-        <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"></tg-details-room>
+
+        <!-- Room Title -->
+        <div class="tg-room--title">
+
+          <ng-container *ngIf="html.title; else dirRoomtitle">
+            <div [innerHtml]="html.title |  dataToHtml:true"></div>
+          </ng-container>
+        </div>
+
+        <!-- Room Description -->
+          <div class="tg-room--desc tg-gray">
+            <ng-container *ngIf="html.desc.details; else regularDescBase">
+                <div [innerHtml]="html.desc.details | dataToHtml:true"></div>
+            </ng-container>
+            
+            <ng-template #regularDescBase>
+              <div class="tg-room--desc" [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
+            </ng-template>
+          </div>
+
+        <tg-details-room 
+          [objs]="html.objcont?.list" [persons]="html.perscont?.list" 
+          *ngIf="html.objcont?.list.length > 0 || html.perscont?.list.length > 0"></tg-details-room>
+
       </ng-container>
 
     </div>
@@ -15,16 +35,34 @@
 <ng-template #extradetail>
 
   <div class="tg-extraoutput--header">
-    <div *ngIf="html.title" class="tg-room--title">
-      <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
+
+    <!-- Room Title -->
+    <div class="tg-room--title">
+      <ng-container *ngIf="html.title; else extra_dirRoomtitle">
+        <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
+      </ng-container>
+
+      <ng-template #extra_dirRoomtitle> 
+          Sposti lo sguardo {{(html.dir === 'basso' || html.dir === 'alto') ? 'in' : 'a' }}&nbsp;<span>{{html.dir}}</span>
+      </ng-template>
     </div>
+
+    <!-- Image -->
     <div class="tg-room--image" *ngIf="html.image">
       <img [src]="getRoomImage(html.image)" />
     </div>
 
-    <ng-container 
-      *ngIf="type === 'room'">
-      <div class="tg-room--desc" [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
+    <!-- Room Description -->
+    <ng-container *ngIf="type === 'room'">
+      <div class="tg-room--desc">
+        <ng-container *ngIf="html.desc.details; else extra_regularDescBase">
+            <div [innerHtml]="html.desc.details | dataToHtml: true"></div>
+        </ng-container>
+        
+        <ng-template #extra_regularDescBase>
+          <div [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
+        </ng-template>
+      </div>
     </ng-container>
 
     <ng-container 
@@ -36,23 +74,29 @@
   </div>
   <!-- ## Button Back to Previous  -->
   <div class="tg-backdetail" *ngIf="html.where" (click)="onBackDetail(html.where.num)">
-    <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span><b>{{html.where.title}}</b></span>
+    <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova&nbsp;<b>{{html.where.title}}</b></span>
   </div>
 
   <div style="height: 100%; overflow:hidden;">
-    
-    <ng-scrollbar class="scrollbar" #scrollBar [shown]="always">
-
+    <ng-scrollbar class="scrollbar" #scrollBar [shown]="always" *ngIf="type === 'room' || type === 'objPers'">
+      
       <ng-container *ngIf="type === 'room'">
         <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" 
           *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
       </ng-container>
 
       <ng-container *ngIf="type === 'objPers'">
-        <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont" 
-          *ngIf="html.eqcont || html.objcont"></tg-objpers-container>
+        <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont" *ngIf="html.eqcont || html.objcont; else nothing"></tg-objpers-container>
+        <ng-template #nothing>
+            <div class="tg-objperson--nothing">
+                &#8618; Non sembra contenere&nbsp;<span class="tg-gray"> niente</span>.
+            </div> 
+        </ng-template>
       </ng-container>
+
     </ng-scrollbar>
 
   </div>
 </ng-template>
+
+
