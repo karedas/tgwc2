@@ -179,8 +179,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setOutputSplit() {
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
+      this.game.extraIsOpen = false;
       this.store.dispatch(new ToggleExtraOutput(false));
     } else {
+      this.game.extraIsOpen = true;
       this.store.dispatch(new ToggleExtraOutput(true));
     }
   }

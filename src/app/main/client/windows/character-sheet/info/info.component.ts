@@ -50,7 +50,7 @@ export class InfoComponent implements AfterViewInit, OnDestroy {
 
   parseDesc(value: string) {
     if (value) {
-      this.description = value.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, '');
+      this.description = value.replace(/([.:?!,])\s*\n/gm, '$1').replace(/\r?\n|\r/g, ' ');
     }
   }
 
