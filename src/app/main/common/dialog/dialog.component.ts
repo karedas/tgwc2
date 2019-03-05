@@ -71,7 +71,6 @@ export class GenericDialogComponent implements OnInit {
 
   // remove self from modal service when directive is destroyed
   ngOnDestroy(): void {
-    console.log('destroy');
-    this.genericDialogService.reset(this);
+    this.genericDialogService.remove(this.id);
   }
 }

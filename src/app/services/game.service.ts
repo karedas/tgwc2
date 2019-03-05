@@ -115,25 +115,21 @@ export class GameService {
     if (now > this.client_update.lastDataTime) {
 
       if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.invOpen) {
-        console.log('@inv');
         this.sendToServer('@inv');
         this.client_update.inventory.needed = false;
         this.client_update.lastDataTime = now;
       }
 
       if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.equipOpen) {
-        console.log('@equip');
         this.sendToServer('@equip');
         this.client_update.lastDataTime = now;
       }
 
       if (this.client_update.room.needed && this.extraIsOpen && !this.client_update.inContainer) {
-        console.log('@agg');
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
       } else if (this.client_update.inContainer && this.extraIsOpen) {
-        console.log('else @aggiorna container');
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`)
       }
     }

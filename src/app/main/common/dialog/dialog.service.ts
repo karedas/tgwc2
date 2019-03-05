@@ -10,7 +10,6 @@ export class GenericDialogService {
   private modals: any[] = [];
 
   add(modal: any) {
-    console.log(this.modals);
       // add modal to array of active modals
       this.modals.push(modal);
   }
@@ -40,9 +39,5 @@ export class GenericDialogService {
     if(modal) {
       return !modal.visible;
     }
-  }
-
-  reset (modal) {
-    delete this.modals[modal];
   }
 }

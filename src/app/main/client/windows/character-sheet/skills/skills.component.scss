@@ -37,8 +37,6 @@ h3 {
     padding-bottom: .5em;
 }
 
-
-
 .meter2 {
   border: 1px solid #59564c;
   background: #0f0f0e;
@@ -51,7 +49,7 @@ h3 {
     width: 0;
     height: 13px;
     max-width: 100%;
-    background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top left;
+    background: #f71008 url($imgPath + '/bars/gradient_redblue.jpg') no-repeat top right;
     background-size: 100% 100%;
     transition: width .4s ease-out;
   }

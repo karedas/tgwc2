@@ -49,7 +49,6 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
       .subscribe(equipment => {
         if(equipment !== undefined) {
           this.equip = this.game.orderObjectsList(equipment);
-          console.log(this.equip);
         }
       });
       

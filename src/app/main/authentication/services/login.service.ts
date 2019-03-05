@@ -149,11 +149,13 @@ export class LoginService {
   }
 
   onReboot() {
+    alert('Il gioco è in stato di reboot, riprova tra un po');
     this.store.dispatch(new SocketStatusAction('reboot'));
     console.log('TGLOG: Attenzione, Reboot del server in corso, impossibile effettuare attualmente l\'accesso');
   }
 
   onServerDown() {
+    alert("Server di Gioco Offline, riprova piu' tardi!")
     this.store.dispatch(new SocketStatusAction('serverdown'));
     this.loginReplayMessage = 'serverdown';
   }
