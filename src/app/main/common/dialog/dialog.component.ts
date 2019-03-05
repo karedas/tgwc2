@@ -31,13 +31,13 @@ export class GenericDialogComponent implements OnInit {
       console.error('modal must have an id');
       return;
     }
-
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.genericDialogService.add(this);
   }
 
   // open modal
   open(config: DialogConfiguration) {
+
     // this.visible = true;
     this.visible = true;
     this.config = Object.assign({}, this.config, config);
@@ -71,6 +71,7 @@ export class GenericDialogComponent implements OnInit {
 
   // remove self from modal service when directive is destroyed
   ngOnDestroy(): void {
-    // this.dialogService.remove(this.id);
+    console.log('destroy');
+    this.genericDialogService.reset(this);
   }
 }

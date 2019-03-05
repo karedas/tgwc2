@@ -210,10 +210,5 @@ export class WindowsService {
       diag.visible = false;
       this.gd.delete(name);
     });
-
-
-    this.genericDialogService.destroyAll();
   }
 }
-
-

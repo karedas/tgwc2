@@ -10,6 +10,7 @@ export class GenericDialogService {
   private modals: any[] = [];
 
   add(modal: any) {
+    console.log(this.modals);
       // add modal to array of active modals
       this.modals.push(modal);
   }
@@ -22,8 +23,10 @@ export class GenericDialogService {
   open(id: string, config?: DialogConfiguration, data?: any ): any {
       // open modal specified by id
       const modal: any = this.modals.filter(x => x.id === id)[0];
-      modal.open(config);
-      return modal;
+      if(modal) {
+        modal.open(config);
+        return modal;
+      }
   }
 
   close(id: string) {
@@ -34,10 +37,12 @@ export class GenericDialogService {
 
   isClosed(id: string): boolean {
     const modal: any = this.modals.filter(x => x.id === id)[0];
-    return !modal.visible;
+    if(modal) {
+      return !modal.visible;
+    }
   }
 
-  destroyAll() {
-    this.modals = [];
+  reset (modal) {
+    delete this.modals[modal];
   }
 }
