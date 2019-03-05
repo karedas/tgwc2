@@ -155,7 +155,6 @@ export class LoginService {
   }
 
   onServerDown() {
-    alert("Server di Gioco Offline, riprova piu' tardi!")
     this.store.dispatch(new SocketStatusAction('serverdown'));
     this.loginReplayMessage = 'serverdown';
   }

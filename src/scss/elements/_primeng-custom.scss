@@ -166,6 +166,26 @@ p-button {
 
 /* Table */
 p-table {
+
+  .ui-table .ui-sortable-column{
+    padding-left:.5em;
+    padding-right: .5em;
+  }
+  
+  .ui-table .ui-sortable-column.ui-state-highlight {
+    background-color: #221915;
+    color: #dedede;
+    outline: none;
+
+    .ui-sortable-column-icon {
+      color: #dedede;
+    }
+  }
+
+  .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
+    background-color: #271d18;
+  }
+
   >.ui-widget {
     font-size: 11px;
   }

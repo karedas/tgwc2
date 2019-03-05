@@ -21,6 +21,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   public rows = [];
   public columns = [];
   public currentPageLimit = 10;
+  private headerTitle: string;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -39,10 +40,15 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (dt: IGenericTable) => {
         if (dt) {
+          this.setHeaderTitle(dt.title);
           this.populate(dt);
           this.open();
         }
       });
+  }
+
+  setHeaderTitle(title) {
+    this.headerTitle = title ? title : 'Informazioni';
   }
 
   private populate(dataTable: any) {
@@ -75,7 +81,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   private open() {
     setTimeout(() => {
-      this.windowsService.openDialogTable(this.dialogID, 'Informazioni');
+      this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
     }, 200);
 
   }

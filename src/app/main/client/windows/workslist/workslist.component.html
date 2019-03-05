@@ -10,10 +10,12 @@
             [paginator]="true"
             [rows]="currentPageLimit"
             [rowHover]="true"
+            sortMode="multiple"
             [reorderableColumns]="true">
             <ng-template pTemplate="header" let-columns>
-              <th *ngFor="let col of cols">
+              <th *ngFor="let col of cols" [pSortableColumn]="col.field">
                   {{col.header}}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
             </ng-template>
 

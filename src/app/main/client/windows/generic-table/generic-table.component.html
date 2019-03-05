@@ -11,12 +11,16 @@
             [paginator]="true"  
             [rows]="currentPageLimit"
             [rowHover]="true"
+            sortMode="multiple"
             [reorderableColumns]="true">
+            
 
             <ng-template pTemplate="header" let-columns>
               <!-- Caption-->
               <tr>
-                <th *ngFor="let col of columns" [innerHtml]="col.name | dataToHtml">
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                  <span [innerHtml]="col.name | dataToHtml"></span>
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>
               </tr>
             </ng-template>
