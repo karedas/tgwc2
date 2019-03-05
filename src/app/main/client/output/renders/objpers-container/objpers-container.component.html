@@ -73,7 +73,7 @@
   
           <tg-icons [icon]="obj.icon" 
             [attr.cntnum]="obj.cntnum"
-            (mousedown)="onInteract($event, obj, i, true)"
+            (mousedown)="onInteract($event, obj)"
             pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
           </tg-icons>
   
@@ -89,7 +89,7 @@
         <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
             <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
               <tg-icons [icon]="obj.icon" 
-                (mousedown)="onInteract($event, obj, indexSz, true)"
+                (mousedown)="onInteract($event, obj, indexSz)"
                 pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
   
               <tg-hstat [condprc]="sz.condprc"></tg-hstat>

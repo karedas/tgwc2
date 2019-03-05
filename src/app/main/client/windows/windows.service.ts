@@ -87,7 +87,6 @@ export class WindowsService {
       ref.onClose.subscribe(
        () => this.render.removeClass(document.body, 'overlay-dark')
       );
-
   }
 
   openCharacterSheet(detail?: string) {
@@ -110,8 +109,7 @@ export class WindowsService {
         },
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
-
-      this.gd.set(ref);
+      this.gd.set(ref, 'charactersheet');
   }
 
   openCommandsList() {
@@ -133,7 +131,7 @@ export class WindowsService {
 
       });
 
-      this.gd.set(ref);
+      this.gd.set(ref, 'commandslist');
   }
 
   openEditor(dialogID: string, ...data: any): any {
@@ -151,7 +149,7 @@ export class WindowsService {
         }
       });
 
-    this.gd.set(ref);
+    this.gd.set(ref, 'editor');
     return ref;
   }
 
@@ -171,7 +169,7 @@ export class WindowsService {
         }
       });
 
-      this.gd.set(ref);
+      this.gd.set(ref, 'table');
   }
 
   openBook(dialogID: string, ...data: any): any {
@@ -193,7 +191,7 @@ export class WindowsService {
         }
       });
 
-      this.gd.set(ref);
+      this.gd.set(ref, 'book');
 
       return ref;
   }
@@ -213,6 +211,8 @@ export class WindowsService {
       this.gd.delete(name);
     });
 
+
+    this.genericDialogService.destroyAll();
   }
 }
 

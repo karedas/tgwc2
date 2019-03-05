@@ -8,7 +8,7 @@ export class AudioService {
 
   public sound: HTMLAudioElement;
   public music: HTMLAudioElement;
-  public playerStatus: BehaviorSubject<string> = new BehaviorSubject('paused');
+  public playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
 
 
   constructor() {
@@ -18,36 +18,8 @@ export class AudioService {
     this.music.volume = .4;
     this.sound.volume = .6;
 
-    this.attachListener();
+    // this.attachListener();
   }
-
-  private attachListener(): void {
-    this.music.addEventListener('playing', this.setPlayerStatus, false);
-    this.music.addEventListener('pause', this.setPlayerStatus, false);
-    this.music.addEventListener('waiting', this.setPlayerStatus, false);
-    this.music.addEventListener('ended', this.setPlayerStatus, false);
-  }
-
-  private setPlayerStatus(evt: any) {
-    switch (evt.type) {
-      case 'playing':
-        this.playerStatus.next('playing');
-        break;
-      case 'pause':
-        this.playerStatus.next('paused');
-        break;
-      case 'waiting':
-        this.playerStatus.next('loading');
-        break;
-      case 'ended':
-        this.playerStatus.next('ended');
-        break;
-      default:
-        this.playerStatus.next('paused');
-        break;
-    }
-  }
-
 
   setAudio(src: string): void {
     const mp3 = '.mp3';
@@ -58,7 +30,7 @@ export class AudioService {
     if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
       this.setMusic(src);
     } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
-      this.setSound(src.replace(mid, mp3));
+      this.setMusic(src.replace(mid, mp3));
     } else {
       this.setSound(src.replace(wav, mp3));
     }
@@ -97,12 +69,6 @@ export class AudioService {
 
   public playSound(): void {
     this.sound.play();
-  }
-
-
-
-  public getPlayerStatus(): Observable<string> {
-    return this.playerStatus.asObservable();
   }
 
   public toggleAudio(): void {

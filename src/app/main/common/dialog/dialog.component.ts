@@ -20,7 +20,7 @@ export class GenericDialogComponent implements OnInit {
 
   constructor(
     private genericDialogService: GenericDialogService,
-    ) { }
+    ) {     }
 
   ngOnInit(): void {
 
@@ -48,7 +48,7 @@ export class GenericDialogComponent implements OnInit {
 
     setTimeout(() => {
       this.dialog.moveOnTop();
-    }, 100);
+    });
 
   }
 

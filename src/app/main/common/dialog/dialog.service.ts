@@ -36,4 +36,8 @@ export class GenericDialogService {
     const modal: any = this.modals.filter(x => x.id === id)[0];
     return !modal.visible;
   }
+
+  destroyAll() {
+    this.modals = [];
+  }
 }

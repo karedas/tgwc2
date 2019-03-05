@@ -45,7 +45,7 @@ export class ObjPersContainerComponent implements OnInit  {
   }
 
   onInteract(event: Event, item: any, index: number, list?: boolean) {
-    this.interactService.interact(event, item, index, list);
+    this.interactService.interact(event, item, index);
   }
 
   onExpand(event: Event, item: any, index: number) {

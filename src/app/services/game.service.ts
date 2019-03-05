@@ -3,12 +3,11 @@ import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
-import { Observable, Subject, BehaviorSubject, interval, timer } from 'rxjs';
+import { Observable, BehaviorSubject, timer } from 'rxjs';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { switchMap } from 'rxjs/operators';
-import { faCarrot } from '@fortawesome/free-solid-svg-icons';
 
 
 @Injectable({
@@ -43,8 +42,6 @@ export class GameService {
       needed: false
     }
   };
-
-
 
   constructor(
     private socketService: SocketService,

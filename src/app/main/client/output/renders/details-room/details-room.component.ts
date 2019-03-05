@@ -69,8 +69,8 @@ export class DetailsRoomComponent implements OnInit {
     }
   }
 
-  onInteract(event: Event, item: any, index: number, list?: boolean) {
-    this.interactService.interact(event, item, index, list);
+  onInteract(event: Event, item: any, index: number) {
+    this.interactService.interact(event, item, index);
   }
 
   onExpand(event: Event, item: any, index: number) {
