@@ -12,8 +12,10 @@
             <div fxFlex="0 0 20%" fxLayoutAlign="center center">Quantità</div>
             <div fxFlex="0 0 20%" fxLayoutAlign="center center">Peso</div>
           </div>
+          
           <ng-scrollbar class="scrollbar" [shown]="'always'" [compact]="true">
             <div class="eqinv-wrapper-list" fxLayout="column">
+
               <ng-container *ngFor="let item of inventory.list">
                 <div fxFlex="1 0 auto" class="eqinv-item-wrap">
                   <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
@@ -27,9 +29,11 @@
                   <div class="eqinv-item-weight" fxFlex="0 0 20%" fxLayoutAlign="center center">
                     {{item.wgt}} pt</div>
                 </div>
+
               </ng-container>
             </div>
           </ng-scrollbar>
+
         </div>
         <ng-container 
           [ngTemplateOutlet]="equipInvAction"
@@ -50,8 +54,10 @@
             <div fxFlex="0 0 55%" fxLayoutAlign="center center">Oggetto</div>
             <div fxFlex="0 0 15%" fxLayoutAlign="center center">Peso</div>
           </div>
+
           <ng-scrollbar class="scrollbar" [shown]="'always'" [compact]="true">
             <div class="eqinv-wrapper-list" fxLayout="column">
+              
               <ng-container *ngFor="let item of equip">
                 <div fxFlex="1 0 auto" *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos" class="eqinv-item-wrap">
                   <div class="eqinv-item-position" fxFlex="0 0 30%" fxLayoutAlign="flex-end center">
@@ -62,12 +68,13 @@
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
                     <span> {{item.desc}}</span>
                   </div>
-                  <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="center center">{{item.wgt}}
-                    pt</div>
+                  <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="center center">{{item.wgt}}pt</div>
                 </div>
               </ng-container>
+
             </div>
           </ng-scrollbar>
+
         </div>
         <ng-container 
           [ngTemplateOutlet]="equipInvAction"

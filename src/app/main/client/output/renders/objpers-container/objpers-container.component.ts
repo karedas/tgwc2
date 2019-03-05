@@ -3,6 +3,7 @@ import { IObjPersEqcont, IObjPersObjcont } from 'src/app/models/data/objpers.mod
 
 import { equip_positions_by_name } from 'src/app/main/common/constants';
 import { InteractService } from '../../services/interact.service';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'tg-objpers-container',
@@ -21,7 +22,8 @@ export class ObjPersContainerComponent implements OnInit  {
   @Input('objcont') objcont: IObjPersObjcont;
 
   constructor(
-    public interactService: InteractService
+    public interactService: InteractService,
+    private game: GameService
     ) {
      const keysAndProperty = Object.keys( equip_positions_by_name );
      this.newListEquip = keysAndProperty.map((val, k) => {
@@ -30,6 +32,10 @@ export class ObjPersContainerComponent implements OnInit  {
   }
 
   ngOnInit(): void {
+
+    // this.eqcont.list = 
+    this.eqcont = this.game.orderObjectsList(this.eqcont);
+
     if (this.objcont) {
       this.populateToggleExpandable();
     }

@@ -47,7 +47,8 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     this.equipment$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe(equipment => {
         if(equipment !== undefined) {
-          this.equipUpdate(equipment);
+          this.equip = this.game.orderObjectsList(equipment);
+          console.log(this.equip);
         }
       });
       
@@ -60,27 +61,6 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     if(this.openedSubTab === 'inventory') {
       this.game.client_update.invOpen = true;
     }
-  }
-
-  equipUpdate(eq: any) {
-    let cont = {
-      list: []
-    };
-
-    Object.keys(eq).forEach( (poskey: any, eqData:any) => {
-      let where = equip_positions_by_name[poskey];
-      if(where) {
-        cont.list = cont.list.concat(eq[poskey][0]);
-      }
-
-    });
-    cont.list.sort((a,b) => {
-      let eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
-      let eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
-        return <number>eq_pos_a - <number>eq_pos_b;
-    })
-
-    this.equip = cont.list;
   }
 
   buttonClick(what: string, event: Event) {

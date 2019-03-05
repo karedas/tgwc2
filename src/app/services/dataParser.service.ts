@@ -41,9 +41,7 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-      /*
-      * TODO: dispatch disconnection
-      */
+        this.store.dispatch(new GameActions.DisconnectAction);
     }
   }
 

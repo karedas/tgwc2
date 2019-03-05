@@ -27,6 +27,7 @@ export class ClientEffects {
         this.loginService.logout();
         this.audioService.pauseAudio();
         this.windowsService.openSmartLogin();
+        this.game.reset();
       }
     }
     ));
@@ -40,6 +41,7 @@ export class ClientEffects {
   );
 
   constructor(
+    private game: GameService,
     private actions$: Actions,
     private audioService: AudioService,
     private loginService: LoginService,
