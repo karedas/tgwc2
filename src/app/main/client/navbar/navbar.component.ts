@@ -4,6 +4,8 @@ import { GameService } from 'src/app/services/game.service';
 import gitInfo from 'src/git-version.json';
 import { WindowsService } from '../windows/windows.service';
 
+import { faFont } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
 
@@ -15,7 +17,11 @@ import { WindowsService } from '../windows/windows.service';
 export class NavbarComponent implements OnInit {
 
   gitVersion = gitInfo.raw;
-  menuItems: MenuItem[];
+  menuItemsLeft: MenuItem[];
+  menuItemsRight: MenuItem[];
+
+  faFont = faFont;
+
 
 
   constructor(
@@ -26,7 +32,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
 
-    this.menuItems = [{
+    this.menuItemsLeft = [{
       label: 'Client',
       items: [
         { label: 'Log di gioco', disabled: true },
@@ -64,5 +70,11 @@ export class NavbarComponent implements OnInit {
         { label: 'Informazioni su The Gate', disabled: true },
       ]
     }];
+
+
+    this.menuItemsRight = [{
+    }]
+
+
   }
 }

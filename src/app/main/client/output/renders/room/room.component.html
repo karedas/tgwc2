@@ -68,8 +68,8 @@
     <ng-container 
       *ngIf="type ==='objPers' && html.desc">
       <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc.base"></div>
-      <div class="tg-objperson--descdetail tg-green" [innerHtml]="(html.desc.details) | dataToHtml:true" *ngIf="html.desc.details"></div>
-    </ng-container>
+      <div class="tg-objperson--descdetail tg-green" [innerHtml]="(html.desc.details)  | capitalizeFirst | dataToHtml:true" *ngIf="html.desc.details"></div>
+    </ng-container> 
 
   </div>
   <!-- ## Button Back to Previous  -->

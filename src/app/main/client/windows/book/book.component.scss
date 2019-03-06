@@ -2,7 +2,6 @@
   height: 100%;
   line-height: 1.4;
   color: #3a2e19;
-  font-size: 1.4em;
 }
 
 .tg-book * {
@@ -15,9 +14,15 @@
   height: 100%
 }
 
+.page {
+  padding-right: .5em;
+  font-size: 13px;
+}
+
+
 .tg-book-title {
   font-family: kingthings;
-  font-size: 1.8em;
+  font-size: 1.6em;
   line-height: 1;
   text-align: center;
   padding-bottom: .5em;
@@ -29,9 +34,6 @@
   display: block;
 }
 
-.page {
-  padding-right: .5em;
-}
 
 .tg-book-pagetext {
   text-align: justify;

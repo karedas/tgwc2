@@ -10,7 +10,7 @@
     <div class="tg-objperson--descbase" 
       [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
     <div class="tg-objperson--descdetail tg-green" 
-      [innerHtml]="html.desc.details | dataToHtml | capitalizeFirst"></div>
+      [innerHtml]="html.desc.details | capitalizeFirst | dataToHtml:true"></div>
   </ng-container>
 
   <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont"  *ngIf="html.eqcont || html.objcont"></tg-objpers-container>

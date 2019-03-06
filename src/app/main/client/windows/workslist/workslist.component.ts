@@ -1,13 +1,14 @@
-import { Component, OnDestroy, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
-import { GenericDialogService } from 'src/app/main/common/dialog/dialog.service';
 import { getWorksList } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/models/data/workslist.model';
 import { GameService } from 'src/app/services/game.service';
 import { WindowsService } from '../windows.service';
+import { Table } from 'primeng/table';
+
 
 @Component({
   selector: 'tg-workslist',
@@ -17,9 +18,10 @@ import { WindowsService } from '../windows.service';
 })
 export class WorkslistComponent implements AfterViewInit, OnDestroy {
 
+  @ViewChild('worksTable') table: Table;
+
   public readonly dialogID = 'workslist';
-
-
+  
   public readonly cols: any = [
     {field: 'id', header: '#'},
     {field: 'icon', header: ''},
@@ -32,7 +34,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   public rows = [];
   public currentPageLimit = 10;
   private cmd: string;
-
+  
 
   public dataTable$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
@@ -49,11 +51,13 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
      }
 
   ngAfterViewInit(): void {
-
     this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (wl: IWorks) => {
         if (wl) {
           this.cmd = wl.cmd;
+          if(this.table ) {
+            this.table.reset();
+          }
           this.populate(wl.list);
           this.open(wl.verb);
         }

@@ -1,23 +1,38 @@
 import { Injectable } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InteractService {
+
   constructor(private game: GameService) {}
 
-  interact(event: Event, item: any, index: number, list?: boolean) {
+  interact(event: Event, item: any, index?: number) {
     event.preventDefault();
+    
+    /* If is not a List */
     if (!item.sz) {
-      if (!item.cntnum) {
-        this.game.processCommands(`guarda &${item.mrn[0]}`);
-      } else if (item.cntnum && item.mrn.length > 0) {
+
+      if(item.cntnum) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       }
-    } else if (list) {
-      const mrn = item.mrn.length ? item.mrn[index] : item.mrn[0] ;
-      this.game.processCommands(`guarda &${mrn}`);
+      else {
+        this.game.processCommands(`guarda &${item.mrn[0]}`);
+      }
+    }
+
+
+    /* Is a List */
+    if(item.sz) {
+      if(!item.cntnum &&  index >= 0) {
+        this.game.processCommands(`guarda &${item.mrn[index]}`);
+      } 
+      
+      else if (item.cntnum && index >= 0) {
+        this.game.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`);
+      }
     }
   }
 

@@ -37,6 +37,7 @@ export interface IHero {
   title?: string;
   status?: IStatus;
   relig?: string;
+  fede?: string;
   sex?: ISex;
   equipment?: [];
   inventory?: [];

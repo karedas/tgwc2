@@ -9,7 +9,7 @@
 @import 'rain';
 
 :host {
- 
+
 
   background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
   background-size: 100%;
@@ -20,7 +20,7 @@
   padding-right: 47px;
 
   .tg-map-box {
-
+    overflow: hidden;
     position: relative;
     border-radius: 50%;
     position: absolute;
@@ -40,11 +40,12 @@
       z-index: 6;
       box-shadow: inset 0 0 20px 2px black;
     }
-    
+
     canvas {
       background-color: transparent;
       max-width: 100%;
       max-height: 100%;
+      border-radius: 50%;
     }
 
     .canvas-snow,
@@ -59,20 +60,118 @@
       border-radius: 50%;
       display: none;
     }
+
     .canvas-snow.run {
       display: block;
     }
   }
 
+  /* Watcher-Event */
+  .tg-watcher-dir {
+    position: absolute;
+    z-index: 11;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    
+    &:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: none;
+      transition: opacity .3s ease-out, box-shadow .3s ease-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    &.watch:before {
+      background: url($imgPath + '/mapobj/watcher-light.png') no-repeat;
+      background-size: contain;
+      opacity: 1;
+    }
+
+    &.watch.w-here:before {
+      box-shadow: inset 0 0 10px 4px #ada43e;
+    }
+
+    &.w-ovest:before {
+      transform: rotate(0);
+    }
+    &.w-nordovest:before {
+      transform: rotate(45deg);
+    }
+    &.w-nord:before {
+      transform: rotate(90deg);
+    }
+    &.w-nordest:before {
+      transform: rotate(140deg);
+    }
+    &.w-est:before {
+      transform: rotate(180deg);
+    }
+    &.w-sudest:before {
+      transform: rotate(-140deg);
+    }
+    &.w-sud:before {
+      transform: rotate(-90deg);
+    }
+    &.w-sudovest:before {
+      transform: rotate(-45deg);
+    }
+
+
+    .watcher-area {
+      width: 33.33%;
+      height: 33.33%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .watcher-ovest{
+
+    }
+    .watcher-nordovest{
+
+    }
+    .watcher-nord{
+
+    }
+    .watcher-nordest{
+
+    }
+    .watcher-est{
+
+    }
+    .watcher-sudest{
+
+    }
+    .watcher-sud{
+
+    }
+    .watcher-sudovest{
+
+    }
+    
+    @include layout-bp(lt-lg) {
+
+    }
+  }
+
+
   @include layout-bp(lt-lg) {
     width: 292px;
     padding-left: 35px;
     padding-right: 35px;
-    
+
     .tg-map-box {
       top: 85px;
       width: 222px;
       height: 222px;
     }
-  } 
+  }
 }

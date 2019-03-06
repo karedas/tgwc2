@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
@@ -6,6 +6,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { takeUntil } from 'rxjs/operators';
 import { WindowsService } from '../windows.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'tg-generic-table',
@@ -15,12 +16,16 @@ import { WindowsService } from '../windows.service';
 })
 export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
+  @ViewChild('genericTable') table: Table;
+
+
   public readonly dialogID: string = 'genericTable';
 
   public dataTable$: Observable<any>;
   public rows = [];
   public columns = [];
   public currentPageLimit = 10;
+  private headerTitle: string;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -39,10 +44,18 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (dt: IGenericTable) => {
         if (dt) {
+          this.setHeaderTitle(dt.title);
+          if(this.table ) {
+            this.table.reset();
+          }
           this.populate(dt);
           this.open();
         }
       });
+  }
+
+  setHeaderTitle(title) {
+    this.headerTitle = title ? title : 'Informazioni';
   }
 
   private populate(dataTable: any) {
@@ -75,7 +88,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   private open() {
     setTimeout(() => {
-      this.windowsService.openDialogTable(this.dialogID, 'Informazioni');
+      this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
     }, 200);
 
   }

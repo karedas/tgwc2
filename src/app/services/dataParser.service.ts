@@ -7,7 +7,7 @@ import * as UiActions from '../store/actions/ui.action';
 import * as GameActions from '../store/actions/client.action';
 
 import { IHero } from '../models/data/hero.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +41,7 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-      /*
-      * TODO: dispatch disconnection
-      */
+        this.store.dispatch(new GameActions.DisconnectAction);
     }
   }
 
@@ -59,6 +57,7 @@ export class DataParser {
   }
 
   parseForDisplay(data: string) {
+
     let pos: any;
 
 
@@ -379,7 +378,7 @@ export class DataParser {
       this.store.dispatch(new DataActions.IncomingData(data));
     }
   }
-
+  
 
   removeColors(data) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
