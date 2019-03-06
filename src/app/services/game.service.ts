@@ -194,7 +194,6 @@ export class GameService {
 
   /* Order person or equip list */
   orderObjectsList(items: any): any {
-    console.log(items);
     if (items && items.list) {
       items.list.sort((a: any, b: any) => {
         let eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
