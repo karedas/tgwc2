@@ -3,24 +3,37 @@
   <tg-directions [isOnMap]="isOnMap"></tg-directions>
   <div class="tg-map-box">
     <!-- Watch Action -->
-    <div class="tg-watcher-dir {{isOnDirection}}" [ngClass]="{'watch': isOnWatcher}">
-      <div class="watcher-eye-ovest" (mouseenter)="onWatcher('w-ovest')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('ovest')"></div>
-      <div class="watcher-eye-nordovest" (mouseenter)="onWatcher('w-nordovest')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('nordovest')"></div>
-      <div class="watcher-eye-nord" (mouseenter)="onWatcher('w-nord')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('nord')"></div>
-      <div class="watcher-eye-nordest" (mouseenter)="onWatcher('w-nordest')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('nordest')"></div>
-      <div class="watcher-eye-est" (mouseenter)="onWatcher('w-est')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('est')"></div>
-      <div class="watcher-eye-sudest" (mouseenter)="onWatcher('w-sudest')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('sudest')"></div>
-      <div class="watcher-eye-sud" (mouseenter)="onWatcher('w-sud')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('sud')"></div>
-      <div class="watcher-eye-sudovest" (mouseenter)="onWatcher('w-sudovest')" (mouseleave)="leaveWatcher()" (mousedown)="watchToDir('sudovest')"></div>
+    <div class="tg-watcher-dir {{isOnDirection}}" [ngClass]="{'watch': isOnWatcher}" fxLayout="row wrap">
+      <div class="watcher-area watcher-nordovest" fxFlex="0 0 33.33%" 
+        (mouseenter)="onWatcher('w-nordovest')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('nordovest')"></div>
+      <div class="watcher-area watcher-nord" fxFlex="0 0 33.33%" 
+        (mouseenter)="onWatcher('w-nord')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('nord')"></div>
+      <div class="watcher-area watcher-nordest" fxFlex="0 0 33.33%" 
+        (mouseenter)="onWatcher('w-nordest')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('nordest')"></div>
+      <div class="watcher-area watcher-ovest" fxFlex="0 0 33.33%" 
+      (mouseenter)="onWatcher('w-ovest')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('ovest')"></div>
+      <div class="watcher-area watcher-here"  fxFlex="0 0 33.33%"
+      (mouseenter)="onWatcher('w-here')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('')"></div>
+      <div class="watcher-area watcher-est" fxFlex="0 0 33.33%" 
+        (mouseenter)="onWatcher('w-est')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('est')"></div>
+      <div class="watcher-area watcher-sudovest" fxFlex="0 0 33.33%" 
+        (mouseenter)="onWatcher('w-sudovest')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('sudovest')"></div>
+      <div class="watcher-area watcher-sud" fxFlex="0 0 33.33%" 
+        (mouseenter)="onWatcher('w-sud')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('sud')"></div>
+      <div class="watcher-area watcher-sudest"  fxFlex="0 0 33.33%"
+      (mouseenter)="onWatcher('w-sudest')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('sudest')"></div>
     </div>
     <!-- end Watch Action -->
     <div class="rain" *ngIf="showRain"></div>
     <div class="fog" *ngIf="showFog"></div>
-    <canvas width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}" #map>
+    <canvas class="tg-map-main"
+      width="{{mapSize.maxWidth * mapSize.tileWidth}}" 
+      height="{{mapSize.maxHeight * mapSize.tileHeight}}" #map>
     </canvas>
-    <canvas [ngClass]="{'run': showSnow}" class="canvas-snow" width="{{maxMapWidth * mapTileWidth}}" height="{{maxMapHeight * mapTileHeight}}"
+    <canvas [ngClass]="{'run': showSnow}" class="canvas-snow" 
+      width="{{mapSize.maxWidth * mapSize.tileWidth}}" 
+      height="{{mapSize.maxHeight * mapSize.tileHeight}}"
       #snow></canvas>
-    <canvas id="rainCanvas" class="canvas-rain"></canvas>
   </div>
 </div>
 

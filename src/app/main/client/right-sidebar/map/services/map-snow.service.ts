@@ -1,13 +1,13 @@
-import { Injectable, ElementRef, ViewChild } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapSnowService {
 
-  canvas: HTMLCanvasElement | null;
+  canvasSnow: HTMLCanvasElement | null;
   canvasID: string;
-  context: CanvasRenderingContext2D;
+  contextSnow: CanvasRenderingContext2D;
   framerate: number;
   flakeNumberModifier: number;
   fallSpeedModifier: number;
@@ -19,10 +19,10 @@ export class MapSnowService {
   radHeight: number;
   tickHandler: any;
 
-  make(snowElement: ElementRef) {
+  prepareSnowCanvas(snowElement: ElementRef) {
     /* --- config start --- */
     this.canvasID = 'snowCanvas';
-    this.context = null;
+    this.contextSnow = null;
     this.framerate = 40; // which fps rate to use, this is not followed exactly
     this.flakeNumberModifier = 1.0; // change this to change the number of flakes
     this.fallSpeedModifier = 0.5; // falling speed
@@ -32,7 +32,7 @@ export class MapSnowService {
     this.flakes = [];
     this.flake =  <HTMLCanvasElement>document.createElement('CANVAS');
     this.radHeight = 40;
-    this.context =  (<HTMLCanvasElement>snowElement.nativeElement).getContext('2d');
+    this.contextSnow =  (<HTMLCanvasElement>snowElement.nativeElement).getContext('2d');
     this.width = snowElement.nativeElement.width;
     this.height = snowElement.nativeElement.height;
     this.numFlakes = Math.min(this.width, 300) * this.height / 400 * this.flakeNumberModifier;
@@ -61,7 +61,7 @@ export class MapSnowService {
     let posX = 0;
 
     // reset canvas for next frame
-    this.context.clearRect(0, 0, this.width, this.height);
+    this.contextSnow.clearRect(0, 0, this.width, this.height);
 
     for (let x = 0; x < this.numFlakes; x++) {
       // calculate changes to snowflake
@@ -74,17 +74,17 @@ export class MapSnowService {
       }
 
       // draw snowflake
-      this.context.globalAlpha = (this.flakes[x].size - 1) / 3;
-      this.context.drawImage(this.flake, posX, this.flakes[x].y, this.flakes[x].size, this.flakes[x].size);
+      this.contextSnow.globalAlpha = (this.flakes[x].size - 1) / 3;
+      this.contextSnow.drawImage(this.flake, posX, this.flakes[x].y, this.flakes[x].size, this.flakes[x].size);
     }
 
     // repeat 300px wide strip with snowflakes to fill whole canvas
     if (this.width > 300) {
-      this.context.globalAlpha = 1;
-      this.context.drawImage(this.canvas, 300, 0);
-      if (this.width > 600) { this.context.drawImage(this.canvas, 600, 0); }
-      if (this.width > 1200) { this.context.drawImage(this.canvas, 1200, 0); }
-      if (this.width > 2400) { this.context.drawImage(this.canvas, 2400, 0); }
+      this.contextSnow.globalAlpha = 1;
+      this.contextSnow.drawImage(this.canvasSnow, 300, 0);
+      if (this.width > 600) { this.contextSnow.drawImage(this.canvasSnow, 600, 0); }
+      if (this.width > 1200) { this.contextSnow.drawImage(this.canvasSnow, 1200, 0); }
+      if (this.width > 2400) { this.contextSnow.drawImage(this.canvasSnow, 2400, 0); }
     }
   }
 
@@ -104,11 +104,11 @@ export class MapSnowService {
     return Math.random() * (end - start) + start;
   }
 
-  public start() {
+  public startSnow() {
     clearInterval(this.tickHandler);
     this.tickHandler = setInterval(this.tick.bind(this), Math.floor(1000 / this.framerate));
   }
-  public stop() {
+  public stopSnow() {
     const _ = this;
     clearInterval(this.tickHandler);
   }

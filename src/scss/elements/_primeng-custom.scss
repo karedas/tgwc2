@@ -249,6 +249,23 @@ p-paginator {
       min-width: 1.5em;
       line-height: 1.5em;
     }
+  }
 
+  p-dropdown {
+    .ui-dropdown {
+      height: 1.5em!important;
+    }
+
+    .ui-dropdown-label {
+      padding: 0;
+    }
+
+    .pi {
+      font-size: 1em!important;
+    }
+
+    .ui-dropdown-trigger {
+      line-height: 1.5!important;
+    }
   }
 }

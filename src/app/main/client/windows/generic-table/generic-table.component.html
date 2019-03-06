@@ -5,10 +5,12 @@
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
           <!-- Generic Table content start -->
           <p-table 
+            #genericTable
             [value]="rows" 
             [columns]="columns" 
             [autoLayout]="true" 
             [paginator]="true"  
+            [rowsPerPageOptions]="[10,15,20,25]"
             [rows]="currentPageLimit"
             [rowHover]="true"
             sortMode="multiple"
