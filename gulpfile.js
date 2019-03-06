@@ -78,7 +78,8 @@ function generateAssetsList() {
 
 	return gulp.src([
 			config.src.img + '**/*.{png,jpg,gif,svg}', 
-			'!'+config.src.img + 'sprites/*/**'
+			'!'+config.src.img + 'sprites/*/**',
+			'!'+config.src.img + 'regions/*/**'
 		])
 		.pipe(fileList('assets_list.json', {
 			relative: true
