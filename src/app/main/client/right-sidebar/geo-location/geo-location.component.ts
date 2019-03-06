@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, Input, OnChanges } from '@angular/core';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { IRegion } from 'src/app/models/data/region.model';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getRegion } from 'src/app/store/selectors';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-import { takeUntil } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { takeUntil, map, catchError, switchMap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Response } from 'selenium-webdriver/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'tg-geo-location',
@@ -32,16 +34,20 @@ import { HttpClient } from '@angular/common/http';
   ]
 
 })
-export class GeoLocationComponent implements OnInit, OnDestroy {
+export class GeoLocationComponent implements OnInit , OnDestroy {
 
   changeState = 'out';
+
+  regionImageUrl: string;
   region$: Observable<IRegion>;
+
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    private http: HttpClient
+    private http: HttpClient,
+    private domSanitizer: DomSanitizer
     ) {
     this.region$ = this.store.pipe(select(getRegion));
     this._unsubscribeAll = new Subject<any>();
@@ -51,27 +57,20 @@ export class GeoLocationComponent implements OnInit, OnDestroy {
     this.region$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (region: IRegion) => {
         if (region) {
-          this.loadRegionImage('assets/images/regions_default.jpg');
-          this.newRegionfadeInOut();
+          let image = new Image();
+          image.src = 'assets/images/regions/' + region.idreg + '.jpg'
+          image.onload = () => {
+            this.newRegionfadeInOut(image.src);
+          }
         }
       }
     );
   }
 
-  showRegionImage(img) {
-    this.loadRegionImage(img).subscribe(
-      () => {
-      }
-    );
-  }
-
-  loadRegionImage(img): Observable<Blob> {
-    return this.http.get(img, {responseType: 'blob'});
-  }
-
-  newRegionfadeInOut() {
+  newRegionfadeInOut(imageUrl) {
     this.changeState = 'out';
     setTimeout(() => {
+      this.regionImageUrl = imageUrl;
       this.changeState = 'in';
     }, 1000);
   }

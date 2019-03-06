@@ -269,3 +269,7 @@ p-paginator {
     }
   }
 }
+
+body .ui-dropdown-panel {
+  z-index: 1100!important;
+}

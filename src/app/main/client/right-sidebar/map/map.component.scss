@@ -82,7 +82,8 @@
       display: block;
       border-radius: 50%;
       opacity: 0;
-      transition: opacity .6s ease-out;
+      box-shadow: none;
+      transition: opacity .3s ease-out, box-shadow .3s ease-out;
       position: absolute;
       top: 0;
       left: 0;
@@ -92,7 +93,10 @@
       background: url($imgPath + '/mapobj/watcher-light.png') no-repeat;
       background-size: contain;
       opacity: 1;
-      transition: none;
+    }
+
+    &.watch.w-here:before {
+      box-shadow: inset 0 0 10px 4px #ada43e;
     }
 
     &.w-ovest:before {
@@ -119,6 +123,7 @@
     &.w-sudovest:before {
       transform: rotate(-45deg);
     }
+
 
     .watcher-area {
       width: 33.33%;

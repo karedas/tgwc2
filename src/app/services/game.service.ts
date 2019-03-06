@@ -194,8 +194,8 @@ export class GameService {
 
   /* Order person or equip list */
   orderObjectsList(items: any): any {
-
-    if (items.list) {
+    console.log(items);
+    if (items && items.list) {
       items.list.sort((a: any, b: any) => {
         let eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
         let eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
@@ -205,7 +205,7 @@ export class GameService {
     }
 
     /* Order for personal Equipment  */
-    if ('ver' in items) {
+    if (items &&  typeof items.ver === 'number') {
 
       let cont = {
         list: []
