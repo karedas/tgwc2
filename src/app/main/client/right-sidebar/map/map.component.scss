@@ -9,7 +9,7 @@
 @import 'rain';
 
 :host {
- 
+
 
   background: url($imgPath + '/interface/quadrante.png') no-repeat top left;
   background-size: 100%;
@@ -40,7 +40,7 @@
       z-index: 6;
       box-shadow: inset 0 0 20px 2px black;
     }
-    
+
     canvas {
       background-color: transparent;
       max-width: 100%;
@@ -59,20 +59,139 @@
       border-radius: 50%;
       display: none;
     }
+
     .canvas-snow.run {
       display: block;
     }
   }
 
+  /* Watcher-Event */
+  .tg-watcher-dir {
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity .4s ease-out;
+    }
+    
+    &.watch:before {
+      background: url($imgPath + '/mapobj/watcher-light.png') no-repeat;
+      opacity: 1;
+      transition: none;
+    }
+
+    div {
+      background-size: 64px 64px;
+      background-position: center left;
+      position: absolute;
+      // transform: translateY(-50%) translateX(-50%);
+    }
+
+
+    &.w-ovest:before {
+      transform: rotate(0);
+    }
+    &.w-nordovest:before {
+      transform: rotate(45deg);
+    }
+    &.w-nord:before {
+      transform: rotate(90deg);
+    }
+    &.w-nordest:before {
+      transform: rotate(140deg);
+    }
+    &.w-est:before {
+      transform: rotate(180deg);
+    }
+    &.w-sudest:before {
+      transform: rotate(-140deg);
+    }
+    &.w-sud:before {
+      transform: rotate(-90deg);
+    }
+    &.w-sudovest:before {
+      transform: rotate(-45deg);
+    }
+
+
+    .watcher-eye-ovest{
+      width: 118px;
+      height: 64px;
+      top:50%;
+      left: 0;
+      transform: translateY(-50%);            
+    }
+    .watcher-eye-nordovest{
+      width: 64px;
+      height: 118px;
+      top: 76px;
+      left: 44px;
+      transform: translateY(-50%) rotate(-45deg);   
+    }
+    .watcher-eye-nord{
+      width: 64px;
+      height: 118px;
+      top:0;
+      left: 50%;
+      transform: translateX(-50%) rotate(-90deg);
+    }
+    .watcher-eye-nordest{
+      width: 64px;
+      height: 118px;
+      top: 76px;
+      right: 44px;
+      transform: translateY(-50%) rotate(-140deg);   
+    }
+    .watcher-eye-est{
+      width: 118px;
+      height: 64px;
+      top:50%;
+      right: 0;
+      transform: translateY(-50%) rotate(180deg);    
+    }
+    .watcher-eye-sudest{
+      width: 64px;
+      height: 118px;
+      bottom: 76px;
+      right: 44px;
+      transform: translateY(50%) rotate(140deg);
+    }
+    .watcher-eye-sud{
+      width: 64px;
+      height: 118px;
+      bottom:0;
+      left: 50%;
+      transform: translateX(-50%) rotate(90deg);
+    }
+    .watcher-eye-sudovest{
+      width: 64px;
+      height: 118px;
+      bottom: 0;
+      left: 44px;
+      transform: translateY(0) rotate(45deg);   
+    }
+  }
+
+
   @include layout-bp(lt-lg) {
     width: 292px;
     padding-left: 35px;
     padding-right: 35px;
-    
+
     .tg-map-box {
       top: 85px;
       width: 222px;
       height: 222px;
     }
-  } 
+  }
 }

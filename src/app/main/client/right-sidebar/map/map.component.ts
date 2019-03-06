@@ -25,7 +25,10 @@ export class MapComponent implements OnDestroy, AfterViewInit {
 
 
   private _unsubscribeAll: Subject<any>;
-  isOnMap = false;
+  
+  public isOnMap = false;
+  public isOnWatcher = false;
+  public isOnDirection: string;
 
   map$: Observable<Map>;
   public context: CanvasRenderingContext2D;
@@ -238,14 +241,27 @@ export class MapComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-
-
   private tileCoords(tilenum: number): number[] {
     const posx = 32 * (tilenum & 0x7f);
     const posy = 32 * (tilenum >> 7);
     return [posx, posy];
   }
 
+
+  /* Watcher Eye */
+  onWatcher(dir) {
+    this.isOnWatcher = true;
+    this.isOnDirection = dir;
+  }
+
+  leaveWatcher() {
+    this.isOnWatcher = false;
+    this.isOnDirection = '';
+  }
+
+  watchToDir(dir) {
+    this.game.processCommands(`guarda ${dir}`);
+  }
 
 
   ngOnDestroy(): void {
