@@ -38,7 +38,7 @@ export class GeoLocationComponent implements OnInit , OnDestroy {
 
   changeState = 'out';
 
-  regionImageUrl: string;
+  regionImageUrl: string = 'assets/images/regions/00.jpg';
   region$: Observable<IRegion>;
 
 
