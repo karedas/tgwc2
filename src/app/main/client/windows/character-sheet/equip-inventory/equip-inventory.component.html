@@ -21,7 +21,7 @@
                   <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
-                    <span> {{item.desc | dataToHtml}}</span>
+                    <span [innerHtml]="item.desc | dataToHtml"></span>
                   </div>
                   <div class="eqinv-item-qty" fxFlex="0 0 20%" fxLayoutAlign="center center">
                     {{item.sz || '1'}}
@@ -66,7 +66,7 @@
                   <div class="eqinv-item" fxFlex="0 0 55%" fxLayoutAlign="start center">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
-                    <span> {{item.desc}}</span>
+                    <span [innerHtml]="item.desc | dataToHtml"></span>
                   </div>
                   <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="center center">{{item.wgt}}pt</div>
                 </div>
