@@ -131,7 +131,7 @@ export class GameService {
         this.client_update.lastDataTime = now;
       } else if (this.client_update.inContainer && this.extraIsOpen) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`)
-      }
+      } 
     }
   }
 
