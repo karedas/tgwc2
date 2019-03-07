@@ -37,7 +37,7 @@ export class BookComponent implements AfterViewInit, OnDestroy {
           this.openedIndexPage = 0;
           this.total = book.pages.length;
           setTimeout(() => {
-            this.windowsService.openBook(this.dialogID, book.descr);
+            this.windowsService.openBook(this.dialogID, book.desc);
           });
         }
       }

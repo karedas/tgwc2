@@ -4,7 +4,7 @@
   }
 
   export interface IBook {
-      descr: string;
+      desc: string;
       title: string;
       pages: IBookPages[];
   }
