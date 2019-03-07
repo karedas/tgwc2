@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, Hos
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
-import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { faColumns, faSolarPanel, faBullseye, faFont } from '@fortawesome/free-solid-svg-icons';
 
 import { State } from 'src/app/store';
 import { getHero, getExtraOutputStatus, getDashboardVisibility } from 'src/app/store/selectors';
@@ -11,6 +11,7 @@ import { HistoryService } from 'src/app/services/history.service';
 import { GameService } from 'src/app/services/game.service';
 import { InputService } from './input.service';
 import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
+import { font_size_options } from 'src/app/main/common/constants';
 
 @Component({
   selector: 'tg-input',
@@ -26,6 +27,7 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   facolumns = faColumns;
   faSolarPanel = faSolarPanel;
   faBullseye = faBullseye;
+  faFont = faFont;
 
   _extraOutputStatus$: Observable<boolean>;
   _dashBoardStatus$: Observable<boolean>;
@@ -33,8 +35,10 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   public zenStatus = false;
 
   private _inCombat$: Observable<any>;
-  inCombat = false;
+  public inCombat = false;
 
+  private fontSizes = font_size_options;
+  
 
   private _unsubscribeAll: Subject<any>;
 
@@ -119,6 +123,10 @@ export class InputComponent implements AfterViewInit, OnDestroy {
       range.collapse(false);
       range.selec();
     }
+  }
+
+  onFontSizeChange() {
+
   }
 
   toggleExtraOutput(event: Event) {
