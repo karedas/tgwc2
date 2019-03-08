@@ -26,7 +26,7 @@ export class ClientContainerComponent implements OnDestroy {
     this.welcomeNews = this.store.pipe(select(getWelcomeNews));
     this._unsubscribeAll = new Subject<any>();
   }
-  
+
 
   ngAfterViewInit(): void {
 

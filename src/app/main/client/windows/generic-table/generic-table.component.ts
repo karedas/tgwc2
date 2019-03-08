@@ -45,7 +45,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
       (dt: IGenericTable) => {
         if (dt) {
           this.setHeaderTitle(dt.title);
-          if(this.table ) {
+          if (this.table ) {
             this.table.reset();
           }
           this.populate(dt);

@@ -64,7 +64,7 @@ export class GenericDialogComponent implements OnInit {
 
 
   bringToFront() {
-    if(this.dialog) {
+    if (this.dialog) {
       this.dialog.moveOnTop();
     }
   }

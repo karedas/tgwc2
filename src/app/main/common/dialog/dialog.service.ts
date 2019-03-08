@@ -22,7 +22,7 @@ export class GenericDialogService {
   open(id: string, config?: DialogConfiguration, data?: any ): any {
       // open modal specified by id
       const modal: any = this.modals.filter(x => x.id === id)[0];
-      if(modal) {
+      if (modal) {
         modal.open(config);
         return modal;
       }
@@ -36,7 +36,7 @@ export class GenericDialogService {
 
   isClosed(id: string): boolean {
     const modal: any = this.modals.filter(x => x.id === id)[0];
-    if(modal) {
+    if (modal) {
       return !modal.visible;
     }
   }

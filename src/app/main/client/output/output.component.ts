@@ -107,8 +107,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
             const content = this.setContent('room', room);
             this.output.push(content);
             this.endOutputStore();
-            
-            if(this.game.client_update.room.version < room.ver) {
+
+            if (this.game.client_update.room.version < room.ver) {
               this.game.client_update.room.version = room.ver;
               this.game.client_update.room.needed = false;
             }

@@ -27,7 +27,7 @@ export const equip_positions_by_name = {
   };
 
   export const pos_to_order = [
-    { pos:0, name: "" },
+    { pos: 0, name: '' },
     18,		// Finger R
     19,		// Finger L
     5,		// Neck

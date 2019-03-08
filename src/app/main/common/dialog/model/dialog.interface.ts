@@ -27,7 +27,7 @@ export class DialogConfiguration  {
         this.draggable = false;
         this.maximizable = false;
         this.closeOnEscape = false;
-        this.style = {}
+        this.style = {};
     }
 }
 

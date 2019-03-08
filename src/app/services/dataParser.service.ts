@@ -371,14 +371,14 @@ export class DataParser {
     });
 
     /* \r is already removed at top */
-  
+
     if (data != 'undefined' && data != undefined && data !== '') {
       data = data.replace(/\n/gm, '<div class="breakline"></div>');
       data = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new DataActions.IncomingData(data));
     }
   }
-  
+
 
   removeColors(data) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');

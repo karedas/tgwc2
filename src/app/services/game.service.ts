@@ -21,10 +21,10 @@ export class GameService {
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
   public serverStat: Observable<any>;
-  public mouseIsOnMap: boolean = false;
+  public mouseIsOnMap = false;
   public extraIsOpen: boolean;
 
-  //Client Data Needed Updates
+  // Client Data Needed Updates
   public client_update = {
     lastDataTime: 0,
     mrnContainer: undefined,
@@ -130,8 +130,8 @@ export class GameService {
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
       } else if (this.client_update.inContainer && this.extraIsOpen) {
-        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`)
-      } 
+        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
+      }
     }
   }
 
@@ -196,8 +196,8 @@ export class GameService {
   orderObjectsList(items: any): any {
     if (items && items.list) {
       items.list.sort((a: any, b: any) => {
-        let eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
-        let eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
+        const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
+        const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
         return <number>eq_pos_a - <number>eq_pos_b;
       });
       return items;
@@ -206,20 +206,20 @@ export class GameService {
     /* Order for personal Equipment  */
     if (items &&  typeof items.ver === 'number') {
 
-      let cont = {
+      const cont = {
         list: []
       };
 
       Object.keys(items).forEach((poskey: any, idbx: any) => {
-        let where = equip_positions_by_name[poskey];
+        const where = equip_positions_by_name[poskey];
         if (where) {
           cont.list = cont.list.concat(items[poskey]);
         }
       });
 
       cont.list.sort((a, b) => {
-        let eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[1]] : 0;
-        let eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[1]] : 0;
+        const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[1]] : 0;
+        const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[1]] : 0;
         return <number>eq_pos_a - <number>eq_pos_b;
       });
 

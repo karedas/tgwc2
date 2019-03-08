@@ -21,7 +21,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   @ViewChild('worksTable') table: Table;
 
   public readonly dialogID = 'workslist';
-  
+
   public readonly cols: any = [
     {field: 'id', header: '#'},
     {field: 'icon', header: ''},
@@ -34,7 +34,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   public rows = [];
   public currentPageLimit = 10;
   private cmd: string;
-  
+
 
   public dataTable$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
@@ -55,7 +55,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
       (wl: IWorks) => {
         if (wl) {
           this.cmd = wl.cmd;
-          if(this.table ) {
+          if (this.table ) {
             this.table.reset();
           }
           this.populate(wl.list);
