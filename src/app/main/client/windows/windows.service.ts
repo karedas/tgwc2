@@ -141,7 +141,7 @@ export class WindowsService {
         resizable: true,
         draggable: true,
         maximizable: true,
-        focusOnShow: true,
+        focusOnShow: false,
         header: data[0],
         style: {
           'width': '500px',

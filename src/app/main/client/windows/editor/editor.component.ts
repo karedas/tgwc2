@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
@@ -88,6 +88,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.gameService.sendToServer(`##ce${currline}`);
       }
     }
+    
     this.gameService.sendToServer('##ce_save');
     this.windowsService.closeGenericDialog(this.dialogID);
     this.inputService.focus();
@@ -97,6 +98,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.gameService.sendToServer('##ce_abort');
     this.windowsService.closeGenericDialog(this.dialogID);
     this.inputService.focus();
+  }
+
+  resetEditor () {
+    this.description = '';
   }
 
   onDescrChange($event) {
