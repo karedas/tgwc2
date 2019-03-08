@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { State } from '../store';
 
 import * as io from 'socket.io-client';
-import * as ClientActions from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +15,28 @@ import * as ClientActions from '../store/actions/client.action';
 export class SocketService {
 
   private socket: io;
-  connected$ = new BehaviorSubject<boolean>(false);
 
-
-  constructor(private store: Store<State>) {
+  socketError: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  // socketStatus: BehaviorSubject<any> = new BehaviorSubject('');
+  connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  
+  constructor(
+    private store: Store<State>,
+    ) {
+    this.connect();
   }
 
-  destroy() {
+  get isConnected () {
+    return this.connected$.asObservable();
+  }
+
+  public connect(): void {
     if (this.socket) {
       this.disconnect();
       this.socket.destroy();
       delete this.socket;
       this.socket = null;
     }
-  }
-
-  public connect(): void {
-    this.destroy();
     this.socket = io(environment.socket.url, environment.socket.options);
     this.startSocketEvent();
   }
@@ -40,18 +44,18 @@ export class SocketService {
   private startSocketEvent() {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
-      this.store.dispatch(new ClientActions.SocketStatusAction('connect'));
+      this.connected$.next(true)
     });
 
     /* Disconnected */
     this.socket.on(socketEvent.DISCONNECT, () => {
-      this.disconnect();
-      this.store.dispatch(new ClientActions.DisconnectAction());
+      this.connected$.next(false);
     });
 
     /* Error */
-    this.socket.on(socketEvent.ERROR, (err) => {
-      this.store.dispatch(new ClientActions.LoginFailureAction(err));
+    this.socket.on(socketEvent.ERROR, (err: any) => {
+      this.connected$.next(false);
+      this.socketError.next('errorproto');
     });
 
     /* Reconnection */
@@ -59,6 +63,7 @@ export class SocketService {
   }
 
   public disconnect(): void {
+    console.log('disconnect');
     this.socket.disconnect();
     this.connected$.next(false);
   }

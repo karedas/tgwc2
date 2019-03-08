@@ -32,11 +32,6 @@ export class ResetAction implements Action {
   readonly type = ClientEventType.RESET;
 }
 
-export class LoginFailureAction implements Action {
-  readonly type = ClientEventType.LOGIN_FAILURE;
-  constructor(public payload: any) { }
-}
-
 export class InGameAction implements Action  {
   readonly type = ClientEventType.INGAME;
 }
@@ -48,4 +43,3 @@ export type ClientActions
   | LoginSuccessAction
   | DisconnectAction
   | ResetAction
-  | LoginFailureAction;

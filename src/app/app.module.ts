@@ -11,7 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { SharedModule } from './shared/shared.module';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { LoggerModule, NgxLoggerLevel, NGXLoggerMonitor } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
 import { ClientModule } from './main/client/client.module';
 
@@ -32,9 +32,10 @@ import { DataEffects } from './store/effects/data.effects';
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([UiEffects, ClientEffects, DataEffects]),
     LoggerModule.forRoot({
-      serverLoggingUrl: '/api/logs',
+      // serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
-      serverLogLevel: NgxLoggerLevel.ERROR
+      serverLogLevel: NgxLoggerLevel.ERROR,
+      
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

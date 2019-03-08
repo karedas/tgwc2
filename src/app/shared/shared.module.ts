@@ -68,7 +68,7 @@ import { ClickStopPropagation } from './directives/click-stop-propagation.direct
     AudioService,
     LoginService,
     DynamicDialogService,
-    GenericDialogService
+    GenericDialogService,
   ],
   exports: [
     CommonModule,

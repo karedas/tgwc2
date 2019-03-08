@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   // Private
   private _unsubscribeAll: Subject<any>;
 
-  socketloginReplayMessage: string;
+  loginReplayMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
         .subscribe((err: string) => {
           if (err !== undefined) {
-            this.socketloginReplayMessage = err;
+            this.loginReplayMessage = err;
           }
         });
 
@@ -74,7 +74,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   resetLoginState() {
-    this.socketService.destroy();
     this.loginService.logout();
   }
 
@@ -96,11 +95,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSubscription = this.loginService.login(values)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
-        if (loginSuccess === true) {
 
+        if (loginSuccess === true) {
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
           this.router.navigate([redirect]);
-
         } else {
           this.loginFailed = true;
         }

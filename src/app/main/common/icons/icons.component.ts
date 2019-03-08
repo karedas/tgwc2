@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, SimpleChange } from '@angular/core';
-import { MIcons } from './icons.model';
+import { Component, Input, ViewEncapsulation, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'tg-icons',

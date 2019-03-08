@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverstatAddress: 'assets/serverstat',
+  serverstatAddress: 'http://play.thegatemud.it/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
   socket : {
     url : 'http://51.38.185.84:3335',
