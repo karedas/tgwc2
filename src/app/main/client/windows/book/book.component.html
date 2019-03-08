@@ -15,9 +15,11 @@
                     <div *ngIf="book?.pages[i].title">
                       <b>{{book.pages[i].title | capitalizeFirst}}</b>
                     </div>
-                    <i class="tg-book-language" *ngIf="page.language">(C'è scritto qualcosa in {{page.language}})</i>
-                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true">
-                    </div>
+                    {{page.text}}
+                    <i class="tg-book-language" *ngIf="page.language">
+                        (C'è scritto qualcosa in {{page.language}})
+                    </i>
+                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true:false"></div>
 
                   </div>
                 </ng-container>

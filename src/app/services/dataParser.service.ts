@@ -179,8 +179,8 @@ export class DataParser {
       const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
       this.store.dispatch(new DataActions.EditorAction({
         maxChars: options_parse[0],
-        title: options_parse[1],
-        description: text
+        title: options_parse[1] ? options_parse[1] : ' ',
+        description: text ? text : ' '
       }));
       return '';
     });

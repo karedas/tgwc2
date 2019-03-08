@@ -11,7 +11,7 @@
                 </div> -->
                 <div class="textarea-cont" fxFlex="1 1 auto">
                   <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
-                    (input)="onDescrChange($event.target.value)">{{description }}</textarea>
+                    (input)="onDescrChange($event.target.value)" #textArea [(ngModel)]="description"></textarea>
                 </div>
                 <div id="editorMaxCharsCount" class="tg-txt-maxcharcount" fxFlex="0 0 auto" fxLayoutAlign="center center">{{totalChars}}</div>
                 <div class="tg-modal-buttons-group" fxFlex="0 0 auto" fxLayoutAlign="center center">

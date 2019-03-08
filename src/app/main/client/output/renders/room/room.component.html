@@ -14,7 +14,8 @@
         <!-- Room Description -->
           <div class="tg-room--desc tg-gray">
             <ng-container *ngIf="html.desc.details; else regularDescBase">
-                <div [innerHtml]="html.desc.details | dataToHtml:true"></div>
+                <div [innerHtml]="html.desc.details | dataToHtml:true | capitalizeFirst"></div>
+                <div [innerHtml]="(html?.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
             </ng-container>
             
             <ng-template #regularDescBase>
@@ -57,6 +58,7 @@
       <div class="tg-room--desc">
         <ng-container *ngIf="html.desc.details; else extra_regularDescBase">
             <div [innerHtml]="html.desc.details | dataToHtml: true"></div>
+            <div [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
         </ng-container>
         
         <ng-template #extra_regularDescBase>
