@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
             this.windowsService.openWelcomeNews();
           }
         },
-        { label: 'Segnala un problema', url:'http://forum.thegatemud.it/viewforum.php?f=51', target: '_blank' },
+        { label: 'Segnala un problema', url: 'http://forum.thegatemud.it/viewforum.php?f=51', target: '_blank' },
         { label: 'Tasti rapidi', disabled: true },
         { label: 'Forum', url: 'http://forum.thegatemud.it', target: '_blank' },
         { label: 'Informazioni su The Gate', disabled: true },
@@ -73,7 +73,7 @@ export class NavbarComponent implements OnInit {
 
 
     this.menuItemsRight = [{
-    }]
+    }];
 
 
   }

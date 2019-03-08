@@ -28,6 +28,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
 import { ClickStopPropagation } from './directives/click-stop-propagation.directive';
@@ -56,7 +57,8 @@ import { ClickStopPropagation } from './directives/click-stop-propagation.direct
     MenubarModule,
     TooltipModule,
     ButtonModule,
-    ContextMenuModule
+    ContextMenuModule,
+    ProgressSpinnerModule
   ],
   providers: [
     GameService,
@@ -66,7 +68,7 @@ import { ClickStopPropagation } from './directives/click-stop-propagation.direct
     AudioService,
     LoginService,
     DynamicDialogService,
-    GenericDialogService
+    GenericDialogService,
   ],
   exports: [
     CommonModule,
@@ -81,6 +83,7 @@ import { ClickStopPropagation } from './directives/click-stop-propagation.direct
     CheckboxModule,
     MenubarModule,
     TooltipModule,
+    ProgressSpinnerModule,
     ButtonModule,
     TableModule,
     ContextMenuModule,

@@ -14,10 +14,10 @@ export class MapService extends MapSnowService {
   public context: CanvasRenderingContext2D;
   private layerMap: any[][];
 
-  _mapTileWidth: number = 32;
-  _mapTileHeight: number = 32;
-  _maxMapHeight: number = 9;
-  _maxMapWidth: number = 9;
+  _mapTileWidth = 32;
+  _mapTileHeight = 32;
+  _maxMapHeight = 9;
+  _maxMapWidth = 9;
 
   _showSnow: BehaviorSubject<boolean> = new BehaviorSubject(false);
   _showRain: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -192,7 +192,7 @@ export class MapService extends MapSnowService {
        tileHeight: this._mapTileHeight,
        maxHeight: this._maxMapHeight,
        maxWidth: this._maxMapWidth
-     }
+     };
     return size;
   }
 

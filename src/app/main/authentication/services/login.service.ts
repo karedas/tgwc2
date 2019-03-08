@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { SocketStatusAction, LoginFailureAction, LoginSuccessAction } from 'src/app/store/actions/client.action';
+import { SocketStatusAction, LoginSuccessAction } from 'src/app/store/actions/client.action';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
 import { ClientState } from 'src/app/store/state/client.state';
@@ -42,6 +42,8 @@ export class LoginService {
 
     this.loginErrorMessage$ = new BehaviorSubject('');
 
+
+    this._init();
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
@@ -50,10 +52,9 @@ export class LoginService {
     this.password = data.password;
 
     this.resetHandler();
-    this.socketService.connect();
-    this.setHandleLoginData();
     this.socketService.emit('loginrequest');
-    return this.isLoggedInSubject.asObservable();
+
+    return this.isLoggedInSubject;
   }
 
   public logout() {
@@ -61,12 +62,13 @@ export class LoginService {
   }
 
   public reconnect() {
-    this.login({username: this.username, password: this.password});
+    this.login({ username: this.username, password: this.password });
   }
 
   private resetHandler() {
     this.socketService.off(socketEvent.LOGIN);
     this.socketService.off(socketEvent.DATA);
+    this.setHandleLoginData();
   }
 
   public get isLoggedinStatusValue(): boolean {
@@ -74,7 +76,7 @@ export class LoginService {
   }
 
   public get isLoggedIn(): Observable<any> {
-    return this.isLoggedInSubject;
+    return this.isLoggedInSubject.asObservable();
   }
 
   setHandleLoginData() {
@@ -113,9 +115,6 @@ export class LoginService {
             break;
           default:
             this.loginReplayMessage = rep.msg;
-            if (!this.loginErrorMessage$) {
-              this.loginReplayMessage = 'errorproto';
-            }
             this.onError(this.loginErrorMessage$);
             break;
         }
@@ -161,15 +160,33 @@ export class LoginService {
 
   onError(err: any) {
     this.socketService.off(socketEvent.LOGIN);
-    this.store.dispatch(new LoginFailureAction(this.loginReplayMessage));
-    this.loginReplayMessage = loginError[err];
+    // this.store.dispatch(new LoginFailureAction(this.loginReplayMessage));
+    this.loginReplayMessage = err;
   }
 
   set loginReplayMessage(what: any) {
-    this.loginErrorMessage$.next(loginError[what]);
+    if (loginError[what]) {
+      this.loginErrorMessage$.next(loginError[what]);
+    }
+    else if (what) {
+      this.loginErrorMessage$.next(what);
+    }
   }
 
   get loginReplayMessage(): any {
     return this.loginErrorMessage$.asObservable();
+  }
+
+  private _init(): void {
+
+    this.socketService.isConnected
+      .subscribe((c) => {
+        if (c === true) {
+          this.loginReplayMessage = ' ';
+        }
+        else if (this.socketService.socketError) {
+          this.loginReplayMessage = this.socketService.socketError.value;
+        }
+      });
   }
 }

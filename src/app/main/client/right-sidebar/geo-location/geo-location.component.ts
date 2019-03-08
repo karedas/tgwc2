@@ -38,7 +38,7 @@ export class GeoLocationComponent implements OnInit , OnDestroy {
 
   changeState = 'out';
 
-  regionImageUrl: string = 'assets/images/regions/00.jpg';
+  regionImageUrl = 'assets/images/regions/00.jpg';
   region$: Observable<IRegion>;
 
 
@@ -57,11 +57,11 @@ export class GeoLocationComponent implements OnInit , OnDestroy {
     this.region$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (region: IRegion) => {
         if (region) {
-          let image = new Image();
-          image.src = 'assets/images/regions/' + region.idreg + '.jpg'
+          const image = new Image();
+          image.src = 'assets/images/regions/' + region.idreg + '.jpg';
           image.onload = () => {
             this.newRegionfadeInOut(image.src);
-          }
+          };
         }
       }
     );

@@ -43,22 +43,22 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    
+
     this.inventory$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
     this.equipment$.pipe(takeUntil(this._unsubscribeAll))
       .subscribe(equipment => {
-        if(equipment !== undefined) {
+        if (equipment !== undefined) {
           this.equip = this.game.orderObjectsList(equipment);
         }
       });
-      
-    
+
+
     this.resetUpdateBeforeProceed();
 
-    if(this.openedSubTab === 'equip') {
+    if (this.openedSubTab === 'equip') {
       this.game.client_update.equipOpen = true;
     }
-    if(this.openedSubTab === 'inventory') {
+    if (this.openedSubTab === 'inventory') {
       this.game.client_update.invOpen = true;
     }
   }
@@ -76,13 +76,13 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     if (what === 'inventory') {
       this.openedSubTab = what;
       this.game.processCommands('inv');
-      this.game.client_update.invOpen = true; 
+      this.game.client_update.invOpen = true;
     }
   }
 
   resetUpdateBeforeProceed() {
-    this.game.client_update.invOpen = false; 
-    this.game.client_update.equipOpen  = false;  
+    this.game.client_update.invOpen = false;
+    this.game.client_update.equipOpen  = false;
   }
 
   ngOnDestroy() {

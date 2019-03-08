@@ -50,7 +50,7 @@ export class MapComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.mapService.prepareCanvas(this.map);
     this.mapService.prepareSnowCanvas(this.snow);
-  
+
     // Rain
     this.mapService.displayRain
       .pipe(takeUntil(this._unsubscribeAll))
@@ -69,8 +69,8 @@ export class MapComponent implements OnDestroy, OnInit {
       .subscribe((visible) => {
         this.showFog = visible;
       });
-  
-  
+
+
     setTimeout(() => {
       this.map$.pipe(
         takeUntil(this._unsubscribeAll)).subscribe(

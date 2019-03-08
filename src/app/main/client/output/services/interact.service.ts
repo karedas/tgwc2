@@ -11,26 +11,23 @@ export class InteractService {
 
   interact(event: Event, item: any, index?: number) {
     event.preventDefault();
-    
+
     /* If is not a List */
     if (!item.sz) {
 
-      if(item.cntnum) {
+      if (item.cntnum) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
-      }
-      else {
+      } else {
         this.game.processCommands(`guarda &${item.mrn[0]}`);
       }
     }
 
 
     /* Is a List */
-    if(item.sz) {
-      if(!item.cntnum &&  index >= 0) {
+    if (item.sz) {
+      if (!item.cntnum &&  index >= 0) {
         this.game.processCommands(`guarda &${item.mrn[index]}`);
-      } 
-      
-      else if (item.cntnum && index >= 0) {
+      } else if (item.cntnum && index >= 0) {
         this.game.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`);
       }
     }

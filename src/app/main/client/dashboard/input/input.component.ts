@@ -89,10 +89,10 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   }
 
   onUpKey(event: any) {
-    
+
     event.preventDefault();
 
-    if(!this.game.mouseIsOnMap) {
+    if (!this.game.mouseIsOnMap) {
       const cmd = this.historyService.getPrevious();
       if (cmd) {
         event.target.value = cmd;
@@ -102,10 +102,10 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   }
 
   onDownKey(event: any) {
-    
+
     event.preventDefault();
 
-    if(!this.game.mouseIsOnMap) {
+    if (!this.game.mouseIsOnMap) {
       const cmd = this.historyService.getNext();
       if (cmd) {
         event.target.value = cmd;

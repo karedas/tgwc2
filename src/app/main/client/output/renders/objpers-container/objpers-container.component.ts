@@ -33,7 +33,7 @@ export class ObjPersContainerComponent implements OnInit  {
 
   ngOnInit(): void {
 
-    // this.eqcont.list = 
+    // this.eqcont.list =
     this.eqcont = this.game.orderObjectsList(this.eqcont);
 
     if (this.objcont) {
