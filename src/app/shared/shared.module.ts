@@ -28,7 +28,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ContextMenuModule } from 'primeng/contextmenu';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
 import { ClickStopPropagation } from './directives/click-stop-propagation.directive';

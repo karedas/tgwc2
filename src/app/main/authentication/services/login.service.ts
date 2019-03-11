@@ -47,7 +47,7 @@ export class LoginService {
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
-
+    
     this.username = data.username;
     this.password = data.password;
 
@@ -66,6 +66,7 @@ export class LoginService {
   }
 
   private resetHandler() {
+    this.socketService.connect();
     this.socketService.off(socketEvent.LOGIN);
     this.socketService.off(socketEvent.DATA);
     this.setHandleLoginData();
@@ -86,7 +87,7 @@ export class LoginService {
 
   handleLoginData(data: any) {
 
-    this.loginReplayMessage = 'Tentativo di connessione in corso...';
+    this._loginReplayMessage = 'Tentativo di connessione in corso...';
 
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
@@ -114,8 +115,8 @@ export class LoginService {
             this.onServerDown();
             break;
           default:
-            this.loginReplayMessage = rep.msg;
-            this.onError(this.loginErrorMessage$);
+            this._loginReplayMessage = rep.msg;
+            this.onError(rep.msg);
             break;
         }
       }
@@ -155,25 +156,23 @@ export class LoginService {
 
   onServerDown() {
     this.store.dispatch(new SocketStatusAction('serverdown'));
-    this.loginReplayMessage = 'serverdown';
+    this._loginReplayMessage = 'serverdown';
   }
 
   onError(err: any) {
     this.socketService.off(socketEvent.LOGIN);
-    // this.store.dispatch(new LoginFailureAction(this.loginReplayMessage));
-    this.loginReplayMessage = err;
+    this._loginReplayMessage = err;
   }
 
-  set loginReplayMessage(what: any) {
+  set _loginReplayMessage(what: any) {
     if (loginError[what]) {
       this.loginErrorMessage$.next(loginError[what]);
-    }
-    else if (what) {
+    } else if (what) {
       this.loginErrorMessage$.next(what);
     }
   }
 
-  get loginReplayMessage(): any {
+  get _loginReplayMessage(): any {
     return this.loginErrorMessage$.asObservable();
   }
 
@@ -182,10 +181,10 @@ export class LoginService {
     this.socketService.isConnected
       .subscribe((c) => {
         if (c === true) {
-          this.loginReplayMessage = ' ';
+          this._loginReplayMessage = ' ';
         }
         else if (this.socketService.socketError) {
-          this.loginReplayMessage = this.socketService.socketError.value;
+          this._loginReplayMessage = this.socketService.socketError.value;
         }
       });
   }

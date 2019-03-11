@@ -83,7 +83,6 @@ export class WindowsService {
       });
 
       this.render.addClass(document.body, 'overlay-dark');
-
       ref.onClose.subscribe(
        () => this.render.removeClass(document.body, 'overlay-dark')
       );

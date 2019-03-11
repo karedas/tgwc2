@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../store';
 
 import * as io from 'socket.io-client';
+import { DisconnectAction } from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +32,10 @@ export class SocketService {
   }
 
   public connect(): void {
-    if (this.socket) {
-      this.disconnect();
-      this.socket.destroy();
-      delete this.socket;
-      this.socket = null;
+    if(!this.socket) {
+      this.socket = io(environment.socket.url, environment.socket.options);
+      this.startSocketEvent();
     }
-    this.socket = io(environment.socket.url, environment.socket.options);
-    this.startSocketEvent();
   }
 
   private startSocketEvent() {
@@ -49,13 +46,14 @@ export class SocketService {
 
     /* Disconnected */
     this.socket.on(socketEvent.DISCONNECT, () => {
-      this.connected$.next(false);
+      this.disconnect();
     });
 
     /* Error */
     this.socket.on(socketEvent.ERROR, (err: any) => {
+      console.log('error');
       this.connected$.next(false);
-      this.socketError.next('errorproto');
+      this.socketError.next('Il server sembra offline, riprova pi&ugrave; tardi');
     });
 
     /* Reconnection */
@@ -63,8 +61,12 @@ export class SocketService {
   }
 
   public disconnect(): void {
-    console.log('disconnect');
+    this.store.dispatch(new DisconnectAction());
     this.socket.disconnect();
+    this.socket.destroy();
+    delete this.socket;
+    this.socket = null;
+
     this.connected$.next(false);
   }
 

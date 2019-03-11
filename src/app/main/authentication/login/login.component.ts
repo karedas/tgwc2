@@ -59,11 +59,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage
+    this.loginService._loginReplayMessage
       .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe((err: string) => {
-          if (err !== undefined) {
-            this.loginReplayMessage = err;
+        .subscribe((msg: string) => {
+          if (msg !== undefined) {
+            console.log(msg);
+            this.loginReplayMessage = msg;
           }
         });
 
@@ -97,6 +98,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((loginSuccess: boolean) => {
 
         if (loginSuccess === true) {
+          this.loginService._loginReplayMessage = ' ';
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
           this.router.navigate([redirect]);
         } else {

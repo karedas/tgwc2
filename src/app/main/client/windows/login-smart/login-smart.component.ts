@@ -29,7 +29,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   loginFailed: boolean; 1;
   loginSubscription: Subscription;
 
-  socketloginReplayMessage: string;
+  loginReplayMessage: string;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -55,11 +55,11 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage
+    this.loginService._loginReplayMessage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((err: string) => {
         if (err !== undefined) {
-          this.socketloginReplayMessage = err;
+          this.loginReplayMessage = err;
         }
       });
   }
@@ -77,6 +77,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       return;
     }
 
+    
     const values = this.smartLoginForm.value;
 
     this.loginSubscription = this.loginService.login(values)
