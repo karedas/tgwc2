@@ -42,17 +42,17 @@ export class LoginService {
 
     this.loginErrorMessage$ = new BehaviorSubject('');
 
-
     this._init();
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
-    
     this.username = data.username;
     this.password = data.password;
 
     this.resetHandler();
+
     this.socketService.emit('loginrequest');
+    this._loginReplayMessage = 'Tentativo di connessione in corso...';
 
     return this.isLoggedInSubject;
   }
@@ -66,7 +66,6 @@ export class LoginService {
   }
 
   private resetHandler() {
-    this.socketService.connect();
     this.socketService.off(socketEvent.LOGIN);
     this.socketService.off(socketEvent.DATA);
     this.setHandleLoginData();
@@ -82,12 +81,10 @@ export class LoginService {
 
   setHandleLoginData() {
     this.socketService.off(socketEvent.LOGIN);
-    this.socketService.addListener(socketEvent.LOGIN, (data) => this.handleLoginData(data));
+    this.socketService.addListener(socketEvent.LOGIN, (data: any) => this.handleLoginData(data));
   }
 
   handleLoginData(data: any) {
-
-    this._loginReplayMessage = 'Tentativo di connessione in corso...';
 
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
@@ -104,9 +101,11 @@ export class LoginService {
             break;
           case loginEventName.SHUTDOWN:
             this.onShutDown();
+            this.onEnterLogin();
             break;
           case loginEventName.REBOOT:
             this.onReboot();
+            this.onEnterLogin();
             break;
           case loginEventName.LOGINOK:
             this.onLoginOk(data.slice(end + 2));
@@ -115,7 +114,6 @@ export class LoginService {
             this.onServerDown();
             break;
           default:
-            this._loginReplayMessage = rep.msg;
             this.onError(rep.msg);
             break;
         }
@@ -149,12 +147,12 @@ export class LoginService {
   }
 
   onReboot() {
-    alert('Il gioco è in stato di reboot, riprova tra un po');
+    alert('Attenzione, il server sarà riavviato entro breve.');
     this.store.dispatch(new SocketStatusAction('reboot'));
-    console.log('TGLOG: Attenzione, Reboot del server in corso, impossibile effettuare attualmente l\'accesso');
   }
 
   onServerDown() {
+    alert('Attenzione, il server sarà spento entro breve per manutenzione.');
     this.store.dispatch(new SocketStatusAction('serverdown'));
     this._loginReplayMessage = 'serverdown';
   }
@@ -178,14 +176,11 @@ export class LoginService {
 
   private _init(): void {
 
-    this.socketService.isConnected
-      .subscribe((c) => {
-        if (c === true) {
-          this._loginReplayMessage = ' ';
-        }
-        else if (this.socketService.socketError) {
-          this._loginReplayMessage = this.socketService.socketError.value;
-        }
-      });
+    // this.socketService.isConnected
+    //   .subscribe((c) => {
+    //     if (c === true) {
+    //     }
+
+    //   });
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription, Subject, BehaviorSubject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
@@ -28,11 +28,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginFailed: boolean; 1;
   loginSubscription: Subscription;
 
+  loginReplayMessage: string;
+  serverStatusMessage: boolean;
 
   // Private
   private _unsubscribeAll: Subject<any>;
-
-  loginReplayMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this._unsubscribeAll = new Subject();
-
   }
 
   ngOnInit() {
@@ -63,7 +62,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
         .subscribe((msg: string) => {
           if (msg !== undefined) {
-            console.log(msg);
             this.loginReplayMessage = msg;
           }
         });
@@ -71,6 +69,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.game.serverStat.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (stat: string) => { this.serverStat = stat; }
     );
+
+    this.socketService.socket_error$.pipe(
+      takeUntil(this._unsubscribeAll)).subscribe((serverstatus: boolean) => {
+      this.serverStatusMessage = !serverstatus;
+    });
 
   }
 
@@ -87,7 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-    if (this.loginForm.invalid) {
+    if (this.loginForm.invalid && !this.socketService.isConnected) {
       return;
     }
 
@@ -96,11 +99,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSubscription = this.loginService.login(values)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
-
         if (loginSuccess === true) {
+
           this.loginService._loginReplayMessage = ' ';
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
           this.router.navigate([redirect]);
+
         } else {
           this.loginFailed = true;
         }

@@ -200,7 +200,6 @@
     }
   }
 
-  .tg-serverstatus,
   .tg-loginstatus {
     padding: 0;
     text-align: center;
@@ -211,17 +210,30 @@
     text-transform: uppercase;
     font-size: 10px;
     padding: 1em 0;
+    text-align: center;
+    
+    span.serverstatus--txt {
+      color: #ff3400;
+      display: inline-block;
+      &:before {
+        content: '';
+        display: inline-block;
+        width: .5rem;
+        height: .5rem;
+        border-radius: 50%;
+        margin-right: 0.2rem;
+        background-color: $tg-red;
+      }
 
-    // &:before {
-    //   content: '';
-    //   display: inline-block;
-    //   width: .5rem;
-    //   height: .5rem;
-    //   border-radius: 50%;
-    //   margin-right: 0.2rem;
-    // }
+      &.server_on {
+        color: #bdb3a3;
+        &:before {
+          background-color: $tg-green;
+        }
+      }
+    }
 
-    span {
+    .serverstatus--onlineuser {
       color: #bdb3a3;
     }
   }
@@ -262,6 +274,43 @@
     opacity: 0;
   }
 }
+
+
+.tg-version-name {
+  text-align: center;
+
+  span {
+    display: inline-block;
+    color: #f3f3f3;
+  }
+}
+
+/* Preloader in Login */
+
+.tg-preloader {
+  display: none;
+  position: relative;
+  text-align: center;
+  margin: .5em 0;
+  border: 1px solid $tg-brown;
+
+  span {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 1px black;
+  }
+
+  //bar
+  div.pbar {
+    background-color: $tg-brown;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+
 
 /*
 * Phrases Rotator - Footer Side 
@@ -318,39 +367,5 @@
   100% {
     opacity: 0;
     z-index: 1;
-  }
-}
-
-.tg-version-name {
-  text-align: center;
-
-  span {
-    display: inline-block;
-    color: #f3f3f3;
-  }
-}
-
-/* Preloader in Login */
-
-.tg-preloader {
-  display: none;
-  position: relative;
-  text-align: center;
-  margin: .5em 0;
-  border: 1px solid $tg-brown;
-
-  span {
-    position: relative;
-    z-index: 2;
-    text-shadow: 0 0 1px black;
-  }
-
-  //bar
-  div.pbar {
-    background-color: $tg-brown;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
   }
 }

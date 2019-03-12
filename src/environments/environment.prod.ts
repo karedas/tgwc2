@@ -12,6 +12,7 @@ export const environment = {
       'resource': 'socket.io',
       'transports': ['websocket'],
       'reconnectionDelay': 1500,
+      'reconnectionDelayMax' : 5000,
       'reconnectionAttempts': 'Infinity'
     }
   }

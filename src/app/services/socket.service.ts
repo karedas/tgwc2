@@ -17,9 +17,9 @@ export class SocketService {
 
   private socket: io;
 
-  socketError: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   // socketStatus: BehaviorSubject<any> = new BehaviorSubject('');
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   
   constructor(
     private store: Store<State>,
@@ -42,6 +42,7 @@ export class SocketService {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
       this.connected$.next(true)
+      this.socket_error$.next(false);
     });
 
     /* Disconnected */
@@ -51,9 +52,9 @@ export class SocketService {
 
     /* Error */
     this.socket.on(socketEvent.ERROR, (err: any) => {
-      console.log('error');
       this.connected$.next(false);
-      this.socketError.next('Il server sembra offline, riprova pi&ugrave; tardi');
+      this.socket_error$.next(true);
+      this.socket.connect();
     });
 
     /* Reconnection */
@@ -62,12 +63,10 @@ export class SocketService {
 
   public disconnect(): void {
     this.store.dispatch(new DisconnectAction());
-    this.socket.disconnect();
-    this.socket.destroy();
-    delete this.socket;
-    this.socket = null;
-
     this.connected$.next(false);
+    if(!this.socket.isConnected) {
+      this.socket.connect();
+    }
   }
 
   public emit(event: any, data?: any) {

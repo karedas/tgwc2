@@ -67,10 +67,12 @@
     <div fxLayout="row">
       <div fxFlex="100">
         <div class="tg-serverstatus">
-          <ng-container *ngIf="serverStat">
-            Utenti ora online: <span>{{serverStat?.players.length || '0'}}</span>
-          </ng-container>
-
+           <span class="serverstatus--txt" [ngClass]="{'server_on': serverStatusMessage }">
+             Server {{ serverStatusMessage === true ? 'online' : 'offline'}}
+           </span> 
+           <ng-container *ngIf="serverStatusMessage">
+            - Utenti ora online: <span class="serverstatus--onlineuser">{{serverStat?.players.length || '0'}}</span>
+           </ng-container>
         </div>
       </div>
     </div>

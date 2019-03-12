@@ -15,7 +15,8 @@ export const environment = {
       'forceNew': true,
       'resource': 'socket.io',
       'transports': ['websocket'],
-      'reconnectionDelay': 1500,
+      'reconnectionDelay': 3000,
+      'reconnectionDelayMax' : 5000,
       'reconnectionAttempts': 'Infinity'
     }
   }
