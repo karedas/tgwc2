@@ -35,7 +35,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
 
     this.preloader.status$
       .pipe(takeUntil(this._unsubscribeAll)).subscribe(status => {
-        if (status == true) {
+        if (status === true) {
           this.preloadDone.emit(status);
           // this.gameIsReady();
         }

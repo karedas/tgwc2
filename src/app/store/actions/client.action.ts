@@ -42,4 +42,4 @@ export type ClientActions
   | SocketStatusAction
   | LoginSuccessAction
   | DisconnectAction
-  | ResetAction
+  | ResetAction;

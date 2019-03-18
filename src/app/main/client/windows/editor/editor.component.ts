@@ -88,7 +88,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.gameService.sendToServer(`##ce${currline}`);
       }
     }
-    
+
     this.gameService.sendToServer('##ce_save');
     this.windowsService.closeGenericDialog(this.dialogID);
     this.inputService.focus();

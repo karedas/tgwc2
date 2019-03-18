@@ -77,7 +77,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       return;
     }
 
-    
+
     const values = this.smartLoginForm.value;
 
     this.loginSubscription = this.loginService.login(values)

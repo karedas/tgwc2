@@ -38,7 +38,7 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   public inCombat = false;
 
   private fontSizes = font_size_options;
-  
+
 
   private _unsubscribeAll: Subject<any>;
 
@@ -150,10 +150,10 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     this.game.processCommands(cmd);
   }
 
-  @HostListener('window:keydown', ['$event'])
+  @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
 
-    if (event.which === 49 && event.shiftKey === true && (this.ic.nativeElement.value).length === 0) {
+    if (event.key === '!' && (this.ic.nativeElement.value).length === 0) {
       const l = this.historyService.cmd_history.length;
 
       if (l > 0) {

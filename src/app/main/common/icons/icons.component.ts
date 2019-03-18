@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, SimpleChange } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'tg-icons',
@@ -6,7 +6,7 @@ import { Component, Input, ViewEncapsulation, SimpleChange } from '@angular/core
   styleUrls: ['./icons.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class IconsComponent {
+export class IconsComponent implements OnChanges {
   @Input('icon') icon: number;
 
   mrn: number;
@@ -20,7 +20,7 @@ export class IconsComponent {
   constructor() {
   }
 
-  ngOnChanges(changes: SimpleChange): void {
+  ngOnChanges(changes: SimpleChanges): void {
 
     if (!this.icon) {
       this.icon = 416;

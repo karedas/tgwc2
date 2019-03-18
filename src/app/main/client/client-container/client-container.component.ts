@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, ViewEncapsulation, OnDestroy, Renderer2, AfterViewInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { UIState } from 'src/app/store/state/ui.state';
 import { Store, select } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { WindowsService } from '../windows/windows.service';
   templateUrl: './client-container.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class ClientContainerComponent implements OnDestroy {
+export class ClientContainerComponent implements AfterViewInit, OnDestroy {
 
   private welcomeNews: Observable<boolean>;
   private _unsubscribeAll: Subject<any>;

@@ -37,6 +37,6 @@ export class InteractService {
     event.preventDefault();
     if (item.sz) {
       return true;
-    } else { false; }
+    }
   }
 }

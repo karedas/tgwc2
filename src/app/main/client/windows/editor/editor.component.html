@@ -15,8 +15,8 @@
                 </div>
                 <div id="editorMaxCharsCount" class="tg-txt-maxcharcount" fxFlex="0 0 auto" fxLayoutAlign="center center">{{totalChars}}</div>
                 <div class="tg-modal-buttons-group" fxFlex="0 0 auto" fxLayoutAlign="center center">
-                    <button  clickStopPropagation type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel($event)">Annulla</button>
-                    <button  clickStopPropagation type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
+                    <button  tgClickStopPropagation type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel($event)">Annulla</button>
+                    <button  tgClickStopPropagation type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
                 </div>
               </div>
             </div>

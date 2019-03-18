@@ -76,7 +76,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   setMoneyAmountLabel(money: any) {
 
     let dividend = 1;
-    money = parseInt(money);
+    money = parseInt(money, 10);
 
     if (money < 10) {
       this.moneyValue = 'mr';

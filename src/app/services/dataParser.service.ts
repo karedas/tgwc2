@@ -365,14 +365,14 @@ export class DataParser {
 
     // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
-      const godInvLev = parseInt(inv.substr(2, 3));
+      const godInvLev = parseInt(inv.substr(2, 3), 10);
       this.store.dispatch(new UiActions.UpdateUI({ invLevel: godInvLev }));
       return '';
     });
 
     /* \r is already removed at top */
 
-    if (data != 'undefined' && data != undefined && data !== '') {
+    if (data !== 'undefined' && data !== undefined && data !== '') {
       data = data.replace(/\n/gm, '<div class="breakline"></div>');
       data = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new DataActions.IncomingData(data));

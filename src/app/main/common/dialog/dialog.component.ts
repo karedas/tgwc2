@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { DialogConfiguration } from './model/dialog.interface';
 import { Dialog } from 'primeng/dialog';
 import { GenericDialogService } from './dialog.service';
@@ -8,7 +8,7 @@ import { GenericDialogService } from './dialog.service';
   templateUrl: './dialog.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class GenericDialogComponent implements OnInit {
+export class GenericDialogComponent implements OnInit, OnDestroy {
 
   @Input() id: string;
   @ViewChild('dialog') dialog: Dialog;

@@ -40,7 +40,7 @@ export class PreloaderService {
 
     this.loadedImages++;
 
-    if (this.loadedImages == this.totalAssets) {
+    if (this.loadedImages === this.totalAssets) {
       this.onComplete();
     }
 

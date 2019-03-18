@@ -35,7 +35,7 @@ import { DataEffects } from './store/effects/data.effects';
       // serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,
-      
+
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

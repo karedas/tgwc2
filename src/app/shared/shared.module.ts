@@ -31,14 +31,14 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
-import { ClickStopPropagation } from './directives/click-stop-propagation.directive';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 
 
 @NgModule({
   declarations: [
     IconsComponent,
     HstatComponent,
-    ClickStopPropagation
+    ClickStopPropagationDirective
   ],
   imports: [
     CommonModule,
@@ -87,7 +87,7 @@ import { ClickStopPropagation } from './directives/click-stop-propagation.direct
     ButtonModule,
     TableModule,
     ContextMenuModule,
-    ClickStopPropagation
+    ClickStopPropagationDirective
   ],
 })
 export class SharedModule {

@@ -79,9 +79,9 @@ export class DirectionsComponent implements OnInit, OnDestroy {
       let cmd: string;
 
       // Close The Door with Right Click
-      if (this.dirStatus[dir] == '2') {
+      if (this.dirStatus[dir] === '2') {
         cmd = `chiudi ${this.dirNames[dir]}`;
-      } else if (this.dirStatus[dir] == '3') {
+      } else if (this.dirStatus[dir] === '3') {
         cmd = `blocca ${this.dirNames[dir]}`;
       }
       if (cmd) {
