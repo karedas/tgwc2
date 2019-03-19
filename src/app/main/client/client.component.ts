@@ -23,7 +23,6 @@ export class ClientComponent implements OnDestroy {
   constructor(
     private cookieService: CookieService,
     private platform: Platform,
-    // private preloader: PreloaderService,
     private windowsService: WindowsService,
     @Inject(DOCUMENT) private document: any
   ) {
@@ -49,7 +48,6 @@ export class ClientComponent implements OnDestroy {
   clientIsReady(event) {
 
     this.preloaded = event;
-
 
     if (!this.cookieService.check('tgCookieLaw')) {
       setTimeout(() => {

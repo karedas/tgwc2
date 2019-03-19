@@ -19,7 +19,8 @@ export const environment = {
       'reconnectionDelayMax' : 5000,
       'reconnectionAttempts': 'Infinity'
     }
-  }
+  },
+  analytics_UAID: 'UA-122402371-2'
 };
 
 /*

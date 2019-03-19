@@ -21,6 +21,7 @@ import { UiEffects } from './store/effects/ui.effects';
 import { ClientEffects } from './store/effects/client.effects';
 import { Auth2Module } from './main/authentication/auth.module';
 import { DataEffects } from './store/effects/data.effects';
+import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { DataEffects } from './store/effects/data.effects';
     Auth2Module,
     AppRoutingModule
   ],
-  providers: [AppPreloadingStrategy],
+  providers: [AppPreloadingStrategy, GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

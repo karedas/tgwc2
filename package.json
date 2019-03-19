@@ -33,6 +33,7 @@
     "@ngrx/store": "^7.1.0",
     "@ngrx/store-devtools": "^7.1.0",
     "@swimlane/ngx-datatable": "^14.0.0",
+    "angular-gtag": "^1.0.3",
     "angular-resize-event": "^1.0.0",
     "angular-split": "^2.0.1",
     "core-js": "^2.6.5",

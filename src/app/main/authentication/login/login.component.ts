@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
 import { Subscription, Subject, BehaviorSubject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import gitInfo from 'src/git-version.json';
 import { SocketService } from 'src/app/services/socket.service';
 import { GameService } from 'src/app/services/game.service';
+import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
 
 @Component({
   selector: 'tg-login',
@@ -21,7 +22,7 @@ import { GameService } from 'src/app/services/game.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   gitVersion = gitInfo.tag;
-  serverStat: any ;
+  serverStat: any;
 
   loginForm: FormGroup;
   loginFormErrors: any;
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private game: GameService,
     private socketService: SocketService,
+    private googleAnalyticsService: GoogleAnalyticsService
   ) {
     this.loginFormErrors = {
       username: {},
@@ -60,11 +62,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.loginService._loginReplayMessage
       .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe((msg: string) => {
-          if (msg !== undefined) {
-            this.loginReplayMessage = msg;
-          }
-        });
+      .subscribe((msg: string) => {
+        if (msg !== undefined) {
+          this.loginReplayMessage = msg;
+        }
+      });
 
     this.game.serverStat.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (stat: string) => { this.serverStat = stat; }
@@ -72,8 +74,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.socketService.socket_error$.pipe(
       takeUntil(this._unsubscribeAll)).subscribe((serverstatus: boolean) => {
-      this.serverStatusMessage = !serverstatus;
-    });
+        this.serverStatusMessage = !serverstatus;
+      });
+
+
 
   }
 
@@ -103,6 +107,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           this.loginService._loginReplayMessage = ' ';
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
+          // Google analytics
+          this.googleAnalyticsService.emitEvent(`userPage`, `User ${this.username.value} Action`, 'login');
           this.router.navigate([redirect]);
 
         } else {
