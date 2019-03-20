@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+import { TGConfig } from 'src/app/config';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +15,8 @@ export class AudioService {
     this.sound = new Audio();
     this.music = new Audio();
 
-    this.music.volume = .4;
-    this.sound.volume = .6;
+    this.music.volume = TGConfig.client_options.musicVolume;
+    this.sound.volume = TGConfig.client_options.soundVolume;
 
     // this.attachListener();
   }

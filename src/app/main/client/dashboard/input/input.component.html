@@ -19,7 +19,8 @@
       pTooltip="Aumenta / Diminuisci Testo" tooltipPosition="top" showDelay="8 00" hideDelay="100">
       <button
         type="button"
-        class="tg-fnt-button">
+        class="tg-fnt-button"
+        (mousedown)="onFontSizeChange()">
         <fa-icon [icon]="faFont"></fa-icon>
       </button>
     </div>

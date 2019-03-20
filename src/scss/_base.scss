@@ -21,10 +21,33 @@ body {
   color: white;
   min-height: 100%;
   line-height: normal;
-  font-size: 13px;
+  font-size: 11px;
   font-family: 'Open Sans', sans-serif;
   display: flex;
 }
+
+body.size-xs{
+  font-size: 10px;
+}
+body.size-s{
+  font-size: 11px;
+}
+body.size-m{
+  font-size: 12px;
+}
+body.size-l{
+  font-size: 12.5px;
+}
+body.size-xl{
+  font-size: 13px;
+}
+body.size-xxl{
+  font-size: 13.5px
+}
+body.size-xxxl{
+  font-size: 14px;
+}
+
 
 a,
 button:focus,
