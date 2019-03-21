@@ -22,7 +22,7 @@ import { Auth2Module } from './main/authentication/auth.module';
 import { DataEffects } from './store/effects/data.effects';
 import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
-import { MainComponent } from './main/main.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 
 @NgModule({
@@ -32,6 +32,7 @@ import { MainModule } from './main/main.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([UiEffects, ClientEffects, DataEffects]),

@@ -17,7 +17,7 @@ import { OutputModule } from './output/output.module';
     ClientComponent,
     ClientContainerComponent,
     NavbarComponent,
-    ControlPanelComponent,
+    // ControlPanelComponent,
     AudioComponent,
   ],
   imports: [

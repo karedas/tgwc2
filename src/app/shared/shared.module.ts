@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -42,7 +41,6 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     PipesModule,
