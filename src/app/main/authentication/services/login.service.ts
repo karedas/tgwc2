@@ -175,12 +175,5 @@ export class LoginService {
   }
 
   private _init(): void {
-
-    // this.socketService.isConnected
-    //   .subscribe((c) => {
-    //     if (c === true) {
-    //     }
-
-    //   });
   }
 }

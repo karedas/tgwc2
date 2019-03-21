@@ -8,7 +8,6 @@ const clientRouting: Routes = [
     path: 'webclient',
     component: ClientContainerComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
   }
 ];
 
