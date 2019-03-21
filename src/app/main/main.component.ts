@@ -1,18 +1,16 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { Platform } from '@angular/cdk/platform';
-import { CookieService } from 'ngx-cookie-service';
-// import { PreloaderService } from '../common/services/preloader.service';
+import { Component, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+import { Platform } from '@angular/cdk/platform';
+import { WindowsService } from './client/windows/windows.service';
+import { DOCUMENT } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
-import { WindowsService } from './windows/windows.service';
 
 @Component({
-  selector: 'tg-client',
-  template: '',
+  selector: 'tg-main',
+  templateUrl: './main.component.html',
 })
-
-export class ClientComponent implements OnDestroy {
+export class MainComponent implements OnDestroy {
 
   public preloaded = false;
   public isCookieAccepted = false;
@@ -26,23 +24,15 @@ export class ClientComponent implements OnDestroy {
   ) {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
-      this.document.body.className += 'is-mobile';
+      this.document.body.className += ' is-mobile';
     }
+
+    this._init();
+
     this._unsubscribeAll = new Subject();
   }
 
-  // Cookie Law Behaviour
-  showCookieLaw() {
-    this.windowsService.openCookieLaw().pipe(
-      takeUntil(this._unsubscribeAll))
-      .subscribe((accept: boolean) => {
-        this.isCookieAccepted = accept;
-      });
-  }
-
-  clientIsReady(event) {
-
-    this.preloaded = event;
+  _init() {
 
     if (!this.cookieService.check('tgCookieLaw')) {
       setTimeout(() => {
@@ -55,6 +45,17 @@ export class ClientComponent implements OnDestroy {
       this.isCookieAccepted = true;
     }
   }
+
+  
+  // Cookie Law Behaviour
+  showCookieLaw() {
+    this.windowsService.openCookieLaw().pipe(
+      takeUntil(this._unsubscribeAll))
+      .subscribe((accept: boolean) => {
+        this.isCookieAccepted = accept;
+      });
+  }
+
 
   onCookieAccepted(status: boolean) {
     this.isCookieAccepted = status;

@@ -1,22 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './main/authentication/login/login.component';
 import { AppPreloadingStrategy } from './app.preloading-strategy';
+import { LoginComponent } from './main/authentication/login/login.component';
 
-const appRoutes: Routes = [
-  { path: '', component: LoginComponent },
-  // {
-  //   path: 'registration',
-  //   component: RegistrationComponent
-  // },
-  { path: '**', redirectTo: 'login'}
-];
-
-
+const routes: Routes = [
+  {path: '', redirectTo: '/auth/login', pathMatch: 'full'},
+  {path: '**', redirectTo: '/'}
+]
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      appRoutes,
+      routes,
       {
         enableTracing: false, // <-- debugging purposes only
         preloadingStrategy: AppPreloadingStrategy,

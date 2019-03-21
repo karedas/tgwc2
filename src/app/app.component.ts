@@ -5,8 +5,15 @@ declare let ga: Function;
 
 @Component({
   selector: 'tg-root',
-  // template: `<tg-client [state]="gameState$ | async"></tg-client>`,
-  template: `<tg-client fxLayout="column" fxFlexFill class="min-h-0"></tg-client>`,
+  // <tg-splashscreen id="splashscreen"></tg-splashscreen>
+  // <!-- Client -->
+  // <ng-container *ngIf="isCookieAccepted">
+  //   <router-outlet></router-outlet>
+  // </ng-container>
+  template: `
+    <tg-splashscreen id="splashscreen"></tg-splashscreen>
+    <tg-main></tg-main>
+    `,
   styles: [`
   :host {
     position: relative;
@@ -27,9 +34,9 @@ export class AppComponent {
   title = 'The Gate v2 WebClient';
 
   constructor(private router: Router) {
-    
-     // subscribe to router events and send page views to Google Analytics
-     this.router.events.subscribe(event => {
+
+    // subscribe to router events and send page views to Google Analytics
+    this.router.events.subscribe(event => {
 
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);

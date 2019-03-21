@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DynamicDialogModule, DynamicDialogComponent } from 'primeng/dynamicdialog';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';

@@ -5,9 +5,23 @@ import { RegistrationComponent } from '../registration/registration.component';
 
 const authRoutes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent
-  },
+    path: 'auth',
+    children: [
+      {
+        path: '',
+        component: LoginComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'registrazione',
+        component: RegistrationComponent
+      }
+    ]
+  }
+
   // {
   //   path: 'registration',
   //   component: RegistrationComponent,

@@ -1,4 +1,4 @@
-import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer, ActionReducer } from '@ngrx/store';
 import * as fromClient from './reducers/client.reducer';
 import * as fromMessage from './reducers/data.reducer';
 import * as fromUi from './reducers/ui.reducer';
@@ -29,7 +29,5 @@ export function clearState(reducer) {
         return reducer(state, action);
     };
 }
-
-
 
 
