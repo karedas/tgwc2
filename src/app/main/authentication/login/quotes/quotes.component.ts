@@ -1,64 +1,57 @@
 import { Component } from '@angular/core';
-import { trigger, style, animate, transition, query } from '@angular/animations';
 import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'tg-quotes',
   template: `
   <div class="tg-intro-rotatext" fxLayout="column" fxLayoutAlign="center center">
-    <ng-container [@crossFadeQuote]>
-    {{ (quotes[index$ | async])?.msg  }}
-    <div class="auth">- {{ (quotes[index$ | async])?.author }} -</div>
-    </ng-container>
+    <div *ngFor="let quote of quotesList;" [@quotesFadeInOut]="quote.show" class="phrase">
+    {{ quote.msg  }}
+    <div class="auth">- {{ quote.author }} -</div>
+    </div>
   </div>`,
   styleUrls: ['./quotes.component.scss'],
-
   animations: [
-    trigger('crossFadeQuote', [
-
-      transition( '* => *', [
-
-          query(':enter',
-              [
-                  style({ opacity: 0 })
-              ],
-              { optional: true }
-          ),
-
-          query(':leave',
-              [
-                  style({ opacity: 1 }),
-                  animate('0.2s', style({ opacity: 0 }))
-              ],
-              { optional: true }
-          ),
-
-          query(':enter',
-              [
-                  style({ opacity: 0 }),
-                  animate('0.2s', style({ opacity: 1 }))
-              ],
-              { optional: true }
-          )
-
-      ]
-      )
-  ])]
+    trigger('quotesFadeInOut', [
+      state('true', style({opacity: 1})),
+      transition('false => true', [
+        animate('.5s')
+      ]),
+      transition('true => false', [
+        animate('.8s')
+      ]),
+    ])
+  ]
 })
 
 export class QuotesComponent {
-  quotes = [
+
+  quotesList = [
     { show: true, author: `Anonimo`, msg: `L'importante non è Guardare, occorre Vedere`},
     { show: false, author: `Una guardia cittadina`, msg: `Nuovo giorno, buon giorno!`},
     { show: false, author: `Strane creature di Ikhari`, msg: `Gnek gnek!` }
   ];
+  
+  lastIndex: number = 0;
 
   index$: Observable<number> = new Observable();
 
   constructor() {
-    this.index$ = timer(0, 4500).pipe(
-      map((item, index) => index % this.quotes.length)
-    );
+
+    this.index$ = timer(0, 4500);
+    this._init();
+
+  }
+
+  _init() {
+    this.index$.pipe(
+      map((item, index: number) => { return index % this.quotesList.length })
+    ).subscribe(i => {
+      this.quotesList[this.lastIndex].show = false;
+      this.quotesList[i].show = !this.quotesList[i].show;
+      this.lastIndex = i;
+    });
   }
 }

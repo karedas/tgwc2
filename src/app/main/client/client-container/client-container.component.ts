@@ -25,7 +25,6 @@ export class ClientContainerComponent implements AfterViewInit, OnDestroy {
   ) {
     this.welcomeNews = this.store.pipe(select(getWelcomeNews));
     this._unsubscribeAll = new Subject<any>();
-    console.log('yo');
   }
 
 

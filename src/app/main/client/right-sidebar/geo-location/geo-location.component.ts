@@ -36,18 +36,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class GeoLocationComponent implements OnInit , OnDestroy {
 
-  changeState = 'out';
-
-  regionImageUrl = 'assets/images/regions/00.jpg';
-  region$: Observable<IRegion>;
+  public changeState = 'out';
+  public regionImageUrl = 'assets/images/regions/00.jpg';
+  public region$: Observable<IRegion>;
 
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    private http: HttpClient,
-    private domSanitizer: DomSanitizer
     ) {
     this.region$ = this.store.pipe(select(getRegion));
     this._unsubscribeAll = new Subject<any>();

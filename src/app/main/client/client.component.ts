@@ -8,7 +8,7 @@ import { WindowsService } from './windows/windows.service';
 
 @Component({
   selector: 'tg-client',
-  template: '',
+  template: '<tg-client-container></tg-client-container>',
 })
 
 export class ClientComponent implements OnDestroy {

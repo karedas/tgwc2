@@ -8,7 +8,7 @@ import { AuthGuard } from './authentication/services/login.guard';
 export const routes = [
   {
     path: 'webclient', 
-    loadChildren: './main/client/client.module#ClientModule',
+    loadChildren: './client/client.module#ClientModule',
     canLoad: [ AuthGuard ]
   }
 ]
@@ -26,7 +26,7 @@ export const routes = [
   exports: [
     RouterModule,
     MainComponent
-  ],
+  ]
 })
 export class MainModule {
  }

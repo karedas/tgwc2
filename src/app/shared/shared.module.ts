@@ -61,7 +61,6 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
   providers: [
     GameService,
     CookieService,
-    SocketService,
     PreloaderService,
     AudioService,
     LoginService,

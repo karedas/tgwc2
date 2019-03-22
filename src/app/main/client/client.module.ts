@@ -11,6 +11,9 @@ import { WindowsModule } from './windows/windows.module';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OutputModule } from './output/output.module';
+import { RouterModule } from '@angular/router';
+
+
 
 @NgModule({
   declarations: [

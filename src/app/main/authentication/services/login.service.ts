@@ -41,8 +41,6 @@ export class LoginService {
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
     this.loginErrorMessage$ = new BehaviorSubject('');
-
-    this._init();
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
@@ -80,7 +78,6 @@ export class LoginService {
   }
 
   setHandleLoginData() {
-    this.socketService.off(socketEvent.LOGIN);
     this.socketService.addListener(socketEvent.LOGIN, (data: any) => this.handleLoginData(data));
   }
 
@@ -174,6 +171,4 @@ export class LoginService {
     return this.loginErrorMessage$.asObservable();
   }
 
-  private _init(): void {
-  }
 }

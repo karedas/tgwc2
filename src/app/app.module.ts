@@ -24,6 +24,7 @@ import { GoogleAnalyticsService } from './services/google-analytics-service.serv
 import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
+import { SocketService } from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -45,11 +46,10 @@ import { MainModule } from './main/main.module';
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
     MainModule,
-    SharedModule,
     Auth2Module,
     AppRoutingModule,
   ],
-  providers: [AppPreloadingStrategy, GoogleAnalyticsService],
+  providers: [AppPreloadingStrategy, GoogleAnalyticsService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
