@@ -5,7 +5,6 @@ import { Platform } from '@angular/cdk/platform';
 import { WindowsService } from './client/windows/windows.service';
 import { DOCUMENT } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'tg-main',
@@ -21,7 +20,6 @@ export class MainComponent implements OnDestroy {
     private cookieService: CookieService,
     private platform: Platform,
     private windowsService: WindowsService,
-    private router: Router,
     @Inject(DOCUMENT) private document: any
   ) {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
@@ -61,7 +59,6 @@ export class MainComponent implements OnDestroy {
 
   start() {
     this.isCookieAccepted = true;
-    this.router.navigate(['/auth/login/']);
   }
 
   ngOnDestroy() {

@@ -4,7 +4,7 @@ import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { LoginComponent } from './main/authentication/login/login.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/', pathMatch: 'full'},
+  {path: '', redirectTo: '/auth/login', pathMatch: 'full'},
   {path: '**', redirectTo: '/'}
 ]
 @NgModule({
