@@ -16,6 +16,8 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 export class DataParser {
 
   private netData = '';
+  private shortcuts = [];
+  private cmd_prefix = '';
 
   private _updateNeeded: Subject<any>;
 
@@ -29,7 +31,7 @@ export class DataParser {
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-       data = this.preParseText(this.netData.substr(0, len - 3));
+      data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
         this.parseForDisplay(data);
@@ -41,7 +43,7 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-        this.store.dispatch(new GameActions.DisconnectAction);
+      this.store.dispatch(new GameActions.DisconnectAction);
     }
   }
 
@@ -194,9 +196,9 @@ export class DataParser {
 
     // Book
     data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
-        const b_parse = JSON.parse(book.slice(6, -1));
-        this.store.dispatch(new DataActions.BookAction(b_parse));
-        return '';
+      const b_parse = JSON.parse(book.slice(6, -1));
+      this.store.dispatch(new DataActions.BookAction(b_parse));
+      return '';
     });
 
     // List of commands
@@ -280,7 +282,7 @@ export class DataParser {
     // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      this.store.dispatch(new UiActions.ShowStatusBoxAction({status: status_parse}));
+      this.store.dispatch(new UiActions.ShowStatusBoxAction({ status: status_parse }));
       return '';
     });
 
@@ -384,13 +386,13 @@ export class DataParser {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
   }
 
-  parseInput(input): any {
+  parseInput(input: any): any {
     /* Split input separated by ; */
     const inputs = input.split(/\s*;\s*/);
     let res = [];
     /* Substitute shortcuts on each command and join results */
     for (let i = 0; i < inputs.length; ++i) {
-      const subs = inputs[i].split(/\s*;\s*/);
+      const subs = this.substShort(inputs[i]).split(/\s*;\s*/);
       res = res.concat(subs);
     }
     /* Return the resulting array */
@@ -405,40 +407,48 @@ export class DataParser {
     return this._updateNeeded.asObservable();
   }
 
-  // substShort(input: string): any {
+  substShort(input: any): any {
 
-  //   /* Split into arguments */
-  //   let args = input.split(/\s+/);
-  //   /* Get the shortcut index */
-  //   let shortcut_key = args.shift();
-  //   let shortcut_num = parseInt(shortcut_key);
-  //   let shortcut_cmd;
-  //   if (!isNaN(shortcut_num)) {
-  //       shortcut_cmd = _.client_options.shortcuts[shortcut_num];
-  //   } else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {
-  //       shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
-  //   }
+    /* Split into arguments */
+    let args = input.split(/\s+/);
+    /* Get the shortcut index */
+    let shortcut_key = args.shift();
+    let shortcut_num = parseInt(shortcut_key);
+    let shortcut_cmd = null;
 
-  //   /* Check if the shortcut is defined */
-  //   if (shortcut_cmd) {
-  //       /* Use the shortcut text as command */
-  //       input = shortcut_cmd.cmd;
-  //       if (/\$\d+/.test(input)) {
-  //           /* Substitute the arguments */
-  //           for (let arg = 0; arg < args.length; ++arg) {
-  //               let rx = new RegExp("\\$" + (arg + 1), 'g');
-  //               input = input.replace(rx, args[arg]);
-  //           }
-  //           /* Remove remaining letiables */
-  //           input = input.replace(/\$\d+/g, '');
-  //       } else
-  //           input += " " + args.join(" ");
-  //   }
+    console.log(args, shortcut_key, shortcut_num)
 
-  //       if (_.cmd_prefix.length > 0) {
-  //           input = _.cmd_prefix + " " + input;
-  //       }
-  //       return input;
-  //   }
+    if (!isNaN(shortcut_num)) {
+      shortcut_cmd = this.shortcuts[shortcut_num];
+    }
+    // else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {}
+
+    /* Check if the shortcut is defined */
+    if (shortcut_cmd) {
+
+      /* Use the shortcut text as command */
+      input = shortcut_cmd.cmd;
+
+      if (/\$\d+/.test(input)) {
+        /* Substitute the arguments */
+        for (let arg = 0; arg < args.length; ++arg) {
+          let rx = new RegExp("\\$" + (arg + 1), 'g');
+          input = input.replace(rx, args[arg]);
+        }
+
+        /* Remove remaining letiables */
+        input = input.replace(/\$\d+/g, '');
+      } else
+        input += " " + args.join(" ");
+    }
+
+    if (this.cmd_prefix.length > 0) {
+      input = this.cmd_prefix + " " + input;
+    }
+
+    console.log(input);
+
+    return input;
+  }
 
 }
