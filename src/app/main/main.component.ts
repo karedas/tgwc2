@@ -5,6 +5,7 @@ import { Platform } from '@angular/cdk/platform';
 import { WindowsService } from './client/windows/windows.service';
 import { DOCUMENT } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tg-main',
@@ -20,6 +21,7 @@ export class MainComponent implements OnDestroy {
     private cookieService: CookieService,
     private platform: Platform,
     private windowsService: WindowsService,
+    private router: Router,
     @Inject(DOCUMENT) private document: any
   ) {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
@@ -28,37 +30,38 @@ export class MainComponent implements OnDestroy {
     }
 
     this._init();
-
     this._unsubscribeAll = new Subject();
+
   }
 
   _init() {
-
     if (!this.cookieService.check('tgCookieLaw')) {
       setTimeout(() => {
-        this.windowsService.openCookieLaw().pipe(
-          takeUntil(this._unsubscribeAll)).subscribe((accept: boolean) => {
-            this.isCookieAccepted = accept;
-          });
-      }, 100);
+        this.showCookieLaw();
+      });
     } else {
-      this.isCookieAccepted = true;
+      this.start();
     }
   }
 
-  
+
   // Cookie Law Behaviour
   showCookieLaw() {
-    this.windowsService.openCookieLaw().pipe(
-      takeUntil(this._unsubscribeAll))
+    this.windowsService.openCookieLaw()
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((accept: boolean) => {
-        this.isCookieAccepted = accept;
+        this.start();
       });
   }
 
 
   onCookieAccepted(status: boolean) {
     this.isCookieAccepted = status;
+  }
+
+  start() {
+    this.isCookieAccepted = true;
+    this.router.navigate(['/auth/login/']);
   }
 
   ngOnDestroy() {

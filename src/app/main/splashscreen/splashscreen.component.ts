@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, delay } from 'rxjs/operators';
 import { PreloaderService } from '../common/services/preloader.service';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
@@ -13,7 +13,7 @@ import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/anim
 })
 export class SplashscreenComponent implements OnInit, OnDestroy {
 
-  @Output() preloadDone: EventEmitter<any> = new EventEmitter<any>();
+  @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
 
   splashScreenEl: any;
   player: AnimationPlayer;
@@ -38,10 +38,14 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
 
 
     this.preloader.status$
-      .pipe(takeUntil(this._unsubscribeAll)).subscribe(status => {
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(status => {
         if (status === true) {
-          this.preloadDone.emit(status);
           this.hide();
+
+          setTimeout(() => {
+            this.loaded.emit(true);
+          }, 1000);
         }
       });
   }

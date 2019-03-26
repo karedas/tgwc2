@@ -13,7 +13,6 @@ export const routes = [
   }
 ]
 
-
 @NgModule({
   declarations: [
     MainComponent,
@@ -28,5 +27,4 @@ export const routes = [
     MainComponent
   ]
 })
-export class MainModule {
- }
+export class MainModule {}

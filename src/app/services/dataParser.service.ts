@@ -16,7 +16,10 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 export class DataParser {
 
   private netData = '';
+
+
   private shortcuts = [];
+  private shortcuts_map = {};
   private cmd_prefix = '';
 
   private _updateNeeded: Subject<any>;
@@ -399,35 +402,30 @@ export class DataParser {
     return res;
   }
 
-  setUpdateNeeded(what: any) {
-    this._updateNeeded.next(what);
-  }
-
-  get updateNeeded(): Observable<any> {
-    return this._updateNeeded.asObservable();
-  }
 
   substShort(input: any): any {
 
     /* Split into arguments */
+
     let args = input.split(/\s+/);
     /* Get the shortcut index */
     let shortcut_key = args.shift();
     let shortcut_num = parseInt(shortcut_key);
-    let shortcut_cmd = null;
+    let shortcut_cmd = '';
 
-    console.log(args, shortcut_key, shortcut_num)
 
     if (!isNaN(shortcut_num)) {
       shortcut_cmd = this.shortcuts[shortcut_num];
     }
-    // else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {}
+    else if (typeof (this.shortcuts_map[shortcut_key]) != 'undefined') {
+      shortcut_cmd = this.shortcuts[this.shortcuts_map[shortcut_key]];
+    }
 
     /* Check if the shortcut is defined */
     if (shortcut_cmd) {
 
       /* Use the shortcut text as command */
-      input = shortcut_cmd.cmd;
+      input = shortcut_cmd['cmd'];
 
       if (/\$\d+/.test(input)) {
         /* Substitute the arguments */
@@ -441,14 +439,27 @@ export class DataParser {
       } else
         input += " " + args.join(" ");
     }
-
+    
+    
     if (this.cmd_prefix.length > 0) {
       input = this.cmd_prefix + " " + input;
     }
-
-    console.log(input);
-
+    
+    console.group();
+    console.log('shortcut_cmd', shortcut_cmd);
+    console.log('shortcut_key', shortcut_key);
+    console.log('shortcut_num', shortcut_num);
+    console.log('input', input);
+    console.groupEnd();
+    
     return input;
   }
 
+  setUpdateNeeded(what: any) {
+    this._updateNeeded.next(what);
+  }
+
+  get updateNeeded(): Observable<any> {
+    return this._updateNeeded.asObservable();
+  }
 }

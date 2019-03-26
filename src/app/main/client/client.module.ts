@@ -20,7 +20,6 @@ import { RouterModule } from '@angular/router';
     ClientComponent,
     ClientContainerComponent,
     NavbarComponent,
-    // ControlPanelComponent,
     AudioComponent,
   ],
   imports: [

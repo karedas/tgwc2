@@ -5,14 +5,9 @@ declare let ga: Function;
 
 @Component({
   selector: 'tg-root',
-  // <tg-splashscreen id="splashscreen"></tg-splashscreen>
-  // <!-- Client -->
-  // <ng-container *ngIf="isCookieAccepted">
-  //   <router-outlet></router-outlet>
-  // </ng-container>
   template: `
-    <tg-splashscreen id="splashscreen"></tg-splashscreen>
-    <tg-main></tg-main>
+    <tg-splashscreen id="splashscreen" (loaded)="onLoad($event)"></tg-splashscreen>
+    <tg-main *ngIf="load"></tg-main>
     `,
   styles: [`
   :host {
@@ -31,7 +26,9 @@ declare let ga: Function;
 })
 
 export class AppComponent {
+
   title = 'The Gate v2 WebClient';
+  load: boolean = false;
 
   constructor(private router: Router) {
 
@@ -43,5 +40,9 @@ export class AppComponent {
         ga('send', 'pageview');
       }
     });
+  }
+
+  onLoad(event: boolean): void {
+    this.load = event;
   }
 }
