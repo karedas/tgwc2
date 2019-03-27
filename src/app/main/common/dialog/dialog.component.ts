@@ -20,7 +20,7 @@ export class GenericDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     private genericDialogService: GenericDialogService,
-    ) {     }
+    ) {  }
 
   ngOnInit(): void {
 

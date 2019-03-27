@@ -3,7 +3,7 @@ import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
-import { Observable, BehaviorSubject, timer, Subject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';

@@ -21,7 +21,9 @@ export class GenericDialogService {
 
   open(id: string, config?: DialogConfiguration, data?: any ): any {
       // open modal specified by id
+      console.log(this.modals);
       const modal: any = this.modals.filter(x => x.id === id)[0];
+
       if (modal) {
         modal.open(config);
         return modal;

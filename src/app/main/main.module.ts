@@ -18,7 +18,6 @@ export const routes = [
     MainComponent,
   ],
   imports: [
-    WindowsModule,
     SharedModule,
     RouterModule.forChild(routes)
   ],

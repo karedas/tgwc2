@@ -42,10 +42,9 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
       .subscribe(status => {
         if (status === true) {
           this.hide();
-
           setTimeout(() => {
             this.loaded.emit(true);
-          }, 1000);
+          }, 450);
         }
       });
   }

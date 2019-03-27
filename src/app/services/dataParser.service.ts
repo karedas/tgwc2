@@ -444,14 +444,7 @@ export class DataParser {
     if (this.cmd_prefix.length > 0) {
       input = this.cmd_prefix + " " + input;
     }
-    
-    console.group();
-    console.log('shortcut_cmd', shortcut_cmd);
-    console.log('shortcut_key', shortcut_key);
-    console.log('shortcut_num', shortcut_num);
-    console.log('input', input);
-    console.groupEnd();
-    
+
     return input;
   }
 

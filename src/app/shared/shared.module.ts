@@ -2,11 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
-import { SocketService } from '../services/socket.service';
 import { LoginService } from '../main/authentication/services/login.service';
-import { AudioService } from '../main/client/audio/audio.service';
 import { PreloaderService } from '../main/common/services/preloader.service';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 
@@ -29,7 +26,7 @@ import { TableModule } from 'primeng/table';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
-import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
+import { DialogService as DynamicDialogService} from 'primeng/api';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 
 
@@ -49,6 +46,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     }),
     FontAwesomeModule,
     NgScrollbarModule,
+
     /* Prime NG Modules (TODO: Moves in another file) */
     CheckboxModule,
     TableModule,
@@ -59,10 +57,8 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     ProgressSpinnerModule
   ],
   providers: [
-    GameService,
     CookieService,
     PreloaderService,
-    AudioService,
     LoginService,
     DynamicDialogService,
     GenericDialogService,

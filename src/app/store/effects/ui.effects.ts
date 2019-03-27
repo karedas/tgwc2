@@ -8,7 +8,7 @@ import { UIEventType } from '../actions/ui.action';
 import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
-import { HeroAction, SkillsAction, InventoryAction, EquipAction, InfoCharacterAction } from '../actions/data.action';
+import { HeroAction, InfoCharacterAction } from '../actions/data.action';
 
 export interface PayloadAction {
   type: string;
@@ -59,7 +59,6 @@ export class UiEffects {
   showCharacterSheet$ = this.actions$.pipe(
     ofType<PayloadAction>(UIEventType.SHOWCHARACTERSHEET),
     switchMap((res) => {
-
       this.windowsService.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [

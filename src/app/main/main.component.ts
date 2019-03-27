@@ -9,6 +9,11 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'tg-main',
   templateUrl: './main.component.html',
+  styles: [`
+    :host {
+      height: 100%;
+    }
+  `]
 })
 export class MainComponent implements OnDestroy {
 
