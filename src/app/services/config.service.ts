@@ -15,8 +15,6 @@ export class ConfigService {
   private readonly _defaultConfig: any;
 
   constructor(
-    private _platform: Platform,
-    private _router: Router,
     @Inject(TG_CONFIG) private _config
   ) {
 
@@ -46,7 +44,6 @@ export class ConfigService {
 
   _init(): void {
 
-
     let config: any;
 
     //get config values from localstorage.
@@ -55,29 +52,44 @@ export class ConfigService {
     // Set the config from the default config
     this._configSubject = new BehaviorSubject(_.cloneDeep(this._defaultConfig));
 
-    if( configInStorage ) {
+    if (configInStorage) {
 
       configInStorage = JSON.parse(configInStorage);
 
       // Check Object keys architecture to avoid difference between code version
       if (this.compareConfigKeys(configInStorage)) {
-
         config = _.cloneDeep(configInStorage);
         this._configSubject.next(config);
-
+      } else {
+        localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
       }
     }
     else {
-     localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
+      localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
     }
   }
 
-  private compareConfigKeys (storedConfig: any) {
+  private compareConfigKeys(storedConfig: any) {
     // Compare default config with Values in localstorage
-    var aKeys = Object.keys(storedConfig).sort();
-    var bKeys = Object.keys(this._configSubject.getValue()).sort();
+    var aKeys = this.getDeepKeys(storedConfig).sort();
+    var bKeys = this.getDeepKeys(this._configSubject.getValue()).sort();
+
     return JSON.stringify(aKeys) === JSON.stringify(bKeys);
 
+  }
+
+  private getDeepKeys(obj) {
+    let keys = [];
+    for (let key in obj) {
+      keys.push(key);
+      if (typeof obj[key] === "object") {
+        let subkeys = this.getDeepKeys(obj[key]);
+        keys = keys.concat(subkeys.map(function (subkey) {
+          return key + "." + subkey;
+        }));
+      }
+    }
+    return keys;
   }
 
   setConfig(value, opts = { emitEvent: true }): void {

@@ -15,9 +15,6 @@ export function reducer(
       return Object.assign({}, state, { track: action.payload});
     }
 
-    case UIEventType.WELCOMENEWS: {
-      return Object.assign({}, state, { welcomeNews: !state.welcomeNews});
-    }
 
     // case UIEventType.TOGGLEOUTPUT: {
     //   let newState = action.payload;

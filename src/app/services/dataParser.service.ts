@@ -7,7 +7,7 @@ import * as UiActions from '../store/actions/ui.action';
 import * as GameActions from '../store/actions/client.action';
 
 import { IHero } from '../models/data/hero.model';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

@@ -4,6 +4,7 @@ import { GameService } from 'src/app/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { DynamicDialogRef } from 'primeng/api';
 import { Observable } from 'rxjs';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'tg-welcome-news',
@@ -19,7 +20,8 @@ export class WelcomeNewsComponent  implements AfterViewInit {
 
   constructor(
     private game: GameService,
-    private ref: DynamicDialogRef
+    private ref: DynamicDialogRef,
+    private _configService: ConfigService
   ) {
   }
 
@@ -29,7 +31,7 @@ export class WelcomeNewsComponent  implements AfterViewInit {
 
   onContinue(): void {
     if (this.dontShowNextTime) {
-      localStorage.setItem('welcomenews', '1');
+      this._configService.config = { news: true};
     }
     this.ref.close();
     this.game.sendToServer('');

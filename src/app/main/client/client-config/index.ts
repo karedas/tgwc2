@@ -1,4 +1,6 @@
 export interface TgConfigInterface {
+  musicVolume: number;
+  soundVolume: number;
   news: boolean,
   layout: {
     extraOutput: boolean,
@@ -8,6 +10,8 @@ export interface TgConfigInterface {
 }
 
 export const tgConfig: TgConfigInterface = {
+  musicVolume: 100,
+  soundVolume: 70,
   news: true,
   layout: {
     extraOutput: true,

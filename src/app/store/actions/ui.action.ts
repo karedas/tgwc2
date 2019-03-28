@@ -61,7 +61,6 @@ export type UIActions   =
   | UpdateUI
   | UpdateUI
   | AudioAction
-  | WelcomeNewsAction
   | CloseTextEditor
   | ShowCommandsActions
   | ShowStatusBoxAction
