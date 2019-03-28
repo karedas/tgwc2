@@ -28,6 +28,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { DialogService as DynamicDialogService} from 'primeng/api';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     NgScrollbarModule,
 
     /* Prime NG Modules (TODO: Moves in another file) */
+    DynamicDialogModule,
     CheckboxModule,
     TableModule,
     MenubarModule,
@@ -70,6 +72,7 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
     ReactiveFormsModule,
     NgScrollbarModule,
     PipesModule,
+    DynamicDialogModule,
     FontAwesomeModule,
     IconsComponent,
     HstatComponent,

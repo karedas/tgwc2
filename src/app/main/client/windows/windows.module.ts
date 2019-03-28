@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicDialogModule, DynamicDialogComponent } from 'primeng/dynamicdialog';
-import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
@@ -28,7 +26,6 @@ import { BookComponent } from './book/book.component';
     LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
-    CookieLawComponent,
     CommandsListComponent,
     EditorComponent,
     WorkslistComponent,
@@ -39,7 +36,6 @@ import { BookComponent } from './book/book.component';
     BookComponent
   ],
   imports: [
-    DynamicDialogModule,
     DialogGenericModule,
     DialogModule,
     CommonModule,
@@ -59,10 +55,10 @@ import { BookComponent } from './book/book.component';
     LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
-    CookieLawComponent,
   ],
   providers: [
     WindowsService
   ]
 })
+
 export class WindowsModule { }

@@ -19,17 +19,13 @@ export function reducer(
       return Object.assign({}, state, { welcomeNews: !state.welcomeNews});
     }
 
-    case UIEventType.TOGGLEOUTPUT: {
-      let newState = action.payload;
-      if (typeof action.payload !== 'boolean' ) {
-        newState = !state.extraOutput;
-      }
-      return Object.assign({}, state, { extraOutput: newState});
-    }
-
-    case UIEventType.TOGGLEDASHBOARD: {
-      return Object.assign({}, state,  {showDashBoard: !state.showDashBoard});
-    }
+    // case UIEventType.TOGGLEOUTPUT: {
+    //   let newState = action.payload;
+    //   if (typeof action.payload !== 'boolean' ) {
+    //     newState = !state.extraOutput;
+    //   }
+    //   return Object.assign({}, state, { extraOutput: newState});
+    // }
 
     case UIEventType.UI: {
       return Object.assign({}, state, action.payload);

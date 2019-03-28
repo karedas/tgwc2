@@ -4,8 +4,6 @@ export enum UIEventType {
   UI = '[UI] Ui Updated',
   AUDIO = '[UI] Audio',
   WELCOMENEWS = '[UI] Welcome News',
-  TOGGLEOUTPUT = '[UI] Toggle Extra Output',
-  TOGGLEDASHBOARD = '[UI] Toggle Dashboard',
   UPDATENEEDED = '[UI] Update Needed Data',
   CLOSETEXTEDITOR = '[UI] Close Text Editor',
   SHOWCOMMANDS = '[UI] Show Commands List',
@@ -20,14 +18,6 @@ export class UpdateUI implements Action {
   constructor(public payload: any) {}
 }
 
-export class ToggleExtraOutput implements Action {
-  readonly type = UIEventType.TOGGLEOUTPUT;
-  constructor(public payload: boolean | null) {}
-}
-
-export class ToggleDashboard implements Action {
-  readonly type = UIEventType.TOGGLEDASHBOARD;
-}
 
 export class AudioAction implements Action {
   readonly type = UIEventType.AUDIO;
@@ -67,11 +57,8 @@ export class ShowStatusBoxAction implements Action {
   constructor( public payload: any) {}
 }
 
-export type UIActions
-  =
+export type UIActions   =
   | UpdateUI
-  | ToggleExtraOutput
-  | ToggleDashboard
   | UpdateUI
   | AudioAction
   | WelcomeNewsAction

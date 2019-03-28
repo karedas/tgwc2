@@ -30,7 +30,9 @@ export class AppComponent {
   title = 'The Gate v2 WebClient';
   load: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    ) {
 
     // subscribe to router events and send page views to Google Analytics
     this.router.events.subscribe(event => {
@@ -40,9 +42,12 @@ export class AppComponent {
         ga('send', 'pageview');
       }
     });
+
   }
 
   onLoad(event: boolean): void {
     this.load = event;
+
+
   }
 }

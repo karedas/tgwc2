@@ -34,6 +34,4 @@ function fetchAudioTrack(state: UIState) {
 export const getUserLevel = createSelector (getUIState, fetchUserLevel);
 export const getInvisibilityLevel = createSelector(getUIState, fetchInvisibilityLevel);
 export const getWelcomeNews = createSelector(getUIState, fetchWelcomeNews);
-export const getDashboardVisibility = createSelector(getUIState, fetchDashboardVisibility);
-export const getExtraOutputStatus = createSelector(getUIState, fetchExtraOutput);
 export const getAudioTrack = createSelector(getUIState, fetchAudioTrack);

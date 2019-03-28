@@ -30,7 +30,7 @@
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleExtraOutput($event)"
-        [ngClass]="{'isActive': _extraOutputStatus$ | async }">
+        [ngClass]="{'isActive': tgConfig.layout.extraOutput}">
         <fa-icon [icon]="facolumns"></fa-icon>
       </button>
     </div>
@@ -39,8 +39,8 @@
       <button
         type="button" 
         class="tg-fnt-button"
-        (mousedown)="toggleDashboard($event)"
-        [ngClass]="{'isActive': _dashBoardStatus$ | async}">
+        (mousedown)="toggleCharacterPanel($event)"
+        [ngClass]="{'isActive': tgConfig.layout.characterPanel}">
         <fa-icon [icon]="faSolarPanel"></fa-icon>
       </button>
     </div>
@@ -50,7 +50,7 @@
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleZen($event)"
-        [ngClass]="{'isActive': zenStatus}">
+        [ngClass]="{'isActive': tgConfig.layout.zen}">
         <fa-icon [icon]="faBullseye"></fa-icon>
       </button>
     </div>

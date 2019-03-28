@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getHero, getDashboardVisibility } from 'src/app/store/selectors';
+import { getHero } from 'src/app/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,8 @@ import { GameService } from 'src/app/services/game.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { hero_position } from 'src/app/main/common/constants';
+import { ConfigService } from 'src/app/services/config.service';
+import { TgConfigInterface } from '../../client-config';
 
 @Component({
   selector: 'tg-character-panel',
@@ -19,9 +21,11 @@ import { hero_position } from 'src/app/main/common/constants';
 })
 export class CharacterPanelComponent implements OnInit, OnDestroy {
 
+  readonly env = environment;
+
+  tgConfig: any;
 
   hero$: Observable<any>;
-  env = environment;
   hero_pos = hero_position;
 
   inCombat = false;
@@ -37,22 +41,18 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   enemyName = '';
   enemyIcon: number = null;
 
-  toggleStatus$: Observable<boolean>;
+  activeMediaQuery = '';
 
   private watcherMedia: Subscription;
-  activeMediaQuery = '';
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    private mediaObserver: MediaObserver) {
-
-    // TODO, MOVE IN APP ROOT COMPONENT
-    this.watcherMedia = this.mediaObserver.media$.subscribe((change: MediaChange) => {
-      this.activeMediaQuery = change ? change.mqAlias : '';
-    });
+    private mediaObserver: MediaObserver,
+    private _configService: ConfigService
+  ) {
 
     this.hero$ = this.store.pipe(select(getHero));
 
@@ -61,16 +61,31 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.toggleStatus$ = this.store.pipe(select(getDashboardVisibility));
+    // Subscribe to config changes
+    this._configService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.tgConfig = config;
+        console.log(this.tgConfig);
+      });
 
-    this.hero$.pipe(takeUntil(this._unsubscribeAll))
+    // TODO, MOVE IN APP ROOT COMPONENT
+    this.watcherMedia = this.mediaObserver.media$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((change: MediaChange) => {
+        this.activeMediaQuery = change ? change.mqAlias : '';
+      });
+
+      
+
+    this.hero$
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((hero: IHero) => {
-          if (hero) {
-            this.setCombatPanel(hero.target);
-            this.setMoneyAmountLabel(hero.money);
-          }
+        if (hero) {
+          this.setCombatPanel(hero.target);
+          this.setMoneyAmountLabel(hero.money);
         }
-      );
+      });
   }
 
   setMoneyAmountLabel(money: any) {
@@ -80,7 +95,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
     if (money < 10) {
       this.moneyValue = 'mr';
-
     }
     if (money >= 10 && money < 100) {
       this.moneyValue = 'ma';

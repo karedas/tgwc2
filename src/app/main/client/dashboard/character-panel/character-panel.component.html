@@ -1,6 +1,6 @@
 <ng-container *ngIf="hero$ | async as hero" >
   
-  <div class="tg-characterpanel b-controlpanel" *ngIf="toggleStatus$ | async">
+  <div class="tg-characterpanel b-controlpanel" *ngIf="tgConfig.layout.characterPanel">
     <div 
       class="tg-characterpanel-wrap"  
       fxFlex="100" 

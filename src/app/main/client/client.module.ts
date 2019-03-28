@@ -9,9 +9,12 @@ import { HistoryService } from 'src/app/services/history.service';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OutputModule } from './output/output.module';
-import { WindowsModule } from './windows/windows.module';
 import { GameService } from 'src/app/services/game.service';
 import { AudioService } from './audio/audio.service';
+import { WindowsModule } from './windows/windows.module';
+import { ConfigService } from 'src/app/services/config.service';
+import { TgConfigModule } from 'src/app/shared/tgconfig.module';
+import { tgConfig } from './client-config';
 
 @NgModule({
   declarations: [
@@ -26,15 +29,17 @@ import { AudioService } from './audio/audio.service';
     RightSidebarModule,
     OutputModule,
     SharedModule,
-    WindowsModule
+    WindowsModule,
+    TgConfigModule.forChild(tgConfig)
   ],
   exports: [
     ClientComponent,
   ],
   providers: [
+    ConfigService,
     AudioService,
     GameService,
-    HistoryService
+    HistoryService,
   ],
 })
 export class ClientModule {

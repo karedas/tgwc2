@@ -5,7 +5,6 @@ import { Action, Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/services/game.service';
 import { tap, map, withLatestFrom, filter, switchMap } from 'rxjs/operators';
 import { UIEventType } from '../actions/ui.action';
-import { getExtraOutputStatus } from '../selectors';
 import { UIState } from '../state/ui.state';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { HeroAction, InfoCharacterAction } from '../actions/data.action';
@@ -25,17 +24,17 @@ export class UiEffects {
     private windowsService: WindowsService,
   ) { }
 
-  @Effect({ dispatch: false })
-  $updateUI: Observable<any> = this.actions$.pipe(
-    ofType(UIEventType.UPDATENEEDED),
-    withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
-    filter(([action, status]) => status === true),
-    map(([action, status]) => action),
-    tap(
-      what => {
-        this.game.updateNeeded(what.payload);
-      })
-  );
+  // @Effect({ dispatch: false })
+  // $updateUI: Observable<any> = this.actions$.pipe(
+  //   ofType(UIEventType.UPDATENEEDED),
+  //   withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
+  //   filter(([action, status]) => status === true),
+  //   map(([action, status]) => action),
+  //   tap(
+  //     what => {
+  //       this.game.updateNeeded(what.payload);
+  //     })
+  // );
 
   @Effect({ dispatch: false })
   closeTextEditor: Observable<Action> = this.actions$.pipe(

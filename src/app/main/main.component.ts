@@ -2,9 +2,11 @@ import { Component, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Platform } from '@angular/cdk/platform';
-import { WindowsService } from './client/windows/windows.service';
 import { DOCUMENT } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs/operators';
+
+import { DialogService as DynamicDialogService, DynamicDialogConfig } from 'primeng/api';
+import { CookieLawComponent } from './client/windows/cookie-law/cookie-law.component';
 
 @Component({
   selector: 'tg-main',
@@ -24,7 +26,7 @@ export class MainComponent implements OnDestroy {
   constructor(
     private cookieService: CookieService,
     private platform: Platform,
-    private windowsService: WindowsService,
+    private dynamicDialogService: DynamicDialogService,
     @Inject(DOCUMENT) private document: any
   ) {
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
@@ -39,24 +41,31 @@ export class MainComponent implements OnDestroy {
 
   _init() {
     if (!this.cookieService.check('tgCookieLaw')) {
-      setTimeout(() => {
-        this.showCookieLaw();
-      });
+      this.showCookieLaw();
     } else {
       this.start();
     }
   }
 
-
   // Cookie Law Behaviour
   showCookieLaw() {
-    this.windowsService.openCookieLaw()
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((accept: boolean) => {
+    setTimeout(() => {
+      const ref = this.dynamicDialogService.open(CookieLawComponent,
+        <DynamicDialogConfig>{
+          showHeader: false,
+          closeOnEscape: false,
+          styleClass: 'tg-dialog',
+          width: '450px',
+          height: 'auto',
+          style: { 'max-width': '100%', 'max-height': '100%' },
+          contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
+        });
+
+      ref.onClose.subscribe(() => {
         this.start();
       });
+    });
   }
-
 
   onCookieAccepted(status: boolean) {
     this.isCookieAccepted = status;

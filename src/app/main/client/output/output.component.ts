@@ -6,11 +6,10 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 // import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, Subject } from 'rxjs';
-import { getExtraOutputStatus, getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
+import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
 import { GameService } from 'src/app/services/game.service';
 import { Room } from 'src/app/models/data/room.model';
 import { SplitComponent } from 'angular-split';
-import { ToggleExtraOutput } from 'src/app/store/actions/ui.action';
 import { LoginService } from '../../authentication/services/login.service';
 import { MenuItem } from 'primeng/api';
 import { IGenericPage } from 'src/app/models/data/genericpage.model';
@@ -53,8 +52,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     private loginService: LoginService,
     private game: GameService) {
 
-    this.extraOutputOpenStatus$ = this.store.select(getExtraOutputStatus);
-
     this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
 
     this._baseText$ = this.store.select(getDataBase);
@@ -74,13 +71,13 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
        }}
     );
 
-    /** Toggle Splitter Output  view  */
-    this.extraOutputOpenStatus$.pipe(
-      takeUntil(this._unsubscribeAll))
-        .subscribe((extra_status) => {
-          this.game.extraIsOpen = extra_status;
-          this.scrollPanelToBottom();
-        });
+    // /** Toggle Splitter Output  view  */
+    // this.extraOutputOpenStatus$.pipe(
+    //   takeUntil(this._unsubscribeAll))
+    //     .subscribe((extra_status) => {
+    //       this.game.extraIsOpen = extra_status;
+    //       this.scrollPanelToBottom();
+    //     });
 
     // Listen Base Text Data
     this._baseText$.pipe(
@@ -180,10 +177,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   setOutputSplit() {
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
       this.game.extraIsOpen = false;
-      this.store.dispatch(new ToggleExtraOutput(false));
+      // this.store.dispatch(new ToggleExtraOutput(false));
     } else {
       this.game.extraIsOpen = true;
-      this.store.dispatch(new ToggleExtraOutput(true));
+      // this.store.dispatch(new ToggleExtraOutput(true));
     }
   }
 

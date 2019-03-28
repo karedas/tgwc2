@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MainComponent } from './main.component';
 import { RouterModule } from '@angular/router';
-import { WindowsModule } from './client/windows/windows.module';
 import { AuthGuard } from './authentication/services/login.guard';
+import { CookieLawComponent } from './client/windows/cookie-law/cookie-law.component';
+import { WindowsModule } from './client/windows/windows.module';
 
 export const routes = [
   {
@@ -16,6 +17,7 @@ export const routes = [
 @NgModule({
   declarations: [
     MainComponent,
+    CookieLawComponent
   ],
   imports: [
     SharedModule,
@@ -23,7 +25,10 @@ export const routes = [
   ],
   exports: [
     RouterModule,
-    MainComponent
+    MainComponent,
+  ],
+  entryComponents: [
+    CookieLawComponent
   ]
 })
 export class MainModule {}
