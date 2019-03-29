@@ -61,7 +61,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Guida al gioco', disabled: true },
         {
           label: 'Ultime novità', disabled: true, command: (onclick) => {
-            this.windowsService.openNews(false);
+            this.windowsService.openNews();
           }
         },
         { label: 'Segnala un problema', url: 'http://forum.thegatemud.it/viewforum.php?f=51', target: '_blank' },

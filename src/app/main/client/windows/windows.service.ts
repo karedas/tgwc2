@@ -30,10 +30,9 @@ export class WindowsService {
     this.dd = new Map();
     this.gd = new Map();
     this.render = rendererFactory.createRenderer(null, null);
-
   }
 
-  openNews(inGame: boolean) {
+  openNews() {
     const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
       <DynamicDialogConfig>{
         header: 'Notizie',

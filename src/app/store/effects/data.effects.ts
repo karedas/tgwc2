@@ -18,7 +18,6 @@ export class DataEffects {
   constructor(
     private actions$: Actions,
     private windowsService: WindowsService,
-    // private game: GameService,
   ) { }
 
 

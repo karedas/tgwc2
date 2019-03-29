@@ -26,16 +26,16 @@ function fetchAudioTrack(state: ClientState) {
 //   return state.isAuthenticated;
 // }
 
-// function fetchInGame(state: ClientState) {
-//   return state.inGame;
-// }
+function fetchInGame(state: ClientState) {
+  return state.inGame;
+}
 
 
 
 /******************* Public Selector API's ******************/
 // export const getErrorMessage  = createSelector(getClientState, fetchErrorMessage);
 // export const getAuthenticatedState = createSelector(getClientState, fetchAuthentication);
-// export const getInGameStatus = createSelector(getClientState, fetchInGame);
+export const getInGameStatus = createSelector(getClientState, fetchInGame);
 export const getUserLevel = createSelector (getClientState, fetchUserLevel);
 export const getInvisibilityLevel = createSelector(getClientState, fetchInvisibilityLevel);
 export const getAudioTrack = createSelector(getClientState, fetchAudioTrack);

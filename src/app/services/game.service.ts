@@ -20,7 +20,7 @@ import { TGConfig } from '../main/client/client-config';
 export class GameService {
 
 
-  tgConfig: TGConfig;
+  _tgConfig: TGConfig;
 
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
@@ -68,13 +68,18 @@ export class GameService {
     this.init();
   }
 
+
+  get config(): TGConfig {
+    return this._tgConfig;
+  }
+
   init() {
 
     this._configService.config
       .pipe(distinctUntilChanged())
       .subscribe((config: TGConfig) => 
         {
-          this.tgConfig = config;
+          this._tgConfig = config;
           console.log('gameservice config subscribe:', config)
         }
       );
@@ -144,7 +149,7 @@ export class GameService {
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
-      } else if (this.client_update.inContainer && this.tgConfig.layout.extraOutput) {
+      } else if (this.client_update.inContainer && this.config.layout.extraOutput) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
       }
     }
