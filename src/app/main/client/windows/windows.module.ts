@@ -26,7 +26,6 @@ import { BookComponent } from './book/book.component';
     LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
-    CommandsListComponent,
     EditorComponent,
     WorkslistComponent,
     CharacterSheetComponent,

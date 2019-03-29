@@ -7,11 +7,6 @@ import { LoginService } from '../main/authentication/services/login.service';
 import { PreloaderService } from '../main/common/services/preloader.service';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 
-import { IconsComponent } from '../main/common/icons/icons.component';
-import { HstatComponent } from '../main/common/hstat/hstat.component';
-
-import { PipesModule } from '../pipes/pipes.module';
-
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -23,31 +18,34 @@ import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { ContextMenuModule } from 'primeng/contextmenu';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
+// import { ContextMenuModule } from 'primeng/contextmenu';
 
 import { DialogService as DynamicDialogService} from 'primeng/api';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { SocketService } from '../services/socket.service';
+import { PipesModule } from '../pipes/pipes.module';
+import { IconsComponent } from '../main/common/icons/icons.component';
+import { HstatComponent } from '../main/common/hstat/hstat.component';
 
 
 @NgModule({
   declarations: [
+    ClickStopPropagationDirective,
     IconsComponent,
-    HstatComponent,
-    ClickStopPropagationDirective
+    HstatComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    PipesModule,
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
     }),
     FontAwesomeModule,
     NgScrollbarModule,
-
+    PipesModule,
+    
     /* Prime NG Modules (TODO: Moves in another file) */
     DynamicDialogModule,
     CheckboxModule,
@@ -55,10 +53,10 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     MenubarModule,
     TooltipModule,
     ButtonModule,
-    ContextMenuModule,
-    ProgressSpinnerModule
+    // ContextMenuModule,
   ],
   providers: [
+    SocketService,
     CookieService,
     PreloaderService,
     LoginService,
@@ -71,18 +69,18 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-    PipesModule,
     DynamicDialogModule,
     FontAwesomeModule,
-    IconsComponent,
-    HstatComponent,
     CheckboxModule,
     MenubarModule,
     TooltipModule,
-    ProgressSpinnerModule,
     ButtonModule,
     TableModule,
-    ContextMenuModule,
+    
+    IconsComponent,
+    HstatComponent,
+    PipesModule,
+    // ContextMenuModule,
     ClickStopPropagationDirective
   ],
 })

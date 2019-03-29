@@ -6,7 +6,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 import { WindowsService } from '../windows/windows.service';
 import { ConfigService } from 'src/app/services/config.service';
-import { tgConfig } from '../client-config';
+import { NewsAction } from 'src/app/store/actions/ui.action';
 
 @Component({
   selector: 'tg-client-container',
@@ -17,7 +17,7 @@ export class ClientContainerComponent implements OnInit, OnDestroy {
 
   tgConfig: any;
 
-  private welcomeNews: Observable<boolean>;
+  private news$: Observable<boolean>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -42,7 +42,7 @@ export class ClientContainerComponent implements OnInit, OnDestroy {
       });
 
     //  Welcome News
-    // this.welcomeNews.pipe(
+    // this.news$.pipe(
     //   takeUntil(this._unsubscribeAll),
     //   filter((r) => r === true)).subscribe(() => {
     //     if (!tgConfig.news) {
@@ -50,7 +50,7 @@ export class ClientContainerComponent implements OnInit, OnDestroy {
     //     } else {
     //       this.showNews();
     //     }
-    //   });
+    // );
   }
 
   // showNews() {

@@ -13,7 +13,7 @@ export interface State {
     data: DataState;
 }
 
-export const appReducer: ActionReducerMap<State> = {
+export const baseReducer: ActionReducerMap<State> = {
     client: fromClient.reducer,
     ui: fromUi.reducer,
     data: fromMessage.reducer,

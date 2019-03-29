@@ -11,10 +11,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { OutputModule } from './output/output.module';
 import { GameService } from 'src/app/services/game.service';
 import { AudioService } from './audio/audio.service';
-import { WindowsModule } from './windows/windows.module';
 import { ConfigService } from 'src/app/services/config.service';
-import { TgConfigModule } from 'src/app/shared/tgconfig.module';
-import { tgConfig } from './client-config';
+import { WindowsModule } from './windows/windows.module';
+import { CommandsListComponent } from './windows/commands-list/commands-list.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +23,12 @@ import { tgConfig } from './client-config';
     AudioComponent,
   ],
   imports: [
+    SharedModule,
     ClientRoutingModule,
     DashboardModule,
     RightSidebarModule,
     OutputModule,
-    SharedModule,
     WindowsModule,
-    TgConfigModule.forChild(tgConfig)
   ],
   exports: [
     ClientComponent,

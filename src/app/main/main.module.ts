@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from './authentication/services/login.guard';
 import { CookieLawComponent } from './client/windows/cookie-law/cookie-law.component';
 import { WindowsModule } from './client/windows/windows.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes = [
   {
@@ -17,13 +18,16 @@ export const routes = [
 @NgModule({
   declarations: [
     MainComponent,
-    CookieLawComponent
+    CookieLawComponent,
+    PageNotFoundComponent
   ],
   imports: [
+    WindowsModule,
     SharedModule,
     RouterModule.forChild(routes)
   ],
   exports: [
+    WindowsModule,
     RouterModule,
     MainComponent,
   ],

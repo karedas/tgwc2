@@ -24,6 +24,7 @@ import { RegistrationComponent } from '../registration/registration.component';
     FlexLayoutModule
   ],
   exports: [
+    AuthRoutingModule
   ]
 })
 export class Auth2Module { }

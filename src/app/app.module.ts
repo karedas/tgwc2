@@ -14,16 +14,14 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
 
 import { AppPreloadingStrategy } from './app.preloading-strategy';
-import { appReducer, clearState } from './store';
-import { UiEffects } from './store/effects/ui.effects';
-import { ClientEffects } from './store/effects/client.effects';
+import { baseReducer, clearState } from './store';
 import { Auth2Module } from './main/authentication/auth.module';
-import { DataEffects } from './store/effects/data.effects';
 import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
-import { SocketService } from './services/socket.service';
+import { TgConfigModule } from './shared/tgconfig.module';
+import { tgConfig } from './main/client/client-config';
 
 @NgModule({
   declarations: [
@@ -34,8 +32,9 @@ import { SocketService } from './services/socket.service';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
-    EffectsModule.forRoot([UiEffects, ClientEffects, DataEffects]),
+    Auth2Module,
+    StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
+    EffectsModule.forRoot([]),
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,
@@ -44,11 +43,12 @@ import { SocketService } from './services/socket.service';
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    
+    TgConfigModule.forRoot(tgConfig),
     MainModule,
-    Auth2Module,
     AppRoutingModule,
   ],
-  providers: [AppPreloadingStrategy, GoogleAnalyticsService, SocketService],
+  providers: [AppPreloadingStrategy, GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

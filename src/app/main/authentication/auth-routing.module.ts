@@ -3,13 +3,14 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from '../registration/registration.component';
 
-const authRoutes: Routes = [
+const AUTH_ROUTES: Routes = [
   {
     path: 'auth',
     children: [
       {
         path: '',
-        component: LoginComponent
+        redirectTo: 'login',
+        pathMatch: 'full',
       },
       {
         path: 'login',
@@ -18,9 +19,10 @@ const authRoutes: Routes = [
       {
         path: 'registrazione',
         component: RegistrationComponent
-      }
+      },
     ]
-  }
+  },
+
 
   // {
   //   path: 'registration',
@@ -34,7 +36,7 @@ const authRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(authRoutes)
+    RouterModule.forChild(AUTH_ROUTES)
   ],
   exports: [
     RouterModule

@@ -3,14 +3,13 @@ import { Action } from '@ngrx/store';
 export enum UIEventType {
   UI = '[UI] Ui Updated',
   AUDIO = '[UI] Audio',
-  WELCOMENEWS = '[UI] Welcome News',
+  NEWS = '[UI] News',
   UPDATENEEDED = '[UI] Update Needed Data',
   CLOSETEXTEDITOR = '[UI] Close Text Editor',
   SHOWCOMMANDS = '[UI] Show Commands List',
   SHOWSTATUSHERO = '[UI] Show Status Hero Inline',
   SHOWCHARACTERSHEET = '[UI] Show Character Sheet',
   REFRESH = '[UI] Refresh server command'
-
 }
 
 export class UpdateUI implements Action {
@@ -24,8 +23,8 @@ export class AudioAction implements Action {
   constructor(public payload: string) {}
 }
 
-export class WelcomeNewsAction implements Action {
-  readonly type =  UIEventType.WELCOMENEWS;
+export class NewsAction implements Action {
+  readonly type =  UIEventType.NEWS;
 }
 
 export class CloseTextEditor implements Action {
@@ -41,7 +40,6 @@ export class ShowCharacterSheetActions implements Action {
   readonly type = UIEventType.SHOWCHARACTERSHEET;
   constructor (public payload: any) {}
 }
-
 
 export class UpdateNeeded implements Action {
   readonly type = UIEventType.UPDATENEEDED;
@@ -62,6 +60,7 @@ export type UIActions   =
   | UpdateUI
   | AudioAction
   | CloseTextEditor
+  | NewsAction
   | ShowCommandsActions
   | ShowStatusBoxAction
   | UpdateNeeded;

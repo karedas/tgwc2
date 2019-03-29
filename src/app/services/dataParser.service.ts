@@ -24,7 +24,9 @@ export class DataParser {
 
   private _updateNeeded: Subject<any>;
 
-  constructor(private store: Store<State>) {
+  constructor(
+    private store: Store<State>
+    ) {
     this._updateNeeded = new Subject<any>();
   }
 
@@ -74,7 +76,8 @@ export class DataParser {
 
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      this.store.dispatch(new UiActions.WelcomeNewsAction);
+      console.log('news');
+      this.store.dispatch(new UiActions.NewsAction);
       return '';
     });
 

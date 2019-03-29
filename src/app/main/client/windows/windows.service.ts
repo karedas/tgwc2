@@ -5,6 +5,7 @@ import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
+import { ConfigService } from 'src/app/services/config.service';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class WindowsService {
     private dynamicDialogService: DynamicDialogService,
     private genericDialogService: GenericDialogService,
     rendererFactory: RendererFactory2
-  ) {
+  ) {    
 
     this.dd = new Map();
     this.gd = new Map();
@@ -32,7 +33,7 @@ export class WindowsService {
 
   }
 
-  openWelcomeNews() {
+  openNews(inGame: boolean) {
     const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
       <DynamicDialogConfig>{
         header: 'Notizie',

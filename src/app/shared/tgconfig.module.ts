@@ -13,7 +13,7 @@ export class TgConfigModule
         }
     }
 
-    static forChild(config): ModuleWithProviders
+    static forRoot(config): ModuleWithProviders
     {
         return {
             ngModule : TgConfigModule,
