@@ -1,16 +1,18 @@
 import { ActionReducerMap } from '@ngrx/store';
 import * as fromClient from './reducers/client.reducer';
+import * as fromData from './reducers/data.reducer';
 import { ClientState } from './state/client.state';
 import { ClientEventType } from './actions/client.action';
+import { DataState } from './state/data.state';
 
 export interface State {
     client: ClientState;
-    // data: DataState;
+    data: DataState;
 }
 
 export const baseReducer: ActionReducerMap<State> = {
     client: fromClient.reducer,
-    // data: fromMessage.reducer,
+    data: fromData.reducer,
 };
 
 

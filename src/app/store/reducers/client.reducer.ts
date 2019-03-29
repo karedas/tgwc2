@@ -12,6 +12,14 @@ export function reducer(
     //   return Object.assign({}, state, { inGame: !state.inGame });
     // }
 
+    case ClientEventType.UI: {
+      return Object.assign({}, state, action.payload );
+    }
+
+    case ClientEventType.AUDIO: {
+      return Object.assign({}, state, { track: action.payload});
+    }
+
     default: {
       return state;
     }
