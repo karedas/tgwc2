@@ -1,4 +1,4 @@
-export interface TgConfigInterface {
+export interface TGConfig {
   musicVolume: number;
   soundVolume: number;
   news: boolean,
@@ -9,7 +9,7 @@ export interface TgConfigInterface {
   }
 }
 
-export const tgConfig: TgConfigInterface = {
+export const tgConfig: TGConfig = {
   musicVolume: 100,
   soundVolume: 70,
   news: true,

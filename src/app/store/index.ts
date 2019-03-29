@@ -9,18 +9,18 @@ import { ClientEventType } from './actions/client.action';
 
 export interface State {
     client: ClientState;
-    ui: UIState;
-    data: DataState;
+    // ui: UIState;
+    // data: DataState;
 }
 
 export const baseReducer: ActionReducerMap<State> = {
     client: fromClient.reducer,
-    ui: fromUi.reducer,
-    data: fromMessage.reducer,
+    // ui: fromUi.reducer,
+    // data: fromMessage.reducer,
 };
 
 
-export function clearState(reducer) {
+export function clearState(reducer: any) {
     return (state, action) => {
         if (action.type === ClientEventType.RESET) {
             state = undefined;

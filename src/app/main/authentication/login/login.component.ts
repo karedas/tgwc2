@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
-import { Subscription, Subject, BehaviorSubject } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
@@ -68,17 +68,20 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.game.serverStat.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      (stat: string) => { this.serverStat = stat; }
-    );
+    // Server Stats like player online from serverstat file
+    this.game.serverStat
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (stat: string) => { this.serverStat = stat; }
+      );
 
-    this.socketService.socket_error$.pipe(
-      takeUntil(this._unsubscribeAll)).subscribe((serverstatus: boolean) => {
+
+    // Show Socket Error to notice user about Server Errors
+    this.socketService.socket_error$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((serverstatus: boolean) => {
         this.serverStatusMessage = !serverstatus;
       });
-
-
-
   }
 
   resetLoginState() {
@@ -94,6 +97,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public login() {
+
+    // Wait validation on inputs value and socket connection
     if (this.loginForm.invalid && !this.socketService.isConnected) {
       return;
     }
@@ -103,6 +108,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSubscription = this.loginService.login(values)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
+
         if (loginSuccess === true) {
 
           this.loginService._loginReplayMessage = ' ';
@@ -121,6 +127,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       });
   }
+
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

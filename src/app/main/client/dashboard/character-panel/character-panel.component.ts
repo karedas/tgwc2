@@ -12,7 +12,7 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { hero_position } from 'src/app/main/common/constants';
 import { ConfigService } from 'src/app/services/config.service';
-import { TgConfigInterface } from '../../client-config';
+import { TGConfig } from '../../client-config';
 
 @Component({
   selector: 'tg-character-panel',
@@ -23,7 +23,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   readonly env = environment;
 
-  tgConfig: any;
+  tgConfig: TGConfig;
 
   hero$: Observable<any>;
   hero_pos = hero_position;
@@ -66,7 +66,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
-        console.log(this.tgConfig);
       });
 
     // TODO, MOVE IN APP ROOT COMPONENT
@@ -118,8 +117,11 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   }
 
   private setCombatPanel(target?: ITarget) {
+
     if (target && typeof target.hit !== 'undefined') {
+      
       const lengthKeys = Object.keys(target).length;
+      
       if (lengthKeys > 0) {
         this.inCombat = true;
         this.enemyHealt = target.hit;

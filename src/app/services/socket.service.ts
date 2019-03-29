@@ -17,7 +17,6 @@ export class SocketService {
 
   private socket: io;
 
-  // socketStatus: BehaviorSubject<any> = new BehaviorSubject('');
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -32,13 +31,15 @@ export class SocketService {
   }
 
   public connect(): void {
+    
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
-      this.startSocketEvent();
+      this.initSocketEvent();
     }
+    
   }
 
-  private startSocketEvent() {
+  private initSocketEvent() {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
       this.connected$.next(true);

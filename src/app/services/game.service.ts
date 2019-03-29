@@ -7,9 +7,11 @@ import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 
 import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
+import { ConfigService } from './config.service';
+import { TGConfig } from '../main/client/client-config';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,13 @@ import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/const
 export class GameService {
 
 
+  tgConfig: TGConfig;
+
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
+
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
-  public extraIsOpen: boolean;
 
   // Client Data Needed Updates
   public client_update = {
@@ -55,7 +59,8 @@ export class GameService {
     private dataParserService: DataParser,
     private historyService: HistoryService,
     private genericDialogService: GenericDialogService,
-    private http: HttpClient
+    private http: HttpClient,
+    private _configService: ConfigService
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
     this._commandsList$ = new BehaviorSubject(null);
@@ -64,6 +69,16 @@ export class GameService {
   }
 
   init() {
+
+    this._configService.config
+      .pipe(distinctUntilChanged())
+      .subscribe((config: TGConfig) => 
+        {
+          this.tgConfig = config;
+          console.log('gameservice config subscribe:', config)
+        }
+      );
+
     this.loadServerStat();
   }
 
@@ -125,11 +140,11 @@ export class GameService {
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.room.needed && this.extraIsOpen && !this.client_update.inContainer) {
+      if (this.client_update.room.needed && this._configService && !this.client_update.inContainer) {
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
-      } else if (this.client_update.inContainer && this.extraIsOpen) {
+      } else if (this.client_update.inContainer && this.tgConfig.layout.extraOutput) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
       }
     }

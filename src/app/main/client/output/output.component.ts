@@ -13,6 +13,7 @@ import { SplitComponent } from 'angular-split';
 import { LoginService } from '../../authentication/services/login.service';
 import { IGenericPage } from 'src/app/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
+import { TGConfig } from '../client-config';
 
 @Component({
   selector: 'tg-output',
@@ -22,7 +23,7 @@ import { ConfigService } from 'src/app/services/config.service';
 
 export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  tgConfig: any;
+  tgConfig: TGConfig;
 
   @ViewChild('scrollBar') scrollBar: NgScrollbar;
   @ViewChild('mainOutputArea') mainOutputArea: ElementRef;
@@ -177,10 +178,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setOutputSplit() {
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
-      this.game.extraIsOpen = false;
+      // this.tgConfig.layout.extraOutput = false;
       // this.store.dispatch(new ToggleExtraOutput(false));
     } else {
-      this.game.extraIsOpen = true;
+      // this.tgConfig.layout.extraOutput = true;
       // this.store.dispatch(new ToggleExtraOutput(true));
     }
   }

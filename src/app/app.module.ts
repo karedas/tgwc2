@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { TgConfigModule } from './shared/tgconfig.module';
 import { tgConfig } from './main/client/client-config';
+import { ClientEffects } from './store/effects/client.effects';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { tgConfig } from './main/client/client-config';
     HttpClientModule,
     Auth2Module,
     StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ClientEffects]),
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,

@@ -149,6 +149,8 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
+  onFontSizeChange(){}
+
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
   }

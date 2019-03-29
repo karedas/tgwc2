@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { SocketStatusAction, LoginSuccessAction } from 'src/app/store/actions/client.action';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
 import { ClientState } from 'src/app/store/state/client.state';
@@ -130,7 +129,6 @@ export class LoginService {
 
   onLoginOk(data: any) {
     this.completeHandShake(data);
-    this.store.dispatch(new LoginSuccessAction());
   }
 
   completeHandShake(data: any) {
@@ -140,17 +138,15 @@ export class LoginService {
   }
 
   onShutDown() {
-    this.store.dispatch(new SocketStatusAction('shutdown'));
+    alert('Attenzione, il server è attualmente in manutenzione.');
   }
 
   onReboot() {
     alert('Attenzione, il server sarà riavviato entro breve.');
-    this.store.dispatch(new SocketStatusAction('reboot'));
   }
 
   onServerDown() {
     alert('Attenzione, il server sarà spento entro breve per manutenzione.');
-    this.store.dispatch(new SocketStatusAction('serverdown'));
     this._loginReplayMessage = 'serverdown';
   }
 
