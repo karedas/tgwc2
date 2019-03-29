@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 
 import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
-import * as UiActions from '../store/actions/ui.action';
 import * as GameActions from '../store/actions/client.action';
 
 import { IHero } from '../models/data/hero.model';
@@ -77,7 +76,7 @@ export class DataParser {
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
       console.log('news');
-      this.store.dispatch(new UiActions.NewsAction);
+      this.store.dispatch(new GameActions.NewsAction);
       return '';
     });
 
@@ -108,7 +107,7 @@ export class DataParser {
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
       console.warn('Todo: Hide Text');
-      this.store.dispatch(new UiActions.UpdateUI({ inputVisible: false }));
+      this.store.dispatch(new GameActions.UpdateUI({ inputVisible: false }));
       return '';
     });
 
@@ -116,7 +115,7 @@ export class DataParser {
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({ inputVisible: true }));
+      this.store.dispatch(new GameActions.UpdateUI({ inputVisible: true }));
       return '';
     });
 
@@ -137,7 +136,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.store.dispatch(new UiActions.AudioAction(audio_parse));
+      this.store.dispatch(new GameActions.AudioAction(audio_parse));
       return '';
     });
 
@@ -177,7 +176,7 @@ export class DataParser {
 
     // Close the text editor
     data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      this.store.dispatch(new UiActions.CloseTextEditor());
+      this.store.dispatch(new GameActions.CloseTextEditor());
       return '';
     });
 
@@ -210,7 +209,7 @@ export class DataParser {
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      this.store.dispatch(new UiActions.ShowCommandsActions(cmd_parse));
+      this.store.dispatch(new GameActions.ShowCommandsActions(cmd_parse));
       return '';
     });
 
@@ -281,14 +280,14 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions([info_parse, 'info']));
+      this.store.dispatch(new GameActions.ShowCharacterSheetActions([info_parse, 'info']));
       return '';
     });
 
     // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      this.store.dispatch(new UiActions.ShowStatusBoxAction({ status: status_parse }));
+      this.store.dispatch(new GameActions.ShowStatusBoxAction({ status: status_parse }));
       return '';
     });
 
@@ -309,7 +308,7 @@ export class DataParser {
     // Refresh command
     data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
       const rcommand_parse = JSON.parse(t.slice(9, -1));
-      this.store.dispatch(new UiActions.RefreshCommandAction());
+      this.store.dispatch(new GameActions.RefreshCommandAction());
       console.log('refresh command', rcommand_parse);
       return '';
     });
@@ -367,14 +366,14 @@ export class DataParser {
 
     // Is God
     data = data.replace(/&i/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({ isGod: true }));
+      this.store.dispatch(new GameActions.UpdateUI({ isGod: true }));
       return '';
     });
 
     // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
       const godInvLev = parseInt(inv.substr(2, 3), 10);
-      this.store.dispatch(new UiActions.UpdateUI({ invLevel: godInvLev }));
+      this.store.dispatch(new GameActions.UpdateUI({ invLevel: godInvLev }));
       return '';
     });
 

@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation, OnDestroy, Renderer2, AfterViewInit, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { UIState } from 'src/app/store/state/ui.state';
-import { Store, select } from '@ngrx/store';
-import { filter, takeUntil } from 'rxjs/operators';
+import { Store  } from '@ngrx/store';
+import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 import { WindowsService } from '../windows/windows.service';
 import { ConfigService } from 'src/app/services/config.service';
-import { NewsAction } from 'src/app/store/actions/ui.action';
+import { ClientState } from 'src/app/store/state/client.state';
 
 @Component({
   selector: 'tg-client-container',
@@ -21,7 +20,7 @@ export class ClientContainerComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private store: Store<UIState>,
+    private store: Store<ClientState>,
     private game: GameService,
     private render: Renderer2,
     private windowsService: WindowsService,

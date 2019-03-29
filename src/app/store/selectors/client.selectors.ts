@@ -5,6 +5,19 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 export const getClientState = createFeatureSelector<ClientState>('client');
 
 /*********************** Individual selectors************************** */
+function fetchUserLevel(state: ClientState) {
+  return state.isgod;
+}
+
+function fetchInvisibilityLevel(state: ClientState) {
+  return state.invLevel;
+}
+
+function fetchAudioTrack(state: ClientState) {
+  return state.track;
+}
+
+
 // function fetchErrorMessage(state: ClientState) {
 //   return state.errorMessage;
 // }
@@ -23,3 +36,6 @@ export const getClientState = createFeatureSelector<ClientState>('client');
 // export const getErrorMessage  = createSelector(getClientState, fetchErrorMessage);
 // export const getAuthenticatedState = createSelector(getClientState, fetchAuthentication);
 // export const getInGameStatus = createSelector(getClientState, fetchInGame);
+export const getUserLevel = createSelector (getClientState, fetchUserLevel);
+export const getInvisibilityLevel = createSelector(getClientState, fetchInvisibilityLevel);
+export const getAudioTrack = createSelector(getClientState, fetchAudioTrack);
