@@ -49,6 +49,7 @@ export class MainComponent implements OnDestroy {
 
   // Cookie Law Behaviour
   showCookieLaw() {
+    
     setTimeout(() => {
       const ref = this.dynamicDialogService.open(CookieLawComponent,
         <DynamicDialogConfig>{
@@ -65,6 +66,7 @@ export class MainComponent implements OnDestroy {
         this.start();
       });
     });
+    
   }
 
   onCookieAccepted(status: boolean) {

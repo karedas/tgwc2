@@ -95,12 +95,14 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
 
   setDoors(doors: any): void {
-    for (let d = 0; d < this.dirNames.length; ++d) {
-      this.doorsStyle[this.dirNames[d]] = {
-        'background-position': (-26 * doors[d] + 'px center')
-      };
+    if(doors) {
+      for (let d = 0; d < this.dirNames.length; ++d) {
+        this.doorsStyle[this.dirNames[d]] = {
+          'background-position': (-26 * doors[d] + 'px center')
+        };
+      }
+      this.dirStatus = doors;
     }
-    this.dirStatus = doors;
   }
 
   @HostListener('window:keydown', ['$event'])

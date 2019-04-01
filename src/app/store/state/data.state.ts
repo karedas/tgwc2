@@ -12,11 +12,11 @@ import { IGenericPage } from 'src/app/models/data/genericpage.model';
 
 export interface DataState {
     date?: IDateTime;
-    base: any[];
-    sky: string;
+    base?: any[];
+    sky?: string;
     doors?: any;
-    room: Room;
-    map: Map;
+    room?: Room;
+    map?: Map;
     hero?: IHero;
     editor?: IEditor;
     objPers?: IObjPerson;
@@ -24,18 +24,23 @@ export interface DataState {
     workslist?: IWorks;
     region?: IRegion;
     book?: IBook;
-    genericpage: IGenericPage[];
+    genericpage?: IGenericPage[];
 }
 
 export const initialState: DataState = {
     date: undefined,
-    base: [''],
+    base: undefined,
     sky: undefined,
-    doors: [],
+    doors: undefined,
     room: undefined,
-    editor: undefined,
     map: undefined,
     hero: undefined,
+    editor: undefined,
+    objPers: undefined,
+    genericTable: undefined,
+    workslist: undefined,
+    region: undefined,
+    book: undefined,
     genericpage: undefined
-};
+}
 

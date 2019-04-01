@@ -15,7 +15,6 @@ export const baseReducer: ActionReducerMap<State> = {
     data: fromData.reducer,
 };
 
-
 export function clearState(reducer: any) {
     return (state, action) => {
         if (action.type === ClientEventType.RESET) {

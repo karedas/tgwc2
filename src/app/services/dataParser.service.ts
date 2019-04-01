@@ -14,6 +14,9 @@ import { Observable, Subject } from 'rxjs';
 
 export class DataParser {
 
+
+  private dispatcher: any = [];
+
   private netData = '';
 
 
@@ -66,16 +69,14 @@ export class DataParser {
 
     let pos: any;
 
-
     // Player is logged in
     data = data.replace(/&!logged"[^"]*"/gm, () => {
-      // this.store.dispatch(new GameActions.InGameAction());
+      this.store.dispatch(new GameActions.InGameAction());
       return '';
     });
 
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      console.log('news');
       this.store.dispatch(new GameActions.NewsAction);
       return '';
     });
@@ -384,6 +385,20 @@ export class DataParser {
       data = data.replace(/<p><\/p>/g, '');
       this.store.dispatch(new DataActions.IncomingData(data));
     }
+
+    this.dispatchData();
+  }
+
+  dispatchData() {
+    // Emit Data showing in right Output Order
+    this.dispatcher.forEach(fnc => {
+      console.log(fnc);
+      if (fnc === 'logged') this.store.dispatch(new GameActions.InGameAction());
+      if (fnc === 'news')  this.store.dispatch(new GameActions.NewsAction);
+    });
+
+    console.log('dispatcher data end');
+
   }
 
 

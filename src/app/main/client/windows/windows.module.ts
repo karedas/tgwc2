@@ -12,7 +12,6 @@ import { WorkslistComponent } from './workslist/workslist.component';
 import { DialogGenericModule } from '../../common/dialog/dialog.module';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { NoFeatureComponent } from './no-feature/no-feature.component';
-import { WindowsService } from './windows.service';
 import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 import { InfoComponent } from './character-sheet/info/info.component';
 import { EquipInventoryComponent } from './character-sheet/equip-inventory/equip-inventory.component';
@@ -55,9 +54,6 @@ import { BookComponent } from './book/book.component';
     CommandsListComponent,
     WelcomeNewsComponent,
   ],
-  providers: [
-    WindowsService
-  ]
 })
 
 export class WindowsModule { }

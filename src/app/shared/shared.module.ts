@@ -23,7 +23,6 @@ import { TableModule } from 'primeng/table';
 import { DialogService as DynamicDialogService} from 'primeng/api';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { SocketService } from '../services/socket.service';
 import { PipesModule } from '../pipes/pipes.module';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { HstatComponent } from '../main/common/hstat/hstat.component';
@@ -56,7 +55,6 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
     // ContextMenuModule,
   ],
   providers: [
-    SocketService,
     CookieService,
     PreloaderService,
     LoginService,

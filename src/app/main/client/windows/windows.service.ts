@@ -1,11 +1,9 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { Observable } from 'rxjs';
 import { DialogService as DynamicDialogService, DynamicDialogConfig } from 'primeng/api';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
-import { ConfigService } from 'src/app/services/config.service';
 
 
 @Injectable({

@@ -1,11 +1,7 @@
-import { Component, ViewEncapsulation, OnDestroy, Renderer2, AfterViewInit, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { Store  } from '@ngrx/store';
+import { Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { GameService } from 'src/app/services/game.service';
-import { WindowsService } from '../windows/windows.service';
 import { ConfigService } from 'src/app/services/config.service';
-import { ClientState } from 'src/app/store/state/client.state';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'tg-client-container',
@@ -15,15 +11,9 @@ import { ClientState } from 'src/app/store/state/client.state';
 export class ClientContainerComponent implements OnInit, OnDestroy {
 
   tgConfig: any;
-
-  private news$: Observable<boolean>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private store: Store<ClientState>,
-    private game: GameService,
-    private render: Renderer2,
-    private windowsService: WindowsService,
     private _configService: ConfigService
   ) {
 
@@ -39,25 +29,7 @@ export class ClientContainerComponent implements OnInit, OnDestroy {
       .subscribe((config) => {
         this.tgConfig = config;
       });
-
-    //  Welcome News
-    // this.news$.pipe(
-    //   takeUntil(this._unsubscribeAll),
-    //   filter((r) => r === true)).subscribe(() => {
-    //     if (!tgConfig.news) {
-    //       this.game.sendToServer('');
-    //     } else {
-    //       this.showNews();
-    //     }
-    // );
   }
-
-  // showNews() {
-  //   setTimeout(() => {
-  //     this.render.addClass(document.body, 'overlay-dark');
-  //     this.windowsService.openWelcomeNews();
-  //   }, 100);
-  // }
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

@@ -10,8 +10,8 @@ export interface ClientState  {
 
 export const initialState: ClientState = {
     time: new Date(),
-    inGame: false,
-    isgod: 0,
-    invLevel: 0,
+    inGame: undefined,
+    isgod: undefined,
+    invLevel: undefined,
     track: undefined,
 };

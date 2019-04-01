@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
-import { ClientState } from 'src/app/store/state/client.state';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { GameService } from 'src/app/services/game.service';
 
@@ -33,8 +31,7 @@ export class LoginService {
   constructor(
 
     private socketService: SocketService,
-    private game: GameService,
-    private store: Store<ClientState>) {
+    private game: GameService) {
 
     this.isLoggedInSubject = new BehaviorSubject(false);
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();

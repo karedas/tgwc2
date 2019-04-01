@@ -14,42 +14,62 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
 
 import { AppPreloadingStrategy } from './app.preloading-strategy';
-import { baseReducer, clearState } from './store';
-import { Auth2Module } from './main/authentication/auth.module';
 import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { TgConfigModule } from './shared/tgconfig.module';
 import { tgConfig } from './main/client/client-config';
+import { SocketService } from './services/socket.service';
+import { baseReducer, clearState } from './store';
 import { ClientEffects } from './store/effects/client.effects';
+import { DataEffects } from './store/effects/data.effects';
+import { PageNotFoundComponent } from './main/page-not-found/page-not-found.component';
+import { WindowsModule } from './main/client/windows/windows.module';
+import { WindowsService } from './main/client/windows/windows.service';
+
 
 @NgModule({
+
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
     SplashscreenComponent,
   ],
+
   imports: [
+
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    Auth2Module,
+
+    TgConfigModule.forRoot(tgConfig),
+    
     StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
-    EffectsModule.forRoot([ClientEffects]),
+    EffectsModule.forRoot([ClientEffects, DataEffects]),
+
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, 
+      logOnly: environment.production,
+    }),
+    
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,
     }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
-    
-    TgConfigModule.forRoot(tgConfig),
+
+    WindowsModule,
     MainModule,
     AppRoutingModule,
   ],
-  providers: [AppPreloadingStrategy, GoogleAnalyticsService],
+  exports: [
+    WindowsModule
+  ],
+  providers: [
+    SocketService,
+    AppPreloadingStrategy,
+    GoogleAnalyticsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

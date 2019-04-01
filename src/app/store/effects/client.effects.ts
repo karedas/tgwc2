@@ -23,25 +23,25 @@ export interface PayloadAction {
 @Injectable()
 export class ClientEffects {
 
-  @Effect({ dispatch: false })
-  onDisconnect: Observable<Action> = this.actions$.pipe(
-    ofType(ClientEventType.DISCONNECT),
-    tap((a) => {
-      if (this.router.url === '/webclient')  {
-        this.loginService.logout();
-        this.audioService.pauseAudio();
-        this.windowsService.openSmartLogin();
-        this.game.reset();
-      }}
-    ));
+  // @Effect({ dispatch: false })
+  // onDisconnect: Observable<Action> = this.actions$.pipe(
+  //   ofType(ClientEventType.DISCONNECT),
+  //   tap((a) => {
+  //     if (this.router.url === '/webclient')  {
+  //       this.loginService.logout();
+  //       this.audioService.pauseAudio();
+  //       this.windowsService.openSmartLogin();
+  //       this.game.reset();
+  //     }}
+  //   ));
 
-  @Effect({dispatch: false})
-  onGameStatus$ = this.actions$.pipe(
-    ofType(ClientEventType.INGAME),
-    tap(() => {
-      this.inputService.focus();
-    })
-  );
+  // @Effect({dispatch: false})
+  // onGameStatus$ = this.actions$.pipe(
+  //   ofType(ClientEventType.INGAME),
+  //   tap(() => {
+  //     this.inputService.focus();
+  //   })
+  // );
 
 
   
@@ -69,55 +69,55 @@ export class ClientEffects {
     }),
   );
 
-  @Effect({ dispatch: false })
-  closeTextEditor: Observable<Action> = this.actions$.pipe(
-    ofType(ClientEventType.CLOSETEXTEDITOR),
-    // tap(() => this.dialogService.close('editor'))
-  );
+  // @Effect({ dispatch: false })
+  // closeTextEditor: Observable<Action> = this.actions$.pipe(
+  //   ofType(ClientEventType.CLOSETEXTEDITOR),
+  //   // tap(() => this.dialogService.close('editor'))
+  // );
 
-  @Effect({ dispatch: false })
-  showCommande$: Observable<Action> = this.actions$.pipe(
-    ofType<PayloadAction>(ClientEventType.SHOWCOMMANDS),
-    map(action => action.payload),
-    tap(cmds => {
-      this.game.setCommands(cmds);
-      setTimeout(() => {
-        this.windowsService.openCommandsList();
-      }, 100);
-    })
-  );
+  // @Effect({ dispatch: false })
+  // showCommande$: Observable<Action> = this.actions$.pipe(
+  //   ofType<PayloadAction>(ClientEventType.SHOWCOMMANDS),
+  //   map(action => action.payload),
+  //   tap(cmds => {
+  //     this.game.setCommands(cmds);
+  //     setTimeout(() => {
+  //       this.windowsService.openCommandsList();
+  //     }, 100);
+  //   })
+  // );
 
-  @Effect()
-  showCharacterSheet$ = this.actions$.pipe(
-    ofType<PayloadAction>(ClientEventType.SHOWCHARACTERSHEET),
-    switchMap((res) => {
-      this.windowsService.openCharacterSheet(res.payload[1]);
-      if (res.payload[1] === 'info') {
-        return [
-          new InfoCharacterAction(),
-          new HeroAction(res.payload[0])
-        ];
-      }
-    }),
-  );
+  // @Effect()
+  // showCharacterSheet$ = this.actions$.pipe(
+  //   ofType<PayloadAction>(ClientEventType.SHOWCHARACTERSHEET),
+  //   switchMap((res) => {
+  //     this.windowsService.openCharacterSheet(res.payload[1]);
+  //     if (res.payload[1] === 'info') {
+  //       return [
+  //         new InfoCharacterAction(),
+  //         new HeroAction(res.payload[0])
+  //       ];
+  //     }
+  //   }),
+  // );
 
-  @Effect()
-  showStatusInline$ = this.actions$.pipe(
-    ofType<PayloadAction>(ClientEventType.SHOWSTATUSHERO),
-    switchMap((res) => {
-        return [
-          new HeroAction(res.payload)
-        ];
-    }),
-    tap(() => this.game.setStatusInline(true))
-  );
+  // @Effect()
+  // showStatusInline$ = this.actions$.pipe(
+  //   ofType<PayloadAction>(ClientEventType.SHOWSTATUSHERO),
+  //   switchMap((res) => {
+  //       return [
+  //         new HeroAction(res.payload)
+  //       ];
+  //   }),
+  //   tap(() => this.game.setStatusInline(true))
+  // );
 
-  @Effect({ dispatch: false })
-  refreshCommand$ = this.actions$.pipe(
-    ofType(ClientEventType.REFRESH),
-    tap(() => {
-      this.game.processCommands('info');
-    }));
+  // @Effect({ dispatch: false })
+  // refreshCommand$ = this.actions$.pipe(
+  //   ofType(ClientEventType.REFRESH),
+  //   tap(() => {
+  //     this.game.processCommands('info');
+  //   }));
 
   constructor(
     private game: GameService,
@@ -126,7 +126,7 @@ export class ClientEffects {
     private loginService: LoginService,
     private windowsService: WindowsService,
     private router: Router,
-    private inputService: InputService,
+    // private inputService: InputService,
     private store: Store<ClientState>
   ) { }
 

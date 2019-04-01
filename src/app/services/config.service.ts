@@ -1,7 +1,5 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Platform } from '@angular/cdk/platform';
-import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
 export const TG_CONFIG = new InjectionToken('tgCustomConfig');
@@ -51,6 +49,7 @@ export class ConfigService {
 
     // Set the config from the default config
     this._configSubject = new BehaviorSubject(_.cloneDeep(this._defaultConfig));
+    console.log(this._configSubject.getValue());
 
     if (configInStorage) {
 

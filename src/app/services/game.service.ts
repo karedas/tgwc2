@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
@@ -7,9 +7,9 @@ import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { switchMap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { switchMap, distinctUntilChanged } from 'rxjs/operators';
 
-import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
+import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/common/constants';
 import { ConfigService } from './config.service';
 import { TGConfig } from '../main/client/client-config';
 
@@ -49,6 +49,7 @@ export class GameService {
     }
   };
 
+  private render: Renderer2;
 
   private _dataSubscription: Subscription;
   private _updateNeededSubscription: Subscription;
@@ -60,12 +61,16 @@ export class GameService {
     private historyService: HistoryService,
     private genericDialogService: GenericDialogService,
     private http: HttpClient,
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    rendererFactory: RendererFactory2,
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
     this._commandsList$ = new BehaviorSubject(null);
     this._showStatus = new BehaviorSubject(null);
-    this.init();
+
+    this.render = rendererFactory.createRenderer(null, null);
+
+    this._init();
   }
 
 
@@ -73,7 +78,7 @@ export class GameService {
     return this._tgConfig;
   }
 
-  init() {
+  _init() {
 
     this._configService.config
       .pipe(distinctUntilChanged())
@@ -245,7 +250,26 @@ export class GameService {
 
       return cont.list;
     }
+  }
 
 
+  /** Font Size Adjustement */
+  
+  setOutputSize() {
+    let newSize = (this._tgConfig.layout.fontSize + 1 ) % font_size_options.length;
+    let old_class = font_size_options[this._tgConfig.layout.fontSize].class;
+    let new_class = font_size_options[newSize].class;
+
+    if(old_class) {
+      this.render.removeClass(document.body, old_class);
+      this.render.addClass(document.body, new_class);
+    }
+
+    // Save in Storage
+    this._configService.config =  { 
+      layout: {
+        fontSize: newSize
+      }
+    }
   }
 }

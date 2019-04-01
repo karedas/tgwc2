@@ -3,6 +3,7 @@ export interface TGConfig {
   soundVolume: number;
   news: boolean,
   layout: {
+    fontSize: number,
     extraOutput: boolean,
     characterPanel: boolean,
     zen: boolean,
@@ -10,10 +11,11 @@ export interface TGConfig {
 }
 
 export const tgConfig: TGConfig = {
-  musicVolume: 100,
-  soundVolume: 70,
+  musicVolume: 1,
+  soundVolume: 0.7,
   news: true,
   layout: {
+    fontSize: 2,
     extraOutput: true,
     characterPanel: true,
     zen: false

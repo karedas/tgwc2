@@ -13,7 +13,6 @@ import { GameService } from 'src/app/services/game.service';
 import { AudioService } from './audio/audio.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { WindowsModule } from './windows/windows.module';
-import { CommandsListComponent } from './windows/commands-list/commands-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import { CommandsListComponent } from './windows/commands-list/commands-list.com
     DashboardModule,
     RightSidebarModule,
     OutputModule,
-    WindowsModule,
+    WindowsModule
   ],
   exports: [
     ClientComponent,

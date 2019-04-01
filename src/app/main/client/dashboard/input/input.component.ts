@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener, OnDestroy, Renderer2, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, ViewEncapsulation, HostListener, OnDestroy, Renderer2, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -149,7 +149,9 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFontSizeChange(){}
+  onFontSizeChange(): void {
+    this.game.setOutputSize();
+  }
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);

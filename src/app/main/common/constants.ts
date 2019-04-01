@@ -68,30 +68,30 @@ export const hero_position = [
 export const font_size_options = [
   {
     name: 'Piccolissimo',
-    class: 'xs'
+    class: 'size-xs'
   },
   {
     name: 'Piccolo',
-    class: 's'
+    class: 'size-s'
   },
   {
     name: 'Medio',
-    class: 'm'
+    class: 'size-m'
   },
   {
     name: 'Grande',
-    class: 'l'
+    class: 'size-l'
   },
   {
     name: 'Grandissimo',
-    class: 'xl'
+    class: 'size-xl'
   },
   {
     name: 'Gigantesco',
-    class: 'xxl'
+    class: 'size-xxl'
   },
   {
     name: 'Enorme',
-    class: 'xxxl'
+    class: 'size-xxxl'
   }
 ];
