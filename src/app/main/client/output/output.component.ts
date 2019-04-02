@@ -30,6 +30,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('splitArea') splitArea: SplitComponent;
 
   lastRoom$: Observable<any>;
+  showExtraByViewport: boolean;
 
   private _baseText$: Observable<any>;
   private _roomBase$: Observable<any>;
@@ -73,18 +74,20 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
     /* Check login status and if is disconnect cleaning the output messages */
-    this.loginService.isLoggedIn.pipe(
-      takeUntil(this._unsubscribeAll)).subscribe((status) => {
+    this.loginService.isLoggedIn
+      .pipe(
+        takeUntil(this._unsubscribeAll))
+      .subscribe((status) => {
         if (status === false) {
           this.output = [];
         }
-      }
-      );
+      });
 
     // Listen Base Text Data
-    this._baseText$.pipe(
-      takeUntil(this._unsubscribeAll),
-      filter(text => text && text !== undefined))
+    this._baseText$
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        filter(text => text && text !== undefined))
       .subscribe(
         (base: string[]) => {
           const content = this.setContent('base', base[0]);
@@ -94,32 +97,32 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         },
       );
 
-    this._roomBase$.pipe(
-      takeUntil(this._unsubscribeAll),
-      filter(room => room && room !== undefined))
-      .subscribe(
-        (room: Room) => {
-          if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
-            this.lastRoomDescription = room.desc['base'];
-          }
-          this.typeDetail = 'room';
-          const content = this.setContent('room', room);
-          this.output.push(content);
-          this.endOutputStore();
-
-          if (this.game.client_update.room.version < room.ver) {
-            this.game.client_update.room.version = room.ver;
-            this.game.client_update.room.needed = false;
-          }
-
-          this.game.client_update.inContainer = false;
+    this._roomBase$
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        filter(room => room && room !== undefined))
+      .subscribe((room: Room) => {
+        if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
+          this.lastRoomDescription = room.desc['base'];
         }
-      );
+        this.typeDetail = 'room';
+        const content = this.setContent('room', room);
+        this.output.push(content);
+        this.endOutputStore();
+
+        if (this.game.client_update.room.version < room.ver) {
+          this.game.client_update.room.version = room.ver;
+          this.game.client_update.room.needed = false;
+        }
+
+        this.game.client_update.inContainer = false;
+      });
 
     /** Object or Person Detail */
-    this._objOrPerson$.pipe(
-      takeUntil(this._unsubscribeAll),
-      filter(elements => elements && elements !== undefined))
+    this._objOrPerson$
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        filter(elements => elements && elements !== undefined))
       .subscribe((elements: any) => {
         this.objPersDetail = elements;
         const content = this.setContent('objpersdetail', this.objPersDetail);
@@ -131,14 +134,15 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         this.game.client_update.inContainer = true;
       });
 
-    this._genericPage$.pipe(
-      takeUntil(this._unsubscribeAll),
-      filter(data => !!data)).subscribe(data => {
-        this.genericPage = data;
-        const content = this.setContent('genericpage', this.genericPage);
-        this.output.push(content);
-        this.endOutputStore();
-      });
+    this._genericPage$
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        filter(data => !!data)).subscribe(data => {
+          this.genericPage = data;
+          const content = this.setContent('genericpage', this.genericPage);
+          this.output.push(content);
+          this.endOutputStore();
+        });
   }
 
   ngAfterViewInit(): void {
@@ -178,11 +182,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setOutputSplit() {
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
-      // this.tgConfig.layout.extraOutput = false;
-      // this.store.dispatch(new ToggleExtraOutput(false));
+      this.showExtraByViewport = false;
     } else {
-      // this.tgConfig.layout.extraOutput = true;
-      // this.store.dispatch(new ToggleExtraOutput(true));
+      this.showExtraByViewport = true;
     }
   }
 

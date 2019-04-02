@@ -65,7 +65,7 @@ export class DataParser {
     return data;
   }
 
-  parseForDisplay(data: string) {
+  parseForDisplay(data: string): void {
     
     // reset Dispatcher
     this.dispatcher = {};
@@ -241,23 +241,19 @@ export class DataParser {
 
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
-      dtls = JSON.parse(dtls.slice(6, -1));
-      console.log('ROOOOOOOOOOOOOOOOOOOOOOOM');
-      this.dispatcher.room =  dtls;
+      this.dispatcher.room = JSON.parse(dtls.slice(6, -1));
       return '';
     });
 
     // Person details
     data = data.replace(/&!pers\{[\s\S]*?\}!/gm, (dtls) => {
-      const dtls_parse = JSON.parse(dtls.slice(6, -1));
-      this.store.dispatch(new DataActions.ObjAndPersAction(dtls_parse));
+      this.dispatcher.pers = JSON.parse(dtls.slice(6, -1));
       return '';
     });
 
     // Object details
     data = data.replace(/&!obj\{[\s\S]*?\}!/gm, (dtls) => {
-      const dtls_parse = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
-      this.store.dispatch(new DataActions.ObjAndPersAction(dtls_parse));
+      this.dispatcher.objpers = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
       return '';
     });
 
@@ -372,14 +368,13 @@ export class DataParser {
 
     // Is God
     data = data.replace(/&i/gm, () => {
-      this.store.dispatch(new GameActions.UpdateUI({ isGod: true }));
+      this.dispatcher.isgod = true;
       return '';
     });
 
     // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
-      const godInvLev = parseInt(inv.substr(2, 3), 10);
-      this.store.dispatch(new GameActions.UpdateUI({ invLevel: godInvLev }));
+      this.dispatcher.visibilLevel = parseInt(inv.substr(2, 3), 10);
       return '';
     });
 
@@ -391,23 +386,27 @@ export class DataParser {
       this.dispatcher['base'] = data;
     }
 
+
+    // Execute
     if(Object.keys(this.dispatcher).length > 0 ) {
       this.dispatchData();
     }
   }
 
+  // Emit data Stored in the dispatcher to show then in the right Output Order
   dispatchData() {
-    // Emit Data showing in right Output Order
-    console.log(`dispatching ---------------------->`, this.dispatcher);
-
-    for( let data in this.dispatcher) {
-      // TEMP TEST: 
-      if(data === 'base') { this.store.dispatch(new DataActions.IncomingData(this.dispatcher[data])) }
-      if(data === 'room') { this.store.dispatch(new DataActions.RoomAction(this.dispatcher[data])) }
-    }
-        // console.log(fnc);
-        // if(fnc[0] === 'room') this.store.dispatch(new DataActions.RoomAction(fnc[1]));
-      console.groupEnd();
+    // Output Messages
+    if( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
+    if( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
+    if( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
+    if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    // UI (dont need order) TODO:
+    if( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
+    if( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
+    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
   }
 
 
