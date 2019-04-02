@@ -8,6 +8,7 @@ export interface TGConfig {
     characterPanel: boolean,
     characterPanelTopPosition: boolean,
     zen: boolean,
+    list_column_mode: boolean
   }
 }
 
@@ -20,6 +21,7 @@ export const tgConfig: TGConfig = {
     extraOutput: true,
     characterPanel: true,
     characterPanelTopPosition: false,
-    zen: false
+    zen: false,
+    list_column_mode: true
   }
 }
