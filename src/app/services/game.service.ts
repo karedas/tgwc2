@@ -20,7 +20,7 @@ import { TGConfig } from '../main/client/client-config';
 export class GameService {
 
 
-  _tgConfig: TGConfig;
+  tgConfig: TGConfig;
 
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
@@ -75,7 +75,7 @@ export class GameService {
 
 
   get config(): TGConfig {
-    return this._tgConfig;
+    return this.tgConfig;
   }
 
   _init() {
@@ -84,7 +84,7 @@ export class GameService {
       .pipe(distinctUntilChanged())
       .subscribe((config: TGConfig) => 
         {
-          this._tgConfig = config;
+          this.tgConfig = config;
           console.log('gameservice config subscribe:', config)
         }
       );
@@ -150,13 +150,13 @@ export class GameService {
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.room.needed && this._configService && !this.client_update.inContainer) {
-        this.sendToServer('@agg');
-        this.client_update.room.needed = false;
-        this.client_update.lastDataTime = now;
-      } else if (this.client_update.inContainer && this.config.layout.extraOutput) {
-        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
-      }
+      // if (this.client_update.room.needed && this.tgConfig.layout.extraOutput && !this.client_update.inContainer) {
+      //   this.sendToServer('@agg');
+      //   this.client_update.room.needed = false;
+      //   this.client_update.lastDataTime = now;
+      // } else if (this.client_update.inContainer && this.config.layout.extraOutput) {
+      //   this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
+      // }
     }
   }
 
@@ -256,8 +256,8 @@ export class GameService {
   /** Font Size Adjustement */
   
   setOutputSize() {
-    let newSize = (this._tgConfig.layout.fontSize + 1 ) % font_size_options.length;
-    let old_class = font_size_options[this._tgConfig.layout.fontSize].class;
+    let newSize = (this.tgConfig.layout.fontSize + 1 ) % font_size_options.length;
+    let old_class = font_size_options[this.tgConfig.layout.fontSize].class;
     let new_class = font_size_options[newSize].class;
 
     if(old_class) {

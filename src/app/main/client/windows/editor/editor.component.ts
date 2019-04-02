@@ -7,7 +7,7 @@ import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { WindowsService } from '../windows.service';
-import { InputService } from '../../dashboard/input/input.service';
+import { InputService } from '../../input/input.service';
 
 @Component({
   selector: 'tg-editor',

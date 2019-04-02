@@ -6,6 +6,7 @@ export interface TGConfig {
     fontSize: number,
     extraOutput: boolean,
     characterPanel: boolean,
+    characterPanelTopPosition: boolean,
     zen: boolean,
   }
 }
@@ -18,6 +19,7 @@ export const tgConfig: TGConfig = {
     fontSize: 2,
     extraOutput: true,
     characterPanel: true,
+    characterPanelTopPosition: false,
     zen: false
   }
 }

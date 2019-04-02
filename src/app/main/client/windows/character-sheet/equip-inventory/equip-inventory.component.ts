@@ -6,8 +6,7 @@ import { getEquip, getInventory } from 'src/app/store/selectors';
 import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
-import { InputService } from '../../../dashboard/input/input.service';
-import { Server } from 'selenium-webdriver/safari';
+import { InputService } from '../../../input/input.service';
 
 @Component({
   selector: 'tg-equip-inventory',

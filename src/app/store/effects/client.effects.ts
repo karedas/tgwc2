@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
 import { Action, Store, select } from '@ngrx/store';
-import { tap, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/audio/audio.service';
 import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
-import { InputService } from 'src/app/main/client/dashboard/input/input.service';
-import { HeroAction, InfoCharacterAction } from '../actions/data.action';
 import { getInGameStatus } from '../selectors';
 import { ClientState } from '../state/client.state';
 

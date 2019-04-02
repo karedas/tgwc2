@@ -16,7 +16,6 @@ import { ConfigService } from 'src/app/services/config.service';
   selector: 'tg-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 
 export class InputComponent implements OnInit, OnDestroy {

@@ -13,6 +13,7 @@ import { GameService } from 'src/app/services/game.service';
 import { AudioService } from './audio/audio.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { WindowsModule } from './windows/windows.module';
+import { InputModule } from './input/input.module';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,13 @@ import { WindowsModule } from './windows/windows.module';
     AudioComponent,
   ],
   imports: [
-    SharedModule,
     ClientRoutingModule,
     DashboardModule,
     RightSidebarModule,
     OutputModule,
-    WindowsModule
+    WindowsModule,
+    InputModule,
+    SharedModule
   ],
   exports: [
     ClientComponent,

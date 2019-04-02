@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
+import { TGConfig } from '../client-config';
 
 @Component({
   selector: 'tg-client-container',
@@ -10,7 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class ClientContainerComponent implements OnInit, OnDestroy {
 
-  tgConfig: any;
+  tgConfig: TGConfig;
   private _unsubscribeAll: Subject<any>;
 
   constructor(

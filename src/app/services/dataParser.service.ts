@@ -15,7 +15,7 @@ import { Observable, Subject } from 'rxjs';
 export class DataParser {
 
 
-  private dispatcher: any = [];
+  private dispatcher: any = {};
 
   private netData = '';
 
@@ -66,8 +66,12 @@ export class DataParser {
   }
 
   parseForDisplay(data: string) {
+    
+    // reset Dispatcher
+    this.dispatcher = {};
 
     let pos: any;
+
 
     // Player is logged in
     data = data.replace(/&!logged"[^"]*"/gm, () => {
@@ -238,7 +242,8 @@ export class DataParser {
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
       dtls = JSON.parse(dtls.slice(6, -1));
-      this.store.dispatch(new DataActions.RoomAction(dtls));
+      console.log('ROOOOOOOOOOOOOOOOOOOOOOOM');
+      this.dispatcher.room =  dtls;
       return '';
     });
 
@@ -383,26 +388,30 @@ export class DataParser {
     if (data !== 'undefined' && data !== undefined && data !== '') {
       data = data.replace(/\n/gm, '<div class="breakline"></div>');
       data = data.replace(/<p><\/p>/g, '');
-      this.store.dispatch(new DataActions.IncomingData(data));
+      this.dispatcher['base'] = data;
     }
 
-    this.dispatchData();
+    if(Object.keys(this.dispatcher).length > 0 ) {
+      this.dispatchData();
+    }
   }
 
   dispatchData() {
     // Emit Data showing in right Output Order
-    this.dispatcher.forEach(fnc => {
-      console.log(fnc);
-      if (fnc === 'logged') this.store.dispatch(new GameActions.InGameAction());
-      if (fnc === 'news')  this.store.dispatch(new GameActions.NewsAction);
-    });
+    console.log(`dispatching ---------------------->`, this.dispatcher);
 
-    console.log('dispatcher data end');
-
+    for( let data in this.dispatcher) {
+      // TEMP TEST: 
+      if(data === 'base') { this.store.dispatch(new DataActions.IncomingData(this.dispatcher[data])) }
+      if(data === 'room') { this.store.dispatch(new DataActions.RoomAction(this.dispatcher[data])) }
+    }
+        // console.log(fnc);
+        // if(fnc[0] === 'room') this.store.dispatch(new DataActions.RoomAction(fnc[1]));
+      console.groupEnd();
   }
 
 
-  removeColors(data) {
+  removeColors(data: any) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
   }
 

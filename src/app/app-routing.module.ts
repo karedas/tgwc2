@@ -8,7 +8,7 @@ const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'webclient', 
-    loadChildren: './client/client.module#ClientModule',
+    loadChildren: './main/client/client.module#ClientModule',
     canLoad: [ AuthGuard ]
   },
   { path: '**', component: PageNotFoundComponent }

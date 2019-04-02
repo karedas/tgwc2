@@ -6,7 +6,7 @@
 
 :host {
   background: black;
-  margin-bottom: 3px;
+  order: 2;
 
   .tg-output-main {
     height: 100%;
@@ -16,6 +16,8 @@
   @include layout-bp(gt-md) {
     margin-bottom: 0;
   }
+  
+
 }
 
 .tg-output--history,
@@ -34,7 +36,6 @@
 
 .tg-output--extradetail {
   height: 100%;
-  padding: 0 0 8px 0;
 }
 
 tg-text {

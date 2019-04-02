@@ -4,6 +4,11 @@
 
 @import '~@angular/flex-layout/mq';
 
+
+:host {
+  order: 3;
+}
+
 .tg-input {
   position: relative;
   margin-left: 0;

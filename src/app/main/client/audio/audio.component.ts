@@ -31,12 +31,8 @@ export class AudioComponent implements OnInit, OnDestroy {
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
-        console.log(config.musicVolume, config.soundVolume);
         this.audioService.soundVolume = config.soundVolume;
         this.audioService.musicVolume = config.musicVolume;
-        // this.audioService.music.volume = config.musicVolume;
-        // this.audioService.sound.volume = config.soundVolume;
-        // console.log('SOUND:', this.audioService.music.volume, this.audioService.sound.volume);
       });
 
     this.music$.pipe(filter(state => !!state )).pipe(

@@ -49,7 +49,6 @@ export class ConfigService {
 
     // Set the config from the default config
     this._configSubject = new BehaviorSubject(_.cloneDeep(this._defaultConfig));
-    console.log(this._configSubject.getValue());
 
     if (configInStorage) {
 
