@@ -73,7 +73,8 @@ export class ShowStatusBoxAction implements Action {
 
 
 export type ClientActions
-  = DisconnectAction
+  = InGameAction
+  | DisconnectAction
   | ResetAction
   | UpdateUI
   | AudioAction

@@ -36,7 +36,9 @@ export class NavbarComponent implements OnInit {
       label: 'Client',
       items: [
         { label: 'Log di gioco', disabled: true },
-        { label: 'Preferenze', disabled: true },
+        { label: 'Preferenze', command: (onclick) => {
+          this.windowsService.openControlPanel();
+        }},
         {
           label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', separator: false, command: (onclick) => {
             this.game.disconnectGame();

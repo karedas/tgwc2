@@ -176,6 +176,25 @@ export class WindowsService {
     return ref;
   }
 
+  openControlPanel(): any{ 
+    const ref = this.genericDialogService.open('controlPanel',
+      <DialogConfiguration> {
+        draggable: true,
+        resizable: false,
+        header: 'Impostazioni Client',
+        closeOnEscape: true,
+        modal: true,
+        style: {
+          'width': '650px',
+          'height': 'auto',
+        },
+        contentStyle: {
+          'height': '100%'
+        }
+      });
+  }
+
+
   closeGenericDialog(dialogID: string) {
     this.genericDialogService.close(dialogID);
   }

@@ -17,6 +17,7 @@ import { InfoComponent } from './character-sheet/info/info.component';
 import { EquipInventoryComponent } from './character-sheet/equip-inventory/equip-inventory.component';
 import { SkillsComponent } from './character-sheet/skills/skills.component';
 import { BookComponent } from './book/book.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BookComponent } from './book/book.component';
     InfoComponent,
     EquipInventoryComponent,
     SkillsComponent,
-    BookComponent
+    BookComponent,
+    ControlPanelComponent
   ],
   imports: [
     DialogGenericModule,
@@ -45,8 +47,9 @@ import { BookComponent } from './book/book.component';
     CommandsListComponent,
     GenericTableComponent,
     WorkslistComponent,
+    ControlPanelComponent,
     CharacterSheetComponent,
-    BookComponent
+    BookComponent,
   ],
   entryComponents: [
     NoFeatureComponent,

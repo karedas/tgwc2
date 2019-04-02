@@ -26,6 +26,9 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PipesModule } from '../pipes/pipes.module';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { HstatComponent } from '../main/common/hstat/hstat.component';
+import { AudioService } from '../main/client/audio/audio.service';
+import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { ConfigService } from '../services/config.service';
 
 
 @NgModule({
@@ -54,13 +57,7 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
     ButtonModule,
     // ContextMenuModule,
   ],
-  providers: [
-    CookieService,
-    PreloaderService,
-    LoginService,
-    DynamicDialogService,
-    GenericDialogService,
-  ],
+
   exports: [
     CommonModule,
     FlexLayoutModule,
@@ -83,9 +80,18 @@ import { HstatComponent } from '../main/common/hstat/hstat.component';
   ],
 })
 export class SharedModule {
-  static forRoot() {
+  static forRoot(): ModuleWithProviders{
     return {
       ngModule: SharedModule,
+      providers: [
+        ConfigService,
+        CookieService,
+        PreloaderService,
+        LoginService,
+        DynamicDialogService,
+        GenericDialogService,
+        AudioService,
+      ]
     };
   }
 

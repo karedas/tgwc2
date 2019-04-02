@@ -15,7 +15,6 @@ export class ConfigService {
   constructor(
     @Inject(TG_CONFIG) private _config
   ) {
-
     //set the default config from the user provided config (from forRoot)
     this._defaultConfig = _config;
 

@@ -8,6 +8,7 @@ import { DialogConfiguration } from './model/dialog.interface';
 export class GenericDialogService {
 
   private modals: any[] = [];
+  
 
   add(modal: any) {
       // add modal to array of active modals

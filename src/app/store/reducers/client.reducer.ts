@@ -8,9 +8,9 @@ export function reducer(
 
   switch (action.type) {
 
-    // case ClientEventType.INGAME: {
-    //   return Object.assign({}, state, { inGame: !state.inGame });
-    // }
+    case ClientEventType.INGAME: {
+      return Object.assign({}, state, { inGame: !state.inGame });
+    }
 
     case ClientEventType.UI: {
       return Object.assign({}, state, action.payload );

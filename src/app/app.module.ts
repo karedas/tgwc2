@@ -27,6 +27,7 @@ import { DataEffects } from './store/effects/data.effects';
 import { PageNotFoundComponent } from './main/page-not-found/page-not-found.component';
 import { WindowsModule } from './main/client/windows/windows.module';
 import { WindowsService } from './main/client/windows/windows.service';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { WindowsService } from './main/client/windows/windows.service';
 
   imports: [
 
+    SharedModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

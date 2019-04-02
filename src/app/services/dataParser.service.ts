@@ -400,13 +400,9 @@ export class DataParser {
     if( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
     if( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
     if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
-    // UI (dont need order) TODO:
+    // TODO UI (dont need order) :
     if( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
     if( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
-    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
-    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
-    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
-    // if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
   }
 
 

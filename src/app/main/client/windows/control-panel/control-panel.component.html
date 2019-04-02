@@ -1,0 +1,44 @@
+<tg-dialog [id]="'controlPanel'">
+  <div class="tg-control-panel">
+    <div class="b-ironlight-mini b-ironlight-thin tg-box">
+      <div class="tg-dialog-content-nopadding tg-shadow-inset">
+        <div fxFlex="0 0 25%">
+          Generale
+        </div>
+        <div fxFlex="0 1 100%" style="height: 100%" fxLayout="row wrap">
+
+          <div  fxFlex="1 0 50%">Volume Musica:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.musicVolume}}</div>
+
+          <div  fxFlex="1 0 50%">Volume Suoni:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.soundVolume}}</div>
+
+          <div  fxFlex="1 0 50%">Non mostrare le news al login:</div>
+          <div fxFlex="1 0 auto">[checkbox={{tgConfig.news}}]</div>
+
+          <div  fxFlex="1 0 50%">Dimensione Font:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.layout.fontSize}}</div>
+
+          <div  fxFlex="1 0 50%">Visuale gioco a due colonne:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.layout.extraOutput}}</div>
+
+          <div  fxFlex="1 0 50%">Pannello personaggio:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.layout.characterPanel}}</div>
+          
+          <div  fxFlex="1 0 50%">Pannello personaggio in alto:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.layout.characterPanelTopPosition}}</div>
+
+          <div  fxFlex="1 0 50%">Visuale Zen:</div>
+          <div fxFlex="1 0 auto">{{tgConfig.layout.zen}}</div>
+
+        </div>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+      </div>
+    </div>
+  </div>
+</tg-dialog>

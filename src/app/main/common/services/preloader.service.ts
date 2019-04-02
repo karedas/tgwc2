@@ -15,7 +15,6 @@ export class PreloaderService {
   public percentage$: BehaviorSubject<any> =  new BehaviorSubject<any>(0);
 
   constructor() {
-
     this.status$ = new BehaviorSubject<boolean>(false);
 
     this.totalAssets = AssetsList.length;
