@@ -4,6 +4,9 @@ import { socketEvent } from '../models/socketEvent.enum';
 import { environment } from '../../environments/environment';
 
 import * as io from 'socket.io-client';
+import { Store } from '@ngrx/store';
+import { ClientState } from '../store/state/client.state';
+import { DisconnectAction } from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +20,7 @@ export class SocketService {
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
+    private store: Store<ClientState>
     ) {
     this.connect();
   }
@@ -58,6 +62,9 @@ export class SocketService {
   }
 
   public disconnect(): void {
+    
+    this.store.dispatch(new DisconnectAction());
+    
     this.connected$.next(false);
     if (!this.socket.isConnected) {
       this.socket.connect();

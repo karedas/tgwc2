@@ -27,6 +27,7 @@ export class ClientEffects {
   onDisconnect: Observable<Action> = this.actions$.pipe(
     ofType(ClientEventType.DISCONNECT),
     tap((a) => {
+      console.log('Disconnect!');
       if (this.router.url === '/webclient')  {
         this.loginService.logout();
         this.audioService.pauseAudio();

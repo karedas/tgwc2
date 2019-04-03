@@ -31,6 +31,9 @@ export class WindowsService {
   }
 
   openNews() {
+
+    this.render.addClass(document.body, 'overlay-dark')
+    
     const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
       <DynamicDialogConfig>{
         header: 'Notizie',
