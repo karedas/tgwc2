@@ -15,18 +15,20 @@
       </div>
     </ng-container>
     
-    <div class="tg-btn-font"
-      pTooltip="Aumenta / Diminuisci Testo" tooltipPosition="top" showDelay="8 00" hideDelay="100">
+    <div class="tg-btn-font">
       <button
+        matTooltip="Aumenta / Diminuisci Testo"
+        [matTooltipPosition]="'above'"
         type="button"
         class="tg-fnt-button"
         (mousedown)="onFontSizeChange()">
         <fa-icon [icon]="faFont"></fa-icon>
       </button>
     </div>
-    <div class="tg-btn-extraboard" fxHide fxShow.gt-sm
-      pTooltip="Apri/Chiudi Dettagli" tooltipPosition="top" showDelay="8 00" hideDelay="100">
+    <div class="tg-btn-extraboard" fxHide fxShow.gt-sm>
       <button
+        matTooltip="Apri/Chiudi Dettagli"
+        [matTooltipPosition]="'above'"
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleExtraOutput($event)"
@@ -34,9 +36,10 @@
         <fa-icon [icon]="facolumns"></fa-icon>
       </button>
     </div>
-    <div class="tg-btn-dashboard"
-      pTooltip="Apri/Chiudi Dashboard" tooltipPosition="top" showDelay="800" hideDelay="100">
+    <div class="tg-btn-dashboard">
       <button
+        matTooltip="Apri/Chiudi Dashboard"
+        [matTooltipPosition]="'above'"
         type="button" 
         class="tg-fnt-button"
         (mousedown)="toggleCharacterPanel($event)"
@@ -44,9 +47,10 @@
         <fa-icon [icon]="faSolarPanel"></fa-icon>
       </button>
     </div>
-    <div class="tg-btn-zen" fxHide fxShow.gt-xs
-      pTooltip="Modalità Zen" tooltipPosition="top" showDelay="800" hideDelay="100">
+    <div class="tg-btn-zen" fxHide fxShow.gt-xs>
       <button 
+        matTooltip="Modalità Zen"
+        [matTooltipPosition]="'above'"
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleZen($event)"

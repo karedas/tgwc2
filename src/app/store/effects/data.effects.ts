@@ -4,6 +4,7 @@ import { DataEvenType, HeroAction } from '../actions/data.action';
 import { switchMap, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
+import { DialogV2Service } from 'src/app/main/common/dialog-v2/dialog-v2.service';
 
 export interface PayloadActionData {
   type: string;
@@ -15,6 +16,7 @@ export interface PayloadActionData {
 export class DataEffects {
   constructor(
     private actions$: Actions,
+    private dialogV2Service: DialogV2Service
   ) { }
 
 
@@ -26,6 +28,14 @@ export class DataEffects {
       return [
         new HeroAction({skills: res.payload})
       ];
+    })
+  );
+
+  @Effect({ dispatch: false })
+  openEditor$: Observable<Action> = this.actions$.pipe(
+    ofType<PayloadActionData>(DataEvenType.EDITOR),
+    tap((data) => {
+      this.dialogV2Service.openEditor(data)
     })
   );
 

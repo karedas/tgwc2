@@ -31,7 +31,7 @@ export class ClientEffects {
       if (this.router.url === '/webclient')  {
         this.loginService.logout();
         this.audioService.pauseAudio();
-        // this.windowsService.openSmartLogin();
+        this.dialogV2Service.openSmartLogin();
         this.game.reset();
       }}
     ));
@@ -62,8 +62,11 @@ export class ClientEffects {
     ofType(ClientEventType.NEWS),
     withLatestFrom(this.store.pipe(select(getInGameStatus))),
     map(([action, status]) => {
-      if( this.game.config.news ) {
+      if( !this.game.config.news ) {
         this.dialogV2Service.openNews();
+      }
+      else {
+        this.game.sendToServer('');
       }
       return status;
     }),

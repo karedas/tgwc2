@@ -5,9 +5,9 @@ import { Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
-import { IEditor } from 'src/app/models/data/editor.model';
-import { WindowsService } from '../windows.service';
 import { InputService } from '../../input/input.service';
+import { IEditor } from 'src/app/models/data/editor.model';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tg-editor',
@@ -30,14 +30,12 @@ export class EditorComponent implements OnInit, OnDestroy {
   private maxLineLength = 80;
   private _unsubscribeAll: Subject<any>;
 
-  private dialogRef: any;
 
   constructor(
     private store: Store<DataState>,
-    private windowsService: WindowsService,
     private inputService: InputService,
+    public dialog: MatDialogRef<EditorComponent>,
     private gameService: GameService) {
-
     this._unsubscribeAll = new Subject<any>();
 
     this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
@@ -52,20 +50,14 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.description = editorState.description.replace(/\n/gm, ' ');
           this.dialogTitle = editorState.title;
           this.maxChars = editorState.maxChars;
+          
           this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
-          this.dialogRef = this.openEditor();
         }
       }
     );
 
   }
 
-  private openEditor() {
-    this.totalChars = this.maxChars - this.description.length;
-    setTimeout(() => {
-      this.windowsService.openEditor(this.dialogID, this.dialogTitle);
-    });
-  }
 
   onSave(descr: string) {
     const text = descr.split('\n');
@@ -90,13 +82,13 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
 
     this.gameService.sendToServer('##ce_save');
-    this.windowsService.closeGenericDialog(this.dialogID);
+    this.dialog.close();
     this.inputService.focus();
   }
 
   onCancel(event: any) {
     this.gameService.sendToServer('##ce_abort');
-    this.windowsService.closeGenericDialog(this.dialogID);
+    this.dialog.close();
     this.inputService.focus();
   }
 

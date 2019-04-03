@@ -31,15 +31,15 @@
             <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
               <!-- Conva -->
               <div *ngIf="hero.conva === '1'" class="status-conva" fxLayout
-                pTooltip="Sei <b class='tg-yellow'>convalescente!</b>" tooltipPosition="top" showDelay="300"
-                hideDelay="100" escape="false" [escape]="false">
+                matTooltip="Sei <b class='tg-yellow'>convalescente!</b>" [matTooltipPosition]="'above'">
                 <div class="status-icon-box">
                   <i></i>
                 </div>
               </div>
               <!-- Position -->
-              <div pTooltip="Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>" tooltipPosition="top"
-                showDelay="300" hideDelay="100" [escape]="false" *ngIf="hero.position" class="status-position" fxLayout
+              <div 
+              matTooltip="Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>" [matTooltipPosition]="'above'"
+                *ngIf="hero.position" class="status-position" fxLayout
                 [ngClass]="{
                   'pos-0': (hero.position == '0'),
                   'pos-2': (hero.position == '2'),
@@ -54,8 +54,8 @@
                 <span>{{ hero_pos[hero.position] }}</span>
               </div>
               <!-- Speed -->
-              <div pTooltip="Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>" tooltipPosition="top"
-                showDelay="300" hideDelay="100" [escape]="false" *ngIf="hero.walk; let walk;" class="status-walk"
+              <div matTooltip="Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>" [matTooltipPosition]="'above'"
+                showDelay="300" *ngIf="hero.walk; let walk;" class="status-walk"
                 fxLayout [ngClass]="{
                   'walk-0': (walk == 'passeggio'),
                   'walk-1': (walk == 'camminata'),
@@ -70,8 +70,8 @@
               </div>
               <ng-container *ngIf="hero.combat; let combatSet">
                 <!-- Combat: Difesa -->
-                <div pTooltip="Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>" tooltipPosition="top" showDelay="300"
-                  hideDelay="100" [escape]="false" class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
+                <div matTooltip="Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>" [matTooltipPosition]="'above'"
+                  class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
                     'mod-par-a': (combatSet?.mod == 'deflettere'),
                     'mod-par-s': (combatSet?.mod == 'parare'),
                     'mod-sch': (combatSet?.mod == 'schivare')
@@ -82,8 +82,8 @@
                   <span>{{combatSet.mod | slice:0:3}}</span>
                 </div>
                 <!-- Combat: Atteggiamento -->
-                <div pTooltip="Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>" tooltipPosition="top"
-                  showDelay="300" hideDelay="100" [escape]="false" class="status-combat-attegg" fxLayout>
+                <div matTooltip="Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>" [matTooltipPosition]="'above'"
+                  class="status-combat-attegg" fxLayout>
                   <div class="status-icon-box">
                     <i></i>
                   </div>
@@ -92,8 +92,7 @@
               </ng-container>
               <!-- Money -->
               <div class="status-money infostatus-block tg-yellow" fxLayout
-                pTooltip="I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>" tooltipPosition="top"
-                showDelay="300" hideDelay="100" [escape]="false">
+                matTooltip="I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>" [matTooltipPosition]="'above'">
                 <div class="status-icon-box">
                   <i></i>
                 </div>
@@ -104,24 +103,24 @@
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" pTooltip="Salute" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin lft" matTooltip="Salute" [matTooltipPosition]="'above'">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.hit }}</i> / 100</span>
                 <span class="red barC healthbar" [style.width.%]="hero.status?.hit"></span>
               </div>
-              <div class="barcont barthin" pTooltip="Fiato" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin" matTooltip="Fiato" [matTooltipPosition]="'above'">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.move }}</i> / 100</span>
                 <span class="green barC movebar" [style.width.%]="hero.status?.move"></span>
               </div>
             </div>
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" pTooltip="Fame" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin lft" matTooltip="Fame" [matTooltipPosition]="'above'">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.food }}</i> / 100</span>
                 <span class="orange barC hungrybar" [style.width.%]="hero.status?.food"></span>
               </div>
-              <div class="barcont barthin" pTooltip="Sete" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin" matTooltip="Sete" [matTooltipPosition]="'above'">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.drink}}</i> / 100</span>
                 <span class="blue barC thirstbar" [style.width.%]="hero.status?.drink"></span>

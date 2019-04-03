@@ -56,14 +56,6 @@ import { MatButtonModule } from '@angular/material';
     NgScrollbarModule,
     PipesModule,
 
-    /* Prime NG Modules (TODO: Moves in another file) */
-    // DynamicDialogModule,
-    // CheckboxModule,
-    // TableModule,
-    // MenubarModule,
-    // TooltipModule,
-    // ButtonModule,
-
     /** Angular Material Modules */
     MatCheckboxModule,
     MatButtonModule,
@@ -76,13 +68,7 @@ import { MatButtonModule } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-    // DynamicDialogModule,
-    // FontAwesomeModule,
-    // CheckboxModule,
-    // MenubarModule,
-    // TooltipModule,
-    // ButtonModule,
-    // TableModule,
+    FontAwesomeModule,
 
     /** Angular Material  */
     MatCheckboxModule,
