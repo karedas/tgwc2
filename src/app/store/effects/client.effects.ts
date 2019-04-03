@@ -5,14 +5,14 @@ import { ClientEventType } from '../actions/client.action';
 import { Action, Store, select } from '@ngrx/store';
 import { map, withLatestFrom, tap, switchMap, filter } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/audio/audio.service';
-import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
 import { Router } from '@angular/router';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { getInGameStatus } from '../selectors';
 import { ClientState } from '../state/client.state';
 import { InputService } from 'src/app/main/client/input/input.service';
 import { InfoCharacterAction, HeroAction } from '../actions/data.action';
+import { DialogV2Service } from 'src/app/main/common/dialog-v2/dialog-v2.service';
 
 
 export interface PayloadAction {
@@ -31,7 +31,7 @@ export class ClientEffects {
       if (this.router.url === '/webclient')  {
         this.loginService.logout();
         this.audioService.pauseAudio();
-        this.windowsService.openSmartLogin();
+        // this.windowsService.openSmartLogin();
         this.game.reset();
       }}
     ));
@@ -43,7 +43,6 @@ export class ClientEffects {
       this.inputService.focus();
     })
   );
-
 
   
   // @Effect({ dispatch: false })
@@ -64,7 +63,7 @@ export class ClientEffects {
     withLatestFrom(this.store.pipe(select(getInGameStatus))),
     map(([action, status]) => {
       if( this.game.config.news ) {
-        this.windowsService.openNews();
+        this.dialogV2Service.openNews();
       }
       return status;
     }),
@@ -83,7 +82,7 @@ export class ClientEffects {
     tap(cmds => {
       this.game.setCommands(cmds);
       setTimeout(() => {
-        this.windowsService.openCommandsList();
+        // this.windowsService.openCommandsList();
       });
     })
   );
@@ -92,7 +91,7 @@ export class ClientEffects {
   showCharacterSheet$ = this.actions$.pipe(
     ofType<PayloadAction>(ClientEventType.SHOWCHARACTERSHEET),
     switchMap((res) => {
-      this.windowsService.openCharacterSheet(res.payload[1]);
+      // this.windowsService.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
           new InfoCharacterAction(),
@@ -125,7 +124,7 @@ export class ClientEffects {
     private actions$: Actions,
     private audioService: AudioService,
     private loginService: LoginService,
-    private windowsService: WindowsService,
+    private dialogV2Service: DialogV2Service,
     private inputService: InputService,
     private router: Router,
     // private inputService: InputService,

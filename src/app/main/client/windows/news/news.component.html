@@ -48,8 +48,7 @@
             <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
               <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
               <div class="input-checkbox">
-                <p-checkbox [(ngModel)]="dontShowNextTime" label="Non mostrare piu' questa notizia" binary="true"
-                  autofocus></p-checkbox>
+                  <mat-checkbox (change)="dontShowNextTime = !dontShowNextTime" color="accent">Non mostrare piu' questa notizia</mat-checkbox>
               </div>
             </div>
           </div>

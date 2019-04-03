@@ -1,17 +1,16 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';
-import { DynamicDialogRef } from 'primeng/api';
-import { Observable } from 'rxjs';
 import { ConfigService } from 'src/app/services/config.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'tg-welcome-news',
-  templateUrl: './welcome-news.component.html',
-  styleUrls: ['./welcome-news.component.scss'],
+  selector: 'tg-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.scss'],
 })
-export class WelcomeNewsComponent  implements AfterViewInit {
+export class NewsComponent  implements AfterViewInit {
 
 
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
@@ -20,7 +19,7 @@ export class WelcomeNewsComponent  implements AfterViewInit {
 
   constructor(
     private game: GameService,
-    private ref: DynamicDialogRef,
+    private dialogRef: MatDialogRef<NewsComponent>,
     private _configService: ConfigService
   ) {
   }
@@ -33,7 +32,7 @@ export class WelcomeNewsComponent  implements AfterViewInit {
     if (this.dontShowNextTime) {
       this._configService.config = { news: true};
     }
-    this.ref.close();
+    this.dialogRef.close();
     this.game.sendToServer('');
   }
 

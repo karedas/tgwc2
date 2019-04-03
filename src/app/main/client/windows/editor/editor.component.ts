@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ViewChildren } fro
 import { Observable, Subject } from 'rxjs';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { IEditor } from 'src/app/models/data/editor.model';

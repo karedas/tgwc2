@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { Observable, Subject } from 'rxjs';
 import { IHero } from 'src/app/models/data/hero.model';
 import { select, Store } from '@ngrx/store';

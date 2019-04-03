@@ -7,7 +7,7 @@ import { NgScrollbar } from 'ngx-scrollbar';
 // import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, Subject } from 'rxjs';
 import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { Room } from 'src/app/models/data/room.model';
 import { SplitComponent } from 'angular-split';
 import { LoginService } from '../../authentication/services/login.service';

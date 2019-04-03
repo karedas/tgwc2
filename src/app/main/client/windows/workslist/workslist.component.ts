@@ -5,7 +5,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { getWorksList } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/models/data/workslist.model';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { WindowsService } from '../windows.service';
 import { Table } from 'primeng/table';
 

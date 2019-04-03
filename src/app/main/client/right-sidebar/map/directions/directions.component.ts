@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getDoors, getUserLevel, getInvisibilityLevel } from 'src/app/store/selectors';

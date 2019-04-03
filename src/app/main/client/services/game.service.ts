@@ -1,17 +1,16 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { SocketService } from './socket.service';
-import { socketEvent } from '../models/socketEvent.enum';
-import { DataParser } from './dataParser.service';
+import { SocketService } from '../../../services/socket.service';
+import { socketEvent } from '../../../models/socketEvent.enum';
+import { DataParser } from '../../../services/dataParser.service';
 import { HistoryService } from './history.service';
 import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
-import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { switchMap, distinctUntilChanged } from 'rxjs/operators';
 
 import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/common/constants';
-import { ConfigService } from './config.service';
-import { TGConfig } from '../main/client/client-config';
+import { ConfigService } from '../../../services/config.service';
+import { TGConfig } from '../client-config';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +58,6 @@ export class GameService {
     private socketService: SocketService,
     private dataParserService: DataParser,
     private historyService: HistoryService,
-    private genericDialogService: GenericDialogService,
     private http: HttpClient,
     private _configService: ConfigService,
     rendererFactory: RendererFactory2,
@@ -139,16 +137,16 @@ export class GameService {
 
     if (now > this.client_update.lastDataTime) {
 
-      if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.invOpen) {
-        this.sendToServer('@inv');
-        this.client_update.inventory.needed = false;
-        this.client_update.lastDataTime = now;
-      }
+      // if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.invOpen) {
+      //   this.sendToServer('@inv');
+      //   this.client_update.inventory.needed = false;
+      //   this.client_update.lastDataTime = now;
+      // }
 
-      if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.equipOpen) {
-        this.sendToServer('@equip');
-        this.client_update.lastDataTime = now;
-      }
+      // if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.equipOpen) {
+      //   this.sendToServer('@equip');
+      //   this.client_update.lastDataTime = now;
+      // }
 
       // if (this.client_update.room.needed && this.tgConfig.layout.extraOutput && !this.client_update.inContainer) {
       //   this.sendToServer('@agg');

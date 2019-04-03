@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { DataEvenType, HeroAction } from '../actions/data.action';
 import { switchMap, tap } from 'rxjs/operators';
-import { WindowsService } from 'src/app/main/client/windows/windows.service';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 
@@ -16,7 +15,6 @@ export interface PayloadActionData {
 export class DataEffects {
   constructor(
     private actions$: Actions,
-    private windowsService: WindowsService,
   ) { }
 
 
@@ -24,7 +22,7 @@ export class DataEffects {
   skillsRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SKILLS),
     switchMap((res) => {
-      this.windowsService.openCharacterSheet('skills');
+      // this.windowsService.openCharacterSheet('skills');
       return [
         new HeroAction({skills: res.payload})
       ];
@@ -35,7 +33,7 @@ export class DataEffects {
   equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
     switchMap((res) => {
-        this.windowsService.openCharacterSheet('equip');
+        // this.windowsService.openCharacterSheet('equip');
         return [
           new HeroAction({equipment: res.payload})
         ];
@@ -46,7 +44,7 @@ export class DataEffects {
   inventoryRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.INVENTORY),
     switchMap((res) => {
-        this.windowsService.openCharacterSheet('inventory');
+        // this.windowsService.openCharacterSheet('inventory');
         return [
           new HeroAction({inventory: res.payload})
         ];

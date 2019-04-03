@@ -1,6 +1,5 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { DialogService as DynamicDialogService, DynamicDialogConfig } from 'primeng/api';
-import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
@@ -30,28 +29,28 @@ export class WindowsService {
     this.render = rendererFactory.createRenderer(null, null);
   }
 
-  openNews() {
+  // openNews() {
 
-    this.render.addClass(document.body, 'overlay-dark')
+  //   this.render.addClass(document.body, 'overlay-dark')
     
-    const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
-      <DynamicDialogConfig>{
-        header: 'Notizie',
-        styleClass: 'op-100',
-        closable: false,
-        width: '750px',
-        height: '600px',
-        style: { 'max-width': '100%', 'max-height': '100%' },
-        contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
-      });
+  //   const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
+  //     <DynamicDialogConfig>{
+  //       header: 'Notizie',
+  //       styleClass: 'op-100',
+  //       closable: false,
+  //       width: '750px',
+  //       height: '600px',
+  //       style: { 'max-width': '100%', 'max-height': '100%' },
+  //       contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
+  //     });
 
-    ref.onClose.subscribe(
-      () => this.render.removeClass(document.body, 'overlay-dark')
-    );
+  //   ref.onClose.subscribe(
+  //     () => this.render.removeClass(document.body, 'overlay-dark')
+  //   );
 
-    this.dd.set(ref, 'welcomenews');
+  //   this.dd.set(ref, 'welcomenews');
 
-  }
+  // }
 
   openSmartLogin() {
     this.closeAllDialogs();

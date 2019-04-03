@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 export const loginEventName = {
   READY: 'ready',

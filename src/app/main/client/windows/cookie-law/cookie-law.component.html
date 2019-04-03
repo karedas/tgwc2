@@ -14,10 +14,12 @@
             <b class="cookie-lastalert">Proseguendo nell'accesso si acconsente all'uso dei cookie.</b>
           </div>
           <div class="custom-checkbox">
-            <p-checkbox [(ngModel)]="showButton" binary="true" label="Ho letto e accetto"></p-checkbox>
+            <!-- <p-checkbox [(ngModel)]="showButton" binary="true" label="Ho letto e accetto"></p-checkbox> -->
+            <mat-checkbox (change)="showButton = !showButton">Ho letto e accetto</mat-checkbox>
           </div>
           <div [style.visibility]="showButton ? 'visible' : 'hidden'">
-            <button class="tg-btn btn-default tg-btn-cookieconsent" (click)="onContinue()">Continua</button>
+            <!-- <button class="tg-btn btn-default tg-btn-cookieconsent" (click)="onContinue()">Continua</button> -->
+            <button mat-raised-button (click)="onContinue()" color="accent">Continua</button>
           </div>
         </div>
       </div>

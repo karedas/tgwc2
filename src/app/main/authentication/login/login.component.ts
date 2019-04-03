@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';
 import { SocketService } from 'src/app/services/socket.service';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
 
 @Component({

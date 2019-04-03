@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({

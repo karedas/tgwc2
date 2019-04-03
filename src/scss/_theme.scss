@@ -1,0 +1,27 @@
+
+@import '~@angular/material/theming';
+
+$tg-theme-primary: mat-palette($mat-yellow);
+$tg-theme-accent : mat-palette($mat-amber, A700, A100, A400);
+$tg-theme-warn   : mat-palette($mat-red);
+
+$tg-theme: mat-light-theme(
+    $tg-theme-primary,
+    $tg-theme-accent,
+    $tg-theme-warn
+);
+
+@include mat-core();
+@include angular-material-theme($tg-theme);
+
+
+// Add this to your global stylesheet after your theme setup
+.tg-app .mat-dialog-container {
+  padding: 0;
+  background: transparent;
+  border-radius: 8px;
+}
+
+.tg-app .mat-raised-button {
+  line-height: 30px;
+}

@@ -6,7 +6,7 @@ import { Subject, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/models/data/hero.model';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 

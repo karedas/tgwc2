@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, delay } from 'rxjs/operators';
-import { PreloaderService } from '../common/services/preloader.service';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
+import { SplashScreenService } from './splashscreen.service';
 
 @Component({
   selector: 'tg-splashscreen',
@@ -22,7 +22,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   
   constructor(
     private _animationBuilder: AnimationBuilder,
-    private preloader: PreloaderService,
+    private splashScreenService: SplashScreenService,
     @Inject(DOCUMENT) private _document: any
     ) {
       this.splashScreenEl = this._document.body.querySelector('#splashscreen');
@@ -31,13 +31,13 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.preloader.percentage.pipe(
+    this.splashScreenService.percentage.pipe(
       takeUntil(this._unsubscribeAll)).subscribe(amount => {
         this.preloadPerc = amount;
       });
 
 
-    this.preloader.status$
+    this.splashScreenService.status$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(status => {
         if (status === true) {

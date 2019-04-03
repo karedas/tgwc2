@@ -1,3 +1,6 @@
+@import 'theme';
+
+
 @import 'core';
 @import 'colors';
 /* Elements */
@@ -9,5 +12,7 @@
 /*various */
 @import 'elements/as-split';
 @import 'elements/ng_scrollbar';
-@import 'elements/primeng-custom';
+
+//PrimeNG Custom
+// @import 'elements/primeng-custom';
 

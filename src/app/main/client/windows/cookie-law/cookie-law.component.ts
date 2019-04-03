@@ -1,5 +1,5 @@
 import { Component , Output, EventEmitter } from '@angular/core';
-import { DynamicDialogRef } from 'primeng/api';
+import { MatDialogRef } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -12,14 +12,16 @@ export class CookieLawComponent {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
 
-  public readonly dialogID: string = 'cookielaw';
   showButton = false;
 
-  constructor(private ref: DynamicDialogRef, private cookieService: CookieService) {}
+  constructor(
+    private dialogRef: MatDialogRef<CookieLawComponent>,
+    private cookieService: CookieService
+    ) {}
 
 
   onContinue() {
-    this.ref.close(true);
     this.cookieService.set('tgCookieLaw', '1');
+    this.dialogRef.close();
   }
 }

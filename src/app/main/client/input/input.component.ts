@@ -7,8 +7,8 @@ import { faColumns, faSolarPanel, faBullseye, faFont } from '@fortawesome/free-s
 import { State } from 'src/app/store';
 import { getHero } from 'src/app/store/selectors';
 
-import { HistoryService } from 'src/app/services/history.service';
-import { GameService } from 'src/app/services/game.service';
+import { HistoryService } from 'src/app/main/client/services/history.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from './input.service';
 import { ConfigService } from 'src/app/services/config.service';
 

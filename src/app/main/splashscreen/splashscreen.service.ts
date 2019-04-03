@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PreloaderService {
+export class SplashScreenService {
 
   private images: HTMLImageElement[] = [];
   private loadedImages = 0;

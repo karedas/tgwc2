@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-extraboard',

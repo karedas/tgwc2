@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -25,9 +26,10 @@ import { baseReducer, clearState } from './store';
 import { ClientEffects } from './store/effects/client.effects';
 import { DataEffects } from './store/effects/data.effects';
 import { PageNotFoundComponent } from './main/page-not-found/page-not-found.component';
-import { WindowsModule } from './main/client/windows/windows.module';
-import { WindowsService } from './main/client/windows/windows.service';
 import { SharedModule } from './shared/shared.module';
+
+import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
+import 'hammerjs';
 
 
 @NgModule({
@@ -60,17 +62,23 @@ import { SharedModule } from './shared/shared.module';
       serverLogLevel: NgxLoggerLevel.ERROR,
     }),
 
-    WindowsModule,
+    /**
+     * MATERIAL DIALOG
+     */
+    DialogV2Module,
+    /** --------------------- */
+    // WindowsModule,
     MainModule,
     AppRoutingModule,
   ],
   exports: [
-    WindowsModule
+    // WindowsModule
   ],
   providers: [
     SocketService,
     AppPreloadingStrategy,
     GoogleAnalyticsService,
+
   ],
   bootstrap: [AppComponent]
 })

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
 import { CommandsListComponent } from './commands-list/commands-list.component';
 import { DialogModule } from 'primeng/dialog';
 import { EditorComponent } from './editor/editor.component';
@@ -25,7 +24,6 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
     NoFeatureComponent,
     LoginSmartComponent,
     CommandsListComponent,
-    WelcomeNewsComponent,
     EditorComponent,
     WorkslistComponent,
     CharacterSheetComponent,
@@ -55,7 +53,6 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
     NoFeatureComponent,
     LoginSmartComponent,
     CommandsListComponent,
-    WelcomeNewsComponent,
   ],
 })
 

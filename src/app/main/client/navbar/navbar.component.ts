@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/menuitem';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import gitInfo from 'src/git-version.json';
-import { WindowsService } from '../windows/windows.service';
 
 import { faFont } from '@fortawesome/free-solid-svg-icons';
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private game: GameService,
-    private windowsService: WindowsService
+    private dialogV2Service: DialogV2Service
   ) {
   }
 
@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
       items: [
         { label: 'Log di gioco', disabled: true },
         { label: 'Preferenze', command: (onclick) => {
-          this.windowsService.openControlPanel();
+          this.dialogV2Service.openNews();
         }},
         {
           label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', separator: false, command: (onclick) => {
@@ -63,7 +63,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Guida al gioco', disabled: true },
         {
           label: 'Ultime novità', disabled: true, command: (onclick) => {
-            this.windowsService.openNews();
+            // this.windowsService.openNews();
           }
         },
         { label: 'Segnala un problema', url: 'http://forum.thegatemud.it/viewforum.php?f=51', target: '_blank' },

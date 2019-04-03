@@ -5,7 +5,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { Observable } from 'rxjs';
 import { IHero } from 'src/app/models/data/hero.model';
 import { getHero } from 'src/app/store/selectors';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-character-sheet',

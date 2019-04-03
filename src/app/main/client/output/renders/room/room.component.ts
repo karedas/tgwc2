@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { Room } from 'src/app/models/data/room.model';
 import { environment } from 'src/environments/environment';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-room',
