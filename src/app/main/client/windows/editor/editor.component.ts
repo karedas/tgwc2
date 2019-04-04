@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
@@ -7,7 +7,7 @@ import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map } from 'rxjs/operators';
 import { InputService } from '../../input/input.service';
 import { IEditor } from 'src/app/models/data/editor.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'tg-editor',
@@ -50,7 +50,7 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.description = editorState.description.replace(/\n/gm, ' ');
           this.dialogTitle = editorState.title;
           this.maxChars = editorState.maxChars;
-          
+
           this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
         }
       }

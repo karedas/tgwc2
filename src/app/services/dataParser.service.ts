@@ -66,7 +66,7 @@ export class DataParser {
   }
 
   parseForDisplay(data: string): void {
-    
+
     // reset Dispatcher
     this.dispatcher = {};
 
@@ -388,7 +388,7 @@ export class DataParser {
 
 
     // Execute
-    if(Object.keys(this.dispatcher).length > 0 ) {
+    if (Object.keys(this.dispatcher).length > 0 ) {
       this.dispatchData();
     }
   }
@@ -396,13 +396,13 @@ export class DataParser {
   // Emit data Stored in the dispatcher to show then in the right Output Order
   dispatchData() {
     // Output Messages
-    if( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
-    if( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
-    if( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
-    if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    if ( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
+    if ( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
+    if ( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
+    if ( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
     // TODO UI (dont need order) :
-    if( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
-    if( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
+    if ( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
+    if ( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
   }
 
 
@@ -428,17 +428,16 @@ export class DataParser {
 
     /* Split into arguments */
 
-    let args = input.split(/\s+/);
+    const args = input.split(/\s+/);
     /* Get the shortcut index */
-    let shortcut_key = args.shift();
-    let shortcut_num = parseInt(shortcut_key);
+    const shortcut_key = args.shift();
+    const shortcut_num = parseInt(shortcut_key);
     let shortcut_cmd = '';
 
 
     if (!isNaN(shortcut_num)) {
       shortcut_cmd = this.shortcuts[shortcut_num];
-    }
-    else if (typeof (this.shortcuts_map[shortcut_key]) != 'undefined') {
+    } else if (typeof (this.shortcuts_map[shortcut_key]) != 'undefined') {
       shortcut_cmd = this.shortcuts[this.shortcuts_map[shortcut_key]];
     }
 
@@ -451,19 +450,20 @@ export class DataParser {
       if (/\$\d+/.test(input)) {
         /* Substitute the arguments */
         for (let arg = 0; arg < args.length; ++arg) {
-          let rx = new RegExp("\\$" + (arg + 1), 'g');
+          const rx = new RegExp('\\$' + (arg + 1), 'g');
           input = input.replace(rx, args[arg]);
         }
 
         /* Remove remaining letiables */
         input = input.replace(/\$\d+/g, '');
-      } else
-        input += " " + args.join(" ");
+      } else {
+        input += ' ' + args.join(' ');
+      }
     }
-    
-    
+
+
     if (this.cmd_prefix.length > 0) {
-      input = this.cmd_prefix + " " + input;
+      input = this.cmd_prefix + ' ' + input;
     }
 
     return input;

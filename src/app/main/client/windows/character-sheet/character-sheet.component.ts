@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, Inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IHero } from 'src/app/models/data/hero.model';
 import { getHero } from 'src/app/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'tg-character-sheet',
@@ -28,17 +29,18 @@ export class CharacterSheetComponent  {
 
   constructor(
     private store: Store<DataState>,
-    private game: GameService
-  ) {
+    private game: GameService,
+    @Inject(MAT_DIALOG_DATA) data) {
 
+    this.openedTab = data.detail;
     this.heroBase$ = this.store.pipe(select(getHero));
   }
 
-  onRequest(data: any) {
-    if (data !== this.openedTab) {
-      this.openedTab = data;
-    }
-  }
+  // onRequest(data: any) {
+  //   if (data !== this.openedTab) {
+  //     this.openedTab = data;
+  //   }
+  // }
 
   switchPanel(tab: string, event: Event) {
 

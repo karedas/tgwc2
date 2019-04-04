@@ -48,15 +48,15 @@ import 'hammerjs';
     HttpClientModule,
 
     TgConfigModule.forRoot(tgConfig),
-    
+
     StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([ClientEffects, DataEffects]),
 
     StoreDevtoolsModule.instrument({
-      maxAge: 25, 
+      maxAge: 25,
       logOnly: environment.production,
     }),
-    
+
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,

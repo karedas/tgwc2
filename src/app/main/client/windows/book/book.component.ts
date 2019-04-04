@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IBook } from 'src/app/models/data/book.model';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getBook } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
-import { WindowsService } from '../windows.service';
+// import { WindowsService } from '../windows.service';
 
 @Component({
   selector: 'tg-book',
@@ -24,7 +24,7 @@ export class BookComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private windowsService: WindowsService
+    // private windowsService: WindowsService
   ) {
     this.book$ = this.store.pipe(select(getBook));
     this._unsubscribeAll = new Subject<any>();
@@ -37,7 +37,7 @@ export class BookComponent implements AfterViewInit, OnDestroy {
           this.openedIndexPage = 0;
           this.total = book.pages.length;
           setTimeout(() => {
-            this.windowsService.openBook(this.dialogID, book.desc);
+            // this.windowsService.openBook(this.dialogID, book.desc);
           });
         }
       }

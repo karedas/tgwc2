@@ -1,10 +1,9 @@
 <ng-container *ngIf="dataTable$ | async">
-  <tg-dialog [id]="dialogID">
     <div class="tg-workslist">
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
           <!-- Workslist content start -->
-          <p-table 
+          <!-- <p-table 
             #worksTable
             [value]="rows" 
             [autoLayout]="true" 
@@ -41,7 +40,7 @@
             <ng-template pTemplate="summary">
               Visualizzati {{rows.length }} risultati
             </ng-template>
-          </p-table>
+          </p-table> -->
           <!-- Workslist content end -->
         </div>
         <div class="tg-border-box">
@@ -52,5 +51,4 @@
         </div>
       </div>
     </div>
-  </tg-dialog>
 </ng-container>

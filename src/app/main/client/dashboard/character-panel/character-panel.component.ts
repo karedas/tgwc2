@@ -75,7 +75,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
         this.activeMediaQuery = change ? change.mqAlias : '';
       });
 
-      
+
 
     this.hero$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -119,9 +119,9 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   private setCombatPanel(target?: ITarget) {
 
     if (target && typeof target.hit !== 'undefined') {
-      
+
       const lengthKeys = Object.keys(target).length;
-      
+
       if (lengthKeys > 0) {
         this.inCombat = true;
         this.enemyHealt = target.hit;

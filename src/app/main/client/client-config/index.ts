@@ -1,7 +1,7 @@
 export interface TGConfig {
   musicVolume: number;
   soundVolume: number;
-  news: boolean,
+  news: boolean;
   layout: {
     fontSize: number,
     extraOutput: boolean,
@@ -9,7 +9,7 @@ export interface TGConfig {
     characterPanelTopPosition: boolean,
     zen: boolean,
     list_column_mode: boolean
-  }
+  };
 }
 
 export const tgConfig: TGConfig = {
@@ -24,4 +24,4 @@ export const tgConfig: TGConfig = {
     zen: false,
     list_column_mode: true
   }
-}
+};

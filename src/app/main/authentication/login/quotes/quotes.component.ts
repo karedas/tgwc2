@@ -33,8 +33,8 @@ export class QuotesComponent {
     { show: false, author: `Una guardia cittadina`, msg: `Nuovo giorno, buon giorno!`},
     { show: false, author: `Strane creature di Ikhari`, msg: `Gnek gnek!` }
   ];
-  
-  lastIndex: number = 0;
+
+  lastIndex = 0;
 
   index$: Observable<number> = new Observable();
 
@@ -47,7 +47,7 @@ export class QuotesComponent {
 
   _init() {
     this.index$.pipe(
-      map((item, index: number) => { return index % this.quotesList.length })
+      map((item, index: number) => index % this.quotesList.length)
     ).subscribe(i => {
       this.quotesList[this.lastIndex].show = false;
       this.quotesList[i].show = !this.quotesList[i].show;

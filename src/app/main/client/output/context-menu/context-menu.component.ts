@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+// import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'tg-context-menu',
@@ -10,16 +10,16 @@ export class ContextMenuComponent implements OnInit {
 
 
   // @Input('model')  model: MenuItem[];
-  public items: MenuItem[];
+  // public items: MenuItem[];
   public readonly target: string;
 
   constructor() {
 
-    this.items = [
-      { label: 'Prendi', icon: 'pi pi-fw pi-times' },
-      { label: 'Indossa', icon: 'pi pi-fw pi-times'},
-      { label: 'Posa', icon: 'pi pi-fw pi-times'}
-    ];
+    // this.items = [
+    //   { label: 'Prendi', icon: 'pi pi-fw pi-times' },
+    //   { label: 'Indossa', icon: 'pi pi-fw pi-times'},
+    //   { label: 'Posa', icon: 'pi pi-fw pi-times'}
+    // ];
 
   }
 

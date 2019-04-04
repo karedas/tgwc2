@@ -19,6 +19,13 @@ export class DataEffects {
     private dialogV2Service: DialogV2Service
   ) { }
 
+  @Effect({ dispatch: false })
+  openEditor$: Observable<Action> = this.actions$.pipe(
+    ofType<PayloadActionData>(DataEvenType.EDITOR),
+    tap((data) => {
+      this.dialogV2Service.openEditor();
+    })
+  );
 
   @Effect()
   skillsRequest$: Observable<Action> = this.actions$.pipe(
@@ -28,14 +35,6 @@ export class DataEffects {
       return [
         new HeroAction({skills: res.payload})
       ];
-    })
-  );
-
-  @Effect({ dispatch: false })
-  openEditor$: Observable<Action> = this.actions$.pipe(
-    ofType<PayloadActionData>(DataEvenType.EDITOR),
-    tap((data) => {
-      this.dialogV2Service.openEditor(data)
     })
   );
 

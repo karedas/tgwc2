@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'tg-dashboard',
   templateUrl: './dashboard.component.html',
   styles: [`
-    :host { 
+    :host {
       margin-top: auto;
       order: 3;
     }

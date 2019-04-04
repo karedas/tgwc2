@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HistoryService } from 'src/app/main/client/services/history.service';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
@@ -16,7 +15,6 @@ import { AudioComponent } from './audio/audio.component';
   declarations: [
     ClientComponent,
     ClientContainerComponent,
-    NavbarComponent,
     AudioComponent
   ],
   imports: [

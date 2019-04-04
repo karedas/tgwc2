@@ -7,12 +7,12 @@ import { AuthGuard } from './main/authentication/services/login.guard';
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
-    path: 'webclient', 
+    path: 'webclient',
     loadChildren: './main/client/client.module#ClientModule',
     canLoad: [ AuthGuard ]
   },
   { path: '**', component: PageNotFoundComponent }
-]
+];
 @NgModule({
   imports: [
     RouterModule.forRoot(

@@ -6,8 +6,6 @@ import { getWorksList } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/models/data/workslist.model';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { WindowsService } from '../windows.service';
-import { Table } from 'primeng/table';
 
 
 @Component({
@@ -18,7 +16,7 @@ import { Table } from 'primeng/table';
 })
 export class WorkslistComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild('worksTable') table: Table;
+  // @ViewChild('worksTable') table: Table;
 
   public readonly dialogID = 'workslist';
 
@@ -43,7 +41,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    private windowsService: WindowsService
+    // private windowsService: WindowsService
     ) {
 
       this.dataTable$ = this.store.pipe(select(getWorksList));
@@ -55,9 +53,9 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
       (wl: IWorks) => {
         if (wl) {
           this.cmd = wl.cmd;
-          if (this.table ) {
-            this.table.reset();
-          }
+          // if (this.table ) {
+          //   this.table.reset();
+          // }
           this.populate(wl.list);
           this.open(wl.verb);
         }
@@ -79,7 +77,7 @@ export class WorkslistComponent implements AfterViewInit, OnDestroy {
   private open(verb) {
     const title = `Cosa sai ${verb}`;
     setTimeout(() => {
-      this.windowsService.openDialogTable(this.dialogID, title);
+      // this.windowsService.openDialogTable(this.dialogID, title);
     });
   }
 

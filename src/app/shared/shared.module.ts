@@ -1,41 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { CookieService } from 'ngx-cookie-service';
-import { LoginService } from '../main/authentication/services/login.service';
-// import { GenericDialogService } from '../main/common/dialog/dialog.service';
-import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
-
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
-/* Prime NG */
-// import { CheckboxModule } from 'primeng/checkbox';
-// import { MenubarModule } from 'primeng/menubar';
-// import { TooltipModule } from 'primeng/tooltip';
-// import { ButtonModule } from 'primeng/button';
-// import { TableModule } from 'primeng/table';
-// import { DialogService as DynamicDialogService} from 'primeng/api';
-// import { DynamicDialogModule } from 'primeng/dynamicdialog';
-
+import { TooltipModule } from "ngx-tooltip";
 
 /* Material Design */
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material';
 
-
+//My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { PipesModule } from '../pipes/pipes.module';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { HstatComponent } from '../main/common/hstat/hstat.component';
+
+//My Services
 import { AudioService } from '../main/client/audio/audio.service';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { ConfigService } from '../services/config.service';
 import { DialogV2Service } from '../main/common/dialog-v2/dialog-v2.service';
-import { MatButtonModule } from '@angular/material';
+import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
+import { LoginService } from '../main/authentication/services/login.service';
 
 
 @NgModule({
@@ -54,12 +43,15 @@ import { MatButtonModule } from '@angular/material';
 
     FontAwesomeModule,
     NgScrollbarModule,
-    PipesModule,
+    TooltipModule,
 
+    PipesModule,
+    
     /** Angular Material Modules */
     MatCheckboxModule,
+    MatMenuModule,
     MatButtonModule,
-    MatTooltipModule,
+    // MatTooltipModule,
   ],
 
   exports: [
@@ -68,19 +60,16 @@ import { MatButtonModule } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
+    TooltipModule,
     FontAwesomeModule,
-
-    /** Angular Material  */
-    MatCheckboxModule,
-    MatButtonModule,
-    MatTooltipModule,
-
-
     IconsComponent,
     HstatComponent,
-
     PipesModule,
-    ClickStopPropagationDirective
+    ClickStopPropagationDirective,
+    /** Angular Material  */
+    MatCheckboxModule,
+    MatMenuModule,
+    MatButtonModule,
   ],
 })
 export class SharedModule {

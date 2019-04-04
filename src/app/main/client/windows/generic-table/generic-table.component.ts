@@ -5,8 +5,6 @@ import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { takeUntil } from 'rxjs/operators';
-import { WindowsService } from '../windows.service';
-import { Table } from 'primeng/table';
 
 @Component({
   selector: 'tg-generic-table',
@@ -16,7 +14,7 @@ import { Table } from 'primeng/table';
 })
 export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
-  @ViewChild('genericTable') table: Table;
+  // @ViewChild('genericTable') table: Table;
 
 
   public readonly dialogID: string = 'genericTable';
@@ -31,7 +29,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private windowsService: WindowsService
+    // private windowsService: WindowsService
   ) {
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
@@ -45,9 +43,9 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
       (dt: IGenericTable) => {
         if (dt) {
           this.setHeaderTitle(dt.title);
-          if (this.table ) {
-            this.table.reset();
-          }
+          // if (this.table ) {
+          //   this.table.reset();
+          // }
           this.populate(dt);
           this.open();
         }
@@ -88,7 +86,7 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   private open() {
     setTimeout(() => {
-      this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
+      // this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
     }, 200);
 
   }

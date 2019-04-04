@@ -126,20 +126,20 @@ export class InputComponent implements OnInit, OnDestroy {
   toggleExtraOutput(event: Event) {
     this._configService.setConfig({
       layout: { extraOutput: !this.tgConfig.layout.extraOutput }
-    })
+    });
   }
 
   toggleCharacterPanel(event: Event) {
     this._configService.setConfig({
       layout: { characterPanel: !this.tgConfig.layout.characterPanel }
-    })
+    });
   }
 
   toggleZen(event: Event) {
 
     this._configService.setConfig({
       layout: { zen: !this.tgConfig.layout.zen }
-    })
+    });
 
     if (this.tgConfig.layout.zen) {
       this.render.addClass(document.body, 'zen');

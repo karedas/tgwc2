@@ -3,7 +3,6 @@ import { GameService } from 'src/app/main/client/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';
 import { ConfigService } from 'src/app/services/config.service';
-import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tg-news',
@@ -19,7 +18,6 @@ export class NewsComponent  implements AfterViewInit {
 
   constructor(
     private game: GameService,
-    private dialogRef: MatDialogRef<NewsComponent>,
     private _configService: ConfigService
   ) {
   }
@@ -29,10 +27,10 @@ export class NewsComponent  implements AfterViewInit {
   }
 
   onContinue(): void {
+    // Save Next Login News display based on user's choice
     if (this.dontShowNextTime) {
       this._configService.config = { news: false };
     }
-    this.dialogRef.close();
     this.game.sendToServer('');
   }
 

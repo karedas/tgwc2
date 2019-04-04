@@ -18,7 +18,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   constructor(
     private _configService: ConfigService
   ) {
-    
+
     this._unsubscribeAll = new Subject();
    }
 
@@ -27,7 +27,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
-      })
+      });
 
   }
 

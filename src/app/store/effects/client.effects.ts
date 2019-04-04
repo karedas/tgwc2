@@ -44,7 +44,7 @@ export class ClientEffects {
     })
   );
 
-  
+
   // @Effect({ dispatch: false })
   // $updateUI: Observable<any> = this.actions$.pipe(
   //   ofType(ClientEventType.UPDATENEEDED),
@@ -62,10 +62,9 @@ export class ClientEffects {
     ofType(ClientEventType.NEWS),
     withLatestFrom(this.store.pipe(select(getInGameStatus))),
     map(([action, status]) => {
-      if( this.game.config.news ) {
+      if ( this.game.config.news ) {
         this.dialogV2Service.openNews();
-      }
-      else {
+      } else {
         this.game.sendToServer('');
       }
       return status;
@@ -94,7 +93,7 @@ export class ClientEffects {
   showCharacterSheet$ = this.actions$.pipe(
     ofType<PayloadAction>(ClientEventType.SHOWCHARACTERSHEET),
     switchMap((res) => {
-      // this.windowsService.openCharacterSheet(res.payload[1]);
+      this.dialogV2Service.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
           new InfoCharacterAction(),

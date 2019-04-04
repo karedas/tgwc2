@@ -19,7 +19,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   player: AnimationPlayer;
   preloadPerc: any;
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private _animationBuilder: AnimationBuilder,
     private splashScreenService: SplashScreenService,
@@ -65,7 +65,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   }
 
   hide(): void {
-    this.player = 
+    this.player =
       this._animationBuilder
         .build([
           style({ opacity: '1'}),
@@ -75,7 +75,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
           }))
         ]).create(this.splashScreenEl);
 
-    
+
     setTimeout(() => {
       this.player.play();
     }, 0);

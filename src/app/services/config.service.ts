@@ -15,7 +15,7 @@ export class ConfigService {
   constructor(
     @Inject(TG_CONFIG) private _config
   ) {
-    //set the default config from the user provided config (from forRoot)
+    // set the default config from the user provided config (from forRoot)
     this._defaultConfig = _config;
 
     this._init();
@@ -43,7 +43,7 @@ export class ConfigService {
 
     let config: any;
 
-    //get config values from localstorage.
+    // get config values from localstorage.
     let configInStorage = localStorage.getItem('config');
 
     // Set the config from the default config
@@ -58,18 +58,17 @@ export class ConfigService {
         config = _.cloneDeep(configInStorage);
         this._configSubject.next(config);
       } else {
-        localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
+        localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()));
       }
-    }
-    else {
-      localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
+    } else {
+      localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()));
     }
   }
 
   private compareConfigKeys(storedConfig: any) {
     // Compare default config with Values in localstorage
-    var aKeys = this.getDeepKeys(storedConfig).sort();
-    var bKeys = this.getDeepKeys(this._configSubject.getValue()).sort();
+    const aKeys = this.getDeepKeys(storedConfig).sort();
+    const bKeys = this.getDeepKeys(this._configSubject.getValue()).sort();
 
     return JSON.stringify(aKeys) === JSON.stringify(bKeys);
 
@@ -77,12 +76,12 @@ export class ConfigService {
 
   private getDeepKeys(obj) {
     let keys = [];
-    for (let key in obj) {
+    for (const key in obj) {
       keys.push(key);
-      if (typeof obj[key] === "object") {
-        let subkeys = this.getDeepKeys(obj[key]);
+      if (typeof obj[key] === 'object') {
+        const subkeys = this.getDeepKeys(obj[key]);
         keys = keys.concat(subkeys.map(function (subkey) {
-          return key + "." + subkey;
+          return key + '.' + subkey;
         }));
       }
     }

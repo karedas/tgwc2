@@ -1,41 +1,41 @@
-<tg-dialog [id]="dialogID" (data)="onRequest($event)" *ngIf="heroBase$ | async as hero" >
-  <div class="tg-character-card">
-    <div class="b-ironlight-mini tg-box">
-      <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <div class="tg-character-content">
-            <div class="m-h-0" fxLayout="row" style="height: 100%" >
-              <!-- ######## Info Main Character ########  -->
-              <div class="info-main" fxLayout="column" fxFlex="1 1 auto">
-                <div class="info-avatar tg-shadow">
-                  <img id="infoimage" src="{{ imagepath + hero.image }}" *ngIf="hero.image"/>
-                </div>
-                <div class="info-nametitle">
-                  <div class="info-name">{{ hero.name }}</div>
-                  <div class="info-title">{{ hero.title }}</div>
-                </div>
-                <nav class="info-menu flex-column">
-                  <button class="btn-i-generale tg-button tg-shadow nav-item nav-link active" (click)="openedTab !== 'info' && switchPanel('info', $event)"
-                    [ngClass]="{'active': openedTab =='info'}">Generalit&agrave;</button>
-                  <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link" (click)="(openedTab !== 'equip' && openedTab !== 'inventory') && switchPanel('equip', $event)"
-                    [ngClass]="{'active': (openedTab == 'equip' || openedTab == 'inventory')}">Equip &amp; Inventario</button>
-                  <button class="btn-i-ability tg-button tg-shadow nav-item nav-link" (click)="openedTab !== 'skills' && switchPanel('skills', $event)"
-                    [ngClass]="{'active': openedTab =='skills'}">Abilità Personali</button>
-                </nav>
+<div class="tg-character-card" *ngIf="heroBase$ | async as hero"
+  cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div mat-dialog-title cdkDragHandle>{{hero.name}} - Scheda personale}}</div>
+  <div class="b-ironlight-mini tg-box">
+    <div class="tg-dialog-content-nopadding tg-shadow-inset">
+        <div class="tg-character-content">
+          <div class="m-h-0" fxLayout="row" style="height: 100%" >
+            <!-- ######## Info Main Character ########  -->
+            <div class="info-main" fxLayout="column" fxFlex="1 1 auto">
+              <div class="info-avatar tg-shadow">
+                <img id="infoimage" src="{{ imagepath + hero.image }}" *ngIf="hero.image"/>
               </div>
-              <div class="right-data" fxLayout="column" fxFlex="0 1 100%" style="height:100%;">
-                <tg-info *ngIf="openedTab == 'info'" style="height: 100%;"></tg-info>
-                <tg-equip-inventory *ngIf="openedTab == 'equip' || openedTab == 'inventory'" style="height:100%;" [subTab]="openedTab"></tg-equip-inventory>
-                <tg-skills *ngIf="openedTab == 'skills'" style="height:100%;"></tg-skills>
+              <div class="info-nametitle">
+                <div class="info-name">{{ hero.name }}</div>
+                <div class="info-title">{{ hero.title }}</div>
               </div>
+              <nav class="info-menu flex-column">
+                <button class="btn-i-generale tg-button tg-shadow nav-item nav-link active" (click)="openedTab !== 'info' && switchPanel('info', $event)"
+                  [ngClass]="{'active': openedTab =='info'}">Generalit&agrave;</button>
+                <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link" (click)="(openedTab !== 'equip' && openedTab !== 'inventory') && switchPanel('equip', $event)"
+                  [ngClass]="{'active': (openedTab == 'equip' || openedTab == 'inventory')}">Equip &amp; Inventario</button>
+                <button class="btn-i-ability tg-button tg-shadow nav-item nav-link" (click)="openedTab !== 'skills' && switchPanel('skills', $event)"
+                  [ngClass]="{'active': openedTab =='skills'}">Abilità Personali</button>
+              </nav>
+            </div>
+            <div class="right-data" fxLayout="column" fxFlex="0 1 100%" style="height:100%;">
+              <tg-info *ngIf="openedTab == 'info'" style="height: 100%;"></tg-info>
+              <tg-equip-inventory *ngIf="openedTab == 'equip' || openedTab == 'inventory'" style="height:100%;" [subTab]="openedTab"></tg-equip-inventory>
+              <tg-skills *ngIf="openedTab == 'skills'" style="height:100%;"></tg-skills>
             </div>
           </div>
-      </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
-      </div>
+        </div>
+    </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
-</tg-dialog>
+</div>

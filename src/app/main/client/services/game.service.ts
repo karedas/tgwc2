@@ -80,10 +80,9 @@ export class GameService {
 
     this._configService.config
       .pipe(distinctUntilChanged())
-      .subscribe((config: TGConfig) => 
-        {
+      .subscribe((config: TGConfig) => {
           this.tgConfig = config;
-          console.log('gameservice config subscribe:', config)
+          console.log('gameservice config subscribe:', config);
         }
       );
 
@@ -252,22 +251,22 @@ export class GameService {
 
 
   /** Font Size Adjustement */
-  
-  setOutputSize() {
-    let newSize = (this.tgConfig.layout.fontSize + 1 ) % font_size_options.length;
-    let old_class = font_size_options[this.tgConfig.layout.fontSize].class;
-    let new_class = font_size_options[newSize].class;
 
-    if(old_class) {
+  setOutputSize() {
+    const newSize = (this.tgConfig.layout.fontSize + 1 ) % font_size_options.length;
+    const old_class = font_size_options[this.tgConfig.layout.fontSize].class;
+    const new_class = font_size_options[newSize].class;
+
+    if (old_class) {
       this.render.removeClass(document.body, old_class);
       this.render.addClass(document.body, new_class);
     }
 
     // Save in Storage
-    this._configService.config =  { 
+    this._configService.config =  {
       layout: {
         fontSize: newSize
       }
-    }
+    };
   }
 }

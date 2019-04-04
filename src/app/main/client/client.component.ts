@@ -12,7 +12,7 @@ export class ClientComponent implements OnInit {
 
   config: any;
 
-  //private
+  // private
   private _unsubscribeAll: Subject<any>;
 
 
@@ -23,11 +23,11 @@ export class ClientComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.config = config;
-      })
+      });
   }
 }

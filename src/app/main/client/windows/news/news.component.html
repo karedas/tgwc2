@@ -1,5 +1,5 @@
+<div mat-dialog-title>Ultime Notizie</div>
 <div class="tg-notizie">
-  <div mat-dialog-title>Ultime Notizie</div>
   <div class="b-ironlight-mini tg-box">
     <div class="tg-dialog-content-nopadding tg-shadow-inset">
       <div class="tg-box b-paper" style="min-height: 300px;">
@@ -11,7 +11,7 @@
                 <div class="tg-mnch-img" fxFlex="1 1 100%"></div>
               </div>
               <div fxFlex="70" fxFlex.lt-sm="100">
-                <ng-scrollbar class="scrollbar-light" #scrollBar [disableOnBreakpoints]="false">
+                <ng-scrollbar class="scrollbar-light" #scrollBar [disableOnBreakpoints]="true"  mat-dialog-content>
                   <div #scrollable>
                     <div style="padding-right:.5em; font-size:15px;">
                         <h2>
@@ -47,7 +47,7 @@
               </div>
             </div>
             <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
-              <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()">Continua</button>
+              <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()" mat-dialog-close>Continua</button>
               <div class="input-checkbox">
                   <mat-checkbox (change)="dontShowNextTime = !dontShowNextTime" color="accent">Non mostrare piu' questa notizia</mat-checkbox>
               </div>
