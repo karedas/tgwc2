@@ -10,12 +10,14 @@ import { OutputModule } from './output/output.module';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { InputModule } from './input/input.module';
 import { AudioComponent } from './audio/audio.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     ClientComponent,
     ClientContainerComponent,
-    AudioComponent
+    AudioComponent,
+    NavbarComponent
   ],
   imports: [
     SharedModule,
@@ -26,7 +28,8 @@ import { AudioComponent } from './audio/audio.component';
     InputModule
   ],
   exports: [
-    ClientComponent,
+    NavbarComponent,
+    ClientComponent
   ],
   providers: [
     GameService,

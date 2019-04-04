@@ -6,8 +6,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { TooltipModule } from "ngx-tooltip";
 
+import { TooltipModule } from 'ng2-tooltip-directive';
+ 
 /* Material Design */
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
@@ -44,7 +45,6 @@ import { LoginService } from '../main/authentication/services/login.service';
     FontAwesomeModule,
     NgScrollbarModule,
     TooltipModule,
-
     PipesModule,
     
     /** Angular Material Modules */
@@ -60,11 +60,11 @@ import { LoginService } from '../main/authentication/services/login.service';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-    TooltipModule,
     FontAwesomeModule,
     IconsComponent,
     HstatComponent,
     PipesModule,
+    TooltipModule,
     ClickStopPropagationDirective,
     /** Angular Material  */
     MatCheckboxModule,

@@ -1,107 +1,45 @@
 @import '~src/scss/colors';
 
-tg-navbar {
+:host-context(.zen) :host {
+  display: none!important;
+}
+
+:host {
   background-image: url($imgPath + '/interface/navbar_background.png');
   background-repeat: repeat-x;
-  padding: 0 .5rem 8px;
+
+  .tg-navbar--wrap {
+    background: black;
+    height: 28px;
+    width: 100%;
+    padding: 0 .5rem 8px;
+  }
 
   /*Logo */
   .brand {
     display: inline-block;
-    padding: 5px;
+    width: 18px;
+    height: 18px;
+    margin: auto 0;
 
     img {
       height: 100%;
     }
   }
-}
+  
+  .mat-button {
+    line-height: 1;
+    height: 28px;
+    font-size: 11px;
+  }
 
-p-menubar {
-  .ui-menubar {
-    padding: 0;
-    box-sizing: border-box;
-    height: 100%;
+  .mat-menu-content {
+    background-color: #2f2314;
+    // border: 1px solid #71624e;
+    // border-top: 0;
 
-    .ui-menubar-root-list {
-
-      display: flex;
-      align-items: center;
-      height: 100%;
-
-      .ui-menuitem {
-
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        > .ui-menuitem-link {
-          color: black;
-          background-color: transparent;
-          font-weight: bold;
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          padding: 0 0.857em;
-          border-left: 1px solid transparent;
-          border-right: 1px solid transparent;
-
-          .ui-menuitem-text,
-          .ui-menuitem-icon {
-            color: black;
-          }
-        }
-      }
-
-      > .ui-menuitem-active {
-        background-color: #2f2314;
-        
-         .pi-caret-down:before {
-           color: #d3ccb1;
-         }
-
-        > .ui-menuitem-link {
-
-            border-left: 1px solid #71624e;
-            border-right: 1px solid #71624e;
-
-            .ui-menuitem-text,
-            .ui-menuitem-icon {
-              color: #d3ccb1;
-            }
-        }
-      }
-    }
-
-    .ui-submenu-list {
-      background-color: #2f2314;
-      border: 1px solid #71624e;
-      border-top: 0;
-      box-shadow: 0 10px 7px 1px black;
-
-    }
-    .ui-submenu-list .ui-menuitem {
-      box-sizing: border-box;
-      
-
-      .ui-menuitem-link {
-        padding:0 ;
-        border: 0;
-        width: 100%;
-        box-sizing: border-box;
-
-        .ui-menuitem-text,
-        .ui-menuitem-icon {
-          font-size: 10px;
-          padding: 0.714em 0.857em;
-          color: #d3ccb1;
-          font-weight: normal;
-        }
-      }
-
-      &:hover {
-        background: #41301c;
-      }
+    .mat-menu-item {
+      font-size: 11px;
     }
   }
 }
@@ -110,6 +48,95 @@ p-menubar {
   margin-left: auto;
 }
 
-body.zen tg-navbar {
-  display: none!important;
-}
+
+
+
+// p-menubar {
+//   .ui-menubar {
+//     padding: 0;
+//     box-sizing: border-box;
+//     height: 100%;
+
+//     .ui-menubar-root-list {
+
+//       display: flex;
+//       align-items: center;
+//       height: 100%;
+
+//       .ui-menuitem {
+
+//         height: 100%;
+//         display: flex;
+//         align-items: center;
+
+//         > .ui-menuitem-link {
+//           color: black;
+//           background-color: transparent;
+//           font-weight: bold;
+//           font-family: Verdana, Geneva, Tahoma, sans-serif;
+//           height: 100%;
+//           display: flex;
+//           align-items: center;
+//           padding: 0 0.857em;
+//           border-left: 1px solid transparent;
+//           border-right: 1px solid transparent;
+
+//           .ui-menuitem-text,
+//           .ui-menuitem-icon {
+//             color: black;
+//           }
+//         }
+//       }
+
+//       > .ui-menuitem-active {
+//         background-color: #2f2314;
+        
+//          .pi-caret-down:before {
+//            color: #d3ccb1;
+//          }
+
+//         > .ui-menuitem-link {
+
+//             border-left: 1px solid #71624e;
+//             border-right: 1px solid #71624e;
+
+//             .ui-menuitem-text,
+//             .ui-menuitem-icon {
+//               color: #d3ccb1;
+//             }
+//         }
+//       }
+//     }
+
+//     .ui-submenu-list {
+//       background-color: #2f2314;
+//       border: 1px solid #71624e;
+//       border-top: 0;
+//       box-shadow: 0 10px 7px 1px black;
+//     }
+//     .ui-submenu-list .ui-menuitem {
+//       box-sizing: border-box;
+      
+
+//       .ui-menuitem-link {
+//         padding:0 ;
+//         border: 0;
+//         width: 100%;
+//         box-sizing: border-box;
+
+//         .ui-menuitem-text,
+//         .ui-menuitem-icon {
+//           font-size: 10px;
+//           padding: 0.714em 0.857em;
+//           color: #d3ccb1;
+//           font-weight: normal;
+//         }
+//       }
+
+//       &:hover {
+//         background: #41301c;
+//       }
+//     }
+//   }
+// }
+

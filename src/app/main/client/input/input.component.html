@@ -17,8 +17,8 @@
     
     <div class="tg-btn-font">
       <button
-        matTooltip="Aumenta / Diminuisci Testo"
-        [matTooltipPosition]="'above'"
+        tooltip="Aumenta / Diminuisci Testo"
+        placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="onFontSizeChange()">
@@ -27,8 +27,8 @@
     </div>
     <div class="tg-btn-extraboard" fxHide fxShow.gt-sm>
       <button
-        matTooltip="Apri/Chiudi Dettagli"
-        [matTooltipPosition]="'above'"
+        tooltip="Apri/Chiudi Dettagli"
+        placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleExtraOutput($event)"
@@ -38,8 +38,8 @@
     </div>
     <div class="tg-btn-dashboard">
       <button
-        matTooltip="Apri/Chiudi Dashboard"
-        [matTooltipPosition]="'above'"
+        tooltip="Apri/Chiudi Dashboard"
+        placement="top"
         type="button" 
         class="tg-fnt-button"
         (mousedown)="toggleCharacterPanel($event)"
@@ -49,8 +49,8 @@
     </div>
     <div class="tg-btn-zen" fxHide fxShow.gt-xs>
       <button 
-        matTooltip="Modalità Zen"
-        [matTooltipPosition]="'above'"
+        tooltip="Modalità Zen"
+        placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleZen($event)"

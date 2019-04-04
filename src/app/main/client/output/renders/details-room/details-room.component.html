@@ -64,8 +64,8 @@
 
         <div class="tg-objects--line" 
           *ngFor="let objMrn of object.mrn; let indexSz=index" 
-          pTooltip="Guarda"
-          tooltipPosition="left" showDelay="500" hideDelay="100">
+          tooltip="Guarda"
+          placement="left">
           <tg-icons 
             [icon]="object.icon" 
             (mousedown)="onInteract($event, object, indexSz)"></tg-icons>

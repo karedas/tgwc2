@@ -50,6 +50,7 @@
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "merge-stream": "^1.0.1",
+    "ng2-tooltip-directive": "^2.1.9",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-cookie-service": "^2.0.0",
     "ngx-logger": "^3.3.12",

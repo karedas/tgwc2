@@ -1,6 +1,19 @@
-<div class="brand">
+<div class="tg-navbar--wrap"  fxFlex="0 0 100%" fxLayout>
+  <div class="brand">
     <img src="assets/images/logo/tgminilogo.png" />
+  </div>
+
+  <mat-menu #clientMenu="matMenu">
+    <button mat-menu-item>Log di gioco</button>
+    <button mat-menu-item>Preferenze</button>
+    <button mat-menu-item (click)="disconnect()">Disconnetti</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="clientMenu">Client</button>
+
+  <div class="nav-right">
+    V.2.0.0.7-beta
+  </div>
 </div>
 <!-- <p-menubar [model]="menuItemsLeft" [styleClass]="'tg-menubar'"></p-menubar>
 <p-menubar [model]="menuItemsRight" [styleClass]="'tg-menubar nav-right'"></p-menubar> -->
-

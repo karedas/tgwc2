@@ -1,19 +1,18 @@
-// import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-// import { GameService } from 'src/app/main/client/services/game.service';
+import { Component, OnInit } from '@angular/core';
+import { GameService } from 'src/app/main/client/services/game.service';
 // import gitInfo from 'src/git-version.json';
 
 // import { faFont } from '@fortawesome/free-solid-svg-icons';
 // import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 
-// @Component({
+@Component({
 
-//   selector: 'tg-navbar',
-//   templateUrl: './navbar.component.html',
-//   styleUrls: ['./navbar.component.scss'],
-//   encapsulation: ViewEncapsulation.None
-// })
-// export class NavbarComponent implements OnInit {
+  selector: 'tg-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
+})
+export class NavbarComponent implements OnInit {
 
 //   gitVersion = gitInfo.raw;
 //   // menuItemsLeft: MenuItem[];
@@ -23,13 +22,16 @@
 
 
 
-//   constructor(
-//     private game: GameService,
-//     // private dialogV2Service: DialogV2Service
-//   ) {
-//   }
+  constructor(
+    private game: GameService,
+    // private dialogV2Service: DialogV2Service
+  ) {}
 
-//   ngOnInit() {
+  ngOnInit(): void {}
+
+  disconnect(): void {
+    this.game.disconnectGame();
+  }
 
 //     // this.menuItemsLeft = [{
 //     //   label: 'Client',
@@ -77,5 +79,5 @@
 //     // }];
 
 
-//   }
-// }
+  // }
+}
