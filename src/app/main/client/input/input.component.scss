@@ -2,7 +2,8 @@
 @import '~src/scss/utils/sprites-mixins';
 @import '~src/scss/sprites';
 
-@import '~@angular/flex-layout/mq';
+// @import '~@angular/flex-layout/mq';
+@import 'utils/fix';
 
 
 :host {

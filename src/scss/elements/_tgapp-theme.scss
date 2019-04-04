@@ -1,53 +1,30 @@
-//DynamicDialog && Generic
-.overlay-dark {
-  background-color: rgba(0, 0, 0, 1);
-}
-
-// .ui-dialog {
-//   display: flex;
-//   flex-direction: column;
-// }
 
 
-// .ui-dynamicdialog .ui-resizable-se {
-//   width: 14px;
-//   height: 14px;
-//   right: 2px;
-//   bottom: -22px;
-// }
-
-/* Custom Class*/
-
-.tg-dialog-content,
-.tg-dialog-content-nopadding {
-  position: relative;
-  z-index: 10;
-  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-  height: 100%;
-  max-height: 100%;
-  overflow: auto;
-  border-radius: 5px;
-  font-size: 12px;
-}
-
-.tg-dialog-content {
-  padding: 8px;
-}
-
-body {
-  // .ui-dialog {
-  //   box-shadow: none;
-  // }
-  // .ui-dialog .ui-dialog-content {
-  //   background: transparent;
-  //   box-shadow: 0px 6px 11px 0 black;
-  //   border: none;
-  //   height: 100%;
-  //   padding: 0;
-  //   overflow: hidden;
-  // }
-
-  .ui-dialog .ui-dialog-titlebar {
+.tg-app {
+  //DynamicDialog && Generic
+  .overlay-dark {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  
+  /* Custom Class*/
+  
+  .tg-dialog-content,
+  .tg-dialog-content-nopadding {
+    position: relative;
+    z-index: 10;
+    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  
+  .tg-dialog-content {
+    padding: 8px;
+  }
+    
+  .mat-dialog-title {
     cursor: pointer;
     margin: 0 auto;
     max-height: 24px !important;
@@ -69,7 +46,14 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
+    position: relative;
+    max-width: 90%;
+    display: table;
+  
+    &:before, &:after {
+      content: '';
+      display: block;
+    }
 
     &:before {
       background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 0 0;
@@ -80,7 +64,7 @@ body {
       top: 0;
       height: 100%;
     }
-
+  
     &:after {
       position: absolute;
       width: 6px;
@@ -90,7 +74,17 @@ body {
       height: 100%;
       background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
     }
+  }
 
+
+  /*checkbox */
+  .mat-checkbox-frame {
+    background: #2b2924;
+  }
+}
+
+
+body {
     span {
       width: 100%;
       padding: 0;
@@ -109,7 +103,6 @@ body {
     }
   }
 
-}
 
 // body .ui-dialog.ui-dialog-maximized {
 //   .ui-dialog-titlebar {

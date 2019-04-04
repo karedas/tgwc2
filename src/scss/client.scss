@@ -1,19 +1,18 @@
-@import 'theme';
 
 
 @import 'core';
 @import 'colors';
+
 /* Elements */
 @import 'borders';
 @import 'base';
 @import 'buttons';
 
-
 /*various */
 @import 'elements/as-split';
 @import 'elements/ng_scrollbar';
-@import 'elements/dialog';
 
-//PrimeNG Custom
-// @import 'elements/primeng-custom';
+/* Theme */
+@import 'theme';
+@import 'elements/tgapp-theme';
 

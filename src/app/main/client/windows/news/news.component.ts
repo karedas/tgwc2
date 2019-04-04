@@ -30,7 +30,7 @@ export class NewsComponent  implements AfterViewInit {
 
   onContinue(): void {
     if (this.dontShowNextTime) {
-      this._configService.config = { news: true};
+      this._configService.config = { news: false };
     }
     this.dialogRef.close();
     this.game.sendToServer('');
