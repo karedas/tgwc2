@@ -14,14 +14,3 @@ $tg-theme: mat-light-theme(
 @include mat-core();
 @include angular-material-theme($tg-theme);
 
-
-// Add this to your global stylesheet after your theme setup
-.tg-app .mat-dialog-container {
-  padding: 0;
-  background: transparent;
-  border-radius: 8px;
-}
-
-.tg-app .mat-raised-button {
-  line-height: 24px;
-}

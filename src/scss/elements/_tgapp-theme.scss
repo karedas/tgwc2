@@ -1,11 +1,25 @@
 
 
 .tg-app {
+
   //DynamicDialog && Generic
   .overlay-dark {
     background-color: rgba(0, 0, 0, 1);
   }
   
+    
+  // Add this to your global stylesheet after your theme setup
+  .mat-dialog-container {
+    background: transparent;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .mat-raised-button {
+    line-height: 24px;
+  }
+
+
   /* Custom Class*/
   
   .tg-dialog-content,
@@ -45,9 +59,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    position: relative;
     max-width: 90%;
     display: table;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
   
     &:before, &:after {
       content: '';
@@ -81,26 +98,6 @@
     background: #2b2924;
   }
 }
-
-
-body {
-    span {
-      width: 100%;
-      padding: 0;
-      box-sizing: border-box;
-    }
-  }
-
-  .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
-    display: inline-block;
-    padding: 0 8px;
-    margin-right: -28px;
-
-    span {
-      margin-top: 5px;
-      margin-left: 8px;
-    }
-  }
 
 
 // body .ui-dialog.ui-dialog-maximized {
