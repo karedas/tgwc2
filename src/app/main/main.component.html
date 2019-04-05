@@ -1,7 +1,3 @@
-<ng-scrollbar class="scrollbar"  #scrollBar  [autoUpdate]="true" [disableOnBreakpoints]="false">
-
-  <ng-container *ngIf="isCookieAccepted">
-    <router-outlet></router-outlet>
-  </ng-container>
-
-</ng-scrollbar>
+<ng-container *ngIf="isCookieAccepted">
+  <router-outlet></router-outlet>
+</ng-container>

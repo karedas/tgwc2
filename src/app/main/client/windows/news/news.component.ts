@@ -1,15 +1,16 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';
 import { ConfigService } from 'src/app/services/config.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tg-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
 })
-export class NewsComponent  implements AfterViewInit {
+export class NewsComponent  implements OnInit {
 
 
   @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
@@ -18,12 +19,18 @@ export class NewsComponent  implements AfterViewInit {
 
   constructor(
     private game: GameService,
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    private dialogRef: MatDialogRef<NewsComponent>
   ) {
   }
 
-  ngAfterViewInit(): void {
-      this.textAreaScrollbar.update();
+  ngOnInit(): void {
+    this.dialogRef.afterOpened().subscribe(() => {
+      setTimeout(() => {
+        this.textAreaScrollbar.update();
+      });
+    })
+    
   }
 
   onContinue(): void {

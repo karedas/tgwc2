@@ -1,54 +1,49 @@
 <div mat-dialog-title >Ultime Notizie</div>
-  <div class="tg-notizie">
+  <div class="tg-notizie" >
     <div class="b-ironlight-mini tg-box">
       <div class="tg-dialog-content-nopadding tg-shadow-inset">
-        <div class="tg-box b-paper" style="min-height: 300px;">
-          <div class="tg-box" fxLayout="column no-wrap">
-            <div fxLayout="column" style="max-height: 100%;">
-              <div class="tg-notizie--content" style="min-height: 0;">
-                <div fxFlex="30" fxLayout="column" fxHide.lt-sm>
-                  <div class="tg-mnch-img" fxFlex="1 1 100%"></div>
-                </div>
-                <div fxFlex="70" fxFlex.lt-sm="100">
-                  <ng-scrollbar class="scrollbar-light" #scrollBar [disableOnBreakpoints]="false" >
-                    <div #scrollable>
-                      <div style="padding-right:.5em; font-size:15px;" >
-                          <h2>
-                            Webclient 2.0 <span class="tg-brown">beta</span>
-                          </h2>
-                          <p>Ciao e benvenuto/a sul <b>Webclient 2.0 (beta)</b>!</p>
-                          <p>
-                            &Egrave; passato molto tempo dalla prima volta che abbiamo dato la notizia dello sviluppo di un
-                            possibile webclient di seconda generazione, notizia datata "metà del 2017" e poi caduta
-                            apparentemente nel dimenticatoio.</p>
-                          <p>
-                            Da quel giorno di acqua sotto i ponti ( e su Ikhari! ) ne è passata: enormi e  mitologici
-                            draghi di ogni colore e indole hanno sorvolato i cieli, antichi demoni
-                            liberati e poi sigillati nuovamente (a dispetto del povero Varuna), abomini e mostri multiforma, strategiche
-                            battaglie alle porte di un'antica Sibrin, disperate missioni tra le ancestrali mura di una
-                            sinistra piramide sommersa sotto le sabbie del deserto, morti che camminano (tanti!), il popolo dei
-                            Giganti alla continua ricerca del loro perduto Re. E poi terremoti, squarci di luce, maledizioni, spade di luce
-                            e scudi di tenebra  e poi e poi e poi…<br/>
-                            E poi piu' di un decennio di storie e racconti, avventure e narrazione. Ma soprattutto tanti
-                            ricordi avvenuti grazie a tutti voi che anche per poco tempo siete passati di qui almeno una volta a girovagare nel nostro mondo.
-                          </p>
-                          <p>Dopo tutto questo ( e contro ogni pronostico ) possiamo dire di essere finalmente pronti a rendere pubblica la versione BETA 
-                            del tanto agognato Webclient in tutta la sua nuova veste grafica.</p>
-      
-                          <p>Prima di continuare però ti invitiamo caldamente a visitare il forum a <a href="questo indirizzo" target="_blank">questo indirizzo</a> e leggere attentamente tutte le informazioni 
-                            a riguardo. O semplicemente per scriverci qualcosa in merito.<br/><br/>
-                            Per il resto, buon gioco!
-                          </p>
-                      </div>
-  
-                    </div>
-                  </ng-scrollbar>
-                </div>
+        <div class="tg-box b-paper">
+          <div class="tg-box" fxLayout="column no-wrap" style="max-height: 100%;">
+            <div class="tg-notizie--content" style="min-height: 0;">
+              <div fxFlex="30" fxLayout="column" fxHide.lt-sm>
+                <div class="tg-mnch-img" fxFlex="1 1 100%"></div>
               </div>
-              <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
-                <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()" mat-dialog-close>Continua</button>
-                <div class="input-checkbox">
-                    <mat-checkbox (change)="dontShowNextTime = !dontShowNextTime" color="accent">Non mostrare piu' questa notizia</mat-checkbox>
+              <div fxLayout="column" fxFlex="70" fxFlex.lt-sm="100">
+                <ng-scrollbar class="scrollbar-light" [disableOnBreakpoints]="false">
+                  <div style="padding-right:.5em; font-size:15px;" >
+                    <h2>
+                      Webclient 2.0 beta
+                    </h2>
+                    <p>Ciao e benvenuto/a sul <b>Webclient 2.0 (beta)</b>!</p>
+                    <p>
+                      &Egrave; passato molto tempo dalla prima volta che abbiamo dato la notizia dello sviluppo di un
+                      possibile webclient di seconda generazione, notizia datata "metà del 2017" e poi caduta
+                      apparentemente nel dimenticatoio.</p>
+                    <p>
+                      Da quel giorno di acqua sotto i ponti ( e su Ikhari! ) ne è passata: enormi e  mitologici
+                      draghi di ogni colore e indole hanno sorvolato i cieli, antichi demoni
+                      liberati e poi sigillati nuovamente (a dispetto del povero Varuna), abomini e mostri multiforma, strategiche
+                      battaglie alle porte di un'antica Sibrin, disperate missioni tra le ancestrali mura di una
+                      sinistra piramide sommersa sotto le sabbie del deserto, morti che camminano (tanti!), il popolo dei
+                      Giganti alla continua ricerca del loro perduto Re. E poi terremoti, squarci di luce, maledizioni, spade di luce
+                      e scudi di tenebra  e poi e poi e poi…<br/>
+                      E poi piu' di un decennio di storie e racconti, avventure e narrazione. Ma soprattutto tanti
+                      ricordi avvenuti grazie a tutti voi che anche per poco tempo siete passati di qui almeno una volta a girovagare nel nostro mondo.
+                    </p>
+                    <p>Dopo tutto questo ( e contro ogni pronostico ) possiamo dire di essere finalmente pronti a rendere pubblica la versione BETA 
+                      del tanto agognato Webclient in tutta la sua nuova veste grafica.</p>
+
+                    <p>Prima di continuare però ti invitiamo caldamente a visitare il forum a <a href="questo indirizzo" target="_blank">questo indirizzo</a> e leggere attentamente tutte le informazioni 
+                      a riguardo. O semplicemente per scriverci qualcosa in merito.<br/><br/>
+                      Per il resto, buon gioco!
+                    </p>
+                  </div>
+                </ng-scrollbar>
+                <div class="notizie-action" fxLayout="column" fxFlex="0 0 auto" fxLayoutAlign="center center">
+                  <button class="tg-button tg-button-continua tg-shadow-light" (click)="onContinue()" mat-dialog-close>Continua</button>
+                  <div class="input-checkbox">
+                      <mat-checkbox (change)="dontShowNextTime = !dontShowNextTime" color="accent">Non mostrare piu' questa notizia</mat-checkbox>
+                  </div>
                 </div>
               </div>
             </div>

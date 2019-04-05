@@ -17,34 +17,46 @@ export class DialogV2Service {
 
 
   openSmartLogin() {
-    // this.closeAllDialogs();
+
+    // Close All dialogs before proceed
+    this.dialog.closeAll();
+
+    const dialogID = 'smartlogin';
     const config = new MatDialogConfig();
 
+    config.id = dialogID;
     config.disableClose = true;
     config.backdropClass = 'overlay-dark';
+
     const ref = this.dialog.open(LoginSmartComponent, config);
   }
 
 
   openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
 
-    let config = new MatDialogConfig();
-    config = {
-      disableClose: true,
-      width: '450px',
-    };
+    const dialogID = 'cookielaw';
+    const config = new MatDialogConfig();
+
+    config.id = dialogID;
+    config.disableClose = true;
+    config.width = '450px';
 
     const dialogRef = this.dialog.open(CookieLawComponent, config );
+
     return dialogRef;
   }
 
   openNews(): void {
 
+    const dialogID = 'news';
     const config = new MatDialogConfig();
 
+    config.id = dialogID;
     config.disableClose = true;
     config.width = '750px';
     config.height = '600px';
+    config.minHeight = '400px';
+    config.autoFocus = false;
     config.backdropClass = 'overlay-dark';
 
     const ref = this.dialog.open(NewsComponent, config);
@@ -53,7 +65,10 @@ export class DialogV2Service {
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
 
+    const dialogID = 'editor';
     const config = new MatDialogConfig();
+
+    config.id = dialogID;
     config.width = '500px';
     config.height = '450px';
     config.disableClose = true;
@@ -66,6 +81,9 @@ export class DialogV2Service {
   openControlPanel(): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
 
     const config = new MatDialogConfig();
+    const dialogID = 'controlpanel';
+
+    config.id = dialogID;
     config.width = '650px';
     config.height = 'auto';
 
@@ -76,17 +94,23 @@ export class DialogV2Service {
 
 
   openCharacterSheet(detail?: string) {
-    const config = new MatDialogConfig();
 
-    config.width = '750px';
-    config.height = '650px';
-    config.hasBackdrop = true;
-    config.autoFocus = true;
-    config.data = {
-      tab: detail
-    };
+    const dialogID = 'charactersheet';
 
-    const ref = this.dialog.open( CharacterSheetComponent, config);
+    if (!this.dialog.getDialogById(dialogID)) {
+      const config = new MatDialogConfig();
+  
+      config.id = dialogID;
+      config.width = '750px';
+      config.height = '650px';
+      config.hasBackdrop = true;
+      config.autoFocus = true;
+      config.data = {
+        tab: detail
+      };
+  
+      const ref = this.dialog.open( CharacterSheetComponent, config);
+    }
     //   <DialogConfiguration>{
     //     // showHeader: true,
     //     draggable: true,
@@ -106,6 +130,4 @@ export class DialogV2Service {
     //   });
     // this.gd.set(ref, 'charactersheet');
   }
-
-
 }

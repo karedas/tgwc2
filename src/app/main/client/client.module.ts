@@ -7,7 +7,6 @@ import { HistoryService } from 'src/app/main/client/services/history.service';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OutputModule } from './output/output.module';
-import { GameService } from 'src/app/main/client/services/game.service';
 import { InputModule } from './input/input.module';
 import { AudioComponent } from './audio/audio.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -32,7 +31,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     ClientComponent
   ],
   providers: [
-    GameService,
     HistoryService,
   ],
 })

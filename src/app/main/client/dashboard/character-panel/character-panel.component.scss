@@ -283,6 +283,13 @@
         i {
           font-style: normal;
         }
+
+        @include layout-bp(xs) {
+          width: 100%;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
       }
   
       .barC {

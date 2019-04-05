@@ -89,7 +89,7 @@
   }
 
   .tg-loginform {
-    background: url($imgPath + '/login/border-top-mainbox.png') no-repeat top left;
+    background: url($imgPath + '/login/border-top-mainbox.png') no-repeat top center;
     background-size: 100%;
     text-align: center;
     padding-top: 40px;
@@ -99,7 +99,7 @@
 
 
     .tg-loginform-wrap {
-      background: url($imgPath + '/login/border-bottom-mainbox.jpg') no-repeat bottom left;
+      background: url($imgPath + '/login/border-bottom-mainbox.jpg') no-repeat bottom center;
       background-size: 100%;
       padding-bottom: 13px;
       position: relative;

@@ -77,9 +77,9 @@ export class GameService {
   }
 
   _init() {
+    console.log('init');
 
     this._configService.config
-      .pipe(distinctUntilChanged())
       .subscribe((config: TGConfig) => {
           this.tgConfig = config;
           console.log('gameservice config subscribe:', config);

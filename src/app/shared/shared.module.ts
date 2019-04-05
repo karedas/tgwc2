@@ -26,6 +26,7 @@ import { ConfigService } from '../services/config.service';
 import { DialogV2Service } from '../main/common/dialog-v2/dialog-v2.service';
 import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { LoginService } from '../main/authentication/services/login.service';
+import { GameService } from '../main/client/services/game.service';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
+        GameService,
         ConfigService,
         CookieService,
         SplashScreenService,
