@@ -4,12 +4,24 @@
   </div>
 
   <mat-menu #clientMenu="matMenu">
-    <button mat-menu-item>Log di gioco</button>
-    <button mat-menu-item>Preferenze</button>
-    <button mat-menu-item (click)="disconnect()">Disconnetti</button>
+    <button mat-menu-item (click)="onItemClick('log')">Log di gioco</button>
+    <button mat-menu-item (click)="onItemClick('preferences')">Preferenze</button>
+    <button mat-menu-item (click)="onItemClick('disconnect')">Disconnetti</button>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="clientMenu">Client</button>
+
+  <mat-menu #gameMenu="matMenu">
+      <button mat-menu-item (click)="onItemClick('showGameCommands')">Comandi di gioco</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="gameMenu">Gioco</button>
+
+  <mat-menu #guideMenu="matMenu">
+      <button mat-menu-item (click)="onItemClick('news')">Notizie</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="guideMenu">Guida</button>
 
   <div class="nav-right">
     V.2.0.0.7-beta

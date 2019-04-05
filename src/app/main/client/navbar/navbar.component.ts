@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
+import { disconnect } from 'cluster';
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 // import gitInfo from 'src/git-version.json';
 
 // import { faFont } from '@fortawesome/free-solid-svg-icons';
@@ -24,13 +26,33 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private game: GameService,
-    // private dialogV2Service: DialogV2Service
+    private dialogV2Service: DialogV2Service
   ) {}
 
   ngOnInit(): void {}
 
-  disconnect(): void {
-    this.game.disconnectGame();
+
+  onItemClick(what: string) {
+
+    switch(what){
+
+      // Client
+      case 'disconnect':
+        this.game.disconnectGame();
+
+      // Gioco
+      case 'showGameCommands': 
+        this.game.processCommands('comandi');
+
+      // Guida
+      case 'news':
+        this.dialogV2Service.openNews();
+
+      default:
+        return false;
+    }
+
+    
   }
 
 //     // this.menuItemsLeft = [{
