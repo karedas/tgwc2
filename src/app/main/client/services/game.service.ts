@@ -77,7 +77,6 @@ export class GameService {
   }
 
   _init() {
-    console.log('init');
 
     this._configService.config
       .subscribe((config: TGConfig) => {
