@@ -60,7 +60,6 @@ import { InputService } from '../main/client/input/input.service';
     MatDividerModule,
     MatSelectModule,
     MatInputModule
-    // MatTooltipModule,
   ],
 
   exports: [

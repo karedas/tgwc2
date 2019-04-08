@@ -36,12 +36,13 @@
                 </div>
               </ng-container>
 
-              <ng-template #noPage>
-                <!-- No Pages -->
-                <div class="tg-book-pagetext">Non ci sono Pagine</div>
-              </ng-template>
-
+              
             </ng-scrollbar>
+
+            <ng-template #noPage>
+              <!-- No Pages -->
+              <div class="tg-book-pagetext">Non ci sono Pagine</div>
+            </ng-template>
 
             <div class="tg-book-pager" *ngIf="data?.pages.length > 1" fxLayout>
               <div class="pager-btns">

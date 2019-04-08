@@ -7,7 +7,8 @@
     <button mat-menu-item (click)="onItemClick('log')">Log di gioco</button>
     <button mat-menu-item (click)="onItemClick('preferences')">Preferenze</button>
     <mat-divider></mat-divider>
-    <button mat-menu-item (click)="onItemClick('disconnect')">Disconnetti</button>
+    <button mat-menu-item (click)="onItemClick('disconnect')">
+      <mat-icon>exit_to_app</mat-icon>Disconnetti</button>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="clientMenu">Client</button>
