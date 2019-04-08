@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';

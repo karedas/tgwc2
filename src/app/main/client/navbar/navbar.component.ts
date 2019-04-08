@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
       // Gioco
       case 'showGameCommands': 
         this.game.processCommands('comandi');
-        break;
+      break;
       // Guida
       case 'news':
         this.dialogV2Service.openNews();
