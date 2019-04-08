@@ -2,22 +2,10 @@
 
 .tg-app {
 
-  //DynamicDialog && Generic
-  .overlay-dark {
-    background-color: rgba(0, 0, 0, 1);
-  }
-  
-    
-  // Add this to your global stylesheet after your theme setup
-  .mat-dialog-container {
-    background: transparent;
-    border-radius: 8px;
-    position: relative;
-  }
-
-
-  .mat-dialog-content {
-    margin: 0;
+ 
+  /*checkbox */
+  .mat-checkbox-frame {
+    background: #5d5d5d;
   }
 
   .mat-raised-button {
@@ -25,8 +13,8 @@
   }
 
 
-  /* Custom Class*/
-  
+  /* Dialog */
+
   .tg-dialog-content,
   .tg-dialog-content-nopadding {
     position: relative;
@@ -37,8 +25,20 @@
     border-radius: 5px;
     font-size: 12px;
   }
-  
+
+   .overlay-dark {
+    background-color: rgba(0, 0, 0, 1);
+  }
+    
+  .mat-dialog-container {
+    background: transparent;
+    border-radius: 8px;
+    padding: 24px 0 0;
+    position: relative;
+  }
+
   .tg-dialog-content {
+    margin: 0;
     padding: 8px;
   }
     
@@ -54,7 +54,7 @@
     letter-spacing: 1px;
     text-transform: capitalize;
     text-align: center;
-    padding: 0 44px 0;
+    padding: 0 16px;
     box-sizing: content-box;
     color: #ccaa31;
     border-radius: 0;
@@ -95,14 +95,32 @@
       height: 100%;
       background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
     }
+
+    .tg-dialog--close {
+      line-height: 1;
+      color: $tg-red;
+      vertical-align: middle;
+      height: auto;
+      width: auto;
+      margin: auto 0 0 16px;
+    }
   }
 
-
-  /*checkbox */
-  .mat-checkbox-frame {
-    background: #2b2924;
+  /* Menu */
+  .mat-menu-panel {
+    border-radius: 0;
+    background-color: #5f5649;
+  }
+  
+  .mat-menu-item {
+    color: #eceae3;
+    line-height: 1;
+    height: auto;
+    padding: .4em 16px;
+    font-size: 11px;
   }
 }
+
 
 
 // body .ui-dialog.ui-dialog-maximized {

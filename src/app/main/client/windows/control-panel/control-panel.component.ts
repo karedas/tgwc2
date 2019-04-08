@@ -28,7 +28,19 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
       .subscribe((config) => {
         this.tgConfig = config;
       });
+  }
 
+  // Format audio to Decimal only for user view
+  formatAudio(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    if (value >= 0.1) {
+      return value * 10;
+    }
+
+    return value;
   }
 
   ngOnDestroy(): void {

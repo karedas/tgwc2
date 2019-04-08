@@ -12,6 +12,7 @@ export class HistoryService {
   public cmd_history: any[] = [];
 
   constructor() {
+    console.log('history');
   }
 
   push(value: string) {

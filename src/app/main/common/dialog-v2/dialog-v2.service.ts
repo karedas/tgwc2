@@ -6,6 +6,9 @@ import { EditorComponent } from '../../client/windows/editor/editor.component';
 import { ControlPanelComponent } from '../../client/windows/control-panel/control-panel.component';
 import { LoginSmartComponent } from '../../client/windows/login-smart/login-smart.component';
 import { CharacterSheetComponent } from '../../client/windows/character-sheet/character-sheet.component';
+import { CommandsListComponent } from '../../client/windows/commands-list/commands-list.component';
+import { BookComponent } from '../../client/windows/book/book.component';
+import { config } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +18,7 @@ export class DialogV2Service {
   constructor(
     public dialog: MatDialog) { }
 
-
-  openSmartLogin() {
-
+  openSmartLogin(): MatDialogRef<LoginSmartComponent, MatDialogConfig> {
     // Close All dialogs before proceed
     this.dialog.closeAll();
 
@@ -29,8 +30,9 @@ export class DialogV2Service {
     config.backdropClass = 'overlay-dark';
 
     const ref = this.dialog.open(LoginSmartComponent, config);
-  }
 
+    return ref;
+  }
 
   openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
 
@@ -46,7 +48,7 @@ export class DialogV2Service {
     return dialogRef;
   }
 
-  openNews(): void {
+  openNews(): MatDialogRef<NewsComponent, MatDialogConfig> {
 
     const dialogID = 'news';
     const config = new MatDialogConfig();
@@ -60,8 +62,9 @@ export class DialogV2Service {
     config.backdropClass = 'overlay-dark';
 
     const ref = this.dialog.open(NewsComponent, config);
-  }
 
+    return ref;
+  }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
 
@@ -77,23 +80,7 @@ export class DialogV2Service {
     return ref;
   }
 
-
-  openControlPanel(): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
-
-    const config = new MatDialogConfig();
-    const dialogID = 'controlpanel';
-
-    config.id = dialogID;
-    config.width = '650px';
-    config.height = 'auto';
-
-    const ref = this.dialog.open(ControlPanelComponent, config);
-
-    return ref;
-  }
-
-
-  openCharacterSheet(detail?: string) {
+  openCharacterSheet(detail?: string): MatDialogRef<CharacterSheetComponent, MatDialogConfig> {
 
     const dialogID = 'charactersheet';
 
@@ -103,31 +90,79 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '750px';
       config.height = '650px';
-      config.hasBackdrop = true;
+      config.hasBackdrop = false;
       config.autoFocus = true;
       config.data = {
         tab: detail
       };
   
       const ref = this.dialog.open( CharacterSheetComponent, config);
+
+      return ref;
     }
-    //   <DialogConfiguration>{
-    //     // showHeader: true,
-    //     draggable: true,
-    //     resizable: true,
-    //     dismissableMask: true,
-    //     modal: false,
-    //     header: 'Scheda Personaggio',
-    //     focusOnShow: false,
-    //     data: detail,
-    //     style: {
-    //       'width': '750px',
-    //       'height': '650px',
-    //       // 'max-width': '100%',
-    //       // 'max-height': '100%',
-    //     },
-    //     contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
-    //   });
-    // this.gd.set(ref, 'charactersheet');
+  }
+
+  openCommandsList(): MatDialogRef<CommandsListComponent, MatDialogConfig> {
+    
+    const dialogID = 'commandslist';
+
+    if(!this.dialog.getDialogById(dialogID)) {
+      const config = new MatDialogConfig();
+
+      config.id = dialogID;
+      config.width = '750px';
+      config.height = '650px';
+      config.hasBackdrop = true;
+      config.autoFocus = false;
+
+      const ref = this.dialog.open( CommandsListComponent, config );
+      return ref;
+    }
+
+  }
+
+  openControlPanel(): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
+
+    const dialogID = 'controlpanel';
+
+    if (!this.dialog.getDialogById(dialogID)) {
+
+      const config = new MatDialogConfig();
+
+      config.id = dialogID;
+      config.width = '750px';
+      config.height = 'auto';
+      config.hasBackdrop = true;
+      config.autoFocus = false;
+
+      const ref = this.dialog.open(ControlPanelComponent, config);
+      return ref;
+    }
+    
+  }
+
+  /**
+   * 
+   * @param data  [0] IBook - [1] Index page from Param
+   */
+  openBook(...data: any): MatDialogRef<BookComponent, MatDialogConfig> {
+    
+    const dialogID = 'book';
+    let config = new MatDialogConfig();
+    config.id = dialogID;
+    config.width = '550px';
+    config.height = '600px';
+    config.hasBackdrop = false;
+    
+    config.data = {
+      title: data[0].title,
+      desc: data[0].desc,
+      pages: data[0].pages,
+      index: data[1]
+      // index: 0,
+    }
+
+    const ref = this.dialog.open( BookComponent, config);
+    return ref;
   }
 }

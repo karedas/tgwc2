@@ -430,9 +430,10 @@ export class DataParser {
 
     const args = input.split(/\s+/);
     /* Get the shortcut index */
-    const shortcut_key = args.shift();
-    const shortcut_num = parseInt(shortcut_key);
-    let shortcut_cmd = '';
+    let shortcut_key = args.shift();
+    let shortcut_num = parseInt(shortcut_key);
+
+    let shortcut_cmd: any;
 
 
     if (!isNaN(shortcut_num)) {

@@ -12,7 +12,10 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 /* Material Design */
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatInputModule } from '@angular/material';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+
 
 //My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
@@ -27,6 +30,7 @@ import { DialogV2Service } from '../main/common/dialog-v2/dialog-v2.service';
 import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { LoginService } from '../main/authentication/services/login.service';
 import { GameService } from '../main/client/services/game.service';
+import { InputService } from '../main/client/input/input.service';
 
 
 @NgModule({
@@ -52,6 +56,10 @@ import { GameService } from '../main/client/services/game.service';
     MatCheckboxModule,
     MatMenuModule,
     MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatInputModule
     // MatTooltipModule,
   ],
 
@@ -71,6 +79,10 @@ import { GameService } from '../main/client/services/game.service';
     MatCheckboxModule,
     MatMenuModule,
     MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatInputModule
   ],
 })
 export class SharedModule {
@@ -83,10 +95,10 @@ export class SharedModule {
         CookieService,
         SplashScreenService,
         LoginService,
-        // DynamicDialogService,
-        // GenericDialogService,
+        InputService,
         AudioService,
-        DialogV2Service
+        DialogV2Service,
+        InputService,
       ]
     };
   }

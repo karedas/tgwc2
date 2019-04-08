@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { disconnect } from 'cluster';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 // import gitInfo from 'src/git-version.json';
 
@@ -39,15 +38,17 @@ export class NavbarComponent implements OnInit {
       // Client
       case 'disconnect':
         this.game.disconnectGame();
-
+        break;
       // Gioco
       case 'showGameCommands': 
         this.game.processCommands('comandi');
-
+        break;
       // Guida
       case 'news':
         this.dialogV2Service.openNews();
-
+        break;
+      case 'preferences': 
+        this.dialogV2Service.openControlPanel();
       default:
         return false;
     }

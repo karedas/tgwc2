@@ -23,27 +23,38 @@ export interface PayloadAction {
 @Injectable()
 export class ClientEffects {
 
+  constructor(
+    private game: GameService,
+    private actions$: Actions,
+    private audioService: AudioService,
+    private loginService: LoginService,
+    private dialogV2Service: DialogV2Service,
+    private inputService: InputService,
+    private router: Router,
+    private store: Store<ClientState>
+  ) { }
+
+
   @Effect({ dispatch: false })
   onDisconnect: Observable<Action> = this.actions$.pipe(
     ofType(ClientEventType.DISCONNECT),
     tap((a) => {
-      console.log('Disconnect!');
-      if (this.router.url === '/webclient')  {
+      if (this.router.url === '/webclient') {
         this.loginService.logout();
         this.audioService.pauseAudio();
         this.dialogV2Service.openSmartLogin();
         this.game.reset();
-      }}
-    ));
+      }
+    }
+  ));
 
-  @Effect({dispatch: false})
-  onGameStatus$ = this.actions$.pipe(
+  @Effect({ dispatch: false })
+  onGameStatus$: Observable<any> = this.actions$.pipe(
     ofType(ClientEventType.INGAME),
     tap(() => {
-      this.inputService.focus();
+      console.log('TG-LOG: in game');
     })
   );
-
 
   // @Effect({ dispatch: false })
   // $updateUI: Observable<any> = this.actions$.pipe(
@@ -57,15 +68,17 @@ export class ClientEffects {
   //     })
   // );
 
-  @Effect({ dispatch: false})
+
+  @Effect({ dispatch: false })
   showNews$: Observable<boolean | Action> = this.actions$.pipe(
     ofType(ClientEventType.NEWS),
     withLatestFrom(this.store.pipe(select(getInGameStatus))),
     map(([action, status]) => {
-      if ( this.game.config.news ) {
+      if (this.game.config.news) {
         this.dialogV2Service.openNews();
       } else {
         this.game.sendToServer('');
+        this.inputService.focus();
       }
       return status;
     }),
@@ -74,7 +87,7 @@ export class ClientEffects {
   @Effect({ dispatch: false })
   closeTextEditor: Observable<Action> = this.actions$.pipe(
     ofType(ClientEventType.CLOSETEXTEDITOR),
-    // tap(() => this.dialogService.close('editor'))
+    // tap(() => this.dialogV2Service.close('editor'))
   );
 
   @Effect({ dispatch: false })
@@ -84,7 +97,7 @@ export class ClientEffects {
     tap(cmds => {
       this.game.setCommands(cmds);
       setTimeout(() => {
-        // this.windowsService.openCommandsList();
+        this.dialogV2Service.openCommandsList();
       });
     })
   );
@@ -107,9 +120,9 @@ export class ClientEffects {
   showStatusInline$ = this.actions$.pipe(
     ofType<PayloadAction>(ClientEventType.SHOWSTATUSHERO),
     switchMap((res) => {
-        return [
-          new HeroAction(res.payload)
-        ];
+      return [
+        new HeroAction(res.payload)
+      ];
     }),
     tap(() => this.game.setStatusInline(true))
   );
@@ -120,17 +133,4 @@ export class ClientEffects {
     tap(() => {
       this.game.processCommands('info');
     }));
-
-  constructor(
-    private game: GameService,
-    private actions$: Actions,
-    private audioService: AudioService,
-    private loginService: LoginService,
-    private dialogV2Service: DialogV2Service,
-    private inputService: InputService,
-    private router: Router,
-    // private inputService: InputService,
-    private store: Store<ClientState>
-  ) { }
-
 }

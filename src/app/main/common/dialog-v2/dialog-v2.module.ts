@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatSliderModule } from '@angular/material';
 import { NewsComponent } from '../../client/windows/news/news.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginSmartComponent } from '../../client/windows/login-smart/login-smart.component';
@@ -13,6 +13,7 @@ import { CommandsListComponent } from '../../client/windows/commands-list/comman
 import { GenericTableComponent } from '../../client/windows/generic-table/generic-table.component';
 import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.component';
 import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,15 @@ import { WorkslistComponent } from '../../client/windows/workslist/workslist.com
     CommandsListComponent,
     GenericTableComponent,
     NoFeatureComponent,
-    WorkslistComponent
+    WorkslistComponent,
   ],
+
   imports: [
     SharedModule,
+    DragDropModule,
     CharacterSheetModule,
     MatDialogModule,
+    MatSliderModule
   ],
 
   entryComponents: [
@@ -38,13 +42,14 @@ import { WorkslistComponent } from '../../client/windows/workslist/workslist.com
     NewsComponent,
     LoginSmartComponent,
     EditorComponent,
-    CharacterSheetComponent,
     ControlPanelComponent,
     BookComponent,
     CommandsListComponent,
     GenericTableComponent,
     NoFeatureComponent,
-    WorkslistComponent
+    WorkslistComponent,
+    CharacterSheetComponent
   ]
 })
+
 export class DialogV2Module { }

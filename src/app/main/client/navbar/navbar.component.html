@@ -3,21 +3,22 @@
     <img src="assets/images/logo/tgminilogo.png" />
   </div>
 
-  <mat-menu #clientMenu="matMenu">
+  <mat-menu #clientMenu="matMenu" class="mat-elevation-z4">
     <button mat-menu-item (click)="onItemClick('log')">Log di gioco</button>
     <button mat-menu-item (click)="onItemClick('preferences')">Preferenze</button>
+    <mat-divider></mat-divider>
     <button mat-menu-item (click)="onItemClick('disconnect')">Disconnetti</button>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="clientMenu">Client</button>
 
-  <mat-menu #gameMenu="matMenu">
+  <mat-menu #gameMenu="matMenu" class="mat-elevation-z4">
       <button mat-menu-item (click)="onItemClick('showGameCommands')">Comandi di gioco</button>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="gameMenu">Gioco</button>
 
-  <mat-menu #guideMenu="matMenu">
+  <mat-menu #guideMenu="matMenu" class="mat-elevation-z4">
       <button mat-menu-item (click)="onItemClick('news')">Notizie</button>
   </mat-menu>
 
@@ -27,5 +28,3 @@
     V.2.0.0.7-beta
   </div>
 </div>
-<!-- <p-menubar [model]="menuItemsLeft" [styleClass]="'tg-menubar'"></p-menubar>
-<p-menubar [model]="menuItemsRight" [styleClass]="'tg-menubar nav-right'"></p-menubar> -->

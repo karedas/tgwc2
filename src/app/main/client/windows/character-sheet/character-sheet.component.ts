@@ -32,15 +32,10 @@ export class CharacterSheetComponent  {
     private game: GameService,
     @Inject(MAT_DIALOG_DATA) data) {
 
-    this.openedTab = data.detail;
+      console.log(data);
+    this.openedTab = data.tab;
     this.heroBase$ = this.store.pipe(select(getHero));
   }
-
-  // onRequest(data: any) {
-  //   if (data !== this.openedTab) {
-  //     this.openedTab = data;
-  //   }
-  // }
 
   switchPanel(tab: string, event: Event) {
 

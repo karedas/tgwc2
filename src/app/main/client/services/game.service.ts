@@ -68,6 +68,7 @@ export class GameService {
 
     this.render = rendererFactory.createRenderer(null, null);
 
+    console.log('init!');
     this._init();
   }
 

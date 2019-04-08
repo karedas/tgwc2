@@ -1,10 +1,9 @@
-import { Component, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IBook } from 'src/app/models/data/book.model';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
-import { getBook } from 'src/app/store/selectors';
-import { takeUntil } from 'rxjs/operators';
+import { MAT_DIALOG_DATA } from '@angular/material';
 // import { WindowsService } from '../windows.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements AfterViewInit, OnDestroy {
+export class BookComponent {
 
   dialogID = 'book';
 
@@ -20,30 +19,13 @@ export class BookComponent implements AfterViewInit, OnDestroy {
   openedIndexPage = 0;
   book$: Observable<IBook>;
 
-  private _unsubscribeAll: Subject<any>;
-
   constructor(
     private store: Store<DataState>,
-    // private windowsService: WindowsService
+    @Inject(MAT_DIALOG_DATA) public data
   ) {
-    this.book$ = this.store.pipe(select(getBook));
-    this._unsubscribeAll = new Subject<any>();
+    this.openedIndexPage = data.index
+    this.total = data.pages.length;
   }
-
-  ngAfterViewInit() {
-    this.book$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      (book: IBook) => {
-        if (book) {
-          this.openedIndexPage = 0;
-          this.total = book.pages.length;
-          setTimeout(() => {
-            // this.windowsService.openBook(this.dialogID, book.desc);
-          });
-        }
-      }
-    );
-  }
-
 
   nextPage() {
     if ((this.openedIndexPage + 1) < this.total) {
@@ -55,11 +37,4 @@ export class BookComponent implements AfterViewInit, OnDestroy {
       this.openedIndexPage--;
     }
   }
-
-
-  ngOnDestroy(): void {
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
-  }
-
 }

@@ -5,9 +5,10 @@
     fxFlex="0 1 100%" fxLayout="column">
   
     <div class="b-paper tg-box" style="background-color: transparent;">
+      
       <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap" fxLayout="column">
         <div class="info-textarea--container" fxFlex="0 1 100%">
-          <ng-scrollbar class="scrollbar" #scrollBar [autoUpdate]="true" style="height: 200px;">
+          <ng-scrollbar class="scrollbar" #scrollBar [autoUpdate]="true">
             <div name="editor" cols="30" autofocus class="textarea" [innerHtml]="description | dataToHtml:true"></div>
           </ng-scrollbar>
         </div>
@@ -16,13 +17,16 @@
             pTooltip="Cambia la descrizione" tooltipPosition="top" showDelay="500" hideDelay="100">Modifica</button>
         </div>
       </div>
+
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
         <div class="tg-border tg-border-left"></div>
         <div class="tg-border tg-border-right"></div>
         <div class="tg-border tg-border-bottom"></div>
       </div>
+
     </div>
+
   </div>
   
   <!-- Base Character Data -->

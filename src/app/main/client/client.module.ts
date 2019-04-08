@@ -3,7 +3,6 @@ import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HistoryService } from 'src/app/main/client/services/history.service';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OutputModule } from './output/output.module';
@@ -29,9 +28,6 @@ import { NavbarComponent } from './navbar/navbar.component';
   exports: [
     NavbarComponent,
     ClientComponent
-  ],
-  providers: [
-    HistoryService,
   ],
 })
 export class ClientModule {

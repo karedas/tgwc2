@@ -5,31 +5,68 @@
           Generale
         </div>
         
-        <div fxFlex="0 1 100%" style="height: 100%" fxLayout="row wrap">
+        <div fxFlex="0 1 100%" style="height: 100%" mat-dialog-content>
 
-          <div  fxFlex="1 0 50%">Volume Musica:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.musicVolume}}</div>
+          <div>Volume Musica:</div>
+          <div>
+            <mat-slider
+              thumbLabel 
+              [displayWith]="formatAudio"
+              class="tg-slider"
+              tickInterval="0.01"
+              max="1"
+              min="0"
+              value="{{tgConfig.musicVolume}}"
+              step="0.01">
+            </mat-slider> {{tgConfig.musicVolume}}
+          </div>
 
-          <div  fxFlex="1 0 50%">Volume Suoni:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.soundVolume}}</div>
+          <div>Volume Suoni:</div>
+          <div>
+            <mat-slider
+              thumbLabel 
+              [displayWith]="formatAudio"
+              class="tg-slider"
+              tickInterval="0.01"
+              max="1"
+              min="0"
+              value="{{tgConfig.soundVolume}}"
+              step="0.01">
+            </mat-slider> {{tgConfig.soundVolume}}
+          </div>
 
-          <div  fxFlex="1 0 50%">Non mostrare le news al login:</div>
-          <div fxFlex="1 0 auto">[checkbox={{tgConfig.news}}]</div>
+          <div>
+            <mat-checkbox [(ngModel)]="tgConfig.news">Non mostrare le news al login</mat-checkbox>
+          </div>
 
-          <div  fxFlex="1 0 50%">Dimensione Font:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.layout.fontSize}}</div>
+          <div>
+            <mat-form-field>
+              <mat-label>Dimensione Testo</mat-label>
+              <select matNativeControl required>
+                <option value="0">Piccolissimo</option>
+                <option value="1">Piccolo</option>
+                <option value="2">Medio</option>
+                <option value="3">Grande</option>
+                <option value="4">Grandissimo</option>
+                <option value="5">Gigantesco</option>
+                <option value="6">Enorme</option>
+              </select>
+            </mat-form-field>
+          </div>
 
-          <div  fxFlex="1 0 50%">Visuale gioco a due colonne:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.layout.extraOutput}}</div>
+          <div>
+            <mat-checkbox [(ngModel)]="tgConfig.layout.extraOutput">Visuale gioco a due colonne</mat-checkbox>
+          </div>
 
-          <div  fxFlex="1 0 50%">Pannello personaggio:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.layout.characterPanel}}</div>
+          <div>
+            <mat-checkbox [(ngModel)]="tgConfig.layout.characterPanel">Mostra pannello personaggio</mat-checkbox>
+          </div>
           
-          <div  fxFlex="1 0 50%">Pannello personaggio in alto:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.layout.characterPanelTopPosition}}</div>
+          <div>Posizione pannello personaggio: {{tgConfig.layout.characterPanelTopPosition}}</div>
 
-          <div  fxFlex="1 0 50%">Visuale Zen:</div>
-          <div fxFlex="1 0 auto">{{tgConfig.layout.zen}}</div>
+          <div>
+            <mat-checkbox [(ngModel)]="tgConfig.layout.zen">Modalità Zen</mat-checkbox>
+          </div>
 
         </div>
         

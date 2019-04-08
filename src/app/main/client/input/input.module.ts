@@ -12,9 +12,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   exports: [
     InputComponent
-  ],
-  providers: [
-    InputService
   ]
 })
 export class InputModule { }

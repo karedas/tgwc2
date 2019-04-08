@@ -6,7 +6,7 @@
         <div class="tg-character-content">
           <div class="m-h-0" fxLayout="row" style="height: 100%" >
             <!-- ######## Info Main Character ########  -->
-            <div class="info-main" fxLayout="column" fxFlex="1 1 auto">
+            <div class="info-main" fxLayout="column" fxFlex="1 1 auto" fxHide fxShow.gt-sm>
               <div class="info-avatar tg-shadow">
                 <img id="infoimage" src="{{ imagepath + hero.image }}" *ngIf="hero.image"/>
               </div>

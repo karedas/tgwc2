@@ -75,9 +75,6 @@ function fetchInventory(state: DataState) {
   return state.hero.inventory;
 }
 
-function fetchBook(state: DataState) {
-  return state.book;
-}
 
 function fetchDateTime(state: DataState) {
   return state.date;
@@ -104,6 +101,5 @@ export const getRegion = createSelector(getDataState, fetchRegion);
 export const getSkills = createSelector(getDataState, fetchSkills);
 export const getEquip = createSelector(getDataState, fetchEquip);
 export const getInventory = createSelector(getDataState, fetchInventory);
-export const getBook = createSelector(getDataState, fetchBook);
 export const getDateTime = createSelector(getDataState, fetchDateTime);
 export const getGenericPage = createSelector(getDataState, fetchGenericPage);
