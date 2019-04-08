@@ -1,3 +1,21 @@
+@import '~src/scss/colors';
+@import '~src/scss/utils/sprites-mixins';
+@import '~src/scss/sprites';
+
 :host {
   color: #eceae3;
+
+
+  .tg-control-panel--tab,
+  .tg-control-panel--options {
+    padding: 1em;
+  }
+
+  .tg-control-panel--tab {
+    background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
+  }
+
+  .tg-control-panel--options {
+    background-color: #00000082;
+  }
 }

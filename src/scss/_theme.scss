@@ -11,6 +11,14 @@ $tg-theme: mat-light-theme(
     $tg-theme-warn
 );
 
-@include mat-core();
+
+
+$general-typography: mat-typography-config(
+  $font-family: '"Open Sans", "Helvetica Neue", sans-serif',
+  $body-2:        mat-typography-level(14px, 24px, 600)  
+);
+
+
+@include mat-core($general-typography);
 @include angular-material-theme($tg-theme);
 

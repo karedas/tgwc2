@@ -102,14 +102,24 @@
       vertical-align: middle;
       height: auto;
       width: auto;
-      margin: auto 0 0 16px;
+      margin: auto 0;
+
+      .mat-icon {
+        font-size: 18px;
+      }
     }
   }
 
   /* Menu */
+
+    
+  .mat-menu-content {
+    background-color: #171614;
+  }
+
   .mat-menu-panel {
     border-radius: 0;
-    background-color: #352f26;
+    background-color: #171614;
   }
   
   .mat-menu-item {
@@ -117,7 +127,27 @@
     line-height: 1;
     height: auto;
     padding: .4em 16px;
-    font-size: 11px;
+    font-size: 10px;
+
+    
+    .mat-icon {
+      color: #eceae3;
+      line-height: 1;
+      height: auto;
+      padding: .4em 0;
+      font-size: 10px;
+      width: auto;
+      margin-right: 8px;
+    }
+
+    &:hover:not(disabled) {
+      background: rgba(177, 116, 39, 0.68);
+    }
+    
+    .mat-divider {
+      background:rgb(51, 50, 46);
+    }
+
   }
 }
 

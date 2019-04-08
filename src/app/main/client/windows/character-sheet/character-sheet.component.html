@@ -1,6 +1,10 @@
 <div class="tg-character-card" *ngIf="heroBase$ | async as hero"
   cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div mat-dialog-title cdkDragHandle>{{hero.name}} - Scheda personale}}</div>
+  <div mat-dialog-title cdkDragHandle>{{hero.name}} - Scheda personale
+    <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+      <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+    </button>
+  </div>
   <div class="b-ironlight-mini tg-box">
     <div class="tg-dialog-content-nopadding tg-shadow-inset">
         <div class="tg-character-content">
