@@ -1,4 +1,5 @@
 export interface TGConfig {
+  audio: boolean;
   musicVolume: number;
   soundVolume: number;
   news: boolean;
@@ -13,6 +14,7 @@ export interface TGConfig {
 }
 
 export const tgConfig: TGConfig = {
+  audio: true,
   musicVolume: 1,
   soundVolume: 0.7,
   news: true,

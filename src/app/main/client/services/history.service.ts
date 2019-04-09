@@ -11,10 +11,6 @@ export class HistoryService {
   private cmd_history_pos = 0;
   public cmd_history: any[] = [];
 
-  constructor() {
-    console.log('history');
-  }
-
   push(value: string) {
     if (value.length > 0) {
       if (this.cmd_history.length >= this.max_history_length) {

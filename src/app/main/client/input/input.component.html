@@ -17,8 +17,7 @@
     
     <div class="tg-btn-font">
       <button
-        tooltip="Aumenta / Diminuisci Testo"
-        placement="top"
+        tooltip="Aumenta / Diminuisci Testo" show-delay="500" placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="onFontSizeChange()">
@@ -27,8 +26,7 @@
     </div>
     <div class="tg-btn-extraboard" fxHide fxShow.gt-sm>
       <button
-        tooltip="Apri/Chiudi Dettagli"
-        placement="top"
+        tooltip="Apri/Chiudi Dettagli" show-delay="500" placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleExtraOutput($event)"
@@ -38,8 +36,7 @@
     </div>
     <div class="tg-btn-dashboard">
       <button
-        tooltip="Apri/Chiudi Dashboard"
-        placement="top"
+        tooltip="Apri/Chiudi Dashboard" show-delay="500" placement="top"
         type="button" 
         class="tg-fnt-button"
         (mousedown)="toggleCharacterPanel($event)"
@@ -49,9 +46,7 @@
     </div>
     <div class="tg-btn-zen" fxHide fxShow.gt-xs>
       <button 
-        tooltip="Modalità Zen"
-        placement="top"
-        type="button"
+        tooltip="Modalità Zen" placement="top" type="button"
         class="tg-fnt-button"
         (mousedown)="toggleZen($event)"
         [ngClass]="{'isActive': tgConfig.layout.zen}">

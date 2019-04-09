@@ -11,7 +11,7 @@
         <div class="b-paper tg-box">
           <div class="tg-book-inset" fxLayout="column">
 
-            <ng-scrollbar class="scrollbar" *ngIf="data.pages.length !== 0; else noPage">
+            <ng-scrollbar class="scrollbar scrollbar-dialog" *ngIf="data.pages.length !== 0; else noPage">
 
               <ng-container *ngFor="let page of data.pages; let i=index">
 

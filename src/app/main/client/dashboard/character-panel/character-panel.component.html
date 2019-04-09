@@ -34,7 +34,7 @@
               <ng-template #convaTooltip placement="top">
                 Sei <b class='tg-yellow'>convalescente!</b>
               </ng-template>
-              <div *ngIf="hero.conva === '1'" class="status-conva" fxLayout tooltip="convaTooltip">
+              <div *ngIf="hero.conva === '1'" class="status-conva" fxLayout tooltip="convaTooltip" show-delay="500">
                 <div class="status-icon-box">
                   <i></i>
                 </div>
@@ -42,10 +42,10 @@
 
               <!-- Position -->
               <ng-template #positionTooltip placement="top">
-                  Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>
+                Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>
               </ng-template>
-              <div tooltip="positionTooltip"
-                *ngIf="hero.position" class="status-position" fxLayout [ngClass]="{
+              <div tooltip="positionTooltip" show-delay="500" *ngIf="hero.position" class="status-position" fxLayout
+                [ngClass]="{
                   'pos-0': (hero.position == '0'),
                   'pos-2': (hero.position == '2'),
                   'pos-3': (hero.position == '3'),
@@ -61,9 +61,9 @@
 
               <!-- Speed -->
               <ng-template #speedTooltip placement="top">
-                  Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>
+                Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>
               </ng-template>
-              <div tooltip="speedTooltip" showDelay="300" *ngIf="hero.walk; let walk;" class="status-walk" fxLayout 
+              <div tooltip="speedTooltip" show-delay="500" *ngIf="hero.walk; let walk;" class="status-walk" fxLayout
                 [ngClass]="{
                   'walk-0': (walk == 'passeggio'),
                   'walk-1': (walk == 'camminata'),
@@ -80,10 +80,10 @@
 
                 <!-- Combat: Difesa -->
                 <ng-template #combatDifTooltip placement="top">
-                    Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>
+                  Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>
                 </ng-template>
-                <div tooltip="combatDifTooltip"
-                  class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
+                <div tooltip="combatDifTooltip" show-delay="500" class="status-combat-mod infostatus-block" fxLayout
+                  [ngClass]="{
                     'mod-par-a': (combatSet?.mod == 'deflettere'),
                     'mod-par-s': (combatSet?.mod == 'parare'),
                     'mod-sch': (combatSet?.mod == 'schivare')
@@ -96,9 +96,9 @@
 
                 <!-- Combat: Atteggiamento -->
                 <ng-template #combatAttTooltip placement="top">
-                    Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>
+                  Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>
                 </ng-template>
-                <div tooltip="combatAttTooltip" class="status-combat-attegg" fxLayout>
+                <div tooltip="combatAttTooltip" show-delay="500" class="status-combat-attegg" fxLayout>
                   <div class="status-icon-box">
                     <i></i>
                   </div>
@@ -108,7 +108,7 @@
 
               <!-- Money -->
               <ng-template #moneyTooltip placement="top">
-                  I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>
+                I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>
               </ng-template>
               <div class="status-money infostatus-block tg-yellow" fxLayout tooltip="moneyTooltip">
                 <div class="status-icon-box">
@@ -121,24 +121,24 @@
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" tooltip="Salute" placement="top">
+              <div class="barcont barthin lft" tooltip="Salute" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.hit }}</i> / 100</span>
                 <span class="red barC healthbar" [style.width.%]="hero.status?.hit"></span>
               </div>
-              <div class="barcont barthin" tooltip="Fiato" placement="top">
+              <div class="barcont barthin" tooltip="Fiato" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.move }}</i> / 100</span>
                 <span class="green barC movebar" [style.width.%]="hero.status?.move"></span>
               </div>
             </div>
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" tooltip="Fame" placement="top">
+              <div class="barcont barthin lft" tooltip="Fame" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.food }}</i> / 100</span>
                 <span class="orange barC hungrybar" [style.width.%]="hero.status?.food"></span>
               </div>
-              <div class="barcont barthin" tooltip="Sete" placement="top">
+              <div class="barcont barthin" tooltip="Sete" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.drink}}</i> / 100</span>
                 <span class="blue barC thirstbar" [style.width.%]="hero.status?.drink"></span>

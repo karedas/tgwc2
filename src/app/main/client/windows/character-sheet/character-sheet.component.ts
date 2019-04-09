@@ -32,7 +32,6 @@ export class CharacterSheetComponent  {
     private game: GameService,
     @Inject(MAT_DIALOG_DATA) data) {
 
-      console.log(data);
     this.openedTab = data.tab;
     this.heroBase$ = this.store.pipe(select(getHero));
   }
