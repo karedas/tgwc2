@@ -30,6 +30,9 @@
 
 }
 
+.mat-raised-button {
+  line-height: 24px;
+}
 
 .mat-button, .mat-icon-button {
   height: 26px;
@@ -39,13 +42,16 @@
   
 }
 
-.material-icons {
-  font-size:18px;
-  height: 26px;
-  width: 26px;
-  line-height: 26px;
+.mat-icon-button  {
+  width: auto;
+  font-size: 10px;
 }
 
+.material-icons {
+  font-size:15px;
+  height: 26px;
+  line-height: 26px;
+}
 
 .nav-right {
   margin-left: auto;

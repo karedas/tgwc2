@@ -22,7 +22,6 @@ export class NewsComponent  implements OnInit {
     private game: GameService,
     private _configService: ConfigService,
     private dialogRef: MatDialogRef<NewsComponent>,
-    private inputService: InputService
   ) {
   }
 

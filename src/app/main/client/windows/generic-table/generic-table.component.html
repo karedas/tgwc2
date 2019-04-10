@@ -1,7 +1,15 @@
+<div mat-dialog-title cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" cdkDragBoundary="body">
+    {{headerTitle}}
+    <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+      <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+    </button>
+</div>
 <ng-container *ngIf="dataTable$ | async">
     <div class="tg-generictable">
       <div class="b-ironlight-mini tg-box">
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
+
+
           <!-- Generic Table content start -->
           <!-- <p-table 
             #genericTable
@@ -13,9 +21,8 @@
             [rowHover]="true"
             sortMode="multiple"
             [reorderableColumns]="true">
-            
-
             <ng-template pTemplate="header" let-columns>
+               -->
               <!-- Caption-->
               <!-- <tr>
                 <th *ngFor="let col of columns" [pSortableColumn]="col.field">

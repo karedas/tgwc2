@@ -9,6 +9,7 @@ import { CharacterSheetComponent } from '../../client/windows/character-sheet/ch
 import { CommandsListComponent } from '../../client/windows/commands-list/commands-list.component';
 import { BookComponent } from '../../client/windows/book/book.component';
 import { config } from 'rxjs';
+import { GenericTableComponent } from '../../client/windows/generic-table/generic-table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -165,4 +166,22 @@ export class DialogV2Service {
     const ref = this.dialog.open( BookComponent, config);
     return ref;
   }
+
+
+  openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig>  {
+
+    const dialogID = 'generictable';
+    let config = new MatDialogConfig();
+
+    config.id = dialogID;
+    config.width = 'auto';
+    config.height = 'auto';
+    config.data = {
+      title: data[0]
+    }
+
+    const ref = this.dialog.open( GenericTableComponent, config );
+    return ref;
+  }
+
 }

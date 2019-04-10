@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component,  OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
@@ -10,11 +10,10 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'tg-generic-table',
   templateUrl: './generic-table.component.html',
   styleUrls: ['./generic-table.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
-export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
-  // @ViewChild('genericTable') table: Table;
+export class GenericTableComponent implements  OnInit, OnDestroy {
+
 
 
   public readonly dialogID: string = 'genericTable';
@@ -23,13 +22,12 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
   public rows = [];
   public columns = [];
   public currentPageLimit = 10;
-  private headerTitle: string;
+  public headerTitle: string = 'Lista Generica';
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    // private windowsService: WindowsService
   ) {
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
@@ -37,17 +35,17 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     this._unsubscribeAll = new Subject;
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (dt: IGenericTable) => {
+        console.log(dt);
         if (dt) {
           this.setHeaderTitle(dt.title);
           // if (this.table ) {
           //   this.table.reset();
           // }
           this.populate(dt);
-          this.open();
         }
       });
   }
@@ -84,12 +82,12 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     }
   }
 
-  private open() {
-    setTimeout(() => {
-      // this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
-    }, 200);
+  // private open() {
+  //   setTimeout(() => {
+  //     // this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
+  //   }, 200);
 
-  }
+  // }
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

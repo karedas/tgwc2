@@ -50,8 +50,10 @@
 
 
   <div class="nav-right">
-      <button mat-icon-button><mat-icon color="accent" (click)="onItemClick('audio')">
-        {{!!tgConfig.audio ? 'volume_up' : 'volume_down'}}
+      <button mat-icon-button (click)="onItemClick('audio')"> 
+        Audio 
+        <mat-icon color="accent" >
+        {{!!tgConfig.audio ? 'volume_off' : 'volume_up'}}
       </mat-icon></button>
 
       <!-- <span style="font-size:9px;">{{gitVersion}}</span> -->

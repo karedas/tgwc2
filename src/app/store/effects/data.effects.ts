@@ -38,6 +38,7 @@ export class DataEffects {
     })
   );
 
+
   @Effect()
   equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
@@ -67,4 +68,13 @@ export class DataEffects {
       this.dialogV2Service.openBook(data.payload, 0);
     })
   );
+
+  @Effect({ dispatch: false })
+  genericTable$: Observable<Action> = this.actions$.pipe(
+    ofType<PayloadActionData>(DataEvenType.GENERICTABLE),
+    tap((res) => {
+      this.dialogV2Service.openGenericTable();
+    })
+  );
+  
 }
