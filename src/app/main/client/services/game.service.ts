@@ -6,11 +6,12 @@ import { HistoryService } from './history.service';
 import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
+import { MatDialog } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class GameService {
 
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
-
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
 
@@ -49,7 +49,6 @@ export class GameService {
   };
 
   private render: Renderer2;
-
   private _dataSubscription: Subscription;
   private _updateNeededSubscription: Subscription;
 
@@ -60,6 +59,7 @@ export class GameService {
     private historyService: HistoryService,
     private http: HttpClient,
     private _configService: ConfigService,
+    public dialog: MatDialog,
     rendererFactory: RendererFactory2,
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
@@ -103,7 +103,6 @@ export class GameService {
     });
 
     this._updateNeededSubscription = this.dataParserService.updateNeeded.subscribe((up) => {
-
       this.updateNeeded(up);
     });
   }
@@ -119,6 +118,9 @@ export class GameService {
   }
 
   updateNeeded(what: any) {
+
+    console.log('need', what);
+
     const now = Date.now();
 
     if (what.inventory > this.client_update.inventory.version) {
@@ -135,24 +137,27 @@ export class GameService {
 
     if (now > this.client_update.lastDataTime) {
 
-      // if (this.client_update.inventory.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.invOpen) {
-      //   this.sendToServer('@inv');
-      //   this.client_update.inventory.needed = false;
-      //   this.client_update.lastDataTime = now;
-      // }
+      if (this.client_update.inventory.needed && !this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
+        console.log('inv')
+        this.sendToServer('@inv');
+        this.client_update.inventory.needed = false;
+        this.client_update.lastDataTime = now;
+      }
 
-      // if (this.client_update.equipment.needed && !this.genericDialogService.isClosed('charactersheet') && this.client_update.equipOpen) {
-      //   this.sendToServer('@equip');
-      //   this.client_update.lastDataTime = now;
-      // }
+      if (this.client_update.equipment.needed && !this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
+        console.log('equip')
+        this.sendToServer('@equip');
+        this.client_update.lastDataTime = now;
+      }
 
-      // if (this.client_update.room.needed && this.tgConfig.layout.extraOutput && !this.client_update.inContainer) {
-      //   this.sendToServer('@agg');
-      //   this.client_update.room.needed = false;
-      //   this.client_update.lastDataTime = now;
-      // } else if (this.client_update.inContainer && this.config.layout.extraOutput) {
-      //   this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
-      // }
+      if (this.client_update.room.needed && this.tgConfig.layout.extraOutputDisplay && !this.client_update.inContainer) {
+        console.log('agg')
+        this.sendToServer('@agg');
+        this.client_update.room.needed = false;
+        this.client_update.lastDataTime = now;
+      } else if (this.client_update.inContainer && this.config.layout.extraOutputDisplay) {
+        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
+      }
     }
   }
 

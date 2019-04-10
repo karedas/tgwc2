@@ -8,7 +8,6 @@ import { LoginSmartComponent } from '../../client/windows/login-smart/login-smar
 import { CharacterSheetComponent } from '../../client/windows/character-sheet/character-sheet.component';
 import { CommandsListComponent } from '../../client/windows/commands-list/commands-list.component';
 import { BookComponent } from '../../client/windows/book/book.component';
-import { config } from 'rxjs';
 import { GenericTableComponent } from '../../client/windows/generic-table/generic-table.component';
 
 @Injectable({
@@ -96,11 +95,14 @@ export class DialogV2Service {
       config.data = {
         tab: detail
       };
-  
-      const ref = this.dialog.open( CharacterSheetComponent, config);
 
+      const ref = this.dialog.open( CharacterSheetComponent, config);
       return ref;
+
+    } else {
+      this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail }
     }
+    
   }
 
   openCommandsList(): MatDialogRef<CommandsListComponent, MatDialogConfig> {
@@ -138,8 +140,7 @@ export class DialogV2Service {
 
       const ref = this.dialog.open(ControlPanelComponent, config);
       return ref;
-    }
-    
+    }    
   }
 
   /**

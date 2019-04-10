@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IHero } from 'src/app/models/data/hero.model';
 import { getHero } from 'src/app/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tg-character-sheet',
@@ -21,6 +21,7 @@ export class CharacterSheetComponent  {
   imagepath: string = environment.media_address;
 
   heroBase$: Observable<IHero>;
+  
   public heroImageUrl: string;
   public heroName: string;
   public heroTitle: string;
@@ -30,9 +31,9 @@ export class CharacterSheetComponent  {
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    @Inject(MAT_DIALOG_DATA) data) {
+    private dialogRef: MatDialogRef<CharacterSheetComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    this.openedTab = data.tab;
     this.heroBase$ = this.store.pipe(select(getHero));
   }
 
@@ -59,7 +60,5 @@ export class CharacterSheetComponent  {
         this.game.processCommands('abilita');
       break;
     }
-    this.openedTab = tab;
   }
-
 }

@@ -4,7 +4,6 @@ import { GameService } from 'src/app/main/client/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { ConfigService } from 'src/app/services/config.service';
 import { MatDialogRef } from '@angular/material';
-import { InputService } from '../../input/input.service';
 
 @Component({
   selector: 'tg-news',

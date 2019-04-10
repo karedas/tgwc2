@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { CookieService } from 'ngx-cookie-service';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { TooltipModule } from 'ng2-tooltip-directive';
@@ -47,7 +46,6 @@ import { InputService } from '../main/client/input/input.service';
       useColumnBasisZero: false,
     }),
 
-    FontAwesomeModule,
     NgScrollbarModule,
     TooltipModule,
     PipesModule,
@@ -69,7 +67,6 @@ import { InputService } from '../main/client/input/input.service';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-    FontAwesomeModule,
     IconsComponent,
     HstatComponent,
     PipesModule,

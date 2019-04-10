@@ -2,7 +2,6 @@ import { Component, ViewChild, ElementRef, ViewEncapsulation, HostListener, OnDe
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
-import { faColumns, faSolarPanel, faBullseye, faFont } from '@fortawesome/free-solid-svg-icons';
 
 import { State } from 'src/app/store';
 import { getHero } from 'src/app/store/selectors';
@@ -23,11 +22,6 @@ export class InputComponent implements OnInit, OnDestroy {
   @ViewChild('inputCommand') ic: ElementRef;
 
   tgConfig: any;
-
-  facolumns = faColumns;
-  faSolarPanel = faSolarPanel;
-  faBullseye = faBullseye;
-  faFont = faFont;
 
   public inCombat = false;
 
@@ -126,7 +120,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   toggleExtraOutput(event: Event) {
     this._configService.setConfig({
-      layout: { extraOutput: !this.tgConfig.layout.extraOutput }
+      layout: { extraOutputDisplay: !this.tgConfig.layout.extraOutputDisplay }
     });
   }
 

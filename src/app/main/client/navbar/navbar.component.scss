@@ -26,32 +26,24 @@
       height: 100%;
     }
   }
-  
-
 }
 
-.mat-raised-button {
-  line-height: 24px;
-}
 
 .mat-button, .mat-icon-button {
-  height: 26px;
+  height: 28px;
   line-height: 28px;
   font-size: 10px;
   min-width: auto;
   
 }
 
-.mat-icon-button  {
-  width: auto;
-  font-size: 10px;
-}
-
 .material-icons {
-  font-size:15px;
+  font-size: 18px;
   height: 26px;
+  width: 26px;
   line-height: 26px;
 }
+
 
 .nav-right {
   margin-left: auto;

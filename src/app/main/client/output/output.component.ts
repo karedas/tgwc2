@@ -65,7 +65,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
@@ -102,15 +102,17 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
+        
         if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
           this.lastRoomDescription = room.desc['base'];
         }
+        
         this.typeDetail = 'room';
         const content = this.setContent('room', room);
         this.output.push(content);
         this.endOutputStore();
-
-        if (this.game.client_update.room.version < room.ver) {
+        console.log(this.splitArea);
+        if (this.game.client_update.room.version < room.ver && this.splitArea) {
           this.game.client_update.room.version = room.ver;
           this.game.client_update.room.needed = false;
         }
@@ -148,7 +150,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.setOutputSplit();
-    });
+    }, 200);
   }
 
   private setContent(t: string, c: any): any {

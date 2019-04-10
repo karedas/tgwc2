@@ -138,11 +138,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       case 'disconnect':
         this.game.disconnectGame();
         break;
-      // Gioco
-      case 'showGameCommands': 
-        this.game.processCommands('comandi');
-      break;
-      // Guida
       case 'news':
         this.dialogV2Service.openNews();
         break;
@@ -153,6 +148,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.audioService.toggleAudio();
         break;
       default:
+        this.game.processCommands(what);
         return false;
     }
 

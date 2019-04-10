@@ -30,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
 import 'hammerjs';
+import { AngularSplitModule } from 'angular-split';
 
 
 @NgModule({
@@ -62,9 +63,10 @@ import 'hammerjs';
       serverLogLevel: NgxLoggerLevel.ERROR,
     }),
 
-    /**
-     * MATERIAL DIALOG
-     */
+    // TODO: I'll need to move out. 
+    AngularSplitModule.forRoot(),
+
+
     DialogV2Module,
     /** --------------------- */
     // WindowsModule,
@@ -72,7 +74,7 @@ import 'hammerjs';
     AppRoutingModule,
   ],
   exports: [
-    // WindowsModule
+    AngularSplitModule
   ],
   providers: [
     SocketService,

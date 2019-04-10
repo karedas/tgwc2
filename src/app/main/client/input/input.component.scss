@@ -83,12 +83,13 @@
     display: flex;
 
     .tg-fnt-button {
-      background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
-      padding-left: 8px;
+      font-size: 13px;
+      line-height: 1;
+      height: 100%;
+      width: auto;
+      padding:0 4px;
       color: #54544d;
       box-shadow: none;
-      height: 100%;
-      font-size: 13px;
 
       &:hover,
       &.isActive {
@@ -98,6 +99,10 @@
       &:active {
         color: $tg-yellow;
       }
+    }
+
+    .mat-icon {
+      font-size: 18px;
     }
   }
 

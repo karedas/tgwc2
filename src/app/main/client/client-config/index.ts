@@ -5,7 +5,8 @@ export interface TGConfig {
   news: boolean;
   layout: {
     fontSize: number,
-    extraOutput: boolean,
+    extraOutputDisplay: boolean,
+    extraOutputSize: number,
     characterPanel: boolean,
     characterPanelTopPosition: boolean,
     zen: boolean,
@@ -20,7 +21,8 @@ export const tgConfig: TGConfig = {
   news: true,
   layout: {
     fontSize: 2,
-    extraOutput: true,
+    extraOutputDisplay: true,
+    extraOutputSize: 50,
     characterPanel: true,
     characterPanelTopPosition: false,
     zen: false,

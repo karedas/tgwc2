@@ -16,41 +16,42 @@
     </ng-container>
     
     <div class="tg-btn-font">
-      <button
+      <button mat-icon-button
         tooltip="Aumenta / Diminuisci Testo" show-delay="500" placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="onFontSizeChange()">
-        <fa-icon [icon]="faFont"></fa-icon>
+        <mat-icon>format_size</mat-icon>
       </button>
     </div>
     <div class="tg-btn-extraboard" fxHide fxShow.gt-sm>
       <button
+        mat-icon-button
         tooltip="Apri/Chiudi Dettagli" show-delay="500" placement="top"
         type="button"
         class="tg-fnt-button"
         (mousedown)="toggleExtraOutput($event)"
-        [ngClass]="{'isActive': tgConfig.layout.extraOutput}">
-        <fa-icon [icon]="facolumns"></fa-icon>
+        [ngClass]="{'isActive': tgConfig.layout.extraOutputDisplay}">
+        <mat-icon>vertical_split</mat-icon>
       </button>
     </div>
     <div class="tg-btn-dashboard">
-      <button
+      <button mat-icon-button
         tooltip="Apri/Chiudi Dashboard" show-delay="500" placement="top"
-        type="button" 
+        type="button"
         class="tg-fnt-button"
         (mousedown)="toggleCharacterPanel($event)"
         [ngClass]="{'isActive': tgConfig.layout.characterPanel}">
-        <fa-icon [icon]="faSolarPanel"></fa-icon>
+        <mat-icon>face_outline</mat-icon>
       </button>
     </div>
     <div class="tg-btn-zen" fxHide fxShow.gt-xs>
-      <button 
+      <button mat-icon-button
         tooltip="Modalità Zen" placement="top" type="button"
         class="tg-fnt-button"
         (mousedown)="toggleZen($event)"
         [ngClass]="{'isActive': tgConfig.layout.zen}">
-        <fa-icon [icon]="faBullseye"></fa-icon>
+        <mat-icon>aspect_ratio_outline</mat-icon>
       </button>
     </div>
   </div>

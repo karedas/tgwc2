@@ -21,8 +21,10 @@ export const loginEventName = {
 export class LoginService {
 
   public isLoggedIn$: Observable<any>;
+
   public isLoggedInSubject: BehaviorSubject<boolean>;
 
+  
   private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;
