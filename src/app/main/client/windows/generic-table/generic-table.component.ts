@@ -19,9 +19,9 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
   public readonly dialogID: string = 'genericTable';
 
   public dataTable$: Observable<any>;
-  public rows = [];
-  public columns = [];
-  public currentPageLimit = 10;
+  public data = [];
+  public columnsToDisplay: string[]
+  public resultsLength: number = 0;
   public headerTitle: string = 'Lista Generica';
 
   private _unsubscribeAll: Subject<any>;
@@ -39,12 +39,9 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
     // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
       (dt: IGenericTable) => {
-        console.log(dt);
         if (dt) {
           this.setHeaderTitle(dt.title);
-          // if (this.table ) {
-          //   this.table.reset();
-          // }
+          this.resultsLength = Object.keys(dt.data).length;
           this.populate(dt);
         }
       });
@@ -56,28 +53,29 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
 
   private populate(dataTable: any) {
 
-    this.rows = [];
-    this.columns = [];
+    this.data = [];
+    this.columnsToDisplay = [];
 
     if (dataTable.head) {
       dataTable.head.forEach((v: any, i: number) => {
         switch (typeof v) {
           case 'object':
-            this.columns.push({ field: 'prop_' + i, 'name': v.title.toLowerCase() });
+            this.columnsToDisplay.push(v.title.toLowerCase());
             break;
           default:
-            this.columns.push({ field: 'prop_' + i, 'name': v.toLowerCase() });
+            this.columnsToDisplay.push(v.toLowerCase());
             break;
         }
       });
     }
+    // pupulate data
     if (dataTable.data) {
       dataTable.data.forEach((d: any) => {
         const obj = {};
         d.map((row: string, rowIndex: number) => {
-          obj[this.columns[rowIndex].field] = row;
+          obj[this.columnsToDisplay[rowIndex]] = row;
         });
-        this.rows.push(obj);
+        this.data.push(obj);
       });
     }
   }

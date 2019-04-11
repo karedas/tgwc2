@@ -36,7 +36,7 @@ export class NewsComponent  implements OnInit {
   onContinue(): void {
     // Save Next Login News display based on user's choice
     if (this.dontShowNextTime) {
-      this._configService.config = { news: false };
+      this._configService.setConfig({ news: false });
     }
     this.game.sendToServer('');
   }

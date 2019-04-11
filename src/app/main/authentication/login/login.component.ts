@@ -109,8 +109,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
         
+        console.log(loginSuccess);
         if (loginSuccess === true) {
-
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
 
           // Google Analytics

@@ -14,6 +14,7 @@ export interface TGConfig {
   characterPanel: boolean,
   characterPanelTopPosition: boolean,
   zen: boolean,
+  tablePageSize: number
 }
 
 
@@ -34,5 +35,5 @@ export const tgConfig: TGConfig = {
   characterPanel: true,
   characterPanelTopPosition: false,
   zen: false,
-
+  tablePageSize: 20
 };

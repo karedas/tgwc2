@@ -159,7 +159,43 @@
   .mat-menu-item-submenu-trigger::after {
     color: rgba(236, 234, 227, 0.54);
   }
+ 
+ 
+ 
+  /* Table */
+
+  .mat-table {
+    background: #271d18;
+
+    .mat-header-cell {
+      color: #FFB300;
+    }
+
+    td.mat-cell {
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+      color: #dedede;
+      font-size: 100%;
+    }
+
+    tr.mat-footer-row, tr.mat-row {
+      height: 28px;
+    }
+  }
+
+
+  /* Paginator */
+  .mat-paginator {
+    background: #191611;
+  }
+
+  .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.54);
+  }
 }
+
+
+
 
 // /* Tooltip */
 // body {

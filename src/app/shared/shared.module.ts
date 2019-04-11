@@ -11,7 +11,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 /* Material Design */
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule, MatIconModule, MatInputModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatInputModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -58,7 +58,8 @@ import { InputService } from '../main/client/input/input.service';
     MatDividerModule,
     MatSelectModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
 
   exports: [
@@ -80,7 +81,8 @@ import { InputService } from '../main/client/input/input.service';
     MatDividerModule,
     MatSelectModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
 })
 export class SharedModule {
