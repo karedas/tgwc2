@@ -23,12 +23,9 @@ export class ConfigService {
 
 
   set config(value) {
-
     let config = this._configSubject.getValue();
     config = _.merge({}, config, value);
-
     this._configSubject.next(config);
-
   }
 
   get config(): any | Observable<any> {

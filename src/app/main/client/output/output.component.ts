@@ -65,13 +65,14 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
       });
+
 
     /* Check login status and if is disconnect cleaning the output messages */
     this.loginService.isLoggedIn
@@ -111,7 +112,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         const content = this.setContent('room', room);
         this.output.push(content);
         this.endOutputStore();
-        console.log(this.splitArea);
         if (this.game.client_update.room.version < room.ver && this.splitArea) {
           this.game.client_update.room.version = room.ver;
           this.game.client_update.room.needed = false;
@@ -183,11 +183,19 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setOutputSplit() {
+    // Check if the Output area is over min-size to show split. 
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
       this.showExtraByViewport = false;
     } else {
       this.showExtraByViewport = true;
     }
+  }
+
+  onDragEnd(event) {
+    // Store the Split size in the main config
+    this._configService.setConfig({
+      output: { extraArea: {size: [event.sizes[0], event.sizes[1]]} }
+    });
   }
 
   ngOnDestroy() {

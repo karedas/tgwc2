@@ -4,10 +4,16 @@
     <div class="tg-output-main" #mainOutputArea>
 
       <!-- Output Area -->
-      <ng-container *ngIf="showExtraByViewport && tgConfig.layout.extraOutputDisplay as extra; else noextra">
+      <ng-container *ngIf="showExtraByViewport && tgConfig.output.extraArea.visible as extra; else noextra">
 
-        <as-split [direction]="'horizontal'" class="tg-output--splitter" #splitArea (splitEnd)="console.log('yo')">
-          <as-split-area [size]="tgConfig.layout.extraOutputSize" style="position:relative">
+        <as-split #splitArea 
+          class="tg-output--splitter" 
+          [direction]="'horizontal'" 
+          (dragEnd)="onDragEnd($event)">
+
+          <as-split-area 
+            [size]="tgConfig.output.extraArea.size[0]" 
+            style="position:relative">
 
             <tg-status></tg-status>
 
@@ -25,8 +31,9 @@
                 </div>
               </ng-scrollbar>
             </div>
+
           </as-split-area>
-          <as-split-area [size]="(100 - tgConfig.layout.extraOutputSize)">
+          <as-split-area [size]="tgConfig.output.extraArea.size[1]">
             <div style="height: 100%; overflow:hidden;">
               <div class="tg-output--extradetail">
                 <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extra"

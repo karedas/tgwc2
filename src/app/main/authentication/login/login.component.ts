@@ -108,14 +108,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSubscription = this.loginService.login(values)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
-
+        
         if (loginSuccess === true) {
 
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
 
           // Google Analytics
           this.googleAnalyticsService.emitEvent(`userPage`, `User ${this.username.value} Action`, 'login');
-          this.router.navigate([redirect]).finally( () => {
+
+          this.router.navigate([redirect]).then( () => {
             this.loginService._loginReplayMessage = ' ';
           });
 

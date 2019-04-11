@@ -150,12 +150,14 @@ export class GameService {
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.room.needed && this.tgConfig.layout.extraOutputDisplay && !this.client_update.inContainer) {
+      if (this.client_update.room.needed 
+          && this.tgConfig.output.extraArea.visible 
+          && !this.client_update.inContainer) {
         console.log('agg')
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
-      } else if (this.client_update.inContainer && this.config.layout.extraOutputDisplay) {
+      } else if ( this.client_update.inContainer && this.config.output.extraArea.visible ) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
       }
     }
@@ -257,8 +259,8 @@ export class GameService {
   /** Font Size Adjustement */
 
   setOutputSize() {
-    const newSize = (this.tgConfig.layout.fontSize + 1 ) % font_size_options.length;
-    const old_class = font_size_options[this.tgConfig.layout.fontSize].class;
+    const newSize = (this.tgConfig.fontSize + 1 ) % font_size_options.length;
+    const old_class = font_size_options[this.tgConfig.fontSize].class;
     const new_class = font_size_options[newSize].class;
 
     if (old_class) {
@@ -267,10 +269,8 @@ export class GameService {
     }
 
     // Save in Storage
-    this._configService.config =  {
-      layout: {
-        fontSize: newSize
-      }
+    this._configService.config =  { 
+      fontSize: newSize
     };
   }
 }

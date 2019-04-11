@@ -3,29 +3,36 @@ export interface TGConfig {
   musicVolume: number;
   soundVolume: number;
   news: boolean;
-  layout: {
-    fontSize: number,
-    extraOutputDisplay: boolean,
-    extraOutputSize: number,
-    characterPanel: boolean,
-    characterPanelTopPosition: boolean,
-    zen: boolean,
+  fontSize: number,
+  output: {
+    extraArea:  {
+      visible: boolean,
+      size: number[]
+    },
     list_column_mode: boolean
-  };
+  }
+  characterPanel: boolean,
+  characterPanelTopPosition: boolean,
+  zen: boolean,
 }
 
+
+/** DEFAULT CONFIG */
 export const tgConfig: TGConfig = {
   audio: true,
   musicVolume: 1,
   soundVolume: 0.7,
   news: true,
-  layout: {
-    fontSize: 2,
-    extraOutputDisplay: true,
-    extraOutputSize: 50,
-    characterPanel: true,
-    characterPanelTopPosition: false,
-    zen: false,
+  fontSize: 2,
+  output: {
+    extraArea: {
+      visible: true,
+      size: [50,50]
+    },
     list_column_mode: true
-  }
+  },
+  characterPanel: true,
+  characterPanelTopPosition: false,
+  zen: false,
+
 };
