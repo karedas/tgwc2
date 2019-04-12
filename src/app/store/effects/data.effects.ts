@@ -76,5 +76,5 @@ export class DataEffects {
       this.dialogV2Service.openGenericTable();
     })
   );
-  
+
 }

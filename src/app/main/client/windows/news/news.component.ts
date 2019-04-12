@@ -29,8 +29,8 @@ export class NewsComponent  implements OnInit {
       setTimeout(() => {
         this.textAreaScrollbar.update();
       });
-    })
-    
+    });
+
   }
 
   onContinue(): void {

@@ -24,7 +24,7 @@ export class LoginService {
 
   public isLoggedInSubject: BehaviorSubject<boolean>;
 
-  
+
   private loginErrorMessage$: BehaviorSubject<string>;
   private username: string;
   private password: string;

@@ -15,6 +15,7 @@ import { IGenericPage } from 'src/app/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../client-config';
 
+
 @Component({
   selector: 'tg-output',
   templateUrl: './output.component.html',
@@ -103,11 +104,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
-        
+
         if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
           this.lastRoomDescription = room.desc['base'];
         }
-        
+
         this.typeDetail = 'room';
         const content = this.setContent('room', room);
         this.output.push(content);
@@ -183,11 +184,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setOutputSplit() {
-    // Check if the Output area is over min-size to show split. 
+    // Check if the Output area is over min-size to show split.
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
-      this.showExtraByViewport = false;
+      this.showExtraByViewport = this.game.showExtraByViewport = false;
     } else {
-      this.showExtraByViewport = true;
+      this.showExtraByViewport = this.game.showExtraByViewport = true;
     }
   }
 

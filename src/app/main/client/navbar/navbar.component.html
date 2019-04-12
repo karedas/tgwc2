@@ -62,7 +62,7 @@
       <button mat-icon-button (click)="onItemClick('audio')"> 
         Audio 
         <mat-icon color="accent" >
-        {{!!tgConfig.audio ? 'volume_off' : 'volume_up'}}
+        {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
       </mat-icon></button>
 
       <!-- <span style="font-size:9px;">{{gitVersion}}</span> -->

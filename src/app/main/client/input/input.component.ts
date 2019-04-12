@@ -120,7 +120,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   toggleExtraOutput(event: Event) {
     this._configService.setConfig({
-      output: { extraArea: { visible: !this.tgConfig.output.extraArea }}
+      output: { extraArea: { visible: !this.tgConfig.output.extraArea.visible }}
     });
   }
 

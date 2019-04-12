@@ -7,7 +7,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { TooltipModule } from 'ng2-tooltip-directive';
- 
+
 /* Material Design */
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
@@ -16,13 +16,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
 
-//My Modules and Components
+// My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { PipesModule } from '../pipes/pipes.module';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { HstatComponent } from '../main/common/hstat/hstat.component';
 
-//My Services
+// My Services
 import { AudioService } from '../main/client/audio/audio.service';
 import { ConfigService } from '../services/config.service';
 import { DialogV2Service } from '../main/common/dialog-v2/dialog-v2.service';
@@ -49,7 +49,7 @@ import { InputService } from '../main/client/input/input.service';
     NgScrollbarModule,
     TooltipModule,
     PipesModule,
-    
+
     /** Angular Material Modules */
     MatCheckboxModule,
     MatMenuModule,

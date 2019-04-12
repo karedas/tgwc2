@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isMatMenu2Open = false;
     }
   }
-  
+
 
   menuLeave(trigger, button) {
     setTimeout(() => {
@@ -70,7 +70,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       } else {
         this.isMatMenuOpen = false;
       }
-    }, 80)
+    }, 80);
   }
 
   menu2enter() {
@@ -90,28 +90,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isMatMenu2Open = false;
         trigger2.closeMenu();
       }
-    }, 100)
+    }, 100);
   }
 
   buttonEnter(trigger) {
     setTimeout(() => {
-      if(this.prevButtonTrigger && this.prevButtonTrigger != trigger){
+      if (this.prevButtonTrigger && this.prevButtonTrigger != trigger) {
         this.prevButtonTrigger.closeMenu();
         this.prevButtonTrigger = trigger;
         this.isMatMenuOpen = false;
         this.isMatMenu2Open = false;
-        trigger.openMenu()
-      }
-      else if (!this.isMatMenuOpen) {
+        trigger.openMenu();
+      } else if (!this.isMatMenuOpen) {
         this.enteredButton = true;
-        this.prevButtonTrigger = trigger
-        trigger.openMenu()
-      }
-      else {
+        this.prevButtonTrigger = trigger;
+        trigger.openMenu();
+      } else {
         this.enteredButton = true;
-        this.prevButtonTrigger = trigger
+        this.prevButtonTrigger = trigger;
       }
-    })
+    });
   }
 
   buttonLeave(trigger, button) {
@@ -127,12 +125,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       } else {
         this.enteredButton = false;
       }
-    }, 100)
+    }, 100);
   }
 
   onItemClick(what: string) {
 
-    switch(what){
+    switch (what) {
 
       // Client
       case 'disconnect':
@@ -141,7 +139,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       case 'news':
         this.dialogV2Service.openNews();
         break;
-      case 'preferences': 
+      case 'preferences':
         this.dialogV2Service.openControlPanel();
         break;
       case 'audio':
@@ -152,7 +150,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return false;
     }
 
-    
+
   }
 
 

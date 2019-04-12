@@ -20,9 +20,9 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
 
   public dataTable$: Observable<any>;
   public data = [];
-  public columnsToDisplay: string[]
-  public resultsLength: number = 0;
-  public headerTitle: string = 'Lista Generica';
+  public columnsToDisplay: string[];
+  public resultsLength = 0;
+  public headerTitle = 'Lista Generica';
 
   private _unsubscribeAll: Subject<any>;
 

@@ -14,7 +14,7 @@ export class ClientComponent implements OnInit {
 
   // private
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private _configService: ConfigService
   ) {

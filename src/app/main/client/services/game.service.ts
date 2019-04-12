@@ -24,8 +24,12 @@ export class GameService {
 
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
+
+
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
+
+  showExtraByViewport:  boolean = undefined;
 
   // Client Data Needed Updates
   public client_update = {
@@ -138,25 +142,25 @@ export class GameService {
     if (now > this.client_update.lastDataTime) {
 
       if (this.client_update.inventory.needed && !this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
-        console.log('inv')
         this.sendToServer('@inv');
         this.client_update.inventory.needed = false;
         this.client_update.lastDataTime = now;
       }
 
       if (this.client_update.equipment.needed && !this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
-        console.log('equip')
         this.sendToServer('@equip');
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.room.needed 
-          && this.tgConfig.output.extraArea.visible 
+      if (this.client_update.room.needed
+          && this.tgConfig.output.extraArea.visible
+          && this.showExtraByViewport
           && !this.client_update.inContainer) {
-        console.log('agg')
+
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
+
       } else if ( this.client_update.inContainer && this.config.output.extraArea.visible ) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
       }
@@ -269,7 +273,7 @@ export class GameService {
     }
 
     // Save in Storage
-    this._configService.config =  { 
+    this._configService.config =  {
       fontSize: newSize
     };
   }

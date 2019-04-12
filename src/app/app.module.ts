@@ -63,7 +63,7 @@ import { AngularSplitModule } from 'angular-split';
       serverLogLevel: NgxLoggerLevel.ERROR,
     }),
 
-    // TODO: I'll need to move out. 
+    // TODO: I'll need to move out.
     AngularSplitModule.forRoot(),
 
 

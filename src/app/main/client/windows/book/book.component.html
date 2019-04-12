@@ -1,6 +1,6 @@
   <div mat-dialog-title cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" cdkDragBoundary="body">
     {{data.desc}} 
-    <button mat-icon-button [mat-dialog-close]="true">
+    <button mat-icon-button [mat-dialog-close]="true" class="tg-dialog--close">
       <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
     </button>
   </div>
@@ -12,7 +12,6 @@
           <div class="tg-book-inset" fxLayout="column">
 
             <ng-scrollbar class="scrollbar scrollbar-dialog" *ngIf="data.pages.length !== 0; else noPage">
-
               <ng-container *ngFor="let page of data.pages; let i=index">
 
                 <div class="page" [attr.pagenumber]="i" *ngIf="openedIndexPage == i">
@@ -35,8 +34,6 @@
 
                 </div>
               </ng-container>
-
-              
             </ng-scrollbar>
 
             <ng-template #noPage>

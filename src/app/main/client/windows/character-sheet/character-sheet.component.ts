@@ -21,7 +21,7 @@ export class CharacterSheetComponent  {
   imagepath: string = environment.media_address;
 
   heroBase$: Observable<IHero>;
-  
+
   public heroImageUrl: string;
   public heroName: string;
   public heroTitle: string;

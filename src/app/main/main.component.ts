@@ -6,7 +6,6 @@ import { DOCUMENT } from '@angular/platform-browser';
 
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { MatDialog } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-main',
