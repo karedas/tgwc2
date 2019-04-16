@@ -56,18 +56,6 @@ export class ClientEffects {
     })
   );
 
-  // @Effect({ dispatch: false })
-  // $updateUI: Observable<any> = this.actions$.pipe(
-  //   ofType(ClientEventType.UPDATENEEDED),
-  //   withLatestFrom(this.store.pipe(select(getExtraOutputStatus))),
-  //   filter(([action, status]) => status === true),
-  //   map(([action, status]) => action),
-  //   tap(
-  //     what => {
-  //       this.game.updateNeeded(what.payload);
-  //     })
-  // );
-
 
   @Effect({ dispatch: false })
   showNews$: Observable<boolean | Action> = this.actions$.pipe(

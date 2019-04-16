@@ -14,6 +14,7 @@ import { GenericTableComponent } from '../../client/windows/generic-table/generi
 import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.component';
 import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DragDropModule,
     CharacterSheetModule,
     MatDialogModule,
-    MatSliderModule
+    MatSliderModule,
   ],
 
   entryComponents: [

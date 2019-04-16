@@ -11,17 +11,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class CookieLawComponent {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
-
   showButton = false;
 
   constructor(
     private dialogRef: MatDialogRef<CookieLawComponent>,
-    private cookieService: CookieService
-    ) {}
+    private cookieService: CookieService,
+    ) {
+    }
 
 
   onContinue() {
     this.cookieService.set('tgCookieLaw', '1');
     this.dialogRef.close();
   }
+
+  onFocus() {
+  }
+
 }

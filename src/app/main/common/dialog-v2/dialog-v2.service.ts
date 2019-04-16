@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
-import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { NewsComponent } from '../../client/windows/news/news.component';
 import { EditorComponent } from '../../client/windows/editor/editor.component';
 import { ControlPanelComponent } from '../../client/windows/control-panel/control-panel.component';
@@ -10,23 +9,70 @@ import { CommandsListComponent } from '../../client/windows/commands-list/comman
 import { BookComponent } from '../../client/windows/book/book.component';
 import { GenericTableComponent } from '../../client/windows/generic-table/generic-table.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogV2Service {
 
-
-  private overlayRef;
+  // _baseZIndex: number = 1000;
+  private render: Renderer2;
+  private baseZIndex: number = 1000;
+  private dialogs: any[] = [];
+  private idLastDialog: string;
 
   constructor(
+    rendererFactory: RendererFactory2,
     public dialog: MatDialog,
     public overlay: Overlay) {
+    this.render = rendererFactory.createRenderer(null, null);
+  }
+
+  private addBringToFrontEvent(dialogRef:MatDialogRef<any>) {
+
+    const overlayElement = <HTMLElement>dialogRef['_overlayRef'].overlayElement;
+    this.increaseZIndex(dialogRef, overlayElement);
+    
+    overlayElement.addEventListener('click', () => {
+      this.increaseZIndex(dialogRef, overlayElement);
+    })
+  }
+
+  private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement: HTMLElement) {
+    this.idLastDialog = dialogRef.id;
+    this.render.setStyle(
+      overlayElement.parentElement,
+      'z-index',
+      ++this.baseZIndex
+    )
+  }
+
+  private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
+      
+    //Saving the last added DialogID
+    this.idLastDialog = dialogRef.id;
+
+    this.addBringToFrontEvent(dialogRef);
+
+    dialogRef.keydownEvents().subscribe((key) => {
+      //ordering the close event if dialog has been brought to front
+      if(key.keyCode === 27) {
+        if(dialogRef.id === this.idLastDialog) {
+          dialogRef.close();
+        } else {
+          this.dialog.getDialogById(this.idLastDialog).close();
+        }
+      }
+    });
+  }
+
+  closeLastDialog() {
+    this.dialog.getDialogById('cookielaw').close();
   }
 
   openSmartLogin(): MatDialogRef<LoginSmartComponent, MatDialogConfig> {
     // Close All dialogs before proceed
-    this.dialog.closeAll();
 
     const dialogID = 'smartlogin';
     const config = new MatDialogConfig();
@@ -35,9 +81,10 @@ export class DialogV2Service {
     config.disableClose = true;
     config.backdropClass = 'overlay-dark';
 
-    const ref = this.dialog.open(LoginSmartComponent, config);
+    const dialogRef = this.dialog.open(LoginSmartComponent, config);
 
-    return ref;
+    this.dialogs.push(dialogRef);
+    return dialogRef;
   }
 
   openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
@@ -48,10 +95,12 @@ export class DialogV2Service {
     config.id = dialogID;
     config.disableClose = true;
     config.width = '450px';
+    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
-    const dialogRef = this.dialog.open(CookieLawComponent, config );
+    const dialogRef = this.dialog.open(CookieLawComponent, config);
 
     return dialogRef;
+
   }
 
   openNews(): MatDialogRef<NewsComponent, MatDialogConfig> {
@@ -66,11 +115,9 @@ export class DialogV2Service {
     config.minHeight = '400px';
     config.restoreFocus = true;
     config.autoFocus = false;
-    config.backdropClass = 'overlay-dark';
 
-    const ref = this.dialog.open(NewsComponent, config);
-
-    return ref;
+    const dialogRef = this.dialog.open(NewsComponent, config);
+    return dialogRef;
   }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
@@ -84,8 +131,9 @@ export class DialogV2Service {
     config.restoreFocus = true;
     config.disableClose = true;
 
-    const ref = this.dialog.open(EditorComponent, config);
-    return ref;
+    const dialogRef = this.dialog.open(EditorComponent, config);
+
+    return dialogRef;
   }
 
   openCharacterSheet(detail?: string): MatDialogRef<CharacterSheetComponent, MatDialogConfig> {
@@ -94,19 +142,21 @@ export class DialogV2Service {
 
     if (!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
-
       config.id = dialogID;
       config.width = '750px';
-      config.height = '650px';
       config.hasBackdrop = false;
       config.restoreFocus = true;
-      config.autoFocus = true;
+      config.disableClose = true;
+      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
       config.data = {
         tab: detail
       };
 
-      const ref = this.dialog.open( CharacterSheetComponent, config);
-      return ref;
+      const dialogRef = this.dialog.open(CharacterSheetComponent, config);
+
+      this.addDialogBehaviour(dialogRef);
+
+      return dialogRef;
 
     } else {
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail };
@@ -123,15 +173,15 @@ export class DialogV2Service {
 
       config.id = dialogID;
       config.width = '750px';
-      config.height = '650px';
       config.restoreFocus = true;
-      config.hasBackdrop = true;
+      config.hasBackdrop = false;
       config.autoFocus = false;
+      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
-      const ref = this.dialog.open( CommandsListComponent, config );
-      return ref;
+      const dialogRef = this.dialog.open(CommandsListComponent, config);
+
+      return dialogRef;
     }
-
   }
 
   openControlPanel(): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
@@ -149,8 +199,9 @@ export class DialogV2Service {
       config.hasBackdrop = true;
       config.autoFocus = false;
 
-      const ref = this.dialog.open(ControlPanelComponent, config);
-      return ref;
+      const dialogRef = this.dialog.open(ControlPanelComponent, config);
+
+      return dialogRef;
     }
   }
 
@@ -164,11 +215,10 @@ export class DialogV2Service {
     const config = new MatDialogConfig();
     config.id = dialogID;
     config.width = '550px';
-    config.height = '600px';
     config.restoreFocus = true;
     config.hasBackdrop = false;
     config.panelClass = 'provaprova';
-    config.scrollStrategy = this.overlay.scrollStrategies.noop()
+    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
     config.data = {
       title: data[0].title,
@@ -178,13 +228,13 @@ export class DialogV2Service {
       // index: 0,
     };
 
-    const ref = this.dialog.open( BookComponent, config);
-    return ref;
+    const dialogRef = this.dialog.open(BookComponent, config);
+
+    return dialogRef;
 
   }
 
-
-  openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig>  {
+  openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig> {
 
     const dialogID = 'generictable';
     const config = new MatDialogConfig();
@@ -193,13 +243,17 @@ export class DialogV2Service {
     config.width = 'auto';
     config.height = 'auto';
     config.hasBackdrop = false;
+    config.disableClose = true;
     config.restoreFocus = true;
     config.data = {
       title: data[0]
     };
 
-    const ref = this.dialog.open( GenericTableComponent, config );
-    return ref;
-  }
+    const dialogRef = this.dialog.open(GenericTableComponent, config);
 
+    this.addDialogBehaviour(dialogRef);
+
+
+    return dialogRef;
+  }
 }

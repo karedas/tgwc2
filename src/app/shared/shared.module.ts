@@ -30,6 +30,7 @@ import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { LoginService } from '../main/authentication/services/login.service';
 import { GameService } from '../main/client/services/game.service';
 import { InputService } from '../main/client/input/input.service';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -49,7 +50,6 @@ import { InputService } from '../main/client/input/input.service';
     NgScrollbarModule,
     TooltipModule,
     PipesModule,
-
     /** Angular Material Modules */
     MatCheckboxModule,
     MatMenuModule,
@@ -59,7 +59,7 @@ import { InputService } from '../main/client/input/input.service';
     MatSelectModule,
     MatInputModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
 
   exports: [
@@ -82,7 +82,7 @@ import { InputService } from '../main/client/input/input.service';
     MatSelectModule,
     MatInputModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
 })
 export class SharedModule {

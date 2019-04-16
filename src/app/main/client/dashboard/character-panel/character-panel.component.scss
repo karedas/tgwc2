@@ -316,6 +316,11 @@
           background-image: url($imgPath + '/bars/sete.jpg' );
         }
       }
+
+      @include layout-bp(xs) {
+       padding: 0;
+       margin-bottom: 0;
+      }
     }
   }
 

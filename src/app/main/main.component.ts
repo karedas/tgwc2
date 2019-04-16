@@ -32,6 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     @Inject(DOCUMENT) private document: any
   ) {
+    
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
       this.document.body.className += ' is-mobile';
@@ -42,7 +43,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    
     setTimeout(() => {
       if (!this.cookieService.check('tgCookieLaw')) {
         this.dialogV2Service
