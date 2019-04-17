@@ -9,22 +9,16 @@ import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@
 export class IconsComponent implements OnChanges {
   @Input('icon') icon: number;
 
-  mrn: number;
-  cnttype: string;
-  cntmrn: number;
-  cmd: string;
-  addclass: string;
-
   bgPositionStyle: Object;
 
-  constructor() {
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-
-    if (!this.icon) {
+    
+    this.icon = +this.icon;
+    if (this.icon === 0) {
+      // Get Default Tg-icon
       this.icon = 416;
     }
+
     this.setTileBackgroundPosition();
   }
 

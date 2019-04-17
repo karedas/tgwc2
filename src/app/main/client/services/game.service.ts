@@ -12,6 +12,7 @@ import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/ap
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material';
+import { LogService } from 'src/app/services/log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,9 @@ export class GameService {
     private historyService: HistoryService,
     private http: HttpClient,
     private _configService: ConfigService,
+    private logService: LogService,
     public dialog: MatDialog,
+    
     rendererFactory: RendererFactory2,
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
@@ -102,13 +105,20 @@ export class GameService {
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.handlerGameData(initialData);
 
-    this._dataSubscription = this.socketService.listen(socketEvent.DATA).subscribe(data => {
-      this.dataParserService.handlerGameData(data);
-    });
+    this._dataSubscription = this.socketService.listen(socketEvent.DATA)
+      .subscribe(data => {
+        this.dataParserService.handlerGameData(data);
 
-    this._updateNeededSubscription = this.dataParserService.updateNeeded.subscribe((up) => {
-      this.updateNeeded(up);
-    });
+        // Dispatch to Log Service if enabled
+        if(this.tgConfig.log) {
+          this.logService.parseForLog(data);
+        }
+      });
+
+    this._updateNeededSubscription = this.dataParserService.updateNeeded
+      .subscribe((up) => {
+        this.updateNeeded(up);
+      });
   }
 
   disconnectGame() {

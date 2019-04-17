@@ -68,6 +68,7 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
         }
       });
     }
+    
     // pupulate data
     if (dataTable.data) {
       dataTable.data.forEach((d: any) => {
@@ -79,13 +80,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
       });
     }
   }
-
-  // private open() {
-  //   setTimeout(() => {
-  //     // this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
-  //   }, 200);
-
-  // }
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

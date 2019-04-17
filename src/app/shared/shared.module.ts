@@ -36,6 +36,7 @@ import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { LoginService } from '../main/authentication/services/login.service';
 import { GameService } from '../main/client/services/game.service';
 import { InputService } from '../main/client/input/input.service';
+import { LogService } from '../services/log.service';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ export class SharedModule {
         InputService,
         AudioService,
         DialogV2Service,
+        LogService,
         InputService,
       ]
     };
