@@ -40,7 +40,7 @@ export class AudioComponent implements OnInit, OnDestroy {
       .pipe(
         filter(state => !!state ),
         takeUntil(this._unsubscribeAll))
-      .subscribe(track => 
+      .subscribe(track =>
         this.audioService.setAudio(track)
       );
   }

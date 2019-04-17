@@ -2,10 +2,10 @@ import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/platform-browser';
 
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { MatDialog } from '@angular/material';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'tg-main',
@@ -32,7 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     @Inject(DOCUMENT) private document: any
   ) {
-    
+
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
       this.document.body.className += ' is-mobile';
@@ -43,7 +43,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
     setTimeout(() => {
       if (!this.cookieService.check('tgCookieLaw')) {
         this.dialogV2Service

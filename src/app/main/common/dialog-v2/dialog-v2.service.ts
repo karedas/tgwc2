@@ -19,7 +19,7 @@ import { WorkslistComponent } from '../../client/windows/workslist/workslist.com
 export class DialogV2Service {
 
   private render: Renderer2;
-  private baseZIndex: number = 1000;
+  private baseZIndex = 1000;
 
   constructor(
     rendererFactory: RendererFactory2,
@@ -32,7 +32,7 @@ export class DialogV2Service {
     dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       d.addPanelClass('tg-shadow');
       this.addDialogBehaviour(d);
-    })
+    });
 
   }
 
@@ -46,7 +46,7 @@ export class DialogV2Service {
       dialogRef.disableClose = true;
 
       dialogRef.keydownEvents().subscribe((e) => {
-        //ordering the close event if dialog has been brought to front
+        // ordering the close event if dialog has been brought to front
         if (e.key === 'Escape') {
           this.closeForwardedDialog();
         }
@@ -61,7 +61,7 @@ export class DialogV2Service {
 
     overlayElement.addEventListener('click', () => {
       this.increaseZIndex(dialogRef, overlayElement);
-    })
+    });
   }
 
   private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement: HTMLElement) {
@@ -72,21 +72,21 @@ export class DialogV2Service {
         overlayElement.parentElement,
         'z-index',
         ++this.baseZIndex
-      )
+      );
 
-      //Extract DialogRef based on his ID. 
+      // Extract DialogRef based on his ID.
       const activeDialog = this.dialog.openDialogs.find(obj => {
         return obj.id === dialogRef.id;
-      })
+      });
 
       if (activeDialog) {
-        //move the DialogRef Item to last Position dialogs array. 
+        // move the DialogRef Item to last Position dialogs array.
         this.dialog.openDialogs.push(this.dialog.openDialogs.splice(this.dialog.openDialogs.indexOf(activeDialog), 1)[0]);
       }
     }
   }
 
-  /** 
+  /**
    Just close the dialog based on z-index priority
    *  */
   private closeForwardedDialog() {
@@ -94,7 +94,7 @@ export class DialogV2Service {
     const d = this.dialog.openDialogs[this.dialog.openDialogs.length - 1];
     d.close();
 
-    //Reset Z-Index if there is 1 or less  dialog
+    // Reset Z-Index if there is 1 or less  dialog
     if (this.dialog.openDialogs.length <= 1) {
       this.baseZIndex = 1000;
     }
@@ -111,15 +111,15 @@ export class DialogV2Service {
 
     const dialogID = 'smartlogin';
 
-    if( !this.dialog.getDialogById(dialogID) ) {
+    if ( !this.dialog.getDialogById(dialogID) ) {
       const config = new MatDialogConfig();
-  
+
       config.id = dialogID;
       config.disableClose = true;
       config.backdropClass = 'overlay-dark';
-  
+
       const dialogRef = this.dialog.open(LoginSmartComponent, config);
-  
+
       return dialogRef;
     }
   }
@@ -196,7 +196,7 @@ export class DialogV2Service {
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
       dialogRef.afterOpened().subscribe(() => {
-        //Keep focus on inputbar
+        // Keep focus on inputbar
         this.inputService.focus();
       });
 
@@ -205,9 +205,9 @@ export class DialogV2Service {
     } else {
 
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail };
-      //Keep focus on inputbar
+      // Keep focus on inputbar
       this.inputService.focus();
-      
+
     }
   }
 
@@ -228,7 +228,7 @@ export class DialogV2Service {
       const dialogRef = this.dialog.open(CommandsListComponent, config);
 
       dialogRef.afterOpened().subscribe(() => {
-        //Keep focus on inputbar
+        // Keep focus on inputbar
         this.inputService.focus();
       });
 
@@ -283,7 +283,7 @@ export class DialogV2Service {
     const dialogRef = this.dialog.open(BookComponent, config);
 
     dialogRef.afterOpened().subscribe(() => {
-      //Keep focus on inputbar
+      // Keep focus on inputbar
       this.inputService.focus();
     });
 
@@ -306,9 +306,9 @@ export class DialogV2Service {
     };
 
     const dialogRef = this.dialog.open(GenericTableComponent, config);
-    
+
     dialogRef.afterOpened().subscribe(() => {
-      //Keep focus on inputbar
+      // Keep focus on inputbar
       this.inputService.focus();
     });
 
@@ -319,7 +319,7 @@ export class DialogV2Service {
 
     const dialogID = 'workslist';
     const config = new MatDialogConfig();
-    
+
     config.id = dialogID;
     config.width = 'auto';
     config.height = 'auto';
@@ -332,7 +332,7 @@ export class DialogV2Service {
 
     const dialogRef = this.dialog.open(WorkslistComponent, config);
 
-    //Keep focus on inputbar
+    // Keep focus on inputbar
     this.inputService.focus();
 
     return dialogRef;

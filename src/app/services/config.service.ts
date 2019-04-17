@@ -66,21 +66,23 @@ export class ConfigService {
     // Compare default config with Values in localstorage
     const aKeys = this.getDeepKeys(storedConfig).sort();
     const bKeys = this.getDeepKeys(this._configSubject.getValue()).sort();
-
     return JSON.stringify(aKeys) === JSON.stringify(bKeys);
-
   }
 
   private getDeepKeys(obj) {
     let keys = [];
     for (const key in obj) {
-      keys.push(key);
-      if (typeof obj[key] === 'object') {
-        const subkeys = this.getDeepKeys(obj[key]);
-        keys = keys.concat(subkeys.map(function (subkey) {
-          return key + '.' + subkey;
-        }));
+      
+      if (obj.hasOwnProperty(key)) {
+        keys.push(key);
+        if (typeof obj[key] === 'object') {
+          const subkeys = this.getDeepKeys(obj[key]);
+          keys = keys.concat(subkeys.map(function (subkey) {
+            return key + '.' + subkey;
+          }));
+        }
       }
+      
     }
     return keys;
   }

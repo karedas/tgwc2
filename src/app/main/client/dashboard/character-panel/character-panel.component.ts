@@ -69,13 +69,13 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       });
 
     // TODO, MOVE IN APP ROOT COMPONENT
-    this.watcherMedia = this.mediaObserver.media$
+    this.watcherMedia = this.mediaObserver.asObservable()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((change: MediaChange) => {
-        this.activeMediaQuery = change ? change.mqAlias : '';
+      .subscribe((changes: MediaChange[]) => {
+        changes.forEach(change => {
+          this.activeMediaQuery = change ? change.mqAlias : '';
+        });
       });
-
-
 
     this.hero$
       .pipe(takeUntil(this._unsubscribeAll))

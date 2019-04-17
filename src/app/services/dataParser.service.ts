@@ -401,7 +401,7 @@ export class DataParser {
     if ( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
     if ( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
     // TODO UI (dont need order) :
-    if ( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
+    if ( this.dispatcher['visibilLevel'] ) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); };
     if ( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
   }
 
@@ -431,14 +431,14 @@ export class DataParser {
     const args = input.split(/\s+/);
     /* Get the shortcut index */
     const shortcut_key = args.shift();
-    const shortcut_num = parseInt(shortcut_key);
+    const shortcut_num = parseInt(shortcut_key, 10);
 
     let shortcut_cmd: any;
 
 
     if (!isNaN(shortcut_num)) {
       shortcut_cmd = this.shortcuts[shortcut_num];
-    } else if (typeof (this.shortcuts_map[shortcut_key]) != 'undefined') {
+    } else if (typeof (this.shortcuts_map[shortcut_key]) !== 'undefined') {
       shortcut_cmd = this.shortcuts[this.shortcuts_map[shortcut_key]];
     }
 
