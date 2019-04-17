@@ -10,81 +10,118 @@ import { BookComponent } from '../../client/windows/book/book.component';
 import { GenericTableComponent } from '../../client/windows/generic-table/generic-table.component';
 import { Overlay } from '@angular/cdk/overlay';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
+import { InputService } from '../../client/input/input.service';
+import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogV2Service {
 
-  // _baseZIndex: number = 1000;
   private render: Renderer2;
   private baseZIndex: number = 1000;
-  private dialogs: any[] = [];
-  private idLastDialog: string;
 
   constructor(
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
+    private inputService: InputService,
     public overlay: Overlay) {
+
     this.render = rendererFactory.createRenderer(null, null);
+
+    dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
+      d.addPanelClass('tg-shadow');
+      this.addDialogBehaviour(d);
+    })
+
   }
 
-  private addBringToFrontEvent(dialogRef:MatDialogRef<any>) {
+
+  private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
+
+    this.addBringToFrontEvent(dialogRef);
+
+    if (!dialogRef.disableClose) {
+
+      dialogRef.disableClose = true;
+
+      dialogRef.keydownEvents().subscribe((e) => {
+        //ordering the close event if dialog has been brought to front
+        if (e.key === 'Escape') {
+          this.closeForwardedDialog();
+        }
+      });
+    }
+  }
+
+  private addBringToFrontEvent(dialogRef: MatDialogRef<any>) {
 
     const overlayElement = <HTMLElement>dialogRef['_overlayRef'].overlayElement;
     this.increaseZIndex(dialogRef, overlayElement);
-    
+
     overlayElement.addEventListener('click', () => {
       this.increaseZIndex(dialogRef, overlayElement);
     })
   }
 
   private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement: HTMLElement) {
-    this.idLastDialog = dialogRef.id;
-    this.render.setStyle(
-      overlayElement.parentElement,
-      'z-index',
-      ++this.baseZIndex
-    )
-  }
 
-  private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
-      
-    //Saving the last added DialogID
-    this.idLastDialog = dialogRef.id;
+    if (this.dialog.openDialogs.length > 1) {
+      // Add Z-index Inline based on global Dialog zindex status
+      this.render.setStyle(
+        overlayElement.parentElement,
+        'z-index',
+        ++this.baseZIndex
+      )
 
-    this.addBringToFrontEvent(dialogRef);
+      //Extract DialogRef based on his ID. 
+      const activeDialog = this.dialog.openDialogs.find(obj => {
+        return obj.id === dialogRef.id;
+      })
 
-    dialogRef.keydownEvents().subscribe((key) => {
-      //ordering the close event if dialog has been brought to front
-      if(key.keyCode === 27) {
-        if(dialogRef.id === this.idLastDialog) {
-          dialogRef.close();
-        } else {
-          this.dialog.getDialogById(this.idLastDialog).close();
-        }
+      if (activeDialog) {
+        //move the DialogRef Item to last Position dialogs array. 
+        this.dialog.openDialogs.push(this.dialog.openDialogs.splice(this.dialog.openDialogs.indexOf(activeDialog), 1)[0]);
       }
-    });
+    }
   }
 
-  closeLastDialog() {
-    this.dialog.getDialogById('cookielaw').close();
+  /** 
+   Just close the dialog based on z-index priority
+   *  */
+  private closeForwardedDialog() {
+    // Extract the last item in array
+    const d = this.dialog.openDialogs[this.dialog.openDialogs.length - 1];
+    d.close();
+
+    //Reset Z-Index if there is 1 or less  dialog
+    if (this.dialog.openDialogs.length <= 1) {
+      this.baseZIndex = 1000;
+    }
   }
+
+
+  /**
+   * DIALOGS LIST
+   */
 
   openSmartLogin(): MatDialogRef<LoginSmartComponent, MatDialogConfig> {
-    // Close All dialogs before proceed
+
+    this.dialog.closeAll();
 
     const dialogID = 'smartlogin';
-    const config = new MatDialogConfig();
 
-    config.id = dialogID;
-    config.disableClose = true;
-    config.backdropClass = 'overlay-dark';
-
-    const dialogRef = this.dialog.open(LoginSmartComponent, config);
-
-    this.dialogs.push(dialogRef);
-    return dialogRef;
+    if( !this.dialog.getDialogById(dialogID) ) {
+      const config = new MatDialogConfig();
+  
+      config.id = dialogID;
+      config.disableClose = true;
+      config.backdropClass = 'overlay-dark';
+  
+      const dialogRef = this.dialog.open(LoginSmartComponent, config);
+  
+      return dialogRef;
+    }
   }
 
   openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
@@ -113,6 +150,7 @@ export class DialogV2Service {
     config.width = '750px';
     config.height = '600px';
     config.minHeight = '400px';
+    config.scrollStrategy = this.overlay.scrollStrategies.block();
     config.restoreFocus = true;
     config.autoFocus = false;
 
@@ -141,12 +179,15 @@ export class DialogV2Service {
     const dialogID = 'charactersheet';
 
     if (!this.dialog.getDialogById(dialogID)) {
+
       const config = new MatDialogConfig();
+
       config.id = dialogID;
       config.width = '750px';
+      config.height = '650px';
       config.hasBackdrop = false;
       config.restoreFocus = true;
-      config.disableClose = true;
+      config.disableClose = false;
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
       config.data = {
         tab: detail
@@ -154,14 +195,20 @@ export class DialogV2Service {
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
-      this.addDialogBehaviour(dialogRef);
+      dialogRef.afterOpened().subscribe(() => {
+        //Keep focus on inputbar
+        this.inputService.focus();
+      });
 
       return dialogRef;
 
     } else {
-      this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail };
-    }
 
+      this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail };
+      //Keep focus on inputbar
+      this.inputService.focus();
+      
+    }
   }
 
   openCommandsList(): MatDialogRef<CommandsListComponent, MatDialogConfig> {
@@ -179,6 +226,11 @@ export class DialogV2Service {
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
       const dialogRef = this.dialog.open(CommandsListComponent, config);
+
+      dialogRef.afterOpened().subscribe(() => {
+        //Keep focus on inputbar
+        this.inputService.focus();
+      });
 
       return dialogRef;
     }
@@ -230,8 +282,12 @@ export class DialogV2Service {
 
     const dialogRef = this.dialog.open(BookComponent, config);
 
-    return dialogRef;
+    dialogRef.afterOpened().subscribe(() => {
+      //Keep focus on inputbar
+      this.inputService.focus();
+    });
 
+    return dialogRef;
   }
 
   openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig> {
@@ -242,17 +298,42 @@ export class DialogV2Service {
     config.id = dialogID;
     config.width = 'auto';
     config.height = 'auto';
+    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
     config.hasBackdrop = false;
-    config.disableClose = true;
     config.restoreFocus = true;
     config.data = {
       title: data[0]
     };
 
     const dialogRef = this.dialog.open(GenericTableComponent, config);
+    
+    dialogRef.afterOpened().subscribe(() => {
+      //Keep focus on inputbar
+      this.inputService.focus();
+    });
 
-    this.addDialogBehaviour(dialogRef);
+    return dialogRef;
+  }
 
+  openWorksList(...data: any): MatDialogRef<WorkslistComponent, MatDialogConfig> {
+
+    const dialogID = 'workslist';
+    const config = new MatDialogConfig();
+    
+    config.id = dialogID;
+    config.width = 'auto';
+    config.height = 'auto';
+    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    config.hasBackdrop = false;
+    config.restoreFocus = true;
+    config.data = {
+      title: data[0]
+    };
+
+    const dialogRef = this.dialog.open(WorkslistComponent, config);
+
+    //Keep focus on inputbar
+    this.inputService.focus();
 
     return dialogRef;
   }

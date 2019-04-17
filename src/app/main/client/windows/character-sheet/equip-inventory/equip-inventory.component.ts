@@ -66,6 +66,7 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
 
     this.resetUpdateBeforeProceed();
     this.inputService.focus();
+    
     if (what === 'equip') {
       this.openedSubTab = what;
       this.game.processCommands('equip');

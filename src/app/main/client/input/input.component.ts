@@ -73,7 +73,6 @@ export class InputComponent implements OnInit, OnDestroy {
 
   focus() {
     this.ic.nativeElement.focus();
-    console.log('focus');
   }
 
   onEnter(event: any, val: string) {

@@ -52,7 +52,7 @@ export class ClientEffects {
   onGameStatus$: Observable<any> = this.actions$.pipe(
     ofType(ClientEventType.INGAME),
     tap(() => {
-      console.log('TG-LOG: in game');
+      console.log('TG-LOG: User logged-in game');
     })
   );
 

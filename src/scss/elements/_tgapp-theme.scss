@@ -7,14 +7,10 @@
   .mat-checkbox-frame {
     background: #5d5d5d;
   }
-
-
-
     
   .mat-button-wrapper {
     height: 100%; 
   }
-
 
   /* Dialog */
 
@@ -192,33 +188,21 @@
     font-size: 10px;
     color: rgba(255, 255, 255, 0.54);
   }
+
+
+  /* ProgressBar */
+  .mat-progress-bar {
+    height: 2px;
+
+    .mat-progress-bar-buffer {
+      background-color: #ff9b00;
+    }
+
+    .mat-progress-bar-fill:after {
+      background-color: $tg-yellow;
+    }
+  }
 }
-
-
-
-
-// /* Tooltip */
-// body {
-//   .ui-tooltip .ui-tooltip-arrow {
-//     border-color: black!important;
-//   }
-//   .ui-tooltip .ui-tooltip-text {
-//     background: black;
-//     font-size: 11px;
-//     text-align: center;
-//   }
-// }
-
-// /* Buttons */
-// p-button {
-//   .ui-button.ui-button-icon-only {
-//     width: auto;
-
-//     .ui-button-text {
-//       padding: 0;
-//     }
-//   }
-// }
 
 // /* Table */
 // p-table {

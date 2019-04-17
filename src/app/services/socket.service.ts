@@ -19,9 +19,7 @@ export class SocketService {
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private store: Store<ClientState>
-    ) {
+  constructor(private store: Store<ClientState>) { 
     this.connect();
   }
 

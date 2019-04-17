@@ -1,11 +1,11 @@
-<div mat-dialog-title cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" cdkDragBoundary="body">
-  {{headerTitle}}
-  <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-    <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-  </button>
-</div>
 <ng-container *ngIf="dataTable$ | async">
-  <div class="tg-generictable">
+  <div class="tg-generictable" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <div mat-dialog-title cdkDragHandle>
+      {{headerTitle}}
+      <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+        <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+      </button>
+    </div>
     <div class="b-ironlight-mini tg-box">
       <div class="tg-dialog-content-nopadding tg-shadow-inset">
 

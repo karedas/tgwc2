@@ -7,6 +7,9 @@
       <div class="tg-leftside" fxFlex="1 1 auto" fxLayout="column">
         <!-- Output -->
         <tg-output fxLayout fxFlex="1 1 100%" class="min-h-0"></tg-output>
+
+        <mat-progress-bar mode="indeterminate" fxFlexOrder="3"></mat-progress-bar>
+
         <!-- Hero Dashboard -->
         <tg-dashboard [ngClass]="{'top': tgConfig.characterPanelTopPosition}"></tg-dashboard>
         <tg-input></tg-input>

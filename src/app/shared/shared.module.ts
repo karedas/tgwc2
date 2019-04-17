@@ -11,7 +11,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 /* Material Design */
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule, MatIconModule, MatInputModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatInputModule, MatTableModule, MatPaginatorModule, MatProgressBarModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -30,7 +30,6 @@ import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { LoginService } from '../main/authentication/services/login.service';
 import { GameService } from '../main/client/services/game.service';
 import { InputService } from '../main/client/input/input.service';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -60,6 +59,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatProgressBarModule
   ],
 
   exports: [
@@ -83,6 +83,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatProgressBarModule
   ],
 })
 export class SharedModule {
