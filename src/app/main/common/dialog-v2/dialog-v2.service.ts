@@ -12,6 +12,8 @@ import { Overlay } from '@angular/cdk/overlay';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { InputService } from '../../client/input/input.service';
 import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
+import { GameService } from '../../client/services/game.service';
+import { LogComponent } from '../../client/windows/log/log.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +27,11 @@ export class DialogV2Service {
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
     private inputService: InputService,
+    private game: GameService,
     public overlay: Overlay) {
-
     this.render = rendererFactory.createRenderer(null, null);
 
     dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
-      d.addPanelClass('tg-shadow');
       this.addDialogBehaviour(d);
     });
 
@@ -100,7 +101,6 @@ export class DialogV2Service {
     }
   }
 
-
   /**
    * DIALOGS LIST
    */
@@ -150,6 +150,7 @@ export class DialogV2Service {
     config.width = '750px';
     config.height = '600px';
     config.minHeight = '400px';
+    config.backdropClass = this.game.newsShowedFirstTime ? '' : 'overlay-dark';
     config.scrollStrategy = this.overlay.scrollStrategies.block();
     config.restoreFocus = true;
     config.autoFocus = false;
@@ -186,7 +187,7 @@ export class DialogV2Service {
       config.width = '750px';
       config.height = '650px';
       config.hasBackdrop = false;
-      config.restoreFocus = true;
+      config.autoFocus = false;
       config.disableClose = false;
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
       config.data = {
@@ -194,11 +195,12 @@ export class DialogV2Service {
       };
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
-
+      
       dialogRef.afterOpened().subscribe(() => {
         // Keep focus on inputbar
         this.inputService.focus();
       });
+
 
       return dialogRef;
 
@@ -222,6 +224,7 @@ export class DialogV2Service {
       config.width = '750px';
       config.restoreFocus = true;
       config.hasBackdrop = false;
+      config.restoreFocus = true;
       config.autoFocus = false;
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
@@ -248,8 +251,8 @@ export class DialogV2Service {
       config.width = 'auto';
       config.height = 'auto';
       config.restoreFocus = true;
-      config.hasBackdrop = true;
       config.autoFocus = false;
+      config.hasBackdrop = true;
 
       const dialogRef = this.dialog.open(ControlPanelComponent, config);
 
@@ -265,10 +268,12 @@ export class DialogV2Service {
 
     const dialogID = 'book';
     const config = new MatDialogConfig();
+    
     config.id = dialogID;
     config.width = '550px';
-    config.restoreFocus = true;
     config.hasBackdrop = false;
+    config.restoreFocus = true;
+    config.autoFocus = false;
     config.panelClass = 'provaprova';
     config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
@@ -301,6 +306,7 @@ export class DialogV2Service {
     config.scrollStrategy = this.overlay.scrollStrategies.reposition();
     config.hasBackdrop = false;
     config.restoreFocus = true;
+    config.autoFocus = false;
     config.data = {
       title: data[0]
     };
@@ -326,6 +332,7 @@ export class DialogV2Service {
     config.scrollStrategy = this.overlay.scrollStrategies.reposition();
     config.hasBackdrop = false;
     config.restoreFocus = true;
+    config.autoFocus = false;
     config.data = {
       title: data[0]
     };
@@ -336,5 +343,26 @@ export class DialogV2Service {
     this.inputService.focus();
 
     return dialogRef;
+  }
+
+
+  openLog(...data: any): MatDialogRef<LogComponent, MatDialogConfig> {
+
+    const dialogID = 'log';
+    if (!this.dialog.getDialogById(dialogID)) {
+      console.log('open');
+      const config = new MatDialogConfig();
+
+      config.width = 'auto';
+      config.height = 'auto';
+      config.maxWidth = '90%';
+      config.maxHeight = '90%';
+      config.hasBackdrop = false;
+
+      const dialogRef = this.dialog.open(LogComponent, config);
+
+      return dialogRef;
+    }
+
   }
 }

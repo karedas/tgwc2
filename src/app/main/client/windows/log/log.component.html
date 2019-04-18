@@ -1,0 +1,27 @@
+<div class="tg-log">
+  <div mat-dialog-title cdkDragHandle>
+    Log
+    <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+      <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+    </button>
+  </div>
+  <div class="b-ironlight-mini tg-box">
+    <div class="tg-dialog-content-nopadding tg-shadow-inset">
+        <div class="tg-log-content" mat-dialog-content #logContentArea>
+          <ng-container *ngFor="let log of logStorage">
+            <p [innerHtml]="log" class="tg-log--line"></p>
+          </ng-container>
+        </div>
+        <div class="tg-log-action" mat-dialog-actions>
+            <button mat-raised-button color="accent" (click)="saveLog()">Salva su File</button>
+            <button mat-raised-button color="alert" (click)="resetLog()">Cancella Log</button>
+        </div>
+    </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
+  </div>
+</div>

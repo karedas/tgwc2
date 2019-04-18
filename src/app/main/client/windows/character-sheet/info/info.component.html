@@ -9,7 +9,7 @@
       <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap" fxLayout="column">
         <div class="info-textarea--container" fxFlex="0 1 100%">
           <ng-scrollbar class="scrollbar" #scrollBar [autoUpdate]="true">
-            <div name="editor" cols="30" autofocus class="textarea" [innerHtml]="description | dataToHtml:true"></div>
+            <div name="editor" cols="30" class="textarea" [innerHtml]="description | dataToHtml:true"></div>
           </ng-scrollbar>
         </div>
         <div class="info-textarea--action" fxFlex="0 0 auto">

@@ -1,16 +1,32 @@
 import { Injectable } from '@angular/core';
+import { Observable, ReplaySubject } from 'rxjs';
+import { scan } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogService {
+  
+  log$: ReplaySubject<any> = new ReplaySubject<any>(500);
+  logStorage = [];
 
-  constructor() { }
+  constructor() { 
+    this.log$.pipe(
+      scan((acc, curr) => { Object.assign({}, acc, curr), {}} ),
+    )
+    this.log$.asObservable();
+  }
+
+  get log(): Observable<any> {
+    return this.log$
+  }
+
+  resetLog() {
+  }
 
   parseForLog(data: any) {
 
     // Not repeated tags
-
     data = data.replace(/&[xe]\n*/gm, '');
     data = data.replace(/&o.\n*/gm, '');
     data = data.replace(/&d\d{6}\n*/gm, '');
@@ -21,6 +37,8 @@ export class LogService {
     data = data.replace(/&!up"[^"]*"\n*/gm, '');
     data = data.replace(/&!img"[^"]*"\n*/gm, '');
     data = data.replace(/&!im"[^"]*"\n*/gm, '');
+    data = data.replace(/&!news\{[\s\S]*?\}!/gm, '');
+    data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, '');
     data = data.replace(/&!logged"[^"]*"/gm, '');
     data = data.replace(/&!e[ad]"[^"]*"\n*/gm, '');
     data = data.replace(/&!s[mi]"[^"]*"/gm, '');
@@ -43,6 +61,16 @@ export class LogService {
       return this.printPage(p)
     });
 
+    // Data Time
+    data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, (time) => {
+      const parse_time = JSON.parse(time.slice(10, -1));
+      return parse_time;
+    });
+
+    data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
+      return '';
+    });
+  
     // Generic table (title, head, data)
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
       t = JSON.parse(t.slice(7, -1));
@@ -125,13 +153,18 @@ export class LogService {
       return link[1];
     });
 
+
     data = data.replace(/&(i|I\d)/gm, '');
+    
+    if (data !== 'undefined' && data !== undefined && data !== '') {
+      data = this.removeColors(data);
+      data = data.replace(/\n/gm, '<br>');
+      data.replace(/<p><\/p>/g, '');
 
-    data = data.replace(/\n/gm, '<br>');
+      //Update the Observable Subject
+      this.log$.next(data);
+    }
 
-    data = '<p>' + this.removeColors(data) + '</p>';
-
-    console.log(data)
 
   }
 
@@ -144,21 +177,39 @@ export class LogService {
     return '';
   }
 
-  private printPage(page) {}
+  private printPage(page) {
+    return '';
+  }
 
-  private printTable(page) {}
+  private printTable(page) {
+    return '';
+  }
 
-  private printDetails(detail, type) {}
+  private printDetails(detail, type) {
+    return '';
+  }
 
-  private printInventory(inv) {}
+  private printInventory(inv) {
+    return '';
+  }
 
-  private printEquipment(eq) {}
+  private printEquipment(eq) {
+    return '';
+  }
 
-  private printWorksList(wklist) {}
+  private printWorksList(wklist) {
+    return '';
+  }
 
-  private printSkillsList(skills) {}
+  private printSkillsList(skills) {
+    return '';
+  }
 
-  private printPlayerInfo(pinfo) {}
+  private printPlayerInfo(pinfo) {
+    return '';
+  }
 
-  private printPlayerStatus(status) {}
+  private printPlayerStatus(status) {
+    return '';
+  }
 }

@@ -39,6 +39,7 @@ export class NewsComponent  implements OnInit {
       this._configService.setConfig({ news: false });
     }
     this.game.sendToServer('');
+    this.game.newsShowedFirstTime = true;
   }
 
   onCheckbox(event: any): void {

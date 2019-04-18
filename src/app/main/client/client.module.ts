@@ -15,7 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ClientComponent,
     ClientContainerComponent,
     AudioComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     SharedModule,

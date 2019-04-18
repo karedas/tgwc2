@@ -145,6 +145,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       case 'audio':
         this.audioService.toggleAudio();
         break;
+      case 'log':
+        this.dialogV2Service.openLog();
+        break;
       default:
         this.game.processCommands(what);
         return false;

@@ -15,6 +15,7 @@ import { NoFeatureComponent } from '../../client/windows/no-feature/no-feature.c
 import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { LogComponent } from '../../client/windows/log/log.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     GenericTableComponent,
     NoFeatureComponent,
     WorkslistComponent,
+    LogComponent
   ],
 
   imports: [
@@ -49,7 +51,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     GenericTableComponent,
     NoFeatureComponent,
     WorkslistComponent,
-    CharacterSheetComponent
+    CharacterSheetComponent,
+    LogComponent
   ]
 })
 

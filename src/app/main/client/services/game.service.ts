@@ -12,7 +12,6 @@ import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/ap
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material';
-import { LogService } from 'src/app/services/log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +29,8 @@ export class GameService {
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
 
-  showExtraByViewport:  boolean = undefined;
+  public showExtraByViewport:  boolean = undefined;
+  public newsShowedFirstTime: boolean = false;
 
   // Client Data Needed Updates
   public client_update = {
@@ -64,7 +64,6 @@ export class GameService {
     private historyService: HistoryService,
     private http: HttpClient,
     private _configService: ConfigService,
-    private logService: LogService,
     public dialog: MatDialog,
     
     rendererFactory: RendererFactory2,
@@ -107,12 +106,7 @@ export class GameService {
 
     this._dataSubscription = this.socketService.listen(socketEvent.DATA)
       .subscribe(data => {
-        this.dataParserService.handlerGameData(data);
-
-        // Dispatch to Log Service if enabled
-        if(this.tgConfig.log) {
-          this.logService.parseForLog(data);
-        }
+        this.dataParserService.handlerGameData(data, this.tgConfig.log);
       });
 
     this._updateNeededSubscription = this.dataParserService.updateNeeded
@@ -268,7 +262,6 @@ export class GameService {
       return cont.list;
     }
   }
-
 
   /** Font Size Adjustement */
 

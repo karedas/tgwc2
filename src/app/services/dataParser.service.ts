@@ -7,6 +7,7 @@ import * as GameActions from '../store/actions/client.action';
 
 import { IHero } from '../models/data/hero.model';
 import { Observable, Subject } from 'rxjs';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,23 +28,33 @@ export class DataParser {
   private _updateNeeded: Subject<any>;
 
   constructor(
-    private store: Store<State>
+    private store: Store<State>,
+    private logService: LogService
     ) {
     this._updateNeeded = new Subject<any>();
   }
 
-  handlerGameData(data: any) {
+  handlerGameData(data: any, logEnabled?: boolean) {
 
     this.netData += data;
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
+
       data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
         this.parseForDisplay(data);
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
+      }
+
+      if( logEnabled ) {
+       try {
+         this.logService.parseForLog(data);
+       } catch(err) {
+         console.log(err.message);
+       }
       }
 
       this.netData = '';
