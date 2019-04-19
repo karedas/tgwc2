@@ -131,6 +131,7 @@ export class DialogV2Service {
 
     config.id = dialogID;
     config.disableClose = true;
+    config.autoFocus = false;
     config.width = '450px';
     config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
@@ -352,12 +353,10 @@ export class DialogV2Service {
     if (!this.dialog.getDialogById(dialogID)) {
       console.log('open');
       const config = new MatDialogConfig();
-
-      config.width = 'auto';
-      config.height = 'auto';
-      config.maxWidth = '90%';
-      config.maxHeight = '90%';
+      config.width = '650px';
+      config.height = '450px';
       config.hasBackdrop = false;
+      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
       const dialogRef = this.dialog.open(LogComponent, config);
 

@@ -95,14 +95,15 @@ export class GameService {
   }
 
   loadServerStat() {
-    this.serverStat = timer(0, 25000).pipe(
-      switchMap(() => this.http.get(environment.serverstatAddress)),
+    this.serverStat = timer(0, 25000).pipe (
+      switchMap(() => this.http.get(environment.serverstatAddress))
     );
   }
 
   startGame(initialData) {
+    
     // Perform Reset before start any Environments Stuff.
-    this.dataParserService.handlerGameData(initialData);
+    this.dataParserService.handlerGameData(initialData, this.tgConfig.log);
 
     this._dataSubscription = this.socketService.listen(socketEvent.DATA)
       .subscribe(data => {
@@ -113,6 +114,7 @@ export class GameService {
       .subscribe((up) => {
         this.updateNeeded(up);
       });
+
   }
 
   disconnectGame() {

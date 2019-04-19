@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { LogService } from 'src/app/services/log.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -7,13 +7,14 @@ import { saveAs } from 'file-saver';
 @Component({
   selector: 'tg-log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.scss']
+  styleUrls: ['./log.component.scss'],
 })
 export class LogComponent implements OnInit, OnDestroy{
 
   @ViewChild('logContentArea') logContentArea: ElementRef;
 
   logStorage = [];
+  dateTime: string;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -21,6 +22,8 @@ export class LogComponent implements OnInit, OnDestroy{
     private logService: LogService
   ) {
     this._unsubscribeAll = new Subject<any>();
+    const d = new Date();
+    this.dateTime = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}, ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
   }
 
   ngOnInit() {
@@ -33,10 +36,7 @@ export class LogComponent implements OnInit, OnDestroy{
 
   saveLog() {
     const content =  this.logContentArea.nativeElement.innerHTML;
-    //TODO: Move in Config or in another place
-    const d = new Date();
-    const dateTime = d.getFullYear + '-' + d.getMonth + '-' + d.getHours() + '-' + d.getMinutes() + '-' + d.getMilliseconds()
-    const file = new File([content], dateTime + '_TG-LOG.html' , {type: "text/plain;charset=utf-8"});
+    const file = new File([content], this.dateTime.replace(/\-|:/g, '_') + '_TG-LOG.html' , {type: "text/plain;charset=utf-8"});
     saveAs(file);
   }
 

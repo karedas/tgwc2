@@ -1,5 +1,64 @@
-:host {
-  .tg-log-content {
-    color: white;
+
+.tg-log-content {
+  color: white;
+  font-size: 90%;
+  background: black;
+  height: 100%;
+  color: #00ff21;
+}
+
+.tg-log-date{
+  text-align: center;
+  color: gray;
+  padding: .5em 0;
+  border-bottom: 1px solid #54544d;
+}
+
+.tg-log-line {
+
+  padding: .5em 0;
+
+  h1, h2, h3{
+    margin: .5em 0;
+  }
+
+  p {
+    margin: 0;
+  }
+  
+  .tg-log-linenumber {
+    padding: .5em .5em 0 0;
+    color: rgb(95, 95, 95);
+    border-right: 1px solid #191919;
+    max-width: 25px;
+    min-width: 25px;
+    text-align: right;
+  }
+
+  .tg-log-msg {
+    padding: .5em 20px 0 20px;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 1.2em;
+      left: 0;
+      width: 12px;
+      height: 1px;
+      background-color: #313131;
+    }
+  }
+
+}
+
+
+.tg-log-action {
+
+  border-top: 1px solid #54544d;
+
+  button {
+    margin: 0 auto;
   }
 }

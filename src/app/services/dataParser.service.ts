@@ -49,7 +49,9 @@ export class DataParser {
         console.log(err.message);
       }
 
+
       if( logEnabled ) {
+
        try {
          this.logService.parseForLog(data);
        } catch(err) {
@@ -118,16 +120,15 @@ export class DataParser {
       return '';
     });
 
-    /**
+    /* *
      * DEPRECATED
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
-      console.warn('Todo: Hide Text');
       this.store.dispatch(new GameActions.UpdateUI({ inputVisible: false }));
       return '';
     });
 
-    /**
+    /* *
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {

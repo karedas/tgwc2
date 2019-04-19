@@ -1,112 +1,47 @@
 
+@import 'dialog';
 
 .tg-app {
 
- 
+  // Buttons
+  .mat-raised-button {
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .mat-button-wrapper {
+    height: 100%; 
+  }
+
   /*checkbox */
   .mat-checkbox-frame {
     background: #5d5d5d;
   }
     
-  .mat-button-wrapper {
-    height: 100%; 
-  }
-
   /* Dialog */
 
-  .tg-dialog-content,
-  .tg-dialog-content-nopadding {
-    position: relative;
-    z-index: 10;
-    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-    height: 100%;
-    max-height: 100%;
-    border-radius: 5px;
-    font-size: 12px;
-  }
-
-   .overlay-dark {
-    background-color: rgba(0, 0, 0, 1);
-  }
-    
   .mat-dialog-container {
     background: transparent;
     border-radius: 8px;
-    padding: 24px 0 0;
     position: relative;
+    box-shadow: none;
   }
 
-  .tg-dialog-content {
+  .mat-dialog-actions {
     margin: 0;
-    padding: 8px;
+    padding: 0;
+  }
+
+  .mat-dialog-content {
+    margin: 0;
+    padding-left: 12px;
+    padding-right: 0;
   }
     
-  .mat-dialog-title {
-    cursor: pointer;
-    margin: 0 auto;
-    max-height: 24px !important;
-    border: none;
-    width: auto !important;
-    line-height: 24px;
-    font-size: 13px;
-    font-family: kingthings;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-    text-align: center;
-    padding: 0 16px;
-    box-sizing: content-box;
-    color: #ccaa31;
-    border-radius: 0;
-    background: url($imgPath + '/interface/modal_title_center_bg.png') repeat-x top left;
-    transition: width .3s linear;
-    box-shadow: inset 0px -3px 10px 0px black;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90%;
-    display: table;
-    top: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-  
-    &:before, &:after {
-      content: '';
-      display: block;
-    }
 
-    &:before {
-      background: url($imgPath + '/interface/modal_title_left_bg.png') no-repeat 0 0;
-      position: absolute;
-      width: 6px;
-      display: block;
-      left: 0;
-      top: 0;
-      height: 100%;
-    }
-  
-    &:after {
-      position: absolute;
-      width: 6px;
-      display: block;
-      right: 0px;
-      top: 0;
-      height: 100%;
-      background: url($imgPath + '/interface/modal_title_right_bg.png') no-repeat top right;
-    }
-
-    .tg-dialog--close {
-      line-height: 1;
-      color: $tg-red;
-      vertical-align: middle;
-      height: auto;
-      width: auto;
-      margin: auto 0;
-
-      .mat-icon {
-        font-size: 18px;
-      }
-    }
+  .cdk-drag {
+    display: block;
+    height: 100%;
   }
 
   /* Menu */
