@@ -2,6 +2,10 @@
 @import 'sprites';
 @import 'utils/sprites-mixins';
 
+:host {
+  position: relative;
+}
+
 .info-description {
   background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
   padding: 1em;

@@ -12,7 +12,6 @@ import { map, takeUntil, take } from 'rxjs/operators';
   selector: 'tg-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoComponent implements AfterViewInit, OnDestroy {

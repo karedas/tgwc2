@@ -1,10 +1,11 @@
-import { Component,  OnDestroy, OnInit } from '@angular/core';
+import { Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { takeUntil } from 'rxjs/operators';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'tg-generic-table',
@@ -14,15 +15,17 @@ import { takeUntil } from 'rxjs/operators';
 
 export class GenericTableComponent implements  OnInit, OnDestroy {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
+  dataTable$: Observable<any>;
+  pageSizeBase: number = 5;
+  private data = [];
 
-  public readonly dialogID: string = 'genericTable';
-
-  public dataTable$: Observable<any>;
-  public data = [];
-  public columnsToDisplay: string[];
-  public resultsLength = 0;
-  public headerTitle = 'Lista Generica';
+  dataSource:  MatTableDataSource<any>;
+  columnsToDisplay: string[];
+  resultsLength = 0;
+  headerTitle = 'Lista Generica';
 
   private _unsubscribeAll: Subject<any>;
 
@@ -53,7 +56,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
 
   private populate(dataTable: any) {
 
-    this.data = [];
     this.columnsToDisplay = [];
 
     if (dataTable.head) {
@@ -75,10 +77,19 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
         const obj = {};
         d.map((row: string, rowIndex: number) => {
           obj[this.columnsToDisplay[rowIndex]] = row;
+          this.data.push(obj);
         });
-        this.data.push(obj);
       });
     }
+    
+    this.dataSource = new MatTableDataSource(this.data);
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
   ngOnDestroy(): void {

@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver';
   selector: 'tg-log',
   templateUrl: './log.component.html',
   styleUrls: ['./log.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LogComponent implements OnInit, OnDestroy{
 

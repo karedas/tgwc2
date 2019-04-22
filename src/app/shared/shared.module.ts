@@ -17,6 +17,7 @@ import {
   MatInputModule,
   MatTableModule,
   MatPaginatorModule,
+  MatSortModule,
   MatProgressBarModule } from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
@@ -66,7 +67,8 @@ import { LogService } from '../services/log.service';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSortModule
   ],
 
   exports: [
@@ -90,7 +92,8 @@ import { LogService } from '../services/log.service';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSortModule
   ],
 })
 export class SharedModule {

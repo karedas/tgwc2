@@ -1,9 +1,24 @@
-<ng-container *ngIf="dataTable$ | async">
-    <div class="tg-workslist">
-      <div class="b-ironlight-mini tg-box">
-        <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <!-- Workslist content start -->
-          <!-- <p-table 
+<div class="b-ironlight-mini tg-box">
+  <div class="tg-dialog-content-nopadding tg-shadow-inset">
+    <div class="tg-dialog-title" cdkDragHandle>
+      {{headerTitle}}
+      <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+        <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+      </button>
+    </div>
+    <div class="tg-workslist" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+      <div fxLayout="column" matDialogContent>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <ng-scrollbar class="scrollbar scrollbar-dialog" [autoUpdate]="true" #scrollBar [shown]="'always'"
+        [disableOnBreakpoints]="false">
+        </ng-scrollbar>
+
+      </div>
+          
+    <!-- Workslist content start -->
+      <!-- <p-table 
             #worksTable
             [value]="rows" 
             [autoLayout]="true" 
@@ -41,14 +56,13 @@
               Visualizzati {{rows.length }} risultati
             </ng-template>
           </p-table> -->
-          <!-- Workslist content end -->
-        </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
-      </div>
+      <!-- Workslist content end -->
     </div>
-</ng-container>
+  </div>
+  <div class="tg-border-box">
+    <div class="tg-border tg-border-top"></div>
+    <div class="tg-border tg-border-left"></div>
+    <div class="tg-border tg-border-right"></div>
+    <div class="tg-border tg-border-bottom"></div>
+  </div>
+</div>

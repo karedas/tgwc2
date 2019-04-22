@@ -60,7 +60,7 @@ export class DialogV2Service {
     const overlayElement = <HTMLElement>dialogRef['_overlayRef'].overlayElement;
     this.increaseZIndex(dialogRef, overlayElement);
 
-    overlayElement.addEventListener('click', () => {
+    overlayElement.addEventListener('mousedown', () => {
       this.increaseZIndex(dialogRef, overlayElement);
     });
   }
@@ -169,6 +169,7 @@ export class DialogV2Service {
     config.width = '500px';
     config.height = '450px';
     config.restoreFocus = true;
+    config.hasBackdrop = true;
     config.disableClose = true;
 
     const dialogRef = this.dialog.open(EditorComponent, config);
@@ -353,8 +354,8 @@ export class DialogV2Service {
     if (!this.dialog.getDialogById(dialogID)) {
       console.log('open');
       const config = new MatDialogConfig();
-      config.width = '650px';
-      config.height = '450px';
+      config.width = '60%';
+      config.height = '80%';
       config.hasBackdrop = false;
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 

@@ -24,7 +24,11 @@
     background: transparent;
     border-radius: 8px;
     position: relative;
-    box-shadow: none;
+    padding: 0;
+    box-shadow: 
+      0px 11px 15px -7px rgb(0, 0, 0), 
+      0px 24px 38px 3px rgba(0, 0, 0, 0.14), 
+      0px 9px 46px 8px rgba(0, 0, 0, 0.12);
   }
 
   .mat-dialog-actions {
@@ -34,8 +38,7 @@
 
   .mat-dialog-content {
     margin: 0;
-    padding-left: 12px;
-    padding-right: 0;
+    padding: 0;
   }
     
 
@@ -97,26 +100,36 @@
 
   .mat-table {
     background: #271d18;
+    width: 100%;
 
     .mat-header-cell {
       color: #FFB300;
+      border-right: 1px solid black;
+      padding: 0 5px;
+      background-color: #0b0907;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom-color: rgba(255, 255, 255, 0.12);
     }
 
     td.mat-cell {
       border-bottom-color: rgba(255, 255, 255, 0.12);
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
       color: #dedede;
       font-size: 100%;
+      background: #191512;
+      padding: 0 5px;
     }
 
     tr.mat-footer-row, tr.mat-row {
       height: 28px;
+      background: #0b0907;
     }
   }
 
 
   /* Paginator */
   .mat-paginator {
-    background: #191611;
+    background: #0b0907;
   }
 
   .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
@@ -124,6 +137,19 @@
     color: rgba(255, 255, 255, 0.54);
   }
 
+  .mat-select-value {
+    color: rgba(255, 214, 0, 0.87);
+  }
+
+  .mat-select-row {
+    color: rgba(255, 255, 255, 0.54);
+  }
+
+
+  /* Form and more*/
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
 
   /* ProgressBar */
   .mat-progress-bar {
@@ -138,113 +164,3 @@
     }
   }
 }
-
-// /* Table */
-// p-table {
-
-//   .ui-table .ui-sortable-column{
-//     padding-left:.5em;
-//     padding-right: .5em;
-//   }
-  
-//   .ui-table .ui-sortable-column.ui-state-highlight {
-//     background-color: #221915;
-//     color: #dedede;
-//     outline: none;
-
-//     .ui-sortable-column-icon {
-//       color: #dedede;
-//     }
-//   }
-
-//   .ui-table .ui-sortable-column:not(.ui-state-highlight):hover {
-//     background-color: #271d18;
-//   }
-
-//   >.ui-widget {
-//     font-size: 11px;
-//   }
-
-//   .ui-table {
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-//     border-collapse: collapse;
-
-//     .ui-table-thead>tr>th {
-//       color: #FFB300;
-//       position: sticky;
-//       top: 0;
-//       border: 0;
-//     }
-//   }
-
-//   thead {
-//     th {
-//       padding-top:.5em;
-//       padding-bottom:.5em;
-//     }
-//   }
-
-
-//   .ui-table-wrapper {
-//     flex: 1 1 auto;
-//   }
-
-//   tbody {
-//     text-align: center;
-//     td {
-//       overflow: hidden;
-//       text-overflow: ellipsis;
-//       padding: 0.571em 1.857em!important;
-//     }
-
-//     td:first-child {
-//       border-left: 0!important
-//     }
-
-//     td:last-child {
-//       border-right: 0!important;
-//     }
-    
-//   }
-
-// }
-
-// p-paginator {
-//   .ui-paginator {
-//     padding: 8px 0;
-
-//     .ui-paginator-pages .ui-paginator-page,
-//     .ui-paginator-first,
-//     .ui-paginator-prev,
-//     .ui-paginator-next,
-//     .ui-paginator-last {
-//       height: 1.5em;
-//       min-width: 1.5em;
-//       line-height: 1.5em;
-//     }
-//   }
-
-//   p-dropdown {
-//     .ui-dropdown {
-//       height: 1.5em!important;
-//     }
-
-//     .ui-dropdown-label {
-//       padding: 0;
-//     }
-
-//     .pi {
-//       font-size: 1em!important;
-//     }
-
-//     .ui-dropdown-trigger {
-//       line-height: 1.5!important;
-//     }
-//   }
-// }
-
-// body .ui-dropdown-panel {
-//   z-index: 1100!important;
-// }

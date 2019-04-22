@@ -1,37 +1,42 @@
-  <div class="editor-dialog">
-    <div mat-dialog-title>{{dialogTitle}}</div>
-    <div class="b-ironlight-mini tg-box">
-      <div class="tg-dialog-inside-nopadding tg-shadow-inset tg-box" style="height: 100%">
-        <div class="tg-modal-contentwrap b-paper tg-box">
-          <div fxLayout style="z-index: 2"  class="tg-editor-container">
-            <div fxFlex="100" fxLayout="column">
-              <!-- <div class="tg-editor--heroname" fxFlex="0 0 auto" fxLayoutAlign="center center">
-                {{HeroName$ | async}}
-              </div> -->
-              <div class="textarea-cont" fxFlex="1 1 auto">
-                <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
-                  (input)="onDescrChange($event.target.value)" #textArea [(ngModel)]="description"></textarea>
-              </div>
-              <div id="editorMaxCharsCount" class="tg-txt-maxcharcount" fxFlex="0 0 auto" fxLayoutAlign="center center">{{totalChars}}</div>
-              <div class="tg-modal-buttons-group" fxFlex="0 0 auto" fxLayoutAlign="center center">
-                  <button  tgClickStopPropagation type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light" (click)="onCancel($event)">Annulla</button>
-                  <button  tgClickStopPropagation type="button" class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light" (click)="onSave(textareaDescription.value)">Salva</button>
-              </div>
+<div class="editor-dialog">
+  <div class="b-ironlight-mini tg-box">
+    <div class="tg-dialog-inside-nopadding tg-shadow-inset tg-box" fxLayout="column">
+      
+      <div class="tg-dialog-title">{{dialogTitle}}</div>
+      <div class="tg-modal-contentwrap b-paper tg-box">
+        <div fxLayout style="z-index: 2" class="tg-editor-container" matDialogContent>
+          <div fxFlex="100" fxLayout="column">
+            <!-- <div class="tg-editor--heroname" fxFlex="0 0 auto" fxLayoutAlign="center center">
+              {{HeroName$ | async}}
+            </div> -->
+            <div class="textarea-cont" fxFlex="1 1 auto">
+              <textarea #textareaDescription name="editor" cols="30" rows="10" autofocus [maxLength]="maxChars"
+                (input)="onDescrChange($event.target.value)" #textArea [(ngModel)]="description"></textarea>
+            </div>
+            <div id="editorMaxCharsCount" class="tg-txt-maxcharcount" fxFlex="0 0 auto" fxLayoutAlign="center center">
+              {{totalChars}}</div>
+            <div class="tg-modal-buttons-group" fxFlex="0 0 auto" fxLayoutAlign="center center">
+              <button tgClickStopPropagation type="button" class="tg-button tg-button-annulla ml-auto tg-shadow-light"
+                (click)="onCancel($event)">Annulla</button>
+              <button tgClickStopPropagation type="button"
+                class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light"
+                (click)="onSave(textareaDescription.value)">Salva</button>
             </div>
           </div>
-          <div class="tg-border-box">
-            <div class="tg-border tg-border-top"></div>
-            <div class="tg-border tg-border-left"></div>
-            <div class="tg-border tg-border-right"></div>
-            <div class="tg-border tg-border-bottom"></div>
-          </div>
+        </div>
+        <div class="tg-border-box">
+          <div class="tg-border tg-border-top"></div>
+          <div class="tg-border tg-border-left"></div>
+          <div class="tg-border tg-border-right"></div>
+          <div class="tg-border tg-border-bottom"></div>
         </div>
       </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
-      </div>
+    </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
     </div>
   </div>
+</div>

@@ -1,7 +1,7 @@
 <div class="tg-notizie" >
-  <div mat-dialog-title>Ultime Notizie</div>
   <div class="b-ironlight-mini tg-box">
-    <div class="tg-dialog-content-nopadding tg-shadow-inset">
+    <div class="tg-dialog-content-nopadding tg-shadow-inset" fxLayout="column">
+      <div class="tg-dialog-title">Ultime Notizie</div>
       <div class="tg-box b-paper">
         <div class="tg-box" fxLayout="column no-wrap" style="max-height: 100%;">
           <div class="tg-notizie--content" style="min-height: 0;">
@@ -10,7 +10,7 @@
               <div class="tg-mnch-img" fxFlex="1 1 100%"></div>
             </div>
 
-            <div fxFlex="70" fxFlex.lt-sm="100">
+            <div fxFlex="70" fxFlex.lt-sm="100" matDialogContent>
               <ng-scrollbar class="scrollbar-light scrollbar-dialog" [disableOnBreakpoints]="false">
                 <div fxLayout="column">
                   <div style="padding-right:.5em;">

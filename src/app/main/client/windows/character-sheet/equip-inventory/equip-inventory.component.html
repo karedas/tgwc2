@@ -85,7 +85,7 @@
 
 
 <ng-template #equipInvAction let-wprc="wprc" let-weight="weight">
-  <div class="eqinv-totalweight" fxFlex="0 1 auto" fxFlex.gt-xs="0 1 100%">
+  <div class="eqinv-totalweight" fxFlex="0 1 100%" fxFlex.gt-xs="0 1 auto">
     <div class="eqinv-switch-action">
       <div class="wrap-btnend-box" [ngClass]="{'active': openedSubTab == 'equip'}">
         <button class="tg-button btn-equip-graph" (mousedown)="buttonClick('equip', $event)">Equip</button>
