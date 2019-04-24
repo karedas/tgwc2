@@ -13,13 +13,18 @@
     height: 100%; 
   }
 
+
+  .mat-icon-button[disabled][disabled] {
+    color: rgba(249, 249, 249, 0.26);
+  }
+
+
   /*checkbox */
   .mat-checkbox-frame {
     background: #5d5d5d;
   }
     
   /* Dialog */
-
   .mat-dialog-container {
     background: transparent;
     border-radius: 8px;
@@ -40,7 +45,6 @@
     margin: 0;
     padding: 0;
   }
-    
 
   .cdk-drag {
     display: block;
@@ -49,7 +53,9 @@
 
   /* Menu */
   .mat-menu-content {
+
     background-color: #171614;
+
     > div {
       margin: -8px 0;
     }
@@ -94,10 +100,7 @@
     color: rgba(236, 234, 227, 0.54);
   }
  
- 
- 
   /* Table */
-
   .mat-table {
     background: #271d18;
     width: 100%;
@@ -124,12 +127,19 @@
       height: 28px;
       background: #0b0907;
     }
-  }
 
+    tr.mat-row:hover td {
+      background: #272421;
+    }
+  }
 
   /* Paginator */
   .mat-paginator {
     background: #0b0907;
+  }
+
+  .mat-paginator-page-size {
+    margin-right: auto;
   }
 
   .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
@@ -145,12 +155,6 @@
     color: rgba(255, 255, 255, 0.54);
   }
 
-
-  /* Form and more*/
-  .mat-form-field-wrapper {
-    padding-bottom: 0;
-  }
-
   /* ProgressBar */
   .mat-progress-bar {
     height: 2px;
@@ -162,5 +166,15 @@
     .mat-progress-bar-fill:after {
       background-color: $tg-yellow;
     }
+  }
+
+
+  /* filter */
+  .tg-table--filter {
+    background-color: #ece9e0;
+    width: 100%;
+    padding: 0 1em;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 8px 2px black;
   }
 }

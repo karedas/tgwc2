@@ -78,26 +78,18 @@ export class GameService {
   }
 
 
-  get config(): TGConfig {
-    return this.tgConfig;
-  }
-
   _init() {
-
     this._configService.config
       .subscribe((config: TGConfig) => {
           this.tgConfig = config;
+          //check Zen Mode:
+          this.setZenMode(this.tgConfig.zen);
+          // Debug
           console.log('gameservice config subscribe:', config);
         }
       );
 
     this.loadServerStat();
-  }
-
-  loadServerStat() {
-    this.serverStat = timer(0, 25000).pipe (
-      switchMap(() => this.http.get(environment.serverstatAddress))
-    );
   }
 
   startGame(initialData) {
@@ -114,7 +106,6 @@ export class GameService {
       .subscribe((up) => {
         this.updateNeeded(up);
       });
-
   }
 
   disconnectGame() {
@@ -167,19 +158,25 @@ export class GameService {
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
 
-      } else if ( this.client_update.inContainer && this.config.output.extraArea.visible ) {
+      } else if ( this.client_update.inContainer && this.tgConfig.output.extraArea.visible ) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
       }
     }
   }
 
-  clearUpdate() {
+  private clearUpdate() {
     this.client_update.inventory.version = -1;
     this.client_update.inventory.needed = false;
     this.client_update.equipment.version = -1;
     this.client_update.equipment.needed = false;
     this.client_update.room.version = -1;
     this.client_update.room.needed = false;
+  }
+  
+  private loadServerStat() {
+    this.serverStat = timer(0, 25000).pipe (
+      switchMap(() => this.http.get(environment.serverstatAddress))
+    );
   }
 
   /**
@@ -210,6 +207,11 @@ export class GameService {
     this.socketService.disconnect();
   }
 
+
+  /**
+   * UI UTILITY 
+   */
+
   /* Commands List request */
   public setCommands(cmds: any) {
     this._commandsList$.next(cmds);
@@ -226,8 +228,16 @@ export class GameService {
     }, 5000);
   }
 
-  getStatusInline(): Observable<any> {
+  public getStatusInline(): Observable<any> {
     return this._showStatus.asObservable();
+  }
+
+  public setZenMode(status: boolean) {
+    if (status) {
+      this.render.addClass(document.body, 'zen');
+    } else {
+      this.render.removeClass(document.body, 'zen');
+    }
   }
 
   /* Order person or equip list */
@@ -266,7 +276,6 @@ export class GameService {
   }
 
   /** Font Size Adjustement */
-
   setOutputSize() {
     const newSize = (this.tgConfig.fontSize + 1 ) % font_size_options.length;
     const old_class = font_size_options[this.tgConfig.fontSize].class;

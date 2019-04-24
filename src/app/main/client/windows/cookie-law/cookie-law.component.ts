@@ -22,6 +22,7 @@ export class CookieLawComponent {
 
   onContinue() {
     this.cookieService.set('tgCookieLaw', '1');
+    this.cookieService.set
     this.dialogRef.close();
   }
 

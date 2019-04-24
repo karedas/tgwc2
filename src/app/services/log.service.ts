@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { scan } from 'rxjs/operators';
+import { equip_positions_by_name } from '../main/common/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,7 @@ export class LogService {
     data = data.replace(/&!au"[^"]*"\n*/gm, '');
 
     // Player status
-
-
+    data = data.replace(/&!si"[^"]*"/gm, '');
     data = data.replace(/&!st\{[\s\S]*?\}!/gm, '');
     data = data.replace(/&!up"[^"]*"\n*/gm, '');
     data = data.replace(/&!img"[^"]*"\n*/gm, '');
@@ -46,8 +46,6 @@ export class LogService {
     data = data.replace(/&!e[ad]"[^"]*"\n*/gm, '');
     data = data.replace(/&!s[mi]"[^"]*"/gm, '');
     data = data.replace(/&!as"[^"]*"/gm, '');
-
-
 
     // Map data
     // TODO: Draw map?
@@ -71,10 +69,7 @@ export class LogService {
       return this.printDateTime(parse_time);
     });
 
-    data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
-      const region_parse = JSON.parse(region.slice(8, -1));
-      return this.printRegion(region_parse);
-    });
+    data = data.replace(/&!region\{[\s\S]*?\}!/gm, '');
 
     // Generic table (title, head, data)
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
@@ -162,10 +157,9 @@ export class LogService {
     if (data !== 'undefined' && data !== undefined && data !== '') {
       data = this.removeColors(data);
       data = data.replace(/\n/gm, '<br>');
-      data.replace(/<p><\/p>/g, '');
+      data = data.replace(/<p><\/p>/g, '');
 
       //Update the Observable Subject
-      const n = this.lineNumber;
       this.log$.next({ l: ++this.lineNumber, d: data });
     }
   }
@@ -180,7 +174,7 @@ export class LogService {
   }
 
   private printDateTime(date) {
-    return `<p>E' ${date.datestr} </p>`;
+    return `<p>Data: ${date.datestr} </p>`;
   }
 
   private printRegion(region) {
@@ -194,72 +188,71 @@ export class LogService {
   }
 
   private printPage(p) {
-    return '<h3>'+p.title + '</h3><div>' + p.text.replace(/\n/gm, '<br>') + '</div>';
+    return '<h3>' + p.title + '</h3><div>' + p.text.replace(/\n/gm, '<br>') + '</div>';
   }
 
   private printTable(t) {
-    return '';
-    // let txt ='<table>';
+    let txt = '<table>';
 
-    // if(t.title && t.dialog == false)
-    //   txt += '<caption>' + t.title + '</caption>';
-  
-    // if(t.head) {
-    //   txt += '<thead><tr>'
-    //   t.head.forEach((v, i) => {
+    if (t.title && t.dialog == false)
+      txt += '<caption>' + t.title + '</caption>';
 
-    //     switch(typeof v) {
-    //       case "object":
-    //         txt += '<th>'+v.title+'</th>';
-    //         break;
-    
-    //       default:
-    //         txt += '<th>'+v+'</th>';
-    //         break;
-    //       }
-    //   });
-    //   txt += '</tr></thead>';
-    // }
-  
-    // if(t.data) {
-    //  t.data.forEach( (row, ri) => {
-    //     txt += '<tr>';
+    if (t.head) {
+      txt += '<thead><tr>'
+      t.head.forEach((v, i) => {
 
-    //     row.forEach( (elem, di) => {
-  
-    //       let h = t.head ? t.head[di] : null;
-          
-    //       switch(typeof h) {
-    //         case "object":
-    //           switch(h.type) {
-    //             case "account":
-    //               txt += '<td><a target="_blank" href="/admin/accounts/'+elem+'">'+elem+'</a></td>';
-    //               break;
-  
-    //             case "ipaddr":
-    //               txt += '<td><a target="_blank" href="http://www.infosniper.net/index.php?ip_address='+elem+'">'+elem+'</a></td>';
-    //               break;
-  
-    //             // case "icon":
-    //             //   txt += '<td>'+ elem +'</td>';
-    //             //   break;
-  
-    //             default:
-    //               txt += '<td>'+elem+'</td>';
-    //               break;
-    //           }
-    //           break;
-  
-    //         default:
-    //           txt += '<td>'+elem+'</td>';
-    //           break;
-    //       }
-    //     });
-    //     txt += '</tr>';
-    //   });
-    // }
-  
-    // txt += '</table>';
+        switch (typeof v) {
+          case "object":
+            txt += '<th>' + v.title + '</th>';
+            break;
+
+          default:
+            txt += '<th>' + v + '</th>';
+            break;
+        }
+      });
+      txt += '</tr></thead>';
+    }
+
+    if (t.data) {
+      t.data.forEach((row, ri) => {
+        txt += '<tr>';
+
+        row.forEach((elem, di) => {
+
+          let h = t.head ? t.head[di] : null;
+
+          switch (typeof h) {
+            case "object":
+              switch (h.type) {
+                case "account":
+                  txt += '<td><a target="_blank" href="/admin/accounts/' + elem + '">' + elem + '</a></td>';
+                  break;
+
+                case "ipaddr":
+                  txt += '<td><a target="_blank" href="http://www.infosniper.net/index.php?ip_address=' + elem + '">' + elem + '</a></td>';
+                  break;
+
+                // case "icon":
+                //   txt += '<td>'+ elem +'</td>';
+                //   break;
+
+                default:
+                  txt += '<td>' + elem + '</td>';
+                  break;
+              }
+              break;
+
+            default:
+              txt += '<td>' + elem + '</td>';
+              break;
+          }
+        });
+        txt += '</tr>';
+      });
+    }
+
+    txt += '</table>';
   }
 
   private printDetails(info, type) {
@@ -302,27 +295,128 @@ export class LogService {
   }
 
   private printInventory(inv) {
-    return '';
+    if (inv.list.length == 0)
+      return ('<p>Non hai niente in inventario!</p>');
+    else
+      return '<h4>Il tuo inventario:</h4>' + this.removeColors(this.printDetailsList(inv, 'obj'));
   }
 
   private printEquipment(eq) {
-    return '';
+    let res = '';
+    let eqcount = 0;
+
+    Object.keys(equip_positions_by_name).forEach((posname, idx) => {
+      let eqdata = eq[posname];
+
+      if (eqdata) {
+        eqdata.forEach((obj, idx) => {
+          res += equip_positions_by_name[posname] + ': ' + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '<br>';
+          eqcount++;
+        });
+      }
+    });
+
+    if (eqcount == 0)
+      return '<p>Non hai equipaggiato nulla!</p>';
+    else
+      return '<p>Equipaggiamento:</p>' + res;
   }
 
-  private printWorksList(wklist) {
-    return '';
+  private printWorksList(wk) {
+    let txt = '<table><caption>Potresti ' + wk.verb + ':</caption>';
+
+    txt += '<thead><tr><th>#</th><th>Difficolt&agrave;</th><th>Puoi?</th><th>Descrizione</th></tr></thead><tbody>';
+
+    for (let n = 0; n < wk.list.length; n++) {
+      txt += `<tr>
+                <td>${n + 1}</td>
+                <td>${wk.list[n].diff}</td>
+                <td>${(wk.list[n].cando ? 'si' : 'no')}</td>
+                <td>${wk.list[n].desc}</td>
+              </tr>`;
+    }
+
+    txt += '</tbody></table>';
+
+    return txt;
   }
 
-  private printSkillsList(skills) {
-    return '';
+  private printSkillsList(skinfo) {
+    let txt = '<table><caption>Abilit&agrave; conosciute</caption>';
+
+    for (var groupname in skinfo) {
+      txt += '<tr><td colspan="1000"><h3>' + groupname + '</h3></td></tr>';
+
+      let group = skinfo[groupname];
+
+      for (let skname in group) {
+        txt += '<tr><th>' + skname + '</th>';
+
+        let sk = group[skname];
+
+        if ('prac' in sk && 'theo' in sk)
+          txt += '<td>' + sk.prac + '</td><td>' + sk.theo + '</td>';
+
+        if ('auto' in sk)
+          txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
+
+        txt += '</tr>';
+      }
+    }
+
+    txt += '</table>';
+
+    return txt;
   }
 
   private printPlayerInfo(pinfo) {
-    return '';
+    const abiltxt = [
+      { val: 6, txt: "Terribile" },
+      { val: 14, txt: "Pessima" },
+      { val: 24, txt: "Scarsa" },
+      { val: 34, txt: "Discreta" },
+      { val: 64, txt: "Normale" },
+      { val: 74, txt: "Buona" },
+      { val: 84, txt: "Ottima" },
+      { val: 94, txt: "Eccellente" },
+      { val: 100, txt: "Leggendaria" }
+    ];
+
+    return '<table><caption>' + pinfo.name + ', ' + pinfo.title + '</caption>'
+      + '<tr><th>Descrizione</th><td colspan=3>' + pinfo.desc.replace(/([.:?!,])\s*\n/gm, '$1<p></p>').replace(/\n/gm, ' ') + '</td></tr>'
+      + '<tr><th>Razza</th><td>' + pinfo.race.name + '</td><th>Cultura</th><td>' + pinfo.cult + '</td></tr>'
+      + '<tr><th>Etnia</th><td>' + pinfo.ethn + '</td><th>Religione</th><td>' + (pinfo.relig ? pinfo.relig : 'nessuna') + '</td></tr>'
+      + '<tr><th>Altezza</th><td>' + pinfo.height + ' cm.</td><th>Sesso</th><td>' + pinfo.sex.name + '</td></tr>'
+      + '<tr><th>Peso</th><td>' + pinfo.weight + ' pietre</td><th>Citt&agrave;</th><td>' + (pinfo.city ? pinfo.city : 'nessuna') + '</td></tr>'
+      + '<tr><th>Et&agrave;</th><td>' + pinfo.age + ' anni</td><th>Lingua</th><td>' + pinfo.lang + '</td></tr>'
+      + '<tr><th>Nascita:</th><td colspan=3>' + pinfo.born + '</td></tr>'
+      + '</table><table><caption>Caratteristiche:</caption>'
+      + '<tr><td colspan="3"><h4>Mente</h4></td></tr>'
+      + '<tr><th>Volontà</th><td>' + pinfo.abil.wil.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.wil.prc, abiltxt) + '</td></tr>'
+      + '<tr><th>Intelligenza</th><td>' + pinfo.abil.int.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.int.prc, abiltxt) + '</td></tr>'
+      + '<tr><th>Empatia</th><td>' + pinfo.abil.emp.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.emp.prc, abiltxt) + '</td></tr>'
+      + '<tr><td colspan="3"><h4>Corpo</h4></td></tr>'
+      + '<tr><th>Taglia</th><td>' + pinfo.abil.siz.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.siz.prc, abiltxt) + '</td></tr>'
+      + '<tr><th>Forza</th><td>' + pinfo.abil.str.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.str.prc, abiltxt) + '</td></tr>'
+      + '<tr><th>Costituzione</th><td>' + pinfo.abil.con.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.con.prc, abiltxt) + '</td></tr>'
+      + '<tr><td colspan="3"><h4>Agilità</h4></td></tr>'
+      + '<tr><th>Destrezza</th><td>' + pinfo.abil.dex.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.dex.prc, abiltxt) + '</td></tr>'
+      + '<tr><th>Velocità</th><td>' + pinfo.abil.spd.prc + '</td><td>' + this.prcLowTxt(pinfo.abil.spd.prc, abiltxt) + '</td></tr>'
+      + '</table>';
   }
 
   private printPlayerStatus(status) {
-    return '';
+    let sttxt = '<h4>Condizioni</h4>';
+
+    sttxt += '<p>Salute: ' + status.hit + '</p>';
+    sttxt += '<p>Movimento: ' + status.move + '</p>';
+    sttxt += '<p>Fame: ' + status.food + '</p>';
+    sttxt += '<p>Sete: ' + status.drink + '</p>';
+
+    if (status.msg)
+      sttxt += '<p>' + status.msg + '</p>';
+
+    return sttxt;
   }
 
   private printDetailsList(cont, type) {
@@ -360,6 +454,14 @@ export class LogService {
       res += '&#160;[x' + count + ']';
 
     return res;
+  }
+
+  private prcLowTxt(val, values) {
+    for (var i = 0; i < values.length; ++i)
+      if (val <= values[i].val)
+        return values[i].txt;
+
+    return null;
   }
 
 }

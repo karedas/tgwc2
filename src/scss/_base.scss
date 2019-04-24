@@ -4,17 +4,18 @@
 /**** FONTS *****/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
-
 @include font-face(
   kingthings, '/assets/fonts/Kingthings_Foundation', null, null, ttf
 );
+
+
 /********************/
 
-body,
-html {
-  height: 100%;
-  width: 100%;
-}
+// body,
+// html {
+//   height: 100%;
+//   width: 100%;
+// }
 
 body {
   background: #0b0807;
@@ -24,6 +25,8 @@ body {
   font-size: 11px;
   font-family: 'Open Sans', sans-serif;
   display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 body.size-xs{

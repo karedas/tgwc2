@@ -62,7 +62,7 @@ export class ClientEffects {
     ofType(ClientEventType.NEWS),
     withLatestFrom(this.store.pipe(select(getInGameStatus))),
     map(([action, status]) => {
-      if (this.game.config.news) {
+      if (this.game.tgConfig.news) {
         this.dialogV2Service.openNews();
       } else {
         this.game.sendToServer('');

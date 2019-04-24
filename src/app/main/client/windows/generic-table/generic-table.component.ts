@@ -40,13 +40,15 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      (dt: IGenericTable) => {
-        if (dt) {
-          this.setHeaderTitle(dt.title);
-          this.resultsLength = Object.keys(dt.data).length;
-          this.populate(dt);
-        }
+    this.dataTable$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (dt: IGenericTable) => {
+          if (dt) {
+            this.setHeaderTitle(dt.title);
+            this.resultsLength = Object.keys(dt.data).length;
+            this.populate(dt);
+          }
       });
   }
 
@@ -86,6 +88,8 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    console.log(this.dataSource);
   }
 
   applyFilter(filterValue: string) {

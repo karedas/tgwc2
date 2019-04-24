@@ -303,7 +303,7 @@ export class DialogV2Service {
     const config = new MatDialogConfig();
 
     config.id = dialogID;
-    config.width = 'auto';
+    config.width = '700px';
     config.height = 'auto';
     config.scrollStrategy = this.overlay.scrollStrategies.reposition();
     config.hasBackdrop = false;
@@ -329,7 +329,7 @@ export class DialogV2Service {
     const config = new MatDialogConfig();
 
     config.id = dialogID;
-    config.width = 'auto';
+    config.width = '700px';
     config.height = 'auto';
     config.scrollStrategy = this.overlay.scrollStrategies.reposition();
     config.hasBackdrop = false;

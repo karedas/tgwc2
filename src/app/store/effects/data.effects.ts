@@ -77,4 +77,12 @@ export class DataEffects {
     })
   );
 
+  @Effect({ dispatch: false })
+  worksList$: Observable<Action> = this.actions$.pipe(
+    ofType<PayloadActionData>(DataEvenType.WORKSLIST),
+    tap((res) => {
+      this.dialogV2Service.openWorksList();
+    })
+  );
+
 }

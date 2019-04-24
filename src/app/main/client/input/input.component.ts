@@ -129,17 +129,10 @@ export class InputComponent implements OnInit, OnDestroy {
     });
   }
 
-  toggleZen(event: Event) {
-
+  toggleZen(event?: Event) {
     this._configService.setConfig({
       zen: !this.tgConfig.zen
     });
-
-    if (this.tgConfig.zen) {
-      this.render.addClass(document.body, 'zen');
-    } else {
-      this.render.removeClass(document.body, 'zen');
-    }
   }
 
   onFontSizeChange(): void {
