@@ -55,7 +55,7 @@ import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     CharacterSheetComponent,
     LogComponent
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: getItalianPaginatorIntl}],
+  providers: [{ provide: MatPaginatorIntl, useClass: getItalianPaginatorIntl}]
 })
 
 export class DialogV2Module { }

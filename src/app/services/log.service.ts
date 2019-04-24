@@ -9,7 +9,7 @@ import { equip_positions_by_name } from '../main/common/constants';
 export class LogService {
 
   lineNumber: number = 0;
-  log$: ReplaySubject<any> = new ReplaySubject<any>(500);
+  log$: ReplaySubject<any> = new ReplaySubject<any>(1);
   logStorage = [];
 
   constructor() {
