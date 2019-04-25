@@ -48,7 +48,10 @@
                     matRipple 
                     [matRippleCentered]="centered">Continua</button>
                     <div class="input-checkbox">
-                        <mat-checkbox (change)="dontShowNextTime = !dontShowNextTime" color="accent">Non mostrare piu' questa notizia</mat-checkbox>
+                        <mat-checkbox 
+                          (change)="onCheckbox($event)" 
+                          color="accent"
+                          [(ngModel)]="checked">Non mostrare piu' questa notizia</mat-checkbox>
                     </div>
                   </div>
                 </div>

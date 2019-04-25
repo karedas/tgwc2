@@ -137,7 +137,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.game.disconnectGame();
         break;
       case 'news':
-        this.dialogV2Service.openNews();
+        this.dialogV2Service.openNews(true);
         break;
       case 'preferences':
         this.dialogV2Service.openControlPanel();

@@ -141,7 +141,7 @@ export class DialogV2Service {
 
   }
 
-  openNews(): MatDialogRef<NewsComponent, MatDialogConfig> {
+  openNews(fromGame: boolean): MatDialogRef<NewsComponent, MatDialogConfig> {
 
     const dialogID = 'news';
     const config = new MatDialogConfig();
@@ -151,7 +151,7 @@ export class DialogV2Service {
     config.width = '750px';
     config.height = '600px';
     config.minHeight = '400px';
-    config.backdropClass = this.game.newsShowedFirstTime ? '' : 'overlay-dark';
+    config.backdropClass = fromGame ? '' : 'overlay-dark';
     config.scrollStrategy = this.overlay.scrollStrategies.block();
     config.restoreFocus = true;
     config.autoFocus = false;

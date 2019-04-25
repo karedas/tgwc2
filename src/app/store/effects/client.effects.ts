@@ -63,7 +63,7 @@ export class ClientEffects {
     withLatestFrom(this.store.pipe(select(getInGameStatus))),
     map(([action, status]) => {
       if (this.game.tgConfig.news) {
-        this.dialogV2Service.openNews();
+        this.dialogV2Service.openNews(false);
       } else {
         this.game.sendToServer('');
         this.inputService.focus();

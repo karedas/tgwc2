@@ -30,7 +30,6 @@ export class GameService {
   public mouseIsOnMap = false;
 
   public showExtraByViewport:  boolean = undefined;
-  public newsShowedFirstTime: boolean = false;
 
   // Client Data Needed Updates
   public client_update = {

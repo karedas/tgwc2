@@ -1,3 +1,4 @@
+
 export interface TGConfig {
   audio: {
     enable: boolean;
@@ -18,6 +19,7 @@ export interface TGConfig {
   zen: boolean;
   tablePageSize: number;
   log: boolean;
+  shortcuts: [];
 }
 
 
@@ -41,5 +43,6 @@ export const tgConfig: TGConfig = {
   characterPanelTopPosition: false,
   zen: false,
   tablePageSize: 20,
-  log: true
+  log: true,
+  shortcuts: undefined
 };
