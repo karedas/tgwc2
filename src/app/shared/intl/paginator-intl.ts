@@ -21,6 +21,8 @@ export function getItalianPaginatorIntl() {
   
   paginatorIntl.itemsPerPageLabel = 'Risultati per pagina:';
   paginatorIntl.nextPageLabel = 'Avanti';
+  paginatorIntl.lastPageLabel = 'Ultima pagina';
+  paginatorIntl.firstPageLabel = 'Prima pagina';
   paginatorIntl.previousPageLabel = 'Precedente';
   paginatorIntl.getRangeLabel = italianRangeLabel;
   

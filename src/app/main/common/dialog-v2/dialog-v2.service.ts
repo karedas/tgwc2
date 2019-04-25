@@ -382,8 +382,8 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '300px';
-      config.height = '300px';
+      config.width = '288px';
+      config.height = 'auto';
       config.hasBackdrop = false;
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
