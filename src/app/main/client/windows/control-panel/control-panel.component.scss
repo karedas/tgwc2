@@ -5,17 +5,55 @@
 :host {
   color: #eceae3;
 
-
+  .mat-divider {
+    margin-bottom: 1em;
+    border-top-color: rgba(255, 255, 255, 0.188);
+  }
+  
   .tg-control-panel--tab,
-  .tg-control-panel--options {
+  .tg-control-panel--tabcontent {
     padding: 1em;
   }
-
   .tg-control-panel--tab {
     background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
+    text-transform: uppercase;
+    color: #bfbfbf;
   }
 
-  .tg-control-panel--options {
+  .tg-control-panel-tabitem{
+    padding-bottom: 1em;
+    cursor: pointer;
+
+    &:hover, &.active{
+      color: white;
+    }
+  }
+
+  .tg-control-panel--subtitle {
+    color: $tg-yellow;
+    font-weight: normal;
+  }
+
+  .tg-control-panel--tabcontent {
     background-color: #00000082;
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+
+  .tg-control-panel--option {
+    padding-bottom: 1em;
+  }
+
+  .tg-control-panel--suboption{
+    padding: 0 0 0 3em;
+  
+    h4 {
+      color: #bfbfbf;
+      margin: 0;
+      font-size: 100%;
+      font-weight: normal;
+    }
   }
 }

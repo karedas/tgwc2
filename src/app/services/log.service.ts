@@ -9,7 +9,7 @@ import { equip_positions_by_name } from '../main/common/constants';
 export class LogService {
 
   lineNumber: number = 0;
-  log$: ReplaySubject<any> = new ReplaySubject<any>(1);
+  log$: ReplaySubject<any> = new ReplaySubject<any>(500);
   logStorage = [];
 
   constructor() {
@@ -23,8 +23,6 @@ export class LogService {
     return this.log$
   }
 
-  resetLog() {
-  }
 
   parseForLog(data: any) {
 
@@ -64,10 +62,7 @@ export class LogService {
     });
 
     // Data Time
-    data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, (time) => {
-      const parse_time = JSON.parse(time.slice(10, -1));
-      return this.printDateTime(parse_time);
-    });
+    data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, '');
 
     data = data.replace(/&!region\{[\s\S]*?\}!/gm, '');
 
@@ -310,7 +305,7 @@ export class LogService {
 
       if (eqdata) {
         eqdata.forEach((obj, idx) => {
-          res += equip_positions_by_name[posname] + ': ' + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '<br>';
+          res += '<div>' + equip_positions_by_name[posname] + ': ' + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '</div>';
           eqcount++;
         });
       }
@@ -428,7 +423,7 @@ export class LogService {
 
       for (let n = 0; n < cont.list.length; n++) {
         let l = cont.list[n];
-        res += this.printDecoratedDescription(type, l.condprc, l.mvprc, l.mrn ? l.mrn.length : 0, l.desc) + '<br>';
+        res += '<div>' + this.printDecoratedDescription(type, l.condprc, l.mvprc, l.mrn ? l.mrn.length : 0, l.desc) + '</div>';
       }
 
       if (cont.title && (cont.list.length > 0 || cont.show === true))

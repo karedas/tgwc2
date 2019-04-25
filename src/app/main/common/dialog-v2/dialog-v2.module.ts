@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
-import { MatDialogModule, MatSliderModule, MatRippleModule, MatPaginatorIntl } from '@angular/material';
+import { MatDialogModule, MatSliderModule, MatPaginatorIntl, MatButtonModule } from '@angular/material';
 import { NewsComponent } from '../../client/windows/news/news.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginSmartComponent } from '../../client/windows/login-smart/login-smart.component';
@@ -16,6 +16,7 @@ import { WorkslistComponent } from '../../client/windows/workslist/workslist.com
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LogComponent } from '../../client/windows/log/log.component';
 import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
+import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts-panel.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     GenericTableComponent,
     NoFeatureComponent,
     WorkslistComponent,
-    LogComponent
+    LogComponent,
+    ShortcutsPanelComponent
   ],
 
   imports: [
@@ -38,7 +40,6 @@ import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     CharacterSheetModule,
     MatDialogModule,
     MatSliderModule,
-    MatRippleModule
   ],
 
   entryComponents: [
@@ -53,7 +54,8 @@ import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     NoFeatureComponent,
     WorkslistComponent,
     CharacterSheetComponent,
-    LogComponent
+    LogComponent,
+    ShortcutsPanelComponent
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: getItalianPaginatorIntl}]
 })

@@ -83,7 +83,7 @@ export class GameService {
       .subscribe((config: TGConfig) => {
           this.tgConfig = config;
           //check Zen Mode:
-          this.setZenMode(this.tgConfig.zen);
+          this.setZenMode(config.zen);
           // Debug
           console.log('gameservice config subscribe:', config);
         }
@@ -233,6 +233,7 @@ export class GameService {
   }
 
   public setZenMode(status: boolean) {
+    console.log('zen', status);
     if (status) {
       this.render.addClass(document.body, 'zen');
     } else {

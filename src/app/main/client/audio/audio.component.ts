@@ -32,8 +32,8 @@ export class AudioComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
         this.audioService.enable = config.audio.enable;
-        this.audioService.soundVolume = config.audio.soundVolume;
-        this.audioService.musicVolume = config.audio.musicVolume;
+        this.audioService.soundVolume = config.audio.soundVolume / 100;
+        this.audioService.musicVolume = config.audio.musicVolume / 100;
       });
 
     this.music$

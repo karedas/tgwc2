@@ -26,15 +26,18 @@
               
               <button class="btn-i-generale tg-button tg-shadow nav-item nav-link active"
                 (click)="data.tab !== 'info' && switchPanel('info', $event)"
-                [ngClass]="{'active': data.tab =='info'}">Generalit&agrave;</button>
+                [ngClass]="{'active': data.tab =='info'}"
+                matRipple>Generalit&agrave;</button>
               
               <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link"
                 (click)="(data.tab !== 'equip' && data.tab !== 'inventory') && switchPanel('equip', $event)"
-                [ngClass]="{'active': (data.tab == 'equip' || data.tab == 'inventory')}">Equip &amp; Inventario</button>
+                [ngClass]="{'active': (data.tab == 'equip' || data.tab == 'inventory')}"
+                matRipple>Equip &amp; Inventario</button>
               
               <button class="btn-i-ability tg-button tg-shadow nav-item nav-link"
                 (click)="data.tab !== 'skills' && switchPanel('skills', $event)"
-                [ngClass]="{'active': data.tab =='skills'}">Abilità Personali</button>
+                [ngClass]="{'active': data.tab =='skills'}"
+                matRipple>Abilità Personali</button>
 
             </nav>
 

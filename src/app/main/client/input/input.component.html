@@ -9,13 +9,27 @@
     
     <ng-container *ngIf="inCombat === true">
       <div>
-        <button type="button" class="tg-button tg-button-pieta" (mousedown)="sendCmd('pieta')"></button>
+        <button type="button" class="tg-button tg-button-pieta" 
+        (mousedown)="sendCmd('pieta')"
+        matRipple
+        ></button>
       </div>
       <div>
-        <button type="button" class="tg-button tg-button-tregua"  (mousedown)="sendCmd('tregua')"></button>
+        <button type="button" class="tg-button tg-button-tregua"  
+        (mousedown)="sendCmd('tregua')"
+        matRipple
+        ></button>
       </div>
     </ng-container>
     
+    <button mat-icon-button
+      tooltip="Scorciatoie" show-delay="500" placement="top"
+      type="button"
+      class="tg-fnt-button"
+      (mousedown)="openShortCut()">
+      <mat-icon>vpn_key</mat-icon>
+    </button>
+
     <button mat-icon-button
       tooltip="Aumenta / Diminuisci Testo" show-delay="500" placement="top"
       type="button"

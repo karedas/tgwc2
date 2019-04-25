@@ -13,10 +13,10 @@ export class CommandsListComponent implements OnInit {
   @Input('data') data: any;
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
-  public readonly dialogID: string = 'commandsList';
+
   commands$: Observable<any>;
   title: string;
-  groupOpen = 0;
+  groupOpen: number = 0;
 
   constructor(private game: GameService) {
   }

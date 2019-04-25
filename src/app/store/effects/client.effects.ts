@@ -66,7 +66,6 @@ export class ClientEffects {
         this.dialogV2Service.openNews();
       } else {
         this.game.sendToServer('');
-        this.game.newsShowedFirstTime = true;
         this.inputService.focus();
       }
       return status;

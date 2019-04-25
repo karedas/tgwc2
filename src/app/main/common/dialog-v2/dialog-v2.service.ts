@@ -14,6 +14,7 @@ import { InputService } from '../../client/input/input.service';
 import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
 import { GameService } from '../../client/services/game.service';
 import { LogComponent } from '../../client/windows/log/log.component';
+import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts-panel.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,6 @@ export class DialogV2Service {
     dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       this.addDialogBehaviour(d);
     });
-
   }
 
 
@@ -200,7 +200,7 @@ export class DialogV2Service {
       
       dialogRef.afterOpened().subscribe(() => {
         // Keep focus on inputbar
-        this.inputService.focus();
+        this.inputService.focus(); 
       });
 
 
@@ -250,11 +250,11 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = 'auto';
+      config.width = '550px';
       config.height = 'auto';
       config.restoreFocus = true;
       config.autoFocus = false;
-      config.hasBackdrop = true;
+      config.hasBackdrop = false;
 
       const dialogRef = this.dialog.open(ControlPanelComponent, config);
 
@@ -300,51 +300,59 @@ export class DialogV2Service {
   openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig> {
 
     const dialogID = 'generictable';
-    const config = new MatDialogConfig();
 
-    config.id = dialogID;
-    config.width = '700px';
-    config.height = 'auto';
-    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
-    config.hasBackdrop = false;
-    config.restoreFocus = true;
-    config.autoFocus = false;
-    config.data = {
-      title: data[0]
-    };
+    if (!this.dialog.getDialogById(dialogID)) {
 
-    const dialogRef = this.dialog.open(GenericTableComponent, config);
+      const config = new MatDialogConfig();
 
-    dialogRef.afterOpened().subscribe(() => {
-      // Keep focus on inputbar
-      this.inputService.focus();
-    });
+      config.id = dialogID;
+      config.width = '700px';
+      config.height = 'auto';
+      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.hasBackdrop = false;
+      config.restoreFocus = true;
+      config.autoFocus = false;
+      config.data = {
+        title: data[0]
+      };
+
+      const dialogRef = this.dialog.open(GenericTableComponent, config);
+
+      dialogRef.afterOpened().subscribe(() => {
+        // Keep focus on inputbar
+        this.inputService.focus();
+      });
 
     return dialogRef;
+    }
   }
 
   openWorksList(...data: any): MatDialogRef<WorkslistComponent, MatDialogConfig> {
 
     const dialogID = 'workslist';
-    const config = new MatDialogConfig();
 
-    config.id = dialogID;
-    config.width = '700px';
-    config.height = 'auto';
-    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
-    config.hasBackdrop = false;
-    config.restoreFocus = true;
-    config.autoFocus = false;
-    config.data = {
-      title: data[0]
-    };
+    if (!this.dialog.getDialogById(dialogID)) {
 
-    const dialogRef = this.dialog.open(WorkslistComponent, config);
+      const config = new MatDialogConfig();
 
-    // Keep focus on inputbar
-    this.inputService.focus();
+      config.id = dialogID;
+      config.width = '700px';
+      config.height = 'auto';
+      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.hasBackdrop = false;
+      config.restoreFocus = true;
+      config.autoFocus = false;
+      config.data = {
+        title: data[0]
+      };
 
-    return dialogRef;
+      const dialogRef = this.dialog.open(WorkslistComponent, config);
+
+      // Keep focus on inputbar
+      this.inputService.focus();
+
+      return dialogRef;
+    }
   }
 
 
@@ -352,10 +360,11 @@ export class DialogV2Service {
 
     const dialogID = 'log';
     if (!this.dialog.getDialogById(dialogID)) {
-      console.log('open');
+
       const config = new MatDialogConfig();
+      config.id = dialogID;
       config.width = '60%';
-      config.height = '80%';
+      config.height = '700px';
       config.hasBackdrop = false;
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
@@ -363,6 +372,23 @@ export class DialogV2Service {
 
       return dialogRef;
     }
+  }
 
+  openShortcut(): MatDialogRef<ShortcutsPanelComponent, MatDialogConfig> {
+
+    const dialogID = 'shortcut';
+
+    if(!this.dialog.getDialogById(dialogID)) {
+      const config = new MatDialogConfig();
+
+      config.id = dialogID;
+      config.width = '300px';
+      config.height = '300px';
+      config.hasBackdrop = false;
+      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+
+      const dialogRef = this.dialog.open(ShortcutsPanelComponent, config);
+      return dialogRef;
+    }
   }
 }

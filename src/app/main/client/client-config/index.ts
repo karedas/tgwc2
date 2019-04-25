@@ -25,8 +25,8 @@ export interface TGConfig {
 export const tgConfig: TGConfig = {
   audio: {
     enable: true,
-    musicVolume: 1,
-    soundVolume: 0.7,
+    musicVolume: 100,
+    soundVolume: 70,
   },
   news: true,
   fontSize: 2,

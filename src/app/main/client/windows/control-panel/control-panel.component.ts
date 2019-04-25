@@ -3,6 +3,8 @@ import { TGConfig, tgConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatSliderChange } from '@angular/material';
+import { AudioService } from '../../audio/audio.service';
 
 @Component({
   selector: 'tg-control-panel',
@@ -14,9 +16,11 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   tgConfig: TGConfig;
 
   private _unsubscribeAll: Subject<any>;
+  tabOpen: number = 0;
 
   constructor(
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    private audioService: AudioService
   ) {
 
     this._unsubscribeAll = new Subject();
@@ -35,12 +39,28 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
     if (!value) {
       return 0;
     }
-
-    if (value >= 0.1) {
-      return value * 10;
-    }
-
     return value;
+  }
+
+  onAudioChange(event: MatSliderChange, source: string) {
+
+    if (source === 'sound') {
+      this._configService.setConfig({
+        audio: {soundVolume: event.value }
+      })
+    } 
+    else if (source === 'music') {
+      this._configService.setConfig({
+        audio: { musicVolume: event.value }
+      })
+    }
+    else if (source === 'enable') {
+      this.audioService.toggleAudio();
+    }
+  }
+
+  setTab(index: number) {
+    this.tabOpen = index;
   }
 
   ngOnDestroy(): void {

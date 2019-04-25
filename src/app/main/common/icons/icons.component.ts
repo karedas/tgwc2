@@ -14,7 +14,8 @@ export class IconsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     
     this.icon = +this.icon;
-    if (this.icon === 0) {
+
+    if (!this.icon) {
       // Get Default Tg-icon
       this.icon = 416;
     }

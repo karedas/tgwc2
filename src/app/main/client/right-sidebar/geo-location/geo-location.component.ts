@@ -37,7 +37,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class GeoLocationComponent implements OnInit , OnDestroy {
 
   public changeState = 'out';
-  public regionImageUrl = 'assets/images/regions/00.jpg';
+  public regionImageUrl = 'assets/images/regions/base.jpg';
   public region$: Observable<IRegion>;
 
 

@@ -30,7 +30,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
 
   pageSizeBase = 10;
   dataSource:  MatTableDataSource<any>;
-  columnsToDisplay: string[] = ['id', 'icon', 'diff', 'cando', 'descr', 'cmd'];
+  columnsToDisplay: string[] = ['id', 'icon', 'diff', 'cando', 'desc', 'cmd'];
   resultsLength = 0;
   headerTitle: string = '';
 
@@ -57,7 +57,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
         (wl: IWorks) => {
           if (wl) {
             this.setHeaderTitle(wl.verb)
-            // this.cmd = wl.cmd;
+            this.cmd = wl.cmd;
             this.resultsLength = Object.keys(wl.list).length;
             this.populate(wl.list);
           }
@@ -69,14 +69,10 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   }
 
   private populate(data: any) {
-
     if (data) {
       data.forEach((d: any) => {
         const obj = {};
-        // Object.keys(d).map((row: string, rowIndex: number) => {
-          // obj[this.columnsToDisplay[rowIndex]] = row;
           this.data.push(d);
-        // });
       });
 
       this.dataSource = new MatTableDataSource(this.data);

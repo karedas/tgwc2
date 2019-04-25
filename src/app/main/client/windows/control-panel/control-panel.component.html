@@ -1,83 +1,99 @@
-<div mat-dialog-title cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" cdkDragBoundary="body">
-  Preferenze
-  <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-    <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-  </button>
-</div>
-<div class="tg-control-panel">
-    <div class="b-ironlight-mini tg-box">
-      <div class="tg-dialog-content-nopadding tg-shadow-inset">
-        <div fxFlex="0 0 25%" class="tg-control-panel--tab">
-          Generale
+<div class="b-ironlight-mini tg-box"  cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="tg-dialog-content-nopadding tg-shadow-inset">
+    <div class="tg-dialog-title" cdkDragHandle>
+      Preferenze
+      <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+        <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+      </button>
+    </div>
+    <div class="tg-control-panel">
+      <div fxFlex="0 0 auto" class="tg-control-panel--tab">
+        <div class="tg-control-panel-tabitem" (click)="setTab(0)">Generale</div>
+        <div class="tg-control-panel-tabitem" (click)="setTab(1)">Audio</div>
+        <div class="tg-control-panel-tabitem" (click)="setTab(2)">Scorciatoie</div>
+      </div>
+      
+      <div fxFlex="0 1 100%" fxFlexFill class="tg-control-panel--tabcontent"  
+        [ngClass]="{'active': 0 === tabOpen}">
+        <div class="tg-control-panel--option">
+          <mat-checkbox [(ngModel)]="tgConfig.news">Non mostrare le news al login</mat-checkbox>
+        </div>
+
+        <div class="tg-control-panel--option">
+          <mat-form-field>
+            <mat-label>Dimensione Testo</mat-label>
+            <mat-select required >
+              <mat-option [value]="0">Piccolissimo</mat-option >
+              <mat-option [value]="1">Piccolo</mat-option >
+              <mat-option [value]="2">Medio</mat-option >
+              <mat-option [value]="3">Grande</mat-option >
+              <mat-option [value]="4">Grandissimo</mat-option >
+              <mat-option [value]="5">Gigantesco</mat-option >
+              <mat-option [value]="6">Enorme</mat-option >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="tg-control-panel--option">
+          <mat-checkbox [(ngModel)]="tgConfig.output.extraArea.visible">Visuale gioco a due colonne</mat-checkbox>
+        </div>
+
+        <div class="tg-control-panel--option">
+          <mat-checkbox [(ngModel)]="tgConfig.characterPanel">Mostra pannello personaggio</mat-checkbox>
         </div>
         
-        <div fxFlex="0 1 100%" style="height: 100%" class="tg-control-panel--options">
+        <div class="tg-control-panel--option">Posizione pannello personaggio: {{tgConfig.characterPanelTopPosition}}</div>
 
-          <div>Volume Musica:</div>
-          <div>
-            <mat-slider
-              [displayWith]="formatAudio"
-              class="tg-slider"
-              max="1"
-              min="0"
-              value="{{tgConfig.musicVolume}}"
-              step="0.01">
-            </mat-slider> {{tgConfig.musicVolume}}
-          </div>
-
-          <div>Volume Suoni:</div>
-          <div>
-            <mat-slider
-              [displayWith]="formatAudio"
-              class="tg-slider"
-              max="1"
-              min="0"
-              value="{{tgConfig.soundVolume}}"
-              step="0.01">
-            </mat-slider> {{tgConfig.soundVolume}}
-          </div>
-
-          <div>
-            <mat-checkbox [(ngModel)]="tgConfig.news">Non mostrare le news al login</mat-checkbox>
-          </div>
-
-          <div>
-            <mat-form-field>
-              <mat-label>Dimensione Testo</mat-label>
-              <select matNativeControl required>
-                <option value="0">Piccolissimo</option>
-                <option value="1">Piccolo</option>
-                <option value="2">Medio</option>
-                <option value="3">Grande</option>
-                <option value="4">Grandissimo</option>
-                <option value="5">Gigantesco</option>
-                <option value="6">Enorme</option>
-              </select>
-            </mat-form-field>
-          </div>
-
-          <div>
-            <mat-checkbox [(ngModel)]="tgConfig.output.extraArea.visible">Visuale gioco a due colonne</mat-checkbox>
-          </div>
-
-          <div>
-            <mat-checkbox [(ngModel)]="tgConfig.characterPanel">Mostra pannello personaggio</mat-checkbox>
-          </div>
-          
-          <div>Posizione pannello personaggio: {{tgConfig.characterPanelTopPosition}}</div>
-
-          <div>
-            <mat-checkbox [(ngModel)]="tgConfig.zen">Modalità Zen</mat-checkbox>
-          </div>
-
+        <div class="tg-control-panel--option">
+          <mat-checkbox [(ngModel)]="tgConfig.zen">Modalità Zen</mat-checkbox>
         </div>
-        
       </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
+
+      <div fxFlex="0 1 100%" fxFlexFill class="tg-control-panel--tabcontent"  
+      [ngClass]="{'active': 1 === tabOpen}">
+        <div class="tg-control-panel--option">
+            <mat-checkbox [(ngModel)]="tgConfig.audio.enable" (change)="onAudioChange($event, 'enable')">Abilita effetti sonori e musica d'ambiente</mat-checkbox>
+        </div>
+        <div class="tg-control-panel--suboption">
+          <h4>Volume Musica</h4>
+          <mat-slider
+            [displayWith]="formatAudio"
+            (input)="onAudioChange($event, 'music')"
+            [thumbLabel]="true"
+            class="tg-slider"
+            max="100"
+            min="1"
+            value="{{tgConfig.audio.musicVolume}}"
+            step="1">
+          </mat-slider> {{tgConfig.audio.musicVolume}}
+        </div>
+
+        <div class="tg-control-panel--suboption">
+          <h4>Volume Suoni</h4>
+          <mat-slider
+            [displayWith]="formatAudio"
+            (input)="onAudioChange($event, 'sound')"
+            [thumbLabel]="true"
+            class="tg-slider"
+            max="100"
+            min="1"
+            value="{{tgConfig.audio.soundVolume}}"
+            step="1">
+          </mat-slider> {{tgConfig.audio.soundVolume}}
+        </div>
       </div>
+      
+      <div fxFlex="0 1 100%" fxFlexFill  class="tg-control-panel--tabcontent"  
+      [ngClass]="{'active': 2 === tabOpen}">
+      scorciatoie
+      </div>
+
     </div>
   </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
+</div>

@@ -10,6 +10,7 @@ import { HistoryService } from 'src/app/main/client/services/history.service';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from './input.service';
 import { ConfigService } from 'src/app/services/config.service';
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 @Component({
   selector: 'tg-input',
@@ -33,7 +34,7 @@ export class InputComponent implements OnInit, OnDestroy {
     private store: Store<State>,
     private historyService: HistoryService,
     private inputService: InputService,
-    private render: Renderer2,
+    private dialogService: DialogV2Service,
     private _configService: ConfigService
   ) {
 
@@ -115,6 +116,10 @@ export class InputComponent implements OnInit, OnDestroy {
       range.collapse(false);
       range.selec();
     }
+  }
+
+  openShortCut() {
+    this.dialogService.openShortcut();
   }
 
   toggleExtraOutput(event: Event) {

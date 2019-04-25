@@ -44,6 +44,7 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(
         (dt: IGenericTable) => {
+          console.log(dt);
           if (dt) {
             this.setHeaderTitle(dt.title);
             this.resultsLength = Object.keys(dt.data).length;

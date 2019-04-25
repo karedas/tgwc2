@@ -5,7 +5,9 @@
       <!-- Character Detail -->
       <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
         <!-- Character Avatar -->
-        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm>
+        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()"
+         fxHide fxShow.gt-sm
+         matRipple>
           <div class="tg-avatar-wrap">
             <ng-container *ngIf="hero.image; else heroImage">
               <img src="{{env.media_address + hero.image}}" alt="Avatar" />
