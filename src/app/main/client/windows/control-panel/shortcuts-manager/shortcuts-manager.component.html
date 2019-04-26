@@ -1,0 +1,32 @@
+<h3 class="tg-control-panel--subtitle" style="margin-top:0;">Gestione Scorciatoie</h3>
+<p class="tg-white">Le scorciatoie sono un comodo modo per richiamare uno o più comandi concatenati attraverso un
+  singolo nuovo comando.<br />
+  Definisci qui un alias, inserisci il comando (puoi concatenarne più di uno) e scegli un'icona di riferimento.</p>
+<p>
+  Esempio 1: <span class="tg-green">"bistecca" </span>: (prendi bistecca tavolo; cuoci bistecca camino)<br />
+  Esempio 2: <span class="tg-green">"difenditi" </span>: (impugna spada; impugna scudo; combattimento difensivo;)</p>
+
+<mat-divider></mat-divider>
+
+<div class="tg-shortcut-box">
+  <tg-icons [icon]="476"></tg-icons>
+
+  <mat-form-field>
+    <input matInput placeholder="Nome / Alias" value="">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Comando" value="">
+  </mat-form-field>
+
+  <button mat-flat-button color="accent">
+    Nuova
+  </button>
+
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="tg-shortcuts-all">
+  <p class="tg-gray">Non hai ancora nessuna scorciatoia salvata</p>
+</div>

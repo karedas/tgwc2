@@ -11,7 +11,7 @@
         <mat-progress-bar mode="indeterminate" fxFlexOrder="3"></mat-progress-bar>
 
         <!-- Hero Dashboard -->
-        <tg-dashboard [ngClass]="{'top': tgConfig.characterPanelTopPosition}"></tg-dashboard>
+        <tg-dashboard [ngClass]="{'top': 0 === tgConfig.characterPanelTopPosition}"></tg-dashboard>
         <tg-input></tg-input>
       </div>
       <!-- Right Sidebar -->
@@ -24,17 +24,3 @@
   <tg-audio></tg-audio> 
 
 </div>
-
-<!-- <tg-commands-list></tg-commands-list>
-
-<tg-character-sheet></tg-character-sheet>
-
-<tg-generic-table></tg-generic-table>
-
-<tg-editor></tg-editor>
-
-<tg-workslist></tg-workslist>
-
-<tg-book></tg-book>
-
-<tg-control-panel></tg-control-panel> -->

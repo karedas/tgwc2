@@ -61,6 +61,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))

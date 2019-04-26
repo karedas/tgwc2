@@ -100,6 +100,7 @@ export class ConfigService {
       this._configSubject.next(config);
     }
 
+
     localStorage.setItem('config', JSON.stringify(config));
   }
 
@@ -111,4 +112,5 @@ export class ConfigService {
     // Set the config from the default config
     this._configSubject.next(_.cloneDeep(this._defaultConfig));
   }
+  
 }

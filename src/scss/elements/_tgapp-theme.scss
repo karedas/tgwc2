@@ -235,7 +235,7 @@
 
   /* Select */
   .mat-form-field-label {
-    color: $tg-yellow;
+    color: #8e8e8e;
   }
 
   .mat-form-field-infix:after {
@@ -244,5 +244,10 @@
 
   .mat-form-field-underline {
     background-color: #252525;
+  }
+
+  /* Radio */
+  .mat-radio-outer-circle {
+    border-color: rgb(142, 142, 142);
   }
 }

@@ -19,7 +19,8 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatProgressBarModule, 
-  MatRippleModule} from '@angular/material';
+  MatRippleModule,
+  MatRadioModule} from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -70,7 +71,8 @@ import { LogService } from '../services/log.service';
     MatPaginatorModule,
     MatProgressBarModule,
     MatSortModule,
-    MatRippleModule
+    MatRippleModule,
+    MatRadioModule
   ],
 
   exports: [
@@ -96,7 +98,8 @@ import { LogService } from '../services/log.service';
     MatPaginatorModule,
     MatProgressBarModule,
     MatSortModule,
-    MatRippleModule
+    MatRippleModule,
+    MatRadioModule
   ],
 })
 export class SharedModule {

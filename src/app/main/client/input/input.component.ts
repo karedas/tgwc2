@@ -141,7 +141,7 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   onFontSizeChange(): void {
-    this.game.setOutputSize();
+    this.game.setOutputSize(true);
   }
 
   sendCmd(cmd: string) {

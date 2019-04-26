@@ -9,15 +9,19 @@
         </button>
       </div>
       
-      <div class="tg-log-content" #logContentArea matDialogContent>
+      <div class="tg-log-content"  matDialogContent>
         <ng-scrollbar [compact]="true" class="scrollbar" [disableOnBreakpoints]="false">
+
           <div class="tg-log-date">Data Inizio Log: {{dateTime}}</div>
-          <ng-container *ngFor="let log of logStorage">
-            <div class="tg-log-line" fxLayout>
-              <div class="tg-log-linenumber">{{log.l}}</div>
-              <div [innerHtml]="log.d | dataToHtml" class="tg-log-msg"></div>
-            </div>
-          </ng-container>
+          <div #logContentArea>
+            <ng-container *ngFor="let log of logStorage">
+              <div class="tg-log-line" fxLayout>
+                <div class="tg-log-linenumber" [attr.data-lognumber]="log.l"></div>
+                <div [innerHtml]="log.d | dataToHtml" class="tg-log-msg"></div>
+              </div>
+            </ng-container>
+          </div>
+
         </ng-scrollbar>
       </div>
 

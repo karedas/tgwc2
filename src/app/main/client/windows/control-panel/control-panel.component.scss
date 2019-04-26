@@ -2,58 +2,75 @@
 @import '~src/scss/utils/sprites-mixins';
 @import '~src/scss/sprites';
 
-:host {
-  color: #eceae3;
+.tg-control-panel{
+  color: rgb(142, 142, 142);
 
   .mat-divider {
     margin-bottom: 1em;
     border-top-color: rgba(255, 255, 255, 0.188);
   }
-  
-  .tg-control-panel--tab,
-  .tg-control-panel--tabcontent {
-    padding: 1em;
+
+  button {
+    margin: .2em;
   }
-  .tg-control-panel--tab {
-    background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
-    text-transform: uppercase;
+
+  .mat-radio-button {
+    margin: .2em 0;
+  }
+
+  .mat-label {
+    padding-bottom:  .5em;
+  }
+}
+
+ 
+.tg-control-panel--tabcontent {
+  padding: 1em;
+}
+
+.tg-control-panel--tab {
+  background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
+  text-transform: uppercase;
+  color: #bfbfbf;
+}
+
+.tg-control-panel-tabitem{
+  padding:1em;
+  cursor: pointer;
+  background-color: none;
+  transition: background-color .1s linear;
+
+  &:hover, &.active{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.tg-control-panel--subtitle {
+  color: $tg-yellow;
+  font-weight: normal;
+}
+
+.tg-control-panel--tabcontent {
+  background-color: #00000082;
+  display: none;
+  min-height: 400px;
+  &.active {
+    display: block;
+  }
+}
+
+.tg-control-panel--option {
+  padding-bottom: 1em;
+}
+
+.tg-control-panel--suboption{
+  padding: 0 0 0 3em;
+
+  h4 {
     color: #bfbfbf;
-  }
-
-  .tg-control-panel-tabitem{
-    padding-bottom: 1em;
-    cursor: pointer;
-
-    &:hover, &.active{
-      color: white;
-    }
-  }
-
-  .tg-control-panel--subtitle {
-    color: $tg-yellow;
+    margin: 0;
+    font-size: 100%;
     font-weight: normal;
-  }
-
-  .tg-control-panel--tabcontent {
-    background-color: #00000082;
-    display: none;
-    &.active {
-      display: block;
-    }
-  }
-
-  .tg-control-panel--option {
-    padding-bottom: 1em;
-  }
-
-  .tg-control-panel--suboption{
-    padding: 0 0 0 3em;
-  
-    h4 {
-      color: #bfbfbf;
-      margin: 0;
-      font-size: 100%;
-      font-weight: normal;
-    }
   }
 }

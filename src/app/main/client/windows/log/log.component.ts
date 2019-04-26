@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ViewEncapsulation 
 import { LogService } from 'src/app/services/log.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { saveAs } from 'file-saver';
+import { FileSaverService } from 'ngx-filesaver';
 
 @Component({
   selector: 'tg-log',
@@ -20,7 +20,8 @@ export class LogComponent implements OnInit, OnDestroy{
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private logService: LogService
+    private logService: LogService,
+    private _FileSaverService: FileSaverService
   ) {
     this._unsubscribeAll = new Subject<any>();
     const d = new Date();
@@ -37,12 +38,10 @@ export class LogComponent implements OnInit, OnDestroy{
 
   saveLog() {
     const content =  this.logContentArea.nativeElement.innerHTML;
-    const file = new File([content], this.dateTime.replace(/\-|:/g, '_') + '_TG-LOG.html' , {type: "text/plain;charset=utf-8"});
-    saveAs(file);
-  }
-
-  resetLog() {
-
+    this._FileSaverService.save(
+        content, 
+        this.dateTime.replace(/\-|:/g, '_') + '_TG-LOG.html'
+    );
   }
 
   ngOnDestroy(): void {

@@ -7,7 +7,6 @@ import { LoginSmartComponent } from '../../client/windows/login-smart/login-smar
 import { EditorComponent } from '../../client/windows/editor/editor.component';
 import { CharacterSheetComponent } from '../../client/windows/character-sheet/character-sheet.component';
 import { CharacterSheetModule } from '../../client/windows/character-sheet/character-sheet.module';
-import { ControlPanelComponent } from '../../client/windows/control-panel/control-panel.component';
 import { BookComponent } from '../../client/windows/book/book.component';
 import { CommandsListComponent } from '../../client/windows/commands-list/commands-list.component';
 import { GenericTableComponent } from '../../client/windows/generic-table/generic-table.component';
@@ -17,6 +16,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LogComponent } from '../../client/windows/log/log.component';
 import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
 import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts-panel.component';
+import { ControlPanelModule } from '../../client/windows/control-panel/control-panel.module';
 
 @NgModule({
   declarations: [
@@ -24,14 +24,13 @@ import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts
     NewsComponent,
     LoginSmartComponent,
     EditorComponent,
-    ControlPanelComponent,
     BookComponent,
     CommandsListComponent,
     GenericTableComponent,
     NoFeatureComponent,
     WorkslistComponent,
     LogComponent,
-    ShortcutsPanelComponent
+    ShortcutsPanelComponent,
   ],
 
   imports: [
@@ -40,6 +39,7 @@ import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts
     CharacterSheetModule,
     MatDialogModule,
     MatSliderModule,
+    ControlPanelModule
   ],
 
   entryComponents: [
@@ -47,7 +47,7 @@ import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts
     NewsComponent,
     LoginSmartComponent,
     EditorComponent,
-    ControlPanelComponent,
+    // ControlPanelComponent,
     BookComponent,
     CommandsListComponent,
     GenericTableComponent,

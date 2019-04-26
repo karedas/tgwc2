@@ -38,10 +38,10 @@ export class NewsComponent  implements OnInit, OnDestroy {
     });
 
     this._configService.config
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe((config: TGConfig) => {
-     this.checked  = config.news ? '' : 'checked' ;
-    });
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config: TGConfig) => {
+        this.checked  = config.news ? '' : 'checked' ;
+      });
 
   }
 

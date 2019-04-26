@@ -56,6 +56,7 @@
     "ng2-tooltip-directive": "^2.1.9",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-cookie-service": "^2.0.0",
+    "ngx-filesaver": "^2.2.1",
     "ngx-logger": "^3.3.12",
     "ngx-scrollbar": "^4.1.1",
     "ngx-socket-io": "^2.0.0",

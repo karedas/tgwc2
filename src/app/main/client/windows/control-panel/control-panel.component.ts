@@ -1,26 +1,34 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TGConfig, tgConfig } from '../../client-config';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { TGConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatSliderChange } from '@angular/material';
 import { AudioService } from '../../audio/audio.service';
+import { FileSaverService } from 'ngx-filesaver';
+import { font_size_options } from 'src/app/main/common/constants';
 
 @Component({
   selector: 'tg-control-panel',
   templateUrl: './control-panel.component.html',
-  styleUrls: ['./control-panel.component.scss']
+  styleUrls: ['./control-panel.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ControlPanelComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
 
   private _unsubscribeAll: Subject<any>;
+
+  fileUploaded: boolean = false;
   tabOpen: number = 0;
+
+  fontSizes = font_size_options;
 
   constructor(
     private _configService: ConfigService,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private _FileSaverService: FileSaverService
   ) {
 
     this._unsubscribeAll = new Subject();
@@ -32,6 +40,11 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
       .subscribe((config) => {
         this.tgConfig = config;
       });
+  }
+
+  onOptionChange(event, value: any) {
+    console.log(value);
+    this._configService.setConfig(value);
   }
 
   // Format audio to Decimal only for user view
@@ -61,6 +74,32 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
   setTab(index: number) {
     this.tabOpen = index;
+    this.fileUploaded = false;
+  }
+
+  saveConfig() {
+    const conf = localStorage.getItem('config');
+    this._FileSaverService.saveText(conf, 'tgconfig');
+  }
+
+  uploadConfig(event: any) {
+
+    let file: any = event.target.files[0];
+
+    if(file) {
+      let fileReader = new FileReader();
+  
+      fileReader.onload = (e) => {
+        let result = fileReader.result;
+        if( typeof result === 'string' ){
+          let newConf =  JSON.parse(result);
+          this._configService.setConfig(newConf);
+
+          this.fileUploaded = true;
+        }  
+      }
+      fileReader.readAsText(file);
+    }
   }
 
   ngOnDestroy(): void {

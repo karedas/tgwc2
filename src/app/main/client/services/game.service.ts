@@ -20,7 +20,7 @@ import { MatDialog } from '@angular/material';
 export class GameService {
 
 
-  tgConfig: TGConfig;
+  private _tgConfig: TGConfig;
 
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
@@ -29,7 +29,7 @@ export class GameService {
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
 
-  public showExtraByViewport:  boolean = undefined;
+  public showExtraByViewport: boolean = undefined;
 
   // Client Data Needed Updates
   public client_update = {
@@ -64,7 +64,7 @@ export class GameService {
     private http: HttpClient,
     private _configService: ConfigService,
     public dialog: MatDialog,
-    
+
     rendererFactory: RendererFactory2,
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
@@ -80,25 +80,33 @@ export class GameService {
   _init() {
     this._configService.config
       .subscribe((config: TGConfig) => {
-          this.tgConfig = config;
-          //check Zen Mode:
-          this.setZenMode(config.zen);
-          // Debug
-          console.log('gameservice config subscribe:', config);
+        
+        if( this._tgConfig ) {
+            //check Zen Mode:
+            this.setZenMode(config.zen);
+
+          if(this._tgConfig.fontSize !== config.fontSize) {
+            this.setOutputSize(config.fontSize);
+          }
         }
-      );
+
+        this._tgConfig = config;
+        // Debug
+        console.log('CHANGE', this._tgConfig);
+      });
 
     this.loadServerStat();
   }
 
+
   startGame(initialData) {
-    
+
     // Perform Reset before start any Environments Stuff.
-    this.dataParserService.handlerGameData(initialData, this.tgConfig.log);
+    this.dataParserService.handlerGameData(initialData, this._tgConfig.log);
 
     this._dataSubscription = this.socketService.listen(socketEvent.DATA)
       .subscribe(data => {
-        this.dataParserService.handlerGameData(data, this.tgConfig.log);
+        this.dataParserService.handlerGameData(data, this._tgConfig.log);
       });
 
     this._updateNeededSubscription = this.dataParserService.updateNeeded
@@ -149,15 +157,15 @@ export class GameService {
       }
 
       if (this.client_update.room.needed
-          && this.tgConfig.output.extraArea.visible
-          && this.showExtraByViewport
-          && !this.client_update.inContainer) {
+        && this._tgConfig.output.extraArea.visible
+        && this.showExtraByViewport
+        && !this.client_update.inContainer) {
 
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.lastDataTime = now;
 
-      } else if ( this.client_update.inContainer && this.tgConfig.output.extraArea.visible ) {
+      } else if (this.client_update.inContainer && this._tgConfig.output.extraArea.visible) {
         this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
       }
     }
@@ -171,9 +179,9 @@ export class GameService {
     this.client_update.room.version = -1;
     this.client_update.room.needed = false;
   }
-  
+
   private loadServerStat() {
-    this.serverStat = timer(0, 25000).pipe (
+    this.serverStat = timer(0, 25000).pipe(
       switchMap(() => this.http.get(environment.serverstatAddress))
     );
   }
@@ -252,7 +260,7 @@ export class GameService {
     }
 
     /* Order for personal Equipment  */
-    if (items &&  typeof items.ver === 'number') {
+    if (items && typeof items.ver === 'number') {
 
       const cont = {
         list: []
@@ -276,19 +284,26 @@ export class GameService {
   }
 
   /** Font Size Adjustement */
-  setOutputSize() {
-    const newSize = (this.tgConfig.fontSize + 1 ) % font_size_options.length;
-    const old_class = font_size_options[this.tgConfig.fontSize].class;
-    const new_class = font_size_options[newSize].class;
+  setOutputSize(size) {
+    let new_class;
+    
+    const old_class = font_size_options[this._tgConfig.fontSize].class;
+
+    if(isNaN(size)) {
+      let newSize = (this._tgConfig.fontSize + 1) % font_size_options.length;
+      this._configService.setConfig({ fontSize: newSize });
+
+      new_class = font_size_options[newSize].class;
+
+    } 
+    else {
+      new_class = font_size_options[size].class;
+    }
+
 
     if (old_class) {
       this.render.removeClass(document.body, old_class);
       this.render.addClass(document.body, new_class);
     }
-
-    // Save in Storage
-    this._configService.config =  {
-      fontSize: newSize
-    };
   }
 }

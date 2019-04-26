@@ -15,11 +15,11 @@ export interface TGConfig {
     list_column_mode: boolean
   };
   characterPanel: boolean;
-  characterPanelTopPosition: boolean;
+  characterPanelTopPosition: number;
   zen: boolean;
   tablePageSize: number;
   log: boolean;
-  shortcuts: [];
+  // shortcuts: [];
 }
 
 
@@ -40,9 +40,9 @@ export const tgConfig: TGConfig = {
     list_column_mode: true
   },
   characterPanel: true,
-  characterPanelTopPosition: false,
+  characterPanelTopPosition: 1,
   zen: false,
   tablePageSize: 20,
   log: true,
-  shortcuts: undefined
+  // shortcuts: undefined
 };

@@ -24,6 +24,10 @@
   max-width: 25px;
   min-width: 25px;
   text-align: right;
+
+  &:before {
+    content: attr(data-lognumber);
+  }
 }
 
 .tg-log-msg {

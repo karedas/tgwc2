@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ClientComponent } from './client.component';
+import { FileSaverModule } from 'ngx-filesaver';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -23,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     DashboardModule,
     RightSidebarModule,
     OutputModule,
-    InputModule
+    InputModule,
+    FileSaverModule
   ],
   exports: [
     NavbarComponent,
