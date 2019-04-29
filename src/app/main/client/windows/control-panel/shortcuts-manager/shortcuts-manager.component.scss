@@ -1,0 +1,43 @@
+.tg-shortcuts-area {
+    position: relative;
+    height: 100%;
+}
+
+.field-full-width{
+    width: 100%;
+}
+
+.tg-button {
+    margin-right: 1em;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.tg-shortcut-iconslist {
+    border: 1px solid rgba(255, 255, 255, 0.308);
+    border-radius: 10px;
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    transition: all .2s ease-out;
+    top: 0;
+    transform: scale(.9);
+    z-index: 100;
+    padding: .5em;
+    box-sizing: border-box;
+
+    &.open {
+        transform: scale(1);
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    .tg-shortcut-icon {
+        height: 32px;
+        width: 32px;
+        background: brown;
+    }
+}

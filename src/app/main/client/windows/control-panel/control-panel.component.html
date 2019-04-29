@@ -44,7 +44,9 @@
           <mat-label id="character-panel-radio-label">Posizione del pannello personaggio</mat-label><br/>
           <mat-radio-group
             aria-labelledby="character-panel-radio-label"
-            [ngModel]="tgConfig.characterPanelTopPosition" (change)="onOptionChange($event, {characterPanelTopPosition: $event.value})">
+            [(ngModel)]="tgConfig.characterPanelTopPosition" 
+            (change)="onOptionChange($event, {characterPanelTopPosition: $event.value})"
+            [disabled]="(tgConfig.zen || !tgConfig.characterPanel)">
             <mat-radio-button [value]="0" color="accent">In alto</mat-radio-button>&nbsp;
             <mat-radio-button [value]="1" color="accent">In Basso</mat-radio-button>
           </mat-radio-group>
@@ -60,7 +62,7 @@
           (change)="onOptionChange($event, { news: $event.checked })">Non mostrare le news al login</mat-checkbox>
         </div>
 
-        <p class="tg-red"><u>Il salvataggio della configurazione viene applicato automaticamente ad ogni singola modifica effettuata.</u></p>
+        <p class="tg-lt-white"><u>Il salvataggio della configurazione viene applicato automaticamente ad ogni singola modifica effettuata.</u></p>
 
         <mat-divider></mat-divider>
         <h3 class="tg-control-panel--subtitle">File di configurazione</h3>
@@ -84,6 +86,7 @@
         <div class="tg-control-panel--suboption">
           <h4>Volume Musica</h4>
           <mat-slider
+            [disabled]="!tgConfig.audio.enable"
             [displayWith]="formatAudio"
             (input)="onAudioChange($event, 'music')"
             [thumbLabel]="true"
@@ -98,6 +101,7 @@
         <div class="tg-control-panel--suboption">
           <h4>Volume Suoni</h4>
           <mat-slider
+            [disabled]="!tgConfig.audio.enable"
             [displayWith]="formatAudio"
             (input)="onAudioChange($event, 'sound')"
             [thumbLabel]="true"

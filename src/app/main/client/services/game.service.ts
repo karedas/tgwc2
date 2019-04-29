@@ -98,6 +98,9 @@ export class GameService {
     this.loadServerStat();
   }
 
+  get tgConfig (): TGConfig {
+    return this._tgConfig;
+  }
 
   startGame(initialData) {
 

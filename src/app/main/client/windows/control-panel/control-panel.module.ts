@@ -4,6 +4,7 @@ import { ShortcutsManagerComponent } from './shortcuts-manager/shortcuts-manager
 import { ControlPanelComponent } from './control-panel.component';
 import { MatDialogModule, MatIconModule, MatDividerModule, MatSliderModule, MatButtonModule } from '@angular/material';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatSliderModule,
     MatIconModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    DragDropModule
   ],
   entryComponents: [
     ControlPanelComponent

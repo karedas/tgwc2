@@ -224,6 +224,7 @@ export class DialogV2Service {
 
       config.id = dialogID;
       config.width = '750px';
+      config.height = '600px';
       config.restoreFocus = true;
       config.hasBackdrop = false;
       config.restoreFocus = true;
@@ -402,4 +403,5 @@ export class DialogV2Service {
       return dialogRef;
     }
   }
+  
 }

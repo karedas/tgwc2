@@ -227,7 +227,7 @@
     background-color: #252525;
   }
 
-  .mat-accent .mat-slider-thumb {
+  .mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label{
     background-color: #ffc400;
     border-right-color: #ffc400;
   }

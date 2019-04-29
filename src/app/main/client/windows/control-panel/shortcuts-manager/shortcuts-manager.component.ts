@@ -7,9 +7,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class ShortcutsManagerComponent implements OnInit {
 
+  iconsListOpenedStatus: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  openIconsList() {
+    this.iconsListOpenedStatus = !this.iconsListOpenedStatus;    
   }
 
 }
