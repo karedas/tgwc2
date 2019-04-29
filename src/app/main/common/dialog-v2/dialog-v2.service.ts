@@ -242,7 +242,7 @@ export class DialogV2Service {
     }
   }
 
-  openControlPanel(tab?:number): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
+  openControlPanel(tab:number = 0): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
 
     const dialogID = 'controlpanel';
 
@@ -265,6 +265,7 @@ export class DialogV2Service {
       return dialogRef;
     }
     else {
+      console.log(tab);
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: tab };
     }
   }
