@@ -18,7 +18,7 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatProgressBarModule, 
+  // MatProgressBarModule, 
   MatRippleModule,
   MatRadioModule} from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
@@ -69,7 +69,7 @@ import { LogService } from '../services/log.service';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule,
+    // MatProgressBarModule,
     MatSortModule,
     MatRippleModule,
     MatRadioModule
@@ -96,7 +96,7 @@ import { LogService } from '../services/log.service';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule,
+    // MatProgressBarModule,
     MatSortModule,
     MatRippleModule,
     MatRadioModule

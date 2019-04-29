@@ -240,7 +240,6 @@ export class GameService {
   }
 
   public setZenMode(status: boolean) {
-    console.log('zen', status);
     if (status) {
       this.render.addClass(document.body, 'zen');
     } else {

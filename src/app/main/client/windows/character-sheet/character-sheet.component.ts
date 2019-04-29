@@ -31,7 +31,6 @@ export class CharacterSheetComponent  {
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    private dialogRef: MatDialogRef<CharacterSheetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.heroBase$ = this.store.pipe(select(getHero));

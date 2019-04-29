@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
 import { TGConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatSliderChange } from '@angular/material';
+import { MatSliderChange, MAT_DIALOG_DATA } from '@angular/material';
 import { AudioService } from '../../audio/audio.service';
 import { FileSaverService } from 'ngx-filesaver';
 import { font_size_options } from 'src/app/main/common/constants';
@@ -28,10 +28,12 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   constructor(
     private _configService: ConfigService,
     private audioService: AudioService,
-    private _FileSaverService: FileSaverService
+    private _FileSaverService: FileSaverService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
     this._unsubscribeAll = new Subject();
+    this.tabOpen = data.tab
    }
 
   ngOnInit() {
@@ -43,7 +45,6 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   }
 
   onOptionChange(event, value: any) {
-    console.log(value);
     this._configService.setConfig(value);
   }
 

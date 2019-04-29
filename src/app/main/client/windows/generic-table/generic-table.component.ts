@@ -44,7 +44,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(
         (dt: IGenericTable) => {
-          console.log(dt);
           if (dt) {
             this.setHeaderTitle(dt.title);
             this.resultsLength = Object.keys(dt.data).length;
@@ -89,8 +88,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
-    console.log(this.dataSource);
   }
 
   applyFilter(filterValue: string) {

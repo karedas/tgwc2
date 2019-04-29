@@ -8,6 +8,9 @@ import * as GameActions from '../store/actions/client.action';
 import { IHero } from '../models/data/hero.model';
 import { Observable, Subject } from 'rxjs';
 import { LogService } from './log.service';
+import { TGConfig } from '../main/client/client-config';
+import { ConfigService } from './config.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +18,10 @@ import { LogService } from './log.service';
 
 export class DataParser {
 
+  tgConfig: TGConfig
 
   private dispatcher: any = {};
-
   private netData = '';
-
 
   private shortcuts = [];
   private shortcuts_map = {};
@@ -29,9 +31,16 @@ export class DataParser {
 
   constructor(
     private store: Store<State>,
+    private _configService: ConfigService,
     private logService: LogService
     ) {
     this._updateNeeded = new Subject<any>();
+
+    //Subscribe to the shortcuts in Config
+    this._configService.getConfig()
+      .pipe(map((config: TGConfig) => { return config.shortcuts}))
+      .subscribe((shortcuts) => { this.shortcuts = shortcuts;}
+    )
   }
 
   handlerGameData(data: any, logEnabled?: boolean) {
@@ -447,16 +456,14 @@ export class DataParser {
 
     let shortcut_cmd: any;
 
-
     if (!isNaN(shortcut_num)) {
       shortcut_cmd = this.shortcuts[shortcut_num];
-    } else if (typeof (this.shortcuts_map[shortcut_key]) !== 'undefined') {
-      shortcut_cmd = this.shortcuts[this.shortcuts_map[shortcut_key]];
+    } else {
+      shortcut_cmd = this.shortcuts.filter(x => x.alias === shortcut_key)[0];
     }
 
     /* Check if the shortcut is defined */
     if (shortcut_cmd) {
-
       /* Use the shortcut text as command */
       input = shortcut_cmd['cmd'];
 

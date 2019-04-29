@@ -6,18 +6,21 @@
           <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
         </button>
       </div>
-      <div class="tg-shortcutpanel" matDialogContent fxLayout="row wrap">
-        <div class="tg-shortcut"
-          *ngFor="let shortcut of totalShortcuts; let i = index;" fxFlex="1 1 32px">
-          <button matRipple>s {{i+1}}</button>
+      <ng-container *ngIf="totalShortcuts.length > 0; else noShortcuts">
+        <div class="tg-shortcutpanel" matDialogContent fxLayout="row wrap">
+            <div class="tg-shortcut" *ngFor="let shortcut of totalShortcuts; let i = index;" fxFlex="1 1 32px">
+              <button matRipple (click)="sendCmd(shortcut.alias)" (mouseover)="changeCmdLabel(i)" (mouseout)="changeCmdLabel('')">{{i+1}}</button>
+            </div>
         </div>
         <div class="tg-shortcut-cmdlabel">
-          //cosa fa
+          <ng-container  *ngIf="totalShortcuts &&  cmdHoverId >= 0">
+            <span>Alias:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.alias}}, <br/><span>Cmd:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.cmd}}
+          </ng-container>
         </div>
-      </div>
+      </ng-container>
       <div matDialogActions>
-        <button mat-icon-button>
-          <mat-icon aria-label="Modifica scorciatoie">settings</mat-icon>
+        <button mat-icon-button (click)="openShortcutManager()">
+          <mat-icon aria-label="Modifica scorciatoie" color="primary">settings</mat-icon> modifica scorciatoie
         </button>
       </div>
     </div>
@@ -28,3 +31,10 @@
       <div class="tg-border tg-border-bottom"></div>
     </div>
 </div>
+
+<ng-template #noShortcuts>
+  <p>
+    Non hai ancora nessuna scorciatoia salvata.<br/>
+    <i (click)="openShortcutManager()" class="tg-yellow">Creane subito una</i>
+  </p>
+</ng-template>

@@ -241,7 +241,7 @@ export class DialogV2Service {
     }
   }
 
-  openControlPanel(): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
+  openControlPanel(tab?:number): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
 
     const dialogID = 'controlpanel';
 
@@ -251,15 +251,20 @@ export class DialogV2Service {
 
       config.id = dialogID;
       config.width = '550px';
-      config.maxWidth = '100vh';
+      config.maxWidth = '95vw';
       config.height = 'auto';
       config.restoreFocus = true;
       config.autoFocus = false;
       config.hasBackdrop = false;
+      config.data = {
+        tab: tab
+      }
 
       const dialogRef = this.dialog.open(ControlPanelComponent, config);
-
       return dialogRef;
+    }
+    else {
+      this.dialog.getDialogById(dialogID).componentInstance.data = { tab: tab };
     }
   }
 
@@ -348,7 +353,6 @@ export class DialogV2Service {
       };
 
       const dialogRef = this.dialog.open(WorkslistComponent, config);
-
       // Keep focus on inputbar
       this.inputService.focus();
 
@@ -389,6 +393,12 @@ export class DialogV2Service {
       config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
       const dialogRef = this.dialog.open(ShortcutsPanelComponent, config);
+
+      //open shortcuts manager on link click.
+      dialogRef.componentInstance.onManagerCall.subscribe(
+        () => this.openControlPanel(2)
+      )
+
       return dialogRef;
     }
   }

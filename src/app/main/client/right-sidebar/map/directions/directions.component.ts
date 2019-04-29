@@ -68,7 +68,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
         cmd = this.dirNames[dir];
       }
       if (cmd) {
-        this.game.sendToServer(cmd);
+        this.game.processCommands(cmd);
       }
     }
   }
@@ -85,7 +85,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
         cmd = `blocca ${this.dirNames[dir]}`;
       }
       if (cmd) {
-        this.game.sendToServer(cmd);
+        this.game.processCommands(cmd);
       }
 
       return false;
