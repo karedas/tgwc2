@@ -40,11 +40,13 @@ import { LoginService } from '../main/authentication/services/login.service';
 import { GameService } from '../main/client/services/game.service';
 import { InputService } from '../main/client/input/input.service';
 import { LogService } from '../services/log.service';
+import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 
 
 @NgModule({
   declarations: [
     ClickStopPropagationDirective,
+    AutofocusInputbarDirective,
     IconsComponent,
     HstatComponent
   ],
@@ -86,6 +88,7 @@ import { LogService } from '../services/log.service';
     PipesModule,
     TooltipModule,
     ClickStopPropagationDirective,
+    AutofocusInputbarDirective,
     /** Angular Material  */
     MatCheckboxModule,
     MatMenuModule,

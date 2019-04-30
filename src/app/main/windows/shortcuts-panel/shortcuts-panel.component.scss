@@ -1,9 +1,10 @@
-@import '~src/scss/colors';
+@import 'variables';
+
 
 .tg-shortcut {
-    height: 32px;
-    width: 32px;
-    background: gray;
+    .tg-icon {
+        cursor: pointer;
+    }
 }
 
 .tg-shortcuts-conflink {

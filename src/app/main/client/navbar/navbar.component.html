@@ -42,7 +42,6 @@
   </mat-menu>
 
 
-
 <!-- Guida  Menu -->
   <button mat-button 
     [matMenuTriggerFor]="guideMenu" 
@@ -57,7 +56,6 @@
     </div>
   </mat-menu> 
 
-
   <div class="nav-right">
       <button mat-icon-button (click)="onItemClick('audio')"> 
         Audio 
@@ -65,6 +63,9 @@
         {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
       </mat-icon></button>
 
+      <button mat-icon-button>
+        <mat-icon></mat-icon>
+      </button>
       <!-- <span style="font-size:9px;">{{gitVersion}}</span> -->
   </div>
 </div>

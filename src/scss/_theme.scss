@@ -1,9 +1,9 @@
 
 @import '~@angular/material/theming';
 
-$tg-theme-primary: mat-palette($mat-brown, A800, A600, A900);
-$tg-theme-accent : mat-palette($mat-amber, A400, A100, A400);
-$tg-theme-warn   : mat-palette($mat-red);
+$tg-theme-primary: mat-palette($mat-brown, 100);
+$tg-theme-accent : mat-palette($mat-amber, 400, 100, 400);
+$tg-theme-warn   : mat-palette($mat-red, A700);
 
 $tg-theme: mat-light-theme(
     $tg-theme-primary,

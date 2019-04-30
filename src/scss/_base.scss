@@ -151,31 +151,3 @@ body[data-loginstatus=ready] {
   @include sprite($notchecked-sprite);
 }
 
-
-
-// // Custom Form Elements
-// .custom-control-label {
-//     cursor: pointer;
-// }
-// .custom-checkbox .custom-control-label::before {
-//     border-radius: 0;
-//     border: none;
-//     background-color: transparent;
-//     // @include sprite($checkbox-sprite);
-//     transition: none;
-// }
-
-// .custom-checkbox .custom-control-label::after {
-//     border: none!important;
-//     background-color: transparent;
-// }
-
-// .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-//     // @include sprite($checkbox-checked-sprite);
-//     top: -4px;
-//     background-size: unset;
-// }
-
-// .custom-control-input{
-//     visibility: hidden;
-// }

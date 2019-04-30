@@ -1,4 +1,4 @@
-@import '~src/scss/colors';
+@import 'variables';
 @import '~src/scss/utils/sprites-mixins';
 @import '~src/scss/sprites';
 
@@ -6,7 +6,7 @@
   color: rgb(142, 142, 142);
 
   .mat-divider {
-    margin-bottom: 1em;
+    margin: 1em 0;
     border-top-color: rgba(255, 255, 255, 0.188);
   }
 

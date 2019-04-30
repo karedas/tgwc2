@@ -1,3 +1,6 @@
+@import 'variables';
+
+
 .tg-shortcuts-area {
     position: relative;
     height: 100%;
@@ -13,7 +16,7 @@
     display: inline-block;
 }
 
-.tg-shortcut-iconslist {
+.tg-shortcut-iconslist, .tg-shortcut-new {
     border: 1px solid rgba(255, 255, 255, 0.308);
     border-radius: 10px;
     visibility: hidden;
@@ -39,5 +42,28 @@
         height: 32px;
         width: 32px;
         background: brown;
+    }
+}
+
+.tg-shortcuts-all table {
+    width: 100%;
+    text-align: left;
+}
+
+
+
+//angular icons
+.mat-icon-button {
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+
+    .mat-icon {
+        line-height: 16px;
+        font-size: 16px;
+    }
+
+    &:hover {
+        color: $tg-white;
     }
 }

@@ -55,6 +55,7 @@ export class ConfigService {
         config = _.cloneDeep(configInStorage);
         this._configSubject.next(config);
       } else {
+
         localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()));
       }
     } else {
@@ -72,8 +73,7 @@ export class ConfigService {
   private getDeepKeys(obj) {
     let keys = [];
     for (const key in obj) {
-      
-      if (obj.hasOwnProperty(key)) {
+      if (obj.hasOwnProperty(key) && key !== 'shortcuts') {
         keys.push(key);
         if (typeof obj[key] === 'object') {
           const subkeys = this.getDeepKeys(obj[key]);
@@ -92,12 +92,19 @@ export class ConfigService {
     let config = this._configSubject.getValue();
 
     // Merge the new config
-    config = _.merge({}, config, value);
+    const newconfig = _.mergeWith(config, value, (obj, src) => {
+      if (!_.isNil(src)) {
+        return src;
+      }
+      return obj;
+    });
+    
+    console.log(newconfig);
 
     // If emitEvent option is true...
     if (opts.emitEvent === true) {
       // Notify the observers
-      this._configSubject.next(config);
+      this._configSubject.next(newconfig);
     }
 
 

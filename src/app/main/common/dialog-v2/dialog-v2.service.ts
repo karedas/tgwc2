@@ -253,7 +253,6 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '550px';
       config.maxWidth = '95vw';
-      config.height = 'auto';
       config.restoreFocus = true;
       config.autoFocus = false;
       config.hasBackdrop = false;

@@ -19,7 +19,7 @@ export interface TGConfig {
   zen: boolean;
   tablePageSize: number;
   log: boolean;
-  shortcuts: any[]
+  shortcuts: any[],
 }
 
 
@@ -47,7 +47,7 @@ export const tgConfig: TGConfig = {
   // shortcuts: undefined
   shortcuts: [
     {icon: 406, alias: 'prova', cmd: 'saluta' },
-    {icon: 406, alias: 'test', cmd: 'gongola' },
-    {icon: 406, alias: 'yo', cmd: 'ridi' },
-  ]
+    {icon: 416, alias: 'test', cmd: 'gongola' },
+    {icon: 750, alias: 'yo', cmd: 'ridi' },
+  ],
 };
