@@ -391,7 +391,6 @@ export class DialogV2Service {
       config.width = '288px';
       config.height = 'auto';
       config.hasBackdrop = false;
-      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
       const dialogRef = this.dialog.open(ShortcutsPanelComponent, config);
 

@@ -20,7 +20,8 @@ import {
   MatSortModule,
   // MatProgressBarModule, 
   MatRippleModule,
-  MatRadioModule} from '@angular/material';
+  MatRadioModule,
+  MatTooltipModule} from '@angular/material';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -71,6 +72,7 @@ import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.dire
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
     // MatProgressBarModule,
     MatSortModule,
     MatRippleModule,
@@ -99,6 +101,7 @@ import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.dire
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
     // MatProgressBarModule,
     MatSortModule,
     MatRippleModule,

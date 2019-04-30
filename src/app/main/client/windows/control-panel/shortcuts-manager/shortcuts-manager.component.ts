@@ -3,6 +3,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { TGConfig } from '../../../client-config';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'tg-shortcuts-manager',
@@ -11,14 +12,13 @@ import { TGConfig } from '../../../client-config';
 })
 export class ShortcutsManagerComponent implements OnInit {
 
+  shortcuts: any[];
   iconsListOpenedStatus: boolean = false;
   newShortcutOpenedStatus: boolean = false;
-
-  shortcuts: any[];
-
-  public scIcon: number;
-  public scAlias: string;
-  public scCmd: string;
+  scIcon: number = 416;
+  newShortcutForm: FormGroup;
+  
+  shortcutExistError: boolean = false;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -29,6 +29,12 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.newShortcutForm = new FormGroup({
+      scAlias: new FormControl(''),
+      scCmd: new FormControl(''),
+    });
+
     this._configService.getConfig()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts });
@@ -38,32 +44,44 @@ export class ShortcutsManagerComponent implements OnInit {
     this.iconsListOpenedStatus = !this.iconsListOpenedStatus;
   }
 
+  setNewIcon(icon: number) {
+    this.scIcon = icon;
+    console.log(this.scIcon);
+    this.iconsListOpenedStatus = false;
+  }
+
   openNewShortcut() {
     this.newShortcutOpenedStatus = true;
   }
 
   closeNewShortcut() {
     this.newShortcutOpenedStatus = false;
+    
   }
 
   saveShortcut() {
 
+    //reset error    
+    this.shortcutExistError = false;
+    
+    const alias = this.newShortcutForm.get('scAlias').value;
+    const cmd = this.newShortcutForm.get('scCmd').value;
+    
     //check if Alias Shortcuts exists in the Array
-    if(this.scAlias && this.scCmd) {
+    if(alias && cmd) {
       
-      if (this.shortcuts.filter(x => { return x.alias === this.scAlias }).length <= 0) {
-        this.shortcuts.push({ 'icon': 416, 'alias': this.scAlias, 'cmd': this.scCmd });
+      if (this.shortcuts.filter(x => { return x.alias === alias }).length <= 0) {
+        this.shortcuts.push({ 'icon': this.scIcon, 'alias': alias, 'cmd': cmd });
         this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts })
         this.closeNewShortcut();
+        this.newShortcutForm.reset();
       }
       else {
-        // Show Warning in the form and return false
-        console.log('exists!!!');
+        this.shortcutExistError = true;
       }
-      
     }
-
   }
+
 
   deleteShortcut(alias:string) {
     const scUp =  this.shortcuts.filter(x => { return x.alias !== alias });

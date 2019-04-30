@@ -26,10 +26,13 @@
           </td>
           <td>
             <button mat-icon-button class="small">
-              <mat-icon aria-label="Modifica">edit</mat-icon>
+              <mat-icon aria-label="Modifica"  matTooltip="Modifica">edit</mat-icon>
             </button>
-            <button mat-icon-button class="small" (click)="deleteShortcut(sc.alias)">
+            <button mat-icon-button class="small" (click)="deleteShortcut(sc.alias)" matTooltip="Elimina">
               <mat-icon aria-label="Rimuovi">delete_forever</mat-icon>
+            </button>
+            <button mat-icon-button class="small" [matTooltip]="sc.cmd">
+              <mat-icon aria-label="Rimuovi">help</mat-icon>
             </button>
           </td>
         </tr>
@@ -40,65 +43,70 @@
     </ng-container>
     <p class="tg-gray" *ngIf="!shortcuts.length">Non hai ancora nessuna scorciatoia salvata</p>
   </div>
-
-  <div class="tg-shortcut-iconslist" [ngClass]="{'open': iconsListOpenedStatus}">
-    <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
-    <div class="tg-shortcut-icons--container" fxLayout="row wrap">
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-      <div class="tg-shortcut-icon squared" fxFlex="1 1 32px">icon</div>
-    </div>
-  </div>
-
-
   <div class="tg-shortcut-new" [ngClass]="{'open': newShortcutOpenedStatus}">
-    <form #newShortcut="ngForm" (ngSubmit)="saveShortcut(newShortcut)">
-      <tg-icons ([icon])="scIcon" class="tg-button squared" matRipple (click)="openIconsList()"></tg-icons>
+    <form [formGroup]="newShortcutForm"  (ngSubmit)="saveShortcut(newShortcut)">
+      <tg-icons [(icon)]="scIcon" class="tg-button squared" matRipple (click)="openIconsList()"></tg-icons>
       <mat-form-field>
-        <input matInput placeholder="Nome / Alias" [(ngModel)]="scAlias" name="alias" required>
+        <input matInput placeholder="Nome / Alias" formControlName="scAlias" required autocomplete="off">
       </mat-form-field>
 
       <mat-form-field class="field-full-width">
-        <textarea matInput placeholder="Comando/i" [(ngModel)]="scCmd" name="cmd" required></textarea>
+        <textarea matInput placeholder="Comando/i" formControlName="scCmd" required autocomplete="off"></textarea>
       </mat-form-field>
+      
+      <div *ngIf="shortcutExistError" class="tg-red">L'alias è già presente tra le tue scorciatoie: cambiarlo o cancellare la scorciatoia precedente.</div>
 
       <mat-divider></mat-divider>
+
       <button mat-raised-button color="accent" type="submit">Salva</button>&nbsp;
       <button mat-raised-button color="warn" (click)="closeNewShortcut()">Chiudi</button>
     </form>
+
+
+    
+  <div class="tg-shortcut-iconslist" [ngClass]="{'open': iconsListOpenedStatus}">
+      <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
+      <div class="tg-shortcut-icons--container" fxLayout="row wrap">
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+        <div class="tg-shortcut-icon" fxFlex="1 1 32px"><tg-icons class="squared" [icon]="870" (click)="setNewIcon(870)"></tg-icons></div>
+      </div>
+    </div>
+
+    
   </div>
 
 
