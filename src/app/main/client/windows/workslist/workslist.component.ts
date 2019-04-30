@@ -89,6 +89,10 @@ export class WorkslistComponent implements OnInit, OnDestroy {
     }
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase()
+  }
+
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();

@@ -44,7 +44,7 @@
     <p class="tg-gray" *ngIf="!shortcuts.length">Non hai ancora nessuna scorciatoia salvata</p>
   </div>
   <div class="tg-shortcut-new" [ngClass]="{'open': newShortcutOpenedStatus}">
-    <form [formGroup]="newShortcutForm"  (ngSubmit)="saveShortcut(newShortcut)">
+    <form [formGroup]="newShortcutForm"  (ngSubmit)="saveShortcut()">
       <tg-icons [(icon)]="scIcon" class="tg-button squared" matRipple (click)="openIconsList()"></tg-icons>
       <mat-form-field>
         <input matInput placeholder="Nome / Alias" formControlName="scAlias" required autocomplete="off">
