@@ -15,6 +15,11 @@
   display: inline-block;
 }
 
+.tg-control-panel--subtitle {
+  color: $tg-yellow;
+  font-weight: normal;
+}
+
 .tg-shortcut-iconslist,
 .tg-shortcut-new {
   border: 1px solid rgba(255, 255, 255, 0.308);
@@ -56,6 +61,15 @@
   }
 }
 
+.tg-shortcut-row {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.541);
+  margin:2px 0;
+  align-items: center;
+}
+
 
 .tg-shortcut-iconslist {
   border: 0;
@@ -65,7 +79,16 @@
 
 }
 
-.tg-shortcuts-all table {
+.tg-shortcut-headerlist {
+  font-weight: bold;
+  padding:.5em 0;
+}
+
+.tg-shortcuts-all {
+  max-height: 400px;
+}
+
+.tg-shortcuts-all .shortcuts-list {
   width: 100%;
   text-align: left;
   margin-bottom: 2em;

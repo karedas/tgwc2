@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class ShortcutsManagerComponent implements OnInit {
   constructor(
     private _configService: ConfigService
   ) {
-    this.totalIcons = Array(22).fill(0).map((x,i)=>i);
+    this.totalIcons = Array(124).fill(0).map((x,i)=>i);
 
     this._unsubscribeAll = new Subject<any>();
   }
@@ -66,9 +66,6 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   openNewShortcut() {
-    if(!this.isEdit) {
-    }
-
     this.newShortcutOpenedStatus = true;
   }
 
@@ -135,6 +132,7 @@ export class ShortcutsManagerComponent implements OnInit {
     this.editableID = idx;
 
     this.scIcon = icon;
+
     this.newShortcutForm.setValue({
       scAlias: alias,
       scCmd: cmd

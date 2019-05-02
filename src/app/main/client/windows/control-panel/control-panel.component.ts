@@ -13,6 +13,7 @@ import { GameService } from '../../services/game.service';
   selector: 'tg-control-panel',
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ControlPanelComponent implements OnInit, OnDestroy {
 
