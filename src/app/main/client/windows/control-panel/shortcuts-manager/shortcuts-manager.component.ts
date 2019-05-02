@@ -80,25 +80,26 @@ export class ShortcutsManagerComponent implements OnInit {
     
     const alias = this.newShortcutForm.get('scAlias').value;
     const cmd = this.newShortcutForm.get('scCmd').value;
+
     //check if Alias Shortcuts exists in the Array
     if(alias && cmd) {
 
       if(!this.shortcuts.length) {
         this.addShortcut(alias, cmd);
+        this.resetForm();
       } 
       else if (this.isEdit) {
         this.saveEditableShortcut(alias, cmd);
+         this.resetForm();
       }
       else if (this.shortcuts.filter(x => { return x.alias === alias }).length <= 0) {
         this.addShortcut(alias, cmd);
+       this.resetForm();
       }
       else {
         this.shortcutExistError = true;
       }
     }
-
-    this.resetForm();
-
   }
 
   private addShortcut(alias: string, cmd: string) {

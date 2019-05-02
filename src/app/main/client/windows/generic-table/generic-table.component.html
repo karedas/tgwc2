@@ -18,25 +18,23 @@
           
           <ng-scrollbar class="scrollbar scrollbar-dialog" [autoUpdate]="true" #scrollBar [shown]="'always'"
             [disableOnBreakpoints]="false">
+
             <table mat-table [dataSource]="dataSource" matSort>
 
               <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+
                 <th mat-header-cell *matHeaderCellDef  mat-sort-header>{{column}}</th>
+
                 <td mat-cell *matCellDef="let element">
                   <!-- Icon type -->
-                  <ng-container *ngIf="column ==='icona'">
-                    <tg-icons [icon]="element[column]"></tg-icons>
-                  </ng-container>
+                  <tg-icons [icon]="element[column]" *ngIf="column === 'icona'"></tg-icons>
                   <!-- Ip Address type-->
-                  <ng-container *ngIf="column ==='ipaddr'">
-                    <a target="_blank"
-                      href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{element[column]}}</a>
-                  </ng-container>
+                  <a target="_blank"  *ngIf="column === 'ipaddr'"
+                  href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{element[column]}}</a>
                   <!-- Default Text type -->
-                  <ng-container *ngIf="column !== 'icona' && column !=='ipaddr'">
-                    <span [innerHtml]="element[column] | dataToHtml" *ngIf="element[column]"></span>
-                  </ng-container>
+                  <span [innerHtml]="element[column] | dataToHtml" *ngIf="element[column] && column !== 'icona' && column !=='ipaddr'"></span>
                 </td>
+
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="columnsToDisplay;  sticky: true"></tr>

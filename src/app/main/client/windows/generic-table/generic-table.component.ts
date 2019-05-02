@@ -73,16 +73,19 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
             break;
         }
       });
+
     }
     
     // pupulate data
     if (dataTable.data) {
       dataTable.data.forEach((d: any) => {
         const obj = {};
+
         d.map((row: string, rowIndex: number) => {
           obj[this.columnsToDisplay[rowIndex]] = row;
-          this.data.push(obj);
         });
+
+        this.data.push(obj);
       });
     }
     this.dataSource = new MatTableDataSource(this.data);
