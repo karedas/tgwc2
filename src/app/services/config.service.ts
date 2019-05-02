@@ -1,6 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as _ from 'lodash';
+import { SRCSET_ATTRS } from '@angular/core/src/sanitization/html_sanitizer';
 
 export const TG_CONFIG = new InjectionToken('tgCustomConfig');
 
@@ -90,21 +91,19 @@ export class ConfigService {
   setConfig(value, opts = { emitEvent: true }): void {
     // Get the value from the behavior subject
     let config = this._configSubject.getValue();
-
-    // Merge the new config
-    const newconfig = _.mergeWith(config, value, (obj, src) => {
-      if (!_.isNil(src)) {
+    // // Merge the new config
+    config = _.mergeWith(config, value,  (obj, src) => {
+      if(_.isArray(src) && _.isEmpty(src)) {
+        return src;
+      } else if (_.isArray(src)) {
         return src;
       }
-      return obj;
-    });
-    
-    console.log(newconfig);
+    })
 
     // If emitEvent option is true...
     if (opts.emitEvent === true) {
       // Notify the observers
-      this._configSubject.next(newconfig);
+      this._configSubject.next(config);
     }
 
 

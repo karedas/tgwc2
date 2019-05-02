@@ -8,21 +8,26 @@
       </div>
       <ng-container *ngIf="totalShortcuts.length > 0; else noShortcuts">
         <div class="tg-shortcutpanel" matDialogContent fxLayout="row wrap">
-            <div class="tg-shortcut" *ngFor="let shortcut of totalShortcuts; let i = index;" fxFlex="1 1 32px">
-              <tg-icons class="squared" [icon]="shortcut.icon" matRipple (click)="sendCmd(shortcut.alias)" (mouseover)="changeCmdLabel(i)" (mouseout)="changeCmdLabel('')"></tg-icons>
-            </div>
+          <div 
+            *ngFor="let shortcut of totalShortcuts; let i = index;" fxFlex="1 1 32px" 
+            class="tg-shortcut-icon" 
+            matRipple (click)="sendCmd(shortcut.alias)" 
+            (mouseover)="changeCmdLabel(i)" 
+            (mouseout)="changeCmdLabel('')">
+              <img src="assets/images/shortcuts/shortcut_{{shortcut.icon}}.png" alt="">
+          </div>
         </div>
         <div class="tg-shortcut-cmdlabel">
           <ng-container  *ngIf="totalShortcuts[cmdHoverId] &&  cmdHoverId >= 0">
-            <span>Alias:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.alias}}, <br/><span>Cmd:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.cmd}}
+            <span class="tg-brown">alias:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.alias}}, &nbsp; <span class="tg-brown">cmd:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.cmd}}
           </ng-container>
         </div>
+        <div matDialogActions class="tg-shortcuts-edit">
+          <button mat-stroked-button (click)="openShortcutManager()" color="accent">
+            modifica scorciatoie
+          </button>
+        </div>
       </ng-container>
-      <div matDialogActions>
-        <button mat-icon-button (click)="openShortcutManager()" color="primary">
-          <mat-icon aria-label="Modifica scorciatoie">settings</mat-icon> modifica scorciatoie
-        </button>
-      </div>
     </div>
     <div class="tg-border-box">
       <div class="tg-border tg-border-top"></div>
@@ -33,8 +38,8 @@
 </div>
 
 <ng-template #noShortcuts>
-  <p>
+  <p class="no-shortcuts">
     Non hai ancora nessuna scorciatoia salvata.<br/>
-    <i (click)="openShortcutManager()" class="tg-yellow">Creane subito una</i>
+    <button mat-stroked-button (click)="openShortcutManager()" color="accent">Creane subito una</button> 
   </p>
 </ng-template>

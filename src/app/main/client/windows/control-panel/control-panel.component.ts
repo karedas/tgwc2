@@ -45,6 +45,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   }
 
   onOptionChange(event, value: any) {
+    console.log(value);
     this._configService.setConfig(value);
   }
 

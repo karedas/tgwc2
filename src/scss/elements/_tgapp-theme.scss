@@ -17,6 +17,10 @@
     height: 100%; 
   }
 
+  .mat-stroked-button:not([disabled]) {
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
 
   .mat-icon-button[disabled][disabled] {
     color: rgba(249, 249, 249, 0.26);
@@ -236,7 +240,7 @@
   /* Slide Thumb */
   .mat-slider {
    max-width: 80%;
-   width: 300px;
+   width: 100%;
   }
 
   .mat-slider-track-fill {

@@ -84,15 +84,10 @@ export class GameService {
         if( this._tgConfig ) {
             //check Zen Mode:
             this.setZenMode(config.zen);
-
-          if(this._tgConfig.fontSize !== config.fontSize) {
             this.setOutputSize(config.fontSize);
-          }
         }
 
         this._tgConfig = config;
-        // Debug
-        console.log('CHANGE', this._tgConfig);
       });
 
     this.loadServerStat();
@@ -287,11 +282,12 @@ export class GameService {
 
   /** Font Size Adjustement */
   setOutputSize(size) {
+    
     let new_class;
     
     const old_class = font_size_options[this._tgConfig.fontSize].class;
 
-    if(isNaN(size)) {
+    if(!isNaN(size)) {
       let newSize = (this._tgConfig.fontSize + 1) % font_size_options.length;
       this._configService.setConfig({ fontSize: newSize });
 

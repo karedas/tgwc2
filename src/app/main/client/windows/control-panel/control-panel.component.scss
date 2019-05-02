@@ -7,6 +7,7 @@
 
   .mat-divider {
     margin: 1em 0;
+    width: 100%;
     border-top-color: rgba(255, 255, 255, 0.188);
   }
 
@@ -55,6 +56,8 @@
   background-color: #00000082;
   display: none;
   min-height: 400px;
+  position: relative;
+
   &.active {
     display: block;
   }

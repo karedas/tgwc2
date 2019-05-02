@@ -45,9 +45,5 @@ export const tgConfig: TGConfig = {
   tablePageSize: 20,
   log: true,
   // shortcuts: undefined
-  shortcuts: [
-    {icon: 406, alias: 'prova', cmd: 'saluta' },
-    {icon: 416, alias: 'test', cmd: 'gongola' },
-    {icon: 750, alias: 'yo', cmd: 'ridi' },
-  ],
+  shortcuts: [],
 };

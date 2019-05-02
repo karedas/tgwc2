@@ -1,9 +1,16 @@
 @import 'variables';
 
 
-.tg-shortcut {
-    .tg-icon {
-        cursor: pointer;
+.tg-shortcut-icon {
+    cursor: pointer;
+    width:32px;
+    height: 32px;
+	border: 1px solid #4e4229;
+    padding: 1px;
+    
+    img {
+        max-width: 100%;
+        max-height: 100%;
     }
 }
 
@@ -13,10 +20,44 @@
 .tg-shortcut-cmdlabel {
     line-height: 14px;
     height: 13px;
-    font-size: 13px;
+    font-size: 12px;
     padding: .2em;
     color: white;
+    background: #0000006e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #8e8e8e;
+    padding: 0.5em .5em;
+
     span {
         color: #8e8e8e;
+    }
+}
+
+.tg-shortcuts-edit {
+    background: black;
+    padding: .5em .5em;
+    text-align: center;
+    min-height: auto;
+
+    button {
+        margin:  1em  auto 0;
+        line-height: 28px;
+        font-size: 12px;
+    }
+
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.no-shortcuts {
+    display: block;
+    text-align: center;
+    color: white;
+    padding: 1em .5em;
+    margin: 0;
+
+    button {
+        margin: 0 auto;
     }
 }
