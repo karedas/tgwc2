@@ -80,12 +80,18 @@
   .mat-dialog-content {
     margin: 0;
     padding: 0;
+    transition: opacity .1s linear;
   }
 
   .cdk-drag {
     // display: block;
     height: 100%;
   }
+
+  .cdk-drag-dragging .mat-dialog-content {
+    opacity: 0;
+  }
+
 
   /* Menu */
   .mat-menu-content {
