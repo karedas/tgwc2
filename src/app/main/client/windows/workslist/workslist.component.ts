@@ -69,10 +69,12 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   }
 
   private populate(data: any) {
+
+    this.data = [];
+
     if (data) {
       data.forEach((d: any) => {
-        const obj = {};
-          this.data.push(d);
+        this.data.push(d);
       });
 
       this.dataSource = new MatTableDataSource(this.data);

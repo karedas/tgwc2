@@ -12,6 +12,7 @@ import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/ap
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material';
+import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -78,22 +79,18 @@ export class GameService {
 
 
   _init() {
+
     this._configService.config
       .subscribe((config: TGConfig) => {
-        
-        if( this._tgConfig ) {
-            //check Zen Mode:
-            this.setZenMode(config.zen);
-            this.setOutputSize(config.fontSize);
-        }
-
+        this.setZenMode(config.zen);
         this._tgConfig = config;
       });
+
 
     this.loadServerStat();
   }
 
-  get tgConfig (): TGConfig {
+  get tgConfig(): TGConfig {
     return this._tgConfig;
   }
 
@@ -124,8 +121,6 @@ export class GameService {
   }
 
   updateNeeded(what: any) {
-
-    console.log('need', what);
 
     const now = Date.now();
 
@@ -212,7 +207,6 @@ export class GameService {
     this.socketService.disconnect();
   }
 
-
   /**
    * UI UTILITY 
    */
@@ -246,7 +240,7 @@ export class GameService {
   }
 
   /* Order person or equip list */
-  orderObjectsList(items: any): any {
+  public orderObjectsList(items: any): any {
     if (items && items.list) {
       items.list.sort((a: any, b: any) => {
         const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
@@ -281,27 +275,27 @@ export class GameService {
   }
 
   /** Font Size Adjustement */
-  setOutputSize(size) {
-    
-    let new_class;
-    
-    const old_class = font_size_options[this._tgConfig.fontSize].class;
+  public setOutputSize(size?: number) {
 
-    if(!isNaN(size)) {
-      let newSize = (this._tgConfig.fontSize + 1) % font_size_options.length;
-      this._configService.setConfig({ fontSize: newSize });
+    let prefix = 'size-';
+    let new_class: string;
+    let old_class: string;
 
-      new_class = font_size_options[newSize].class;
-
-    } 
-    else {
-      new_class = font_size_options[size].class;
+    if (!size && this._tgConfig) {
+      size = (this._tgConfig.fontSize + 1) % font_size_options.length;
+      old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
+      new_class = prefix + font_size_options[size].class;
     }
-
+    else {
+      old_class = prefix + font_size_options[size].class;
+      new_class = prefix + font_size_options[size].class;
+    }
 
     if (old_class) {
       this.render.removeClass(document.body, old_class);
       this.render.addClass(document.body, new_class);
     }
+
+    this._configService.setConfig({ fontSize: size });
   }
 }

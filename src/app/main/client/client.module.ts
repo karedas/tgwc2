@@ -11,6 +11,8 @@ import { InputModule } from './input/input.module';
 import { AudioComponent } from './audio/audio.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+
 @NgModule({
   declarations: [
     ClientComponent,
@@ -25,7 +27,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     RightSidebarModule,
     OutputModule,
     InputModule,
-    FileSaverModule
+    FileSaverModule,
+    JwSocialButtonsModule
   ],
   exports: [
     NavbarComponent,

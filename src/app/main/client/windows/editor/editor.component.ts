@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DataState } from 'src/app/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
-import { takeUntil, map } from 'rxjs/operators';
+import { takeUntil, map, filter, take } from 'rxjs/operators';
 import { InputService } from '../../input/input.service';
 import { IEditor } from 'src/app/models/data/editor.model';
 import { MatDialogRef } from '@angular/material';
@@ -56,6 +56,16 @@ export class EditorComponent implements OnInit, OnDestroy {
       }
     );
 
+    this.dialog.keydownEvents()
+      .pipe(
+        filter((e: KeyboardEvent) => e.code === 'Escape'),
+        take(1)
+      )
+      .subscribe(() => {
+        this.gameService.sendToServer('##ce_abort')
+        this.dialog.close();
+        this.inputService.focus();
+      })
   }
 
 
@@ -89,10 +99,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   onCancel(event: any) {
     this.gameService.sendToServer('##ce_abort');
     this.dialog.close();
-    this.inputService.focus();
   }
 
-  resetEditor () {
+  resetEditor() {
     this.description = '';
   }
 

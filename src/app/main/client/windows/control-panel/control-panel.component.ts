@@ -7,12 +7,12 @@ import { MatSliderChange, MAT_DIALOG_DATA } from '@angular/material';
 import { AudioService } from '../../audio/audio.service';
 import { FileSaverService } from 'ngx-filesaver';
 import { font_size_options } from 'src/app/main/common/constants';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'tg-control-panel',
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class ControlPanelComponent implements OnInit, OnDestroy {
 
@@ -28,13 +28,14 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   constructor(
     private _configService: ConfigService,
     private audioService: AudioService,
+    private gameService: GameService,
     private _FileSaverService: FileSaverService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
     this._unsubscribeAll = new Subject();
     this.tabOpen = data.tab
-   }
+  }
 
   ngOnInit() {
     this._configService.config
@@ -44,8 +45,11 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
       });
   }
 
+  changeFontSize(size: number) {
+    this.gameService.setOutputSize(size);
+  }
+
   onOptionChange(event, value: any) {
-    console.log(value);
     this._configService.setConfig(value);
   }
 
@@ -54,6 +58,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
     if (!value) {
       return 0;
     }
+
     return value;
   }
 
@@ -61,9 +66,9 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
     if (source === 'sound') {
       this._configService.setConfig({
-        audio: {soundVolume: event.value }
+        audio: { soundVolume: event.value }
       })
-    } 
+    }
     else if (source === 'music') {
       this._configService.setConfig({
         audio: { musicVolume: event.value }
@@ -88,17 +93,17 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
     let file: any = event.target.files[0];
 
-    if(file) {
+    if (file) {
       let fileReader = new FileReader();
-  
+
       fileReader.onload = (e) => {
         let result = fileReader.result;
-        if( typeof result === 'string' ){
-          let newConf =  JSON.parse(result);
+        if (typeof result === 'string') {
+          let newConf = JSON.parse(result);
           this._configService.setConfig(newConf);
 
           this.fileUploaded = true;
-        }  
+        }
       }
       fileReader.readAsText(file);
     }

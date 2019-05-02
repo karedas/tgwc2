@@ -32,7 +32,6 @@ import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
 import 'hammerjs';
 import { AngularSplitModule } from 'angular-split';
 
-
 @NgModule({
 
   declarations: [
@@ -65,8 +64,6 @@ import { AngularSplitModule } from 'angular-split';
 
     // TODO: I'll need to move out.
     AngularSplitModule.forRoot(),
-
-
     DialogV2Module,
     /** --------------------- */
     // WindowsModule,

@@ -59,6 +59,8 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
   private populate(dataTable: any) {
 
     this.columnsToDisplay = [];
+    this.data = [];
+
 
     if (dataTable.head) {
       dataTable.head.forEach((v: any, i: number) => {
@@ -83,7 +85,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
         });
       });
     }
-    
     this.dataSource = new MatTableDataSource(this.data);
 
     this.dataSource.paginator = this.paginator;

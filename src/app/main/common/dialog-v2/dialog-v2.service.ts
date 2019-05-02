@@ -35,6 +35,11 @@ export class DialogV2Service {
     dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       this.addDialogBehaviour(d);
     });
+
+  }
+
+  getOverlayElement(dialogRef:MatDialogRef<any>): HTMLElement {
+    return <HTMLElement>dialogRef['_overlayRef'].overlayElement;
   }
 
 
@@ -57,7 +62,7 @@ export class DialogV2Service {
 
   private addBringToFrontEvent(dialogRef: MatDialogRef<any>) {
 
-    const overlayElement = <HTMLElement>dialogRef['_overlayRef'].overlayElement;
+    const overlayElement = this.getOverlayElement(dialogRef);
     this.increaseZIndex(dialogRef, overlayElement);
 
     overlayElement.addEventListener('mousedown', () => {
@@ -65,8 +70,12 @@ export class DialogV2Service {
     });
   }
 
-  private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement: HTMLElement) {
-
+  private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement?: HTMLElement) {
+    
+    if(!overlayElement) {
+      overlayElement = this.getOverlayElement(dialogRef);
+    }
+    
     if (this.dialog.openDialogs.length > 1) {
       // Add Z-index Inline based on global Dialog zindex status
       this.render.setStyle(
@@ -152,7 +161,7 @@ export class DialogV2Service {
     config.height = '600px';
     config.minHeight = '400px';
     config.backdropClass = fromGame ? '' : 'overlay-dark';
-    config.scrollStrategy = this.overlay.scrollStrategies.block();
+    config.scrollStrategy = this.overlay.scrollStrategies.noop();
     config.restoreFocus = true;
     config.autoFocus = false;
 
@@ -169,11 +178,10 @@ export class DialogV2Service {
     config.width = '500px';
     config.height = '450px';
     config.restoreFocus = true;
+    config.disableClose = false;
     config.hasBackdrop = true;
-    config.disableClose = true;
 
     const dialogRef = this.dialog.open(EditorComponent, config);
-
     return dialogRef;
   }
 
@@ -191,7 +199,7 @@ export class DialogV2Service {
       config.hasBackdrop = false;
       config.autoFocus = false;
       config.disableClose = false;
-      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
       config.data = {
         tab: detail
       };
@@ -229,7 +237,7 @@ export class DialogV2Service {
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
-      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(CommandsListComponent, config);
 
@@ -256,6 +264,8 @@ export class DialogV2Service {
       config.restoreFocus = true;
       config.autoFocus = false;
       config.hasBackdrop = false;
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
+
       config.data = {
         tab: tab
       }
@@ -264,7 +274,6 @@ export class DialogV2Service {
       return dialogRef;
     }
     else {
-      console.log(tab);
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: tab };
     }
   }
@@ -284,7 +293,7 @@ export class DialogV2Service {
     config.restoreFocus = true;
     config.autoFocus = false;
     config.panelClass = 'provaprova';
-    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
     config.data = {
       title: data[0].title,
@@ -315,7 +324,7 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '700px';
       config.height = 'auto';
-      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
@@ -331,6 +340,8 @@ export class DialogV2Service {
       });
 
     return dialogRef;
+    } else {
+      this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
   }
 
@@ -345,7 +356,7 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '700px';
       config.height = 'auto';
-      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
@@ -358,9 +369,10 @@ export class DialogV2Service {
       this.inputService.focus();
 
       return dialogRef;
+    } else {
+      this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
   }
-
 
   openLog(...data: any): MatDialogRef<LogComponent, MatDialogConfig> {
 
@@ -372,12 +384,15 @@ export class DialogV2Service {
       config.width = '60%';
       config.height = '700px';
       config.hasBackdrop = false;
-      config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(LogComponent, config);
 
       return dialogRef;
+    } else {
+      this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
+    
   }
 
   openShortcut(): MatDialogRef<ShortcutsPanelComponent, MatDialogConfig> {
@@ -391,6 +406,7 @@ export class DialogV2Service {
       config.width = '288px';
       config.height = 'auto';
       config.hasBackdrop = false;
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(ShortcutsPanelComponent, config);
 
@@ -400,7 +416,10 @@ export class DialogV2Service {
       )
 
       return dialogRef;
+    } else {
+      this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
+    
   }
   
 }

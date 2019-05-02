@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { TGConfig } from '../../../client-config';
 import { FormGroup, FormControl } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'tg-shortcuts-manager',
@@ -72,7 +73,6 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   closeNewShortcut() {
-    console.log('close?');
     this.newShortcutOpenedStatus = false;
   }
 
@@ -83,7 +83,6 @@ export class ShortcutsManagerComponent implements OnInit {
     
     const alias = this.newShortcutForm.get('scAlias').value;
     const cmd = this.newShortcutForm.get('scCmd').value;
-    console.log('save');
     //check if Alias Shortcuts exists in the Array
     if(alias && cmd) {
 
@@ -106,15 +105,12 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   private addShortcut(alias: string, cmd: string) {
-    console.log('add');
     this.shortcuts.push({ 'icon': this.scIcon, 'alias': alias, 'cmd': cmd });
-
     this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts })
     this.closeNewShortcut();
   }
 
   private saveEditableShortcut(alias, cmd) {
-    console.log('saveedit');
     this.shortcuts[this.editableID] = {
       icon: this.scIcon,
       alias: alias,
@@ -126,7 +122,6 @@ export class ShortcutsManagerComponent implements OnInit {
     this.isEdit = false;
 
   }
-
 
   deleteShortcut(alias:string) {
     const scUp =  this.shortcuts.filter(x => { return x.alias !== alias });
@@ -148,4 +143,9 @@ export class ShortcutsManagerComponent implements OnInit {
     this.openNewShortcut();
   }
 
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.shortcuts, event.previousIndex, event.currentIndex); 
+    this._configService.setConfig({ shortcuts: this.shortcuts });
+  }
 }

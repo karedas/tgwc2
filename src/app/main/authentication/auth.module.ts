@@ -7,8 +7,10 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { QuotesComponent } from './login/quotes/quotes.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { RegistrationComponent } from '../registration/registration.component';
 import { RegistrationModule } from '../registration/registration.module';
+
+// import social buttons module
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { RegistrationModule } from '../registration/registration.module';
     ReactiveFormsModule,
     AuthRoutingModule,
     RegistrationModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    JwSocialButtonsModule
   ],
   exports: [
     AuthRoutingModule

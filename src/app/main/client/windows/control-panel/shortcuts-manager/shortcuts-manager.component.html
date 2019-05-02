@@ -13,13 +13,20 @@
 
   <div class="tg-shortcuts-all">
     <ng-container *ngIf="shortcuts">
-      <table *ngIf="shortcuts.length > 0">
+
+      <table *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)">
         <tr>
+          <th>&nbsp;</th>
           <th>Icona</th>
           <th>Alias</th>
           <th>Azione</th>
         </tr>
-        <tr *ngFor="let sc of shortcuts; let isc = index;">
+        <tr *ngFor="let sc of shortcuts; let isc = index;" cdkDrag>
+          <td>
+            <button mat-icon-button class="small" cdkDragHandle>
+                <mat-icon aria-label="ordina">reorder</mat-icon>
+            </button>
+          </td>
           <td>
             <div class="tg-shortcut-icon">
               <img src="assets/images/shortcuts/shortcut_{{sc.icon}}.png" alt="">
@@ -36,11 +43,12 @@
               <mat-icon aria-label="Rimuovi">delete_forever</mat-icon>
             </button>
             <button mat-icon-button class="small" [matTooltip]="sc.cmd">
-              <mat-icon aria-label="Rimuovi">help</mat-icon>
+              <mat-icon aria-label="Info">help</mat-icon>
             </button>
           </td>
         </tr>
       </table>
+
       <mat-divider></mat-divider>
       <p class="tg-gray" *ngIf="!shortcuts.length">Non hai ancora nessuna scorciatoia salvata</p>
       <button mat-raised-button color="accent" (click)="openNewShortcut()">Aggiungi</button>
