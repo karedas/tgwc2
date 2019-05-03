@@ -27,8 +27,8 @@
         <div class="tg-control-panel--option">
           <mat-form-field>
             <mat-label>Dimensione Testo</mat-label>
-            <mat-select required (selectionChange)="changeFontSize($event.value)"
-              [(value)]="tgConfig.fontSize">
+            <mat-select required (selectionChange)="changeFontSize($event)"
+              [value]="tgConfig.fontSize">
               <mat-option *ngFor="let size of fontSizes; let idx = index" [value]="idx">{{size.name}}</mat-option>
             </mat-select>
           </mat-form-field>

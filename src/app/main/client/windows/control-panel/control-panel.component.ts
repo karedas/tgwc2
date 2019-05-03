@@ -24,6 +24,8 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   fileUploaded: boolean = false;
   tabOpen: number = 0;
 
+  oldFontSize: number;
+
   fontSizes = font_size_options;
 
   constructor(
@@ -46,8 +48,9 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
       });
   }
 
-  changeFontSize(size: number) {
-    this.gameService.setOutputSize(size);
+  changeFontSize(event: any) {
+    this.oldFontSize = this.tgConfig.fontSize;
+    this.gameService.setOutputSize(event.value, this.oldFontSize);
   }
 
   onOptionChange(event, value: any) {

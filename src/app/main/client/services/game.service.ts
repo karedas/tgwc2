@@ -138,13 +138,13 @@ export class GameService {
 
     if (now > this.client_update.lastDataTime) {
 
-      if (this.client_update.inventory.needed && !this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
+      if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
         this.sendToServer('@inv');
         this.client_update.inventory.needed = false;
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.equipment.needed && !this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
+      if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
         this.sendToServer('@equip');
         this.client_update.lastDataTime = now;
       }
@@ -275,23 +275,26 @@ export class GameService {
   }
 
   /** Font Size Adjustement */
-  public setOutputSize(size?: number) {
+  public setOutputSize(size?: number, oldSize?: number) {
 
     let prefix = 'size-';
     let new_class: string;
     let old_class: string;
 
+    if(oldSize) {
+      old_class = prefix + font_size_options[oldSize].class;
+    }
     if (!size && this._tgConfig) {
       size = (this._tgConfig.fontSize + 1) % font_size_options.length;
       old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
       new_class = prefix + font_size_options[size].class;
     }
     else {
-      old_class = prefix + font_size_options[size].class;
       new_class = prefix + font_size_options[size].class;
     }
 
     if (old_class) {
+
       this.render.removeClass(document.body, old_class);
       this.render.addClass(document.body, new_class);
     }

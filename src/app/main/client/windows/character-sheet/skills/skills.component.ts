@@ -10,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'tg-skills',
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class SkillsComponent implements OnInit, OnDestroy {
 

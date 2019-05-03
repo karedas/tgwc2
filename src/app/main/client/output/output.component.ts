@@ -4,7 +4,6 @@ import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
-// import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, Subject } from 'rxjs';
 import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -151,7 +150,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.setOutputSplit();
-    }, 200);
+    });
   }
 
   private setContent(t: string, c: any): any {

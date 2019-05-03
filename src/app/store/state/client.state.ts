@@ -12,6 +12,6 @@ export const initialState: ClientState = {
     time: new Date(),
     inGame: undefined,
     isgod: undefined,
-    invLevel: undefined,
+    invLevel: 0,
     track: undefined,
 };
