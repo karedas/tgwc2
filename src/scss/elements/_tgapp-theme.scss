@@ -90,7 +90,6 @@
   }
 
 
-
   /* Menu */
   .mat-menu-content {
 
@@ -198,7 +197,6 @@
     color: rgba(255, 255, 255, 0.54);
   }
 
-
   .mat-select-panel {
       background: #0c0a08;
       border: 1px solid #ffffff21;
@@ -211,7 +209,6 @@
   .mat-option-text {
     color: #ece9e0;
   }
-
 
   /* ProgressBar */
   .mat-progress-bar {
@@ -226,7 +223,6 @@
     }
   }
 
-
   /* filter */
   .tg-table--filter {
     background-color: #0b0907;
@@ -239,7 +235,6 @@
       color: white;
     }
   }
-
 
   /* Slide Thumb */
   .mat-slider {
@@ -260,7 +255,6 @@
     border-right-color: #ffc400;
   }
 
-
   /* Select */
   .mat-form-field-label {
     color: #8e8e8e;
@@ -279,9 +273,22 @@
     border-color: rgb(142, 142, 142);
   }
 
-
   /* Mat Tooltip */
   .mat-tooltip {
     background-color: rgba(62, 62, 62, 0.9);
+  }
+
+  /* Stepper */
+  .mat-stepper-horizontal, .mat-stepper-vertical {
+    color: white;
+  }
+
+  .mat-step-header .mat-step-label.mat-step-label-active {
+    color: white;
+  }
+
+  .mat-step-header .mat-step-icon {
+    background-color: rgba(0, 0, 0, 0.54);
+    color: rgba(255, 255, 255, 0.31);
   }
 }

@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './main/page-not-found/page-not-found.comp
 import { AuthGuard } from './main/authentication/services/login.guard';
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'webclient',
     loadChildren: './main/client/client.module#ClientModule',

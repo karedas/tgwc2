@@ -1,3 +1,63 @@
-<p>
-  step-first works!
-</p>
+<div class="tg-registration-step" fxLayout [formGroup]="parentForm">
+
+  <div class="tg-races-list" fxFlex="1 1 110px">
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'umano'}"
+      (click)="setRace('umano')">Umano</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'halfling'}"
+      (click)="setRace('halfling')">Halfling dell'Arcipelago</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'nano'}"
+      (click)="setRace('nano')">Nano</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'elfo_boschi'}"
+      (click)="setRace('elfo_boschi')">Elfo dei boschi</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'elfo_ambrato'}"
+      (click)="setRace('elfo_ambrato')">Elfo ambrato</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'ousst'}"
+      (click)="setRace('ousst')">Ousst'viiryn</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'goblin'}"
+      (click)="setRace('goblin')">Goblin</div>
+    <div matRipple class="tg-races-item" 
+      [ngClass]="{'active': selectedRace === 'orco'}"
+      (click)="setRace('orco')">Orco</div>
+  </div>
+  
+  <div class="tg-races-content" fxFlex="1 1 100%">
+    <div class="race-image">
+      img: {{selectedRace}}
+    </div>
+    <div class="tg-races-text">
+      <ng-container *ngIf="selectedRace === 'umano'">
+        <h2 class="race-title">Umani</h2> 
+        <p>Sono la razza dominante di Landmar ed anche la più versatile.
+        In base alla loro discendenza si distinguono in Emeriani ed Eliantiriani,
+        secondo la loro cultura scelgono ampi e variegati stili di vita. Malvagi
+        o benevoli in base alle loro credenze, sono tutt'ora la razza più diffusa.</p>
+      </ng-container>
+      <!-- Halfling -->
+      <ng-container *ngIf="selectedRace === 'halfling'">
+          <h2 class="race-title">Halfling dell'Arcipelago</h2> Gli Halfling sono entrati nella storia
+          da pochi decenni, in seguito ad una serie di conflitti che hanno colpito
+          la loro terra d'origine, L'Arcipelago. La loro civiltà, sviluppatasi fra
+          quelle isole vulcaniche, è strettamente legata alla navigazione in tutti
+          i suoi aspetti, dalla costruzione di navi, alla loro gestione, alla
+          cartografia e all'orientamento.
+      </ng-container>
+      <!-- Nano -->
+      <ng-container *ngIf="selectedRace === 'nano'">
+          <h2 class="race-title">Nano Zanarquon</h2> Quasi tutti gli esponenti di altre razze che
+          raccontano i loro incontri con i Nani fanno almeno un accenno al loro
+          caratteraccio. Burberi e irascibili, perdono spesso la pazienza e
+          attaccano briga: non è insolito trovare un Nano ubriaco in mezzo ad una
+          rissa in una taverna.
+      </ng-container>
+
+      <button mat-raised-button color="accent" (click)="goNext()">Avanti</button>
+    </div>
+  </div>
+</div>

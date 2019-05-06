@@ -2,9 +2,36 @@
   <div class="tg-registration-step--wrap">
     <div class="b-ironlight-mini tg-box tg-shadow">
       <div class="tg-registration-content tg-shadow-inset">
-        <section>
-          <!-- <router-outlet name="registration"></router-outlet> -->
-        </section>
+          <section>
+            <mat-horizontal-stepper
+            [linear]="true"
+            labelPosition="bottom"
+            class="tg-registration-stepper" #registrationStepper>
+
+              <mat-step 
+              [stepControl]="firstStepGroup"> 
+                <form [formGroup]="firstStepGroup">
+                  <ng-template matStepLabel>Inizio</ng-template>
+                  <tg-step-first [parentForm]="firstStepGroup" (stepDone)="nextStep($event)"></tg-step-first>
+                </form>
+              </mat-step>
+
+              <mat-step 
+              [stepControl]="secondStepGroup">
+                <form [formGroup]="secondStepGroup">
+                  <ng-template matStepLabel>Caratteristiche</ng-template>
+                  <tg-step-second></tg-step-second>
+                </form>
+              </mat-step>
+
+              <mat-step 
+              [stepControl]="thirdStep">
+                <ng-template matStepLabel>terzo</ng-template>
+                <tg-step-third></tg-step-third>
+              </mat-step>
+              
+            </mat-horizontal-stepper>
+          </section>
       </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>

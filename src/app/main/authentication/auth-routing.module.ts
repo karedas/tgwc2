@@ -4,23 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 const AUTH_ROUTES: Routes = [
   {
-    path: 'auth',
-    children: [
-
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'registrazione',
-        loadChildren: '../registration/registration.module#RegistrationModule',
-      },
-      {
-        path: '',
-        redirectTo: 'login',
-        pathMatch: 'full',
-      }
-    ]
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registrazione',
+    loadChildren: '../registration/registration.module#RegistrationModule',
   },
 ];
 

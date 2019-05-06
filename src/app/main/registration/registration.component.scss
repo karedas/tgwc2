@@ -2,20 +2,24 @@
 /* Others */
 
 :host {
+  display: flex;
+  height: 100%;
+}
+
+.tg-registration-step {
+  display: flex;
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+}
+
+
+.tg-registration-content  {
   position: relative;
   z-index: 2;
   background-color: #0b0807;
-  display: flex;
-  height: 100%;
 
 
-  .tg-registration-step {
-    display: flex;
-    width: 100%;
-    max-width: 750px;
-    margin: 0 auto;
-  }
-  
   .tg-registration-step--wrap {
     width: 100%;
     margin: auto 0;
@@ -29,5 +33,39 @@
     min-height: 500px;
     z-index: 2;
     position: relative;
+  }
+}
+
+::ng-deep {
+
+  .tg-registration-stepper {
+  
+    background-color: transparent;
+    
+    .mat-step-header .mat-step-label, .mat-step-header .mat-step-optional {
+      color: rgba(255, 255, 255, 0.54);
+    }
+    .mat-horizontal-stepper-header-container {
+      background-color: rgba(255,255,255, 0.10);
+    }
+    
+    .mat-horizontal-content-container {
+      padding: 0;
+    }
+  
+    .mat-horizontal-stepper-header::before, 
+    .mat-horizontal-stepper-header::after, 
+    .mat-stepper-horizontal-line {
+      border-top-color: rgba(247, 247, 247, 0.12);
+    }
+
+    .mat-step-header .mat-step-icon {
+      font-weight: bold;
+    }
+
+    .mat-step-header .mat-step-icon-selected{
+      background-color: $tg-yellow;
+      color: black;
+    }
   }
 }
