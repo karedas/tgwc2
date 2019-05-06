@@ -1,4 +1,33 @@
+@import 'variables';
+/* Others */
+
 :host {
   position: relative;
   z-index: 2;
+  background-color: #0b0807;
+  display: flex;
+  height: 100%;
+
+
+  .tg-registration-step {
+    display: flex;
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  
+  .tg-registration-step--wrap {
+    width: 100%;
+    margin: auto 0;
+    background: black;
+    position: relative;
+    border-radius: 10px;
+  }
+  
+  .tg-registration-content {
+    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+    min-height: 500px;
+    z-index: 2;
+    position: relative;
+  }
 }

@@ -3,9 +3,9 @@
 
   <h3 class="tg-control-panel--subtitle" style="margin-top:0;">Gestione Scorciatoie</h3>
   <ng-container *ngIf="!shortcuts.length">
-    <p class="tg-white">Le scorciatoie sono un comodo modo per richiamare uno o più comandi concatenati adivivaverso un
+    <p class="tg-white">Le scorciatoie sono un comodo modo per richiamare uno o più comandi concatenati attraverso un
       singolo nuovo comando personale.<br />
-      Definisci qui un <span class="tg-yellow">alias</span> e definisci il comando che desideri richiamare.</p>
+      Definisci qui un <span class="tg-yellow">il tuo comando</span> e scrivi cosa desideri eseguire.</p>
     <p>
       Esempio 1: <span class="tg-green">"bistecca" </span>: (prendi bistecca tavolo; cuoci bistecca camino)<br />
       Esempio 2: <span class="tg-green">"difenditi" </span>: (impugna spada; impugna scudo; combattimento difensivo;)
@@ -20,7 +20,7 @@
         <div fxLayout="row" fxAlignItems="center center" class="tg-shortcut-headerlist">
           <div fxFlex="1 1 10%">&nbsp;</div>
           <div fxFlex="1 1 30%">Icona</div>
-          <div fxFlex="1 1 30%">Alias</div>
+          <div fxFlex="1 1 30%">Comando</div>
           <div fxFlex="1 1 30%">Azione</div>
         </div>
         <div>
@@ -74,7 +74,7 @@
         Cambia icona
       </button>
       <mat-form-field [floatLabel]="'never'" class="field-full-width">
-        <input matInput placeholder="Nome / Alias" formControlName="scAlias" required autocomplete="off">
+        <input matInput placeholder="Comando personale" formControlName="scAlias" required autocomplete="off">
         <mat-hint>Digita il comando personale che utilizzerai</mat-hint>
       </mat-form-field>
 
@@ -83,7 +83,7 @@
         <mat-hint>Inserisci uno o piu' comandi concatenati dal punto e virgola</mat-hint>
       </mat-form-field>
 
-      <div *ngIf="shortcutExistError" class="tg-red">L'alias è già presente diva le tue scorciatoie: cambiarlo o
+      <div *ngIf="shortcutExistError" class="tg-red">Questo comando è già presente tra le tue scorciatoie: cambiarlo o
         cancellare la scorciatoia precedente.</div>
 
 

@@ -2,7 +2,9 @@
 @import '~@angular/flex-layout/mq';
 
 /**** FONTS *****/
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin-ext');
+
+
 
 @include font-face(
   kingthings, '/assets/fonts/Kingthings_Foundation', null, null, ttf
@@ -92,7 +94,7 @@ body[data-loginstatus=ready] {
 // }
 
 .tg-shadow-inset {
-  box-shadow: 0px 0px 11px 5px black inset;
+  box-shadow: 0px 0px 9px 2px black inset;
 }
 
 .tg-area {

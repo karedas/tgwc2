@@ -57,7 +57,6 @@ export class WorkslistComponent implements OnInit, OnDestroy {
         (wl: IWorks) => {
           if (wl) {
             this.setHeaderTitle(wl.verb)
-            this.cmd = wl.cmd;
             this.resultsLength = Object.keys(wl.list).length;
             this.populate(wl.list);
           }
@@ -73,12 +72,15 @@ export class WorkslistComponent implements OnInit, OnDestroy {
     this.data = [];
 
     if (data) {
-      data.forEach((d: any) => {
+
+      data.forEach((d: any, i: number) => {
+        d.cmd = i;
         this.data.push(d);
       });
 
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
+
       this.dataSource.sort = this.sort;
     }
   }
@@ -86,7 +88,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
 
   onAction(index: number, event: Event) {
     event.preventDefault();
-    if (this.cmd) {
+    if (index) {
       this.game.processCommands(this.cmd + ' ' + (index + 1));
     }
   }

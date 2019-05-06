@@ -10,13 +10,10 @@
   <div class="tg-objperson" fxLayout="row wrap">
 
     <!-- Obj or Person Title -->
-      <div class="tg-objperson--title" *ngIf="objcont?.title" fxFlex="1 1 100%">
-        {{eqcont.title | capitalizeFirst}} 
-      </div>
-    
-    <ng-container *ngIf="eqcont.list.length === 0; else equipmentList">
+  
+    <ng-container *ngIf="eqcont.list.length === 0 ; else equipmentList">
         <div class="tg-objperson--line tg-brown" fxFlex="1 1 100%">
-          Non indossa niente di particolare.
+         Non indossa niente di particolare.
         </div>
     </ng-container>
     
