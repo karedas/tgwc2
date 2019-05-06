@@ -6,7 +6,7 @@ import { AuthGuard } from './main/authentication/services/login.guard';
 import { GlobalNewsComponent } from './main/pages/global-news/global-news.component';
 
 const APP_ROUTES: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'webclient',
     loadChildren: './main/client/client.module#ClientModule',

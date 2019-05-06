@@ -1,5 +1,3 @@
-<tg-main-navigation [active]="'login'"></tg-main-navigation>
-
   <div class="tg-loginpanel" fxFill fxLayout="column wrap">
     <!-- Login Panel -->
     <div fxLayout="column" fxFlex="1 1 0%" fxLayoutAlign="center center">
@@ -29,6 +27,10 @@
                 </div>
                 <button type="submit" class="tg-loginbtn" value="accedi" [disabled]="!loginForm.valid" >Accedi</button>
               </form>
+              <div class="tg-newcharacter" matRipple>
+                <span> oppure </span>
+                <a routerLink="/registrazione" class="tg-brown" #linkNewPg>Crea un nuovo personaggio</a>
+              </div>
             </div>
           </div>
         </div>
