@@ -51,7 +51,7 @@ export class RegistrationComponent implements OnInit {
 
     });
     
-    this.stepper.selectedIndex = 4;
+    this.stepper.selectedIndex = 0;
 
     this.registrationGroup.valueChanges.subscribe((value) => console.log(value))
 

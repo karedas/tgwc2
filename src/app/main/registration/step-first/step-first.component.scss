@@ -9,7 +9,7 @@
 
   .tg-races-item {
     cursor: pointer;
-    padding: .8em 1.5em .8em;
+    padding: 1.5em 1.5em;
     border-bottom: 1px solid rgba(255, 255, 255, 0.10); 
     text-align: right;
     transition: all .3s ease-out;
@@ -51,6 +51,6 @@
   }
 
   .tg-races-text {
-    padding: 2.5em 1em;
+    padding: 0 1em;
   }
 }
