@@ -21,6 +21,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private _configService: ConfigService,
+    private inputService: InputService,
     private game: GameService,
     private inputService: InputService
   ) {
@@ -38,7 +39,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendCmd(cmd: string) {
+  sendCmd(event: any, cmd: string) {
     this.game.processCommands(cmd);
     this.inputService.focus();
   }

@@ -1,3 +1,27 @@
-<p>
-  step-third works!
-</p>
+<p>Le razze si differenziano per <b>etnie</b> che spesso abitano in comunità separate e con diversi stili di vita.
+  Alcune razze sono molto coese, altre invece
+  hanno vissuto una storia turbolenta e si sono divise in gruppi.</p>
+<p>L'etnia determinana le professioni, culture e credenze religiose inizialmente disponibili per il tuo personaggio,
+  quindi anche il suo equipaggiamento e conoscenze iniziali.</p>
+
+  <div class="tg-ethnicity-list" [formGroup]="parentForm">
+    <div>
+        <h2>Seleziona un'etnia</h2>
+
+        <mat-radio-group *ngIf="ethnicityList[selectedBaseRace]; let ethnicities"
+          aria-labeledby="Entnia"
+          class="tg-radio-group"
+          (change)="setEthnicity($event)">
+    
+           <mat-radio-button class="tg-radio-button" *ngFor="let eth of ethnicities" [value]="eth.code">
+            {{eth.name}}
+          </mat-radio-button>
+    
+           {{ethnicity}}
+        </mat-radio-group>
+
+        <button mat-raised-button color="accent" (click)="goNext()" *ngIf="selectedRace">Avanti</button>
+
+        
+    </div>
+  </div>

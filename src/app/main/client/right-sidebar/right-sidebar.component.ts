@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { IDateTime } from 'src/app/models/data/dateTime.model';
 import { getDateTime } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'tg-right-sidebar',
@@ -17,7 +18,8 @@ export class RightSidebarComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private store: Store<DataState>
+    private store: Store<DataState>,
+    private game: GameService
   ) {
     this.gameData$ = this.store.pipe(select(getDateTime));
     this._unsubscribeAll = new Subject<any>();
@@ -25,6 +27,10 @@ export class RightSidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.gameData$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
+  }
+
+  getDateTime() {
+    this.game.processCommands('data');
   }
 
   ngOnDestroy(): void {

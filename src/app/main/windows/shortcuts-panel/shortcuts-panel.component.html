@@ -11,7 +11,7 @@
           <div 
             *ngFor="let shortcut of totalShortcuts; let i = index;" fxFlex="1 1 32px" 
             class="tg-shortcut-icon" 
-            matRipple (click)="sendCmd(shortcut.alias)" 
+            matRipple (click)="sendCmd($event, shortcut.alias)" 
             (mouseover)="changeCmdLabel(i)" 
             (mouseout)="changeCmdLabel('')">
               <img src="assets/images/shortcuts/shortcut_{{shortcut.icon}}.png" alt="">

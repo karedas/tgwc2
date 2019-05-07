@@ -1,6 +1,6 @@
 <div class="tg-date-game"
   *ngIf="gameData$ | async as time" 
-  tooltip="E' {{time.datestr}}" placement="bottom">
+  tooltip="E' {{time.datestr}}" placement="bottom" (click)="getDateTime()">
   Anno {{time.year}}
 </div>
 <div class="tg-rightside-wrap" fxLayout="column" fxHide fxShow.gt-xs>

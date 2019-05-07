@@ -13,8 +13,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.10); 
     text-align: right;
     transition: all .3s ease-out;
-    font-size: 11px;
-    font-family: Kingthings;
+    font-size: 11px;    
+    font-family: 'Modern Antiqua', cursive;
 
     &:hover {
       background: rgba(255, 255, 255, 0.07);
@@ -43,8 +43,8 @@
     text-align: center;
   }
 
-  .race-title {
-    font-family: Kingthings;
+  .race-title {    
+    font-family: 'Modern Antiqua', cursive;
     font-weight: normal;
     font-size: 2.5em;
     margin: 0;
