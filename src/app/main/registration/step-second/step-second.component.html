@@ -1,75 +1,99 @@
-
-<div fxLayout="row" fxLayoutGap="20px" class="tg-attribute-wrap">
-  <div class="tg-attribute-column" fxFlex="1 1 50%">
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Forza</h2>
+  <p>Il tuo personaggio ha diverse caratteristiche che ne descrivono le qualità
+    fisiche e mentali. Esse dipendono in parte dalla sua razza, ma possono cambiare da individuo a individio.<br>
+    Usa i <b class="tg-cyan">punti creazione</b> disponibili per modificare le caratteristiche
+    del tuo personaggio <b>rispetto alla media della sua razza</b>. Se abbassi
+    una caratteristica riceverai dei punti che potrai spendere per alzarne
+    altre. Alzare una caratteristica ti costerà invece punti.
+  </p>
+  <div fxLayout="row" fxLayoutGap="20px" class="tg-attribute-wrap">
+    <div class="tg-attribute-column" fxFlex="1 1 50%">
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Forza</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'strength'}">
+          </ng-container>
+        </div>
       </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Costituzione</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'constitution'}">
+          </ng-container>
+        </div>
+      </div>
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Taglia</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'size'}">
+          </ng-container>
+        </div>
+      </div>
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Destrezza</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'dexterity'}">
+          </ng-container>
+        </div>
       </div>
     </div>
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Costituzione</h2>
+    <div class="tg-attribute-column" fxFlex="1 1 50%">
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Velocità</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'speed'}">
+          </ng-container>
+        </div>
       </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Empatia</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'empathy'}">
+          </ng-container>
+        </div>
       </div>
-    </div>
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Taglia</h2>
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Intelligenza</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'intelligence'}">
+          </ng-container>
+        </div>
       </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
-      </div>
-    </div>
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Destrezza</h2>
-      </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
+      <div class="tg-attribute">
+        <div class="tg-attr-name">
+          <h2 class="example-h2">Volontà</h2>
+        </div>
+        <div class="tg-attr-value">
+          <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'willpower'}">
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>
-  <div class="tg-attribute-column" fxFlex="1 1 50%">
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Velocità</h2>
-      </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
-      </div>
-    </div>
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Empatia</h2>
-      </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
-      </div>
-    </div>
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Intelligenza</h2>
-      </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
-      </div>
-    </div>
-    <div class="tg-attribute">
-      <div class="tg-attr-name">
-        <h2 class="example-h2">Volontà</h2>
-      </div>
-      <div class="tg-attr-value">
-        <mat-slider [(ngModel)]="value"></mat-slider>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="attr-points">Punti creazione disponibili: <span id="attr-points">0</span></div>
-<div class="attr-descr">
+  <div class="attr-points">Punti creazione disponibili: <span id="attr-points">{{points}}</span></div>
 
-</div>
+  <div class="attr-descr">
+
+  </div>
+
+  <button mat-raised-button color="accent" (click)="goNext()" *ngIf="selectedRace">Avanti</button>
+
+
+
+  <ng-template #attrSlider let-default let-name="name">
+    <mat-slider [(ngModel)]="default" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel"
+      (input)="changeAttribute($event, name)"></mat-slider>
+  </ng-template>

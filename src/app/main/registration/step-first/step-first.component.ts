@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'tg-step-first',
@@ -8,26 +8,19 @@ import { FormGroup } from '@angular/forms';
 })
 export class StepFirstComponent implements OnInit {
   
+  @Input() parentForm: FormControl;
   @Output() stepDone = new EventEmitter<boolean>(false);
-  @Input() parentForm: FormGroup;
 
   selectedRace: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.selectedRace = this.parentForm.controls['race'].value;
   }
-
-  get race() {
-    return this.parentForm.controls['race'].value
-  }
+  
   setRace(race: string) {
     this.selectedRace = race;
-    this.parentForm.setValue({
-      race: race
-    })
+    (this.parentForm.get('formArray') as FormArray).controls[0].setValue({race: race});
   }
 
   goNext() {

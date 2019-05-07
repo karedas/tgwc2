@@ -7,12 +7,13 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Material
-import {MatStepperModule, matStepperAnimations} from '@angular/material/stepper'
+import {MatStepperModule} from '@angular/material/stepper'
 import {MatRippleModule} from '@angular/material/core';
-import { MatSidenavModule, MatButtonModule, MatIconModule, MatFormField, MatFormFieldModule, MatInputModule, MatSliderModule } from '@angular/material';
-import { RegistrationService } from './services/registration.service';
+import { MatSidenavModule, MatButtonModule, MatIconModule, MatFormField, MatFormFieldModule, MatInputModule, MatSliderModule, MatRadioModule } from '@angular/material';
 import { StepSecondComponent } from './step-second/step-second.component';
 import { StepThirdComponent } from './step-third/step-third.component';
+import { StepFourComponent } from './step-four/step-four.component';
+import { StepFiveComponent } from './step-five/step-five.component';
 
 
 export const routes: Routes = [
@@ -26,7 +27,9 @@ export const routes: Routes = [
     RegistrationComponent,
     StepFirstComponent,
     StepSecondComponent,
-    StepThirdComponent
+    StepThirdComponent,
+    StepFourComponent,
+    StepFiveComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -41,10 +44,9 @@ export const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSliderModule
+    MatSliderModule,
+    MatRadioModule
   ],
-  exports: [
-    RegistrationComponent,
-  ],
+
 })
 export class RegistrationModule { }

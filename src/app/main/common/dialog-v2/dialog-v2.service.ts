@@ -405,6 +405,7 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '288px';
       config.height = 'auto';
+      config.autoFocus = false;
       config.hasBackdrop = false;
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 

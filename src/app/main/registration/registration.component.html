@@ -1,44 +1,52 @@
-<div class="tg-registration-step">
-  <div class="tg-registration-step--wrap">
-    <div class="b-ironlight-mini tg-box tg-shadow">
-      <div class="tg-registration-content tg-shadow-inset">
+<form [formGroup]="registrationGroup">
+  <div class="tg-registration-step">
+    <div class="tg-registration-step--wrap">
+      <div class="b-ironlight-mini tg-box tg-shadow">
+        <div class="tg-registration-content tg-shadow-inset">
           <section>
-            <mat-horizontal-stepper
-            [linear]="true"
-            labelPosition="bottom"
-            class="tg-registration-stepper" #registrationStepper>
 
-              <mat-step 
-              [stepControl]="firstStepGroup"> 
-                <form [formGroup]="firstStepGroup">
-                  <ng-template matStepLabel>Inizio</ng-template>
-                  <tg-step-first [parentForm]="firstStepGroup" (stepDone)="nextStep($event)"></tg-step-first>
-                </form>
+            <mat-horizontal-stepper 
+            formArrayName="formArray"
+            [linear]="true" 
+            labelPosition="bottom" 
+            class="tg-registration-stepper"
+            #registrationStepper>
+
+              <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+                <ng-template matStepLabel>Inizio</ng-template>
+                <tg-step-first (stepDone)="nextStep($event)" [parentForm]="registrationGroup"></tg-step-first>
               </mat-step>
 
-              <mat-step 
-              [stepControl]="secondStepGroup">
-                <form [formGroup]="secondStepGroup">
-                  <ng-template matStepLabel>Caratteristiche</ng-template>
-                  <tg-step-second></tg-step-second>
-                </form>
+              <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
+                <ng-template matStepLabel>Caratteristiche</ng-template>
+                <tg-step-second [parentForm]="registrationGroup"></tg-step-second>
               </mat-step>
 
-              <mat-step 
-              [stepControl]="thirdStep">
-                <ng-template matStepLabel>terzo</ng-template>
-                <tg-step-third></tg-step-third>
+               <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
+                <ng-template matStepLabel>Etnia e Cultura</ng-template>
+                <tg-step-third [parentForm]="registrationGroup"></tg-step-third>
               </mat-step>
-              
+
+              <mat-step formGroupName="3" [stepControl]="formArray.get([3])">
+                <ng-template matStepLabel>Luogo di nascita</ng-template>
+                <tg-step-four [parentForm]="registrationGroup"></tg-step-four>
+              </mat-step>
+
+              <mat-step formGroupName="4" [stepControl]="formArray.get([4])">
+                <ng-template matStepLabel>Accesso</ng-template>
+                <tg-step-five [parentForm]="registrationGroup"></tg-step-five>
+              </mat-step>
+
             </mat-horizontal-stepper>
           </section>
-      </div>
+        </div>
         <div class="tg-border-box">
           <div class="tg-border tg-border-top"></div>
           <div class="tg-border tg-border-left"></div>
           <div class="tg-border tg-border-right"></div>
           <div class="tg-border tg-border-bottom"></div>
         </div>
+      </div>
     </div>
   </div>
-</div>
+</form>

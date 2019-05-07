@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+// import { Injectable } from '@angular/core';
+// import { RegistrationData } from '../models/creation_data.model';
 
-@Injectable()
+// @Injectable()
 
-export class RegistrationService {
+// export class RegistrationService extends RegistrationData{
 
-  // private teamForm: BehaviorSubject<FormGroup | undefined> =
-  //   new BehaviorSubject(this.fb.group(
-  //     new regForm(new Team('Cavaliers'))
-  //   ))
+//   // private teamForm: BehaviorSubject<FormGroup | undefined> =
+//   //   new BehaviorSubject(this.fb.group(
+//   //     new regForm(new Team('Cavaliers'))
+//   //   ))
 
-  // regForm$: Observable<FormGroup> = this.teamForm.asObservable();
-  // constructor(private fb: FormBuilder) { }
-}
+//   // regForm$: Observable<FormGroup> = this.teamForm.asObservable();
+
+//   setValue (values: any) {
+    
+//   }
+
+// }

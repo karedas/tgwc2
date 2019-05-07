@@ -1,29 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, Input } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { MatStepper, MatStepperNext } from '@angular/material';
-
-
-export interface ICreationData {
-  name: string,
-  password: string,
-  email: string,
-  invitation: string,
-  race: string,
-  sex: string,
-  culture: string,
-  start: string,
-  stats: {
-    strength: string,
-    constitution: string,
-    size: string,
-    dexterity: string,
-    speed: string,
-    empathy: string,
-    intelligence: string,
-    willpower: string
-  }
-}
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatStepper } from '@angular/material';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 
 @Component({
@@ -34,29 +11,57 @@ export interface ICreationData {
 
 
 export class RegistrationComponent implements OnInit {
-
+  
   @ViewChild('registrationStepper') stepper: MatStepper;
+  registrationGroup: FormGroup;
 
-  firstStepGroup: FormGroup;
-  secondStepGroup: FormGroup;
-  regFormSub: Subscription;
-  regData: FormArray;
-
-
-  constructor( private fb: FormBuilder ) { }
+  constructor(
+    private _formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
-    this.firstStepGroup = this.fb.group({
-      race: ['umano', Validators.required]
+    this.registrationGroup = this._formBuilder.group({
+
+      formArray: this._formBuilder.array([
+        this._formBuilder.group({
+          race: ['human', Validators.required],
+          sex: ['m', Validators.required]
+        }),
+        this._formBuilder.group({
+          strength: [0, Validators.required],
+          constitution: [0, Validators.required],
+          size: [0, Validators.required],
+          dexterity: [0, Validators.required],
+          speed: [0, Validators.required],
+          empathy: [0, Validators.required],
+          intelligence: [0, Validators.required],
+          willpower: [0, Validators.required],
+        }),
+        this._formBuilder.group({
+          race_code: ['', Validators.required],
+        }),
+        this._formBuilder.group({
+          start: ['', Validators.required],
+        }),
+        this._formBuilder.group({
+          nome: ['', Validators.required, Validators.maxLength(12)],
+          pwd: ['', Validators.required],
+        }),
+      ])
+
     });
+    
+    this.stepper.selectedIndex = 4;
 
-    this.secondStepGroup = this.fb.group({});
+    this.registrationGroup.valueChanges.subscribe((value) => console.log(value))
 
-    this.firstStepGroup.valueChanges.subscribe(newVal => console.log(newVal));
   }
 
+  get formArray(): AbstractControl | null {
+    return this.registrationGroup.get('formArray');
+  }
+  
   nextStep(event: any) {
-    console.log(event);
     this.stepper.next();
   }
 }

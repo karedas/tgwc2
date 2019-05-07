@@ -19,18 +19,18 @@
   .tg-date-game {
     border: 1px solid #947d66;
     border-radius: 5px;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 2px;
-    font-family: kingthings;
+    font-family: 'Modern Antiqua', cursive;
     padding: 2px 12px;
     background: #190f06 url($imgPath +'/background/bg-ironbrown.jpg') repeat;
     position: absolute;
     margin-left: 7px;
-    top: 4px;
+    top: 0;
     left: 50%;
     z-index: 10;
     transform: translateX(-50%);
-    cursor: help;
+    cursor: pointer;
   }
 
 
