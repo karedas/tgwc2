@@ -7,7 +7,7 @@
   <div class="tg-ethnicity-list" [formGroup]="parentForm">
     <div>
         <h2>Seleziona un'etnia</h2>
-
+      {{selectedBaseRace}}
         <mat-radio-group *ngIf="ethnicityList[selectedBaseRace]; let ethnicities"
           aria-labeledby="Entnia"
           class="tg-radio-group"

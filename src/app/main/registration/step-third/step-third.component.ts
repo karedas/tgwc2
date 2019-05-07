@@ -8,7 +8,7 @@ import { MatRadioChange } from '@angular/material';
   templateUrl: './step-third.component.html',
   styleUrls: ['./step-third.component.scss']
 })
-export class StepThirdComponent implements OnInit {
+export class StepThirdComponent implements OnInit{
 
   @Input() parentForm: FormGroup;
 
@@ -21,15 +21,10 @@ export class StepThirdComponent implements OnInit {
 
    }
 
+
+
   ngOnInit() {
     this.selectedBaseRace = (this.parentForm.get('formArray') as FormArray).value[0].race;
-
-    //Debug
-    //   ethnicity[this.selectedBaseRace].forEach(eth => {
-    //     this.code =  ethnicity[e].code;
-    //     this.limited =  ethnicity[e].code;
-    //     this.name = ethnicity[e].name;
-    // });
   }
 
   setEthnicity(event: MatRadioChange) {

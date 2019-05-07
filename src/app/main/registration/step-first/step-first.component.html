@@ -1,7 +1,7 @@
 
   <div class="tg-registration-step" fxLayout>
 
-    <div class="tg-races-list" fxFlex="1 1 110px">
+    <div class="tg-races-list" fxFlex="1 1 130px">
       <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'umano'}" (click)="setRace('umano')">
         Umano</div>
       <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'halfling'}"
@@ -18,7 +18,7 @@
     </div>
 
     <div class="tg-races-content" fxFlex="1 1 100%">
-      <div class="race-image">
+      <div class="race-image" *ngIf="selectedRace">
         img: {{selectedRace}}
       </div>
       <div class="tg-races-text">
@@ -32,7 +32,7 @@
         </ng-container>
         <!-- Umano -->
         <ng-container *ngIf="selectedRace === 'umano'">
-          <h2 class="race-title">Umani</h2>
+          <h2 class="race-title">Umano</h2>
           <p>Sono la razza dominante di Landmar ed anche la più versatile.
             In base alla loro discendenza si distinguono in Emeriani ed Eliantiriani,
             secondo la loro cultura scelgono ampi e variegati stili di vita. Malvagi

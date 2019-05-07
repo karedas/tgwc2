@@ -6,19 +6,11 @@
   height: 100%;
 }
 
-.tg-registration-step {
-  display: flex;
-  width: 100%;
-  max-width: 750px;
-  margin: auto;
-}
-
 
 .tg-registration-content  {
-  position: relative;
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
   z-index: 2;
-  background-color: #0b0807;
-
+  position: relative;
 
   .tg-registration-step--wrap {
     width: 100%;
@@ -27,16 +19,20 @@
     position: relative;
     border-radius: 10px;
   }
-  
-  .tg-registration-content {
-    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-    min-height: 500px;
-    z-index: 2;
-    position: relative;
-  }
 }
 
 ::ng-deep {
+
+    
+  .tg-registration-step {
+    display: flex;
+    width: 100%;
+    max-width: 750px;
+    min-height: 400px;
+    margin: auto;
+  }
+
+
 
   .tg-registration-stepper {
   

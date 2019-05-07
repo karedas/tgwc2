@@ -1,10 +1,10 @@
-<form [formGroup]="registrationGroup">
-  <div class="tg-registration-step">
-    <div class="tg-registration-step--wrap">
-      <div class="b-ironlight-mini tg-box tg-shadow">
-        <div class="tg-registration-content tg-shadow-inset">
-          <section>
-
+<div class="tg-registration-step">
+  <div class="tg-registration-step--wrap">
+    <div class="b-ironlight-mini tg-box tg-shadow">
+      <div class="tg-registration-content tg-shadow-inset">
+        <section>
+          
+          <form [formGroup]="registrationGroup">
             <mat-horizontal-stepper 
             formArrayName="formArray"
             [linear]="true" 
@@ -38,6 +38,8 @@
               </mat-step>
 
             </mat-horizontal-stepper>
+          </form>
+
           </section>
         </div>
         <div class="tg-border-box">
@@ -49,4 +51,3 @@
       </div>
     </div>
   </div>
-</form>

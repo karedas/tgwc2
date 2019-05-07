@@ -20,7 +20,7 @@ export class StepFirstComponent implements OnInit {
   
   setRace(race: string) {
     this.selectedRace = race;
-    (this.parentForm.get('formArray') as FormArray).controls[0].setValue({race: race});
+    (this.parentForm.get('formArray') as FormArray).controls[0].patchValue({race: race});
   }
 
   goNext() {
