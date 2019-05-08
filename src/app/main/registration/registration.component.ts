@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     
-    this.stepper.selectedIndex = 3;
+    this.stepper.selectedIndex = 6;
 
     this.stepFirstComponent.frmStepFirst.valueChanges
       .subscribe((selected) => { this.selectedBaseRace = selected.race });

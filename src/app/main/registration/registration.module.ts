@@ -14,6 +14,7 @@ import { StepSecondComponent } from './step-second/step-second.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepFourComponent } from './step-four/step-four.component';
 import { StepFiveComponent } from './step-five/step-five.component';
+import { StepSixComponent } from './step-six/step-six.component';
 
 
 export const routes: Routes = [
@@ -29,7 +30,8 @@ export const routes: Routes = [
     StepSecondComponent,
     StepThirdComponent,
     StepFourComponent,
-    StepFiveComponent
+    StepFiveComponent,
+    StepSixComponent
   ],
   imports: [
     RouterModule.forChild(routes),
