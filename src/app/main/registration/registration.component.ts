@@ -22,6 +22,7 @@ export class RegistrationComponent implements OnInit {
  
 
   selectedBaseRace: string;
+  selectedEthnicity: string;
 
   get frmStepFirst() {
     return this.stepFirstComponent ? this.stepFirstComponent.frmStepFirst : null;
@@ -40,9 +41,14 @@ export class RegistrationComponent implements OnInit {
 
 
   ngOnInit() {
+    
+    this.stepper.selectedIndex = 3;
 
     this.stepFirstComponent.frmStepFirst.valueChanges
-      .subscribe((race) => { console.log(race); this.selectedBaseRace = race });
+      .subscribe((selected) => { this.selectedBaseRace = selected.race });
+
+    this.stepSecondComponent.frmStepSecond.valueChanges
+      .subscribe((selected) => { this.selectedEthnicity = selected.race_code });
 
     // this.registrationGroup = this._formBuilder.group({
 
@@ -75,7 +81,6 @@ export class RegistrationComponent implements OnInit {
 
     // });
 
-    this.stepper.selectedIndex = 2;
     // this.frmStepOne.valueChanges.subscribe((value) => console.log(value))
   }
 

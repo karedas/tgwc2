@@ -21,14 +21,14 @@
 
                <mat-step [stepControl]="frmStepThird">
                 <ng-template matStepLabel>Mestiere</ng-template>
-                <tg-step-third></tg-step-third>
+                <tg-step-third [ethnicity]="selectedEthnicity"></tg-step-third>
               </mat-step>
               
-              <!-- 
-              <mat-step formGroupName="3" [stepControl]="formArray.get([3])">
-                <ng-template matStepLabel>Luogo di nascita</ng-template>
-                <tg-step-four [parentForm]="registrationGroup"></tg-step-four>
+              <mat-step [stepControl]="frmStepFour">
+                <ng-template matStepLabel>Caratteristiche</ng-template>
+                <tg-step-four></tg-step-four>
               </mat-step>
+              <!-- 
 
               <mat-step formGroupName="4" [stepControl]="formArray.get([4])">
                 <ng-template matStepLabel>Accesso</ng-template>

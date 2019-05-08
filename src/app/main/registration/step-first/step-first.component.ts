@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { races } from 'src/assets/data/races/races.const';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'tg-step-first',
@@ -7,26 +9,31 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@ang
   styleUrls: ['./step-first.component.scss']
 })
 export class StepFirstComponent {
-
-  @Output() stepDone = new EventEmitter<boolean>(false); 
-  
-  public frmStepFirst: FormGroup;
-  
+ 
+  racesList = races;
+  frmStepFirst: FormGroup;
+  raceDetailText: string;
   selectedRace: string;
 
-  constructor( private fb: FormBuilder) {
+  constructor( 
+    private fb: FormBuilder,
+    private http: HttpClient
+    ) {
     this.frmStepFirst = this.fb.group({
-      race: ['human', Validators.required ]
+      race: ['', Validators.required ]
     });
 
   }
 
-  setRace(race: string) {
-    this.selectedRace = race;
-    this.frmStepFirst.setValue({ race: race })
-  }
+  setRace(race: any) {
+    //Load Html Detail file
+    this.http.get('assets/data/races/'+ race.code +'.html', {responseType: 'text'})
+    .subscribe((data) => {
+      this.raceDetailText = data;
+    });
 
-  goNext() {
-    this.stepDone.emit(true);
+    this.selectedRace = race.code;
+    this.frmStepFirst.setValue({ race: this.selectedRace });
+ 
   }
 }
