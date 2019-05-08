@@ -1,4 +1,177 @@
-  <p>Il tuo personaggio ha diverse caratteristiche che ne descrivono le qualità
+<form [formGroup]="frmStepSecond">
+  <div class="tg-registration-step" fxLayout>
+    <div class="tg-sidebar" fxFlex="1 1 150px" *ngIf="ethnicityList[baseRace?.race]; let ethnicities">
+      <div *ngFor="let eth of ethnicities;" matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': race_code === eth.code}" (click)="setEthnicity(eth.code)">{{eth.name}}</div>
+    </div>
+    <div class="tg-detail-content" fxFlex="1 1 100%">
+
+      <ng-container *ngIf="!race_code; else ethnicityDescription">
+
+        <div class="tg-detail-text">
+          <p>Le razze si differenziano per <b>etnie</b> che spesso abitano in comunità separate e con diversi stili di
+            vita.
+            Alcune razze sono molto coese, altre invece hanno vissuto una storia turbolenta e si sono divise in gruppi.
+          </p>
+          <p>L'etnia determinana le professioni, culture e credenze religiose inizialmente disponibili per il tuo
+            personaggio,
+            quindi anche il suo equipaggiamento e conoscenze iniziali.</p>
+          <p class="tg-cyan">Scegli quindi un' etnia dalla lista di sinistra.</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>
+
+
+<ng-template #ethnicityDescription>
+  <!-- Umani -->
+  <div class="tg-detail-image">
+    img: {{race_code}}
+  </div>
+  <div class="tg-detail-text">
+    <ng-container *ngIf="race_code === 'uma'">
+      <h2 class="tg-detail-title">Umano Eliantiriano</h2>
+      <p>
+        Sfuggiti alla caduta dell’Impero dell’isola di Eliantir, sono la razza più diffusa e versatile di Landmar.
+        Caratterizzati da una carnagione chiara o abbronzata, si mescolano facilmente in ogni realtà cittadina.<br>
+        Gli umani non hanno particolari poteri, forze o debolezze fisiche ma si avvalgono della loro intraprendenza e
+        versatilità per confrontarsi con le altre razze.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'ume'">
+      <h2 class="tg-detail-title">Umano Emeriano</h2>
+      <p>
+        Originariamente nomadi ma divenuti in tempi recenti anche stanziali, provengono dal continente desertico
+        dell’Emer. Caratterizzati da una carnagione scura o olivastra, sono una popolazione estremamente religiosa e
+        legata alle tradizioni.<br>
+        Gli umani non hanno particolari forze o debolezze fisiche ma si avvalgono
+        della loro intraprendenza e versatilità per confrontarsi con le altre razze.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'hal'">
+      <h2 class="tg-detail-title">Halfling dell'Arcipelago</h2>
+      <p>
+        Gli Halfling sono entrati nella storia
+        da pochi decenni, in seguito ad una serie di conflitti che hanno colpito
+        la loro terra d'origine, L'Arcipelago. La loro civiltà, sviluppatasi fra
+        quelle isole vulcaniche, è strettamente legata alla navigazione in tutti
+        i suoi aspetti, dalla costruzione di navi, alla loro gestione, alla
+        cartografia e all'orientamento.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'nan'">
+      <h2 class="tg-detail-title">Nano Zanarquon</h2>
+      <p>
+        Quasi tutti gli esponenti di altre razze che
+        raccontano i loro incontri con i Nani fanno almeno un accenno al loro
+        caratteraccio. Burberi e irascibili, perdono spesso la pazienza e
+        attaccano briga: non è insolito trovare un Nano ubriaco in mezzo ad una
+        rissa in una taverna.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'eal'">
+      <h2 class="tg-detail-title">Elfi di Alwenion</h2>
+      <p>
+        Sono gli esuli dell’antico regno elfico di
+        Alwenion. Costretti a vagare per decenni come ospiti sgraditi in molte
+        comunità, oggi sono divenuti finalmente stanziali vivendo tra i propri
+        simili. Il periodo di nomadismo li ha condotti inevitabilmente
+        all’utilizzo del denaro al fine di sopravvivere.<br>
+        Gli elfi di Alwenion tendono ad essere fisicamente esili e meno forti
+        di altre razze, ma sono intelligenti e molto empatici. Sono dotati di
+        infravisione e abili nel muoversi nelle foreste e nell'agire con
+        furtività.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'esi'">
+      <h2 class="tg-detail-title">Elfi Sinoriani</h2>
+      <p>
+        Sono i primi guerrieri elfici dell’avamposto
+        costruito su Rasserim per contrastare la minaccia orchesca. Contrapposti
+        in seguito per un lungo periodo agli Alwenioniani, da decenni
+        collaborano con quest’ultimi per la costruzione di un futuro glorioso.<br>
+        I Sinoriani sono fisicamente esili e meno forti di altre razze, anche se
+        in misura minore degli altri elfi. Sono però agili e veloci, dotati di
+        infravisione e abili nel muoversi nelle foreste. Sanno essere furtivi,
+        anche se meno degli altri elfi.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'dra'">
+      <h2 class="tg-detail-title">Elfi Ambrati</h2>
+      <p>
+        Discendenti da elfi naufraghi, raccontano la caduta
+        del regno elfico di Alwenion per mano degli orchi. Pragmatici e
+        materialisti, in passato vivevano raggruppati in piccole comunità. Oggi
+        sono principalmente stanziati nel sud di Rasserim.<br>
+        Gli elfi Ambrati tendono ad essere fisicamente esili e meno forti
+        di altre razze, ma sono agili ed intelligenti. Sono dotati di
+        infravisione e abili nel muoversi nelle foreste e nell'agire con
+        furtività.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'drw'">
+      <h2 class="tg-detail-title">Ousst'viiryn</h2>
+      <p>
+        Derivano dagli elfi dell'antica Alwenion, dai quali
+        però si sono separati a seguito di un tradimento fraticida. Gli
+        Ousst'viiryn sono diventati una razza a se stante, che professa una
+        particolare credenza sulle loro origini e sul loro destino. Secondo la
+        credenza degli Ousst'viiryn essi sono stati creati superiori a tutte le
+        altre razze e destinati quindi a raggiungere uno stato dell'esistenza
+        superiore.<br>
+        <br>
+        Questa etnia richiede un codice di attivazione e non è consigliata per i
+        giocatori inesperti.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'els'">
+      <h2 class="tg-detail-title">Elfi Selvaggi</h2>
+      <p>
+        Sono il frutto di rare relazioni tra elfi
+        di Alwenion e Driadi delle foreste. Creature primitive, scelgono la vita
+        isolata o in piccoli gruppi nelle foreste di Landmar cibandosi di frutta
+        e radici. Ripudiano il denaro e sono totalmente pacifici e sensibili,
+        risultando estremamente empatici con la natura che li circonda.<br>
+        Gli elfi Selvaggi sono più minuti ed esili degli altri elfi, risultando
+        meno forti di altre razze. Sono però estremamente veloci e destri,
+        potendo muoversi con destrezza e per lunghi tratti nelle foreste. Sono
+        dotati di infravisione e risultano molto furtivi.<br>
+        <br>
+        Questa etnia richiede un codice di attivazione e non è consigliata per i
+        giocatori inesperti.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'gob'">
+      <h2 class="tg-detail-title">Goblin pelleverde</h2>
+      <p>
+        Spesso vivono assieme agli orchi i quali
+        definiscono i goblin razza inferiore e quindi spesso sono ridotti a
+        svolgere lavori umili per loro. Il vero punto di forza di questo essere,
+        quello che gli ha permesso di sopravvivere lungo le ere, sono i suoi
+        straordinari organi sensoriali e soprattutto la sua spiccata furbizia. I
+        goblin non danno troppa importanza a niente, e nonostante l’intelligenza
+        sviluppata, sono totalmente incoscienti.
+      </p>
+    </ng-container>
+    <ng-container *ngIf="race_code === 'orc'">
+      <h2 class="tg-detail-title">Orco Nktama</h2>
+      <p>
+        L’orco è un essere bestiale capace di provare solo
+        grandi passioni, in grado di vivere solo gli estremi di una gamma di
+        emozioni, d’odio o d’estrema devozione. Privo dei sensi di colpa in
+        grado di mitigare i rapporti con gli altri e il rispetto altrui,
+        l’orco si comporta alla pari di un animale dotato di un marcato istinto.
+      </p>
+    </ng-container>
+
+    <button mat-raised-button color="accent" type="button">Avanti</button>
+  </div>
+
+
+</ng-template>
+
+<!-- <p>Il tuo personaggio ha diverse caratteristiche che ne descrivono le qualità
     fisiche e mentali. Esse dipendono in parte dalla sua razza, ma possono cambiare da individuo a individio.<br>
     Usa i <b class="tg-cyan">punti creazione</b> disponibili per modificare le caratteristiche
     del tuo personaggio <b>rispetto alla media della sua razza</b>. Se abbassi
@@ -96,4 +269,4 @@
   <ng-template #attrSlider let-default let-name="name">
     <mat-slider [(ngModel)]="default" [max]="max" [min]="min" [step]="step" [thumbLabel]="thumbLabel"
       (input)="changeAttribute($event, name)"></mat-slider>
-  </ng-template>
+  </ng-template> -->

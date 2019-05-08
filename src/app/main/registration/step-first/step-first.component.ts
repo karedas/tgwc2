@@ -6,21 +6,24 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@ang
   templateUrl: './step-first.component.html',
   styleUrls: ['./step-first.component.scss']
 })
-export class StepFirstComponent implements OnInit {
-  
-  @Input() parentForm: FormControl;
-  @Output() stepDone = new EventEmitter<boolean>(false);
+export class StepFirstComponent {
 
+  @Output() stepDone = new EventEmitter<boolean>(false); 
+  
+  public frmStepFirst: FormGroup;
+  
   selectedRace: string;
 
-  constructor() {}
+  constructor( private fb: FormBuilder) {
+    this.frmStepFirst = this.fb.group({
+      race: ['human', Validators.required ]
+    });
 
-  ngOnInit() {
   }
-  
+
   setRace(race: string) {
     this.selectedRace = race;
-    (this.parentForm.get('formArray') as FormArray).controls[0].patchValue({race: race});
+    this.frmStepFirst.setValue({ race: race })
   }
 
   goNext() {

@@ -1,27 +1,40 @@
+<form [formGroup]="frmStepFirst">
 
   <div class="tg-registration-step" fxLayout>
 
-    <div class="tg-races-list" fxFlex="1 1 130px">
-      <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'umano'}" (click)="setRace('umano')">
-        Umano</div>
-      <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'halfling'}"
-        (click)="setRace('halfling')">Halfling dell'Arcipelago</div>
-      <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'nano'}" (click)="setRace('nano')">Nano
+    <div class="tg-sidebar" fxFlex="1 1 150px">
+      <div matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': selectedRace === 'human'}"
+        (click)="setRace('human')">Umano
       </div>
-      <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'elfo'}" (click)="setRace('elfo')">Elfo
+      <div matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': selectedRace === 'halfling'}"
+        (click)="setRace('halfling')">Halfling
       </div>
-      <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'goblin'}" (click)="setRace('goblin')">
+      <div matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': selectedRace === 'dwarf'}"
+        (click)="setRace('dwarf')">Nano
+      </div>
+      <div matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': selectedRace === 'elf'}"
+        (click)="setRace('elf')">Elfo
+      </div>
+      <div matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': selectedRace === 'goblin'}"
+        (click)="setRace('goblin')">
         Goblin</div>
-      <div matRipple class="tg-races-item" [ngClass]="{'active': selectedRace === 'orco'}" (click)="setRace('orco')">Orco
+      <div matRipple class="tg-sidebar-item"
+        [ngClass]="{'active': selectedRace === 'orc'}"
+        (click)="setRace('orc')">Orco
       </div>
 
     </div>
 
-    <div class="tg-races-content" fxFlex="1 1 100%">
-      <div class="race-image" *ngIf="selectedRace">
+    <div class="tg-detail-content" fxFlex="1 1 100%">
+      <div class="tg-detail-image" *ngIf="selectedRace">
         img: {{selectedRace}}
       </div>
-      <div class="tg-races-text">
+      <div class="tg-detail-text">
         <ng-container *ngIf="!selectedRace">
           <p>La scelta della <b>razza del tuo personaggio</b> è una delle decisioni più importanti. Essa determina che
             caratteristiche fisiche e mentali avrà,
@@ -31,8 +44,8 @@
           <p>Seleziona razza e sesso del tuo personaggio dall'elenco a sinistra...</p>
         </ng-container>
         <!-- Umano -->
-        <ng-container *ngIf="selectedRace === 'umano'">
-          <h2 class="race-title">Umano</h2>
+        <ng-container *ngIf="selectedRace === 'human'">
+          <h2 class="tg-detail-title">Umano</h2>
           <p>Sono la razza dominante di Landmar ed anche la più versatile.
             In base alla loro discendenza si distinguono in Emeriani ed Eliantiriani,
             secondo la loro cultura scelgono ampi e variegati stili di vita. Malvagi
@@ -40,7 +53,7 @@
         </ng-container>
         <!-- Halfling -->
         <ng-container *ngIf="selectedRace === 'halfling'">
-          <h2 class="race-title">Halfling dell'Arcipelago</h2>
+          <h2 class="tg-detail-title">Halfling dell'Arcipelago</h2>
           <p>Gli Halfling sono entrati nella storia
             da pochi decenni, in seguito ad una serie di conflitti che hanno colpito
             la loro terra d'origine, L'Arcipelago. La loro civiltà, sviluppatasi fra
@@ -49,8 +62,8 @@
             cartografia e all'orientamento.</p>
         </ng-container>
         <!-- Nano -->
-        <ng-container *ngIf="selectedRace === 'nano'">
-          <h2 class="race-title">Nano Zanarquon</h2>
+        <ng-container *ngIf="selectedRace === 'dwarf'">
+          <h2 class="tg-detail-title">Nano Zanarquon</h2>
           <p>Quasi tutti gli esponenti di altre razze che
             raccontano i loro incontri con i Nani fanno almeno un accenno al loro
             caratteraccio. Burberi e irascibili, perdono spesso la pazienza e
@@ -58,8 +71,8 @@
             rissa in una taverna.</p>
         </ng-container>
         <!-- Elfo -->
-        <ng-container *ngIf="selectedRace === 'elfo'">
-          <h2 class="race-title">Elfi</h2>
+        <ng-container *ngIf="selectedRace === 'elf'">
+          <h2 class="tg-detail-title">Elfi</h2>
           <p>
             Divisi in due grandi gruppi, elfi chiari ed elfi oscuri, in
             base alla propria cultura sviluppano credenze e costumi pressochè
@@ -69,8 +82,8 @@
           </p>
         </ng-container>
         <!-- Orco -->
-        <ng-container *ngIf="selectedRace === 'orco'">
-          <h2 class="race-title">Orchi</h2>
+        <ng-container *ngIf="selectedRace === 'orc'">
+          <h2 class="tg-detail-title">Orchi</h2>
           <p>
             Violenti e possenti, questa razza fa della brutalità il
             suo aspetto primario. Trattati come bestie a causa del loro aspetto
@@ -80,7 +93,7 @@
         </ng-container>
         <!-- Goblin -->
         <ng-container *ngIf="selectedRace === 'goblin'">
-          <h2 class="race-title">Goblin</h2>
+          <h2 class="tg-detail-title">Goblin</h2>
           <p>
             Gracili e privi di forza fisica ma spietati ed astuti,
             per sopravvivere praticano l'arte del raggiro e dell'assasinio. Si
@@ -92,3 +105,5 @@
       </div>
     </div>
   </div>
+
+</form>
