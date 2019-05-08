@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { cultures } from 'src/assets/data/cultures/cultures.const';
 
 @Component({
   selector: 'tg-step-third',
@@ -8,27 +10,42 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class StepThirdComponent implements OnInit{
 
-  frmStepThird: FormGroup;
+  @Input('ethnicity') baseEthnicity: string ;
 
-  constructor(private fb: FormBuilder) {
+  frmStepThird: FormGroup;
+  culturesList = cultures;
+  selectedCulture: string;
+  cultureDetailText: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+    ) {
     this.frmStepThird = this.fb.group({
-      race_code: ['', Validators.required ]
+      culture: ['', Validators.required ]
     });
    }
 
 
 
   ngOnInit() {
-  //   this.parentForm.valueChanges
-  //     .pipe(
-  //       map((value) => )
-  //     )
-  //     .subscribe((value) => console.log(value));
-  //   this.selectedBaseRace = (this.parentForm.get('formArray') as FormArray).value[0].race;
-  // }
 
-  // setEthnicity(event: MatRadioChange) {
-  //   (this.parentForm.get('formArray') as FormArray).controls[2].setValue({race_code: event.value});
+   
+    this.frmStepThird.valueChanges
+      .subscribe((value) => console.log(value));
+  }
+
+  setCultures(culture: string) {
+    //Load Html content
+    this.http.get('assets/data/cultures/'+ culture +'.html', {responseType: 'text'})
+    .subscribe((data) => {
+      this.cultureDetailText = data;
+    });
+    
+    this.selectedCulture = culture;
+    this.frmStepThird.setValue({
+      culture: culture
+    })
   }
 
 }

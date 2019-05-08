@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ethnicity } from '../data/ethnicity.const';
-import { MatRadioChange } from '@angular/material';
+import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'tg-step-second',
@@ -11,12 +11,16 @@ import { MatRadioChange } from '@angular/material';
 export class StepSecondComponent implements OnInit {
 
   @Input('race') baseRace: any;
-
+  
   frmStepSecond: FormGroup;
   ethnicityList = ethnicity;
+  ethnicityDetailText: string;
   race_code: number;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+    ) {
     this.frmStepSecond = this.fb.group({
       race_code: ['', Validators.required ]
     });
@@ -27,12 +31,18 @@ export class StepSecondComponent implements OnInit {
     this.frmStepSecond.valueChanges.subscribe(val => console.log(val));
   }
 
-  setEthnicity(eth_code: number) {
-    this.race_code = eth_code;
-    this.frmStepSecond.setValue({
-      race_code: this.race_code
-    })
-  }
+  setEthnicity(eth: any) {
+
+    this.http.get('assets/data/ethnicity/' + eth.help_url + '.html', {responseType: 'text'})
+      .subscribe((data) => {
+        this.ethnicityDetailText = data;
+      })
+
+      this.race_code = eth.code;
+      this.frmStepSecond.setValue({
+        race_code: this.race_code
+      })
+    }
 }
 
 
