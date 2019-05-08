@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { ethnicity } from '../data/ethnicity.const';
 import { MatRadioChange } from '@angular/material';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-step-third',
@@ -24,6 +25,10 @@ export class StepThirdComponent implements OnInit{
 
 
   ngOnInit() {
+    this.parentForm.valueChanges.subscribe((value) => console.log(value));
+      // .pipe(
+      //   map((value) => )
+      // )
     this.selectedBaseRace = (this.parentForm.get('formArray') as FormArray).value[0].race;
   }
 
