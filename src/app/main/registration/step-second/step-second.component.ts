@@ -19,6 +19,7 @@ export class StepSecondComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
 
+  points: number;
 
   // attributesList: IStats = {
   //   strength: 0,
