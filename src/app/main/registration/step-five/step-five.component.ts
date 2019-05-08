@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class StepFiveComponent implements OnInit {
   
-  @Input() parentForm: FormGroup;
+  frmStepFour: FormGroup;
 
   constructor() { }
 

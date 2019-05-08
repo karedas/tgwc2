@@ -36,17 +36,26 @@
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.40);
     overflow: auto;
-    max-height: 600px;
+    max-height: 500px;
   
     .tg-sidebar-item {
       cursor: pointer;
-      padding: .4em 1.5em;
+      padding: .6em 1.5em .6em .2em;
       border-bottom: 1px solid rgba(255, 255, 255, 0.10); 
       text-align: right;
       transition: all .3s ease-out;
       font-size: 14px;    
       font-family: 'Modern Antiqua', cursive;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      line-height: 1.5em;
+      text-transform: capitalize;
+
+      &:last-child {
+        border-bottom: none;
+      }
   
       &:hover {
         background: rgba(255, 255, 255, 0.10);
@@ -56,10 +65,18 @@
       &.active{
         background-color: $tg-yellow;
         color: black;
-        border: none;
-        // box-shadow: inset 0 0 7px 0px black;
       }
     }
+
+    .tg-sidebar-img{
+      height: 50px;
+      width: 50px;
+      vertical-align: middle;
+      float: left;
+      margin-right: 1em;
+      border: 1px solid #675941;
+    }
+  
   }
   
   .tg-detail-content {
@@ -96,7 +113,7 @@
     background-color: transparent;
     
     .mat-step-header .mat-step-label, .mat-step-header .mat-step-optional {
-      color: rgba(255, 255, 255, 0.54);
+      color: rgba(255, 255, 255, 0.25);
     }
     .mat-horizontal-stepper-header-container {
       background-color: rgba(255,255,255, 0.10);

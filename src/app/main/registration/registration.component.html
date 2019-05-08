@@ -28,12 +28,16 @@
                 <ng-template matStepLabel>Caratteristiche</ng-template>
                 <tg-step-four></tg-step-four>
               </mat-step>
-              <!-- 
 
-              <mat-step formGroupName="4" [stepControl]="formArray.get([4])">
+              <mat-step [stepControl]="frmStepFive">
+                <ng-template matStepLabel>Città di partenza</ng-template>
+                <tg-step-five></tg-step-five>
+              </mat-step>
+
+              <mat-step [stepControl]="frmStepFive">
                 <ng-template matStepLabel>Accesso</ng-template>
-                <tg-step-five [parentForm]="registrationGroup"></tg-step-five>
-              </mat-step> -->
+                <tg-step-six></tg-step-six>
+              </mat-step>
 
             </mat-horizontal-stepper>
 
