@@ -1,8 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { ethnicity } from '../data/ethnicity.const';
-import { MatRadioChange } from '@angular/material';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'tg-step-third',
@@ -11,29 +8,27 @@ import { map } from 'rxjs/operators';
 })
 export class StepThirdComponent implements OnInit{
 
-  @Input() parentForm: FormGroup;
-
-  ethnicityList = ethnicity;
-  selectedBaseRace: string;
-  
-  race_code: string;
+  frmStepThird: FormGroup;
 
   constructor(private fb: FormBuilder) {
-
+    this.frmStepThird = this.fb.group({
+      race_code: ['', Validators.required ]
+    });
    }
 
 
 
   ngOnInit() {
-    this.parentForm.valueChanges.subscribe((value) => console.log(value));
-      // .pipe(
-      //   map((value) => )
-      // )
-    this.selectedBaseRace = (this.parentForm.get('formArray') as FormArray).value[0].race;
-  }
+  //   this.parentForm.valueChanges
+  //     .pipe(
+  //       map((value) => )
+  //     )
+  //     .subscribe((value) => console.log(value));
+  //   this.selectedBaseRace = (this.parentForm.get('formArray') as FormArray).value[0].race;
+  // }
 
-  setEthnicity(event: MatRadioChange) {
-    (this.parentForm.get('formArray') as FormArray).controls[2].setValue({race_code: event.value});
+  // setEthnicity(event: MatRadioChange) {
+  //   (this.parentForm.get('formArray') as FormArray).controls[2].setValue({race_code: event.value});
   }
 
 }
