@@ -14,6 +14,9 @@ export class StepFourComponent implements OnInit {
   frmStepFour: FormGroup;
   points: number;
 
+  attributeHover: boolean;
+  attributeDesc: string;
+
   attributesList: IStats = {
     strength: 0,
     constitution: 0,
@@ -53,29 +56,24 @@ export class StepFourComponent implements OnInit {
 
     this.calculateUsedPoints();
 
-
     //DEBUG 
-    this.frmStepFour.valueChanges.subscribe((val) => {console.log(val)})
+    this.frmStepFour.valueChanges.subscribe((val) => { console.log(val) })
 
   }
 
   private calculateUsedPoints() {
     let sum = 0;
-
     Object.keys(this.attributesList).map(e => {
       sum -= this.statCost(this.attributesList[e]);
     });
-
     this.points = sum;
   }
 
-    private statCost(val: number) {
+  private statCost(val: number) {
     const cost = [-40, -30, -20, -15, -10, -5, 0, 5, 10, 15, 25, 40, 60];
     const idx = (30 + val) / 5;
-
     return cost[idx];
   }
-
 
   changeAttribute(event: MatSliderChange, id?: any) {
     let attr = {}
@@ -83,4 +81,18 @@ export class StepFourComponent implements OnInit {
     this.frmStepFour.patchValue(attr)
   }
 
+  //on Mouse Over, showing description
+  onAttribute(event: any, fileName: string) {
+    if(!fileName) {
+      this.attributeHover = false;
+      return;
+    }
+
+    this.http.get('assets/data/attributes/' + fileName + '.html', { responseType: 'text' })
+      .subscribe((data) => {
+        this.attributeDesc = data;
+        console.log(this.attributeDesc);
+        this.attributeHover = true;
+      });
+    }
 }
