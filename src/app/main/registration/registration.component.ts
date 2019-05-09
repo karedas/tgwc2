@@ -37,12 +37,12 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor() { }
 
 
   ngOnInit() {
     
-    this.stepper.selectedIndex = 4;
+    this.stepper.selectedIndex = 3;
 
     this.stepFirstComponent.frmStepFirst.valueChanges
       .subscribe((selected) => { this.selectedBaseRace = selected.race });

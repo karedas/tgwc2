@@ -1,0 +1,53 @@
+@import 'variables';
+
+
+h3 {
+  cursor: help;
+  padding-right: 1em;
+}
+
+
+.tg-attribute-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+
+  h3 {
+    margin: 0;
+  }
+  td, th {
+    padding: 0.3rem;
+  }
+}
+
+.tg-attribute-bar {
+  border:1px solid #5f5c59;
+  min-width: 100px;
+  width: 100%;
+  height: 20px;
+  padding: 1px;
+
+  span.barsection {
+    display: inline-block;
+    width: 25%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #171614;
+    border-right: 1px solid #5f5c59;
+    box-shadow: inset 0 0 5px 2px #53371c;
+  
+    &:last-child {
+      border-right: none;
+    }
+  
+    &.fill {
+      background-image: url($imgPath + '/bars/stamina.jpg' );
+    }
+  }
+}
+
+.point-value {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 22px;
+  color: #f3e6c8;
+}
