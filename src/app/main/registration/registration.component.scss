@@ -46,7 +46,7 @@
     
     .tg-sidebar-item {
       cursor: pointer;
-      padding: .6em 1.5em .6em .2em;
+      padding: 1em 1.5em;
       border-bottom: 1px solid rgba(255, 255, 255, 0.10); 
       text-align: right;
       transition: all .3s ease-out;
@@ -58,6 +58,10 @@
       text-align: left;
       line-height: 1.5em;
       text-transform: capitalize;
+
+      &.img-frame {
+        padding: .6em 1.5em .6em .6em;
+      }
 
       &:last-child {
         border-bottom: none;
@@ -75,10 +79,9 @@
     }
 
     .tg-sidebar-img{
+      flex: 0 0 50px;
       height: 50px;
-      width: 50px;
       vertical-align: middle;
-      float: left;
       margin-right: 1em;
       border: 1px solid #675941;
     }
@@ -89,7 +92,7 @@
     font-size: 13px;
     background: rgba(0, 0, 0, 0.40);
     min-height: 400px;
-    max-height: 600px;
+    max-height: 500px;
     
     .tg-detail-image {
       padding: .5em 0;
@@ -110,7 +113,22 @@
     .tg-detail-text {
       padding: 0 1em;
     }
+
+    .tg-detail-action {
+      margin: 1em 0;
+    }
   }
+
+    
+  span.help {
+    cursor: help;
+    display: inline-block;
+    font-weight: normal;
+    border-bottom: 1px dotted currentColor;
+    font-size: 11px;
+    vertical-align: top;
+  }
+
 
 
   // STEPPER MATERIAL

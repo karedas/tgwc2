@@ -9,12 +9,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // Material
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatRippleModule} from '@angular/material/core';
-import { MatSidenavModule, MatButtonModule, MatIconModule, MatFormField, MatFormFieldModule, MatInputModule, MatSliderModule, MatRadioModule } from '@angular/material';
+import { MatSidenavModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatRadioModule } from '@angular/material';
 import { StepSecondComponent } from './step-second/step-second.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepFourComponent } from './step-four/step-four.component';
 import { StepFiveComponent } from './step-five/step-five.component';
 import { StepSixComponent } from './step-six/step-six.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 
 export const routes: Routes = [
@@ -46,8 +47,8 @@ export const routes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSliderModule,
-    MatRadioModule
+    MatRadioModule,
+    NgScrollbarModule
   ],
 
 })

@@ -1,11 +1,9 @@
 @import 'variables';
 
 
-h3 {
-  cursor: help;
-  padding-right: 1em;
+h3 { 
+  display: inline-block;
 }
-
 
 .tg-attribute-table {
   width: 100%;
@@ -17,6 +15,7 @@ h3 {
   }
   td, th {
     padding: 0.3rem;
+    vertical-align: top;
   }
 }
 

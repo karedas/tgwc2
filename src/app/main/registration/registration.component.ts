@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { StepFirstComponent } from './step-first/step-first.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepSecondComponent } from './step-second/step-second.component';
+import { StepFourComponent } from './step-four/step-four.component';
 
 
 @Component({
@@ -19,10 +20,13 @@ export class RegistrationComponent implements OnInit {
   @ViewChild(StepFirstComponent) stepFirstComponent: StepFirstComponent;
   @ViewChild(StepSecondComponent) stepSecondComponent: StepSecondComponent;
   @ViewChild(StepThirdComponent) stepThirdComponent: StepThirdComponent;
- 
+  @ViewChild(StepFourComponent) stepFourComponent: StepFourComponent;
 
-  selectedBaseRace: string;
-  selectedEthnicity: string;
+
+  race: string;
+  race_code: string;
+
+
 
   get frmStepFirst() {
     return this.stepFirstComponent ? this.stepFirstComponent.frmStepFirst : null;
@@ -31,57 +35,51 @@ export class RegistrationComponent implements OnInit {
   get frmStepSecond() {
     return this.stepSecondComponent ? this.stepSecondComponent.frmStepSecond : null;
   }
-  
+
   get frmStepThird() {
     return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
   }
+
 
 
   constructor() { }
 
 
   ngOnInit() {
-    
     this.stepper.selectedIndex = 3;
 
+    //Race
     this.stepFirstComponent.frmStepFirst.valueChanges
-      .subscribe((selected) => { this.selectedBaseRace = selected.race });
+      .subscribe((selected) => {
+        this.race = selected.race
+        this.stepSecondComponent.race_code = null;
+        //DEBUG:
+        console.log(selected);
+      });
 
+    //Ethnicity
     this.stepSecondComponent.frmStepSecond.valueChanges
-      .subscribe((selected) => { this.selectedEthnicity = selected.race_code });
+      .subscribe((selected) => {
+        this.race_code = selected.race_code;
+        //DEBUG:
+        console.log(selected);
+      });
 
-    // this.registrationGroup = this._formBuilder.group({
+    //Culture
+    this.stepThirdComponent.frmStepThird.valueChanges
+      .subscribe((selected) => {
+        //DEBUG:
+        console.log(selected);
+      });
 
-    //   formArray: this._formBuilder.array([
-    //     this._formBuilder.group({
-    //       race: ['human', Validators.required],
-    //       sex: ['m', Validators.required]
-    //     }),
-    //     this._formBuilder.group({
-    //       strength: [0, Validators.required],
-    //       constitution: [0, Validators.required],
-    //       size: [0, Validators.required],
-    //       dexterity: [0, Validators.required],
-    //       speed: [0, Validators.required],
-    //       empathy: [0, Validators.required],
-    //       intelligence: [0, Validators.required],
-    //       willpower: [0, Validators.required],
-    //     }),
-    //     this._formBuilder.group({
-    //       race_code: ['', Validators.required],
-    //     }),
-    //     this._formBuilder.group({
-    //       start: ['', Validators.required],
-    //     }),
-    //     this._formBuilder.group({
-    //       nome: ['', Validators.required, Validators.maxLength(12)],
-    //       pwd: ['', Validators.required],
-    //     }),
-    //   ])
+    //Skills
+    this.stepFourComponent.frmStepFour.valueChanges
+      .subscribe((selected) => {
+        //DEBUG:
+        console.log(selected);
+      });
 
-    // });
 
-    // this.frmStepOne.valueChanges.subscribe((value) => console.log(value))
   }
 
   nextStep(event: any) {

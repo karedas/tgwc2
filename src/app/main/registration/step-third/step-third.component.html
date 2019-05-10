@@ -1,15 +1,19 @@
 <form [formGroup]="frmStepThird">
   <div class="tg-registration-step" fxLayout>
-    <div class="tg-sidebar" fxFlex="1 1 150px" *ngIf="culturesList['uma']; let cultures">
-      <div *ngFor="let cult of cultures" class="tg-sidebar-item" [ngClass]="{'active': cult.name === selectedCulture}"
-        (click)="setCultures(cult.name)">
-        {{cult.name}}
-      </div>
+    <div class="tg-sidebar" fxFlex="1 1 150px" *ngIf="culturesList[baseEthnicity]; let cultures">
+      <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
+        <div *ngFor="let cult of cultures" class="tg-sidebar-item" [ngClass]="{'active': cult.name === selectedCulture}"
+          (click)="setCultures(cult.name)">
+          {{cult.name}}
+        </div>
+      </ng-scrollbar>
     </div>
     <div class="tg-detail-content" fxFlex="1 1 100%">
       <div class="tg-detail-text">
         <ng-container *ngIf="!selectedCulture; else cultureDetailContent">
-          <p>La <b class="tg-cyan">cultura o professione</b> del tuo personaggio determina le esperienze vissute durante
+          <h2 class="tg-detail-title tg-yellow">Mestiere</h2>
+          <p>La <span class="tg-yellow">cultura o professione</span> del tuo personaggio determina le esperienze vissute
+            durante
             la sua giovinezza, come la famiglia e l'ambiente in cui è cresciuto. Ogni razza
             ed etnia ha culture o professioni prevalenti che il tuo personaggio può aver appreso.
             <p>Questa scelta determina le abilità e l'equipaggiamento iniziali del tuo personaggio. Durante il gioco
@@ -21,8 +25,9 @@
 </form>
 
 <ng-template #cultureDetailContent>
-    <div class="tg-detail-text" [innerHtml]="cultureDetailText"></div>
+  <p [innerHtml]="cultureDetailText"></p>
+  <div class="tg-detail-action">
     <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
     <button mat-raised-button matStepperNext color="accent">Avanti</button>
+  </div>
 </ng-template>
-

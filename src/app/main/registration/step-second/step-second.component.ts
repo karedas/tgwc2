@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { HttpClient } from '@angular/common/http';
@@ -8,9 +8,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './step-second.component.html',
   styleUrls: ['./step-second.component.scss']
 })
-export class StepSecondComponent implements OnInit {
+export class StepSecondComponent {
 
-  @Input('race') baseRace: any;
+  @Input('race') race: any;
   
   frmStepSecond: FormGroup;
   ethnicityList = ethnicity;
@@ -26,14 +26,10 @@ export class StepSecondComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    //DEBUG
-    this.frmStepSecond.valueChanges.subscribe(val => console.log(val));
-  }
 
   setEthnicity(eth: any) {
 
-    this.http.get('assets/data/ethnicity/' + eth.help_url + '.html', {responseType: 'text'})
+    this.http.get('assets/data/ethnicity/' + eth.help_url , {responseType: 'text'})
       .subscribe((data) => {
         this.ethnicityDetailText = data;
       });

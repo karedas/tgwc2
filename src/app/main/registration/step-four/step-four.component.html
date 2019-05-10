@@ -4,17 +4,21 @@
     <div class="tg-sidebar" fxFlex="1 1 40%">
       <div class="tg-sidebar-text">
 
-        <!-- Attribute Description & Help -->
+        <ng-container *ngIf="!attributeHover; else attrDescText">
+          <!-- Attribute Description & Help -->
           <p>Il tuo personaggio ha diverse caratteristiche che ne descrivono le qualità
             fisiche e mentali. Esse dipendono in parte dalla sua razza, ma possono cambiare da individuo a
             individio.<br>
-            Usa i <b class="tg-cyan">punti creazione</b> disponibili per modificare le caratteristiche
+            Usa i <span class="tg-yellow">punti creazione</span> disponibili per modificare le caratteristiche
             del tuo personaggio <b>rispetto alla media della sua razza</b>. Se abbassi
             una caratteristica riceverai dei punti che potrai spendere per alzarne
             altre. Alzare una caratteristica ti costerà invece punti.
           </p>
-
-        <p [innerHtml]="attributeDesc" *ngIf="attributeHover"></p>
+        </ng-container>
+        
+        <ng-template #attrDescText>
+          <p [innerHtml]="attributeDesc" *ngIf="attributeHover"></p>
+        </ng-template>
 
       </div>
     </div>
@@ -45,9 +49,10 @@
             <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Volontà', ref:'willpower'}">
             </ng-container>
           </table>
-
-          <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
-          <button mat-raised-button matStepperNext color="accent">Avanti</button>
+          <div class="tg-detail-action">
+            <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
+            <button mat-raised-button matStepperNext color="accent">Avanti</button>
+          </div>
         </div>
       </div>
     </div>
@@ -56,20 +61,25 @@
   <ng-template #attrSlider let-default let-name="name" let-ref="ref">
     <tr>
       <th>
-        <h3 (mouseover)="onAttribute($event, ref)" (mouseout)="onAttribute($event, null)">{{name}}</h3>
+        <h3>{{name}}</h3>&nbsp;
+        <span class="help" (mouseover)="onAttribute($event, ref)" (mouseout)="onAttribute($event, null)">[ ? ]</span>
       </th>
       <td>
         <div class="tg-attribute-bar">
-          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= -1}"></span>
-          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= 0}"></span>
-          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= 1}"></span>
-          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= 2}"></span>
+          <span class="barsection" [ngClass]="{
+            'fill': attributesList[ref] >= 1}"></span>
+          <span class="barsection" [ngClass]="{
+            'fill': attributesList[ref] >= 2}"></span>
+          <span class="barsection" [ngClass]="{
+            'fill': attributesList[ref] >= 3}"></span>
+          <span class="barsection" [ngClass]="{
+            'fill': attributesList[ref] == 4}"></span>
         </div>
     </td>
       <td>
         <div class="points-action">
           <button  type="button" mat-button (click)="decreaseAttr($event, ref)">-</button>
-          <input matInput name="counter" type="number" [formControlName]="ref" readonly required class="point-value">
+          <input matInput name="counter" type="number" value="{{attributesList[ref]}}" [formControlName]="ref" readonly required class="point-value">
           <button  type="button" mat-button (click)="increaseAttr($event, ref)">+</button >
         </div>
       </td>

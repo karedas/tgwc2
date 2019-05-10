@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { cultures } from 'src/assets/data/cultures/cultures.const';
 
 @Component({
@@ -8,9 +8,9 @@ import { cultures } from 'src/assets/data/cultures/cultures.const';
   templateUrl: './step-third.component.html',
   styleUrls: ['./step-third.component.scss']
 })
-export class StepThirdComponent implements OnInit{
+export class StepThirdComponent{
 
-  @Input('ethnicity') baseEthnicity: string ;
+  @Input('race_code') baseEthnicity: string ;
 
   frmStepThird: FormGroup;
   culturesList = cultures;
@@ -26,26 +26,16 @@ export class StepThirdComponent implements OnInit{
     });
    }
 
-
-
-  ngOnInit() {
-
-   
-    this.frmStepThird.valueChanges
-      .subscribe((value) => console.log(value));
-  }
-
   setCultures(culture: string) {
     //Load Html content
     this.http.get('assets/data/cultures/'+ culture +'.html', {responseType: 'text'})
     .subscribe((data) => {
       this.cultureDetailText = data;
+      this.selectedCulture = culture;
     });
     
-    this.selectedCulture = culture;
     this.frmStepThird.setValue({
       culture: culture
     })
   }
-
 }
