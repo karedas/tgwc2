@@ -5,7 +5,6 @@
       <div class="tg-sidebar-text">
 
         <!-- Attribute Description & Help -->
-        <ng-container *ngIf="!attributeHover; else attrDescription">
           <p>Il tuo personaggio ha diverse caratteristiche che ne descrivono le qualità
             fisiche e mentali. Esse dipendono in parte dalla sua razza, ma possono cambiare da individuo a
             individio.<br>
@@ -14,76 +13,67 @@
             una caratteristica riceverai dei punti che potrai spendere per alzarne
             altre. Alzare una caratteristica ti costerà invece punti.
           </p>
-        </ng-container>
 
-        <ng-template #attrDescription>
-          <p [innerHtml]="attributeDesc"></p>
-        </ng-template>
+        <p [innerHtml]="attributeDesc" *ngIf="attributeHover"></p>
 
       </div>
     </div>
 
     <div class="tg-detail-content" fxFlex="1 1 60%">
+      <div class="tg-detail-text">
 
-      <div class="attr-points">Punti creazione disponibili: <span id="attr-points">{{points}}</span></div>
+        <p class="attr-points">Punti creazione disponibili: <span id="attr-points">{{points}}</span></p>
 
-      <div class="tg-attribute-wrap">
-        <table class="tg-attribute-table">
-          <ng-container 
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Forza', file: 'strength'}">
-          </ng-container>
-          <ng-container
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Costituzione', file:'constitution'}">
-          </ng-container>
-          <ng-container 
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Taglia', file:'size'}">
-          </ng-container>
-          <ng-container 
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Destrezza', file:'dexterity'}">
-          </ng-container>
-          <ng-container 
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Velocità', file:'speed'}">
-          </ng-container>
-          <ng-container 
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Empatia', file:'empathy'}">
-          </ng-container>
-          <ng-container
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Intelligenza', file:'intelligence'}">
-          </ng-container>
-          <ng-container 
-            *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Volontà', file:'willpower'}">
-          </ng-container>
-        </table>
+        <div class="tg-attribute-wrap">
+          <table class="tg-attribute-table">
+            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Forza', ref: 'strength'}">
+            </ng-container>
+            <ng-container
+              *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Costituzione', ref:'constitution'}">
+            </ng-container>
+            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Taglia', ref:'size'}">
+            </ng-container>
+            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Destrezza', ref:'dexterity'}">
+            </ng-container>
+            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Velocità', ref:'speed'}">
+            </ng-container>
+            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Empatia', ref:'empathy'}">
+            </ng-container>
+            <ng-container
+              *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Intelligenza', ref:'intelligence'}">
+            </ng-container>
+            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Volontà', ref:'willpower'}">
+            </ng-container>
+          </table>
 
+          <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
+          <button mat-raised-button matStepperNext color="accent">Avanti</button>
+        </div>
       </div>
-
-      <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
-      <button mat-raised-button matStepperNext color="accent">Avanti</button>
-
     </div>
   </div>
+  
+  <ng-template #attrSlider let-default let-name="name" let-ref="ref">
+    <tr>
+      <th>
+        <h3 (mouseover)="onAttribute($event, ref)" (mouseout)="onAttribute($event, null)">{{name}}</h3>
+      </th>
+      <td>
+        <div class="tg-attribute-bar">
+          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= -1}"></span>
+          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= 0}"></span>
+          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= 1}"></span>
+          <span class="barsection" [ngClass]="{'fill': frmStepFour.controls[ref].value >= 2}"></span>
+        </div>
+    </td>
+      <td>
+        <div class="points-action">
+          <button  type="button" mat-button (click)="decreaseAttr($event, ref)">-</button>
+          <input matInput name="counter" type="number" [formControlName]="ref" readonly required class="point-value">
+          <button  type="button" mat-button (click)="increaseAttr($event, ref)">+</button >
+        </div>
+      </td>
+    </tr>
+  </ng-template>
 
 </form>
-
-<ng-template #attrSlider let-default let-name="name" let-file="file">
-  <tr>
-    <th>
-      <h3 (mouseover)="onAttribute($event, file)" (mouseout)="onAttribute($event, null)">{{name}}</h3>
-    </th>
-    <td>
-      <div class="tg-attribute-bar">
-        <span class="barsection fill"></span>
-        <span class="barsection fill"></span>
-        <span class="barsection"></span>
-        <span class="barsection"></span>
-      </div>
-    </td>
-    <td>
-      <div class="points-action">
-        <button type="button" mat-button><</button>
-        <span class="point-value">0</span>
-        <button type="button" mat-button>></button>
-      </div>
-    </td>
-  </tr>
-</ng-template>
