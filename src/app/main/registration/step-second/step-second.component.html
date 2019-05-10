@@ -1,20 +1,34 @@
 <form [formGroup]="frmStepSecond">
   <div class="tg-registration-step" fxLayout>
-    <div class="tg-sidebar" fxFlex="1 1 150px" *ngIf="ethnicityList[race]; let ethnicities">
-      <div *ngFor="let eth of ethnicities;" matRipple class="tg-sidebar-item"
-        [ngClass]="{'active': race_code === eth.code}" (click)="setEthnicity(eth)">{{eth.name}}</div>
+
+    <div class="tg-sidebar" fxFlex="1 1 210px" *ngIf="ethnicityList[race]; let ethnicities">
+      <div *ngFor="let eth of ethnicities;" matRipple class="tg-sidebar-item img-frame"
+        [ngClass]="{'active': race_code === eth.code}" (click)="setEthnicity(eth)">
+        <div class="tg-sidebar-img">
+          <img src="assets/images/registration/avatars/{{eth.code}}.jpg">
+        </div>
+        {{eth.name}}
+      </div>
     </div>
+
     <div class="tg-detail-content" fxFlex="1 1 100%">
       <ng-container *ngIf="!race_code && race; else ethnicityDescription">
-        <div class="tg-detail-text">
-          <h2 class="tg-detail-title tg-yellow">Etnia e Cultura</h2>
-          <p>Le razze si differenziano per <span class="tg-yellow">etnie</span> che spesso abitano in comunità separate e con diversi stili di
-            vita. Alcune razze sono molto coese, altre invece hanno vissuto una storia turbolenta e si sono divise in gruppi.
-          </p>
-          <p>L'etnia determinana le professioni, culture e credenze religiose inizialmente disponibili per il tuo
-            personaggio, quindi anche il suo equipaggiamento e conoscenze iniziali.</p>
-          <p class="tg-yellow">Scegli quindi un' etnia dalla lista di sinistra.</p>
-        </div>
+        
+        <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
+          [disableOnBreakpoints]="false">
+          <div class="tg-detail-text">
+            <h2 class="tg-detail-title tg-yellow">Etnia e Cultura</h2>
+            <p>Le razze si differenziano per <span class="tg-yellow">etnie</span> che spesso abitano in comunità
+              separate e con diversi stili di
+              vita. Alcune razze sono molto coese, altre invece hanno vissuto una storia turbolenta e si sono divise in
+              gruppi.
+            </p>
+            <p>L'etnia determinana le professioni, culture e credenze religiose inizialmente disponibili per il tuo
+              personaggio, quindi anche il suo equipaggiamento e conoscenze iniziali.</p>
+            <p class="tg-yellow">Scegli quindi un' etnia dalla lista di sinistra.</p>
+          </div>
+        </ng-scrollbar>
+        
       </ng-container>
 
     </div>
@@ -34,4 +48,3 @@
     </div>
   </div>
 </ng-template>
-

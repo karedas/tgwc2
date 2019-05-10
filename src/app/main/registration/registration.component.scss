@@ -6,7 +6,8 @@
   height: 100%;
 }
 
-.tg-registration-content  {
+
+.tg-registration-content {
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
   z-index: 2;
   position: relative;
@@ -21,7 +22,12 @@
 }
 
 ::ng-deep {
-    
+
+  
+  form {
+    max-height: 600px;
+  }
+
   .tg-registration-step {
     display: flex;
     width: 100%;
@@ -33,24 +39,25 @@
   }
 
   .tg-sidebar {
-    width:  150px;
-    border-right: 1px solid rgba(255, 255, 255, 0.10); 
+    width: 150px;
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.40);
     overflow: auto;
-    max-height: 500px;
+    min-height: 400px;
+    max-height: 700px;
 
     .tg-sidebar-text {
-      padding:0 1em;
+      padding: 0 1em;
     }
-    
+
     .tg-sidebar-item {
       cursor: pointer;
       padding: 1em 1.5em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10); 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
       text-align: right;
       transition: all .3s ease-out;
-      font-size: 14px;    
+      font-size: 14px;
       font-family: 'Modern Antiqua', cursive;
       font-weight: bold;
       display: flex;
@@ -66,34 +73,41 @@
       &:last-child {
         border-bottom: none;
       }
-  
+
       &:hover {
         background: rgba(255, 255, 255, 0.10);
         // box-shadow: inset 0 0 7px 0px black;
       }
-  
-      &.active{
+
+      &.active {
         background-color: $tg-yellow;
         color: black;
       }
     }
 
-    .tg-sidebar-img{
-      flex: 0 0 50px;
-      height: 50px;
+    .tg-sidebar-img {
+      flex: 0 0 65px;
+      height: 65px;
       vertical-align: middle;
       margin-right: 1em;
       border: 1px solid #675941;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
-  
+
   }
-  
+
   .tg-detail-content {
     font-size: 13px;
     background: rgba(0, 0, 0, 0.40);
     min-height: 400px;
-    max-height: 500px;
-    
+    max-height: 700px;
+    overflow: hidden;
+
+
     .tg-detail-image {
       padding: .5em 0;
       height: 150px;
@@ -102,14 +116,19 @@
       margin-bottom: 1em;
       text-align: center;
     }
-  
-    .tg-detail-title {    
-      font-family: 'Modern Antiqua', cursive;
+
+    h2 {
       font-weight: normal;
       font-size: 2em;
-      // margin: 0;
+      color: $tg-yellow;
     }
-  
+
+    h3 {
+      font-weight: normal;
+      font-size: 1.2em;
+      color: $tg-yellow;
+    }
+
     .tg-detail-text {
       padding: 0 1em;
     }
@@ -117,9 +136,13 @@
     .tg-detail-action {
       margin: 1em 0;
     }
+
+    ul {
+      padding: 0 0 0 16px;
+    }
   }
 
-    
+
   span.help {
     cursor: help;
     display: inline-block;
@@ -133,22 +156,24 @@
 
   // STEPPER MATERIAL
   .tg-registration-stepper {
-  
+
     background-color: transparent;
-    
-    .mat-step-header .mat-step-label, .mat-step-header .mat-step-optional {
+
+    .mat-step-header .mat-step-label,
+    .mat-step-header .mat-step-optional {
       color: rgba(255, 255, 255, 0.25);
     }
+
     .mat-horizontal-stepper-header-container {
-      background-color: rgba(255,255,255, 0.10);
+      background-color: rgba(255, 255, 255, 0.10);
     }
-    
+
     .mat-horizontal-content-container {
       padding: 0;
     }
-  
-    .mat-horizontal-stepper-header::before, 
-    .mat-horizontal-stepper-header::after, 
+
+    .mat-horizontal-stepper-header::before,
+    .mat-horizontal-stepper-header::after,
     .mat-stepper-horizontal-line {
       border-top-color: rgba(247, 247, 247, 0.12);
     }
@@ -157,13 +182,13 @@
       font-weight: bold;
     }
 
-    .mat-step-header .mat-step-icon-selected{
+    .mat-step-header .mat-step-icon-selected {
       background-color: $tg-yellow;
       color: black;
     }
 
     .mat-step-header .mat-step-label-selected {
-      color: $tg-yellow!important;
+      color: $tg-yellow !important;
     }
   }
 }

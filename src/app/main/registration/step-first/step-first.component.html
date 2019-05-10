@@ -6,10 +6,9 @@
       
       <div *ngFor="let race of racesList; let idx = index;"
         matRipple 
-        class="tg-sidebar-item img-frame"
+        class="tg-sidebar-item"
         [ngClass]="{'active': selectedRace === race.code}"
         (click)="setRace(race)">
-        <div class="tg-sidebar-img"></div>
         {{race.name}}
       </div>
 
@@ -19,7 +18,7 @@
 
       <ng-container *ngIf="!selectedRace; else raceDetailContent">
         <div class="tg-detail-text">
-          <h2 class="tg-detail-title tg-yellow">Razza</h2>
+          <h2 class="tg-detail-title tg-yellow">Scelta della razza</h2>
           <p>La scelta della <span class="tg-yellow">razza del tuo personaggio</span> è una delle decisioni più importanti. Essa determina che
             caratteristiche fisiche e mentali avrà,
             quali saranno i suoi punti di forza e debolezza, in cosa sarà più abile, se sarà cittadino di un villaggio o

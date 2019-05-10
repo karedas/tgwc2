@@ -13,7 +13,7 @@ export const ethnicity = {
     { name: "Elfo di Alwenion", code: "eal", help_url: 'elfo_alwenion.html' },
     { name: "Elfo sinoriano", code: "esi", help_url: 'elfo_sinoriano.html' },
     { name: "Elfo ambrato", code: "dra", help_url: 'elfo_ambrato.html' },
-    { name: "Ousst'viiryn", code: "drw", help_url: 'ousst_viiryn.html' },
+    { name: "Ilythiiri", code: "drw", help_url: 'ousst_viiryn.html' },
     { name: "Selvaggio delle radure", code: "els", help_url: 'elfo_selvaggio.html', limited: true }
   ],
   goblin: [

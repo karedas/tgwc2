@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'tg-step-six',
@@ -11,7 +11,9 @@ export class StepSixComponent implements OnInit {
 
   frmStepSix: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { 
+    this.frmStepSix = this.fb.group({});
+  }
 
   ngOnInit() {
   }
