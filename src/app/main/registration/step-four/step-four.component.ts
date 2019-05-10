@@ -44,41 +44,55 @@ export class StepFourComponent implements OnInit {
   ngOnInit() {
 
     this.frmStepFour = this.fb.group({
-      strength: [0, Validators.required],
-      constitution: [0, Validators.required],
-      size: [0, Validators.required],
-      dexterity: [0, Validators.required],
-      speed: [0, Validators.required],
-      empathy: [0, Validators.required],
-      intelligence: [0, Validators.required],
-      willpower: [0, Validators.required],
+      strength: [0],
+      constitution: [0],
+      size: [0],
+      dexterity: [0],
+      speed: [0],
+      empathy: [0],
+      intelligence: [0],
+      willpower: [0],
     });
 
     this.calculateUsedPoints();
 
     //DEBUG 
-    this.frmStepFour.valueChanges.subscribe((val) => { console.log(val) })
+    this.frmStepFour.valueChanges.subscribe((val) => {
+      console.log(val);
+    })
 
   }
 
   private calculateUsedPoints() {
     let sum = 0;
-    Object.keys(this.attributesList).map(e => {
-      sum -= this.statCost(this.attributesList[e]);
+    let stats = this.frmStepFour.getRawValue();
+    Object.keys(stats).map(e => {
+      sum -= this.statCost(stats[e]);
     });
     this.points = sum;
   }
 
   private statCost(val: number) {
+    console.log(val);
     const cost = [-40, -30, -20, -15, -10, -5, 0, 5, 10, 15, 25, 40, 60];
     const idx = (30 + val) / 5;
     return cost[idx];
   }
 
-  changeAttribute(event: MatSliderChange, id?: any) {
-    let attr = {}
-    attr[id] = event.value;
-    this.frmStepFour.patchValue(attr)
+  increaseAttr(event: any, id?: any) {
+    if(this.attributesList[id] < 2 ) {
+      this.attributesList[id]++;
+      this.frmStepFour.controls[id].setValue(this.attributesList[id]);
+      this.calculateUsedPoints();
+    }
+  }
+
+  decreaseAttr(event: any, id?:any) {
+    if(this.attributesList[id] > -2 ) {
+      this.attributesList[id]--;
+      this.frmStepFour.controls[id].setValue(this.attributesList[id]);
+      this.calculateUsedPoints();
+    }
   }
 
   //on Mouse Over, showing description
@@ -91,7 +105,6 @@ export class StepFourComponent implements OnInit {
     this.http.get('assets/data/attributes/' + fileName + '.html', { responseType: 'text' })
       .subscribe((data) => {
         this.attributeDesc = data;
-        console.log(this.attributeDesc);
         this.attributeHover = true;
       });
     }
