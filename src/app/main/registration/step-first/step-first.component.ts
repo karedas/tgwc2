@@ -26,6 +26,9 @@ export class StepFirstComponent {
   }
 
   setRace(race: any) {
+    
+    this.raceDetailText = '';
+    
     //Load Html Detail file
     this.http.get('assets/data/races/'+ race.code +'.html', {responseType: 'text'})
     .subscribe((data) => {

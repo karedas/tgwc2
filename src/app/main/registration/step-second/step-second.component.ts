@@ -29,6 +29,8 @@ export class StepSecondComponent {
 
   setEthnicity(eth: any) {
 
+    this.ethnicityDetailText = '';
+
     this.http.get('assets/data/ethnicity/' + eth.help_url , {responseType: 'text'})
       .subscribe((data) => {
         this.ethnicityDetailText = data;

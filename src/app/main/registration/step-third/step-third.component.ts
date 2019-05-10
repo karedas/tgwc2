@@ -27,6 +27,9 @@ export class StepThirdComponent{
    }
 
   setCultures(culture: string) {
+
+    this.cultureDetailText = '';
+    
     //Load Html content
     this.http.get('assets/data/cultures/'+ culture +'.html', {responseType: 'text'})
     .subscribe((data) => {
