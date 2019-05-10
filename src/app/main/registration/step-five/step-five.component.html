@@ -1,3 +1,27 @@
 <form [formGroup]="frmStepFive">
-  
+  <div class="tg-registration-step" fxLayout>
+    <div class="tg-sidebar" fxFlex="1 1 40%">
+      <div class="tg-sidebar-text">
+        <h2 class="tg-detail-title tg-yellow">Luogo di partenza</h2>
+        <p>
+          Scegli ora <span class="tg-yellow">dove iniziare</span> il tuo gioco. I personaggi entrano in
+          Ikhari attraverso antichi cerchi di pietre di origine misteriosa e legati
+          ad una profezia di immortalità. Nelle vicinanze di questi cerchi sono
+          sorti, nel corso della storia, diversi insediamenti legati alle varie
+          razze. La scelta è quindi limitata dalla razza del tuo personaggio.<br>
+          <br>
+          I cerchi di pietre consigliati per i nuovi giocatori sono segnati dal
+          simbolo.
+        </p>
+      </div>
+    </div>
+    <div class="tg-detail-content" fxFlex="1 1 60%">
+      <div class="tg-detail-ikharimap">
+          [mappa grafica]
+      </div>
+      <div class="tg-detail-text"> 
+        <p>Città selezionata: <span class="tg-yellow">[city_value]</span></p> 
+      </div>
+    </div>
+  </div>
 </form>
