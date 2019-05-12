@@ -50,8 +50,8 @@
             </ng-container>
           </table>
           <div class="tg-detail-action">
-            <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
-            <button mat-raised-button matStepperNext color="accent">Avanti</button>
+            <button mat-raised-button matStepperPrevious class="tg-step-back">Indietro</button>&nbsp;
+            <button mat-raised-button matStepperNext class="tg-step-next">Avanti</button>
           </div>
         </div>
       </div>
@@ -73,7 +73,9 @@
           <span class="barsection" [ngClass]="{
             'fill': attributesList[ref] >= 1}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] == 2}"></span>
+            'fill': attributesList[ref] >= 2}"></span>
+          <span class="barsection" [ngClass]="{
+            'fill': attributesList[ref] == 3}"></span>
         </div>
     </td>
       <td>

@@ -1,10 +1,9 @@
 <form [formGroup]="frmStepSix">
 
   <div class="tg-registration-step" fxLayout>
-
-    <div class="tg-detail-content" fxFlex="1 1 100%">
-      <div class="tg-detail-text">
-        <h2>Sei quasi pronto...</h2>
+    <div class="tg-sidebar" fxFlex="1 1 30%">
+      <div class="tg-sidebar-text">
+        <h2>Sei quasi pronto!</h2>
         Decidi ora un nome per il tuo personaggio. Ricorda che gli altri abitanti di Ikhari ti conosceranno con questo
         nome, pertanto scegline uno degno di lui!
         <ul>
@@ -13,18 +12,43 @@
           <li>Non usare nomi offensivi o stupidi, o in generale nomi con cui non vorresti davvero che il tuo personaggio
             fosse chiamato.</li>
         </ul>
-
-        <mat-form-field>
+      </div>
+    </div>
+    <div class="tg-detail-content" fxFlex="1 1 70%">
+      <div class="tg-detail-text tg-detail-left">
+        <mat-form-field floatLabel="never" appearance="outline"> 
           <input matInput placeholder="Nome del personaggio" type="text" autocomplete="off">
         </mat-form-field>
-        <mat-form-field>
+        <mat-radio-group aria-label="Sesso:">
+          <mat-radio-button value="m">Maschio</mat-radio-button>&nbsp;
+          <mat-radio-button value="f">Femmina</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input matInput placeholder="E-mail" type="text" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input matInput placeholder="Ripeti la tua e-mail" type="text" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field floatLabel="never" appearance="outline">
           <input matInput placeholder="Password" type="password" autocomplete="off">
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field floatLabel="never" appearance="outline">
           <input matInput placeholder="Ripeti la password" type="password" autocomplete="off">
         </mat-form-field>
 
         <button mat-raised-button color="accent">Completa</button>
+      </div>
+      <div class="tg-detail-right">
+        <div class="tg-detail-summary">
+          <div class="tg-detail-summary-header">
+            Riepilogo
+          </div>
+          <p>Razza: [razza_etnia]</p>
+          <p>Mestiere: [mestiere]</p>
+          <p>Caratteristiche: [lista]</p>
+          <p>Città di partenza: [città]</p>
+        </div>
       </div>
     </div>
 

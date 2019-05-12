@@ -3,7 +3,7 @@
 
     <div class="tg-sidebar" fxFlex="1 1 210px" *ngIf="ethnicityList[race]; let ethnicities">
       <div *ngFor="let eth of ethnicities;" matRipple class="tg-sidebar-item img-frame"
-        [ngClass]="{'active': race_code === eth.code}" (click)="setEthnicity(eth)">
+        [ngClass]="{'active': race_code === eth.code, 'limited': eth.limited === true}" (click)="setEthnicity(eth)">
         <div class="tg-sidebar-img">
           <img src="assets/images/registration/avatars/{{eth.code}}.jpg">
         </div>
@@ -43,8 +43,8 @@
   <div class="tg-detail-text">
     <div [innerHtml]="ethnicityDetailText"></div>
     <div class="tg-detail-action">
-      <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;
-      <button mat-raised-button matStepperNext color="accent">Avanti</button>
+      <button mat-raised-button matStepperPrevious class="tg-step-back">Indietro</button>&nbsp;
+      <button mat-raised-button matStepperNext class="tg-step-next">Avanti</button>
     </div>
   </div>
 </ng-template>
