@@ -29,6 +29,10 @@ export class StepSecondComponent {
 
   setEthnicity(eth: any) {
 
+    if(eth.limited) {
+      return;
+    }
+    
     this.ethnicityDetailText = '';
 
     this.http.get('assets/data/ethnicity/' + eth.help_url , {responseType: 'text'})
