@@ -56,6 +56,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
       .subscribe(
         (wl: IWorks) => {
           if (wl) {
+            this.cmd = wl.cmd;
             this.setHeaderTitle(wl.verb)
             this.resultsLength = Object.keys(wl.list).length;
             this.populate(wl.list);
@@ -72,7 +73,6 @@ export class WorkslistComponent implements OnInit, OnDestroy {
     this.data = [];
 
     if (data) {
-
       data.forEach((d: any, i: number) => {
         d.cmd = i;
         this.data.push(d);
