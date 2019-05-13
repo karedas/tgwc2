@@ -103,27 +103,29 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
-        console.log(room);
         
         if (this.game.client_update.inContainer) {
    
           let personUpdate = false;
           let objectUpdate = false;
 
-          room.objcont.list.forEach(element => {
-            if(element.mrn.includes(this.game.client_update.mrnContainer)) {
-              console.log('aggiorno contenitore oggetto, è ancora qui');
-              objectUpdate = true;
-            }
-          });
-
-          room.perscont.list.forEach(element => {
-            if (element.mrn.includes(this.game.client_update.mrnContainer)) {
-              console.log('aggiorno contenitore persona');
-              //  this.game.updateMrnContainer();
-              personUpdate = true;
-            }
-          });
+          if(room.objcont) {
+            room.objcont.list.forEach(element => {
+              if(element.mrn.includes(this.game.client_update.mrnContainer)) {
+                console.log('aggiorno contenitore oggetto, è ancora qui');
+                objectUpdate = true;
+              }
+            });
+          }
+          if(room.perscont) {
+            room.perscont.list.forEach(element => {
+              if (element.mrn.includes(this.game.client_update.mrnContainer)) {
+                console.log('aggiorno contenitore persona');
+                //  this.game.updateMrnContainer();
+                personUpdate = true;
+              }
+            });
+          }
 
           if (personUpdate || objectUpdate) {
             this.game.updateMrnContainer();
