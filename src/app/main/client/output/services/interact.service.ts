@@ -14,7 +14,6 @@ export class InteractService {
 
     /* If is not a List */
     if (!item.sz) {
-
       if (item.cntnum) {
         this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
       } else {

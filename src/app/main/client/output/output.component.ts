@@ -103,22 +103,52 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
-        console.log('room');
-        this.typeDetail = 'room';
+        console.log(room);
         
+        if (this.game.client_update.inContainer) {
+   
+          let personUpdate = false;
+          let objectUpdate = false;
+
+          room.objcont.list.forEach(element => {
+            if(element.mrn.includes(this.game.client_update.mrnContainer)) {
+              console.log('aggiorno contenitore oggetto, è ancora qui');
+              objectUpdate = true;
+            }
+          });
+
+          room.perscont.list.forEach(element => {
+            if (element.mrn.includes(this.game.client_update.mrnContainer)) {
+              console.log('aggiorno contenitore persona');
+              //  this.game.updateMrnContainer();
+              personUpdate = true;
+            }
+          });
+
+          if (personUpdate || objectUpdate) {
+            this.game.updateMrnContainer();
+          }
+          else {
+            console.log('mrn sparito!');
+            this.game.client_update.inContainer = false;
+          }
+        }
+
+
+
+        this.typeDetail = 'room';
         if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
           this.lastRoomDescription = room.desc['base'];
         }
         this.output.push(this.setContent('room', room));
+
         // if (this.game.client_update.room.version < room.ver && this.splitArea) {
-        console.log(this.game.client_update.room.version, room.ver);
         if (this.game.client_update.room.version < room.ver) {
           this.game.client_update.room.version = room.ver;
           this.game.client_update.room.needed = false;
         }
 
-        this.scrollPanelToBottom();
-
+        // this.scrollPanelToBottom();
         // this.game.client_update.inContainer = false;
       });
 
@@ -128,7 +158,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(elements => elements && elements !== undefined))
       .subscribe((elements: any) => {
-        console.log('OBJORPERSON');
+        console.log('OBJORPERSON', elements);
         this.objPersDetail = elements;
         const content = this.setContent('objpersdetail', this.objPersDetail);
         this.output.push(content);
@@ -194,7 +224,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   onDragEnd(event) {
     // Store the Split size in the main config
     this._configService.setConfig({
-      output: { extraArea: {size: [event.sizes[0], event.sizes[1]]} }
+      output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });
   }
 

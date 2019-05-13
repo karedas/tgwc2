@@ -177,6 +177,7 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const ud = update.slice(5, status.lastIndexOf('"')).split(',');
+      console.log(ud);
       this.dispatcher.update = ud;
       return '';
     });
@@ -420,7 +421,7 @@ export class DataParser {
     // TODO UI (dont need order) :
     if (this.dispatcher['visibilLevel']) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); };
     if (this.dispatcher['isgod']) { this.store.dispatch(new GameActions.UpdateUI({ isGod: this.dispatcher['isgod'] })); }
-    if (this.dispatcher['up']) { this.setUpdateNeeded(this.dispatchData['up']) }
+    if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']) }
   }
 
 
