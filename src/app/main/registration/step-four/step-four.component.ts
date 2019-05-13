@@ -36,7 +36,6 @@ export class StepFourComponent implements OnInit {
 
   ngOnInit() {
     this.points = this.calculateUsedPoints();
-    console.log(this.points);
   }
 
   private calculateUsedPoints() {
