@@ -11,6 +11,6 @@ import { GameService } from 'src/app/main/client/services/game.service';
 export class ObjpersDetailComponent {
 
   @Input() html: IObjPersDesc;
-
+  
   constructor() { }
 }

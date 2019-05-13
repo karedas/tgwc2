@@ -20,7 +20,7 @@
     <ng-template #equipmentList>
       <!-- Obj or Person Title -->
       <div class="tg-objperson--title" *ngIf="eqcont?.title" fxFlex="1 1 100%">
-        {{eqcont.title | capitalizeFirst}} 
+        {{eqcont.title | capitalizeFirst}}  
       </div>
       
       <div class="tg-objperson--line" fxFlex="1 1 100%" *ngFor="let item of eqcont.list; let i=index">

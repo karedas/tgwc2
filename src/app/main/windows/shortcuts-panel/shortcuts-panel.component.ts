@@ -3,6 +3,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { GameService } from '../../client/services/game.service';
+import { InputService } from '../../client/input/input.service';
 
 @Component({
   selector: 'tg-shortcuts-panel',
@@ -21,6 +22,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
   constructor(
     private _configService: ConfigService,
     private game: GameService,
+    private inputService: InputService
   ) {
     
     this._unsubscribeAll = new Subject<any>();
@@ -38,6 +40,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
+    this.inputService.focus();
   }
 
   changeCmdLabel(val: number) {

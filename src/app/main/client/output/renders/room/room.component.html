@@ -83,7 +83,7 @@
     <ng-scrollbar class="scrollbar" #scrollBar [shown]="always" *ngIf="type === 'room' || type === 'objPers'">
       
       <ng-container *ngIf="type === 'room'">
-        <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list" 
+        <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"
           *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
       </ng-container>
 

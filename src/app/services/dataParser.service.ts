@@ -33,14 +33,15 @@ export class DataParser {
     private store: Store<State>,
     private _configService: ConfigService,
     private logService: LogService
-    ) {
+  ) {
+
     this._updateNeeded = new Subject<any>();
 
     //Subscribe to the shortcuts in Config
     this._configService.getConfig()
-      .pipe(map((config: TGConfig) => { return config.shortcuts}))
-      .subscribe((shortcuts) => { this.shortcuts = shortcuts;}
-    )
+      .pipe(map((config: TGConfig) => { return config.shortcuts }))
+      .subscribe((shortcuts) => { this.shortcuts = shortcuts; }
+      )
   }
 
   handlerGameData(data: any, logEnabled?: boolean) {
@@ -59,13 +60,13 @@ export class DataParser {
       }
 
 
-      if( logEnabled ) {
+      if (logEnabled) {
 
-       try {
-         this.logService.parseForLog(data);
-       } catch(err) {
-         console.log(err.message);
-       }
+        try {
+          this.logService.parseForLog(data);
+        } catch (err) {
+          console.log(err.message);
+        }
       }
 
       this.netData = '';
@@ -175,13 +176,8 @@ export class DataParser {
 
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
-      const update_parse = update.slice(5, status.lastIndexOf('"')).split(',');
-      const up = {
-        inventory: Number(update_parse[0]),
-        equipment: Number(update_parse[1]),
-        room: Number(update_parse[2])
-      };
-      this.setUpdateNeeded(up);
+      const ud = update.slice(5, status.lastIndexOf('"')).split(',');
+      this.dispatcher.update = ud;
       return '';
     });
 
@@ -409,7 +405,7 @@ export class DataParser {
 
 
     // Execute
-    if (Object.keys(this.dispatcher).length > 0 ) {
+    if (Object.keys(this.dispatcher).length > 0) {
       this.dispatchData();
     }
   }
@@ -417,13 +413,14 @@ export class DataParser {
   // Emit data Stored in the dispatcher to show then in the right Output Order
   dispatchData() {
     // Output Messages
-    if ( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
-    if ( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
-    if ( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
-    if ( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    if (this.dispatcher['base']) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
+    if (this.dispatcher['objpers']) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
+    if (this.dispatcher['room']) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
+    if (this.dispatcher['pers']) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
     // TODO UI (dont need order) :
-    if ( this.dispatcher['visibilLevel'] ) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); };
-    if ( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
+    if (this.dispatcher['visibilLevel']) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); };
+    if (this.dispatcher['isgod']) { this.store.dispatch(new GameActions.UpdateUI({ isGod: this.dispatcher['isgod'] })); }
+    if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']) }
   }
 
 
@@ -489,8 +486,8 @@ export class DataParser {
     return input;
   }
 
-  setUpdateNeeded(what: any) {
-    this._updateNeeded.next(what);
+  setUpdateNeeded(ud: any) {
+    this._updateNeeded.next(ud);
   }
 
   get updateNeeded(): Observable<any> {
