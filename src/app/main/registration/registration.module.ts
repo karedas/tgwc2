@@ -16,6 +16,7 @@ import { StepFourComponent } from './step-four/step-four.component';
 import { StepFiveComponent } from './step-five/step-five.component';
 import { StepSixComponent } from './step-six/step-six.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { StepCompleteComponent } from './step-complete/step-complete.component';
 
 
 export const routes: Routes = [
@@ -32,7 +33,8 @@ export const routes: Routes = [
     StepThirdComponent,
     StepFourComponent,
     StepFiveComponent,
-    StepSixComponent
+    StepSixComponent,
+    StepCompleteComponent
   ],
   imports: [
     RouterModule.forChild(routes),

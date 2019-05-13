@@ -13,6 +13,17 @@
     line-height: 28px;
   }
 
+    /* Border */
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+  }
+
+  /* Font color */
+  input.mat-input-element {
+    color: white;
+    line-height: 1;
+  }
+
   .mat-button-wrapper {
     height: 100%; 
   }
@@ -27,9 +38,7 @@
   }
 
   .mat-icon-button {
-    
-    vertical-align: middle; 
-    
+    vertical-align: middle;  
     &.small {
   
       width: 16px;
@@ -43,7 +52,12 @@
         line-height: 16px;
       }
     }
+  }
 
+  /* Hint */
+  
+  .mat-form-field-appearance-legacy .mat-hint {
+    color: rgba(255, 255, 255, 0.54);
   }
 
 
@@ -265,7 +279,7 @@
   }
 
   .mat-form-field-underline {
-    background-color: #252525;
+    background-color: rgba(255, 255, 255, 0.20);
   }
 
   /* Radio */

@@ -1,33 +1,40 @@
 .mat-form-field {
-    width: 100%;
+	width: 100%;
+	margin: 6px 0;
+}
+
+.mat-radio-button {
+  margin: 0 12px 0 0;
 }
 
 .tg-detail-left {
-    width: 50%;
-    float: left;
-    box-sizing: border-box;
-    padding: 1em;
+  width: 50%;
+  float: left;
+  box-sizing: border-box;
+  padding: 1em;
 }
+
 .tg-detail-right {
-    width: 50%;
-    float: right;
-    box-sizing: border-box;
+  width: 50%;
+  float: right;
+  box-sizing: border-box;
 }
 
 .tg-detail-summary {
-    margin: 1em;
-    border: 2px solid #7b7560;
-    border-radius: 4px;
-    box-shadow: 0 0 9px black;
+	background: rgba(0, 0, 0, 0.4);
+  margin: 1em;
+  border: 2px solid #7b7560;
+  border-radius: 4px;
+  box-shadow: 0 0 9px black;
 
-    .tg-detail-summary-header {
-        background: #6b1209;
-        padding: .5em 1em;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
+  .tg-detail-summary-header {
+    background: #6b1209;
+    padding: .5em 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 
-    p {
-        padding: .5em 1em;
-    }
+  p {
+    padding: .5em 1em;
+  }
 }

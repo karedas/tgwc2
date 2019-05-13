@@ -5,6 +5,8 @@ import { StepFirstComponent } from './step-first/step-first.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepSecondComponent } from './step-second/step-second.component';
 import { StepFourComponent } from './step-four/step-four.component';
+import { StepFiveComponent } from './step-five/step-five.component';
+import { StepSixComponent } from './step-six/step-six.component';
 
 
 @Component({
@@ -21,6 +23,8 @@ export class RegistrationComponent implements OnInit {
   @ViewChild(StepSecondComponent) stepSecondComponent: StepSecondComponent;
   @ViewChild(StepThirdComponent) stepThirdComponent: StepThirdComponent;
   @ViewChild(StepFourComponent) stepFourComponent: StepFourComponent;
+  @ViewChild(StepFiveComponent) stepFiveComponent: StepFiveComponent;
+  @ViewChild(StepSixComponent) stepSixComponent: StepSixComponent;
 
 
   race: string;
@@ -40,7 +44,17 @@ export class RegistrationComponent implements OnInit {
     return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
   }
 
+  get frmStepFour() {
+    return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
+  }
 
+  get frmStepFive() {
+    return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
+  }
+
+  get frmStepSix() {
+    return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
+  }
 
   constructor() { }
 
@@ -74,6 +88,20 @@ export class RegistrationComponent implements OnInit {
 
     //Skills
     this.stepFourComponent.frmStepFour.valueChanges
+      .subscribe((selected) => {
+        //DEBUG:
+        console.log(selected);
+      });
+      
+    //Skills
+    this.stepFiveComponent.frmStepFive.valueChanges
+      .subscribe((selected) => {
+        //DEBUG:
+        console.log(selected);
+      });
+      
+    //Skills
+    this.stepSixComponent.frmStepSix.valueChanges
       .subscribe((selected) => {
         //DEBUG:
         console.log(selected);

@@ -1,4 +1,4 @@
-<form [formGroup]="frmStepSix">
+<form [formGroup]="frmStepSix" autocomplete="off">
 
   <div class="tg-registration-step" fxLayout>
     <div class="tg-sidebar" fxFlex="1 1 30%">
@@ -16,38 +16,44 @@
     </div>
     <div class="tg-detail-content" fxFlex="1 1 70%">
       <div class="tg-detail-text tg-detail-left">
-        <mat-form-field floatLabel="never" appearance="outline"> 
-          <input matInput placeholder="Nome del personaggio" type="text" autocomplete="off">
+        <mat-form-field floatLabel="never" hintLabel="Max 16 caratteri">
+          <input #inputName 
+            matInput 
+            [formControlName]="'name'" 
+            maxlength="16" 
+            placeholder="Nome del personaggio" 
+            type="text">
+          <mat-hint align="end">{{inputName.value?.length || 0}}/16</mat-hint>
         </mat-form-field>
-        <mat-radio-group aria-label="Sesso:">
+        <mat-radio-group aria-label="Sesso:" [formControlName]="'sex'">
           <mat-radio-button value="m">Maschio</mat-radio-button>&nbsp;
           <mat-radio-button value="f">Femmina</mat-radio-button>
         </mat-radio-group>
 
-        <mat-form-field floatLabel="never" appearance="outline">
-          <input matInput placeholder="E-mail" type="text" autocomplete="off">
+        <mat-form-field floatLabel="never">
+          <input matInput [formControlName]="'email'" placeholder="E-mail" type="text" autocomplete="off">
         </mat-form-field>
-        <mat-form-field floatLabel="never" appearance="outline">
-          <input matInput placeholder="Ripeti la tua e-mail" type="text" autocomplete="off">
+        <mat-form-field floatLabel="never">
+          <input matInput [formControlName]="'confirmEmail'" placeholder="Ripeti la tua e-mail" type="text" autocomplete="off">
         </mat-form-field>
-        <mat-form-field floatLabel="never" appearance="outline">
-          <input matInput placeholder="Password" type="password" autocomplete="off">
+       <mat-form-field floatLabel="never">
+          <input matInput [formControlName]="'password'" placeholder="Password" type="password" autocomplete="off">
         </mat-form-field>
-        <mat-form-field floatLabel="never" appearance="outline">
-          <input matInput placeholder="Ripeti la password" type="password" autocomplete="off">
+        <mat-form-field floatLabel="never">
+          <input matInput [formControlName]="'confirmPassword'" placeholder="Ripeti la password" type="password" autocomplete="off">
         </mat-form-field>
 
-        <button mat-raised-button color="accent">Completa</button>
+        <button mat-raised-button color="accent" (click)="test()">Completa</button>
       </div>
       <div class="tg-detail-right">
         <div class="tg-detail-summary">
           <div class="tg-detail-summary-header">
             Riepilogo
           </div>
-          <p>Razza: [razza_etnia]</p>
-          <p>Mestiere: [mestiere]</p>
-          <p>Caratteristiche: [lista]</p>
-          <p>Città di partenza: [città]</p>
+          <p><span class="tg-white">Razza</span>: [razza_etnia]<br>
+            <span class="tg-white">Mestiere</span>: [mestiere]<br>
+            <span class="tg-white">Caratteristiche</span>: [lista]<br>
+            <span class="tg-white">Città di partenza</span>: [città]</p>
         </div>
       </div>
     </div>
