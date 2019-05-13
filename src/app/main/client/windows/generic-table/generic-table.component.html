@@ -1,62 +1,57 @@
-<ng-container *ngIf="dataTable$ | async">
-  <tg-dialog [id]="dialogID">
-    <div class="tg-generictable">
-      <div class="b-ironlight-mini tg-box">
-        <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <!-- Generic Table content start -->
-          <p-table 
-            #genericTable
-            [value]="rows" 
-            [columns]="columns" 
-            [autoLayout]="true" 
-            [paginator]="true"  
-            [rows]="currentPageLimit"
-            [rowHover]="true"
-            sortMode="multiple"
-            [reorderableColumns]="true">
-            
 
-            <ng-template pTemplate="header" let-columns>
-              <!-- Caption-->
-              <tr>
-                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                  <span [innerHtml]="col.name | dataToHtml"></span>
-                  <p-sortIcon [field]="col.field"></p-sortIcon>
-                </th>
-              </tr>
-            </ng-template>
+  <div class="b-ironlight-mini tg-box" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    <div class="tg-dialog-content-nopadding tg-shadow-inset">
+      <!-- Generic Page Dialog Title -->
+      <div class="tg-dialog-title" cdkDragHandle>
+        {{headerTitle}}
+        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+        </button>
+      </div>
 
-            <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
-              <tr [pReorderableRow]="index">
-                <td *ngFor="let col of columns">
-                  <ng-container *ngIf="col.name ==='icona'">
-                    <tg-icons [icon]="rowData[col.field]"></tg-icons>
-                  </ng-container>
+      <div class="tg-generictable">
+        <div>
+          <!-- Saerch Filter -->
+          <mat-form-field class="tg-table--filter">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off">
+          </mat-form-field>
+          
+          <ng-scrollbar class="scrollbar scrollbar-dialog" [autoUpdate]="true" #scrollBar [shown]="'always'"
+            [disableOnBreakpoints]="false">
 
-                  <ng-container *ngIf="col.name ==='ipaddr'">
-                      <a target="_blank" href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{rowData[col.field]}}</a>
-                  </ng-container>
+            <table mat-table [dataSource]="dataSource" matSort>
 
-                  <ng-container *ngIf="col.name !== 'icona' && col.name !=='ipaddr'">
-                    <span [innerHtml]="rowData[col.field] | dataToHtml"  pReorderableRowHandle *ngIf="rowData[col.field]"></span>
-                  </ng-container>
+              <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header>{{column}}</th>
+
+                <td mat-cell *matCellDef="let element">
+                  <!-- Icon type -->
+                  <tg-icons [icon]="element[column]" *ngIf="column === 'icona'"></tg-icons>
+                  <!-- Ip Address type-->
+                  <a target="_blank"  *ngIf="column === 'ipaddr'"
+                  href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{element[column]}}</a>
+                  <!-- Default Text type -->
+                  <span [innerHtml]="element[column] | dataToHtml" *ngIf="element[column] && column !== 'icona' && column !=='ipaddr'"></span>
                 </td>
-              </tr>
-            </ng-template>
-            
-            <ng-template pTemplate="summary">
-              Visualizzati {{rows.length }} risultati
-            </ng-template>
-          </p-table>
-          <!-- Generic Table content end -->
+
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay;  sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+            </table>
+          </ng-scrollbar>
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+
         </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
+        <!-- Generic Table content end -->
       </div>
     </div>
-  </tg-dialog>
-</ng-container>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
+  </div>

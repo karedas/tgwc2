@@ -14,13 +14,9 @@ export class ClientContainerComponent implements OnInit, OnDestroy {
   tgConfig: TGConfig;
   private _unsubscribeAll: Subject<any>;
 
-  constructor(
-    private _configService: ConfigService
-  ) {
-
+  constructor(private _configService: ConfigService) {
     this._unsubscribeAll = new Subject<any>();
   }
-
 
   ngOnInit(): void {
 

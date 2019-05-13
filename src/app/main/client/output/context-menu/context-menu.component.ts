@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'tg-context-menu',
@@ -7,21 +6,9 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./context-menu.component.scss']
 })
 export class ContextMenuComponent implements OnInit {
-
-
-  // @Input('model')  model: MenuItem[];
-  public items: MenuItem[];
   public readonly target: string;
 
-  constructor() {
-
-    this.items = [
-      { label: 'Prendi', icon: 'pi pi-fw pi-times' },
-      { label: 'Indossa', icon: 'pi pi-fw pi-times'},
-      { label: 'Posa', icon: 'pi pi-fw pi-times'}
-    ];
-
-  }
+  constructor() {}
 
   ngOnInit() {
   }

@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getDoors, getUserLevel, getInvisibilityLevel } from 'src/app/store/selectors';
@@ -68,7 +68,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
         cmd = this.dirNames[dir];
       }
       if (cmd) {
-        this.game.sendToServer(cmd);
+        this.game.processCommands(cmd);
       }
     }
   }
@@ -85,7 +85,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
         cmd = `blocca ${this.dirNames[dir]}`;
       }
       if (cmd) {
-        this.game.sendToServer(cmd);
+        this.game.processCommands(cmd);
       }
 
       return false;
@@ -95,7 +95,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
 
   setDoors(doors: any): void {
-    if(doors) {
+    if (doors) {
       for (let d = 0; d < this.dirNames.length; ++d) {
         this.doorsStyle[this.dirNames[d]] = {
           'background-position': (-26 * doors[d] + 'px center')

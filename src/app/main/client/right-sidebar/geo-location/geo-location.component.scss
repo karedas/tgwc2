@@ -1,5 +1,4 @@
 @import 'variables';
-@import '~src/scss/colors';
 @import 'sprites';
 @import 'utils/sprites-mixins';
 
@@ -52,7 +51,7 @@ tg-geo-location {
 }
 
 .tg-geolocal--image {
-  background: url($imgPath + '/regions/00.jpg') no-repeat center center;
+  background: url($imgPath + '/regions/base.jpg') no-repeat center center;
   height: 100%;
 	width: 100%;
 	opacity: 0;

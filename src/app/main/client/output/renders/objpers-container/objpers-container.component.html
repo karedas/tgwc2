@@ -10,13 +10,10 @@
   <div class="tg-objperson" fxLayout="row wrap">
 
     <!-- Obj or Person Title -->
-      <div class="tg-objperson--title" *ngIf="objcont?.title" fxFlex="1 1 100%">
-        {{eqcont.title | capitalizeFirst}} 
-      </div>
-    
-    <ng-container *ngIf="eqcont.list.length === 0; else equipmentList">
+  
+    <ng-container *ngIf="eqcont.list.length === 0 ; else equipmentList">
         <div class="tg-objperson--line tg-brown" fxFlex="1 1 100%">
-          Non indossa niente di particolare.
+         Non indossa niente di particolare.
         </div>
     </ng-container>
     
@@ -74,7 +71,9 @@
           <tg-icons [icon]="obj.icon" 
             [attr.cntnum]="obj.cntnum"
             (mousedown)="onInteract($event, obj)"
-            pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100">
+            tooltip="Guarda" 
+            placement="left"
+            show-delay="500">
           </tg-icons>
   
           <tg-hstat [condprc]="obj.condprc" *ngIf="!obj.sz;else objquantity"></tg-hstat>
@@ -90,7 +89,9 @@
             <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
               <tg-icons [icon]="obj.icon" 
                 (mousedown)="onInteract($event, obj, indexSz)"
-                pTooltip="Guarda" tooltipPosition="left" showDelay="500" hideDelay="100"></tg-icons>
+                tooltip="Guarda"
+                placement="left"
+                show-delay="500"></tg-icons>
   
               <tg-hstat [condprc]="sz.condprc"></tg-hstat>
   

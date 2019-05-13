@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';
 import { SocketService } from 'src/app/services/socket.service';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
 
 @Component({
@@ -110,13 +110,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((loginSuccess: boolean) => {
 
         if (loginSuccess === true) {
-
-          this.loginService._loginReplayMessage = ' ';
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
-          
+
           // Google Analytics
           this.googleAnalyticsService.emitEvent(`userPage`, `User ${this.username.value} Action`, 'login');
-          this.router.navigate([redirect]);
+
+          this.router.navigate([redirect]).then( () => {
+            this.loginService._loginReplayMessage = ' ';
+          });
 
         } else {
           this.loginFailed = true;
@@ -126,6 +127,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loginFailed = false;
         }
       });
+  }
+
+  routeToRegistrazione() {
+    this.router.navigate(['auth/registrazione']);
   }
 
   ngOnDestroy() {

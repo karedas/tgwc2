@@ -1,13 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TGConfig, tgConfig } from '../../client-config';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
+import { TGConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatSliderChange, MAT_DIALOG_DATA } from '@angular/material';
+import { AudioService } from '../../audio/audio.service';
+import { FileSaverService } from 'ngx-filesaver';
+import { font_size_options } from 'src/app/main/common/constants';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'tg-control-panel',
   templateUrl: './control-panel.component.html',
-  styleUrls: ['./control-panel.component.scss']
+  styleUrls: ['./control-panel.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ControlPanelComponent implements OnInit, OnDestroy {
 
@@ -15,20 +21,96 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
+  fileUploaded: boolean = false;
+  tabOpen: number = 0;
+
+  oldFontSize: number;
+
+  fontSizes = font_size_options;
+
   constructor(
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    private audioService: AudioService,
+    private gameService: GameService,
+    private _FileSaverService: FileSaverService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    
+
     this._unsubscribeAll = new Subject();
-   }
+    this.tabOpen = data.tab
+  }
 
   ngOnInit() {
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
-      })
+      });
+  }
 
+  changeFontSize(event: any) {
+    this.oldFontSize = this.tgConfig.fontSize;
+    this.gameService.setOutputSize(event.value, this.oldFontSize);
+  }
+
+  onOptionChange(event, value: any) {
+    this._configService.setConfig(value);
+  }
+
+  // Format audio to Decimal only for user view
+  formatAudio(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    return value;
+  }
+
+  onAudioChange(event: MatSliderChange, source: string) {
+
+    if (source === 'sound') {
+      this._configService.setConfig({
+        audio: { soundVolume: event.value }
+      })
+    }
+    else if (source === 'music') {
+      this._configService.setConfig({
+        audio: { musicVolume: event.value }
+      })
+    }
+    else if (source === 'enable') {
+      this.audioService.toggleAudio();
+    }
+  }
+
+  setTab(index: number) {
+    this.tabOpen = index;
+    this.fileUploaded = false;
+  }
+
+  saveConfig() {
+    const conf = localStorage.getItem('config');
+    this._FileSaverService.saveText(conf, 'tgconfig');
+  }
+
+  uploadConfig(event: any) {
+
+    let file: any = event.target.files[0];
+
+    if (file) {
+      let fileReader = new FileReader();
+
+      fileReader.onload = (e) => {
+        let result = fileReader.result;
+        if (typeof result === 'string') {
+          let newConf = JSON.parse(result);
+          this._configService.setConfig(newConf);
+
+          this.fileUploaded = true;
+        }
+      }
+      fileReader.readAsText(file);
+    }
   }
 
   ngOnDestroy(): void {

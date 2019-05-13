@@ -1,11 +1,13 @@
 <ng-container *ngIf="hero$ | async as hero">
 
-  <div class="tg-characterpanel b-controlpanel" *ngIf="tgConfig.layout.characterPanel">
+  <div class="tg-characterpanel b-controlpanel" *ngIf="tgConfig.characterPanel">
     <div class="tg-characterpanel-wrap" fxFlex="100" fxLayout="row">
       <!-- Character Detail -->
       <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
         <!-- Character Avatar -->
-        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm>
+        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()"
+         fxHide fxShow.gt-sm
+         matRipple>
           <div class="tg-avatar-wrap">
             <ng-container *ngIf="hero.image; else heroImage">
               <img src="{{env.media_address + hero.image}}" alt="Avatar" />
@@ -29,18 +31,24 @@
           <div class="tg-infocharname" fxLayout="row" fxHide fxShow.gt-xs>
             <span class="charName" fxHide fxShow.gt-sm>{{hero.name}}</span>
             <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
+
               <!-- Conva -->
-              <div *ngIf="hero.conva === '1'" class="status-conva" fxLayout
-                pTooltip="Sei <b class='tg-yellow'>convalescente!</b>" tooltipPosition="top" showDelay="300"
-                hideDelay="100" escape="false" [escape]="false">
+              <ng-template #convaTooltip>
+                Sei <b class='tg-yellow'>convalescente!</b>
+              </ng-template>
+              <div class="status-conva" *ngIf="hero.conva === '1'" fxLayout [tooltip]="convaTooltip" placement="top"
+                content-type="template" show-delay="500">
                 <div class="status-icon-box">
                   <i></i>
                 </div>
               </div>
+
               <!-- Position -->
-              <div pTooltip="Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>" tooltipPosition="top"
-                showDelay="300" hideDelay="100" [escape]="false" *ngIf="hero.position" class="status-position" fxLayout
-                [ngClass]="{
+              <ng-template #positionTooltip>
+                Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b>
+              </ng-template>
+              <div class="status-position" *ngIf="hero.position" [tooltip]="positionTooltip" placement="top"
+                content-type="template" placement="top" show-delay="500" fxLayout [ngClass]="{
                   'pos-0': (hero.position == '0'),
                   'pos-2': (hero.position == '2'),
                   'pos-3': (hero.position == '3'),
@@ -53,10 +61,13 @@
                 </div>
                 <span>{{ hero_pos[hero.position] }}</span>
               </div>
+
               <!-- Speed -->
-              <div pTooltip="Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>" tooltipPosition="top"
-                showDelay="300" hideDelay="100" [escape]="false" *ngIf="hero.walk; let walk;" class="status-walk"
-                fxLayout [ngClass]="{
+              <ng-template #speedTooltip>
+                Velocità di movimento: <b class='tg-yellow'>{{hero.walk}}</b>
+              </ng-template>
+              <div class="status-walk" *ngIf="hero.walk; let walk;" [tooltip]="speedTooltip" show-delay="500"
+                placement="top" content-type="template" fxLayout [ngClass]="{
                   'walk-0': (walk == 'passeggio'),
                   'walk-1': (walk == 'camminata'),
                   'walk-2': (walk == 'marcia'),
@@ -69,9 +80,13 @@
                 <span class="tg-green">{{ walk | slice:0:3}}</span>
               </div>
               <ng-container *ngIf="hero.combat; let combatSet">
+
                 <!-- Combat: Difesa -->
-                <div pTooltip="Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>" tooltipPosition="top" showDelay="300"
-                  hideDelay="100" [escape]="false" class="status-combat-mod infostatus-block" fxLayout [ngClass]="{
+                <ng-template #combatDifTooltip>
+                  Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>
+                </ng-template>
+                <div class="status-combat-mod infostatus-block" [tooltip]="combatDifTooltip" show-delay="500"
+                  placement="top" content-type="template" fxLayout [ngClass]="{
                     'mod-par-a': (combatSet?.mod == 'deflettere'),
                     'mod-par-s': (combatSet?.mod == 'parare'),
                     'mod-sch': (combatSet?.mod == 'schivare')
@@ -81,20 +96,27 @@
                   </div>
                   <span>{{combatSet.mod | slice:0:3}}</span>
                 </div>
+
                 <!-- Combat: Atteggiamento -->
-                <div pTooltip="Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>" tooltipPosition="top"
-                  showDelay="300" hideDelay="100" [escape]="false" class="status-combat-attegg" fxLayout>
+                <ng-template #combatAttTooltip>
+                  Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>
+                </ng-template>
+                <div class="status-combat-attegg" [tooltip]="combatAttTooltip" show-delay="500" placement="top"
+                  content-type="template" fxLayout>
                   <div class="status-icon-box">
                     <i></i>
                   </div>
                   <span>{{combatSet.atteg | slice:0:3}}</span>
                 </div>
               </ng-container>
+
               <!-- Money -->
-              <div class="status-money infostatus-block tg-yellow" fxLayout
-                pTooltip="I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>" tooltipPosition="top"
-                showDelay="300" hideDelay="100" [escape]="false">
-                <div class="status-icon-box">
+              <ng-template #moneyTooltip>
+                I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>
+              </ng-template>
+              <div class="status-money infostatus-block tg-yellow" fxLayout [tooltip]="moneyTooltip" show-delay="500"
+                placement="top" content-type="template" fxLayout>
+                <div class="status-icon-box" style="margin-top: -10px;">
                   <i></i>
                 </div>
               </div>
@@ -104,24 +126,24 @@
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" pTooltip="Salute" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin lft" tooltip="Salute" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.hit }}</i> / 100</span>
                 <span class="red barC healthbar" [style.width.%]="hero.status?.hit"></span>
               </div>
-              <div class="barcont barthin" pTooltip="Fiato" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin" tooltip="Fiato" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.move }}</i> / 100</span>
                 <span class="green barC movebar" [style.width.%]="hero.status?.move"></span>
               </div>
             </div>
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" pTooltip="Fame" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin lft" tooltip="Fame" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.food }}</i> / 100</span>
                 <span class="orange barC hungrybar" [style.width.%]="hero.status?.food"></span>
               </div>
-              <div class="barcont barthin" pTooltip="Sete" tooltipPosition="top" showDelay="300" hideDelay="100">
+              <div class="barcont barthin" tooltip="Sete" show-delay="500" placement="top">
                 <span class="tg-statusbar-text">
                   <i>{{ hero.status?.drink}}</i> / 100</span>
                 <span class="blue barC thirstbar" [style.width.%]="hero.status?.drink"></span>

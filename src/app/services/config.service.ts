@@ -1,6 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as _ from 'lodash';
+import { SRCSET_ATTRS } from '@angular/core/src/sanitization/html_sanitizer';
 
 export const TG_CONFIG = new InjectionToken('tgCustomConfig');
 
@@ -15,7 +16,7 @@ export class ConfigService {
   constructor(
     @Inject(TG_CONFIG) private _config
   ) {
-    //set the default config from the user provided config (from forRoot)
+    // set the default config from the user provided config (from forRoot)
     this._defaultConfig = _config;
 
     this._init();
@@ -23,12 +24,9 @@ export class ConfigService {
 
 
   set config(value) {
-
     let config = this._configSubject.getValue();
     config = _.merge({}, config, value);
-
     this._configSubject.next(config);
-
   }
 
   get config(): any | Observable<any> {
@@ -43,7 +41,7 @@ export class ConfigService {
 
     let config: any;
 
-    //get config values from localstorage.
+    // get config values from localstorage.
     let configInStorage = localStorage.getItem('config');
 
     // Set the config from the default config
@@ -58,33 +56,34 @@ export class ConfigService {
         config = _.cloneDeep(configInStorage);
         this._configSubject.next(config);
       } else {
-        localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
+
+        localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()));
       }
-    }
-    else {
-      localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()))
+    } else {
+      localStorage.setItem('config', JSON.stringify(this._configSubject.getValue()));
     }
   }
 
   private compareConfigKeys(storedConfig: any) {
     // Compare default config with Values in localstorage
-    var aKeys = this.getDeepKeys(storedConfig).sort();
-    var bKeys = this.getDeepKeys(this._configSubject.getValue()).sort();
-
+    const aKeys = this.getDeepKeys(storedConfig).sort();
+    const bKeys = this.getDeepKeys(this._configSubject.getValue()).sort();
     return JSON.stringify(aKeys) === JSON.stringify(bKeys);
-
   }
 
   private getDeepKeys(obj) {
     let keys = [];
-    for (let key in obj) {
-      keys.push(key);
-      if (typeof obj[key] === "object") {
-        let subkeys = this.getDeepKeys(obj[key]);
-        keys = keys.concat(subkeys.map(function (subkey) {
-          return key + "." + subkey;
-        }));
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key) && key !== 'shortcuts') {
+        keys.push(key);
+        if (typeof obj[key] === 'object') {
+          const subkeys = this.getDeepKeys(obj[key]);
+          keys = keys.concat(subkeys.map(function (subkey) {
+            return key + '.' + subkey;
+          }));
+        }
       }
+      
     }
     return keys;
   }
@@ -92,15 +91,21 @@ export class ConfigService {
   setConfig(value, opts = { emitEvent: true }): void {
     // Get the value from the behavior subject
     let config = this._configSubject.getValue();
-
-    // Merge the new config
-    config = _.merge({}, config, value);
+    // // Merge the new config
+    config = _.mergeWith(config, value,  (obj, src) => {
+      if(_.isArray(src) && _.isEmpty(src)) {
+        return src;
+      } else if (_.isArray(src)) {
+        return src;
+      }
+    })
 
     // If emitEvent option is true...
     if (opts.emitEvent === true) {
       // Notify the observers
       this._configSubject.next(config);
     }
+
 
     localStorage.setItem('config', JSON.stringify(config));
   }
@@ -113,4 +118,5 @@ export class ConfigService {
     // Set the config from the default config
     this._configSubject.next(_.cloneDeep(this._defaultConfig));
   }
+  
 }

@@ -3,18 +3,14 @@ import { TG_CONFIG } from '../services/config.service';
 
 
 @NgModule()
-export class TgConfigModule
-{
-    constructor(@Optional() @SkipSelf() parentModule: TgConfigModule)
-    {
-        if ( parentModule )
-        {
+export class TgConfigModule {
+    constructor(@Optional() @SkipSelf() parentModule: TgConfigModule) {
+        if ( parentModule ) {
             throw new Error('TgConfigModule is already loaded. Import it in the AppModule only!');
         }
     }
 
-    static forRoot(config): ModuleWithProviders
-    {
+    static forRoot(config): ModuleWithProviders {
         return {
             ngModule : TgConfigModule,
             providers: [

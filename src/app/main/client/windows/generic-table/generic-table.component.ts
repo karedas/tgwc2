@@ -1,37 +1,36 @@
-import { Component, ViewEncapsulation, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/models/data/generictable.model';
 import { takeUntil } from 'rxjs/operators';
-import { WindowsService } from '../windows.service';
-import { Table } from 'primeng/table';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'tg-generic-table',
   templateUrl: './generic-table.component.html',
   styleUrls: ['./generic-table.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
-export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
-  @ViewChild('genericTable') table: Table;
+export class GenericTableComponent implements  OnInit, OnDestroy {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  public readonly dialogID: string = 'genericTable';
+  dataTable$: Observable<any>;
+  pageSizeBase: number = 5;
+  private data = [];
 
-  public dataTable$: Observable<any>;
-  public rows = [];
-  public columns = [];
-  public currentPageLimit = 10;
-  private headerTitle: string;
+  dataSource:  MatTableDataSource<any>;
+  columnsToDisplay: string[];
+  resultsLength = 0;
+  headerTitle = 'Lista Generica';
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
-    private windowsService: WindowsService
   ) {
 
     this.dataTable$ = this.store.pipe(select(getGenericTable));
@@ -39,18 +38,17 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
     this._unsubscribeAll = new Subject;
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     // Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      (dt: IGenericTable) => {
-        if (dt) {
-          this.setHeaderTitle(dt.title);
-          if (this.table ) {
-            this.table.reset();
+    this.dataTable$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (dt: IGenericTable) => {
+          if (dt) {
+            this.setHeaderTitle(dt.title);
+            this.resultsLength = Object.keys(dt.data).length;
+            this.populate(dt);
           }
-          this.populate(dt);
-          this.open();
-        }
       });
   }
 
@@ -60,37 +58,44 @@ export class GenericTableComponent implements  AfterViewInit, OnDestroy {
 
   private populate(dataTable: any) {
 
-    this.rows = [];
-    this.columns = [];
+    this.columnsToDisplay = [];
+    this.data = [];
+
 
     if (dataTable.head) {
       dataTable.head.forEach((v: any, i: number) => {
         switch (typeof v) {
           case 'object':
-            this.columns.push({ field: 'prop_' + i, 'name': v.title.toLowerCase() });
+            this.columnsToDisplay.push(v.title.toLowerCase());
             break;
           default:
-            this.columns.push({ field: 'prop_' + i, 'name': v.toLowerCase() });
+            this.columnsToDisplay.push(v.toLowerCase());
             break;
         }
       });
+
     }
+    
+    // pupulate data
     if (dataTable.data) {
       dataTable.data.forEach((d: any) => {
         const obj = {};
+
         d.map((row: string, rowIndex: number) => {
-          obj[this.columns[rowIndex].field] = row;
+          obj[this.columnsToDisplay[rowIndex]] = row;
         });
-        this.rows.push(obj);
+
+        this.data.push(obj);
       });
     }
+    this.dataSource = new MatTableDataSource(this.data);
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  private open() {
-    setTimeout(() => {
-      this.windowsService.openDialogTable(this.dialogID, this.headerTitle);
-    }, 200);
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
   ngOnDestroy(): void {

@@ -6,10 +6,10 @@ import { Observable, BehaviorSubject, Subject, ReplaySubject } from 'rxjs';
 })
 export class InputService {
 
-  private _isFocussed: ReplaySubject<any>;
+  private _isFocussed: BehaviorSubject<boolean>;
 
   constructor() {
-    this._isFocussed = new ReplaySubject();
+    this._isFocussed = new BehaviorSubject(false);
   }
 
   get isFocussed(): Observable<any> {
@@ -17,6 +17,6 @@ export class InputService {
   }
 
   focus() {
-    this._isFocussed.next();
+    this._isFocussed.next(true);
   }
 }

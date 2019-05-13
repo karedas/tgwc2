@@ -31,14 +31,18 @@ export class AudioComponent implements OnInit, OnDestroy {
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
-        this.audioService.soundVolume = config.soundVolume;
-        this.audioService.musicVolume = config.musicVolume;
+        this.audioService.enable = config.audio.enable;
+        this.audioService.soundVolume = config.audio.soundVolume / 100;
+        this.audioService.musicVolume = config.audio.musicVolume / 100;
       });
 
-    this.music$.pipe(filter(state => !!state )).pipe(
-      takeUntil(this._unsubscribeAll)).subscribe(
-      track => this.audioService.setAudio(track)
-    );
+    this.music$
+      .pipe(
+        filter(state => !!state ),
+        takeUntil(this._unsubscribeAll))
+      .subscribe(track =>
+        this.audioService.setAudio(track)
+      );
   }
 
   ngOnDestroy(): void {

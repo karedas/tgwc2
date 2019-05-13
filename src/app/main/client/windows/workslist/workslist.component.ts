@@ -1,94 +1,100 @@
-import { Component, OnDestroy, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getWorksList } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/models/data/workslist.model';
-import { GameService } from 'src/app/services/game.service';
-import { WindowsService } from '../windows.service';
-import { Table } from 'primeng/table';
+import { GameService } from 'src/app/main/client/services/game.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
+
+export interface WorksListElement {
+  id: number,
+  icon: number,
+  diff: string,
+  cando: string,
+  desc: string,
+  action: any
+}
 
 @Component({
   selector: 'tg-workslist',
   templateUrl: './workslist.component.html',
   styleUrls: ['./workslist.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
-export class WorkslistComponent implements AfterViewInit, OnDestroy {
+export class WorkslistComponent implements OnInit, OnDestroy {
 
-  @ViewChild('worksTable') table: Table;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  public readonly dialogID = 'workslist';
+  pageSizeBase = 10;
+  dataSource:  MatTableDataSource<any>;
+  columnsToDisplay: string[] = ['id', 'icon', 'diff', 'cando', 'desc', 'cmd'];
+  resultsLength = 0;
+  headerTitle: string = '';
 
-  public readonly cols: any = [
-    {field: 'id', header: '#'},
-    {field: 'icon', header: ''},
-    {field: 'diff', header: 'Difficoltà'},
-    {field: 'cando', header: 'Puoi?'},
-    {field: 'desc', header: 'Descrizione'},
-    {field: 'action', header: ''},
-  ];
+  dataTable$: Observable<any>;
 
-  public rows = [];
-  public currentPageLimit = 10;
+  private data = [];
   private cmd: string;
-
-
-  public dataTable$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
 
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    private windowsService: WindowsService
     ) {
-
       this.dataTable$ = this.store.pipe(select(getWorksList));
       this._unsubscribeAll = new Subject;
      }
 
-  ngAfterViewInit(): void {
-    this.dataTable$.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      (wl: IWorks) => {
-        if (wl) {
-          this.cmd = wl.cmd;
-          if (this.table ) {
-            this.table.reset();
+  ngOnInit(): void {
+
+    this.dataTable$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (wl: IWorks) => {
+          if (wl) {
+            this.setHeaderTitle(wl.verb)
+            this.resultsLength = Object.keys(wl.list).length;
+            this.populate(wl.list);
           }
-          this.populate(wl.list);
-          this.open(wl.verb);
-        }
-      }
-    );
-  }
-
-  private populate(wl: any) {
-
-    this.rows = [];
-
-    if (wl) {
-      wl.forEach((dataRow: IWorksList) => {
-        this.rows.push(dataRow);
       });
-    }
   }
 
-  private open(verb) {
-    const title = `Cosa sai ${verb}`;
-    setTimeout(() => {
-      this.windowsService.openDialogTable(this.dialogID, title);
-    });
+  setHeaderTitle(verb) {
+    this.headerTitle =  `Cosa sai ${verb}`;;
+  }
+
+  private populate(data: any) {
+
+    this.data = [];
+
+    if (data) {
+
+      data.forEach((d: any, i: number) => {
+        d.cmd = i;
+        this.data.push(d);
+      });
+
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+
+      this.dataSource.sort = this.sort;
+    }
   }
 
 
   onAction(index: number, event: Event) {
     event.preventDefault();
-    if (this.cmd) {
+    if (index) {
       this.game.processCommands(this.cmd + ' ' + (index + 1));
     }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
   ngOnDestroy(): void {

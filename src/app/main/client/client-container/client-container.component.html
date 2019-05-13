@@ -1,14 +1,17 @@
-<div class="tg-area tg-box b-area">
+<div class="tg-area tg-box b-area" tgAutofocusInputbar>
   <!-- Main Panel -->
   <div class="tg-main" fxLayout="column" fxFill>
-    <tg-navbar fxFlex="0 0 36px" fxLayout></tg-navbar>
+    <tg-navbar></tg-navbar>
     
     <div fxLayout="row" fxFlex="1 1 0%" class="tg-main-row min-h-0" style="overflow: auto;">
       <div class="tg-leftside" fxFlex="1 1 auto" fxLayout="column">
         <!-- Output -->
         <tg-output fxLayout fxFlex="1 1 100%" class="min-h-0"></tg-output>
+
+        <!-- <mat-progress-bar mode="indeterminate" fxFlexOrder="3"></mat-progress-bar> -->
+
         <!-- Hero Dashboard -->
-        <tg-dashboard [ngClass]="{'top': tgConfig.layout.characterPanelTopPosition}"></tg-dashboard>
+        <tg-dashboard [ngClass]="{'top': 0 === tgConfig.characterPanelTopPosition}"></tg-dashboard>
         <tg-input></tg-input>
       </div>
       <!-- Right Sidebar -->
@@ -21,17 +24,3 @@
   <tg-audio></tg-audio> 
 
 </div>
-
-<tg-commands-list></tg-commands-list>
-
-<tg-character-sheet></tg-character-sheet>
-
-<tg-generic-table></tg-generic-table>
-
-<tg-editor></tg-editor>
-
-<tg-workslist></tg-workslist>
-
-<tg-book></tg-book>
-
-<tg-control-panel></tg-control-panel>

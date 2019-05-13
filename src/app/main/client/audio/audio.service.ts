@@ -1,18 +1,36 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ConfigService } from 'src/app/services/config.service';
+import { TGConfig } from '../client-config';
+import { audit } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class AudioService {
 
+  tgConfig: TGConfig;
+
   public sound: HTMLAudioElement;
   public music: HTMLAudioElement;
+  public _enable = false;
   public playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
 
 
-  constructor() {
+  constructor(
+    private _configService: ConfigService
+  ) {
     this.sound = new Audio();
     this.music = new Audio();
+  }
+
+  set enable (value: boolean) {
+    this._enable = value;
+    this.sound.muted = !this._enable;
+    this.music.muted = !this._enable;
+  }
+
+  get enable(): boolean {
+    return this._enable;
   }
 
   set soundVolume(value: number) {
@@ -74,6 +92,9 @@ export class AudioService {
   }
 
   public toggleAudio(): void {
-    (this.music.paused) ? this.music.play() : this.music.pause();
+    // store in configuration
+    this._configService.setConfig({
+      audio: {enable: this.enable = !this.enable}
+    });
   }
 }

@@ -28,7 +28,7 @@ declare let ga: Function;
 export class AppComponent {
 
   title = 'The Gate v2 WebClient';
-  load: boolean = false;
+  load = false;
 
   constructor(
     private router: Router,

@@ -6,7 +6,7 @@ import { Subject, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/models/data/hero.model';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
@@ -61,6 +61,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
@@ -69,13 +70,13 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       });
 
     // TODO, MOVE IN APP ROOT COMPONENT
-    this.watcherMedia = this.mediaObserver.media$
+    this.watcherMedia = this.mediaObserver.asObservable()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((change: MediaChange) => {
-        this.activeMediaQuery = change ? change.mqAlias : '';
+      .subscribe((changes: MediaChange[]) => {
+        changes.forEach(change => {
+          this.activeMediaQuery = change ? change.mqAlias : '';
+        });
       });
-
-      
 
     this.hero$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -119,9 +120,9 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   private setCombatPanel(target?: ITarget) {
 
     if (target && typeof target.hit !== 'undefined') {
-      
+
       const lengthKeys = Object.keys(target).length;
-      
+
       if (lengthKeys > 0) {
         this.inCombat = true;
         this.enemyHealt = target.hit;

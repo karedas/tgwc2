@@ -1,0 +1,80 @@
+@import 'variables';
+@import '~src/scss/utils/sprites-mixins';
+@import '~src/scss/sprites';
+
+.tg-control-panel{
+  color: rgb(142, 142, 142);
+
+  .mat-divider {
+    margin: 1em 0;
+    width: 100%;
+    border-top-color: rgba(255, 255, 255, 0.188);
+  }
+
+  button {
+    margin: .2em;
+  }
+
+  .mat-radio-button {
+    margin: .2em 0;
+  }
+
+  .mat-label {
+    padding-bottom:  .5em;
+  }
+}
+
+ 
+.tg-control-panel--tabcontent {
+  padding: 1em;
+}
+
+.tg-control-panel--tab {
+  background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
+  text-transform: uppercase;
+  color: #bfbfbf;
+  height: 100%;
+}
+
+.tg-control-panel-tabitem{
+  padding:1em;
+  cursor: pointer;
+  background-color: none;
+  transition: background-color .1s linear;
+
+  &:hover, &.active{
+    color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.tg-control-panel--subtitle {
+  color: $tg-yellow;
+  font-weight: normal;
+}
+
+.tg-control-panel--tabcontent {
+  background-color: #00000082;
+  display: none;
+  min-height: 400px;
+  position: relative;
+
+  &.active {
+    display: block;
+  }
+}
+
+.tg-control-panel--option {
+  padding-bottom: 1em;
+}
+
+.tg-control-panel--suboption{
+  padding: 0 0 0 3em;
+
+  h4 {
+    color: #bfbfbf;
+    margin: 0;
+    font-size: 100%;
+    font-weight: normal;
+  }
+}

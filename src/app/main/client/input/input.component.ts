@@ -2,15 +2,15 @@ import { Component, ViewChild, ElementRef, ViewEncapsulation, HostListener, OnDe
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
-import { faColumns, faSolarPanel, faBullseye, faFont } from '@fortawesome/free-solid-svg-icons';
 
 import { State } from 'src/app/store';
 import { getHero } from 'src/app/store/selectors';
 
-import { HistoryService } from 'src/app/services/history.service';
-import { GameService } from 'src/app/services/game.service';
+import { HistoryService } from 'src/app/main/client/services/history.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from './input.service';
 import { ConfigService } from 'src/app/services/config.service';
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 @Component({
   selector: 'tg-input',
@@ -24,11 +24,6 @@ export class InputComponent implements OnInit, OnDestroy {
 
   tgConfig: any;
 
-  facolumns = faColumns;
-  faSolarPanel = faSolarPanel;
-  faBullseye = faBullseye;
-  faFont = faFont;
-
   public inCombat = false;
 
   private _inCombat$: Observable<any>;
@@ -39,7 +34,7 @@ export class InputComponent implements OnInit, OnDestroy {
     private store: Store<State>,
     private historyService: HistoryService,
     private inputService: InputService,
-    private render: Renderer2,
+    private dialogService: DialogV2Service,
     private _configService: ConfigService
   ) {
 
@@ -123,29 +118,26 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
+  openShortCut() {
+    this.dialogService.openShortcut();
+  }
+
   toggleExtraOutput(event: Event) {
     this._configService.setConfig({
-      layout: { extraOutput: !this.tgConfig.layout.extraOutput }
-    })
+      output: { extraArea: { visible: !this.tgConfig.output.extraArea.visible }}
+    });
   }
 
   toggleCharacterPanel(event: Event) {
     this._configService.setConfig({
-      layout: { characterPanel: !this.tgConfig.layout.characterPanel }
-    })
+      characterPanel: !this.tgConfig.characterPanel
+    });
   }
 
-  toggleZen(event: Event) {
-
+  toggleZen(event?: Event) {
     this._configService.setConfig({
-      layout: { zen: !this.tgConfig.layout.zen }
-    })
-
-    if (this.tgConfig.layout.zen) {
-      this.render.addClass(document.body, 'zen');
-    } else {
-      this.render.removeClass(document.body, 'zen');
-    }
+      zen: !this.tgConfig.zen
+    });
   }
 
   onFontSizeChange(): void {

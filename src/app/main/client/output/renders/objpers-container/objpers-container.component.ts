@@ -3,7 +3,7 @@ import { IObjPersEqcont, IObjPersObjcont } from 'src/app/models/data/objpers.mod
 
 import { equip_positions_by_name } from 'src/app/main/common/constants';
 import { InteractService } from '../../services/interact.service';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-objpers-container',

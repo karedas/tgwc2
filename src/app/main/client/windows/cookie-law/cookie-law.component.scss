@@ -1,4 +1,4 @@
-@import '~src/scss/colors';
+@import 'variables';
 
 .tg-cookielaw {
   font-size: 1em;
@@ -12,11 +12,15 @@
     color: $tg-brown;
   }
 
+  .tg-cookielawcontent {
+    padding: 1em;
+  }
+
   .tg-title {
     color: $tg-brown;
     font-size: 13px;
     margin: 0;
-    padding:2em 0 1em;
+    padding-bottom: 1em;
   }
 
   .tg-btn-cookieconsent {
@@ -46,5 +50,10 @@
       line-height: 1;
       color: $tg-brown;
     }
+  }
+
+  //continue button
+  .mat-raised-button {
+    line-height: 25px;
   }
 }

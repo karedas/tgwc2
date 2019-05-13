@@ -17,6 +17,7 @@ $regions-border-size: 30px;
 .tg-box {
   position: relative;
   z-index: 2;
+  height: 100%;
   overflow: hidden;
 
   .tg-border-box {
@@ -150,8 +151,6 @@ $regions-border-size: 30px;
 .b-ironlight-mini {
   padding: $ironlight-mini-border-size;
   box-sizing: border-box;
-  height: 100%;
-  width: 100%;
 
   >.tg-border-box {
     overflow: hidden;

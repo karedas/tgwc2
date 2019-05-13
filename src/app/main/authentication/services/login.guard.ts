@@ -1,46 +1,46 @@
 import { Injectable } from '@angular/core';
 import {
-	CanActivateChild,
-	CanLoad, CanActivate,
-	ActivatedRouteSnapshot,
-	RouterStateSnapshot, Router, Route
+  CanActivateChild,
+  CanLoad, CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot, Router, Route
 } from '@angular/router';
 
 import { LoginService } from './login.service';
 
 @Injectable({
-	providedIn: 'root',
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-	constructor(
-		private loginService: LoginService, 
-		private router: Router
-		) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+    ) { }
 
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		const url: string = state.url;
-		return this.checkLogin(url);
-	}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const url: string = state.url;
+    return this.checkLogin(url);
+  }
 
-	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		return this.canActivate(route, state);
-	}
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(route, state);
+  }
 
-	canLoad(route: Route): boolean {
-		const url = `/${route.path}`;
-		return this.checkLogin(url);
-	}
+  canLoad(route: Route): boolean {
+    const url = `/${route.path}`;
+    return this.checkLogin(url);
+  }
 
-	checkLogin(url: string): boolean {
-		if (this.loginService.isLoggedinStatusValue) {
-			return true;
-		}
+  checkLogin(url: string): boolean {
+    if (this.loginService.isLoggedinStatusValue) {
+      return true;
+    }
 
-		// Store the attempted URL for redirecting
-		this.loginService.redirectUrl = url;
+    // Store the attempted URL for redirecting
+    this.loginService.redirectUrl = url;
 
-		// Navigate to the login page with extras
-		this.router.navigate(['/auth/login']);
-		return false;
-	}
+    // Navigate to the login page with extras
+    this.router.navigate(['/auth/login']);
+    return false;
+  }
 }

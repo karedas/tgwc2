@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { ClientComponent } from './client.component';
+import { FileSaverModule } from 'ngx-filesaver';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientContainerComponent } from './client-container/client-container.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { HistoryService } from 'src/app/services/history.service';
 import { RightSidebarModule } from './right-sidebar/right-sidebar.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OutputModule } from './output/output.module';
-import { GameService } from 'src/app/services/game.service';
-import { WindowsModule } from './windows/windows.module';
 import { InputModule } from './input/input.module';
 import { AudioComponent } from './audio/audio.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 @NgModule({
   declarations: [
     ClientComponent,
     ClientContainerComponent,
+    AudioComponent,
     NavbarComponent,
-    AudioComponent
   ],
   imports: [
     SharedModule,
@@ -26,15 +26,13 @@ import { AudioComponent } from './audio/audio.component';
     DashboardModule,
     RightSidebarModule,
     OutputModule,
-    WindowsModule,
-    InputModule
+    InputModule,
+    FileSaverModule,
+    JwSocialButtonsModule
   ],
   exports: [
-    ClientComponent,
-  ],
-  providers: [
-    GameService,
-    HistoryService,
+    NavbarComponent,
+    ClientComponent
   ],
 })
 export class ClientModule {

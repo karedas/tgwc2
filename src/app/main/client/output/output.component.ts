@@ -4,16 +4,16 @@ import { DataState } from 'src/app/store/state/data.state';
 import * as fromSelectors from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
-// import { jqxSplitterComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxsplitter';
 import { Observable, Subject } from 'rxjs';
 import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { Room } from 'src/app/models/data/room.model';
 import { SplitComponent } from 'angular-split';
 import { LoginService } from '../../authentication/services/login.service';
 import { IGenericPage } from 'src/app/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../client-config';
+
 
 @Component({
   selector: 'tg-output',
@@ -73,6 +73,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         this.tgConfig = config;
       });
 
+
     /* Check login status and if is disconnect cleaning the output messages */
     this.loginService.isLoggedIn
       .pipe(
@@ -102,15 +103,16 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
+
         if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
           this.lastRoomDescription = room.desc['base'];
         }
+
         this.typeDetail = 'room';
         const content = this.setContent('room', room);
         this.output.push(content);
         this.endOutputStore();
-
-        if (this.game.client_update.room.version < room.ver) {
+        if (this.game.client_update.room.version < room.ver && this.splitArea) {
           this.game.client_update.room.version = room.ver;
           this.game.client_update.room.needed = false;
         }
@@ -181,11 +183,19 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setOutputSplit() {
+    // Check if the Output area is over min-size to show split.
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
-      this.showExtraByViewport = false;
+      this.showExtraByViewport = this.game.showExtraByViewport = false;
     } else {
-      this.showExtraByViewport = true;
+      this.showExtraByViewport = this.game.showExtraByViewport = true;
     }
+  }
+
+  onDragEnd(event) {
+    // Store the Split size in the main config
+    this._configService.setConfig({
+      output: { extraArea: {size: [event.sizes[0], event.sizes[1]]} }
+    });
   }
 
   ngOnDestroy() {

@@ -27,7 +27,7 @@ import { StatusComponent } from './status/status.component';
   imports: [
     CommonModule,
     SharedModule,
-    AngularSplitModule.forRoot()
+    AngularSplitModule
   ],
   exports: [
     OutputComponent

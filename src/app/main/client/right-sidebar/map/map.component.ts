@@ -4,7 +4,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Map } from 'src/app/models/data/map.model';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { takeUntil } from 'rxjs/operators';
 import { MapService } from './services/map.service';
 

@@ -19,9 +19,7 @@ export class SocketService {
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private store: Store<ClientState>
-    ) {
+  constructor(private store: Store<ClientState>) {
     this.connect();
   }
 
@@ -30,12 +28,12 @@ export class SocketService {
   }
 
   public connect(): void {
-    
+
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
       this.initSocketEvent();
     }
-    
+
   }
 
   private initSocketEvent() {
@@ -62,9 +60,9 @@ export class SocketService {
   }
 
   public disconnect(): void {
-    
+
     this.store.dispatch(new DisconnectAction());
-    
+
     this.connected$.next(false);
     if (!this.socket.isConnected) {
       this.socket.connect();

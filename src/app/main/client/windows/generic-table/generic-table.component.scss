@@ -15,33 +15,33 @@ thead {
     text-align: center;
     font-weight: bold;
 
-    datatable-header-inner {
-        height: 100%;
-    }
+    // datatable-header-inner {
+    //     height: 100%;
+    // }
     
-    datatable-header-cell {
-        border-right: 1px solid black;
-    }
+    // datatable-header-cell {
+        // border-right: 1px solid black;
+    // }
 }
 
-datatable-body {
-    color: black;
+// datatable-body {
+    // color: black;
     
-    datatable-body-row {
-        background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
-        box-sizing: border-box;
-        border-top: 1px solid  #42342c!important;
-        transition: background .4s linear;
-        cursor: pointer;
-    }
+    // datatable-body-row {
+    //     background: url($imgPath + '/interface/trow-bg-light.jpg') repeat-x bottom left;
+    //     box-sizing: border-box;
+    //     border-top: 1px solid  #42342c!important;
+    //     transition: background .4s linear;
+    //     cursor: pointer;
+    // }
 
-    datatable-body-row:hover {
-        background: url($imgPath + '/interface/trow-bg-dark.jpg') repeat-x bottom left;
-    }
+    // datatable-body-row:hover {
+    //     background: url($imgPath + '/interface/trow-bg-dark.jpg') repeat-x bottom left;
+    // }
 
-    datatable-body-cell {
-        border-right: 1px solid #a79a73;
-    }
+    // datatable-body-cell {
+    //     border-right: 1px solid #a79a73;
+    // }
 
     // datatable-selection {
     //     height: 1px;
@@ -175,4 +175,4 @@ datatable-body {
 //     // .checkbox.checked {
 //     //     @include sprite($checked-sprite);
 //     // }
-}
+// }

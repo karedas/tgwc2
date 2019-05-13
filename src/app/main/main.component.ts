@@ -1,12 +1,11 @@
-import { Component, OnDestroy, Inject } from '@angular/core';
+import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/platform-browser';
-import { takeUntil } from 'rxjs/operators';
 
-import { DialogService as DynamicDialogService, DynamicDialogConfig } from 'primeng/api';
-import { CookieLawComponent } from './client/windows/cookie-law/cookie-law.component';
+import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
+import { MatDialog } from '@angular/material';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'tg-main',
@@ -17,7 +16,7 @@ import { CookieLawComponent } from './client/windows/cookie-law/cookie-law.compo
     }
   `]
 })
-export class MainComponent implements OnDestroy {
+export class MainComponent implements OnInit, OnDestroy {
 
   public preloaded = false;
   public isCookieAccepted = false;
@@ -26,50 +25,38 @@ export class MainComponent implements OnDestroy {
   constructor(
     private cookieService: CookieService,
     private platform: Platform,
-    private dynamicDialogService: DynamicDialogService,
+    public dialog: MatDialog,
+
+    private dialogV2Service: DialogV2Service,
+
+
     @Inject(DOCUMENT) private document: any
   ) {
+
     /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
     if (this.platform.ANDROID || this.platform.IOS) {
       this.document.body.className += ' is-mobile';
     }
 
-    this._init();
     this._unsubscribeAll = new Subject();
 
   }
 
-  _init() {
-    if (!this.cookieService.check('tgCookieLaw')) {
-      this.showCookieLaw();
-    } else {
-      this.start();
-    }
-  }
+  ngOnInit(): void {
 
-  // Cookie Law Behaviour
-  showCookieLaw() {
-    
     setTimeout(() => {
-      const ref = this.dynamicDialogService.open(CookieLawComponent,
-        <DynamicDialogConfig>{
-          showHeader: false,
-          closeOnEscape: false,
-          styleClass: 'tg-dialog',
-          width: '450px',
-          height: 'auto',
-          style: { 'max-width': '100%', 'max-height': '100%' },
-          contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
-        });
-
-      ref.onClose.subscribe(() => {
+      if (!this.cookieService.check('tgCookieLaw')) {
+        this.dialogV2Service.openCookieLaw()
+          .afterClosed().subscribe(() => 
+            this.start()
+          );
+      } else {
         this.start();
-      });
+      }
     });
-    
   }
 
-  onCookieAccepted(status: boolean) {
+   onCookieAccepted(status: boolean) {
     this.isCookieAccepted = status;
   }
 

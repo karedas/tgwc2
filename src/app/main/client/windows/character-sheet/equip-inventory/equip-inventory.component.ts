@@ -5,7 +5,7 @@ import { DataState } from 'src/app/store/state/data.state';
 import { getEquip, getInventory } from 'src/app/store/selectors';
 import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
 import { takeUntil } from 'rxjs/operators';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from '../../../input/input.service';
 
 @Component({
@@ -66,6 +66,7 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
 
     this.resetUpdateBeforeProceed();
     this.inputService.focus();
+
     if (what === 'equip') {
       this.openedSubTab = what;
       this.game.processCommands('equip');

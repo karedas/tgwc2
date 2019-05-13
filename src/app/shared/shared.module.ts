@@ -1,39 +1,53 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { CookieService } from 'ngx-cookie-service';
-import { LoginService } from '../main/authentication/services/login.service';
-import { PreloaderService } from '../main/common/services/preloader.service';
-import { GenericDialogService } from '../main/common/dialog/dialog.service';
-
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { TooltipModule } from 'ng2-tooltip-directive';
 
-/* Prime NG */
-import { CheckboxModule } from 'primeng/checkbox';
-import { MenubarModule } from 'primeng/menubar';
-import { TooltipModule } from 'primeng/tooltip';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-// import { ContextMenuModule } from 'primeng/contextmenu';
+/* Material Design */
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  // MatProgressBarModule, 
+  MatRippleModule,
+  MatRadioModule,
+  MatTooltipModule} from '@angular/material';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 
-import { DialogService as DynamicDialogService} from 'primeng/api';
+
+// My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { PipesModule } from '../pipes/pipes.module';
 import { IconsComponent } from '../main/common/icons/icons.component';
 import { HstatComponent } from '../main/common/hstat/hstat.component';
+
+// My Services
 import { AudioService } from '../main/client/audio/audio.service';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { ConfigService } from '../services/config.service';
+import { DialogV2Service } from '../main/common/dialog-v2/dialog-v2.service';
+import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
+import { LoginService } from '../main/authentication/services/login.service';
+import { GameService } from '../main/client/services/game.service';
+import { InputService } from '../main/client/input/input.service';
+import { LogService } from '../services/log.service';
+import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 
 
 @NgModule({
   declarations: [
     ClickStopPropagationDirective,
+    AutofocusInputbarDirective,
     IconsComponent,
     HstatComponent
   ],
@@ -44,18 +58,25 @@ import { ConfigService } from '../services/config.service';
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
     }),
-    FontAwesomeModule,
+
     NgScrollbarModule,
-    PipesModule,
-    
-    /* Prime NG Modules (TODO: Moves in another file) */
-    DynamicDialogModule,
-    CheckboxModule,
-    TableModule,
-    MenubarModule,
     TooltipModule,
-    ButtonModule,
-    // ContextMenuModule,
+    PipesModule,
+    /** Angular Material Modules */
+    MatCheckboxModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    // MatProgressBarModule,
+    MatSortModule,
+    MatRippleModule,
+    MatRadioModule
   ],
 
   exports: [
@@ -64,33 +85,44 @@ import { ConfigService } from '../services/config.service';
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-    DynamicDialogModule,
-    FontAwesomeModule,
-    CheckboxModule,
-    MenubarModule,
-    TooltipModule,
-    ButtonModule,
-    TableModule,
-    
     IconsComponent,
     HstatComponent,
     PipesModule,
-    // ContextMenuModule,
-    ClickStopPropagationDirective
+    TooltipModule,
+    ClickStopPropagationDirective,
+    AutofocusInputbarDirective,
+    /** Angular Material  */
+    MatCheckboxModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    // MatProgressBarModule,
+    MatSortModule,
+    MatRippleModule,
+    MatRadioModule
   ],
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders{
+  static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
       providers: [
+        GameService,
         ConfigService,
         CookieService,
-        PreloaderService,
+        SplashScreenService,
         LoginService,
-        DynamicDialogService,
-        GenericDialogService,
+        InputService,
         AudioService,
+        DialogV2Service,
+        LogService,
+        InputService,
       ]
     };
   }

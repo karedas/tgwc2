@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -25,10 +26,11 @@ import { baseReducer, clearState } from './store';
 import { ClientEffects } from './store/effects/client.effects';
 import { DataEffects } from './store/effects/data.effects';
 import { PageNotFoundComponent } from './main/page-not-found/page-not-found.component';
-import { WindowsModule } from './main/client/windows/windows.module';
-import { WindowsService } from './main/client/windows/windows.service';
 import { SharedModule } from './shared/shared.module';
 
+import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
+import 'hammerjs';
+import { AngularSplitModule } from 'angular-split';
 
 @NgModule({
 
@@ -46,31 +48,36 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
 
     TgConfigModule.forRoot(tgConfig),
-    
+
     StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([ClientEffects, DataEffects]),
 
     StoreDevtoolsModule.instrument({
-      maxAge: 25, 
+      maxAge: 25,
       logOnly: environment.production,
     }),
-    
+
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,
     }),
 
-    WindowsModule,
+    // TODO: I'll need to move out.
+    AngularSplitModule.forRoot(),
+    DialogV2Module,
+    /** --------------------- */
+    // WindowsModule,
     MainModule,
     AppRoutingModule,
   ],
   exports: [
-    WindowsModule
+    AngularSplitModule
   ],
   providers: [
     SocketService,
     AppPreloadingStrategy,
     GoogleAnalyticsService,
+
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,66 @@
-<div class="brand">
+<div class="tg-navbar--wrap" fxFlex="0 0 100%" fxLayout>
+  <div class="brand">
     <img src="assets/images/logo/tgminilogo.png" />
-</div>
-<p-menubar [model]="menuItemsLeft" [styleClass]="'tg-menubar'"></p-menubar>
-<p-menubar [model]="menuItemsRight" [styleClass]="'tg-menubar nav-right'"></p-menubar>
+  </div>
 
+  <!-- Client Menu -->
+  <button #button mat-button 
+    [matMenuTriggerFor]="clientMenu" 
+    #clientTrigger="matMenuTrigger"
+    (mouseenter)="buttonEnter(clientTrigger)"
+    (mouseleave)="buttonLeave(clientTrigger, button)">Client
+  </button>
+
+  <mat-menu #clientMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4" >
+    <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)">
+      <button mat-menu-item (click)="onItemClick('log')">Log di gioco</button>
+      <button mat-menu-item (click)="onItemClick('preferences')">
+          <mat-icon>settings</mat-icon>Preferenze</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="onItemClick('disconnect')">
+        <mat-icon>exit_to_app</mat-icon>Disconnetti
+      </button>
+    </div>
+  </mat-menu>
+
+  <!-- Game Menu -->
+  <button #button mat-button 
+    [matMenuTriggerFor]="gameMenu" 
+    #gameTrigger="matMenuTrigger"
+    (mouseenter)="buttonEnter(gameTrigger)"
+    (mouseleave)="buttonLeave(gameTrigger, button)">Gioco</button>
+
+  <mat-menu #gameMenu="matMenu"[overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4" >
+    <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(gameTrigger, button)">
+      <button mat-menu-item (click)="onItemClick('info')">Apri informazioni</button>
+      <button mat-menu-item (click)="onItemClick('equip')">Apri Equipaggiamento</button>
+      <button mat-menu-item (click)="onItemClick('inventario')">Apri Inventario</button>
+      <button mat-menu-item (click)="onItemClick('Abilita')">Visualizza Abilità</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="onItemClick('cambia desc')">Cambia la descrizione personale</button>
+    </div>
+  </mat-menu>
+
+
+<!-- Guida  Menu -->
+  <button mat-button 
+    [matMenuTriggerFor]="guideMenu" 
+    #guideTrigger="matMenuTrigger"
+    (mouseenter)="buttonEnter(guideTrigger)"
+    (mouseleave)="buttonLeave(guideTrigger, button)">Guida</button>
+  <mat-menu #guideMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4" >
+    <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(guideTrigger, button)">
+      <button mat-menu-item (click)="onItemClick('comandi')">Comandi di gioco</button>
+      <button mat-menu-item (click)="onItemClick('server')">Statistiche Server</button>
+      <button mat-menu-item (click)="onItemClick('news')">Notizie</button>
+    </div>
+  </mat-menu> 
+
+  <div class="nav-right">
+    <button mat-icon-button (click)="onItemClick('audio')"> 
+      Audio 
+      <mat-icon color="accent">
+      {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
+    </mat-icon></button>
+  </div>
+</div>

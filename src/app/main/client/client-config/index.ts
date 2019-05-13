@@ -1,27 +1,49 @@
+
 export interface TGConfig {
-  musicVolume: number;
-  soundVolume: number;
-  news: boolean,
-  layout: {
-    fontSize: number,
-    extraOutput: boolean,
-    characterPanel: boolean,
-    characterPanelTopPosition: boolean,
-    zen: boolean,
+  audio: {
+    enable: boolean;
+    musicVolume: number;
+    soundVolume: number;
+  };
+  news: boolean;
+  fontSize: number;
+  output: {
+    extraArea:  {
+      visible: boolean,
+      size: number[]
+    },
     list_column_mode: boolean
-  }
+  };
+  characterPanel: boolean;
+  characterPanelTopPosition: number;
+  zen: boolean;
+  tablePageSize: number;
+  log: boolean;
+  shortcuts: any[],
 }
 
+
+/** DEFAULT CONFIG */
 export const tgConfig: TGConfig = {
-  musicVolume: 1,
-  soundVolume: 0.7,
+  audio: {
+    enable: true,
+    musicVolume: 100,
+    soundVolume: 70,
+  },
   news: true,
-  layout: {
-    fontSize: 2,
-    extraOutput: true,
-    characterPanel: true,
-    characterPanelTopPosition: false,
-    zen: false,
+  fontSize: 2,
+  output: {
+    extraArea: {
+      visible: true,
+      size: [50, 50]
+    },
     list_column_mode: true
-  }
-}
+  },
+  characterPanel: true,
+  characterPanelTopPosition: 1,
+  zen: false,
+  tablePageSize: 20,
+  log: true,
+  // shortcuts: undefined
+  shortcuts: [],
+};

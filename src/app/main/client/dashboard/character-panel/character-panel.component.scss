@@ -1,6 +1,10 @@
-@import '~src/scss/colors';
+@import 'variables';
+
 @import 'sprites';
 @import 'utils/sprites-mixins';
+@import 'utils/fix';
+
+// @import '~@angular/flex-layout/mq';
 @import 'utils/fix';
 
 
@@ -259,6 +263,10 @@
         display: inline-block;
         text-align: left;
         margin-right: 58px;
+        
+        @include layout-bp(xs) {
+          margin-right: 2px;
+        }
       }
   
       .tg-extrabars {
@@ -275,6 +283,13 @@
   
         i {
           font-style: normal;
+        }
+
+        @include layout-bp(xs) {
+          width: 100%;
+          left: 0;
+          right: 0;
+          text-align: center;
         }
       }
   
@@ -302,8 +317,14 @@
           background-image: url($imgPath + '/bars/sete.jpg' );
         }
       }
+
+      @include layout-bp(xs) {
+       padding: 0;
+       margin-bottom: 0;
+      }
     }
   }
+
 }
 
 body.zen :host{

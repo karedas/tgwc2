@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GameService } from 'src/app/services/game.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
@@ -13,10 +13,10 @@ export class CommandsListComponent implements OnInit {
   @Input('data') data: any;
   @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
 
-  public readonly dialogID: string = 'commandsList';
+
   commands$: Observable<any>;
   title: string;
-  groupOpen = 0;
+  groupOpen: number = 0;
 
   constructor(private game: GameService) {
   }

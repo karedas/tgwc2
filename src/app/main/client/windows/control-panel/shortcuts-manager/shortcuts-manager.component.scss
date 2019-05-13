@@ -1,0 +1,127 @@
+@import 'variables';
+
+
+.tg-shortcuts-area {
+  height: 100%;
+}
+
+.field-full-width {
+  width: 100%;
+}
+
+.tg-button {
+  margin-right: 1em;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.tg-control-panel--subtitle {
+  color: $tg-yellow;
+  font-weight: normal;
+}
+
+.tg-shortcut-iconslist,
+.tg-shortcut-new {
+  border: 1px solid rgba(255, 255, 255, 0.308);
+  border-radius: 10px;
+  visibility: hidden;
+  position: absolute;
+  background: black;
+  transition: all .1s ease-out;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  transform: scale(.9);
+  z-index: 100;
+  padding: 1em;
+  box-sizing: border-box;
+
+  &.open {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+/* Form New Shortcut */
+
+.tg-shortcut-new {
+  button {
+    font-size: 100%;
+  }
+
+  .tg-button, .tg-shortcut-icon{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.tg-shortcut-row {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.541);
+  margin:2px 0;
+  align-items: center;
+}
+
+
+.tg-shortcut-iconslist {
+  border: 0;
+	border-radius: 0;
+	padding: 0;
+  background-color: rgba(0, 0, 0, 0.90);
+
+}
+
+.tg-shortcut-headerlist {
+  font-weight: bold;
+  padding:.5em 0;
+}
+
+.tg-shortcuts-all {
+  max-height: 400px;
+}
+
+.tg-shortcuts-all .shortcuts-list {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 2em;
+}
+
+
+.tg-shortcut-icon {
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	border: 1px solid #4e4229;
+	padding: 1px;
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+}
+
+
+
+//angular icons
+.mat-icon-button {
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+
+  .mat-icon {
+    line-height: 16px;
+    font-size: 16px;
+  }
+
+  &:hover {
+    color: $tg-white;
+  }
+}

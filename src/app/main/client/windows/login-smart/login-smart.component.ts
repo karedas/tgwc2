@@ -5,12 +5,12 @@ import { ClientState } from 'src/app/store/state/client.state';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
 
-import { DynamicDialogRef } from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { ResetAction } from 'src/app/store/actions/client.action';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'tg-login-smart',
@@ -36,7 +36,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private store: Store<ClientState>,
     private router: Router,
-    private dialogRef: DynamicDialogRef,
+    private dialogRef: MatDialogRef<LoginSmartComponent>,
     private loginService: LoginService) {
 
     this.loginFormErrors = {
@@ -112,7 +112,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
 
   navigateToHome() {
     this.dialogRef.close();
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate(['auth/login']).then(() => {
       this.store.dispatch(new ResetAction);
     });
   }

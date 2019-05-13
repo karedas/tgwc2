@@ -7,6 +7,10 @@ import * as GameActions from '../store/actions/client.action';
 
 import { IHero } from '../models/data/hero.model';
 import { Observable, Subject } from 'rxjs';
+import { LogService } from './log.service';
+import { TGConfig } from '../main/client/client-config';
+import { ConfigService } from './config.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +18,10 @@ import { Observable, Subject } from 'rxjs';
 
 export class DataParser {
 
+  tgConfig: TGConfig
 
   private dispatcher: any = {};
-
   private netData = '';
-
 
   private shortcuts = [];
   private shortcuts_map = {};
@@ -27,23 +30,42 @@ export class DataParser {
   private _updateNeeded: Subject<any>;
 
   constructor(
-    private store: Store<State>
+    private store: Store<State>,
+    private _configService: ConfigService,
+    private logService: LogService
     ) {
     this._updateNeeded = new Subject<any>();
+
+    //Subscribe to the shortcuts in Config
+    this._configService.getConfig()
+      .pipe(map((config: TGConfig) => { return config.shortcuts}))
+      .subscribe((shortcuts) => { this.shortcuts = shortcuts;}
+    )
   }
 
-  handlerGameData(data: any) {
+  handlerGameData(data: any, logEnabled?: boolean) {
 
     this.netData += data;
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
+
       data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
         this.parseForDisplay(data);
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
+      }
+
+
+      if( logEnabled ) {
+
+       try {
+         this.logService.parseForLog(data);
+       } catch(err) {
+         console.log(err.message);
+       }
       }
 
       this.netData = '';
@@ -66,7 +88,7 @@ export class DataParser {
   }
 
   parseForDisplay(data: string): void {
-    
+
     // reset Dispatcher
     this.dispatcher = {};
 
@@ -107,16 +129,15 @@ export class DataParser {
       return '';
     });
 
-    /**
+    /* *
      * DEPRECATED
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
-      console.warn('Todo: Hide Text');
       this.store.dispatch(new GameActions.UpdateUI({ inputVisible: false }));
       return '';
     });
 
-    /**
+    /* *
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
@@ -388,7 +409,7 @@ export class DataParser {
 
 
     // Execute
-    if(Object.keys(this.dispatcher).length > 0 ) {
+    if (Object.keys(this.dispatcher).length > 0 ) {
       this.dispatchData();
     }
   }
@@ -396,13 +417,13 @@ export class DataParser {
   // Emit data Stored in the dispatcher to show then in the right Output Order
   dispatchData() {
     // Output Messages
-    if( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
-    if( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
-    if( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
-    if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    if ( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
+    if ( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
+    if ( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
+    if ( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
     // TODO UI (dont need order) :
-    if( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
-    if( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
+    if ( this.dispatcher['visibilLevel'] ) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); };
+    if ( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
   }
 
 
@@ -428,42 +449,41 @@ export class DataParser {
 
     /* Split into arguments */
 
-    let args = input.split(/\s+/);
+    const args = input.split(/\s+/);
     /* Get the shortcut index */
-    let shortcut_key = args.shift();
-    let shortcut_num = parseInt(shortcut_key);
-    let shortcut_cmd = '';
+    const shortcut_key = args.shift();
+    const shortcut_num = parseInt(shortcut_key, 10);
 
+    let shortcut_cmd: any;
 
     if (!isNaN(shortcut_num)) {
       shortcut_cmd = this.shortcuts[shortcut_num];
-    }
-    else if (typeof (this.shortcuts_map[shortcut_key]) != 'undefined') {
-      shortcut_cmd = this.shortcuts[this.shortcuts_map[shortcut_key]];
+    } else {
+      shortcut_cmd = this.shortcuts.filter(x => x.alias === shortcut_key)[0];
     }
 
     /* Check if the shortcut is defined */
     if (shortcut_cmd) {
-
       /* Use the shortcut text as command */
       input = shortcut_cmd['cmd'];
 
       if (/\$\d+/.test(input)) {
         /* Substitute the arguments */
         for (let arg = 0; arg < args.length; ++arg) {
-          let rx = new RegExp("\\$" + (arg + 1), 'g');
+          const rx = new RegExp('\\$' + (arg + 1), 'g');
           input = input.replace(rx, args[arg]);
         }
 
         /* Remove remaining letiables */
         input = input.replace(/\$\d+/g, '');
-      } else
-        input += " " + args.join(" ");
+      } else {
+        input += ' ' + args.join(' ');
+      }
     }
-    
-    
+
+
     if (this.cmd_prefix.length > 0) {
-      input = this.cmd_prefix + " " + input;
+      input = this.cmd_prefix + ' ' + input;
     }
 
     return input;

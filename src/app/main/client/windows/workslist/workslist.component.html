@@ -1,10 +1,79 @@
-<ng-container *ngIf="dataTable$ | async">
-  <tg-dialog [id]="dialogID">
+<div class="b-ironlight-mini tg-box" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="tg-dialog-content-nopadding tg-shadow-inset">
+    <div class="tg-dialog-title" cdkDragHandle>
+      {{headerTitle}}
+      <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+        <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+      </button>
+    </div>
     <div class="tg-workslist">
-      <div class="b-ironlight-mini tg-box">
-        <div class="tg-dialog-content-nopadding tg-shadow-inset">
-          <!-- Workslist content start -->
-          <p-table 
+      <div fxLayout="column" matDialogContent>
+
+        <mat-form-field class="tg-table--filter">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off">
+        </mat-form-field>
+
+        <!-- <ng-scrollbar class="scrollbar scrollbar-dialog" [autoUpdate]="true" #scrollBar [shown]="'always'"
+        [disableOnBreakpoints]="false"> -->
+
+          <table mat-table [dataSource]="dataSource" matSort>
+            
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>#</th>
+              <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Icona</th>
+              <td mat-cell *matCellDef="let element">
+                  <tg-icons [icon]="element.icon"></tg-icons>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="diff">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Difficoltà</th>
+              <td mat-cell *matCellDef="let element" [ngClass]="
+              {'tg-green': (element.diff == 'facile' || element.diff =='normale'),
+              'tg-yellow': (element.diff == 'impegantiva' || element.diff =='difficile'),
+              'tg-brown': (element.diff == 'molto difficile'),
+              'tg-red': (element.diff == 'arduo' || element.diff == 'quasi impossibile' || element.diff == 'miracolo')}">
+              {{element.diff}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cando">
+              <th mat-header-cell *matHeaderCellDef>Puoi?</th>
+              <td mat-cell *matCellDef="let element">
+                  <div [ngClass]="element.cando === true ? 'cando' : 'cantdo'"></div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="desc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrizione</th>
+              <td mat-cell *matCellDef="let element">{{element.desc}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cmd" >
+              <th mat-header-cell *matHeaderCellDef>Azione</th>
+              <td mat-cell *matCellDef="let element">
+                  <button class="tg-button btn-workcmd" (click)="onAction(element.cmd, $event)" 
+                    matRipple 
+                    [matRippleCentered]="centered">{{element.cmd}}
+                </button>
+              </td>
+            </ng-container> 
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay" ></tr>
+            
+          </table>
+        <!-- </ng-scrollbar> -->
+
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+
+      </div>
+          
+    <!-- Workslist content start -->
+      <!-- <p-table 
             #worksTable
             [value]="rows" 
             [autoLayout]="true" 
@@ -41,16 +110,14 @@
             <ng-template pTemplate="summary">
               Visualizzati {{rows.length }} risultati
             </ng-template>
-          </p-table>
-          <!-- Workslist content end -->
-        </div>
-        <div class="tg-border-box">
-          <div class="tg-border tg-border-top"></div>
-          <div class="tg-border tg-border-left"></div>
-          <div class="tg-border tg-border-right"></div>
-          <div class="tg-border tg-border-bottom"></div>
-        </div>
-      </div>
+          </p-table> -->
+      <!-- Workslist content end -->
     </div>
-  </tg-dialog>
-</ng-container>
+  </div>
+  <div class="tg-border-box">
+    <div class="tg-border tg-border-top"></div>
+    <div class="tg-border tg-border-left"></div>
+    <div class="tg-border tg-border-right"></div>
+    <div class="tg-border tg-border-bottom"></div>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, delay } from 'rxjs/operators';
-import { PreloaderService } from '../common/services/preloader.service';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
+import { SplashScreenService } from './splashscreen.service';
 
 @Component({
   selector: 'tg-splashscreen',
@@ -19,10 +19,10 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   player: AnimationPlayer;
   preloadPerc: any;
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private _animationBuilder: AnimationBuilder,
-    private preloader: PreloaderService,
+    private splashScreenService: SplashScreenService,
     @Inject(DOCUMENT) private _document: any
     ) {
       this.splashScreenEl = this._document.body.querySelector('#splashscreen');
@@ -31,13 +31,13 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.preloader.percentage.pipe(
+    this.splashScreenService.percentage.pipe(
       takeUntil(this._unsubscribeAll)).subscribe(amount => {
         this.preloadPerc = amount;
       });
 
 
-    this.preloader.status$
+    this.splashScreenService.status$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(status => {
         if (status === true) {
@@ -65,7 +65,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   }
 
   hide(): void {
-    this.player = 
+    this.player =
       this._animationBuilder
         .build([
           style({ opacity: '1'}),
@@ -75,7 +75,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
           }))
         ]).create(this.splashScreenEl);
 
-    
+
     setTimeout(() => {
       this.player.play();
     }, 0);
