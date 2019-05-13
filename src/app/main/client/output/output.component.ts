@@ -112,7 +112,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
           if(room.objcont) {
             room.objcont.list.forEach(element => {
               if(element.mrn.includes(this.game.client_update.mrnContainer)) {
-                console.log('aggiorno contenitore oggetto, è ancora qui');
                 objectUpdate = true;
               }
             });
@@ -120,8 +119,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
           if(room.perscont) {
             room.perscont.list.forEach(element => {
               if (element.mrn.includes(this.game.client_update.mrnContainer)) {
-                console.log('aggiorno contenitore persona');
-                //  this.game.updateMrnContainer();
                 personUpdate = true;
               }
             });
@@ -131,7 +128,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
             this.game.updateMrnContainer();
           }
           else {
-            console.log('mrn sparito!');
             this.game.client_update.inContainer = false;
           }
         }

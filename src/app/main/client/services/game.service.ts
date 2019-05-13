@@ -120,7 +120,6 @@ export class GameService {
   }
 
   updatePanels(what: any) {
-    console.log('updatepanels', what);
     const now = Date.now();
     
     if (what[0] > this.client_update.inventory.version) {
@@ -149,7 +148,7 @@ export class GameService {
       }
         
     // Update Extra Detail
-      if (this.client_update.room.needed && this.extraIsVisible  ) {
+      if (this.client_update.room.needed && this.extraIsVisible  && !this.client_update.inContainer ) {
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.now = now;
@@ -158,7 +157,6 @@ export class GameService {
   }
 
   updateMrnContainer() {
-      console.log('update mrn container', this.client_update.mrnContainer);
       this.sendToServer(`@agg &${this.client_update.mrnContainer}`);
   }
 
