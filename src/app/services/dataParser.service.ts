@@ -177,7 +177,6 @@ export class DataParser {
     // Generic Update for Client Status and more
     data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
       const ud = update.slice(5, status.lastIndexOf('"')).split(',');
-      console.log(ud);
       this.dispatcher.update = ud;
       return '';
     });
