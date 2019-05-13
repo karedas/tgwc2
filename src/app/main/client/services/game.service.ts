@@ -12,7 +12,6 @@ import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/ap
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material';
-import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +54,7 @@ export class GameService {
 
   private render: Renderer2;
   private _dataSubscription: Subscription;
-  private _updateNeededSubscription: Subscription;
+  private _upSubscription: Subscription;
 
 
   constructor(
@@ -104,9 +103,9 @@ export class GameService {
         this.dataParserService.handlerGameData(data, this._tgConfig.log);
       });
 
-    this._updateNeededSubscription = this.dataParserService.updateNeeded
+    this._upSubscription = this.dataParserService.updateNeeded
       .subscribe((up) => {
-        this.updateNeeded(up);
+        this.updatePanels(up);
       });
   }
 
@@ -116,11 +115,11 @@ export class GameService {
 
   reset() {
     this._dataSubscription.unsubscribe();
-    this._updateNeededSubscription.unsubscribe();
+    this._upSubscription.unsubscribe();
     this.clearUpdate();
   }
 
-  updateNeeded(what: any) {
+  updatePanels(what: any) {
 
     const now = Date.now();
 
@@ -135,42 +134,53 @@ export class GameService {
     if (what.room > this.client_update.room.version) {
       this.client_update.room.needed = true;
     }
+    
+    console.log(this.client_update);
 
     if (now > this.client_update.lastDataTime) {
 
-      if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
-        this.sendToServer('@inv');
-        this.client_update.inventory.needed = false;
-        this.client_update.lastDataTime = now;
-      }
+    // Update Inventory Panel
+    //   if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
+    //     console.log('inventory');
+    //     this.sendToServer('@inv');
+    //     this.client_update.inventory.needed = false;
+    //     this.client_update.lastDataTime = now;
+    //   }
 
-      if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
-        this.sendToServer('@equip');
-        this.client_update.lastDataTime = now;
-      }
+    // Update Equipment panel
+    //   if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
+    //     console.log('equip');
+    //     this.sendToServer('@equip');
+    //     this.client_update.lastDataTime = now;
+    //   }
 
-      if (this.client_update.room.needed
-        && this._tgConfig.output.extraArea.visible
-        && this.showExtraByViewport
-        && !this.client_update.inContainer) {
+    //   console.log(
+    //     this.extraIsVisible,
+    //     !this.client_update.inContainer,
+    //     this.client_update.mrnContainer
+    //     );
+        
+    // Update Extra Detail
+    //   if (this.client_update.room.needed && this.extraIsVisible  ) {
+    //     console.log('room');
+    //     this.sendToServer('@agg');
+    //     this.client_update.room.needed = false;
+    //     this.client_update.lastDataTime = now;
 
-        this.sendToServer('@agg');
-        this.client_update.room.needed = false;
-        this.client_update.lastDataTime = now;
-
-      } else if (this.client_update.inContainer && this._tgConfig.output.extraArea.visible) {
-        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
-      }
+    //   } 
+    //   // else if (this.client_update.inContainer && this._tgConfig.output.extraArea.visible) {
+    //   //   this.sendToServer(`@agg &${this.client_update.mrnContainer}`);
+    //   // }
     }
   }
 
   private clearUpdate() {
-    this.client_update.inventory.version = -1;
-    this.client_update.inventory.needed = false;
-    this.client_update.equipment.version = -1;
-    this.client_update.equipment.needed = false;
-    this.client_update.room.version = -1;
-    this.client_update.room.needed = false;
+    // this.client_update.inventory.version = -1;
+    // this.client_update.inventory.needed = false;
+    // this.client_update.equipment.version = -1;
+    // this.client_update.equipment.needed = false;
+    // this.client_update.room.version = -1;
+    // this.client_update.room.needed = false;
   }
 
   private loadServerStat() {
@@ -300,5 +310,14 @@ export class GameService {
     }
 
     this._configService.setConfig({ fontSize: size });
+  }
+
+
+  get extraIsVisible(): boolean {
+    if (this._tgConfig.output.extraArea.visible && this.showExtraByViewport) {
+      return true;
+    } else {
+      return false
+    }
   }
 }

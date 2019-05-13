@@ -94,7 +94,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
           const content = this.setContent('base', base[0]);
           this.output.push(content);
           // You might need to give a tiny delay before updating the scrollbar
-          this.endOutputStore();
+          this.scrollPanelToBottom();
         },
       );
 
@@ -103,21 +103,23 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
-
+        console.log('room');
+        this.typeDetail = 'room';
+        
         if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
           this.lastRoomDescription = room.desc['base'];
         }
-
-        this.typeDetail = 'room';
-        const content = this.setContent('room', room);
-        this.output.push(content);
-        this.endOutputStore();
-        if (this.game.client_update.room.version < room.ver && this.splitArea) {
+        this.output.push(this.setContent('room', room));
+        // if (this.game.client_update.room.version < room.ver && this.splitArea) {
+        console.log(this.game.client_update.room.version, room.ver);
+        if (this.game.client_update.room.version < room.ver) {
           this.game.client_update.room.version = room.ver;
           this.game.client_update.room.needed = false;
         }
 
-        this.game.client_update.inContainer = false;
+        this.scrollPanelToBottom();
+
+        // this.game.client_update.inContainer = false;
       });
 
     /** Object or Person Detail */
@@ -126,11 +128,13 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(elements => elements && elements !== undefined))
       .subscribe((elements: any) => {
+        console.log('OBJORPERSON');
         this.objPersDetail = elements;
         const content = this.setContent('objpersdetail', this.objPersDetail);
         this.output.push(content);
         this.typeDetail = 'objPers';
-        this.endOutputStore();
+        this.scrollPanelToBottom();
+
         // save last container if we need to update his view
         this.game.client_update.mrnContainer = elements.num;
         this.game.client_update.inContainer = true;
@@ -143,7 +147,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
           this.genericPage = data;
           const content = this.setContent('genericpage', this.genericPage);
           this.output.push(content);
-          this.endOutputStore();
+          this.scrollPanelToBottom();
         });
   }
 
@@ -164,14 +168,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private scrollPanelToBottom() {
+    this.trimOutput();
     setTimeout(() => {
       this.scrollBar.scrollToBottom(0).subscribe();
     }, 50);
-  }
-
-  private endOutputStore() {
-    this.trimOutput();
-    this.scrollPanelToBottom();
   }
 
   @HostListener('window:resize', ['$event.target'])
