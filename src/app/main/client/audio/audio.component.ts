@@ -4,7 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { getAudioTrack } from 'src/app/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { UIState } from 'src/app/store/state/ui.state';
+import { ClientState } from 'src/app/store/state/client.state';
+import { ConfigService } from 'src/app/services/config.service';
+import { TGConfig } from '../client-config';
 
 @Component({
   selector: 'tg-audio',
@@ -15,14 +17,24 @@ export class AudioComponent implements OnInit, OnDestroy {
   music$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private audioService: AudioService, private store: Store<UIState>) {
-
+  constructor(
+    private audioService: AudioService,
+    private _configService: ConfigService,
+    private store: Store<ClientState>
+    ) {
     this.music$ = this.store.pipe(select(getAudioTrack));
     this._unsubscribeAll = new Subject<any>();
-
   }
 
   ngOnInit(): void {
+
+    this._configService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe( (config: TGConfig ) => {
+        this.audioService.soundVolume = config.soundVolume;
+        this.audioService.musicVolume = config.musicVolume;
+      });
+
     this.music$.pipe(filter(state => !!state )).pipe(
       takeUntil(this._unsubscribeAll)).subscribe(
       track => this.audioService.setAudio(track)

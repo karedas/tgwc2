@@ -6,17 +6,12 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
   styleUrls: ['./combat-panel.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CombatPanelComponent implements OnInit {
+export class CombatPanelComponent {
 
 
-  @Input('enemyHealt') healt: number;
-  @Input('enemyMove') move: number;
-  @Input('enemyIcon') icon: number | null;
-  @Input('enemyName') name: string;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Input('enemyHealt') enemyHealt: number;
+  @Input('enemyMove') enemyMove: number;
+  @Input('enemyIcon') enemyIcon: number | null;
+  @Input('enemyName') enemyName: string;
 
 }

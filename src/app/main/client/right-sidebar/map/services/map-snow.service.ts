@@ -65,8 +65,11 @@ export class MapSnowService {
 
     for (let x = 0; x < this.numFlakes; x++) {
       // calculate changes to snowflake
-      posX = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight * (5 - this.flakes[x].size)) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
-      this.flakes[x].y += this.flakes[x].size * this.fallSpeedModifier; // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
+      const posX_a = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight);
+      const posX_b = (5 - this.flakes[x].size) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
+      posX =  posX_a * posX_b;
+      // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
+      this.flakes[x].y += this.flakes[x].size * this.fallSpeedModifier;
 
       // if snowflake is out of bounds, reset
       if (this.flakes[x].y > this.height + 5) {

@@ -1,8 +1,6 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { DialogService as DynamicDialogService, DynamicDialogConfig } from 'primeng/api';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
-import { Observable } from 'rxjs';
-import { CookieLawComponent } from './cookie-law/cookie-law.component';
 import { GenericDialogService } from '../../common/dialog/dialog.service';
 import { DialogConfiguration } from '../../common/dialog/model/dialog.interface';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
@@ -25,15 +23,17 @@ export class WindowsService {
     private dynamicDialogService: DynamicDialogService,
     private genericDialogService: GenericDialogService,
     rendererFactory: RendererFactory2
-  ) {
+  ) {    
 
     this.dd = new Map();
     this.gd = new Map();
     this.render = rendererFactory.createRenderer(null, null);
-
   }
 
-  openWelcomeNews() {
+  openNews() {
+
+    this.render.addClass(document.body, 'overlay-dark')
+    
     const ref = this.dynamicDialogService.open(WelcomeNewsComponent,
       <DynamicDialogConfig>{
         header: 'Notizie',
@@ -45,31 +45,15 @@ export class WindowsService {
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
 
-      ref.onClose.subscribe(
-       () => this.render.removeClass(document.body, 'overlay-dark')
-      );
+    ref.onClose.subscribe(
+      () => this.render.removeClass(document.body, 'overlay-dark')
+    );
 
-      this.dd.set(ref, 'welcomenews');
+    this.dd.set(ref, 'welcomenews');
 
-  }
-
-  openCookieLaw(): Observable<any> {
-    const ref = this.dynamicDialogService.open(CookieLawComponent,
-      <DynamicDialogConfig>{
-        showHeader: false,
-        closeOnEscape: false,
-        styleClass: 'tg-dialog',
-        width: '450px',
-        height: 'auto',
-        style: { 'max-width': '100%', 'max-height': '100%' },
-        contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
-      });
-
-    return ref.onClose;
   }
 
   openSmartLogin() {
-
     this.closeAllDialogs();
 
     const ref = this.dynamicDialogService.open(LoginSmartComponent,
@@ -82,11 +66,10 @@ export class WindowsService {
         height: 'auto',
       });
 
-      this.render.addClass(document.body, 'overlay-dark');
-
-      ref.onClose.subscribe(
-       () => this.render.removeClass(document.body, 'overlay-dark')
-      );
+    this.render.addClass(document.body, 'overlay-dark');
+    ref.onClose.subscribe(
+      () => this.render.removeClass(document.body, 'overlay-dark')
+    );
   }
 
   openCharacterSheet(detail?: string) {
@@ -109,7 +92,7 @@ export class WindowsService {
         },
         contentStyle: { 'max-height': '100%', 'max-width': '100%', 'overflow': 'auto' }
       });
-      this.gd.set(ref, 'charactersheet');
+    this.gd.set(ref, 'charactersheet');
   }
 
   openCommandsList() {
@@ -131,7 +114,7 @@ export class WindowsService {
 
       });
 
-      this.gd.set(ref, 'commandslist');
+    this.gd.set(ref, 'commandslist');
   }
 
   openEditor(dialogID: string, ...data: any): any {
@@ -141,7 +124,7 @@ export class WindowsService {
         resizable: true,
         draggable: true,
         maximizable: true,
-        focusOnShow: true,
+        focusOnShow: false,
         header: data[0],
         style: {
           'width': '500px',
@@ -169,7 +152,7 @@ export class WindowsService {
         }
       });
 
-      this.gd.set(ref, 'table');
+    this.gd.set(ref, 'table');
   }
 
   openBook(dialogID: string, ...data: any): any {
@@ -191,10 +174,29 @@ export class WindowsService {
         }
       });
 
-      this.gd.set(ref, 'book');
+    this.gd.set(ref, 'book');
 
-      return ref;
+    return ref;
   }
+
+  openControlPanel(): any{ 
+    const ref = this.genericDialogService.open('controlPanel',
+      <DialogConfiguration> {
+        draggable: true,
+        resizable: false,
+        header: 'Impostazioni Client',
+        closeOnEscape: true,
+        modal: true,
+        style: {
+          'width': '650px',
+          'height': 'auto',
+        },
+        contentStyle: {
+          'height': '100%'
+        }
+      });
+  }
+
 
   closeGenericDialog(dialogID: string) {
     this.genericDialogService.close(dialogID);

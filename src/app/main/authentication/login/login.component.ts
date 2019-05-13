@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 import gitInfo from 'src/git-version.json';
 import { SocketService } from 'src/app/services/socket.service';
 import { GameService } from 'src/app/services/game.service';
+import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
 
 @Component({
   selector: 'tg-login',
@@ -21,18 +22,18 @@ import { GameService } from 'src/app/services/game.service';
 export class LoginComponent implements OnInit, OnDestroy {
 
   gitVersion = gitInfo.tag;
-  serverStat: any ;
+  serverStat: any;
 
   loginForm: FormGroup;
   loginFormErrors: any;
   loginFailed: boolean; 1;
   loginSubscription: Subscription;
 
+  loginReplayMessage: string;
+  serverStatusMessage: boolean;
 
   // Private
   private _unsubscribeAll: Subject<any>;
-
-  loginReplayMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private game: GameService,
     private socketService: SocketService,
+    private googleAnalyticsService: GoogleAnalyticsService
   ) {
     this.loginFormErrors = {
       username: {},
@@ -47,7 +49,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this._unsubscribeAll = new Subject();
-
   }
 
   ngOnInit() {
@@ -59,18 +60,28 @@ export class LoginComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage
+    this.loginService._loginReplayMessage
       .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe((err: string) => {
-          if (err !== undefined) {
-            this.loginReplayMessage = err;
-          }
-        });
+      .subscribe((msg: string) => {
+        if (msg !== undefined) {
+          this.loginReplayMessage = msg;
+        }
+      });
 
-    this.game.serverStat.pipe(takeUntil(this._unsubscribeAll)).subscribe(
-      (stat: string) => { this.serverStat = stat; }
-    );
+    // Server Stats like player online from serverstat file
+    this.game.serverStat
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (stat: string) => { this.serverStat = stat; }
+      );
 
+
+    // Show Socket Error to notice user about Server Errors
+    this.socketService.socket_error$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((serverstatus: boolean) => {
+        this.serverStatusMessage = !serverstatus;
+      });
   }
 
   resetLoginState() {
@@ -86,7 +97,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public login() {
-    if (this.loginForm.invalid) {
+
+    // Wait validation on inputs value and socket connection
+    if (this.loginForm.invalid && !this.socketService.isConnected) {
       return;
     }
 
@@ -97,8 +110,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((loginSuccess: boolean) => {
 
         if (loginSuccess === true) {
+
+          this.loginService._loginReplayMessage = ' ';
           const redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/webclient';
+          
+          // Google Analytics
+          this.googleAnalyticsService.emitEvent(`userPage`, `User ${this.username.value} Action`, 'login');
           this.router.navigate([redirect]);
+
         } else {
           this.loginFailed = true;
         }

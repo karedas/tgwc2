@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClientContainerComponent } from './client-container/client-container.component';
 import { AuthGuard } from '../authentication/services/login.guard';
+import { ClientComponent } from './client.component';
 
 const clientRouting: Routes = [
   {
-    path: 'webclient',
-    component: ClientContainerComponent,
+    path: '',
+    component: ClientComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   }

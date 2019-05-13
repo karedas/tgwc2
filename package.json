@@ -7,19 +7,19 @@
     "build": "node git.version gulp generate-sprites && gulp generate-assetslist && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "bundle-report": "webpack-bundle-analyzer dist/dev/stats.json"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.2.6",
-    "@angular/cdk": "^7.3.3",
+    "@angular/cdk": "^7.3.6",
     "@angular/common": "^7.2.6",
     "@angular/compiler": "7.2.6",
     "@angular/core": "7.2.6",
     "@angular/flex-layout": "^7.0.0-beta.23",
     "@angular/forms": "^7.2.6",
     "@angular/http": "^7.2.6",
-    "@angular/material": "^7.3.3",
     "@angular/platform-browser": "^7.2.6",
     "@angular/platform-browser-dynamic": "^7.2.6",
     "@angular/router": "^7.2.6",
@@ -33,6 +33,7 @@
     "@ngrx/store": "^7.1.0",
     "@ngrx/store-devtools": "^7.1.0",
     "@swimlane/ngx-datatable": "^14.0.0",
+    "angular-gtag": "^1.0.3",
     "angular-resize-event": "^1.0.0",
     "angular-split": "^2.0.1",
     "core-js": "^2.6.5",
@@ -46,6 +47,7 @@
     "gulp.spritesmith": "^6.9.0",
     "hammerjs": "^2.0.8",
     "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.11",
     "merge-stream": "^1.0.1",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-cookie-service": "^2.0.0",
@@ -54,7 +56,7 @@
     "ngx-socket-io": "^2.0.0",
     "normalize.css": "^8.0.1",
     "primeicons": "^1.0.0",
-    "primeng": "^7.0.5",
+    "primeng": "^7.1.0",
     "rxjs": "^6.3.3",
     "semver": "^5.6.0",
     "socket.io": "^2.1.1",
@@ -62,8 +64,8 @@
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.12.3",
-    "@angular/cli": "~7.3.4",
+    "@angular-devkit/build-angular": "^0.13.6",
+    "@angular/cli": "~7.3.6",
     "@angular/compiler-cli": "^7.2.6",
     "@angular/language-service": "^7.2.6",
     "@types/jasmine": "^3.3.9",
@@ -79,6 +81,7 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
     "ts-node": "~8.0.2",
-    "tslint": "~5.12.0"
+    "tslint": "~5.12.0",
+    "webpack-bundle-analyzer": "^3.1.0"
   }
 }

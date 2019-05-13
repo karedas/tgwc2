@@ -79,9 +79,9 @@ export class DirectionsComponent implements OnInit, OnDestroy {
       let cmd: string;
 
       // Close The Door with Right Click
-      if (this.dirStatus[dir] == '2') {
+      if (this.dirStatus[dir] === '2') {
         cmd = `chiudi ${this.dirNames[dir]}`;
-      } else if (this.dirStatus[dir] == '3') {
+      } else if (this.dirStatus[dir] === '3') {
         cmd = `blocca ${this.dirNames[dir]}`;
       }
       if (cmd) {
@@ -95,12 +95,14 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
 
   setDoors(doors: any): void {
-    for (let d = 0; d < this.dirNames.length; ++d) {
-      this.doorsStyle[this.dirNames[d]] = {
-        'background-position': (-26 * doors[d] + 'px center')
-      };
+    if(doors) {
+      for (let d = 0; d < this.dirNames.length; ++d) {
+        this.doorsStyle[this.dirNames[d]] = {
+          'background-position': (-26 * doors[d] + 'px center')
+        };
+      }
+      this.dirStatus = doors;
     }
-    this.dirStatus = doors;
   }
 
   @HostListener('window:keydown', ['$event'])

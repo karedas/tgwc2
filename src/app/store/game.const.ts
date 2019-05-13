@@ -5,33 +5,3 @@ export enum SocketState {
     ERROR = 'Error'
 }
 
-export const GameMode = {
-    HIDEINPUTTEXT: 'hideInputText',
-    SHOWINPUTTEXT: 'showInputText',
-    SKYPICTURE: 'updateSkyPicture',
-    DOORSINFO: 'doorsInfo',
-    AUDIO: 'audio',
-    UPDATE: 'playerStatus',
-    UPDATEPLAYER: 'playerUpdateFromServer',
-    IMAGE: 'image',
-    IMAGEWITHGAMMA: 'imageWithGamma',
-    PLAYERISLOGGEDIN: 'playerIsLoggedIn',
-    CLOSETEXTEDITOR: 'closeTextEditor',
-    MAP: 'updateMap',
-    RENDERGENERIC: 'renderGeneric',
-    RENDERTABLE: 'renderTable',
-    RENDERINVENTORY: 'renderInventory',
-    ROOMDETAILS: 'roomDetails',
-    PERSONDETAILS: 'personDetails',
-    OBJECTDETAILS: 'objectDetails',
-    EQUIP: 'equipment',
-    WORKABLELIST: 'workableList',
-    SKILLS: 'skillsList',
-    PLAYERINFO: 'playerInfo',
-    PLAYERSTATUS: 'playerStatus',
-    NEWIMAGEREQUEST: 'newImageRequest',
-    SELECTABLEGENERIC: 'selectableGeneric',
-    REFRESH: 'refresh',
-    PAUSESCROLL: 'pauseScroll',
-    CLEARMESSAGE: 'clearMessage',
-};

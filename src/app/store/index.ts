@@ -1,26 +1,21 @@
-import { ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 import * as fromClient from './reducers/client.reducer';
-import * as fromMessage from './reducers/data.reducer';
-import * as fromUi from './reducers/ui.reducer';
+import * as fromData from './reducers/data.reducer';
 import { ClientState } from './state/client.state';
-import { DataState } from './state/data.state';
-import { UIState } from './state/ui.state';
 import { ClientEventType } from './actions/client.action';
+import { DataState } from './state/data.state';
 
 export interface State {
     client: ClientState;
-    ui: UIState;
     data: DataState;
 }
 
-export const appReducer: ActionReducerMap<State> = {
+export const baseReducer: ActionReducerMap<State> = {
     client: fromClient.reducer,
-    ui: fromUi.reducer,
-    data: fromMessage.reducer,
+    data: fromData.reducer,
 };
 
-
-export function clearState(reducer) {
+export function clearState(reducer: any) {
     return (state, action) => {
         if (action.type === ClientEventType.RESET) {
             state = undefined;
@@ -29,7 +24,5 @@ export function clearState(reducer) {
         return reducer(state, action);
     };
 }
-
-
 
 

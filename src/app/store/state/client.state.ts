@@ -1,17 +1,17 @@
 import { SocketState } from '../game.const';
 
 export interface ClientState  {
-    socketStatus: string;
-    isAuthenticated: boolean;
+    time?: Date;
     inGame: boolean;
-    errorMessage: string | null;
-    time?: string;
+    isgod: number;
+    invLevel: number;
+    track: string;
 }
 
 export const initialState: ClientState = {
-    socketStatus: SocketState.INITIALIZE,
-    isAuthenticated: false,
-    inGame: false,
-    errorMessage: null,
-    time: undefined,
+    time: new Date(),
+    inGame: undefined,
+    isgod: undefined,
+    invLevel: undefined,
+    track: undefined,
 };

@@ -3,10 +3,10 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { socketEvent } from '../models/socketEvent.enum';
 import { environment } from '../../environments/environment';
 
-import { Store } from '@ngrx/store';
-import { State } from '../store';
-
 import * as io from 'socket.io-client';
+import { Store } from '@ngrx/store';
+import { ClientState } from '../store/state/client.state';
+import { DisconnectAction } from '../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,11 @@ export class SocketService {
 
   private socket: io;
 
-  socketError: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  // socketStatus: BehaviorSubject<any> = new BehaviorSubject('');
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  
+  socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(
-    private store: Store<State>,
+    private store: Store<ClientState>
     ) {
     this.connect();
   }
@@ -31,31 +30,31 @@ export class SocketService {
   }
 
   public connect(): void {
-    if (this.socket) {
-      this.disconnect();
-      this.socket.destroy();
-      delete this.socket;
-      this.socket = null;
+    
+    if (!this.socket) {
+      this.socket = io(environment.socket.url, environment.socket.options);
+      this.initSocketEvent();
     }
-    this.socket = io(environment.socket.url, environment.socket.options);
-    this.startSocketEvent();
+    
   }
 
-  private startSocketEvent() {
+  private initSocketEvent() {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
-      this.connected$.next(true)
+      this.connected$.next(true);
+      this.socket_error$.next(false);
     });
 
     /* Disconnected */
     this.socket.on(socketEvent.DISCONNECT, () => {
-      this.connected$.next(false);
+      this.disconnect();
     });
 
     /* Error */
     this.socket.on(socketEvent.ERROR, (err: any) => {
       this.connected$.next(false);
-      this.socketError.next('errorproto');
+      this.socket_error$.next(true);
+      this.socket.connect();
     });
 
     /* Reconnection */
@@ -63,9 +62,13 @@ export class SocketService {
   }
 
   public disconnect(): void {
-    console.log('disconnect');
-    this.socket.disconnect();
+    
+    this.store.dispatch(new DisconnectAction());
+    
     this.connected$.next(false);
+    if (!this.socket.isConnected) {
+      this.socket.connect();
+    }
   }
 
   public emit(event: any, data?: any) {

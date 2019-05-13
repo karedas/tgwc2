@@ -1,20 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { GameService } from '../services/game.service';
 import { CookieService } from 'ngx-cookie-service';
-import { SocketService } from '../services/socket.service';
 import { LoginService } from '../main/authentication/services/login.service';
-import { AudioService } from '../main/client/audio/audio.service';
 import { PreloaderService } from '../main/common/services/preloader.service';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
-
-import { IconsComponent } from '../main/common/icons/icons.component';
-import { HstatComponent } from '../main/common/hstat/hstat.component';
-
-import { PipesModule } from '../pipes/pipes.module';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -27,73 +18,80 @@ import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { ContextMenuModule } from 'primeng/contextmenu';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+// import { ContextMenuModule } from 'primeng/contextmenu';
 
-import { DialogService as DynamicDialogService, MenuItem} from 'primeng/api';
-import { ClickStopPropagation } from './directives/click-stop-propagation.directive';
+import { DialogService as DynamicDialogService} from 'primeng/api';
+import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { PipesModule } from '../pipes/pipes.module';
+import { IconsComponent } from '../main/common/icons/icons.component';
+import { HstatComponent } from '../main/common/hstat/hstat.component';
+import { AudioService } from '../main/client/audio/audio.service';
+import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { ConfigService } from '../services/config.service';
 
 
 @NgModule({
   declarations: [
+    ClickStopPropagationDirective,
     IconsComponent,
-    HstatComponent,
-    ClickStopPropagation
+    HstatComponent
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    PipesModule,
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
     }),
     FontAwesomeModule,
     NgScrollbarModule,
+    PipesModule,
+    
     /* Prime NG Modules (TODO: Moves in another file) */
+    DynamicDialogModule,
     CheckboxModule,
     TableModule,
     MenubarModule,
     TooltipModule,
     ButtonModule,
-    ContextMenuModule,
-    ProgressSpinnerModule
+    // ContextMenuModule,
   ],
-  providers: [
-    GameService,
-    CookieService,
-    SocketService,
-    PreloaderService,
-    AudioService,
-    LoginService,
-    DynamicDialogService,
-    GenericDialogService,
-  ],
+
   exports: [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     NgScrollbarModule,
-    PipesModule,
+    DynamicDialogModule,
     FontAwesomeModule,
-    IconsComponent,
-    HstatComponent,
     CheckboxModule,
     MenubarModule,
     TooltipModule,
-    ProgressSpinnerModule,
     ButtonModule,
     TableModule,
-    ContextMenuModule,
-    ClickStopPropagation
+    
+    IconsComponent,
+    HstatComponent,
+    PipesModule,
+    // ContextMenuModule,
+    ClickStopPropagationDirective
   ],
 })
 export class SharedModule {
-  static forRoot() {
+  static forRoot(): ModuleWithProviders{
     return {
       ngModule: SharedModule,
+      providers: [
+        ConfigService,
+        CookieService,
+        PreloaderService,
+        LoginService,
+        DynamicDialogService,
+        GenericDialogService,
+        AudioService,
+      ]
     };
   }
 

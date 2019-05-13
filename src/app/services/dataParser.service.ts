@@ -3,11 +3,10 @@ import { Store } from '@ngrx/store';
 
 import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
-import * as UiActions from '../store/actions/ui.action';
 import * as GameActions from '../store/actions/client.action';
 
 import { IHero } from '../models/data/hero.model';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,21 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 export class DataParser {
 
+
+  private dispatcher: any = {};
+
   private netData = '';
+
+
+  private shortcuts = [];
+  private shortcuts_map = {};
+  private cmd_prefix = '';
 
   private _updateNeeded: Subject<any>;
 
-  constructor(private store: Store<State>) {
+  constructor(
+    private store: Store<State>
+    ) {
     this._updateNeeded = new Subject<any>();
   }
 
@@ -29,7 +38,7 @@ export class DataParser {
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-       data = this.preParseText(this.netData.substr(0, len - 3));
+      data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
         this.parseForDisplay(data);
@@ -41,7 +50,7 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-        this.store.dispatch(new GameActions.DisconnectAction);
+      this.store.dispatch(new GameActions.DisconnectAction);
     }
   }
 
@@ -56,7 +65,10 @@ export class DataParser {
     return data;
   }
 
-  parseForDisplay(data: string) {
+  parseForDisplay(data: string): void {
+    
+    // reset Dispatcher
+    this.dispatcher = {};
 
     let pos: any;
 
@@ -69,7 +81,7 @@ export class DataParser {
 
     // News
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      this.store.dispatch(new UiActions.WelcomeNewsAction);
+      this.store.dispatch(new GameActions.NewsAction);
       return '';
     });
 
@@ -100,7 +112,7 @@ export class DataParser {
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
       console.warn('Todo: Hide Text');
-      this.store.dispatch(new UiActions.UpdateUI({ inputVisible: false }));
+      this.store.dispatch(new GameActions.UpdateUI({ inputVisible: false }));
       return '';
     });
 
@@ -108,7 +120,7 @@ export class DataParser {
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({ inputVisible: true }));
+      this.store.dispatch(new GameActions.UpdateUI({ inputVisible: true }));
       return '';
     });
 
@@ -129,7 +141,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.store.dispatch(new UiActions.AudioAction(audio_parse));
+      this.store.dispatch(new GameActions.AudioAction(audio_parse));
       return '';
     });
 
@@ -169,7 +181,7 @@ export class DataParser {
 
     // Close the text editor
     data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      this.store.dispatch(new UiActions.CloseTextEditor());
+      this.store.dispatch(new GameActions.CloseTextEditor());
       return '';
     });
 
@@ -179,8 +191,8 @@ export class DataParser {
       const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
       this.store.dispatch(new DataActions.EditorAction({
         maxChars: options_parse[0],
-        title: options_parse[1],
-        description: text
+        title: options_parse[1] ? options_parse[1] : ' ',
+        description: text ? text : ' '
       }));
       return '';
     });
@@ -194,15 +206,15 @@ export class DataParser {
 
     // Book
     data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
-        const b_parse = JSON.parse(book.slice(6, -1));
-        this.store.dispatch(new DataActions.BookAction(b_parse));
-        return '';
+      const b_parse = JSON.parse(book.slice(6, -1));
+      this.store.dispatch(new DataActions.BookAction(b_parse));
+      return '';
     });
 
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      this.store.dispatch(new UiActions.ShowCommandsActions(cmd_parse));
+      this.store.dispatch(new GameActions.ShowCommandsActions(cmd_parse));
       return '';
     });
 
@@ -229,22 +241,19 @@ export class DataParser {
 
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
-      dtls = JSON.parse(dtls.slice(6, -1));
-      this.store.dispatch(new DataActions.RoomAction(dtls));
+      this.dispatcher.room = JSON.parse(dtls.slice(6, -1));
       return '';
     });
 
     // Person details
     data = data.replace(/&!pers\{[\s\S]*?\}!/gm, (dtls) => {
-      const dtls_parse = JSON.parse(dtls.slice(6, -1));
-      this.store.dispatch(new DataActions.ObjAndPersAction(dtls_parse));
+      this.dispatcher.pers = JSON.parse(dtls.slice(6, -1));
       return '';
     });
 
     // Object details
     data = data.replace(/&!obj\{[\s\S]*?\}!/gm, (dtls) => {
-      const dtls_parse = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
-      this.store.dispatch(new DataActions.ObjAndPersAction(dtls_parse));
+      this.dispatcher.objpers = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
       return '';
     });
 
@@ -273,14 +282,14 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      this.store.dispatch(new UiActions.ShowCharacterSheetActions([info_parse, 'info']));
+      this.store.dispatch(new GameActions.ShowCharacterSheetActions([info_parse, 'info']));
       return '';
     });
 
     // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      this.store.dispatch(new UiActions.ShowStatusBoxAction({status: status_parse}));
+      this.store.dispatch(new GameActions.ShowStatusBoxAction({ status: status_parse }));
       return '';
     });
 
@@ -301,7 +310,7 @@ export class DataParser {
     // Refresh command
     data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
       const rcommand_parse = JSON.parse(t.slice(9, -1));
-      this.store.dispatch(new UiActions.RefreshCommandAction());
+      this.store.dispatch(new GameActions.RefreshCommandAction());
       console.log('refresh command', rcommand_parse);
       return '';
     });
@@ -359,42 +368,105 @@ export class DataParser {
 
     // Is God
     data = data.replace(/&i/gm, () => {
-      this.store.dispatch(new UiActions.UpdateUI({ isGod: true }));
+      this.dispatcher.isgod = true;
       return '';
     });
 
     // Invisibility Level (only god);
     data = data.replace(/&I\d/gm, (inv) => {
-      const godInvLev = parseInt(inv.substr(2, 3));
-      this.store.dispatch(new UiActions.UpdateUI({ invLevel: godInvLev }));
+      this.dispatcher.visibilLevel = parseInt(inv.substr(2, 3), 10);
       return '';
     });
 
     /* \r is already removed at top */
 
-    if (data != 'undefined' && data != undefined && data !== '') {
+    if (data !== 'undefined' && data !== undefined && data !== '') {
       data = data.replace(/\n/gm, '<div class="breakline"></div>');
       data = data.replace(/<p><\/p>/g, '');
-      this.store.dispatch(new DataActions.IncomingData(data));
+      this.dispatcher['base'] = data;
+    }
+
+
+    // Execute
+    if(Object.keys(this.dispatcher).length > 0 ) {
+      this.dispatchData();
     }
   }
 
+  // Emit data Stored in the dispatcher to show then in the right Output Order
+  dispatchData() {
+    // Output Messages
+    if( this.dispatcher['base'] ) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
+    if( this.dispatcher['objpers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
+    if( this.dispatcher['room'] ) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
+    if( this.dispatcher['pers'] ) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
+    // TODO UI (dont need order) :
+    if( this.dispatcher['visibilLevel'] ) { new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] }); }
+    if( this.dispatcher['isgod'] ) { this.store.dispatch(new GameActions.UpdateUI( {isGod: this.dispatcher['isgod']} )); }
+  }
 
-  removeColors(data) {
+
+  removeColors(data: any) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
   }
 
-  parseInput(input): any {
+  parseInput(input: any): any {
     /* Split input separated by ; */
     const inputs = input.split(/\s*;\s*/);
     let res = [];
     /* Substitute shortcuts on each command and join results */
     for (let i = 0; i < inputs.length; ++i) {
-      const subs = inputs[i].split(/\s*;\s*/);
+      const subs = this.substShort(inputs[i]).split(/\s*;\s*/);
       res = res.concat(subs);
     }
     /* Return the resulting array */
     return res;
+  }
+
+
+  substShort(input: any): any {
+
+    /* Split into arguments */
+
+    let args = input.split(/\s+/);
+    /* Get the shortcut index */
+    let shortcut_key = args.shift();
+    let shortcut_num = parseInt(shortcut_key);
+    let shortcut_cmd = '';
+
+
+    if (!isNaN(shortcut_num)) {
+      shortcut_cmd = this.shortcuts[shortcut_num];
+    }
+    else if (typeof (this.shortcuts_map[shortcut_key]) != 'undefined') {
+      shortcut_cmd = this.shortcuts[this.shortcuts_map[shortcut_key]];
+    }
+
+    /* Check if the shortcut is defined */
+    if (shortcut_cmd) {
+
+      /* Use the shortcut text as command */
+      input = shortcut_cmd['cmd'];
+
+      if (/\$\d+/.test(input)) {
+        /* Substitute the arguments */
+        for (let arg = 0; arg < args.length; ++arg) {
+          let rx = new RegExp("\\$" + (arg + 1), 'g');
+          input = input.replace(rx, args[arg]);
+        }
+
+        /* Remove remaining letiables */
+        input = input.replace(/\$\d+/g, '');
+      } else
+        input += " " + args.join(" ");
+    }
+    
+    
+    if (this.cmd_prefix.length > 0) {
+      input = this.cmd_prefix + " " + input;
+    }
+
+    return input;
   }
 
   setUpdateNeeded(what: any) {
@@ -404,41 +476,4 @@ export class DataParser {
   get updateNeeded(): Observable<any> {
     return this._updateNeeded.asObservable();
   }
-
-  // substShort(input: string): any {
-
-  //   /* Split into arguments */
-  //   let args = input.split(/\s+/);
-  //   /* Get the shortcut index */
-  //   let shortcut_key = args.shift();
-  //   let shortcut_num = parseInt(shortcut_key);
-  //   let shortcut_cmd;
-  //   if (!isNaN(shortcut_num)) {
-  //       shortcut_cmd = _.client_options.shortcuts[shortcut_num];
-  //   } else if (typeof (_.shortcuts_map[shortcut_key]) != 'undefined') {
-  //       shortcut_cmd = _.client_options.shortcuts[_.shortcuts_map[shortcut_key]];
-  //   }
-
-  //   /* Check if the shortcut is defined */
-  //   if (shortcut_cmd) {
-  //       /* Use the shortcut text as command */
-  //       input = shortcut_cmd.cmd;
-  //       if (/\$\d+/.test(input)) {
-  //           /* Substitute the arguments */
-  //           for (let arg = 0; arg < args.length; ++arg) {
-  //               let rx = new RegExp("\\$" + (arg + 1), 'g');
-  //               input = input.replace(rx, args[arg]);
-  //           }
-  //           /* Remove remaining letiables */
-  //           input = input.replace(/\$\d+/g, '');
-  //       } else
-  //           input += " " + args.join(" ");
-  //   }
-
-  //       if (_.cmd_prefix.length > 0) {
-  //           input = _.cmd_prefix + " " + input;
-  //       }
-  //       return input;
-  //   }
-
 }

@@ -3,11 +3,27 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from '../registration/registration.component';
 
-const authRoutes: Routes = [
+const AUTH_ROUTES: Routes = [
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'auth',
+    children: [
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'registrazione',
+        component: RegistrationComponent
+      },
+    ]
   },
+
+
   // {
   //   path: 'registration',
   //   component: RegistrationComponent,
@@ -20,7 +36,7 @@ const authRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(authRoutes)
+    RouterModule.forChild(AUTH_ROUTES)
   ],
   exports: [
     RouterModule

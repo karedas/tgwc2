@@ -10,43 +10,68 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { SharedModule } from './shared/shared.module';
-import { LoggerModule, NgxLoggerLevel, NGXLoggerMonitor } from 'ngx-logger';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from 'src/environments/environment';
-import { ClientModule } from './main/client/client.module';
 
 import { AppPreloadingStrategy } from './app.preloading-strategy';
-import { appReducer, clearState } from './store';
-import { UiEffects } from './store/effects/ui.effects';
+import { GoogleAnalyticsService } from './services/google-analytics-service.service';
+import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainModule } from './main/main.module';
+import { TgConfigModule } from './shared/tgconfig.module';
+import { tgConfig } from './main/client/client-config';
+import { SocketService } from './services/socket.service';
+import { baseReducer, clearState } from './store';
 import { ClientEffects } from './store/effects/client.effects';
-import { Auth2Module } from './main/authentication/auth.module';
 import { DataEffects } from './store/effects/data.effects';
+import { PageNotFoundComponent } from './main/page-not-found/page-not-found.component';
+import { WindowsModule } from './main/client/windows/windows.module';
+import { WindowsService } from './main/client/windows/windows.service';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
+
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
+    SplashscreenComponent,
   ],
+
   imports: [
+
+    SharedModule.forRoot(),
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducer, { metaReducers: [clearState] }),
-    EffectsModule.forRoot([UiEffects, ClientEffects, DataEffects]),
+
+    TgConfigModule.forRoot(tgConfig),
+    
+    StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
+    EffectsModule.forRoot([ClientEffects, DataEffects]),
+
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, 
+      logOnly: environment.production,
+    }),
+    
     LoggerModule.forRoot({
-      // serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.DEBUG,
       serverLogLevel: NgxLoggerLevel.ERROR,
-      
     }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
-    SharedModule,
-    ClientModule,
-    Auth2Module,
-    AppRoutingModule
+
+    WindowsModule,
+    MainModule,
+    AppRoutingModule,
   ],
-  providers: [AppPreloadingStrategy],
+  exports: [
+    WindowsModule
+  ],
+  providers: [
+    SocketService,
+    AppPreloadingStrategy,
+    GoogleAnalyticsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

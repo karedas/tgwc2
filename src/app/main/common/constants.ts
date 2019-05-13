@@ -64,3 +64,34 @@ export const hero_position = [
   'seduto',
   'in piedi'
 ];
+
+export const font_size_options = [
+  {
+    name: 'Piccolissimo',
+    class: 'size-xs'
+  },
+  {
+    name: 'Piccolo',
+    class: 'size-s'
+  },
+  {
+    name: 'Medio',
+    class: 'size-m'
+  },
+  {
+    name: 'Grande',
+    class: 'size-l'
+  },
+  {
+    name: 'Grandissimo',
+    class: 'size-xl'
+  },
+  {
+    name: 'Gigantesco',
+    class: 'size-xxl'
+  },
+  {
+    name: 'Enorme',
+    class: 'size-xxxl'
+  }
+];

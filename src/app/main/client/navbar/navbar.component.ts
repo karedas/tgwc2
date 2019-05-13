@@ -36,7 +36,9 @@ export class NavbarComponent implements OnInit {
       label: 'Client',
       items: [
         { label: 'Log di gioco', disabled: true },
-        { label: 'Preferenze', disabled: true },
+        { label: 'Preferenze', command: (onclick) => {
+          this.windowsService.openControlPanel();
+        }},
         {
           label: 'Disconnetti', icon: 'pi pi-fw pi-sign-out', separator: false, command: (onclick) => {
             this.game.disconnectGame();
@@ -61,7 +63,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Guida al gioco', disabled: true },
         {
           label: 'Ultime novità', disabled: true, command: (onclick) => {
-            this.windowsService.openWelcomeNews();
+            this.windowsService.openNews();
           }
         },
         { label: 'Segnala un problema', url: 'http://forum.thegatemud.it/viewforum.php?f=51', target: '_blank' },

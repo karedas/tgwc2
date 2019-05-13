@@ -1,6 +1,5 @@
 tg-splashscreen {
-  height: 100%;
-  width: 100%;
+  display: block;
   background-color: #0b0807;
   text-align: center;
   position: absolute;
@@ -9,9 +8,15 @@ tg-splashscreen {
   right: 0;
   bottom: 0;
   z-index: 100;
+  pointer-events: none;
 
   .tg-splashscreen--percentage {
     margin: auto;
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .tg-splashscreen--logo {
@@ -33,15 +38,17 @@ tg-splashscreen {
     height: 1px;
     width: 40vw;
     position: relative;
-    margin-top: 5px;
+    margin: 5px auto;
 
     .tg-splashscreen--percentageamount {
       position: absolute;
       left: 0;
       display: block;
-      background-color: #71510b;
+      background-color: #d69813;
       width: 0;
       height: 100%;
+      box-shadow: 0 0 16px 1px #d69813;
+      transition: width .1s linear;
     }
   }
 }

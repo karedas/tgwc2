@@ -5,8 +5,9 @@
         <div class="tg-dialog-content-nopadding tg-shadow-inset">
           <div class="b-paper tg-box">
             <div class="tg-book-inset" fxLayout="column">
-              <ng-scrollbar class="scrollbar" *ngIf="book.pages; else noPage">
-                <ng-container  *ngFor="let page of book.pages let i=index">
+
+              <ng-scrollbar class="scrollbar" *ngIf="book.pages.length !== 0; else noPage">
+                <ng-container  *ngFor="let page of book.pages; let i=index">
                   <div class="page" [attr.pagenumber]="i" *ngIf="openedIndexPage == i">
                     
                     <div class="tg-book-title" *ngIf="book.title && i === 0">
@@ -15,16 +16,20 @@
                     <div *ngIf="book?.pages[i].title">
                       <b>{{book.pages[i].title | capitalizeFirst}}</b>
                     </div>
-                    <i class="tg-book-language" *ngIf="page.language">(C'è scritto qualcosa in {{page.language}})</i>
-                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true">
-                    </div>
+                    {{page.text}}
+                    <i class="tg-book-language" *ngIf="page.language">
+                        (C'è scritto qualcosa in {{page.language}})
+                    </i>
+                    <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true:false"></div>
 
                   </div>
                 </ng-container>
-
+                
                 <ng-template #noPage>
+                  <!-- No Pages -->
                   <div class="tg-book-pagetext">Non ci sono Pagine</div>
                 </ng-template>
+
               </ng-scrollbar>
 
               <div class="tg-book-pager" *ngIf="book.pages.length > 1" fxLayout>

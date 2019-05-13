@@ -3,7 +3,7 @@
     <div class="tg-output-main" #mainOutputArea>
 
       <!-- Output Area -->
-      <ng-container *ngIf="extraOutputOpenStatus$ | async as extra; else noextra">
+      <ng-container *ngIf="showExtraByViewport && tgConfig.layout.extraOutput as extra; else noextra">
         <as-split [direction]="'horizontal'" class="tg-output--splitter"#splitArea>
           <as-split-area size="50" style="position:relative">
             <tg-status></tg-status>

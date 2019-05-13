@@ -1,41 +1,37 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, ViewEncapsulation, HostListener, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, ViewChild, ElementRef, ViewEncapsulation, HostListener, OnDestroy, Renderer2, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
-import { faColumns, faSolarPanel, faBullseye } from '@fortawesome/free-solid-svg-icons';
+import { faColumns, faSolarPanel, faBullseye, faFont } from '@fortawesome/free-solid-svg-icons';
 
 import { State } from 'src/app/store';
-import { getHero, getExtraOutputStatus, getDashboardVisibility } from 'src/app/store/selectors';
+import { getHero } from 'src/app/store/selectors';
 
 import { HistoryService } from 'src/app/services/history.service';
 import { GameService } from 'src/app/services/game.service';
 import { InputService } from './input.service';
-import { ToggleExtraOutput, ToggleDashboard } from 'src/app/store/actions/ui.action';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'tg-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 
-export class InputComponent implements AfterViewInit, OnDestroy {
+export class InputComponent implements OnInit, OnDestroy {
 
   @ViewChild('inputCommand') ic: ElementRef;
+
+  tgConfig: any;
 
   facolumns = faColumns;
   faSolarPanel = faSolarPanel;
   faBullseye = faBullseye;
+  faFont = faFont;
 
-  _extraOutputStatus$: Observable<boolean>;
-  _dashBoardStatus$: Observable<boolean>;
-
-  public zenStatus = false;
+  public inCombat = false;
 
   private _inCombat$: Observable<any>;
-  inCombat = false;
-
-
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -43,30 +39,36 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     private store: Store<State>,
     private historyService: HistoryService,
     private inputService: InputService,
-    private render: Renderer2
+    private render: Renderer2,
+    private _configService: ConfigService
   ) {
-
-    this._extraOutputStatus$ = this.store.pipe(select(getExtraOutputStatus));
-    this._dashBoardStatus$ = this.store.pipe(select(getDashboardVisibility));
 
     this._inCombat$ = this.store.pipe(select(getHero));
 
     this._unsubscribeAll = new Subject();
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
+
+    // Subscribe to config changes
+    this._configService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.tgConfig = config;
+      });
+
 
     this._inCombat$.pipe(
       takeUntil(this._unsubscribeAll),
       filter(state => !!state)).subscribe(
-      (cc) => {
-        if (cc.target && typeof cc.target.hit !== 'undefined') {
-          this.inCombat = Object.keys(cc).length ? true : false;
-        } else {
-          this.inCombat = false;
+        (cc) => {
+          if (cc.target && typeof cc.target.hit !== 'undefined') {
+            this.inCombat = Object.keys(cc).length ? true : false;
+          } else {
+            this.inCombat = false;
+          }
         }
-      }
-    );
+      );
 
     // Listen focus Call from another component
     this.inputService.isFocussed.pipe(takeUntil(this._unsubscribeAll))
@@ -110,7 +112,7 @@ export class InputComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private moveCursorAtEnd(target) {
+  moveCursorAtEnd(target) {
     if (typeof target.selectionStart === 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
     } else if (typeof target.createTextRange !== 'undefined') {
@@ -122,30 +124,42 @@ export class InputComponent implements AfterViewInit, OnDestroy {
   }
 
   toggleExtraOutput(event: Event) {
-    this.store.dispatch(new ToggleExtraOutput(null));
+    this._configService.setConfig({
+      layout: { extraOutput: !this.tgConfig.layout.extraOutput }
+    })
   }
 
-  toggleDashboard(event: Event) {
-    this.store.dispatch(new ToggleDashboard());
+  toggleCharacterPanel(event: Event) {
+    this._configService.setConfig({
+      layout: { characterPanel: !this.tgConfig.layout.characterPanel }
+    })
   }
 
   toggleZen(event: Event) {
-    this.zenStatus = !this.zenStatus;
-    if (this.zenStatus) {
+
+    this._configService.setConfig({
+      layout: { zen: !this.tgConfig.layout.zen }
+    })
+
+    if (this.tgConfig.layout.zen) {
       this.render.addClass(document.body, 'zen');
     } else {
       this.render.removeClass(document.body, 'zen');
     }
   }
 
+  onFontSizeChange(): void {
+    this.game.setOutputSize();
+  }
+
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
   }
 
-  @HostListener('window:keydown', ['$event'])
+  @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
 
-    if (event.which === 49 && event.shiftKey === true && (this.ic.nativeElement.value).length === 0) {
+    if (event.key === '!' && (this.ic.nativeElement.value).length === 0) {
       const l = this.historyService.cmd_history.length;
 
       if (l > 0) {
@@ -154,7 +168,6 @@ export class InputComponent implements AfterViewInit, OnDestroy {
       return false;
     }
   }
-
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

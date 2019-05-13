@@ -4,7 +4,6 @@ import { CombatPanelComponent } from './combat-panel/combat-panel.component';
 import { ExtraboardComponent } from './extraboard/extraboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
-import { InputModule } from './input/input.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { InputModule } from './input/input.module';
     DashboardComponent,
   ],
   imports: [
-    InputModule,
     SharedModule
   ],
   exports: [

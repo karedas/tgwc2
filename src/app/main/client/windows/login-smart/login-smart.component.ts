@@ -4,14 +4,13 @@ import { Store } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/main/authentication/services/login.service';
-import { DisconnectAction, ResetAction } from 'src/app/store/actions/client.action';
 
 import { DynamicDialogRef } from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
-import { Reset } from '@ngrx/store-devtools/src/actions';
+import { ResetAction } from 'src/app/store/actions/client.action';
 
 @Component({
   selector: 'tg-login-smart',
@@ -29,7 +28,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   loginFailed: boolean; 1;
   loginSubscription: Subscription;
 
-  socketloginReplayMessage: string;
+  loginReplayMessage: string;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -55,11 +54,11 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService.loginReplayMessage
+    this.loginService._loginReplayMessage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((err: string) => {
         if (err !== undefined) {
-          this.socketloginReplayMessage = err;
+          this.loginReplayMessage = err;
         }
       });
   }
@@ -76,6 +75,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     if (this.smartLoginForm.invalid) {
       return;
     }
+
 
     const values = this.smartLoginForm.value;
 

@@ -44,7 +44,7 @@ export class MapService extends MapSnowService {
     this.canvasHeight = this._maxMapHeight * this._mapTileHeight;
 
     this.context.save();
-    this.context.beginPath;
+    this.context.beginPath();
     this.context.arc(this.canvasWidth / 2, this.canvasHeight / 2, this.canvasWidth / 2, 0, Math.PI * 2, true);
     this.context.clip();
     this.context.fill();
@@ -146,7 +146,9 @@ export class MapService extends MapSnowService {
                 swidth -= 8;
               }
 
-              this.context.drawImage(this.mapShadowTile, clipx, clipy, swidth, sheight, x * this._mapTileWidth - 8 + clipx, y * this._mapTileHeight - 8 + clipy, swidth, sheight);
+              const draw_x = x * this._mapTileWidth - 8 + clipx;
+              const draw_y = y * this._mapTileHeight - 8 + clipy;
+              this.context.drawImage(this.mapShadowTile, clipx, clipy, swidth, sheight, draw_x, draw_y, swidth, sheight);
             }
           }
         }

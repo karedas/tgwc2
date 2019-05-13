@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { SocketStatusAction, LoginSuccessAction } from 'src/app/store/actions/client.action';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/services/socket.service';
-import { ClientState } from 'src/app/store/state/client.state';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { GameService } from 'src/app/services/game.service';
 
@@ -34,25 +31,22 @@ export class LoginService {
   constructor(
 
     private socketService: SocketService,
-    private game: GameService,
-    private store: Store<ClientState>) {
+    private game: GameService) {
 
     this.isLoggedInSubject = new BehaviorSubject(false);
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
     this.loginErrorMessage$ = new BehaviorSubject('');
-
-
-    this._init();
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
-
     this.username = data.username;
     this.password = data.password;
 
     this.resetHandler();
+
     this.socketService.emit('loginrequest');
+    this._loginReplayMessage = 'Tentativo di connessione in corso...';
 
     return this.isLoggedInSubject;
   }
@@ -80,13 +74,10 @@ export class LoginService {
   }
 
   setHandleLoginData() {
-    this.socketService.off(socketEvent.LOGIN);
-    this.socketService.addListener(socketEvent.LOGIN, (data) => this.handleLoginData(data));
+    this.socketService.addListener(socketEvent.LOGIN, (data: any) => this.handleLoginData(data));
   }
 
   handleLoginData(data: any) {
-
-    this.loginReplayMessage = 'Tentativo di connessione in corso...';
 
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
@@ -103,9 +94,11 @@ export class LoginService {
             break;
           case loginEventName.SHUTDOWN:
             this.onShutDown();
+            this.onEnterLogin();
             break;
           case loginEventName.REBOOT:
             this.onReboot();
+            this.onEnterLogin();
             break;
           case loginEventName.LOGINOK:
             this.onLoginOk(data.slice(end + 2));
@@ -114,8 +107,7 @@ export class LoginService {
             this.onServerDown();
             break;
           default:
-            this.loginReplayMessage = rep.msg;
-            this.onError(this.loginErrorMessage$);
+            this.onError(rep.msg);
             break;
         }
       }
@@ -134,7 +126,6 @@ export class LoginService {
 
   onLoginOk(data: any) {
     this.completeHandShake(data);
-    this.store.dispatch(new LoginSuccessAction());
   }
 
   completeHandShake(data: any) {
@@ -144,49 +135,33 @@ export class LoginService {
   }
 
   onShutDown() {
-    this.store.dispatch(new SocketStatusAction('shutdown'));
+    alert('Attenzione, il server è attualmente in manutenzione.');
   }
 
   onReboot() {
-    alert('Il gioco è in stato di reboot, riprova tra un po');
-    this.store.dispatch(new SocketStatusAction('reboot'));
-    console.log('TGLOG: Attenzione, Reboot del server in corso, impossibile effettuare attualmente l\'accesso');
+    alert('Attenzione, il server sarà riavviato entro breve.');
   }
 
   onServerDown() {
-    this.store.dispatch(new SocketStatusAction('serverdown'));
-    this.loginReplayMessage = 'serverdown';
+    alert('Attenzione, il server sarà spento entro breve per manutenzione.');
+    this._loginReplayMessage = 'serverdown';
   }
 
   onError(err: any) {
     this.socketService.off(socketEvent.LOGIN);
-    // this.store.dispatch(new LoginFailureAction(this.loginReplayMessage));
-    this.loginReplayMessage = err;
+    this._loginReplayMessage = err;
   }
 
-  set loginReplayMessage(what: any) {
+  set _loginReplayMessage(what: any) {
     if (loginError[what]) {
       this.loginErrorMessage$.next(loginError[what]);
-    }
-    else if (what) {
+    } else if (what) {
       this.loginErrorMessage$.next(what);
     }
   }
 
-  get loginReplayMessage(): any {
+  get _loginReplayMessage(): any {
     return this.loginErrorMessage$.asObservable();
   }
 
-  private _init(): void {
-
-    this.socketService.isConnected
-      .subscribe((c) => {
-        if (c === true) {
-          this.loginReplayMessage = ' ';
-        }
-        else if (this.socketService.socketError) {
-          this.loginReplayMessage = this.socketService.socketError.value;
-        }
-      });
-  }
 }

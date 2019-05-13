@@ -1,16 +1,16 @@
   <div class="tg-combatpanel--wrap">
     <div class="tg-combatpanel--box">
-      <div class="enemyname" [innerHtml]="name | dataToHtml" *ngIf="name"></div>
+      <div class="enemyname" [innerHtml]="enemyName | dataToHtml" *ngIf="enemyName"></div>
       <div class="tg-enemyicon">
-          <tg-icons [icon]="icon"></tg-icons>
+          <tg-icons [icon]="enemyIcon"></tg-icons>
       </div>
-      <div class="enemy-h-prc">{{healt}}%</div>
+      <div class="enemy-h-prc">{{enemyHealt}}%</div>
       <div class="tg-enemy-h">
-        <div class="enemy-bar enemyH" [style.width.%]="healt"></div>
+        <div class="enemy-bar enemyH" [style.width.%]="enemyHealt"></div>
       </div>
-      <div class="enemy-m-prc">{{move}}%</div>
+      <div class="enemy-m-prc">{{enemyMove}}%</div>
       <div class="tg-enemy-m">
-        <div class="enemy-bar enemyM" [style.width.%]="move"></div>
+        <div class="enemy-bar enemyM" [style.width.%]="enemyMove"></div>
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@ tg-geo-location {
 
 .tg-geolocal {
   position: relative;
-	padding: 8px 4px 0px;
+	padding: 4px 4px 0px;
 	height: 100%;
   background: #190f06 url($imgPath + "/background/bg-ironbrown.jpg") repeat;
 }
@@ -69,7 +69,7 @@ tg-geo-location {
 .tg-geolocal--databox {
 	color: #9b8c7d;
 	text-align: center;
-	font-size: 14px;
+	font-size: 13px;
 	width: 100%;
 	margin: auto;
 
@@ -78,6 +78,7 @@ tg-geo-location {
 		height: 24px;
 		line-height: 24px;
 		vertical-align: middle;
+		display: inline-block;
 	
 		.tg-icon {
 			transform: scale(.8);
@@ -92,6 +93,10 @@ tg-geo-location {
 	margin-left: -16px;
 	font-size: 14px;
 	color: #aca49b;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 .tg-geolocal--region:after {
@@ -114,7 +119,7 @@ tg-geo-location {
 	}
 
 	.tg-geolocal--imagecnt {
-		height: 110px;
+		display: none;
 	}
 	
 	.tg-geolocal--image{

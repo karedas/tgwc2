@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { SocketService } from './socket.service';
 import { socketEvent } from '../models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
-import { Observable, BehaviorSubject, timer, Subject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { GenericDialogService } from '../main/common/dialog/dialog.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, distinctUntilChanged } from 'rxjs/operators';
 
-import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
+import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/common/constants';
+import { ConfigService } from './config.service';
+import { TGConfig } from '../main/client/client-config';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,13 @@ import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/const
 export class GameService {
 
 
+  tgConfig: TGConfig;
+
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
+
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
-  public extraIsOpen: boolean;
 
   // Client Data Needed Updates
   public client_update = {
@@ -45,6 +49,7 @@ export class GameService {
     }
   };
 
+  private render: Renderer2;
 
   private _dataSubscription: Subscription;
   private _updateNeededSubscription: Subscription;
@@ -55,15 +60,35 @@ export class GameService {
     private dataParserService: DataParser,
     private historyService: HistoryService,
     private genericDialogService: GenericDialogService,
-    private http: HttpClient
+    private http: HttpClient,
+    private _configService: ConfigService,
+    rendererFactory: RendererFactory2,
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
     this._commandsList$ = new BehaviorSubject(null);
     this._showStatus = new BehaviorSubject(null);
-    this.init();
+
+    this.render = rendererFactory.createRenderer(null, null);
+
+    this._init();
   }
 
-  init() {
+
+  get config(): TGConfig {
+    return this.tgConfig;
+  }
+
+  _init() {
+
+    this._configService.config
+      .pipe(distinctUntilChanged())
+      .subscribe((config: TGConfig) => 
+        {
+          this.tgConfig = config;
+          console.log('gameservice config subscribe:', config)
+        }
+      );
+
     this.loadServerStat();
   }
 
@@ -125,13 +150,13 @@ export class GameService {
         this.client_update.lastDataTime = now;
       }
 
-      if (this.client_update.room.needed && this.extraIsOpen && !this.client_update.inContainer) {
-        this.sendToServer('@agg');
-        this.client_update.room.needed = false;
-        this.client_update.lastDataTime = now;
-      } else if (this.client_update.inContainer && this.extraIsOpen) {
-        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
-      }
+      // if (this.client_update.room.needed && this.tgConfig.layout.extraOutput && !this.client_update.inContainer) {
+      //   this.sendToServer('@agg');
+      //   this.client_update.room.needed = false;
+      //   this.client_update.lastDataTime = now;
+      // } else if (this.client_update.inContainer && this.config.layout.extraOutput) {
+      //   this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
+      // }
     }
   }
 
@@ -225,7 +250,26 @@ export class GameService {
 
       return cont.list;
     }
+  }
 
 
+  /** Font Size Adjustement */
+  
+  setOutputSize() {
+    let newSize = (this.tgConfig.layout.fontSize + 1 ) % font_size_options.length;
+    let old_class = font_size_options[this.tgConfig.layout.fontSize].class;
+    let new_class = font_size_options[newSize].class;
+
+    if(old_class) {
+      this.render.removeClass(document.body, old_class);
+      this.render.addClass(document.body, new_class);
+    }
+
+    // Save in Storage
+    this._configService.config =  { 
+      layout: {
+        fontSize: newSize
+      }
+    }
   }
 }

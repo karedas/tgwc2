@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { CookieLawComponent } from '../../client/windows/cookie-law/cookie-law.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { WelcomeNewsComponent } from './welcome-news/welcome-news.component';
@@ -14,12 +12,12 @@ import { WorkslistComponent } from './workslist/workslist.component';
 import { DialogGenericModule } from '../../common/dialog/dialog.module';
 import { LoginSmartComponent } from './login-smart/login-smart.component';
 import { NoFeatureComponent } from './no-feature/no-feature.component';
-import { WindowsService } from './windows.service';
 import { CharacterSheetComponent } from './character-sheet/character-sheet.component';
 import { InfoComponent } from './character-sheet/info/info.component';
 import { EquipInventoryComponent } from './character-sheet/equip-inventory/equip-inventory.component';
 import { SkillsComponent } from './character-sheet/skills/skills.component';
 import { BookComponent } from './book/book.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 @NgModule({
   declarations: [
@@ -28,18 +26,16 @@ import { BookComponent } from './book/book.component';
     LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
-    CookieLawComponent,
-    CommandsListComponent,
     EditorComponent,
     WorkslistComponent,
     CharacterSheetComponent,
     InfoComponent,
     EquipInventoryComponent,
     SkillsComponent,
-    BookComponent
+    BookComponent,
+    ControlPanelComponent
   ],
   imports: [
-    DynamicDialogModule,
     DialogGenericModule,
     DialogModule,
     CommonModule,
@@ -51,18 +47,16 @@ import { BookComponent } from './book/book.component';
     CommandsListComponent,
     GenericTableComponent,
     WorkslistComponent,
+    ControlPanelComponent,
     CharacterSheetComponent,
-    BookComponent
+    BookComponent,
   ],
   entryComponents: [
     NoFeatureComponent,
     LoginSmartComponent,
     CommandsListComponent,
     WelcomeNewsComponent,
-    CookieLawComponent,
   ],
-  providers: [
-    WindowsService
-  ]
 })
+
 export class WindowsModule { }
