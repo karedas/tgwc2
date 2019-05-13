@@ -46,6 +46,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private resizeID: any;
   private outputTrimLines = 500;
+  private personUpdate = false;
+  private objectUpdate = false;
+
 
   private _unsubscribeAll: Subject<any>;
 
@@ -56,6 +59,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     private _configService: ConfigService) {
 
     this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
+
 
     this._baseText$ = this.store.select(getDataBase);
     this._roomBase$ = this.store.select(getRoomBase);
@@ -103,51 +107,44 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(room => room && room !== undefined))
       .subscribe((room: Room) => {
-        
-        if (this.game.client_update.inContainer) {
-   
-          let personUpdate = false;
-          let objectUpdate = false;
+        // if (this.game.client_update.inContainer) {
 
-          if(room.objcont) {
-            room.objcont.list.forEach(element => {
-              if(element.mrn.includes(this.game.client_update.mrnContainer)) {
-                objectUpdate = true;
-              }
-            });
-          }
-          if(room.perscont) {
-            room.perscont.list.forEach(element => {
-              if (element.mrn.includes(this.game.client_update.mrnContainer)) {
-                personUpdate = true;
-              }
-            });
-          }
+        //   if (room.objcont) {
+        //     room.objcont.list.forEach(element => {
+        //       if (element.mrn.includes(this.game.client_update.mrnContainer)) {
+        //         this.objectUpdate = true;
+        //       }
+        //     });
+        //   }
+        //   if (room.perscont) {
+        //     room.perscont.list.forEach(element => {
+        //       if (element.mrn.includes(this.game.client_update.mrnContainer)) {
+        //         this.personUpdate = true;
+        //       }
+        //     });
+        //   }
 
-          if (personUpdate || objectUpdate) {
-            this.game.updateMrnContainer();
-          }
-          else {
-            this.game.client_update.inContainer = false;
-          }
-        }
-
-
-
+        //   if (this.objectUpdate || this.personUpdate) {
+        //     this.past = false;
+        //   }
+        //   else {
+        //     this.past = true;
+        //   }
+        // }
         this.typeDetail = 'room';
+
         if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
           this.lastRoomDescription = room.desc['base'];
         }
-        this.output.push(this.setContent('room', room));
 
-        // if (this.game.client_update.room.version < room.ver && this.splitArea) {
+        this.output.push(this.setContent('room', room));
+        this.scrollPanelToBottom();
+        this.game.client_update.inContainer = false;
+
         if (this.game.client_update.room.version < room.ver) {
           this.game.client_update.room.version = room.ver;
           this.game.client_update.room.needed = false;
         }
-
-        // this.scrollPanelToBottom();
-        // this.game.client_update.inContainer = false;
       });
 
     /** Object or Person Detail */
@@ -156,7 +153,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this._unsubscribeAll),
         filter(elements => elements && elements !== undefined))
       .subscribe((elements: any) => {
-        console.log('OBJORPERSON', elements);
+
         this.objPersDetail = elements;
         const content = this.setContent('objpersdetail', this.objPersDetail);
         this.output.push(content);
