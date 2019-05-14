@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StepSecondComponent {
 
-  @Input('race') race: any;
+  @Input('race') race: string;
   
   frmStepSecond: FormGroup;
   ethnicityList = ethnicity;

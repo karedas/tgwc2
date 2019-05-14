@@ -17,6 +17,8 @@ import { StepFiveComponent } from './step-five/step-five.component';
 import { StepSixComponent } from './step-six/step-six.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { StepCompleteComponent } from './step-complete/step-complete.component';
+import { RegistrationService } from './services/registration.service';
+import { SocketService } from 'src/app/services/socket.service';
 
 
 export const routes: Routes = [
@@ -52,6 +54,8 @@ export const routes: Routes = [
     MatRadioModule,
     NgScrollbarModule
   ],
-
+  providers: [
+    RegistrationService,
+  ]
 })
 export class RegistrationModule { }

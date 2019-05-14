@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { cultures } from 'src/assets/data/cultures/cultures.const';
+import { RegistrationData } from '../models/creation_data.model';
 
 @Component({
   selector: 'tg-step-third',
@@ -10,7 +11,7 @@ import { cultures } from 'src/assets/data/cultures/cultures.const';
 })
 export class StepThirdComponent{
 
-  @Input('race_code') baseEthnicity: string ;
+  @Input('race_code') race_code: string ;
 
   frmStepThird: FormGroup;
   culturesList = cultures;
