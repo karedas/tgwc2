@@ -14,7 +14,7 @@ export class StepSixComponent implements OnInit {
   frmStepSix: FormGroup;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private registrationService: RegistrationService,
     private socketService: SocketService) {
 
@@ -45,7 +45,7 @@ export class StepSixComponent implements OnInit {
 
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
-      
+
       if (matchingControl.errors && !matchingControl.errors.mustMatch) {
         // return if another validator has already found an error on the matchingControl
         return;
@@ -58,32 +58,6 @@ export class StepSixComponent implements OnInit {
       }
     }
   }
-
-  test() {
-
-  
-    let create = "create:" 
-    + "testoryondue,"
-    + "pwdtest,"
-    + "lisandr84@gmail.com,"
-    + "123456789,"
-    + "ume,"
-    + "m,"
-    + "minatore,"
-    + "temperia,"
-    + "20,"
-    + "20,"
-    + "20,"
-    + "-20,"
-    + "-20,"
-    + "-20,"
-    + "-15,"
-    + "0"
-    + "\n";
-
-    this.registrationService.test(create);
-  }
-
   ngOnInit() {
   }
 }
