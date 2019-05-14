@@ -20,6 +20,7 @@ export class SocketService {
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private store: Store<ClientState>) {
+    console.log('constructor');
     this.connect();
   }
 
@@ -67,6 +68,11 @@ export class SocketService {
     if (!this.socket.isConnected) {
       this.socket.connect();
     }
+  }
+
+  public oob() {
+    const when = new Date().getTime();
+    this.emit(socketEvent.OOB, { itime: when.toString(16) });
   }
 
   public emit(event: any, data?: any) {

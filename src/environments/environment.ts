@@ -9,6 +9,7 @@ export const environment = {
   socket : {
     url : 'http://51.38.185.84:3335',
     // url : 'http://play.thegatemud.it:3335',
+    // url : 'http://localhost:3335',
     options : {
       'reconnection': true,
       'autoConnect:': true,

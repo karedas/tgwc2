@@ -6,5 +6,7 @@ export enum socketEvent {
     PONG = 'pong',
     LOGIN = 'auth',
     DATA = 'data',
-    OOB = 'oob'
+    OOB = 'oob',
+    REGISTRATION = 'reg',
+    NEWCHAR = 'newchar'
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SocketService } from 'src/app/services/socket.service';
+import { RegistrationService } from '../services/registration.service';
 
 @Component({
   selector: 'tg-step-six',
@@ -12,14 +13,17 @@ export class StepSixComponent implements OnInit {
 
   frmStepSix: FormGroup;
 
-  constructor(private fb: FormBuilder, private socketService: SocketService) {
+  constructor(
+    private fb: FormBuilder, 
+    private registrationService: RegistrationService,
+    private socketService: SocketService) {
 
     this.frmStepSix = this.fb.group({
       name: ['', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(16),
-        Validators.pattern(/^[a-z]+$/)
+        Validators.pattern(/^[A-Za-z]+$/)
       ]],
       sex: ['m'],
       email: ['', [Validators.required, Validators.email]],
@@ -55,29 +59,31 @@ export class StepSixComponent implements OnInit {
     }
   }
 
+  test() {
 
-  // test() {
-  //   this.socketService.emit('data', "create:" 
-  //       + "karedas,"
-  //       + "test,"
-  //       + ","
-  //       + ","
-  //       + "ume,"
-  //       + "m,"
-  //       + "falegname,"
-  //       + "temperia,"
-  //       + "0,"
-  //       + "0,"
-  //       + "0,"
-  //       + "0,"
-  //       + "0,"
-  //       + "0,"
-  //       + "0,"
-  //       + "0,"
-  //       + "\n");
-  // }
+  
+    let create = "create:" 
+    + "testoryondue,"
+    + "pwdtest,"
+    + "lisandr84@gmail.com,"
+    + "123456789,"
+    + "ume,"
+    + "m,"
+    + "minatore,"
+    + "temperia,"
+    + "20,"
+    + "20,"
+    + "20,"
+    + "-20,"
+    + "-20,"
+    + "-20,"
+    + "-15,"
+    + "0"
+    + "\n";
+
+    this.registrationService.test(create);
+  }
 
   ngOnInit() {
   }
-
 }

@@ -42,10 +42,11 @@ export class LoginService {
   }
 
   public login(data: { username: string, password: string }): Observable<boolean> {
+    
     this.username = data.username;
     this.password = data.password;
 
-    this.resetHandler();
+    this.setHandleLoginData();
 
     this.socketService.emit('loginrequest');
     this._loginReplayMessage = 'Tentativo di connessione in corso...';
@@ -64,7 +65,6 @@ export class LoginService {
   private resetHandler() {
     this.socketService.off(socketEvent.LOGIN);
     this.socketService.off(socketEvent.DATA);
-    this.setHandleLoginData();
   }
 
   public get isLoggedinStatusValue(): boolean {
@@ -76,6 +76,7 @@ export class LoginService {
   }
 
   setHandleLoginData() {
+    this.resetHandler();
     this.socketService.addListener(socketEvent.LOGIN, (data: any) => this.handleLoginData(data));
   }
 
@@ -89,7 +90,7 @@ export class LoginService {
         switch (rep.msg) {
 
           case loginEventName.READY:
-            this.onReady();
+            this.socketService.oob();
             break;
           case loginEventName.ENTERLOGIN:
             this.onEnterLogin();
@@ -114,11 +115,6 @@ export class LoginService {
         }
       }
     }
-  }
-
-  onReady() {
-    const when = new Date().getTime();
-    this.socketService.emit(socketEvent.OOB, { itime: when.toString(16) });
   }
 
   onEnterLogin() {

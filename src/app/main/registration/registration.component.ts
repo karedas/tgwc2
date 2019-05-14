@@ -27,10 +27,6 @@ export class RegistrationComponent implements OnInit {
   @ViewChild(StepFiveComponent) stepFiveComponent: StepFiveComponent;
   @ViewChild(StepSixComponent) stepSixComponent: StepSixComponent;
 
-
-  race: string;
-  race_code: string;
-
   data: RegistrationData = new RegistrationData();
 
 
@@ -61,17 +57,15 @@ export class RegistrationComponent implements OnInit {
 
   constructor() { }
 
-
   ngOnInit() {
-    this.stepper.selectedIndex = 5;
+    this.stepper.selectedIndex = 3;
 
     //Race
     this.stepFirstComponent.frmStepFirst.valueChanges
       .subscribe((selected) => {
         this.data.race = selected.race;
-        //Todo??
         this.stepSecondComponent.race_code = null;
-        //DEBUG:
+        this.stepThirdComponent.race_code = null;
         console.log(selected);
       });
 
@@ -79,39 +73,36 @@ export class RegistrationComponent implements OnInit {
     this.stepSecondComponent.frmStepSecond.valueChanges
       .subscribe((selected) => {
         this.data.race_code = selected.race_code;
-        //DEBUG:
+        this.stepThirdComponent.race_code = null;
         console.log(selected);
       });
-
+  
     //Culture
     this.stepThirdComponent.frmStepThird.valueChanges
       .subscribe((selected) => {
-        //DEBUG:
+        this.data.culture = selected;
         console.log(selected);
       });
 
     //Skills
     this.stepFourComponent.frmStepFour.valueChanges
       .subscribe((selected) => {
-        //DEBUG:
+        this.data.stats = selected;
         console.log(selected);
       });
       
-    //Skills
+    //City Start
     this.stepFiveComponent.frmStepFive.valueChanges
       .subscribe((selected) => {
-        //DEBUG:
+        this.data.start = selected;
         console.log(selected);
       });
       
-    //Skills
+    //Generic
     this.stepSixComponent.frmStepSix.valueChanges
       .subscribe((selected) => {
-        //DEBUG:
         console.log(selected);
       });
-
-
   }
 
   nextStep(event: any) {

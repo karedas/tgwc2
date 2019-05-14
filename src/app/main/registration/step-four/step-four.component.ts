@@ -44,12 +44,12 @@ export class StepFourComponent implements OnInit {
     Object.keys(this.attributesList).map(e => {
       sum -= this.statCost(this.attributesList[e]);
     });
-    return sum / 10;
+    return sum;
   }
 
   private statCost(val) {
-    const cost = [-40, -20, 0, 20, 40, 60];
-    const idx = (2 + val)  ;
+    const cost = [ -40, -30, -20, -15, -10, -5, 0, 5, 10, 15, 25, 40, 60 ];
+    const idx = (30 + val) / 5;
     return cost[idx];
   }
 
@@ -58,18 +58,18 @@ export class StepFourComponent implements OnInit {
   }
 
   increaseAttr(event: any, id?: any) {
-    if (this.attributesList[id] < 3) {
-      this.attributesList[id] = ++this.attributesList[id];
-      this.frmStepFour.controls[id].setValue(this.statCost(this.attributesList[id] + 20));
+    if (this.attributesList[id] < 30) {
+      this.attributesList[id] = this.attributesList[id] + 5;
+      this.frmStepFour.controls[id].setValue(this.statCost(this.attributesList[id]));
       this.points = this.calculateUsedPoints();
     }
 
   }
 
   decreaseAttr(event: any, id?: any) {
-    if (this.attributesList[id] > -2) {
-      this.attributesList[id] = --this.attributesList[id];
-      this.frmStepFour.controls[id].setValue(this.statCost(this.attributesList[id] -20));
+    if (this.attributesList[id] > -30) {
+      this.attributesList[id] = this.attributesList[id] - 5;
+      this.frmStepFour.controls[id].setValue(this.statCost(this.attributesList[id]));
       this.points = this.calculateUsedPoints();
     }
   }
