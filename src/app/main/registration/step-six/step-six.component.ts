@@ -38,9 +38,10 @@ export class StepSixComponent implements OnInit {
 
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
+
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
-      console.log(matchingControl.errors);
+      
       if (matchingControl.errors && !matchingControl.errors.mustMatch) {
         // return if another validator has already found an error on the matchingControl
         return;
@@ -55,26 +56,26 @@ export class StepSixComponent implements OnInit {
   }
 
 
-  test() {
-    this.socketService.emit('data', "create:" 
-        + "karedas,"
-        + "test,"
-        + ","
-        + ","
-        + "ume,"
-        + "m,"
-        + "falegname,"
-        + "temperia,"
-        + "0,"
-        + "0,"
-        + "0,"
-        + "0,"
-        + "0,"
-        + "0,"
-        + "0,"
-        + "0,"
-        + "\n");
-  }
+  // test() {
+  //   this.socketService.emit('data', "create:" 
+  //       + "karedas,"
+  //       + "test,"
+  //       + ","
+  //       + ","
+  //       + "ume,"
+  //       + "m,"
+  //       + "falegname,"
+  //       + "temperia,"
+  //       + "0,"
+  //       + "0,"
+  //       + "0,"
+  //       + "0,"
+  //       + "0,"
+  //       + "0,"
+  //       + "0,"
+  //       + "0,"
+  //       + "\n");
+  // }
 
   ngOnInit() {
   }
