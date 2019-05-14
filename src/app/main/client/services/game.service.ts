@@ -12,7 +12,6 @@ import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/ap
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material';
-import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,7 @@ export class GameService {
 
   // Client Data Needed Updates
   public client_update = {
-    lastDataTime: 0,
+    now: 0,
     mrnContainer: undefined,
     inContainer: false,
     invOpen: false,
@@ -49,13 +48,13 @@ export class GameService {
     },
     room: {
       version: -1,
-      needed: false
+      needed: false,
     }
   };
 
   private render: Renderer2;
   private _dataSubscription: Subscription;
-  private _updateNeededSubscription: Subscription;
+  private _upSubscription: Subscription;
 
 
   constructor(
@@ -104,9 +103,9 @@ export class GameService {
         this.dataParserService.handlerGameData(data, this._tgConfig.log);
       });
 
-    this._updateNeededSubscription = this.dataParserService.updateNeeded
+    this._upSubscription = this.dataParserService.updateNeeded
       .subscribe((up) => {
-        this.updateNeeded(up);
+        this.updatePanels(up);
       });
   }
 
@@ -116,52 +115,49 @@ export class GameService {
 
   reset() {
     this._dataSubscription.unsubscribe();
-    this._updateNeededSubscription.unsubscribe();
+    this._upSubscription.unsubscribe();
     this.clearUpdate();
   }
 
-  updateNeeded(what: any) {
-
+  updatePanels(what: any) {
     const now = Date.now();
-
-    if (what.inventory > this.client_update.inventory.version) {
+    
+    if (what[0] > this.client_update.inventory.version) {
       this.client_update.inventory.needed = true;
     }
-
-    if (what.equipment > this.client_update.equipment.version) {
+    if (what[1] > this.client_update.equipment.version) {
       this.client_update.equipment.needed = true;
     }
-
-    if (what.room > this.client_update.room.version) {
+    if (what[2] > this.client_update.room.version) {
       this.client_update.room.needed = true;
     }
+    
+    if (now > this.client_update.now) {
 
-    if (now > this.client_update.lastDataTime) {
-
+    // Update Inventory Panel
       if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
         this.sendToServer('@inv');
         this.client_update.inventory.needed = false;
-        this.client_update.lastDataTime = now;
+        this.client_update.now = now;
       }
 
+    // Update Equipment panel
       if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
         this.sendToServer('@equip');
-        this.client_update.lastDataTime = now;
+        this.client_update.now = now;
       }
-
-      if (this.client_update.room.needed
-        && this._tgConfig.output.extraArea.visible
-        && this.showExtraByViewport
-        && !this.client_update.inContainer) {
-
+        
+    // Update Extra Detail
+      if (this.client_update.room.needed && this.extraIsVisible && !this.client_update.inContainer) {
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
-        this.client_update.lastDataTime = now;
-
-      } else if (this.client_update.inContainer && this._tgConfig.output.extraArea.visible) {
-        this.sendToServer(`@aggiorna &${this.client_update.mrnContainer}`);
-      }
+        this.client_update.now = now;
+      } 
     }
+  }
+
+  updateMrnContainer() {
+      this.sendToServer(`@agg &${this.client_update.mrnContainer}`);
   }
 
   private clearUpdate() {
@@ -300,5 +296,14 @@ export class GameService {
     }
 
     this._configService.setConfig({ fontSize: size });
+  }
+
+
+  get extraIsVisible(): boolean {
+    if (this._tgConfig.output.extraArea.visible && this.showExtraByViewport) {
+      return true;
+    } else {
+      return false
+    }
   }
 }
