@@ -25,10 +25,14 @@
             type="text">
           <mat-hint align="end">{{inputName.value?.length || 0}}/16</mat-hint>
         </mat-form-field>
-        <mat-radio-group aria-label="Sesso:" [formControlName]="'sex'">
-          <mat-radio-button value="m">Maschio</mat-radio-button>&nbsp;
-          <mat-radio-button value="f">Femmina</mat-radio-button>
-        </mat-radio-group>
+
+        <div class="tg-sexvalue-radio">
+          <label>Sesso:</label>
+          <mat-radio-group aria-label="Sesso:" [formControlName]="'sex'"><br/>
+            <mat-radio-button value="m">Maschio</mat-radio-button>&nbsp;
+            <mat-radio-button value="f">Femmina</mat-radio-button>
+          </mat-radio-group>
+        </div>
 
         <mat-form-field floatLabel="never">
           <input matInput [formControlName]="'email'" placeholder="E-mail" type="text" autocomplete="off">

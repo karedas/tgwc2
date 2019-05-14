@@ -204,13 +204,16 @@ export class DataParser {
 
     // Open the text editor
     data = data.replace(/&!ed"[^"]*"\n*/gm, (options) => {
+
       const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
       const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
+
       this.store.dispatch(new DataActions.EditorAction({
         maxChars: options_parse[0],
         title: options_parse[1] ? options_parse[1] : ' ',
         description: text ? text : ' '
       }));
+      
       return '';
     });
 

@@ -23,7 +23,6 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
     private _configService: ConfigService,
     private inputService: InputService,
     private game: GameService,
-    private inputService: InputService
   ) {
     
     this._unsubscribeAll = new Subject<any>();
