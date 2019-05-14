@@ -7,6 +7,7 @@ import { StepSecondComponent } from './step-second/step-second.component';
 import { StepFourComponent } from './step-four/step-four.component';
 import { StepFiveComponent } from './step-five/step-five.component';
 import { StepSixComponent } from './step-six/step-six.component';
+import { RegistrationData } from './models/creation_data.model';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class RegistrationComponent implements OnInit {
 
   race: string;
   race_code: string;
+
+  data: RegistrationData = new RegistrationData();
 
 
 
@@ -60,12 +63,13 @@ export class RegistrationComponent implements OnInit {
 
 
   ngOnInit() {
-    this.stepper.selectedIndex = 5;
+    this.stepper.selectedIndex = 0;
 
     //Race
     this.stepFirstComponent.frmStepFirst.valueChanges
       .subscribe((selected) => {
-        this.race = selected.race
+        this.data.race = selected.race;
+        //Todo??
         this.stepSecondComponent.race_code = null;
         //DEBUG:
         console.log(selected);
@@ -74,7 +78,7 @@ export class RegistrationComponent implements OnInit {
     //Ethnicity
     this.stepSecondComponent.frmStepSecond.valueChanges
       .subscribe((selected) => {
-        this.race_code = selected.race_code;
+        this.data.race_code = selected.race_code;
         //DEBUG:
         console.log(selected);
       });

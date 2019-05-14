@@ -16,12 +16,12 @@
                 
               <mat-step [stepControl]="frmStepSecond">
                 <ng-template matStepLabel>Etnia e Cultura</ng-template>
-                <tg-step-second [race]="race"></tg-step-second>
+                <tg-step-second [race]="data.race"></tg-step-second>
               </mat-step>
 
                <mat-step [stepControl]="frmStepThird">
                 <ng-template matStepLabel>Mestiere</ng-template>
-                <tg-step-third [race_code]="race_code"></tg-step-third>
+                <tg-step-third [race_code]="data.race_code"></tg-step-third>
               </mat-step>
               
               <mat-step [stepControl]="frmStepFour">

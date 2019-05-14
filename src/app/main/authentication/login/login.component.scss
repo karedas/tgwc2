@@ -193,7 +193,7 @@
   }
 
   .tg-newcharacter {
-    padding: 1em 0;
+    padding:0;
     border-top: 1px solid #4e4a2a;
     display: inline-block;
     font-size: 12px;
@@ -205,6 +205,7 @@
     span {
       display: block;
       line-height: 12px;
+      padding-top:1em;
     }
 
     a {
@@ -213,8 +214,9 @@
       transition: text-shadow .3s linear;
       text-transform: uppercase;
       text-decoration: none;
+      padding-bottom: 1em;
     }
-    a:hover {
+    &:hover a {
       text-shadow: 0 0 30px #fff900;
     }
   }

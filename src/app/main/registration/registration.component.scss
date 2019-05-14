@@ -130,13 +130,12 @@
         height: 100%;
       }
     }
-
   }
 
   .tg-detail-content {
     min-height: 400px;
-    max-height: 700px;
-    overflow: hidden;
+    max-height: 600px;
+    overflow: auto;
 
 
     .tg-detail-image {
@@ -171,7 +170,6 @@
       }
     }
   }
-
 
   span.help {
     cursor: help;

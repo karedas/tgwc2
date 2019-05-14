@@ -1,10 +1,23 @@
 .mat-form-field {
 	width: 100%;
-	margin: 6px 0;
+	margin-bottom: 1em;
 }
 
 .mat-radio-button {
   margin: 0 12px 0 0;
+}
+
+.tg-sexvalue-radio {
+  margin: 1em 0;
+
+  label {
+    display: block;
+  }
+  
+  .mat-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .tg-detail-left {
