@@ -58,7 +58,7 @@ export class RegistrationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.stepper.selectedIndex = 3;
+    this.stepper.selectedIndex = 0;
 
     //Race
     this.stepFirstComponent.frmStepFirst.valueChanges

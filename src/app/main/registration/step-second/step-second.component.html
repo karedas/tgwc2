@@ -12,10 +12,11 @@
     </div>
 
     <div class="tg-detail-content" fxFlex="1 1 100%">
+      <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
+        [disableOnBreakpoints]="false">
+        
       <ng-container *ngIf="!race_code && race; else ethnicityDescription">
         
-        <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
-          [disableOnBreakpoints]="false">
           <div class="tg-detail-text">
             <h2 class="tg-detail-title tg-yellow">Etnia e Cultura</h2>
             <p>Le razze si differenziano per <span class="tg-yellow">etnie</span> che spesso abitano in comunità
@@ -27,9 +28,10 @@
               personaggio, quindi anche il suo equipaggiamento e conoscenze iniziali.</p>
             <p class="tg-yellow">Scegli quindi un' etnia dalla lista di sinistra.</p>
           </div>
-        </ng-scrollbar>
-        
-      </ng-container>
+          
+        </ng-container>
+
+      </ng-scrollbar>
 
     </div>
   </div>

@@ -1,5 +1,6 @@
 @import 'variables';
-/* Others */
+@import 'sprites';
+@import 'utils/sprites-mixins';
 
 :host {
   display: flex;
@@ -75,61 +76,83 @@
       padding: 0 1em;
     }
 
-    .tg-sidebar-item {
-      cursor: pointer;
-      padding: 1em 1.5em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-      text-align: right;
-      transition: all .3s ease-out;
-      font-size: 13px;
-      font-family: 'Modern Antiqua', cursive;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      text-align: left;
-      line-height: 1.5em;
-      text-transform: capitalize;
+  }
+  .tg-sidebar-item {
+    cursor: pointer;
+    padding: 1em 1.5em 1em 45px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    text-align: right;
+    transition: all .3s ease-out;
+    font-size: 13px;
+    font-family: 'Modern Antiqua', cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1.5em;
+    position: relative;
+    text-transform: capitalize;
 
-      &.img-frame {
-        padding: .6em 1.5em .6em .6em;
-      }
-
-      &.limited:before {
-        content: '';
-        position: absolute;
-        background: rgba(0, 0, 0, 0.60);
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &:not(.limited):hover{
-        background: rgba(255, 255, 255, 0.05);
-      }
-
-      &.active {
-        background-color: $tg-yellow!important;
-        color: black;
-      }
+    
+    &.active, &:not(.limited):hover {
+      text-shadow: 0 0 18px #ff6a00;
     }
 
-    .tg-sidebar-img {
-      flex: 0 0 65px;
-      height: 65px;
-      vertical-align: middle;
-      margin-right: 1em;
-      border: 1px solid #675941;
 
-      img {
-        width: 100%;
-        height: 100%;
-      }
+    &.img-frame {
+      padding: .6em 1.5em .6em .6em;
     }
+
+    &.limited:before {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.60);
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .tg-sidebar-img {
+    flex: 0 0 65px;
+    height: 65px;
+    vertical-align: middle;
+    margin-right: 1em;
+    border: 1px solid #675941;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .tg-sidebar-item.checkable {
+    
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      @include sprite($checkbox-sprite);
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &.active:after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 50%;
+      transform: translateY(-64%);
+      left: 10px;
+      @include sprite($checkbox-checked-sprite);
+
+    }
+
   }
 
   .tg-detail-content {

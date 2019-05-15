@@ -48,7 +48,8 @@ export class StepFourComponent implements OnInit {
   }
 
   private statCost(val) {
-    const cost = [ -40, -30, -20, -15, -10, -5, 0, 5, 10, 15, 25, 40, 60 ];
+
+    const cost = [ -40, -30, -20, -15, -10, -5, 0, 20, 35, 45, 50, 55, 60];
     const idx = (30 + val) / 5;
     return cost[idx];
   }

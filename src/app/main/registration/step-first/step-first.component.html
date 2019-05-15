@@ -6,7 +6,7 @@
       
       <div *ngFor="let race of racesList; let idx = index;"
         matRipple 
-        class="tg-sidebar-item"
+        class="tg-sidebar-item checkable"
         [ngClass]="{'active': selectedRace === race.code}"
         (click)="setRace(race)">
         {{race.name}}
