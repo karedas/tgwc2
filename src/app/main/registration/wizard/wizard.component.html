@@ -26,7 +26,7 @@
                 
                 <mat-step [stepControl]="frmStepFour">
                   <ng-template matStepLabel>Caratteristiche</ng-template>
-                  <tg-step-four></tg-step-four>
+                  <tg-step-four (nextStep)="nextStep()"></tg-step-four>
                 </mat-step>
   
                 <mat-step [stepControl]="frmStepFive">

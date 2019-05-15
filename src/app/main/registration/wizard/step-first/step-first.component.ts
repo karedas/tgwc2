@@ -13,7 +13,6 @@ export class StepFirstComponent {
   racesList = races;
   frmStepFirst: FormGroup;
   raceDetailText: string;
-  selectedRace: string;
 
   constructor( 
     private fb: FormBuilder,
@@ -34,8 +33,7 @@ export class StepFirstComponent {
       this.raceDetailText = data;
     });
 
-    this.selectedRace = race.code;
-    this.frmStepFirst.setValue({ race: this.selectedRace });
+    this.frmStepFirst.setValue({ race: race.code });
  
   }
 }

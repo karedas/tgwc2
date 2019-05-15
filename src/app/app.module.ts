@@ -31,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
 import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
 import 'hammerjs';
 import { AngularSplitModule } from 'angular-split';
+import { RegistrationService } from './main/registration/services/registration.service';
 
 @NgModule({
 
@@ -74,7 +75,6 @@ import { AngularSplitModule } from 'angular-split';
     AngularSplitModule
   ],
   providers: [
-    SocketService,
     AppPreloadingStrategy,
     GoogleAnalyticsService,
 

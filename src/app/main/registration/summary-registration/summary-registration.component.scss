@@ -17,9 +17,6 @@
   max-width: 400px;
 }
 
-.tg-summary--wrap {
-
-}
 
 .tg-summary-content {
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
@@ -39,6 +36,39 @@
     font-weight: normal;
     text-shadow: 0 0 13px black;
   }
+
+  p {
+    margin: 0;
+  }
+
+  .tg-summary-total {
+    padding: 2em 0;
+    margin: 1em 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid #ffffff1f;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 0 20px 0px black;
+  }
+
+  .tg-entra-btn {
+    background: url($imgPath + '/registration/start-btn.png') no-repeat;
+    width: 200px;
+    height: 56px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #cec7bd;
+  }
+
+  .summary-action {
+    margin:0 0 2em;
+  }
+
+  .mat-divider {
+    margin: 1em;
+    border-top-color: rgba(255, 255, 255, 0.10);
+  }
 }
 
 
@@ -47,11 +77,19 @@
     color: black!important;
   }
 
+  .tg-summary {
+    border: 2px solid black;
+  }
+
   .tg-summary-content h2 { 
     text-shadow: none;
   }
 
   .summary-action {
     display: none;
+  }
+
+  .tg-shadow-inset, .tg-shadow {
+    box-shadow: none!important;
   }
 }

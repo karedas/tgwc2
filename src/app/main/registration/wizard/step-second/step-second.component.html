@@ -1,9 +1,8 @@
 <form [formGroup]="frmStepSecond">
   <div class="tg-registration-step" fxLayout>
-
     <div class="tg-sidebar" fxFlex="1 1 210px" *ngIf="ethnicityList[race]; let ethnicities">
       <div *ngFor="let eth of ethnicities;" matRipple class="tg-sidebar-item img-frame"
-        [ngClass]="{'active': race_code === eth.code, 'limited': eth.limited === true}" (click)="setEthnicity(eth)">
+        [ngClass]="{'active': frmStepSecond.get('race_code').value === eth.code, 'limited': eth.limited === true}" (click)="setEthnicity(eth)">
         <div class="tg-sidebar-img">
           <img src="assets/images/registration/avatars/{{eth.code}}.jpg">
         </div>

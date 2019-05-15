@@ -15,8 +15,5 @@ import { SocketService } from '../services/socket.service';
   exports: [
     MainComponent,
   ],
-  providers: [
-    SocketService,
-  ]
 })
 export class MainModule {}

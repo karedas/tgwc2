@@ -53,7 +53,7 @@
             </table>
             <div class="tg-detail-action">
               <button mat-raised-button matStepperPrevious class="tg-step-back" type="button">Indietro</button>&nbsp;
-              <button mat-raised-button matStepperNext class="tg-step-next" (click)="verifyAttr()">Avanti</button>
+              <button mat-raised-button class="tg-step-next" (click)="onNext($event)">Avanti</button>
             </div>
           </div>
         </div>
@@ -70,31 +70,31 @@
       <td>
         <div class="tg-attribute-bar">
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= -30}"></span>
+            'fill': frmStepFour.get(ref).value >= -30}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= -25}"></span>
+            'fill': frmStepFour.get(ref).value >= -25}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= -20}"></span>
+            'fill': frmStepFour.get(ref).value >= -20}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= -15}"></span>
+            'fill': frmStepFour.get(ref).value >= -15}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= -10}"></span>
+            'fill': frmStepFour.get(ref).value >= -10}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= -5}"></span>
+            'fill': frmStepFour.get(ref).value >= -5}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= 0}"></span>
+            'fill': frmStepFour.get(ref).value >= 0}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= 5}"></span>
+            'fill': frmStepFour.get(ref).value >= 5}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= 10}"></span>
+            'fill': frmStepFour.get(ref).value >= 10}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= 15}"></span>
+            'fill': frmStepFour.get(ref).value >= 15}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= 20}"></span>
+            'fill': frmStepFour.get(ref).value >= 20}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] >= 25}"></span>
+            'fill': frmStepFour.get(ref).value >= 25}"></span>
           <span class="barsection" [ngClass]="{
-            'fill': attributesList[ref] == 30}"></span>
+            'fill': frmStepFour.get(ref).value == 30}"></span>
         </div>
       </td>
       <td>

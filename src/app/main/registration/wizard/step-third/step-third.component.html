@@ -3,7 +3,7 @@
 
     <div class="tg-sidebar" fxFlex="1 1 150px" *ngIf="culturesList[race_code]; let cultures">
       <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
-        <div *ngFor="let cult of cultures" class="tg-sidebar-item checkable" [ngClass]="{'active': cult.name === selectedCulture}"
+        <div *ngFor="let cult of cultures" class="tg-sidebar-item checkable" [ngClass]="{'active': cult.name === frmStepThird.get('culture').value}"
           (click)="setCultures(cult.name)">
           {{cult.name}}
         </div>
