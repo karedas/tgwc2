@@ -16,7 +16,7 @@
     </div>
     <div class="tg-detail-content" fxFlex="1 1 70%">
       <div class="tg-detail-text tg-detail-left">
-        <mat-form-field floatLabel="never" hintLabel="Max 16 caratteri">
+        <mat-form-field floatLabel="never" hintLabel="Max 16 caratteri (solo lettere)">
           <input #inputName 
             matInput 
             [formControlName]="'name'" 
@@ -24,6 +24,9 @@
             placeholder="Nome del personaggio" 
             type="text">
           <mat-hint align="end">{{inputName.value?.length || 0}}/16</mat-hint>
+          <mat-error *ngIf="frmStepSix.hasError('name') && !frmStepSix.hasError('required')">
+            Un nome è <strong>obbligatorio</strong>
+          </mat-error>
         </mat-form-field>
 
         <div class="tg-sexvalue-radio">
@@ -36,28 +39,35 @@
 
         <mat-form-field floatLabel="never">
           <input matInput [formControlName]="'email'" placeholder="E-mail" type="text" autocomplete="off">
+          <mat-error *ngIf="frmStepSix.hasError('name') && !frmStepSix.hasError('required')">
+            Inserisci un'e-mail corretta
+          </mat-error>
         </mat-form-field>
         <mat-form-field floatLabel="never">
           <input matInput [formControlName]="'confirmEmail'" placeholder="Ripeti la tua e-mail" type="text" autocomplete="off">
+          <mat-error *ngIf="frmStepSix.hasError('name') && !frmStepSix.hasError('required')">
+            Devi digitare nuovamente la tua e-mail
+          </mat-error>
         </mat-form-field>
        <mat-form-field floatLabel="never">
           <input matInput [formControlName]="'password'" placeholder="Password" type="password" autocomplete="off">
+          <mat-hint>Minimo 5 caratteri</mat-hint>
         </mat-form-field>
         <mat-form-field floatLabel="never">
           <input matInput [formControlName]="'confirmPassword'" placeholder="Ripeti la password" type="password" autocomplete="off">
         </mat-form-field>
 
-        <button mat-raised-button color="accent" (click)="test()">Completa</button>
+        <button mat-raised-button color="accent" (click)="onComplete()">Completa</button>
       </div>
       <div class="tg-detail-right">
         <div class="tg-detail-summary">
           <div class="tg-detail-summary-header">
             Riepilogo
           </div>
-          <p><span class="tg-white">Razza</span>: [razza_etnia]<br>
+          <p><span class="tg-white">Razza</span>: {{data.race}}<br>
             <span class="tg-white">Mestiere</span>: [mestiere]<br>
             <span class="tg-white">Caratteristiche</span>: [lista]<br>
-            <span class="tg-white">Città di partenza</span>: [città]</p>
+            <span class="tg-white">Città di partenza</span>: {{data.start}}</p>
         </div>
       </div>
     </div>

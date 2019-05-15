@@ -15,7 +15,7 @@
       <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
         [disableOnBreakpoints]="false">
         
-      <ng-container *ngIf="!race_code && race; else ethnicityDescription">
+      <ng-container *ngIf="!frmStepSecond.get('race_code').value; else ethnicityDescription">
         
           <div class="tg-detail-text">
             <h2 class="tg-detail-title tg-yellow">Etnia e Cultura</h2>

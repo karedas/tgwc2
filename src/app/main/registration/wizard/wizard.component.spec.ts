@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepCompleteComponent } from './step-complete.component';
+import { WizardComponent } from './wizard.component';
 
-describe('StepCompleteComponent', () => {
-  let component: StepCompleteComponent;
-  let fixture: ComponentFixture<StepCompleteComponent>;
+describe('WizardComponent', () => {
+  let component: WizardComponent;
+  let fixture: ComponentFixture<WizardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StepCompleteComponent ]
+      declarations: [ WizardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StepCompleteComponent);
+    fixture = TestBed.createComponent(WizardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
