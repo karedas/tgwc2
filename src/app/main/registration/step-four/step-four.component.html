@@ -15,7 +15,7 @@
             altre. Alzare una caratteristica ti costerà invece punti.
           </p>
         </ng-container>
-        
+
         <ng-template #attrDescText>
           <p [innerHtml]="attributeDesc" *ngIf="attributeHover"></p>
         </ng-template>
@@ -24,41 +24,43 @@
     </div>
 
     <div class="tg-detail-content" fxFlex="1 1 70%">
-      <div class="tg-detail-text">
+      <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
+        <div class="tg-detail-text">
 
-        <p class="attr-points">Punti creazione disponibili: <span class="attr-points">{{points}}</span></p>
-        <mat-error *ngIf="hasError">Hai usato troppi punti rispetto al totale.</mat-error>
+          <p class="attr-points">Punti creazione disponibili: <span class="attr-points">{{points}}</span></p>
+          <mat-error *ngIf="hasError">Hai usato troppi punti rispetto al totale.</mat-error>
 
-        <div class="tg-attribute-wrap">
-          <table class="tg-attribute-table">
-            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Forza', ref: 'strength'}">
-            </ng-container>
-            <ng-container
-              *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Costituzione', ref:'constitution'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Taglia', ref:'size'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Destrezza', ref:'dexterity'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Velocità', ref:'speed'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Empatia', ref:'empathy'}">
-            </ng-container>
-            <ng-container
-              *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Intelligenza', ref:'intelligence'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Volontà', ref:'willpower'}">
-            </ng-container>
-          </table>
-          <div class="tg-detail-action">
-            <button mat-raised-button matStepperPrevious class="tg-step-back" type="button">Indietro</button>&nbsp;
-            <button mat-raised-button matStepperNext class="tg-step-next" (click)="verifyAttr()">Avanti</button>
+          <div class="tg-attribute-wrap">
+            <table class="tg-attribute-table">
+              <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Forza', ref: 'strength'}">
+              </ng-container>
+              <ng-container
+                *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Costituzione', ref:'constitution'}">
+              </ng-container>
+              <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Taglia', ref:'size'}">
+              </ng-container>
+              <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Destrezza', ref:'dexterity'}">
+              </ng-container>
+              <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Velocità', ref:'speed'}">
+              </ng-container>
+              <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Empatia', ref:'empathy'}">
+              </ng-container>
+              <ng-container
+                *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Intelligenza', ref:'intelligence'}">
+              </ng-container>
+              <ng-container *ngTemplateOutlet="attrSlider;context:{$implicit: 50, name:'Volontà', ref:'willpower'}">
+              </ng-container>
+            </table>
+            <div class="tg-detail-action">
+              <button mat-raised-button matStepperPrevious class="tg-step-back" type="button">Indietro</button>&nbsp;
+              <button mat-raised-button matStepperNext class="tg-step-next" (click)="verifyAttr()">Avanti</button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-scrollbar>
     </div>
   </div>
-  
+
   <ng-template #attrSlider let-default let-name="name" let-ref="ref">
     <tr>
       <th>
@@ -94,12 +96,13 @@
           <span class="barsection" [ngClass]="{
             'fill': attributesList[ref] == 30}"></span>
         </div>
-    </td>
+      </td>
       <td>
         <div class="points-action">
-          <button  type="button" (click)="decreaseAttr($event, ref)" class="decrease-btn">-</button>
-          <input matInput name="counter" type="number" [value]="frmStepFour.get(ref).value" [formControlName]="ref" readonly required class="point-value">
-          <button  type="button" (click)="increaseAttr($event, ref)" class="increase-btn">+</button >
+          <button type="button" (click)="decreaseAttr($event, ref)" class="decrease-btn">-</button>
+          <input matInput name="counter" type="number" [value]="frmStepFour.get(ref).value" [formControlName]="ref"
+            readonly required class="point-value">
+          <button type="button" (click)="increaseAttr($event, ref)" class="increase-btn">+</button>
         </div>
       </td>
     </tr>

@@ -20,7 +20,6 @@ export class SocketService {
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private store: Store<ClientState>) {
-    console.log('constructor');
     this.connect();
   }
 

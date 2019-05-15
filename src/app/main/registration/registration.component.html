@@ -36,11 +36,10 @@
 
               <mat-step [stepControl]="frmStepSix">
                 <ng-template matStepLabel>Accesso</ng-template>
-                <tg-step-six></tg-step-six>
+                <tg-step-six [data]="data" (lastStepCompleted)="onLastStepCompleted($event)"></tg-step-six>
               </mat-step>
 
             </mat-horizontal-stepper>
-
           </section>
         </div>
         <div class="tg-border-box">

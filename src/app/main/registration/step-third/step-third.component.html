@@ -13,7 +13,7 @@
     <div class="tg-detail-content" fxFlex="1 1 100%">
       <div class="tg-detail-text">
 
-        <ng-container *ngIf="!selectedCulture; else cultureDetailContent">
+        <ng-container *ngIf="!frmStepThird.get('culture').value; else cultureDetailContent">
           <h2 class="tg-detail-title tg-yellow">Mestiere</h2>
           <p>La <span class="tg-yellow">cultura o professione</span> del tuo personaggio determina le esperienze vissute
             durante

@@ -18,12 +18,15 @@ import { StepSixComponent } from './step-six/step-six.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { StepCompleteComponent } from './step-complete/step-complete.component';
 import { RegistrationService } from './services/registration.service';
-import { SocketService } from 'src/app/services/socket.service';
+import { CapitalizeFirstPipe } from 'src/app/pipes/capitalizeFirst';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { WizardComponent } from './wizard/wizard.component';
 
 
 export const routes: Routes = [
 
   { path: '', component: RegistrationComponent, pathMatch: 'full' },
+  { path: 'summary', component: StepCompleteComponent , pathMatch: 'full' },
 
 ];
 
@@ -36,7 +39,9 @@ export const routes: Routes = [
     StepFourComponent,
     StepFiveComponent,
     StepSixComponent,
-    StepCompleteComponent
+    StepCompleteComponent,
+    WizardComponent,
+    
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -52,7 +57,8 @@ export const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    PipesModule
   ],
   providers: [
     RegistrationService,

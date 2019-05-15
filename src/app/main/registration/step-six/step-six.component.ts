@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SocketService } from 'src/app/services/socket.service';
-import { RegistrationService } from '../services/registration.service';
+import { RegistrationData } from '../models/creation_data.model';
 
 @Component({
   selector: 'tg-step-six',
   templateUrl: './step-six.component.html',
   styleUrls: ['./step-six.component.scss']
 })
-export class StepSixComponent implements OnInit {
+export class StepSixComponent {
 
-
+  @Input('data') data: RegistrationData;
+  @Output() lastStepCompleted = new EventEmitter();
+  
   frmStepSix: FormGroup;
 
+
   constructor(
-    private fb: FormBuilder,
-    private registrationService: RegistrationService,
-    private socketService: SocketService) {
+    private fb: FormBuilder) {
 
     this.frmStepSix = this.fb.group({
       name: ['', [
@@ -40,7 +40,7 @@ export class StepSixComponent implements OnInit {
     );
   }
 
-  mustMatch(controlName: string, matchingControlName: string) {
+  private mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
 
       const control = formGroup.controls[controlName];
@@ -58,6 +58,10 @@ export class StepSixComponent implements OnInit {
       }
     }
   }
-  ngOnInit() {
+
+  onComplete() {
+    if(this.frmStepSix.valid) {
+      this.lastStepCompleted.emit(true);
+    }
   }
 }

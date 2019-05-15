@@ -10,39 +10,39 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StepSecondComponent {
 
-  @Input('race') race: string;
-  
+  // Public
   frmStepSecond: FormGroup;
   ethnicityList = ethnicity;
   ethnicityDetailText: string;
   race_code: number;
 
+  @Input('race') race : string
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient
-    ) {
+  ) {
     this.frmStepSecond = this.fb.group({
-      race_code: ['', Validators.required ]
+      race_code: ['', Validators.required]
     });
   }
 
-
   setEthnicity(eth: any) {
 
-    if(eth.limited) {
+    if (eth.limited) {
       return;
     }
-    
+
     this.ethnicityDetailText = '';
 
-    this.http.get('assets/data/ethnicity/' + eth.help_url , {responseType: 'text'})
+    this.http.get('assets/data/ethnicity/' + eth.help_url, { responseType: 'text' })
       .subscribe((data) => {
         this.ethnicityDetailText = data;
       });
 
-      this.race_code = eth.code;
-      this.frmStepSecond.setValue({
-        race_code: this.race_code
-      });
-    }
+    this.race_code = eth.code;
+    this.frmStepSecond.setValue({
+      race_code: this.race_code
+    });
+  }
 }

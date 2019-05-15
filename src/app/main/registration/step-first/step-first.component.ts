@@ -22,7 +22,6 @@ export class StepFirstComponent {
     this.frmStepFirst = this.fb.group({
       race: ['', Validators.required ]
     });
-
   }
 
   setRace(race: any) {

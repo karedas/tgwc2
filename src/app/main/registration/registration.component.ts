@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatStepper } from '@angular/material';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { StepFirstComponent } from './step-first/step-first.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepSecondComponent } from './step-second/step-second.component';
-import { StepFourComponent } from './step-four/step-four.component';
+import { StepFourComponent, attributes } from './step-four/step-four.component';
 import { StepFiveComponent } from './step-five/step-five.component';
 import { StepSixComponent } from './step-six/step-six.component';
 import { RegistrationData } from './models/creation_data.model';
+import { RegistrationService } from './services/registration.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 @Component({
@@ -29,7 +30,9 @@ export class RegistrationComponent implements OnInit {
 
   data: RegistrationData = new RegistrationData();
 
-
+  lastStepCompleted: boolean = false;
+  registrationDone: boolean = false;
+  
 
   get frmStepFirst() {
     return this.stepFirstComponent ? this.stepFirstComponent.frmStepFirst : null;
@@ -44,68 +47,106 @@ export class RegistrationComponent implements OnInit {
   }
 
   get frmStepFour() {
-    return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
+    return this.stepFourComponent ? this.stepFourComponent.frmStepFour : null;
   }
 
   get frmStepFive() {
-    return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
+    return this.stepFiveComponent ? this.stepFiveComponent.frmStepFive : null;
   }
 
   get frmStepSix() {
-    return this.stepThirdComponent ? this.stepThirdComponent.frmStepThird : null;
+    return this.stepSixComponent ? this.stepSixComponent.frmStepSix : null;
   }
 
-  constructor() { }
+  constructor(
+    private registrationService: RegistrationService,
+    private router: Router
+  ) { 
+  }
 
   ngOnInit() {
-    this.stepper.selectedIndex = 3;
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          name: 'karedas',
+          race: 'umano',
+          start: 'Aral Maktar'
+      }
+  };
 
-    //Race
+    this.router.navigate(['/summary'], navigationExtras);
+
+    this.registrationService.isCreated()
+      .subscribe((s) => {
+        //Go to Complete
+        //Show Welcome Message
+      })
+
+    /* Race */
     this.stepFirstComponent.frmStepFirst.valueChanges
       .subscribe((selected) => {
+        this.frmStepSecond.reset();
         this.data.race = selected.race;
-        this.stepSecondComponent.race_code = null;
-        this.stepThirdComponent.race_code = null;
-        console.log(selected);
       });
 
-    //Ethnicity
+    /* Ethnicity */
     this.stepSecondComponent.frmStepSecond.valueChanges
       .subscribe((selected) => {
+        this.frmStepThird.reset();
         this.data.race_code = selected.race_code;
-        this.stepThirdComponent.race_code = null;
-        console.log(selected);
       });
   
-    //Culture
+    /* Culture */
     this.stepThirdComponent.frmStepThird.valueChanges
       .subscribe((selected) => {
-        this.data.culture = selected;
-        console.log(selected);
+        this.frmStepFour.reset(attributes);
+        this.data.culture = selected.culture;
       });
 
-    //Skills
+    /* Skills */
     this.stepFourComponent.frmStepFour.valueChanges
       .subscribe((selected) => {
+        this.frmStepFive.reset({start: 'temperia'});
         this.data.stats = selected;
-        console.log(selected);
       });
       
     //City Start
     this.stepFiveComponent.frmStepFive.valueChanges
       .subscribe((selected) => {
-        this.data.start = selected;
-        console.log(selected);
+        this.data.start = selected.start;
       });
       
     //Generic
     this.stepSixComponent.frmStepSix.valueChanges
       .subscribe((selected) => {
-        console.log(selected);
+        this.data.name = selected.name;
+        this.data.sex = selected.sex;
+        this.data.email = selected.email;
+        this.data.password = selected.password;
       });
   }
 
   nextStep(event: any) {
     this.stepper.next();
+  }
+
+  onLastStepCompleted(event) {
+    if(event && this.verifyForms) {
+      this.registrationService.register(this.data);
+    }
+  }
+
+  verifyForms(): boolean {
+    if(
+      this.frmStepFirst.valid &&
+      this.frmStepSecond.valid &&
+      this.frmStepThird.valid &&
+      this.frmStepFour.valid &&
+      this.frmStepFive.valid &&
+      this.frmStepSix.valid
+      ) {
+        return true;
+      } else {
+        return false;
+      }
   }
 }

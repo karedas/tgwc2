@@ -3,13 +3,15 @@ import { SocketService } from 'src/app/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { BehaviorSubject } from 'rxjs';
 import { registratiionReplayMessage } from './registration-replay-msg.const';
+import { RegistrationData } from '../models/creation_data.model';
 
 @Injectable()
 
 export class RegistrationService {
 
-  datareg: string;
+  datareg: RegistrationData;
   isCreatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  responseMessage: string;
 
   constructor(private socketService: SocketService) {
   }
@@ -18,7 +20,7 @@ export class RegistrationService {
     return this.isCreatedSubject.asObservable();
   }
 
-  test (data) {
+  register(data: RegistrationData) {
     this.datareg = data;
     this.setHandleRegistrationData();
     this.socketService.emit('newchar');
@@ -26,7 +28,7 @@ export class RegistrationService {
 
   setHandleRegistrationData() {
     this.resetHandler();
-    this.socketService.addListener(socketEvent.REGISTRATION, 
+    this.socketService.addListener(socketEvent.REGISTRATION,
       (data: any) => this.handleRegistrationData(data));
   }
 
@@ -44,15 +46,15 @@ export class RegistrationService {
         switch (rep.msg) {
           case 'ready':
             this.socketService.oob();
-          break;
+            break;
           case 'enterlogin':
             this.performRegistration();
-          break;
-          case 'created': 
+            break;
+          case 'created':
             this.onCreated(data.slice(end + 2));
-          break;
+            break;
           default:
-          this.onError(rep.msg);
+            this.onError(rep.msg);
             break;
         }
       }
@@ -65,11 +67,33 @@ export class RegistrationService {
 
   onCreated(data: any) {
     this.socketService.off(socketEvent.REGISTRATION);
-    //TODO
+    this.responseMessage = data;
     this.isCreatedSubject.next(true);
   }
 
   private performRegistration() {
-    this.socketService.emit('data', this.datareg);
+
+    let creationString = "create:"
+      + this.datareg.name.toString() + ","
+      + this.datareg.password.toString() + ","
+      + this.datareg.email.toString() + ","
+      + (this.datareg.invitation ?  this.datareg.invitation.toString() : '') + ","
+      + this.datareg.race_code.toString() + ","
+      + this.datareg.sex.toString() + ","
+      + this.datareg.culture.toString() + ","
+      + this.datareg.start.toString() + ","
+      + this.datareg.stats.strength.toString() + ","
+      + this.datareg.stats.constitution.toString() + ","
+      + this.datareg.stats.size.toString() + ","
+      + this.datareg.stats.dexterity.toString() + ","
+      + this.datareg.stats.speed.toString() + ","
+      + this.datareg.stats.empathy.toString() + ","
+      + this.datareg.stats.intelligence.toString() + ","
+      + this.datareg.stats.willpower.toString()
+      + "\n";
+
+    console.log(creationString);
+
+    this.socketService.emit('data', creationString);
   }
 }

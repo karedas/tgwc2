@@ -12,9 +12,10 @@ export interface IStats {
 
 export class RegistrationData {
   invitation: number;
+  email: string;
   race: string;
   sex: string;
-  race_code: number;
+  race_code: string;
   stats: IStats;
   culture: string;
   religion: string;
