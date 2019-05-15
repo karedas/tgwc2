@@ -11,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class StepFourComponent implements OnInit {
 
   frmStepFour: FormGroup;
+
+  hasError: boolean = false;
   points: number;
 
   attributeHover: boolean;
@@ -40,7 +42,6 @@ export class StepFourComponent implements OnInit {
 
   private calculateUsedPoints() {
     let sum = 0;
-
     Object.keys(this.attributesList).map(e => {
       sum -= this.statCost(this.attributesList[e]);
     });
@@ -48,14 +49,24 @@ export class StepFourComponent implements OnInit {
   }
 
   private statCost(val) {
-
+    // -120 min gain
+    // 265 max used
     const cost = [ -40, -30, -20, -15, -10, -5, 0, 20, 35, 45, 50, 55, 60];
     const idx = (30 + val) / 5;
     return cost[idx];
   }
 
-  private verifyAttr() {
-    return this.calculateUsedPoints() >= 0;
+  verifyAttr() {
+    if(this.calculateUsedPoints() < 0) {
+      this.hasError = true;
+    } else this.hasError = false;
+
+  }
+
+  getErrorMessage() {
+    if(this.calculateUsedPoints() <= 0 ) {
+      return 'Hai usato troppi punti rispetto al totale.';
+    }
   }
 
   increaseAttr(event: any, id?: any) {

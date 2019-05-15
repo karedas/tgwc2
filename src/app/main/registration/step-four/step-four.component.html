@@ -27,6 +27,7 @@
       <div class="tg-detail-text">
 
         <p class="attr-points">Punti creazione disponibili: <span class="attr-points">{{points}}</span></p>
+        <mat-error *ngIf="hasError">Hai usato troppi punti rispetto al totale.</mat-error>
 
         <div class="tg-attribute-wrap">
           <table class="tg-attribute-table">
@@ -50,8 +51,8 @@
             </ng-container>
           </table>
           <div class="tg-detail-action">
-            <button mat-raised-button matStepperPrevious class="tg-step-back">Indietro</button>&nbsp;
-            <button mat-raised-button matStepperNext class="tg-step-next">Avanti</button>
+            <button mat-raised-button matStepperPrevious class="tg-step-back" type="button">Indietro</button>&nbsp;
+            <button mat-raised-button matStepperNext class="tg-step-next" (click)="verifyAttr()">Avanti</button>
           </div>
         </div>
       </div>
