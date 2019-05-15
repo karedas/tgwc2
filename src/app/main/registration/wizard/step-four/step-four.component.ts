@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { IStats } from '../models/creation_data.model';
+import { IStats } from '../../models/creation_data.model';
 import { HttpClient } from '@angular/common/http';
 
 export const attributes: IStats  = {

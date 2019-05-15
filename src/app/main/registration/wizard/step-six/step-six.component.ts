@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RegistrationData } from '../models/creation_data.model';
+import { RegistrationData } from '../../models/creation_data.model';
 
 @Component({
   selector: 'tg-step-six',

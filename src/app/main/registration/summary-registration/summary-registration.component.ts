@@ -4,11 +4,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'tg-step-complete',
-  templateUrl: './step-complete.component.html',
-  styleUrls: ['./step-complete.component.scss']
+  selector: 'tg-summary-registration',
+  templateUrl: './summary-registration.component.html',
+  styleUrls: ['./summary-registration.component.scss']
 })
-export class StepCompleteComponent implements OnInit, OnDestroy{
+export class SummaryRegistrationComponent implements OnInit, OnDestroy{
 
   name: string;
   race: string;
