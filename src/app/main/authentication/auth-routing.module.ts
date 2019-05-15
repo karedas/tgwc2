@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
+import { RegistrationService } from '../registration/services/registration.service';
 
 const AUTH_ROUTES: Routes = [
   {
@@ -24,6 +25,9 @@ const AUTH_ROUTES: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    RegistrationService
   ]
 })
 

@@ -7,7 +7,7 @@
       <div *ngFor="let race of racesList; let idx = index;"
         matRipple 
         class="tg-sidebar-item checkable"
-        [ngClass]="{'active': selectedRace === race.code}"
+        [ngClass]="{'active': frmStepFirst.get('race').value === race.code}"
         (click)="setRace(race)">
         {{race.name}}
       </div>
@@ -16,7 +16,7 @@
 
     <div class="tg-detail-content" fxFlex="1 1 100%">
 
-      <ng-container *ngIf="!selectedRace; else raceDetailContent">
+      <ng-container *ngIf="!frmStepFirst.get('race').value; else raceDetailContent">
         <div class="tg-detail-text">
           <h2 class="tg-detail-title tg-yellow">Scelta della razza</h2>
           <p>La scelta della <span class="tg-yellow">razza del tuo personaggio</span> è una delle decisioni più importanti. Essa determina che

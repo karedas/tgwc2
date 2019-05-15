@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatStepper } from '@angular/material';
 import { StepFirstComponent } from './step-first/step-first.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepSecondComponent } from './step-second/step-second.component';
-import { StepFourComponent, attributes } from './step-four/step-four.component';
+import { StepFourComponent } from './step-four/step-four.component';
 import { StepFiveComponent } from './step-five/step-five.component';
 import { StepSixComponent } from './step-six/step-six.component';
-import { RegistrationData } from '../models/creation_data.model';
 import { RegistrationService } from '../services/registration.service';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 
 
-export class WizardComponent implements OnInit {
+export class WizardComponent implements OnInit, OnDestroy {
 
   @ViewChild('registrationStepper') stepper: MatStepper;
   @ViewChild(StepFirstComponent) stepFirstComponent: StepFirstComponent;
@@ -28,11 +29,14 @@ export class WizardComponent implements OnInit {
   @ViewChild(StepFiveComponent) stepFiveComponent: StepFiveComponent;
   @ViewChild(StepSixComponent) stepSixComponent: StepSixComponent;
 
-  data: RegistrationData = new RegistrationData();
+  data: any;
 
   lastStepCompleted: boolean = false;
+  verified: boolean = false;
   registrationDone: boolean = false;
-  
+
+  private _unsubscribeAll: Subject<any>;
+
 
   get frmStepFirst() {
     return this.stepFirstComponent ? this.stepFirstComponent.frmStepFirst : null;
@@ -61,67 +65,79 @@ export class WizardComponent implements OnInit {
   constructor(
     private registrationService: RegistrationService,
     private router: Router
-  ) { 
+  ) {
+    this.data = this.registrationService.getParams();
+    this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          name: 'karedas',
-          race: 'umano',
-          start: 'Aral Maktar'
-      }
-  };
 
-    this.router.navigate(['/riepilogo'], navigationExtras);
+    this.stepper.selectedIndex = 3;
 
     this.registrationService.isCreated()
-      .subscribe((s) => {
-        //Go to Complete
-        //Show Welcome Message
+      .subscribe((res) => {
+        if(res) {
+          this.router.navigate(['/riepilogo']);
+        }
+      })
+
+
+    this.registrationService.getParams()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((values) => {
+
+        this.data = values;
       })
 
     /* Race */
     this.stepFirstComponent.frmStepFirst.valueChanges
-      .subscribe((selected) => {
+      .subscribe((race) => {
         this.frmStepSecond.reset();
-        this.data.race = selected.race;
+        this.registrationService.setParams(race);
       });
 
     /* Ethnicity */
     this.stepSecondComponent.frmStepSecond.valueChanges
       .subscribe((selected) => {
         this.frmStepThird.reset();
-        this.data.race_code = selected.race_code;
+        this.registrationService.setParams(selected);
       });
-  
+
     /* Culture */
     this.stepThirdComponent.frmStepThird.valueChanges
       .subscribe((selected) => {
-        this.frmStepFour.reset(attributes);
-        this.data.culture = selected.culture;
+        this.stepFourComponent.calculateUsedPoints();
+        this.frmStepFour.reset({
+          strength: 0,
+          constitution: 0,
+          size: 0,
+          dexterity: 0,
+          speed: 0,
+          empathy: 0,
+          intelligence: 0,
+          willpower: 0
+        });
+
+        this.registrationService.setParams(selected);
       });
 
     /* Skills */
     this.stepFourComponent.frmStepFour.valueChanges
       .subscribe((selected) => {
-        this.frmStepFive.reset({start: 'temperia'});
-        this.data.stats = selected;
+        this.frmStepFive.reset({ start: 'temperia' });
+        this.registrationService.setParams({stats: selected});
       });
-      
+
     //City Start
     this.stepFiveComponent.frmStepFive.valueChanges
       .subscribe((selected) => {
-        this.data.start = selected.start;
+        this.registrationService.setParams(selected);
       });
-      
+
     //Generic
     this.stepSixComponent.frmStepSix.valueChanges
       .subscribe((selected) => {
-        this.data.name = selected.name;
-        this.data.sex = selected.sex;
-        this.data.email = selected.email;
-        this.data.password = selected.password;
+        this.registrationService.setParams(selected);
       });
   }
 
@@ -130,23 +146,28 @@ export class WizardComponent implements OnInit {
   }
 
   onLastStepCompleted(event) {
-    if(event && this.verifyForms) {
+    if (event && this.verifyForms) {
       this.registrationService.register(this.data);
     }
   }
 
   verifyForms(): boolean {
-    if(
+    if (
       this.frmStepFirst.valid &&
       this.frmStepSecond.valid &&
       this.frmStepThird.valid &&
       this.frmStepFour.valid &&
       this.frmStepFive.valid &&
       this.frmStepSix.valid
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();    
   }
 }

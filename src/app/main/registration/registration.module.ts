@@ -25,12 +25,10 @@ export const routes: Routes = [
   {
     path: 'riepilogo', 
     component: SummaryRegistrationComponent,
-    children : [],
   },
   { 
     path: '**',
     component: WizardComponent,    
-    children : [],
   },
 ];
 
@@ -64,8 +62,5 @@ export const routes: Routes = [
     NgScrollbarModule,
     PipesModule
   ],
-  providers: [
-    RegistrationService,
-  ]
 })
 export class RegistrationModule { }

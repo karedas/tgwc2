@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { RegistrationService } from '../services/registration.service';
+import { RegistrationData } from '../models/creation_data.model';
 
 @Component({
   selector: 'tg-summary-registration',
@@ -10,24 +12,33 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SummaryRegistrationComponent implements OnInit, OnDestroy{
 
-  name: string;
-  race: string;
-  start: string;
+  // data: RegistrationData;
+  data: RegistrationData;
   
   private _unsubscribeAll: Subject<any>;
   
-  constructor(private route: ActivatedRoute) {
+  constructor(private registrationService: RegistrationService) {
     this._unsubscribeAll = new Subject();
-   }
-
+  }
+  
   ngOnInit() {  
-    this.route.queryParams
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(params => {
-        this.name =  params.name;
-        this.race = params.race;
-        this.start = params.start;
-      })
+    
+    this.registrationService.getParams()
+      .subscribe(params => {console.log(params); this.data = params});
+    // this.route.queryParams
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe(params => {
+    //     this.name =  params.name;
+    //     this.race = params.race;
+    //     this.start = params.start;
+    //     this.culture = params.culture;
+    //     this.email = params.email;
+    //   })
+  }
+
+  print(event) {
+    event.preventDefault();
+    window.print();
   }
 
   ngOnDestroy(): void {

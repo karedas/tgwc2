@@ -1,7 +1,7 @@
 export const ethnicity = {
   human: [
-    { name: "Eliantiriano", code: "uma", help_url: 'eliantiriano.html' },
-    { name: "Emeriano", code: "ume", help_url: 'emeriano.html' }
+    { name: "Umano Eliantiriano", code: "uma", help_url: 'eliantiriano.html' },
+    { name: "Umano Emeriano", code: "ume", help_url: 'emeriano.html' }
   ],
   halfling: [
     { name: "Halfling dell'Arcipelago", code: "hal", help_url: 'halfling_arcipelago.html' }

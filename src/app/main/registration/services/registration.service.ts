@@ -1,27 +1,39 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
-import { BehaviorSubject } from 'rxjs';
-import { registratiionReplayMessage } from './registration-replay-msg.const';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationData } from '../models/creation_data.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class RegistrationService {
-
-  datareg: RegistrationData;
+  
+  private _dataReg: RegistrationData = new RegistrationData();
+  
+  $dataRegSubject: BehaviorSubject<RegistrationData> = new BehaviorSubject<RegistrationData>(this._dataReg);
   isCreatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   responseMessage: string;
 
   constructor(private socketService: SocketService) {
+    console.log('construct');
+  }
+
+  setParams(val) {
+    this._dataReg = Object.assign({}, this._dataReg, val);
+    this.$dataRegSubject.next(this._dataReg);
+  }
+
+  getParams(): Observable<RegistrationData> {
+    return this.$dataRegSubject.asObservable();
   }
 
   isCreated() {
     return this.isCreatedSubject.asObservable();
   }
 
-  register(data: RegistrationData) {
-    this.datareg = data;
+  register(data?: RegistrationData) {
     this.setHandleRegistrationData();
     this.socketService.emit('newchar');
   }
@@ -62,7 +74,6 @@ export class RegistrationService {
   }
 
   onError(error) {
-    console.log(registratiionReplayMessage[error]);
   }
 
   onCreated(data: any) {
@@ -72,27 +83,25 @@ export class RegistrationService {
   }
 
   private performRegistration() {
-
     let creationString = "create:"
-      + this.datareg.name.toString() + ","
-      + this.datareg.password.toString() + ","
-      + this.datareg.email.toString() + ","
-      + (this.datareg.invitation ?  this.datareg.invitation.toString() : '') + ","
-      + this.datareg.race_code.toString() + ","
-      + this.datareg.sex.toString() + ","
-      + this.datareg.culture.toString() + ","
-      + this.datareg.start.toString() + ","
-      + this.datareg.stats.strength.toString() + ","
-      + this.datareg.stats.constitution.toString() + ","
-      + this.datareg.stats.size.toString() + ","
-      + this.datareg.stats.dexterity.toString() + ","
-      + this.datareg.stats.speed.toString() + ","
-      + this.datareg.stats.empathy.toString() + ","
-      + this.datareg.stats.intelligence.toString() + ","
-      + this.datareg.stats.willpower.toString()
+      + this._dataReg.name.toString() + ","
+      + this._dataReg.password.toString() + ","
+      + this._dataReg.email.toString() + ","
+      + (this._dataReg.invitation ?  this._dataReg.invitation.toString() : '') + ","
+      + this._dataReg.race_code.toString() + ","
+      + this._dataReg.sex.toString() + ","
+      + this._dataReg.culture.toString() + ","
+      + this._dataReg.start.toString() + ","
+      + this._dataReg.stats.strength.toString() + ","
+      + this._dataReg.stats.constitution.toString() + ","
+      + this._dataReg.stats.size.toString() + ","
+      + this._dataReg.stats.dexterity.toString() + ","
+      + this._dataReg.stats.speed.toString() + ","
+      + this._dataReg.stats.empathy.toString() + ","
+      + this._dataReg.stats.intelligence.toString() + ","
+      + this._dataReg.stats.willpower.toString()
       + "\n";
 
-    console.log(creationString);
 
     this.socketService.emit('data', creationString);
   }

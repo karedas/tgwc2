@@ -15,7 +15,6 @@ export class StepThirdComponent{
 
   frmStepThird: FormGroup;
   culturesList = cultures;
-  selectedCulture: string;
   cultureDetailText: string;
 
   constructor(
@@ -35,7 +34,6 @@ export class StepThirdComponent{
     this.http.get('assets/data/cultures/'+ culture +'.html', {responseType: 'text'})
     .subscribe((data) => {
       this.cultureDetailText = data;
-      this.selectedCulture = culture;
     });
     
     this.frmStepThird.setValue({

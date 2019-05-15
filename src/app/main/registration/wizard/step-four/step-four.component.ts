@@ -1,18 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { IStats } from '../../models/creation_data.model';
 import { HttpClient } from '@angular/common/http';
+import { attributes } from '../../models/creation_data.model';
 
-export const attributes: IStats  = {
-  strength: 0,
-  constitution: 0,
-  size: 0,
-  dexterity: 0,
-  speed: 0,
-  empathy: 0,
-  intelligence: 0,
-  willpower: 0
-}
+
 @Component({
   selector: 'tg-step-four',
   templateUrl: './step-four.component.html',
@@ -20,6 +11,8 @@ export const attributes: IStats  = {
 })
 
 export class StepFourComponent implements OnInit {
+
+  @Output() nextStep = new EventEmitter(false);
 
   frmStepFour: FormGroup;
 
@@ -42,36 +35,35 @@ export class StepFourComponent implements OnInit {
     this.points = this.calculateUsedPoints();
   }
 
-  private calculateUsedPoints() {
+  calculateUsedPoints() {
     let sum = 0;
-    Object.keys(this.attributesList).map(e => {
-      sum -= this.statCost(this.attributesList[e]);
+    Object.keys(this.frmStepFour.controls).map(e => {
+      sum -= this.statCost(this.frmStepFour.controls[e].value);
     });
-    return sum;
+    
+    this.points = sum;
+
+    return this.points;
   }
 
   private statCost(val) {
     // -120 min gain
     // 265 max used
-    const cost = [ -40, -30, -20, -15, -10, -5, 0, 20, 35, 45, 50, 55, 60];
+    const cost = [-40, -30, -20, -15, -10, -5, 0, 20, 35, 45, 50, 55, 60];
     const idx = (30 + val) / 5;
     return cost[idx];
   }
 
-  verifyAttr() {
-    if(this.calculateUsedPoints() < 0) {
-      this.hasError = true;
-    } else this.hasError = false;
-
-  }
 
   getErrorMessage() {
-    if(this.calculateUsedPoints() <= 0 ) {
+    if (this.calculateUsedPoints() <= 0) {
       return 'Hai usato troppi punti rispetto al totale.';
     }
   }
 
   increaseAttr(event: any, id?: any) {
+
+
     if (this.attributesList[id] < 30) {
       this.attributesList[id] = this.attributesList[id] + 5;
       this.frmStepFour.controls[id].patchValue(this.statCost(this.attributesList[id]));
@@ -100,5 +92,23 @@ export class StepFourComponent implements OnInit {
         this.attributeDesc = data;
         this.attributeHover = true;
       });
+  }
+
+  onNext(event) {
+    if (this.verifyAttr()) {
+      this.nextStep.next(true);
+    }
+  }
+
+
+  private verifyAttr() {
+    if (this.calculateUsedPoints() < 0) {
+      this.hasError = true;
+      return false;
+    } else {
+      this.hasError = false
+      return true;
+    };
+
   }
 }
