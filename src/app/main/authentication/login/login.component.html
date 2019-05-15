@@ -27,10 +27,10 @@
                 </div>
                 <button type="submit" class="tg-loginbtn" value="accedi" [disabled]="!loginForm.valid" >Accedi</button>
               </form>
-              <div class="tg-newcharacter" matRipple>
+              <a class="tg-newcharacter" matRipple routerLink="/registrazione">
                 <span> oppure </span>
-                <a routerLink="/registrazione" class="tg-brown" #linkNewPg>Crea un nuovo personaggio</a>
-              </div>
+                <span class="tg-brown highlight" #linkNewPg>Crea un nuovo personaggio</span>
+              </a>
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ h3 {
 
 .tg-attribute-table {
   width: 100%;
+  table-layout: fixed;
   text-align: left;
   border-collapse: collapse;
 
@@ -68,7 +69,7 @@ h3 {
   font-size: 22px;
   color: #f3e6c8;
   display: inline-block;
-  min-width: 35px;
+  width: 55px;
   text-align: center;
   vertical-align: middle;
   padding-left: .5em;
