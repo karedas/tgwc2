@@ -1,0 +1,42 @@
+@import 'variables';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+:host {
+  display: flex;
+  height: 100%;
+}
+
+
+.tg-summary {
+  width: 100%;
+  margin: auto;
+  background: black;
+  position: relative;
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+.tg-summary--wrap {
+
+}
+
+.tg-summary-content {
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+  padding: 0 1em;
+  z-index: 2;
+  position: relative;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: center;
+  color: #cec7bd;
+
+
+
+  h2 {
+    font-family: 'Modern Antiqua', cursive;
+    font-size: 2.5em;
+    font-weight: normal;
+    text-shadow: 0 0 13px black;
+  }
+}

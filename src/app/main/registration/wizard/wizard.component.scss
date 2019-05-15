@@ -1,0 +1,254 @@
+@import 'variables';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+:host {
+  display: flex;
+  height: 100%;
+}
+
+.tg-registration-step--wrap {
+  width: 100%;
+  margin: auto 0;
+  background: black;
+  position: relative;
+  border-radius: 10px;
+}
+
+.tg-registration-content {
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+  z-index: 2;
+  position: relative;
+
+}
+
+.tg-registration-footer {
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    color: $tg-yellow;
+  }
+}
+
+::ng-deep {
+
+  
+  form {
+    max-height: 600px;
+  }
+
+  .tg-registration-step {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    font-size: 13px;
+    color: #cec7bd;
+
+    ul {
+      padding: 0 0 0 16px;
+    }
+
+    
+    h2 {
+      font-weight: normal;
+      font-size: 2em;
+      color: $tg-yellow;
+    }
+
+    h3 {
+      font-weight: normal;
+      font-size: 1.2em;
+      color: $tg-yellow;
+    }
+  }
+
+  .tg-sidebar {
+    width: 150px;
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.40);
+    overflow: auto;
+    min-height: 400px;
+    max-height: 600px;
+
+    .tg-sidebar-text {
+      padding: 0 1em;
+    }
+
+  }
+  .tg-sidebar-item {
+    cursor: pointer;
+    padding: 1em 1.5em 1em 45px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    border-top: 2px solid #ffffff0a;
+    text-align: right;
+    font-size: 13px;
+    font-family: 'Modern Antiqua', cursive;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    line-height: 1.5em;
+    position: relative;
+    text-transform: capitalize;
+    box-shadow: inset 0 0 0 0 black;
+    background-color: rgba(19, 19, 19, 0);
+    transition: all .3s ease-out;
+    
+    &.active, &:not(.limited):hover {
+      text-shadow: 0 0 18px $tg-yellow;
+      box-shadow: inset 0 0 20px 4px black;
+      background-color: rgba(19, 19, 19, 0.35);
+    }
+
+
+    &.img-frame {
+      padding: .6em 1.5em .6em .6em;
+    }
+
+    &.limited:before {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.60);
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .tg-sidebar-img {
+    flex: 0 0 65px;
+    height: 65px;
+    vertical-align: middle;
+    margin-right: 1em;
+    border: 1px solid #675941;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .tg-sidebar-item.checkable {
+    
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      @include sprite($checkbox-sprite);
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &.active:after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 50%;
+      transform: translateY(-64%);
+      left: 10px;
+      @include sprite($checkbox-checked-sprite);
+
+    }
+
+  }
+
+  .tg-detail-content {
+    min-height: 400px;
+    max-height: 600px;
+    overflow: auto;
+
+
+    .tg-detail-image {
+      padding: .5em 0;
+      height: 150px;
+      background-color: $tg-brown;
+      line-height: 50px;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    .tg-detail-text {
+      padding: 0 1em;
+    }
+
+    .tg-detail-action {
+      margin: 2em 0;
+      text-align: right;
+      
+      .tg-step-next {
+        background: transparent url($imgPath + '/registration/next-step.png') no-repeat!important;
+        width: 83px;
+        height: 26px;
+        text-indent: -9999px;
+      }
+
+      .tg-step-back {
+        background: transparent url($imgPath + '/registration/back-step.png') no-repeat!important;
+        width: 98px;
+        height: 26px;
+        text-indent: -9999px;
+      }
+    }
+  }
+
+  span.help {
+    cursor: help;
+    display: inline-block;
+    font-weight: normal;
+    border-bottom: 1px dotted currentColor;
+    font-size: 11px;
+    vertical-align: top;
+  }
+
+  // STEPPER MATERIAL
+  .tg-registration-stepper {
+
+    background-color: transparent;
+
+    .mat-step-header .mat-step-label,
+    .mat-step-header .mat-step-optional {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .mat-horizontal-stepper-header-container {
+      background-color: rgba(255, 255, 255, 0.10);
+    }
+
+    .mat-horizontal-content-container {
+      padding: 0;
+    }
+
+    .mat-horizontal-stepper-header::before,
+    .mat-horizontal-stepper-header::after,
+    .mat-stepper-horizontal-line {
+      border-top-color: rgba(247, 247, 247, 0.12);
+    }
+
+    .mat-step-header .mat-step-icon {
+      font-weight: bold;
+    }
+
+    .mat-step-header .mat-step-icon-selected {
+      background-color: $tg-yellow;
+      color: black;
+    }
+
+    .mat-step-header .mat-step-label-selected {
+      color: $tg-yellow !important;
+    }
+
+
+    .mat-error {
+      font-weight: bold;
+    }
+  }
+}
+
+
