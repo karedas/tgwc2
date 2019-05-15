@@ -40,3 +40,18 @@
     text-shadow: 0 0 13px black;
   }
 }
+
+
+@media print {
+  * {
+    color: black!important;
+  }
+
+  .tg-summary-content h2 { 
+    text-shadow: none;
+  }
+
+  .summary-action {
+    display: none;
+  }
+}
