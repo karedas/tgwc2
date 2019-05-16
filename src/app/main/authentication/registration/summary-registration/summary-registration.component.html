@@ -1,29 +1,29 @@
 
 <div class="tg-summary">
-  
-<div class="tg-summary-content">
-  <ng-container *ngIf="data">
-    <h2 class="tg-yellow">
-      Registrazione completata
-    </h2>
-      <p>
-        <span class="tg-yellow">{{data.name | capitalizeFirst}}</span> è appena approdato nelle terre di Ikhari e aspetta
-        solo un tuo ingresso per vivere la sua nuova avventura.
-      </p>
-      <div class="tg-summary-total">
-        <p>Nome personaggio: <strong>{{data.name}}</strong></p>
-        <p>Razza: <strong>{{data.race}}</strong></p>
-        <p>Luogo di nascita: <strong>{{data.start}}</strong></p>
-        <p>Cultura: <strong>{{data.culture}}</strong></p>
-        <mat-divider></mat-divider>
-        <p>E-mail di riferimento: <strong>{{data.email}}</strong></p>
-        <p>Password <strong>{{data.password}}</strong></p>
-      </div>
-      <div class="summary-action">
-        <button class="tg-entra-btn tg-button"></button> <br/>
-        <a  (click)="print($event)" href="#">Stampa il riepilogo</a> <br/>
-      </div>
-  </ng-container>
-</div>
+  <div class="tg-summary-content">
 
+    <ng-container *ngIf="data">
+      <h2 class="tg-yellow">
+        Registrazione completata
+      </h2>
+        <p>
+          <span class="tg-yellow">{{data.name | capitalizeFirst}}</span> è appena approdato nelle terre di Ikhari e aspetta
+          solo un tuo ingresso per vivere la sua nuova avventura.
+        </p>
+        <div class="tg-summary-total">
+          <p>Nome personaggio: <strong>{{data.name}}</strong></p>
+          <p>Razza: <strong>{{data.race}}</strong></p>
+          <p>Luogo di nascita: <strong>{{data.start}}</strong></p>
+          <p>Cultura: <strong>{{data.culture}}</strong></p>
+          <mat-divider></mat-divider>
+          <p>E-mail di riferimento: <strong>{{data.email}}</strong></p>
+          <p>Password <strong>{{data.password}}</strong></p>
+        </div>
+        <div class="summary-action">
+          <button class="tg-entra-btn tg-button"></button> <br/>
+          <a  (click)="print($event)" href="#">Stampa il riepilogo</a> <br/>
+        </div>
+    </ng-container>
+
+  </div>
 </div>

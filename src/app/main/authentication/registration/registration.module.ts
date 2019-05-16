@@ -29,18 +29,18 @@ export const routes: Routes = [
     path: '',
     component: RegistrationComponent,
     children: [
-      { 
+      {
         path: 'benvenuto',
         component: WelcomeRegistrationComponent,
       },
-      { 
+      {
         path: 'riepilogo',
         component: SummaryRegistrationComponent,
         resolve: [
           { reg: RegistrationService }
         ]
       },
-      { 
+      {
         path: 'wizard',
         component: WizardComponent,
         resolve: [
