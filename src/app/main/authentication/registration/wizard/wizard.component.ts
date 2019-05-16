@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 })
 
 
+
 export class WizardComponent implements OnInit, OnDestroy {
 
   @ViewChild('registrationStepper') stepper: MatStepper;
@@ -68,6 +69,9 @@ export class WizardComponent implements OnInit, OnDestroy {
   ) {
     this.data = this.registrationService.getParams();
     this._unsubscribeAll = new Subject<any>();
+
+console.log('yo?');
+
   }
 
   ngOnInit() {

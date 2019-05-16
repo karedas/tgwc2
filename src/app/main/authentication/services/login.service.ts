@@ -20,67 +20,79 @@ export const loginEventName = {
 
 export class LoginService {
 
-  public isLoggedIn$: Observable<any>;
-
   public isLoggedInSubject: BehaviorSubject<boolean>;
-
-
   private loginErrorMessage$: BehaviorSubject<string>;
+
   private username: string;
   private password: string;
   public redirectUrl: string;
 
+
+  get isLoggedinValue(): boolean {
+    return this.isLoggedInSubject.value;
+  }
+
+  get isLoggedIn(): Observable<any> {
+    return this.isLoggedInSubject.asObservable();
+  }
+
+  set _loginReplayMessage(what: any) {
+    if (loginError[what]) {
+      this.loginErrorMessage$.next(loginError[what]);
+    } else if (what) {
+      this.loginErrorMessage$.next(what);
+    }
+  }
+
+  get _loginReplayMessage(): any {
+    return this.loginErrorMessage$.asObservable();
+  }
+
   constructor(
-
     private socketService: SocketService,
-    private game: GameService) {
-
+    private game: GameService
+  ) {
     this.isLoggedInSubject = new BehaviorSubject(false);
-    this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
-
     this.loginErrorMessage$ = new BehaviorSubject('');
   }
 
-  public login(data: { username: string, password: string }): Observable<boolean> {
-    
+  /** ---- Public Methods ---- */
+
+  login(data: { username: string, password: string }): Observable<boolean> {
+
     this.username = data.username;
     this.password = data.password;
 
-    this.setHandleLoginData();
+    this.resetHandler();
 
     this.socketService.emit('loginrequest');
     this._loginReplayMessage = 'Tentativo di connessione in corso...';
 
-    return this.isLoggedInSubject;
+    return this.isLoggedIn;
   }
 
-  public logout() {
+  logout() {
     this.isLoggedInSubject.next(false);
   }
 
-  public reconnect() {
+  reconnect() {
     this.login({ username: this.username, password: this.password });
   }
+
+  /** ---- Private Methods ---- */
 
   private resetHandler() {
     this.socketService.off(socketEvent.LOGIN);
     this.socketService.off(socketEvent.DATA);
+    this.setHandleLoginData();
   }
 
-  public get isLoggedinStatusValue(): boolean {
-    return this.isLoggedInSubject.value;
+  private setHandleLoginData() {
+    this.socketService.addListener(socketEvent.LOGIN, 
+      (data: any) => this.handleLoginData(data));
   }
 
-  public get isLoggedIn(): Observable<any> {
-    return this.isLoggedInSubject.asObservable();
-  }
-
-  setHandleLoginData() {
-    this.resetHandler();
-    this.socketService.addListener(socketEvent.LOGIN, (data: any) => this.handleLoginData(data));
-  }
-
-  handleLoginData(data: any) {
+  private handleLoginData(data: any) {
 
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
@@ -117,49 +129,36 @@ export class LoginService {
     }
   }
 
-  onEnterLogin() {
+  private onEnterLogin() {
     const credentials = `login:${this.username},${this.password}\n`;
     this.socketService.emit(socketEvent.DATA, credentials);
   }
 
-  onLoginOk(data: any) {
+  private onLoginOk(data: any) {
     this.completeHandShake(data);
   }
 
-  completeHandShake(data: any) {
+  private completeHandShake(data: any) {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
     this.game.startGame(data);
   }
 
-  onShutDown() {
+  private onShutDown() {
     alert('Attenzione, il server è attualmente in manutenzione.');
   }
 
-  onReboot() {
+  private onReboot() {
     alert('Attenzione, il server sarà riavviato entro breve.');
   }
 
-  onServerDown() {
+  private onServerDown() {
     alert('Attenzione, il server sarà spento entro breve per manutenzione.');
     this._loginReplayMessage = 'serverdown';
   }
 
-  onError(err: any) {
+  private onError(err: any) {
     this.socketService.off(socketEvent.LOGIN);
     this._loginReplayMessage = err;
   }
-
-  set _loginReplayMessage(what: any) {
-    if (loginError[what]) {
-      this.loginErrorMessage$.next(loginError[what]);
-    } else if (what) {
-      this.loginErrorMessage$.next(what);
-    }
-  }
-
-  get _loginReplayMessage(): any {
-    return this.loginErrorMessage$.asObservable();
-  }
-
 }

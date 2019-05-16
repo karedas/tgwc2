@@ -3,12 +3,13 @@ import { SocketService } from 'src/app/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationData } from '../models/creation_data.model';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class RegistrationService {
+export class RegistrationService implements Resolve<any> {
   
   private _dataReg: RegistrationData = new RegistrationData();
   
@@ -17,7 +18,13 @@ export class RegistrationService {
   responseMessage: string;
 
   constructor(private socketService: SocketService) {
-    console.log('construct');
+    this.setHandleRegistrationData();
+    this.socketService.emit('registration');
+  }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | Promise<any> | any
+  {
+    return this.getParams();
   }
 
   setParams(val) {
@@ -35,7 +42,7 @@ export class RegistrationService {
 
   register(data?: RegistrationData) {
     this.setHandleRegistrationData();
-    this.socketService.emit('newchar');
+    this.socketService.emit('newcregistrationhar');
   }
 
   setHandleRegistrationData() {
@@ -60,7 +67,8 @@ export class RegistrationService {
             this.socketService.oob();
             break;
           case 'enterlogin':
-            this.performRegistration();
+            this.test();
+            // this.performRegistration();
             break;
           case 'created':
             this.onCreated(data.slice(end + 2));
@@ -71,6 +79,11 @@ export class RegistrationService {
         }
       }
     }
+  }
+
+  test() {
+    console.log('test');
+    this.socketService.emit('data', 'requestinvite:lisandr84@provaprova.com');
   }
 
   onError(error) {

@@ -285,32 +285,38 @@ export class DialogV2Service {
   openBook(...data: any): MatDialogRef<BookComponent, MatDialogConfig> {
 
     const dialogID = 'book';
-    const config = new MatDialogConfig();
-    
-    config.id = dialogID;
-    config.width = '550px';
-    config.hasBackdrop = false;
-    config.restoreFocus = true;
-    config.autoFocus = false;
-    config.panelClass = 'provaprova';
-    config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
-    config.data = {
+    const bookData = {
       title: data[0].title,
       desc: data[0].desc,
       pages: data[0].pages,
       index: data[1]
-      // index: 0,
-    };
+    }
 
-    const dialogRef = this.dialog.open(BookComponent, config);
+    if (!this.dialog.getDialogById(dialogID)) {
 
-    dialogRef.afterOpened().subscribe(() => {
-      // Keep focus on inputbar
-      this.inputService.focus();
-    });
+      const config = new MatDialogConfig();
+    
+      config.id = dialogID;
+      config.width = '550px';
+      config.hasBackdrop = false;
+      config.restoreFocus = true;
+      config.autoFocus = false;
+      config.panelClass = 'provaprova';
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
+      config.data = bookData
 
-    return dialogRef;
+      const dialogRef = this.dialog.open(BookComponent, config);
+      
+      dialogRef.afterOpened().subscribe(() => {
+        // Keep focus on inputbar
+        this.inputService.focus();
+      });
+
+      return dialogRef;
+    } else {
+      this.dialog.getDialogById(dialogID).componentInstance.data =  bookData;
+    }
   }
 
   openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig> {

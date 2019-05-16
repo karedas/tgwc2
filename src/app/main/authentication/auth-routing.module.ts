@@ -1,33 +1,33 @@
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
-import { RegistrationService } from '../registration/services/registration.service';
 
-const AUTH_ROUTES: Routes = [
+const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'registrazione',
-    loadChildren: '../registration/registration.module#RegistrationModule',
+    path: 'auth',
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'registrazione',
+        loadChildren: './registration/registration.module#RegistrationModule',
+      },
+      {
+        path: '**',
+        redirectTo: 'login'
+      }
+    ]
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(AUTH_ROUTES)
+    RouterModule.forChild(routes)
   ],
   exports: [
     RouterModule
-  ],
-  providers: [
-    RegistrationService
   ]
 })
 
