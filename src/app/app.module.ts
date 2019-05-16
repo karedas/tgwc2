@@ -21,7 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { TgConfigModule } from './shared/tgconfig.module';
 import { tgConfig } from './main/client/client-config';
-import { SocketService } from './services/socket.service';
 import { baseReducer, clearState } from './store';
 import { ClientEffects } from './store/effects/client.effects';
 import { DataEffects } from './store/effects/data.effects';
@@ -31,7 +30,6 @@ import { SharedModule } from './shared/shared.module';
 import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
 import 'hammerjs';
 import { AngularSplitModule } from 'angular-split';
-import { RegistrationService } from './main/registration/services/registration.service';
 
 @NgModule({
 
@@ -67,7 +65,6 @@ import { RegistrationService } from './main/registration/services/registration.s
     AngularSplitModule.forRoot(),
     DialogV2Module,
     /** --------------------- */
-    // WindowsModule,
     MainModule,
     AppRoutingModule,
   ],

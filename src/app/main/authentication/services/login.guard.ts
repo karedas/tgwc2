@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    if (this.loginService.isLoggedinStatusValue) {
+    if (this.loginService.isLoggedinValue) {
       return true;
     }
 
@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     this.loginService.redirectUrl = url;
 
     // Navigate to the login page with extras
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
     return false;
   }
 }

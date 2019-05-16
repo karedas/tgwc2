@@ -20,16 +20,26 @@ import { RegistrationService } from './services/registration.service';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { WizardComponent } from './wizard/wizard.component';
 
-
 export const routes: Routes = [
+  {
+    path: 'nuovo',
+    component: WizardComponent,
+    children:[],
+    resolve: {
+      dataReg: RegistrationService
+    }
+  },
   {
     path: 'riepilogo', 
     component: SummaryRegistrationComponent,
+    resolve: {
+      dataReg: RegistrationService
+    }
   },
-  { 
+  {
     path: '**',
-    component: WizardComponent,    
-  },
+    redirectTo: 'wizard'
+  }
 ];
 
 @NgModule({
@@ -62,5 +72,8 @@ export const routes: Routes = [
     NgScrollbarModule,
     PipesModule
   ],
+  providers: [
+    RegistrationService
+  ]
 })
 export class RegistrationModule { }

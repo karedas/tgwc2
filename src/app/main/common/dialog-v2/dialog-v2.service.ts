@@ -38,7 +38,7 @@ export class DialogV2Service {
 
   }
 
-  getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
+  getOverlayElement(dialogRef:MatDialogRef<any>): HTMLElement {
     return <HTMLElement>dialogRef['_overlayRef'].overlayElement;
   }
 
@@ -71,11 +71,11 @@ export class DialogV2Service {
   }
 
   private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement?: HTMLElement) {
-
-    if (!overlayElement) {
+    
+    if(!overlayElement) {
       overlayElement = this.getOverlayElement(dialogRef);
     }
-
+    
     if (this.dialog.openDialogs.length > 1) {
       // Add Z-index Inline based on global Dialog zindex status
       this.render.setStyle(
@@ -120,7 +120,7 @@ export class DialogV2Service {
 
     const dialogID = 'smartlogin';
 
-    if (!this.dialog.getDialogById(dialogID)) {
+    if ( !this.dialog.getDialogById(dialogID) ) {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
@@ -205,10 +205,10 @@ export class DialogV2Service {
       };
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
-
+      
       dialogRef.afterOpened().subscribe(() => {
         // Keep focus on inputbar
-        this.inputService.focus();
+        this.inputService.focus(); 
       });
 
 
@@ -250,7 +250,7 @@ export class DialogV2Service {
     }
   }
 
-  openControlPanel(tab: number = 0): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
+  openControlPanel(tab:number = 0): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
 
     const dialogID = 'controlpanel';
 
@@ -296,7 +296,7 @@ export class DialogV2Service {
     if (!this.dialog.getDialogById(dialogID)) {
 
       const config = new MatDialogConfig();
-
+    
       config.id = dialogID;
       config.width = '550px';
       config.hasBackdrop = false;
@@ -307,7 +307,7 @@ export class DialogV2Service {
       config.data = bookData
 
       const dialogRef = this.dialog.open(BookComponent, config);
-
+      
       dialogRef.afterOpened().subscribe(() => {
         // Keep focus on inputbar
         this.inputService.focus();
@@ -315,7 +315,7 @@ export class DialogV2Service {
 
       return dialogRef;
     } else {
-      this.dialog.getDialogById(dialogID).componentInstance.data = bookData;
+      this.dialog.getDialogById(dialogID).componentInstance.data =  bookData;
     }
   }
 
@@ -345,7 +345,7 @@ export class DialogV2Service {
         this.inputService.focus();
       });
 
-      return dialogRef;
+    return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
@@ -398,14 +398,14 @@ export class DialogV2Service {
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
-
+    
   }
 
   openShortcut(): MatDialogRef<ShortcutsPanelComponent, MatDialogConfig> {
 
     const dialogID = 'shortcut';
 
-    if (!this.dialog.getDialogById(dialogID)) {
+    if(!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
@@ -425,6 +425,8 @@ export class DialogV2Service {
       return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
-    };
+    }
+    
   }
+  
 }

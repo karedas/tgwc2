@@ -5,7 +5,7 @@ import { ClientComponent } from './client.component';
 
 const clientRouting: Routes = [
   {
-    path: '',
+    path: '**',
     component: ClientComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
