@@ -45,9 +45,7 @@ import { AngularSplitModule } from 'angular-split';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     TgConfigModule.forRoot(tgConfig),
-
     StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
     EffectsModule.forRoot([ClientEffects, DataEffects]),
 

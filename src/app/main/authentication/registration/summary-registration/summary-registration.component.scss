@@ -2,12 +2,6 @@
 @import 'sprites';
 @import 'utils/sprites-mixins';
 
-:host {
-  display: flex;
-  height: 100%;
-}
-
-
 .tg-summary {
   width: 100%;
   margin: auto;
@@ -29,6 +23,7 @@
   color: #cec7bd;
 
 
+}
 
   h2 {
     font-family: 'Modern Antiqua', cursive;
@@ -69,7 +64,6 @@
     margin: 1em;
     border-top-color: rgba(255, 255, 255, 0.10);
   }
-}
 
 
 @media print {

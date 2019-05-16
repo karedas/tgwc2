@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Material
-import {MatStepperModule} from '@angular/material/stepper'
-import {MatRippleModule} from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatRippleModule } from '@angular/material/core';
 import { MatSidenavModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDividerModule } from '@angular/material';
 import { StepSecondComponent } from './wizard/step-second/step-second.component';
 import { StepThirdComponent } from './wizard/step-third/step-third.component';
@@ -19,27 +19,43 @@ import { SummaryRegistrationComponent } from './summary-registration/summary-reg
 import { RegistrationService } from './services/registration.service';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { WizardComponent } from './wizard/wizard.component';
+import { WelcomeRegistrationComponent } from './welcome-registration/welcome-registration.component';
+import { RegistrationComponent } from './registration.component';
 
 export const routes: Routes = [
+
+
   {
-    path: 'nuovo',
-    component: WizardComponent,
-    children:[],
-    resolve: {
-      dataReg: RegistrationService
-    }
+    path: '',
+    component: RegistrationComponent,
+    children: [
+      { 
+        path: 'benvenuto',
+        component: WelcomeRegistrationComponent,
+      },
+      { 
+        path: 'riepilogo',
+        component: SummaryRegistrationComponent,
+        resolve: [
+          { reg: RegistrationService }
+        ]
+      },
+      { 
+        path: 'wizard',
+        component: WizardComponent,
+        resolve: [
+          { reg: RegistrationService }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: 'benvenuto'
+      },
+    ],
   },
-  {
-    path: 'riepilogo', 
-    component: SummaryRegistrationComponent,
-    resolve: {
-      dataReg: RegistrationService
-    }
-  },
-  {
-    path: '**',
-    redirectTo: 'wizard'
-  }
+
+
+
 ];
 
 @NgModule({
@@ -50,9 +66,11 @@ export const routes: Routes = [
     StepFourComponent,
     StepFiveComponent,
     StepSixComponent,
+    RegistrationComponent,
     SummaryRegistrationComponent,
     WizardComponent,
-    
+    WelcomeRegistrationComponent,
+
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -71,6 +89,9 @@ export const routes: Routes = [
     MatDividerModule,
     NgScrollbarModule,
     PipesModule
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [
     RegistrationService

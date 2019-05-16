@@ -27,7 +27,7 @@
                 </div>
                 <button type="submit" class="tg-loginbtn" value="accedi" [disabled]="!loginForm.valid" >Accedi</button>
               </form>
-              <a class="tg-newcharacter" matRipple routerLink="/auth/registrazione">
+              <a class="tg-newcharacter" matRipple  [routerLink]="['/auth/registrazione']">
                 <span> oppure </span>
                 <span class="tg-brown highlight" #linkNewPg>Crea un nuovo personaggio</span>
               </a>
