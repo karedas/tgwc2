@@ -1,31 +1,11 @@
+.tg-welcomeregistration-content {
+    padding: 1em 0.5em;
+}
 
-// :host {
-//     display: flex;
-//     height: 100%;
-//   }
-  
-//   .tg-registration-step--wrap {
-//     width: 100%;
-//     margin: auto 0;
-//     background: black;
-//     position: relative;
-//     border-radius: 10px;
-//   }
-  
-//   .tg-registration-content {
-//     background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-//     z-index: 2;
-//     position: relative;
-  
-//   }
-  
-//   .tg-registration-footer {
-//     text-align: center;
-  
-//     a {
-//       text-decoration: none;
-//       color: $tg-yellow;
-//     }
-//   }
-// }
-  
+.tg-newrequest-box, .tg-withinvitation-box {
+    margin: 0 .5em;
+    width: 300px;
+    min-height: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 5px;
+}
