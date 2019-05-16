@@ -69,14 +69,11 @@ export class WizardComponent implements OnInit, OnDestroy {
   ) {
     this.data = this.registrationService.getParams();
     this._unsubscribeAll = new Subject<any>();
-
-console.log('yo?');
-
   }
 
   ngOnInit() {
 
-    this.stepper.selectedIndex = 3;
+    this.stepper.selectedIndex = 0;
 
     this.registrationService.isCreated()
       .subscribe((res) => {

@@ -7,7 +7,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { QuotesComponent } from './login/quotes/quotes.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { RegistrationModule } from './registration/registration.module';
 
 // import social buttons module
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
@@ -24,7 +23,6 @@ import { MainNavigationModule } from '../main-navigation/main-navigation.module'
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    RegistrationModule,
     FlexLayoutModule,
     JwSocialButtonsModule,
     MainNavigationModule

@@ -24,7 +24,7 @@ export class RegistrationService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | Promise<any> | any
   {
-    return this.getParams();
+    return  this.getParams().subscribe((v) => console.log(v));
   }
 
   setParams(val) {
