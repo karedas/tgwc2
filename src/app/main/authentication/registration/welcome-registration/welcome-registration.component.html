@@ -1,6 +1,31 @@
 <div class="tg-welcomeregistration">
   <div class="tg-welcomeregistration-content" fxLayout="row">
-      <div fxFlex="1 1 50%" class="tg-newrequest-box">nuovo</div>
-      <div fxFlex="1 1 50%" class="tg-withinvitation-box">invito</div>
+    <div fxFlex="1 1 50%" class="tg-newrequest-box">
+      <h2>
+        Voglio richiedere un codice
+      </h2>
+      <p>Inserisci la tua mail per ricevere un codice e poter creare un nuovo personaggio.</p>
+
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="la tua e-mail" type="email">
+        </mat-form-field>
+        <button mat-button>Invia</button>
+      </form>
+    </div>
+    <div fxFlex="1 1 50%" class="tg-withinvitation-box">
+      <h2>
+        Ho un codice personaggio
+      </h2>
+      <p>
+        Inserisci il codice ricevuto
+      </p>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="codice invito">
+        </mat-form-field>
+        <button mat-button>Invia</button>
+      </form>
+    </div>
   </div>
 </div>

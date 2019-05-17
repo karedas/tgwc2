@@ -12,7 +12,8 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 export class RegistrationService implements Resolve<any> {
   
   private _dataReg: RegistrationData = new RegistrationData();
-  
+  private requestType: string;
+
   $dataRegSubject: BehaviorSubject<RegistrationData> = new BehaviorSubject<RegistrationData>(this._dataReg);
   isCreatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   responseMessage: string;
@@ -40,12 +41,19 @@ export class RegistrationService implements Resolve<any> {
     return this.isCreatedSubject.asObservable();
   }
 
+  requestNewInvitationCode() {
+    this.requestType = 'invite';
+    this.setHandleRegistrationData();
+    this.socketService.emit('requestinvite');
+  }
+
   register(data?: RegistrationData) {
+    this.requestType = 'newchar';
     this.setHandleRegistrationData();
     this.socketService.emit('newcregistrationhar');
   }
 
-  setHandleRegistrationData() {
+  private setHandleRegistrationData() {
     this.resetHandler();
     this.socketService.addListener(socketEvent.REGISTRATION,
       (data: any) => this.handleRegistrationData(data));
@@ -67,8 +75,13 @@ export class RegistrationService implements Resolve<any> {
             this.socketService.oob();
             break;
           case 'enterlogin':
+            if(this.requestType === 'invite') {
+              this.performRequestInvitationCode();
+            }
+            else if(this.requestType === 'newchar')  {
+              this.performRegistration();
+            }
             this.test();
-            // this.performRegistration();
             break;
           case 'created':
             this.onCreated(data.slice(end + 2));
@@ -81,15 +94,14 @@ export class RegistrationService implements Resolve<any> {
     }
   }
 
-  test() {
-    console.log('test');
+  private performRequestInvitationCode() {
     this.socketService.emit('data', 'requestinvite:lisandr84@provaprova.com');
   }
 
-  onError(error) {
+  private onError(error) {
   }
 
-  onCreated(data: any) {
+  private onCreated(data: any) {
     this.socketService.off(socketEvent.REGISTRATION);
     this.responseMessage = data;
     this.isCreatedSubject.next(true);
