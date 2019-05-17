@@ -38,7 +38,7 @@ export class DialogV2Service {
 
   }
 
-  getOverlayElement(dialogRef:MatDialogRef<any>): HTMLElement {
+  getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
     return <HTMLElement>dialogRef['_overlayRef'].overlayElement;
   }
 
@@ -71,11 +71,11 @@ export class DialogV2Service {
   }
 
   private increaseZIndex(dialogRef: MatDialogRef<any>, overlayElement?: HTMLElement) {
-    
-    if(!overlayElement) {
+
+    if (!overlayElement) {
       overlayElement = this.getOverlayElement(dialogRef);
     }
-    
+
     if (this.dialog.openDialogs.length > 1) {
       // Add Z-index Inline based on global Dialog zindex status
       this.render.setStyle(
@@ -120,7 +120,7 @@ export class DialogV2Service {
 
     const dialogID = 'smartlogin';
 
-    if ( !this.dialog.getDialogById(dialogID) ) {
+    if (!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
@@ -205,10 +205,10 @@ export class DialogV2Service {
       };
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
-      
+
       dialogRef.afterOpened().subscribe(() => {
         // Keep focus on inputbar
-        this.inputService.focus(); 
+        this.inputService.focus();
       });
 
 
@@ -250,7 +250,7 @@ export class DialogV2Service {
     }
   }
 
-  openControlPanel(tab:number = 0): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
+  openControlPanel(tab: number = 0): MatDialogRef<ControlPanelComponent, MatDialogConfig> {
 
     const dialogID = 'controlpanel';
 
@@ -285,32 +285,38 @@ export class DialogV2Service {
   openBook(...data: any): MatDialogRef<BookComponent, MatDialogConfig> {
 
     const dialogID = 'book';
-    const config = new MatDialogConfig();
-    
-    config.id = dialogID;
-    config.width = '550px';
-    config.hasBackdrop = false;
-    config.restoreFocus = true;
-    config.autoFocus = false;
-    config.panelClass = 'provaprova';
-    config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
-    config.data = {
+    const bookData = {
       title: data[0].title,
       desc: data[0].desc,
       pages: data[0].pages,
       index: data[1]
-      // index: 0,
-    };
+    }
 
-    const dialogRef = this.dialog.open(BookComponent, config);
+    if (!this.dialog.getDialogById(dialogID)) {
 
-    dialogRef.afterOpened().subscribe(() => {
-      // Keep focus on inputbar
-      this.inputService.focus();
-    });
+      const config = new MatDialogConfig();
 
-    return dialogRef;
+      config.id = dialogID;
+      config.width = '550px';
+      config.hasBackdrop = false;
+      config.restoreFocus = true;
+      config.autoFocus = false;
+      config.panelClass = 'provaprova';
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
+      config.data = bookData
+
+      const dialogRef = this.dialog.open(BookComponent, config);
+
+      dialogRef.afterOpened().subscribe(() => {
+        // Keep focus on inputbar
+        this.inputService.focus();
+      });
+
+      return dialogRef;
+    } else {
+      this.dialog.getDialogById(dialogID).componentInstance.data = bookData;
+    }
   }
 
   openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig> {
@@ -339,7 +345,7 @@ export class DialogV2Service {
         this.inputService.focus();
       });
 
-    return dialogRef;
+      return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
@@ -392,19 +398,20 @@ export class DialogV2Service {
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
     }
-    
+
   }
 
   openShortcut(): MatDialogRef<ShortcutsPanelComponent, MatDialogConfig> {
 
     const dialogID = 'shortcut';
 
-    if(!this.dialog.getDialogById(dialogID)) {
+    if (!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
       config.width = '288px';
       config.height = 'auto';
+      config.autoFocus = false;
       config.hasBackdrop = false;
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
@@ -418,8 +425,6 @@ export class DialogV2Service {
       return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
-    }
-    
+    };
   }
-  
 }
