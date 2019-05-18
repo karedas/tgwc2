@@ -11,11 +11,13 @@ import { RegistrationModule } from '../registration/registration.module';
 
 // import social buttons module
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import { MainNavigationComponent } from '../main-navigation/main-navigation.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     QuotesComponent,
+    MainNavigationComponent
   ],
   imports: [
     CommonModule,
