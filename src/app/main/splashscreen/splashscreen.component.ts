@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil, delay } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
 import { SplashScreenService } from './splashscreen.service';
@@ -13,7 +13,7 @@ import { SplashScreenService } from './splashscreen.service';
 })
 export class SplashscreenComponent implements OnInit, OnDestroy {
 
-  @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
+  @Output() loaded: EventEmitter<any> = new EventEmitter<any>(false);
 
   splashScreenEl: any;
   player: AnimationPlayer;
@@ -26,14 +26,20 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private _document: any
     ) {
       this.splashScreenEl = this._document.body.querySelector('#splashscreen');
+
       this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
-
-    this.splashScreenService.percentage.pipe(
-      takeUntil(this._unsubscribeAll)).subscribe(amount => {
-        this.preloadPerc = amount;
+    
+    
+    this.splashScreenService.percentage
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(amount => {
+        if(amount === 0) {
+          this.show();
+        }
+        this.preloadPerc = Math.round(amount);
       });
 
 
@@ -42,6 +48,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
       .subscribe(status => {
         if (status === true) {
           this.hide();
+          this.preloadPerc = 0;
           setTimeout(() => {
             this.loaded.emit(true);
           }, 450);
@@ -50,13 +57,12 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   }
 
   show(): void {
-    this._animationBuilder
+    this.player = this._animationBuilder
       .build([
         style({
-          opacity: '0',
+          opacity: '1',
           zIndex: '99999'
         }),
-        animate('400ms ease', style({opacity: '1'}))
       ]).create(this.splashScreenEl);
 
     setTimeout(() => {
@@ -69,7 +75,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
       this._animationBuilder
         .build([
           style({ opacity: '1'}),
-          animate('400ms ease', style({
+          animate('100ms ease', style({
             opacity: '0',
             zIndex: '-10'
           }))

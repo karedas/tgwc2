@@ -81,7 +81,6 @@ export class RegistrationService implements Resolve<any> {
             else if(this.requestType === 'newchar')  {
               this.performRegistration();
             }
-            this.test();
             break;
           case 'created':
             this.onCreated(data.slice(end + 2));
