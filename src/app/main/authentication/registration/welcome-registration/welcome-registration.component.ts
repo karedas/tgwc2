@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tg-welcome-registration',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeRegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
+
+  checkCodeActivation() {
+    this.router.navigate(['/auth/registrazione/wizard']);
+  }
+
+  requestCodeViaEmail() {}
+
 
 }

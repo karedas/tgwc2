@@ -62,8 +62,6 @@ export class StepFourComponent implements OnInit {
   }
 
   increaseAttr(event: any, id?: any) {
-
-
     if (this.attributesList[id] < 30) {
       this.attributesList[id] = this.attributesList[id] + 5;
       this.frmStepFour.controls[id].patchValue(this.statCost(this.attributesList[id]));

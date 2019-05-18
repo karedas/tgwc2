@@ -1,30 +1,30 @@
 <div class="tg-welcomeregistration">
   <div class="tg-welcomeregistration-content" fxLayout="row">
     <div fxFlex="1 1 50%" class="tg-newrequest-box">
-      <h2>
-        Voglio richiedere un codice
-      </h2>
-      <p>Inserisci la tua mail per ricevere un codice e poter creare un nuovo personaggio.</p>
+      <div class="tg-box-introtext">
+        <h2>
+          Voglio richiedere un codice
+        </h2>
+        <p>Inserisci la tua mail per ricevere un codice e poter creare un nuovo personaggio.</p>
+      </div>
 
       <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="la tua e-mail" type="email">
-        </mat-form-field>
-        <button mat-button>Invia</button>
+          <input  placeholder="La tua e-mail" type="email">
+        <button mat-button class="tg-invia-btn" [disableRipple]="true" (click)="requestCodeViaEmail()">Invia</button>
       </form>
     </div>
     <div fxFlex="1 1 50%" class="tg-withinvitation-box">
-      <h2>
-        Ho un codice personaggio
-      </h2>
-      <p>
-        Inserisci il codice ricevuto
-      </p>
+      <div class="tg-box-introtext">
+        <h2>
+          Ho un codice personaggio
+        </h2>
+        <p>
+          Inserisci il codice ricevuto sulla tua email ed inizia la tua avventura
+        </p>
+      </div>
       <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="codice invito">
-        </mat-form-field>
-        <button mat-button>Invia</button>
+        <input  placeholder="Digita qui il tuo codice" type="text">
+        <button mat-button class="tg-conferma-btn"  [disableRipple]="true" (click)="checkCodeActivation()">Conferma</button>
       </form>
     </div>
   </div>

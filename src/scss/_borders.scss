@@ -100,6 +100,7 @@ $regions-border-size: 30px;
 /* BORDER TYPE */
 .b-ironlight-thin {
   padding: 5px!important;
+
 }
 
 .b-ironlight {
@@ -163,6 +164,7 @@ $regions-border-size: 30px;
 .b-ironlight-mini {
   padding: $ironlight-mini-border-size;
   box-sizing: border-box;
+  border-radius: 10px;
 
   >.tg-border-box {
     overflow: hidden;

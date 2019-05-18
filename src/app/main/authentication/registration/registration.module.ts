@@ -36,16 +36,15 @@ export const routes: Routes = [
       {
         path: 'riepilogo',
         component: SummaryRegistrationComponent,
-        resolve: [
+        resolve:
           { reg: RegistrationService }
-        ]
+
       },
       {
         path: 'wizard',
         component: WizardComponent,
-        resolve: [
+        resolve:
           { reg: RegistrationService }
-        ]
       },
       {
         path: '',
