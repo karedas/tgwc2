@@ -18,7 +18,7 @@ export class StepSecondComponent {
   ethnicityDetailText: string;
   race_label: string;
 
-  @Input('race') race : string
+  @Input('race') race: string;
 
   constructor(
     private fb: FormBuilder,

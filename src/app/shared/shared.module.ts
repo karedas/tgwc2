@@ -18,7 +18,7 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  // MatProgressBarModule, 
+  // MatProgressBarModule,
   MatRippleModule,
   MatRadioModule,
   MatTooltipModule} from '@angular/material';

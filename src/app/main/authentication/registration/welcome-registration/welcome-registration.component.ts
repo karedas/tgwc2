@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegistrationService } from '../services/registration.service';
 
 @Component({
   selector: 'tg-welcome-registration',
@@ -8,8 +9,12 @@ import { Router } from '@angular/router';
 })
 export class WelcomeRegistrationComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  userEmail: string;
 
+  constructor(
+    private router: Router,
+    private registrationService: RegistrationService
+    ) { }
   ngOnInit() {
   }
 
@@ -17,7 +22,9 @@ export class WelcomeRegistrationComponent implements OnInit {
     this.router.navigate(['/auth/registrazione/wizard']);
   }
 
-  requestCodeViaEmail() {}
+  requestCodeViaEmail() {
+    this.registrationService.requestNewInvitationCode(this.userEmail);
+  }
 
 
 }

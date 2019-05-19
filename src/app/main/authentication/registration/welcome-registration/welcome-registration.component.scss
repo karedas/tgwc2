@@ -36,6 +36,11 @@ p {
     line-height: 1;
 }
 
+.form-input-wrap {
+    position: relative;
+    padding-bottom: 3.5em;
+}
+
 input {
     line-height: 38px;
     width: 100%;
@@ -46,17 +51,23 @@ input {
     background-position: 1em;
     font-size: 14px;
     padding: 0 .5em;
-    margin-bottom: 2.5em;
     box-shadow: inset 0 0 9px 2px black;
     position: relative;
     box-sizing: border-box;
     border: 1px solid #403a32;
     background-clip: padding-box;
-    transition: border-color .15s ease-in-out,
-    box-shadow .15s ease-in-out; 
     font-family: 'Open Sans', sans-serif;
     text-align: center;
 
+}
+
+.invalid-feedback {
+    color: $tg-red;
+    position: absolute;
+    bottom: 1em;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
 }
 
 

@@ -19,7 +19,7 @@ export interface TGConfig {
   zen: boolean;
   tablePageSize: number;
   log: boolean;
-  shortcuts: any[],
+  shortcuts: any[];
 }
 
 

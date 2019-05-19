@@ -268,12 +268,11 @@ export class DialogV2Service {
 
       config.data = {
         tab: tab
-      }
+      };
 
       const dialogRef = this.dialog.open(ControlPanelComponent, config);
       return dialogRef;
-    }
-    else {
+    } else {
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: tab };
     }
   }
@@ -291,12 +290,12 @@ export class DialogV2Service {
       desc: data[0].desc,
       pages: data[0].pages,
       index: data[1]
-    }
+    };
 
     if (!this.dialog.getDialogById(dialogID)) {
 
       const config = new MatDialogConfig();
-    
+
       config.id = dialogID;
       config.width = '550px';
       config.hasBackdrop = false;
@@ -304,10 +303,10 @@ export class DialogV2Service {
       config.autoFocus = false;
       config.panelClass = 'provaprova';
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
-      config.data = bookData
+      config.data = bookData;
 
       const dialogRef = this.dialog.open(BookComponent, config);
-      
+
       dialogRef.afterOpened().subscribe(() => {
         // Keep focus on inputbar
         this.inputService.focus();
@@ -417,14 +416,14 @@ export class DialogV2Service {
 
       const dialogRef = this.dialog.open(ShortcutsPanelComponent, config);
 
-      //open shortcuts manager on link click.
+      // open shortcuts manager on link click.
       dialogRef.componentInstance.onManagerCall.subscribe(
         () => this.openControlPanel(2)
-      )
+      );
 
       return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
-    };
+    }
   }
 }

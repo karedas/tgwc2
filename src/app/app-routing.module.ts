@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'novita',
     loadChildren: './main/pages/global-news/global-news.module#GlobalNewsModule'
   },
-  { 
+  {
     path: '**',
     redirectTo: 'auth'
   }

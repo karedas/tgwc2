@@ -28,6 +28,7 @@ import { MainNavigationModule } from '../main-navigation/main-navigation.module'
     MainNavigationModule
   ],
   exports: [
+    MainNavigationModule,
     AuthRoutingModule
   ]
 })

@@ -12,7 +12,7 @@ export class IconsComponent implements OnChanges {
   bgPositionStyle: Object;
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
     this.icon = +this.icon;
 
     if (!this.icon) {

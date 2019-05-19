@@ -32,9 +32,9 @@ export class WizardComponent implements OnInit, OnDestroy {
 
   data: any;
 
-  lastStepCompleted: boolean = false;
-  verified: boolean = false;
-  registrationDone: boolean = false;
+  lastStepCompleted = false;
+  verified = false;
+  registrationDone = false;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -77,10 +77,10 @@ export class WizardComponent implements OnInit, OnDestroy {
 
     this.registrationService.isCreated()
       .subscribe((res) => {
-        if(res) {
+        if (res) {
           this.router.navigate(['/riepilogo']);
         }
-      })
+      });
 
 
     this.registrationService.getParams()
@@ -88,7 +88,7 @@ export class WizardComponent implements OnInit, OnDestroy {
       .subscribe((values) => {
 
         this.data = values;
-      })
+      });
 
     /* Race */
     this.stepFirstComponent.frmStepFirst.valueChanges
@@ -129,13 +129,13 @@ export class WizardComponent implements OnInit, OnDestroy {
         this.registrationService.setParams({stats: selected});
       });
 
-    //City Start
+    // City Start
     this.stepFiveComponent.frmStepFive.valueChanges
       .subscribe((selected) => {
         this.registrationService.setParams(selected);
       });
 
-    //Generic
+    // Generic
     this.stepSixComponent.frmStepSix.valueChanges
       .subscribe((selected) => {
         this.registrationService.setParams(selected);
@@ -169,6 +169,6 @@ export class WizardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();    
+    this._unsubscribeAll.complete();
   }
 }

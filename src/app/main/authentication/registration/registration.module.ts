@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Material
-import { MatStepperModule } from '@angular/material/stepper'
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSidenavModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatDividerModule } from '@angular/material';
 import { StepSecondComponent } from './wizard/step-second/step-second.component';
@@ -21,6 +21,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { WizardComponent } from './wizard/wizard.component';
 import { WelcomeRegistrationComponent } from './welcome-registration/welcome-registration.component';
 import { RegistrationComponent } from './registration.component';
+import { MainNavigationModule } from '../../main-navigation/main-navigation.module';
 
 export const routes: Routes = [
 
@@ -72,6 +73,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     FormsModule,
+    MainNavigationModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatIconModule,

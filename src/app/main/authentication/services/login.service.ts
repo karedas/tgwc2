@@ -88,7 +88,7 @@ export class LoginService {
   }
 
   private setHandleLoginData() {
-    this.socketService.addListener(socketEvent.LOGIN, 
+    this.socketService.addListener(socketEvent.LOGIN,
       (data: any) => this.handleLoginData(data));
   }
 

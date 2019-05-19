@@ -10,21 +10,21 @@ import { RegistrationData } from '../models/creation_data.model';
   templateUrl: './summary-registration.component.html',
   styleUrls: ['./summary-registration.component.scss']
 })
-export class SummaryRegistrationComponent implements OnInit, OnDestroy{
+export class SummaryRegistrationComponent implements OnInit, OnDestroy {
 
   // data: RegistrationData;
   data: RegistrationData;
-  
+
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(private registrationService: RegistrationService) {
     this._unsubscribeAll = new Subject();
   }
-  
-  ngOnInit() {  
-    
+
+  ngOnInit() {
+
     this.registrationService.getParams()
-      .subscribe(params => {console.log(params); this.data = params});
+      .subscribe(params => {console.log(params); this.data = params; });
     // this.route.queryParams
     //   .pipe(takeUntil(this._unsubscribeAll))
     //   .subscribe(params => {

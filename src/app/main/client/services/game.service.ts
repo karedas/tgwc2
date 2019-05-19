@@ -121,7 +121,7 @@ export class GameService {
 
   updatePanels(what: any) {
     const now = Date.now();
-    
+
     if (what[0] > this.client_update.inventory.version) {
       this.client_update.inventory.needed = true;
     }
@@ -131,7 +131,7 @@ export class GameService {
     if (what[2] > this.client_update.room.version) {
       this.client_update.room.needed = true;
     }
-    
+
     if (now > this.client_update.now) {
 
     // Update Inventory Panel
@@ -146,13 +146,13 @@ export class GameService {
         this.sendToServer('@equip');
         this.client_update.now = now;
       }
-        
+
     // Update Extra Detail
       if (this.client_update.room.needed && this.extraIsVisible && !this.client_update.inContainer) {
         this.sendToServer('@agg');
         this.client_update.room.needed = false;
         this.client_update.now = now;
-      } 
+      }
     }
   }
 
@@ -204,7 +204,7 @@ export class GameService {
   }
 
   /**
-   * UI UTILITY 
+   * UI UTILITY
    */
 
   /* Commands List request */
@@ -273,19 +273,18 @@ export class GameService {
   /** Font Size Adjustement */
   public setOutputSize(size?: number, oldSize?: number) {
 
-    let prefix = 'size-';
+    const prefix = 'size-';
     let new_class: string;
     let old_class: string;
 
-    if(oldSize) {
+    if (oldSize) {
       old_class = prefix + font_size_options[oldSize].class;
     }
     if (!size && this._tgConfig) {
       size = (this._tgConfig.fontSize + 1) % font_size_options.length;
       old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
       new_class = prefix + font_size_options[size].class;
-    }
-    else {
+    } else {
       new_class = prefix + font_size_options[size].class;
     }
 
@@ -303,7 +302,7 @@ export class GameService {
     if (this._tgConfig.output.extraArea.visible && this.showExtraByViewport) {
       return true;
     } else {
-      return false
+      return false;
     }
   }
 }

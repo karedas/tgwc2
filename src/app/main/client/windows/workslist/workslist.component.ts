@@ -10,12 +10,12 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 
 export interface WorksListElement {
-  id: number,
-  icon: number,
-  diff: string,
-  cando: string,
-  desc: string,
-  action: any
+  id: number;
+  icon: number;
+  diff: string;
+  cando: string;
+  desc: string;
+  action: any;
 }
 
 @Component({
@@ -32,7 +32,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   dataSource:  MatTableDataSource<any>;
   columnsToDisplay: string[] = ['id', 'icon', 'diff', 'cando', 'desc', 'cmd'];
   resultsLength = 0;
-  headerTitle: string = '';
+  headerTitle = '';
 
   dataTable$: Observable<any>;
 
@@ -57,7 +57,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
         (wl: IWorks) => {
           if (wl) {
             this.cmd = wl.cmd;
-            this.setHeaderTitle(wl.verb)
+            this.setHeaderTitle(wl.verb);
             this.resultsLength = Object.keys(wl.list).length;
             this.populate(wl.list);
           }
@@ -65,7 +65,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   }
 
   setHeaderTitle(verb) {
-    this.headerTitle =  `Cosa sai ${verb}`;;
+    this.headerTitle =  `Cosa sai ${verb}`;
   }
 
   private populate(data: any) {
@@ -94,7 +94,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase()
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

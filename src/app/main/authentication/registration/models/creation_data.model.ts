@@ -1,13 +1,13 @@
 
 export interface IStats {
-  strength: number,
-  constitution: number,
-  size: number,
-  dexterity: number,
-  speed: number,
-  empathy: number,
-  intelligence: number,
-  willpower: number
+  strength: number;
+  constitution: number;
+  size: number;
+  dexterity: number;
+  speed: number;
+  empathy: number;
+  intelligence: number;
+  willpower: number;
 }
 
 export const attributes: IStats = {
@@ -19,7 +19,7 @@ export const attributes: IStats = {
   empathy: 0,
   intelligence: 0,
   willpower: 0
-}
+};
 
 export class RegistrationData {
   invitation: string;
@@ -34,7 +34,7 @@ export class RegistrationData {
   start: string;
   name: string;
   password: string;
-  password2: string; 
+  password2: string;
   constructor() {
     this.invitation = '';
     this.email = '';
@@ -48,6 +48,6 @@ export class RegistrationData {
     this.start = '';
     this.name = '';
     this.password = '';
-    this.password2 = ''; 
+    this.password2 = '';
   }
 }
