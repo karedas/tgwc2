@@ -10,22 +10,21 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 })
 
 export class RegistrationService implements Resolve<any> {
-  
+
   private _dataReg: RegistrationData = new RegistrationData();
   private requestType: string;
+  private emailInvitationCode: string;
 
   $dataRegSubject: BehaviorSubject<RegistrationData> = new BehaviorSubject<RegistrationData>(this._dataReg);
   isCreatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   responseMessage: string;
 
+
   constructor(private socketService: SocketService) {
-    this.setHandleRegistrationData();
-    this.socketService.emit('registration');
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any> | Promise<any> | any
-  {
-    return  this.getParams().subscribe((v) => console.log(v));
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    return this.getParams().subscribe((v) => console.log(v));
   }
 
   setParams(val) {
@@ -41,19 +40,20 @@ export class RegistrationService implements Resolve<any> {
     return this.isCreatedSubject.asObservable();
   }
 
-  requestNewInvitationCode() {
+  requestNewInvitationCode(email: string) {
     this.requestType = 'invite';
+    this.emailInvitationCode = email;
     this.setHandleRegistrationData();
-    this.socketService.emit('requestinvite');
+    this.socketService.emit('registration');
   }
 
   register(data?: RegistrationData) {
     this.requestType = 'newchar';
     this.setHandleRegistrationData();
-    this.socketService.emit('newcregistrationhar');
+    this.socketService.emit('newcregistrationchar');
   }
 
-  private setHandleRegistrationData() {
+  private setHandleRegistrationData(data?: string) {
     this.resetHandler();
     this.socketService.addListener(socketEvent.REGISTRATION,
       (data: any) => this.handleRegistrationData(data));
@@ -75,10 +75,9 @@ export class RegistrationService implements Resolve<any> {
             this.socketService.oob();
             break;
           case 'enterlogin':
-            if(this.requestType === 'invite') {
+            if (this.requestType === 'invite') {
               this.performRequestInvitationCode();
-            }
-            else if(this.requestType === 'newchar')  {
+            } else if (this.requestType === 'newchar') {
               this.performRegistration();
             }
             break;
@@ -94,7 +93,7 @@ export class RegistrationService implements Resolve<any> {
   }
 
   private performRequestInvitationCode() {
-    this.socketService.emit('data', 'requestinvite:lisandr84@provaprova.com');
+    this.socketService.emit('data', 'requestinvite:' + this.emailInvitationCode);
   }
 
   private onError(error) {
@@ -107,24 +106,24 @@ export class RegistrationService implements Resolve<any> {
   }
 
   private performRegistration() {
-    let creationString = "create:"
-      + this._dataReg.name.toString() + ","
-      + this._dataReg.password.toString() + ","
-      + this._dataReg.email.toString() + ","
-      + (this._dataReg.invitation ?  this._dataReg.invitation.toString() : '') + ","
-      + this._dataReg.race_code.toString() + ","
-      + this._dataReg.sex.toString() + ","
-      + this._dataReg.culture.toString() + ","
-      + this._dataReg.start.toString() + ","
-      + this._dataReg.stats.strength.toString() + ","
-      + this._dataReg.stats.constitution.toString() + ","
-      + this._dataReg.stats.size.toString() + ","
-      + this._dataReg.stats.dexterity.toString() + ","
-      + this._dataReg.stats.speed.toString() + ","
-      + this._dataReg.stats.empathy.toString() + ","
-      + this._dataReg.stats.intelligence.toString() + ","
+    const creationString = 'create:'
+      + this._dataReg.name.toString() + ','
+      + this._dataReg.password.toString() + ','
+      + this._dataReg.email.toString() + ','
+      + (this._dataReg.invitation ? this._dataReg.invitation.toString() : '') + ','
+      + this._dataReg.race_code.toString() + ','
+      + this._dataReg.sex.toString() + ','
+      + this._dataReg.culture.toString() + ','
+      + this._dataReg.start.toString() + ','
+      + this._dataReg.stats.strength.toString() + ','
+      + this._dataReg.stats.constitution.toString() + ','
+      + this._dataReg.stats.size.toString() + ','
+      + this._dataReg.stats.dexterity.toString() + ','
+      + this._dataReg.stats.speed.toString() + ','
+      + this._dataReg.stats.empathy.toString() + ','
+      + this._dataReg.stats.intelligence.toString() + ','
       + this._dataReg.stats.willpower.toString()
-      + "\n";
+      + '\n';
 
 
     this.socketService.emit('data', creationString);

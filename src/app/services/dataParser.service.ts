@@ -18,7 +18,7 @@ import { map } from 'rxjs/operators';
 
 export class DataParser {
 
-  tgConfig: TGConfig
+  tgConfig: TGConfig;
 
   private dispatcher: any = {};
   private netData = '';
@@ -37,11 +37,11 @@ export class DataParser {
 
     this._updateNeeded = new Subject<any>();
 
-    //Subscribe to the shortcuts in Config
+    // Subscribe to the shortcuts in Config
     this._configService.getConfig()
-      .pipe(map((config: TGConfig) => { return config.shortcuts }))
+      .pipe(map((config: TGConfig) => config.shortcuts))
       .subscribe((shortcuts) => { this.shortcuts = shortcuts; }
-      )
+      );
   }
 
   handlerGameData(data: any, logEnabled?: boolean) {
@@ -213,7 +213,7 @@ export class DataParser {
         title: options_parse[1] ? options_parse[1] : ' ',
         description: text ? text : ' '
       }));
-      
+
       return '';
     });
 
@@ -421,9 +421,9 @@ export class DataParser {
     if (this.dispatcher['room']) { this.store.dispatch(new DataActions.RoomAction(this.dispatcher['room'])); }
     if (this.dispatcher['pers']) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['pers'])); }
     // TODO UI (dont need order) :
-    if (this.dispatcher['visibilLevel']) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); };
+    if (this.dispatcher['visibilLevel']) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); }
     if (this.dispatcher['isgod']) { this.store.dispatch(new GameActions.UpdateUI({ isGod: this.dispatcher['isgod'] })); }
-    if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']) }
+    if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']); }
   }
 
 

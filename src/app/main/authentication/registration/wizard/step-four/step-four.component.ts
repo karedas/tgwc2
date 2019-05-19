@@ -16,7 +16,7 @@ export class StepFourComponent implements OnInit {
 
   frmStepFour: FormGroup;
 
-  hasError: boolean = false;
+  hasError = false;
   points: number;
 
   attributeHover: boolean;
@@ -40,7 +40,7 @@ export class StepFourComponent implements OnInit {
     Object.keys(this.frmStepFour.controls).map(e => {
       sum -= this.statCost(this.frmStepFour.controls[e].value);
     });
-    
+
     this.points = sum;
 
     return this.points;
@@ -78,7 +78,7 @@ export class StepFourComponent implements OnInit {
     }
   }
 
-  //on Mouse Over, showing description
+  // on Mouse Over, showing description
   onAttribute(event: any, fileName: string) {
     if (!fileName) {
       this.attributeHover = false;
@@ -104,9 +104,9 @@ export class StepFourComponent implements OnInit {
       this.hasError = true;
       return false;
     } else {
-      this.hasError = false
+      this.hasError = false;
       return true;
-    };
+    }
 
   }
 }

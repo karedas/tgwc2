@@ -10,7 +10,7 @@ import { FileSaverService } from 'ngx-filesaver';
   styleUrls: ['./log.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LogComponent implements OnInit, OnDestroy{
+export class LogComponent implements OnInit, OnDestroy {
 
   @ViewChild('logContentArea') logContentArea: ElementRef;
 
@@ -39,7 +39,7 @@ export class LogComponent implements OnInit, OnDestroy{
   saveLog() {
     const content =  this.logContentArea.nativeElement.innerHTML;
     this._FileSaverService.save(
-        content, 
+        content,
         this.dateTime.replace(/\-|:/g, '_') + '_TG-LOG.html'
     );
   }

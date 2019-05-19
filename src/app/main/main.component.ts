@@ -47,7 +47,7 @@ export class MainComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if (!this.cookieService.check('tgCookieLaw')) {
         this.dialogV2Service.openCookieLaw()
-          .afterClosed().subscribe(() => 
+          .afterClosed().subscribe(() =>
             this.start()
           );
       } else {

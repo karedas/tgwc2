@@ -83,7 +83,7 @@ export class ConfigService {
           }));
         }
       }
-      
+
     }
     return keys;
   }
@@ -93,12 +93,12 @@ export class ConfigService {
     let config = this._configSubject.getValue();
     // // Merge the new config
     config = _.mergeWith(config, value,  (obj, src) => {
-      if(_.isArray(src) && _.isEmpty(src)) {
+      if (_.isArray(src) && _.isEmpty(src)) {
         return src;
       } else if (_.isArray(src)) {
         return src;
       }
-    })
+    });
 
     // If emitEvent option is true...
     if (opts.emitEvent === true) {
@@ -118,5 +118,5 @@ export class ConfigService {
     // Set the config from the default config
     this._configSubject.next(_.cloneDeep(this._defaultConfig));
   }
-  
+
 }

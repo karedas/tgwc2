@@ -11,7 +11,7 @@ export class StepSixComponent {
 
   @Input('data') data: RegistrationData;
   @Output() lastStepCompleted = new EventEmitter();
-  
+
   frmStepSix: FormGroup;
 
 
@@ -56,11 +56,11 @@ export class StepSixComponent {
       } else {
         matchingControl.setErrors(null);
       }
-    }
+    };
   }
 
   onComplete() {
-    if(this.frmStepSix.valid) {
+    if (this.frmStepSix.valid) {
       this.lastStepCompleted.emit(true);
     }
   }

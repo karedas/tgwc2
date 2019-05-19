@@ -24,7 +24,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
     private inputService: InputService,
     private game: GameService,
   ) {
-    
+
     this._unsubscribeAll = new Subject<any>();
   }
 
@@ -32,7 +32,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
     this._configService.getConfig()
       .pipe(
         takeUntil(this._unsubscribeAll),
-        map((config) => {return config.shortcuts}))
+        map((config) => config.shortcuts))
       .subscribe((sc) => {
         this.totalShortcuts = sc;
       });

@@ -9,7 +9,7 @@ import { RegistrationData } from '../../models/creation_data.model';
   templateUrl: './step-third.component.html',
   styleUrls: ['./step-third.component.scss']
 })
-export class StepThirdComponent{
+export class StepThirdComponent {
 
   @Input('race_code') race_code: string ;
 
@@ -29,15 +29,15 @@ export class StepThirdComponent{
   setCultures(culture: string) {
 
     this.cultureDetailText = '';
-    
-    //Load Html content
-    this.http.get('assets/data/cultures/'+ culture +'.html', {responseType: 'text'})
+
+    // Load Html content
+    this.http.get('assets/data/cultures/' + culture + '.html', {responseType: 'text'})
     .subscribe((data) => {
       this.cultureDetailText = data;
     });
-    
+
     this.frmStepThird.setValue({
       culture: culture
-    })
+    });
   }
 }

@@ -8,19 +8,19 @@ import { equip_positions_by_name } from '../main/common/constants';
 })
 export class LogService {
 
-  lineNumber: number = 0;
+  lineNumber = 0;
   log$: ReplaySubject<any> = new ReplaySubject<any>(500);
   logStorage = [];
 
   constructor() {
     this.log$.pipe(
-      scan((acc, curr) => { Object.assign({}, acc, curr), {} }),
-    )
+      scan((acc, curr) => { Object.assign({}, acc, curr), {}; }),
+    );
     this.log$.asObservable();
   }
 
   get log(): Observable<any> {
-    return this.log$
+    return this.log$;
   }
 
 
@@ -58,7 +58,7 @@ export class LogService {
     // Generic page (title, text)
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       p = JSON.parse(p.slice(6, -1));
-      return this.printPage(p)
+      return this.printPage(p);
     });
 
     // Data Time
@@ -154,7 +154,7 @@ export class LogService {
       data = data.replace(/\n/gm, '<br>');
       data = data.replace(/<p><\/p>/g, '');
 
-      //Update the Observable Subject
+      // Update the Observable Subject
       this.log$.next({ l: ++this.lineNumber, d: data });
     }
   }
@@ -189,15 +189,16 @@ export class LogService {
   private printTable(t) {
     let txt = '<table>';
 
-    if (t.title && t.dialog == false)
+    if (t.title && t.dialog == false) {
       txt += '<caption>' + t.title + '</caption>';
+    }
 
     if (t.head) {
-      txt += '<thead><tr>'
+      txt += '<thead><tr>';
       t.head.forEach((v, i) => {
 
         switch (typeof v) {
-          case "object":
+          case 'object':
             txt += '<th>' + v.title + '</th>';
             break;
 
@@ -215,16 +216,16 @@ export class LogService {
 
         row.forEach((elem, di) => {
 
-          let h = t.head ? t.head[di] : null;
+          const h = t.head ? t.head[di] : null;
 
           switch (typeof h) {
-            case "object":
+            case 'object':
               switch (h.type) {
-                case "account":
+                case 'account':
                   txt += '<td><a target="_blank" href="/admin/accounts/' + elem + '">' + elem + '</a></td>';
                   break;
 
-                case "ipaddr":
+                case 'ipaddr':
                   txt += '<td><a target="_blank" href="http://www.infosniper.net/index.php?ip_address=' + elem + '">' + elem + '</a></td>';
                   break;
 
@@ -254,46 +255,55 @@ export class LogService {
 
     let res = '';
 
-    if (info.title)
+    if (info.title) {
       // res += '<h3>'+ capFirstLetter (info.title) +'</h3>';
       res += '<h3>' + info.title + '</h3>';
-    // 
+    }
+    //
 
-    if (info.action)
+    if (info.action) {
       res += '<p>' + info.action + '</p>';
+    }
 
     /* Print description */
     if (info.desc) {
-      if (info.desc.base)
+      if (info.desc.base) {
         res += info.desc.base;
+      }
 
-      if (info.desc.details)
+      if (info.desc.details) {
         res += info.desc.details;
+      }
 
-      if (info.desc.equip)
+      if (info.desc.equip) {
         res += info.desc.equip;
+      }
     }
 
     /* Print person list */
-    if (info.perscont)
+    if (info.perscont) {
       res += this.printDetailsList(info.perscont, 'pers');
+    }
 
     /* Print objects list */
-    if (info.objcont)
+    if (info.objcont) {
       res += this.printDetailsList(info.objcont, 'obj');
+    }
 
     /* Print equipment list */
-    if (info.eqcont)
+    if (info.eqcont) {
       res += this.printDetailsList(info.eqcont, 'obj');
+    }
 
     return res;
   }
 
   private printInventory(inv) {
-    if (inv.list.length == 0)
+    if (inv.list.length == 0) {
       return ('<p>Non hai niente in inventario!</p>');
-    else
+    } else {
       return '<h4>Il tuo inventario:</h4>' + this.removeColors(this.printDetailsList(inv, 'obj'));
+    }
   }
 
   private printEquipment(eq) {
@@ -301,7 +311,7 @@ export class LogService {
     let eqcount = 0;
 
     Object.keys(equip_positions_by_name).forEach((posname, idx) => {
-      let eqdata = eq[posname];
+      const eqdata = eq[posname];
 
       if (eqdata) {
         eqdata.forEach((obj, idx) => {
@@ -311,10 +321,11 @@ export class LogService {
       }
     });
 
-    if (eqcount == 0)
+    if (eqcount == 0) {
       return '<p>Non hai equipaggiato nulla!</p>';
-    else
+    } else {
       return '<p>Equipaggiamento:</p>' + res;
+    }
   }
 
   private printWorksList(wk) {
@@ -339,21 +350,23 @@ export class LogService {
   private printSkillsList(skinfo) {
     let txt = '<table><caption>Abilit&agrave; conosciute</caption>';
 
-    for (var groupname in skinfo) {
+    for (const groupname in skinfo) {
       txt += '<tr><td colspan="1000"><h3>' + groupname + '</h3></td></tr>';
 
-      let group = skinfo[groupname];
+      const group = skinfo[groupname];
 
-      for (let skname in group) {
+      for (const skname in group) {
         txt += '<tr><th>' + skname + '</th>';
 
-        let sk = group[skname];
+        const sk = group[skname];
 
-        if ('prac' in sk && 'theo' in sk)
+        if ('prac' in sk && 'theo' in sk) {
           txt += '<td>' + sk.prac + '</td><td>' + sk.theo + '</td>';
+        }
 
-        if ('auto' in sk)
+        if ('auto' in sk) {
           txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
+        }
 
         txt += '</tr>';
       }
@@ -366,15 +379,15 @@ export class LogService {
 
   private printPlayerInfo(pinfo) {
     const abiltxt = [
-      { val: 6, txt: "Terribile" },
-      { val: 14, txt: "Pessima" },
-      { val: 24, txt: "Scarsa" },
-      { val: 34, txt: "Discreta" },
-      { val: 64, txt: "Normale" },
-      { val: 74, txt: "Buona" },
-      { val: 84, txt: "Ottima" },
-      { val: 94, txt: "Eccellente" },
-      { val: 100, txt: "Leggendaria" }
+      { val: 6, txt: 'Terribile' },
+      { val: 14, txt: 'Pessima' },
+      { val: 24, txt: 'Scarsa' },
+      { val: 34, txt: 'Discreta' },
+      { val: 64, txt: 'Normale' },
+      { val: 74, txt: 'Buona' },
+      { val: 84, txt: 'Ottima' },
+      { val: 94, txt: 'Eccellente' },
+      { val: 100, txt: 'Leggendaria' }
     ];
 
     return '<table><caption>' + pinfo.name + ', ' + pinfo.title + '</caption>'
@@ -408,8 +421,9 @@ export class LogService {
     sttxt += '<p>Fame: ' + status.food + '</p>';
     sttxt += '<p>Sete: ' + status.drink + '</p>';
 
-    if (status.msg)
+    if (status.msg) {
       sttxt += '<p>' + status.msg + '</p>';
+    }
 
     return sttxt;
   }
@@ -418,16 +432,18 @@ export class LogService {
     let res = '';
 
     if (cont.list) {
-      if (cont.title)
+      if (cont.title) {
         res += '<p>' + cont.title + '</p>';
+      }
 
       for (let n = 0; n < cont.list.length; n++) {
-        let l = cont.list[n];
+        const l = cont.list[n];
         res += '<div>' + this.printDecoratedDescription(type, l.condprc, l.mvprc, l.mrn ? l.mrn.length : 0, l.desc) + '</div>';
       }
 
-      if (cont.title && (cont.list.length > 0 || cont.show === true))
+      if (cont.title && (cont.list.length > 0 || cont.show === true)) {
         res += 'Niente.<br>';
+      }
     }
 
     return res;
@@ -437,24 +453,29 @@ export class LogService {
     let res = '[' + type[0] + ']&#160;' + desc.replace(/\n/gm, ' ');
 
     if (condprc || moveprc) {
-      res += '&#160;{'
-      if (condprc)
+      res += '&#160;{';
+      if (condprc) {
         res += 'pf' + condprc + '%';
-      if (moveprc)
+      }
+      if (moveprc) {
         res += 'mv' + moveprc + '%';
-      res += '}'
+      }
+      res += '}';
     }
 
-    if (count > 1)
+    if (count > 1) {
       res += '&#160;[x' + count + ']';
+    }
 
     return res;
   }
 
   private prcLowTxt(val, values) {
-    for (var i = 0; i < values.length; ++i)
-      if (val <= values[i].val)
+    for (let i = 0; i < values.length; ++i) {
+      if (val <= values[i].val) {
         return values[i].txt;
+    }
+      }
 
     return null;
   }

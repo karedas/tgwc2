@@ -21,8 +21,8 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
-  fileUploaded: boolean = false;
-  tabOpen: number = 0;
+  fileUploaded = false;
+  tabOpen = 0;
 
   oldFontSize: number;
 
@@ -37,7 +37,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   ) {
 
     this._unsubscribeAll = new Subject();
-    this.tabOpen = data.tab
+    this.tabOpen = data.tab;
   }
 
   ngOnInit() {
@@ -71,14 +71,12 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
     if (source === 'sound') {
       this._configService.setConfig({
         audio: { soundVolume: event.value }
-      })
-    }
-    else if (source === 'music') {
+      });
+    } else if (source === 'music') {
       this._configService.setConfig({
         audio: { musicVolume: event.value }
-      })
-    }
-    else if (source === 'enable') {
+      });
+    } else if (source === 'enable') {
       this.audioService.toggleAudio();
     }
   }
@@ -95,20 +93,20 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
 
   uploadConfig(event: any) {
 
-    let file: any = event.target.files[0];
+    const file: any = event.target.files[0];
 
     if (file) {
-      let fileReader = new FileReader();
+      const fileReader = new FileReader();
 
       fileReader.onload = (e) => {
-        let result = fileReader.result;
+        const result = fileReader.result;
         if (typeof result === 'string') {
-          let newConf = JSON.parse(result);
+          const newConf = JSON.parse(result);
           this._configService.setConfig(newConf);
 
           this.fileUploaded = true;
         }
-      }
+      };
       fileReader.readAsText(file);
     }
   }

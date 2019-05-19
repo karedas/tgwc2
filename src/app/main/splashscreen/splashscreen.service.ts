@@ -14,7 +14,7 @@ export class SplashScreenService {
   private totalAssets: number;
   private currentUrl: string;
 
-  assetsDone = []
+  assetsDone = [];
 
   public status$: BehaviorSubject<boolean>;
 
@@ -50,10 +50,10 @@ export class SplashScreenService {
     this.status$.next(false);
     this.percentage$.next(0);
 
-    if(this.currentUrl === 'default') {
+    if (this.currentUrl === 'default') {
       assetsList = AssetsList;
     }
-    if(this.currentUrl === 'registration') {
+    if (this.currentUrl === 'registration') {
       assetsList = AssetsListRegistration;
     }
 
@@ -82,7 +82,7 @@ export class SplashScreenService {
       this.onComplete();
     }
 
-    const calcPerc =  this.percentage$.value >= 100 ? 100 : (this.percentage$.value + (100 / this.totalAssets))
+    const calcPerc =  this.percentage$.value >= 100 ? 100 : (this.percentage$.value + (100 / this.totalAssets));
     this.percentage$.next(calcPerc);
   }
 

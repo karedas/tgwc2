@@ -18,20 +18,20 @@ export class ShortcutsManagerComponent implements OnInit {
   totalIcons: any;
 
   shortcuts: any = [];
-  iconsListOpenedStatus: boolean = false;
-  newShortcutOpenedStatus: boolean = false;
-  scIcon: number = 1;
+  iconsListOpenedStatus = false;
+  newShortcutOpenedStatus = false;
+  scIcon = 1;
   newShortcutForm: FormGroup;
-  shortcutExistError: boolean = false;
+  shortcutExistError = false;
 
   private editableID: number;
-  private isEdit: boolean = false;
+  private isEdit = false;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private _configService: ConfigService
   ) {
-    this.totalIcons = Array(124).fill(0).map((x,i)=>i);
+    this.totalIcons = Array(124).fill(0).map((x, i) => i);
 
     this._unsubscribeAll = new Subject<any>();
   }
@@ -45,7 +45,7 @@ export class ShortcutsManagerComponent implements OnInit {
 
     this._configService.getConfig()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts });
+      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts; });
   }
 
   private resetForm() {
@@ -75,28 +75,25 @@ export class ShortcutsManagerComponent implements OnInit {
 
   saveShortcut() {
 
-    //reset error    
+    // reset error
     this.shortcutExistError = false;
-    
+
     const alias = this.newShortcutForm.get('scAlias').value;
     const cmd = this.newShortcutForm.get('scCmd').value;
 
-    //check if Alias Shortcuts exists in the Array
-    if(alias && cmd) {
+    // check if Alias Shortcuts exists in the Array
+    if (alias && cmd) {
 
-      if(!this.shortcuts.length) {
+      if (!this.shortcuts.length) {
         this.addShortcut(alias, cmd);
         this.resetForm();
-      } 
-      else if (this.isEdit) {
+      } else if (this.isEdit) {
         this.saveEditableShortcut(alias, cmd);
          this.resetForm();
-      }
-      else if (this.shortcuts.filter(x => { return x.alias === alias }).length <= 0) {
+      } else if (this.shortcuts.filter(x => x.alias === alias).length <= 0) {
         this.addShortcut(alias, cmd);
        this.resetForm();
-      }
-      else {
+      } else {
         this.shortcutExistError = true;
       }
     }
@@ -104,7 +101,7 @@ export class ShortcutsManagerComponent implements OnInit {
 
   private addShortcut(alias: string, cmd: string) {
     this.shortcuts.push({ 'icon': this.scIcon, 'alias': alias, 'cmd': cmd });
-    this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts })
+    this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts });
     this.closeNewShortcut();
   }
 
@@ -113,21 +110,21 @@ export class ShortcutsManagerComponent implements OnInit {
       icon: this.scIcon,
       alias: alias,
       cmd: cmd
-    }
+    };
 
-    this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts })
+    this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts });
     this.closeNewShortcut();
     this.isEdit = false;
 
   }
 
-  deleteShortcut(alias:string) {
-    const scUp =  this.shortcuts.filter(x => { return x.alias !== alias });
-    this._configService.setConfig({shortcuts: scUp})
+  deleteShortcut(alias: string) {
+    const scUp =  this.shortcuts.filter(x => x.alias !== alias);
+    this._configService.setConfig({shortcuts: scUp});
   }
 
-  onEditShortcut(idx:number, icon: number, alias: string, cmd: string) {
-    
+  onEditShortcut(idx: number, icon: number, alias: string, cmd: string) {
+
     this.isEdit = true;
 
     this.editableID = idx;
@@ -138,13 +135,13 @@ export class ShortcutsManagerComponent implements OnInit {
       scAlias: alias,
       scCmd: cmd
     });
-    
+
     this.openNewShortcut();
   }
 
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.shortcuts, event.previousIndex, event.currentIndex); 
+    moveItemInArray(this.shortcuts, event.previousIndex, event.currentIndex);
     this._configService.setConfig({ shortcuts: this.shortcuts });
   }
 }

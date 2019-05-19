@@ -16,7 +16,7 @@ export class CommandsListComponent implements OnInit {
 
   commands$: Observable<any>;
   title: string;
-  groupOpen: number = 0;
+  groupOpen = 0;
 
   constructor(private game: GameService) {
   }

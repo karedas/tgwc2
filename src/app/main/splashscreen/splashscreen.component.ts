@@ -31,12 +31,12 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    
-    
+
+
     this.splashScreenService.percentage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(amount => {
-        if(amount === 0) {
+        if (amount === 0) {
           this.show();
         }
         this.preloadPerc = Math.round(amount);

@@ -53,7 +53,7 @@ export class NewsComponent  implements OnInit, OnDestroy {
   onCheckbox(event: MatCheckboxChange): void {
     this._configService.setConfig({
       news: !event.checked
-    })
+    });
   }
 
   ngOnDestroy(): void {

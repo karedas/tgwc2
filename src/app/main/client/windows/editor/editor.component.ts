@@ -62,10 +62,10 @@ export class EditorComponent implements OnInit, OnDestroy {
         take(1)
       )
       .subscribe(() => {
-        this.gameService.sendToServer('##ce_abort')
+        this.gameService.sendToServer('##ce_abort');
         this.dialog.close();
         this.inputService.focus();
-      })
+      });
   }
 
 

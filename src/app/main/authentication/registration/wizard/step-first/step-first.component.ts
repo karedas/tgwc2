@@ -9,12 +9,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./step-first.component.scss']
 })
 export class StepFirstComponent {
- 
+
   racesList = races;
   frmStepFirst: FormGroup;
   raceDetailText: string;
 
-  constructor( 
+  constructor(
     private fb: FormBuilder,
     private http: HttpClient
     ) {
@@ -24,16 +24,16 @@ export class StepFirstComponent {
   }
 
   setRace(race: any) {
-    
+
     this.raceDetailText = '';
-    
-    //Load Html Detail file
-    this.http.get('assets/data/races/'+ race.code +'.html', {responseType: 'text'})
+
+    // Load Html Detail file
+    this.http.get('assets/data/races/' + race.code + '.html', {responseType: 'text'})
     .subscribe((data) => {
       this.raceDetailText = data;
     });
 
     this.frmStepFirst.setValue({ race: race.code });
- 
+
   }
 }

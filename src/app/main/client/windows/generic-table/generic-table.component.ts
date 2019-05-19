@@ -19,7 +19,7 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   dataTable$: Observable<any>;
-  pageSizeBase: number = 5;
+  pageSizeBase = 5;
   private data = [];
 
   dataSource:  MatTableDataSource<any>;
@@ -75,7 +75,7 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
       });
 
     }
-    
+
     // pupulate data
     if (dataTable.data) {
       dataTable.data.forEach((d: any) => {
@@ -95,7 +95,7 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase()
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

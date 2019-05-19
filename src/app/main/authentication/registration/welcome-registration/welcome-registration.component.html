@@ -8,9 +8,16 @@
         <p>Inserisci la tua mail per ricevere un codice e poter creare un nuovo personaggio.</p>
       </div>
 
-      <form class="example-form">
-          <input  placeholder="La tua e-mail" type="email">
-        <button mat-button class="tg-invia-btn" [disableRipple]="true" (click)="requestCodeViaEmail()">Invia</button>
+      <form #formEmail="ngForm" class="example-form" (ngSubmit)="formEmail.form.valid && requestCodeViaEmail()"
+        novalidate>
+        <div class="form-input-wrap">
+          <input placeholder="La tua e-mail" type="email" [(ngModel)]="userEmail" name="email" class="form-control"
+            #email="ngModel" [ngClass]="{ 'is-invalid': formEmail.submitted && email.invalid }" required email>
+          <div *ngIf="formEmail.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email non corretta</div>
+          </div>
+        </div>
+        <button mat-button class="tg-invia-btn" [disableRipple]="true">Invia</button>
       </form>
     </div>
     <div fxFlex="1 1 50%" class="tg-withinvitation-box">
@@ -23,8 +30,12 @@
         </p>
       </div>
       <form class="example-form">
-        <input  placeholder="Digita qui il tuo codice" type="text">
-        <button mat-button class="tg-conferma-btn"  [disableRipple]="true" (click)="checkCodeActivation()">Conferma</button>
+        <div class="form-input-wrap">
+          <input placeholder="Digita qui il tuo codice" type="text" class="form-control">
+        </div>
+
+        <button mat-button class="tg-conferma-btn" [disableRipple]="true"
+          (click)="checkCodeActivation()">Conferma</button>
       </form>
     </div>
   </div>
