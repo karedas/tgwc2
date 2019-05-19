@@ -1,0 +1,38 @@
+@import 'variables';
+
+:host {
+    display: block;
+    background: url($imgPath + '/registration/bg.jpg') no-repeat;
+    background-size: contain;
+    background-color: black;
+}
+
+.tg-news {
+    margin: 0 auto;
+    padding-top:40px;
+    box-sizing: border-box;
+    width: 1045px;
+    max-width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: #3a2e19;
+
+}
+
+.tg-news-wrap {
+    height: 100%;;
+}
+
+.tg-news-inset, .tg-news-content  {
+    position: relative;
+    z-index: 10;
+}
+
+.tg-news-content {
+  height: 100%;
+  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+}
+
+
+h1 {
+    text-align: center;
+}

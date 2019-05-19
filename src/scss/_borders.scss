@@ -7,6 +7,18 @@ $modal-border-size: 6px;
 $modalpaper-border-size: 80px;
 $regions-border-size: 30px;
 
+.border-noy {
+  
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+
+  > .tg-border-box {
+    .tg-border-left, > .tg-border-right {
+      top: 0!important;
+      bottom: 0!important;
+    }
+  }
+}
 
 .tg-box-content {
   position: relative;
@@ -360,7 +372,7 @@ $regions-border-size: 30px;
       right: 0;
       bottom: 0;
       left: 0;
-      margin: 30px;
+      margin: 80px;
     }
 
     .tg-border-top,

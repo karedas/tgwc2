@@ -10,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // import social buttons module
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import { MainNavigationModule } from '../main-navigation/main-navigation.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
     ReactiveFormsModule,
     AuthRoutingModule,
     FlexLayoutModule,
-    JwSocialButtonsModule
+    JwSocialButtonsModule,
+    MainNavigationModule
   ],
   exports: [
     AuthRoutingModule

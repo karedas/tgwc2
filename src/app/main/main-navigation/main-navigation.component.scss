@@ -1,0 +1,31 @@
+.tg-mainnav {
+    width: 100%;
+    height: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgb(11, 8, 7);
+    padding: 0 1em;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px #0c0807;
+    border-bottom: 1px solid #ffffff1a;
+
+    .tg-mainnav-item {
+        height: 30px;
+        font-size: 10px;
+        display: inline-block;
+        line-height: 30px;
+        margin-right: 25px;
+    }
+    
+    .tg-mainnav-item a {
+        text-decoration: none;
+        color: #bdb3a3;
+        &:hover, &.active {
+            color: #da962d;
+        } 
+    }
+}

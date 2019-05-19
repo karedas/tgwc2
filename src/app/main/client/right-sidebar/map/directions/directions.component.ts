@@ -68,13 +68,12 @@ export class DirectionsComponent implements OnInit, OnDestroy {
         cmd = this.dirNames[dir];
       }
       if (cmd) {
-        this.game.processCommands(cmd);
+        this.game.processCommands(cmd, false);
       }
     }
   }
 
   closeLockDoor(event: any, dir: number): boolean {
-
     if (event.which === 3) {
       let cmd: string;
 
@@ -85,7 +84,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
         cmd = `blocca ${this.dirNames[dir]}`;
       }
       if (cmd) {
-        this.game.processCommands(cmd);
+        this.game.processCommands(cmd, false);
       }
 
       return false;
