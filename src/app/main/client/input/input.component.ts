@@ -66,7 +66,8 @@ export class InputComponent implements OnInit, OnDestroy {
       );
 
     // Listen focus Call from another component
-    this.inputService.isFocussed.pipe(takeUntil(this._unsubscribeAll))
+    this.inputService.isFocussed
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => {
         this.focus();
       });
@@ -107,7 +108,7 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
-  moveCursorAtEnd(target) {
+  private moveCursorAtEnd(target) {
     if (typeof target.selectionStart === 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
     } else if (typeof target.createTextRange !== 'undefined') {
@@ -147,6 +148,7 @@ export class InputComponent implements OnInit, OnDestroy {
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
   }
+
 
   @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {

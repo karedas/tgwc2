@@ -200,7 +200,7 @@
     box-shadow: inset 0 0 15px 3px black;
     color: #a8a8a8;
     text-decoration: none;
-    padding: 1em 0;
+    padding: .5em 0;
     cursor: pointer;
 
     span {
@@ -210,13 +210,16 @@
     }
 
     span.highlight {
-      display: block;
+      display: inline-block;
       font-weight: bold;
       text-shadow: transparent;
       transition: text-shadow .3s linear;
       text-transform: uppercase;
       padding: 0;
+      color: #d4b720;
+
     }
+    
     &:hover .highlight {
       text-shadow: 0 0 30px #fff900;
     }

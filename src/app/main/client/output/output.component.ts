@@ -46,8 +46,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private resizeID: any;
   private outputTrimLines = 500;
-  private personUpdate = false;
-  private objectUpdate = false;
+  // private personUpdate = false;
+  // private objectUpdate = false;
 
 
   private _unsubscribeAll: Subject<any>;
