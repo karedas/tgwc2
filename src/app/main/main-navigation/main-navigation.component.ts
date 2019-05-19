@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-navigation.component.scss']
 })
 export class MainNavigationComponent implements OnInit {
-
+  @Input('active') active: string;
   constructor() { }
 
   ngOnInit() {

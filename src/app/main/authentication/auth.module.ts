@@ -11,13 +11,12 @@ import { RegistrationModule } from '../registration/registration.module';
 
 // import social buttons module
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
-import { MainNavigationComponent } from '../main-navigation/main-navigation.component';
+import { MainNavigationModule } from '../main-navigation/main-navigation.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
     QuotesComponent,
-    MainNavigationComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +26,8 @@ import { MainNavigationComponent } from '../main-navigation/main-navigation.comp
     AuthRoutingModule,
     RegistrationModule,
     FlexLayoutModule,
-    JwSocialButtonsModule
+    JwSocialButtonsModule,
+    MainNavigationModule
   ],
   exports: [
     AuthRoutingModule

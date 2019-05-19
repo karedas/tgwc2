@@ -3,12 +3,12 @@
     <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
   </div>
   <div class="tg-mainnav-item">
-    <a [routerLink]="[ '/']" class="active">Entra in gioco</a>
+    <a [routerLink]="['/']" [ngClass]="{'active': active === 'login'}">Entra in gioco</a>
   </div>
   <div class="tg-mainnav-item">
     <a href="http://forum.thegatemud.it">Forum</a>
   </div>
-  <!-- <div class="tg-mainnav-item">
-    <a [routerLink]="[ '/novita']">Novità</a>
-  </div> -->
+  <div class="tg-mainnav-item">
+    <a [routerLink]="['/novita']"  [ngClass]="{'active': active === 'novita'}">Novità</a>
+  </div>
 </div>

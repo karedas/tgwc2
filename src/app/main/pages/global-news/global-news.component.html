@@ -1,0 +1,365 @@
+<tg-main-navigation [active]="'novita'"></tg-main-navigation>
+
+<div class="tg-news">
+  <div class="b-ironlight-mini b-ironlight-thin tg-box tg-shadow ">
+    <div class="tg-news-content tg-shadow-inset">
+      <div class="tg-news-wrap tg-shadow-inset">
+
+        <div class="b-paper tg-box">
+          <div class="tg-news-inset" fxLayout="column">
+            <h1>
+              Novità e Patch Notes
+            </h1>
+            <section>
+              <article>
+                <h2>v2.0.0.9(b)-beta (6 Marzo 2019)</h2>
+                <ul>
+                  <li>
+                    Fix: Bug alla lettura libri che causava un crash della UI quando si provava a digitare nuovamente un
+                    "leggi [oggetto]" con la finestra libro già aperta.
+                  </li>
+                  <li>
+                    Rimosso, dal salvataggio nello storico "comandi digitati", i comandi "direzione" quando questi
+                    venivano cliccati sulla zona della mappa. Rimarranno salvati quando invece vengono digitati
+                    direttamente sulla barra comandi.
+                  </li>
+                </ul>
+
+              </article>
+              <article>
+                <h2>
+                  v2.0.0.8(b)-beta (13 Maggio 2019)
+                </h2>
+                <ul>
+                  <li>
+                    Fix "non lo vedi qui". Dovrebbe essere risolto il problema e con esso aimè l'auto-update del
+                    dettaglio persona/oggetto/contenitore/equip quando uno di questi ultimi veniva aggiornato. Questo
+                    intende che non vederete sparire o apparire automaticamente le aggiunte o le sottrazioni dai
+                    contenitori.
+                    Dovrete dare un nuovo "guarda oggetto" per vedere se è cambiato qualcosa nel mentre (è stato tolto
+                    qualcosa dall'equip, è stato tolto un oggetto dal tavolo etc).
+                  </li>
+                  <li>
+                    Fix: pulsante azione nella tabella mestieri il quale sbagliava oggetto dopo l'ordinamento delle
+                    liste.
+                  </li>
+                  <li>
+                    Fix: Aggiunto autofocus barra comandi sul click delle scorciatoie nel pannello smart.
+                  </li>
+                  <li>
+                    Fix vari bug minori.
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>v2.0.0.7-beta</h2>
+                <h3>Login</h3>
+                <ul>
+                  <li>
+                    Nuovi effetti di caricamento del client pre-start, dissolvenze testi e elementi.
+                  </li>
+                  <li>
+                    Controlli piu' accurati sul login e messaggi di errori user/password errata, inattività del server
+                    etc.
+                  </li>
+                </ul>
+                <h3>Client</h3>
+                <ul>
+                  <li>
+                    Ogni preferenze adottata al client verrà mantenuta salvata (dettagli output aperto si/no, mostrare o
+                    meno la dashboard etc) e sarà così anche al nuovo login.
+                  </li>
+                  <li>
+                    Tutte le finestre inseguono il nuovo motore di rendering e si apriranno piu' fluidamente. Inoltre si
+                    posizioneranno automaticamente sul browser nel caso venga questo ridimensionato (prima sballava un
+                    po' in verticale). Inoltre alcune di queste finestre si adatteranno nel contenuto alla dimensione
+                    del browser come ad esempio il pannello personaggio. Alcune cose vanno rifinite, le vedremo poi.
+                    <br>
+                    Vi dico subito che è stata rimossa la funzionalità "ridimensiona" finestra che purtroppo creava
+                    un'infinità di problemi. Spero di reinserire la funzionalità successivamente appena avrò un attimo
+                    di tempo.
+                  </li>
+                  <li>
+                    Autofocus comandi: Quando digiterete qualsiasi tasto sulla tastiera, eccetto casi eccezionali, il
+                    client
+                    vi autoposizionerà sulla barra comandi.
+                  </li>
+                  <li>
+                    Nuova barra menu' principale: Oltre alla grafica, anche 2 novità interne di cui sotto. A destra
+                    della
+                    barra potrete inoltre trovare un rapido tasto per disattivare o attivare l'audio.
+                  </li>
+                  <li>
+                    Log: Adesso la vostra partita verrà registrata in un apposito pannello separato. Il tasto "SALVA" vi
+                    permetterà di salvare il log su di un file HTML.
+                  </li>
+                  <li>
+                    Pannello Preferenze: Tutte le opzioni e le preferenze del client verranno mostrare in questo
+                    pannello.
+                    Attenzione però, le preferenze sono salvate a livello di browser il che vuol dire che se cambiate
+                    computer non avrete lo stesso risultato. Vi ho inserito due pulsanti: SALVA CONFIGURAIZIONE e CARICA
+                    CONFIGURAZIONE in modo possiate esportare e importare quest'ultima in un secondo momento (o
+                    semplicemente per backup). Piu' avanti aggiungerò altre "feature" personalizzabili.
+                  </li>
+                  <li>
+                    Gestione dimensione FONT (avete fino a 6 livelli di scalabilità, vediamo se possono bastare. Potete
+                    cambiare il valore sia dalle preferenze che dal tasto sulla destra della barra comandi.
+                  </li>
+                  <li>
+                    Scorciatoie: Le scorciatoie sono richiamabili o da barra comandi o aprendo una visuale rapida dal
+                    pulsante sulla destra della barra comandi. Quest'ultimo caso vi permette di cliccare sull'icona o
+                    passarci sopra con il mouse per ricordarvi di cosa si tratta.
+                    L'intero "manager" delle scorciatoie si trova all'interno del pannello preferenze dove potrete
+                    aggiungere una quantità infinita delle stesse e associando ad ognuna un'icona personale (ci sono 120
+                    icone spero possano bastare :-p ). Provatele e ditemi se tutto funziona!
+                  </li>
+                  <li>
+                    Liste filtrabili potenziate: Adesso potrete ordinare le liste (costrusici/forgia etc) e fare una
+                    ricerca
+                    ulteriore attraverso un campo apposito.
+                  </li>
+                  <li>
+                    Sono stati corretti diversi bug come l'ordine dei messaggi e altre cose segnalate. Devo comunque
+                    ricontrollare un po' delle vostre segnalazioni perché alcune possono essere state risolte e altre
+                    invece
+                    sono rimaste.
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>v2.0.0.6(b)-beta (6 Marzo 2019)</h2>
+                <ul>
+                  <li>
+                    Fix ai titoli dei libri e all'header della finestra che si apre (revisione di riferimento
+                    2.0.0.6-beta)
+                  </li>
+                  <li>
+                    Corretto un bug all'effetto neve erroneamente inserito nell'ultima revision.
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>v2.0.0.6-beta (6 Marzo 2019)</h2>
+                <ul>
+                  <li>
+                    Inserite tutte le Immagini Regioni e Territorio. Ogni territorio ha un'immagine propria da ora in
+                    avanti, sciogliete i pegasi e guardatevele tutte! (e grazie ad Algol per avercele fornite).
+                  </li>
+                  <li>
+                    (Novità) Finestre con liste(lezioni, mestieri, etc): Inserita possibilità di ordinare i valori sulla
+                    base della colonna cliccata.
+                  </li>
+                  <li>
+                    (Novità) Aggiunta funzionalità per guardare le direzioni (diagonali comprese) direttamente passando
+                    il mouse sopra la mappa e cliccando in uno dei 8 quadranti + 1 centrale (per il guarda in loco).
+                    le pergamene e i libri riportano ora il loro titolo (by Alendil, etc).
+                    Da adesso potrete vedere e usare i titoli delle pergamene come sorta di "capitoli" dei vostri libri
+                    e trovarveli stampati e visibili all'interno di ogni pagina / pergamena alla quale ne è stato dato
+                    uno (cmd: impugna pergamena; intitola La bella addormentata dell'orco; rilega pergamena libro)
+                    Questa va trattata come una novità in quanto non esisteva questa visualizzazione ne all'interno del
+                    vecchio client java, ne sul wc1. Ovviamente vedrete anche i titoli che già in passato avevate
+                    inserito nelle pergamene.
+                  </li>
+                  <li>
+                    Libri e pergamene mostrano ora il corretto valore della lingua nella quale sono stati scritti" (by
+                    Velika)
+                  </li>
+                  <li>
+                    Il Grado Fedeltà religione viene ora riportatato nella scheda INFO subito sotto RELIGIONE (by
+                    Andrea-dresan)
+                  </li>
+                  <li>
+                    Le Barre skill mostravano un rigo rosso alla fine. (by Sevaleth)
+                  </li>
+                  <li>
+                    La Finestra "Equip" ora mostra gli item indossati su stesse parti del corpo tipo camicie, mutande di
+                    pizzo, reggiseni, al di sotto del corpetto (by Marco - Tabris)
+                  </li>
+                  <li>
+                    L'equip è adesso in ordine anche quando si vede guardando il mob/persona.
+                  <li>
+                    Sistemato un bug che causava molteplici problemi quando si rientrava in gioco usando un "riconnetti"
+                    o
+                    ripartendo dalla home page senza refreshare l'intero client. Riattivato anche "Nuovo accesso" in
+                    relazione a questa risoluzione.
+                  </li>
+                  <li>
+                    Le liste espandibili all'interno dei contenitori adesso funzionano correttamente (by Marco Tabris)
+                  </li>
+                  <li>
+                    [Client] La musica si interrompe in combattimento dopo un primo "suono" (by Shygan anche se non si
+                    capisce come un cinghiale ci capisca di musica).
+                  </li>
+                  <li>
+                    Le finestre generiche (mestieri, lezioni, negozi etc) adesso mostrano il giusto titolo nella testata
+                    della finestra aperta. (administrator);
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>v2.0.0.5-beta (3 Marzo 2019)</h2>
+                <ul>
+                  <li>
+                    Ogni tanto il client lanciava un "guarda" generico o su oggetto senza che fosse richiesto. Da
+                    testare. (nd)
+                  </li>
+                  <li>
+                    Barra scroll inutile in leggi pergamena/libro (by Alendil - Zraesch)
+                  </li>
+                  <li>
+                    [Richiesta] Visualizzazione monete (by Ndik)
+                  </li>
+                  <li>
+                    Formattazione dei testi migliorati nell'output (Oryon)
+                  </li>
+                  <li>
+                    Menu' principale: Aggiunta voce "Segnala un problema" che rimanda alla sezione forum (Oryon)
+                  </li>
+                  <li>
+                    Testo "Esamini il suo equipaggiamento" è assente quando si guarda qualcuno. (by Aelin - Zraesch)
+                  </li>
+                  <li>
+                    BUG non si vede % peso su EQUPAGGIAMENTO ( by Daniele - Luker )
+                  </li>
+                  <li>
+                    [BUG] No titolo descrizione in guarda direzione (by Alendil - Zraesch)
+                  </li>
+                  <li>
+                    Rimosso temporaneamente pulsante "nuovo accessoo" nello smart login per prevenzione errori nella UI.
+                    (Oryon)
+                  </li>
+                  <li>
+                    Le barre Usura ora appaiono per ogni singolo oggetto quando si guarda l'equip di qualcuno dal
+                    "guarda" (Oryon)
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>
+                  v2.0.0.4-beta (2 Marzo 2019)
+                </h2>
+                <ul>
+                  <li>
+                    FONT CLIENT: Rimozione del monospace, Test su open-sans by Google (Oryon)
+                  </li>
+                  <li>
+                    [BUG] Spazio tra i caratteri modificando la descrizione (by Raykar)
+                  </li>
+                  <li>
+                    Immagine mattino errata (by Alendil - Zraesch)
+                  </li>
+                  <li>
+                    Contenitori svuotati col PRENDI non aggiornati in visuale stanza (by Alendil -Zraesch)
+                  </li>
+                  <li>
+                    Ordine lista equip (by Trasfluthrin)
+                  </li>
+                  <li>
+                    Aumentare dimensioni e font lettura libri/pergamene. Ora si possono ridimensionare e portare a full
+                    screen per una lettura migliore.
+                  </li>
+                  <li>
+                    [TYPO] voce "Altezza" in Scheda Personaggio (by Alendil - Zraesch)
+                  </li>
+                  <li>
+                    [BUG] Osservare tasche vuote non da output (by Alendil - Zraesch)
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>
+                  v2.0.0.3-beta
+                </h2>
+                <ul>
+                  <li>
+                    Rimossi i valori delle abilità. Il regalo è finito
+                  </li>
+                  Cambio font in Monospace (fate un test, vediamo se è piu' leggibile!).
+                  <li>
+                    [BUG] Tasti direzionali: conflitto tra input-bar e comandi sulla mappa.
+                  </li>
+                  <li>
+                    Quando l'utente ha il mouse sulla mappa e provava ad andare a nord/sud, si attivava la funzione
+                    HISTORY COMANDI sulla input bar che andava a richiamare i vecchi comandi. La funzione ora si attiva
+                    solo se il mouse è fuori dalla mappa ndr.. (Segnalazione by Annika-Nesya).
+                  </li>
+                  <li>
+                    [BUG] Chiusura porte dalla mappa con testo destro del mouse (By Alendil - Zraesch).
+                  </li>
+                  <li>
+                    [BUG] Colori barre di skill, da rosso a verde (By Magnur - Andre)
+                  </li>
+                  <li>
+                    [BUG] pulsante stato: testo errato "salute" al posto di "fiato" (by Ixidor)
+                  </li>
+                  <li>
+                    [BUG] Caratteri incomprensibili in tutte le schede "lista" (by Ixidor)
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>
+                  v2.0.0.2-beta
+                </h2>
+                <ul>
+                  <li>
+                    0000133: [Client] Le porte non si aprono o chiudono cliccando sull'icona nella mappa.
+                  </li>
+                  <li>
+                    0000132: [Client] Rimosso l'evento "guarda oggetto" se si clicca sull'icona dell'oggetto
+                    espandibile.
+                  </li>
+                  <li>
+                    0000131: [Client] Dopo il logout, al "nuovo accesso" non resetta lo stato del personaggio mostrando.
+                  </li>
+                  <li>
+                    brevemente il precedente (fino ad un nuovo rimappa, movimento etc).
+                  </li>
+                  <li>
+                    0000128: [Client] [BUG] Scelta oggetto in lista oggetti multipli.
+                  </li>
+                  <li>
+                    0000127: [Client] [BUG] Switch automatico a scheda EQUIP & INVENTARIO.
+                  </li>
+                </ul>
+              </article>
+              <article>
+                <h2>
+                  v2.0.0.1-beta
+                </h2>
+                <ul>
+                  <li>
+                    Quando il personaggio non ha un'immagine propria, ora appare un avatar di default TheGate™
+                  </li>
+                  <li>
+                    Per il problema di cui sopra, corretto un difetto grafico nell'avatar all'interno della Scheda
+                    Personaggio.
+                  </li>
+                  <li>
+                    [BUG] Barra Fiato [Segnalazione by Federico-Raziel]
+                  </li>
+                </ul>
+              </article>
+            </section>
+          </div>
+          <div class="tg-border-box">
+            <div class="tg-border tg-border-top"></div>
+            <div class="tg-border tg-border-left"></div>
+            <div class="tg-border tg-border-right"></div>
+            <div class="tg-border tg-border-bottom"></div>
+            <div class="tg-border tg-border-area"></div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
+  </div>
+</div>
