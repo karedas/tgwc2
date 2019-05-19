@@ -3,14 +3,18 @@
 @import 'utils/sprites-mixins';
 
 :host {
-  display: flex;
+  display: block;
+  background: url($imgPath + '/registration/bg.jpg') no-repeat top left;
+  background-size: contain;
+  background-attachment: fixed;
+  background-color: black;
   height: 100%;
 }
 
 .tg-registration {
+  display: flex;
   width: 100%;
-  background: url($imgPath + '/registration/bg.jpg') no-repeat center center;
-  background-size: cover;
+  height: 100%;
 }
 
 .tg-registration-content {
@@ -26,6 +30,6 @@
   text-transform: uppercase;
 
   a {
-    color: $tg-yellow;
+    color: #9b9285;
   }
 }

@@ -87,6 +87,8 @@
       width: auto;
       padding:0 4px;
       color: #54544d;
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 0;
       cursor: pointer;
 
       &:hover,

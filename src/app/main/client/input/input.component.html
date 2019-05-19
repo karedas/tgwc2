@@ -23,6 +23,14 @@
     </ng-container>
     
     <button mat-icon-button
+      tooltip="Metti in pausa" show-delay="500" placement="top"
+      type="button"
+      class="tg-fnt-button"
+      (mousedown)="pauseScrollOutput()">
+      <mat-icon>pause</mat-icon>
+    </button>
+    
+    <button mat-icon-button
       tooltip="Scorciatoie" show-delay="500" placement="top"
       type="button"
       class="tg-fnt-button"

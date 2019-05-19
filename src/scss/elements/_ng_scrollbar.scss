@@ -10,6 +10,10 @@
     --scroll-view-margin: 0;
     --scroll-view-color: transparent;
     min-height: 100%;
+
+    ng-scrollbar-y {
+      margin-right: 4px;
+    }
   }
 
   ng-scrollbar.scrollbar-light {
