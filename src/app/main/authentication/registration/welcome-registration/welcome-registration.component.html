@@ -1,42 +1,55 @@
 <div class="tg-welcomeregistration">
-  <div class="tg-welcomeregistration-content" fxLayout="row">
-    <div fxFlex="1 1 50%" class="tg-newrequest-box">
-      <div class="tg-box-introtext">
-        <h2>
-          Voglio richiedere un codice
-        </h2>
-        <p>Inserisci la tua mail per ricevere un codice e poter creare un nuovo personaggio.</p>
-      </div>
-
-      <form #formEmail="ngForm" class="example-form" (ngSubmit)="formEmail.form.valid && requestCodeViaEmail()"
-        novalidate>
-        <div class="form-input-wrap">
-          <input placeholder="La tua e-mail" type="email" [(ngModel)]="userEmail" name="email" class="form-control"
-            #email="ngModel" [ngClass]="{ 'is-invalid': formEmail.submitted && email.invalid }" required email>
-          <div *ngIf="formEmail.submitted && email.invalid" class="invalid-feedback">
-            <div *ngIf="email.errors.required">Email non corretta</div>
+  <div class="tg-welcomeregistration-content" [ngClass]="{'response': response}" fxLayout="row">
+    <ng-container *ngIf="!emailProcessed; else response">
+      <div fxFlex="1 1 50%" class="tg-welcome-box">
+        <div class="tg-box-introtext">
+          <h2>
+            Voglio richiedere un codice
+          </h2>
+          <p>Inserisci la tua mail per ricevere un codice e poter creare un nuovo personaggio.</p>
+        </div>
+  
+        <form #formEmail="ngForm" class="example-form" (ngSubmit)="formEmail.form.valid && requestCodeViaEmail()"
+          novalidate>
+          <div class="form-input-wrap">
+            <input placeholder="La tua e-mail" type="email" [(ngModel)]="userEmail" name="email" class="form-control"
+              #email="ngModel" [ngClass]="{ 'is-invalid': formEmail.submitted && email.invalid }" autocomplete="off" required email>
+            <div *ngIf="formEmail.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email non corretta</div>
+            </div>
           </div>
-        </div>
-        <button mat-button class="tg-invia-btn" [disableRipple]="true">Invia</button>
-      </form>
-    </div>
-    <div fxFlex="1 1 50%" class="tg-withinvitation-box">
-      <div class="tg-box-introtext">
-        <h2>
-          Ho un codice personaggio
-        </h2>
-        <p>
-          Inserisci il codice ricevuto sulla tua email ed inizia la tua avventura
-        </p>
+          <button mat-button class="tg-invia-btn" [disableRipple]="true">Invia</button>
+        </form>
       </div>
-      <form class="example-form">
-        <div class="form-input-wrap">
-          <input placeholder="Digita qui il tuo codice" type="text" class="form-control">
+      <div fxFlex="1 1 50%" class="tg-welcome-box">
+        <div class="tg-box-introtext">
+          <h2>
+            Ho un codice personaggio
+          </h2>
+          <p>
+            Inserisci il codice ricevuto sulla tua email ed inizia la tua avventura
+          </p>
         </div>
-
-        <button mat-button class="tg-conferma-btn" [disableRipple]="true"
-          (click)="checkCodeActivation()">Conferma</button>
-      </form>
-    </div>
+        <form class="example-form">
+          <div class="form-input-wrap">
+            <input placeholder="Digita qui il tuo codice" type="text" class="form-control">
+          </div>
+  
+          <button mat-button class="tg-conferma-btn" [disableRipple]="true"
+            (click)="checkCodeActivation()">Conferma</button>
+        </form>
+      </div>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #response>
+  <div class="tg-response-box" fxFlex="1 1 100%">
+    <section>
+      <h3>Richiesta elaborata correttamente.</h3>
+      <p>Controlla la casella di posta dell'e-mail inserita per proseguire.</p>
+      <button mat-stroked-button (click)="emailProcessed = false">Va bene</button>
+    </section>
+  </div>
+</ng-template>
+
