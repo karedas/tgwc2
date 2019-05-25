@@ -15,8 +15,8 @@ import { WorkslistComponent } from '../../client/windows/workslist/workslist.com
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LogComponent } from '../../client/windows/log/log.component';
 import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
-import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts-panel.component';
 import { ControlPanelModule } from '../../client/windows/control-panel/control-panel.module';
+import { ShortcutsPanelComponent } from '../../client/windows/shortcuts-panel/shortcuts-panel.component';
 
 @NgModule({
   declarations: [

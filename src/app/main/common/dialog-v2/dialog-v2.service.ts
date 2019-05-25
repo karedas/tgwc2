@@ -14,7 +14,7 @@ import { InputService } from '../../client/input/input.service';
 import { WorkslistComponent } from '../../client/windows/workslist/workslist.component';
 import { GameService } from '../../client/services/game.service';
 import { LogComponent } from '../../client/windows/log/log.component';
-import { ShortcutsPanelComponent } from '../../windows/shortcuts-panel/shortcuts-panel.component';
+import { ShortcutsPanelComponent } from '../../client/windows/shortcuts-panel/shortcuts-panel.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,6 @@ export class DialogV2Service {
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
     private inputService: InputService,
-    private game: GameService,
     public overlay: Overlay) {
     this.render = rendererFactory.createRenderer(null, null);
 

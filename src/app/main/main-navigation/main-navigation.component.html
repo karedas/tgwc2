@@ -11,4 +11,7 @@
   <div class="tg-mainnav-item">
     <a [routerLink]="['/novita']"  [ngClass]="{'active': active === 'novita'}">Novità</a>
   </div>
+  <div class="tg-mainnav-item right" *ngIf="gameTime">
+    In gioco ora è: <p class="tg-yellow">{{gameTime}}</p>
+  </div>
 </div>

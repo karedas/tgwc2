@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import { GameService } from '../../client/services/game.service';
-import { InputService } from '../../client/input/input.service';
+import { InputService } from '../../input/input.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'tg-shortcuts-panel',

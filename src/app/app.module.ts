@@ -24,12 +24,13 @@ import { tgConfig } from './main/client/client-config';
 import { baseReducer, clearState } from './store';
 import { ClientEffects } from './store/effects/client.effects';
 import { DataEffects } from './store/effects/data.effects';
-import { PageNotFoundComponent } from './main/page-not-found/page-not-found.component';
 import { SharedModule } from './shared/shared.module';
 
 import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
 import 'hammerjs';
 import { AngularSplitModule } from 'angular-split';
+import { ApiService } from './services/api.service';
+import { PageNotFoundComponent } from './main/pages/page-not-found/page-not-found.component';
 
 @NgModule({
 
@@ -72,7 +73,7 @@ import { AngularSplitModule } from 'angular-split';
   providers: [
     AppPreloadingStrategy,
     GoogleAnalyticsService,
-
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

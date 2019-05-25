@@ -19,6 +19,12 @@
         display: inline-block;
         line-height: 30px;
         margin-right: 25px;
+
+        &.right {
+            float: right;
+            margin-right: 0;
+            margin-left: 25px;
+        }
     }
     
     .tg-mainnav-item a {
@@ -27,5 +33,10 @@
         &:hover, &.active {
             color: #da962d;
         } 
+    }
+
+    p {
+        display: inline-block;
+        margin: 0;
     }
 }
