@@ -1,0 +1,31 @@
+@import 'variables';
+@import 'sprites';
+@import 'utils/sprites-mixins';
+
+:host {
+  display: block;
+  background: url($imgPath + '/registration/bg.jpg') no-repeat top left;
+  background-size: contain;
+  background-attachment: fixed;
+  background-color: black;
+  height: 100%;
+}
+
+.tg-signup {
+    width: 650px;
+    max-width: 100%;
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.tg-signup-wrap {
+    width: 100%;
+}
+
+.tg-signup-content {
+    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+    z-index: 2;
+    position: relative;
+    color: #9b9285;
+  }
+  

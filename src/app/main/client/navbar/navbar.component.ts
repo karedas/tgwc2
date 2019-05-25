@@ -8,6 +8,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AudioService } from '../audio/audio.service';
+import { ApiService } from 'src/app/services/api.service';
 
 // import { faFont } from '@fortawesome/free-solid-svg-icons';
 // import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
@@ -37,7 +38,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private dialogV2Service: DialogV2Service,
     private render: Renderer2,
     private audioService: AudioService,
-    private _configService: ConfigService
+    private _configService: ConfigService,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -58,7 +59,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isMatMenu2Open = false;
     }
   }
-
 
   menuLeave(trigger, button) {
     setTimeout(() => {
@@ -155,7 +155,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 
   }
-
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
