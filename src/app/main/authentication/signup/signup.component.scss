@@ -12,20 +12,100 @@
 }
 
 .tg-signup {
-    width: 650px;
-    max-width: 100%;
-    padding-top: 30px;
-    margin: 0 auto;
+  margin: 0 auto;
+  width: 500px;
+  max-width: 100%;
+  font-size: 1.2em;
 }
 
 .tg-signup-wrap {
     width: 100%;
-}
-
-.tg-signup-content {
-    background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
+  }
+  
+  .tg-signup-content {
     z-index: 2;
     position: relative;
     color: #9b9285;
-  }
+    overflow: hidden;
+    padding: 2em 1em;
+}
   
+h1 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 3em;
+  margin-top: 0;
+  line-height: 1;
+}
+
+p {
+  text-align: justify;
+}
+
+.tg-logo-composit {
+  width: 195px;
+  height: 148px;
+  position: relative;
+  box-sizing: content-box;
+  visibility: visible;
+  background: url($imgPath + '/login/logo_hd.png') no-repeat;
+  background-size: contain;
+  z-index: 3;
+  margin: 0 auto;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: url($imgPath + '/login/logo_light_triangle.png') no-repeat;
+    width: 98px;
+    height: 91px;
+    left: 70px;
+    top: 58px;
+    opacity: 0;
+  }
+}
+
+form {
+
+  .form-field-group {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .tg-input {
+    color: #e4dcd2;
+    width: 100%;
+    background-color: #181411;
+    padding: .5em;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: border .4s ease-out;
+
+    &:hover, &:focus {
+      border: 1px solid rgba(255, 255, 255, 0.50);
+    }
+  }
+
+  .conditions {
+    overflow: auto;
+    padding: .5em;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 9px;
+    max-height: 100px;
+    margin: 1em 0;
+    border: 1px solid rgba(255,255,255, 0.50);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .tg-submit {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: $tg-yellow;
+    padding: .5em;
+  }
+}
