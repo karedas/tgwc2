@@ -1,0 +1,15 @@
+@import 'variables';
+
+.main-content {
+    display: table;
+    margin: 0 auto;
+    max-width: 1410px;
+    box-sizing: border-box;
+    padding-right: 13px;
+    background: #0a0706 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y right top;
+
+    .main-content-wrap {
+        background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
+        padding-left: 13px;
+    }
+}

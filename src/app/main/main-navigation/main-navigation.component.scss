@@ -1,42 +1,52 @@
+@import 'variables';
+
 .tg-mainnav {
-    width: 100%;
-    height: 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgb(11, 8, 7);
-    padding: 0 1em;
-    box-sizing: border-box;
-    text-transform: uppercase;
-    box-shadow: 0 2px 5px #0c0807;
-    border-bottom: 1px solid #ffffff1a;
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgb(11, 8, 7) url($imgPath + '/navbar/bg.jpg') repeat-x;
+  padding: 0 1em;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px #0c0807;
+  border-bottom: 1px solid #ffffff1a;
 
-    .tg-mainnav-item {
-        height: 30px;
-        font-size: 10px;
-        display: inline-block;
-        line-height: 30px;
-        margin-right: 25px;
-
-        &.right {
-            float: right;
-            margin-right: 0;
-            margin-left: 25px;
-        }
-    }
-    
-    .tg-mainnav-item a {
-        text-decoration: none;
-        color: #bdb3a3;
-        &:hover, &.active {
-            color: #da962d;
-        } 
-    }
-
-    p {
-        display: inline-block;
-        margin: 0;
-    }
+  p {
+    display: inline-block;
+    margin: 0;
+  }
 }
+
+.tg-mainnav-wrap {
+    margin: 0 auto;
+    max-width: 1410px;
+  }
+
+  .tg-mainnav-item {
+    height: 40px;
+    font-size: 10px;
+    display: inline-block;
+    line-height: 40px;
+    margin-right: 25px;
+
+    &.right {
+      float: right;
+      margin-right: 0;
+      margin-left: 25px;
+    }
+  }
+
+  .tg-mainnav-item a {
+    text-decoration: none;
+    color: #bdb3a3;
+
+    &:hover,
+    &.active {
+      color: rgb(189, 179, 163);
+      text-shadow: 0 0 8px white;
+    }
+  }
