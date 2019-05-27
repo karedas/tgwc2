@@ -5,8 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map, filter, take } from 'rxjs/operators';
-import { InputService } from '../../input/input.service';
-import { IEditor } from 'src/app/models/data/editor.model';
+import { InputService } from '../../components/input/input.service';
+import { IEditor } from 'src/app/main/client/models/data/editor.model';
 import { MatDialogRef } from '@angular/material';
 
 @Component({

@@ -3,10 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/store/state/data.state';
 import { getEquip, getInventory } from 'src/app/store/selectors';
-import { equip_positions_by_name, pos_to_order } from 'src/app/main/common/constants';
+import { equip_positions_by_name, pos_to_order } from 'src/app/main/client/common/constants';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { InputService } from '../../../input/input.service';
+import { InputService } from '../../../components/input/input.service';
 
 @Component({
   selector: 'tg-equip-inventory',

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import { InputService } from '../../input/input.service';
+import { InputService } from '../../components/input/input.service';
 import { GameService } from '../../services/game.service';
 
 @Component({

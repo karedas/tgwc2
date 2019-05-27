@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Platform } from '@angular/cdk/platform';
 
-import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
+import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
 import { MatDialog } from '@angular/material';
 import { DOCUMENT } from '@angular/common';
 

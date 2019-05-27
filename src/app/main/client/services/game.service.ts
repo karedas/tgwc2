@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { switchMap } from 'rxjs/operators';
 
-import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/common/constants';
+import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/client/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material';

@@ -1,14 +1,14 @@
-import { Map } from 'src/app/models/data/map.model';
-import { IHero } from 'src/app/models/data/hero.model';
-import { Room } from 'src/app/models/data/room.model';
-import { IEditor } from 'src/app/models/data/editor.model';
-import { IObjPerson } from 'src/app/models/data/objpers.model';
-import { IGenericTable } from 'src/app/models/data/generictable.model';
-import { IWorks } from 'src/app/models/data/workslist.model';
-import { IRegion } from 'src/app/models/data/region.model';
-import { IBook } from 'src/app/models/data/book.model';
-import { IDateTime } from 'src/app/models/data/dateTime.model';
-import { IGenericPage } from 'src/app/models/data/genericpage.model';
+import { Map } from 'src/app/main/client/models/data/map.model';
+import { IHero } from 'src/app/main/client/models/data/hero.model';
+import { Room } from 'src/app/main/client/models/data/room.model';
+import { IEditor } from 'src/app/main/client/models/data/editor.model';
+import { IObjPerson } from 'src/app/main/client/models/data/objpers.model';
+import { IGenericTable } from 'src/app/main/client/models/data/generictable.model';
+import { IWorks } from 'src/app/main/client/models/data/workslist.model';
+import { IRegion } from 'src/app/main/client/models/data/region.model';
+import { IBook } from 'src/app/main/client/models/data/book.model';
+import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
+import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 
 export interface DataState {
     date?: IDateTime;
