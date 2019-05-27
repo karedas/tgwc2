@@ -33,6 +33,7 @@
 h1 {
   text-align: center;
   font-weight: normal;
+  color: #c7bcad;
   font-size: 3em;
   margin-top: 0;
   line-height: 1;
@@ -70,11 +71,13 @@ form {
 
   .form-field-group {
     width: 100%;
-    margin-bottom: 1em;
+    position: relative;
+    margin-bottom: .5em;
   }
 
   .tg-input {
     color: #e4dcd2;
+    margin-bottom: 1rem;
     width: 100%;
     background-color: #181411;
     padding: .5em;
@@ -108,4 +111,46 @@ form {
     background-color: $tg-yellow;
     padding: .5em;
   }
+
+  .mat-hint {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 80%;
+  }
+
+  .invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    position: absolute;
+    bottom: 0;
+    color: #dc3545;
+  }
+
+  &.ng-invalid .invalid-feedback {
+    display: block;
+  }
+}
+
+.registration-response {
+  text-align: center;
+  border: 1px solid rgba(255,255,255, 0.20);
+  padding: 1em;
+
+  h2 {
+    font-weight: normal;
+    color: #c7bcad;
+  }
+}
+
+.api-error {
+  border: 1px solid #dc3545;
+  color: white;
+  font-weight: 500;
+  background: #360e10;
+  margin: 1em 0;
+  padding: 1em;
 }

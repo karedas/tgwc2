@@ -5,7 +5,7 @@ import { State } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as GameActions from '../store/actions/client.action';
 
-import { IHero } from '../models/data/hero.model';
+import { IHero } from '../main/client/models/data/hero.model';
 import { Observable, Subject } from 'rxjs';
 import { LogService } from './log.service';
 import { TGConfig } from '../main/client/client-config';

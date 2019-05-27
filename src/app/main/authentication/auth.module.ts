@@ -12,12 +12,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { MainNavigationModule } from '../main-navigation/main-navigation.module';
 import { SignupComponent } from './signup/signup.component';
+import { VerifyRegistrationComponent } from './verify-registration/verify-registration.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignupComponent,
     QuotesComponent,
+    VerifyRegistrationComponent,
   ],
   imports: [
     CommonModule,

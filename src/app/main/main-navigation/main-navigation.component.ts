@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -11,16 +10,9 @@ export class MainNavigationComponent implements OnInit {
   gameTime: string;
 
   constructor(
-    private apiService: ApiService
   ) { }
 
   ngOnInit() {
-    this.getGameTime();
   }
 
-
-  getGameTime() {
-    this.apiService.getGameTime()
-    .subscribe((data) => this.gameTime = data.time );
-  }
 }

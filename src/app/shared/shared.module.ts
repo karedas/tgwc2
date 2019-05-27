@@ -29,17 +29,17 @@ import { MatSelectModule } from '@angular/material/select';
 // My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 import { PipesModule } from '../pipes/pipes.module';
-import { IconsComponent } from '../main/common/icons/icons.component';
-import { HstatComponent } from '../main/common/hstat/hstat.component';
+import { IconsComponent } from '../main/client/common/icons/icons.component';
+import { HstatComponent } from '../main/client/common/hstat/hstat.component';
 
 // My Services
-import { AudioService } from '../main/client/audio/audio.service';
+import { AudioService } from '../main/client/components/audio/audio.service';
 import { ConfigService } from '../services/config.service';
-import { DialogV2Service } from '../main/common/dialog-v2/dialog-v2.service';
+import { DialogV2Service } from '../main/client/common/dialog-v2/dialog-v2.service';
 import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { LoginService } from '../main/authentication/services/login.service';
 import { GameService } from '../main/client/services/game.service';
-import { InputService } from '../main/client/input/input.service';
+import { InputService } from '../main/client/components/input/input.service';
 import { LogService } from '../services/log.service';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 

@@ -4,9 +4,9 @@ import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatSliderChange, MAT_DIALOG_DATA } from '@angular/material';
-import { AudioService } from '../../audio/audio.service';
+import { AudioService } from '../../components/audio/audio.service';
 import { FileSaverService } from 'ngx-filesaver';
-import { font_size_options } from 'src/app/main/common/constants';
+import { font_size_options } from 'src/app/main/client/common/constants';
 import { GameService } from '../../services/game.service';
 
 @Component({

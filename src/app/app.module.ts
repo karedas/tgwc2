@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import 'hammerjs';
 
@@ -26,11 +26,11 @@ import { ClientEffects } from './store/effects/client.effects';
 import { DataEffects } from './store/effects/data.effects';
 import { SharedModule } from './shared/shared.module';
 
-import { DialogV2Module } from './main/common/dialog-v2/dialog-v2.module';
+import { DialogV2Module } from './main/client/common/dialog-v2/dialog-v2.module';
 import 'hammerjs';
 import { AngularSplitModule } from 'angular-split';
-import { ApiService } from './services/api.service';
 import { PageNotFoundComponent } from './main/pages/page-not-found/page-not-found.component';
+import { MyInterceptor } from './shared/interceptor/http.interceptor';
 
 @NgModule({
 
@@ -73,7 +73,11 @@ import { PageNotFoundComponent } from './main/pages/page-not-found/page-not-foun
   providers: [
     AppPreloadingStrategy,
     GoogleAnalyticsService,
-    ApiService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MyInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

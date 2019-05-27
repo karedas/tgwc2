@@ -4,7 +4,7 @@ import { DataEvenType, HeroAction } from '../actions/data.action';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { DialogV2Service } from 'src/app/main/common/dialog-v2/dialog-v2.service';
+import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 
 export interface PayloadActionData {
   type: string;

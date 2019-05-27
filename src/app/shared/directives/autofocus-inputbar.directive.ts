@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
-import { InputService } from 'src/app/main/client/input/input.service';
+import { InputService } from 'src/app/main/client/components/input/input.service';
 import { MatDialog } from '@angular/material';
 
 @Directive({
