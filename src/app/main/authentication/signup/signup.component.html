@@ -3,7 +3,6 @@
   <div class="tg-signup-wrap">
     <div class="tg-signup-content">
       <div class="tg-logo-composit"></div>
-      <ng-container *ngIf="!formOk; else emailSended">
         <h1>Crea un Account</h1>
         <p>Crea un account <b>TheGateMud</b> per poter accedere alla tua area privata, creare il tuo personaggio e
           usufruire di tutti gli strumenti messi a disposizione per te. </p>
@@ -12,7 +11,7 @@
         
         <form name="signup" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
           <div class="api-error" *ngIf="apiError">
-            {{apiError.error}}
+            {{ apiError }}
           </div>
           <div class="form-field-group">
             <input class="tg-input" placeholder="Nome utente" type="text" formControlName="username">
@@ -61,23 +60,14 @@
               consectetur non feugiat quis, egestas nec purus. Fusce pretium ex ac velit dignissim semper. Integer sodales
               elit ligula, et mollis urna semper viverra.</p>
           </div>
-          <!-- <div class="form-element"> -->
-          <!-- <mat-checkbox formControlName="validate" value="1">Accetto le condizioni</mat-checkbox> -->
-          <!-- </div> -->
+          <div class="form-element form-field-group">
+            <mat-checkbox formControlName="conditions" value="1">Accetto le condizioni</mat-checkbox>
+            <div *ngIf="submitted && f.conditions.errors" class="invalid-feedback">
+                <div *ngIf="f.conditions.errors.required">Devi accettare le condizioni sul trattamento dati.</div>
+            </div>
+          </div>
           <button type="submit" class="tg-submit">Crea un Account</button>
         </form>
-      </ng-container>
-      <ng-template #emailSended>
-        <div class="registration-response">
-          <h2>Richiesta registrazione inviata</h2>
-          <p>
-            Ti è stata inviata una mail all'indirizzo da te inserito con un link per confermare l'attivazione del tuo account.<br>
-          </p>
-          <p>Una volta confermato il tuo account potrai accedere con le tue credenziali. <br><br>
-          <b>Lo staff di The Gate Mud.</b></p>
-        </div>
-      </ng-template>
-      
     </div>
   </div>
 </div>

@@ -1,22 +1,31 @@
-<div class="tg-mainnav">
+<div class="tg-mainnav" [ngClass]="{'hamburger-open': hamburgerStatus}">
   <div class="tg-mainnav-wrap">
-    <div class="tg-mainnav-item">
-      <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
+    <div class="hamburger-item" (click)="onHamburgerClick()" >
+      <mat-icon>menu</mat-icon>
     </div>
-    <div class="tg-mainnav-item">
-      <a [routerLink]="['/']" [ngClass]="{'active': active === 'login'}">Entra in gioco</a>
-    </div>
-    <div class="tg-mainnav-item">
-      <a href="http://forum.thegatemud.it">Forum</a>
-    </div>
-    <div class="tg-mainnav-item">
-      <a [routerLink]="['/novita']" [ngClass]="{'active': active === 'novita'}">Novità</a>
-    </div>
-    <div class="tg-mainnav-item right">
-      <a [routerLink]="['/login']" class="tg-yellow">Login</a>
-    </div>
-    <div class="tg-mainnav-item right">
-      <a [routerLink]="['/auth/signup']" [ngClass]="{'active': active === 'registrati'}">Registrati</a>
+    <div class="m-full" (click)="hamburgerStatus === true && onHamburgerClick()">
+      <div class="m-left">
+        <div class="tg-mainnav-item">
+          <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
+        </div>
+        <div class="tg-mainnav-item">
+          <a [routerLink]="['/']" [ngClass]="{'active': active === 'login'}">Entra in gioco</a>
+        </div>
+        <div class="tg-mainnav-item">
+          <a href="http://forum.thegatemud.it">Forum</a>
+        </div>
+        <div class="tg-mainnav-item">
+          <a [routerLink]="['/novita']" [ngClass]="{'active': active === 'novita'}">Novità</a>
+        </div>
+      </div>
+      <div class="m-right">
+        <div class="tg-mainnav-item">
+          <a [routerLink]="['/login']" class="tg-yellow">Login</a>
+        </div>
+        <div class="tg-mainnav-item">
+          <a [routerLink]="['/auth/signup']" [ngClass]="{'active': active === 'registrati'}">Registrati</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

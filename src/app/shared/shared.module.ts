@@ -107,24 +107,17 @@ import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.dire
     MatRippleModule,
     MatRadioModule
   ],
+  providers: [
+    GameService,
+    ConfigService,
+    CookieService,
+    SplashScreenService,
+    LoginService,
+    InputService,
+    AudioService,
+    DialogV2Service,
+    LogService,
+    InputService,
+  ]
 })
-export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [
-        GameService,
-        ConfigService,
-        CookieService,
-        SplashScreenService,
-        LoginService,
-        InputService,
-        AudioService,
-        DialogV2Service,
-        LogService,
-        InputService,
-      ]
-    };
-  }
-
-}
+export class SharedModule {}

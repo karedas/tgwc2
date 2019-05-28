@@ -6,13 +6,19 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./main-navigation.component.scss']
 })
 export class MainNavigationComponent implements OnInit {
+
   @Input('active') active: string;
-  gameTime: string;
+  public hamburgerStatus: boolean = false;
+
 
   constructor(
   ) { }
 
   ngOnInit() {
+  }
+
+  onHamburgerClick() {
+    this.hamburgerStatus = !this.hamburgerStatus;
   }
 
 }

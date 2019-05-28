@@ -1,4 +1,6 @@
 @import 'variables';
+// @import '~@angular/flex-layout/mq';
+@import 'utils/fix';
 
 .tg-mainnav {
   width: 100%;
@@ -8,12 +10,11 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgb(11, 8, 7) url($imgPath + '/navbar/bg.jpg') repeat-x;
-  padding: 0 1em;
   box-sizing: border-box;
   text-transform: uppercase;
   box-shadow: 0 2px 5px #0c0807;
-  border-bottom: 1px solid #ffffff1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  background: #0f0b08 url($imgPath + '/navbar/bg.jpg') repeat-x bottom;
 
   p {
     display: inline-block;
@@ -22,31 +23,108 @@
 }
 
 .tg-mainnav-wrap {
-    margin: 0 auto;
-    max-width: 1410px;
-  }
+  margin: 0 auto;
+  max-width: 1410px;
+}
+
+.m-left {
+  float: left;
+  padding-left: 2em;
 
   .tg-mainnav-item {
-    height: 40px;
-    font-size: 10px;
-    display: inline-block;
-    line-height: 40px;
     margin-right: 25px;
-
-    &.right {
-      float: right;
-      margin-right: 0;
-      margin-left: 25px;
-    }
   }
+}
 
-  .tg-mainnav-item a {
-    text-decoration: none;
+.m-right {
+  float: right;
+  padding-right: 2em;
+
+  .tg-mainnav-item {
+    margin-left: 25px;
+  }
+}
+
+
+.tg-mainnav-item {
+  height: 40px;
+  font-size: 10px;
+  display: inline-block;
+  line-height: 40px;
+}
+
+.tg-mainnav-item a {
+  text-decoration: none;
+  color: #bdb3a3;
+
+  &:hover,
+  &.active {
+    color: rgb(189, 179, 163);
+    text-shadow: 0 0 8px white;
+  }
+}
+
+
+.hamburger-item {
+  float: left;
+  margin-left: 1em;
+  height: 40px;
+  font-size: 10px;
+  display: inline-block;
+  line-height: 40px;
+  cursor: pointer;
+  transition: all .3s ease-out;
+
+  .mat-icon {
+    margin-top: 8px;
     color: #bdb3a3;
-
-    &:hover,
-    &.active {
-      color: rgb(189, 179, 163);
-      text-shadow: 0 0 8px white;
-    }
   }
+}
+
+.hamburger-open {
+  .hamburger-item {
+    transform: rotate(360deg);
+  }
+
+  .m-full {
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 100vh;
+  }
+} 
+
+
+
+@include layout-bp(lt-sm) {
+
+  .m-left {
+    width: 240px;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    position: absolute;
+    background: #0f0b08;
+    height: 100vh;
+    border-right: 1px solid #797576;
+    box-shadow: 5px 0px 16px black;
+    transition: all .2s ease-in-out;
+    padding-left: 2em;
+    padding-top: 40px;
+    box-sizing: border-box;
+  }
+
+  .m-left .tg-mainnav-item {
+    display: block;
+  }
+
+  .hamburger-open .m-left {
+    left: 0; 
+  }
+
+}
+
+@include layout-bp(gt-xs) {
+  .hamburger-item {
+    display: none;
+  }
+}

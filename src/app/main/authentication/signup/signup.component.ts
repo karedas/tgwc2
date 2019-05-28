@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { CustomValidators } from '../../common/validators/custom-validators';
+import { ApiResponse } from 'src/app/core/models/api-response.model';
+import { map } from 'rxjs/operators';
+import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
+import { environment } from 'src/environments/environment.prod';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tg-signup',
@@ -14,10 +17,9 @@ export class SignupComponent implements OnInit {
 
   public signupForm: FormGroup;
   public submitted: boolean = false;
-  public formOk: boolean = false;
   public apiError: string;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.signupForm = this.createSignupForm();
@@ -59,7 +61,6 @@ export class SignupComponent implements OnInit {
           Validators.required,
           Validators.minLength(5),
         ])],
-        // email is required and must be a valid email email
         email: ['lisandr84@gmail.com', Validators.compose([
           Validators.email,
           Validators.required])
@@ -68,15 +69,12 @@ export class SignupComponent implements OnInit {
         password: ['testest', Validators.compose([
           Validators.minLength(5),
           Validators.required,
-          // CustomValidators.patternValidator(/\d/, { hasNumber: true }),
-          // CustomValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
-          // CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true })
-          ])
+        ])
         ],
-        confirmPassword: ['testest', Validators.compose([Validators.required])]
+        confirmPassword: ['testest', Validators.compose([Validators.required])],
+        conditions: [1, Validators.required]
       },
       {
-        // check whether our password and confirm password match
         validator: [CustomValidators.passwordMatchValidator, CustomValidators.emailMatchValidator]
       });
   }
@@ -84,10 +82,12 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    console.log(this.signupForm.invalid);
+
     if (this.signupForm.invalid) {
       return;
     }
+
+    const url = environment.apiAddress + '/auth/registration';
 
     let httpBody = {
       username: this.signupForm.get('username').value,
@@ -95,11 +95,18 @@ export class SignupComponent implements OnInit {
       email: this.signupForm.get('email').value
     }
 
-    this.http.post('http://localhost:9595/auth/registration', httpBody)
-      .subscribe(() => {
-        this.formOk = true;
+    this.http.post(url, httpBody)
+      .subscribe((apiResponse: ApiResponse) => {
+        if(!apiResponse.success) {
+          this.apiError = apiResponse.data;
+        }
+        else {
+          this.apiError = '';
+          this.router.navigate(['/auth/signup-confirm']);
+        }
       }, (error) => {
-        this.apiError = error;
-      })
+        if (error instanceof NotAuthorizeError) {
+        }
+      });
   }
 }

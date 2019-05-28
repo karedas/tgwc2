@@ -3,27 +3,30 @@ import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyRegistrationComponent } from './verify-registration/verify-registration.component';
+import { SignupConfirmComponent } from './signup-confirm/signup-confirm.component';
+import { VcodeGuard } from './services/vcode.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
     children: [
       {
-        path: 'registration/verify',
-        component: VerifyRegistrationComponent
+        path: 'verify/:token',
+        component: VerifyRegistrationComponent,
+        canActivate: [VcodeGuard]
       },
       {
         path: 'signup',
         component: SignupComponent
       },
       {
+        path: 'signup-confirm',
+        component: SignupConfirmComponent
+      },
+      {
         path: 'login',
         component: LoginComponent
       },
-      // {
-      //   path: 'registrazione',
-      //   loadChildren: './registration/registration.module#RegistrationModule',
-      // },
       {
         path: '**',
         redirectTo: 'login'

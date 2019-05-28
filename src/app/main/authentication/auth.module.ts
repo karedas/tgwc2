@@ -13,6 +13,7 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { MainNavigationModule } from '../main-navigation/main-navigation.module';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyRegistrationComponent } from './verify-registration/verify-registration.component';
+import { SignupConfirmComponent } from './signup-confirm/signup-confirm.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { VerifyRegistrationComponent } from './verify-registration/verify-regist
     SignupComponent,
     QuotesComponent,
     VerifyRegistrationComponent,
+    SignupConfirmComponent,
   ],
   imports: [
     CommonModule,
