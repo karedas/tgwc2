@@ -18,14 +18,27 @@
           <a [routerLink]="['/novita']" [ngClass]="{'active': active === 'novita'}">Novità</a>
         </div>
       </div>
-      <div class="m-right">
-        <div class="tg-mainnav-item">
-          <a [routerLink]="['/login']" class="tg-yellow">Login</a>
+      <ng-container *ngIf="!loggedIn; else userLoggedIn">
+        <div class="m-right">
+          <div class="tg-mainnav-item">
+            <a [routerLink]="['/login']" class="tg-yellow">Login</a>
+          </div>
+          <div class="tg-mainnav-item">
+            <a [routerLink]="['/auth/signup']" [ngClass]="{'active': active === 'registrati'}">Registrati</a>
+          </div>
         </div>
-        <div class="tg-mainnav-item">
-          <a [routerLink]="['/auth/signup']" [ngClass]="{'active': active === 'registrati'}">Registrati</a>
+      </ng-container>
+      
+      <ng-template #userLoggedIn>
+        <div class="m-right user-side">
+          <div class="tg-mainnav-item">
+            <mat-icon>account_box</mat-icon>
+            lisandr84 - [Vai al profilo] <a [routerLink]="['/']" class="tg-btn-logout">Esci</a> 
+          </div>
         </div>
-      </div>
+      </ng-template>
+      
+
     </div>
   </div>
 </div>

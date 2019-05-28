@@ -30,6 +30,7 @@ import 'hammerjs';
 import { AngularSplitModule } from 'angular-split';
 import { PageNotFoundComponent } from './main/pages/page-not-found/page-not-found.component';
 import { CoreModule } from './core/core.module';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
 
@@ -52,6 +53,14 @@ import { CoreModule } from './core/core.module';
       maxAge: 25,
       logOnly: environment.production,
     }),
+
+    JwtModule.forRoot({
+			config: {
+				tokenGetter: () => {
+					return localStorage.getItem('token');
+				}
+			}
+		}),
 
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,

@@ -8,7 +8,8 @@ export class AuthService {
   constructor(private jwtHelper: JwtHelperService) { }
 
   isLoggedIn(): boolean {
-    return !this.jwtHelper.isTokenExpired();
+    const tokenLife = !this.jwtHelper.isTokenExpired();
+    return tokenLife;
   }
 
   hasPermission(permission: string) {

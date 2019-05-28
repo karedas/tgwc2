@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { map } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'tg-signup',
@@ -19,7 +19,11 @@ export class SignupComponent implements OnInit {
   public submitted: boolean = false;
   public apiError: string;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private meta: Meta,
+    private http: HttpClient, 
+    private fb: FormBuilder, 
+    private router: Router) { }
 
   ngOnInit() {
     this.signupForm = this.createSignupForm();
@@ -54,6 +58,7 @@ export class SignupComponent implements OnInit {
         validator: [CustomValidators.passwordMatchValidator, CustomValidators.emailMatchValidator]
       });
   }
+
 
   onSubmit() {
     this.submitted = true;

@@ -29,7 +29,7 @@
 
 .m-left {
   float: left;
-  padding-left: 2em;
+  padding-left: 1em;
 
   .tg-mainnav-item {
     margin-right: 25px;
@@ -38,7 +38,7 @@
 
 .m-right {
   float: right;
-  padding-right: 2em;
+  padding-right: 1em;
 
   .tg-mainnav-item {
     margin-left: 25px;
@@ -75,10 +75,6 @@
   cursor: pointer;
   transition: all .3s ease-out;
 
-  .mat-icon {
-    margin-top: 8px;
-    color: #bdb3a3;
-  }
 }
 
 .hamburger-open {
@@ -91,6 +87,22 @@
     height: 100vh;
   }
 } 
+
+
+.mat-icon {
+  color: #bdb3a3;
+  vertical-align: middle;
+}
+
+.tg-btn-logout {
+  background-color: #e62b0d;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: white;
+  border: 0;
+  font-weight: bold;
+  font-size: 11px;
+}
 
 
 
