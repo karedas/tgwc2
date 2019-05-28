@@ -10,7 +10,7 @@ export class MainNavigationComponent implements OnInit {
 
   @Input('active') active: string;
 
-  public loggedIn: boolean = true;
+  public loggedIn: boolean = false;
   public hamburgerStatus: boolean = false;
 
 
@@ -19,7 +19,7 @@ export class MainNavigationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if( this.authService.isLoggedIn ) {
+    if( this.authService.isLoggedIn () ) {
       this.loggedIn = true;
     }
   }
