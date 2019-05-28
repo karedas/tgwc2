@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
           ])
         ],
         confirmPassword: [null, Validators.compose([Validators.required])],
-        conditions: [null, Validators.required]
+        conditions: [false, Validators.required]
       },
       {
         // check whether our password and confirm password match

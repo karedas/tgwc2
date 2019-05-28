@@ -3,7 +3,7 @@
 @import 'utils/sprites-mixins';
 
 :host {
-  display: block;
+  display: flex;
   background: url($imgPath + '/registration/bg.jpg') no-repeat top left;
   background-size: contain;
   background-attachment: fixed;
@@ -12,10 +12,10 @@
 }
 
 .tg-signup {
-  margin: 0 auto;
   width: 500px;
   max-width: 100%;
   padding-top: 10px;
+  margin: auto;
   font-size: 1.2em;
 }
 
@@ -29,6 +29,10 @@
   color: #9b9285;
   overflow: hidden;
   padding: 2em 1em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #0e0a07;
 }
 
 h2 {
