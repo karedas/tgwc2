@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiAddress: 'http://localhost:9595',
   serverstatAddress: 'http://play.thegatemud.it/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
   socket : {
