@@ -29,52 +29,28 @@ export class SignupComponent implements OnInit {
   get f() { return this.signupForm.controls; }
 
   createSignupForm(): FormGroup {
-    // return this.fb.group(
-    //   {
-    //     username: [null, Validators.compose([
-    //       Validators.required,
-    //       Validators.minLength(5),
-    //     ])],
-    //     // email is required and must be a valid email email
-    //     email: [null, Validators.compose([
-    //       Validators.email,
-    //       Validators.required])
-    //     ],
-    //     confirmEmail: [null, Validators.compose([Validators.required])],
-    //     password: [null, Validators.compose([
-    //       Validators.minLength(5),
-    //       Validators.required,
-    //       // CustomValidators.patternValidator(/\d/, { hasNumber: true }),
-    //       // CustomValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
-    //       // CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true })
-    //       ])
-    //     ],
-    //     confirmPassword: [null, Validators.compose([Validators.required])]
-    //   },
-    //   {
-    //     // check whether our password and confirm password match
-    //     validator: [CustomValidators.passwordMatchValidator, CustomValidators.emailMatchValidator]
-    //   });
     return this.fb.group(
       {
-        username: ['andrea', Validators.compose([
+        username: [null, Validators.compose([
           Validators.required,
           Validators.minLength(5),
         ])],
-        email: ['lisandr84@gmail.com', Validators.compose([
+        // email is required and must be a valid email email
+        email: [null, Validators.compose([
           Validators.email,
           Validators.required])
         ],
-        confirmEmail: ['lisandr84@gmail.com', Validators.compose([Validators.required])],
-        password: ['testest', Validators.compose([
+        confirmEmail: [null, Validators.compose([Validators.required])],
+        password: [null, Validators.compose([
           Validators.minLength(5),
           Validators.required,
-        ])
+          ])
         ],
-        confirmPassword: ['testest', Validators.compose([Validators.required])],
-        conditions: [1, Validators.required]
+        confirmPassword: [null, Validators.compose([Validators.required])],
+        conditions: [null, Validators.required]
       },
       {
+        // check whether our password and confirm password match
         validator: [CustomValidators.passwordMatchValidator, CustomValidators.emailMatchValidator]
       });
   }
