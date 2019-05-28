@@ -4,13 +4,11 @@
 
 export const environment = {
   production: false,
-  apiAddress: 'http://localhost:9595',
+  apiAddress: 'http://51.38.185.84:9595',
   serverstatAddress: 'http://play.thegatemud.it/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
   socket : {
     url : 'http://51.38.185.84:3335',
-    // url : 'http://play.thegatemud.it:3335',
-    // url : 'http://localhost:3335',
     options : {
       'reconnection': true,
       'autoConnect:': true,
