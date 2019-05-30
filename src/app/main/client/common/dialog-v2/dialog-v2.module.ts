@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CookieLawComponent } from '../../components/windows/cookie-law/cookie-law.component';
-import { MatDialogModule, MatSliderModule, MatPaginatorIntl, MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSliderModule } from '@angular/material/slider';
 import { NewsComponent } from '../../components/windows/news/news.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginSmartComponent } from '../../components/windows/login-smart/login-smart.component';

@@ -16,13 +16,13 @@ import { Meta } from '@angular/platform-browser';
 export class SignupComponent implements OnInit {
 
   public signupForm: FormGroup;
-  public submitted: boolean = false;
+  public submitted = false;
   public apiError: string;
 
   constructor(
     private meta: Meta,
-    private http: HttpClient, 
-    private fb: FormBuilder, 
+    private http: HttpClient,
+    private fb: FormBuilder,
     private router: Router) { }
 
   ngOnInit() {
@@ -70,21 +70,20 @@ export class SignupComponent implements OnInit {
 
     const url = environment.apiAddress + '/auth/registration';
 
-    let httpBody = {
+    const httpBody = {
       username: this.signupForm.get('username').value,
       password: this.signupForm.get('password').value,
       email: this.signupForm.get('email').value
-    }
+    };
 
     this.http.post(url, httpBody)
       .subscribe((apiResponse: ApiResponse) => {
-        if(!apiResponse.success) {
-          this.apiError = apiResponse.data;
-        }
-        else {
-          this.apiError = '';
-          this.router.navigate(['/auth/signup-confirm']);
-        }
+        // if (!apiResponse.success) {
+        //   this.apiError = apiResponse.data;
+        // } else {
+        //   this.apiError = '';
+        //   this.router.navigate(['/auth/signup-confirm']);
+        // }
       }, (error) => {
         if (error instanceof NotAuthorizeError) {
         }

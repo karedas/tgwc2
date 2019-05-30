@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Renderer2, OnDestroy } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { MatMenuTrigger } from '@angular/material';
+import { MatMenuTrigger } from '@angular/material/menu';
 import gitInfo from 'src/git-version.json';
 import { TGConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';

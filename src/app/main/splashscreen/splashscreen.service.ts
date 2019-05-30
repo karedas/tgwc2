@@ -32,9 +32,7 @@ export class SplashScreenService {
         if ((event.url.startsWith('/auth/registrazione')) && !this.assetsDone.includes('registration')) {
           this.currentUrl = 'registration';
           this.startPreload();
-        }
-
-        else if (!this.assetsDone.includes('default')) {
+        } else if (!this.assetsDone.includes('default')) {
 
           this.currentUrl = 'default';
           this.startPreload();
@@ -48,18 +46,16 @@ export class SplashScreenService {
     let assetsList: any;
 
     this.percentage$.next(0);
-    
+
     if (this.currentUrl === 'registration') {
       assetsList = AssetsListRegistration;
-    }
-    
-    else {
+    } else {
       assetsList = AssetsList;
     }
 
 
     this.status$.next(false);
-    
+
     this.totalAssets = assetsList.length;
 
     assetsList.forEach((urlimg: string, i: any) => {

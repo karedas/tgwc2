@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './login/login.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyRegistrationComponent } from './verify-registration/verify-registration.component';
 import { SignupConfirmComponent } from './signup-confirm/signup-confirm.component';
 import { VcodeGuard } from './services/vcode.guard';
+// import { LoginClientComponent } from './login-client/login.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'login',
         component: LoginComponent
       },
+      // {
+      //   path: 'access',
+      //   component: LoginClientComponent
+      // },
       {
         path: '**',
         redirectTo: 'login'

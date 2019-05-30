@@ -5,7 +5,9 @@ import { getGenericTable } from 'src/app/store/selectors';
 import { DataState } from 'src/app/store/state/data.state';
 import { IGenericTable } from 'src/app/main/client/models/data/generictable.model';
 import { takeUntil } from 'rxjs/operators';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'tg-generic-table',
@@ -15,8 +17,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 export class GenericTableComponent implements  OnInit, OnDestroy {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   dataTable$: Observable<any>;
   pageSizeBase = 5;

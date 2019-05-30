@@ -7,7 +7,7 @@ import { getEditor, getHero } from 'src/app/store/selectors';
 import { takeUntil, map, filter, take } from 'rxjs/operators';
 import { InputService } from '../../input/input.service';
 import { IEditor } from 'src/app/main/client/models/data/editor.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'tg-editor',

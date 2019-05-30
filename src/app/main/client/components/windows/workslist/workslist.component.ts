@@ -6,7 +6,9 @@ import { getWorksList } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/main/client/models/data/workslist.model';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 export interface WorksListElement {
@@ -25,8 +27,8 @@ export interface WorksListElement {
 })
 export class WorkslistComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   pageSizeBase = 10;
   dataSource:  MatTableDataSource<any>;

@@ -1,4 +1,4 @@
-import { Deserializable } from "./deserializable.model";
+import { Deserializable } from './deserializable.model';
 
 export class User implements Deserializable<User> {
   private _id: number;

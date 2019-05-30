@@ -17,8 +17,8 @@ import { MapService } from './services/map.service';
 
 export class MapComponent implements OnDestroy, OnInit {
 
-  @ViewChild('map') map: ElementRef;
-  @ViewChild('snow') snow: ElementRef;
+  @ViewChild('map', {static: true}) map: ElementRef;
+  @ViewChild('snow', {static: true}) snow: ElementRef;
 
   public mapSize: any;
   public showSnow: boolean;

@@ -1,0 +1,96 @@
+  <div class="tg-loginpanel" fxFill fxLayout="column wrap">
+    <!-- Login Panel -->
+    <div fxLayout="column" fxFlex="1 1 0%" fxLayoutAlign="center center">
+
+      <div class="tg-login-container">
+        <div class="tg-logo-composit">
+        </div>
+        <div class="tg-loginform">
+          <div class="tg-loginform-wrap">
+            <div class="tg-loginform-content">
+              <h2>Gioco di Ruolo Fantasy Online
+                <br> Accedi
+                <span>gratis</span> al mondo di Ikhari!
+              </h2>
+              <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off" novalidate>
+                <div fxLayout="row wrap">
+                  <div fxFlex="100">
+                    <input class="form-control" formControlName="username" type="text" autocomplete="off" placeholder="Username"
+                      required autofocus [ngClass]="{'is-invalid': (!username.valid && username.touched) || loginFailed}" />
+                  </div>
+                </div>
+                <div fxLayout="row wrap">
+                  <div fxFlex="100">
+                    <input class="form-control" formControlName="password" type="password" autocomplete="off" placeholder="Password"
+                      required [ngClass]="{'is-invalid': (!password.valid && password.touched) || loginFailed }" />
+                  </div>
+                </div>
+                <button type="submit" class="tg-loginbtn" value="accedi" [disabled]="!loginForm.valid" >Accedi</button>
+              </form>
+              <!-- <a class="tg-newcharacter" matRipple  [routerLink]="['/auth/registrazione']">
+                <span> oppure </span>
+                <span class="highlight" #linkNewPg>Crea un nuovo personaggio</span>
+              </a> -->
+            </div>
+          </div>
+        </div>
+        <div class="tg-loginstatus" [innerHtml]="loginReplayMessage"></div>
+        <tg-quotes></tg-quotes>
+      </div>
+      <!-- glow Effect ### //-->
+      <div class="glow_container">
+        <div class="glow_wamp glow_box"></div>
+        <div class="glow_box _spectral">
+          <div class="glow_stream _type_1">
+            <div class="glow_slide">
+              <div class="shake">
+                <div class="glow_item _type_1"></div>
+                <div class="glow_item _type_2"></div>
+                <div class="glow_item _type_3"></div>
+                <div class="glow_item _type_4"></div>
+              </div>
+            </div>
+            <div class="glow_slide _delay_1">
+              <div class="shake _delay_1">
+                <div class="glow_item _type_1"></div>
+                <div class="glow_item _type_2"></div>
+                <div class="glow_item _type_3"></div>
+                <div class="glow_item _type_4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright and Usefull Links -->
+    <div fxLayout="column" fxFlex="0 0 auto" class="tg-login-footer">
+      <div fxLayout="row">
+        <div fxFlex="100">
+          <div class="tg-serverstatus">
+            <span class="serverstatus--txt" [ngClass]="{'server_on': serverStatusMessage }">
+              Server {{ serverStatusMessage === true ? 'online' : 'offline'}}
+            </span> 
+            <ng-container *ngIf="serverStatusMessage">
+              - Utenti ora online: <span class="serverstatus--onlineuser">{{serverStat?.players.length || '0'}}</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlex="33.33" fxLayoutAlign="center flex-end">
+          <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a>&nbsp;|&nbsp;
+          <a href="http://forum.thegatemud.it/" target="_blank">Forum</a>&nbsp;
+        </div>
+        <div fxFlex="33.33" fxLayoutAlign="center flex-end">
+          <span class="tg-version-name">Webclient {{ gitVersion }}
+          </span>
+        </div>
+        <div fxFlex="33.33" fxLayoutAlign="center flex-end">
+          &copy; 2013-2019 The Gate MUD
+          <!-- &nbsp;|&nbsp; -->
+          <!-- <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a> -->
+        </div>
+      </div>
+    </div>
+  </div>

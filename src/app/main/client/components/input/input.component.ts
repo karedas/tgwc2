@@ -20,7 +20,7 @@ import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 export class InputComponent implements OnInit, OnDestroy {
 
-  @ViewChild('inputCommand') ic: ElementRef;
+  @ViewChild('inputCommand', {static: true}) ic: ElementRef;
 
   tgConfig: any;
 

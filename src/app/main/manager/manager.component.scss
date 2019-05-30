@@ -1,0 +1,66 @@
+mat-sidenav {
+  color: white;
+  padding: 10px 0;
+  font-size: 12px;
+
+  nav {
+    button.menu-item {
+      padding: 3px 32px 3px 24px;
+      font-weight: 700;
+      line-height: 16px;
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+      position: relative;
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: 0 0;
+      border: none;
+      outline: none;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0 0 5px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      font-size: 13px;
+      line-height: 16px;
+      margin: 0;
+      padding: 5px 16px 5px 32px;
+    }
+
+    li button {
+      font-weight: normal;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    mat-icon {
+      margin-right: 8px;
+      vertical-align: middle;
+      font-size: 18px;
+    }
+  }
+
+
+
+
+  .menu-item {
+
+  
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  
+  .sidenav-container {
+    padding: 20px 0;
+  }
+
+}

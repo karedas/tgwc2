@@ -1,7 +1,6 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as _ from 'lodash';
-import { SRCSET_ATTRS } from '@angular/core/src/sanitization/html_sanitizer';
 
 export const TG_CONFIG = new InjectionToken('tgCustomConfig');
 

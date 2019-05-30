@@ -1,5 +1,5 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { NewsComponent } from '../../components/windows/news/news.component';
 import { EditorComponent } from '../../components/windows/editor/editor.component';
 import { ControlPanelComponent } from '../../components/windows/control-panel/control-panel.component';
@@ -9,12 +9,11 @@ import { CommandsListComponent } from '../../components/windows/commands-list/co
 import { BookComponent } from '../../components/windows/book/book.component';
 import { GenericTableComponent } from '../../components/windows/generic-table/generic-table.component';
 import { Overlay } from '@angular/cdk/overlay';
-import { CookieLawComponent } from '../../components/windows/cookie-law/cookie-law.component';
 import { InputService } from '../../components/input/input.service';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
-import { GameService } from '../../services/game.service';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
+// import { CookieLawComponent } from '../../components/windows/cookie-law/cookie-law.component';
 
 @Injectable({
   providedIn: 'root'
@@ -132,22 +131,22 @@ export class DialogV2Service {
     }
   }
 
-  openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
+  // openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
 
-    const dialogID = 'cookielaw';
-    const config = new MatDialogConfig();
+  //   const dialogID = 'cookielaw';
+  //   const config = new MatDialogConfig();
 
-    config.id = dialogID;
-    config.disableClose = true;
-    config.autoFocus = false;
-    config.width = '450px';
-    config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+  //   config.id = dialogID;
+  //   config.disableClose = true;
+  //   config.autoFocus = false;
+  //   config.width = '450px';
+  //   config.scrollStrategy = this.overlay.scrollStrategies.reposition();
 
-    const dialogRef = this.dialog.open(CookieLawComponent, config);
+  //   const dialogRef = this.dialog.open(CookieLawComponent, config);
 
-    return dialogRef;
+  //   return dialogRef;
 
-  }
+  // }
 
   openNews(fromGame: boolean): MatDialogRef<NewsComponent, MatDialogConfig> {
 

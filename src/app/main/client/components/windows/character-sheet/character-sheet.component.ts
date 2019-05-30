@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { getHero } from 'src/app/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'tg-character-sheet',

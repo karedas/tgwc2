@@ -3,14 +3,14 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ClientState } from 'src/app/store/state/client.state';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/main/authentication/services/login.service';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { ResetAction } from 'src/app/store/actions/client.action';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 
 @Component({
   selector: 'tg-login-smart',
@@ -37,7 +37,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     private store: Store<ClientState>,
     private router: Router,
     private dialogRef: MatDialogRef<LoginSmartComponent>,
-    private loginService: LoginService) {
+    private loginClientService: LoginClientService) {
 
     this.loginFormErrors = {
       username: {},
@@ -54,7 +54,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginService._loginReplayMessage
+    this.loginClientService._loginReplayMessage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((err: string) => {
         if (err !== undefined) {
@@ -79,7 +79,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
 
     const values = this.smartLoginForm.value;
 
-    this.loginSubscription = this.loginService.login(values)
+    this.loginSubscription = this.loginClientService.login(values)
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((loginSuccess: boolean) => {
         if (loginSuccess === true) {
@@ -96,7 +96,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
 
 
   onReconnect() {
-    this.loginService.reconnect();
+    this.loginClientService.reconnect();
     // TODO: Wait OK from Server
     this.dialogRef.close();
   }

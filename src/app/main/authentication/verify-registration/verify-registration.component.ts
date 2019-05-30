@@ -10,7 +10,7 @@ import { ApiResponse } from 'src/app/core/models/api-response.model';
   templateUrl: './verify-registration.component.html',
   styleUrls: ['./verify-registration.component.scss']
 })
-export class VerifyRegistrationComponent implements OnInit, OnDestroy{
+export class VerifyRegistrationComponent implements OnInit, OnDestroy {
 
   public response: any;
   private sub: any;
@@ -30,8 +30,8 @@ export class VerifyRegistrationComponent implements OnInit, OnDestroy{
     const url = environment.apiAddress + '/auth/verify/' + code;
     this.http.get(url)
     .subscribe((apiResponse: ApiResponse) => {
-    
-        this.response = apiResponse
+
+        this.response = apiResponse;
 
     }, (error) => {
       if (error instanceof NotAuthorizeError) {

@@ -1,6 +1,6 @@
 import { Directive, HostListener } from '@angular/core';
 import { InputService } from 'src/app/main/client/components/input/input.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Directive({
   selector: '[tgAutofocusInputbar]'

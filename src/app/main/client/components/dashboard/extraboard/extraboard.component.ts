@@ -10,7 +10,7 @@ import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.
 })
 export class ExtraboardComponent {
 
-  @ViewChild('#shortcutOpen') shortcutLink: ElementRef;
+  @ViewChild('#shortcutOpen', {static: true}) shortcutLink: ElementRef;
 
   constructor(private game: GameService, private dialogService: DialogV2Service) { }
 

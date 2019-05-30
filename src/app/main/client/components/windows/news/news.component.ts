@@ -3,7 +3,8 @@ import { GameService } from 'src/app/main/client/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';
 import { ConfigService } from 'src/app/services/config.service';
-import { MatDialogRef, MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatDialogRef } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { TGConfig } from '../../../client-config';
 import { Subject } from 'rxjs';
@@ -16,7 +17,7 @@ import { Subject } from 'rxjs';
 export class NewsComponent  implements OnInit, OnDestroy {
 
 
-  @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
+  @ViewChild(NgScrollbar, {static: true}) textAreaScrollbar: NgScrollbar;
 
   checked = '';
 

@@ -12,7 +12,7 @@ import { FileSaverService } from 'ngx-filesaver';
 })
 export class LogComponent implements OnInit, OnDestroy {
 
-  @ViewChild('logContentArea') logContentArea: ElementRef;
+  @ViewChild('logContentArea', {static: true}) logContentArea: ElementRef;
 
   logStorage = [];
   dateTime: string;
