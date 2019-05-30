@@ -8,6 +8,7 @@
   background-color: black;
   height: 100%;
   min-height: 400px;
+  box-sizing: border-box;
   padding-top: 40px;
 }
 
@@ -22,13 +23,13 @@
 
     > div {
       padding-top: 32px;
-      padding-bottom: 24px;
     }
 
     h1 {
       font-weight: 300;
       font-size: 24px;
       letter-spacing: -.5px;
+      margin-top: 0;
     }
   }
 
@@ -88,6 +89,10 @@
       color: #fff;
       cursor: pointer;
     }
+
+    .tg-submit-primary:disabled {
+      opacity: .6;
+    }
   }
 
 
@@ -104,3 +109,13 @@
     }
   }
 }
+
+.api-error {
+  border: 1px solid #dc3545;
+  color: white;
+  font-weight: 500;
+  background: #360e10;
+  margin: 1em 0 0;
+  padding: 1em;
+}
+

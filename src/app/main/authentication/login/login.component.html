@@ -12,13 +12,12 @@
           <a class="label-link" [routerLink]="[ '/auth/password-reset']">Password dimenticata?</a>
       </label>
       <input type="password" formControlName="password" class="input-block form-control">
-      <input type="submit" value="Accedi" name="submit" class="tg-submit-primary">
+      <input type="submit" value="Accedi" name="submit" class="tg-submit-primary" [disabled]="onProcess">
+      <div class="api-error" *ngIf="loginFailedError">{{loginFailedError}}</div>
     </div>
 
     <div class="tg-auth-create">
       Nuovo di The Gate? <a [routerLink]="[ '/auth/registration' ]" class="tg-brown">Crea un account</a>
     </div>
-
-
   </form>
 </div>

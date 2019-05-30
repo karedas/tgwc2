@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/services/api.service';
 import { User } from 'src/app/core/models/user.model';
 
@@ -21,10 +21,11 @@ export class LoginService extends ApiService {
   }
 
   public login(data: { email: string, password: string }): Observable<boolean> {
+
     const url = '/auth/login';
+
     return this.post(url, data).pipe(
       map((apiResponse: ApiResponse) => {
-
         if (apiResponse.httpCode !== 200) {
           return false;
         }
@@ -38,7 +39,6 @@ export class LoginService extends ApiService {
           this.authService.saveAuthData(responseData.token, user);
           return true;
         }
-
         return false;
       })
     );
