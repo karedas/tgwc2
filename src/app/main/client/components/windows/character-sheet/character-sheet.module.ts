@@ -4,7 +4,7 @@ import { InfoComponent } from './info/info.component';
 import { SkillsComponent } from './skills/skills.component';
 import { EquipInventoryComponent } from './equip-inventory/equip-inventory.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({

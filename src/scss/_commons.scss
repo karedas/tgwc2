@@ -13,3 +13,14 @@
         padding-left: 13px;
     }
 }
+
+
+.tg-base-logo {
+    background-image: url($imgPath + "/logo/triang_int.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+  }

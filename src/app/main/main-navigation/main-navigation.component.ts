@@ -10,8 +10,9 @@ export class MainNavigationComponent implements OnInit {
 
   @Input('active') active: string;
 
-  public loggedIn: boolean = false;
-  public hamburgerStatus: boolean = false;
+  public loggedIn = false;
+  public dataUser: any;
+  public hamburgerStatus = false;
 
 
   constructor(
@@ -19,13 +20,20 @@ export class MainNavigationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if( this.authService.isLoggedIn () ) {
+    if ( this.authService.isLoggedIn () ) {
       this.loggedIn = true;
+      //get data user
+      this.dataUser = this.authService.currentUser;
+      console.log(this.dataUser);
     }
   }
 
   onHamburgerClick() {
     this.hamburgerStatus = !this.hamburgerStatus;
+  }
+  
+
+  userOnLogout() {
   }
 
 }

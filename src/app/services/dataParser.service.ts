@@ -218,8 +218,8 @@ export class DataParser {
     });
 
     // Map data
-    data = data.replace(/&!map\{[\s\S]*?\}!/gm, (map) => {
-      const map_parse = JSON.parse(map.slice(5, -1));
+    data = data.replace(/&!map\{[\s\S]*?\}!/gm, (m) => {
+      const map_parse = JSON.parse(m.slice(5, -1));
       this.store.dispatch(new DataActions.MapAction(map_parse));
       return '';
     });

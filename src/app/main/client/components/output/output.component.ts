@@ -9,10 +9,10 @@ import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/ap
 import { GameService } from 'src/app/main/client/services/game.service';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { SplitComponent } from 'angular-split';
-import { LoginService } from '../../../authentication/services/login.service';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 
 
 @Component({
@@ -25,9 +25,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   tgConfig: TGConfig;
 
-  @ViewChild('scrollBar') scrollBar: NgScrollbar;
-  @ViewChild('mainOutputArea') mainOutputArea: ElementRef;
-  @ViewChild('splitArea') splitArea: SplitComponent;
+  @ViewChild('scrollBar', {static: true}) scrollBar: NgScrollbar;
+  @ViewChild('mainOutputArea', {static: true}) mainOutputArea: ElementRef;
+  @ViewChild('splitArea', {static: true}) splitArea: SplitComponent;
 
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
@@ -54,7 +54,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private loginService: LoginService,
+    private loginClientService: LoginClientService,
     private game: GameService,
     private _configService: ConfigService) {
 
@@ -79,7 +79,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     /* Check login status and if is disconnect cleaning the output messages */
-    this.loginService.isLoggedIn
+    this.loginClientService.isLoggedIn
       .pipe(
         takeUntil(this._unsubscribeAll))
       .subscribe((status) => {

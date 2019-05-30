@@ -53,10 +53,10 @@ export class RegistrationService implements Resolve<any> {
     this.socketService.emit('newcregistrationchar');
   }
 
-  private setHandleRegistrationData(data?: string) {
+  private setHandleRegistrationData(d?: string) {
     this.resetHandler();
     this.socketService.addListener(socketEvent.REGISTRATION,
-      (data: any) => this.handleRegistrationData(data));
+      (d: any) => this.handleRegistrationData(d));
   }
 
   private resetHandler() {

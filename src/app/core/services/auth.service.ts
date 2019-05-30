@@ -39,7 +39,7 @@ export class AuthService {
     if ( !this.isLoggedIn() ) {
       return null;
     }
-    
+
     return new User().deserialize(JSON.parse(localStorage.getItem('user')));
   }
 

@@ -11,7 +11,7 @@ import { NgScrollbar } from 'ngx-scrollbar';
 })
 export class CommandsListComponent implements OnInit {
   @Input('data') data: any;
-  @ViewChild(NgScrollbar) scrollbar: NgScrollbar;
+  @ViewChild(NgScrollbar, {static: true}) scrollbar: NgScrollbar;
 
 
   commands$: Observable<any>;

@@ -6,14 +6,14 @@ import {
   RouterStateSnapshot, Router, Route
 } from '@angular/router';
 
-import { LoginService } from './login.service';
+import { LoginClientService } from './login-client.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
-    private loginService: LoginService,
+    private loginClientService: LoginClientService,
     private router: Router
     ) { }
 
@@ -32,12 +32,12 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    if (this.loginService.isLoggedinValue) {
+    if (this.loginClientService.isLoggedinValue) {
       return true;
     }
 
     // Store the attempted URL for redirecting
-    this.loginService.redirectUrl = url;
+    this.loginClientService.redirectUrl = url;
 
     // Navigate to the login page with extras
     this.router.navigate(['/auth/login']);

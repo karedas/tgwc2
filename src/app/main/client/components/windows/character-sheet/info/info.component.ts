@@ -16,7 +16,7 @@ import { map, takeUntil, take } from 'rxjs/operators';
 })
 export class InfoComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild(NgScrollbar) textAreaScrollbar: NgScrollbar;
+  @ViewChild(NgScrollbar, {static: true}) textAreaScrollbar: NgScrollbar;
 
   heroInfo$: Observable<IHero>;
   description = '';

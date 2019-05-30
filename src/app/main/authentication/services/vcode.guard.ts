@@ -7,12 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class VcodeGuard implements CanActivate {
   constructor(private router: Router) {}
-  
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const params = route.params['token'];
-    if(params) {
+    if (params) {
       return true;
-    }
-    else false;
+    } else { false; }
   }
 }

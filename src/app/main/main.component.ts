@@ -3,9 +3,11 @@ import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Platform } from '@angular/cdk/platform';
 
-import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
-import { MatDialog } from '@angular/material';
+// import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
+// import { MatDialog } from '@angular/material/dialog';
 import { DOCUMENT } from '@angular/common';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 
 @Component({
   selector: 'tg-main',
@@ -27,7 +29,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private platform: Platform,
     public dialog: MatDialog,
 
-    private dialogV2Service: DialogV2Service,
+    // private dialogV2Service: DialogV2Service,
 
 
     @Inject(DOCUMENT) private document: any
@@ -46,14 +48,30 @@ export class MainComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       if (!this.cookieService.check('tgCookieLaw')) {
-        this.dialogV2Service.openCookieLaw()
-          .afterClosed().subscribe(() =>
-            this.start()
-          );
+        this.openCookieLaw().afterClosed()
+          .subscribe(() => {
+            this.start();
+          })
       } else {
         this.start();
       }
     });
+  }
+
+
+  openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
+
+    const dialogID = 'cookielaw';
+    const config = new MatDialogConfig();
+
+    config.id = dialogID;
+    config.disableClose = true;
+    config.autoFocus = false;
+    config.width = '450px';
+    // config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    const dialogRef = this.dialog.open(CookieLawComponent, config);
+
+    return dialogRef;
   }
 
    onCookieAccepted(status: boolean) {

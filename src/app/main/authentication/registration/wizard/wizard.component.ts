@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatStepper } from '@angular/material';
+import { MatStepper } from '@angular/material/stepper';
 import { StepFirstComponent } from './step-first/step-first.component';
 import { StepThirdComponent } from './step-third/step-third.component';
 import { StepSecondComponent } from './step-second/step-second.component';
@@ -22,13 +22,13 @@ import { Subject } from 'rxjs';
 
 export class WizardComponent implements OnInit, OnDestroy {
 
-  @ViewChild('registrationStepper') stepper: MatStepper;
-  @ViewChild(StepFirstComponent) stepFirstComponent: StepFirstComponent;
-  @ViewChild(StepSecondComponent) stepSecondComponent: StepSecondComponent;
-  @ViewChild(StepThirdComponent) stepThirdComponent: StepThirdComponent;
-  @ViewChild(StepFourComponent) stepFourComponent: StepFourComponent;
-  @ViewChild(StepFiveComponent) stepFiveComponent: StepFiveComponent;
-  @ViewChild(StepSixComponent) stepSixComponent: StepSixComponent;
+  @ViewChild('registrationStepper', {static: true}) stepper: MatStepper;
+  @ViewChild(StepFirstComponent, {static: true}) stepFirstComponent: StepFirstComponent;
+  @ViewChild(StepSecondComponent, {static: true}) stepSecondComponent: StepSecondComponent;
+  @ViewChild(StepThirdComponent, {static: true}) stepThirdComponent: StepThirdComponent;
+  @ViewChild(StepFourComponent, {static: true}) stepFourComponent: StepFourComponent;
+  @ViewChild(StepFiveComponent, {static: true}) stepFiveComponent: StepFiveComponent;
+  @ViewChild(StepSixComponent, {static: true}) stepSixComponent: StepSixComponent;
 
   data: any;
 

@@ -2,9 +2,9 @@ import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../services/registration.service';
 import { NgForm } from '@angular/forms';
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/mergeMap";
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/mergeMap';
 
 import { Subject } from 'rxjs';
 
@@ -13,12 +13,12 @@ import { Subject } from 'rxjs';
   templateUrl: './welcome-registration.component.html',
   styleUrls: ['./welcome-registration.component.scss']
 })
-export class WelcomeRegistrationComponent implements OnDestroy{
+export class WelcomeRegistrationComponent implements OnDestroy {
 
-  @ViewChild('formEmail') formEmail: NgForm;
+  @ViewChild('formEmail', { static: true}) formEmail: NgForm;
 
   userEmail: string;
-  emailProcessed: boolean = false;
+  emailProcessed = false;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -32,12 +32,10 @@ export class WelcomeRegistrationComponent implements OnDestroy{
     this.router.navigate(['/auth/registrazione/wizard']);
   }
 
-  // Send Email request to Server and wait response 
+  // Send Email request to Server and wait response
   requestCodeViaEmail() {
     this.emailProcessed = true;
     this.formEmail.resetForm();
-    // this.registrationService.requestNewInvitationCode(this.userEmail);
-    // return;
   }
 
   ngOnDestroy(): void {

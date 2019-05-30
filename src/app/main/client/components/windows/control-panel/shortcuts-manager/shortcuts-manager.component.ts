@@ -13,7 +13,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class ShortcutsManagerComponent implements OnInit {
 
-  @ViewChild('f') myNgForm;
+  @ViewChild('f', {static: true}) myNgForm;
 
   totalIcons: any;
 
