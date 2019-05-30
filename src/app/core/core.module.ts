@@ -5,7 +5,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthJwtInterceptor } from './interceptor/http.interceptor';
 import { SharedModule } from '../shared/shared.module';
 import { LoginService } from '../main/authentication/services/login.service';
-// import { ManagerComponent } from '../main/manager/manager.component';
 
 @NgModule({
   imports: [

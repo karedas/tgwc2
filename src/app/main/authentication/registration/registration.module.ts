@@ -30,7 +30,6 @@ import { MainNavigationModule } from '../../main-navigation/main-navigation.modu
 
 export const routes: Routes = [
 
-
   {
     path: '',
     component: RegistrationComponent,
@@ -44,7 +43,6 @@ export const routes: Routes = [
         component: SummaryRegistrationComponent,
         resolve:
           { reg: RegistrationService }
-
       },
       {
         path: 'wizard',
