@@ -23,9 +23,9 @@ export class ApiService {
   public post(url: string, postData: any): Observable<any> {
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
-
     return this.http.post(endpoint, JSON.stringify(postData), {headers}).pipe(
       map( response => {
+
         return new ApiResponse(response);
       }),
       catchError(this.handleError.bind(this))
@@ -56,15 +56,9 @@ export class ApiService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<AppError> {
-    // this.showLoading(false);
-    // this.snackBar.open(error.message, 'Undo', {
-    //   duration: 5000
-    // });
-
     if (error.status === 401 ) {
       return throwError(new NotAuthorizeError(error));
     }
-
     return throwError(new AppError(error));
   }
 }

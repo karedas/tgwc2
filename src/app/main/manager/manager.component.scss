@@ -51,16 +51,15 @@ mat-sidenav {
 
 
   .menu-item {
-
-  
     span {
       display: inline-block;
       vertical-align: middle;
     }
   }
   
-  .sidenav-container {
-    padding: 20px 0;
-  }
+  
+}
 
+.sidenav-container {
+  padding: 0 20px;
 }

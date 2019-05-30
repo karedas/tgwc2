@@ -7,7 +7,18 @@
             <mat-icon>dashboard</mat-icon>
             <span>Dashboard</span>
           </button>
-
+          <ul>
+            <li>
+              <button class="menu-item" [routerLink]="['profilo']">
+                <span>Profilo</span>
+              </button>
+            </li>
+            <li>
+              <button class="menu-item" [routerLink]="['personaggi']">
+                <span>I miei personaggi</span>
+              </button>
+            </li>
+          </ul>
         </nav>
         <nav>
           <button class="menu-item">
@@ -31,7 +42,9 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <div class="sidenav-container">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

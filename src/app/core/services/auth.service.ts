@@ -16,16 +16,17 @@ export class AuthService {
     if (this.isLoggedIn()) {
       return false;
     }
-
     return this.currentUser.hasPermission(permission);
   }
 
   isEnableTo(permission: string) {
+
     if (this.isLoggedIn()) {
       return false;
     }
 
     let found = false;
+
     for (let i = 0; i < this.currentUser.permissions.length && !found; i++) {
       if (this.currentUser.permissions[i].indexOf(permission) > -1) {
         found = true;
@@ -33,6 +34,7 @@ export class AuthService {
     }
 
     return found;
+
   }
 
   get currentUser() {
@@ -56,4 +58,5 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
+  
 }
