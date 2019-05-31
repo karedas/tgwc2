@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+
 
 @Component({
   selector: 'tg-manager',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manager.component.scss']
 })
 export class ManagerComponent implements OnInit {
+  
+  isAdmin: boolean = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
+  
+  isEnableFor(level: string): boolean {
+    return this.authService.isEnableTo(level);
+  }
+
+  
 
 }

@@ -1,26 +1,25 @@
-<div style="height: 100%">
-  <mat-sidenav-container fxFlexFill class="example-container">
+
+<div fxLayout fxFlex="1 1 100%">
+
+  <mat-sidenav-container fxFlexFill>
     <mat-sidenav #sidenav fxLayout="column" opened="true" mode="side">
       <div fxLayout="column">
         <nav>
-          <button class="menu-item" [routerLink]="['/manager/dashboard']">
+          <button class="menu-item" [routerLink]="['/manager/dashboard']" [ngClass]="{'active': true}">
             <mat-icon>dashboard</mat-icon>
             <span>Dashboard</span>
           </button>
-          <ul>
-            <li>
-              <button class="menu-item" [routerLink]="['profilo']">
-                <span>Profilo</span>
-              </button>
-            </li>
-            <li>
-              <button class="menu-item" [routerLink]="['personaggi']">
-                <span>I miei personaggi</span>
-              </button>
-            </li>
-          </ul>
+          <button class="menu-item" [routerLink]="['/manager/dashboard']">
+            <mat-icon>dashboard</mat-icon>
+            <span>Profilo</span>
+          </button>
+          <button class="menu-item" [routerLink]="['/manager/dashboard']">
+            <mat-icon>dashboard</mat-icon>
+            <span>I miei personaggi</span>
+          </button>
         </nav>
-        <nav>
+        <mat-divider></mat-divider>
+        <nav *ngIf="isEnableFor('administrator')">
           <button class="menu-item">
             <mat-icon>ballot</mat-icon>
             <span>Amministrazione</span>

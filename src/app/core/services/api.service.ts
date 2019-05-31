@@ -21,18 +21,20 @@ export class ApiService {
 
   
   public post(url: string, postData: any): Observable<any> {
+    
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
     return this.http.post(endpoint, JSON.stringify(postData), {headers}).pipe(
       map( response => {
-
         return new ApiResponse(response);
       }),
       catchError(this.handleError.bind(this))
     );
+    
   }
 
   public get(url: string): Observable<any> {
+
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
 

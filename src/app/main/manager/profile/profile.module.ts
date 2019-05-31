@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
+import { AuthGuard } from 'src/app/core/services/auth.guard';
+import { ProfileService } from './profile.service';
 
 const routes: Routes = [
   {
     path: '**',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      profile: ProfileService
+    }
   }
 ];
 
@@ -16,6 +21,9 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    ProfileService
   ]
 })
 export class ProfileModule { }

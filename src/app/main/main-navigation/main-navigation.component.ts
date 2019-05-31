@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
+import { LoginService } from '../authentication/services/login.service';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -16,15 +18,25 @@ export class MainNavigationComponent implements OnInit {
 
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private loginService: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+
+    this.router.events
+      .subscribe(() => this.checkLoggedinUser());
+  }
+
+  checkLoggedinUser() {
     if ( this.authService.isLoggedIn () ) {
       this.loggedIn = true;
-      //get data user
       this.dataUser = this.authService.currentUser;
-      console.log(this.dataUser);
+    }
+    else {
+      this.loggedIn = false;
+      this.dataUser = null;
     }
   }
 
@@ -34,6 +46,7 @@ export class MainNavigationComponent implements OnInit {
   
 
   userOnLogout() {
+    this.loginService.logout();
   }
 
 }
