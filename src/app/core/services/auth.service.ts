@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   hasPermission(permission: string) {
-    if (this.isLoggedIn()) {
+    if (!this.isLoggedIn()) {
       return false;
     }
     return this.currentUser.hasPermission(permission);
@@ -21,7 +21,7 @@ export class AuthService {
 
   isEnableTo(permission: string) {
 
-    if (this.isLoggedIn()) {
+    if (!this.isLoggedIn()) {
       return false;
     }
 
@@ -34,7 +34,6 @@ export class AuthService {
     }
 
     return found;
-
   }
 
   get currentUser() {

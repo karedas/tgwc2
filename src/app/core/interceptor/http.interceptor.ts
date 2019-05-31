@@ -1,45 +1,28 @@
-import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpResponse,
-  HttpResponseBase
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthJwtInterceptor implements HttpInterceptor {
-  constructor() { }
+
+  constructor(private authService: AuthService) {
+  }
+
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // how to update the request Parameters
-    const updatedRequest = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer Some-dummyCode')
-    });
-    // logging the updated Parameters to browser's console
-    console.log('Before making api call : ', updatedRequest);
-    if (!environment.production) {
-      return next.handle(request).pipe(
-        tap(
-          event => {
-            // logging the http response to browser's console in case of a success
-            if (event instanceof HttpResponse) {
-              console.log('api call success :', event);
-            }
-          },
-          error => {
-            // logging the http response to browser's console in case of a failuer
-            if (event instanceof HttpResponse) {
-              console.log('api call error :', event);
-            }
-          }
-        )
-      );
-    } else {
+    const token = this.authService.getToken();
+
+    if (!token) {
       return next.handle(request);
     }
+
+    request = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    return next.handle(request) ;
   }
 }

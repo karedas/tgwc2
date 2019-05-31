@@ -107,10 +107,15 @@ body[data-loginstatus=ready] {
 }
 
 tg-main {
-  padding-top: 40px;
   box-sizing: border-box;
 }
 
+
+.tg-layout-container {
+  padding-top: 40px;
+  height: 100vh;
+  box-sizing: border-box;
+}
 
 /* Icons & Stuff */
 

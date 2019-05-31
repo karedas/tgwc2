@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/services/api.service';
 import { User } from 'src/app/core/models/user.model';
 
@@ -19,6 +19,7 @@ export class LoginService extends ApiService {
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
+  
 
   public login(data: { email: string, password: string }): Observable<boolean> {
 
@@ -45,7 +46,9 @@ export class LoginService extends ApiService {
   }
 
   public logout(): Observable<boolean> {
-    return this.post('/auth/logout', []).pipe(
+
+    return this.post('/auth/logout', this.authService.currentUser.id).pipe(
+
       map((apiResponse: ApiResponse) => {
         if (apiResponse.httpCode !== 200) {
           return false;
@@ -53,7 +56,7 @@ export class LoginService extends ApiService {
         this.isLoginSubject$.next(false);
         this.authService.removeAuthData();
         return true;
-      })
+      }),
     );
   }
   
