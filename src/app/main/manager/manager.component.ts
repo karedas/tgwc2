@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 
+
 @Component({
   selector: 'tg-manager',
   templateUrl: './manager.component.html',
@@ -9,6 +10,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ManagerComponent implements OnInit {
   
+  selectedItem = 0;
+  
+
+
   isAdmin: boolean = false;
 
   constructor(private authService: AuthService) { }
@@ -16,6 +21,10 @@ export class ManagerComponent implements OnInit {
   ngOnInit() {
   }
   
+  selectItmeMenu(i) {
+    this.selectedItem = i;
+  }
+
   isEnableFor(level: string): boolean {
     return this.authService.isEnableTo(level);
   }

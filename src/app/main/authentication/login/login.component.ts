@@ -6,11 +6,13 @@ import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { AppError } from 'src/app/shared/errors/app.error';
+import { tgAnimations } from 'src/app/animations';
 
 @Component({
   selector: 'tg-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [tgAnimations]
 })
 export class LoginComponent implements OnInit {
 

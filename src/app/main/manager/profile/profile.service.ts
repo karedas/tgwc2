@@ -3,9 +3,6 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class ProfileService extends ApiService implements Resolve<any> {
 
   about: any = null;
@@ -15,8 +12,7 @@ export class ProfileService extends ApiService implements Resolve<any> {
     return new Promise((resolve, reject) => {
       Promise.all([
         this.getAbout()
-      ]).then(
-        () => { 
+      ]).then( () => { 
           resolve();
         },
         reject

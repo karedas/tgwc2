@@ -13,6 +13,7 @@ import { SignupConfirmComponent } from './signup-confirm/signup-confirm.componen
 // import { LoginClientComponent } from './login-client/login.component';
 import { QuotesComponent } from './login-client/quotes/quotes.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LoginComponent } from './login/login.component';
     VerifyRegistrationComponent,
     SignupConfirmComponent,
     LoginComponent,
+    ForgotPasswordComponent,
     // QuotesComponent,
   ],
   imports: [
