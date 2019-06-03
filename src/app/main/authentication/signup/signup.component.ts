@@ -20,7 +20,6 @@ export class SignupComponent implements OnInit {
   public apiError: string;
 
   constructor(
-    private meta: Meta,
     private http: HttpClient,
     private fb: FormBuilder,
     private router: Router) { }
@@ -35,10 +34,6 @@ export class SignupComponent implements OnInit {
   createSignupForm(): FormGroup {
     return this.fb.group(
       {
-        username: [null, Validators.compose([
-          Validators.required,
-          Validators.minLength(5),
-        ])],
         // email is required and must be a valid email email
         email: [null, Validators.compose([
           Validators.email,
@@ -71,7 +66,6 @@ export class SignupComponent implements OnInit {
     const url = environment.apiAddress + '/auth/registration';
 
     const httpBody = {
-      username: this.signupForm.get('username').value,
       password: this.signupForm.get('password').value,
       email: this.signupForm.get('email').value
     };

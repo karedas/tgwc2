@@ -8,7 +8,8 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class ProfileService extends ApiService implements Resolve<any> {
 
-  aboutChanged: BehaviorSubject<any>;
+  about: any = null;
+  aboutChanged: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     return new Promise((resolve, reject) => {
@@ -25,12 +26,11 @@ export class ProfileService extends ApiService implements Resolve<any> {
 
   getAbout(): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      this.get('/auth/user/about')
+      this.get('/profile/about')
           .subscribe((about: any) => {
-              // this.about = about;
-              // this.aboutOnChanged.next(this.about);
-              // resolve(this.about);
-              resolve();
+              this.about = about;
+              this.aboutChanged.next(this.about);
+              resolve(this.about);
           }, reject);
   });
   }

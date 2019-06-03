@@ -24,7 +24,7 @@ export class LoginService extends ApiService {
   public login(data: { email: string, password: string }): Observable<boolean> {
 
     const url = '/auth/login';
-
+    
     return this.post(url, data).pipe(
       map((apiResponse: ApiResponse) => {
         if (apiResponse.httpCode !== 200) {
@@ -46,13 +46,14 @@ export class LoginService extends ApiService {
   }
 
   public logout(): Observable<boolean> {
+    const url = '/auth/logout';
 
-    return this.post('/auth/logout', this.authService.currentUser.id).pipe(
-
+    return this.post(url, {id: this.authService.currentUser.id}).pipe(
       map((apiResponse: ApiResponse) => {
         if (apiResponse.httpCode !== 200) {
           return false;
         }
+        console.log('else');
         this.isLoginSubject$.next(false);
         this.authService.removeAuthData();
         return true;

@@ -1,3 +1,6 @@
+
+@import 'variables';
+
 :host {
   font-size: 1rem;
   line-height: 1.25;
@@ -6,26 +9,31 @@
   height: 100%;
   width: 100%;
   display: flex;
+  background: url($imgPath + '/registration/bg.jpg') no-repeat top left;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-color: black;
 }
 
-// mat-sidenav-container {
-// }
+mat-sidenav-container {
+ background-color: #ebeff5;  
+}
 
 mat-sidenav-content {
   padding: 0 20px;
+  position: relative;
 }
 
 mat-sidenav {
   color: white;
   padding: 10px 0;
   font-size: 12px;
-  margin-top: 20px;
-  border-top-right-radius: .375rem;
-  width: 220px;
+  width: 180px;
+  background-color: #0f0b08;
   
   nav {
     button.menu-item {
-      padding: .6rem 32px .6rem 24px;
+      padding: .6rem 18px .6rem 18px;
       line-height: 16px;
       margin: 0;
       font-size: 13px;
@@ -64,17 +72,26 @@ mat-sidenav {
       font-weight: normal;
       padding-top: 0;
       padding-bottom: 0;
-      color: #2a2a2a;
+      color: white;
+      transition: color .2s ease-out;
     }
 
-    button:hover, button.active {
-      font-weight: 600;
+    button:hover {
+      color: $tg-brown;
+    }
+
+    button.active {
+      background-color: $tg-brown;
+      color: white;
     }
 
     mat-icon {
       margin-right: 8px;
       vertical-align: middle;
-      color: #a4abb3;
+      font-size: 14px;
+      line-height: 14px;
+      height: 14px;
+      color: white;
     }
   }
 
@@ -86,7 +103,5 @@ mat-sidenav {
       display: inline-block;
       vertical-align: middle;
     }
-  }
-  
-  
+  }  
 }

@@ -25,8 +25,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
 // My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
 // import { PipesModule } from '../pipes/pipes.module';
@@ -107,7 +105,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatPaginatorModule,
     MatTooltipModule,
     MatDialogModule,
-    // MatProgressBarModule,
     MatSortModule,
     MatRippleModule,
     MatRadioModule

@@ -20,6 +20,4 @@ export class ManagerComponent implements OnInit {
     return this.authService.isEnableTo(level);
   }
 
-  
-
 }

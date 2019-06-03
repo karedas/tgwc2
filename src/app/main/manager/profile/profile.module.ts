@@ -17,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     RouterModule.forChild(routes)
