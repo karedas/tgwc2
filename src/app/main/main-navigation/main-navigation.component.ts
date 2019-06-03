@@ -46,7 +46,9 @@ export class MainNavigationComponent implements OnInit {
   
 
   userOnLogout() {
-    this.loginService.logout();
+    this.loginService.logout().subscribe(() => {
+      this.router.navigate(['auth/login']);
+    });
   }
 
 }

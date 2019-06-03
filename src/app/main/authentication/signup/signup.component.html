@@ -13,10 +13,15 @@
             {{ apiError }}
           </div>
           <div class="form-field-group">
-            <input class="tg-input" placeholder="Nome utente" type="text" formControlName="username">
-            <mat-hint>minimo 5 caratteri</mat-hint>
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required || f.username.errors.minlength">Nome utente non valido.</div>
+            <input class="tg-input" placeholder="La tua e-mail" type="email" formControlName="email">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required  || f.email.errors.email">E-mail non valida</div>
+            </div>
+          </div>
+          <div class="form-field-group">
+            <input class="tg-input" placeholder="Scrivi di nuovo la tua e-mail" type="email" formControlName="confirmEmail">
+            <div *ngIf="submitted && f.confirmEmail.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmEmail.errors.required || f.confirmEmail.errors.noEmailMatch">L'e-mail inserita non è uguale.</div>
             </div>
           </div>
           <div class="form-field-group">
@@ -32,18 +37,7 @@
                 <div *ngIf="f.confirmPassword.errors.required  || f.confirmPassword.errors.noPassswordMatch">La password non è uguale.</div>
             </div>
           </div>
-          <div class="form-field-group">
-            <input class="tg-input" placeholder="La tua e-mail" type="email" formControlName="email">
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                <div *ngIf="f.email.errors.required  || f.email.errors.email">E-mail non valida</div>
-            </div>
-          </div>
-          <div class="form-field-group">
-            <input class="tg-input" placeholder="Scrivi di nuovo la tua e-mail" type="email" formControlName="confirmEmail">
-            <div *ngIf="submitted && f.confirmEmail.errors" class="invalid-feedback">
-                <div *ngIf="f.confirmEmail.errors.required || f.confirmEmail.errors.noEmailMatch">L'e-mail inserita non è uguale.</div>
-            </div>
-          </div>
+
           <div class="conditions">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus diam vel commodo tristique. In
               scelerisque purus non pellentesque porta. Integer ut commodo risus, vitae lobortis mauris. Proin quis sem

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { ApiResponse } from '../models/api-response.model';
 import { AppError } from 'src/app/shared/errors/app.error';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
@@ -21,9 +21,10 @@ export class ApiService {
 
   
   public post(url: string, postData: any): Observable<any> {
-    
+
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
+    
     return this.http.post(endpoint, JSON.stringify(postData), {headers}).pipe(
       map( response => {
         return new ApiResponse(response);
@@ -44,7 +45,7 @@ export class ApiService {
         return new ApiResponse(response);
       }),
       catchError(this.handleError.bind(this))
-    );
+    )
   }
 
   private buildUrl(url: string): string {

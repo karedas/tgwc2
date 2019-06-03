@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ProfileService } from './profile.service';
+import { Subject } from 'rxjs';
+import { ApiResponse } from 'src/app/core/models/api-response.model';
 
 @Component({
   selector: 'tg-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements AfterViewInit {
 
-  constructor() { }
+  userProfile: Subject<any>
+  constructor(private profileService: ProfileService) {
 
-  ngOnInit() {
+   }
+
+  ngAfterViewInit(): void {
+    this.profileService.getAbout()
+      .then((profile: any) => {
+        console.log(profile);
+        this.userProfile = profile.data;
+      }) 
   }
 
 }
