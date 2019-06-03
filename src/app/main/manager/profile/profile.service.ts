@@ -12,9 +12,9 @@ export class ProfileService extends ApiService implements Resolve<any> {
     return new Promise((resolve, reject) => {
       Promise.all([
         this.getAbout()
-      ]).then( () => { 
-          resolve();
-        },
+      ]).then(() => {
+        resolve();
+      },
         reject
       )
     })
@@ -23,11 +23,11 @@ export class ProfileService extends ApiService implements Resolve<any> {
   getAbout(): Promise<any[]> {
     return new Promise((resolve, reject) => {
       this.get('/profile/about')
-          .subscribe((about: any) => {
-              this.about = about;
-              this.aboutChanged.next(this.about);
-              resolve(this.about);
-          }, reject);
-  });
+        .subscribe((about: any) => {
+          this.about = about;
+          this.aboutChanged.next(this.about);
+          resolve(this.about);
+        }, reject);
+    });
   }
 }

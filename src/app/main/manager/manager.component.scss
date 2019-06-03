@@ -15,9 +15,15 @@
   background-color: black;
 }
 
-mat-sidenav-container {
- background-color: #ebeff5;  
+.tg-manager-wlft {
+  background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y top left;
+  padding-left: 13px;
 }
+.tg-manager-wrgt {
+  background: #ebeff5 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y top right;
+  padding-right: 13px;
+}
+
 
 mat-sidenav-content {
   padding: 0 20px;
