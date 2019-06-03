@@ -1,0 +1,30 @@
+:host {}
+
+.header-img {
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+mat-panel-title{
+  padding: 6px 12px;
+}
+
+.characters-action {
+  margin-bottom: 20px;
+}
+
+
+.ch-avatar {
+  width: 75px;
+  height: 75px;
+  border: 1px solid black;
+}
+
+.ch-infoaction {
+
+  .ch-char-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+}

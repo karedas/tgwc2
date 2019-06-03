@@ -5,33 +5,47 @@
     <mat-sidenav #sidenav fxLayout="column" opened="true" mode="side">
       <div fxLayout="column">
         <nav>
-          <button class="menu-item" [routerLink]="['/manager/dashboard']" [ngClass]="{'active': true}">
+          <button class="menu-item" 
+          [routerLink]="['/manager/dashboard']" 
+          [ngClass]="{'active': selectedItem === 0}"
+          (click)="selectItmeMenu(0)">
             <mat-icon>home</mat-icon>
             <span>Dashboard</span>
           </button>
-          <button class="menu-item" [routerLink]="['/manager/profilo']">
+          <button class="menu-item" 
+          [routerLink]="['/manager/profilo']"
+          [ngClass]="{'active': selectedItem === 1}"
+          (click)="selectItmeMenu(1)">
             <mat-icon>account_circle</mat-icon>
             <span>Profilo</span>
           </button>
-          <button class="menu-item" [routerLink]="['/manager/personaggi']">
+          <button class="menu-item" 
+          [routerLink]="['/manager/personaggi']"
+          [ngClass]="{'active': selectedItem === 2}"
+          (click)="selectItmeMenu(2)">
             <mat-icon>people</mat-icon>
             <span>I miei personaggi</span>
           </button>
         </nav>
         <mat-divider></mat-divider>
         <nav *ngIf="isEnableFor('administrator')">
-          <button class="menu-item"  [routerLink]="['/manager/administration']">
+          <button class="menu-item"  
+          [routerLink]="['/manager/administration']"
+          [ngClass]="{'active': selectedItem === 3}"
+          (click)="selectItmeMenu(3)">
             <mat-icon>ballot</mat-icon>
             <span>Amministrazione</span>
           </button>
           <ul>
             <li>
-              <button class="menu-item" [routerLink]="['/manager/statistiche']">
+              <button class="menu-item" 
+              [routerLink]="['/manager/statistiche']">
                 <span>Statistiche</span>
               </button>
             </li>
             <li>
-              <button class="menu-item" [routerLink]="['/manager/immagini']">
+              <button class="menu-item" 
+              [routerLink]="['/manager/immagini']">
                 <span>Immagini Gioco</span>
               </button>
             </li>
@@ -45,8 +59,8 @@
         <router-outlet></router-outlet>
       </div>
 
+      
       <tg-manager-footer></tg-manager-footer>
-
     </mat-sidenav-content>
 
   </mat-sidenav-container>

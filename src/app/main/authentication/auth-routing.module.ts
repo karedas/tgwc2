@@ -6,6 +6,8 @@ import { SignupConfirmComponent } from './signup-confirm/signup-confirm.componen
 import { VcodeGuard } from './services/vcode.guard';
 // import { LoginClientComponent } from './login-client/login.component';
 import { LoginComponent } from './login/login.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { tgAnimations } from 'src/app/animations';
 
 const routes: Routes = [
   {
@@ -26,12 +28,12 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
       },
-      // {
-      //   path: 'access',
-      //   component: LoginClientComponent
-      // },
+      {
+        path: 'password-reset',
+        component: ForgotPasswordComponent
+      },
       {
         path: '**',
         redirectTo: 'login'
