@@ -24,7 +24,6 @@ export class ApiService {
 
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
-    
     return this.http.post(endpoint, JSON.stringify(postData), {headers}).pipe(
       map( response => {
         return new ApiResponse(response);
@@ -62,6 +61,11 @@ export class ApiService {
     if (error.status === 401 ) {
       return throwError(new NotAuthorizeError(error));
     }
-    return throwError(new AppError(error));
+    return throwError(()  => {
+      if (error instanceof HttpErrorResponse ) {
+        new HttpErrorResponse(error);
+      }
+      else new AppError(error);
+    });
   }
 }
