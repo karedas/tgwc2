@@ -4,11 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
+import { tgAnimations } from 'src/app/animations';
 
 @Component({
   selector: 'tg-verify-registration',
   templateUrl: './verify-registration.component.html',
-  styleUrls: ['./verify-registration.component.scss']
+  styleUrls: ['./verify-registration.component.scss'],
+  animations: [tgAnimations]
+
 })
 export class VerifyRegistrationComponent implements OnInit, OnDestroy {
 

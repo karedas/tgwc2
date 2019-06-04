@@ -37,9 +37,8 @@ export class LoginComponent implements OnInit {
   private createLoginForm(): FormGroup {
 
     return this.fb.group({
-      email: ['lisandr84@gmail.com', Validators.compose([
+      username: ['lisandr84@gmail.com', Validators.compose([
         Validators.required,
-        Validators.email
       ])],
       password: ['morfeo.84', Validators.compose([
         Validators.minLength(5),
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    let email = this.f.email.value;
+    let username = this.f.username.value;
     let password = this.f.password.value;
 
     this.loginFailedError = '';
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit {
       
       this.onProcess = true;
 
-      this.loginService.login({ email, password })
+      this.loginService.login({ username, password })
         .subscribe((loginSuccess: boolean) => {
 
 
@@ -74,10 +73,11 @@ export class LoginComponent implements OnInit {
           this.loginFailed = true;
           this.onProcess = false;
           if (error instanceof NotAuthorizeError) {
-            this.loginFailedError = error.originalError.error.message;
+            console.log(error);
+            this.loginFailedError = error.originalError.error.status;
           } 
           else if (error instanceof AppError) {
-            this.loginFailedError = error.originalError.statusText;
+            this.loginFailedError = error.originalError.error.status;
           }
         });
     }

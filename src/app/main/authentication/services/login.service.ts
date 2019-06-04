@@ -21,7 +21,7 @@ export class LoginService extends ApiService {
   }
   
 
-  public login(data: { email: string, password: string }): Observable<boolean> {
+  public login(data: { username: string, password: string }): Observable<boolean> {
 
     const url = '/auth/login';
     

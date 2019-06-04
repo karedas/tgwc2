@@ -13,7 +13,6 @@ export class AuthJwtInterceptor implements HttpInterceptor {
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     const token = this.authService.getToken();
     if (!token) {
       return next.handle(request);

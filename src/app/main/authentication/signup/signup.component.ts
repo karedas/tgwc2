@@ -35,23 +35,48 @@ export class SignupComponent implements OnInit {
   get f() { return this.signupForm.controls; }
 
   createSignupForm(): FormGroup {
+    // return this.fb.group(
+    //   {
+    //     username: [null, Validators.compose([
+    //       Validators.required,
+    //       Validators.minLength(5),
+    //     ])],
+    //     email: [null, Validators.compose([
+    //       Validators.email,
+    //       Validators.required])
+    //     ],
+    //     confirmEmail: [null, Validators.compose([Validators.required])],
+    //     password: [null, Validators.compose([
+    //       Validators.minLength(5),
+    //       Validators.required,
+    //     ])
+    //     ],
+    //     confirmPassword: [null, Validators.compose([Validators.required])],
+    //     conditions: new FormControl('', [(control) => {
+    //       return !control.value ? { 'required': true } : null;
+    //     }]
+    //     )
+    //   },
+    //   {
+    //     validator: [CustomValidators.passwordMatchValidator, CustomValidators.emailMatchValidator]
+    //   });
     return this.fb.group(
       {
-        username: [null, Validators.compose([
+        username: ['lisandr84', Validators.compose([
           Validators.required,
           Validators.minLength(5),
         ])],
-        email: [null, Validators.compose([
+        email: ['lisandr84@gmail.com', Validators.compose([
           Validators.email,
           Validators.required])
         ],
-        confirmEmail: [null, Validators.compose([Validators.required])],
-        password: [null, Validators.compose([
+        confirmEmail: ['lisandr84@gmail.com', Validators.compose([Validators.required])],
+        password: ['testest', Validators.compose([
           Validators.minLength(5),
           Validators.required,
         ])
         ],
-        confirmPassword: [null, Validators.compose([Validators.required])],
+        confirmPassword: ['testest', Validators.compose([Validators.required])],
         conditions: new FormControl('', [(control) => {
           return !control.value ? { 'required': true } : null;
         }]
@@ -79,15 +104,14 @@ export class SignupComponent implements OnInit {
 
     this.http.post(url, httpBody)
       .subscribe((apiResponse: ApiResponse) => {
-        if (apiResponse.httpCode !== 200) {
-          this.apiError = apiResponse.data;
+        if (!apiResponse.success) {
+          this.apiError = apiResponse.status;
         } else {
           this.apiError = '';
           this.router.navigate(['/auth/signup-confirm']);
         }
-      }, (error) => {
-        if (error instanceof NotAuthorizeError) {
-        }
+      }, (e) => {
+        this.apiError = e.error.status;
       });
   }
 }

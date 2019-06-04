@@ -18,6 +18,8 @@
 .tg-manager-wlft {
   background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y top left;
   padding-left: 13px;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 .tg-manager-wrgt {
   background: #ebeff5 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y top right;
