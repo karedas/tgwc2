@@ -53,7 +53,6 @@ export class LoginService extends ApiService {
         if (apiResponse.httpCode !== 200) {
           return false;
         }
-        console.log('else');
         this.isLoginSubject$.next(false);
         this.authService.removeAuthData();
         return true;

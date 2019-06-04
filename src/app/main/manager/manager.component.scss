@@ -97,12 +97,10 @@ mat-sidenav {
       font-size: 14px;
       line-height: 14px;
       height: 14px;
+      width: 14px;
       color: white;
     }
   }
-
-
-
 
   .menu-item {
     span {
@@ -111,7 +109,6 @@ mat-sidenav {
     }
   }  
 }
-
 
 ::ng-deep {
   

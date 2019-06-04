@@ -1,16 +1,25 @@
 <div class="tg-signup" fxLayout="row wrap" fxLayoutAlign="center center">
   <div class="tg-signup-wrap">
     <div class="tg-signup-content">
-      <div class="tg-logo-composit"></div>
+      <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
+        <div class="tg-base-logo"></div>
         <h1>Crea un Account</h1>
+      </div>
+      
+      <form name="signup" [formGroup]="signupForm" (ngSubmit)="onSubmit()" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
         <p>Crea un account <b>TheGateMud</b> per poter accedere alla tua area privata, creare il tuo personaggio e
           usufruire di tutti gli strumenti messi a disposizione per te. </p>
   
         <p><b>Attenzione</b>: Il nome utente in questo step non equivale al nome del tuo futuro personaggio.</p>
-        
-        <form name="signup" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
           <div class="api-error" *ngIf="apiError">
             {{ apiError }}
+          </div>
+          <div class="form-field-group">
+            <input class="tg-input" placeholder="Nome utente" type="text" formControlName="username">
+            <mat-hint>minimo 5 caratteri</mat-hint>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required || f.username.errors.minlength">Nome utente non valido.</div>
+            </div>
           </div>
           <div class="form-field-group">
             <input class="tg-input" placeholder="La tua e-mail" type="email" formControlName="email">
