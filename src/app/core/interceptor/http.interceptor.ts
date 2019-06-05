@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class AuthJwtInterceptor implements HttpInterceptor {
@@ -38,7 +39,7 @@ export class AuthJwtInterceptor implements HttpInterceptor {
               this.router.navigate(['login']);
           }
         }
-        return Observable.throw(err);
+        return throwError(err);
       })
     );
   }
