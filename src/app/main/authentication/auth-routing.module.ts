@@ -8,6 +8,7 @@ import { VcodeGuard } from './services/vcode.guard';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { tgAnimations } from 'src/app/animations';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -31,8 +32,12 @@ const routes: Routes = [
         component: LoginComponent,
       },
       {
-        path: 'password-reset',
+        path: 'reset',
         component: ForgotPasswordComponent
+      },
+      {
+        path: 'reset/:token',
+        component: ResetPasswordComponent
       },
       {
         path: '**',

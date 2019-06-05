@@ -35,48 +35,23 @@ export class SignupComponent implements OnInit {
   get f() { return this.signupForm.controls; }
 
   createSignupForm(): FormGroup {
-    // return this.fb.group(
-    //   {
-    //     username: [null, Validators.compose([
-    //       Validators.required,
-    //       Validators.minLength(5),
-    //     ])],
-    //     email: [null, Validators.compose([
-    //       Validators.email,
-    //       Validators.required])
-    //     ],
-    //     confirmEmail: [null, Validators.compose([Validators.required])],
-    //     password: [null, Validators.compose([
-    //       Validators.minLength(5),
-    //       Validators.required,
-    //     ])
-    //     ],
-    //     confirmPassword: [null, Validators.compose([Validators.required])],
-    //     conditions: new FormControl('', [(control) => {
-    //       return !control.value ? { 'required': true } : null;
-    //     }]
-    //     )
-    //   },
-    //   {
-    //     validator: [CustomValidators.passwordMatchValidator, CustomValidators.emailMatchValidator]
-    //   });
     return this.fb.group(
       {
-        username: ['lisandr84', Validators.compose([
+        username: [null, Validators.compose([
           Validators.required,
           Validators.minLength(5),
         ])],
-        email: ['lisandr84@gmail.com', Validators.compose([
+        email: [null, Validators.compose([
           Validators.email,
           Validators.required])
         ],
-        confirmEmail: ['lisandr84@gmail.com', Validators.compose([Validators.required])],
-        password: ['testest', Validators.compose([
+        confirmEmail: [null, Validators.compose([Validators.required])],
+        password: [null, Validators.compose([
           Validators.minLength(5),
           Validators.required,
         ])
         ],
-        confirmPassword: ['testest', Validators.compose([Validators.required])],
+        confirmPassword: [null, Validators.compose([Validators.required])],
         conditions: new FormControl('', [(control) => {
           return !control.value ? { 'required': true } : null;
         }]

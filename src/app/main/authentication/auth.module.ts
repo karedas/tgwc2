@@ -14,6 +14,7 @@ import { SignupConfirmComponent } from './signup-confirm/signup-confirm.componen
 import { QuotesComponent } from './login-client/quotes/quotes.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     SignupConfirmComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
     // QuotesComponent,
   ],
   imports: [
