@@ -11,7 +11,7 @@ import { tgAnimations } from 'src/app/animations';
 @Component({
   selector: 'tg-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['../auth.component.scss'],
   animations: [tgAnimations]
 })
 export class LoginComponent implements OnInit {
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
   private createLoginForm(): FormGroup {
 
     return this.fb.group({
-      username: ['lisandr84@gmail.com', Validators.compose([
+      username: [null, Validators.compose([
         Validators.required,
       ])],
-      password: ['morfeo.84', Validators.compose([
+      password: [null, Validators.compose([
         Validators.minLength(5),
         Validators.required,
       ])

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'tg-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss'],
+  styleUrls: ['../auth.component.scss'],
   animations: [ tgAnimations ]
 })
 export class ForgotPasswordComponent implements OnInit {
@@ -17,22 +17,30 @@ export class ForgotPasswordComponent implements OnInit {
   public forgotPasswordForm: FormGroup;
   public resetPasswordError: string;
   public sended: boolean = false;
+  public submitted: boolean = false;
+
 
   constructor( 
     private loginService: LoginService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
     ) { 
     }
 
   ngOnInit(): void {
+
     this.forgotPasswordForm = this.fb.group({
-        email: ['lisanasdasddr84@gmail.com', [Validators.required, Validators.email]]
+        email: [null, [Validators.required, Validators.email]]
     });
   }
 
+  get f() { return this.forgotPasswordForm.controls; }
+
+
   onSubmit(): void {
 
+    this.submitted =  true;
+    
     let email = this.forgotPasswordForm.controls.email.value;
 
     this.resetPasswordError = '';
@@ -42,12 +50,15 @@ export class ForgotPasswordComponent implements OnInit {
         .subscribe((response: ApiResponse) => {
           if(response.success) {
             this.sended = true;
+            
           }
           else {
-            this.sended = false;
-            this.resetPasswordError = response.status;
           }
-        });
+        }, (err => {
+          this.sended = false;
+          this.submitted =  false;
+          this.resetPasswordError = err.error.status;
+        }));
     }
   }
 }

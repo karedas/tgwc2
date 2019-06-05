@@ -18,7 +18,7 @@
     margin-bottom: 15px;
     text-align: center;
 
-    > div {
+    >div {
       padding-top: 32px;
     }
 
@@ -30,18 +30,31 @@
     }
   }
 
-  .tg-auth-form-body {
+  .tg-auth-form-body,
+  .tg-auth-create {
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 20px;
     font-size: 14px;
-    background-color: #181411;
+  }
+
+
+  .tg-auth-form-body {
+    background: #181411;
   }
 
   form {
     width: 100%;
 
-    label, input {
+    .form-field-group {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1em;
+    }
+
+    label,
+    input {
       display: block;
     }
 
@@ -51,6 +64,13 @@
     }
 
 
+    .label-link {
+      float: right;
+      font-size: 12px;
+      text-decoration: none;
+      color: $tg-brown;
+    }
+
     input {
       color: #e4dcd2;
       width: 100%;
@@ -59,15 +79,15 @@
       box-sizing: border-box;
       border: 1px solid rgba(255, 255, 255, 0.18);
       transition: border .4s ease-out;
-  
-      &:hover, &:focus {
+
+      &:hover,
+      &:focus {
         border: 1px solid rgba(255, 255, 255, 0.50);
       }
     }
 
     .input-block {
-      margin-bottom: 15px;
-      margin-top: 5px;
+      margin-top: .5em;
     }
 
     .tg-submit-primary {
@@ -79,8 +99,45 @@
 
     .tg-submit-primary:disabled {
       opacity: .6;
+		}
+		
+		
+
+		.tg-auth-create {
+			text-align: center;
+			margin-top: 10px;
+	
+			a {
+				text-decoration: none;
+			}
+	
+			a:hover {
+				text-decoration: underline;
+			}
+    }
+    
+    .mat-hint {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      color: rgba(255, 255, 255, 0.50);
+      font-size: 80%;
+    }
+  
+    .invalid-feedback {
+      display: none;
+      width: 100%;
+      margin-top: .25rem;
+      font-size: 80%;
+      color: #dc3545;
+    }
+    
+    &.ng-invalid .invalid-feedback {
+      display: block;
     }
   }
+
+
 
   .api-error {
     border: 1px solid #dc3545;
@@ -90,5 +147,5 @@
     margin: 1em 0 0;
     padding: 1em;
   }
-  
+
 }
