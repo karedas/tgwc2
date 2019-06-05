@@ -1,21 +1,28 @@
-<div class="tg-signup verify" fxLayout="row wrap" fxLayoutAlign="center center">
-  <div class="tg-signup-wrap">
-    <div class="tg-signup-content" *ngIf="response | async; let res;">
+<div class="tg-auth-form" fxLayout="row wrap" fxLayoutAlign="center center">
+  <div class="noform">
+    <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
+      <div class="tg-base-logo"></div>
+      <h1>Attivazione account</h1>
+    </div>
+    <div class="tg-auth-form-body" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
 
-        <ng-container *ngIf="res.success === false; else vcode_notAuthorized">
-          <h2>Account attivato</h2>
-          <p>
-            Benvenuto <b class="tg-yellow">{{username}}!</b>. <br/> Ti comunichiamo che il tuo account è stato correttamente attivato.
-          </p>
-          <p>Utilizza il tuo nome utente e la password scelta per accedere finalmente al portale. </p>
-        </ng-container>
-        
-        <ng-template #vcode_notAuthorized *ngIf="res.success === true">
-          <h2>Errore:</h2>
-          <p>C'è stato qualche problema:  <b>{{res.status}}</b> </p>
-        </ng-template>
+      <ng-container *ngIf="success === true; else vcode_notAuthorized">
+        <p>
+          Benvenuto <b class="tg-yellow">{{username}}!</b>. <br /> Ti comunichiamo che il tuo account è stato
+          correttamente attivato.
+        </p>
+        <p>Utilizza il tuo nome utente e la password scelta per accedere finalmente al portale attraverso la 
+          <a [routerLink]="['auth/login']" class="tg-yellow">pagina di login</a> </p>
+      </ng-container>
 
-      
+      <ng-template #vcode_notAuthorized>
+        <h2>Errore:</h2>
+        <p>C'è stato qualche problema: <br>
+          <b class="tg-red">{{loginFailedError}}</b>
+        </p>
+      </ng-template>
+
+
     </div>
   </div>
 </div>
