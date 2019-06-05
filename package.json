@@ -45,7 +45,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^4.0.0",
     "gulp-filelist": "^1.1.1",
-    "gulp.spritesmith": "^6.10.0",
+    "gulp.spritesmith": "^6.10.1",
     "hammerjs": "^2.0.8",
     "immutable": "^4.0.0-rc.12",
     "jw-angular-social-buttons": "^1.0.0",

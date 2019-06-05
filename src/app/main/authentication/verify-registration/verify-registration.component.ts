@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { tgAnimations } from 'src/app/animations';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-verify-registration',
@@ -15,31 +17,30 @@ import { tgAnimations } from 'src/app/animations';
 })
 export class VerifyRegistrationComponent implements OnInit, OnDestroy {
 
-  public response: any;
+  public response: Subject<any>;
+  public username: string;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
+    this.response = new Subject<any>();
+  }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      const v_code = params['token'];
-      this.verifyVCode(v_code);
-    });
+    this.sub = this.route.params
+      .pipe(
+        switchMap(param => this.verifyVCode(param['token'])))
+      .subscribe( (val) => {console.log(val)});
 
   }
 
   verifyVCode(code: string) {
-
     const url = environment.apiAddress + '/auth/verify/' + code;
-    this.http.get(url)
-    .subscribe((apiResponse: ApiResponse) => {
-
-        this.response = apiResponse;
-
-    }, (error) => {
-      if (error instanceof NotAuthorizeError) {
-      }
-    });
+    return this.http.get(url).pipe(
+      map((apiResponse: ApiResponse) => {
+        this.username = apiResponse.data.username
+        this.response.next(apiResponse);
+      }),
+    );
   }
 
   ngOnDestroy(): void {

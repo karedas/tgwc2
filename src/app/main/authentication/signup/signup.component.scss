@@ -3,12 +3,12 @@
 @import 'utils/sprites-mixins';
 
 :host {
-  display: block;
+  display: flex;
   background: url($imgPath + '/registration/bg.jpg') no-repeat top left;
-  background-size: 100% auto;
+  background-size: contain;
   background-attachment: fixed;
   background-color: black;
-  min-height: 100%;
+  height: 100%;
 }
 
 .tg-signup {
