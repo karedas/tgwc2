@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { tgAnimations } from 'src/app/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from '../../common/validators/custom-validators';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'tg-reset-password',
@@ -45,14 +46,26 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     let password = this.f.password.value;
-    console.log(password);
-    return;
-
     this.loginFailedError = '';
 
-    if (!this.frmNewPassword.invalid) {}
+    if (!this.frmNewPassword.invalid) {
+
+      // const url = environment.apiAddress + '/auth/reset/' + code;
+
+      // return this.http.get(url)
+      //   .pipe(
+      //     map((apiResponse: ApiResponse) => {
+      //       this.username = apiResponse.data.username
+      //       this.success = apiResponse.success;
+      //     }),
+      //     catchError(err => {
+      //       this.loginFailedError = err.error.status;
+      //       return Observable.throw(err);
+      //     })
+      //   )
+
+    }
       
   }
 }
