@@ -9,10 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { tgAnimations } from 'src/app/animations';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AnonymousGuard } from 'src/app/core/services/anonymous.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
+    canActivate: [AnonymousGuard],
     children: [
       {
         path: 'verify/:token',
@@ -21,11 +23,11 @@ const routes: Routes = [
       },
       {
         path: 'signup',
-        component: SignupComponent
+        component: SignupComponent,
       },
       {
         path: 'signup-confirm',
-        component: SignupConfirmComponent
+        component: SignupConfirmComponent,
       },
       {
         path: 'login',
@@ -33,11 +35,11 @@ const routes: Routes = [
       },
       {
         path: 'reset',
-        component: ForgotPasswordComponent
+        component: ForgotPasswordComponent,
       },
       {
         path: 'reset/:token',
-        component: ResetPasswordComponent
+        component: ResetPasswordComponent,
       },
       {
         path: '**',

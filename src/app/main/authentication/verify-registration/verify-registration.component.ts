@@ -32,7 +32,7 @@ export class VerifyRegistrationComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap(param => this.verifyVCode(param['token']) )
       )
-      .subscribe( (val) => {console.log(val)});
+      .subscribe();
 
   }
 
@@ -49,7 +49,6 @@ export class VerifyRegistrationComponent implements OnInit, OnDestroy {
         catchError(err => {
           this.loginFailedError = err.error.status;
           this.success = false;
-          console.log(err);
           return  throwError(err);
         })
       )

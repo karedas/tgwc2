@@ -5,14 +5,14 @@ import { CapitalizeFirstPipe } from './capitalizeFirst';
 
 @NgModule({
   declarations: [
-    DataToHtmlPipe,
-    IconsPipe,
+    // DataToHtmlPipe,
+    // IconsPipe,
     CapitalizeFirstPipe
   ],
   imports: [],
   exports: [
-    IconsPipe,
-    DataToHtmlPipe,
+    // IconsPipe,
+    // DataToHtmlPipe,
     CapitalizeFirstPipe
   ]
 })

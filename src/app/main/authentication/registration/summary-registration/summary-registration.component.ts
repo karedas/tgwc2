@@ -24,7 +24,7 @@ export class SummaryRegistrationComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.registrationService.getParams()
-      .subscribe(params => {console.log(params); this.data = params; });
+      .subscribe(params => {this.data = params; });
     // this.route.queryParams
     //   .pipe(takeUntil(this._unsubscribeAll))
     //   .subscribe(params => {
