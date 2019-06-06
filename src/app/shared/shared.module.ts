@@ -37,6 +37,8 @@ import { ClickStopPropagationDirective } from './directives/click-stop-propagati
 // import { DialogV2Service } from '../main/client/common/dialog-v2/dialog-v2.service';
 import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CapitalizeFirstPipe } from '../pipes/capitalizeFirst';
+import { PipesModule } from '../pipes/pipes.module';
 // import { LoginService } from '../main/authentication/services/login.service';
 // import { GameService } from '../main/client/services/game.service';
 // import { InputService } from '../main/client/components/input/input.service';
@@ -50,6 +52,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     // AutofocusInputbarDirective,
     // IconsComponent,
     // HstatComponent
+    
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
     NgScrollbarModule,
     TooltipModule,
-    // PipesModule,
+    PipesModule,
+
     /** Angular Material Modules */
     MatCheckboxModule,
     MatMenuModule,
@@ -88,7 +92,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     NgScrollbarModule,
     // IconsComponent,
     // HstatComponent,
-    // PipesModule,
+    PipesModule,
     // TooltipModule,
     ClickStopPropagationDirective,
     // AutofocusInputbarDirective,

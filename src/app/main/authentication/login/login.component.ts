@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit {
           this.loginFailed = true;
           this.onProcess = false;
           if (error instanceof NotAuthorizeError) {
-            console.log(error);
             this.loginFailedError = error.originalError.error.status;
           } 
           else if (error instanceof AppError) {

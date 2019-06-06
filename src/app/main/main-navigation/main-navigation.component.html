@@ -9,38 +9,38 @@
           <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
         </div>
         <div class="tg-mainnav-item">
-          <a [routerLink]="['/']" [ngClass]="{'active': active === 'login'}">Entra in gioco</a>
-        </div>
-        <div class="tg-mainnav-item">
           <a href="http://forum.thegatemud.it">Forum</a>
         </div>
         <div class="tg-mainnav-item">
-          <a [routerLink]="['/novita']" [ngClass]="{'active': active === 'novita'}">Novità</a>
+          <a 
+            [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</a>
         </div>
       </div>
       <ng-container *ngIf="!loggedIn; else userLoggedIn">
         <div class="m-right">
           <div class="tg-mainnav-item">
-            <a [routerLink]="['/auth/login']" class="tg-yellow">Login</a>
+            <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow">Login</a>
           </div>
           <div class="tg-mainnav-item">
-            <a [routerLink]="['/auth/signup']" [ngClass]="{'active': active === 'registrati'}">Registrati</a>
+            <a [routerLink]="['/auth/signup']" [routerLinkActive]="['active']">Registrati</a>
           </div>
         </div>
       </ng-container>
       
       <ng-template #userLoggedIn>
+        <!-- User Logged In -->
+
         <!-- User Menu -->
         <div class="m-right user-side">
           <div class="tg-mainnav-item">
-            <!-- {{dataUser.name}} -->
             
+            {{dataUser.username | capitalizeFirst}}
             <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>account_circle</mat-icon>
+                <mat-icon>account_circle</mat-icon>
             </button>
             <mat-menu #menu="matMenu" class="mat-elevation-z4">
               <div class="user-menu-item">
-                Collegato come <b>{{dataUser.name}}</b>
+                Collegato come <b class="tg-yellow">{{dataUser.username | capitalizeFirst}}</b>
               </div> 
               <mat-divider></mat-divider>
               <button mat-menu-item class="user-menu-item">I tuoi personaggi</button>

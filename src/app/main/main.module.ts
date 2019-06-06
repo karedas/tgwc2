@@ -13,17 +13,15 @@ const routes: Routes = [
     loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule),
   },
   {
+    path: 'novita',
+    loadChildren: () => import('./pages/global-news/global-news.module').then(m => m.GlobalNewsModule),
+  },
+  {
     path: '',
     redirectTo: 'manager',
     pathMatch: 'full',
     canActivate: [AuthGuard]
-  },
-  // {
-  //   path: '',
-  //   redirectTo: 'manager',
-  //   pathMatch: 'full',
-  //   canActivate: [AuthGuard]
-  // },
+  }
 ];
 
 

@@ -18,7 +18,6 @@ export class ProfileComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.profileService.getAbout()
       .then((profile: any) => {
-        console.log(profile);
         this.userProfile = profile.data;
       }) 
   }

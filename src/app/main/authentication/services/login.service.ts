@@ -50,7 +50,6 @@ export class LoginService extends ApiService {
 
     return this.post(url, {id: this.authService.currentUser.id}).pipe(
       map((apiResponse: ApiResponse) => {
-        console.log(apiResponse);
         if (!apiResponse.success) {
           return false;
         }
