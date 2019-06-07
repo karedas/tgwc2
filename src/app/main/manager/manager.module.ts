@@ -6,6 +6,11 @@ import { AuthGuard } from 'src/app/core/services/auth.guard';
 import { AdministrationModule } from './administration/administration.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FooterComponent } from './footer/footer.component';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -49,12 +54,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
-    MatExpansionModule,
-    
-  ],
-  exports: [
-    RouterModule,
-    MatExpansionModule
   ]
 })
 

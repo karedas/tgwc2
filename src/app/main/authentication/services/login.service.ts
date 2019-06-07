@@ -20,7 +20,6 @@ export class LoginService extends ApiService {
     return !!localStorage.getItem('token');
   }
   
-
   public login(data: { username: string, password: string }): Observable<boolean> {
 
     const url = '/auth/login';
@@ -32,7 +31,6 @@ export class LoginService extends ApiService {
         }
 
         const responseData = apiResponse.data;
-
         this.isLoginSubject$.next(true);
 
         if (responseData && responseData.token) {

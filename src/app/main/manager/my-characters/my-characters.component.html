@@ -7,43 +7,42 @@
     <button mat-stroked-button>
       <mat-icon>add</mat-icon>
       Aggiungi personaggio
-    </button> | slot liberi: 1
+    </button> | slot liberi: <b>{{2 - charactersSizeMax}} / 2</b>
   </div>
 </div>
 
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let char of characters" [ngClass]="{'char-disabled': char.status === 'disabled'}">
     <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+
       <mat-panel-title fxLayout="row" fxLayoutGap="6px">
         <div class="ch-avatar mat-elevation-z4">
         </div>
         <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
-          <div class="ch-char-name">Karedas</div>
-          <div class="ch-char-action">
+          <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
+          <div class="ch-char-subaction">
             <a href="#">Cambia immagine</a> | <a href="#">Segnala un problema</a>
           </div>
         </div>
       </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-      </mat-panel-description>
-    </mat-expansion-panel-header>
 
-    <!-- <mat-form-field>
-        <input matInput placeholder="First name">
-      </mat-form-field> -->
-
-    <!-- <mat-form-field>
-        <input matInput placeholder="Age">
-      </mat-form-field> -->
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Toby
-      </mat-panel-title>
       <mat-panel-description>
+
+        <div class="ch-char-action">
+          <button mat-stroked-button>Connetti</button>
+        </div>
+
       </mat-panel-description>
+
     </mat-expansion-panel-header>
+    
+    <p>Razza: {{char.race}}</p>
+    <p>Sesso: {{char.sex}} </p>
+    <p>Età: {{char.age}} </p>
+
+    <button mat-raised-button>Disabilita personaggio</button>
   </mat-expansion-panel>
+
 </mat-accordion>
+
+

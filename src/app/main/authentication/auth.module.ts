@@ -15,17 +15,17 @@ import { QuotesComponent } from './login-client/quotes/quotes.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
-    // LoginClientComponent,
     SignupComponent,
     VerifyRegistrationComponent,
     SignupConfirmComponent,
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    // QuotesComponent,
   ],
   imports: [
     SharedModule,
@@ -33,8 +33,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FlexLayoutModule,
   ],
   exports: [
-    // MainNavigationModule,
-    // AuthRoutingModule
   ]
 })
 export class Auth2Module { }

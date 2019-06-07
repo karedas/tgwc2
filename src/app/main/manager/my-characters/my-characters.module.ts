@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MyCharactersService } from './my-characters.service';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -31,6 +33,7 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    SharedModule
   ],
   providers: [
     MyCharactersService

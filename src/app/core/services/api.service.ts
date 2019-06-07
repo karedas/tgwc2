@@ -24,6 +24,7 @@ export class ApiService {
 
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
+
     return this.http.post(endpoint, JSON.stringify(postData), {headers}).pipe(
       map( response => {
         return new ApiResponse(response);
@@ -40,7 +41,6 @@ export class ApiService {
 
     return this.http.get(endpoint, { headers }).pipe(
       map( response => {
-        // this.showLoading(false);
         return new ApiResponse(response);
       }),
       catchError(this.handleError.bind(this))
