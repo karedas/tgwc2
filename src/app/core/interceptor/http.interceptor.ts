@@ -23,7 +23,7 @@ export class AuthJwtInterceptor implements HttpInterceptor {
       setHeaders: {
         'Content-Type' : 'application/json; charset=utf-8',
         'Accept'       : 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Token ${token}`,
       },
     });
 
@@ -36,7 +36,7 @@ export class AuthJwtInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-              this.router.navigate(['login']);
+              this.router.navigate(['auth/login']);
           }
         }
         return throwError(err);

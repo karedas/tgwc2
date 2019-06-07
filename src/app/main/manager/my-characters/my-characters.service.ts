@@ -26,7 +26,7 @@ export class MyCharactersService extends ApiService implements Resolve<any>{
   getMyCharacters(): Promise<any[]> {
 
     return new Promise((resolve, reject) => {
-      this.get('/user/characters')
+      this.get('/profile/characters')
         .subscribe((chars: any) => {
           this.charactersList = chars;
           this.onCharactersListChanged.next(this.charactersList);
