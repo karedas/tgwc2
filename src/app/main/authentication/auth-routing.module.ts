@@ -4,14 +4,11 @@ import { SignupComponent } from './signup/signup.component';
 import { VerifyRegistrationComponent } from './verify-registration/verify-registration.component';
 import { SignupConfirmComponent } from './signup-confirm/signup-confirm.component';
 import { VcodeGuard } from './services/vcode.guard';
-// import { LoginClientComponent } from './login-client/login.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { tgAnimations } from 'src/app/animations';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AnonymousGuard } from 'src/app/core/services/anonymous.guard';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 const routes: Routes = [
   {

@@ -17,12 +17,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
 @NgModule({
   declarations: [
     ClickStopPropagationDirective,    
+    AutofocusInputbarDirective,
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatMenuModule,
     MatDividerModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatRadioModule
   ],
 
   exports: [
@@ -52,6 +56,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     ReactiveFormsModule,
     NgScrollbarModule,
     PipesModule,
+    TooltipModule,
     ClickStopPropagationDirective,
 
     MatFormFieldModule,
@@ -61,7 +66,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatMenuModule,
     MatDividerModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatRadioModule,
   ],
   providers: [
     CookieService,

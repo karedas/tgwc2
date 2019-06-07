@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainNavigationComponent } from './main-navigation.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   imports: [
     RouterModule,
-    CommonModule,
+    SharedModule,
     MatIconModule
   ],
   exports: [

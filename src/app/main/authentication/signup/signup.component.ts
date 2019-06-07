@@ -3,11 +3,10 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { Meta } from '@angular/platform-browser';
 import { tgAnimations } from 'src/app/animations';
+console.log(environment);
 
 @Component({
   selector: 'tg-signup',

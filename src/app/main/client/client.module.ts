@@ -12,6 +12,8 @@ import { AudioComponent } from './components/audio/audio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import { IconsComponent } from './common/icons/icons.component';
+import { HstatComponent } from './common/hstat/hstat.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
     ClientContainerComponent,
     AudioComponent,
     NavbarComponent,
+    IconsComponent,
+    HstatComponent,
   ],
   imports: [
     SharedModule,
@@ -31,6 +35,7 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
     JwSocialButtonsModule
   ],
   exports: [
+    IconsComponent,
     NavbarComponent,
     ClientComponent
   ],

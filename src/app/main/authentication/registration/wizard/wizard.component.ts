@@ -142,7 +142,7 @@ export class WizardComponent implements OnInit, OnDestroy {
       });
   }
 
-  nextStep(event: any) {
+  nextStep(event?: any) {
     this.stepper.next();
   }
 

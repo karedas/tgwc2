@@ -15,7 +15,7 @@
 <ng-container *ngIf="characters.length > 0; else noCharacters">
 
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let char of characters" [ngClass]="{'char-disabled': char.status === 'disable'}">
+    <mat-expansion-panel *ngFor="let char of characters" [ngClass]="{'char-disabled': char.status === 'disabled'}">
       <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
   
         <mat-panel-title fxLayout="row" fxLayoutGap="6px">
