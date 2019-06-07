@@ -28,6 +28,11 @@ import { CoreModule } from './core/core.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,9 +51,7 @@ import { HttpClientModule } from '@angular/common/http';
 
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        }
+        tokenGetter: tokenGetter
       }
     }),
     // TgConfigModule.forRoot(tgConfig),
