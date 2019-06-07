@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    const url = environment.apiAddress + '/auth/registration';
+    const url = environment.apiAddress + '/users/registration';
 
     const httpBody = {
       username: this.signupForm.get('username').value,

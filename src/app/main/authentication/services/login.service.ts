@@ -22,15 +22,15 @@ export class LoginService extends ApiService {
   
   public login(data: { username: string, password: string }): Observable<boolean> {
 
-    const url = '/auth/login';
+    const url = '/users/login';
     
-    return this.post(url, data).pipe(
+    return this.post(url, {user: data}).pipe(
       map((apiResponse: ApiResponse) => {
-        if (apiResponse.httpCode !== 200) {
+        if (!apiResponse.success) {
           return false;
         }
-
         const responseData = apiResponse.data;
+        console.log(apiResponse.data);
         this.isLoginSubject$.next(true);
 
         if (responseData && responseData.token) {
