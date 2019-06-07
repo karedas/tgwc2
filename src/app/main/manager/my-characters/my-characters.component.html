@@ -11,38 +11,48 @@
   </div>
 </div>
 
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let char of characters" [ngClass]="{'char-disabled': char.status === 'disabled'}">
-    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
 
-      <mat-panel-title fxLayout="row" fxLayoutGap="6px">
-        <div class="ch-avatar mat-elevation-z4">
-        </div>
-        <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
-          <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
-          <div class="ch-char-subaction">
-            <a href="#">Cambia immagine</a> | <a href="#">Segnala un problema</a>
+<ng-container *ngIf="characters.length > 0; else noCharacters">
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let char of characters" [ngClass]="{'char-disabled': char.status === 'disable'}">
+      <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+  
+        <mat-panel-title fxLayout="row" fxLayoutGap="6px">
+          <div class="ch-avatar mat-elevation-z4">
           </div>
-        </div>
-      </mat-panel-title>
+          <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
+            <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
+            <div class="ch-char-subaction">
+              <a href="#">Cambia immagine</a> | <a href="#">Segnala un problema</a>
+            </div>
+          </div>
+        </mat-panel-title>
+  
+        <mat-panel-description>
+  
+          <div class="ch-char-action">
+            <button mat-stroked-button>Connetti</button>
+          </div>
+  
+        </mat-panel-description>
+  
+      </mat-expansion-panel-header>
+      
+      <p>Razza: {{char.race}}</p>
+      <p>Sesso: {{char.sex}} </p>
+      <p>Età: {{char.age}} </p>
+  
+      <button mat-raised-button>Disabilita personaggio</button>
+    </mat-expansion-panel>
+  
+  </mat-accordion>
 
-      <mat-panel-description>
+</ng-container>
 
-        <div class="ch-char-action">
-          <button mat-stroked-button>Connetti</button>
-        </div>
-
-      </mat-panel-description>
-
-    </mat-expansion-panel-header>
-    
-    <p>Razza: {{char.race}}</p>
-    <p>Sesso: {{char.sex}} </p>
-    <p>Età: {{char.age}} </p>
-
-    <button mat-raised-button>Disabilita personaggio</button>
-  </mat-expansion-panel>
-
-</mat-accordion>
+<ng-template #noCharacters>
+  Non possiedi ne hai creato alcun personaggio fino ad ora.
+  Creane subito uno!
+</ng-template>
 
 
