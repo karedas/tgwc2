@@ -51,19 +51,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    let username = this.f.username.value;
-    let password = this.f.password.value;
-
     this.loginFailedError = '';
 
     if (!this.frmLogin.invalid) {
       
       this.onProcess = true;
 
-      this.loginService.login({ username, password })
+      const loginAuth = {
+          username: <string>this.f.username.value,
+          password: <string>this.f.password.value
+      }
+      this.loginService.login(loginAuth)
         .subscribe((loginSuccess: boolean) => {
-
-
           if (loginSuccess === true) {
             this.router.navigate(['/manager']);
           } else {
@@ -72,6 +71,7 @@ export class LoginComponent implements OnInit {
         }, (error) => {
           this.loginFailed = true;
           this.onProcess = false;
+          console.log(error);
           if (error instanceof NotAuthorizeError) {
             this.loginFailedError = error.originalError.error.status;
           } 

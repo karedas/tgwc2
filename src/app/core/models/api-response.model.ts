@@ -1,14 +1,17 @@
 export class ApiResponse {
+  
   private _success: boolean;
   private _data: any;
   private _httpCode: number;
   private _status: string;
+  private _errors: any;
 
   constructor(response: any) {
     this.data = response['data'];
     this.httpCode = response['http_code'];
     this.success = response['success'];
     this.status = response['status'];
+    this.errors = response['errors'];
   }
 
   get httpCode(): number {
@@ -33,6 +36,14 @@ export class ApiResponse {
 
   set status(value: string) {
     this._status = value;
+  }
+
+  get errors(): string {
+    return this._errors;
+  }
+
+  set errors(value: string) {
+    this._errors = value;
   }
 
   get data(): any {
