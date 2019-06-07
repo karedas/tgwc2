@@ -10,6 +10,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { tgAnimations } from 'src/app/animations';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AnonymousGuard } from 'src/app/core/services/anonymous.guard';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const routes: Routes = [
   {
@@ -51,10 +53,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ]
 })
 
