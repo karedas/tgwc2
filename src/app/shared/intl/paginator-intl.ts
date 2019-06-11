@@ -16,7 +16,7 @@ const italianRangeLabel = (page: number, pageSize: number, length: number) => {
 };
 
 
-export function getItalianPaginatorIntl() {
+export function getItalianPaginatorIntl(): MatPaginatorIntl{
   const paginatorIntl = new MatPaginatorIntl();
 
   paginatorIntl.itemsPerPageLabel = 'Risultati per pagina:';
