@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CookieLawComponent } from '../../components/windows/cookie-law/cookie-law.component';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSliderModule } from '@angular/material/slider';
@@ -23,7 +21,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
 
 @NgModule({
   declarations: [
-    CookieLawComponent,
     NewsComponent,
     LoginSmartComponent,
     EditorComponent,
@@ -46,7 +43,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
   ],
 
   entryComponents: [
-    CookieLawComponent,
     NewsComponent,
     LoginSmartComponent,
     EditorComponent,

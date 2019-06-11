@@ -5,6 +5,7 @@ import { Auth2Module } from './authentication/auth.module';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/services/auth.guard';
 import { MainNavigationModule } from './main-navigation/main-navigation.module';
+import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MainComponent,
+    CookieLawComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -38,6 +40,7 @@ const routes: Routes = [
     MainComponent,
   ],
   entryComponents: [
+    CookieLawComponent
   ]
 })
 export class MainModule { }

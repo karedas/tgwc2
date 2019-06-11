@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.dev';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
           username: <string>this.f.username.value,
           password: <string>this.f.password.value
       }
+
       this.loginService.login(loginAuth)
         .subscribe((loginSuccess: boolean) => {
           if (loginSuccess === true) {
@@ -68,10 +69,11 @@ export class LoginComponent implements OnInit {
           } else {
             this.loginFailed = true;
           }
-        }, (error) => {
+        }, (error: HttpErrorResponse) => {
+
           this.loginFailed = true;
           this.onProcess = false;
-          console.log(error);
+
           if (error instanceof NotAuthorizeError) {
             this.loginFailedError = error.originalError.error.status;
           } 
@@ -81,7 +83,9 @@ export class LoginComponent implements OnInit {
         });
     }
     else {
+      
       this.loginFailedError = 'Username o Password incorretta';
+      
     }
   }
 

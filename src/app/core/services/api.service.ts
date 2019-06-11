@@ -52,19 +52,25 @@ export class ApiService {
   }
 
   private buildHeader(additionalHeaders = []): HttpHeaders {
+
     let headers = new HttpHeaders();
+
     headers = headers.append('Content-Type', 'application/json');
     return headers;
   }
 
   private handleError(error: HttpErrorResponse): Observable<AppError> {
+
     if (error.status === 401 ) {
       return throwError(new NotAuthorizeError(error));
     }
+
     return throwError(()  => {
+      
       if (error instanceof HttpErrorResponse ) {
         new HttpErrorResponse(error);
       }
+
       else new AppError(error);
     });
   }

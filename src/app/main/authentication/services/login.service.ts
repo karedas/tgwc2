@@ -30,7 +30,6 @@ export class LoginService extends ApiService {
           return false;
         }
         const responseData = apiResponse.data;
-        console.log(apiResponse.data);
         this.isLoginSubject$.next(true);
 
         if (responseData && responseData.token) {
@@ -57,6 +56,4 @@ export class LoginService extends ApiService {
       }),
     );
   }
-
-  // public forgotPasswordCheck(): Observable<boolean> {}
 }

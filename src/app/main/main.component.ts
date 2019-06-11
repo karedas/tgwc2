@@ -26,22 +26,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   constructor(
     private cookieService: CookieService,
-    private platform: Platform,
     public dialog: MatDialog,
-
-    // private dialogV2Service: DialogV2Service,
-
-
-    @Inject(DOCUMENT) private document: any
   ) {
-
-    /* Add a class to the Body Dom Element client if is loads in a Mobile device. */
-    if (this.platform.ANDROID || this.platform.IOS) {
-      this.document.body.className += ' is-mobile';
-    }
-
     this._unsubscribeAll = new Subject();
-
   }
 
   ngOnInit(): void {
