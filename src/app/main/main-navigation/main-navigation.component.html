@@ -1,8 +1,6 @@
 <div class="tg-mainnav">
   <div class="tg-mainnav-wrap">
-    <!-- <div class="hamburger-item" (click)="onHamburgerClick()" >
-      <mat-icon>menu</mat-icon>
-    </div> -->
+
     <div class="m-full">
       <div class="m-left">
         <div class="tg-brand tg-base-logo tg-mainnav-item">
@@ -14,8 +12,7 @@
           <a href="http://forum.thegatemud.it">Forum</a>
         </div>
         <div class="tg-mainnav-item">
-          <a 
-            [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</a>
+          <a [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</a>
         </div>
       </div>
       <ng-container *ngIf="!loggedIn; else userLoggedIn">

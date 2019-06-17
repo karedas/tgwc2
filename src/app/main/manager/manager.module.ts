@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserModule } from '@angular/platform-browser';
+import { AnonymousGuard } from 'src/app/core/services/anonymous.guard';
 
 
 
@@ -24,14 +25,14 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      {
-        path: 'profilo',
-        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-      },
-      {
-        path: 'personaggi',
-        loadChildren: () => import('./my-characters/my-characters.module').then(m => m.MyCharactersModule)
-      },
+      // {
+      //   path: 'profilo',
+      //   loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+      // },
+      // {
+      //   path: 'personaggi',
+      //   loadChildren: () => import('./my-characters/my-characters.module').then(m => m.MyCharactersModule)
+      // },
       {
         path: 'administration',
         loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
@@ -41,7 +42,6 @@ const routes: Routes = [
         redirectTo: 'dashboard',
         pathMatch: 'full',
       },
-  
     ]
   },
 ];

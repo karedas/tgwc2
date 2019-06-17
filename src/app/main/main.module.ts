@@ -20,7 +20,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'manager',
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   }
 ];
 

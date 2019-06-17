@@ -7,7 +7,7 @@ const routes: Routes = [
     {
       path: '**',
       component: AdministrationComponent,
-      canActivate: [AuthGuard],
+      // canActivate: [AuthGuard],
     }
   ]
 

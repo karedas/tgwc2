@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { AppError } from 'src/app/shared/errors/app.error';
 import { tgAnimations } from 'src/app/animations';
+import { ApiResponse } from 'src/app/core/models/api-response.model';
 
 @Component({
   selector: 'tg-login',
@@ -63,11 +64,13 @@ export class LoginComponent implements OnInit {
       }
 
       this.loginService.login(loginAuth)
-        .subscribe((loginSuccess: boolean) => {
-          if (loginSuccess === true) {
+        .subscribe((res: ApiResponse) => {
+          if (res.success === true) {
             this.router.navigate(['/manager']);
           } else {
             this.loginFailed = true;
+            this.loginFailedError = res.status;
+            this.onProcess = false;
           }
         }, (error: HttpErrorResponse) => {
 
@@ -83,7 +86,7 @@ export class LoginComponent implements OnInit {
         });
     }
     else {
-      
+      // Empty or unvalid User/password
       this.loginFailedError = 'Username o Password incorretta';
       
     }

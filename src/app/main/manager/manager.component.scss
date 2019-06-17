@@ -1,4 +1,3 @@
-
 @import 'variables';
 @import 'utils/fix';
 
@@ -15,150 +14,176 @@
   background-size: 100% auto;
   background-attachment: fixed;
   background-color: black;
+}
 
-  .tg-manager-wlft {
-    background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y top left;
-    padding-left: 13px;
-    box-sizing: border-box;
-    max-width: 100%;
-    height: 100%;
+.tg-manager-wlft {
+  background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y top left;
+  padding-left: 13px;
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 100%;
+}
+
+.tg-manager-wrgt {
+  background: #ebeff5 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y top right;
+  padding-right: 13px;
+}
+
+mat-toolbar {
+  background-color: #181411;
+
+  .mat-icon {
+    color: #bdb3a3;
   }
+}
 
-  .tg-manager-wrgt {
-    background: #ebeff5 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y top right;
-    padding-right: 13px;
+mat-sidenav-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+mat-sidenav-content {
+  position: relative;
+}
+
+mat-sidenav {
+
+  background-color: #0f0b08;
+  
+  .tg-manager-avatar {
+    width:180px;
+    margin: 12px;
+    border:1px solid rgba(255, 255, 255, 0.2);;
+    > mat-icon {
+      width: 100%;
+      height: 100%;
+      font-size: 180px;
+      color: rgba(255, 255, 255, 0.1);
+    }
   }
+  
+  nav {
 
-  mat-toolbar {
-    background-color: #181411;
+    color: white;
+    padding: 10px 0;
+    font-size: 12px;
 
-    .mat-icon {
-      color: #bdb3a3;
+    button.menu-item {
+
+      padding: .6rem 12px .6rem 12px;
+      line-height: 16px;
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+      position: relative;
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: 0 0;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0 0 5px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      font-size: 13px;
+      line-height: 16px;
+      margin: 0;
+      padding: 5px 16px 5px 32px;
+    }
+
+    li button {
+      border-bottom: none;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    button {
+      font-weight: normal;
+      padding-top: 0;
+      padding-bottom: 0;
+      color: white;
+      transition: color .2s ease-out;
+    }
+
+    button:hover {
+      color: $tg-brown;
+    }
+
+    button.active {
+      background-color: $tg-brown;
+      color: white;
+    }
+
+    mat-icon {
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 14px;
+      height: 14px;
+      width: 14px;
+      color: white;
     }
   }
 
-  mat-sidenav-container {
-    width: 100%;
-    box-sizing: border-box;
+  .menu-item-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+}
+
+.sidenav-content {
+  padding: 0 1em;
+  overflow: hidden;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+mat-divider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@include layout-bp(lt-sm) {
+
+  .tg-manager-wlft,
+  .tg-manager-wrgt {
+    background-image: none;
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  mat-sidenav-content {
-    position: relative;
+  .tg-manager-avatar  {
+    display: none;
   }
   
   mat-sidenav {
-
-    background-color: #0f0b08;
-
     nav {
+      left: 0;
 
-      color: white;
-      padding: 10px 0;
-      font-size: 12px;
-
-      button.menu-item {
-
-        padding: .6rem 12px .6rem 12px;
-        line-height: 16px;
-        margin: 0;
-        font-size: 13px;
-        cursor: pointer;
-        position: relative;
-        display: block;
-        width: 100%;
-        text-align: left;
-        background: 0 0;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-
-      }
-  
-      ul {
-        list-style-type: none;
-        margin: 0 0 5px;
-        padding: 0;
-        overflow: hidden;
-      }
-  
-      li {
-        font-size: 13px;
-        line-height: 16px;
-        margin: 0;
-        padding: 5px 16px 5px 32px;
-      }
-  
-      li button {
-        border-bottom: none;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-  
-      button {
-        font-weight: normal;
-        padding-top: 0;
-        padding-bottom: 0;
-        color: white;
-        transition: color .2s ease-out;
-      }
-  
-      button:hover {
-        color: $tg-brown;
-      }
-  
-      button.active {
-        background-color: $tg-brown;
-        color: white;
-      }
-  
-      mat-icon {
-        vertical-align: middle;
-        font-size: 14px;
-        line-height: 14px;
-        height: 14px;
-        width: 14px;
-        color: white;
+      button span {
+        display: none;
       }
     }
-  
-    .menu-item-label {
-      display: inline-block;
-      vertical-align: middle;
-      margin-left: 8px;
+
+    ul {
+      width: 0;
     }
-  }
 
-  .sidenav-content {
-    padding: 0 1em;
-    overflow: hidden;
-  }
-
-  h1 {
-    text-transform: uppercase;
-    font-size: 1.5em;
-  }
-
-  @include layout-bp(lt-sm) {
-    .tg-manager-wlft, .tg-manager-wrgt {
-      background-image: none;
-      padding-left: 0;
-      padding-right: 0;
-    }
-  
-    mat-sidenav {
-      nav {
-        left: 0;
-  
-      .menu-item-label {
-          display: none;
-        }
-      }
-  
-      nav mat-icon {
-        font-size: 18px;
-        width: 18px;
-        height: 18px;
-      }
+    nav mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
     }
   }
 }

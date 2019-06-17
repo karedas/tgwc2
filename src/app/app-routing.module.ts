@@ -14,25 +14,6 @@ const routes: Routes = [
     path: '**',
     component: PageNotFoundComponent
   }
-  // {
-    // path: '',
-    // loadChildren: () => import('./main/client/client.module').then(m => m.ClientModule),}
-  // {
-    // path: '', component: ManagerComponent
-    // , canActivate: [AuthGuard]
-  // },
-  // {
-  //   path: 'webclient',
-  //   loadChildren: () => import('./main/client/client.module').then(m => m.ClientModule),
-  //   canLoad: [AuthGuard]
-  // },
-  // {
-  //   path: 'novita',
-  //   loadChildren: () => import('./main/pages/global-news/global-news.module').then(m => m.GlobalNewsModule)
-  // },
-
-  // { path: 'login', component: LoginComponent },
-
 ];
 
 
