@@ -1,7 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Renderer2 } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
-import { Platform } from '@angular/cdk/platform';
+import { BreakpointObserver, Breakpoints, MediaMatcher, BreakpointState } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 
 declare let ga: Function;
@@ -41,13 +40,20 @@ export class AppComponent {
   constructor(
     public mediaMatcher: MediaMatcher,
     private router: Router,
-    private platform: Platform,
     public breakpointObserver: BreakpointObserver,
+    private render: Renderer2,
     @Inject(DOCUMENT) private document: any
   ) {
-
-    this.matcher = this.mediaMatcher.matchMedia(Breakpoints.XSmall);
-    this.matcher.addListener(this.breakpointsListener);
+    
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.render.addClass(this.document.body, 'xs');
+        } else {
+          this.render.removeClass(this.document.body, 'xs');
+        }
+      });
 
     // subscribe to router events and send page views to Google Analytics
     this.router.events
@@ -59,9 +65,7 @@ export class AppComponent {
       });
   }
 
-  private breakpointsListener(event) {
-    this.document.body.className += ' is-mobile';
-  }
+
 
   onLoad(event: boolean): void {
     this.load = event;

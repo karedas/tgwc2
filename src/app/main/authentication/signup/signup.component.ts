@@ -6,7 +6,6 @@ import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { tgAnimations } from 'src/app/animations';
-console.log(environment);
 
 @Component({
   selector: 'tg-signup',
@@ -78,12 +77,14 @@ export class SignupComponent implements OnInit {
 
     this.http.post(url, httpBody)
       .subscribe((apiResponse: ApiResponse) => {
+
         if (!apiResponse.success) {
           this.apiError = apiResponse.status;
         } else {
           this.apiError = '';
           this.router.navigate(['/auth/signup-confirm']);
         }
+
       }, (e) => {
         this.apiError = e.error.status;
       });

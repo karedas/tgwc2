@@ -1,15 +1,32 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../models/user.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private jwtHelper: JwtHelperService) { }
+  _isLoggedin: BehaviorSubject<boolean>;
+
+  constructor(private jwtHelper: JwtHelperService) {
+    this._isLoggedin = new BehaviorSubject<any>(false);
+  }
+
+  setLoggedin(val: boolean) {
+    this._isLoggedin.next(val);
+  }
+
+  getLoggedin(): Observable<any> {
+    return this._isLoggedin.asObservable();
+  }
+
 
   isLoggedIn(): boolean {
+    console.log('isloggedin');
     const tokenLife = !this.jwtHelper.isTokenExpired();
-    return tokenLife;
+    this.setLoggedin(tokenLife);
+
+    // return tokenLife;
   }
 
   hasPermission(permission: string) {

@@ -13,7 +13,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   templateUrl: './main-navigation.component.html',
   styleUrls: ['./main-navigation.component.scss']
 })
-export class MainNavigationComponent implements OnDestroy{
+export class MainNavigationComponent implements OnDestroy {
 
   @Input('active') active: string;
 
@@ -26,21 +26,16 @@ export class MainNavigationComponent implements OnDestroy{
   private _mobileQueryListener: () => void;
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private authService: AuthService,
     private loginService: LoginService,
-    private router: Router,
-    media: MediaMatcher) {
-
-    this.mediaQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mediaQuery.addListener(this._mobileQueryListener);
-    this.router.events
-      .subscribe(() => this.checkLoggedinUser());
+    private router: Router
+  ) {
+    this.authService.getLoggedin()
+      .subscribe((status) => {console.log(status); this.setLoggedinUser(status)})
   }
 
-  checkLoggedinUser() {
-    if (this.authService.isLoggedIn()) {
+  private setLoggedinUser(status) {
+    if (status) {
       this.loggedIn = true;
       this.dataUser = this.authService.currentUser;
     }

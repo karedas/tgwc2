@@ -1,64 +1,54 @@
+<div class="tg-manager-wlft tg-shadow" fxLayout="column">
 
-<div fxLayout fxFlex="1 1 auto" style="margin: 0 auto;" class="tg-manager-wlft tg-shadow">
-  <mat-sidenav-container fxFlexFill class="tg-manager-wrgt">
-    <mat-sidenav #sidenav fxLayout="column" opened="true" mode="side">
-      <div fxLayout="column">
-        <nav>
-          <button class="menu-item" 
-          [routerLink]="['/manager/dashboard']" 
-          [ngClass]="{'active': selectedItem === 0}"
+  <mat-sidenav-container class="tg-manager-wrgt" fxFlex="1 1 100%">
+
+    <mat-sidenav #sidenav opened="true" mode="side">
+      <nav>
+        <button class="menu-item" [routerLink]="['/manager/dashboard']" [ngClass]="{'active': selectedItem === 0}"
           (click)="selectItmeMenu(0)">
-            <mat-icon>home</mat-icon>
-            <span>Dashboard</span>
-          </button>
-          <button class="menu-item" 
-          [routerLink]="['/manager/profilo']"
-          [ngClass]="{'active': selectedItem === 1}"
+          <mat-icon>home</mat-icon>
+          <span class="menu-item-label">Dashboard</span>
+        </button>
+        <button class="menu-item" [routerLink]="['/manager/profilo']" [ngClass]="{'active': selectedItem === 1}"
           (click)="selectItmeMenu(1)">
-            <mat-icon>account_circle</mat-icon>
-            <span>Profilo</span>
-          </button>
-          <button class="menu-item" 
-          [routerLink]="['/manager/personaggi']"
-          [ngClass]="{'active': selectedItem === 2}"
+          <mat-icon>account_circle</mat-icon>
+          <span class="menu-item-label">Profilo</span>
+        </button>
+        <button class="menu-item" [routerLink]="['/manager/personaggi']" [ngClass]="{'active': selectedItem === 2}"
           (click)="selectItmeMenu(2)">
-            <mat-icon>people</mat-icon>
-            <span>I miei personaggi</span>
-          </button>
-        </nav>
-        <mat-divider></mat-divider>
-        <nav *ngIf="isEnableFor('administrator')">
-          <button class="menu-item"  
-          [routerLink]="['/manager/administration']"
-          [ngClass]="{'active': selectedItem === 3}"
+          <mat-icon>people</mat-icon>
+          <span class="menu-item-label">I miei personaggi</span>
+        </button>
+      </nav>
+      <mat-divider></mat-divider>
+      <nav *ngIf="isEnableFor('administrator')">
+        <button class="menu-item" [routerLink]="['/manager/administration']" [ngClass]="{'active': selectedItem === 3}"
           (click)="selectItmeMenu(3)">
-            <mat-icon>ballot</mat-icon>
-            <span>Amministrazione</span>
-          </button>
-          <ul>
-            <li>
-              <button class="menu-item" 
-              [routerLink]="['/manager/statistiche']">
-                <span>Statistiche</span>
-              </button>
-            </li>
-            <li>
-              <button class="menu-item" 
-              [routerLink]="['/manager/immagini']">
-                <span>Immagini Gioco</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+          <mat-icon>ballot</mat-icon>
+          <span class="menu-item-label">Amministrazione</span>
+        </button>
+        <ul>
+          <li>
+            <button class="menu-item" [routerLink]="['/manager/statistiche']">
+              <span>Statistiche</span>
+            </button>
+          </li>
+          <li>
+            <button class="menu-item" [routerLink]="['/manager/immagini']">
+              <span>Immagini Gioco</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <div class="sidenav-container">
+
+      <div class="sidenav-content">
         <router-outlet></router-outlet>
         <!-- <tg-manager-footer></tg-manager-footer> -->
       </div>
-      
+
     </mat-sidenav-content>
 
   </mat-sidenav-container>
