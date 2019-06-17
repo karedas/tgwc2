@@ -1,5 +1,4 @@
 @import 'variables';
-// @import '~@angular/flex-layout/mq';
 @import 'utils/fix';
 
 :host {
@@ -9,6 +8,11 @@
   right: 0;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(12, 8, 7, 0.70);
+}
+
+.tg-brand {
+  height: 40px;
+  width: 23px;
 }
 
 .tg-mainnav {
@@ -27,12 +31,11 @@
 
 .tg-mainnav-wrap {
   margin: 0 auto;
-  // max-width: 1410px;
 }
 
 .m-left {
   float: left;
-  padding-left: 1.5em;
+  padding-left: 12px;
 
   .tg-mainnav-item {
     margin-right: 25px;
@@ -41,20 +44,19 @@
 
 .m-right {
   float: right;
-  padding-right: 1.5em;
+  padding-right: 12px;
 
   .tg-mainnav-item {
     margin-left: 25px;
   }
 }
 
-
-
 .tg-mainnav-item {
   height: 40px;
   font-size: 11px;
   display: inline-block;
   line-height: 40px;
+  vertical-align: middle;
 }
 
 .tg-mainnav-item a {
@@ -69,35 +71,10 @@
 }
 
 
-.hamburger-item {
-  float: left;
-  margin-left: 1em;
-  height: 40px;
-  font-size: 11px;
-  display: inline-block;
-  line-height: 40px;
-  cursor: pointer;
-  transition: all .3s ease-out;
-
-}
-
-.hamburger-open {
-  .hamburger-item {
-    transform: rotate(360deg);
-  }
-
-  .m-full {
-    background-color: rgba(0, 0, 0, 0.25);
-    height: 100vh;
-  }
-} 
-
-
-.mat-icon {
+.mat-icon , .user-side{
   color: #bdb3a3;
   vertical-align: middle;
 }
-
 
 .user-menu-item {
   padding: 8px 16px;
@@ -110,40 +87,5 @@
 
   &.highlight {
     background-color: rgba(255, 255, 255, 0.10);
-  }
-}
-
-@include layout-bp(lt-sm) {
-
-  .m-left {
-    width: 240px;
-    overflow-y: auto;
-    top: 0;
-    bottom: 0;
-    left: -100%;
-    position: absolute;
-    background: #0f0b08;
-    height: 100vh;
-    border-right: 1px solid #797576;
-    box-shadow: 5px 0px 16px black;
-    transition: all .2s ease-in-out;
-    padding-left: 2em;
-    padding-top: 40px;
-    box-sizing: border-box;
-  }
-
-  .m-left .tg-mainnav-item {
-    display: block;
-  }
-
-  .hamburger-open .m-left {
-    left: 0; 
-  }
-
-}
-
-@include layout-bp(gt-xs) {
-  .hamburger-item {
-    display: none;
   }
 }

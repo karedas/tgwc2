@@ -19,8 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
-
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDividerModule,
     MatDialogModule,
     MatSidenavModule,
-    MatRadioModule
+    MatRadioModule,
+    MatToolbarModule
   ],
 
   exports: [
@@ -68,6 +68,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
+    MatToolbarModule
   ],
   providers: [
     CookieService,

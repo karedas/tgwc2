@@ -1,11 +1,9 @@
-import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { Platform } from '@angular/cdk/platform';
 
 // import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
 // import { MatDialog } from '@angular/material/dialog';
-import { DOCUMENT } from '@angular/common';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 

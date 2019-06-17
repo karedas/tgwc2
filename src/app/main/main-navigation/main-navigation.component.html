@@ -1,10 +1,12 @@
-<div class="tg-mainnav" [ngClass]="{'hamburger-open': hamburgerStatus}">
+<div class="tg-mainnav">
   <div class="tg-mainnav-wrap">
-    <div class="hamburger-item" (click)="onHamburgerClick()" >
+    <!-- <div class="hamburger-item" (click)="onHamburgerClick()" >
       <mat-icon>menu</mat-icon>
-    </div>
-    <div class="m-full" (click)="hamburgerStatus === true && onHamburgerClick()">
+    </div> -->
+    <div class="m-full">
       <div class="m-left">
+        <div class="tg-brand tg-base-logo tg-mainnav-item">
+        </div>
         <div class="tg-mainnav-item">
           <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
         </div>
@@ -32,11 +34,12 @@
 
         <!-- User Menu -->
         <div class="m-right user-side">
+          
           <div class="tg-mainnav-item">
             
-            {{dataUser.username | capitalizeFirst}}
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>account_box</mat-icon>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>account_box</mat-icon>
+              {{dataUser.username | capitalizeFirst}}
             </button>
             <mat-menu #menu="matMenu" class="mat-elevation-z4">
               <div class="user-menu-item">
@@ -52,7 +55,9 @@
               </ng-container>
               <button mat-menu-item class="user-menu-item" (click)="userOnLogout()">Logout</button>
             </mat-menu>
+
           </div>
+          
         </div>
       </ng-template>
       
