@@ -6,37 +6,35 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  _isLoggedin: BehaviorSubject<boolean>;
+  private _isLoggedin: BehaviorSubject<boolean>;
+  isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+
 
   constructor(private jwtHelper: JwtHelperService) {
     this._isLoggedin = new BehaviorSubject<any>(false);
   }
 
-  setLoggedin(val: boolean) {
-    this._isLoggedin.next(val);
+
+  // public setLoggedinStatus(val: boolean) {
+  //   this._isLoggedin.next(val);
+  // }
+
+  hasToken(): boolean {
+    return !this.jwtHelper.isTokenExpired()
   }
 
-  getLoggedin(): Observable<any> {
-    return this._isLoggedin.asObservable();
+  public isLoggedIn(): Observable<boolean> {
+    return this.isLoginSubject.asObservable();
   }
 
-
-  isLoggedIn(): boolean {
-    console.log('isloggedin');
-    const tokenLife = !this.jwtHelper.isTokenExpired();
-    this.setLoggedin(tokenLife);
-
-    // return tokenLife;
-  }
-
-  hasPermission(permission: string) {
+  public hasPermission(permission: string) {
     if (!this.isLoggedIn()) {
       return false;
     }
     return this.currentUser.hasPermission(permission);
   }
 
-  isEnableTo(permission: string) {
+  public isEnableTo(permission: string) {
 
     if (!this.isLoggedIn()) {
       return false;
@@ -53,7 +51,7 @@ export class AuthService {
     return found;
   }
 
-  get currentUser() {
+  public get currentUser() {
     if ( !this.isLoggedIn() ) {
       return null;
     }
@@ -68,11 +66,14 @@ export class AuthService {
   public saveAuthData(token: string, user: User): void {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    //Update the Observer
+    this.isLoginSubject.next(true);
   }
 
   public removeAuthData(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    //Update the Observer
+    this.isLoginSubject.next(false);
   }
-  
 }

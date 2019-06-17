@@ -1,8 +1,8 @@
 import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MyCharactersService } from './my-characters.service';
 import { takeUntil } from 'rxjs/operators';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'tg-my-characters',
@@ -16,13 +16,13 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
   
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private mycharacterService: MyCharactersService) {
+  constructor(private dashboardService: DashboardService) {
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
 
-    this.mycharacterService.onCharactersListChanged
+    this.dashboardService.onCharactersListChanged
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(( response: ApiResponse ) => { 
         this.characters = response.data.chars;
