@@ -1,5 +1,8 @@
 mat-panel-title{
-  padding: 6px 12px;
+}
+
+mat-expansion-panel {
+  padding: 12px 0;
 }
 
 .characters-action {
@@ -10,7 +13,15 @@ mat-panel-title{
 .ch-avatar {
   width: 75px;
   height: 75px;
-  border: 4px solid black;
+  border: 2px solid #866c1d;
+  box-shadow: inset 0 0 13px black;
+  background: rgb(45, 41, 38);
+
+  .tg-base-logo {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
 }
 
 .ch-infoaction {
@@ -19,5 +30,12 @@ mat-panel-title{
     font-size: 16px;
     font-weight: bold;
   }
-  
+}
+
+.ch-char-action {
+  margin: auto;
+}
+
+.ch-char-details {
+  padding: 6 12px;
 }

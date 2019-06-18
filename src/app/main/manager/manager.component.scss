@@ -44,24 +44,29 @@ mat-sidenav-container {
 
 mat-sidenav-content {
   position: relative;
+  background-color: #25201b;
+  box-shadow: inset 0 0 0px black;
+  color: white;
 }
 
 mat-sidenav {
 
   background-color: #0f0b08;
-  
+
   .tg-manager-avatar {
-    width:180px;
+    width: 180px;
     margin: 12px;
-    border:1px solid rgba(255, 255, 255, 0.2);;
-    > mat-icon {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    ;
+
+    >mat-icon {
       width: 100%;
       height: 100%;
       font-size: 180px;
       color: rgba(255, 255, 255, 0.1);
     }
   }
-  
+
   nav {
 
     color: white;
@@ -163,13 +168,16 @@ mat-divider {
     padding-right: 0;
   }
 
-  .tg-manager-avatar  {
+  .tg-manager-avatar {
     display: none;
   }
-  
+
   mat-sidenav {
+
     nav {
-      left: 0;
+      button {
+        padding-right: 0;
+      }
 
       button span {
         display: none;
@@ -185,5 +193,6 @@ mat-divider {
       width: 18px;
       height: 18px;
     }
+    
   }
 }

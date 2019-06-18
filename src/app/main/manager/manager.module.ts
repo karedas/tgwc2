@@ -25,14 +25,6 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      // {
-      //   path: 'profilo',
-      //   loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-      // },
-      // {
-      //   path: 'personaggi',
-      //   loadChildren: () => import('./my-characters/my-characters.module').then(m => m.MyCharactersModule)
-      // },
       {
         path: 'administration',
         loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
