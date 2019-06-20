@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { navigationSidebar, ManagerNavigation } from './sidebar';
+import { User } from 'src/app/core/models/user.model';
 
 
 
@@ -11,11 +13,22 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class ManagerComponent implements OnInit {
   
   selectedItem = 0;
-  isAdmin: boolean = false;
+  // isAdmin: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  public links: ManagerNavigation[] = [];
+  public currentUser: User;
+
+  constructor(private authService: AuthService) { 
+    this.currentUser = this.authService.currentUser;
+  }
 
   ngOnInit() {
+
+    for (let item in navigationSidebar) {
+      if(navigationSidebar.hasOwnProperty(item)) {
+        this.links.push(navigationSidebar[item]);
+      }
+    }
   }
   
   selectItmeMenu(i) {

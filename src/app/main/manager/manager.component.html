@@ -3,20 +3,46 @@
   <mat-sidenav-container class="tg-manager-wrgt" fxFlex="1 1 100%">
 
     <mat-sidenav #sidenav opened="true" mode="side">
+      
       <div class="tg-manager-avatar">
         <mat-icon>account_circle</mat-icon>
       </div>
-      <nav>
-        <button class="menu-item" [routerLink]="['/manager/dashboard']" [ngClass]="{'active': selectedItem === 0}"
+      
+      <ng-template #itemContent let-item="item">
+
+        <nav *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">
+          <!-- *ngIf="child.permission === null || (child.permission !== null && currentUser.hasPermission(child.permission))" -->
+          <button class="menu-item" 
+          [routerLink]="item.url ? item.url : null" 
+          [ngClass]="{'active': selectedItem === 0}"
           (click)="selectItmeMenu(0)">
-          <mat-icon>home</mat-icon>
-          <span class="menu-item-label">Dashboard</span>
-        </button>
-      </nav>
+            <mat-icon>{{item.icon}}</mat-icon>
+            <span class="menu-item-label">{{item.title}}</span>
+          </button>
+          
+          <ng-container *ngIf="item.children">
+            <ul>
+              <li *ngFor="let child of item.children">
+                <button class="menu-item" [routerLink]="[child.url]"
+                  *ngIf="child.permission == null || (child.permission != null && currentUser.hasPermission(child.permission))">
+                  <span>{{child.title}}</span>
+                </button>
+              </li>
+            </ul>
+          </ng-container>
+          
+        </nav>
+      
+      </ng-template>
+      
+      <ng-container *ngFor="let item of links">
+          <ng-container [ngTemplateOutlet]="itemContent" [ngTemplateOutletContext]="{ item: item }"></ng-container>
+      </ng-container>
+      
 
       <mat-divider></mat-divider>
 
-      <nav *ngIf="isEnableFor('administrator')">
+      <!-- <nav *ngIf="isEnableFor('administrator')">
 
         <button class="menu-item" [routerLink]="['/manager/administration']" [ngClass]="{'active': selectedItem === 3}"
           (click)="selectItmeMenu(3)">
@@ -40,7 +66,7 @@
 
         </ul>
         
-      </nav>
+      </nav> -->
     </mat-sidenav>
 
     <mat-sidenav-content>
