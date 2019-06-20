@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/services/auth.guard';
 import { MainNavigationModule } from './main-navigation/main-navigation.module';
 import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
+import { Error403Module } from './pages/errors/403/error-403.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,6 @@ const routes: Routes = [
   }
 ];
 
-
 @NgModule({
   declarations: [
     MainComponent,
@@ -34,6 +34,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     Auth2Module,
+    Error403Module,
     MainNavigationModule
   ],
   exports: [

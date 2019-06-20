@@ -34,7 +34,7 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
       .subscribe(( response: ApiResponse ) => { 
         this.characters = response.data.chars;
         this.charactersSizeMax = this.characters.length;
-        console.log(this.characters);
+        console.log('myCharacters', this.characters);
       });
   }
 
