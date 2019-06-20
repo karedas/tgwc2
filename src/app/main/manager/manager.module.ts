@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthGuard } from 'src/app/core/services/auth.guard';
 import { FooterComponent } from './footer/footer.component';
+import { CommonModule } from '@angular/common';
 
 
 

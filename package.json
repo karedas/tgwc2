@@ -55,7 +55,6 @@
     "ngx-cookie-service": "^2.2.0",
     "ngx-filesaver": "^2.2.1",
     "ngx-logger": "^3.3.13",
-    "ngx-permissions": "^7.0.2",
     "ngx-scrollbar": "^4.2.0",
     "ngx-socket-io": "^2.0.0",
     "normalize.css": "^8.0.1",

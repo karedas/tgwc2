@@ -3,7 +3,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MainComponent } from './main.component';
 import { Auth2Module } from './authentication/auth.module';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../core/services/auth.guard';
 import { MainNavigationModule } from './main-navigation/main-navigation.module';
 import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 import { Error403Module } from './pages/errors/403/error-403.module';
@@ -21,7 +20,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'manager',
     pathMatch: 'full',
-    // canActivate: [AuthGuard]
   }
 ];
 
@@ -44,4 +42,5 @@ const routes: Routes = [
     CookieLawComponent
   ]
 })
+
 export class MainModule { }

@@ -40,7 +40,6 @@ export class User implements Deserializable<User> {
 
   hasPermission (permission: string): boolean {
     console.log('hasPermission', permission);
-    console.log('permissions', this.permissions);
     return this.permissions.indexOf(permission) >= 0;
   }
 
