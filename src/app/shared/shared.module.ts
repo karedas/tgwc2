@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
   providers: [
     CookieService,

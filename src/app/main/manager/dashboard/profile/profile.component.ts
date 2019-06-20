@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
@@ -8,7 +8,7 @@ import { DashboardService } from '../dashboard.service';
 @Component({
   selector: 'tg-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy{
 
@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(( response: ApiResponse ) => { 
       this.userProfile = response.data;
-      console.log(this.userProfile);
     })
   }
 

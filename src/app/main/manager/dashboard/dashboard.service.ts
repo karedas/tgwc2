@@ -11,7 +11,6 @@ export class DashboardService extends ApiService implements Resolve<any> {
   onCharactersListChanged: BehaviorSubject<any>;
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    console.log('resolved');
 
     this.aboutChanged = new BehaviorSubject<any>({});
     this.onCharactersListChanged = new BehaviorSubject<any>([]);
@@ -36,9 +35,7 @@ export class DashboardService extends ApiService implements Resolve<any> {
     return new Promise((resolve, reject) => {
       this.get('/profile/me')
         .subscribe((about: any) => {
-          console.log(about);
           this.aboutChanged.next(about);
-          console.log('profile/me');
           resolve(about.data);
         }, reject);
     });
@@ -52,7 +49,6 @@ export class DashboardService extends ApiService implements Resolve<any> {
       this.get('/profile/characters')
         .subscribe((chars: any) => {
           this.onCharactersListChanged.next(chars);
-          console.log('chars');
           resolve(chars);
         }, reject);
     });

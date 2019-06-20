@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment.dev';
+import { HttpErrorResponse } from '@angular/common/http';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
