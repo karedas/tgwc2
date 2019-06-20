@@ -2,8 +2,8 @@ import { Deserializable } from './deserializable.model';
 
 export class User implements Deserializable<User> {
   private _id: number;
-  private _name: number;
-  private _email: number;
+  private _name: string;
+  private _email: string;
   private _permissions: string[];
 
   get id(): number {
@@ -14,19 +14,19 @@ export class User implements Deserializable<User> {
     this._id = value;
   }
 
-  get username(): number {
+  get username(): string {
     return this._name;
   }
 
-  set username(value: number) {
+  set username(value: string) {
     this._name = value;
   }
 
-  get email(): number {
+  get email(): string {
     return this._email;
   }
 
-  set email(value: number) {
+  set email(value: string) {
     this._email = value;
   }
 
@@ -38,8 +38,9 @@ export class User implements Deserializable<User> {
     this._permissions = value;
   }
 
-
   hasPermission (permission: string): boolean {
+    console.log('hasPermission', permission);
+    console.log('permissions', this.permissions);
     return this.permissions.indexOf(permission) >= 0;
   }
 

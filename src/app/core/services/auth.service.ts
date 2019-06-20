@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../models/user.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Role } from '../models/role';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,9 @@ export class AuthService {
     this._isLoggedin = new BehaviorSubject<any>(false);
   }
 
+  get isAdmin() {
+    return this.currentUser && this.hasPermission(Role.Administrator);
+  }
 
   // public setLoggedinStatus(val: boolean) {
   //   this._isLoggedin.next(val);

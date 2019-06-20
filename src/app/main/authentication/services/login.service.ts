@@ -17,38 +17,26 @@ export class LoginService extends ApiService {
   // }
   
   public login(data: { username: string, password: string }): Observable<ApiResponse> {
-
-    const url = '/users/login';
-    
-    return this.post(url, {user: data})
-      .pipe(
-        map((apiResponse: ApiResponse) => {
-
+    return this.post('/users/login', {user: data})
+      .pipe( map(( apiResponse: ApiResponse ) => {
           if (!apiResponse.success) {
             return apiResponse;
           }
-
           const responseData = apiResponse.data;
           // this.isLoginSubject$.next(true);
           if (responseData && responseData.token) {
             const user = new User().deserialize(responseData.user);
             this.authService.saveAuthData(responseData.token, user);
-            return apiResponse;
           }
-
           return apiResponse;
         })
     );
   }
 
   public logout(): Observable<boolean> {
-
-    const url = '/users/logout';
-
-    return this.post(url, {id: this.authService.currentUser.id})
+    return this.post('/users/logout', {id: this.authService.currentUser.id})
       .pipe(
         map((apiResponse: ApiResponse) => {
-
           if (!apiResponse.success) {
             return false;
           }
