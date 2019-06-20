@@ -11,6 +11,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
     MatFormFieldModule,
     SharedModule,
     RouterModule.forChild(routes),
+    NgxPermissionsModule.forChild({
+      permissionsIsolate: true,
+      rolesIsolate: true
+    })
   ],
   providers: [
     DashboardService

@@ -1,11 +1,10 @@
 @import 'variables';
-@import 'utils/fix';
-
+@import '~@angular/flex-layout/mq';
 
 :host {
-  font-size: 1rem;
+  font-size: 13px;
   line-height: 1.25;
-  color: #a4abb3;
+  color: #e0e0cf;
   background: #ebeff5;
   height: 100%;
   width: 100%;
@@ -28,6 +27,26 @@
   background: #ebeff5 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y top right;
   padding-right: 13px;
 }
+
+
+::ng-deep {
+
+  
+
+  h1, h2, h3{
+    font-weight: normal;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .mat-divider {
+    border-top-color: rgba(255, 255, 255, 0.2);
+  }
+  
+}
+
 
 mat-toolbar {
   background-color: #181411;
@@ -153,11 +172,10 @@ mat-sidenav {
 h1 {
   text-transform: uppercase;
   font-size: 1.5em;
+  font-weight: normal;
 }
 
-mat-divider {
-  color: rgba(255, 255, 255, 0.2);
-}
+
 
 @include layout-bp(lt-sm) {
 

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { tgAnimations } from 'src/app/animations';
 import { Observable, BehaviorSubject, Subject, throwError } from 'rxjs';

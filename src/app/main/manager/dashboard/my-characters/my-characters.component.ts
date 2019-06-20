@@ -1,8 +1,9 @@
-import { Component, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { DashboardService } from '../dashboard.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-my-characters',
@@ -11,8 +12,14 @@ import { DashboardService } from '../dashboard.service';
 })
 export class MyCharactersComponent implements OnInit,  OnDestroy{
 
+  readonly env = environment;
+  readonly maxCharacter = 2;
+  
   characters: any;
   charactersSizeMax: number = 2;
+
+
+
   
   private _unsubscribeAll: Subject<any>;
 
@@ -27,14 +34,12 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
       .subscribe(( response: ApiResponse ) => { 
         this.characters = response.data.chars;
         this.charactersSizeMax = this.characters.length;
-
+        console.log(this.characters);
       });
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
 }
