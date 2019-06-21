@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { socketEvent } from '../models/socketEvent.enum';
-import { environment } from '../../environments/environment';
+import { socketEvent } from '../../../models/socketEvent.enum';
+import { environment } from '../../../../environments/environment';
 
 import * as io from 'socket.io-client';
 import { Store } from '@ngrx/store';
-import { ClientState } from '../store/state/client.state';
-import { DisconnectAction } from '../store/actions/client.action';
+import { ClientState } from '../../../store/state/client.state';
+import { DisconnectAction } from '../../../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'

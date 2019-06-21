@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginService } from '../authentication/services/login.service';
+import { SidebarService } from '../manager/sidebar/sidebar.service';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -19,13 +20,16 @@ export class MainNavigationComponent implements OnDestroy {
   constructor(
     private authService: AuthService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private sidebarService: SidebarService
   ) {
 
-    this.authService.isLoggedIn()
-      .subscribe((status) => { 
-        this.setLoggedinUser(status);
-      })
+
+    this.router.events.subscribe((event: Event) => {
+      if(event instanceof NavigationEnd) {
+        this.setLoggedinUser(this.authService.isLoggedIn);
+      }
+    });
   }
 
   private setLoggedinUser(status) {
@@ -39,8 +43,8 @@ export class MainNavigationComponent implements OnDestroy {
     }
   }
 
-  onHamburgerClick() {
-    this.hamburgerStatus = !this.hamburgerStatus;
+  onHamburgerClick(event) { 
+    this.sidebarService.toggle();
   }
 
 

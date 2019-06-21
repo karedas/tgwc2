@@ -8,7 +8,7 @@ import { UsernameValidation, PasswordValidation } from 'src/app/main/common/vali
 import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';
-import { SocketService } from 'src/app/services/socket.service';
+import { SocketService } from 'src/app/main/client/services/socket.service';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
 import { LoginClientService } from '../services/login-client.service';

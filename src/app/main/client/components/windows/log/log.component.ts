@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { LogService } from 'src/app/services/log.service';
+import { LogService } from 'src/app/main/client/services/log.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FileSaverService } from 'ngx-filesaver';

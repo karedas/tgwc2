@@ -39,19 +39,8 @@ export const navigationSidebar: ManagerNavigation[] = [
       title: 'Clan',
       type: 'group',
       icon: 'ballot',
+      url: '/manager/clan',
       permission: 'read-clan',
-      // children: [
-      //     {
-      //         id: 'sku-generator',
-      //         title: 'Sku Generator',
-      //         type: 'item',
-      //         url: '/apps/sku-generator',
-      //         icon: 'email',
-      //         exactMatch: true,
-      //         permission: 'create-sku_generator'
-      //     },
-      // ],
-
   },
   {
       id: 'administration',
@@ -59,13 +48,23 @@ export const navigationSidebar: ManagerNavigation[] = [
       type: 'group',
       icon: 'ballot',
       permission: 'read-administration',
-      children: [{
+      children: [
+        {
         id: 'general',
         title: 'Generale',
         type: 'item',
         url: '/manager/administration/general',
         icon: 'dashboard',
-        exactMatch: true,
-      }],
+        exactMatch: true
+        },
+        {
+        id: 'registereduser',
+        title: 'Utenti registrati',
+        type: 'item',
+        url: '/manager/administration/userslist',
+        icon: 'account_group',
+        exactMatch: true
+        },
+      ],
   }
 ];

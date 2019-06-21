@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SocketService } from 'src/app/services/socket.service';
+import { SocketService } from 'src/app/main/client/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationData } from '../models/creation_data.model';

@@ -1,8 +1,8 @@
-<div id="profile">
 
-  <h1 class="profile-username">Salve {{userProfile.username}}</h1>
+<div id="profile" *ngIf="profile">
+  <h1 class="profile-username">Salve {{profile.username}}</h1>
   <div class="profile-detail">
-    <div class="profile-id"><b>TGID: </b>{{userProfile.id}}</div>
+    <div class="profile-id"><b>TGID: </b>{{profile.id}}</div>
   </div>
   <div class="profile-actions">
     <a href="#" class="tg-yellow">Modifica profilo</a>

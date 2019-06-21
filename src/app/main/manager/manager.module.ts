@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthGuard } from 'src/app/core/services/auth.guard';
 import { FooterComponent } from './footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   declarations: [
     ManagerComponent,
     FooterComponent,
+    SidebarComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

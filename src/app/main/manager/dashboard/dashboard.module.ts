@@ -18,9 +18,6 @@ const routes: Routes = [
     path: '**',
     component: DashboardComponent,
     canActivate: [AuthGuard],
-    resolve: {
-      dashboard: DashboardService
-    },
     data: {roles: [Role.Player] }
   }
 ];

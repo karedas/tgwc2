@@ -1,68 +1,74 @@
-<h2>Personaggi</h2>
 
-<div class="header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
-  fxLayout.gt-sm="row">
-  <div class="ch-mainaction">
-    <button mat-raised-button color="accent">
-      <mat-icon>add</mat-icon>
-      Aggiungi personaggio
-    </button> | slot liberi: <b>{{charactersSizeMax - 2}} / 2</b>
+<div id="characters" *ngIf="characters">
+  <h2>I tuoi personaggi</h2>
+  <div class="header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
+    fxLayout.gt-sm="row">
+    <div class="ch-mainaction">
+      <button mat-raised-button color="accent">
+        <mat-icon>add</mat-icon>
+        Nuovo personaggio 
+      </button>
+      <span class="ch-mainaction-slots">| slot liberi: <b>{{charactersSizeMax - 2}} / 2</b></span>
+    </div>
   </div>
+
+
+  <ng-container *ngIf="characters.length > 0; else noCharacters">
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let char of characters"
+        [disabled]="char.status === 'disabled' ? 'isDisabled': ''"
+        [ngClass]="{'char-disabled': char.status === 'disabled'}" >
+
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+
+          <mat-panel-title fxLayout="row" fxLayoutGap="13px">
+            <div class="ch-avatar mat-elevation-z4" fxFlex="0 0 75px">
+              <img src="{{env.media_address + '/' + char.image}}" *ngIf="char.image !== ''" />
+              <div class="tg-base-logo" *ngIf="!char.image"></div>
+            </div>
+            <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
+              <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
+              <div class="ch-char-subaction">
+                <a href="#" class="tg-yellow">Cambia immagine</a>
+              </div>
+            </div>
+          </mat-panel-title>
+
+          <mat-panel-description>
+            <div class="ch-char-action" *ngIf="char.status !== 'disabled'">
+              <button mat-flat-button color="accent" *ngIf="char.status === 'enable'">Connetti</button>
+            </div>
+          </mat-panel-description>
+
+        </mat-expansion-panel-header>
+
+        <div class="ch-char-details">
+          <table>
+            <tr>
+              <td>Razza:</td>
+              <td>{{char.race}}</td>
+            </tr>
+            <tr>
+              <td>Sesso:</td>
+              <td>{{char.sex}}</td>
+            </tr>
+            <tr>
+              <td>Età:</td>
+              <td>{{char.age}}</td>
+            </tr>
+          </table>
+          <button mat-raised-button color="warn" *ngIf="char.status === 'enable'">Disabilita personaggio</button>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </ng-container>
+
+  <ng-template #noCharacters>
+    Non possiedi ne hai creato alcun personaggio fino ad ora.
+    Creane subito uno!
+  </ng-template>
 </div>
 
-
-<ng-container *ngIf="characters.length > 0; else noCharacters">
-
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let char of characters" [ngClass]="{'char-disabled': char.status === 'disabled'}" >
-
-      <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
-
-        <mat-panel-title fxLayout="row" fxLayoutGap="13px">
-          <div class="ch-avatar mat-elevation-z4" fxFlex="0 0 75px">
-            <img src="{{env.media_address + '/' + char.image}}" *ngIf="char.image !== ''" />
-            <div class="tg-base-logo" *ngIf="!char.image"></div>
-          </div>
-          <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
-            <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
-            <div class="ch-char-subaction">
-              <a href="#" class="tg-yellow">Cambia immagine</a>
-            </div>
-          </div>
-        </mat-panel-title>
-
-        <mat-panel-description>
-          <div class="ch-char-action">
-            <button mat-flat-button color="accent" *ngIf="char.status === 'enable'">Connetti</button>
-          </div>
-        </mat-panel-description>
-
-      </mat-expansion-panel-header>
-
-      <div class="ch-char-details">
-        <table>
-          <tr>
-            <td>Razza:</td>
-            <td>{{char.race}}</td>
-          </tr>
-          <tr>
-            <td>Sesso:</td>
-            <td>{{char.sex}}</td>
-          </tr>
-          <tr>
-            <td>Età:</td>
-            <td>{{char.age}}</td>
-          </tr>
-        </table>
-        <button mat-raised-button color="warn" *ngIf="char.status === 'enable'">Disabilita personaggio</button>
-      </div>
-
-    </mat-expansion-panel>
-  </mat-accordion>
-
-</ng-container>
-
-<ng-template #noCharacters>
-  Non possiedi ne hai creato alcun personaggio fino ad ora.
-  Creane subito uno!
-</ng-template>
