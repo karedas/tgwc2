@@ -1,45 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { navigationSidebar, ManagerNavigation } from './sidebar';
-import { User } from 'src/app/core/models/user.model';
+import { MatSidenav } from '@angular/material';
+import { SidebarService } from './sidebar/sidebar.service';
 
 
 
 @Component({
   selector: 'tg-manager',
   templateUrl: './manager.component.html',
-  styleUrls: ['./manager.component.scss']
+  styleUrls: ['./manager.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ManagerComponent implements OnInit {
-  
-  selectedItem = 0;
-  // isAdmin: boolean = false;
 
-  public links: ManagerNavigation[] = [];
-  public currentUser: User;
-
-  constructor(private authService: AuthService) { 
-    this.currentUser = this.authService.currentUser;
-  }
-
-  ngOnInit() {
-
-    for (let item in navigationSidebar) {
-      if(navigationSidebar.hasOwnProperty(item)) {
-        this.links.push(navigationSidebar[item]);
-      }
-    }
+  @Input('sidenav') sidenav: MatSidenav;
+    constructor(private authService: AuthService, private sidebarService: SidebarService) { 
   }
   
-  selectItmeMenu(i) {
-    this.selectedItem = i;
+  ngOnInit(): void {
+    console.log(this.sidenav);
+    this.sidebarService.setSidenav(this.sidenav);
   }
-
-  isEnableFor(level: string): boolean {
-
-    // return this.authService.isEnableTo(level);
-    return true;
-  }
-
 
 }

@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { User } from 'src/app/core/models/user.model';
 import { DashboardService } from '../dashboard.service';
+
+
 
 @Component({
   selector: 'tg-profile',
@@ -12,19 +14,22 @@ import { DashboardService } from '../dashboard.service';
 })
 export class ProfileComponent implements OnInit, OnDestroy{
 
-  userProfile: Subject<User>
+  profile: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(
+    private dashboardService: DashboardService
+  ) {
     this._unsubscribeAll = new Subject();
    }
 
   ngOnInit(): void {
-    this.dashboardService.aboutChanged
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(( response: ApiResponse ) => { 
-      this.userProfile = response.data;
-    })
+
+    this.dashboardService.getProfile()
+      .pipe( takeUntil(this._unsubscribeAll) )
+      .subscribe((profile => {
+        this.profile =  profile;
+      }))
   }
 
   ngOnDestroy(): void {

@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
     const currentUser = this.authService.currentUser;
     if(currentUser) {
-
+      console.log(currentUser);
       // Get roles difference 
       const roles = route.data.roles.some( (r: any) => this.authService.currentUser.permissions.includes(r))
 
@@ -34,21 +34,5 @@ export class AuthGuard implements CanActivate {
     }
 
     this.router.navigate(['auth/login'], {queryParams: { returnUrl: state.url }});
-    return false;
-
-    // return this.authService.isLoggedIn().pipe(
-    //   map( loggedIn => {
-    //     if(loggedIn) {
-    //       return true;
-    //     }
-    //       this.router.navigate(['auth/login']);
-    //       return false;
-
-    //   }),
-    //   catchError( () => {
-    //       this.router.navigate(['auth/login']);
-    //       return of(false);
-    //   })
-    // )
   }
 }

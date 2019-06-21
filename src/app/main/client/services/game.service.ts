@@ -1,7 +1,7 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { SocketService } from '../../../services/socket.service';
+import { SocketService } from './socket.service';
 import { socketEvent } from '../../../models/socketEvent.enum';
-import { DataParser } from '../../../services/dataParser.service';
+import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
 import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';

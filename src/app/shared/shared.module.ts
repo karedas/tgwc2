@@ -20,7 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgxPermissionsModule } from 'ngx-permissions';
+import { SidebarService } from '../main/manager/sidebar/sidebar.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +74,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
   providers: [
     CookieService,
     SplashScreenService,
+    SidebarService
   ]
 })
 export class SharedModule {}

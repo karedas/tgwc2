@@ -1,4 +1,5 @@
 @import 'variables';
+@import '~@angular/flex-layout/mq';
 
 :host {
   position: fixed;
@@ -10,17 +11,21 @@
 }
 
 .tg-brand {
-  height: 40px;
-  width: 23px;
+  
+  a {
+    height: 100%;
+    width: 28px;
+    margin: 0;
+  }
 }
 
 .tg-mainnav {
   width: 100%;
-  height: 40px;
   box-sizing: border-box;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-  background: #181411 url($imgPath + '/navbar/bg.jpg') repeat-x bottom;
+  border-bottom: 1px solid rgb(121, 117, 118);
+  background: #181411;
+  box-shadow: inset 0px -8px 20px 0px black;
 
   p {
     display: inline-block;
@@ -30,32 +35,40 @@
 
 .tg-mainnav-wrap {
   margin: 0 auto;
+  overflow: hidden;
 }
 
-.m-left {
-  float: left;
-  padding-left: 12px;
-
-  .tg-mainnav-item {
-    margin-right: 25px;
-  }
-}
-
-.m-right {
-  float: right;
-  padding-right: 12px;
-
-  .tg-mainnav-item {
-    margin-left: 25px;
-  }
+header {
+  padding: 8px 16px;
+  height: 40px;
 }
 
 .tg-mainnav-item {
-  height: 40px;
+  display: none;
   font-size: 11px;
-  display: inline-block;
-  line-height: 40px;
   vertical-align: middle;
+}
+
+.m-right {
+  margin-left: auto;
+}
+
+
+
+.hamburger-item {
+  display: none;
+}
+
+
+.mat-icon-button, .mat-button{
+  line-height: 24px;
+  height: 24px;
+
+  mat-icon {
+    font-size: 20px;
+    width: auto;
+    height: auto;
+  }
 }
 
 .tg-mainnav-item .mat-button {
@@ -79,6 +92,12 @@
   vertical-align: middle;
 }
 
+.user-button {
+  span {
+    padding-left: 6px;
+  }
+}
+
 .user-menu-item {
   padding: 8px 16px;
   font-size: 11px;
@@ -90,5 +109,38 @@
 
   &.highlight {
     background-color: rgba(255, 255, 255, 0.10);
+  }
+}
+
+
+@include layout-bp(lt-sm) {
+  
+  header {
+    height: auto;
+  }
+  
+  .tg-brand {
+    
+    a {
+      height: 40px;
+      width: 50px;
+      margin: 0;
+    }
+  }
+
+
+  .tg-brand {
+    margin-left: 40px;
+  }
+
+  .hamburger-item {
+    display: flex;
+    margin: auto 0;
+  }
+
+  .mat-button mat-icon, .mat-icon-button mat-icon {
+    font-size: 24px;
+    width: auto;
+    height: auto;
   }
 }

@@ -7,28 +7,39 @@ import { Role } from '../models/role';
 @Injectable()
 export class AuthService {
 
-  private _isLoggedin: BehaviorSubject<boolean>;
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
-
+  private _isLoggedin: BehaviorSubject<boolean>;
+  
 
   constructor(private jwtHelper: JwtHelperService) {
     this._isLoggedin = new BehaviorSubject<any>(false);
+  }
+
+  get currentUser() {
+    if ( !this.isLoggedIn() ) {
+      return null;
+    }
+    return new User().deserialize(JSON.parse(localStorage.getItem('user')));
   }
 
   get isAdmin() {
     return this.currentUser && this.hasPermission(Role.Administrator);
   }
 
-  // public setLoggedinStatus(val: boolean) {
-  //   this._isLoggedin.next(val);
-  // }
+  public setUserLoggedinStatus(val: boolean) {
+    this._isLoggedin.next(val);
+  }
+
+  public getUserLoggedInStatus(): Observable<any> {
+    return this._isLoggedin.asObservable();
+  }
 
   hasToken(): boolean {
     return !this.jwtHelper.isTokenExpired()
   }
 
-  public isLoggedIn(): Observable<boolean> {
-    return this.isLoginSubject.asObservable();
+  public isLoggedIn(): boolean{
+    return !this.jwtHelper.isTokenExpired();
   }
 
   public hasPermission(permission: string) {
@@ -55,14 +66,6 @@ export class AuthService {
     return found;
   }
 
-  public get currentUser() {
-    if ( !this.isLoggedIn() ) {
-      return null;
-    }
-
-    return new User().deserialize(JSON.parse(localStorage.getItem('user')));
-  }
-
   public getToken(): string | null {
     return localStorage.getItem('token');
   }
@@ -70,14 +73,16 @@ export class AuthService {
   public saveAuthData(token: string, user: User): void {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    //Update the Observer
+    // Update the Observers
+    this.setUserLoggedinStatus(true);
     this.isLoginSubject.next(true);
   }
 
   public removeAuthData(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    //Update the Observer
+    // Update the Observers
+    this.setUserLoggedinStatus(false);
     this.isLoginSubject.next(false);
   }
 }

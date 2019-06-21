@@ -130,7 +130,12 @@ tg-main {
   line-height: 16px;
 }
 
-@include layout-bp(lt-md) {
+@include layout-bp(lt-sm) {
+
+  
+.tg-layout-container {
+  padding-top: 58px;
+}
   .tg-area {
     padding: 0;
   }

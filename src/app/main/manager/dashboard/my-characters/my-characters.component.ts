@@ -17,9 +17,6 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
   
   characters: any;
   charactersSizeMax: number = 2;
-
-
-
   
   private _unsubscribeAll: Subject<any>;
 
@@ -28,13 +25,11 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
   }
 
   ngOnInit(): void {
-
-    this.dashboardService.onCharactersListChanged
+    this.dashboardService.getMyCharacters()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(( response: ApiResponse ) => { 
-        this.characters = response.data.chars;
+      .subscribe(( response: any ) => { 
+        this.characters = response.chars;
         this.charactersSizeMax = this.characters.length;
-        console.log('myCharacters', this.characters);
       });
   }
 

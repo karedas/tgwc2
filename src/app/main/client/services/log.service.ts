@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { scan } from 'rxjs/operators';
-import { equip_positions_by_name } from '../main/client/common/constants';
+import { equip_positions_by_name } from '../common/constants';
 
 @Injectable({
   providedIn: 'root'
