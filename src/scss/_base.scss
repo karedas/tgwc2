@@ -85,10 +85,6 @@ body[data-loginstatus=ready] {
   box-shadow: 0px 3px 5px 0 black;
 }
 
-// .tg-shadow-dialog {
-//   box-shadow: 0px 2px 20px 6px black;
-// }
-
 .tg-shadow-inset {
   box-shadow: 0px 0px 9px 2px black inset;
 }
@@ -115,6 +111,12 @@ tg-main {
   padding-top: 40px;
   height: 100vh;
   box-sizing: border-box;
+  display: block;
+  background: url($imgPath + '/background/default-bg.jpg') no-repeat top center;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-color: black;
+  min-height: 100%;
 }
 
 /* Icons & Stuff */

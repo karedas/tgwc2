@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { SidebarService } from './sidebar/sidebar.service';
+import { SidenavService } from './services/sidenav.service';
+import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 
@@ -9,17 +9,31 @@ import { SidebarService } from './sidebar/sidebar.service';
   selector: 'tg-manager',
   templateUrl: './manager.component.html',
   styleUrls: ['./manager.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
-export class ManagerComponent implements OnInit {
 
-  @Input('sidenav') sidenav: MatSidenav;
-    constructor(private authService: AuthService, private sidebarService: SidebarService) { 
-  }
+export class ManagerComponent implements OnInit, OnDestroy{
+
+  @ViewChild('sidenav', {static: true}) public  sidenav: MatSidenav;
+ 
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
+    constructor( 
+      private sidenavService: SidenavService,
+      media: MediaMatcher,
+      changeDetectorRef: ChangeDetectorRef
+    ) {
+      this.mobileQuery = media.matchMedia(Breakpoints.XSmall);
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+    }
   
   ngOnInit(): void {
-    console.log(this.sidenav);
-    this.sidebarService.setSidenav(this.sidenav);
+    this.sidenavService.setSidenav(this.sidenav);
+
   }
 
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
 }

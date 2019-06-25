@@ -16,14 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
 import { MainModule } from './main/main.module';
-// import { TgConfigModule } from './shared/tgconfig.module';
-// import { tgConfig } from './main/client/client-config';
-// import { baseReducer, clearState } from './store';
-// import { ClientEffects } from './store/effects/client.effects';
-// import { DataEffects } from './store/effects/data.effects';
-
-// import { DialogV2Module } from './main/client/common/dialog-v2/dialog-v2.module';
-// import { AngularSplitModule } from 'angular-split';
 import { CoreModule } from './core/core.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';

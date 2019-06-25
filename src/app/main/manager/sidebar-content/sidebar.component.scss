@@ -1,0 +1,119 @@
+@import 'variables';
+@import '~@angular/flex-layout/mq';
+
+
+
+.tg-manager-avatar {
+  width: 180px;
+  margin: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  ;
+
+  >.mat-icon {
+    width: 100%;
+    height: 100%;
+    font-size: 180px;
+    color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+nav {
+
+  color: white;
+  padding: 10px 0;
+  font-size: 12px;
+
+  button.menu-item {
+
+    padding: .6rem 12px .6rem 12px;
+    line-height: 16px;
+    margin: 0;
+    font-size: 13px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: 0 0;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0 0 5px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  li {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 16px 5px 32px;
+  }
+
+  li button {
+    border-bottom: none;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  button {
+    font-weight: normal;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: white;
+    transition: color .2s ease-out;
+  }
+
+  button:hover {
+    color: $tg-brown;
+  }
+
+  button.active {
+    background-color: $tg-brown;
+    color: white;
+  }
+
+  mat-icon {
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 14px;
+    height: 14px;
+    width: 14px;
+    color: white;
+  }
+}
+
+.menu-item-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+
+
+@include layout-bp(lt-sm) {
+  nav {
+    button {
+      padding-right: 0;
+    }
+
+    button span {
+      display: none;
+    }
+  }
+
+  ul {
+    width: 0;
+  }
+
+  nav mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -56,6 +56,6 @@ export interface IHero {
   position?: number;
 }
 
-export class Hero implements IHero {
-  constructor() {}
-}
+// export class Hero implements IHero {
+//   constructor() {}
+// }

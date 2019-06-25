@@ -2,11 +2,8 @@ import { NgModule } from '@angular/core';
 import { ManagerComponent } from './manager.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AuthGuard } from 'src/app/core/services/auth.guard';
 import { FooterComponent } from './footer/footer.component';
-import { CommonModule } from '@angular/common';
-import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { SidebarComponent } from './sidebar-content/sidebar.component';
 
 
 const routes: Routes = [
@@ -40,7 +37,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
-  ]
+  ],
 })
 
 export class ManagerModule { }

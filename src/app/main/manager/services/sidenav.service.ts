@@ -4,14 +4,12 @@ import { MatSidenav } from '@angular/material';
 @Injectable({
   providedIn: 'root'
 })
-export class SidebarService {
+export class SidenavService {
   
   private sidenav: MatSidenav;
 
-
     public setSidenav(sidenav: MatSidenav) {
-        this.sidenav = sidenav;
-        console.log(sidenav)
+      this.sidenav = sidenav;
     }
 
     public open() {

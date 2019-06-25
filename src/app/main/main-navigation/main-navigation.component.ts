@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginService } from '../authentication/services/login.service';
-import { SidebarService } from '../manager/sidebar/sidebar.service';
+import { SidenavService } from '../manager/services/sidenav.service';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -21,7 +21,7 @@ export class MainNavigationComponent implements OnDestroy {
     private authService: AuthService,
     private loginService: LoginService,
     private router: Router,
-    private sidebarService: SidebarService
+    private sidenavService: SidenavService
   ) {
 
 
@@ -44,7 +44,7 @@ export class MainNavigationComponent implements OnDestroy {
   }
 
   onHamburgerClick(event) { 
-    this.sidebarService.toggle();
+    this.sidenavService.toggle();
   }
 
 
