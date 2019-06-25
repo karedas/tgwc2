@@ -1,9 +1,8 @@
-import { Component, OnDestroy, AfterViewInit, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy,  OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { DashboardService } from '../dashboard.service';
 import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'tg-my-characters',
@@ -16,22 +15,33 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
   readonly maxCharacter = 2;
   
   characters: any;
-  charactersSizeMax: number = 2;
+  enabledCharactersNumber: number;
   
   private _unsubscribeAll: Subject<any>;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private userService: UserService) {
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-    this.dashboardService.getMyCharacters()
+    this.userService.getCharacters()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(( response: any ) => { 
         this.characters = response.chars;
-        this.charactersSizeMax = this.characters.length;
+        this.enabledCharactersNumber = this.getTotalEnabledChars();
       });
   }
+  
+
+  getTotalEnabledChars(): number {
+    let count = 0;
+    for(let i = 0; i < this.characters.length; ++i){
+      if(this.characters[i].status === 'enable')
+        count++;
+    }
+    return count;
+  }
+
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

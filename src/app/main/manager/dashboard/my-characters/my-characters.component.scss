@@ -59,6 +59,19 @@ mat-expansion-panel {
   padding: 6px 12px;
 }
 
+
+
+/* No characters*/
+.no-characters-box {
+  border: 1px solid rgba(255,255,255, .2);
+  box-sizing: border-box;
+  text-align: center;
+  min-height: 350px;
+  p {
+
+  }
+} 
+
 /* Disabled Char*/
 mat-expansion-panel.char-disabled {
   * {

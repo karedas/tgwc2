@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { DashboardService } from './dashboard.service';
 import { AuthGuard } from 'src/app/core/services/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { MyCharactersComponent } from './my-characters/my-characters.component';
@@ -37,8 +36,5 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes),
   ],
-  providers: [
-    DashboardService
-  ]
 })
 export class DashboardModule { }

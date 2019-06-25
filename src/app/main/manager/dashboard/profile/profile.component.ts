@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { User } from 'src/app/core/models/user.model';
-import { DashboardService } from '../dashboard.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 
@@ -13,12 +11,11 @@ import { DashboardService } from '../dashboard.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy{
-
   profile: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: UserService
   ) {
     this._unsubscribeAll = new Subject();
    }
