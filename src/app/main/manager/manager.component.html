@@ -1,13 +1,13 @@
 <div class="tg-manager-wlft tg-shadow" fxLayout="column">
-
   <mat-sidenav-container class="tg-manager-wrgt" fxFlex="1 1 100%">
 
-    <mat-sidenav #sidenav opened="false" mode="side">
+    <mat-sidenav #sidenav [opened]="mobileQuery.matches ? 'false' : 'true'"
+      [mode]="mobileQuery.matches ? 'over' : 'side'" 
+      fixedInViewport="false">
       <tg-sidebar></tg-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content>
-
       <div class="sidenav-content">
         <router-outlet></router-outlet>
       </div>

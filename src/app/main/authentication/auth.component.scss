@@ -1,14 +1,5 @@
 @import 'variables';
 
-:host {
-  display: block;
-  background: url($imgPath + '/registration/bg.jpg') no-repeat top left;
-  background-size: 100% auto;
-  background-attachment: fixed;
-  background-color: black;
-  min-height: 100%;
-}
-
 .tg-auth-form {
   width: 340px;
   margin: auto;

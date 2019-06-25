@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, ViewChild } from '@angular/core';
 import { navigationSidebar, ManagerNavigation } from './sidebar';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.model';
-import { SidebarService } from './sidebar.service';
 
 @Component({
   selector: 'tg-sidebar',
@@ -16,7 +15,9 @@ export class SidebarComponent implements OnInit {
   public selectedItem = 0
   public currentUser: User;
 
-  constructor(private authService: AuthService, private sidebarService: SidebarService) {
+  constructor(
+    private authService: AuthService
+    ) {
     this.currentUser = this.authService.currentUser;
   }
 

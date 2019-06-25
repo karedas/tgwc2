@@ -1,14 +1,14 @@
 import { Action } from '@ngrx/store';
 import { Map } from 'src/app/main/client/models/data/map.model';
-import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { Editor } from 'src/app/main/client/models/data/editor.model';
 import { IObjPerson } from 'src/app/main/client/models/data/objpers.model';
 import { IGenericTable } from 'src/app/main/client/models/data/generictable.model';
 import { IWorks } from 'src/app/main/client/models/data/workslist.model';
-import { IRegion } from 'src/app/main/client/models/data/region.model';
 import { IBook } from 'src/app/main/client/models/data/book.model';
 import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
+import { IHero } from 'src/app/main/client/models/data/hero.model';
+import { IRegion } from 'src/app/main/client/models/data/region.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
