@@ -44,11 +44,11 @@
             </button>
             <button mat-button [matMenuTriggerFor]="menu" class="user-button">
               <mat-icon>account_box</mat-icon>
-              <span fxHide fxShow.gt-xs>{{dataUser.username | capitalizeFirst}}</span>
+              <span fxHide fxShow.gt-xs>{{dataUser.name | capitalizeFirst}}</span>
             </button>
             <mat-menu #menu="matMenu" class="mat-elevation-z4">
               <div class="user-menu-item">
-                Collegato come <b class="tg-yellow">{{dataUser.username | capitalizeFirst}}</b>
+                Collegato come <b class="tg-yellow">{{dataUser.name | capitalizeFirst}}</b>
               </div> 
               <mat-divider></mat-divider>
               <button mat-menu-item class="user-menu-item">I tuoi personaggi</button>

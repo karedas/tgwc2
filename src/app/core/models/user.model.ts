@@ -14,11 +14,11 @@ export class User implements Deserializable<User> {
     this._id = value;
   }
 
-  get username(): string {
+  get name(): string {
     return this._name;
   }
 
-  set username(value: string) {
+  set name(value: string) {
     this._name = value;
   }
 

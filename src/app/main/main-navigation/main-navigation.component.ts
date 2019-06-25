@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginService } from '../authentication/services/login.service';
 import { SidenavService } from '../manager/services/sidenav.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -21,10 +22,9 @@ export class MainNavigationComponent implements OnDestroy {
     private authService: AuthService,
     private loginService: LoginService,
     private router: Router,
+    private userService: UserService,
     private sidenavService: SidenavService
   ) {
-
-
     this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd) {
         this.setLoggedinUser(this.authService.isLoggedIn);

@@ -21,6 +21,7 @@ import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.dire
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidenavService } from '../main/manager/services/sidenav.service';
+import { UserService } from '../core/services/user.service';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,8 @@ import { SidenavService } from '../main/manager/services/sidenav.service';
     MatToolbarModule,
   ],
   providers: [
+    SidenavService,
+    UserService,
     CookieService,
     SplashScreenService,
   ]

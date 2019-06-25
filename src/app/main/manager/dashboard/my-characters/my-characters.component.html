@@ -1,19 +1,20 @@
 
 <div id="characters" *ngIf="characters">
   <h2>I tuoi personaggi</h2>
-  <div class="header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
-    fxLayout.gt-sm="row">
-    <div class="ch-mainaction">
-      <button mat-raised-button color="accent">
-        <mat-icon>add</mat-icon>
-        Nuovo personaggio 
-      </button>
-      <span class="ch-mainaction-slots">| slot liberi: <b>{{charactersSizeMax - 2}} / 2</b></span>
+  
+  
+  <ng-container *ngIf="!characters.length > 0; else noCharacters">
+
+    <div class="header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
+      fxLayout.gt-sm="row">
+      <div class="ch-mainaction">
+        <button mat-raised-button color="accent">
+          <mat-icon>add</mat-icon>
+          Nuovo personaggio 
+        </button>
+        <span class="ch-mainaction-slots">| slot liberi: <b>{{maxCharacter - enabledCharactersNumber}} / {{maxCharacter}}</b></span>
+      </div>
     </div>
-  </div>
-
-
-  <ng-container *ngIf="characters.length > 0; else noCharacters">
 
     <mat-accordion>
       <mat-expansion-panel *ngFor="let char of characters"
@@ -67,8 +68,16 @@
   </ng-container>
 
   <ng-template #noCharacters>
-    Non possiedi ne hai creato alcun personaggio fino ad ora.
-    Creane subito uno!
+    <div class="no-characters-box" fxLayout="column" fxLayoutAlign="center center">
+      <p>
+        Non possiedi ne hai creato alcun personaggio fino ad ora.
+      </p>
+      <br>
+        <button mat-raised-button color="accent">
+          <mat-icon>add</mat-icon>
+          Crea
+        </button>
+    </div>
   </ng-template>
 </div>
 
