@@ -7,7 +7,7 @@ import { Role } from '../models/role';
 @Injectable()
 export class AuthService {
 
-  isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+  isLoginSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   private _isLoggedin: BehaviorSubject<boolean>;
   
 
@@ -34,10 +34,6 @@ export class AuthService {
     return this._isLoggedin.asObservable();
   }
 
-  hasToken(): boolean {
-    return !this.jwtHelper.isTokenExpired()
-  }
-
   public isLoggedIn(): boolean{
     return !this.jwtHelper.isTokenExpired();
   }
@@ -62,7 +58,6 @@ export class AuthService {
         found = true;
       }
     }
-
     return found;
   }
 

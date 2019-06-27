@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { AuthGuard } from 'src/app/core/services/auth.guard';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { MyCharactersComponent } from './my-characters/my-characters.component';
 import { FlexLayoutModule } from '@angular/flex-layout';

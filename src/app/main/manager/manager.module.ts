@@ -36,7 +36,7 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    SharedModule,
+    SharedModule
   ],
 })
 

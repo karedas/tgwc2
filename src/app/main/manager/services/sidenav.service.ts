@@ -5,7 +5,7 @@ import { MatSidenav } from '@angular/material';
   providedIn: 'root'
 })
 export class SidenavService {
-  
+
   private sidenav: MatSidenav;
 
     public setSidenav(sidenav: MatSidenav) {
@@ -13,12 +13,11 @@ export class SidenavService {
     }
 
     public open() {
-        return this.sidenav.open();
+      return this.sidenav.open();
     }
 
-
     public close() {
-        return this.sidenav.close();
+      return this.sidenav.close();
     }
 
     public toggle(): void {

@@ -7,7 +7,7 @@ import { VcodeGuard } from './services/vcode.guard';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AnonymousGuard } from 'src/app/core/services/anonymous.guard';
+import { AnonymousGuard } from 'src/app/core/guards/anonymous.guard';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [

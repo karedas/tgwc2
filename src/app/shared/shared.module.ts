@@ -20,7 +20,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SidenavService } from '../main/manager/services/sidenav.service';
 import { UserService } from '../core/services/user.service';
 
 @NgModule({
@@ -73,7 +72,6 @@ import { UserService } from '../core/services/user.service';
     MatToolbarModule,
   ],
   providers: [
-    SidenavService,
     UserService,
     CookieService,
     SplashScreenService,
