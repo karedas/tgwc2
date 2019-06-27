@@ -1,6 +1,6 @@
-@import 'variables';
-@import 'sprites';
-@import 'utils/sprites-mixins';
+@import 'abstract/variables';
+@import 'abstract/sprites';
+@import 'abstract/sprites-mixins';
 
 tg-geo-location {
   background: url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;

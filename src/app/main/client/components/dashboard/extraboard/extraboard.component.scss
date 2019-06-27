@@ -1,7 +1,7 @@
-@import 'variables';
+@import 'abstract/variables';
 
-@import 'sprites';
-@import 'utils/sprites-mixins';
+@import 'abstract/sprites';
+@import 'abstract/sprites-mixins';
 
 /* Tg Extra Board */
 .extraboard-content {

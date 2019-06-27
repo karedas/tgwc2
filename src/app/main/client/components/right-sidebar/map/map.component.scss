@@ -1,8 +1,8 @@
-@import 'variables';
+@import 'abstract/variables';
 
 /* Others */
-@import 'sprites';
-@import 'utils/sprites-mixins';
+@import 'abstract/sprites';
+@import 'abstract/sprites-mixins';
 // @import '~@angular/flex-layout/mq';
 @import 'utils/fix';
 

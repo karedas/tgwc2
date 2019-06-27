@@ -44,7 +44,7 @@ function generateSprites(done) {
         let sprite_options = {
           imgName: folders[i] + '_sprite.png',
           imgPath: '/assets/images/' + folders[i] + '/' + folders[i] + '_sprite.png',
-          cssName: "_" + folders[i] + '_sprite.scss',
+          cssName: "_" + folders[i] + '/abstract/_sprite.scss',
           cssOpts: {
             functions: false
           }
@@ -63,7 +63,7 @@ function generateSprites(done) {
 
       let imgSpriteList = stream(imgStream)
       let cssSpriteList = stream(cssStream)
-        .pipe(concat('_sprites.scss'))
+        .pipe(concat('/abstract/_sprites.scss'))
         .pipe(gulp.dest(config.src.scss));
 
       log(chalk.green("Sprites generated correctly"));

@@ -1,22 +1,21 @@
 
 <div id="characters" *ngIf="characters">
-  <h2 class="tg-brown">I tuoi personaggi</h2>
-  
+  <h2 class="tg-brown comp-title">I tuoi personaggi</h2>
   
   <ng-container *ngIf="characters.length > 0; else noCharacters">
+      <mat-divider></mat-divider>
 
-    <div class="header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
+    <div class="comp-header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
       fxLayout.gt-sm="row">
       <div class="ch-mainaction">
         <span class="ch-mainaction-slots">Slot liberi: <b>{{maxCharacter - enabledCharactersNumber}} / {{maxCharacter}}</b></span>
       </div>
     </div>
 
-    <mat-accordion>
+    <mat-accordion class="mat-elevation-z4">
       <ng-container *ngFor="let char of characters">
-        
         <mat-expansion-panel 
-          [disabled]="char.status === 'disabled' ? 'isDisabled': ''"
+         
           [ngClass]="{'char-disabled': char.status === 'disabled'}" >
   
           <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
@@ -46,7 +45,7 @@
             <table>
               <tr>
                 <td>Razza:</td>
-                <td>{{char.race}}</td>
+                <td>{{ ethnicity[char.race].code == char.ethnicity }}</td>
               </tr>
               <tr>
                 <td>Sesso:</td>
