@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
     this.dashboardService.getProfile()
       .pipe( takeUntil(this._unsubscribeAll) )
       .subscribe((profile => {
-        this.profile =  profile;
+        this.profile =  profile.user;
       }))
   }
 

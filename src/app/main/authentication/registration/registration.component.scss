@@ -1,6 +1,6 @@
-@import 'variables';
-@import 'sprites';
-@import 'utils/sprites-mixins';
+@import 'abstract/variables';
+@import 'abstract/sprites';
+@import 'abstract/sprites-mixins';
 
 :host {
   min-height: 400px;
