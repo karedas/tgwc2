@@ -28,10 +28,9 @@ export class CoreModule {
       return {
           ngModule: CoreModule,
           providers: [
-              LoginService,
-              AuthService,
-              // LoaderService,
-              {provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true}
+            LoginService,
+            AuthService,
+            {provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true}
           ]
       };
   }

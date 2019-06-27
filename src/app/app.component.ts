@@ -65,8 +65,6 @@ export class AppComponent {
       });
   }
 
-
-
   onLoad(event: boolean): void {
     this.load = event;
   }

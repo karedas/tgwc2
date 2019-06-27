@@ -7,16 +7,17 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService extends ApiService {
+  
   public getProfile(): Observable<any> {
     return this.get('/profile/me')
       .pipe(map((response: ApiResponse) => {
         const data = response.data;
         return data;
       })
-      );
+    );
   }
-
 
   public getCharacters(): Observable<any> {
     return this.get('/profile/characters')
@@ -25,4 +26,5 @@ export class UserService extends ApiService {
         return data
       }));
   }
+
 }

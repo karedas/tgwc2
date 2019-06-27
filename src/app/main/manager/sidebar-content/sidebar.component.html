@@ -1,5 +1,10 @@
 <div class="tg-manager-avatar">
-  <mat-icon>account_circle</mat-icon>
+  <ng-container *ngIf="currentUser.image; else noProfileImage">
+    <img [src]="currentUser.image" />
+  </ng-container>
+  <ng-template #noProfileImage>
+    <mat-icon>account_circle</mat-icon>
+  </ng-template>
 </div>
 
 <ng-template #itemContent let-item="item" let-index="idx">

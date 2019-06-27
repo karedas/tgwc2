@@ -10,12 +10,6 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class LoginService extends ApiService {
 
-  // isLoginSubject$ = new BehaviorSubject<boolean>(this.hasToken());
-
-  // private hasToken(): boolean {
-  //   return !!localStorage.getItem('token');
-  // }
-  
   public login(data: { username: string, password: string }): Observable<ApiResponse> {
     return this.post('/users/login', {user: data})
       .pipe( map(( apiResponse: ApiResponse ) => {
@@ -40,7 +34,6 @@ export class LoginService extends ApiService {
           if (!apiResponse.success) {
             return false;
           }
-          // this.isLoginSubject$.next(false);
           this.authService.removeAuthData();
           return true;
         }),

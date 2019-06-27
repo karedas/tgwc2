@@ -15,31 +15,30 @@ export class MainNavigationComponent implements OnDestroy {
   @Input('active') active: string;
 
   public loggedIn = false;
-  public dataUser: any;
+  public currentUser: any;
   public hamburgerStatus = false;
 
   constructor(
     private authService: AuthService,
     private loginService: LoginService,
     private router: Router,
-    private userService: UserService,
     private sidenavService: SidenavService
   ) {
     this.router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd) {
-        this.setLoggedinUser(this.authService.isLoggedIn);
+        this.setLoggedinUser(this.authService.isLoggedIn());
       }
     });
   }
 
-  private setLoggedinUser(status) {
+  private setLoggedinUser(status: boolean) {
     if (status) {
       this.loggedIn = true;
-      this.dataUser = this.authService.currentUser;
+      this.currentUser = this.authService.currentUser;
     }
     else {
       this.loggedIn = false;
-      this.dataUser = null;
+      this.currentUser = null;
     }
   }
 
