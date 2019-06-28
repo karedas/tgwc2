@@ -2,7 +2,7 @@
 @import '~@angular/flex-layout/mq';
 @import 'commons';
 /**** FONTS *****/
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Modern+Antiqua');
 /********************/
 
@@ -17,7 +17,7 @@ body {
   min-height: 100%;
   line-height: normal;
   font-size: 11px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   min-height: 100%;
   flex-direction: column;
   display: flex;
@@ -133,9 +133,10 @@ tg-main {
 
   
 .tg-layout-container {
-  padding-top: 58px;
+  padding-top: 56px;
 }
-  .tg-area {
+
+.tg-area {
     padding: 0;
   }
   

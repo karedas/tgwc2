@@ -1,13 +1,13 @@
 @import 'abstract/variables';
 @import '~@angular/flex-layout/mq';
 
-:host {
-  background: #ebeff5;
+tg-manager {
   width: 1045px;
   max-width: 100%;
   margin: 0 auto;
   height: 100%;
   display: block;
+  font-size: 14px;
 }
 
 .tg-manager-wlft {
@@ -60,7 +60,6 @@ mat-sidenav-container {
   position: relative;
   background-color: #E1E2E1;
   box-shadow: inset 0 0 0px black;
-  color: white;
 }
 
 .mat-sidenav {
