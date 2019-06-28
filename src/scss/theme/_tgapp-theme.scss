@@ -1,5 +1,6 @@
 
 @import 'dialog';
+@import 'partials/mat-divider';
 
 .tg-app {
 
@@ -106,21 +107,12 @@
 
   /* Menu */
   .mat-menu-content {
-
     background-color: #171614;
-
-    // > div {
-    //   margin: -8px 0;
-    // }
   }
 
   .mat-menu-panel {
     border-radius: 0;
     background-color: #171614;
-
-    .mat-divider {
-      border-top-color: rgba(255, 255, 255, 0.32);
-    }
   }
 
   .mat-menu-item {

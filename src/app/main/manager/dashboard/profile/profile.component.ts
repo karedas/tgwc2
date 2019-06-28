@@ -9,6 +9,7 @@ import { UserService } from 'src/app/core/services/user.service';
   selector: 'tg-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit, OnDestroy{
   profile: Observable<any>;

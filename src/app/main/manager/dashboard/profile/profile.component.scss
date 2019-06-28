@@ -1,20 +1,25 @@
-.profile-username {
-  margin-bottom: 0;
-}
 
-.profile-id {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.431);
-  letter-spacing: 1px;
-  padding-top:6px;
-  padding-bottom: 12px;
+tg-profile {
 
-  b {
-    color: white;
-    font-weight: 700;
+  .profile-username {
+    margin-bottom: 0;
   }
-}
+  
+  .profile-id {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.431);
+    letter-spacing: 1px;
+    padding-top:6px;
+    padding-bottom: 12px;
+  
+    b {
+      color: white;
+      font-weight: 700;
+    }
+  }
+  
+  .profile-actions {
+    padding-bottom: 12px;
+  }
 
-.profile-actions {
-  padding-bottom: 12px;
 }

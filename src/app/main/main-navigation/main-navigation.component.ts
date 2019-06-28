@@ -32,10 +32,12 @@ export class MainNavigationComponent implements OnDestroy {
   }
 
   private setLoggedinUser(status: boolean) {
+    
     if (status) {
       this.loggedIn = true;
       this.currentUser = this.authService.currentUser;
     }
+    
     else {
       this.loggedIn = false;
       this.currentUser = null;

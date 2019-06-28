@@ -1,15 +1,17 @@
-import { Component, OnDestroy,  OnInit } from '@angular/core';
+import { Component, OnDestroy,  OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/core/services/user.service';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
+import { Character } from 'src/app/core/models/character.model';
 
 
 @Component({
   selector: 'tg-my-characters',
   templateUrl: './my-characters.component.html',
   styleUrls: ['./my-characters.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MyCharactersComponent implements OnInit,  OnDestroy{
 
@@ -29,8 +31,8 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
   ngOnInit(): void {
     this.userService.getCharacters()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(( response: any ) => { 
-        this.characters = response.chars;
+      .subscribe(( chars: Character ) => { 
+        this.characters = chars;
         this.enabledCharactersNumber = this.getTotalEnabledChars();
       });
   }
