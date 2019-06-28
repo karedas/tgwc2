@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
 
     const currentUser = this.authService.currentUser;
     if(currentUser) {
-      console.log(currentUser);
       // Get roles difference 
       const roles = route.data.roles.some( (r: any) => this.authService.currentUser.permissions.includes(r))
 
@@ -28,7 +27,7 @@ export class AuthGuard implements CanActivate {
         return false;
       }
 
-      console.log('Is Permitted: ', currentUser.permissions);
+      console.log('permissions: ', currentUser.permissions);
       return true;
 
     }

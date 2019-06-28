@@ -3,7 +3,7 @@ import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
 import { map } from 'rxjs/operators';
-import { Characters } from '../models/characters.model';
+import { Character } from '../models/character.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +22,10 @@ export class UserService extends ApiService {
 
   public getCharacters(): Observable<any> {
     return this.get('/profile/characters')
-      .pipe(map((response: ApiResponse) => {
-        const characters = new Characters().deserialize(response.data);
-        return characters
+      .pipe(map(( {data: { chars }}: ApiResponse) => {
+        return chars.map( ( c => {
+          return new Character().deserialize(c);
+        }))
       }));
   }
-
 }

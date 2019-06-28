@@ -1,6 +1,6 @@
 import { Deserializable } from "./deserializable.model";
 
-export class Characters implements Deserializable<Characters> {
+export class Character implements Deserializable<Character> {
   
   id: number;
   createdDate: string;
@@ -11,7 +11,7 @@ export class Characters implements Deserializable<Characters> {
   status: string;
   age: number;
 
-  deserialize(input: any): Characters {
+  deserialize(input: any): Character {
     Object.assign(this, input);
     return this;
   }
