@@ -21,6 +21,8 @@ import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.dire
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from '../core/services/user.service';
+import { LoginService } from '../main/authentication/services/login.service';
+import { ApiService } from '../core/services/api.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,6 @@ import { UserService } from '../core/services/user.service';
     NgScrollbarModule,
     TooltipModule,
     PipesModule,
-
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
@@ -72,9 +73,10 @@ import { UserService } from '../core/services/user.service';
     MatToolbarModule,
   ],
   providers: [
-    UserService,
+    ApiService,
     CookieService,
     SplashScreenService,
+    UserService,
   ]
 })
 export class SharedModule {}

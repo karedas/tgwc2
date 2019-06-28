@@ -9,6 +9,7 @@ export class Character implements Deserializable<Character> {
   race: string;
   sex: string;
   status: string;
+  txtrace: string;
   age: number;
 
   deserialize(input: any): Character {

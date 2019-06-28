@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { HttpClient } from '@angular/common/http';
 import { RegistrationService } from '../../services/registration.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-step-second',
@@ -44,10 +43,5 @@ export class StepSecondComponent {
     this.frmStepSecond.setValue({
       race_code: eth.code
     });
-
-    // if(this.frmStepSecond.valid) {
-      // this.registrationService.setParams({race_label: this.ethnicityList[this.race].name})
-    // }
-
   }
 }

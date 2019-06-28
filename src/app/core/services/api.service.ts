@@ -17,7 +17,9 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     protected authService: AuthService,
-  ) { }
+  ) { 
+    console.log('bo');
+  }
 
   
   public post(url: string, postData: any): Observable<any> {

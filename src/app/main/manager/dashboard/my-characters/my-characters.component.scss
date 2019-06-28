@@ -6,6 +6,10 @@ tg-my-characters {
     
   }
   
+  .ch-header-action {
+    padding-bottom: 12px;
+  }
+
   .mat-expansion-panel {
     // background: rgba(0, 0, 0, 0.15);
     // border: 1px solid rgba(255, 255, 255, 0.2);
@@ -65,9 +69,14 @@ tg-my-characters {
   
     }
   } 
+
+  .ch-count {
+    text-align: right;
+  }
   
   /* Disabled Char*/
   mat-expansion-panel.char-disabled {
+
     * {
       color: gray!important;
     }
@@ -82,7 +91,7 @@ tg-my-characters {
       div {
         filter: saturate(0);
       }
-  
+      
     }
   }
 
