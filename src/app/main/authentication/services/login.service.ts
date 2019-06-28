@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
-import { map, tap, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/services/api.service';
 import { User } from 'src/app/core/models/user.model';
 

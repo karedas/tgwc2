@@ -1,8 +1,7 @@
 
 @import '~@angular/flex-layout/mq';
-@import 'commons';
 /**** FONTS *****/
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Modern+Antiqua');
 /********************/
 
@@ -13,10 +12,10 @@ html {
 
 body {
   background: #0b0807;
-  color: white;
+  color: $base-text-color;
   min-height: 100%;
-  line-height: normal;
-  font-size: 11px;
+  line-height: 1.5;
+  font-size: 14px;
   font-family: 'Roboto', sans-serif;
   min-height: 100%;
   flex-direction: column;
@@ -55,6 +54,15 @@ textarea:focus,
 select:focus,
 button:active {
   outline: 0 none !important;
+}
+
+a {
+  text-decoration: none;
+  color: $tg-brown;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 button,
@@ -103,7 +111,6 @@ tg-main {
   box-sizing: border-box;
 }
 
-
 .tg-layout-container {
   padding-top: 40px;
   height: 100vh;
@@ -114,6 +121,36 @@ tg-main {
   background-attachment: fixed;
   background-color: black;
   min-height: 100%;
+}
+
+
+.main-content {
+  display: table;
+  margin: 0 auto;
+  max-width: 1410px;
+  box-sizing: border-box;
+  padding-right: 13px;
+  background: #0a0706 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y right top;
+
+  .main-content-wrap {
+      background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
+      padding-left: 13px;
+  }
+}
+
+
+.tg-base-logo {
+  background-image: url($imgPath + "/logo/triang_int.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+a.tg-base-logo {
+  display: block;
 }
 
 /* Icons & Stuff */
@@ -130,23 +167,18 @@ tg-main {
 }
 
 @include layout-bp(lt-sm) {
-
-  
 .tg-layout-container {
   padding-top: 56px;
 }
-
 .tg-area {
     padding: 0;
   }
-  
   .tg-main {
     .tg-controlpanel {
       margin-left: 0;
     }
   }
 }
-
 
 /* Various Sprite, Effects and State */
 .cando {

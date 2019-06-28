@@ -1,6 +1,8 @@
 
 @import 'dialog';
 @import 'partials/mat-divider';
+@import 'partials/mat-expansion';
+@import 'partials/mat-menu';
 
 .tg-app {
 
@@ -120,7 +122,6 @@
     line-height: 1;
     height: auto;
     padding: 8px 16px;
-    font-size: 10px;
     
     .mat-icon {
       color: #eceae3;

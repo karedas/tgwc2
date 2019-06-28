@@ -32,7 +32,7 @@
             <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow">Login</a>
           </div>
           <div class="tg-mainnav-item">
-            <a [routerLink]="['/auth/signup']"  fxHide fxShow.lt-sm [routerLinkActive]="['active']">Registrati</a>
+            <a [routerLink]="['/auth/signup']" fxHide fxShow.lt-sm [routerLinkActive]="['active']">Registrati</a>
           </div>
         </div>
 
@@ -57,19 +57,27 @@
 
             <mat-menu #menu="matMenu" class="mat-elevation-z4">
               <div class="user-menu-item">
-                Collegato come <b class="tg-yellow">{{currentUser.username | capitalizeFirst}}</b>
+                Collegato come <span class="tg-yellow">{{currentUser.username | capitalizeFirst}}</span>
               </div>
 
-              <mat-divider></mat-divider>
-              <button mat-menu-item class="user-menu-item">I tuoi personaggi</button>
-              <button mat-menu-item class="user-menu-item" [routerLink]="['manager/profilo']">
-                Vai al tuo profilo
-              </button>
-              <mat-divider></mat-divider>
+              <mat-divider class="light"></mat-divider>
+              
+              <!--  Characters List Fast Connector -->
+              <div class="user-smart-chars">
+                <div class="smart-char" *ngFor="let char of charactersList | async" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="smart-char-avatar">
+                    <img [src]="env.media_address + '/' + char.image" alt="{{char.name}}" />
+                  </div>
+                  <div class="smart-char-name">{{char.name}}</div>
+                </div>
+              </div>
+              <!-- END  Characters List Fast Connector -->
+              
+              <mat-divider class="light"></mat-divider>
 
               <ng-container *ngIf="currentUser.permissions === 'administrator'">
                 <button mat-menu-item class="user-menu-item highlight">Amministrazione</button>
-                <mat-divider></mat-divider>
+                <mat-divider class="light"></mat-divider>
               </ng-container>
 
               <button mat-menu-item class="user-menu-item" (click)="userOnLogout()">Logout</button>

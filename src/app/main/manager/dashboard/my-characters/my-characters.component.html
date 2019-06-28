@@ -1,19 +1,17 @@
 
-<div id="characters" *ngIf="characters">
+<div id="characters" *ngIf="characters | async; let chars;">
   <h2 class="tg-brown comp-title">I tuoi personaggi</h2>
   
-  <ng-container *ngIf="characters.length > 0; else noCharacters">
+  <ng-container *ngIf="chars.length; else noCharacters">
 
-    <div class="comp-header" fxLayout="column" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="space-between end"
-      fxLayout.gt-sm="row">
-      <div class="ch-mainaction">
-        <span class="ch-mainaction-slots">Slot liberi: <b>{{maxCharacter - enabledCharactersNumber}} / {{maxCharacter}}</b></span>
-      </div>
+    <div class="ch-header-action">
+      <a href="#">Nuovo personaggio</a> | <a href="#">Aggiungi manualmente</a> | 
     </div>
 
+    
     <mat-accordion class="mat-elevation-z4">
-      <ng-container *ngFor="let char of characters;">
-        <mat-expansion-panel *ngIf="char.status !== 'disabled'">
+      <ng-container *ngFor="let char of chars;" >
+        <mat-expansion-panel *ngIf="char.status !== 'disabled'" class="mat-elevation-z0">
   
           <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
   
@@ -25,7 +23,7 @@
               <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
                 <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
                 <div class="ch-char-subaction">
-                  <a href="#" class="tg-yellow">Cambia immagine</a>
+                  <a href="#">Cambia immagine</a>
                 </div>
               </div>
             </mat-panel-title>
@@ -42,7 +40,7 @@
             <table>
               <tr>
                 <td>Razza:</td>
-                <td>{{ ethnicity[char.race].code == char.ethnicity }}</td>
+                <td>{{char.race | getEthnicityByCode: char.ethnicity }}</td>
               </tr>
               <tr>
                 <td>Sesso:</td>
@@ -53,16 +51,20 @@
                 <td>{{char.age}}</td>
               </tr>
             </table>
-            <button mat-raised-button color="warn">Disabilita personaggio</button>
+            <button mat-flat-button color="warn">Disabilita personaggio</button>
           </div>
   
         </mat-expansion-panel>
 
       </ng-container>
     </mat-accordion>
+    <p class="ch-count">
+      <b>Totale</b>: {{maxCharacter - enabledCharactersNumber}} / {{maxCharacter}}
+    </p>
 
   </ng-container>
 
+  <!--  No Characters advice -->
   <ng-template #noCharacters>
     <div class="no-characters-box" fxLayout="column" fxLayoutAlign="center center">
       <p>
@@ -74,5 +76,14 @@
         </button>
     </div>
   </ng-template>
+
+  <!-- <ng-container *ngif="let char of characters;">
+    <table class="mat-elevation-z1">
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  </ng-container> -->
+
 </div>
 
