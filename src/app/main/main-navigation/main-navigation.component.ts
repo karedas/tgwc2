@@ -6,6 +6,7 @@ import { SidenavService } from '../manager/services/sidenav.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-main-navigation',
@@ -39,8 +40,11 @@ export class MainNavigationComponent implements OnDestroy {
         }
     });
 
-    this.charactersList = this.userService.getCharacters();
     this._unsubscribeAll = new Subject();
+  }
+  
+  ngOnInit(): void {
+    this.charactersList = this.userService.characters
   }
 
   private setLoggedinUser(status: boolean) {

@@ -29,8 +29,8 @@ export class CoreModule {
       return {
           ngModule: CoreModule,
           providers: [
-            ApiService,
             UserService,
+            ApiService,
             AuthService,
             {provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true}
           ]

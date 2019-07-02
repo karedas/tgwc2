@@ -1,5 +1,5 @@
 import { Component, OnDestroy,  OnInit, ViewEncapsulation } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/core/services/user.service';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
@@ -16,35 +16,37 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
   readonly env = environment;
   readonly maxCharacter = 2;
   readonly ethnicity = ethnicity;
-  
-  characters: any;
+
+  characters: Observable<any>;
+  test: Observable<any>;
   enabledCharactersNumber: number;
   
   private _unsubscribeAll: Subject<any>;
 
   constructor(private userService: UserService) {
     this._unsubscribeAll = new Subject();
-    this.characters = this.userService.getCharacters();
   }
   
   
   ngOnInit(): void {
-    // this.characters.subscribe()
-      // .subscribe( chars => { 
-      //   this.characters = chars;
-      //   this.enabledCharactersNumber = this.getTotalEnabledChars();
-      // });
+    this.characters = this.userService.characters;
+
+    // this.characters = this.userService.characters;
+    // this.characters
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe((chars: any) => { 
+    //     this.enabledCharactersNumber = this.getTotalEnabledChars(chars);
+    //   });
   }
   
-  // private getTotalEnabledChars(): number {
-  //   let count = 0;
-  //   for(let i = 0; i < this.characters.length; ++i){
-  //     if(this.characters[i].status === 'enable')
-  //       count++;
-  //   }
-  //   return count;
-  // }
-
+  private getTotalEnabledChars(chars: any): number {
+    let count = 0;
+    for(let i = 0; i < chars.length; ++i){
+      if(chars[i].status === 'enable')
+        count++;
+    }
+    return count;
+  }
   
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
