@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -24,8 +24,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
    }
 
   ngOnInit(): void {
-
-    this.userService.getProfile()
+    this.profile = this.userService.profile
+    // this.profile = this.userService.getProfile()
       .pipe( takeUntil(this._unsubscribeAll) )
       .subscribe((profile => {
         this.profile =  profile.user;

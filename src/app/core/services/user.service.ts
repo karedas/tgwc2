@@ -2,46 +2,64 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable, ConnectableObservable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
-import { map, share, publishReplay, publish, shareReplay } from 'rxjs/operators';
+import { map, tap, shareReplay, share, publishReplay, refCount } from 'rxjs/operators';
 import { Character } from '../models/character.model';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
+
+const CACHE_SIZE = 1;
 
 @Injectable()
 
 export class UserService extends ApiService {
 
-  characters$: any;
+  private characters$: Observable<Array<Character>>;
+  private profile$: Observable<any>;
 
-  constructor(
-    http: HttpClient,
-    authService: AuthService
-  ) {
-    super(http, authService);
-    console.log('yo 1');
+  get profile(): any {
+    if (!this.profile$) {
+      this.profile$ = this.requestProfile()
+      .pipe(
+        shareReplay(CACHE_SIZE),
+        );
+      }
+      
+    return this.profile$;
   }
 
-  public getProfile(): Observable<any> {
-    return this.get('/profile/me')
+  get characters(): any {
+    if (!this.characters$) {
+      this.characters$ = this.requestCharacters().pipe(
+        shareReplay(CACHE_SIZE)
+      );
+    }
+
+    return this.characters$;
+  }
+
+  public requestProfile(): Observable<any> {
+    let obs$ = this.get('/profile/me')
       .pipe(
+        tap(() => console.log('requestProfile effect on shared')),
         map((response: ApiResponse) => {
           const data = response.data;
           return data;
         })
       );
+
+      
+    return obs$;
   }
 
-  public getCharacters(): Observable<any>{
-
+  public requestCharacters(): Observable<any>{
     let obs$ = this.get('/profile/characters')
       .pipe(
+        tap(() => console.log('Side effect on shared')),
         map(({ data: { chars } }: ApiResponse) => {
           return chars.map((c => {
             return new Character().deserialize(c);
           }))
         }),
-        shareReplay(1)
       )
+      
     return obs$;
   }
 }
