@@ -7,6 +7,8 @@ import { MainNavigationModule } from './main-navigation/main-navigation.module';
 import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 import { Error403Module } from './pages/errors/403/error-403.module';
 import { SidenavService } from './manager/services/sidenav.service';
+import { CookieService } from 'ngx-cookie-service';
+import { SplashScreenService } from './splashscreen/splashscreen.service';
 
 const routes: Routes = [
   {
@@ -43,7 +45,9 @@ const routes: Routes = [
     CookieLawComponent
   ],
   providers: [
-    SidenavService
+    CookieService,
+    SidenavService,
+    SplashScreenService
   ]
 })
 

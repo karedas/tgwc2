@@ -40,9 +40,6 @@ export class MainNavigationComponent implements OnDestroy {
     });
 
     this.charactersList = this.userService.getCharacters();
-    this.charactersList = this.userService.getCharacters();
-    this.charactersList = this.userService.getCharacters();
-    this.charactersList = this.userService.getCharacters();
     this._unsubscribeAll = new Subject();
   }
 

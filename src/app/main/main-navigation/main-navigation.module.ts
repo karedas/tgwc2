@@ -10,8 +10,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MainNavigationComponent
   ],
   imports: [
-    RouterModule,
     SharedModule,
+    RouterModule,
     MatIconModule
   ],
   exports: [

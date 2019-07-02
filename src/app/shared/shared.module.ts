@@ -20,9 +20,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { UserService } from '../core/services/user.service';
-import { LoginService } from '../main/authentication/services/login.service';
-import { ApiService } from '../core/services/api.service';
 
 @NgModule({
   declarations: [
@@ -72,11 +69,5 @@ import { ApiService } from '../core/services/api.service';
     MatRadioModule,
     MatToolbarModule,
   ],
-  providers: [
-    ApiService,
-    CookieService,
-    SplashScreenService,
-    UserService,
-  ]
 })
 export class SharedModule {}
