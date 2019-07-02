@@ -4,16 +4,11 @@ import { AppComponent } from './app.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-// import { EffectsModule } from '@ngrx/effects';
-// import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 import { environment } from 'src/environments/environment';
-
 import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
 import { MainModule } from './main/main.module';
 import { CoreModule } from './core/core.module';

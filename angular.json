@@ -24,15 +24,15 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/scss/"
+              "src/assets/"
             ],
             "styles": [
               "node_modules/normalize.css/normalize.css",
-              "src/scss/client.scss"
+              "src/assets/scss/client.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "./src/scss/"
+                "./src/assets/scss/"
               ]
           },
             "scripts": []
@@ -118,8 +118,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/scss/client.scss",
-              "src/scss/fonts.scss"
+              "src/assets/scss/client.scss",
+              "src/assets/scss/fonts.scss"
             ],
             "scripts": [],
             "assets": [

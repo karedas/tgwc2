@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from 'src/app/core/services/user.service';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
-import { ApiService } from 'src/app/core/services/api.service';
 
 
 @Component({
@@ -25,11 +24,12 @@ export class MyCharactersComponent implements OnInit,  OnDestroy{
 
   constructor(private userService: UserService) {
     this._unsubscribeAll = new Subject();
+    this.characters = this.userService.getCharacters();
   }
   
   
   ngOnInit(): void {
-    this.characters = this.userService.getCharacters();
+    // this.characters.subscribe()
       // .subscribe( chars => { 
       //   this.characters = chars;
       //   this.enabledCharactersNumber = this.getTotalEnabledChars();

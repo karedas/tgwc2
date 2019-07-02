@@ -4,11 +4,21 @@ import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { map } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/services/api.service';
 import { User } from 'src/app/core/models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService extends ApiService {
+  
+  constructor(
+    http: HttpClient,
+    authService: AuthService
+  ) {
+    super(http, authService);
+    console.log('yo 2');
+  }
 
   public login(data: { username: string, password: string }): Observable<ApiResponse> {
     return this.post('/users/login', {user: data})
