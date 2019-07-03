@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginService } from '../authentication/services/login.service';
@@ -11,7 +11,8 @@ import { shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'tg-main-navigation',
   templateUrl: './main-navigation.component.html',
-  styleUrls: ['./main-navigation.component.scss']
+  styleUrls: ['./main-navigation.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainNavigationComponent implements OnDestroy {
 

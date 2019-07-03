@@ -1,12 +1,13 @@
 @import 'abstract/variables';
 @import '~@angular/flex-layout/mq';
 
-:host {
+tg-main-navigation {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  font-size: 12px;
   // box-shadow: 0 2px 5px rgba(12, 8, 7, 0.70);
 }
 
@@ -19,6 +20,7 @@
 }
 
 .tg-mainnav {
+  font-size: 12px;
   width: 100%;
   box-sizing: border-box;
   text-transform: uppercase;
@@ -57,8 +59,8 @@ header {
   display: none;
 }
 
-
-.mat-icon-button, .mat-button{
+.mat-icon-button,
+.mat-button {
   line-height: 24px;
   height: 24px;
 
@@ -70,7 +72,7 @@ header {
 }
 
 .tg-mainnav-item .mat-button {
-  min-width: 0;  
+  min-width: 0;
   padding: 0 8px;
 }
 
@@ -86,7 +88,8 @@ header {
   }
 }
 
-.mat-icon , .user-side{
+.mat-icon,
+.user-side {
   color: #bdb3a3;
   vertical-align: middle;
 }
@@ -108,12 +111,28 @@ header {
   &.highlight {
     background-color: rgba(255, 255, 255, 0.10);
   }
+
 }
 
+.btn-logout {
+  background: #b50000;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid #565656;
+  box-shadow: inset 0px -3px 8px black;
 
-/* Characters Boxes*/ 
+  &:hover {
+    background: #d30000 !important;
+    color: white;
+  }
+
+
+}
+
+/* Characters Boxes*/
 .user-smart-chars {
   background-color: black;
+  padding: 12px 0;
 }
 
 .smart-char {
@@ -134,10 +153,10 @@ header {
   width: 35px;
   margin-right: 12px;
   border: 1px solid $tg-brown;
-  
+
   img {
     max-width: 100%;
-    display: block;  
+    display: block;
   }
 }
 
@@ -148,13 +167,13 @@ header {
 
 
 @include layout-bp(lt-sm) {
-  
+
   header {
     height: auto;
   }
-  
+
   .tg-brand {
-    
+
     a {
       height: 40px;
       width: 50px;
@@ -167,7 +186,8 @@ header {
     margin: auto 0;
   }
 
-  .mat-button mat-icon, .mat-icon-button mat-icon {
+  .mat-button mat-icon,
+  .mat-icon-button mat-icon {
     font-size: 24px;
     width: auto;
     height: auto;

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { tgAnimations } from 'src/app/animations';
-import { Observable, BehaviorSubject, Subject, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 
 @Component({
