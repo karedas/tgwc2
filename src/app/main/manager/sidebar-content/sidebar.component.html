@@ -1,11 +1,11 @@
-<div class="tg-manager-avatar">
+<!-- <div class="tg-manager-avatar">
   <ng-container *ngIf="currentUser.image; else noProfileImage">
     <img [src]="currentUser.image" />
   </ng-container>
   <ng-template #noProfileImage>
     <mat-icon>account_circle</mat-icon>
   </ng-template>
-</div>
+</div> -->
 
 <ng-template #itemContent let-item="item" let-index="idx">
   <nav *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">

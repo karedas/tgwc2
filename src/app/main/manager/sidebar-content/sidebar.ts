@@ -31,7 +31,7 @@ export const navigationSidebar: ManagerNavigation[] = [
       title: 'Dashboard',
       type: 'item',
       icon: 'home',
-      url: '/manager/dashboards',
+      url: '/manager/dashboard',
       permission: 'read-dashboard'
   },
   {

@@ -1,0 +1,14 @@
+@import 'abstract/variables';
+
+mat-ink-bar{
+  height: 1px;
+}
+
+mat-tab-header{
+
+  margin-bottom: 12px;
+
+  .mat-tab-label {
+    color: $base-text-color;
+  }
+}

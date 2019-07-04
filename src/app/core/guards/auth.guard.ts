@@ -22,12 +22,10 @@ export class AuthGuard implements CanActivate {
       const roles = route.data.roles.some( (r: any) => this.authService.currentUser.permissions.includes(r))
 
       if(route.data.roles && !roles) {
-        console.log('no permitted', currentUser.permissions)
         this.router.navigate(['errors/error-403']);
         return false;
       }
 
-      console.log('permissions: ', currentUser.permissions);
       return true;
 
     }

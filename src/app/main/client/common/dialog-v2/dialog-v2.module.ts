@@ -56,7 +56,7 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
     LogComponent,
     ShortcutsPanelComponent
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: getItalianPaginatorIntl}]
+  // providers: [{ provide: MatPaginatorIntl, useClass: getItalianPaginatorIntl}]
 })
 
 export class DialogV2Module { }

@@ -15,10 +15,10 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      {
-        path: 'administration',
-        loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
-      },
+      // {
+      //   path: 'administration',
+      //   loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
+      // },
       {
         path: '',
         redirectTo: 'dashboard',
