@@ -2,7 +2,8 @@
 @import 'abstract/sprites';
 @import 'abstract/sprites-mixins';
 
-@import 'utils/fix';
+@import '~@angular/flex-layout/mq';
+
 
 :host {
   background: black;
