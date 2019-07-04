@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background: #0b0807;
+  background: #000000;
   color: $base-text-color;
   min-height: 100%;
   line-height: 1.5;
@@ -94,6 +94,10 @@ body[data-loginstatus=ready] {
   box-shadow: 0px 0px 9px 2px black inset;
 }
 
+
+
+
+
 .tg-area {
   width: 100%;
   height: 100vh;
@@ -117,6 +121,7 @@ tg-main {
   box-sizing: border-box;
   display: block;
   background: url($imgPath + '/background/default-bg.jpg') no-repeat top center;
+  background-position: 40px 0;
   background-size: 100% auto;
   background-attachment: fixed;
   background-color: black;
@@ -166,9 +171,11 @@ a.tg-base-logo {
   line-height: 16px;
 }
 
-@include layout-bp(lt-sm) {
+@include layout-bp(lt-md) {
+
 .tg-layout-container {
   padding-top: 56px;
+  background-position: 40px 56px;
 }
 .tg-area {
     padding: 0;
@@ -178,6 +185,7 @@ a.tg-base-logo {
       margin-left: 0;
     }
   }
+  
 }
 
 /* Various Sprite, Effects and State */
@@ -188,5 +196,10 @@ a.tg-base-logo {
 .cantdo {
   display: inline-block;
   @include sprite($notchecked-sprite);
+}
+
+
+.table-responsive {
+  overflow-x: auto;
 }
 

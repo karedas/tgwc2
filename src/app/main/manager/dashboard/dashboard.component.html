@@ -1,13 +1,21 @@
+<!-- 
 <section class="section-profile">
-  
   <tg-profile></tg-profile>
-  
-</section>
+</section> 
+-->
 
-<mat-divider></mat-divider>
-
+<!-- <mat-divider></mat-divider> -->
 <section class="section-characters">
+  <mat-tab-group dynamicHeight animationDuration="100ms">
+    <mat-tab label="I miei personaggi">
+      <tg-characters-list [chars]="characters | async"></tg-characters-list>
+    </mat-tab>
+    <mat-tab label="Gestisci personaggi">
+      <tg-characters-manage></tg-characters-manage>
+    </mat-tab>
+  </mat-tab-group>
+
   
-  <tg-my-characters></tg-my-characters>
+
   
 </section>

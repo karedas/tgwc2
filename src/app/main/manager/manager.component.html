@@ -1,17 +1,5 @@
-<div class="tg-manager-wlft tg-shadow" fxLayout="column">
-  <mat-sidenav-container class="tg-manager-wrgt" fxFlex="1 1 100%">
-
-    <mat-sidenav #sidenav [opened]="mobileQuery.matches ? 'false' : 'true'"
-      [mode]="mobileQuery.matches ? 'over' : 'side'" 
-      fixedInViewport="false">
-      <tg-sidebar></tg-sidebar>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-      <div class="sidenav-content-wrap">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
-</div>
+ <div class="tg-manager-wlft">
+    <div class="tg-manager-wrgt" fxFlex="1 1 100%">
+      <router-outlet></router-outlet>
+    </div>
+  </div>

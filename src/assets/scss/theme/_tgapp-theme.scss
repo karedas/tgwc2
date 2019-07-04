@@ -1,10 +1,14 @@
 
-@import 'dialog';
-@import 'partials/mat-divider';
-@import 'partials/mat-expansion';
-@import 'partials/mat-menu';
 
 .tg-app {
+  
+  @import 'dialog';
+  @import 'partials/mat-divider';
+  @import 'partials/mat-expansion';
+  @import 'partials/mat-menu';
+  @import 'partials/mat-table';
+  @import 'partials/mat-tab';
+
 
   .cdk-overlay-connected-position-bounding-box {
     z-index: 9999;
@@ -145,42 +149,6 @@
 
   .mat-menu-item-submenu-trigger::after {
     color: rgba(236, 234, 227, 0.54);
-  }
- 
-  /* Table */
-  .mat-table {
-    background: #271d18;
-    width: 100%;
-
-    .mat-header-cell {
-      color: #FFB300;
-      border-right: 1px solid black;
-      padding: 0 5px;
-      background-color: #0b0907;
-      border-right: 1px solid rgba(255, 255, 255, 0.12);
-      border-bottom-color: rgba(255, 255, 255, 0.12);
-      border-top: 1px solid rgba(255,255,255,0.12);
-      text-align: center;
-    }
-
-    td.mat-cell {
-      border-bottom-color: rgba(255, 255, 255, 0.12);
-      border-right: 1px solid rgba(255, 255, 255, 0.12);
-      color: #dedede;
-      font-size: 100%;
-      background: #191512;
-      padding: 0 5px;
-      text-align: center;
-    }
-
-    tr.mat-footer-row, tr.mat-row {
-      height: 28px;
-      background: #0b0907;
-    }
-
-    tr.mat-row:hover td {
-      background: #272421;
-    }
   }
 
   /* Paginator */

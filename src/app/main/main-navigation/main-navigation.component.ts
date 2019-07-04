@@ -6,7 +6,9 @@ import { SidenavService } from '../manager/services/sidenav.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { shareReplay } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { Character } from 'src/app/core/models/character.model';
+
 
 @Component({
   selector: 'tg-main-navigation',
@@ -17,10 +19,10 @@ import { shareReplay } from 'rxjs/operators';
 export class MainNavigationComponent implements OnDestroy {
 
   @Input('active') active: string;
-  
+
   readonly env = environment;
 
-  public loggedIn = false;
+  public loggedIn = null;
   public currentUser: any;
   public charactersList: Observable<any>;
   public hamburgerStatus = false;
@@ -34,34 +36,45 @@ export class MainNavigationComponent implements OnDestroy {
     private sidenavService: SidenavService,
     private userService: UserService
   ) {
-    this.router.events
-      .subscribe((event: Event) => {
-        if(event instanceof NavigationEnd) {
-          this.setLoggedinUser(this.authService.isLoggedIn());
-        }
-    });
 
+    this.charactersList = this.userService.characters;
     this._unsubscribeAll = new Subject();
   }
-  
+
   ngOnInit(): void {
-    this.charactersList = this.userService.characters
+
+    this.router.events
+      .subscribe((event: Event) => {
+        if (event instanceof NavigationEnd) {
+          this.setLoggedinUser();
+        }
+      });
+
+
+    this.charactersList
+      .pipe(
+        map((chars: any) => {
+          return chars.filter((char: Character) => { return char.status === 1 })
+        }))
+      .subscribe(chl => this.charactersList = chl);
   }
 
-  private setLoggedinUser(status: boolean) {
-    
+  private setLoggedinUser() {
+
+    const status = this.authService.isLoggedIn();
     if (status) {
       this.loggedIn = true;
       this.currentUser = this.authService.currentUser;
     }
-    
+
     else {
       this.loggedIn = false;
       this.currentUser = null;
     }
+    console.log(this.currentUser);
   }
 
-  onHamburgerClick(event) { 
+  onHamburgerClick(event) {
     this.sidenavService.toggle();
   }
 

@@ -38,7 +38,6 @@ export class UserService extends ApiService {
   public requestProfile(): Observable<any> {
     let obs$ = this.get('/profile/me')
       .pipe(
-        tap(() => console.log('requestProfile effect on shared')),
         map((response: ApiResponse) => {
           const data = response.data;
           return data;
@@ -52,7 +51,6 @@ export class UserService extends ApiService {
   public requestCharacters(): Observable<any>{
     let obs$ = this.get('/profile/characters')
       .pipe(
-        tap(() => console.log('Side effect on shared')),
         map(({ data: { chars } }: ApiResponse) => {
           return chars.map((c => {
             return new Character().deserialize(c);

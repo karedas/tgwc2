@@ -9,6 +9,7 @@ import { Error403Module } from './pages/errors/403/error-403.module';
 import { SidenavService } from './manager/services/sidenav.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SplashScreenService } from './splashscreen/splashscreen.service';
+import { HelpComponent } from './pages/help/help.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MainComponent,
-    CookieLawComponent
+    CookieLawComponent,
+    HelpComponent
   ],
   imports: [
     RouterModule.forChild(routes),

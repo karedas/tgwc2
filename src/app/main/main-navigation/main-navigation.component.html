@@ -8,24 +8,23 @@
         </button>
       </div>
 
-      <div class="tg-brand tg-mainnav-item" fxLayout fxFlex="1 1 28px" fxFlex.lt-sm="1 1 auto"
-        fxLayoutAlign.lt-sm="center center">
+      <div class="tg-brand tg-mainnav-item" fxLayout fxFlex="1 1 28px" fxFlex.lt-md="1 1 auto"
+        fxLayoutAlign.lt-md="center center">
         <a href="http://www.thegatemud.it" class="tg-base-logo"></a>
       </div>
 
-      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-xs fxLayoutAlign="center center">
+      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
         <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
       </div>
 
-      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-xs fxLayoutAlign="center center">
+      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
         <a href="http://forum.thegatemud.it">Forum</a>
       </div>
 
-      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-xs fxLayoutAlign="center center">
+      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
         <a [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</a>
       </div>
-
-      <ng-container *ngIf="!loggedIn; else userLoggedIn">
+      <ng-container *ngIf="!loggedIn ; else userLoggedIn">
         
         <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap="20px">
           <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
@@ -41,51 +40,72 @@
 
 
       <ng-template #userLoggedIn>
-        <!-- User Menu -->
-        <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end">
 
-          <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
+        <ng-container *ngIf="currentUser">
 
-            <button mat-icon-button>
-              <mat-icon>notification_important</mat-icon>
-            </button>
-
-            <button mat-button [matMenuTriggerFor]="menu" class="user-button">
-              <mat-icon>account_box</mat-icon>
-              <span fxHide fxShow.gt-xs>{{currentUser.username | capitalizeFirst}}</span>
-            </button>
-
-            <mat-menu #menu="matMenu" class="mat-elevation-z4">
-              <div class="user-menu-item">
-                Collegato come <span class="tg-yellow">{{currentUser.username | capitalizeFirst}}</span>
-              </div>
-
-              <mat-divider class="light"></mat-divider>
-              
-              <!--  Characters List Fast Connector -->
-              <div class="user-smart-chars">
-                <div class="smart-char" *ngFor="let char of charactersList | async" fxLayout="row" fxLayoutAlign="start center">
-                  <div class="smart-char-avatar">
-                    <img [src]="env.media_address + '/' + char.image" alt="{{char.name}}" />
-                  </div>
-                  <div class="smart-char-name">{{char.name}}</div>
+          <!-- User Menu -->
+          <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end">
+  
+            <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
+  
+              <button mat-icon-button>
+                <mat-icon matBadge="4" matBadgeColor="warn">notification_important</mat-icon>
+              </button>
+  
+              <button mat-button [matMenuTriggerFor]="menu" class="user-button">
+                <mat-icon>account_box</mat-icon>
+                <span fxHide fxShow.gt-xs>{{currentUser.username | capitalizeFirst}}</span>
+              </button>
+  
+              <mat-menu #menu="matMenu" class="mat-elevation-z4">
+                <div class="user-menu-item">
+                  Salve <span class="tg-yellow">{{currentUser.username | capitalizeFirst}}</span>
                 </div>
-              </div>
-              <!-- END  Characters List Fast Connector -->
-              
-              <mat-divider class="light"></mat-divider>
-
-              <ng-container *ngIf="currentUser.permissions === 'administrator'">
-                <button mat-menu-item class="user-menu-item highlight">Amministrazione</button>
+  
                 <mat-divider class="light"></mat-divider>
-              </ng-container>
+                
+                <!--  Characters List Fast Connector -->
+                <div class="user-smart-chars">
+                  <div class="menu-label" *ngIf="charactersList.length > 0">
+                    Connettiti con:
+                  </div>
+                  <div class="smart-char" *ngFor="let char of charactersList" fxLayout="row" fxLayoutAlign="start center">
 
-              <button mat-menu-item class="user-menu-button btn-logout" (click)="userOnLogout()">Logout</button>
-            </mat-menu>
+                    <div class="smart-char-avatar">
+                      <ng-container *ngIf="char.image; else nocharImg">
+                        <img [src]="env.media_address + '/' + char.image" alt="{{char.name}}" />
+                      </ng-container>
+                    </div>
 
+                    <div class="smart-char-name">{{char.name}}</div>
+                  </div>
+
+                  <ng-template #nocharImg>
+                      <mat-icon>portrait</mat-icon>
+                  </ng-template>
+
+
+                </div>
+                <!-- END  Characters List Fast Connector -->
+                
+                <mat-divider class="light"></mat-divider>
+  
+                <!-- <ng-container *ngIf="currentUser.permissions === 'administrator'">
+                  <button mat-menu-item class="user-menu-item highlight">Amministrazione</button>
+                  <mat-divider class="light"></mat-divider>
+                </ng-container> -->
+  
+                <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
+                <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button>
+                <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Logout</button>
+              </mat-menu>
+  
+            </div>
           </div>
-        </div>
+          
+        </ng-container>
       </ng-template>
+
     </header>
   </div>
 </div>
