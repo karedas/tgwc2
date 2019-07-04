@@ -9,10 +9,7 @@ import { ApiResponse } from '../models/api-response.model';
 import { AppError } from 'src/app/shared/errors/app.error';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable()
 export class ApiService {
 
   constructor(

@@ -3,7 +3,7 @@ module.exports  = function() {
         src: {
             base: './src',
             assets: './src/assets/',
-            scss: './src/assets/scss/',
+            scss: './src/scss/',
             js: './src/assets/js/',
             img: './src/assets/images/',
             fonts:'./src/assets/fonts/'

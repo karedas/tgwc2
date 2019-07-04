@@ -1,9 +1,8 @@
 @import 'abstract/variables';
 @import '~src/scss/abstract/sprites-mixins';
-@import '~src/scss/sprites';
+@import '~src/scss/abstract/sprites';
 
-// @import '~@angular/flex-layout/mq';
-@import 'utils/fix';
+@import '~@angular/flex-layout/mq';
 
 
 :host {
