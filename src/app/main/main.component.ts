@@ -31,7 +31,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    setTimeout(() => {
       if (!this.cookieService.check('tgCookieLaw')) {
         this.openCookieLaw().afterClosed()
           .subscribe(() => {
@@ -40,7 +39,6 @@ export class MainComponent implements OnInit, OnDestroy {
       } else {
         this.start();
       }
-    });
   }
 
 

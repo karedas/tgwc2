@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { SocketService } from 'src/app/main/client/services/socket.service';
+// import { SocketService } from 'src/app/main/client/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationData } from '../models/creation_data.model';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { SocketService } from 'src/app/main/client/services/socket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,9 @@ export class RegistrationService implements Resolve<any> {
   responseMessage: string;
 
 
-  constructor(private socketService: SocketService) {
+  constructor(
+    // private socketService: SocketService
+  ) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
@@ -44,24 +47,24 @@ export class RegistrationService implements Resolve<any> {
     this.requestType = 'invite';
     this.emailInvitationCode = email;
     this.setHandleRegistrationData();
-    this.socketService.emit('registration');
+    // this.socketService.emit('registration');
   }
 
   register(data?: RegistrationData) {
     this.requestType = 'newchar';
     this.setHandleRegistrationData();
-    this.socketService.emit('newcregistrationchar');
+    // this.socketService.emit('newcregistrationchar');
   }
 
   private setHandleRegistrationData(d?: string) {
     this.resetHandler();
-    this.socketService.addListener(socketEvent.REGISTRATION,
-      (d: any) => this.handleRegistrationData(d));
+    // this.socketService.addListener(socketEvent.REGISTRATION,
+      // (d: any) => this.handleRegistrationData(d));
   }
 
   private resetHandler() {
-    this.socketService.off(socketEvent.NEWCHAR);
-    this.socketService.off(socketEvent.REGISTRATION);
+    // this.socketService.off(socketEvent.NEWCHAR);
+    // this.socketService.off(socketEvent.REGISTRATION);
   }
 
   private handleRegistrationData(data: any) {
@@ -72,7 +75,7 @@ export class RegistrationService implements Resolve<any> {
       if (rep.msg) {
         switch (rep.msg) {
           case 'ready':
-            this.socketService.oob();
+            // this.socketService.oob();
             break;
           case 'enterlogin':
             if (this.requestType === 'invite') {
@@ -93,14 +96,14 @@ export class RegistrationService implements Resolve<any> {
   }
 
   private performRequestInvitationCode() {
-    this.socketService.emit('data', 'requestinvite:' + this.emailInvitationCode);
+    // this.socketService.emit('data', 'requestinvite:' + this.emailInvitationCode);
   }
 
   private onError(error) {
   }
 
   private onCreated(data: any) {
-    this.socketService.off(socketEvent.REGISTRATION);
+    // this.socketService.off(socketEvent.REGISTRATION);
     this.responseMessage = data;
     this.isCreatedSubject.next(true);
   }
@@ -126,6 +129,6 @@ export class RegistrationService implements Resolve<any> {
       + '\n';
 
 
-    this.socketService.emit('data', creationString);
+    // this.socketService.emit('data', creationString);
   }
 }

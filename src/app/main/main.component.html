@@ -1,6 +1,6 @@
+<tg-main-navigation [hidden]="!isCookieAccepted"></tg-main-navigation>
 <ng-container *ngIf="isCookieAccepted">
   
-  <tg-main-navigation></tg-main-navigation>
   <div class="tg-layout-container">
     <router-outlet></router-outlet>
   </div>

@@ -61,6 +61,10 @@ a {
   color: $tg-brown;
 }
 
+a.underlink {
+  text-decoration: underline;
+}
+
 a:hover {
   text-decoration: underline;
 }
@@ -121,7 +125,7 @@ tg-main {
   box-sizing: border-box;
   display: block;
   background: url($imgPath + '/background/default-bg.jpg') no-repeat top center;
-  background-position: 40px 0;
+  background-position: 0 0;
   background-size: 100% auto;
   background-attachment: fixed;
   background-color: black;
@@ -175,7 +179,7 @@ a.tg-base-logo {
 
 .tg-layout-container {
   padding-top: 56px;
-  background-position: 40px 56px;
+  background-position: 0 0;
 }
 .tg-area {
     padding: 0;
