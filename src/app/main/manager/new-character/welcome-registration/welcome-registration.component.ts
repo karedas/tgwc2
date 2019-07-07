@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component,  ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegistrationService } from '../services/registration.service';
 import { NgForm } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -24,7 +23,6 @@ export class WelcomeRegistrationComponent implements OnDestroy {
 
   constructor(
     private router: Router,
-    private registrationService: RegistrationService,
     ) {
       this._unsubscribeAll = new Subject<any>();
     }

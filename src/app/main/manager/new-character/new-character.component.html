@@ -1,8 +1,8 @@
-<div class="tg-registration"  fxLayout="row wrap" >
-  <div class="tg-registration--wrap">
+<div class="tg-registration" fxLayout="wrap" fxLayoutAlign="center center" fxFlexFill >
+  <div class="tg-registration--wrap"  [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
     <div class="b-ironlight-mini tg-box tg-shadow">
       <div class="tg-registration-content tg-shadow-inset">
-        <!-- <router-outlet></router-outlet> -->
+        <router-outlet></router-outlet>
       </div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="tg-registration-footer">
-      <p><a routerLink="/">Torna alla pagina di login</a></p>
+      <p><a routerLink="/manager">Torna alla Dashboard</a></p>
     </div>
   </div>
 </div>

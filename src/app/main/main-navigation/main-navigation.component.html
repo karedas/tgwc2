@@ -1,8 +1,7 @@
-<div class="tg-mainnav">
-  <div class="tg-mainnav-wrap">
-    <header class="m-full" fxLayout="wrap" fxLayoutGap="20px">
+<mat-toolbar class="tg-mainnav">
+  <mat-toolbar-row  fxLayout="wrap" fxLayoutGap="20px">
 
-      <div class="hamburger-item" *ngIf="loggedIn">
+      <div class="hamburger-item">
         <button mat-icon-button (click)="onHamburgerClick($event)">
           <mat-icon>menu</mat-icon>
         </button>
@@ -24,7 +23,7 @@
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
         <a [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</a>
       </div>
-      <ng-container *ngIf="!loggedIn ; else userLoggedIn">
+      <ng-container *ngIf="loggedIn === false ; else userLoggedIn">
         
         <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap="20px">
           <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
@@ -49,7 +48,7 @@
             <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
   
               <button mat-icon-button>
-                <mat-icon matBadge="4" matBadgeColor="warn">notification_important</mat-icon>
+                <mat-icon matBadge="4" matBadgeColor="warn" matBadgeSize="small">notification_important</mat-icon>
               </button>
   
               <button mat-button [matMenuTriggerFor]="menu" class="user-button">
@@ -65,11 +64,9 @@
                 <mat-divider class="light"></mat-divider>
                 
                 <!--  Characters List Fast Connector -->
-                <div class="user-smart-chars">
-                  <div class="menu-label" *ngIf="charactersList.length > 0">
-                    Connettiti con:
-                  </div>
-                  <div class="smart-char" *ngFor="let char of charactersList" fxLayout="row" fxLayoutAlign="start center">
+                <div class="user-smart-chars" *ngIf="charactersList | async as chars">
+
+                  <div class="smart-char" *ngFor="let char of chars" fxLayout="row" fxLayoutAlign="start center">
 
                     <div class="smart-char-avatar">
                       <ng-container *ngIf="char.image; else nocharImg">
@@ -105,7 +102,5 @@
           
         </ng-container>
       </ng-template>
-
-    </header>
-  </div>
-</div>
+    </mat-toolbar-row>
+</mat-toolbar>

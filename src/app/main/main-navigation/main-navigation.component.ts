@@ -36,27 +36,29 @@ export class MainNavigationComponent implements OnDestroy {
     private sidenavService: SidenavService,
     private userService: UserService
   ) {
+    
+    this.router.events
+      .subscribe((event: Event) => {
+        if (event instanceof NavigationEnd) {
+          this.setLoggedinUser();
+          this.charactersList = this.userService.characters;
+        }
+      });
 
-    this.charactersList = this.userService.characters;
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
 
-    this.router.events
-      .subscribe((event: Event) => {
-        if (event instanceof NavigationEnd) {
-          this.setLoggedinUser();
-        }
-      });
+      if(this.charactersList && this.loggedIn) {
 
-
-    this.charactersList
-      .pipe(
-        map((chars: any) => {
-          return chars.filter((char: Character) => { return char.status === 1 })
-        }))
-      .subscribe(chl => this.charactersList = chl);
+        this.charactersList
+          .pipe(
+            map((chars: any) => {
+              return chars.filter((char: Character) => { return char.status === 1 })
+            }))
+          .subscribe(chl => this.charactersList = chl);
+      }
   }
 
   private setLoggedinUser() {
@@ -71,7 +73,6 @@ export class MainNavigationComponent implements OnDestroy {
       this.loggedIn = false;
       this.currentUser = null;
     }
-    console.log(this.currentUser);
   }
 
   onHamburgerClick(event) {

@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Role } from 'src/app/core/models/role';
-import { MatTableModule, MatTabsModule } from '@angular/material';
+import { MatTableModule, MatTabsModule, MatInputModule } from '@angular/material';
 import { CharactersManageComponent } from './characters-manage/characters-manage.component';
 
 const routes: Routes = [
@@ -37,6 +37,7 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatInputModule,
     MatTabsModule,
     SharedModule,
     RouterModule.forChild(routes),

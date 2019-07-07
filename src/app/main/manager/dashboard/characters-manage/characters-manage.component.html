@@ -1,3 +1,23 @@
-<div class="ch-header-action">
-  <a href="#">Nuovo personaggio</a> | <a href="#">Aggiungi manualmente</a>
+<div class="comp-content comp-padd">
+
+  <div class="ch-header-action">
+    <p>
+      Sei nuovo? Vuoi creare un nuovo personaggio? Inizia da qui!
+    </p>
+    <button mat-raised-button>
+      <a [routerLink]="[ '/manager/nuovo-personaggio']">Nuovo personaggio</a>
+    </button>
+    <form>
+      <p>
+        Aggiungi manualmente (ho già un personaggio e desidero aggiungerlo a questo account):
+      </p>
+      <mat-form-field class="i-fullwidth">
+        <input matInput placeholder="Nome Personaggio" value="" type="text">
+      </mat-form-field>
+      <mat-form-field class="i-fullwidth">
+        <input matInput placeholder="Password" value="" type="password">
+      </mat-form-field>
+    </form>
+  </div>
+  
 </div>

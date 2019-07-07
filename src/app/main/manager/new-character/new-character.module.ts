@@ -12,15 +12,16 @@ import { SummaryRegistrationComponent } from './summary-registration/summary-reg
 import { RegistrationService } from './services/registration.service';
 import { WizardComponent } from './wizard/wizard.component';
 import { WelcomeRegistrationComponent } from './welcome-registration/welcome-registration.component';
-import { RegistrationComponent } from './registration.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NewCharacterComponent } from './new-character.component';
+import { MatInputModule } from '@angular/material';
 
 
 export const routes: Routes = [
 
   {
-    path: '',
-    component: RegistrationComponent,
+    path: 'nuovo-personaggio',
+    component: NewCharacterComponent,
     children: [
       {
         path: 'benvenuto',
@@ -40,7 +41,8 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'benvenuto'
+        pathMatch: 'full',
+        redirectTo: 'wizard'
       },
     ],
   },
@@ -48,13 +50,13 @@ export const routes: Routes = [
 
 @NgModule({
   declarations: [
+    NewCharacterComponent,
     StepFirstComponent,
     StepSecondComponent,
     StepThirdComponent,
     StepFourComponent,
     StepFiveComponent,
     StepSixComponent,
-    RegistrationComponent,
     SummaryRegistrationComponent,
     WizardComponent,
     WelcomeRegistrationComponent,
@@ -63,7 +65,8 @@ export const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
-    MatStepperModule
+    MatStepperModule,
+    MatInputModule
   ],
   exports: [
     RouterModule
@@ -72,4 +75,4 @@ export const routes: Routes = [
     RegistrationService
   ]
 })
-export class RegistrationModule { }
+export class NewCharacterModule { }

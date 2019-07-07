@@ -1,5 +1,4 @@
-import { Component,  OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component,  OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 
@@ -12,14 +11,19 @@ import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 })
 export class MyCharactersComponent implements OnInit{
 
+  @Output() goToManage = new EventEmitter();
   @Input('chars') chars: any[];
+
 
 
   readonly env = environment;
   readonly maxCharacter: number;
   readonly ethnicity = ethnicity;
+
+
   enabledCharactersNumber: number;
-  
+
+
   constructor() {
     this.maxCharacter = 2;
   }
@@ -30,6 +34,11 @@ export class MyCharactersComponent implements OnInit{
   
 
   private getTotalEnabledChars(chars: any): number {
+  
+    if (!chars) 
+      return;
+  
+  
     let count = 0;
     for(let i = 0; i < chars.length; ++i){
       if(chars[i].status === 1)
@@ -38,4 +47,7 @@ export class MyCharactersComponent implements OnInit{
     return count;
   }
 
+  goToChractersManage(event) {
+    this.goToManage.emit();
+  }
 }

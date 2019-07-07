@@ -48,12 +48,12 @@
 
   <!--  No Characters advice -->
   <ng-template #noCharacters>
-    <div class="no-characters-box comp-content" fxLayout="column" fxLayoutAlign="center center">
+    <div class="no-characters-box comp-content comp-padd" fxLayout="column" fxLayoutAlign="center center">
       <p>
-        Non possiedi ne hai creato alcun personaggio fino ad ora.
+        Non possiedi un personaggio attivo.
       </p>
-        <button mat-raised-button color="accent">
-          Crea
+        <button mat-raised-button color="accent" (click)="goToChractersManage()">
+          Crea o Aggiungi
         </button>
     </div>
   </ng-template>

@@ -4,9 +4,12 @@ import { socketEvent } from '../../../models/socketEvent.enum';
 import { environment } from '../../../../environments/environment';
 
 import * as io from 'socket.io-client';
+import { DisconnectAction } from 'src/app/store/actions/client.action';
+import { ClientState } from 'src/app/store/state/client.state';
 import { Store } from '@ngrx/store';
-import { ClientState } from '../../../store/state/client.state';
-import { DisconnectAction } from '../../../store/actions/client.action';
+// import { Store } from '@ngrx/store';
+// import { ClientState } from '../../../store/state/client.state';
+// import { DisconnectAction } from '../../../store/actions/client.action';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,9 @@ export class SocketService {
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private store: Store<ClientState>) {
+  constructor(
+    private store: Store<ClientState>
+    ) {
     this.connect();
   }
 

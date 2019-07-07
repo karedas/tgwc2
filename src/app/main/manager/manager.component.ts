@@ -15,7 +15,7 @@ import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layo
 export class ManagerComponent implements OnInit, OnDestroy {
 
   @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
-
+  
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
 
@@ -24,14 +24,15 @@ export class ManagerComponent implements OnInit, OnDestroy {
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef
   ) {
+
     this.mobileQuery = media.matchMedia(Breakpoints.XSmall);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
   }
 
   ngOnInit(): void {
     this.sidenavService.setSidenav(this.sidenav);
-
   }
 
   ngOnDestroy(): void {

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ManagerComponent } from './manager.component';
 import { Routes, RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar-content/sidebar.component';
+import { NewCharacterModule } from './new-character/new-character.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'nuovo-personaggio',
+        loadChildren: () => import('./new-character/new-character.module').then(m => m.NewCharacterModule)
       },
       // {
       //   path: 'administration',
@@ -36,6 +41,7 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
+    NewCharacterModule,
     SharedModule
   ],
 })

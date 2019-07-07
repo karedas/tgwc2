@@ -65,7 +65,7 @@ export class WizardComponent implements OnInit, OnDestroy {
 
   constructor(
     private registrationService: RegistrationService,
-    private router: Router
+    private router: Router,
   ) {
     this.data = this.registrationService.getParams();
     this._unsubscribeAll = new Subject<any>();
