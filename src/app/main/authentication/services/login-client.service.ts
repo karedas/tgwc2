@@ -5,14 +5,6 @@ import { SocketService } from 'src/app/main/client/services/socket.service';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { GameService } from 'src/app/main/client/services/game.service';
 
-export const loginEventName = {
-  READY: 'ready',
-  SHUTDOWN: 'shutdown',
-  SERVERDOWN: 'serverdown',
-  REBOOT: 'reboot',
-  ENTERLOGIN: 'enterlogin',
-  LOGINOK: 'loginok',
-};
 
 @Injectable({
   providedIn: 'root'
@@ -94,39 +86,39 @@ export class LoginClientService {
 
   private handleLoginData(data: any) {
 
-    if (data.indexOf('&!connmsg{') === 0) {
-      const end = data.indexOf('}!');
-      const rep = JSON.parse(data.slice(9, end + 1));
+    // if (data.indexOf('&!connmsg{') === 0) {
+    //   const end = data.indexOf('}!');
+    //   const rep = JSON.parse(data.slice(9, end + 1));
 
-      if (rep.msg) {
-        switch (rep.msg) {
+    //   if (rep.msg) {
+    //     switch (rep.msg) {
 
-          case loginEventName.READY:
-            this.socketService.oob();
-            break;
-          case loginEventName.ENTERLOGIN:
-            this.onEnterLogin();
-            break;
-          case loginEventName.SHUTDOWN:
-            this.onShutDown();
-            this.onEnterLogin();
-            break;
-          case loginEventName.REBOOT:
-            this.onReboot();
-            this.onEnterLogin();
-            break;
-          case loginEventName.LOGINOK:
-            this.onLoginOk(data.slice(end + 2));
-            break;
-          case loginEventName.SERVERDOWN:
-            this.onServerDown();
-            break;
-          default:
-            this.onError(rep.msg);
-            break;
-        }
-      }
-    }
+    //       case socketEventName.READY:
+    //         this.socketService.oob();
+    //         break;
+    //       case socketEventName.ENTERLOGIN:
+    //         this.onEnterLogin();
+    //         break;
+    //       case socketEventName.SHUTDOWN:
+    //         this.onShutDown();
+    //         this.onEnterLogin();
+    //         break;
+    //       case socketEventName.REBOOT:
+    //         this.onReboot();
+    //         this.onEnterLogin();
+    //         break;
+    //       case socketEventName.LOGINOK:
+    //         this.onLoginOk(data.slice(end + 2));
+    //         break;
+    //       case socketEventName.SERVERDOWN:
+    //         this.onServerDown();
+    //         break;
+    //       default:
+    //         this.onError(rep.msg);
+    //         break;
+    //     }
+    //   }
+    // }
   }
 
   private onEnterLogin() {
