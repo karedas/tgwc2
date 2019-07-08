@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginService } from '../authentication/services/login.service';
-import { SidenavService } from '../manager/services/sidenav.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 
 
@@ -17,7 +16,8 @@ import { Character } from 'src/app/core/models/character.model';
   encapsulation: ViewEncapsulation.None
 })
 export class MainNavigationComponent implements OnDestroy {
-
+  
+  @Output() toggleSidenav = new EventEmitter<void>();
   @Input('active') active: string;
 
   readonly env = environment;
@@ -33,7 +33,6 @@ export class MainNavigationComponent implements OnDestroy {
     private authService: AuthService,
     private loginService: LoginService,
     private router: Router,
-    private sidenavService: SidenavService,
     private userService: UserService
   ) {
     
@@ -74,11 +73,6 @@ export class MainNavigationComponent implements OnDestroy {
       this.currentUser = null;
     }
   }
-
-  onHamburgerClick(event) {
-    this.sidenavService.toggle();
-  }
-
 
   userOnLogout() {
     this.loginService.logout().subscribe(() => {

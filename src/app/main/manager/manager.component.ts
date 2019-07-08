@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { SidenavService } from './services/sidenav.service';
 import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
@@ -12,7 +11,7 @@ import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layo
   encapsulation: ViewEncapsulation.None
 })
 
-export class ManagerComponent implements OnInit, OnDestroy {
+export class ManagerComponent implements OnDestroy {
 
   @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
   
@@ -20,7 +19,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
 
   constructor(
-    private sidenavService: SidenavService,
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef
   ) {
@@ -29,10 +27,6 @@ export class ManagerComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-  }
-
-  ngOnInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
   }
 
   ngOnDestroy(): void {

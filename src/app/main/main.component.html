@@ -1,8 +1,37 @@
-<tg-main-navigation [hidden]="!isCookieAccepted"></tg-main-navigation>
-<ng-container *ngIf="isCookieAccepted">
-  
-  <div class="tg-layout-container">
-    <router-outlet></router-outlet>
-  </div>
-  
-</ng-container>
+<tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
+
+<mat-sidenav-container autosize>
+
+  <mat-sidenav mode="over" #navigationSidenav role="navigation">
+
+    <mat-toolbar fxLayout="wrap" fxLayoutGap="20px">
+      <mat-toolbar-row>
+        <div class="tg-brand tg-mainnav-item" fxLayout fxFlex="1 1 28px" fxFlex.lt-md="1 1 auto"
+          fxLayoutAlign.lt-md="center center">
+          <a href="http://www.thegatemud.it" class="tg-base-logo"></a>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <tg-sidebar></tg-sidebar>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <!-- <crm-navigation-bar
+          *ngIf="isAuthenticated()"
+          (toggleSidenav)="sidenav.toggle()">
+        </crm-navigation-bar> -->
+
+    <ng-container *ngIf="isCookieAccepted">
+
+      <div class="tg-layout-container">
+        <router-outlet></router-outlet>
+      </div>
+
+    </ng-container>
+
+  </mat-sidenav-content>

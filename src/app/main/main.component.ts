@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-
-// import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
-// import { MatDialog } from '@angular/material/dialog';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 
@@ -53,7 +50,6 @@ export class MainComponent implements OnInit, OnDestroy {
     config.width = '450px';
     // config.scrollStrategy = this.overlay.scrollStrategies.reposition();
     const dialogRef = this.dialog.open(CookieLawComponent, config);
-
     return dialogRef;
   }
 

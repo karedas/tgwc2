@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TooltipModule } from 'ng2-tooltip-directive';
 // My Modules and Components
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation.directive';
-import { SplashScreenService } from '../main/splashscreen/splashscreen.service';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -67,7 +65,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
-    MatToolbarModule,
   ],
 })
 export class SharedModule {}
