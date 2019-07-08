@@ -1,19 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { socketEvent } from '../../../models/socketEvent.enum';
 import { environment } from '../../../../environments/environment';
 
 import * as io from 'socket.io-client';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
-import { ClientState } from 'src/app/store/state/client.state';
-import { Store } from '@ngrx/store';
+// import { socketEventName } from '../../authentication/services/login-client.service';
+// import { socketEventName } from '../../authentication/services/login-client.service';
+// import { ClientState } from 'src/app/store/state/client.state';
+// import { Store } from '@ngrx/store';
 // import { Store } from '@ngrx/store';
 // import { ClientState } from '../../../store/state/client.state';
 // import { DisconnectAction } from '../../../store/actions/client.action';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
+
+
+export const socketEventName = {
+  READY: 'ready',
+  SHUTDOWN: 'shutdown',
+  SERVERDOWN: 'serverdown',
+  REBOOT: 'reboot',
+  ENTERLOGIN: 'enterlogin',
+  LOGINOK: 'loginok',
+};
+
+export interface ISocketResponse {
+  event: string
+  data?: any
+}
+
 
 export class SocketService {
 
@@ -21,14 +39,15 @@ export class SocketService {
 
   connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  socketResponse: ISocketResponse;
 
   constructor(
-    private store: Store<ClientState>
-    ) {
+    // private store: Store<ClientState>
+  ) {
     this.connect();
   }
 
-  get isConnected () {
+  get isConnected() {
     return this.connected$.asObservable();
   }
 
@@ -64,9 +83,13 @@ export class SocketService {
     this.socket.on(socketEvent.RECONNECT, () => { });
   }
 
+  public removeListener(event) {
+    this.socket.removeListener(event);
+  }
+
   public disconnect(): void {
 
-    this.store.dispatch(new DisconnectAction());
+    // this.store.dispatch(new DisconnectAction());
 
     this.connected$.next(false);
     if (!this.socket.isConnected) {
@@ -84,7 +107,7 @@ export class SocketService {
   }
 
   public listen(event: socketEvent): Observable<any> {
-    return new Observable<Event>(observer =>  {
+    return new Observable<Event>(observer => {
       this.socket.on(event, data => {
         observer.next(data);
       });
@@ -98,6 +121,62 @@ export class SocketService {
   public off(event: socketEvent): void {
     if (this.socket) {
       this.socket.off(event);
+    }
+  }
+
+
+  handleSocketData(data: any): any {
+    if (data.indexOf('&!connmsg{') === 0) {
+      const end = data.indexOf('}!');
+      const rep = JSON.parse(data.slice(9, end + 1));
+
+      if (rep.msg) {
+        switch (rep.msg) {
+
+          case socketEventName.READY:
+            this.oob();
+
+            return this.socketResponse = {
+                event: socketEventName.READY,
+            };
+
+          case socketEventName.ENTERLOGIN:
+              return this.socketResponse = {
+                event: socketEventName.ENTERLOGIN
+              }
+            // return this.socketResponse = ;
+            // this.onEnterLogin();
+          case socketEventName.SHUTDOWN:
+            return this.socketResponse = {
+              event: socketEventName.SHUTDOWN
+            }
+            // this.onShutDown();
+            // this.onEnterLogin();
+          case socketEventName.REBOOT:
+              return this.socketResponse = {
+                event: socketEventName.REBOOT
+              }
+            // this.onReboot();
+            // this.onEnterLogin();
+          case socketEventName.LOGINOK:
+              return this.socketResponse = {
+                event: socketEventName.LOGINOK,
+                data: (data.slice(end+2))
+              }
+          case socketEventName.SERVERDOWN:
+            
+            // this.onServerDown();
+            return this.socketResponse = {
+              event: socketEventName.SERVERDOWN,
+            }
+          default:
+            // this.onError(rep.msg);
+            return this.socketResponse = {
+              event: 'error',
+              data: rep.msg
+            }
+        }
+      }
     }
   }
 }

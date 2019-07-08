@@ -14,15 +14,10 @@ export class MyCharactersComponent implements OnInit{
   @Output() goToManage = new EventEmitter();
   @Input('chars') chars: any[];
 
-
-
   readonly env = environment;
   readonly maxCharacter: number;
   readonly ethnicity = ethnicity;
-
-
   enabledCharactersNumber: number;
-
 
   constructor() {
     this.maxCharacter = 2;

@@ -7,17 +7,19 @@
     <button mat-raised-button>
       <a [routerLink]="[ '/manager/nuovo-personaggio']">Nuovo personaggio</a>
     </button>
-    <form>
+    <form name="verifyCharacterForm" [formGroup]="verifyCharacterForm" (ngSubmit)="verify()" autocomplete="off"
+      novalidate>
       <p>
         Aggiungi manualmente (ho già un personaggio e desidero aggiungerlo a questo account):
       </p>
       <mat-form-field class="i-fullwidth">
-        <input matInput placeholder="Nome Personaggio" value="" type="text">
+        <input matInput placeholder="Nome Personaggio" value="" type="text" formControlName="characterName">
       </mat-form-field>
       <mat-form-field class="i-fullwidth">
-        <input matInput placeholder="Password" value="" type="password">
+        <input matInput placeholder="Password" value="" type="password" formControlName="characterPassword">
       </mat-form-field>
+      <button mat-raised-button type="submit">Verifica</button>
     </form>
   </div>
-  
+
 </div>

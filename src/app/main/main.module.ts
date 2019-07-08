@@ -49,7 +49,7 @@ const routes: Routes = [
   providers: [
     CookieService,
     SidenavService,
-    SplashScreenService
+    SplashScreenService,
   ]
 })
 
