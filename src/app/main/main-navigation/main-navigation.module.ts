@@ -4,7 +4,7 @@ import { MainNavigationComponent } from './main-navigation.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatBadgeModule } from '@angular/material';
+import { MatBadgeModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -12,6 +12,7 @@ import { MatBadgeModule } from '@angular/material';
   ],
   imports: [
     SharedModule,
+    MatToolbarModule,
     MatBadgeModule,
     RouterModule,
     MatIconModule

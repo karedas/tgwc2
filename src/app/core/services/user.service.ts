@@ -17,21 +17,20 @@ export class UserService extends ApiService {
   get profile(): any {
     if (!this.profile$) {
       this.profile$ = this.requestProfile()
-      .pipe(
-        shareReplay(CACHE_SIZE),
-        );
+        .pipe(
+          shareReplay(CACHE_SIZE),
+          );
       }
-      
     return this.profile$;
   }
 
   get characters(): any {
     if (!this.characters$) {
-      this.characters$ = this.requestCharacters().pipe(
-        shareReplay(CACHE_SIZE)
-      );
+      this.characters$ = this.requestCharacters()
+        .pipe(
+          shareReplay(CACHE_SIZE)
+        );
     }
-
     return this.characters$;
   }
 

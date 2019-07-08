@@ -24,21 +24,21 @@ export class MyCharactersComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    this.enabledCharactersNumber =  this.getTotalEnabledChars(this.chars);    
+    // this.enabledCharactersNumber =  this.getTotalEnabledChars(this.chars);
   }
   
-
   private getTotalEnabledChars(chars: any): number {
   
     if (!chars) 
       return;
   
-  
     let count = 0;
+
     for(let i = 0; i < chars.length; ++i){
       if(chars[i].status === 1)
         count++;
     }
+
     return count;
   }
 

@@ -8,7 +8,6 @@ import { User } from 'src/app/core/models/user.model';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   encapsulation: ViewEncapsulation.None
-
 })
 export class SidebarComponent implements OnInit {
   public links: ManagerNavigation[] = [];

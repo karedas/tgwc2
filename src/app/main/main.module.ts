@@ -6,10 +6,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainNavigationModule } from './main-navigation/main-navigation.module';
 import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
 import { Error403Module } from './pages/errors/403/error-403.module';
-import { SidenavService } from './manager/services/sidenav.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SplashScreenService } from './splashscreen/splashscreen.service';
 import { HelpComponent } from './pages/help/help.component';
+import { MatListModule, MatToolbarModule } from '@angular/material';
+import { SidebarComponent } from './sidebar-content/sidebar.component';
 
 const routes: Routes = [
   {
@@ -31,14 +32,17 @@ const routes: Routes = [
   declarations: [
     MainComponent,
     CookieLawComponent,
+    SidebarComponent,
     HelpComponent
   ],
   imports: [
-    RouterModule.forChild(routes),
+    MatListModule,
+    MatToolbarModule,
     SharedModule,
-    Auth2Module,
     Error403Module,
-    MainNavigationModule
+    Auth2Module,
+    MainNavigationModule,
+    RouterModule.forChild(routes),
   ],
   exports: [
     MainComponent,
@@ -48,7 +52,6 @@ const routes: Routes = [
   ],
   providers: [
     CookieService,
-    SidenavService,
     SplashScreenService,
   ]
 })
