@@ -1,4 +1,4 @@
-import { Component,  OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewEncapsulation, Input, Output, EventEmitter, SimpleChange, OnChanges, SimpleChanges, ComponentFactoryResolver } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 
@@ -6,25 +6,31 @@ import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 @Component({
   selector: 'tg-characters-list',
   templateUrl: './tg-characters-list.component.html',
-  styleUrls: ['./tg-characters-list.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MyCharactersComponent implements OnInit{
+export class MyCharactersComponent implements OnChanges{
 
   @Output() goToManage = new EventEmitter();
-  @Input('chars') chars: any[];
+  @Input() chars: any[];
 
   readonly env = environment;
-  readonly maxCharacter: number;
   readonly ethnicity = ethnicity;
+  readonly maxCharacter: number;
+
+  charsList: any;
   enabledCharactersNumber: number;
 
-  constructor() {
-    this.maxCharacter = 2;
+
+  ngOnChanges(changes: SimpleChanges) {
+    const chars: SimpleChange = changes.chars;
+    if(chars.currentValue) {
+      // Get Only the enabled chars
+      this.charsList = chars.currentValue.filter(this.isEnabled);
+    }
   }
-  
-  ngOnInit(): void {
-    // this.enabledCharactersNumber =  this.getTotalEnabledChars(this.chars);
+
+  isEnabled(value) {
+    return value.status === 1;
   }
   
   private getTotalEnabledChars(chars: any): number {

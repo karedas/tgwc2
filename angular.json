@@ -119,7 +119,6 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "./src/assets/scss/client.scss",
-              "./src/assets/scss/fonts.scss"
             ],
             "scripts": [],
             "assets": [

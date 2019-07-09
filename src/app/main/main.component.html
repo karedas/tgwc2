@@ -1,5 +1,5 @@
-<tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
 
+<tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
 <mat-sidenav-container autosize>
 
   <mat-sidenav mode="over" #navigationSidenav role="navigation">
@@ -13,19 +13,12 @@
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <mat-nav-list>
-      <tg-sidebar></tg-sidebar>
-    </mat-nav-list>
+    <tg-sidebar></tg-sidebar>
 
   </mat-sidenav>
 
 
   <mat-sidenav-content>
-    <!-- <crm-navigation-bar
-          *ngIf="isAuthenticated()"
-          (toggleSidenav)="sidenav.toggle()">
-        </crm-navigation-bar> -->
-
     <ng-container *ngIf="isCookieAccepted">
 
       <div class="tg-layout-container">
@@ -33,5 +26,4 @@
       </div>
 
     </ng-container>
-
   </mat-sidenav-content>

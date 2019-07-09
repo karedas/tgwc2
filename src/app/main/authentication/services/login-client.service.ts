@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { loginError } from './login-errors';
 import { SocketService } from 'src/app/main/client/services/socket.service';
-import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { GameService } from 'src/app/main/client/services/game.service';
+import { socketEvent } from 'src/app/models/socketEvent.enum';
 
 
 @Injectable({

@@ -12,36 +12,27 @@
 
         <table class="mat-elevation-z8 mat-table ch-table ">
           <tbody>
-            <tr *ngFor="let char of chars;" [ngClass]="{'disabled': char.status === 0}">
-
+            
+            <tr *ngFor="let char of charsList;">
               <td>
                 <div class="ch-avatar mat-elevation-z4" fxFlex="0 0 75px">
                   <img src="{{env.media_address + '/' + char.image}}" *ngIf="char.image !== ''" />
                   <div class="tg-base-logo" *ngIf="!char.image"></div>
                 </div>
               </td>
-
               <td>
                 <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
                   <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
-                  {{char.race | getEthnicityByCode: char.ethnicity }}
+                  <div class="ch-char-ethnicity">{{char.race | getEthnicityByCode: char.ethnicity }}</div>
                 </div>
               </td>
-              <!-- <td>
-                <div class="ch-char-action">
-                  <span class="tg-green" *ngIf="char.status === 1">Attivo</span>
-
-                  <span *ngIf="char.status === 0">Inattivo</span>
-                </div>
-              </td> -->
+              <td>
+                Connetti
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="ch-count">
-        <b>Totale</b>: {{enabledCharactersNumber}} / {{maxCharacter}}
-      </p>
-      
     </div>
 
   </ng-container>

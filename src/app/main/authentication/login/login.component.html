@@ -21,7 +21,7 @@
 
       <div class="form-field-group">
         <input type="submit" value="Accedi" name="submit" class="tg-submit-primary" [disabled]="onProcess">
-        <div class="api-error" *ngIf="loginFailedError">{{loginFailedError}}</div>
+        <div class="tg-error" *ngIf="loginFailedError">{{loginFailedError}}</div>
       </div>
     </div>
 

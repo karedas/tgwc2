@@ -15,13 +15,13 @@ export class DashboardComponent implements OnInit {
 
   // private _unsubscribeAll: Subject<any>;
   
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
     this.characters = this.userService.characters;
   }
 
-  
   changeTab(index: number) {
       this.selectedTab = index;
   }

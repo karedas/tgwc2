@@ -3,6 +3,7 @@
 
 
 tg-sidebar {
+  
   .mat-list-base .mat-list-item {
     line-height: 16px;
     margin: 0;
@@ -13,6 +14,7 @@ tg-sidebar {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     transition: background-color .2s ease-out;
+    font-size: 14px;
 
     &.active, &:hover {
       background-color: #675842;
