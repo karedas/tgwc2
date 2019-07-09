@@ -6,12 +6,12 @@
 
 <!-- <mat-divider></mat-divider> -->
 <section class="section-characters">
-  <mat-tab-group dynamicHeight animationDuration="100ms" #dashboardTabs>
+  <mat-tab-group dynamicHeight animationDuration="100ms" #dashboardTabs selectedIndex="1">
     <mat-tab label="I miei personaggi">
       <tg-characters-list [chars]="characters | async" (goToManage)="dashboardTabs.selectedIndex = 1"></tg-characters-list>
     </mat-tab>
     <mat-tab label="Gestisci personaggi">
-      <tg-characters-manage></tg-characters-manage>
+      <tg-characters-manage [chars]="characters | async" ></tg-characters-manage>
     </mat-tab>
   </mat-tab-group>
 

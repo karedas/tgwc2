@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { socketEvent } from '../../../models/socketEvent.enum';
 import { environment } from '../../../../environments/environment';
 
 import * as io from 'socket.io-client';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
+import { socketEvent } from 'src/app/models/socketEvent.enum';
 // import { socketEventName } from '../../authentication/services/login-client.service';
 // import { socketEventName } from '../../authentication/services/login-client.service';
 // import { ClientState } from 'src/app/store/state/client.state';
@@ -18,14 +18,6 @@ import { DisconnectAction } from 'src/app/store/actions/client.action';
 // })
 
 
-export const socketEventName = {
-  READY: 'ready',
-  SHUTDOWN: 'shutdown',
-  SERVERDOWN: 'serverdown',
-  REBOOT: 'reboot',
-  ENTERLOGIN: 'enterlogin',
-  LOGINOK: 'loginok',
-};
 
 export interface ISocketResponse {
   event: string
@@ -73,7 +65,7 @@ export class SocketService {
     });
 
     /* Error */
-    this.socket.on(socketEvent.ERROR, (err: any) => {
+    this.socket.on(socketEvent.CONNECTERROR, (err: any) => {
       this.connected$.next(false);
       this.socket_error$.next(true);
       this.socket.connect();
@@ -115,6 +107,9 @@ export class SocketService {
   }
 
   public addListener(eventName: string, handler: any): void {
+    // Avoid duplicate removing previous one
+    this.socket.removeListener(eventName);
+    // Then add the new heandler
     this.socket.on(eventName, handler);
   }
 
@@ -133,41 +128,41 @@ export class SocketService {
       if (rep.msg) {
         switch (rep.msg) {
 
-          case socketEventName.READY:
+          case socketEvent.READY:
             this.oob();
 
             return this.socketResponse = {
-                event: socketEventName.READY,
+                event: socketEvent.READY,
             };
 
-          case socketEventName.ENTERLOGIN:
+          case socketEvent.ENTERLOGIN:
               return this.socketResponse = {
-                event: socketEventName.ENTERLOGIN
+                event: socketEvent.ENTERLOGIN
               }
             // return this.socketResponse = ;
             // this.onEnterLogin();
-          case socketEventName.SHUTDOWN:
+          case socketEvent.SHUTDOWN:
             return this.socketResponse = {
-              event: socketEventName.SHUTDOWN
+              event: socketEvent.SHUTDOWN
             }
             // this.onShutDown();
             // this.onEnterLogin();
-          case socketEventName.REBOOT:
+          case socketEvent.REBOOT:
               return this.socketResponse = {
-                event: socketEventName.REBOOT
+                event: socketEvent.REBOOT
               }
             // this.onReboot();
             // this.onEnterLogin();
-          case socketEventName.LOGINOK:
+          case socketEvent.LOGINOK:
               return this.socketResponse = {
-                event: socketEventName.LOGINOK,
+                event: socketEvent.LOGINOK,
                 data: (data.slice(end+2))
               }
-          case socketEventName.SERVERDOWN:
+          case socketEvent.SERVERDOWN:
             
             // this.onServerDown();
             return this.socketResponse = {
-              event: socketEventName.SERVERDOWN,
+              event: socketEvent.SERVERDOWN,
             }
           default:
             // this.onError(rep.msg);

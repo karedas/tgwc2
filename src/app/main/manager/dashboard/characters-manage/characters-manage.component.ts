@@ -1,22 +1,31 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { VerifyCharacterService } from '../../services/verify-character.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { SocketService } from 'src/app/main/client/services/socket.service';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, delay } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 
 @Component({
   selector: 'tg-characters-manage',
   templateUrl: './characters-manage.component.html',
-  styleUrls: ['./characters-manage.component.scss'],
   providers: [VerifyCharacterService],
   encapsulation: ViewEncapsulation.None
 })
 export class CharactersManageComponent implements OnInit {
 
+  @Input('chars') chars: any[];
+  
+  readonly env = environment;
+  readonly ethnicity = ethnicity;
+  readonly maxCharacter: number = 2;
+
   verifyCharacterForm: FormGroup;
   verifySubscription: Subscription;
+  verifyFormSubmitted: boolean = false;
+  apiError: boolean = false;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -24,7 +33,9 @@ export class CharactersManageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private verifyCharacterService: VerifyCharacterService,
-  ) { }
+  ) { 
+    this._unsubscribeAll = new Subject<any>();
+  }
 
   ngOnInit() {
 
@@ -32,7 +43,6 @@ export class CharactersManageComponent implements OnInit {
       characterName: new FormControl('karedas', UsernameValidation),
       characterPassword: new FormControl('peppe', PasswordValidation),
     });
-
     // this.verifyCharacterService
   }
 
@@ -49,20 +59,26 @@ export class CharactersManageComponent implements OnInit {
       return;
     }
 
+    this.verifyFormSubmitted = true;
+    this.verifyCharacterForm.disable();
+    
     const values = this.verifyCharacterForm.value;
 
     this.verifyCharacterService.check(values)
-    //   .pipe(takeUntil(this._unsubscribeAll))
-    //   .subscribe( (verifyResponse: boolean ) => {
-    //     if(verifyResponse) {
+      .pipe(
+        delay(2000),
+        takeUntil(this._unsubscribeAll)
+        )
+        .subscribe(( resposne: boolean ) => {
+          this.verifyFormSubmitted = false;
+          this.verifyCharacterForm.enable();
 
-    //     }
-    //   });
-
+          if(resposne) {
+            // Adding and Rrefresh chars List
+          } else {
+            // Not found
+          }
+      });
     return;
-
   }
-
-
-
 }

@@ -3,66 +3,29 @@
 .tg-app {
   
   @import 'dialog';
-  @import 'partials/mat-divider';
-  @import 'partials/mat-expansion';
-  @import 'partials/mat-menu';
-  @import 'partials/mat-table';
-  @import 'partials/mat-tab';
-  @import 'partials/mat-sidenav';
-  @import 'partials/mat-toolbar';
+  @import 'partials/material/mat-divider';
+  @import 'partials/material/mat-expansion';
+  @import 'partials/material/mat-menu';
+  @import 'partials/material/mat-table';
+  @import 'partials/material/mat-tab';
+  @import 'partials/material/mat-sidenav';
+  @import 'partials/material/mat-toolbar';
+  @import 'partials/material/mat-buttons';
+  @import 'partials/material/mat-form';
+  @import 'partials/common';
 
 
   .cdk-overlay-connected-position-bounding-box {
     z-index: 9999;
   }
 
-  // Buttons
-  .mat-raised-button {
-    font-weight: 700;
-    line-height: 28px;
-  }
 
     /* Border */
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: white;
   }
 
-  /* Font color */
-  input.mat-input-element {
-    color: white;
-    line-height: 1;
-  }
-
-  .mat-button-wrapper {
-    height: 100%; 
-  }
-
-  .mat-stroked-button:not([disabled]) {
-    border-color: rgba(255, 255, 255, 0.16);
-  }
-
-
-  .mat-icon-button[disabled][disabled] {
-    color: rgba(249, 249, 249, 0.26);
-  }
-
-  .mat-icon-button {
-    vertical-align: middle;  
-    &.small {
   
-      width: 16px;
-      height: 16px;
-      line-height: 16px;
-  
-      .mat-icon {
-        font-size: 16px;
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
-      }
-    }
-  }
-
   /* Hint */
   
   .mat-form-field-appearance-legacy .mat-hint {
@@ -75,9 +38,7 @@
     background: #5d5d5d;
   }
 
-  .mat-checkbox-label {
-    color: #8e8e8e;
-  }
+
 
   .mat-checkbox-checkmark-path {
     stroke: black!important;

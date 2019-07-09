@@ -9,37 +9,40 @@
 </div>
 -->
 
+<mat-nav-list *ngIf="links">
 
-<ng-container *ngFor="let item of links; let i = index">
-  <ng-container [ngTemplateOutlet]="itemContent" [ngTemplateOutletContext]="{ item: item, idx: i}"></ng-container>
-</ng-container>
+  <ng-container *ngFor="let item of links; let i = index">
+    <ng-container [ngTemplateOutlet]="itemContent" [ngTemplateOutletContext]="{ item: item, idx: i}"></ng-container>
+  </ng-container>
 
+</mat-nav-list>
 
 <ng-template #itemContent let-item="item" let-index="idx">
-  
-  <mat-nav-list *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">
 
-    <mat-list-item>
-      <a matLine class="menu-item" [routerLink]="item.url ? item.url : null"
-        [ngClass]="{'active': selectedItem === index}" (click)="selectItmeMenu(0)">
-        <mat-icon matListIcon>{{item.icon}}</mat-icon>
-        <span class="menu-item-label">{{item.title}}</span>
-      </a>
-    </mat-list-item>
+  <mat-list-item *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">
+    <a mat-line class="menu-item"
+      [routerLink]="item.url ? item.url : null"
+      routerLinkActive="active"
+      [ngClass]="{'active': selectedItem === index}" (click)="selectItmeMenu(0)">
 
-  </mat-nav-list>
+        <mat-icon mat-list-icon >{{item.icon}}</mat-icon>
+        <span class="menu-item-label" >{{item.title}}</span>
+    </a>
+  </mat-list-item>
 
-  <mat-nav-list dense *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" class="sub-items">
-    
+  <!-- Sub Menu -->
+  <!-- <mat-nav-list dense *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" class="sub-items">
     <ng-container *ngIf="item.children">
       <mat-list-item *ngFor="let child of item.children">
-          <a matLine class="menu-item" [routerLink]="[child.url]"
-            *ngIf="child.permission == null || (child.permission != null && currentUser.hasPermission(child.permission))">
-            <span>{{child.title}}</span>
-      </a>
-        </mat-list-item>
-    </ng-container>
 
-  </mat-nav-list>
+        <a matLine class="menu-item" [routerLink]="[child.url]"
+          *ngIf="child.permission == null || (child.permission != null && currentUser.hasPermission(child.permission))">
+          <span>{{child.title}}</span>
+        </a>
+
+      </mat-list-item>
+    </ng-container>
+  </mat-nav-list> -->
+
 
 </ng-template>

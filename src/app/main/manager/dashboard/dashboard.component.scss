@@ -1,0 +1,99 @@
+@import 'abstract/variables';
+
+
+.ch-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  
+  th {
+    font-weight: normal;
+    padding-bottom: 6px;
+    font-size: 11px;
+  }
+
+  tr {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(66, 64, 60, 0.6);
+    transition: all .3s ease-out;
+    cursor: pointer;
+    position: relative;
+  }
+
+  tr:not(.disabled):hover {
+    background-color: rgba(66, 64, 60, 0.7);
+  }
+
+  td {
+    padding: 12px;
+  }
+
+  .ch-block {
+    bottom: 12px 0;
+  }
+
+  .ch-mainaction-block {
+    display: inline-block;
+  }
+
+  .ch-avatar {
+    width: 45px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+    }
+
+    .tg-base-logo {
+      width: 100%;
+      height: 100%;
+      min-height: 75px;
+      background-size: cover;
+    }
+  }
+
+  .ch-infoaction {
+    .ch-char-name {
+      line-height: 1;
+      color: $tg-yellow;
+    }
+
+    .ch-char-ethnicity {
+      font-size: 12px;
+    }
+  }
+
+  .ch-char-action {
+    margin: auto;
+  }
+
+  .ch-char-details {
+    padding: 12px 0 0;
+  }
+
+
+  .ch-count {
+    text-align: right;
+    padding: 0 12px;
+    margin: 0;
+    background-color: $tg-brown;
+    color: black;
+  }
+
+
+  /* Disabled Row Char */
+  tr.disabled {
+    opacity: 0.6;
+    background-color: rgb(26, 26, 26);
+
+    .ch-char-name,
+    .ch-char-ethnicity {
+      color: #ababab;
+    }
+  }
+
+
+}
