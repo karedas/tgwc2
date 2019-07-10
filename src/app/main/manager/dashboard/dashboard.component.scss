@@ -5,32 +5,30 @@
   width: 100%;
   border-collapse: collapse;
   background: transparent;
+  margin-bottom: 1em;
   
   th {
     font-weight: normal;
     padding-bottom: 6px;
     font-size: 11px;
+    text-align: left;
   }
-
+  
   tr {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(66, 64, 60, 0.6);
-    transition: all .3s ease-out;
-    cursor: pointer;
     position: relative;
+    cursor: pointer;
+    transition: all .3s ease-out;
   }
-
-  tr:not(.disabled):hover {
-    background-color: rgba(66, 64, 60, 0.7);
-  }
-
+  
   td {
-    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: #0e0e0e;
+    padding: 6px;
+    transition: background .2s ease-out;
   }
 
-  .ch-block {
-    bottom: 12px 0;
+  tr:hover td {
+    background: rgb(22, 22, 22);
   }
 
   .ch-mainaction-block {
@@ -74,26 +72,23 @@
     padding: 12px 0 0;
   }
 
-
-  .ch-count {
-    text-align: right;
-    padding: 0 12px;
-    margin: 0;
-    background-color: $tg-brown;
-    color: black;
-  }
-
-
   /* Disabled Row Char */
-  tr.disabled {
-    opacity: 0.6;
-    background-color: rgb(26, 26, 26);
+  tr.disabled td {
+    opacity: 0.4;
+    background-color: rgba(14, 14, 14, .2);
 
-    .ch-char-name,
+    .ch-char-name {
+      color: white;
+    }
     .ch-char-ethnicity {
       color: #ababab;
     }
   }
-
-
 }
+
+
+/* Characters Manager */
+#addnewchar {
+  margin: 0 auto;
+  display: block;
+}   
