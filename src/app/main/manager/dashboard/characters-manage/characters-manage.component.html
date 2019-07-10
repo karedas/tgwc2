@@ -13,7 +13,7 @@
         <tr *ngFor="let char of chars;" [ngClass]="{'disabled': char.status === 0}">
 
           <td>
-            <div class="ch-avatar mat-elevation-z4" fxFlex="0 0 75px">
+            <div class="ch-avatar mat-elevation-z4">
               <img src="{{env.media_address + '/' + char.image}}" *ngIf="char.image !== ''" />
               <div class="tg-base-logo" *ngIf="!char.image"></div>
             </div>
@@ -44,7 +44,7 @@
 
   <div class="ch-block">
 
-    <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']">
+    <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']" id="addnewchar">
       Nuovo personaggio
     </button>
 
@@ -53,9 +53,9 @@
       (ngSubmit)="verify()"
       autocomplete="off"
       novalidate>
-
+      <h3>Aggiungi manualmente</h3>
       <p>
-        Aggiungi manualmente (ho già un personaggio e desidero aggiungerlo a questo account):
+        Se hai già un personaggio e conosci le credenziali di accesso puoi aggiungerlo manualmente al tuo account.
       </p>
 
       <mat-form-field class="i-fullwidth">
