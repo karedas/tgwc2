@@ -2,8 +2,6 @@ import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit, ViewChild, 
 import { MatSidenav } from '@angular/material';
 import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-
-
 @Component({
   selector: 'tg-manager',
   templateUrl: './manager.component.html',
@@ -22,11 +20,9 @@ export class ManagerComponent implements OnDestroy {
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef
   ) {
-
     this.mobileQuery = media.matchMedia(Breakpoints.XSmall);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-
   }
 
   ngOnDestroy(): void {
