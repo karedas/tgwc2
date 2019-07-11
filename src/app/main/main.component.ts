@@ -48,9 +48,11 @@ export class MainComponent implements OnInit, OnDestroy {
     config.disableClose = true;
     config.autoFocus = false;
     config.width = '450px';
-    // config.scrollStrategy = this.overlay.scrollStrategies.reposition();
+    
     const dialogRef = this.dialog.open(CookieLawComponent, config);
+
     return dialogRef;
+
   }
 
    onCookieAccepted(status: boolean) {
