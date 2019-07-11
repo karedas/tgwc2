@@ -1,8 +1,7 @@
-<div class="comp-content comp-padd">
-
-  <div class="table-responsive">
-
-    <table class="mat-elevation-z8 mat-table ch-table">
+<div class="comp-content comp-padd comp-center">
+  <h2>I tuoi personaggi</h2>
+  <div class="table-responsive" *ngIf="chars.length > 0 ">
+    <table class="mat-elevation-z8 mat-table ch-table" >
       <thead>
         <th>Immagine</th>
         <th>Nome / Dettagli</th>
@@ -43,7 +42,9 @@
   </div>
 
   <div class="ch-block">
-
+    <p  *ngIf="chars.length == 0 ||  !chars ">
+      Non hai ancora creato un personaggio, inizia da qui:
+    </p>
     <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']" id="addnewchar">
       Nuovo personaggio
     </button>
@@ -53,7 +54,7 @@
       (ngSubmit)="verify()"
       autocomplete="off"
       novalidate>
-      <h3>Aggiungi manualmente</h3>
+      <h4>Aggiungi manualmente</h4>
       <p>
         Se hai già un personaggio e conosci le credenziali di accesso puoi aggiungerlo manualmente al tuo account.
       </p>
