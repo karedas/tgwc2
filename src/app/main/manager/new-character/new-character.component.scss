@@ -4,20 +4,20 @@
 
 :host {
   min-height: 400px;
+  height: 100%;
+  margin-top: 24px;
+  display: block;
 }
 
-.tg-registration {
 
-}
-
-.tg-registration-content {
+.tg-newcharcter-content {
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
   z-index: 2;
   position: relative;
   color: #9b9285;
 }
 
-.tg-registration-footer {
+.tg-newcharcter-footer {
   overflow: hidden;
   text-align: center;
   text-transform: uppercase;

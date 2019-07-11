@@ -30,7 +30,7 @@ tg-manager {
 //   text-transform: capitalize;
 // }
 
-h1, h2, h3{
+h1, h2, h3, h4{
   // margin: 0;
   // font-weight: normal;
   color: $tg-brown;
@@ -55,6 +55,10 @@ h1, h2, h3{
 
 .comp-padd {
   padding: 24px;
+}
+
+.comp-center {
+  text-align: center;
 }
 
 .comp-blocklink {

@@ -5,7 +5,7 @@ import { tgAnimations } from 'src/app/animations';
   selector: 'tg-new-character',
   templateUrl: './new-character.component.html',
   styleUrls: ['./new-character.component.scss'],
-  animations: [tgAnimations]
+  animations: [tgAnimations],
 })
 export class NewCharacterComponent implements OnInit {
 

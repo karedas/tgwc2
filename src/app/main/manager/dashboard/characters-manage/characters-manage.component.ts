@@ -16,7 +16,7 @@ import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 })
 export class CharactersManageComponent implements OnInit {
 
-  @Input('chars') chars: any[];
+  @Input('chars') chars: any = {};
   
   readonly env = environment;
   readonly ethnicity = ethnicity;
