@@ -8,10 +8,10 @@ import { UsernameValidation, PasswordValidation } from 'src/app/main/common/vali
 import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';
-import { SocketService } from 'src/app/main/client/services/socket.service';
+import { SocketService } from 'src/app/core/services/socket.service';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
-import { LoginClientService } from '../services/login-client.service';
+import { LoginClientService } from '../../client/services/login-client.service';
 
 @Component({
   selector: 'tg-login',
@@ -59,7 +59,7 @@ export class LoginClientComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginClientService._loginReplayMessage
+    this.loginClientService.replayMessage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((msg: string) => {
         if (msg !== undefined) {
@@ -115,7 +115,7 @@ export class LoginClientComponent implements OnInit, OnDestroy {
           this.googleAnalyticsService.emitEvent(`userPage`, `User ${this.username.value} Action`, 'login');
 
           this.router.navigate([redirect]).then( () => {
-            this.loginClientService._loginReplayMessage = ' ';
+            this.loginClientService.replayMessage = ' ';
           });
 
         } else {

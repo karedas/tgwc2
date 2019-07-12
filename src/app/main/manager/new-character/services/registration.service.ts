@@ -4,7 +4,7 @@ import { socketEvent } from 'src/app/models/socketEvent.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationData } from '../models/creation_data.model';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { SocketService } from 'src/app/main/client/services/socket.service';
+import { SocketService } from 'src/app/core/services/socket.service';
 
 @Injectable({
   providedIn: 'root'

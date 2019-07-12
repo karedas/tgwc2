@@ -12,7 +12,7 @@ import { SplitComponent } from 'angular-split';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
-import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
+import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 
 @Component({

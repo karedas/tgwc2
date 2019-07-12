@@ -2,9 +2,11 @@ import { Component, ViewEncapsulation, Output, EventEmitter, OnInit } from '@ang
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
+import { LoginClientService } from 'src/app/main/client/services/login-client.service';
+import { NGXLogger } from 'ngx-logger';
 
 
 @Component({
@@ -24,19 +26,33 @@ export class MyCharactersComponent implements OnInit {
   charactersList: Observable<any>;
   enabledCharactersNumber: number;
 
-  constructor(
-    private userService: UserService
-  ) {}
-  
-  ngOnInit() {
+  private _unsubscribeAll: Subject<any>;
 
+  constructor(
+    private userService: UserService,
+    private loginClientService: LoginClientService,
+    private logger: NGXLogger
+  ) {
+    this._unsubscribeAll = new Subject<any>();
+  }
+  
+  ngOnInit() {    
     this.charactersList = this.userService.getCharacters()
       .pipe(
         map((char: Character) => {
           return char.filter(char => char.status === 1);
         })
       );
+  }
 
+  loginCharacter ( name: string ) {
+
+    const data = {name: name, secret: 'peppe'}
+    this.loginClientService.login(data)
+      .pipe(
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe();
   }
 
   // private getTotalEnabledChars(chars: any): number {

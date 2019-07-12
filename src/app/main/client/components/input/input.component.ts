@@ -144,10 +144,13 @@ export class InputComponent implements OnInit, OnDestroy {
   onFontSizeChange(): void {
     this.game.setOutputSize();
   }
+  
+  pauseScrollOutput() {}
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
   }
+
 
 
   @HostListener('document:keypress', ['$event'])

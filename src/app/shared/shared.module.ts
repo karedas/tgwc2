@@ -18,11 +18,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { IconsComponent } from '../main/client/common/icons/icons.component';
+import { HstatComponent } from '../main/client/common/hstat/hstat.component';
+import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   declarations: [
-    ClickStopPropagationDirective,    
+    ClickStopPropagationDirective,
     AutofocusInputbarDirective,
+    IconsComponent,
+    HstatComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     NgScrollbarModule,
     TooltipModule,
     PipesModule,
+    MatTooltipModule,
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
@@ -43,11 +49,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
-    MatToolbarModule
+    MatRippleModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatTableModule
   ],
 
   exports: [
     CommonModule,
+    IconsComponent,
+    HstatComponent,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
@@ -56,6 +67,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     TooltipModule,
     ClickStopPropagationDirective,
 
+    MatPaginatorModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatRippleModule,
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
@@ -65,6 +80,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
+
   ],
 })
 export class SharedModule {}

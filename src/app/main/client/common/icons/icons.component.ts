@@ -8,7 +8,6 @@ import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@
 })
 export class IconsComponent implements OnChanges {
   @Input('icon') icon: number;
-
   bgPositionStyle: Object;
 
   ngOnChanges(changes: SimpleChanges): void {

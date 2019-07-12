@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { VerifyCharacterService } from '../../services/verify-character.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { SocketService } from 'src/app/main/client/services/socket.service';
+import { SocketService } from 'src/app/core/services/socket.service';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
 import { Subscription, Subject, Observable } from 'rxjs';
 import { takeUntil, delay } from 'rxjs/operators';
