@@ -66,23 +66,23 @@ export class LoginClientService {
 
     this.logger.log(`TGLOG: trying to login character "${name}"... `);
 
-    this.socketService.addListener(socketEvent.LOGIN, 
-      (serverData: any) => {
-        this.replayMessage =  messages.TRY_CONNECTION;
-        const response: ISocketResponse = this.socketService.handleSocketData(serverData)
-        switch(response.event) {
+    // this.socketService.addListener(socketEvent.LOGIN, 
+    //   (serverData: any) => {
+    //     this.replayMessage =  messages.TRY_CONNECTION;
+    //     const response: ISocketResponse = this.socketService.handleSocketData(serverData)
+    //     switch(response.event) {
       
-          case socketEvent.ENTERLOGIN:
-            this.onEnterLogin();
-            break;
+    //       case socketEvent.ENTERLOGIN:
+    //         this.onEnterLogin();
+    //         break;
             
-            case socketEvent.LOGINOK:
-            this.onLoginOk(response.data);
-            break;
-        }
+    //         case socketEvent.LOGINOK:
+    //         this.onLoginOk(response.data);
+    //         break;
+    //     }
 
-      });
-      
+    //   });
+    this.socketService.addListener(socketEvent.LOGIN, this.socketService.handleSocketData);
     this.socketService.emit(socketEvent.LOGINREQUEST);
     
     return this.isLoggedIn;

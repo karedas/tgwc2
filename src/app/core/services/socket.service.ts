@@ -44,7 +44,6 @@ export class SocketService {
 
   public connect(): void {
 
-    console.log('connect socket');
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
       this.initSocketEvent();
