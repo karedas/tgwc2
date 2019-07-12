@@ -10,10 +10,9 @@ import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
 import { AudioComponent } from './components/audio/audio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
-import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
-import { IconsComponent } from './common/icons/icons.component';
 import { HstatComponent } from './common/hstat/hstat.component';
+import { IconsComponent } from './common/icons/icons.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,6 @@ import { HstatComponent } from './common/hstat/hstat.component';
     ClientContainerComponent,
     AudioComponent,
     NavbarComponent,
-    IconsComponent,
-    HstatComponent,
   ],
   imports: [
     SharedModule,
@@ -32,12 +29,10 @@ import { HstatComponent } from './common/hstat/hstat.component';
     OutputModule,
     InputModule,
     FileSaverModule,
-    JwSocialButtonsModule
   ],
   exports: [
-    IconsComponent,
     NavbarComponent,
-    ClientComponent
+    ClientComponent,
   ],
 })
 export class ClientModule {

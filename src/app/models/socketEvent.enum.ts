@@ -11,12 +11,13 @@ export enum socketEvent {
     REQUESTINVITE = 'requestinvite',
     NEWCHAR = 'newchar',
     READY = 'ready',
-    SHUTDOWN = 'shutdown',
-    SERVERDOWN = 'serverdown',
-    REBOOT = 'reboot',
+    LOGINREQUEST = 'loginrequest',
     ENTERLOGIN = 'enterlogin',
     LOGINOK = 'loginok',
-    ERROR = 'error'
+    ERROR = 'error',
+    SHUTDOWN = 'shutdown',
+    SERVERDOWN = 'serverdown',
+    REBOOT = 'reboot'
 }
 
 

@@ -11,11 +11,16 @@ import { SplashScreenService } from './splashscreen/splashscreen.service';
 import { HelpComponent } from './pages/help/help.component';
 import { MatListModule, MatToolbarModule } from '@angular/material';
 import { SidebarComponent } from './sidebar-content/sidebar.component';
+import { SocketService } from '../core/services/socket.service';
 
 const routes: Routes = [
   {
     path: 'manager',
-    loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule),
+    loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule)
+  },
+  {
+    path: 'webclient',
+    loadChildren: () => import('./client/client.module').then( m => m.ClientModule)
   },
   {
     path: 'novita',
@@ -51,6 +56,7 @@ const routes: Routes = [
     CookieLawComponent
   ],
   providers: [
+    SocketService,
     CookieService,
     SplashScreenService,
   ]

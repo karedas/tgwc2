@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { ResetAction } from 'src/app/store/actions/client.action';
 import { MatDialogRef } from '@angular/material/dialog';
-import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
+import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 @Component({
   selector: 'tg-login-smart',
@@ -54,7 +54,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       'password': ['', PasswordValidation]
     });
 
-    this.loginClientService._loginReplayMessage
+    this.loginClientService.replayMessage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((err: string) => {
         if (err !== undefined) {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
 import { Action, Store, select } from '@ngrx/store';
-import { map, withLatestFrom, tap, switchMap, filter } from 'rxjs/operators';
+import { map, withLatestFrom, tap, switchMap } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -12,7 +12,7 @@ import { ClientState } from '../state/client.state';
 import { InputService } from 'src/app/main/client/components/input/input.service';
 import { InfoCharacterAction, HeroAction } from '../actions/data.action';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
-import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
+import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 
 export interface PayloadAction {
@@ -27,7 +27,7 @@ export class ClientEffects {
     private game: GameService,
     private actions$: Actions,
     private audioService: AudioService,
-    private LoginClientService: LoginClientService,
+    private loginClientService: LoginClientService,
     private dialogV2Service: DialogV2Service,
     private inputService: InputService,
     private router: Router,
@@ -40,7 +40,7 @@ export class ClientEffects {
     ofType(ClientEventType.DISCONNECT),
     tap((a) => {
       if (this.router.url === '/webclient') {
-        this.LoginClientService.logout();
+        this.loginClientService.logout();
         this.audioService.pauseAudio();
         this.dialogV2Service.openSmartLogin();
         this.game.reset();

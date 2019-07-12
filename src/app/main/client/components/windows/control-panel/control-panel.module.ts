@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CommonModule,
     SharedModule,
     MatDialogModule,
+    MatSelectModule,
     MatSliderModule,
     MatIconModule,
     MatDividerModule,

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 import * as io from 'socket.io-client';
 import { DisconnectAction } from 'src/app/store/actions/client.action';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
+import { NGXLogger } from 'ngx-logger';
 // import { socketEventName } from '../../authentication/services/login-client.service';
 // import { socketEventName } from '../../authentication/services/login-client.service';
 // import { ClientState } from 'src/app/store/state/client.state';
@@ -17,13 +18,10 @@ import { socketEvent } from 'src/app/models/socketEvent.enum';
 //   providedIn: 'root'
 // })
 
-
-
 export interface ISocketResponse {
   event: string
   data?: any
 }
-
 
 export class SocketService {
 
@@ -35,6 +33,7 @@ export class SocketService {
 
   constructor(
     // private store: Store<ClientState>
+    private logger: NGXLogger
   ) {
     this.connect();
   }
@@ -45,6 +44,7 @@ export class SocketService {
 
   public connect(): void {
 
+    console.log('connect socket');
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
       this.initSocketEvent();
@@ -55,17 +55,20 @@ export class SocketService {
   private initSocketEvent() {
     /* Connected */
     this.socket.on(socketEvent.CONNECT, () => {
+      this.logger.info(`TGLOG: socket.io client connected to ${environment.socket.url} WS server`)
       this.connected$.next(true);
       this.socket_error$.next(false);
     });
 
     /* Disconnected */
     this.socket.on(socketEvent.DISCONNECT, () => {
+      this.logger.info(`TGLOG: socket.io client Disconnected`)
       this.disconnect();
     });
 
     /* Error */
     this.socket.on(socketEvent.CONNECTERROR, (err: any) => {
+      this.logger.error(`TGLOG: Socker.io Error!`, err)
       this.connected$.next(false);
       this.socket_error$.next(true);
       this.socket.connect();
@@ -121,45 +124,37 @@ export class SocketService {
 
 
   handleSocketData(data: any): any {
+
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
-
+      
       if (rep.msg) {
         switch (rep.msg) {
-
           case socketEvent.READY:
             this.oob();
-
-            return this.socketResponse = {
-                event: socketEvent.READY,
-            };
-
           case socketEvent.ENTERLOGIN:
-              return this.socketResponse = {
-                event: socketEvent.ENTERLOGIN
-              }
-            // return this.socketResponse = ;
-            // this.onEnterLogin();
+            return this.socketResponse = {
+              event: socketEvent.ENTERLOGIN
+            }
           case socketEvent.SHUTDOWN:
             return this.socketResponse = {
               event: socketEvent.SHUTDOWN
             }
-            // this.onShutDown();
-            // this.onEnterLogin();
+          // this.onShutDown();
+          // this.onEnterLogin();
           case socketEvent.REBOOT:
-              return this.socketResponse = {
-                event: socketEvent.REBOOT
-              }
-            // this.onReboot();
-            // this.onEnterLogin();
+            return this.socketResponse = {
+              event: socketEvent.REBOOT
+            }
+          // this.onReboot();
+          // this.onEnterLogin();
           case socketEvent.LOGINOK:
-              return this.socketResponse = {
-                event: socketEvent.LOGINOK,
-                data: (data.slice(end+2))
-              }
+            return this.socketResponse = {
+              event: socketEvent.LOGINOK,
+              data: (data.slice(end + 2))
+            }
           case socketEvent.SERVERDOWN:
-            
             // this.onServerDown();
             return this.socketResponse = {
               event: socketEvent.SERVERDOWN,

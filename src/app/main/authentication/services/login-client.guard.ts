@@ -6,12 +6,12 @@ import {
   RouterStateSnapshot, Router, Route
 } from '@angular/router';
 
-import { LoginClientService } from './login-client.service';
+import { LoginClientService } from '../../client/services/login-client.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class LoginClientGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
     private loginClientService: LoginClientService,
     private router: Router

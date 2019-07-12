@@ -25,35 +25,35 @@ export const equip_positions_by_name = {
     'l_shoulder': 'Sulla spalla sinistra',
     'tied': 'Imprigionato'
   };
-
-  export const pos_to_order = [
-    { pos: 0, name: '' },
-    18,		// Finger R
-    19,		// Finger L
-    5,		// Neck
-    8,		// Body
-    1,		// Head
-    23,		// Legs
-    24,		// Feet
-    15,		// Hands
-    12,		// Arms
-    9,		// About
-    22,		// Waist
-    13,		// Wrist R
-    14,		// Wrist L
-    160,	// Hand R
-    170,	// Hand L
-    10,		// Back
-    2,		// Ear R
-    3,		// Ear L
-    4,		// Eyes
-    20,		// Sheath
-    21,		// Belt
-    11,		// Back
-    6,		// Shoulder R
-    7,		// Shoulder L
-    25		// Tied
-  ];
+  
+export const pos_to_order = [
+  { pos: 0, name: '' },
+  18,		// Finger R
+  19,		// Finger L
+  5,		// Neck
+  8,		// Body
+  1,		// Head
+  23,		// Legs
+  24,		// Feet
+  15,		// Hands
+  12,		// Arms
+  9,		// About
+  22,		// Waist
+  13,		// Wrist R
+  14,		// Wrist L
+  160,	// Hand R
+  170,	// Hand L
+  10,		// Back
+  2,		// Ear R
+  3,		// Ear L
+  4,		// Eyes
+  20,		// Sheath
+  21,		// Belt
+  11,		// Back
+  6,		// Shoulder R
+  7,		// Shoulder L
+  25		// Tied
+];
 
 export const hero_position = [
   'morto',

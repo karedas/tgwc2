@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { SocketService, ISocketResponse } from '../../client/services/socket.service';
+import { SocketService, ISocketResponse } from '../../../core/services/socket.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { socketEvent } from 'src/app/models/socketEvent.enum';
 
 
 @Injectable()
-export class VerifyCharacterService extends SocketService {
+export class VerifyCharacterService{
 
   verifySubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
   
   private name: string;
   private pwd: string;
 
-
+  constructor(
+    private socketService: SocketService
+  ){}
 
   public check(data: { characterName: string, characterPassword: string }): Observable<boolean> {
     this.name = data.characterName;
