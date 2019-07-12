@@ -40,7 +40,6 @@ export class MainNavigationComponent implements OnDestroy {
       .subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
           this.setLoggedinUser();
-          this.charactersList = this.userService.characters;
         }
       });
 
@@ -49,20 +48,26 @@ export class MainNavigationComponent implements OnDestroy {
 
   ngOnInit(): void {
 
-      if(this.charactersList && this.loggedIn) {
+      // if(this.charactersList && this.loggedIn) {
 
-        this.charactersList
-          .pipe(
-            map((chars: any) => {
-              return chars.filter((char: Character) => { return char.status === 1 })
-            }))
-          .subscribe(chl => this.charactersList = chl);
-      }
+      // this.charactersList
+      //   .pipe(
+      //     map((chars: any) => {
+      //       console.log(chars);
+      //       return chars.filter(
+      //         (char: Character) => {
+      //           console.log(char);
+      //           return char.status === 1 }
+      //       )
+      //     }))
+      //   .subscribe(chl => this.charactersList = chl);
+      // }
   }
 
   private setLoggedinUser() {
 
     const status = this.authService.isLoggedIn();
+    
     if (status) {
       this.loggedIn = true;
       this.currentUser = this.authService.currentUser;
@@ -73,6 +78,11 @@ export class MainNavigationComponent implements OnDestroy {
       this.currentUser = null;
     }
   }
+
+  private isEnabled(value) {
+    return value.status === 1;
+  }
+
 
   userOnLogout() {
     this.loginService.logout().subscribe(() => {

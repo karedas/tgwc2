@@ -3,10 +3,11 @@ import { VerifyCharacterService } from '../../services/verify-character.service'
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { SocketService } from 'src/app/main/client/services/socket.service';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription, Subject, Observable } from 'rxjs';
 import { takeUntil, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'tg-characters-manage',
@@ -16,8 +17,6 @@ import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 })
 export class CharactersManageComponent implements OnInit {
 
-  @Input('chars') chars: any = {};
-  
   readonly env = environment;
   readonly ethnicity = ethnicity;
   readonly maxCharacter: number = 2;
@@ -27,23 +26,28 @@ export class CharactersManageComponent implements OnInit {
   verifyFormSubmitted: boolean = false;
   apiError: boolean = false;
 
+  charactersList: Observable<any>;
+
+
   // Private
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private formBuilder: FormBuilder, 
     private verifyCharacterService: VerifyCharacterService,
+    private userService: UserService
   ) { 
     this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
-
+    
+    this.charactersList = this.userService.getCharacters();
+    
     this.verifyCharacterForm = new FormGroup({
       characterName: new FormControl('karedas', UsernameValidation),
       characterPassword: new FormControl('peppe', PasswordValidation),
     });
-    // this.verifyCharacterService
   }
 
   get characterUsername() {

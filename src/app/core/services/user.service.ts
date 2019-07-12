@@ -14,7 +14,7 @@ export class UserService extends ApiService {
   private characters$: Observable<Array<Character>>;
   private profile$: Observable<any>;
 
-  get profile(): any {
+  getProfile(): any {
     if (!this.profile$) {
       this.profile$ = this.requestProfile()
         .pipe(
@@ -24,7 +24,7 @@ export class UserService extends ApiService {
     return this.profile$;
   }
 
-  get characters(): any {
+  getCharacters(): Observable<any> {
     if (!this.characters$) {
       this.characters$ = this.requestCharacters()
         .pipe(
@@ -33,6 +33,7 @@ export class UserService extends ApiService {
     }
     return this.characters$;
   }
+
 
   public requestProfile(): Observable<any> {
     let obs$ = this.get('/profile/me')
@@ -59,4 +60,7 @@ export class UserService extends ApiService {
       
     return obs$;
   }
+
+  /* Utils */
+
 }

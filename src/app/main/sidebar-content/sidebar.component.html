@@ -10,25 +10,24 @@
 -->
 
 <mat-nav-list *ngIf="links">
-
   <ng-container *ngFor="let item of links; let i = index">
     <ng-container [ngTemplateOutlet]="itemContent" [ngTemplateOutletContext]="{ item: item, idx: i}"></ng-container>
   </ng-container>
-
 </mat-nav-list>
 
 <ng-template #itemContent let-item="item" let-index="idx">
+  <ng-container *ngIf="currentUser">
 
-  <mat-list-item *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">
-    <a mat-line class="menu-item"
-      [routerLink]="item.url ? item.url : null"
-      routerLinkActive="active"
-      [ngClass]="{'active': selectedItem === index}" (click)="selectItmeMenu(0)">
+    <mat-list-item
+      *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">
+      <a mat-line class="menu-item" [routerLink]="item.url ? item.url : null" routerLinkActive="active"
+        [ngClass]="{'active': selectedItem === index}" (click)="selectItmeMenu(0)">
+        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+        <span class="menu-item-label">{{item.title}}</span>
+      </a>
+    </mat-list-item>
+  </ng-container>
 
-        <mat-icon mat-list-icon >{{item.icon}}</mat-icon>
-        <span class="menu-item-label" >{{item.title}}</span>
-    </a>
-  </mat-list-item>
 
   <!-- Sub Menu -->
   <!-- <mat-nav-list dense *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" class="sub-items">

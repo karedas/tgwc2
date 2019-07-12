@@ -1,6 +1,10 @@
-import { Component, ViewEncapsulation, Input, Output, EventEmitter, SimpleChange, OnChanges, SimpleChanges, ComponentFactoryResolver } from '@angular/core';
+import { Component, ViewEncapsulation, Input, Output, EventEmitter, SimpleChange, OnChanges, SimpleChanges, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
+import { UserService } from 'src/app/core/services/user.service';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+import { Character } from 'src/app/core/models/character.model';
 
 
 @Component({
@@ -8,25 +12,28 @@ import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
   templateUrl: './tg-characters-list.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class MyCharactersComponent implements OnChanges{
+export class MyCharactersComponent implements OnInit{
 
   @Output() goToManage = new EventEmitter();
-  @Input() chars: any[];
+  // @Input() chars: any[];
 
   readonly env = environment;
   readonly ethnicity = ethnicity;
   readonly maxCharacter: number;
 
-  charsList: any;
+  charactersList: Observable<any>;
   enabledCharactersNumber: number;
 
-
-  ngOnChanges(changes: SimpleChanges) {
-    const chars: SimpleChange = changes.chars;
-    if(chars.currentValue) {
-      // Get Only the enabled chars
-      this.charsList = chars.currentValue.filter(this.isEnabled);
-    }
+  constructor (
+    private userService: UserService
+  ){ 
+  }
+  
+  ngOnInit() {
+    this.charactersList = this.userService.getCharacters()
+    .pipe(
+      filter(char => char.status === 1)
+    )
   }
 
   isEnabled(value) {

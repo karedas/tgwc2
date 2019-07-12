@@ -1,6 +1,6 @@
 <div class="comp-content comp-padd comp-center">
   <h2>I tuoi personaggi</h2>
-  <div class="table-responsive" *ngIf="chars.length > 0 ">
+  <div class="table-responsive" *ngIf="chars">
     <table class="mat-elevation-z8 mat-table ch-table" >
       <thead>
         <th>Immagine</th>
@@ -9,7 +9,9 @@
         <th>Azioni</th>
       </thead>
       <tbody>
-        <tr *ngFor="let char of chars;" [ngClass]="{'disabled': char.status === 0}">
+        <tr *ngFor="let char of chars;" 
+          [ngClass]="{'disabled': char.status === 0}"
+          (click)="expandedElement = expandedElement === element ? null : element">
 
           <td>
             <div class="ch-avatar mat-elevation-z4">
@@ -41,8 +43,10 @@
     </table>
   </div>
 
+  
+
   <div class="ch-block">
-    <p  *ngIf="chars.length == 0 ||  !chars ">
+    <p *ngIf="!chars ">
       Non hai ancora creato un personaggio, inizia da qui:
     </p>
     <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']" id="addnewchar">
