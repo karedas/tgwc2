@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { navigationSidebar, ManagerNavigation } from './sidebar';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.model';
@@ -21,12 +21,13 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     for (let item in navigationSidebar) {
       if(navigationSidebar.hasOwnProperty(item)) {
         this.links.push(navigationSidebar[item]);
       }
     }
+
   }
 
   selectItmeMenu(i) {
@@ -34,7 +35,6 @@ export class SidebarComponent implements OnInit {
   }
 
   isEnableFor(level: string): boolean {
-
     // return this.authService.isEnableTo(level);
     return true;
   }
