@@ -1,6 +1,8 @@
-<div class="comp-content comp-padd comp-center">
+<div class="comp-content comp-padd">
+  
   <h2>I tuoi personaggi</h2>
   <div class="table-responsive" *ngIf="chars">
+
     <table class="mat-elevation-z8 mat-table ch-table" >
       <thead>
         <th>Immagine</th>
@@ -41,9 +43,8 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
-  
+  </div>
 
   <div class="ch-block">
     <p *ngIf="!chars ">
@@ -58,6 +59,7 @@
       (ngSubmit)="verify()"
       autocomplete="off"
       novalidate>
+
       <h4>Aggiungi manualmente</h4>
       <p>
         Se hai già un personaggio e conosci le credenziali di accesso puoi aggiungerlo manualmente al tuo account.

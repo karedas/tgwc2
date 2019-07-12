@@ -1,9 +1,9 @@
-import { Component, ViewEncapsulation, Input, Output, EventEmitter, SimpleChange, OnChanges, SimpleChanges, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, Output, EventEmitter, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 
 
@@ -12,7 +12,7 @@ import { Character } from 'src/app/core/models/character.model';
   templateUrl: './tg-characters-list.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class MyCharactersComponent implements OnInit{
+export class MyCharactersComponent implements OnInit {
 
   @Output() goToManage = new EventEmitter();
   // @Input() chars: any[];
@@ -24,36 +24,35 @@ export class MyCharactersComponent implements OnInit{
   charactersList: Observable<any>;
   enabledCharactersNumber: number;
 
-  constructor (
+  constructor(
     private userService: UserService
-  ){ 
-  }
+  ) {}
   
   ngOnInit() {
+
     this.charactersList = this.userService.getCharacters()
-    .pipe(
-      filter(char => char.status === 1)
-    )
+      .pipe(
+        map((char: Character) => {
+          return char.filter(char => char.status === 1);
+        })
+      );
+
   }
 
-  isEnabled(value) {
-    return value.status === 1;
-  }
-  
-  private getTotalEnabledChars(chars: any): number {
-  
-    if (!chars) 
-      return;
-  
-    let count = 0;
+  // private getTotalEnabledChars(chars: any): number {
 
-    for(let i = 0; i < chars.length; ++i){
-      if(chars[i].status === 1)
-        count++;
-    }
+  //   if (!chars)
+  //     return;
 
-    return count;
-  }
+  //   let count = 0;
+
+  //   for (let i = 0; i < chars.length; ++i) {
+  //     if (chars[i].status === 1)
+  //       count++;
+  //   }
+
+  //   return count;
+  // }
 
   goToChractersManage(event) {
     this.goToManage.emit();
