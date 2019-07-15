@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSliderModule } from '@angular/material/slider';
 import { NewsComponent } from '../../components/windows/news/news.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -11,11 +10,9 @@ import { CharacterSheetModule } from '../../components/windows/character-sheet/c
 import { BookComponent } from '../../components/windows/book/book.component';
 import { CommandsListComponent } from '../../components/windows/commands-list/commands-list.component';
 import { GenericTableComponent } from '../../components/windows/generic-table/generic-table.component';
-import { NoFeatureComponent } from '../../components/windows/no-feature/no-feature.component';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LogComponent } from '../../components/windows/log/log.component';
-import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
 import { ControlPanelModule } from '../../components/windows/control-panel/control-panel.module';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
 
@@ -27,7 +24,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
     BookComponent,
     CommandsListComponent,
     GenericTableComponent,
-    NoFeatureComponent,
     WorkslistComponent,
     LogComponent,
     ShortcutsPanelComponent,
@@ -50,7 +46,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
     BookComponent,
     CommandsListComponent,
     GenericTableComponent,
-    NoFeatureComponent,
     WorkslistComponent,
     CharacterSheetComponent,
     LogComponent,

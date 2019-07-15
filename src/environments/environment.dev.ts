@@ -8,13 +8,13 @@ export const environment = {
     url : 'http://51.38.185.84:3335',
     // url : 'http://play.thegatemud.it:3335',
     options : {
-      'reconnection': true,
-      'autoConnect:': true,
-      'forceNew': true,
-      'resource': 'socket.io',
-      'transports': ['websocket'],
-      'reconnectionDelay': 1500,
-      'reconnectionAttempts': 'Infinity'
+      reconnection: true,
+      autoConnect: true,
+      forceNew: false,
+      resource: 'socket.io',
+      transports: ['websocket'],
+      reconnectionDelay: 1500,
+      reconnectionAttempts: 'Infinity'
     }
   }
 };

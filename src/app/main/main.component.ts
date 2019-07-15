@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
+import { CookieLawComponent } from './common/components/dialogs/cookie-law/cookie-law.component';
 
 @Component({
   selector: 'tg-main',

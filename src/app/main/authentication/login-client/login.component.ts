@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
-import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validations.js';
+import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validators/character-validations.js';
 import { takeUntil } from 'rxjs/operators';
 
 import gitInfo from 'src/git-version.json';

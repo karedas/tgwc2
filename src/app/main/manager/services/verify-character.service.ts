@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SocketService, ISocketResponse } from '../../../core/services/socket.service';
+import { SocketService, } from '../../../core/services/socket.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { socketEvent } from 'src/app/models/socketEvent.enum';
+import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 
 
 @Injectable()
@@ -13,21 +13,24 @@ export class VerifyCharacterService{
   private pwd: string;
 
   constructor(
-    private socketService: SocketService
+    private socketService: SocketService,
   ){}
 
   public check(data: { characterName: string, characterPassword: string }): Observable<boolean> {
+    
     this.name = data.characterName;
     this.pwd = data.characterPassword;
 
-    // this.addListener(socketEvent.LOGIN,
-    //   (data: any) => this.dispatchResponse(data));
+    // this.socketService.setHandleLoginData(this.name, this.pwd);
 
     // Request a login call to the websocket
-    // this.emit('loginrequest');
+    // this.socketService.emit('loginrequest');
+
+    // this.socketService.loginRequest()
 
     // TEMP TEST
-    this.verifySubject$.next(true)
+    this.verifySubject$.next(true);
+    
     return this.verifySubject$.asObservable();
   }
 

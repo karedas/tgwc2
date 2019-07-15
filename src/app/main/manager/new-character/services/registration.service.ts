@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { SocketService } from 'src/app/main/client/services/socket.service';
-import { socketEvent } from 'src/app/models/socketEvent.enum';
+import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationData } from '../models/creation_data.model';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -58,7 +58,7 @@ export class RegistrationService implements Resolve<any> {
 
   private setHandleRegistrationData(d?: string) {
     this.resetHandler();
-    // this.socketService.addListener(socketEvent.REGISTRATION,
+    // this.socketService.on(socketEvent.REGISTRATION,
       // (d: any) => this.handleRegistrationData(d));
   }
 

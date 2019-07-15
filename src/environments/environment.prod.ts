@@ -7,14 +7,14 @@ export const environment = {
   socket : {
     url : 'http://play.thegatemud.it:3335',
     options : {
-      'reconnection': true,
-      'autoConnect:': true,
-      'forceNew': true,
-      'resource': 'socket.io',
-      'transports': ['websocket'],
-      'reconnectionDelay': 1500,
-      'reconnectionDelayMax' : 5000,
-      'reconnectionAttempts': 'Infinity'
+      reconnection: true,
+      autoConnect: true,
+      forceNew: false,
+      resource: 'socket.io',
+      transports: ['websocket'],
+      reconnectionDelay: 1500,
+      reconnectionDelayMax : 5000,
+      reconnectionAttempts: 'Infinity'
     }
   },
   analytics_UAID: 'UA-122402371-1'

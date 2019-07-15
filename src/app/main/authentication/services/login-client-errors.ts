@@ -1,4 +1,6 @@
-export const loginError = {
+export const loginClientErrors = {
+  servershutdown: 'Attenzione, il server è attualmente in manutenzione.',
+  serverreboot: 'Attenzione, il server sarà riavviato entro breve.',
   serverdown: 'Il server di gioco è momentaneamente spento. Riprova più tardi.',
   errorproto: 'Errore di comunicazione con il server.',
   errornonew: 'In questo momento non è permessa la creazione di nuovi personaggi.',

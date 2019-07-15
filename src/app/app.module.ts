@@ -9,12 +9,11 @@ import { environment } from 'src/environments/environment';
 import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SplashscreenComponent } from './main/splashscreen/splashscreen.component';
+import { SplashscreenComponent } from './main/common/components/splashscreen/splashscreen.component';
 import { MainModule } from './main/main.module';
 import { CoreModule } from './core/core.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 
 export function tokenGetter() {
@@ -32,7 +31,6 @@ export function tokenGetter() {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    LoggerModule.forRoot({serverLoggingUrl: '/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

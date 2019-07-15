@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 import * as io from 'socket.io-client';
-import { DisconnectAction } from 'src/app/store/actions/client.action';
-import { socketEvent } from 'src/app/models/socketEvent.enum';
-import { NGXLogger } from 'ngx-logger';
-// import { socketEventName } from '../../authentication/services/login-client.service';
+import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 // import { socketEventName } from '../../authentication/services/login-client.service';
 // import { ClientState } from 'src/app/store/state/client.state';
 // import { Store } from '@ngrx/store';
@@ -18,82 +14,64 @@ import { NGXLogger } from 'ngx-logger';
 //   providedIn: 'root'
 // })
 
-export interface ISocketResponse {
-  event: string
-  data?: any
-}
+// export interface ISocketResponse {
+//   event: string
+//   data?: any
+// }
 
 export class SocketService {
 
   private socket: io;
-
-  connected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  connected: boolean = false;
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  socketResponse: ISocketResponse;
 
-  constructor(
-    // private store: Store<ClientState>
-    private logger: NGXLogger
-  ) {
+  constructor(/* private store: Store<ClientState>*/) {
     this.connect();
   }
 
-  get isConnected() {
-    return this.connected$.asObservable();
+  get isConnected(): boolean {
+    return this.connected;
   }
+
+  set isConnected(value: boolean) {
+    this.connected = value;
+  }
+
+
+  /** PUBLIC METHODS  */
 
   public connect(): void {
-
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
-      this.initSocketEvent();
-    }
+      
+      this.socket.on(socketEvent.CONNECT, () => {
+        this.onConnect();
+      });
 
-  }
+      this.socket.on(socketEvent.DISCONNECT, () => {
+        this.onDisconnect();
+      });
 
-  private initSocketEvent() {
-    /* Connected */
-    this.socket.on(socketEvent.CONNECT, () => {
-      this.logger.info(`TGLOG: socket.io client connected to ${environment.socket.url} WS server`)
-      this.connected$.next(true);
-      this.socket_error$.next(false);
-    });
+      this.socket.on(socketEvent.CONNECTERROR, (err: any) => {
+        this.onError();
 
-    /* Disconnected */
-    this.socket.on(socketEvent.DISCONNECT, () => {
-      this.logger.info(`TGLOG: socket.io client Disconnected`)
-      this.disconnect();
-    });
+      });
 
-    /* Error */
-    this.socket.on(socketEvent.CONNECTERROR, (err: any) => {
-      this.logger.error(`TGLOG: Socker.io Error!`, err)
-      this.connected$.next(false);
-      this.socket_error$.next(true);
+      this.socket.on(socketEvent.RECONNECT, () => { 
+        this.onReconnect();
+      });
+
+    } else if( this.socket.disconnected ) {
       this.socket.connect();
-    });
-
-    /* Reconnection */
-    this.socket.on(socketEvent.RECONNECT, () => { });
+    }
+  }
+  
+  public disconnect(): void {
+    this.socket.disconnect();
   }
 
   public removeListener(event) {
     this.socket.removeListener(event);
-  }
-
-  public disconnect(): void {
-
-    // this.store.dispatch(new DisconnectAction());
-
-    this.connected$.next(false);
-    if (!this.socket.isConnected) {
-      this.socket.connect();
-    }
-  }
-
-  public oob() {
-    const when = new Date().getTime();
-    this.emit(socketEvent.OOB, { itime: when.toString(16) });
   }
 
   public emit(event: any, data?: any) {
@@ -108,7 +86,7 @@ export class SocketService {
     });
   }
 
-  public addListener(eventName: string, handler: any): void {
+  public on(eventName: string, handler: any): void {
     // Avoid duplicate removing previous one
     this.socket.removeListener(eventName);
     // Then add the new heandler
@@ -121,51 +99,22 @@ export class SocketService {
     }
   }
 
+  private onConnect() {
+    this.connected = true;
+    this.socket_error$.next(false);
+  }
 
-  handleSocketData(data: any): any {
+  private onError() {
+    this.connected = false;
+    this.socket_error$.next(true);
+    this.socket.connect();
+  }
 
-    if (data.indexOf('&!connmsg{') === 0) {
-      const end = data.indexOf('}!');
-      const rep = JSON.parse(data.slice(9, end + 1));
-      
-      if (rep.msg) {
-        switch (rep.msg) {
-          case socketEvent.READY:
-            this.oob();
-          case socketEvent.ENTERLOGIN:
-            return this.socketResponse = {
-              event: socketEvent.ENTERLOGIN
-            }
-          case socketEvent.SHUTDOWN:
-            return this.socketResponse = {
-              event: socketEvent.SHUTDOWN
-            }
-          // this.onShutDown();
-          // this.onEnterLogin();
-          case socketEvent.REBOOT:
-            return this.socketResponse = {
-              event: socketEvent.REBOOT
-            }
-          // this.onReboot();
-          // this.onEnterLogin();
-          case socketEvent.LOGINOK:
-            return this.socketResponse = {
-              event: socketEvent.LOGINOK,
-              data: (data.slice(end + 2))
-            }
-          case socketEvent.SERVERDOWN:
-            // this.onServerDown();
-            return this.socketResponse = {
-              event: socketEvent.SERVERDOWN,
-            }
-          default:
-            // this.onError(rep.msg);
-            return this.socketResponse = {
-              event: 'error',
-              data: rep.msg
-            }
-        }
-      }
-    }
+  private onReconnect() {
+  }
+
+  private onDisconnect() {
+    this.connected = false;
+    this.connect();
   }
 }
