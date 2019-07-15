@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HstatComponent } from './common/hstat/hstat.component';
 import { IconsComponent } from './common/icons/icons.component';
 import { CommonModule } from '@angular/common';
+import { TgConfigModule } from 'src/app/shared/tgconfig.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CommonModule } from '@angular/common';
     OutputModule,
     InputModule,
     FileSaverModule,
+    TgConfigModule
   ],
   exports: [
     NavbarComponent,
