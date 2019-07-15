@@ -11,7 +11,7 @@ export class AlertComponent {
   dialogID = 'alert';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data
+    @Inject(MAT_DIALOG_DATA) public data,
   ) {
   }
 
