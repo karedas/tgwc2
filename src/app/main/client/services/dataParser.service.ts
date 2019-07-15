@@ -123,7 +123,6 @@ export class DataParser {
     });
 
     // Region
-
     data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
       const region_parse = JSON.parse(region.slice(8, -1));
       this.store.dispatch(new DataActions.RegionAction(region_parse));

@@ -1,12 +1,10 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnDestroy, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
-import { LoginService } from '../authentication/services/login.service';
+import { LoginService } from '../../../authentication/services/login.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
-import { Character } from 'src/app/core/models/character.model';
 
 
 @Component({

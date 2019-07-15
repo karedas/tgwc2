@@ -3,15 +3,16 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MainComponent } from './main.component';
 import { Auth2Module } from './authentication/auth.module';
 import { Routes, RouterModule } from '@angular/router';
-import { MainNavigationModule } from './main-navigation/main-navigation.module';
-import { CookieLawComponent } from './client/components/windows/cookie-law/cookie-law.component';
+import { MainNavigationModule } from './common/components/main-navigation/main-navigation.module';
+import { CookieLawComponent } from './common/components/dialogs/cookie-law/cookie-law.component';
 import { Error403Module } from './pages/errors/403/error-403.module';
 import { CookieService } from 'ngx-cookie-service';
-import { SplashScreenService } from './splashscreen/splashscreen.service';
+import { SplashScreenService } from './common/components/splashscreen/splashscreen.service';
 import { HelpComponent } from './pages/help/help.component';
 import { MatListModule, MatToolbarModule } from '@angular/material';
-import { SidebarComponent } from './sidebar-content/sidebar.component';
+import { SidebarComponent } from './common/components/sidebar-content/sidebar.component';
 import { SocketService } from '../core/services/socket.service';
+import { AlertComponent } from './common/components/dialogs/alert/alert.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
   declarations: [
     MainComponent,
     CookieLawComponent,
+    AlertComponent,
     SidebarComponent,
     HelpComponent
   ],
@@ -53,6 +55,7 @@ const routes: Routes = [
     MainComponent,
   ],
   entryComponents: [
+    AlertComponent,
     CookieLawComponent
   ],
   providers: [

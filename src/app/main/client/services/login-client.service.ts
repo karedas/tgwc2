@@ -1,16 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { loginError } from '../../authentication/services/login-errors';
-import { SocketService, ISocketResponse } from 'src/app/core/services/socket.service';
-import { GameService } from 'src/app/main/client/services/game.service';
-import { socketEvent } from 'src/app/models/socketEvent.enum';
-import { NGXLogger } from 'ngx-logger';
-
-export const messages = {
-  TRY_CONNECTION: 'Tentativo di connessione in corso...'
-}
-
-
+import { SocketService } from 'src/app/core/services/socket.service';
+import { socketEvent } from 'src/app/core/models/socketEvent.enum';
+import { loginClientErrors } from '../../authentication/services/login-client-errors';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +10,14 @@ export const messages = {
 export class LoginClientService {
 
   public redirectUrl: string;
-
   public isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
   private loginErrorMessage$: BehaviorSubject<string> =  new BehaviorSubject<string>('');;
-
+  
   private name: string;
   private secret: string;
 
-
   constructor(
     private socketService: SocketService,
-    private logger: NGXLogger
   ){}
 
 
@@ -41,8 +30,8 @@ export class LoginClientService {
   }
 
   set replayMessage(what: any) {
-    if (loginError[what]) {
-      this.loginErrorMessage$.next(loginError[what]);
+    if (loginClientErrors[what]) {
+      this.loginErrorMessage$.next(loginClientErrors[what]);
     } else if (what) {
       this.loginErrorMessage$.next(what);
     }
@@ -62,48 +51,16 @@ export class LoginClientService {
 
   /** ---- Public Methods ---- */
 
-  login(data: { name: string, secret: string }): Observable<boolean> {
+  public login(data: { name: string, secret: string }): Observable<boolean> {
 
-    this.logger.log(`TGLOG: trying to login character "${name}"... `);
+    this.name = data.name;
+    this.secret = data.secret;
 
-    // this.socketService.addListener(socketEvent.LOGIN, 
-    //   (serverData: any) => {
-    //     this.replayMessage =  messages.TRY_CONNECTION;
-    //     const response: ISocketResponse = this.socketService.handleSocketData(serverData)
-    //     switch(response.event) {
-      
-    //       case socketEvent.ENTERLOGIN:
-    //         this.onEnterLogin();
-    //         break;
-            
-    //         case socketEvent.LOGINOK:
-    //         this.onLoginOk(response.data);
-    //         break;
-    //     }
+    this.replayMessage =  'Tentativo di connessione in corso...';
+    this.setHandleLoginData();
 
-    //   });
-    this.socketService.addListener(socketEvent.LOGIN, this.socketService.handleSocketData);
-    this.socketService.emit(socketEvent.LOGINREQUEST);
-    
-    return this.isLoggedIn;
-
+    return this.isLoggedInSubject.asObservable();
   }
-
-  // private dispatchResponse(res) {
-
-  //   let response: ISocketResponse = this.socketService.handleSocketData(res)
-    
-  //   switch(response.event) {
-      
-  //     case socketEvent.ENTERLOGIN:
-  //       this.onEnterLogin();
-  //       break;
-        
-  //       case socketEvent.LOGINOK:
-  //       this.onLoginOk(response.data);
-  //       break;
-  //   }
-  // }
 
   logout() {
     this.isLoggedInSubject.next(false);
@@ -113,86 +70,94 @@ export class LoginClientService {
     this.login({ name: this.name, secret: this.secret });
   }
 
-  /** ---- Private Methods ---- */
-
-  private resetHandler() {
-    // this.socketService.off(socketEvent.LOGIN);
-    // this.socketService.off(socketEvent.DATA);
-    this.setHandleLoginData();
-  }
 
   private setHandleLoginData() {
-    // this.socketService.addListener(socketEvent.LOGIN,
-      // (data: any) => this.handleLoginData(data));
+
+    this.resetHandler();
+    this.socketService.on(socketEvent.LOGIN,
+      (data: any) => this.handleLoginData(data));
+    this.socketService.emit(socketEvent.LOGINREQUEST);
+  }
+
+  /** ---- Private Methods ---- */
+
+  private oob() {
+    const when = new Date().getTime();
+    this.socketService.emit(socketEvent.OOB, { itime: when.toString(16) });
+  }
+
+  private resetHandler() {
+    this.socketService.removeListener(socketEvent.LOGIN);
+    this.socketService.removeListener(socketEvent.DATA);
   }
 
   private handleLoginData(data: any) {
 
-    // if (data.indexOf('&!connmsg{') === 0) {
-    //   const end = data.indexOf('}!');
-    //   const rep = JSON.parse(data.slice(9, end + 1));
+    console.log(data);
+    if (data.indexOf('&!connmsg{') === 0) {
+      const end = data.indexOf('}!');
+      const rep = JSON.parse(data.slice(9, end + 1));
 
-    //   if (rep.msg) {
-    //     switch (rep.msg) {
+      if (rep.msg) {
+        switch (rep.msg) {
 
-    //       case socketEventName.READY:
-    //         this.socketService.oob();
-    //         break;
-    //       case socketEventName.ENTERLOGIN:
-    //         this.onEnterLogin();
-    //         break;
-    //       case socketEventName.SHUTDOWN:
-    //         this.onShutDown();
-    //         this.onEnterLogin();
-    //         break;
-    //       case socketEventName.REBOOT:
-    //         this.onReboot();
-    //         this.onEnterLogin();
-    //         break;
-    //       case socketEventName.LOGINOK:
-    //         this.onLoginOk(data.slice(end + 2));
-    //         break;
-    //       case socketEventName.SERVERDOWN:
-    //         this.onServerDown();
-    //         break;
-    //       default:
-    //         this.onError(rep.msg);
-    //         break;
-    //     }
-    //   }
-    // }
+          case socketEvent.READY:
+            this.oob();
+            break;
+          case socketEvent.ENTERLOGIN:
+            this.onEnterLogin();
+            break;
+          case socketEvent.SHUTDOWN:
+            this.onShutDown();
+            this.onEnterLogin();
+            break;
+          case socketEvent.REBOOT:
+            this.onReboot();
+            this.onEnterLogin();
+            break;
+          case socketEvent.LOGINOK:
+            this.onLoginOk(data.slice(end + 2));
+            break;
+          case socketEvent.SERVERDOWN:
+            this.onServerDown();
+            break;
+          default:
+            this.onError(rep.msg);
+            break;
+        }
+      }
+    }
   }
 
   private onEnterLogin() {
     const credentials = `login:${this.name},${this.secret}\n`;
-    // this.socketService.emit(socketEvent.DATA, credentials);
+    this.socketService.emit(socketEvent.DATA, credentials);
   }
 
   private onLoginOk(data: any) {
+    this.replayMessage = `Personaggio ${this.name} trovato.`;
     this.completeHandShake(data);
   }
 
   private completeHandShake(data: any) {
-    // this.socketService.off(socketEvent.LOGIN);
+    this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
-    // this.game.startGame(data);
   }
 
   private onShutDown() {
-    alert('Attenzione, il server è attualmente in manutenzione.');
+    this.replayMessage = loginClientErrors.servershutdown;
   }
 
   private onReboot() {
-    alert('Attenzione, il server sarà riavviato entro breve.');
+    this.replayMessage = loginClientErrors.serverreboot;
   }
 
   private onServerDown() {
-    alert('Attenzione, il server sarà spento entro breve per manutenzione.');
-    this.replayMessage = 'serverdown';
+    this.replayMessage = loginClientErrors.serverdown;
   }
 
   private onError(err: any) {
-    // this.socketService.off(socketEvent.LOGIN);
     this.replayMessage = err;
+    this.socketService.connect();
   }
 }
