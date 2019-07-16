@@ -10,8 +10,6 @@ import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
 import { AudioComponent } from './components/audio/audio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TgConfigModule } from 'src/app/shared/tgconfig.module';
-
 
 @NgModule({
   declarations: [
@@ -28,7 +26,6 @@ import { TgConfigModule } from 'src/app/shared/tgconfig.module';
     OutputModule,
     InputModule,
     FileSaverModule,
-    TgConfigModule
   ],
   exports: [
     NavbarComponent,
