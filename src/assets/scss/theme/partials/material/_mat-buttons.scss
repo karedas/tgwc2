@@ -1,9 +1,15 @@
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+  &.thin {
+    line-height: 28px;
+  }
+}
+
 .mat-raised-button, .mat-flat-button {
   border-radius: 0;
 }
 
-
-  // Buttons
+// Buttons
   .mat-raised-button {
     font-weight: 700;
     line-height: 28px;

@@ -29,6 +29,7 @@ export class MyCharactersComponent implements OnInit {
   enabledCharactersNumber: number;
   replayMessage: string;
 
+  private dialogRef: MatDialogRef<AlertComponent>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -37,29 +38,29 @@ export class MyCharactersComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
   ) {
-    this._unsubscribeAll = new Subject<any>();
+
     this.replayMessage = this.loginClientService.replayMessage;
+    this._unsubscribeAll = new Subject<any>();
+
   }
 
   ngOnInit() {
 
     this.loginClientService.replayMessage
-      .pipe( takeUntil(this._unsubscribeAll) )
-      .subscribe( (msg: string) => {
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((msg: string) => {
         this.updateReplayMessage(msg);
-      }
-    );
+      });
 
     this.charactersList = this.userService.getCharacters()
       .pipe(map((char: Character) => {
         return char.filter(char => char.status === 1);
-      })
-      );
+      }));
   }
 
   private updateReplayMessage(msg: string) {
     const replayDialog = this.dialog.getDialogById('loginReplay');
-    if(replayDialog) {
+    if (replayDialog) {
       replayDialog.componentInstance.data = {
         replayMessage: msg
       }
@@ -72,38 +73,40 @@ export class MyCharactersComponent implements OnInit {
     // }
     const values = { name: name, secret: 'ciccio' };
 
-    this.openSpinnerDialog();
+    this.openLoginDialog();
+    this.loginClientService.login(values).pipe(
+      delay(1000),
+      takeUntil(this._unsubscribeAll)
+    ).subscribe((res) => {
 
-    this.loginClientService.login(values)
-      .pipe(
-        delay(1000),
-        takeUntil(this._unsubscribeAll)
-        )
-      .subscribe((res) => {
-        if (res === true) {
-          const redirect = this.loginClientService.redirectUrl ? this.loginClientService.redirectUrl : '/webclient';
-          this.router.navigate([redirect]).then( () => {
-            this.loginClientService.replayMessage = '';
-          });
-        } else {
-          // this.loginfailed = true;
-        }
-      })
+      if (res === true) {
+
+        this.closeLoginDialog();
+
+        const redirect = this.loginClientService.redirectUrl 
+          ? this.loginClientService.redirectUrl 
+          : '/webclient';
+          
+        this.router.navigate([redirect]).then(() => {
+          this.loginClientService.replayMessage = '';
+        });
+      }
+    })
   }
 
-  private openSpinnerDialog(){
+  private openLoginDialog() {
     const config = new MatDialogConfig;
     config.id = 'loginReplay';
+    config.width = "350px"
     config.data = {
       replayMessage: 'PROVA'
     }
-    const dialogRef = this.dialog.open(AlertComponent, config);
+    this.dialogRef = this.dialog.open(AlertComponent, config);
   }
 
-  private closeSpinnerDialog() {
-    this.dialog.closeAll();
+  private closeLoginDialog() {
+    this.dialogRef.close();
   }
-  
 
   // private getTotalEnabledChars(chars: any): number {
 
@@ -126,6 +129,6 @@ export class MyCharactersComponent implements OnInit {
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();    
+    this._unsubscribeAll.complete();
   }
 }
