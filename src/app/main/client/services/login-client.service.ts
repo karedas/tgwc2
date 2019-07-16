@@ -135,7 +135,7 @@ export class LoginClientService {
   }
 
   private onLoginOk(data: any) {
-    this.replayMessage = `Personaggio ${this.name} trovato.`;
+    this.replayMessage = `Personaggio <b class="tg-yellow">${this.name}</b> trovato.`;
     this.completeHandShake(data);
   }
 

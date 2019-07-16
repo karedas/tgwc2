@@ -10,10 +10,8 @@ import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
 import { AudioComponent } from './components/audio/audio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HstatComponent } from './common/hstat/hstat.component';
-import { IconsComponent } from './common/icons/icons.component';
-import { CommonModule } from '@angular/common';
 import { TgConfigModule } from 'src/app/shared/tgconfig.module';
+
 
 @NgModule({
   declarations: [
