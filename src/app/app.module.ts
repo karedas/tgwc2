@@ -14,6 +14,13 @@ import { MainModule } from './main/main.module';
 import { CoreModule } from './core/core.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
+import { tgConfig } from './main/client/client-config';
+import { TgConfigModule } from './shared/tgconfig.module';
+import { StoreModule } from '@ngrx/store';
+import { baseReducer, clearState } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { ClientEffects } from './store/effects/client.effects';
+import { DataEffects } from './store/effects/data.effects';
 
 
 export function tokenGetter() {
@@ -31,18 +38,18 @@ export function tokenGetter() {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
-    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
       }
     }),
-    // TgConfigModule.forRoot(tgConfig),
-    // StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
-    // EffectsModule.forRoot([ClientEffects, DataEffects]),
+    TgConfigModule.forRoot(tgConfig),
+    StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
+    EffectsModule.forRoot([ClientEffects, DataEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
 
     // TODO: I'll need to move out.
     // AngularSplitModule.forRoot(),
