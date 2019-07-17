@@ -53,9 +53,9 @@ export class MyCharactersComponent implements OnInit {
       });
 
     this.charactersList = this.userService.getCharacters()
-      .pipe(map((char: Character) => {
-        return char.filter(char => char.status === 1);
-      }));
+      // .pipe(map((char: Character) => {
+      //   return char.filter(char => char.status === 1);
+      // }));
   }
 
   private updateReplayMessage(msg: string) {

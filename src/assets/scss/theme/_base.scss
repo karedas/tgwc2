@@ -84,14 +84,15 @@ body[data-loginstatus=ready] {
   overflow: hidden;
 }
 
-
 .tg-area {
   width: 100%;
   height: 100vh;
   min-height: 600px;
   display: flex;
   overflow: hidden;
-  padding: 0;
+  background-image: url($imgPath + '/interface/navbar_background.png');
+  background-repeat: repeat-x;
+  padding-top: 12px;
 
   &.expanded {
     padding: 0;
@@ -160,7 +161,7 @@ a.tg-base-logo {
 @include layout-bp(lt-md) {
 
 .tg-layout-container {
-  padding-top: 56px;
+  padding-top: 32px;
   background-position: 0 0;
 }
 .tg-area {

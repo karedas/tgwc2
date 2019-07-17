@@ -15,28 +15,27 @@
   margin-right: 0;
   display: flex;
   flex-direction: row;
-  height: 25px;
-  box-sizing: content-box;
+  box-sizing: border-box;
 
-  &:after,
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-  }
+  // &:after,
+  // &:before {
+  //   content: '';
+  //   display: block;
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  //   z-index: 2;
+  // }
 
-  &:before {
+  // &:before {
     //@include sprite($input-left-decoration-sprite);
-    left: -10px;
-  }
+    // left: -10px;
+  // }
 
-  &:after {
+  // &:after {
     //@include sprite($input-right-decoration-sprite);
-    right: -10px;
-  }
+    // right: -10px;
+  // }
 
   input[type="text"],
   input[type="password"] {
@@ -83,7 +82,6 @@
     .tg-fnt-button {
       line-height: 1;
       height: 100%;
-      width: auto;
       padding:0 4px;
       color: #54544d;
       border-right: 1px solid rgba(255, 255, 255, 0.15);

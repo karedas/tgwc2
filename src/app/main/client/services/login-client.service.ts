@@ -3,31 +3,32 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 import { loginClientErrors } from '../../authentication/services/login-client-errors';
+import { GameService } from './game.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginClientService {
 
-  _redirectUrl: string; 
+  _redirectUrl: string;
 
   private isLoggedInSubject: BehaviorSubject<boolean>;
   private loginErrorMessage$: BehaviorSubject<string>;
   private name: string;
   private secret: string;
 
-  constructor( private socketService: SocketService ){
+  constructor(private socketService: SocketService) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
     this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
 
 
-  get isLoggedIn(): boolean{
+  get isLoggedIn(): boolean {
     return <boolean>this.isLoggedInSubject.value;
   }
 
   set isLoggedIn(value: boolean) {
-   this.isLoggedInSubject.next(value);
+    this.isLoggedInSubject.next(value);
   }
 
 
@@ -52,10 +53,10 @@ export class LoginClientService {
   }
 
 
-  
+
   // constructor(
   //   private socketService: SocketService,
-  //   private game: GameService
+  private game: GameService
   // ) {
   //   this.isLoggedInSubject = new BehaviorSubject(false);
   //   this.loginErrorMessage$ = new BehaviorSubject('');
@@ -64,11 +65,9 @@ export class LoginClientService {
   /** ---- Public Methods ---- */
 
   login(data: { name: string, secret: string }): Observable<boolean> {
-
     this.name = data.name;
     this.secret = data.secret;
-
-    this.replayMessage =  'Tentativo di connessione in corso...';
+    this.replayMessage = 'Tentativo di connessione in corso...';
     this.setHandleLoginData();
 
     return this.isLoggedInSubject.asObservable();
@@ -81,7 +80,6 @@ export class LoginClientService {
   reconnect() {
     this.login({ name: this.name, secret: this.secret });
   }
-
 
   private setHandleLoginData() {
     this.resetHandler();

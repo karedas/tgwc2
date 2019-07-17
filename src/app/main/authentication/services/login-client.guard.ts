@@ -41,7 +41,7 @@ export class LoginClientGuard implements CanActivate, CanActivateChild, CanLoad 
     this.loginClientService.redirectUrl = url;
 
     // Navigate to the login page with extras
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/']);
     return false;
   }
 }

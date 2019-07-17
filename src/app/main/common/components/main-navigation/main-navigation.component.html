@@ -2,7 +2,7 @@
   <mat-toolbar-row fxLayout="wrap" fxLayoutGap="20px">
 
     <div class="hamburger-item">
-      <button mat-icon-button (click)="toggleSidenav.emit()">
+      <button class="tg-mainnav-icon" mat-icon-button (click)="toggleSidenav.emit()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
@@ -33,23 +33,10 @@
 
     <!-- Game Menu -->
     <ng-container *ngIf="userInGame">
-      <div *ngFor="let item of items; let i = index" 
-        class="tg-mainnav-item" 
-        fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-
-        <button #button mat-button>
-          {{item.title}}
-        </button>
-
-        <mat-menu *ngIf="item.children" 
-          [overlapTrigger]="false"[hasBackdrop]="false" class="mat-elevation-z4">
-          <div>
-              <button *ngFor="let children of item.children" mat-menu-item>{{children.title}}</button>
-          </div>
-        </mat-menu>
-      </div>
+      <!-- <tg-navbar></tg-navbar> -->
     </ng-container>
 
+    <!-- User Registration and login Menu -->
     <ng-container *ngIf="loggedIn === false ; else userLoggedIn">
       <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap="20px">
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
@@ -68,7 +55,7 @@
 
           <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
 
-            <button mat-icon-button>
+            <button mat-icon-button class="tg-mainnav-icon">
               <mat-icon matBadge="4" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below after">notification_important</mat-icon>
             </button>
 

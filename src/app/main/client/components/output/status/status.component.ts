@@ -5,7 +5,7 @@ import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { select, Store } from '@ngrx/store';
 import { getHero } from 'src/app/store/selectors';
 import { takeUntil } from 'rxjs/operators';
-import { State } from 'src/app/store';
+import { WebClientState } from 'src/app/store';
 
 @Component({
   selector: 'tg-status',
@@ -23,7 +23,7 @@ export class StatusComponent implements OnInit, OnDestroy {
 
   constructor(
     private game: GameService,
-    private store: Store<State>
+    private store: Store<WebClientState>
     ) {
 
     this.hero$ = this.store.pipe(select(getHero));
