@@ -12,7 +12,7 @@ export class AnonymousGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     /* Check if user is or not logged in. If is logged-in, diable the auth/* route.  */
-    console.log('is anonymous:' , this.authService.isLoggedIn());
+    console.log('is anonymous:' , !this.authService.isLoggedIn());
     if( !this.authService.isLoggedIn() ) {
       return true;
     }

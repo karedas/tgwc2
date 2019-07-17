@@ -9,24 +9,30 @@ import { loginClientErrors } from '../../authentication/services/login-client-er
 })
 export class LoginClientService {
 
-  public redirectUrl: string;
-  public isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
-  private loginErrorMessage$: BehaviorSubject<string> =  new BehaviorSubject<string>('');;
-  
+  _redirectUrl: string; 
+
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  private loginErrorMessage$: BehaviorSubject<string>;
   private name: string;
   private secret: string;
 
-  constructor(
-    private socketService: SocketService,
-  ){}
-
-
-  get isLoggedinValue(): boolean {
-    return this.isLoggedInSubject.value;
+  constructor( private socketService: SocketService ){
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
+    this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
 
-  get isLoggedIn(): Observable<any> {
-    return this.isLoggedInSubject.asObservable();
+
+  get isLoggedIn(): boolean{
+    return <boolean>this.isLoggedInSubject.value;
+  }
+
+  set isLoggedIn(value: boolean) {
+   this.isLoggedInSubject.next(value);
+  }
+
+
+  get replayMessage(): any {
+    return this.loginErrorMessage$.asObservable();
   }
 
   set replayMessage(what: any) {
@@ -37,10 +43,16 @@ export class LoginClientService {
     }
   }
 
-  get replayMessage(): any {
-    return this.loginErrorMessage$.asObservable();
+  get redirectUrl(): string {
+    return this._redirectUrl;
   }
 
+  set redirectUrl(value: string) {
+    this._redirectUrl = value;
+  }
+
+
+  
   // constructor(
   //   private socketService: SocketService,
   //   private game: GameService
@@ -51,7 +63,7 @@ export class LoginClientService {
 
   /** ---- Public Methods ---- */
 
-  public login(data: { name: string, secret: string }): Observable<boolean> {
+  login(data: { name: string, secret: string }): Observable<boolean> {
 
     this.name = data.name;
     this.secret = data.secret;
@@ -72,7 +84,6 @@ export class LoginClientService {
 
 
   private setHandleLoginData() {
-
     this.resetHandler();
     this.socketService.on(socketEvent.LOGIN,
       (data: any) => this.handleLoginData(data));
@@ -93,7 +104,6 @@ export class LoginClientService {
 
   private handleLoginData(data: any) {
 
-    console.log(data);
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
@@ -136,10 +146,10 @@ export class LoginClientService {
 
   private onLoginOk(data: any) {
     this.replayMessage = `Personaggio <b class="tg-yellow">${this.name}</b> trovato.`;
-    this.completeHandShake(data);
+    this.completeHandShake();
   }
 
-  private completeHandShake(data: any) {
+  private completeHandShake() {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
   }

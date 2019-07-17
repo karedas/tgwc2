@@ -79,14 +79,14 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     /* Check login status and if is disconnect cleaning the output messages */
-    this.loginClientService.isLoggedIn
-      .pipe(
-        takeUntil(this._unsubscribeAll))
-      .subscribe((status) => {
-        if (status === false) {
-          this.output = [];
-        }
-      });
+    // this.loginClientService.isLoggedIn
+    //   .pipe(
+    //     takeUntil(this._unsubscribeAll))
+    //   .subscribe((status) => {
+    //     if (status === false) {
+    //       this.output = [];
+    //     }
+    //   });
 
     // Listen Base Text Data
     this._baseText$

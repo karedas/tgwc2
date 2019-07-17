@@ -5,6 +5,8 @@ import { LoginService } from '../../../authentication/services/login.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ManagerNavigation, gameNavigation } from '../navigation';
+import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 
 @Component({
@@ -21,9 +23,12 @@ export class MainNavigationComponent implements OnDestroy {
   readonly env = environment;
 
   public loggedIn = null;
+  public userInGame = null;
   public currentUser: any;
   public charactersList: Observable<any>;
   public hamburgerStatus = false;
+
+  public items: ManagerNavigation[] = [];
 
   private _unsubscribeAll: Subject<any>;
 
@@ -31,7 +36,7 @@ export class MainNavigationComponent implements OnDestroy {
     private authService: AuthService,
     private loginService: LoginService,
     private router: Router,
-    private userService: UserService
+    private loginClientService: LoginClientService
   ) {
     
     this.router.events
@@ -40,12 +45,10 @@ export class MainNavigationComponent implements OnDestroy {
           this.setLoggedinUser();
         }
       });
-
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-
       // if(this.charactersList && this.loggedIn) {
 
       // this.charactersList
@@ -63,7 +66,6 @@ export class MainNavigationComponent implements OnDestroy {
   }
 
   private setLoggedinUser() {
-
     const status = this.authService.isLoggedIn();
     
     if (status) {
@@ -75,12 +77,15 @@ export class MainNavigationComponent implements OnDestroy {
       this.loggedIn = false;
       this.currentUser = null;
     }
+
+    //set also if the user is loggedin with a character
+    this.userInGame = this.loginClientService.isLoggedIn;
+
   }
 
   private isEnabled(value) {
     return value.status === 1;
   }
-
 
   userOnLogout() {
     this.loginService.logout().subscribe(() => {

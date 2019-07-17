@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { navigationSidebar, ManagerNavigation } from './sidebar';
+import { navigationSidebar, ManagerNavigation } from '../navigation';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.model';
 

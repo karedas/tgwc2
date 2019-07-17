@@ -25,6 +25,26 @@ export interface ManagerNavigation extends ManagerNavigationItem {
   children?: ManagerNavigationItem[];
 }
 
+// export const gameNavigation: ManagerNavigation[] = [
+//   {
+//     id: 'client',
+//     title: 'Client',
+//     type: 'group',
+//     children: [
+//       {
+//         id: 'log',
+//         title: 'Log di gioco',
+//         type: 'item'
+//       },
+//       {
+//         id: 'preferences',
+//         title: 'Preferenze',
+//         type: 'item'
+//       }
+//     ]
+//   },
+// ];
+
 export const navigationSidebar: ManagerNavigation[] = [
   {
     id: 'dashboard',
