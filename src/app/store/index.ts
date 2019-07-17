@@ -5,12 +5,12 @@ import { ClientState } from './state/client.state';
 import { ClientEventType } from './actions/client.action';
 import { DataState } from './state/data.state';
 
-export interface State {
+export interface WebClientState {
     client: ClientState;
     data: DataState;
 }
 
-export const baseReducer: ActionReducerMap<State> = {
+export const baseReducer: ActionReducerMap<WebClientState> = {
     client: fromClient.reducer,
     data: fromData.reducer,
 };

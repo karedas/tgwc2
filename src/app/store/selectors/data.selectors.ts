@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DataState } from '../state/data.state';
 
+
 /******************* Base Search State ******************/
 export const getDataState = createFeatureSelector<DataState>('data');
 
@@ -40,6 +41,7 @@ function fetchDoors(state: DataState) {
 }
 
 function fetchSky(state: DataState) {
+  console.log(state);
   return state.sky;
 }
 

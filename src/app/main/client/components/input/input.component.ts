@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
-import { State } from 'src/app/store';
+import { WebClientState } from 'src/app/store';
 import { getHero } from 'src/app/store/selectors';
 
 import { HistoryService } from 'src/app/main/client/services/history.service';
@@ -31,7 +31,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   constructor(
     private game: GameService,
-    private store: Store<State>,
+    private store: Store<WebClientState>,
     private historyService: HistoryService,
     private inputService: InputService,
     private dialogService: DialogV2Service,

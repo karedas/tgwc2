@@ -5,13 +5,13 @@
   width: 100%;
   border-collapse: collapse;
   background: transparent;
-  margin-bottom: 1em;
 
   th {
     font-weight: normal;
-    padding-bottom: 6px;
+    padding: 6px 2px;
     font-size: 11px;
     text-align: left;
+    background: #211f1e;
   }
 
   tr {
@@ -20,14 +20,14 @@
   }
 
   td {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background: #0e0e0e;
-    padding: 6px;
+    padding: 0 6px 0 0;
     transition: all .4s ease;
   }
 
-  tr:hover td {
-    background: rgb(22, 22, 22);
+  tr:not(.disabled):hover td {
+    background: #211f1e;
     border-bottom-color: $tg-yellow;
   }
 
@@ -35,9 +35,22 @@
     display: inline-block;
   }
 
+  .ch-connect {
+    border-radius: 50%;
+    width: 9px;
+    height: 9px;
+
+    &.online {
+      background-color: $tg-green;
+      box-shadow: 0 0 12px 2px #27d018;
+      margin: 6px 9px;
+    }
+  }
+
   .ch-avatar {
     width: 45px;
     border: 1px solid rgba(255, 255, 255, 0.4);
+    margin: 12px 0;
 
     img {
       max-width: 100%;

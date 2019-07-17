@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { State } from '../../../store';
+import { WebClientState } from '../../../store';
 import * as DataActions from '../../../store/actions/data.action';
 import * as GameActions from '../../../store/actions/client.action';
 
@@ -30,7 +30,7 @@ export class DataParser {
   private _updateNeeded: Subject<any>;
 
   constructor(
-    private store: Store<State>,
+    private store: Store<WebClientState>,
     private _configService: ConfigService,
     private logService: LogService
   ) {

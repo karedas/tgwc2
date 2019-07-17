@@ -13,9 +13,7 @@ import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material/dialog';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class GameService {
 
@@ -97,7 +95,6 @@ export class GameService {
 
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.handlerGameData(initialData, this._tgConfig.log);
-
     this._dataSubscription = this.socketService.listen(socketEvent.DATA)
       .subscribe(data => {
         this.dataParserService.handlerGameData(data, this._tgConfig.log);

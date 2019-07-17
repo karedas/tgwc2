@@ -7,26 +7,48 @@
       <div class="table-responsive">
 
         <table class="mat-elevation-z8 mat-table ch-table ">
+           <thead>
+            <th></th>
+            <th>Immagine</th>
+            <th>Nome / Dettagli</th>
+            <th colspan="2">Azioni</th>
+          </thead>
           <tbody>
             
-            <tr *ngFor="let char of chars">
+            <tr *ngFor="let char of chars"
+            [ngClass]="{'disabled': char.status === 0}">
+
+              <td>
+                <div class="ch-connect online"></div>
+              </td>
+
               <td>
                 <div class="ch-avatar mat-elevation-z4">
                   <img src="{{env.media_address + '/' + char.image}}" *ngIf="char.image !== ''" />
                   <div class="tg-base-logo" *ngIf="!char.image"></div>
                 </div>
               </td>
+
               <td>
                 <div class="ch-infoaction" fxLayoutAlign="center start" fxLayout="column">
-                  <div class="ch-char-name tg-yellow"> {{char.name | capitalizeFirst}} </div>
+                  <div class="ch-char-name"> {{char.name | capitalizeFirst}} </div>
                   <div class="ch-char-ethnicity">{{char.race | getEthnicityByCode: char.ethnicity }}</div>
                 </div>
               </td>
+
               <td>
-                 <button mat-flat-button class="tg-button-thin" class="thin" color="accent" (click)="loginCharacter(char.name)">
+                 <button mat-flat-button 
+                    class="tg-button-thin" class="thin"
+                    color="accent" (click)="loginCharacter(char.name)"
+                    *ngIf="char.status === 1">
                    <b>Connetti</b>
                   </button>
               </td>
+
+              <td>
+                <mat-icon>expand_more</mat-icon>
+              </td>
+
             </tr>
 
           </tbody>

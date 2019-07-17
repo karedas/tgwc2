@@ -44,8 +44,8 @@ export function tokenGetter() {
       }
     }),
     TgConfigModule.forRoot(tgConfig),
-    StoreModule.forRoot(baseReducer, { metaReducers: [clearState] }),
-    EffectsModule.forRoot([ClientEffects, DataEffects]),
+    
+    StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
