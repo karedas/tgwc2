@@ -1,7 +1,7 @@
 <mat-toolbar class="tg-mainnav">
   <mat-toolbar-row fxLayout="wrap" fxLayoutGap="20px">
 
-    <div class="hamburger-item">a
+    <div class="hamburger-item">
       <button mat-icon-button (click)="toggleSidenav.emit()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -12,19 +12,45 @@
       <a href="http://www.thegatemud.it" class="tg-base-logo"></a>
     </div>
 
-    <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-      <a href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</a>
-    </div>
+    <!-- Default Menu -->
+    <ng-container *ngIf="!userInGame">
+      
+          <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+            <button #button mat-button href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</button>
+          </div>
+      
+          <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+            <button #button mat-button href="http://forum.thegatemud.it">Forum</button>
+          </div>
+      
+          <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+            <button #button mat-button [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</button>
+          </div>
 
-    <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-      <a href="http://forum.thegatemud.it">Forum</a>
-    </div>
+    </ng-container>
+    
 
-    <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-      <a [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</a>
-    </div>
+
+    <!-- Game Menu -->
+    <ng-container *ngIf="userInGame">
+      <div *ngFor="let item of items; let i = index" 
+        class="tg-mainnav-item" 
+        fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+
+        <button #button mat-button>
+          {{item.title}}
+        </button>
+
+        <mat-menu *ngIf="item.children" 
+          [overlapTrigger]="false"[hasBackdrop]="false" class="mat-elevation-z4">
+          <div>
+              <button *ngFor="let children of item.children" mat-menu-item>{{children.title}}</button>
+          </div>
+        </mat-menu>
+      </div>
+    </ng-container>
+
     <ng-container *ngIf="loggedIn === false ; else userLoggedIn">
-
       <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap="20px">
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
           <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow">Login</a>
@@ -33,22 +59,17 @@
           <a [routerLink]="['/auth/signup']" [routerLinkActive]="['active']">Registrati</a>
         </div>
       </div>
-
     </ng-container>
 
-
-
     <ng-template #userLoggedIn>
-
       <ng-container *ngIf="currentUser">
-
         <!-- User Menu -->
         <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end">
 
           <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
 
             <button mat-icon-button>
-              <mat-icon matBadge="4" matBadgeColor="warn" matBadgeSize="small">notification_important</mat-icon>
+              <mat-icon matBadge="4" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below after">notification_important</mat-icon>
             </button>
 
             <button mat-button [matMenuTriggerFor]="menu" class="user-button">
@@ -96,11 +117,10 @@
               <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button>
               <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Logout</button>
             </mat-menu>
-
           </div>
         </div>
-
       </ng-container>
     </ng-template>
+
   </mat-toolbar-row>
 </mat-toolbar>

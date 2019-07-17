@@ -12,7 +12,7 @@ import { SignupConfirmComponent } from './signup-confirm/signup-confirm.componen
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { LoginClientComponent } from './login-client/login.component';
+// import { LoginClientComponent } from './login-client/login.component';
 import { QuotesComponent } from './login-client/quotes/quotes.component';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { QuotesComponent } from './login-client/quotes/quotes.component';
 
 
     //REMOVE
-    LoginClientComponent,
+    // LoginClientComponent,
     QuotesComponent
   ],
   imports: [

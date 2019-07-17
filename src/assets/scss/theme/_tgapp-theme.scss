@@ -1,7 +1,5 @@
-
-
 .tg-app {
-  
+
   @import 'dialog';
   @import 'partials/material/mat-divider';
   @import 'partials/material/mat-expansion';
@@ -12,6 +10,7 @@
   @import 'partials/material/mat-toolbar';
   @import 'partials/material/mat-buttons';
   @import 'partials/material/mat-form';
+  @import 'partials/material/mat-progressbar';
   @import 'partials/common';
 
 
@@ -20,14 +19,14 @@
   }
 
 
-    /* Border */
+  /* Border */
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: white;
   }
 
-  
+
   /* Hint */
-  
+
   .mat-form-field-appearance-legacy .mat-hint {
     color: rgba(255, 255, 255, 0.54);
   }
@@ -41,18 +40,18 @@
 
 
   .mat-checkbox-checkmark-path {
-    stroke: black!important;
+    stroke: black !important;
   }
-    
+
   /* Dialog */
   .mat-dialog-container {
     background: transparent;
     border-radius: 8px;
     position: relative;
     padding: 0;
-    box-shadow: 
-      0px 11px 15px -7px rgb(0, 0, 0), 
-      0px 24px 38px 3px rgba(0, 0, 0, 0.14), 
+    box-shadow:
+      0px 11px 15px -7px rgb(0, 0, 0),
+      0px 24px 38px 3px rgba(0, 0, 0, 0.14),
       0px 9px 46px 8px rgba(0, 0, 0, 0.12);
   }
 
@@ -89,7 +88,7 @@
     height: auto;
     font-size: 1em;
     padding: 8px 16px;
-    
+
     .mat-icon {
       color: #eceae3;
       line-height: 1;
@@ -104,9 +103,9 @@
       background: rgba(177, 116, 39, 0.68);
       color: white;
     }
-    
+
     .mat-divider {
-      background:rgb(51, 50, 46);
+      background: rgb(51, 50, 46);
     }
   }
 
@@ -123,7 +122,8 @@
     margin-right: auto;
   }
 
-  .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+  .mat-paginator,
+  .mat-paginator-page-size .mat-select-trigger {
     font-size: 10px;
     color: rgba(255, 255, 255, 0.54);
   }
@@ -137,11 +137,12 @@
   }
 
   .mat-select-panel {
-      background: #0c0a08;
-      border: 1px solid #ffffff21;
+    background: #0c0a08;
+    border: 1px solid #ffffff21;
   }
 
-  .mat-option:hover:not(.mat-option-disabled), .mat-option:focus:not(.mat-option-disabled) {
+  .mat-option:hover:not(.mat-option-disabled),
+  .mat-option:focus:not(.mat-option-disabled) {
     background-color: rgba(255, 255, 255, 0.04);
   }
 
@@ -149,18 +150,7 @@
     color: #ece9e0;
   }
 
-  /* ProgressBar */
-  .mat-progress-bar {
-    height: 2px;
 
-    .mat-progress-bar-buffer {
-      background-color: #ff9b00;
-    }
-
-    .mat-progress-bar-fill:after {
-      background-color: $tg-yellow;
-    }
-  }
 
   /* filter */
   .tg-table--filter {
@@ -177,19 +167,22 @@
 
   /* Slide Thumb */
   .mat-slider {
-   max-width: 80%;
-   width: 100%;
+    max-width: 80%;
+    width: 100%;
   }
 
   .mat-slider-track-fill {
     background-color: #ffc400;
   }
 
-  .mat-slider-track-background, .mat-slider:hover .mat-slider-track-background{
+  .mat-slider-track-background,
+  .mat-slider:hover .mat-slider-track-background {
     background-color: #252525;
   }
 
-  .mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label{
+  .mat-accent .mat-slider-track-fill,
+  .mat-accent .mat-slider-thumb,
+  .mat-accent .mat-slider-thumb-label {
     background-color: #ffc400;
     border-right-color: #ffc400;
   }
@@ -200,7 +193,7 @@
   }
 
   .mat-form-field-infix:after {
-    border-right-color: #ffc400!important;
+    border-right-color: #ffc400 !important;
   }
 
   .mat-form-field-underline {
@@ -218,7 +211,8 @@
   }
 
   /* Stepper */
-  .mat-stepper-horizontal, .mat-stepper-vertical {
+  .mat-stepper-horizontal,
+  .mat-stepper-vertical {
     color: white;
   }
 

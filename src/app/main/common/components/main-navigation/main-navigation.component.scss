@@ -26,7 +26,6 @@ tg-main-navigation {
 
 .tg-mainnav {
   font-size: 12px;
-  text-transform: uppercase;
   background: #231f1c;
   height: auto;
 
@@ -75,10 +74,13 @@ tg-main-navigation {
   padding: 0 8px;
 }
 
-.tg-mainnav-item a {
+.tg-mainnav-item a, .tg-mainnav-item .mat-button {
   text-decoration: none;
+  text-transform: uppercase;
   color: #bdb3a3;
   transition: text-shadow .2s linear;
+  font-size: 11px;
+  line-height: 32px;
 
   &:hover,
   &.active {

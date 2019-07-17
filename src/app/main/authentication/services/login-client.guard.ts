@@ -15,7 +15,8 @@ export class LoginClientGuard implements CanActivate, CanActivateChild, CanLoad 
   constructor(
     private loginClientService: LoginClientService,
     private router: Router
-    ) { }
+    ) {
+     }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
@@ -32,7 +33,7 @@ export class LoginClientGuard implements CanActivate, CanActivateChild, CanLoad 
   }
 
   checkLogin(url: string): boolean {
-    if (this.loginClientService.isLoggedinValue) {
+    if (this.loginClientService.isLoggedIn) {
       return true;
     }
 

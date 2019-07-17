@@ -78,15 +78,11 @@ export class MyCharactersComponent implements OnInit {
       delay(1000),
       takeUntil(this._unsubscribeAll)
     ).subscribe((res) => {
-
       if (res === true) {
 
         this.closeLoginDialog();
 
-        const redirect = this.loginClientService.redirectUrl 
-          ? this.loginClientService.redirectUrl 
-          : '/webclient';
-          
+        const redirect = '/webclient';
         this.router.navigate([redirect]).then(() => {
           this.loginClientService.replayMessage = '';
         });
