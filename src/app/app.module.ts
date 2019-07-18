@@ -17,10 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { tgConfig } from './main/client/client-config';
 import { TgConfigModule } from './shared/tgconfig.module';
 import { StoreModule } from '@ngrx/store';
-import { baseReducer, clearState } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { ClientEffects } from './store/effects/client.effects';
-import { DataEffects } from './store/effects/data.effects';
+import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 
 export function tokenGetter() {
@@ -46,6 +44,7 @@ export function tokenGetter() {
     TgConfigModule.forRoot(tgConfig),
     
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -53,7 +52,6 @@ export function tokenGetter() {
 
     // TODO: I'll need to move out.
     // AngularSplitModule.forRoot(),
-    // DialogV2Module,
     /** --------------------- */
     MainModule,
     AppRoutingModule,

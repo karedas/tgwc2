@@ -55,9 +55,9 @@
 
           <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
 
-            <button mat-icon-button class="tg-mainnav-icon">
-              <mat-icon matBadge="4" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below after">notification_important</mat-icon>
-            </button>
+            <!-- <button mat-icon-button class="tg-mainnav-icon">
+              <mat-icon matBadge="4" matBadgeColor="accent" matBadgeSize="small" matBadgePosition="below after">notification_important</mat-icon>
+            </button> -->
 
             <button mat-button [matMenuTriggerFor]="menu" class="user-button">
               <mat-icon>account_box</mat-icon>
@@ -74,7 +74,7 @@
               <!--  Characters List Fast Connector -->
               <div class="user-smart-chars" *ngIf="charactersList | async as chars">
 
-                <div class="smart-char" *ngFor="let char of chars" fxLayout="row" fxLayoutAlign="start center">
+                <div class="smart-char" *ngFor="let char of chars" fxLayout="row" fxLayoutAlign="start center" (click)="loginCharacter(char.name)">
 
                   <div class="smart-char-avatar">
                     <ng-container *ngIf="char.image; else nocharImg">

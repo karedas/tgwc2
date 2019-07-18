@@ -38,7 +38,6 @@ export class DataEffects {
     })
   );
 
-
   @Effect()
   equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
@@ -84,5 +83,4 @@ export class DataEffects {
       this.dialogV2Service.openWorksList();
     })
   );
-
 }

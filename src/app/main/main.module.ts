@@ -13,6 +13,10 @@ import { MatListModule, MatToolbarModule } from '@angular/material';
 import { SidebarComponent } from './common/components/sidebar-content/sidebar.component';
 import { SocketService } from '../core/services/socket.service';
 import { AlertComponent } from './common/components/dialogs/alert/alert.component';
+import { LoginClientService } from './client/services/login-client.service';
+import { GameService } from './client/services/game.service';
+import { DataParser } from './client/services/dataParser.service';
+import { LoginClientGuard } from './authentication/services/login-client.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'webclient',
-    loadChildren: () => import('./client/client.module').then( m => m.ClientModule)
+    loadChildren: () => import('./client/client.module').then( m => m.ClientModule),
+    canLoad: [LoginClientGuard]
   },
   {
     path: 'novita',
@@ -60,6 +65,9 @@ const routes: Routes = [
   ],
   providers: [
     SocketService,
+    LoginClientService,
+    GameService,
+    DataParser,
     CookieService,
     SplashScreenService,
   ]

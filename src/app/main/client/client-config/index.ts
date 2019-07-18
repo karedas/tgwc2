@@ -10,7 +10,7 @@ export interface TGConfig {
   output: {
     extraArea:  {
       visible: boolean,
-      size: number[]
+      size: number[],
     },
     list_column_mode: boolean
   };

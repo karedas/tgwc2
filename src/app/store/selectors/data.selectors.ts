@@ -1,10 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DataState } from '../state/data.state';
+import { selectTGState, TGState } from '..';
+
 
 
 /******************* Base Search State ******************/
-export const getDataState = createFeatureSelector<DataState>('data');
-
+export const getDataState = createSelector(selectTGState, (state) => state.data);
 
 /*********************** Individual selectors************************** */
 export const selectDataBase = (state: DataState) => state.base;
@@ -41,7 +42,6 @@ function fetchDoors(state: DataState) {
 }
 
 function fetchSky(state: DataState) {
-  console.log(state);
   return state.sky;
 }
 

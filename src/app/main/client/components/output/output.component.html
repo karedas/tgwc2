@@ -15,8 +15,8 @@
             <div style="height: 100%; overflow:hidden;">
               <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
                 [disableOnBreakpoints]="false">
-                <div class="tg-output--history">
-                  <ng-container *ngFor="let data of output">
+                <!-- <cdk-virtual-scroll-viewport  class="tg-output--history">
+                  <ng-container *cdkVirtualFor="let data of output">
 
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
@@ -24,7 +24,7 @@
                     </ng-container>
 
                   </ng-container>
-                </div>
+                </cdk-virtual-scroll-viewport> -->
               </ng-scrollbar>
             </div>
 
@@ -57,22 +57,20 @@
   <tg-status></tg-status>
 
   <div style="height: 100%; overflow:hidden;">
-    
-    <ng-scrollbar class="scrollbar" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
-      <div class="tg-output--history">
-        <div *ngFor="let data of output">
-          <ng-container [ngSwitch]="data.type">
-            
+
+    <!-- <ng-scrollbar class="scrollbar" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false"> -->
+    <cdk-virtual-scroll-viewport [itemSize]="1" autosize class="tg-output--history">
+      <div *cdkVirtualFor="let data of outputObservable | async ; let i = index">
+        <ng-container [ngSwitch]="data.type">
             <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
             <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
               [lastDescription]="lastRoomDescription"></tg-room>
             <tg-objpers-detail *ngSwitchCase="'objpersdetail'" [html]="data.content"></tg-objpers-detail>
             <tg-generic-page *ngSwitchCase="'genericpage'" [html]='data.content'></tg-generic-page>
-            
           </ng-container>
-        </div>
       </div>
-    </ng-scrollbar>
-    
+    </cdk-virtual-scroll-viewport>
+    <!-- </ng-scrollbar> -->
+    <!--  -->
   </div>
 </ng-template>

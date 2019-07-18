@@ -5,9 +5,7 @@ import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 import { loginClientErrors } from '../../authentication/services/login-client-errors';
 import { GameService } from './game.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoginClientService {
 
   _redirectUrl: string;
@@ -17,11 +15,10 @@ export class LoginClientService {
   private name: string;
   private secret: string;
 
-  constructor(private socketService: SocketService) {
+  constructor(private socketService: SocketService, private gameService: GameService) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
     this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
-
 
   get isLoggedIn(): boolean {
     return <boolean>this.isLoggedInSubject.value;
@@ -30,7 +27,6 @@ export class LoginClientService {
   set isLoggedIn(value: boolean) {
     this.isLoggedInSubject.next(value);
   }
-
 
   get replayMessage(): any {
     return this.loginErrorMessage$.asObservable();
@@ -51,16 +47,6 @@ export class LoginClientService {
   set redirectUrl(value: string) {
     this._redirectUrl = value;
   }
-
-
-
-  // constructor(
-  //   private socketService: SocketService,
-  private game: GameService
-  // ) {
-  //   this.isLoggedInSubject = new BehaviorSubject(false);
-  //   this.loginErrorMessage$ = new BehaviorSubject('');
-  // }
 
   /** ---- Public Methods ---- */
 
@@ -89,7 +75,6 @@ export class LoginClientService {
   }
 
   /** ---- Private Methods ---- */
-
   private oob() {
     const when = new Date().getTime();
     this.socketService.emit(socketEvent.OOB, { itime: when.toString(16) });
@@ -144,12 +129,15 @@ export class LoginClientService {
 
   private onLoginOk(data: any) {
     this.replayMessage = `Personaggio <b class="tg-yellow">${this.name}</b> trovato.`;
-    this.completeHandShake();
+    this.completeHandShake(data);
   }
 
-  private completeHandShake() {
+  private completeHandShake(data) {
     this.socketService.off(socketEvent.LOGIN);
     this.isLoggedInSubject.next(true);
+    
+    this.gameService.start(data);
+    
   }
 
   private onShutDown() {
