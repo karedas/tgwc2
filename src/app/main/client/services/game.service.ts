@@ -17,19 +17,16 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class GameService {
 
-
+  private render: Renderer2;
   private _tgConfig: TGConfig;
-
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
-
+  private _dataSubscription: Subscription;
+  private _upSubscription: Subscription;
 
   public serverStat: Observable<any>;
   public mouseIsOnMap = false;
-
   public showExtraByViewport: boolean = undefined;
-
-  // Client Data Needed Updates
   public client_update = {
     now: 0,
     mrnContainer: undefined,
@@ -50,11 +47,6 @@ export class GameService {
     }
   };
 
-  private render: Renderer2;
-  private _dataSubscription: Subscription;
-  private _upSubscription: Subscription;
-
-
   constructor(
     private socketService: SocketService,
     private dataParserService: DataParser,
@@ -62,7 +54,6 @@ export class GameService {
     private http: HttpClient,
     private _configService: ConfigService,
     public dialog: MatDialog,
-
     rendererFactory: RendererFactory2,
   ) {
     this.serverStat = new BehaviorSubject<any>(null);
@@ -71,39 +62,45 @@ export class GameService {
 
     this.render = rendererFactory.createRenderer(null, null);
 
-    this._init();
+    this.init();
   }
 
 
-  _init() {
-
+  init() {
     this._configService.config
       .subscribe((config: TGConfig) => {
         this.setZenMode(config.zen);
         this._tgConfig = config;
       });
-
-
-    this.loadServerStat();
   }
 
   get tgConfig(): TGConfig {
     return this._tgConfig;
   }
 
-  startGame(initialData) {
-
+  start(initialData:any): void {
+    console.log(initialData);
     // Perform Reset before start any Environments Stuff.
-    this.dataParserService.handlerGameData(initialData, this._tgConfig.log);
-    this._dataSubscription = this.socketService.listen(socketEvent.DATA)
-      .subscribe(data => {
-        this.dataParserService.handlerGameData(data, this._tgConfig.log);
-      });
+    this.dataParserService.parse(initialData, this._tgConfig.log);
 
-    this._upSubscription = this.dataParserService.updateNeeded
-      .subscribe((up) => {
-        this.updatePanels(up);
-      });
+    this.socketService.on(socketEvent.DATA, 
+      (data: any) => {
+        console.log('data');
+        this.dataParserService.parse(data, this._tgConfig.log);
+      })
+      
+    this._upSubscription = this.dataParserService.updateNeeded.subscribe(this.updatePanels.bind(this));
+
+    // this.socketService.listen(socketEvent.DATA)
+    //   .subscribe(data => {
+    //     this.dataParserService.parse(data, this._tgConfig.log);
+    //   });
+      
+    // this._upSubscription = this.dataParserService.updateNeeded
+
+    //   .subscribe((up) => {
+    //     this.updatePanels(up);
+    //   });
   }
 
   disconnectGame() {
@@ -166,11 +163,11 @@ export class GameService {
     this.client_update.room.needed = false;
   }
 
-  private loadServerStat() {
-    this.serverStat = timer(0, 25000).pipe(
-      switchMap(() => this.http.get(environment.serverstatAddress))
-    );
-  }
+  // private loadServerStat() {
+  //   this.serverStat = timer(0, 25000).pipe(
+  //     switchMap(() => this.http.get(environment.serverstatAddress))
+  //   );
+  // }
 
   /**
    * @param val command value

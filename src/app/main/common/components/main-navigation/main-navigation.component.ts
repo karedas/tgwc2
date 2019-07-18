@@ -81,6 +81,10 @@ export class MainNavigationComponent implements OnDestroy {
     });
   }
 
+  loginCharacter(name) {
+    this.loginClientService.login(name)
+  }
+
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();

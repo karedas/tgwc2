@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
-import { WebClientState } from 'src/app/store';
+import { TGState } from 'src/app/store';
 import { getHero } from 'src/app/store/selectors';
 
 import { HistoryService } from 'src/app/main/client/services/history.service';
@@ -20,7 +20,7 @@ import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 export class InputComponent implements OnInit, OnDestroy {
 
-  @ViewChild('inputCommand', {static: true}) ic: ElementRef;
+  @ViewChild('inputCommand', { static: true }) ic: ElementRef;
 
   tgConfig: any;
 
@@ -31,7 +31,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   constructor(
     private game: GameService,
-    private store: Store<WebClientState>,
+    private store: Store<TGState>,
     private historyService: HistoryService,
     private inputService: InputService,
     private dialogService: DialogV2Service,
@@ -53,9 +53,11 @@ export class InputComponent implements OnInit, OnDestroy {
       });
 
 
-    this._inCombat$.pipe(
-      takeUntil(this._unsubscribeAll),
-      filter(state => !!state)).subscribe(
+    this._inCombat$
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        filter(state => !!state))
+      .subscribe(
         (cc) => {
           if (cc.target && typeof cc.target.hit !== 'undefined') {
             this.inCombat = Object.keys(cc).length ? true : false;
@@ -125,7 +127,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   toggleExtraOutput(event: Event) {
     this._configService.setConfig({
-      output: { extraArea: { visible: !this.tgConfig.output.extraArea.visible }}
+      output: { extraArea: { visible: !this.tgConfig.output.extraArea.visible } }
     });
   }
 
@@ -144,8 +146,8 @@ export class InputComponent implements OnInit, OnDestroy {
   onFontSizeChange(): void {
     this.game.setOutputSize();
   }
-  
-  pauseScrollOutput() {}
+
+  pauseScrollOutput() { }
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);

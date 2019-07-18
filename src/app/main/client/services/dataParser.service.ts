@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { WebClientState } from '../../../store';
+import { TGState } from '../../../store';
 import * as DataActions from '../../../store/actions/data.action';
 import * as GameActions from '../../../store/actions/client.action';
 
@@ -12,9 +12,7 @@ import { TGConfig } from '../client-config';
 import { ConfigService } from '../../../services/config.service';
 import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class DataParser {
 
@@ -22,15 +20,13 @@ export class DataParser {
 
   private dispatcher: any = {};
   private netData = '';
-
   private shortcuts = [];
-  private shortcuts_map = {};
+  // private shortcuts_map = {};
   private cmd_prefix = '';
-
   private _updateNeeded: Subject<any>;
 
   constructor(
-    private store: Store<WebClientState>,
+    private store: Store<TGState>,
     private _configService: ConfigService,
     private logService: LogService
   ) {
@@ -44,7 +40,7 @@ export class DataParser {
       );
   }
 
-  handlerGameData(data: any, logEnabled?: boolean) {
+  parse(data: any, logEnabled?: boolean) {
 
     this.netData += data;
     const len = this.netData.length;
@@ -77,7 +73,7 @@ export class DataParser {
     }
   }
 
-  preParseText(data: string): string {
+  private preParseText(data: string): string {
     data = data.replace(/\r/gm, '');
     data = data.replace(/&!!/gm, '');
     data = data.replace(/\$\$/gm, '$');
@@ -88,7 +84,7 @@ export class DataParser {
     return data;
   }
 
-  parseForDisplay(data: string): void {
+  private parseForDisplay(data: string): void {
 
     // reset Dispatcher
     this.dispatcher = {};
@@ -102,9 +98,9 @@ export class DataParser {
       return '';
     });
 
-    // News
+    // News (Deprecated)
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      this.store.dispatch(new GameActions.NewsAction);
+      // this.store.dispatch(new GameActions.NewsAction);
       return '';
     });
 
@@ -413,7 +409,7 @@ export class DataParser {
   }
 
   // Emit data Stored in the dispatcher to show then in the right Output Order
-  dispatchData() {
+  private dispatchData() {
     // Output Messages
     if (this.dispatcher['base']) { this.store.dispatch(new DataActions.IncomingData(this.dispatcher['base'])); }
     if (this.dispatcher['objpers']) { this.store.dispatch(new DataActions.ObjAndPersAction(this.dispatcher['objpers'])); }
@@ -426,25 +422,8 @@ export class DataParser {
   }
 
 
-  removeColors(data: any) {
-    return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
-  }
 
-  parseInput(input: any): any {
-    /* Split input separated by ; */
-    const inputs = input.split(/\s*;\s*/);
-    let res = [];
-    /* Substitute shortcuts on each command and join results */
-    for (let i = 0; i < inputs.length; ++i) {
-      const subs = this.substShort(inputs[i]).split(/\s*;\s*/);
-      res = res.concat(subs);
-    }
-    /* Return the resulting array */
-    return res;
-  }
-
-
-  substShort(input: any): any {
+  private substShort(input: any): any {
 
     /* Split into arguments */
 
@@ -488,8 +467,27 @@ export class DataParser {
     return input;
   }
 
-  setUpdateNeeded(ud: any) {
+  private setUpdateNeeded(ud: any) {
     this._updateNeeded.next(ud);
+  }
+
+  
+
+  removeColors(data: any) {
+    return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
+  }
+
+  parseInput(input: any): any {
+    /* Split input separated by ; */
+    const inputs = input.split(/\s*;\s*/);
+    let res = [];
+    /* Substitute shortcuts on each command and join results */
+    for (let i = 0; i < inputs.length; ++i) {
+      const subs = this.substShort(inputs[i]).split(/\s*;\s*/);
+      res = res.concat(subs);
+    }
+    /* Return the resulting array */
+    return res;
   }
 
   get updateNeeded(): Observable<any> {

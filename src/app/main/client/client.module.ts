@@ -11,12 +11,13 @@ import { AudioComponent } from './components/audio/audio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
-import { GameService } from './services/game.service';
 import { EffectsModule } from '@ngrx/effects';
 import { ClientEffects } from 'src/app/store/effects/client.effects';
 import { DataEffects } from 'src/app/store/effects/data.effects';
 import { baseReducer, clearState } from 'src/app/store';
 import { StoreModule } from '@ngrx/store';
+import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
+import { DialogV2Module } from './common/dialog-v2/dialog-v2.module';
 
 const clientRouting: Routes = [
   {
@@ -41,10 +42,11 @@ const clientRouting: Routes = [
     RightSidebarModule,
     OutputModule,
     InputModule,
-    StoreModule.forFeature('client', 
+    StoreModule.forFeature('TG', 
       baseReducer, { metaReducers: [clearState] }
     ),
-    // EffectsModule.forFeature([ClientEffects, DataEffects]),
+    EffectsModule.forFeature([ClientEffects, DataEffects]),
+    DialogV2Module,
     FileSaverModule,
   ],
   exports: [
@@ -52,7 +54,7 @@ const clientRouting: Routes = [
     ClientComponent,
   ],
   providers: [
-    GameService
+    DialogV2Service
   ]
 })
 export class ClientModule {

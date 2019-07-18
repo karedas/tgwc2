@@ -1,8 +1,9 @@
 import { ClientState } from '../state/client.state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectTGState } from '..';
 
 /******************* Base Search State ******************/
-export const getClientState = createFeatureSelector<ClientState>('client');
+export const getClientState = createSelector(selectTGState, (state) => state.client);
 
 /*********************** Individual selectors************************** */
 function fetchUserLevel(state: ClientState) {

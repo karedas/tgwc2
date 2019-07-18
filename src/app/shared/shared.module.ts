@@ -21,6 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { IconsComponent } from '../main/client/common/icons/icons.component';
 import { HstatComponent } from '../main/client/common/hstat/hstat.component';
 import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { ScrollDispatchModule, ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -30,29 +31,9 @@ import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule }
     HstatComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     FlexLayoutModule.withConfig({
       useColumnBasisZero: false,
     }),
-    NgScrollbarModule,
-    TooltipModule,
-    PipesModule,
-    MatTooltipModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatDialogModule,
-    MatSidenavModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatPaginatorModule,
-    MatToolbarModule,
-    MatTableModule
   ],
 
   exports: [
@@ -80,6 +61,8 @@ import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule }
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
+    ScrollingModule,
+    ScrollDispatchModule,
 
   ],
 })

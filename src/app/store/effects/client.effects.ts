@@ -32,7 +32,7 @@ export class ClientEffects {
     private inputService: InputService,
     private router: Router,
     private store: Store<ClientState>
-  ) { }
+  ) {  console.log('effects') }
 
 
   @Effect({ dispatch: false })
@@ -57,20 +57,21 @@ export class ClientEffects {
   );
 
 
-  @Effect({ dispatch: false })
-  showNews$: Observable<boolean | Action> = this.actions$.pipe(
-    ofType(ClientEventType.NEWS),
-    withLatestFrom(this.store.pipe(select(getInGameStatus))),
-    map(([action, status]) => {
-      if (this.game.tgConfig.news) {
-        this.dialogV2Service.openNews(false);
-      } else {
-        this.game.sendToServer('');
-        this.inputService.focus();
-      }
-      return status;
-    }),
-  );
+  // @Effect({ dispatch: false })
+  // showNews$: Observable<boolean | Action> = this.actions$.pipe(
+  //   ofType(ClientEventType.NEWS),
+  //   withLatestFrom(this.store.pipe(select(getInGameStatus))),
+  //   map(([action, status]) => {
+  //     console.log(status);
+  //     if (this.game.tgConfig.news) {
+  //       this.dialogV2Service.openNews(false);
+  //     } else {
+  //       this.game.sendToServer('');
+  //       this.inputService.focus();
+  //     }
+  //     return status;
+  //   }),
+  // );
 
   @Effect({ dispatch: false })
   closeTextEditor: Observable<Action> = this.actions$.pipe(

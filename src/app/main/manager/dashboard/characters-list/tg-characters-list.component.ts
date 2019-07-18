@@ -36,7 +36,7 @@ export class MyCharactersComponent implements OnInit {
     private userService: UserService,
     private loginClientService: LoginClientService,
     private router: Router,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
 
     this.replayMessage = this.loginClientService.replayMessage;
@@ -53,9 +53,9 @@ export class MyCharactersComponent implements OnInit {
       });
 
     this.charactersList = this.userService.getCharacters()
-      // .pipe(map((char: Character) => {
-      //   return char.filter(char => char.status === 1);
-      // }));
+    // .pipe(map((char: Character) => {
+    //   return char.filter(char => char.status === 1);
+    // }));
   }
 
   private updateReplayMessage(msg: string) {
@@ -71,23 +71,24 @@ export class MyCharactersComponent implements OnInit {
     // if ( !this.socketService.isConnected) {
     //   return;
     // }
-    const values = { name: name, secret: 'ciccio' };
+    const values = { name: name, secret: 'peppe' };
 
     this.openLoginDialog();
-    this.loginClientService.login(values).pipe(
-      delay(1000),
-      takeUntil(this._unsubscribeAll)
-    ).subscribe((res) => {
+    this.loginClientService.login(values)
+    .pipe( delay(1000), takeUntil(this._unsubscribeAll))
+    .subscribe((res) => {
       if (res === true) {
-
-        this.closeLoginDialog();
-
-        const redirect = '/webclient';
-        this.router.navigate([redirect]).then(() => {
-          this.loginClientService.replayMessage = '';
-        });
+        this.redirectToClient();
       }
-    })
+      })  
+  }
+
+  redirectToClient() {
+    this.router.navigate(['/webclient'])
+      .then(() => {
+        this.closeLoginDialog();
+        this.loginClientService.replayMessage = '';
+    });
   }
 
   private openLoginDialog() {

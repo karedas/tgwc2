@@ -9,6 +9,10 @@
   order: 3;
 }
 
+.mat-icon-button{
+  width: auto;
+}
+
 .tg-input {
   position: relative;
   margin-left: 0;
@@ -16,6 +20,7 @@
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
+
 
   // &:after,
   // &:before {
