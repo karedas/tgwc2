@@ -18,7 +18,6 @@ import { tgConfig } from './main/client/client-config';
 import { TgConfigModule } from './shared/tgconfig.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 
 export function tokenGetter() {

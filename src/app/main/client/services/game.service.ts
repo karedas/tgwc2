@@ -79,13 +79,11 @@ export class GameService {
   }
 
   start(initialData:any): void {
-    console.log(initialData);
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.parse(initialData, this._tgConfig.log);
 
     this.socketService.on(socketEvent.DATA, 
       (data: any) => {
-        console.log('data');
         this.dataParserService.parse(data, this._tgConfig.log);
       })
       
