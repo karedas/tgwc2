@@ -26,7 +26,8 @@
       tooltip="Metti in pausa" show-delay="500" placement="top"
       type="button"
       class="tg-fnt-button"
-      (mousedown)="pauseScrollOutput()">
+      (mousedown)="pauseScrollOutput()"
+      [ngClass]="{'isActive': pauseScroll}">
       <mat-icon>pause</mat-icon>
     </button>
     

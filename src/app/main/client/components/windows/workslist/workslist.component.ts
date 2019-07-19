@@ -1,8 +1,8 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { DataState } from 'src/app/store/state/data.state';
-import { getWorksList } from 'src/app/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
+import { getWorksList } from 'src/app/main/client/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { IWorks, IWorksList } from 'src/app/main/client/models/data/workslist.model';
 import { GameService } from 'src/app/main/client/services/game.service';

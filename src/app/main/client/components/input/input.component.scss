@@ -91,14 +91,16 @@
       color: #54544d;
       border-right: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0;
+      transition: all .2s ease-out;
       cursor: pointer;
 
-      &:hover,
       &.isActive {
         color: #cc6f17;
+        text-shadow: 0 0 6px #cc6f17;
       }
 
-      &:active {
+      &:active,
+      &:hover{
         color: $tg-yellow;
       }
     }

@@ -3,9 +3,9 @@ import { GameService } from 'src/app/main/client/services/game.service';
 import { Observable, Subject } from 'rxjs';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { select, Store } from '@ngrx/store';
-import { getHero } from 'src/app/store/selectors';
+import { getHero } from 'src/app/main/client/store/selectors';
 import { takeUntil } from 'rxjs/operators';
-import { TGState } from 'src/app/store';
+import { TGState } from 'src/app/main/client/store';
 
 @Component({
   selector: 'tg-status',

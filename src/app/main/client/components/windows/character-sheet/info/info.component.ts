@@ -1,9 +1,9 @@
 import { Component, ViewChild, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
-import { DataState } from 'src/app/store/state/data.state';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getHero } from 'src/app/store/selectors';
+import { getHero } from 'src/app/main/client/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { map, takeUntil, take } from 'rxjs/operators';

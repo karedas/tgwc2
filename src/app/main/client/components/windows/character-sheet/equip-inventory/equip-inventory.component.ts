@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { DataState } from 'src/app/store/state/data.state';
-import { getEquip, getInventory } from 'src/app/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
+import { getEquip, getInventory } from 'src/app/main/client/store/selectors';
 import { equip_positions_by_name, pos_to_order } from 'src/app/main/client/common/constants';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/main/client/services/game.service';

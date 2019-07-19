@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, Inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
-import { DataState } from 'src/app/store/state/data.state';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Observable } from 'rxjs';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
-import { getHero } from 'src/app/store/selectors';
+import { getHero } from 'src/app/main/client/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 

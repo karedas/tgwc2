@@ -12,12 +12,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
 import { EffectsModule } from '@ngrx/effects';
-import { ClientEffects } from 'src/app/store/effects/client.effects';
-import { DataEffects } from 'src/app/store/effects/data.effects';
-import { baseReducer, clearState } from 'src/app/store';
+import { ClientEffects } from 'src/app/main/client/store/effects/client.effects';
+import { DataEffects } from 'src/app/main/client/store/effects/data.effects';
+import { baseReducer, clearState } from 'src/app/main/client/store';
 import { StoreModule } from '@ngrx/store';
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { DialogV2Module } from './common/dialog-v2/dialog-v2.module';
+import { OutputService } from './components/output/output.service';
 
 const clientRouting: Routes = [
   {
@@ -54,7 +55,8 @@ const clientRouting: Routes = [
     ClientComponent,
   ],
   providers: [
-    DialogV2Service
+    DialogV2Service,
+    OutputService
   ]
 })
 export class ClientModule {
