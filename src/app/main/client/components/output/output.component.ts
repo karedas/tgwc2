@@ -1,18 +1,18 @@
 import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DataState } from 'src/app/store/state/data.state';
-import * as fromSelectors from 'src/app/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
+import * as fromSelectors from 'src/app/main/client/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/store/selectors';
+import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/main/client/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { SplitComponent } from 'angular-split';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
-
+import { OutputService } from './output.service';
 
 @Component({
   selector: 'tg-output',
@@ -30,6 +30,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
+  pauseScroll: boolean = false;
 
   private _baseText$: Observable<any>;
   private _roomBase$: Observable<any>;
@@ -51,6 +52,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
+    private outputService: OutputService,
     private store: Store<DataState>,
     private game: GameService,
     private _configService: ConfigService) 
@@ -66,6 +68,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.outputService.toggledAutoScroll
+      .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
+
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
@@ -73,6 +78,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         this.tgConfig = config;
       });
 
+
+    
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
     this._baseText$
@@ -164,9 +171,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private scrollPanelToBottom() {
-    setTimeout(() => {
-      this.scrollBar.scrollToBottom(0).subscribe();
-    }, 50);
+    if(!this.pauseScroll) {
+      setTimeout(() => {
+        this.scrollBar.scrollToBottom(0).subscribe();
+      }, 50);
+    }
   }
 
   @HostListener('window:resize', ['$event.target'])
@@ -191,6 +200,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });
+  }
+
+  toggleAutoScroll(event: Event) {
+    event.stopPropagation();
+    this.outputService.toggleAutoScroll();
   }
 
   ngOnDestroy() {

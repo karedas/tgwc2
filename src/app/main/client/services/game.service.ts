@@ -19,12 +19,14 @@ export class GameService {
 
   private render: Renderer2;
   private _tgConfig: TGConfig;
+
   private _commandsList$: BehaviorSubject<any>;
   private _showStatus: BehaviorSubject<(boolean)>;
   private _dataSubscription: Subscription;
   private _upSubscription: Subscription;
-
+  private _outputAutoScroll: BehaviorSubject<boolean>;
   public serverStat: Observable<any>;
+
   public mouseIsOnMap = false;
   public showExtraByViewport: boolean = undefined;
   public client_update = {
@@ -59,6 +61,7 @@ export class GameService {
     this.serverStat = new BehaviorSubject<any>(null);
     this._commandsList$ = new BehaviorSubject(null);
     this._showStatus = new BehaviorSubject(null);
+    this._outputAutoScroll = new BehaviorSubject(false);
 
     this.render = rendererFactory.createRenderer(null, null);
 

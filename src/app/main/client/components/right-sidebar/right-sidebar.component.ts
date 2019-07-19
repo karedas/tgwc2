@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { DataState } from 'src/app/store/state/data.state';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Observable, Subject } from 'rxjs';
 import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
-import { getDateTime } from 'src/app/store/selectors';
+import { getDateTime } from 'src/app/main/client/store/selectors';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from '../../services/game.service';
 

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AudioService } from './audio.service';
 import { Store, select } from '@ngrx/store';
-import { getAudioTrack } from 'src/app/store/selectors';
+import { getAudioTrack } from 'src/app/main/client/store/selectors';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { ClientState } from 'src/app/store/state/client.state';
+import { ClientState } from 'src/app/main/client/store/state/client.state';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { DataState } from 'src/app/store/state/data.state';
-import { getSky } from 'src/app/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
+import { getSky } from 'src/app/main/client/store/selectors';
 import { Store, select } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

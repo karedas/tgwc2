@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
 
 import { equip_positions_by_name } from 'src/app/main/client/common/constants';
-import { InteractService } from '../../services/interact.service';
 import { GameService } from 'src/app/main/client/services/game.service';
+import { OutputService } from '../../output.service';
 
 @Component({
   selector: 'tg-objpers-container',
@@ -22,7 +22,7 @@ export class ObjPersContainerComponent implements OnInit  {
   @Input('objcont') objcont: IObjPersObjcont;
 
   constructor(
-    public interactService: InteractService,
+    public outputService: OutputService,
     private game: GameService
     ) {
      const keysAndProperty = Object.keys( equip_positions_by_name );
@@ -51,11 +51,11 @@ export class ObjPersContainerComponent implements OnInit  {
   }
 
   onInteract(event: Event, item: any, index: number, list?: boolean) {
-    this.interactService.interact(event, item, index);
+    this.outputService.interact(event, item, index);
   }
 
   onExpand(event: Event, item: any, index: number) {
-    if (this.interactService.isExpandeable(event, item, index)) {
+    if (this.outputService.isExpandeable(event, item, index)) {
       this.togglePanel[index] = !this.togglePanel[index];
     }
   }

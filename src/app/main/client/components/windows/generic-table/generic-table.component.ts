@@ -1,8 +1,8 @@
 import { Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { getGenericTable } from 'src/app/store/selectors';
-import { DataState } from 'src/app/store/state/data.state';
+import { getGenericTable } from 'src/app/main/client/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { IGenericTable } from 'src/app/main/client/models/data/generictable.model';
 import { takeUntil } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';

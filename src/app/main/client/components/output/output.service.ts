@@ -1,15 +1,29 @@
-import { Injectable } from '@angular/core';
-import { GameService } from 'src/app/main/client/services/game.service';
-import { identifierModuleUrl } from '@angular/compiler';
+import { Injectable, Output, EventEmitter } from '@angular/core';
+import { GameService } from '../../services/game.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InteractService {
+export class OutputService {
 
-  constructor(private game: GameService) {}
+  // autoScroll: BehaviorSubject<boolean>;
+  @Output() toggledAutoScroll: EventEmitter<boolean> = new EventEmitter();
+  autoScroll: boolean = false;
 
+  constructor(private game: GameService) {
+  }
+
+  // Stop the output AutoScroll Event
+  toggleAutoScroll(): boolean {
+    this.autoScroll = !this.autoScroll;
+    this.toggledAutoScroll.emit(this.autoScroll);
+    return this.autoScroll;
+  }
+
+  // Send request to server by element click
   interact(event: Event, item: any, index?: number) {
+    
     event.preventDefault();
 
     /* If is not a List */
@@ -32,10 +46,13 @@ export class InteractService {
     }
   }
 
+  // Uncollapse/Collapse a collapsed Container 
   isExpandeable(event: Event, item: any, index: number): boolean {
     event.preventDefault();
     if (item.sz) {
       return true;
     }
   }
+
+
 }

@@ -3,11 +3,16 @@
 
 .tg-error {
   border: 1px solid #dc3545;
-  color: white;
+  color: $base-text-color;
   font-weight: 500;
   background: #360e10;
   margin: 1em 0 0;
   padding: 1em;
+
+  a {
+    color: $base-text-color;
+    text-decoration: underline;
+  }
 }
 
 .tg-error-bold {

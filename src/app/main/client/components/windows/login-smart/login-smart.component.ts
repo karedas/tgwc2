@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { ClientState } from 'src/app/store/state/client.state';
+import { ClientState } from 'src/app/main/client/store/state/client.state';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validators/character-validations';
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
-import { ResetAction } from 'src/app/store/actions/client.action';
+import { ResetAction } from 'src/app/main/client/store/actions/client.action';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 

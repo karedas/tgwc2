@@ -34,7 +34,7 @@ tg-main-navigation {
 
   .tg-mainnav {
     font-size: 12px;
-    background: #231f1c;
+    background: #231f1c url($imgPath + '/navbar/bg.jpg') repeat-x 0 0;
     box-shadow: inset 0px -6px 9px 7px black;
     height: auto;
 

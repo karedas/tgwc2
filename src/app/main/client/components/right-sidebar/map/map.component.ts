@@ -1,6 +1,6 @@
 import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, OnInit } from '@angular/core';
-import * as fromSelectors from 'src/app/store/selectors';
-import { DataState } from 'src/app/store/state/data.state';
+import * as fromSelectors from 'src/app/main/client/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { Map } from 'src/app/main/client/models/data/map.model';

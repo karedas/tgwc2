@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy, Input, OnChanges } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { IRegion } from 'src/app/main/client/models/data/region.model';
-import { DataState } from 'src/app/store/state/data.state';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getRegion } from 'src/app/store/selectors';
+import { getRegion } from 'src/app/main/client/store/selectors';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { takeUntil, map, catchError, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';

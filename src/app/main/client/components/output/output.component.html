@@ -1,4 +1,5 @@
-<div class="tg-output tg-box b-ironlight" fxFlex="1 1 100%">
+<div class="tg-output tg-box b-ironlight" fxFlex="1 1 100%" 
+  [ngClass]="{'pause-scroll': pauseScroll}">
   <div class="tg-box" fxFlex="100">
 
     <div class="tg-output-main" #mainOutputArea>
@@ -10,12 +11,16 @@
 
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
 
+            <div class="tg-error alert-inline" *ngIf="pauseScroll">
+              Attenzione, autoscroll disattivato, <a (click)="toggleAutoScroll(event$)" href="#">clicca qui</a> per riattivarlo
+            </div>
+
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;">
               <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
                 [disableOnBreakpoints]="false">
-                <!-- <cdk-virtual-scroll-viewport  class="tg-output--history">
+                <div  smoothScroll class="tg-output--history">
                   <ng-container *cdkVirtualFor="let data of output">
 
                     <ng-container [ngSwitch]="data.type">
@@ -24,7 +29,7 @@
                     </ng-container>
 
                   </ng-container>
-                </cdk-virtual-scroll-viewport> -->
+                </div>
               </ng-scrollbar>
             </div>
 
@@ -53,6 +58,10 @@
 </div>
 
 <ng-template #noextra>
+
+  <div class="tg-error alert-inline" *ngIf="pauseScroll">
+    Attenzione, autoscroll disattivato, <a (click)="toggleAutoScroll(event$)" href="#">clicca qui</a> per riattivarlo
+  </div>
 
   <tg-status></tg-status>
 

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataState } from 'src/app/store/state/data.state';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getHero } from 'src/app/store/selectors';
+import { getHero } from 'src/app/main/client/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';

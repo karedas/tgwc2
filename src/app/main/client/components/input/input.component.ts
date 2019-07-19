@@ -3,14 +3,15 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
-import { TGState } from 'src/app/store';
-import { getHero } from 'src/app/store/selectors';
+import { TGState } from 'src/app/main/client/store';
+import { getHero } from 'src/app/main/client/store/selectors';
 
 import { HistoryService } from 'src/app/main/client/services/history.service';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from './input.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
+import { OutputService } from '../output/output.service';
 
 @Component({
   selector: 'tg-input',
@@ -25,6 +26,7 @@ export class InputComponent implements OnInit, OnDestroy {
   tgConfig: any;
 
   public inCombat = false;
+  public pauseScroll = false;
 
   private _inCombat$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
@@ -34,6 +36,7 @@ export class InputComponent implements OnInit, OnDestroy {
     private store: Store<TGState>,
     private historyService: HistoryService,
     private inputService: InputService,
+    private outputService: OutputService,
     private dialogService: DialogV2Service,
     private _configService: ConfigService
   ) {
@@ -147,7 +150,9 @@ export class InputComponent implements OnInit, OnDestroy {
     this.game.setOutputSize();
   }
 
-  pauseScrollOutput() { }
+  pauseScrollOutput() {
+    this.pauseScroll = this.outputService.toggleAutoScroll();
+  }
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
