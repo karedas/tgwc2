@@ -7,6 +7,11 @@ import { CookieLawComponent } from './common/components/dialogs/cookie-law/cooki
 @Component({
   selector: 'tg-main',
   templateUrl: './main.component.html',
+  styles: [`
+    :host {
+      height: 100%;
+    }
+  `]
 })
 export class MainComponent implements OnInit, OnDestroy {
 

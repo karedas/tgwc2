@@ -3,29 +3,58 @@ import { ActivatedRoute } from '@angular/router';
 import { GameService } from './services/game.service';
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { InputService } from './components/input/input.service';
+import { Subject } from 'rxjs';
+import { TGConfig } from './client-config';
+import { takeUntil } from 'rxjs/operators';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'tg-client',
-  template: '<tg-client-container></tg-client-container>',
+  templateUrl: './client.component.html',
+  styles: [`
+    :host {
+      height: 100%;
+    }
+  `]
 })
 
 export class ClientComponent {
+  
+  tgConfig: TGConfig;
+
+  private _unsubscribeAll: Subject<any>;
 
   constructor(
+    private _configService: ConfigService,
     private gameService: GameService,
     private dialogV2Service: DialogV2Service,
     private inputService: InputService) {
-    this.openNews();
+
+      this._unsubscribeAll = new Subject<any>();
+      this.openNews();
   }
 
   openNews() {
-    console.log('opennewssss');
-    if (this.gameService.tgConfig.news) {
-      this.dialogV2Service.openNews(false);
-    }
-    else {
-      this.gameService.sendToServer('');
-      this.inputService.focus();
-    }
+    
+    // Subscribe to config changes
+    this._configService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+
+        this.tgConfig = config;
+        
+        if (this.tgConfig.news) {
+          this.dialogV2Service.openNews(false);
+        }
+        else {
+          this.gameService.sendToServer('');
+          this.inputService.focus();
+        }
+    });
+  }
+
+  ngOnDestroy() {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }

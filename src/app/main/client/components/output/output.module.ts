@@ -11,7 +11,6 @@ import { AngularSplitModule } from 'angular-split';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
 import { StatusComponent } from './status/status.component';
-import { ScrollDispatchModule, ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     ObjpersDetailComponent,
@@ -22,7 +21,7 @@ import { ScrollDispatchModule, ScrollingModule } from '@angular/cdk/scrolling';
     DetailsRoomComponent,
     ContextMenuComponent,
     GenericPageComponent,
-    StatusComponent
+    StatusComponent,
   ],
   imports: [
     CommonModule,

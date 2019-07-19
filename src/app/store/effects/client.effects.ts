@@ -32,7 +32,7 @@ export class ClientEffects {
     private inputService: InputService,
     private router: Router,
     private store: Store<ClientState>
-  ) {  console.log('effects') }
+  ) {}
 
 
   @Effect({ dispatch: false })

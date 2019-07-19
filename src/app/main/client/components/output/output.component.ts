@@ -12,7 +12,6 @@ import { SplitComponent } from 'angular-split';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
-import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 
 @Component({
@@ -37,35 +36,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   private _objOrPerson$: Observable<any>;
   private _genericPage$: Observable<any>;
 
-  output = Array();
-
-
-    states = [
-      { name: 'Alabama', capital: 'Montgomery' },
-      { name: 'Alaska', capital: 'Juneau' },
-      { name: 'Arizona', capital: 'Phoenix' },
-      { name: 'Arkansas', capital: 'Little Rock' },
-      { name: 'California', capital: 'Sacramento' },
-      { name: 'Colorado', capital: 'Denver' },
-      { name: 'Connecticut', capital: 'Hartford' },
-      { name: 'Delaware', capital: 'Dover' },
-      { name: 'Florida', capital: 'Tallahassee' },
-      { name: 'Georgia', capital: 'Atlanta' },
-      { name: 'Hawaii', capital: 'Honolulu' },
-      { name: 'Idaho', capital: 'Boise' },
-      { name: 'Illinois', capital: 'Springfield' },
-      { name: 'Indiana', capital: 'Indianapolis' },
-      { name: 'Iowa', capital: 'Des Moines' },
-      { name: 'Kansas', capital: 'Topeka' },
-      { name: 'Kentucky', capital: 'Frankfort' },
-      { name: 'Louisiana', capital: 'Baton Rouge' },
-      { name: 'Maine', capital: 'Augusta' },
-      { name: 'Maryland', capital: 'Annapolis' },
-      { name: 'Massachusetts', capital: 'Boston' },
-      { name: 'Michigan', capital: 'Lansing' }
-    ];
-
-  outputObservable = new BehaviorSubject(this.output);
+  output = [];
+  outputObservable = new BehaviorSubject([]);
 
   lastRoomDescription = '';
   typeDetail: string;
@@ -80,7 +52,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private loginClientService: LoginClientService,
     private game: GameService,
     private _configService: ConfigService) 
   
@@ -128,27 +99,34 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  private updateContent(content: any) {
+
+    this.trimOutput();
+    this.output.push(content);
+    this.outputObservable.next(this.output);
+    this.scrollPanelToBottom();
+  }
+  
+  private setContent(t: string, c: any): any {
+    return Object.assign({}, { type: t, content: c });
+  }
+
   private updateBaseText(base: string[]) {
     if(base) {
       const content = this.setContent('base', base[0]);
-      this.output.push(content);
-      // You might need to give a tiny delay before updating the scrollbar
-      this.scrollPanelToBottom();
-      this.outputObservable.next(this.output);
+      this.updateContent(content);
     }
   }
 
   private updateRoomBase(room: Room) {
     if(room) {
-      this.typeDetail = 'room';
-
       if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
         this.lastRoomDescription = room.desc['base'];
       }
+      
+      const content = this.setContent('room', room);
 
-      this.output.push(this.setContent('room', room));
-      this.scrollPanelToBottom();
-      this.game.client_update.inContainer = false;
+      this.updateContent(content);
 
       if (this.game.client_update.room.version < room.ver) {
         this.game.client_update.room.version = room.ver;
@@ -161,9 +139,8 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     if(elements) {
       this.objPersDetail = elements;
       const content = this.setContent('objpersdetail', this.objPersDetail);
-      this.output.push(content);
-      this.typeDetail = 'objPers';
-      this.scrollPanelToBottom();
+
+      this.updateContent(content);
 
       // save last container if we need to update his view
       this.game.client_update.mrnContainer = elements.num;
@@ -175,13 +152,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     if(!!data) {
       this.genericPage = data;
       const content = this.setContent('genericpage', this.genericPage);
-      this.output.push(content);
-      this.scrollPanelToBottom();
-    }
-  }
 
-  private setContent(t: string, c: any): any {
-    return Object.assign({}, { type: t, content: c });
+      this.updateContent(content);
+    }
   }
 
   private trimOutput(): void {
@@ -191,8 +164,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private scrollPanelToBottom() {
-    return;
-    this.trimOutput();
     setTimeout(() => {
       this.scrollBar.scrollToBottom(0).subscribe();
     }, 50);
