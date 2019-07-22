@@ -53,6 +53,7 @@ export class UserService extends ApiService {
       .pipe(
         map(({ data: { chars } }: ApiResponse) => {
           return chars.map((c => {
+            console.log(c);
             return new Character().deserialize(c);
           }))
         }),

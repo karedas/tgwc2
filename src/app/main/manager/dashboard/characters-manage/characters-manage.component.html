@@ -1,7 +1,7 @@
 <div class="comp-content comp-padd">
   
-  <h2>I tuoi personaggi</h2>
-  <div class="table-responsive" *ngIf="charactersList | async as chars">
+  <div class="table-responsive" *ngIf="charactersList.length | async as chars">
+      <h2>I tuoi personaggi</h2>
 
     <table class="mat-elevation-z8 mat-table ch-table" >
       <thead>
