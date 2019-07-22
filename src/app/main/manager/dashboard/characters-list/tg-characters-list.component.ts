@@ -52,7 +52,7 @@ export class MyCharactersComponent implements OnInit {
         this.updateReplayMessage(msg);
       });
 
-    this.charactersList = this.userService.getCharacters()
+    this.charactersList = this.userService.getCharacters();
     // .pipe(map((char: Character) => {
     //   return char.filter(char => char.status === 1);
     // }));

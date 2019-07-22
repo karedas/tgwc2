@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit, ElementRef, Hos
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import * as fromSelectors from 'src/app/main/client/store/selectors';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/main/client/store/selectors';
