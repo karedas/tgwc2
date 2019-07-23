@@ -84,19 +84,14 @@ body[data-loginstatus=ready] {
   overflow: hidden;
 }
 
-.tg-area {
+
+tg-main {
   width: 100%;
   height: 100%;
   min-height: 600px;
-  display: flex;
   overflow: hidden;
   background-image: url($imgPath + '/interface/navbar_background.png');
   background-repeat: repeat-x;
-  padding-top: 12px;
-
-  &.expanded {
-    padding: 0;
-  }
 }
 
 .tg-layout-container {
@@ -133,26 +128,17 @@ body[data-loginstatus=ready] {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-  width: 90px;
-  height: 90px;
   margin: 0 auto;
+  
+  &.big {
+    
+    width: 90px;
+    height: 90px;
+  }
 }
 
 a.tg-base-logo {
   display: block;
-}
-
-
-.tg-brand {
-  width: 40px;
-  height: 100%;
-  margin: 0;
-
-  a {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
 }
 
 /* Icons & Stuff */

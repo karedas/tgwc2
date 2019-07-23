@@ -1,5 +1,3 @@
-import { SocketState } from '../game.const';
-
 export interface ClientState  {
     time?: Date;
     inGame: boolean;

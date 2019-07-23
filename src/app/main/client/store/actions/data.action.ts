@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { Map } from 'src/app/main/client/models/data/map.model';
 import { Editor } from 'src/app/main/client/models/data/editor.model';
 import { IObjPerson } from 'src/app/main/client/models/data/objpers.model';
@@ -34,127 +34,22 @@ export enum DataEvenType {
     GENERICPAGE = '[Data] Generic Page'
 }
 
-export class IncomingData implements Action {
-    readonly type = DataEvenType.IN;
-    constructor(public payload: string) {}
-}
-export class OutgoingData implements Action {
-    readonly type = DataEvenType.OUT;
-    constructor(public payload: string) {}
-}
-
-export class LoggedAction implements Action {
-    readonly type = DataEvenType.LOGGED;
-    constructor(public payload: any) {}
-}
-export class DoorsAction implements Action {
-    readonly type = DataEvenType.DOORS;
-    constructor( public payload: any) {}
-}
-
-export class RoomAction implements Action {
-    readonly type = DataEvenType.ROOM;
-    constructor(public payload: any) {}
-}
-
-export class ObjAndPersAction implements Action {
-    readonly type = DataEvenType.OBJPERSON;
-    constructor(public payload: IObjPerson) {}
-}
-
-export class UpdateStatusHero implements Action {
-    readonly type = DataEvenType.AUTOUPDATESTATUSHERO;
-    constructor( public payload: any) {}
-}
-
-export class HeroAction implements Action {
-    readonly type = DataEvenType.HERODATA;
-    constructor(public payload: IHero) { }
-}
-
-export class MapAction implements Action {
-    readonly type = DataEvenType.MAP;
-    constructor(public payload: Map) {}
-}
-
-export class SkyAction implements Action {
-    readonly type = DataEvenType.SKY;
-    constructor(public payload: string) {}
-}
-
-export class EditorAction implements Action {
-    readonly type = DataEvenType.EDITOR;
-    constructor(public payload: Editor) {}
-}
-
-export class GenericTableAction implements Action {
-    readonly type = DataEvenType.GENERICTABLE;
-    constructor(public payload: IGenericTable) {}
-}
-
-export class WorksListAction implements Action {
-    readonly type = DataEvenType.WORKSLIST;
-    constructor(public payload: IWorks) {}
-}
-
-export class RegionAction implements Action {
-    readonly type = DataEvenType.REGION;
-    constructor(public payload: IRegion) {}
-}
-
-export class SkillsAction implements Action {
-    readonly type = DataEvenType.SKILLS;
-    constructor(public payload: any[]) {}
-}
-
-export class InfoCharacterAction implements Action {
-    readonly type = DataEvenType.INFO;
-}
-
-export class InventoryAction implements Action {
-    readonly type = DataEvenType.INVENTORY;
-    constructor(public payload: any) {}
-}
-
-export class EquipAction implements Action {
-    readonly type = DataEvenType.EQUIP;
-    constructor(public payload: any) {}
-}
-
-export class BookAction implements Action {
-    readonly type = DataEvenType.BOOK;
-    constructor(public payload: IBook) {}
-}
-
-export class DateTimeAction implements Action {
-    readonly type = DataEvenType.DATE;
-    constructor(public payload: IDateTime) {}
-}
-
-export class GenericPageAction implements Action {
-    readonly type = DataEvenType.GENERICPAGE;
-    constructor(public payload: IGenericPage) {}
-}
-
-export type DataAction
-= IncomingData
-| OutgoingData
-| DoorsAction
-| MapAction
-| RoomAction
-| UpdateStatusHero
-| HeroAction
-| SkyAction
-| EditorAction
-| ObjAndPersAction
-| GenericTableAction
-| WorksListAction
-| SkillsAction
-| InfoCharacterAction
-| InventoryAction
-| EquipAction
-| RegionAction
-| DateTimeAction
-| BookAction
-| GenericPageAction;
-
+export const incomingData = createAction(DataEvenType.IN, props<{payload: { message: string }}>());
+export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO,props<{payload: any}>());
+export const doorsAction = createAction(DataEvenType.DOORS,props<{payload: any}>());
+export const roomAction = createAction(DataEvenType.ROOM,props<{payload: any}>());
+export const objectAndPersonAction = createAction(DataEvenType.OBJPERSON,props<{payload: IObjPerson}>());
+export const heroAction = createAction(DataEvenType.HERODATA,props<{payload: IHero}>());
+export const mapAction = createAction(DataEvenType.MAP,props<{payload: Map}>());
+export const skyAction = createAction(DataEvenType.SKY, props<{payload: string}>());
+export const editorAction = createAction(DataEvenType.EDITOR, props<{payload: Editor}>());
+export const genericTableAction = createAction(DataEvenType.GENERICTABLE, props<{payload: IGenericTable}>());
+export const worksListAction = createAction(DataEvenType.WORKSLIST, props<{payload: IWorks}>());
+export const regionAction = createAction(DataEvenType.REGION, props<{payload: IRegion}>());
+export const skillsAction = createAction(DataEvenType.SKILLS, props<{payload: any}>());
+export const infoCharacterAction = createAction(DataEvenType.INFO);
+export const inventoryAction = createAction(DataEvenType.INVENTORY, props<{payload: any}>());
+export const equipAction = createAction( DataEvenType.EQUIP, props<{payload: any}>());
+export const bookAction = createAction(DataEvenType.BOOK, props<{payload: IBook}>());
+export const dataTimeAction = createAction(DataEvenType.DATE, props<{payload: IDateTime}>());
+export const genericPageAction = createAction(DataEvenType.GENERICPAGE, props<{payload: IGenericPage}>());
