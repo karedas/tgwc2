@@ -13,6 +13,7 @@ import { ConfigService } from 'src/app/services/config.service';
   templateUrl: './client.component.html',
   styles: [`
     :host {
+      flex: 1;
       height: 100%;
     }
   `]

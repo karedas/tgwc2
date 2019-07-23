@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { DataEvenType, HeroAction } from '../actions/data.action';
+import { DataEvenType, heroAction } from '../actions/data.action';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
@@ -33,7 +33,7 @@ export class DataEffects {
     switchMap((res) => {
       this.dialogV2Service.openCharacterSheet('skills');
       return [
-        new HeroAction({skills: res.payload})
+        heroAction({payload: {skills: res.payload}})
       ];
     })
   );
@@ -44,7 +44,7 @@ export class DataEffects {
     switchMap((res) => {
         this.dialogV2Service.openCharacterSheet('equip');
         return [
-          new HeroAction({equipment: res.payload})
+          heroAction({payload: {equipment: res.payload}})
         ];
     }),
   );
@@ -55,7 +55,7 @@ export class DataEffects {
     switchMap((res) => {
         this.dialogV2Service.openCharacterSheet('inventory');
         return [
-          new HeroAction({inventory: res.payload})
+          heroAction({payload: {inventory: res.payload}})
         ];
     }),
   );

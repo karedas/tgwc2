@@ -2,17 +2,16 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
-import { Action, Store, select } from '@ngrx/store';
-import { map, withLatestFrom, tap, switchMap } from 'rxjs/operators';
+import { Action, Store } from '@ngrx/store';
+import { map, tap, switchMap } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { getInGameStatus } from '../selectors';
 import { ClientState } from '../state/client.state';
 import { InputService } from 'src/app/main/client/components/input/input.service';
-import { InfoCharacterAction, HeroAction } from '../actions/data.action';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
+import { infoCharacterAction, heroAction } from '../actions/data.action';
 
 
 export interface PayloadAction {
@@ -98,8 +97,8 @@ export class ClientEffects {
       this.dialogV2Service.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
-          new InfoCharacterAction(),
-          new HeroAction(res.payload[0])
+          infoCharacterAction(), 
+          heroAction(res.payload[0])
         ];
       }
     }),
@@ -110,7 +109,7 @@ export class ClientEffects {
     ofType<PayloadAction>(ClientEventType.SHOWSTATUSHERO),
     switchMap((res) => {
       return [
-        new HeroAction(res.payload)
+        heroAction(res.payload)
       ];
     }),
     tap(() => this.game.setStatusInline(true))

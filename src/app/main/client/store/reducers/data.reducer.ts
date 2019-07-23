@@ -1,124 +1,82 @@
-import { initialState, DataState } from '../state/data.state';
-import { DataAction, DataEvenType } from '../actions/data.action';
+import { initialState } from '../state/data.state';
+import {
+  incomingData, updateStatusHero, doorsAction, heroAction,
+  roomAction, objectAndPersonAction, mapAction, skyAction, editorAction, genericTableAction,
+  worksListAction, regionAction, skillsAction, inventoryAction,
+  equipAction, bookAction, dataTimeAction, genericPageAction
+} from '../actions/data.action';
+import { createReducer, on, Action } from '@ngrx/store';
 
-export function reducer(
-  state = initialState,
-  action: DataAction
-): DataState {
-  switch (action.type) {
-
-    case DataEvenType.IN:
-      return Object.assign({}, state, {
-        base: [action.payload]
-      });
-
-    case DataEvenType.OUT:
-      return Object.assign({}, state, action.payload);
-
-    case DataEvenType.AUTOUPDATESTATUSHERO:
-      return Object.assign({}, state, {hero: {
+export const dataReducer = createReducer(
+  initialState,
+  on(mapAction, (state, { payload }) => ({ ...state, map: payload })),
+  on(skyAction, (state, { payload }) => ({ ...state, sky: payload })),
+  on(editorAction, (state, { payload }) => ({ ...state, editor: payload })),
+  on(genericTableAction, (state, { payload }) => ({ ...state, genericTable: payload })),
+  on(worksListAction, (state, { payload }) => ({ ...state, workslist: payload })),
+  on(regionAction, (state, { payload }) => ({ ...state, region: payload })),
+  on(doorsAction, (state, { payload }) => ({ ...state, doors: payload })),
+  on(heroAction, (state, { payload }) => ({ ...state, hero: payload })),
+  on(roomAction, (state, { payload }) => ({ ...state, room: payload })),
+  on(bookAction, (state, { payload }) => ({ book: payload })),
+  on(dataTimeAction, (state, { payload }) => ({ date: payload })),
+  on(genericPageAction, (state, { payload }) => ({ genericpage: [payload] })),
+  on(incomingData, (state, { payload }) => {
+    return Object.assign({}, state, { base: [payload] })
+  }),
+  on(updateStatusHero, (state, { payload }) => ({
+    hero: {
+      ...state.hero,
+      status: {
+        drink: payload.drink,
+        food: payload.food,
+        hit: payload.healt,
+        move: payload.move,
+        msg: payload.msg
+      },
+      target: {
+        move: payload['enemymove'],
+        hit: payload['enemyhealt'],
+        icon: payload['enemyicon'],
+        name: payload['enemyname']
+      },
+      combat: payload.combat,
+      walk: payload.walk,
+      money: payload.money,
+      pietoso: payload.pietoso,
+      nosfodera: payload.nosfodera
+    }
+  })),
+  on(objectAndPersonAction, (state, { payload }) => {
+    return Object.assign({}, { objPers: payload })
+  }),
+  on(skillsAction, (state, { payload }) => {
+    return {
+      ...state, hero: {
         ...state.hero,
-        status: {
-          drink: action.payload.drink,
-          food: action.payload.food,
-          hit: action.payload.healt,
-          move: action.payload.move,
-          msg: action.payload.msg
-        },
-        target: {
-          move: action.payload['enemymove'],
-          hit: action.payload['enemyhealt'],
-          icon: action.payload['enemyicon'],
-          name: action.payload['enemyname']
-        },
-        conva: action.payload.conva,
-        combat: action.payload.combat,
-        position: action.payload.position,
-        walk: action.payload.walk,
-        money: action.payload.money,
-        pietoso: action.payload.pietoso,
-        nosfodera: action.payload.nosfodera
-      }}
-      );
+        skills: payload
+      }
+    };
+  }),
+  on(inventoryAction, (state, { payload }) => {
+    return {
+      ...state, hero: {
+        ...state.hero,
+        inventory: payload
+      }
+    };
+  }),
+  on(equipAction, (state, { payload }) => {
+    return {
+      ...state, hero: {
+        ...state.hero,
+        equipment: payload
+      }
+    };
+  })
+)
 
-    case DataEvenType.HERODATA:
-      const hero = Object.assign({}, state.hero, action.payload);
-      return Object.assign({}, state, {hero: hero});
 
-    case DataEvenType.DOORS:
-      return Object.assign({}, state, {
-        doors: action.payload,
-      });
-    case DataEvenType.ROOM:
-      return Object.assign({}, state, {
-        room: action.payload,
-      });
-
-    case DataEvenType.OBJPERSON:
-      return Object.assign({}, state, {
-        objPers: action.payload
-      });
-
-    case DataEvenType.MAP:
-      return Object.assign({}, state, {
-        map: action.payload,
-      });
-    case DataEvenType.SKY:
-      return Object.assign({}, state, {
-        sky: action.payload,
-      });
-
-    case DataEvenType.EDITOR:
-      return Object.assign({}, state, {
-        editor: action.payload
-      });
-
-    case DataEvenType.GENERICTABLE:
-      return Object.assign({}, state, {
-        genericTable: action.payload}
-      );
-
-    case DataEvenType.WORKSLIST:
-      return Object.assign({}, state, {
-        workslist: action.payload
-      });
-
-    case DataEvenType.REGION:
-      return Object.assign({}, state, {
-        region: action.payload
-      });
-
-    case DataEvenType.SKILLS:
-      return {...state, hero: { ...state.hero,
-        skills: action.payload
-      }};
-
-    case DataEvenType.INVENTORY:
-      return {...state, hero: { ...state.hero,
-      inventory: action.payload
-      }};
-
-    case DataEvenType.EQUIP:
-      return {...state, hero: { ...state.hero,
-      equipment: action.payload
-    }};
-
-    case DataEvenType.BOOK:
-      return Object.assign({}, state, {
-      book: action.payload
-    });
-
-    case DataEvenType.DATE:
-      return Object.assign({}, state, {
-        date: action.payload
-      });
-
-    case DataEvenType.GENERICPAGE:
-      return Object.assign({}, state, {
-        genericpage: action.payload
-      });
-
-    default:
-      return state;
-  }
+export function reducer(state = initialState, action: Action) {
+  return dataReducer(state, action);
 }

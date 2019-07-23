@@ -21,14 +21,24 @@ tg-main-navigation {
   }
 
   .tg-brand {
-    width: 40px;
     height: 100%;
-    margin: 0;
-
+    margin-right: 40px!important;
+    color: #bdb3a3;
+    display: flex;
+    
     a {
-      width: 100%;
+      vertical-align: middle;
+      padding-left: 30px;
       height: 100%;
-      display: block;
+      display: inline-block;
+      background-position: left center;
+    }
+
+    span {
+    /* text-shadow: 0 0 14px #fff5de; */
+    /* font-weight: bold; */
+    text-transform: uppercase;
+    color: #e8e3d2;
     }
   }
 
@@ -99,6 +109,10 @@ tg-main-navigation {
     }
   }
 
+  .tg-mainnav-item .tg-base-logo {
+    height: 24px // Height FIX;
+  }
+
   .mat-icon,
   .user-side {
     color: #bdb3a3;
@@ -124,8 +138,6 @@ tg-main-navigation {
     }
   }
 
-
-
   @include layout-bp(lt-md) {
 
     header {
@@ -135,7 +147,6 @@ tg-main-navigation {
     .tg-brand {
       display: block;
       position: absolute;
-      height: 26px;
       margin-left: 50%;
       transform: translateX(-50%);
       margin-right: 0 !important;
