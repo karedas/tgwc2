@@ -9,7 +9,7 @@ export class AuthService {
 
   isLoginSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   private _isLoggedin: BehaviorSubject<boolean>;
-  
+
 
   constructor(private jwtHelper: JwtHelperService) {
     this._isLoggedin = new BehaviorSubject<any>(false);
@@ -34,7 +34,7 @@ export class AuthService {
     return this._isLoggedin.asObservable();
   }
 
-  public isLoggedIn(): boolean{
+  public isLoggedIn(): boolean {
     return !this.jwtHelper.isTokenExpired();
   }
 

@@ -13,18 +13,18 @@ import { environment } from 'src/environments/environment';
   animations: [ tgAnimations ]
 })
 export class ForgotPasswordComponent implements OnInit {
-  
+
   public forgotPasswordForm: FormGroup;
   public resetPasswordError: string;
-  public sended: boolean = false;
-  public submitted: boolean = false;
+  public sended = false;
+  public submitted = false;
 
 
-  constructor( 
+  constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
     private http: HttpClient,
-    ) { 
+    ) {
     }
 
   ngOnInit(): void {
@@ -40,19 +40,18 @@ export class ForgotPasswordComponent implements OnInit {
   onSubmit(): void {
 
     this.submitted =  true;
-    
-    let email = this.forgotPasswordForm.controls.email.value;
+
+    const email = this.forgotPasswordForm.controls.email.value;
 
     this.resetPasswordError = '';
 
-    if(!this.forgotPasswordForm.invalid) {
-      this.http.post(environment.apiAddress + '/auth/reset', {"email": email})
+    if (!this.forgotPasswordForm.invalid) {
+      this.http.post(environment.apiAddress + '/auth/reset', {'email': email})
         .subscribe((response: ApiResponse) => {
-          if(response.success) {
+          if (response.success) {
             this.sended = true;
-            
-          }
-          else {
+
+          } else {
           }
         }, (err => {
           this.sended = false;

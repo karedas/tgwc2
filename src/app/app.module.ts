@@ -41,7 +41,7 @@ export function tokenGetter() {
       }
     }),
     TgConfigModule.forRoot(tgConfig),
-    
+
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

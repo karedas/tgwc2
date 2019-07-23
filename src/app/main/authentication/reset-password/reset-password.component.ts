@@ -19,10 +19,10 @@ import { map, catchError } from 'rxjs/operators';
 export class ResetPasswordComponent implements OnInit {
 
   private paramToken: any;
-  public submitted: boolean = false;
+  public submitted = false;
   public frmNewPassword: FormGroup;
   public loginFailedError: string;
-  public success: boolean = false;
+  public success = false;
   token: any;
 
   constructor(
@@ -52,7 +52,7 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    let password = this.f.password.value;
+    const password = this.f.password.value;
     this.loginFailedError = '';
 
     if (!this.frmNewPassword.invalid) {
@@ -61,15 +61,15 @@ export class ResetPasswordComponent implements OnInit {
       this.http.post(url, { resetPasswordToken: this.token, password: password })
         .pipe(
           map((apiResponse: ApiResponse)  => {
-            if(apiResponse.success) {
+            if (apiResponse.success) {
               this.success = true;
             }
           }),
           catchError( err => {
             this.loginFailedError = err.error.status;
-            return throwError(err)
+            return throwError(err);
           })
-        ).subscribe()
+        ).subscribe();
     }
 
   }

@@ -32,7 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
         this.openCookieLaw().afterClosed()
           .subscribe(() => {
             this.start();
-          })
+          });
       } else {
         this.start();
       }
@@ -48,7 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
     config.disableClose = true;
     config.autoFocus = false;
     config.width = '450px';
-    
+
     const dialogRef = this.dialog.open(CookieLawComponent, config);
 
     return dialogRef;

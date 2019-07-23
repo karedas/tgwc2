@@ -25,7 +25,7 @@ import { QuotesComponent } from './login-client/quotes/quotes.component';
     ResetPasswordComponent,
 
 
-    //REMOVE
+    // REMOVE
     // LoginClientComponent,
     QuotesComponent
   ],

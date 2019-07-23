@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   public loginFailed: boolean;
   public loginFailedError: string;
 
-  public onProcess: boolean = false;
+  public onProcess = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,13 +54,13 @@ export class LoginComponent implements OnInit {
     this.loginFailedError = '';
 
     if (!this.frmLogin.invalid) {
-      
+
       this.onProcess = true;
 
       const loginAuth = {
           username: <string>this.f.username.value,
           password: <string>this.f.password.value
-      }
+      };
 
       this.loginService.login(loginAuth)
         .subscribe((res: ApiResponse) => {
@@ -78,16 +78,14 @@ export class LoginComponent implements OnInit {
 
           if (error instanceof NotAuthorizeError) {
             this.loginFailedError = error.originalError.error.status;
-          } 
-          else if (error instanceof AppError) {
+          } else if (error instanceof AppError) {
             this.loginFailedError = error.originalError.error.status;
           }
         });
-    }
-    else {
+    } else {
       // Empty or unvalid User/password
       this.loginFailedError = 'Username o Password incorretta';
-      
+
     }
   }
 

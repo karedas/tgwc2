@@ -21,7 +21,7 @@ export class VerifyRegistrationComponent implements OnInit, OnDestroy {
   public loginFailedError: string;
   private sub: any;
 
-  
+
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
   }
@@ -35,14 +35,14 @@ export class VerifyRegistrationComponent implements OnInit, OnDestroy {
 
   }
 
-  verifyVCode(code: string): Observable<any>{
+  verifyVCode(code: string): Observable<any> {
 
     const url = environment.apiAddress + '/auth/verify/' + code;
 
     return this.http.get(url)
       .pipe(
         map((apiResponse: ApiResponse) => {
-          this.username = apiResponse.data.username
+          this.username = apiResponse.data.username;
           this.success = apiResponse.success;
         }),
         catchError(err => {
@@ -50,7 +50,7 @@ export class VerifyRegistrationComponent implements OnInit, OnDestroy {
           this.success = false;
           return  throwError(err);
         })
-      )
+      );
   }
 
   ngOnDestroy(): void {

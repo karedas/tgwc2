@@ -17,7 +17,7 @@ export interface ManagerNavigationItem {
     bg?: string;
     fg?: string;
   };
-  permission?: string,
+  permission?: string;
   children?: ManagerNavigationItem[];
 }
 

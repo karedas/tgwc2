@@ -5,19 +5,19 @@ import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 
 
 @Injectable()
-export class VerifyCharacterService{
+export class VerifyCharacterService {
 
   verifySubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
-  
+
   private name: string;
   private pwd: string;
 
   constructor(
     private socketService: SocketService,
-  ){}
+  ) {}
 
   public check(data: { characterName: string, characterPassword: string }): Observable<boolean> {
-    
+
     this.name = data.characterName;
     this.pwd = data.characterPassword;
 
@@ -30,7 +30,7 @@ export class VerifyCharacterService{
 
     // TEMP TEST
     this.verifySubject$.next(true);
-    
+
     return this.verifySubject$.asObservable();
   }
 

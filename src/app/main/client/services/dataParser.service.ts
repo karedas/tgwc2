@@ -203,7 +203,7 @@ export class DataParser {
       const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
       const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
 
-      this.store.dispatch(DataActions.editorAction({payload:{
+      this.store.dispatch(DataActions.editorAction({payload: {
         maxChars: options_parse[0],
         title: options_parse[1] ? options_parse[1] : ' ',
         description: text ? text : ' '
@@ -471,7 +471,7 @@ export class DataParser {
     this._updateNeeded.next(ud);
   }
 
-  
+
 
   removeColors(data: any) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');

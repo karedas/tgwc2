@@ -30,7 +30,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
-  pauseScroll: boolean = false;
+  pauseScroll = false;
 
   private _baseText$: Observable<any>;
   private _roomBase$: Observable<any>;
@@ -55,9 +55,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     private outputService: OutputService,
     private store: Store<DataState>,
     private game: GameService,
-    private _configService: ConfigService) 
-  
-  {
+    private _configService: ConfigService) {
     this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
     this._baseText$ = this.store.select(getDataBase);
     this._roomBase$ = this.store.select(getRoomBase);
@@ -79,11 +77,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
 
-    
+
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
     this._baseText$
-      .pipe( takeUntil(this._unsubscribeAll)) 
+      .pipe( takeUntil(this._unsubscribeAll))
       .subscribe( (base: string[]) => this.updateBaseText(base));
 
     this._roomBase$
@@ -113,24 +111,24 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.outputObservable.next(this.output);
     this.scrollPanelToBottom();
   }
-  
+
   private setContent(t: string, c: any): any {
     return Object.assign({}, { type: t, content: c });
   }
 
   private updateBaseText(base: string[]) {
-    if(base) {
+    if (base) {
       const content = this.setContent('base', base[0]);
       this.updateContent(content);
     }
   }
 
   private updateRoomBase(room: Room) {
-    if(room) {
+    if (room) {
       if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
         this.lastRoomDescription = room.desc['base'];
       }
-      
+
       const content = this.setContent('room', room);
 
       this.updateContent(content);
@@ -143,7 +141,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private updateObjectOrPerson(elements: any) {
-    if(elements) {
+    if (elements) {
       this.objPersDetail = elements;
       const content = this.setContent('objpersdetail', this.objPersDetail);
 
@@ -156,7 +154,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private updateGenericPage(data: any) {
-    if(!!data) {
+    if (!!data) {
       this.genericPage = data;
       const content = this.setContent('genericpage', this.genericPage);
 
@@ -171,7 +169,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private scrollPanelToBottom() {
-    if(!this.pauseScroll) {
+    if (!this.pauseScroll) {
       setTimeout(() => {
         this.scrollBar.scrollToBottom(0).subscribe();
       }, 50);

@@ -22,7 +22,7 @@ export const dataReducer = createReducer(
   on(dataTimeAction, (state, { payload }) => ({ date: payload })),
   on(genericPageAction, (state, { payload }) => ({ genericpage: [payload] })),
   on(incomingData, (state, { payload }) => {
-    return Object.assign({}, state, { base: [payload] })
+    return Object.assign({}, state, { base: [payload] });
   }),
   on(updateStatusHero, (state, { payload }) => ({
     hero: {
@@ -48,7 +48,7 @@ export const dataReducer = createReducer(
     }
   })),
   on(objectAndPersonAction, (state, { payload }) => {
-    return Object.assign({}, { objPers: payload })
+    return Object.assign({}, { objPers: payload });
   }),
   on(skillsAction, (state, { payload }) => {
     return {
@@ -74,7 +74,7 @@ export const dataReducer = createReducer(
       }
     };
   })
-)
+);
 
 
 export function reducer(state = initialState, action: Action) {

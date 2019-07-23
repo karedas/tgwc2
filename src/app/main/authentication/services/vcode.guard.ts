@@ -12,6 +12,8 @@ export class VcodeGuard implements CanActivate {
     const params = route.params['token'];
     if (params) {
       return true;
-    } else { false; }
+    }
+
+    return false;
   }
 }

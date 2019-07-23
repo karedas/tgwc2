@@ -81,22 +81,22 @@ export class GameService {
     return this._tgConfig;
   }
 
-  start(initialData:any): void {
+  start(initialData: any): void {
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.parse(initialData, this._tgConfig.log);
 
-    this.socketService.on(socketEvent.DATA, 
+    this.socketService.on(socketEvent.DATA,
       (data: any) => {
         this.dataParserService.parse(data, this._tgConfig.log);
-      })
-      
+      });
+
     this._upSubscription = this.dataParserService.updateNeeded.subscribe(this.updatePanels.bind(this));
 
     // this.socketService.listen(socketEvent.DATA)
     //   .subscribe(data => {
     //     this.dataParserService.parse(data, this._tgConfig.log);
     //   });
-      
+
     // this._upSubscription = this.dataParserService.updateNeeded
 
     //   .subscribe((up) => {

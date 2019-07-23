@@ -7,28 +7,28 @@ import { DataState } from './state/data.state';
 
 
 export interface TGState {
-	client: ClientState,
-	data: DataState
+  client: ClientState;
+  data: DataState;
 }
 
 export interface State {
-	TG: TGState
+  TG: TGState;
 }
 
 export const baseReducer: ActionReducerMap<TGState> = {
-	client: fromClient.reducer,
-	data: fromData.reducer,
+  client: fromClient.reducer,
+  data: fromData.reducer,
 };
 
 export const selectTGState = createFeatureSelector<TGState>('TG');
 
 export function clearState(reducer: any) {
-	return (state, action) => {
-		if (action.type === ClientEventType.RESET) {
-			state = undefined;
-		}
-		return reducer(state, action);
-	};
+  return (state, action) => {
+    if (action.type === ClientEventType.RESET) {
+      state = undefined;
+    }
+    return reducer(state, action);
+  };
 }
 
 

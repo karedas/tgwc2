@@ -1,11 +1,27 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, Injectable, ErrorHandler } from '@angular/core';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthJwtInterceptor } from './interceptor/http.interceptor';
+import { HttpErrorInterceptor } from './interceptor/http.interceptor';
 import { SharedModule } from '../shared/shared.module';
 import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
+
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn: 'https://4703a40d72734be383834a9100b66168@sentry.io/1511377'
+});
+
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    // Sentry.showReportDialog({ eventId });
+  }
+}
+
 
 @NgModule({
   imports: [
@@ -32,7 +48,8 @@ export class CoreModule {
             UserService,
             ApiService,
             AuthService,
-            {provide: HTTP_INTERCEPTORS, useClass: AuthJwtInterceptor, multi: true}
+            { provide: ErrorHandler, useClass: SentryErrorHandler },
+            { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
           ]
       };
   }

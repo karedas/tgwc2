@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
 import { GameService } from './services/game.service';
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { InputService } from './components/input/input.service';
@@ -19,8 +18,8 @@ import { ConfigService } from 'src/app/services/config.service';
   `]
 })
 
-export class ClientComponent {
-  
+export class ClientComponent implements OnDestroy {
+
   tgConfig: TGConfig;
 
   private _unsubscribeAll: Subject<any>;
@@ -36,18 +35,17 @@ export class ClientComponent {
   }
 
   openNews() {
-    
+
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
 
         this.tgConfig = config;
-        
+
         if (this.tgConfig.news) {
           this.dialogV2Service.openNews(false);
-        }
-        else {
+        } else {
           this.gameService.sendToServer('');
           this.inputService.focus();
         }

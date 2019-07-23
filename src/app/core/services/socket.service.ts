@@ -22,7 +22,7 @@ import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 export class SocketService {
 
   private socket: io;
-  connected: boolean = false;
+  connected = false;
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(/* private store: Store<ClientState>*/) {
@@ -43,7 +43,7 @@ export class SocketService {
   public connect(): void {
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
-      
+
       this.socket.on(socketEvent.CONNECT, () => {
         this.onConnect();
       });
@@ -57,15 +57,15 @@ export class SocketService {
 
       });
 
-      this.socket.on(socketEvent.RECONNECT, () => { 
+      this.socket.on(socketEvent.RECONNECT, () => {
         this.onReconnect();
       });
 
-    } else if( this.socket.disconnected ) {
+    } else if ( this.socket.disconnected ) {
       this.socket.connect();
     }
   }
-  
+
   public disconnect(): void {
     this.socket.disconnect();
   }

@@ -11,15 +11,15 @@ export class GetEthnicityByCodePipe implements PipeTransform {
   ethnicities = ethnicity;
 
   transform(raceCode: any, ...args: any[]): any {
-    let eths = this.ethnicities[raceCode];
-    let msg = eths.filter((e) => {
+    const eths = this.ethnicities[raceCode];
+    const msg = eths.filter((e) => {
       return e.code === args[0];
     });
 
-    if(msg) {
+    if (msg) {
       return msg[0].name;
     }
-      
+
     return null;
   }
 
