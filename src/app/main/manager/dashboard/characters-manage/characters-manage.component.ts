@@ -22,8 +22,8 @@ export class CharactersManageComponent implements OnInit {
 
   verifyCharacterForm: FormGroup;
   verifySubscription: Subscription;
-  verifyFormSubmitted: boolean = false;
-  apiError: boolean = false;
+  verifyFormSubmitted = false;
+  apiError = false;
 
   charactersList: Observable<any>;
 
@@ -51,11 +51,11 @@ export class CharactersManageComponent implements OnInit {
   }
 
   get characterUsername() {
-    return this.verifyCharacterForm.get('characterName')
+    return this.verifyCharacterForm.get('characterName');
   }
 
   get characterPassword() {
-    return this.verifyCharacterForm.get('characterPassword')
+    return this.verifyCharacterForm.get('characterPassword');
   }
 
   public verify() {

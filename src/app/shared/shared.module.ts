@@ -17,13 +17,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { IconsComponent } from '../main/client/common/icons/icons.component';
 import { HstatComponent } from '../main/client/common/hstat/hstat.component';
 import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule } from '@angular/material';
-// import { ScrollDispatchModule, ScrollingModule } from '@angular/cdk/scrolling';
 import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@angular/cdk-experimental/scrolling';
-import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -67,8 +64,6 @@ import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
     ScrollingModule,
     ExperimentalScrollingModule,
-    ScrollDispatchModule
-
   ],
 })
 export class SharedModule {}

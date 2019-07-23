@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   providedIn: 'root'
 })
 export class LoginService extends ApiService {
-  
+
   public login(data: { username: string, password: string }): Observable<ApiResponse> {
     return this.post('/users/login', {user: data})
       .pipe( map(( apiResponse: ApiResponse ) => {

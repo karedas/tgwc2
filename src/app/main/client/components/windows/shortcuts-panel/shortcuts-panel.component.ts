@@ -48,7 +48,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
   }
 
   openShortcutManager() {
-    this.onManagerCall.emit();
+    this.onManagerCall.emit(true);
   }
 
   ngOnDestroy(): void {

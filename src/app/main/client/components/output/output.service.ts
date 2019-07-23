@@ -9,7 +9,7 @@ export class OutputService {
 
   // autoScroll: BehaviorSubject<boolean>;
   @Output() toggledAutoScroll: EventEmitter<boolean> = new EventEmitter();
-  autoScroll: boolean = false;
+  autoScroll = false;
 
   constructor(private game: GameService) {
   }
@@ -23,7 +23,7 @@ export class OutputService {
 
   // Send request to server by element click
   interact(event: Event, item: any, index?: number) {
-    
+
     event.preventDefault();
 
     /* If is not a List */
@@ -46,7 +46,7 @@ export class OutputService {
     }
   }
 
-  // Uncollapse/Collapse a collapsed Container 
+  // Uncollapse/Collapse a collapsed Container
   isExpandeable(event: Event, item: any, index: number): boolean {
     event.preventDefault();
     if (item.sz) {

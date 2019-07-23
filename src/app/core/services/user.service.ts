@@ -24,19 +24,19 @@ export class UserService extends ApiService {
     return this.profile$;
   }
 
-  getCharacters(): Observable<any> {
-    if (!this.characters$) {
-      this.characters$ = this.requestCharacters()
-        .pipe(
-          shareReplay(CACHE_SIZE)
-        );
-    }
-    return this.characters$;
-  }
+  // getCharacters(): Observable<any> {
+  //   if (!this.characters$) {
+  //     this.characters$ = this.requestCharacters()
+  //       .pipe(
+  //         shareReplay(CACHE_SIZE)
+  //       );
+  //   }
+  //   return this.characters$;
+  // }
 
 
   public requestProfile(): Observable<any> {
-    let obs$ = this.get('/profile/me')
+    const obs$ = this.get('/profile/me')
       .pipe(
         map((response: ApiResponse) => {
           const data = response.data;
@@ -44,22 +44,18 @@ export class UserService extends ApiService {
         })
       );
 
-      
+
     return obs$;
   }
 
-  public requestCharacters(): Observable<any>{
-    let obs$ = this.get('/profile/characters')
-      .pipe(
-        map(({ data: { chars } }: ApiResponse) => {
-          return chars.map((c => {
-            console.log(c);
+  public getCharacters(): Observable<any> {
+    return this.get('/profile/characters')
+      .pipe( map(({ data: { chars } }: ApiResponse) => {
+          chars.map(((c: Character) => {
             return new Character().deserialize(c);
-          }))
+          }));
         }),
-      )
-      
-    return obs$;
+      );
   }
 
   /* Utils */

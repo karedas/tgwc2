@@ -43,7 +43,7 @@ const clientRouting: Routes = [
     RightSidebarModule,
     OutputModule,
     InputModule,
-    StoreModule.forFeature('TG', 
+    StoreModule.forFeature('TG',
       baseReducer, { metaReducers: [clearState] }
     ),
     EffectsModule.forFeature([ClientEffects, DataEffects]),

@@ -1,5 +1,5 @@
 export class ApiResponse {
-  
+
   private _success: boolean;
   private _data: any;
   private _httpCode: number;

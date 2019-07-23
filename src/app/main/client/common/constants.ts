@@ -25,7 +25,7 @@ export const equip_positions_by_name = {
     'l_shoulder': 'Sulla spalla sinistra',
     'tied': 'Imprigionato'
   };
-  
+
 export const pos_to_order = [
   { pos: 0, name: '' },
   18,		// Finger R

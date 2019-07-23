@@ -11,7 +11,7 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class SidebarComponent implements OnInit {
   public links: ManagerNavigation[] = [];
-  public selectedItem = 0
+  public selectedItem = 0;
   public currentUser: User;
 
   constructor(
@@ -22,8 +22,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
 
-    for (let item in navigationSidebar) {
-      if(navigationSidebar.hasOwnProperty(item)) {
+    for (const item in navigationSidebar) {
+      if (navigationSidebar.hasOwnProperty(item)) {
         this.links.push(navigationSidebar[item]);
       }
     }
@@ -39,6 +39,6 @@ export class SidebarComponent implements OnInit {
     return true;
   }
 
-  
+
 
 }

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
@@ -16,7 +16,7 @@ import { AlertComponent } from 'src/app/main/common/components/dialogs/alert/ale
   templateUrl: './tg-characters-list.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class MyCharactersComponent implements OnInit {
+export class MyCharactersComponent implements OnInit, OnDestroy {
 
   @Output() goToManage = new EventEmitter();
   // @Input() chars: any[];
@@ -63,7 +63,7 @@ export class MyCharactersComponent implements OnInit {
     if (replayDialog) {
       replayDialog.componentInstance.data = {
         replayMessage: msg
-      }
+      };
     }
   }
 
@@ -80,7 +80,7 @@ export class MyCharactersComponent implements OnInit {
       if (res === true) {
         this.redirectToClient();
       }
-      })  
+      });
   }
 
   redirectToClient() {
@@ -94,10 +94,10 @@ export class MyCharactersComponent implements OnInit {
   private openLoginDialog() {
     const config = new MatDialogConfig;
     config.id = 'loginReplay';
-    config.width = "350px"
+    config.width = '350px';
     config.data = {
       replayMessage: 'PROVA'
-    }
+    };
     this.dialogRef = this.dialog.open(AlertComponent, config);
   }
 

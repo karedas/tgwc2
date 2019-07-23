@@ -12,7 +12,7 @@ import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layo
 export class ManagerComponent implements OnDestroy {
 
   @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
-  
+
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
 

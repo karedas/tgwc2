@@ -97,7 +97,7 @@ export class ClientEffects {
       this.dialogV2Service.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
-          infoCharacterAction(), 
+          infoCharacterAction(),
           heroAction(res.payload[0])
         ];
       }

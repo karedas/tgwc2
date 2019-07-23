@@ -44,7 +44,7 @@ export class AppComponent {
     private render: Renderer2,
     @Inject(DOCUMENT) private document: any
   ) {
-    
+
     this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {

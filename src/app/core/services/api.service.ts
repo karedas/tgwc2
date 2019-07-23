@@ -9,28 +9,32 @@ import { ApiResponse } from '../models/api-response.model';
 import { AppError } from 'src/app/shared/errors/app.error';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 
+const CACHE_SIZE = 1;
+
 @Injectable()
 export class ApiService {
 
   constructor(
     private http: HttpClient,
     protected authService: AuthService,
-  ) { 
+  ) {
   }
 
-  
+
   public post(url: string, postData: any): Observable<any> {
 
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
 
-    return this.http.post(endpoint, JSON.stringify(postData), {headers}).pipe(
-      map( response => {
-        return new ApiResponse(response);
-      }),
-      catchError(this.handleError.bind(this))
-    );
-    
+    return this.http.post(endpoint, JSON.stringify(postData), { headers })
+      .pipe(
+        shareReplay(CACHE_SIZE),
+        map(response => {
+          return new ApiResponse(response);
+        }),
+        catchError(this.handleError)
+      );
+
   }
 
   public get(url: string): Observable<any> {
@@ -38,12 +42,14 @@ export class ApiService {
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
 
-    return this.http.get(endpoint, { headers }).pipe(
-      map( response => {
-        return new ApiResponse(response);
-      }),
-      catchError(this.handleError.bind(this))
-    )
+    return this.http.get(endpoint, { headers })
+      .pipe(
+        shareReplay(CACHE_SIZE),
+        map(response => {
+          return new ApiResponse(response);
+        }),
+        catchError(this.handleError.bind(this))
+      );
   }
 
   private buildUrl(url: string): string {
@@ -60,17 +66,15 @@ export class ApiService {
 
   private handleError(error: HttpErrorResponse): Observable<AppError> {
 
-    if (error.status === 401 ) {
+    if (error.status === 401) {
       return throwError(new NotAuthorizeError(error));
     }
 
-    return throwError(()  => {
-      
-      if (error instanceof HttpErrorResponse ) {
-        new HttpErrorResponse(error);
-      }
+    return throwError(() => {
 
-      else new AppError(error);
+      if (error instanceof HttpErrorResponse) {
+        new HttpErrorResponse(error);
+      } else { new AppError(error); }
     });
   }
 }

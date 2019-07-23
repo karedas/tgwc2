@@ -46,13 +46,10 @@ export class MainNavigationComponent implements OnDestroy {
       });
     this.charactersList = this.userService.getCharacters()
       .pipe(map((char: Character) => {
-        return char.filter(char => char.status === 1);
+        return char.filter(c => c.status === 1);
       }));
 
     this._unsubscribeAll = new Subject();
-  }
-
-  ngOnInit(): void {
   }
 
   private setLoggedinUser() {
@@ -62,12 +59,11 @@ export class MainNavigationComponent implements OnDestroy {
     if (status) {
       this.loggedIn = true;
       this.currentUser = this.authService.currentUser;
-    }
-    else {
+    } else {
       this.loggedIn = false;
       this.currentUser = null;
     }
-    //set also if the user is loggedin with a character
+    // set also if the user is loggedin with a character
     this.userInGame = this.loginClientService.isLoggedIn;
   }
 
@@ -82,7 +78,7 @@ export class MainNavigationComponent implements OnDestroy {
   }
 
   loginCharacter(name) {
-    this.loginClientService.login(name)
+    this.loginClientService.login(name);
   }
 
   ngOnDestroy(): void {

@@ -35,12 +35,12 @@ export enum DataEvenType {
 }
 
 export const incomingData = createAction(DataEvenType.IN, props<{payload: { message: string }}>());
-export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO,props<{payload: any}>());
-export const doorsAction = createAction(DataEvenType.DOORS,props<{payload: any}>());
-export const roomAction = createAction(DataEvenType.ROOM,props<{payload: any}>());
-export const objectAndPersonAction = createAction(DataEvenType.OBJPERSON,props<{payload: IObjPerson}>());
-export const heroAction = createAction(DataEvenType.HERODATA,props<{payload: IHero}>());
-export const mapAction = createAction(DataEvenType.MAP,props<{payload: Map}>());
+export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO, props<{payload: any}>());
+export const doorsAction = createAction(DataEvenType.DOORS, props<{payload: any}>());
+export const roomAction = createAction(DataEvenType.ROOM, props<{payload: any}>());
+export const objectAndPersonAction = createAction(DataEvenType.OBJPERSON, props<{payload: IObjPerson}>());
+export const heroAction = createAction(DataEvenType.HERODATA, props<{payload: IHero}>());
+export const mapAction = createAction(DataEvenType.MAP, props<{payload: Map}>());
 export const skyAction = createAction(DataEvenType.SKY, props<{payload: string}>());
 export const editorAction = createAction(DataEvenType.EDITOR, props<{payload: Editor}>());
 export const genericTableAction = createAction(DataEvenType.GENERICTABLE, props<{payload: IGenericTable}>());

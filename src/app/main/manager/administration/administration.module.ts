@@ -11,7 +11,7 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       data: {roles: [Role.Administrator] }
     }
-  ]
+  ];
 
 @NgModule({
   declarations: [

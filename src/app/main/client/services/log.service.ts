@@ -136,8 +136,8 @@ export class LogService {
     data = data.replace(/&\*/gm, '');
 
 
-    data = data.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, (line: any, type: any, data: any) => {
-      return data;
+    data = data.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, (line: any, type: any, d: any) => {
+      return d;
     });
 
     data = data.replace(/&!ce"[^"]*"/gm, '');
@@ -189,7 +189,7 @@ export class LogService {
   private printTable(t) {
     let txt = '<table>';
 
-    if (t.title && t.dialog == false) {
+    if (t.title && t.dialog === false) {
       txt += '<caption>' + t.title + '</caption>';
     }
 
@@ -299,7 +299,7 @@ export class LogService {
   }
 
   private printInventory(inv) {
-    if (inv.list.length == 0) {
+    if (inv.list.length === 0) {
       return ('<p>Non hai niente in inventario!</p>');
     } else {
       return '<h4>Il tuo inventario:</h4>' + this.removeColors(this.printDetailsList(inv, 'obj'));
@@ -314,8 +314,9 @@ export class LogService {
       const eqdata = eq[posname];
 
       if (eqdata) {
-        eqdata.forEach((obj, idx) => {
-          res += '<div>' + equip_positions_by_name[posname] + ': ' + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '</div>';
+        eqdata.forEach((obj, idxx) => {
+          res += '<div>' + equip_positions_by_name[posname] + ': '
+              + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '</div>';
           eqcount++;
         });
       }
@@ -356,19 +357,17 @@ export class LogService {
       const group = skinfo[groupname];
 
       for (const skname in group) {
-        txt += '<tr><th>' + skname + '</th>';
-
-        const sk = group[skname];
-
-        if ('prac' in sk && 'theo' in sk) {
-          txt += '<td>' + sk.prac + '</td><td>' + sk.theo + '</td>';
+        if (group.hasOwnProperty(skname)) {
+          txt += '<tr><th>' + skname + '</th>';
+          const sk = group[skname];
+          if ('prac' in sk && 'theo' in sk) {
+            txt += '<td>' + sk.prac + '</td><td>' + sk.theo + '</td>';
+          }
+          if ('auto' in sk) {
+            txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
+          }
+          txt += '</tr>';
         }
-
-        if ('auto' in sk) {
-          txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
-        }
-
-        txt += '</tr>';
       }
     }
 
@@ -474,8 +473,8 @@ export class LogService {
     for (let i = 0; i < values.length; ++i) {
       if (val <= values[i].val) {
         return values[i].txt;
-    }
       }
+    }
 
     return null;
   }

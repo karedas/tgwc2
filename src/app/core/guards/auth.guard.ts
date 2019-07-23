@@ -8,20 +8,20 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  
+
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     const currentUser = this.authService.currentUser;
-    if(currentUser) {
-      // Get roles difference 
-      const roles = route.data.roles.some( (r: any) => this.authService.currentUser.permissions.includes(r))
+    if (currentUser) {
+      // Get roles difference
+      const roles = route.data.roles.some( (r: any) => this.authService.currentUser.permissions.includes(r));
 
-      if(route.data.roles && !roles) {
+      if (route.data.roles && !roles) {
         this.router.navigate(['errors/error-403']);
         return false;
       }

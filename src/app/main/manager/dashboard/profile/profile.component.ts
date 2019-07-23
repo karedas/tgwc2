@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./profile.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ProfileComponent implements OnInit, OnDestroy{
+export class ProfileComponent implements OnInit, OnDestroy {
 
   profile: Observable<any>;
 
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
       .pipe( takeUntil(this._unsubscribeAll) )
       .subscribe((profile => {
         this.profile =  profile.user;
-      }))
+      }));
   }
 
   ngOnDestroy(): void {
