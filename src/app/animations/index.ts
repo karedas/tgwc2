@@ -1,8 +1,6 @@
 import {
   trigger, animate, style, group, query,
-  transition, animateChild, animation,
-  useAnimation }
-from '@angular/animations';
+  transition, animateChild, animation, useAnimation } from '@angular/animations';
 
 const customAnimation = animation([
   style({

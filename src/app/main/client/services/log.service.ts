@@ -14,7 +14,9 @@ export class LogService {
 
   constructor() {
     this.log$.pipe(
-      scan((acc, curr) => { Object.assign({}, acc, curr), {}; }),
+      scan((acc, curr) => {
+        Object.assign({}, acc, curr);
+      }),
     );
     this.log$.asObservable();
   }
@@ -322,7 +324,7 @@ export class LogService {
       }
     });
 
-    if (eqcount == 0) {
+    if (eqcount === 0) {
       return '<p>Non hai equipaggiato nulla!</p>';
     } else {
       return '<p>Equipaggiamento:</p>' + res;
@@ -394,7 +396,9 @@ export class LogService {
       + '<tr><th>Razza</th><td>' + pinfo.race.name + '</td><th>Cultura</th><td>' + pinfo.cult + '</td></tr>'
       + '<tr><th>Etnia</th><td>' + pinfo.ethn + '</td><th>Religione</th><td>' + (pinfo.relig ? pinfo.relig : 'nessuna') + '</td></tr>'
       + '<tr><th>Altezza</th><td>' + pinfo.height + ' cm.</td><th>Sesso</th><td>' + pinfo.sex.name + '</td></tr>'
-      + '<tr><th>Peso</th><td>' + pinfo.weight + ' pietre</td><th>Citt&agrave;</th><td>' + (pinfo.city ? pinfo.city : 'nessuna') + '</td></tr>'
+      + '<tr><th>Peso</th><td>'
+        + pinfo.weight + ' pietre</td><th>Citt&agrave;</th><td>' + (pinfo.city ? pinfo.city : 'nessuna')
+      + '</td></tr>'
       + '<tr><th>Et&agrave;</th><td>' + pinfo.age + ' anni</td><th>Lingua</th><td>' + pinfo.lang + '</td></tr>'
       + '<tr><th>Nascita:</th><td colspan=3>' + pinfo.born + '</td></tr>'
       + '</table><table><caption>Caratteristiche:</caption>'

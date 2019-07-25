@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, share, shareReplay } from 'rxjs/operators';
+import { map, catchError, share, shareReplay, retry } from 'rxjs/operators';
 import { ApiResponse } from '../models/api-response.model';
 import { AppError } from 'src/app/shared/errors/app.error';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
@@ -28,7 +28,7 @@ export class ApiService {
 
     return this.http.post(endpoint, JSON.stringify(postData), { headers })
       .pipe(
-        shareReplay(CACHE_SIZE),
+        retry(1),
         map(response => {
           return new ApiResponse(response);
         }),
@@ -44,7 +44,7 @@ export class ApiService {
 
     return this.http.get(endpoint, { headers })
       .pipe(
-        shareReplay(CACHE_SIZE),
+        retry(1),
         map(response => {
           return new ApiResponse(response);
         }),
@@ -73,8 +73,8 @@ export class ApiService {
     return throwError(() => {
 
       if (error instanceof HttpErrorResponse) {
-        new HttpErrorResponse(error);
-      } else { new AppError(error); }
+        return new HttpErrorResponse(error);
+      } else {  return new AppError(error); }
     });
   }
 }

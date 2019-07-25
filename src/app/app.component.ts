@@ -1,4 +1,4 @@
-import { Component, Inject, Renderer2 } from '@angular/core';
+import { Component, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BreakpointObserver, Breakpoints, MediaMatcher, BreakpointState } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
@@ -28,7 +28,7 @@ declare let ga: Function;
   `]
 })
 
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
   title = 'The Gate v2 WebClient';
   load = false;
