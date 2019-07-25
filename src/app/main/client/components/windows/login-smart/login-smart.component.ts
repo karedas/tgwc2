@@ -8,9 +8,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validators/character-validations';
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
-import { ResetAction } from 'src/app/main/client/store/actions/client.action';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
+import * as ClientActions from '../../../store/actions/client.action';
 
 @Component({
   selector: 'tg-login-smart',
@@ -113,7 +113,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   navigateToHome() {
     this.dialogRef.close();
     this.router.navigate(['auth/login']).then(() => {
-      this.store.dispatch(new ResetAction);
+      this.store.dispatch(ClientActions.resetAction);
     });
   }
 

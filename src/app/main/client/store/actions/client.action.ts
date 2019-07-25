@@ -1,4 +1,5 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
+import { DataEvenType } from './data.action';
 
 export enum ClientEventType {
   DISCONNECT = '[Client] User Disconnect',
@@ -15,71 +16,16 @@ export enum ClientEventType {
   REFRESH = '[Client] Refresh server command'
 }
 
-export class DisconnectAction implements Action {
-  readonly type = ClientEventType.DISCONNECT;
-}
 
-export class InGameAction implements Action {
-  readonly type = ClientEventType.INGAME;
-}
-
-export class UpdateUI implements Action {
-  readonly type = ClientEventType.UI;
-  constructor(public payload: any) {}
-}
-
-
-export class ResetAction implements Action {
-  readonly type = ClientEventType.RESET;
-}
-
-
-export class AudioAction implements Action {
-  readonly type = ClientEventType.AUDIO;
-  constructor(public payload: string) {}
-}
-
-export class NewsAction implements Action {
-  readonly type =  ClientEventType.NEWS;
-}
-
-export class CloseTextEditor implements Action {
-  readonly type = ClientEventType.CLOSETEXTEDITOR;
-}
-
-export class ShowCommandsActions implements Action {
-  readonly type = ClientEventType.SHOWCOMMANDS;
-  constructor( public payload: []) {}
-}
-
-export class ShowCharacterSheetActions implements Action {
-  readonly type = ClientEventType.SHOWCHARACTERSHEET;
-  constructor (public payload: any) {}
-}
-
-export class UpdateNeeded implements Action {
-  readonly type = ClientEventType.UPDATENEEDED;
-  constructor( public payload: any) {}
-}
-
-export class RefreshCommandAction implements Action {
-    readonly type = ClientEventType.REFRESH;
-}
-
-export class ShowStatusBoxAction implements Action {
-  readonly type = ClientEventType.SHOWSTATUSHERO;
-  constructor( public payload: any) {}
-}
-
-
-export type ClientActions
-  = InGameAction
-  | DisconnectAction
-  | ResetAction
-  | UpdateUI
-  | AudioAction
-  | CloseTextEditor
-  | NewsAction
-  | ShowCommandsActions
-  | ShowStatusBoxAction
-  | UpdateNeeded;
+export const disconnectAction = createAction(ClientEventType.DISCONNECT);
+export const inGameAction = createAction(ClientEventType.INGAME);
+export const resetAction = createAction(ClientEventType.RESET);
+export const newsAction = createAction(ClientEventType.NEWS);
+export const closeTextEditorAction = createAction(ClientEventType.CLOSETEXTEDITOR);
+export const refreshCommandAction = createAction(ClientEventType.REFRESH);
+export const updateUIAction = createAction(ClientEventType.UI, props<{payload: any}>());
+export const audioAction = createAction(ClientEventType.AUDIO, props<{payload: string}>());
+export const showCommandsActions = createAction(ClientEventType.SHOWCOMMANDS, props<{payload: []}>());
+export const showCharacterSheetActions = createAction(ClientEventType.SHOWCHARACTERSHEET, props<{payload: any}>());
+export const updateNeededAction = createAction(ClientEventType.UPDATENEEDED, props<{payload: any}>());
+export const showStatusBoxAction = createAction(ClientEventType.SHOWSTATUSHERO, props<{payload: any}>());

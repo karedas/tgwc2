@@ -44,6 +44,7 @@ export class MainNavigationComponent implements OnDestroy {
           this.setLoggedinUser();
         }
       });
+      
     this.charactersList = this.userService.getCharacters()
       .pipe(map((char: Character) => {
         return char.filter(c => c.status === 1);
