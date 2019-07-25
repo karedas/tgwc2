@@ -33,9 +33,9 @@
 
 
     <!-- Game Menu -->
-    <ng-container *ngIf="userInGame">
-      <!-- <tg-navbar></tg-navbar> -->
-    </ng-container>
+    <div *ngIf="userInGame">
+      <tg-game-menu></tg-game-menu>
+    </div>
 
     <!-- User Registration and login Menu -->
     <ng-container *ngIf="loggedIn === false ; else userLoggedIn">

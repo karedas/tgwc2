@@ -1,13 +1,13 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/main/client/services/game.service';
 
 import { NgScrollbar } from 'ngx-scrollbar';
-import { ConfigService } from 'src/app/services/config.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialogRef } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { TGConfig } from '../../../client-config';
 import { Subject } from 'rxjs';
+import { GameService } from '../../../services/game.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'tg-news',

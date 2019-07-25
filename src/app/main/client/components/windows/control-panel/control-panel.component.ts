@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
 import { TGConfig } from '../../../client-config';
-import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,6 +8,7 @@ import { AudioService } from '../../audio/audio.service';
 import { FileSaverService } from 'ngx-filesaver';
 import { font_size_options } from 'src/app/main/client/common/constants';
 import { GameService } from '../../../services/game.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'tg-control-panel',

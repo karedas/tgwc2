@@ -4,11 +4,11 @@ import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { getWorksList } from 'src/app/main/client/store/selectors';
 import { takeUntil } from 'rxjs/operators';
-import { IWorks, IWorksList } from 'src/app/main/client/models/data/workslist.model';
-import { GameService } from 'src/app/main/client/services/game.service';
+import { IWorks } from 'src/app/main/client/models/data/workslist.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { GameService } from '../../../services/game.service';
 
 
 export interface WorksListElement {

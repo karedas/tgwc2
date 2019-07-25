@@ -8,6 +8,7 @@ import { LoginClientService } from 'src/app/main/client/services/login-client.se
 import { map } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 import { UserService } from 'src/app/core/services/user.service';
+import { gameNavigationSideBar, NavigationItem } from '../navigation';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class MainNavigationComponent implements OnDestroy {
   public currentUser: any;
   public charactersList: Observable<any>;
   public hamburgerStatus = false;
+  // public gameItemsMenu:  NavigationItem[];
 
   private _unsubscribeAll: Subject<any>;
 
@@ -55,21 +57,33 @@ export class MainNavigationComponent implements OnDestroy {
 
   private setLoggedinUser() {
 
-    const status = this.authService.isLoggedIn();
+    // Global User Checking Online Status
+    const userStatus = this.authService.isLoggedIn();
 
-    if (status) {
+    if (userStatus) {
       this.loggedIn = true;
       this.currentUser = this.authService.currentUser;
     } else {
       this.loggedIn = false;
       this.currentUser = null;
     }
+
     // set also if the user is loggedin with a character
-    this.userInGame = this.loginClientService.isLoggedIn;
+    if (this.userInGame = this.loginClientService.isLoggedIn) {
+      this.makeGameMenu();
+    }
   }
 
   private isEnabled(value) {
     return value.status === 1;
+  }
+
+  private makeGameMenu() {
+    for (const item in gameNavigationSideBar) {
+      if (gameNavigationSideBar.hasOwnProperty(item)) {
+        // this.gameItemsMenu.push(gameNavigationSideBar[item]);
+      }
+    }
   }
 
   userOnLogout() {

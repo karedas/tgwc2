@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GameService } from 'src/app/main/client/services/game.service';
 import { NgScrollbar } from 'ngx-scrollbar';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'tg-commands-list',

@@ -18,6 +18,10 @@ export class OutputService {
   toggleAutoScroll(): boolean {
     this.autoScroll = !this.autoScroll;
     this.toggledAutoScroll.emit(this.autoScroll);
+
+    if(this.autoScroll === false) {
+    }
+
     return this.autoScroll;
   }
 

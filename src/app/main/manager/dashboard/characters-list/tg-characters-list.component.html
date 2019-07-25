@@ -24,7 +24,7 @@
 
               <td>
                 <div class="ch-avatar mat-elevation-z4">
-                  <img src="{{env.media_address + '/' + char.image}}" *ngIf="char.image !== ''" />
+                  <img src="{{env.media_address + char.image}}" *ngIf="char.image !== ''" />
                   <div class="tg-base-logo big" *ngIf="!char.image"></div>
                 </div>
               </td>

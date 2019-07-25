@@ -18,7 +18,10 @@
             <div style="height: 100%; overflow:hidden;">
               <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
                 [disableOnBreakpoints]="false">
-                <div  smoothScroll class="tg-output--history">
+                <div smoothScroll class="tg-output--history">
+                  <div *ngIf="!output.length" class="no-output-notice">
+                    Scrivi qualcosa o semplicemente aspetta...
+                  </div>
                   <ng-container *ngFor="let data of output">
 
                     <ng-container [ngSwitch]="data.type">
