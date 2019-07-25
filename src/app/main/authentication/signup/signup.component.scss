@@ -2,6 +2,11 @@
 @import 'abstract/sprites';
 @import 'abstract/sprites-mixins';
 
+
+:host {
+  flex: 1;
+}
+
 .tg-signup {
   margin: 0 auto;
   width: 500px;

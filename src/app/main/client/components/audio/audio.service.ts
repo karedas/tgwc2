@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
-import { audit } from 'rxjs/operators';
+import { ConfigService } from 'src/app/services/config.service';
 @Injectable({
   providedIn: 'root'
 })

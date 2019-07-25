@@ -31,6 +31,7 @@ export class MapService extends MapSnowService {
 
 
   public prepareCanvas(map: ElementRef): void {
+    console.log(map);
 
     this.layerMap = new Array(this._maxMapHeight);
     for (let y = 0; y < this._maxMapHeight; ++y) {

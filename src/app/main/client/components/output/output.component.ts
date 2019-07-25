@@ -86,7 +86,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this._roomBase$
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((room: Room) => this.updateRoomBase(room) );
+      .subscribe((room: Room) => {
+        this.typeDetail = 'room';
+        this.updateRoomBase(room)
+      });
 
     /** Object or Person Detail */
     this._objOrPerson$
@@ -198,11 +201,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });
-  }
-
-  toggleAutoScroll(event: Event) {
-    event.stopPropagation();
-    this.outputService.toggleAutoScroll();
   }
 
   ngOnDestroy() {

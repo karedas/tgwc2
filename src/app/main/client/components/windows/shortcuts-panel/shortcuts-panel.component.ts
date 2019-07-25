@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { InputService } from '../../input/input.service';
 import { GameService } from '../../../services/game.service';
+import { TGConfig } from '../../../client-config';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'tg-shortcuts-panel',
@@ -32,7 +33,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
     this._configService.getConfig()
       .pipe(
         takeUntil(this._unsubscribeAll),
-        map((config) => config.shortcuts))
+        map((config: TGConfig) => config.shortcuts))
       .subscribe((sc) => {
         this.totalShortcuts = sc;
       });

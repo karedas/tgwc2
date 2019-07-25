@@ -138,8 +138,10 @@ tg-text {
   }
 
   .tg-room--title {
-    font-size: 14px;
-    color: #ac4c55;
+    font-size: 1.2em;
+    font-family: "Modern Antiqua", cursive;
+    margin-bottom: 2px;
+    color: #ec5563;
   }
 
   .tg-room--desc {
@@ -325,7 +327,7 @@ tg-text {
       color: #dbbf90;
       text-shadow: 0 0 12px #dbbf90;
       box-shadow: inset 0px 0px 20px 4px black;
-      font-size: 16px;
+      font-size: 1.4em;
       overflow: hidden;
       display: flex;
 

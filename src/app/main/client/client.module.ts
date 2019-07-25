@@ -8,7 +8,6 @@ import { DashboardModule } from './components/dashboard/dashboard.module';
 import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
 import { AudioComponent } from './components/audio/audio.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
 import { EffectsModule } from '@ngrx/effects';
@@ -34,7 +33,6 @@ const clientRouting: Routes = [
     ClientComponent,
     ClientContainerComponent,
     AudioComponent,
-    NavbarComponent,
   ],
   imports: [
     SharedModule,
@@ -51,7 +49,6 @@ const clientRouting: Routes = [
     FileSaverModule,
   ],
   exports: [
-    NavbarComponent,
     ClientComponent,
   ],
   providers: [

@@ -215,7 +215,7 @@ export class DataParser {
     // Map data
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, (m) => {
       const map_parse = JSON.parse(m.slice(5, -1));
-      // this.store.dispatch(DataActions.mapAction(map_parse));
+      this.store.dispatch(DataActions.mapAction({payload: map_parse}));
       return '';
     });
 

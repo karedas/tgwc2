@@ -91,19 +91,18 @@ tg-main {
   // height: 100%;
   min-height: 600px;
   overflow: hidden;
-  background-repeat: repeat-x;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #0a0706  url($imgPath + '/background/default-bg.jpg') no-repeat top center;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-color: black;
   
 }
 
 .tg-layout-container {
   padding-top: 40px;
-  background: url($imgPath + '/background/default-bg.jpg') no-repeat top center;
-  background-size: 100% auto;
-  background-attachment: fixed;
-  background-color: black;
 }
 
 .main-content {
@@ -111,13 +110,13 @@ tg-main {
   margin: 0 auto;
   max-width: 1410px;
   box-sizing: border-box;
-  padding-right: 13px;
-  background: #0a0706 url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y right top;
+  // padding-right: 13px;
+  // background:  url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y right top;
 
-  .main-content-wrap {
-      background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
-      padding-left: 13px;
-  }
+  // .main-content-wrap {
+      // background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
+      // padding-left: 13px;
+  // }
 }
 
 .tg-base-logo {

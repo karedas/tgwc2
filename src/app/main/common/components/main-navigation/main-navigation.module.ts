@@ -5,10 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatBadgeModule, MatToolbarModule } from '@angular/material';
+import { TgGameMenu } from './game-menu/tg-game-menu.component';
 
 @NgModule({
   declarations: [
-    MainNavigationComponent
+    MainNavigationComponent,
+    TgGameMenu
   ],
   imports: [
     SharedModule,

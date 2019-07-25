@@ -1,13 +1,11 @@
-import { Component, OnInit, ViewChild, Renderer2, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/main/client/services/game.service';
-import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { MatMenuTrigger } from '@angular/material/menu';
-import gitInfo from 'src/git-version.json';
-import { TGConfig } from '../../client-config';
-import { ConfigService } from 'src/app/services/config.service';
+import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
+import { DialogV2Service } from '../../../../client/common/dialog-v2/dialog-v2.service';
+import { TGConfig } from '../../../../client/client-config';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { AudioService } from '../audio/audio.service';
+import { AudioService } from '../../../../client/components/audio/audio.service';
+import { GameService } from 'src/app/main/client/services/game.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 // import { faFont } from '@fortawesome/free-solid-svg-icons';
 // import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
@@ -15,7 +13,7 @@ import { AudioService } from '../audio/audio.service';
 
 @Component({
 
-  selector: 'tg-navbar',
+  selector: 'tg-game-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
@@ -28,7 +26,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isMatMenu2Open = false;
   prevButtonTrigger;
 
-  gitVersion = gitInfo.raw;
 
   private _unsubscribeAll: Subject<any>;
 
