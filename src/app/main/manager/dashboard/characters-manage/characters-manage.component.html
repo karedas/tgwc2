@@ -1,6 +1,6 @@
 <div class="comp-content comp-padd">
   
-  <div class="table-responsive" *ngIf="charactersList.length | async as chars">
+  <div class="table-responsive" *ngIf="charactersList | async as chars">
       <h2>I tuoi personaggi</h2>
 
     <table class="mat-elevation-z8 mat-table ch-table" >
@@ -47,9 +47,9 @@
   </div>
 
   <div class="ch-block">
-    <p *ngIf="!charactersList as chars ">
+    <!-- <p *ngIf="!charactersList  | async as chars ">
       Non hai ancora creato un personaggio, inizia da qui:
-    </p>
+    </p> -->
     <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']" id="addnewchar">
       Nuovo personaggio
     </button>

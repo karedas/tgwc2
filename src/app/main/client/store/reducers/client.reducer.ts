@@ -1,29 +1,18 @@
-import { ClientState, initialState } from '../state/client.state';
-import { ClientEventType, ClientActions } from '../actions/client.action';
+import { initialState } from '../state/client.state';
+import { inGameAction, updateUIAction, audioAction } from '../actions/client.action';
+import { Action, on, createReducer } from '@ngrx/store';
 
-export function reducer(
-  state = initialState,
-  action: ClientActions
-): ClientState {
+export const clientReducer = createReducer(
+  initialState,
+  on(inGameAction,  state => ({ ...state, inGame: true })),
+  on(updateUIAction, (state, { payload }) => ({
+    ...state,
+    updateUI: payload
+  })),
+  on(audioAction, (state, { payload })  => ({ ...state, audio: payload}))
+);
 
-  switch (action.type) {
 
-    case ClientEventType.INGAME: {
-      return Object.assign({}, state, { inGame: !state.inGame });
-    }
-
-    case ClientEventType.UI: {
-      return Object.assign({}, state, action.payload );
-    }
-
-    case ClientEventType.AUDIO: {
-      return Object.assign({}, state, { track: action.payload});
-    }
-
-    default: {
-      return state;
-    }
-  }
+export function reducer(state = initialState, action: Action) {
+  return clientReducer(state, action);
 }
-
-// export const getSocketStatus = (state: ClientState): string => state.socketStatus;

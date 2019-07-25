@@ -69,7 +69,7 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-      this.store.dispatch(new GameActions.DisconnectAction);
+      this.store.dispatch( GameActions.disconnectAction);
     }
   }
 
@@ -94,7 +94,7 @@ export class DataParser {
 
     // Player is logged in
     data = data.replace(/&!logged"[^"]*"/gm, () => {
-      this.store.dispatch(new GameActions.InGameAction());
+      this.store.dispatch( GameActions.inGameAction());
       return '';
     });
 
@@ -129,7 +129,7 @@ export class DataParser {
      * DEPRECATED
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
-      this.store.dispatch(new GameActions.UpdateUI({ inputVisible: false }));
+      this.store.dispatch(GameActions.updateUIAction({payload: {inputVisible: false }}));
       return '';
     });
 
@@ -137,7 +137,7 @@ export class DataParser {
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
-      this.store.dispatch(new GameActions.UpdateUI({ inputVisible: true }));
+      this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: true }}));
       return '';
     });
 
@@ -158,7 +158,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.store.dispatch(new GameActions.AudioAction(audio_parse));
+      this.store.dispatch(GameActions.audioAction({payload: audio_parse}));
       return '';
     });
 
@@ -193,7 +193,7 @@ export class DataParser {
 
     // Close the text editor
     data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      this.store.dispatch(new GameActions.CloseTextEditor());
+      this.store.dispatch( GameActions.closeTextEditorAction());
       return '';
     });
 
@@ -215,7 +215,7 @@ export class DataParser {
     // Map data
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, (m) => {
       const map_parse = JSON.parse(m.slice(5, -1));
-      this.store.dispatch(DataActions.mapAction(map_parse));
+      // this.store.dispatch(DataActions.mapAction(map_parse));
       return '';
     });
 
@@ -229,7 +229,7 @@ export class DataParser {
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      this.store.dispatch(new GameActions.ShowCommandsActions(cmd_parse));
+      this.store.dispatch( GameActions.showCommandsActions({payload: cmd_parse}));
       return '';
     });
 
@@ -297,14 +297,14 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      this.store.dispatch(new GameActions.ShowCharacterSheetActions([info_parse, 'info']));
+      this.store.dispatch( GameActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
       return '';
     });
 
     // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      this.store.dispatch(new GameActions.ShowStatusBoxAction({ status: status_parse }));
+      this.store.dispatch( GameActions.showStatusBoxAction( {payload: {status: status_parse }}));
       return '';
     });
 
@@ -325,7 +325,7 @@ export class DataParser {
     // Refresh command
     data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
       const rcommand_parse = JSON.parse(t.slice(9, -1));
-      this.store.dispatch(new GameActions.RefreshCommandAction());
+      this.store.dispatch( GameActions.refreshCommandAction());
       console.log('refresh command', rcommand_parse);
       return '';
     });
@@ -416,8 +416,8 @@ export class DataParser {
     if (this.dispatcher['room']) { this.store.dispatch(DataActions.roomAction({payload: this.dispatcher['room']})); }
     if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({payload: this.dispatcher['pers']})); }
     // TODO UI (dont need order) :
-    if (this.dispatcher['visibilLevel']) { this.store.dispatch(new GameActions.UpdateUI({ invLevel: this.dispatcher['visibilLevel'] })); }
-    if (this.dispatcher['isgod']) { this.store.dispatch(new GameActions.UpdateUI({ isGod: this.dispatcher['isgod'] })); }
+    if (this.dispatcher['visibilLevel']) { this.store.dispatch( GameActions.updateUIAction({payload: {invLevel: this.dispatcher['visibilLevel']}})); }
+    if (this.dispatcher['isgod']) { this.store.dispatch(GameActions.updateUIAction({payload: { isGod: this.dispatcher['isgod']}})); }
     if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']); }
   }
 

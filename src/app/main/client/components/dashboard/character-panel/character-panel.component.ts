@@ -3,7 +3,7 @@ import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero } from 'src/app/main/client/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/main/client/models/data/hero.model';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -79,9 +79,12 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       });
 
     this.hero$
-      .pipe(takeUntil(this._unsubscribeAll))
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        map( hero => { return hero}))
       .subscribe((hero: IHero) => {
         if (hero) {
+          
           this.setCombatPanel(hero.target);
           this.setMoneyAmountLabel(hero.money);
         }

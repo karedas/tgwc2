@@ -7,6 +7,8 @@ import { Character } from '../models/character.model';
 
 const CACHE_SIZE = 1;
 
+
+
 @Injectable()
 
 export class UserService extends ApiService {
@@ -19,8 +21,8 @@ export class UserService extends ApiService {
       this.profile$ = this.requestProfile()
         .pipe(
           shareReplay(CACHE_SIZE),
-          );
-      }
+        );
+    }
     return this.profile$;
   }
 
@@ -49,13 +51,18 @@ export class UserService extends ApiService {
   }
 
   public getCharacters(): Observable<any> {
-    return this.get('/profile/characters')
-      .pipe( map(({ data: { chars } }: ApiResponse) => {
-          chars.map(((c: Character) => {
-            return new Character().deserialize(c);
-          }));
-        }),
-      );
+    if(!this.characters$) {
+      this.characters$ =  this.get('/profile/characters')
+        .pipe(
+          map(({ data: { chars } }: ApiResponse) => {
+            return chars.map(((c: Character) => new Character().deserialize(c)
+            ));
+          }),
+          shareReplay(1)
+        );
+    }
+
+    return this.characters$;
   }
 
   /* Utils */
