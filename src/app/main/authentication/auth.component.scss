@@ -1,5 +1,9 @@
 @import 'abstract/variables';
 
+:host {
+  flex: 1;
+}
+
 .tg-auth-form {
   width: 340px;
   margin: auto;
