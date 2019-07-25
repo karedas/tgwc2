@@ -62,35 +62,7 @@
         </div>
       </div>
     </div>
-
-    <!-- Copyright and Usefull Links -->
-    <div fxLayout="column" fxFlex="0 0 auto" class="tg-login-footer">
-      <div fxLayout="row">
-        <div fxFlex="100">
-          <div class="tg-serverstatus">
-            <span class="serverstatus--txt" [ngClass]="{'server_on': serverStatusMessage }">
-              Server {{ serverStatusMessage === true ? 'online' : 'offline'}}
-            </span> 
-            <ng-container *ngIf="serverStatusMessage">
-              - Utenti ora online: <span class="serverstatus--onlineuser">{{serverStat?.players.length || '0'}}</span>
-            </ng-container>
-          </div>
-        </div>
-      </div>
-      <div fxLayout="row">
-        <div fxFlex="33.33" fxLayoutAlign="center flex-end">
-          <a href="https://it-it.facebook.com/TheGateMUD/" target="_blank">Facebook</a>&nbsp;|&nbsp;
-          <a href="http://forum.thegatemud.it/" target="_blank">Forum</a>&nbsp;
-        </div>
-        <div fxFlex="33.33" fxLayoutAlign="center flex-end">
-          <span class="tg-version-name">Webclient {{ gitVersion }}
-          </span>
-        </div>
-        <div fxFlex="33.33" fxLayoutAlign="center flex-end">
-          &copy; 2013-2019 The Gate MUD
-          <!-- &nbsp;|&nbsp; -->
-          <!-- <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a> -->
-        </div>
-      </div>
-    </div>
+    
+    <tg-footer></tg-footer>
+    
   </div>

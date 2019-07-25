@@ -17,6 +17,7 @@ Sentry.init({
 export class SentryErrorHandler implements ErrorHandler {
   constructor() {}
   handleError(error) {
+    console.log(error);
     const eventId = Sentry.captureException(error.originalError || error);
     // Sentry.showReportDialog({ eventId });
   }

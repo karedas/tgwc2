@@ -5,11 +5,11 @@ tg-manager {
   width: 850px;
   max-width: 100%;
   margin: 0 auto;
-  height: 100%;
   display: block;
   box-sizing: border-box;
   padding: 24px;
   color: $base-text-color;
+  flex: 1;
 }
 
 
@@ -29,12 +29,16 @@ tg-manager {
 // h1 {
 //   text-transform: capitalize;
 // }
+h1{
+  font-size: 1.5em;
+  margin: 0;
+}
 
-h1, h2, h3, h4{
+h2, h3, h4{
   // margin: 0;
   // font-weight: normal;
-  color: $tg-brown;
 }
+
 
 
 .comp-alert {

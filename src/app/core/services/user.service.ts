@@ -40,14 +40,17 @@ export class UserService extends ApiService {
   }
 
   public getCharacters(): Observable<any> {
-    this.characters$ = this.get('/profile/characters')
-      .pipe(
-        map(({ data: { chars } }: ApiResponse) => {
-          chars.map(c => {
-            return new Character().deserialize(c);
-          });
-        })
-      );
-    return this.characters$
+    if(!this.characters$) {
+      this.characters$ =  this.get('/profile/characters')
+        .pipe(
+          map(({ data: { chars } }: ApiResponse) => {
+            return chars.map(((c: Character) => new Character().deserialize(c)
+            ));
+          }),
+          shareReplay(1)
+        );
+    }
+
+    return this.characters$;
   }
 }

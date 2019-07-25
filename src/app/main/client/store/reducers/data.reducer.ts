@@ -19,7 +19,7 @@ export const dataReducer = createReducer(
   on(heroAction, (state, { payload }) => ({ ...state, hero: payload })),
   on(roomAction, (state, { payload }) => ({ ...state, room: payload })),
   on(bookAction, (state, { payload }) => ({ ...state, book: payload })),
-  on(dataTimeAction, (state, { payload }) => ({ date: payload })),
+  on(dataTimeAction, (state, { payload }) => ({ ...state,  gametime: payload })),
   on(genericPageAction, (state, { payload }) => ({ genericpage: [payload] })),
   on(incomingData, (state, { payload }) => {
     return Object.assign({}, state, { base: [payload] });
