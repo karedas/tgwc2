@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable, ConnectableObservable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
-import { map, tap, shareReplay, share, publishReplay, refCount } from 'rxjs/operators';
+import { map, shareReplay, share, publishReplay, refCount } from 'rxjs/operators';
 import { Character } from '../models/character.model';
 
 const CACHE_SIZE = 1;
@@ -13,7 +13,7 @@ const CACHE_SIZE = 1;
 
 export class UserService extends ApiService {
 
-  private characters$: Observable<Array<Character>>;
+  private characters$: Observable<any>;
   private profile$: Observable<any>;
 
   getProfile(): any {
@@ -25,17 +25,6 @@ export class UserService extends ApiService {
     }
     return this.profile$;
   }
-
-  // getCharacters(): Observable<any> {
-  //   if (!this.characters$) {
-  //     this.characters$ = this.requestCharacters()
-  //       .pipe(
-  //         shareReplay(CACHE_SIZE)
-  //       );
-  //   }
-  //   return this.characters$;
-  // }
-
 
   public requestProfile(): Observable<any> {
     const obs$ = this.get('/profile/me')
@@ -51,20 +40,14 @@ export class UserService extends ApiService {
   }
 
   public getCharacters(): Observable<any> {
-    if(!this.characters$) {
-      this.characters$ =  this.get('/profile/characters')
-        .pipe(
-          map(({ data: { chars } }: ApiResponse) => {
-            return chars.map(((c: Character) => new Character().deserialize(c)
-            ));
-          }),
-          shareReplay(1)
-        );
-    }
-
-    return this.characters$;
+    this.characters$ = this.get('/profile/characters')
+      .pipe(
+        map(({ data: { chars } }: ApiResponse) => {
+          chars.map(c => {
+            return new Character().deserialize(c);
+          });
+        })
+      );
+    return this.characters$
   }
-
-  /* Utils */
-
 }

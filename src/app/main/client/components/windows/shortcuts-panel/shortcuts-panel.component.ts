@@ -55,5 +55,4 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
 }
