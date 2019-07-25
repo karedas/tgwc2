@@ -84,7 +84,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
         filter(c => !!c)
       )
       .subscribe((hero: IHero) => {
-        console.log(hero);
         if (hero) {
           
           this.setCombatPanel(hero.target);

@@ -1,4 +1,4 @@
-export interface ManagerNavigationItem {
+export interface NavigationItem {
   id: string;
   title: string;
   type: 'item' | 'group' | 'collapsable';
@@ -18,11 +18,12 @@ export interface ManagerNavigationItem {
     fg?: string;
   };
   permission?: string;
-  children?: ManagerNavigationItem[];
+  children?: NavigationItem[];
 }
 
-export interface ManagerNavigation extends ManagerNavigationItem {
-  children?: ManagerNavigationItem[];
+
+export interface Navigation extends NavigationItem {
+  children?: NavigationItem[];
 }
 
 // export const gameNavigation: ManagerNavigation[] = [
@@ -45,7 +46,32 @@ export interface ManagerNavigation extends ManagerNavigationItem {
 //   },
 // ];
 
-export const navigationSidebar: ManagerNavigation[] = [
+
+export const baseNavigationSidebar: NavigationItem[] = [
+
+];
+
+
+export const navigationSidebar: NavigationItem[] = [
+  // {
+  //   id: 'home',
+  //   title: 'Home Page',
+  //   type: 'item',
+  //   icon: 'home',
+  //   url: '/',
+  //   externalUrl: true,
+  //   openInNewTab: true
+  // },
+  // {
+  //   id: 'forum',
+  //   title: 'Forum',
+  //   type: 'item',
+  //   icon: 'forum',
+  //   url: 'http://forum.thegatemud.it',
+  //   externalUrl: true,
+  //   openInNewTab: true
+  // },
+
   {
     id: 'dashboard',
     title: 'Dashboard',
@@ -54,6 +80,7 @@ export const navigationSidebar: ManagerNavigation[] = [
     url: '/manager/dashboard',
     permission: 'read-dashboard'
   },
+
   {
     id: 'Clan',
     title: 'Clan',

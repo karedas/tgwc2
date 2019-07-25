@@ -1,6 +1,5 @@
 <tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
-
-<mat-sidenav-container autosize>
+<mat-sidenav-container autosize >
 
   <mat-sidenav mode="over" #navigationSidenav role="navigation">
 
@@ -14,23 +13,17 @@
 
   </mat-sidenav>
 
-
   <mat-sidenav-content>
 
     <ng-container *ngIf="isCookieAccepted">
       <div class="tg-layout-container" fxLayout="column">
 
         <router-outlet></router-outlet>
-        
-        <tg-footer></tg-footer>
 
       </div>
     </ng-container>
 
-
   </mat-sidenav-content>
-
-
 </mat-sidenav-container>
 
-
+<tg-footer></tg-footer>

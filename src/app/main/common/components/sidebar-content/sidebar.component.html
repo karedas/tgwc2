@@ -9,28 +9,46 @@
 </div>
 -->
 
-<mat-nav-list *ngIf="links">
-  <ng-container *ngFor="let item of links; let i = index">
-    <ng-container [ngTemplateOutlet]="itemContent" [ngTemplateOutletContext]="{ item: item, idx: i}"></ng-container>
-  </ng-container>
+<mat-nav-list>
+  <!-- <mat-list-item *ngFor="let item of baseLinks">
+    <a mat-line class="menu-item">
+      <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+      <span class="menu-item-label">{{item.title}}</span>
+    </a>
+  </mat-list-item> -->
+
+  <mat-list-item *ngFor="let item of items; let i = index">
+    <!-- item.url -->
+    <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" [ngClass]="{'active': selectedItem === index}"
+      [routerLink]="item.url ? item.url : null" [routerLinkActive]="active"
+      [target]="item.openInNewTab ? '_blank' : '_self'" (click)="selectItmeMenu(0)">
+      <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+    <!-- item.externalUrl -->
+    <a mat-line class="menu-item" [ngClass]="{'active': selectedItem === index}" *ngIf="item.url && item.externalUrl"
+      [href]="item.url" [target]="item.openInNewTab ? '_blank' : '_self'">
+      <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+
+    <ng-template #itemContent>
+      <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+      <span class="nav-link-title" [translate]="item.translate">{{item.title}}</span>
+      <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
+        [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
+        {{item.badge.title}}
+      </span>
+      <!-- <mat-icon class="collapsable-arrow">keyboard_arrow_right</mat-icon> -->
+    </ng-template>
+
+
+  </mat-list-item>
+
 </mat-nav-list>
 
-<ng-template #itemContent let-item="item" let-index="idx">
-  <ng-container *ngIf="currentUser">
-
-    <mat-list-item
-      *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))">
-      <a mat-line class="menu-item" [routerLink]="item.url ? item.url : null" routerLinkActive="active"
-        [ngClass]="{'active': selectedItem === index}" (click)="selectItmeMenu(0)">
-        <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-        <span class="menu-item-label">{{item.title}}</span>
-      </a>
-    </mat-list-item>
-  </ng-container>
 
 
-  <!-- Sub Menu -->
-  <!-- <mat-nav-list dense *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" class="sub-items">
+<!-- Sub Menu -->
+<!-- <mat-nav-list dense *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" class="sub-items">
     <ng-container *ngIf="item.children">
       <mat-list-item *ngFor="let child of item.children">
 
@@ -42,6 +60,3 @@
       </mat-list-item>
     </ng-container>
   </mat-nav-list> -->
-
-
-</ng-template>

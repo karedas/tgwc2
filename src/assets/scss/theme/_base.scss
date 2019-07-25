@@ -86,21 +86,24 @@ body[data-loginstatus=ready] {
 
 
 tg-main {
-  width: 100%;
-  height: 100%;
+  
+  // width: 100%;
+  // height: 100%;
   min-height: 600px;
   overflow: hidden;
   background-repeat: repeat-x;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
 }
 
 .tg-layout-container {
   padding-top: 40px;
-  height: 100vh;
   background: url($imgPath + '/background/default-bg.jpg') no-repeat top center;
   background-size: 100% auto;
   background-attachment: fixed;
   background-color: black;
-  min-height: 100%;
 }
 
 .main-content {
