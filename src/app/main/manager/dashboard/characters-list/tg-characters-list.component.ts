@@ -67,13 +67,15 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     }
   }
 
-  loginCharacter(name: string) {
+  loginCharacter(name: string, secret: string) {
     // if ( !this.socketService.isConnected) {
     //   return;
     // }
-    const values = { name: name, secret: 'peppe' };
+    const values = { name: name, secret: secret };
+    
 
     this.openLoginDialog();
+
     this.loginClientService.login(values)
     .pipe( delay(1000), takeUntil(this._unsubscribeAll))
     .subscribe((res) => {
@@ -95,9 +97,6 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     const config = new MatDialogConfig;
     config.id = 'loginReplay';
     config.width = '350px';
-    config.data = {
-      replayMessage: 'PROVA'
-    };
     this.dialogRef = this.dialog.open(AlertComponent, config);
   }
 

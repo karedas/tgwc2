@@ -17,6 +17,7 @@ import { LoginClientService } from './client/services/login-client.service';
 import { GameService } from './client/services/game.service';
 import { DataParser } from './client/services/dataParser.service';
 import { LoginClientGuard } from './authentication/services/login-client.guard';
+import { FooterComponent } from './common/components/footer/footer.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,8 @@ const routes: Routes = [
     CookieLawComponent,
     AlertComponent,
     SidebarComponent,
-    HelpComponent
+    HelpComponent,
+    FooterComponent
   ],
   imports: [
     MatListModule,

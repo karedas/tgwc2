@@ -11,7 +11,7 @@ import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 
 export interface DataState {
-    date?: IDateTime;
+    gametime?: IDateTime;
     base?: any[];
     sky?: string;
     doors?: any;
@@ -28,7 +28,7 @@ export interface DataState {
 }
 
 export const initialState: DataState = {
-    date: undefined,
+    gametime: undefined,
     base: undefined,
     sky: undefined,
     doors: undefined,

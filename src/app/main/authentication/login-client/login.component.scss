@@ -231,37 +231,6 @@
     height: 1.1em;
   }
 
-  .tg-serverstatus {
-    text-transform: uppercase;
-    font-size: 10px;
-    padding: 1em 0;
-    text-align: center;
-    
-    span.serverstatus--txt {
-      color: #ff3400;
-      display: inline-block;
-      &:before {
-        content: '';
-        display: inline-block;
-        width: .5rem;
-        height: .5rem;
-        border-radius: 50%;
-        margin-right: 0.2rem;
-        background-color: $tg-red;
-      }
-
-      &.server_on {
-        color: #bdb3a3;
-        &:before {
-          background-color: $tg-green;
-        }
-      }
-    }
-
-    .serverstatus--onlineuser {
-      color: #bdb3a3;
-    }
-  }
 
   .tg-loginstatus {
     padding-bottom: .4em;
@@ -271,19 +240,7 @@
     color: #ff4500;
   }
 
-  .tg-login-footer {
-    padding-top: .5em;
-    padding-bottom: .5em;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 10px;
-    color: #867d6e;
-    margin-top: auto;
 
-    a {
-      color: #bdb3a3;
-      text-decoration: underline;
-    }
-  }
 }
 
 @keyframes logolightAnimation {

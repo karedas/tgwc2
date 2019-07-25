@@ -10,5 +10,9 @@ mat-tab-header{
   
   .mat-tab-label {
     color: $tg-white;
+    
+    &:first-child {
+      padding-left: 0;
+    }
   }
 }

@@ -1,15 +1,12 @@
-
 <tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
+
 <mat-sidenav-container autosize>
 
   <mat-sidenav mode="over" #navigationSidenav role="navigation">
 
     <mat-toolbar fxLayout="wrap" fxLayoutGap="20px">
       <mat-toolbar-row>
-        <div class="tg-brand tg-mainnav-item" fxLayout fxFlex="1 1 28px" fxFlex.lt-md="1 1 auto"
-          fxLayoutAlign.lt-md="center center">
-          <a href="http://www.thegatemud.it" class="tg-base-logo big"></a>
-        </div>
+
       </mat-toolbar-row>
     </mat-toolbar>
 
@@ -19,11 +16,21 @@
 
 
   <mat-sidenav-content>
-    
+
     <ng-container *ngIf="isCookieAccepted">
-      <div class="tg-layout-container">
+      <div class="tg-layout-container" fxLayout="column">
+
         <router-outlet></router-outlet>
+        
+        <tg-footer></tg-footer>
+
       </div>
     </ng-container>
-    
+
+
   </mat-sidenav-content>
+
+
+</mat-sidenav-container>
+
+

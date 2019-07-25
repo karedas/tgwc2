@@ -79,7 +79,7 @@ function fetchInventory(state: DataState) {
 
 
 function fetchDateTime(state: DataState) {
-  return state.date;
+  return state.gametime;
 }
 
 function fetchGenericPage(state: DataState) {

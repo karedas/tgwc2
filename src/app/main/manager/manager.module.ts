@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ManagerComponent } from './manager.component';
 import { Routes, RouterModule } from '@angular/router';
-import { FooterComponent } from './footer/footer.component';
 import { NewCharacterModule } from './new-character/new-character.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -35,7 +34,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ManagerComponent,
-    FooterComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
