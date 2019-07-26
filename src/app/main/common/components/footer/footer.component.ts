@@ -28,7 +28,6 @@ export class FooterComponent implements OnInit , OnDestroy {
     private router: Router
     ) {
     this._unsubscribeAll = new Subject();
-    console.log('constr');
   }
 
   ngOnInit() {
@@ -49,7 +48,6 @@ export class FooterComponent implements OnInit , OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((serverstatus: boolean) => {
         this.serverStatusMessage = !serverstatus;
-        console.log('serverstatus', this.serverStatusMessage);
       });
   }
 

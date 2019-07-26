@@ -48,7 +48,28 @@ export interface Navigation extends NavigationItem {
 
 
 export const baseNavigationSidebar: NavigationItem[] = [
-
+  {
+    id: 'home',
+    title: 'Home',
+    type: 'item',
+    icon: 'home',
+    url: '/',
+  },
+  {
+    id: 'forum',
+    title: 'Forum',
+    type: 'item',
+    icon: 'forum',
+    externalUrl: true,
+    url: 'http://forum.thegatemud.it'
+  },
+  {
+    id: 'news',
+    title: 'Novità',
+    type: 'item',
+    icon: 'library_books',
+    url: '/novita',
+  },
 ];
 
 

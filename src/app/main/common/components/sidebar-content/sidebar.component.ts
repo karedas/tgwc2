@@ -28,12 +28,13 @@ export class SidebarComponent implements OnInit {
   
   /* Private Method */
   private createMenu() {
-    for (const item in navigationSidebar) {
-      if (navigationSidebar.hasOwnProperty(item)) {
-        this.items.push(navigationSidebar[item]);
+    for (const item in baseNavigationSidebar) {
+      if (baseNavigationSidebar.hasOwnProperty(item)) {
+        this.items.push(baseNavigationSidebar[item]);
       }
     }
   }
+
 
   /* Public Method */
   selectItmeMenu(i) {

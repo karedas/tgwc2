@@ -1,28 +1,27 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let item of items; let i = index">
-    
-    <!-- item.url -->
-    <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" [ngClass]="{'active': selectedItem === index}"
-      [routerLink]="item.url ? item.url : null" [routerLinkActive]="active"
-      [target]="item.openInNewTab ? '_blank' : '_self'" (click)="selectItmeMenu(0)">
-      <ng-container *ngTemplateOutlet="itemContent"></ng-container>
-    </a>
-    <!-- item.externalUrl -->
-    <a mat-line class="menu-item" [ngClass]="{'active': selectedItem === index}" *ngIf="item.url && item.externalUrl"
-      [href]="item.url" [target]="item.openInNewTab ? '_blank' : '_self'">
-      <ng-container *ngTemplateOutlet="itemContent"></ng-container>
-    </a>
+  <mat-list-item *ngFor="let item of items">
 
-    <ng-template #itemContent *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" >
-      <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
-      <span class="nav-link-title" [translate]="item.translate">{{item.title}}</span>
-      <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
-        [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
-        {{item.badge.title}}
-      </span>
-      <!-- <mat-icon class="collapsable-arrow">keyboard_arrow_right</mat-icon> -->
-    </ng-template>
-
+      <!-- item.url -->
+      <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" [ngClass]="{'active': selectedItem === index}"
+        [routerLink]="item.url ? item.url : null" [routerLinkActive]="active"
+        [target]="item.openInNewTab ? '_blank' : '_self'" (click)="selectItmeMenu(0)">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+      </a>
+      <!-- item.externalUrl -->
+      <a mat-line class="menu-item" [ngClass]="{'active': selectedItem === index}" *ngIf="item.url && item.externalUrl"
+        [href]="item.url" [target]="item.openInNewTab ? '_blank' : '_self'">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+      </a>
+  
+      <ng-template #itemContent>
+        <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+        <span class="nav-link-title" [translate]="item.translate">{{item.title}}</span>
+        <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
+          [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
+          {{item.badge.title}}
+        </span>
+        <!-- <mat-icon class="collapsable-arrow">keyboard_arrow_right</mat-icon> -->
+      </ng-template>
 
   </mat-list-item>
 
