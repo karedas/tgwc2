@@ -7,8 +7,10 @@ declare let ga: Function;
 
 @Component({
   selector: 'tg-root',
-  template: ` <tg-main></tg-main>`,
-  // <tg-splashscreen id="splashscreen" (loaded)="onLoad($event)"></tg-splashscreen>
+  template: `
+  <tg-splashscreen id="splashscreen" (loaded)="onLoad($event)"></tg-splashscreen>
+  <tg-main></tg-main>
+  `,
   // <tg-main *ngIf="load"></tg-main>
   // template: `
   //   `,
