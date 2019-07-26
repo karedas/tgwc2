@@ -16,10 +16,10 @@
     <!-- Default Menu -->
     <ng-container *ngIf="!userInGame">
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-        <button #button mat-button href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</button>
+        <a #button mat-button href="http://www.thegatemud.it"  target="_blank" title="The Gate Mud HomePage">Home</a>
       </div>
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-        <button #button mat-button href="http://forum.thegatemud.it">Forum</button>
+        <a #button mat-button href="http://forum.thegatemud.it" target="_blank">Forum</a>
       </div>
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
         <button #button mat-button [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</button>

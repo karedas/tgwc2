@@ -1,21 +1,21 @@
 <div class="tg-auth-form" fxLayout="row wrap" fxLayoutAlign="center center">
 
-    <form [formGroup]="frmCharacterLogin" (ngSubmit)="onSubmit()">
+    <form [formGroup]="frmCharacterLogin" (ngSubmit)="login()">
       <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
         <div class="tg-base-logo big"></div>
-        <h1>Connetti il tuo personaggio a The Gate <span class="tg-brown">Mud</span></h1>
+        <h1>Entra con il tuo personaggio su  <br>The Gate <span class="tg-brown">Mud</span></h1>
         <small>(Accesso Legacy)</small>
       </div>
-      <div class="tg-auth-form-body" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
+      <div class="tg-auth-form-body tg-shadow-inset" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
   
         <div class="form-field-group">
-          <label for="username">Nome Personaggio</label>
-          <input type="text" formControlName="username" class="input-block form-control">
+          <label for="name">Nome Personaggio</label>
+          <input type="text" formControlName="name" class="input-block form-control">
         </div>
   
         <div class="form-field-group">
-          <label for="pwd">Password</label>
-          <input type="password" formControlName="password" class="input-block form-control">
+          <label for="secret">Password</label>
+          <input type="secret" formControlName="secret" class="input-block form-control">
         </div>
   
         <div class="form-field-group">
@@ -23,6 +23,8 @@
           <!-- <div class="tg-error" *ngIf="loginFailedError">{{loginFailedError}}</div> -->
         </div>
       </div>
+      <div class="tg-loginstatus tg-red" [innerHtml]="loginReplayMessage"></div>
+
     </form>
     
   </div>

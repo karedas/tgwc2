@@ -3,16 +3,9 @@ import { environment } from '../../../environments/environment';
 
 import * as io from 'socket.io-client';
 import { socketEvent } from 'src/app/core/models/socketEvent.enum';
-// import { socketEventName } from '../../authentication/services/login-client.service';
-// import { ClientState } from 'src/app/store/state/client.state';
-// import { Store } from '@ngrx/store';
-// import { Store } from '@ngrx/store';
-// import { ClientState } from '../../../store/state/client.state';
-// import { DisconnectAction } from '../../../store/actions/client.action';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
+import * as ClientActions from 'src/app/main/client/store/actions/client.action';
+import { Store } from '@ngrx/store';
+import { TGState } from 'src/app/main/client/store';
 
 // export interface ISocketResponse {
 //   event: string
@@ -25,7 +18,7 @@ export class SocketService {
   connected = false;
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(/* private store: Store<ClientState>*/) {
+  constructor( private store: Store<TGState>) {
     this.connect();
   }
 
@@ -67,6 +60,7 @@ export class SocketService {
   }
 
   public disconnect(): void {
+    this.store.dispatch(ClientActions.disconnectAction());
     this.socket.disconnect();
   }
 

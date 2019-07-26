@@ -1,6 +1,6 @@
 
 import gitInfo from 'src/git-version.json';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -12,9 +12,9 @@ import { Router, NavigationStart } from '@angular/router';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit , OnDestroy {
 
-  show: boolean = true;
+  showFooter: boolean = true;
   serverStat: any;
   gitVersion = gitInfo.tag;
   serverStatusMessage: boolean;
@@ -28,6 +28,7 @@ export class FooterComponent implements OnInit {
     private router: Router
     ) {
     this._unsubscribeAll = new Subject();
+    console.log('constr');
   }
 
   ngOnInit() {
@@ -35,29 +36,26 @@ export class FooterComponent implements OnInit {
     this.router.events.subscribe( (e) => {
       if (e instanceof NavigationStart) {
         if(e.url === "/webclient") {
-          this.show = false;
+          this.showFooter = false;
         }
         else {
-          this.show = true;
+          this.showFooter = true;
         }
       }
     });
-
-    // Server Stats like player online from serverstat file
-    this.game.serverStat
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(
-        (stat: string) => { this.serverStat = stat; }
-      );
 
     // Show Socket Error to notice user about Server Errors
     this.socketService.socket_error$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((serverstatus: boolean) => {
         this.serverStatusMessage = !serverstatus;
+        console.log('serverstatus', this.serverStatusMessage);
       });
+  }
 
-
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();    
   }
 
 }
