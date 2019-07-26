@@ -26,11 +26,12 @@
   }
 
   .tg-auth-form-body,
-  .tg-auth-create {
+  .tg-auth-create, .tg-char-login{
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 20px;
     font-size: 14px;
+    margin-bottom: 12px;
   }
 
 
@@ -98,7 +99,7 @@
 		
 		
 
-		.tg-auth-create {
+		.tg-auth-create{
 			text-align: center;
 			margin-top: 10px;
 	
@@ -110,7 +111,7 @@
 				text-decoration: underline;
 			}
     }
-    
+
     .mat-hint {
       position: absolute;
       right: 0;

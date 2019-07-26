@@ -15,12 +15,9 @@ declare let ga: Function;
   styles: [`
   :host {
     position: relative;
-    display: flex;
-    flex: 1 1 auto;
     width: 100%;
     height: 100%;
     min-width: 0;
-    flex-direction:column;
     top:0;
     bottom:0;
     left:0;

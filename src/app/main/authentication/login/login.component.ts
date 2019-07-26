@@ -14,7 +14,7 @@ import { ApiResponse } from 'src/app/core/models/api-response.model';
   styleUrls: ['../auth.component.scss'],
   animations: [tgAnimations]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   public frmLogin: FormGroup;
   public loginFailed: boolean;
@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit {
   ) {
     this.frmLogin = this.createLoginForm();
   }
-
-  ngOnInit() { }
 
   get f() { return this.frmLogin.controls; }
 

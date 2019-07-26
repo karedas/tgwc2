@@ -1,6 +1,6 @@
 import {
   trigger, animate, style, group, query,
-  transition, animateChild, animation, useAnimation } from '@angular/animations';
+  transition, animateChild, animation, useAnimation, state } from '@angular/animations';
 
 const customAnimation = animation([
   style({
@@ -23,7 +23,12 @@ const customAnimation = animation([
 
 export const tgAnimations = [
 
-
+  trigger('detailExpand', [
+    state('collapsed', style({height: '0px', minHeight: '0'})),
+    state('expanded', style({height: '*'})),
+    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+  ]),
+  
   trigger('animate', [transition('void => *', [useAnimation(customAnimation)])]),
 
   trigger('routerTransitionFade', [

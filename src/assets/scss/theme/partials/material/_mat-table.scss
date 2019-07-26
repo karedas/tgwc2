@@ -1,36 +1,52 @@
  
   /* Table */
   .mat-table.dark {
-    background: #271d18;
     width: 100%;
 
     .mat-header-cell {
-      color: #FFB300;
       border-right: 1px solid black;
       padding: 0 5px;
-      background-color: #0b0907;
+      color: $base-text-color;
+      background: #211f1e;
       border-right: 1px solid rgba(255, 255, 255, 0.12);
       border-bottom-color: rgba(255, 255, 255, 0.12);
       border-top: 1px solid rgba(255,255,255,0.12);
-      text-align: center;
+      transition: background .2s ease-out;
     }
 
     td.mat-cell {
-      border-bottom-color: rgba(255, 255, 255, 0.12);
       border-right: 1px solid rgba(255, 255, 255, 0.12);
-      color: #dedede;
+      color: $base-text-color;
       font-size: 100%;
-      background: #191512;
       padding: 0 5px;
-      text-align: center;
     }
 
     tr.mat-footer-row, tr.mat-row {
       height: 28px;
+    }
+
+    tr.mat-row td {
       background: #0b0907;
+      transition: background-color .2s ease-out;
     }
 
     tr.mat-row:hover td {
       background: #272421;
     }
+
+
+    tr.detail-row {
+      height: 0;
+    }
+
+    .element-row td {
+      border-bottom-width: 0;
+    }
+
+    .element-detail {
+      overflow: hidden;
+      display: flex;
+    }
+    
+
   }

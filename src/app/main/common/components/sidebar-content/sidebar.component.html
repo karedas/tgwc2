@@ -1,22 +1,4 @@
-<!--
-<div class="tg-manager-avatar">
-  <ng-container *ngIf="currentUser.image; else noProfileImage">
-    <img [src]="currentUser.image" />
-  </ng-container>
-  <ng-template #noProfileImage>
-    <mat-icon>account_circle</mat-icon>
-  </ng-template>
-</div>
--->
-
 <mat-nav-list>
-  <!-- <mat-list-item *ngFor="let item of baseLinks">
-    <a mat-line class="menu-item">
-      <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
-      <span class="menu-item-label">{{item.title}}</span>
-    </a>
-  </mat-list-item> -->
-
   <mat-list-item *ngFor="let item of items; let i = index">
     <!-- item.url -->
     <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" [ngClass]="{'active': selectedItem === index}"
@@ -44,8 +26,6 @@
   </mat-list-item>
 
 </mat-nav-list>
-
-
 
 <!-- Sub Menu -->
 <!-- <mat-nav-list dense *ngIf="item.permission ==  null || (item.permission !== null && currentUser.hasPermission(item.permission))" class="sub-items">

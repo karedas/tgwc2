@@ -9,12 +9,14 @@ import { LoginClientService } from 'src/app/main/client/services/login-client.se
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
 import { AlertComponent } from 'src/app/main/common/components/dialogs/alert/alert.component';
+import { tgAnimations } from 'src/app/animations';
 
 
 @Component({
   selector: 'tg-characters-list',
   templateUrl: './tg-characters-list.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [tgAnimations],
 })
 export class MyCharactersComponent implements OnInit, OnDestroy {
 
@@ -24,8 +26,10 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
   readonly env = environment;
   readonly ethnicity = ethnicity;
   readonly maxCharacter: number;
+  readonly displayedColumns: string[] = ['image', 'name', 'actions', 'expand'];
+  expandedElement: [];
 
-  charactersList: Observable<any>;
+  charactersList: Character[];
   enabledCharactersNumber: number;
   replayMessage: string;
 
@@ -52,10 +56,10 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
         this.updateReplayMessage(msg);
       });
 
-    this.charactersList = this.userService.getCharacters();
-    // .pipe(map((char: Character) => {
-    //   return char.filter(char => char.status === 1);
-    // }));
+    this.userService.getCharacters().subscribe( (result: Character[]) => {
+      this.charactersList = result;
+      console.log(this.charactersList);
+    });
   }
 
   private updateReplayMessage(msg: string) {
@@ -67,7 +71,8 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     }
   }
 
-  loginCharacter(name: string, secret: string) {
+  loginCharacter(name: string, secret: string, event: Event) {
+    event.stopImmediatePropagation();
     // if ( !this.socketService.isConnected) {
     //   return;
     // }

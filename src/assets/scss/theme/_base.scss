@@ -1,4 +1,3 @@
-
 @import '~@angular/flex-layout/mq';
 /**** FONTS *****/
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
@@ -23,25 +22,31 @@ body {
   height: 100%;
 }
 
-body.size-xs{
+body.size-xs {
   font-size: 10px;
 }
-body.size-s{
+
+body.size-s {
   font-size: 11px;
 }
-body.size-m{
+
+body.size-m {
   font-size: 12px;
 }
-body.size-l{
+
+body.size-l {
   font-size: 12.5px;
 }
-body.size-xl{
+
+body.size-xl {
   font-size: 13px;
 }
-body.size-xxl{
+
+body.size-xxl {
   font-size: 13.5px
 }
-body.size-xxxl{
+
+body.size-xxxl {
   font-size: 14px;
 }
 
@@ -86,23 +91,15 @@ body[data-loginstatus=ready] {
 
 
 tg-main {
-  
-  // width: 100%;
-  // height: 100%;
   min-height: 600px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #0a0706  url($imgPath + '/background/default-bg.jpg') no-repeat top center;
+  background: #0a0706 url($imgPath + '/background/default-bg.jpg') no-repeat top center;
   background-size: 100% auto;
   background-attachment: fixed;
   background-color: black;
-  
-}
+  padding-top: 32px;
+  position: relative;
 
-.tg-layout-container {
-  padding-top: 40px;
 }
 
 .main-content {
@@ -114,8 +111,8 @@ tg-main {
   // background:  url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y right top;
 
   // .main-content-wrap {
-      // background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
-      // padding-left: 13px;
+  // background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
+  // padding-left: 13px;
   // }
 }
 
@@ -125,9 +122,9 @@ tg-main {
   background-size: contain;
   background-position: center center;
   margin: 0 auto;
-  
+
   &.big {
-    
+
     width: 90px;
     height: 90px;
   }
@@ -141,7 +138,7 @@ a.tg-base-logo {
 
 .tg-icon {
   margin: auto auto;
-  background-image: url( $imgPath + '/tiles.png');
+  background-image: url($imgPath + '/tiles.png');
   background-repeat: no-repeat;
   transform: scale(.5);
   margin-top: -8px;
@@ -152,13 +149,10 @@ a.tg-base-logo {
 
 @include layout-bp(lt-md) {
 
-.tg-layout-container {
-  padding-top: 32px;
-  background-position: 0 0;
-}
-.tg-area {
+  .tg-area {
     padding: 0;
   }
+
   .tg-main {
     .tg-controlpanel {
       margin-left: 0;
@@ -171,6 +165,7 @@ a.tg-base-logo {
   display: inline-block;
   @include sprite($checkbox-checked-sprite);
 }
+
 .cantdo {
   display: inline-block;
   @include sprite($notchecked-sprite);
@@ -178,6 +173,4 @@ a.tg-base-logo {
 
 
 .table-responsive {
-  overflow-x: auto;
 }
-

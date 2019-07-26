@@ -1,0 +1,29 @@
+<div class="tg-auth-form" fxLayout="row wrap" fxLayoutAlign="center center">
+
+    <form [formGroup]="frmCharacterLogin" (ngSubmit)="onSubmit()">
+      <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
+        <div class="tg-base-logo big"></div>
+        <h1>Connetti il tuo personaggio a The Gate <span class="tg-brown">Mud</span></h1>
+        <small>(Accesso Legacy)</small>
+      </div>
+      <div class="tg-auth-form-body" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
+  
+        <div class="form-field-group">
+          <label for="username">Nome Personaggio</label>
+          <input type="text" formControlName="username" class="input-block form-control">
+        </div>
+  
+        <div class="form-field-group">
+          <label for="pwd">Password</label>
+          <input type="password" formControlName="password" class="input-block form-control">
+        </div>
+  
+        <div class="form-field-group">
+          <input type="submit" value="Accedi" name="submit" class="tg-submit-primary" [disabled]="onProcess">
+          <!-- <div class="tg-error" *ngIf="loginFailedError">{{loginFailedError}}</div> -->
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  
