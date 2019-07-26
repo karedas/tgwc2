@@ -106,6 +106,7 @@ export class GameService {
 
   disconnectGame() {
     this.sendToServer('fine');
+    this.socketService.disconnect();
   }
 
   reset() {
@@ -163,12 +164,6 @@ export class GameService {
     this.client_update.room.version = -1;
     this.client_update.room.needed = false;
   }
-
-  // private loadServerStat() {
-  //   this.serverStat = timer(0, 25000).pipe(
-  //     switchMap(() => this.http.get(environment.serverstatAddress))
-  //   );
-  // }
 
   /**
    * @param val command value

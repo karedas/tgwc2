@@ -1,5 +1,5 @@
 <!-- Copyright and Usefull Links -->
-<div class="tg-footer" fxLayout="column" fxFlex="0 0 100%" *ngIf="show">
+<div class="tg-footer" fxLayout="column" fxFlex="0 0 100%" *ngIf="showFooter">
   <div fxLayout="row">
     <div fxFlex="100">
       <div class="tg-serverstatus">
@@ -17,7 +17,7 @@
       <a href="http://www.thegatemud.it" target="_blank">Home</a>&nbsp;|&nbsp;
       <a href="https://it-it.facebook.com/TheGateMUD" target="_blank">Facebook</a>&nbsp;|&nbsp;
       <a href="http://forum.thegatemud.it" target="_blank">Forum</a>&nbsp;
-      <a [routerLink]="['/auth/login-character']">Accesso Personaggi (legacy)</a>
+      <a [routerLink]="['/auth/login-character']">Login personaggio (legacy)</a>
     </div>
     <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center flex-start">
       <span class="tg-version-name">Webclient [Public] Version {{ gitVersion }}

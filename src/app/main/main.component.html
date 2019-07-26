@@ -1,7 +1,7 @@
 <tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
 <mat-sidenav-container>
 
-  <mat-sidenav mode="over" #navigationSidenav role="navigation" [fixedInViewport]="true">
+  <mat-sidenav mode="over" #navigationSidenav role="navigation" [fixedInViewport]="true" [fixedTopGap]="'30'">
     <tg-sidebar></tg-sidebar>
   </mat-sidenav>
 
