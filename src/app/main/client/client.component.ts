@@ -29,7 +29,7 @@ export class ClientComponent implements OnDestroy {
     private gameService: GameService,
     private dialogV2Service: DialogV2Service,
     private inputService: InputService) {
-
+      
       this._unsubscribeAll = new Subject<any>();
       this.openNews();
   }

@@ -1,30 +1,17 @@
 <tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
-<mat-sidenav-container autosize fxFlexFill >
+<mat-sidenav-container>
 
-  <mat-sidenav mode="over" #navigationSidenav role="navigation">
-
-    <mat-toolbar fxLayout="wrap" fxLayoutGap="20px">
-      <mat-toolbar-row>
-
-      </mat-toolbar-row>
-    </mat-toolbar>
-
+  <mat-sidenav mode="over" #navigationSidenav role="navigation" [fixedInViewport]="true">
     <tg-sidebar></tg-sidebar>
-
   </mat-sidenav>
 
   <mat-sidenav-content>
 
     <ng-container *ngIf="isCookieAccepted">
-      <div class="tg-layout-container" fxLayout="column">
-
-        <router-outlet></router-outlet>
-        
-        <tg-footer></tg-footer>
-
-      </div>
+      <router-outlet></router-outlet>
     </ng-container>
 
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+<tg-footer></tg-footer>

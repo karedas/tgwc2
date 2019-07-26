@@ -1,18 +1,28 @@
 
 @import 'abstract/variables';
-/* Others */
+
+
+:host {
+  position: absolute;
+  bottom: 0;
+}
 
 .tg-footer {
   padding: 12px 24px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   color: #867d6e;
   margin-top: auto;
   text-align: center;
+  background: black;
 
   a {
     color: #bdb3a3;
     text-decoration: underline;
+  }
+
+  a:hover {
+    color: $base-text-color-hover;
   }
 }
 

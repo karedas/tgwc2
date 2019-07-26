@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AnonymousGuard } from 'src/app/core/guards/anonymous.guard';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { LoginCharacterComponent } from './login-character/login-character.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'reset/:token',
         component: ResetPasswordComponent,
+      },
+      {
+        path: 'login-character',
+        component: LoginCharacterComponent
       },
       {
         path: '**',

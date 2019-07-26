@@ -6,31 +6,18 @@
   border-collapse: separate;
   border-spacing: 0;
   background: transparent;
-
-  th {
-    font-weight: normal;
-    padding: 6px;
-    font-size: 11px;
-    text-align: left;
-    background: #211f1e;
-  }
-
-  tr {
-    position: relative;
-    cursor: pointer;
-  }
+  color: $base-text-color;
 
   td {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0 6px;
-    transition: all .4s ease;
+    // border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    // border-top: 1px solid rgba(255, 255, 255, 0.1);
+    // transition: all .4s ease;
   }
 
   tr:not(.disabled):hover td {
-    background: rgba(21, 19, 19, 0.5);
-    border-bottom-color: $tg-yellow;
-    border-top-color: $tg-yellow;
+    // background: rgba(21, 19, 19, 0.5);
+    // border-bottom-color: $tg-yellow;
+    // border-top-color: $tg-yellow;
   }
 
   .ch-mainaction-block {

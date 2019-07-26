@@ -15,21 +15,17 @@
 
     <!-- Default Menu -->
     <ng-container *ngIf="!userInGame">
-      
-          <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-            <button #button mat-button href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</button>
-          </div>
-      
-          <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-            <button #button mat-button href="http://forum.thegatemud.it">Forum</button>
-          </div>
-      
-          <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-            <button #button mat-button [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</button>
-          </div>
-
+      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+        <button #button mat-button href="http://www.thegatemud.it" title="The Gate Mud HomePage">Home</button>
+      </div>
+      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+        <button #button mat-button href="http://forum.thegatemud.it">Forum</button>
+      </div>
+      <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
+        <button #button mat-button [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</button>
+      </div>
     </ng-container>
-    
+
 
 
     <!-- Game Menu -->
@@ -56,10 +52,6 @@
 
           <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
 
-            <!-- <button mat-icon-button class="tg-mainnav-icon">
-              <mat-icon matBadge="4" matBadgeColor="accent" matBadgeSize="small" matBadgePosition="below after">notification_important</mat-icon>
-            </button> -->
-
             <button mat-button [matMenuTriggerFor]="menu" class="user-button">
               <mat-icon>account_box</mat-icon>
               <span fxHide fxShow.gt-xs>{{currentUser.username | capitalizeFirst}}</span>
@@ -75,7 +67,8 @@
               <!--  Characters List Fast Connector -->
               <div class="user-smart-chars" *ngIf="charactersList | async as chars">
 
-                <div class="smart-char" *ngFor="let char of chars" fxLayout="row" fxLayoutAlign="start center" (click)="loginCharacter(char.name)">
+                <div class="smart-char" *ngFor="let char of chars" fxLayout="row" fxLayoutAlign="start center"
+                  (click)="loginCharacter(char.name)">
 
                   <div class="smart-char-avatar">
                     <ng-container *ngIf="char.image; else nocharImg">
@@ -92,14 +85,7 @@
 
 
               </div>
-              <!-- END  Characters List Fast Connector -->
-
               <mat-divider class="light"></mat-divider>
-
-              <!-- <ng-container *ngIf="currentUser.permissions === 'administrator'">
-                  <button mat-menu-item class="user-menu-item highlight">Amministrazione</button>
-                  <mat-divider class="light"></mat-divider>
-                </ng-container> -->
 
               <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
               <button mat-menu-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button>

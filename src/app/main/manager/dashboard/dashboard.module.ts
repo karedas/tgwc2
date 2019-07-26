@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Role } from 'src/app/core/models/role';
-import { MatTableModule, MatTabsModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatTabsModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { CharactersManageComponent } from './characters-manage/characters-manage.component';
 
 const routes: Routes = [
@@ -34,7 +34,6 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatExpansionModule,
     FlexLayoutModule,
-    MatTableModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,

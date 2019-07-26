@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 // import { LoginClientComponent } from './login-client/login.component';
 import { QuotesComponent } from './login-client/quotes/quotes.component';
+import { LoginCharacterComponent } from './login-character/login-character.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,13 @@ import { QuotesComponent } from './login-client/quotes/quotes.component';
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-
-
+    LoginCharacterComponent,
     // REMOVE
     // LoginClientComponent,
-    QuotesComponent
+    QuotesComponent,
+
+
+    LoginCharacterComponent
   ],
   imports: [
     SharedModule,
