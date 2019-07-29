@@ -1,12 +1,13 @@
 @import 'abstract/variables';
 @import '~@angular/flex-layout/mq';
 
-tg-manager {
+:host {
   width: 850px;
   max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 24px;
+  display: flex;
   color: $base-text-color;
 }
 
@@ -24,17 +25,12 @@ tg-manager {
   // padding-right: 13px;
 // }
 
-// h1 {
-//   text-transform: capitalize;
-// }
 h1{
   font-size: 1.5em;
   margin: 0;
 }
 
 h2, h3, h4{
-  // margin: 0;
-  // font-weight: normal;
 }
 
 
@@ -70,50 +66,8 @@ h2, h3, h4{
   font-size: 14px;
   font-weight: bold;
 }
-// h2 {
-//   font-size: 1.8em;
-// }
 
-// h3 {
-//   font-size: 1.6em;
-// }
-
-// .comp-header {
-//   padding:12px 0;
-// }
 
 mat-sidenav-container {
   height: 100%;
 }
-
-// .mat-sidenav-content {
-//   position: relative;
-//   background-color: #E1E2E1;
-//   box-shadow: inset 0 0 0px black;
-
-//   .mat-divider {
-//     margin: 8px 0;
-//   }
-// }
-
-// .mat-sidenav {
-//   background-color: #181411;
-//   // border-right: 1px solid rgba(255, 255, 255, 0.3);
-// }
-
-// .sidenav-content-wrap {
-//   padding: 24px;
-//   overflow: hidden;
-// }
-
-
-// @include layout-bp(lt-sm) {
-
-//   .tg-manager-wlft,
-//   .tg-manager-wrgt {
-//     background-image: none;
-//     padding-left: 0;
-//     padding-right: 0;
-//   }
-// }
-

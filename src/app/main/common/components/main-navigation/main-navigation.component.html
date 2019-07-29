@@ -34,10 +34,13 @@
     </div>
 
     <!-- User Registration and login Menu -->
-    <ng-container *ngIf="loggedIn === false ; else userLoggedIn">
-      <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap="20px">
+    <ng-container *ngIf="loggedIn === false && !userInGame ; else userLoggedIn">
+      <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap.gt-xs="20px" fxLayoutGap.lt-sm="5px">
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
-          <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow">Login</a>
+          <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow" fxHide fxShow.gt-xs>Login</a>
+          <button mat-icon-button [routerLink]="['/auth/login']" [routerLinkActive]="['active']"  fxHide fxShow.lt-sm>
+            <mat-icon class="tg-yellow">vpn_key</mat-icon>
+          </button>
         </div>
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
           <a [routerLink]="['/auth/signup']" [routerLinkActive]="['active']">Registrati</a>
@@ -46,7 +49,7 @@
     </ng-container>
 
     <ng-template #userLoggedIn>
-      <ng-container *ngIf="currentUser">
+      <ng-container *ngIf="currentUser === true">
         <!-- User Menu -->
         <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end">
 
@@ -94,6 +97,7 @@
           </div>
         </div>
       </ng-container>
+
     </ng-template>
 
   </mat-toolbar-row>

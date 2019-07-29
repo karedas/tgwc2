@@ -6,7 +6,7 @@
         <h1>Entra con il tuo personaggio su  <br>The Gate <span class="tg-brown">Mud</span></h1>
         <small>(Accesso Legacy)</small>
       </div>
-      <div class="tg-auth-form-body tg-shadow-inset" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
+      <div class="tg-auth-form-body tg-shadow-inout" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
   
         <div class="form-field-group">
           <label for="name">Nome Personaggio</label>
@@ -15,11 +15,11 @@
   
         <div class="form-field-group">
           <label for="secret">Password</label>
-          <input type="secret" formControlName="secret" class="input-block form-control">
+          <input type="password" formControlName="secret" class="input-block form-control">
         </div>
   
         <div class="form-field-group">
-          <input type="submit" value="Accedi" name="submit" class="tg-submit-primary" [disabled]="onProcess">
+          <input type="submit" value="Accedi" name="submit" class="tg-submit-primary">
           <!-- <div class="tg-error" *ngIf="loginFailedError">{{loginFailedError}}</div> -->
         </div>
       </div>

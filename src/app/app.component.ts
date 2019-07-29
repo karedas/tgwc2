@@ -11,6 +11,8 @@ declare let ga: Function;
   <tg-splashscreen id="splashscreen" (loaded)="onLoad($event)"></tg-splashscreen>
   <tg-main></tg-main>
   `,
+  // <tg-main></tg-main>
+  // `,
   // <tg-main *ngIf="load"></tg-main>
   // template: `
   //   `,

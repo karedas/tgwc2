@@ -6,7 +6,6 @@ import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layo
   selector: 'tg-manager',
   templateUrl: './manager.component.html',
   styleUrls: ['./manager.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 
 export class ManagerComponent implements OnDestroy {
