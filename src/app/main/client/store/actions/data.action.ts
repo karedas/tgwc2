@@ -34,18 +34,18 @@ export enum DataEvenType {
     GENERICPAGE = '[Data] Generic Page'
 }
 
+export const mapAction = createAction(DataEvenType.MAP, props<{map: any}>());
 export const incomingData = createAction(DataEvenType.IN, props<{payload: { message: string }}>());
 export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO, props<{payload: any}>());
 export const doorsAction = createAction(DataEvenType.DOORS, props<{payload: any}>());
 export const roomAction = createAction(DataEvenType.ROOM, props<{payload: any}>());
 export const objectAndPersonAction = createAction(DataEvenType.OBJPERSON, props<{payload: IObjPerson}>());
 export const heroAction = createAction(DataEvenType.HERODATA, props<{payload: IHero}>());
-export const mapAction = createAction(DataEvenType.MAP, props<{payload: Map}>());
 export const skyAction = createAction(DataEvenType.SKY, props<{payload: string}>());
 export const editorAction = createAction(DataEvenType.EDITOR, props<{payload: Editor}>());
 export const genericTableAction = createAction(DataEvenType.GENERICTABLE, props<{payload: IGenericTable}>());
 export const worksListAction = createAction(DataEvenType.WORKSLIST, props<{payload: IWorks}>());
-export const regionAction = createAction(DataEvenType.REGION, props<{payload: IRegion}>());
+export const regionAction = createAction(DataEvenType.REGION, props<{payload: { region: IRegion }}>())
 export const skillsAction = createAction(DataEvenType.SKILLS, props<{payload: any}>());
 export const infoCharacterAction = createAction(DataEvenType.INFO);
 export const inventoryAction = createAction(DataEvenType.INVENTORY, props<{payload: any}>());
