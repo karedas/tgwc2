@@ -8,14 +8,12 @@
       padding: 0 5px;
       color: $base-text-color;
       background: #211f1e;
-      border-right: 1px solid rgba(255, 255, 255, 0.12);
       border-bottom-color: rgba(255, 255, 255, 0.12);
       border-top: 1px solid rgba(255,255,255,0.12);
       transition: background .2s ease-out;
     }
 
     td.mat-cell {
-      border-right: 1px solid rgba(255, 255, 255, 0.12);
       color: $base-text-color;
       font-size: 100%;
       padding: 0 5px;
@@ -26,7 +24,7 @@
     }
 
     tr.mat-row td {
-      background: #0b0907;
+      background: rgba(0, 0, 0, 0.4);
       transition: background-color .2s ease-out;
     }
 

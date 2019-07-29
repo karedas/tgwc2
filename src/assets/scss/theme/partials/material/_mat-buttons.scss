@@ -47,7 +47,13 @@
   }
 
 
-  
+  .mat-raised-button.mat-accent {
+    font-weight: normal;
+    color: white;
+    background-image: linear-gradient(-180deg, #d69813, #a96f17 90%);
+  }
+
+
 .mat-raised-button.mat-accent[disabled]{
   background-color: $tg-yellow;
 }

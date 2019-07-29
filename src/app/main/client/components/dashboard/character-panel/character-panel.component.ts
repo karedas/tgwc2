@@ -85,7 +85,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       )
       .subscribe((hero: IHero) => {
         if (hero) {
-          
           this.setCombatPanel(hero.target);
           this.setMoneyAmountLabel(hero.money);
         }
