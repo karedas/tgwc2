@@ -1,5 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
-import { DataEvenType } from './data.action';
+import { createAction, props } from '@ngrx/store';
 
 export enum ClientEventType {
   DISCONNECT = '[Client] User Disconnect',

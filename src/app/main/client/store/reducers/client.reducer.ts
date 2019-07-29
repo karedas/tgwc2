@@ -1,10 +1,14 @@
-import { initialState } from '../state/client.state';
+import { initialState, ClientState } from '../state/client.state';
 import { inGameAction, updateUIAction, audioAction } from '../actions/client.action';
 import { Action, on, createReducer } from '@ngrx/store';
 
-export const clientReducer = createReducer(
+export const reducer = createReducer(
   initialState,
-  on(inGameAction,  state => ({ ...state, inGame: true })),
+  on(inGameAction, state => ({
+      ...state,
+      inGame: true
+    })
+  ),
   on(updateUIAction, (state, { payload }) => ({
     ...state,
     updateUI: payload
@@ -13,6 +17,6 @@ export const clientReducer = createReducer(
 );
 
 
-export function reducer(state = initialState, action: Action) {
-  return clientReducer(state, action);
+export function clientReducer(state: ClientState | undefined, action: Action) {
+  return reducer(state, action);
 }

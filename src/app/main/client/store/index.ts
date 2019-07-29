@@ -16,8 +16,8 @@ export interface State {
 }
 
 export const baseReducer: ActionReducerMap<TGState> = {
-  client: fromClient.reducer,
-  data: fromData.reducer,
+  client: fromClient.clientReducer,
+  data: fromData.dataReducer,
 };
 
 export const selectTGState = createFeatureSelector<TGState>('TG');

@@ -28,10 +28,11 @@ export interface IHero {
   adjective?: string;
   desc?: string;
   race?: IHeroRace;
+  money?: string;
   cult?: string;
   ethn?: string;
   image?: string;
-  conva?: number;
+  conva?: string;
   combat?: any;
   walk?: string;
   title?: string;
@@ -43,17 +44,16 @@ export interface IHero {
   inventory?: [];
   target?: ITarget;
   lang?: string;
-  weight?: number;
-  height?: number;
+  weight?: string;
+  height?: string;
   born?: string;
-  age?: number;
-  icon?: number;
+  age?: string;
+  icon?: string;
   city?: string;
   abil?: any;
   skills?: any;
-  money?: number;
-  pietoso?: number;
-  position?: number;
+  pietoso?: string;
+  position?: string;
 }
 
 // export class Hero implements IHero {
