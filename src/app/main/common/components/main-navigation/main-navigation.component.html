@@ -1,3 +1,4 @@
+
 <mat-toolbar class="tg-mainnav">
   <mat-toolbar-row fxLayout="wrap" fxLayoutGap="20px">
 
@@ -34,7 +35,7 @@
     </div>
 
     <!-- User Registration and login Menu -->
-    <ng-container *ngIf="loggedIn === false && !userInGame ; else userLoggedIn">
+    <ng-container *ngIf="!currentUser && !userInGame ; else userLoggedIn">
       <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap.gt-xs="20px" fxLayoutGap.lt-sm="5px">
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
           <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow" fxHide fxShow.gt-xs>Login</a>
@@ -49,7 +50,6 @@
     </ng-container>
 
     <ng-template #userLoggedIn>
-      <ng-container *ngIf="currentUser === true">
         <!-- User Menu -->
         <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end">
 
@@ -96,7 +96,6 @@
             </mat-menu>
           </div>
         </div>
-      </ng-container>
 
     </ng-template>
 
