@@ -7,7 +7,7 @@
       border-right: 1px solid black;
       padding: 0 5px;
       color: $base-text-color;
-      background: #211f1e;
+      background: #171311;
       border-bottom-color: rgba(255, 255, 255, 0.12);
       border-top: 1px solid rgba(255,255,255,0.12);
       transition: background .2s ease-out;
@@ -29,7 +29,7 @@
     }
 
     tr.mat-row:hover td {
-      background: #272421;
+      background: rgba(39, 36, 33, 0.3);
     }
 
 
