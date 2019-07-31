@@ -1,50 +1,58 @@
- 
-  /* Table */
-  .mat-table.dark {
-    width: 100%;
+ /* Table */
+ .mat-table.dark {
+   width: 100%;
 
-    .mat-header-cell, .mat-footer-cell{
-      border-right: 1px solid black;
-      padding: 0 5px;
-      color: $base-text-color;
-      background: rgba(23, 19, 17, 0.5);
-      border-bottom-color: rgba(255, 255, 255, 0.12);
-      border-top: 1px solid rgba(255,255,255,0.12);
-      transition: background .2s ease-out;
-    }
+   .mat-header-cell,
+   .mat-footer-cell {
+     border-right: 1px solid black;
+     padding: 0 5px;
+     color: $base-text-color;
+     background: rgba(23, 19, 17, 0.5);
+     border-bottom-color: rgba(255, 255, 255, 0.12);
+     border-top: 1px solid rgba(255, 255, 255, 0.12);
+     transition: background .2s ease-out;
+   }
 
-    td.mat-cell {
-      color: $base-text-color;
-      font-size: 100%;
-      padding: 0 5px;
-    }
+   td.mat-cell {
+     color: $base-text-color;
+     font-size: 100%;
+     padding: 0 5px;
+   }
 
-    tr.mat-footer-row, tr.mat-row {
-      height: 28px;
-    }
+   tr.mat-footer-row,
+   tr.mat-row {
+     height: 28px;
+   }
 
-    tr.mat-row td {
-      background: rgba(0, 0, 0, 0.4);
-      transition: background-color .2s ease-out;
-    }
+   tr.mat-row td {
+     background: rgba(0, 0, 0, 0.4);
+     transition: background-color .2s ease-out;
+   }
 
-    tr.mat-row:hover td {
-      background: rgba(39, 36, 33, 0.3);
-    }
+   tr.mat-row:hover td,
+   tr.expanded-row td {
+     border-top: 1px solid $tg-yellow;
+     background: rgba(39, 36, 33, 0.3);
+   }
 
 
-    tr.detail-row {
-      height: 0;
-    }
+   tr.detail-row {
+     height: 0;
 
-    .element-row td {
-      border-bottom-width: 0;
-    }
+     td {
+       background: rgba(39, 36, 33, 0.3);
+       border-bottom: 1px solid $tg-yellow;
+     }
+   }
 
-    .element-detail {
-      overflow: hidden;
-      display: flex;
-    }
-    
+   .element-row td {
+     border-bottom-width: 0;
 
-  }
+   }
+
+   .element-detail {
+     border: none;
+     overflow: hidden;
+     display: block;
+   }
+ }

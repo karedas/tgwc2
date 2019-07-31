@@ -54,6 +54,7 @@ export interface IHero {
   skills?: any;
   pietoso?: string;
   position?: string;
+  nosfodera?: string;
 }
 
 // export class Hero implements IHero {
