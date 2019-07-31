@@ -18,6 +18,11 @@ import { GameService } from './client/services/game.service';
 import { DataParser } from './client/services/dataParser.service';
 import { LoginClientGuard } from './authentication/services/login-client.guard';
 import { FooterComponent } from './common/components/footer/footer.component';
+import { StoreModule } from '@ngrx/store';
+import { baseReducer, clearState } from './client/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ClientEffects } from './client/store/effects/client.effects';
+import { DataEffects } from './client/store/effects/data.effects';
 
 const routes: Routes = [
   {
@@ -57,6 +62,9 @@ const routes: Routes = [
     Auth2Module,
     MainNavigationModule,
     RouterModule.forChild(routes),
+    StoreModule.forFeature('TG',
+      baseReducer, { metaReducers: [clearState] }),
+    EffectsModule.forFeature([ClientEffects, DataEffects]),
   ],
   exports: [
     MainComponent,
