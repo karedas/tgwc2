@@ -39,11 +39,8 @@ export class MapComponent implements OnDestroy, OnInit {
     private game: GameService,
     private mapService: MapService,
   ) {
-
     this.map$ = this.store.select(fromSelectors.getMap);
     this.mapSize = this.mapService.mapSizes;
-
-
     this._unsubscribeAll = new Subject();
   }
 
@@ -72,8 +69,10 @@ export class MapComponent implements OnDestroy, OnInit {
 
 
     setTimeout(() => {
-      this.map$.pipe(
-        takeUntil(this._unsubscribeAll)).subscribe(
+      this.map$
+      .pipe(
+        takeUntil(this._unsubscribeAll))
+      .subscribe(
           (map: Map) => {
             if (map !== undefined) {
               this.mapService.updateMap(map);

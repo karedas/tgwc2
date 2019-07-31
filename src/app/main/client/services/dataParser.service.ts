@@ -5,7 +5,6 @@ import { TGState } from '../store';
 import * as DataActions from '../store/actions/data.action';
 import * as GameActions from '../store/actions/client.action';
 
-import { IHero } from '../models/data/hero.model';
 import { Observable, Subject } from 'rxjs';
 import { LogService } from './log.service';
 import { TGConfig } from '../client-config';
@@ -101,7 +100,7 @@ export class DataParser {
 
     // News (Deprecated)
     data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      // this.store.dispatch(new GameActions.NewsAction);
+      //  this.store.dispatch(new GameActions.NewsAction);
       return '';
     });
 
@@ -145,14 +144,14 @@ export class DataParser {
     // Sky picture
     data = data.replace(/&o.\n*/gm, (sky) => {
       const sky_parse = sky.charAt(2);
-      // this.store.dispatch(DataActions.skyAction({payload: sky_parse }));
+       this.store.dispatch(DataActions.skyAction({payload: sky_parse }));
       return '';
     });
 
     // Doors Info
     data = data.replace(/&d\d{6}\n*/gm, (doors) => {
       const doors_parse = doors.substr(2, 6);
-      // this.store.dispatch(DataActions.doorsAction({payload: doors_parse }));
+       this.store.dispatch(DataActions.doorsAction({payload: doors_parse }));
       return '';
     });
 
@@ -166,7 +165,7 @@ export class DataParser {
     // Auto Update Hero Status
     data = data.replace(/&!st\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(4, -1));
-      // this.store.dispatch( DataActions.updateStatusHero({payload: status_parse}));
+       this.store.dispatch( DataActions.updateStatusHero({payload: status_parse}));
       return '';
     });
 
@@ -204,11 +203,11 @@ export class DataParser {
       const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
       const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
 
-      // this.store.dispatch(DataActions.editorAction({payload: {
-      //   maxChars: options_parse[0],
-      //   title: options_parse[1] ? options_parse[1] : ' ',
-      //   description: text ? text : ' '
-      // }}));
+      this.store.dispatch(DataActions.editorAction({payload: {
+        maxChars: options_parse[0],
+        title: options_parse[1] ? options_parse[1] : ' ',
+        description: text ? text : ' '
+      }}));
 
       return '';
     });
@@ -216,15 +215,14 @@ export class DataParser {
     // Map data
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, (m) => {
       const map_parse = <Map>JSON.parse(m.slice(5, -1));
-      // console.log(map_parse);
-      // this.store.dispatch(DataActions.mapAction({map: map_parse}));
+      this.store.dispatch(DataActions.mapAction({map: map_parse}));
       return '';
     });
 
     // Book
     data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
       const b_parse = JSON.parse(book.slice(6, -1));
-      // this.store.dispatch(DataActions.bookAction(b_parse));
+       this.store.dispatch(DataActions.bookAction(b_parse));
       return '';
     });
 
@@ -238,21 +236,21 @@ export class DataParser {
     // Generic page (title, text)
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
       const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-      // this.store.dispatch(DataActions.genericPageAction({payload: page_parse}));
+       this.store.dispatch(DataActions.genericPageAction({payload: page_parse}));
       return '';
     });
 
     // Generic table (title, head, data)
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
       const gtable_parse = JSON.parse(t.slice(7, -1));
-      // this.store.dispatch(DataActions.genericTableAction({payload: gtable_parse}));
+       this.store.dispatch(DataActions.genericTableAction({payload: gtable_parse}));
       return '';
     });
 
     // Inventory
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
       const inv_parse = JSON.parse(inv.slice(5, -1));
-      // this.store.dispatch(DataActions.inventoryAction({payload: inv_parse}));
+       this.store.dispatch(DataActions.inventoryAction({payload: inv_parse}));
       return '';
     });
 
@@ -277,21 +275,21 @@ export class DataParser {
     // Equipment
     data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
       const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-      // this.store.dispatch(DataActions.equipAction({payload: eq_parse}));
+       this.store.dispatch(DataActions.equipAction({payload: eq_parse}));
       return '';
     });
 
     // Workable lists
     data = data.replace(/&!wklst\{[\s\S]*?\}!/gm, (wk) => {
       const wk_parse = JSON.parse(wk.slice(7, -1));
-      // this.store.dispatch(DataActions.worksListAction({payload: wk_parse}));
+       this.store.dispatch(DataActions.worksListAction({payload: wk_parse}));
       return '';
     });
 
     // Skill list
     data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
       const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-      // this.store.dispatch(DataActions.skillsAction({payload: skinfo_parse}));
+       this.store.dispatch(DataActions.skillsAction({payload: skinfo_parse}));
       return '';
 
     });
@@ -413,10 +411,10 @@ export class DataParser {
   // Emit data Stored in the dispatcher to show then in the right Output Order
   private dispatchData() {
     // Output Messages
-    // if (this.dispatcher['base']) { this.store.dispatch( DataActions.incomingData({payload: this.dispatcher['base']})); }
-    // if (this.dispatcher['objpers']) { this.store.dispatch(DataActions.objectAndPersonAction({payload: this.dispatcher['objpers']})); }
-    // if (this.dispatcher['room']) { this.store.dispatch(DataActions.roomAction({payload: this.dispatcher['room']})); }
-    // if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({payload: this.dispatcher['pers']})); }
+    if (this.dispatcher['base']) { this.store.dispatch( DataActions.incomingData({payload: this.dispatcher['base']})); }
+    if (this.dispatcher['objpers']) { this.store.dispatch(DataActions.objectAndPersonAction({payload: this.dispatcher['objpers']})); }
+    if (this.dispatcher['room']) { this.store.dispatch(DataActions.roomAction({payload: this.dispatcher['room']})); }
+    if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({payload: this.dispatcher['pers']})); }
     // TODO UI (dont need order) :
     if (this.dispatcher['visibilLevel']) { this.store.dispatch( GameActions.updateUIAction({payload: {invLevel: this.dispatcher['visibilLevel']}})); }
     if (this.dispatcher['isgod']) { this.store.dispatch(GameActions.updateUIAction({payload: { isGod: this.dispatcher['isgod']}})); }

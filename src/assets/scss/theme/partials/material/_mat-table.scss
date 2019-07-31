@@ -3,11 +3,11 @@
   .mat-table.dark {
     width: 100%;
 
-    .mat-header-cell {
+    .mat-header-cell, .mat-footer-cell{
       border-right: 1px solid black;
       padding: 0 5px;
       color: $base-text-color;
-      background: #171311;
+      background: rgba(23, 19, 17, 0.5);
       border-bottom-color: rgba(255, 255, 255, 0.12);
       border-top: 1px solid rgba(255,255,255,0.12);
       transition: background .2s ease-out;
