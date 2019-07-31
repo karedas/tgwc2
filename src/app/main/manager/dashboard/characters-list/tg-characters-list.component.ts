@@ -58,7 +58,6 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
     this.userService.getCharacters().subscribe( (result: Character[]) => {
       this.charactersList = result;
-      console.log(this.charactersList);
     });
   }
 
