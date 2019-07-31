@@ -26,23 +26,34 @@
 
    tr.mat-row td {
      background: rgba(0, 0, 0, 0.4);
+     border-bottom: 1px solid transparent;
+     border-top: 1px solid transparent;
      transition: background-color .2s ease-out;
+
    }
 
-   tr.mat-row:hover td,
-   tr.expanded-row td {
-     border-top: 1px solid $tg-yellow;
+   tr.mat-row:hover td, tr.expanded-row td {
      background: rgba(39, 36, 33, 0.3);
+     border-bottom: 1px solid $tg-yellow;
+     border-top: 1px solid $tg-yellow;
+   }
+
+   tr.expanded-row td {
+     cursor: pointer;
+     border-bottom: none!important;
    }
 
 
    tr.detail-row {
      height: 0;
+   }
 
-     td {
-       background: rgba(39, 36, 33, 0.3);
-       border-bottom: 1px solid $tg-yellow;
-     }
+   tr.expanded-row + .detail-row {
+    td {
+      background: rgba(39, 36, 33, 0.3);
+      border-bottom: 1px solid $tg-yellow;
+      border-top: none;
+    }
    }
 
    .element-row td {
