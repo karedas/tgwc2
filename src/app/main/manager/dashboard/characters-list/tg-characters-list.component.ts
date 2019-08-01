@@ -85,7 +85,14 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     .subscribe((res) => {
       if (res === true) {
         this.redirectToClient();
+        return;
       }
+      
+      this.dialogRef.componentInstance.data = {
+        hasError: true
+      }
+      // else {
+      // }
       });
   }
 

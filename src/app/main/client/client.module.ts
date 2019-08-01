@@ -10,9 +10,9 @@ import { InputModule } from './components/input/input.module';
 import { AudioComponent } from './components/audio/audio.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
-import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { DialogV2Module } from './common/dialog-v2/dialog-v2.module';
 import { OutputService } from './components/output/output.service';
+import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 
 const clientRouting: Routes = [
   {
