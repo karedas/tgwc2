@@ -35,26 +35,15 @@ export class SocketService {
 
   public connect(): void {
     if (!this.socket) {
+
       this.socket = io(environment.socket.url, environment.socket.options);
-
-      this.socket.on(socketEvent.CONNECT, () => {
-        this.onConnect();
-      });
-
-      this.socket.on(socketEvent.DISCONNECT, () => {
-        this.onDisconnect();
-      });
-
-      this.socket.on(socketEvent.CONNECTERROR, (err: any) => {
-        this.onError();
-
-      });
-
-      this.socket.on(socketEvent.RECONNECT, () => {
-        this.onReconnect();
-      });
-
-    } else if ( this.socket.disconnected ) {
+      // Adding basic Socket listeners
+      this.socket.on(socketEvent.CONNECT,  this.onConnect);
+      this.socket.on(socketEvent.DISCONNECT, this.onDisconnect);
+      this.socket.on(socketEvent.CONNECTERROR, this.onError);
+      this.socket.on(socketEvent.RECONNECT, this.onReconnect );
+    } 
+    else if ( this.socket.disconnected ) {
       this.socket.connect();
     }
   }
@@ -74,9 +63,7 @@ export class SocketService {
 
   public listen(event: socketEvent): Observable<any> {
     return new Observable<Event>(observer => {
-      this.socket.on(event, data => {
-        observer.next(data);
-      });
+      this.socket.on(event, (data: any) => observer.next(data));
     });
   }
 
@@ -98,7 +85,7 @@ export class SocketService {
     this.socket_error$.next(false);
   }
 
-  private onError() {
+  private onError(err) {
     this.connected = false;
     this.socket_error$.next(true);
     this.socket.connect();

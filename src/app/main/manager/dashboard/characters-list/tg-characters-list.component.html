@@ -52,26 +52,24 @@
 
             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
               <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                  <p>id: {{element.id}}</p>
-                  <p>Data creazione: {{element.createdDate}}</p>
-                  <div>
-                    <span *ngIf="element.status === 2" class="tg-brown">Sospeso</span>
-                    <span *ngIf="element.status === 1" class="tg-green">Attivo</span>
-                    <span *ngIf="element.status === 0">Disabilitato</span>
-                  </div>
-                  <div class="ch-char-block">
-                    Cambia immagine | Segnala un problema | Rimuovi dal tuo account | Disabilita
-                  </div>
+                <p>TGID: {{element.id}}</p>
+                <p>Data creazione: {{element.createdDate}}</p>
+                <div>
+                  <span *ngIf="element.status === 2" class="tg-brown">Sospeso</span>
+                  <span *ngIf="element.status === 1" class="tg-green">Attivo</span>
+                  <span *ngIf="element.status === 0">Disabilitato</span>
                 </div>
+                <div class="ch-char-block">
+                  Cambia immagine | Segnala un problema | Rimuovi dal tuo account | Disabilita
+                </div>
+              </div>
             </td>
           </ng-container>
 
             <!-- Information Footer -->
           <ng-container matColumnDef="charactersinfo">
             <td mat-footer-cell *matFooterCellDef colspan="4">
-              <p>
-                Il numero massimo di personaggi attivi e utilizzabili è <span class="tg-red">2</span>. 
-              </p>
+              Il numero massimo di personaggi attivi e utilizzabili è <span class="tg-red">2</span>. 
             </td>
           </ng-container>
 

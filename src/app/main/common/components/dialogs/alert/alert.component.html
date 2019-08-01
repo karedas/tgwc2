@@ -3,6 +3,10 @@
       <div class="tg-dialog-content">
           <div class="tg-base-logo big"></div>
           <p [innerHtml]="data.replayMessage"></p>
+          <ng-container *ngIf="data.hasError">
+            <button mat-button>Riprova</button>&nbsp;&nbsp;
+            <button mat-button>Chiudi</button>
+          </ng-container>
       </div>
       <div class="tg-border-box">
         <div class="tg-border tg-border-top"></div>

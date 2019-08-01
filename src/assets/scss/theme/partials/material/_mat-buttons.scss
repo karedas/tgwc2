@@ -47,6 +47,12 @@
   }
 
 
+  .mat-raised-button, .mat-flat-button {
+    font-weight: normal;
+    background-image: linear-gradient(-180deg, #ffffff, #cacaca 90%);
+    color: black;
+  }
+
   .mat-raised-button.mat-accent, .mat-flat-button.mat-accent {
     font-weight: normal;
     color: white;

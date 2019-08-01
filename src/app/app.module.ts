@@ -42,7 +42,14 @@ export function tokenGetter() {
     }),
     TgConfigModule.forRoot(tgConfig),
 
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+      },
+    }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
