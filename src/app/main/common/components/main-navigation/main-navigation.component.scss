@@ -76,8 +76,13 @@ tg-main-navigation {
     display: none;
     font-size: 11px;
     vertical-align: middle;
+    margin-right: 20px;
   }
 
+  .mr0 {
+    margin-right: 0!important;
+  }
+  
   .m-right {
     margin-left: auto;
   }
