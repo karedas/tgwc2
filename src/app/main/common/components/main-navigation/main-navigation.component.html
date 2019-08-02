@@ -30,7 +30,7 @@
 
 
     <!-- Game Menu -->
-    <div *ngIf="userInGame">
+    <div *ngIf="userInGame" fxFlex="1 1 100%" class="mr0"> 
       <tg-game-menu></tg-game-menu>
     </div>
 
@@ -53,7 +53,7 @@
         <!-- User Menu -->
         <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end">
 
-          <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center">
+          <div class="tg-mainnav-item" fxLayout fxLayoutAlign="cente center" style="margin-right: 0;">
 
             <button mat-button [matMenuTriggerFor]="menu" class="user-button">
               <mat-icon>account_box</mat-icon>

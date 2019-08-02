@@ -1,10 +1,9 @@
-<div class="tg-navbar--wrap" fxFlex="0 0 100%" fxLayout fxLayoutGap="10px">
+<div class="tg-navbar--wrap" fxFlex="0 0 100%" fxLayout>
 
   <!-- Client Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button #button mat-button [matMenuTriggerFor]="clientMenu" #clientTrigger="matMenuTrigger"
-    (mouseenter)="buttonEnter(clientTrigger)" (mouseleave)="buttonLeave(clientTrigger, button)">Client
-    </button>
+    (mouseenter)="buttonEnter(clientTrigger)" (mouseleave)="buttonLeave(clientTrigger, button)">Client</button>
 
     <mat-menu #clientMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4">
       <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)">
@@ -21,7 +20,7 @@
   </div>
 
   <!-- Game Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button #button mat-button [matMenuTriggerFor]="gameMenu" #gameTrigger="matMenuTrigger"
       (mouseenter)="buttonEnter(gameTrigger)" (mouseleave)="buttonLeave(gameTrigger, button)">Gioco</button>
 
@@ -38,7 +37,7 @@
   </div>
 
   <!-- Guida  Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button mat-button [matMenuTriggerFor]="guideMenu" #guideTrigger="matMenuTrigger"
       (mouseenter)="buttonEnter(guideTrigger)" (mouseleave)="buttonLeave(guideTrigger, button)">Guida</button>
     <mat-menu #guideMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4">
@@ -50,9 +49,8 @@
     </mat-menu>
   </div>
 
-  <div class="nav-right">
+  <div class="m-right">
     <button mat-icon-button (click)="onItemClick('audio')">
-      Audio
       <mat-icon class="tg-yellow">
         {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
       </mat-icon></button>
