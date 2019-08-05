@@ -35,18 +35,20 @@
     </div>
 
     <!-- User Registration and login Menu -->
-    <ng-container *ngIf="!currentUser && !userInGame ; else userLoggedIn">
-      <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap.gt-xs="20px" fxLayoutGap.lt-sm="5px">
-        <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
-          <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow" fxHide fxShow.gt-xs>Login</a>
-          <button mat-icon-button [routerLink]="['/auth/login']" [routerLinkActive]="['active']"  fxHide fxShow.lt-sm>
-            <mat-icon class="tg-yellow">vpn_key</mat-icon>
-          </button>
+    <ng-container *ngIf="!currentUser">
+      <ng-container *ngIf="!loggedIn; else userLoggedIn">
+        <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap.gt-xs="20px" fxLayoutGap.lt-sm="5px">
+          <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+            <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow" fxHide fxShow.gt-xs>Login</a>
+            <button mat-icon-button [routerLink]="['/auth/login']" [routerLinkActive]="['active']"  fxHide fxShow.lt-sm>
+              <mat-icon class="tg-yellow">vpn_key</mat-icon>
+            </button>
+          </div>
+          <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+            <a [routerLink]="['/auth/signup']" [routerLinkActive]="['active']">Registrati</a>
+          </div>
         </div>
-        <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
-          <a [routerLink]="['/auth/signup']" [routerLinkActive]="['active']">Registrati</a>
-        </div>
-      </div>
+      </ng-container>
     </ng-container>
 
     <ng-template #userLoggedIn>

@@ -47,6 +47,7 @@ export class MainNavigationComponent implements OnDestroy {
         }
       });
       
+    
     this.charactersList = this.userService.getCharacters()
       .pipe(map((char: Character) => {
         return char.filter(c => c.status === 1);
@@ -65,7 +66,7 @@ export class MainNavigationComponent implements OnDestroy {
       this.currentUser = this.authService.currentUser;
     } else {
       this.loggedIn = false;
-      this.currentUser = null;
+      this.currentUser = false;
     }
 
     // set also if the user is loggedin with a character
