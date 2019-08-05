@@ -87,9 +87,8 @@ export class MainNavigationComponent implements OnDestroy {
   }
 
   userOnLogout() {
-    this.loginService.logout().subscribe(() => {
-      this.router.navigate(['auth/login']);
-    });
+    this.authService.removeAuthData();
+    this.router.navigate(['auth/login']);
   }
 
   loginCharacter(name) {

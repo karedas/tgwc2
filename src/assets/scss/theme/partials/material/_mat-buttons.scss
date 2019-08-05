@@ -48,20 +48,22 @@
 
 
   .mat-raised-button, .mat-flat-button {
+    line-height: 30px;
     font-weight: normal;
-    background-image: linear-gradient(-180deg, #ffffff, #cacaca 90%);
+    background-image: linear-gradient(-180deg, #ffffff, #909090 90%);
     color: black;
   }
 
   .mat-raised-button.mat-accent, .mat-flat-button.mat-accent {
     font-weight: normal;
-    color: white;
     background-image: linear-gradient(-180deg, #d69813, #a96f17 90%);
-    transition: box-shadow .2s ease-out;
-    
-    &:hover {
-      box-shadow: 0 0 9px #d69813
-    }
+    color: white;
+  }
+
+  .mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
+    font-weight: normal;
+    background-image: linear-gradient(-180deg, #d62a13, #710505 90%);
+    color: white;
   }
 
 

@@ -1,0 +1,15 @@
+.mat-list-base .mat-list-item {
+  color: $base-text-color;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+}  
+
+.mat-primary .mat-pseudo-checkbox-checked{
+  background-color: $tg-brown;
+}
+
+.mat-pseudo-checkbox {
+  color: rgba(255,255,255,.5);
+}
+// .mat-selection-list, .mat-action-list {
+// }

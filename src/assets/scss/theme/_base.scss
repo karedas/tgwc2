@@ -19,7 +19,6 @@ body {
   min-height: 100%;
   flex-direction: column;
   display: flex;
-  height: 100%;
 }
 
 body.size-xs {
@@ -97,10 +96,8 @@ tg-main {
   background-size: 100% auto;
   background-attachment: fixed;
   background-color: black;
-  padding-top: 32px;
   position: relative;
   display: block;
-  height: 100%;
   box-sizing: border-box;
 
 }
@@ -110,13 +107,6 @@ tg-main {
   margin: 0 auto;
   max-width: 1410px;
   box-sizing: border-box;
-  // padding-right: 13px;
-  // background:  url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y right top;
-
-  // .main-content-wrap {
-  // background: url($imgPath + '/commons/maincontent-left-bg.jpg') repeat-y left top;
-  // padding-left: 13px;
-  // }
 }
 
 .tg-base-logo {

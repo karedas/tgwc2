@@ -4,6 +4,7 @@ export class Character implements Deserializable<Character> {
 
   id: number;
   createdDate: string;
+  is_default?: boolean;
   image: string;
   name: string;
   race: string;

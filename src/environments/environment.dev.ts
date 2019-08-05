@@ -4,6 +4,7 @@ export const environment = {
   apiAddress: 'http://51.38.185.84:9595/api',
   serverstatAddress: 'assets/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
+  analytics_UAID: 'UA-122402371-2',
   socket : {
     url : 'http://51.38.185.84:3335',
     // url : 'http://play.thegatemud.it:3335',
@@ -18,3 +19,5 @@ export const environment = {
     }
   }
 };
+
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

@@ -1,4 +1,3 @@
-
 export const environment = {
   production: true,
   apiAddress: 'http://http://play.thegatemud.it/api',
