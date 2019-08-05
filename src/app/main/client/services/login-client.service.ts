@@ -33,7 +33,9 @@ export class LoginClientService {
   }
 
   set replayMessage(what: any) {
-    if (loginClientErrors[what]) {
+    if(!what) {
+      this.loginErrorMessage$.next('');
+    } else if (loginClientErrors[what]) {
       this.loginErrorMessage$.next(loginClientErrors[what]);
     } else if (what) {
       this.loginErrorMessage$.next(what);
