@@ -26,10 +26,11 @@
     tr.mat-row td {
       background: rgba(0, 0, 0, 0.4);
       transition: background-color .2s ease-out;
+      cursor: pointer;
     }
 
-    tr.mat-row:hover td {
-      background: rgba(39, 36, 33, 0.3);
+    tr:not(.detail-row).mat-row:hover td {
+      background: rgba(39, 36, 33, 0.5);
     }
 
 
@@ -44,7 +45,7 @@
     .element-detail {
       overflow: hidden;
       display: flex;
-      // flex-wrap: nowrap;
+      padding: 0px;
     }
     
 

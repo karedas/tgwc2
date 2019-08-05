@@ -28,17 +28,17 @@ export class LoginService extends ApiService {
       })
     );
   }
-
-  public logout(): Observable<boolean> {
-    return this.post('/users/logout', {id: this.authService.currentUser.id})
-      .pipe(
-        map((apiResponse: ApiResponse) => {
-          if (!apiResponse.success) {
-            return false;
-          }
-          this.authService.removeAuthData();
-          return true;
-        }),
-      );
-  }
+  // public logout(): Observable<boolean> {
+  //   return this.post('/users/logout', {id: this.authService.currentUser.id})
+  //     .pipe(
+  //       map((apiResponse: ApiResponse) => {
+  //         console.log('???');
+  //         if (!apiResponse.success) {
+  //           return false;
+  //         }
+  //         this.authService.removeAuthData();
+  //         return true;
+  //       }),
+  //     );
+  // }
 }

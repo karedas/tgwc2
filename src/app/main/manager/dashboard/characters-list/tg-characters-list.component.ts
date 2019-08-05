@@ -2,8 +2,8 @@ import { Component, ViewEncapsulation, Output, EventEmitter, OnInit, OnDestroy }
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
-import { Observable, Subject } from 'rxjs';
-import { map, takeUntil, delay } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil, delay } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import { Router } from '@angular/router';
@@ -21,8 +21,6 @@ import { tgAnimations } from 'src/app/animations';
 export class MyCharactersComponent implements OnInit, OnDestroy {
 
   @Output() goToManage = new EventEmitter();
-  // @Input() chars: any[];
-
   readonly env = environment;
   readonly ethnicity = ethnicity;
   readonly maxCharacter: number;
@@ -42,10 +40,8 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     private router: Router,
     public dialog: MatDialog
   ) {
-
     this.replayMessage = this.loginClientService.replayMessage;
     this._unsubscribeAll = new Subject<any>();
-
   }
 
   ngOnInit() {
@@ -56,7 +52,7 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
         this.updateReplayMessage(msg);
       });
 
-    this.userService.getCharacters().subscribe( (result: Character[]) => {
+    this.userService.getCharacters().subscribe((result: Character[]) => {
       this.charactersList = result;
     });
   }
@@ -72,27 +68,24 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
   loginCharacter(name: string, secret: string, event: Event) {
     event.stopImmediatePropagation();
-    // if ( !this.socketService.isConnected) {
-    //   return;
-    // }
+
     const values = { name: name, secret: secret };
-    
 
     this.openLoginDialog();
-
     this.loginClientService.login(values)
-    .pipe( delay(1000), takeUntil(this._unsubscribeAll))
-    .subscribe((res) => {
-      if (res === true) {
-        this.redirectToClient();
-        return;
-      }
-      
-      this.dialogRef.componentInstance.data = {
-        hasError: true
-      }
-      // else {
-      // }
+      .pipe(
+        delay(1000),
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe((res) => {
+        if (res === true) {
+          this.redirectToClient();
+          return;
+        }
+
+        this.dialogRef.componentInstance.data = {
+          hasError: true
+        }
       });
   }
 
@@ -101,7 +94,7 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
       .then(() => {
         this.closeLoginDialog();
         this.loginClientService.replayMessage = '';
-    });
+      });
   }
 
   private openLoginDialog() {
@@ -132,6 +125,18 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
   goToChractersManage(event) {
     this.goToManage.emit();
+  }
+
+
+  /* Character Actions */
+  onDisableChar(pgname: string): void {
+    pgname = pgname.toUpperCase();
+    let confirm = prompt(`Attenzione, l\'operazione non potrà essere annullata. 
+      Se sei certo di questa scelta digita qui sotto "${pgname}" e premi Ok`,``);
+
+    if (confirm != null && confirm === pgname) {
+      // DISABLE Character!!
+    }
   }
 
   ngOnDestroy(): void {

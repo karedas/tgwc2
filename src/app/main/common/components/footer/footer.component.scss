@@ -3,8 +3,6 @@
 
 
 :host {
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }
 
@@ -19,9 +17,8 @@
 
   a {
     color: #bdb3a3;
-    text-decoration: underline;
   }
-
++
   a:hover {
     color: $base-text-color-hover;
   }
