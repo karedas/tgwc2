@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from './services/game.service';
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { InputService } from './components/input/input.service';
@@ -18,7 +18,7 @@ import { ConfigService } from 'src/app/services/config.service';
   `]
 })
 
-export class ClientComponent implements OnDestroy {
+export class ClientComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
 
@@ -27,29 +27,34 @@ export class ClientComponent implements OnDestroy {
   constructor(
     private _configService: ConfigService,
     private gameService: GameService,
-    private dialogV2Service: DialogV2Service,
+    // private dialogV2Service: DialogV2Service,
     private inputService: InputService) {
-      
       this._unsubscribeAll = new Subject<any>();
-      this.openNews();
+      // this.openNews();
   }
 
-  openNews() {
+  ngOnInit(): void {
 
-    // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
 
         this.tgConfig = config;
+        this.gameService.sendToServer('');
+        this.inputService.focus();
 
-        if (this.tgConfig.news) {
-          this.dialogV2Service.openNews(false);
-        } else {
-          this.gameService.sendToServer('');
-          this.inputService.focus();
-        }
+        this.openNews();
     });
+  }
+
+  openNews() {
+    return;
+    if (this.tgConfig.news) {
+      // this.dialogV2Service.openNews(false);
+    } else {
+      this.gameService.sendToServer('');
+      this.inputService.focus();
+    }
   }
 
   ngOnDestroy() {

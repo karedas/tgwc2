@@ -18,7 +18,7 @@ import { AudioService } from '../../../../client/components/audio/audio.service'
   templateUrl: './tg-game-menu.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class TgGameMenu implements OnInit, OnDestroy {
+export class TgGameMenuComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
 
@@ -135,7 +135,7 @@ export class TgGameMenu implements OnInit, OnDestroy {
         this.game.disconnectGame();
         break;
       case 'news':
-        this.dialogV2Service.openNews(true);
+        // this.dialogV2Service.openNews(true);
         break;
       case 'preferences':
         this.dialogV2Service.openControlPanel();

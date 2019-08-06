@@ -14,14 +14,14 @@ import { Router, NavigationStart } from '@angular/router';
 })
 export class FooterComponent implements OnInit , OnDestroy {
 
-  showFooter: boolean = true;
+  showFooter = true;
   serverStat: any;
   gitVersion = gitInfo.tag;
   serverStatusMessage: boolean;
-  
+
   // Private
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private game: GameService,
     private socketService: SocketService,
@@ -34,10 +34,9 @@ export class FooterComponent implements OnInit , OnDestroy {
 
     this.router.events.subscribe( (e) => {
       if (e instanceof NavigationStart) {
-        if(e.url === "/webclient") {
+        if (e.url === '/webclient') {
           this.showFooter = false;
-        }
-        else {
+        } else {
           this.showFooter = true;
         }
       }
@@ -53,7 +52,7 @@ export class FooterComponent implements OnInit , OnDestroy {
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();    
+    this._unsubscribeAll.complete();
   }
 
 }

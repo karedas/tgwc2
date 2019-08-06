@@ -7,7 +7,7 @@ import { Role } from '../models/role';
 @Injectable()
 export class AuthService {
 
-  isLoginSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  isLoginSubject = new BehaviorSubject<boolean>(this.userIsLoggedIn());
   private _isLoggedin: BehaviorSubject<boolean>;
 
 
@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   get currentUser() {
-    if ( !this.isLoggedIn() ) {
+    if ( !this.userIsLoggedIn() ) {
       return null;
     }
     return new User().deserialize(JSON.parse(localStorage.getItem('user')));
@@ -26,7 +26,7 @@ export class AuthService {
     return this.currentUser && this.hasPermission(Role.Administrator);
   }
 
-  public setUserLoggedinStatus(val: boolean) {
+  private setUserLoggedinStatus(val: boolean) {
     this._isLoggedin.next(val);
   }
 
@@ -34,12 +34,12 @@ export class AuthService {
     return this._isLoggedin.asObservable();
   }
 
-  public isLoggedIn(): boolean {
+  public userIsLoggedIn(): boolean {
     return !this.jwtHelper.isTokenExpired();
   }
 
   public hasPermission(permission: string) {
-    if (!this.isLoggedIn()) {
+    if (!this.userIsLoggedIn()) {
       return false;
     }
     return this.currentUser.hasPermission(permission);
@@ -47,7 +47,7 @@ export class AuthService {
 
   public isEnableTo(permission: string) {
 
-    if (!this.isLoggedIn()) {
+    if (!this.userIsLoggedIn()) {
       return false;
     }
 

@@ -29,7 +29,6 @@ $regions-border-size: 30px;
 .tg-box {
   position: relative;
   z-index: 2;
-  height: 100%;
   overflow: hidden;
 
   .tg-border-box {
@@ -355,7 +354,6 @@ $regions-border-size: 30px;
   height: 100%;
 
   .tg-box {
-    height: 100%;
     background-color: #cbb48d;
     box-shadow: 0 0 10px 8px #cbb48d;
 

@@ -109,4 +109,4 @@ export const gameNavigationSideBar: NavigationItem[] = [
     icon: 'ballot',
     url: '/manager/clan',
   },
-]
+];

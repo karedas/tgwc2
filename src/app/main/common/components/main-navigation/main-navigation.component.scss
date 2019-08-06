@@ -26,15 +26,14 @@ tg-main-navigation {
     display: flex;
 
     .tg-base-logo {
-      height: 24px;  // Height FIX;
-      line-height: 22px;
+      line-height: 32px;
       text-decoration: none;
-      vertical-align: middle;
-      padding-left: 25px;
-      height: 22px;
+      padding-left: 36px;
+      height: 100%;
       margin: auto 0;
       display: inline-block;
-      background-position: left -2px;
+      background-position: left ;
+      background-size: 32px auto;
     }
 
     span {
@@ -190,7 +189,7 @@ tg-main-navigation {
   }
 }
 
-.user-menu-item {
+.user-menu-item, .mat-menu-item {
   padding: 8px 16px;
   color: #bdb3a3;
 

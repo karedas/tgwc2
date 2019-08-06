@@ -318,7 +318,7 @@ export class LogService {
       if (eqdata) {
         eqdata.forEach((obj, idxx) => {
           res += '<div>' + equip_positions_by_name[posname] + ': '
-              + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '</div>';
+            + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '</div>';
           eqcount++;
         });
       }
@@ -354,27 +354,29 @@ export class LogService {
     let txt = '<table><caption>Abilit&agrave; conosciute</caption>';
 
     for (const groupname in skinfo) {
-      txt += '<tr><td colspan="1000"><h3>' + groupname + '</h3></td></tr>';
+      if (skinfo.hasOwnProperty(groupname)) {
+        txt += '<tr><td colspan="1000"><h3>' + groupname + '</h3></td></tr>';
 
-      const group = skinfo[groupname];
+        const group = skinfo[groupname];
 
-      for (const skname in group) {
-        if (group.hasOwnProperty(skname)) {
-          txt += '<tr><th>' + skname + '</th>';
-          const sk = group[skname];
-          if ('prac' in sk && 'theo' in sk) {
-            txt += '<td>' + sk.prac + '</td><td>' + sk.theo + '</td>';
+        for (const skname in group) {
+          if (group.hasOwnProperty(skname)) {
+            txt += '<tr><th>' + skname + '</th>';
+            const sk = group[skname];
+            if ('prac' in sk && 'theo' in sk) {
+              txt += '<td>' + sk.prac + '</td><td>' + sk.theo + '</td>';
+            }
+            if ('auto' in sk) {
+              txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
+            }
+            txt += '</tr>';
           }
-          if ('auto' in sk) {
-            txt += '<td>' + (sk.auto ? 'autodidatta' : '') + '</td>';
-          }
-          txt += '</tr>';
         }
       }
+
+
     }
-
     txt += '</table>';
-
     return txt;
   }
 
@@ -397,7 +399,7 @@ export class LogService {
       + '<tr><th>Etnia</th><td>' + pinfo.ethn + '</td><th>Religione</th><td>' + (pinfo.relig ? pinfo.relig : 'nessuna') + '</td></tr>'
       + '<tr><th>Altezza</th><td>' + pinfo.height + ' cm.</td><th>Sesso</th><td>' + pinfo.sex.name + '</td></tr>'
       + '<tr><th>Peso</th><td>'
-        + pinfo.weight + ' pietre</td><th>Citt&agrave;</th><td>' + (pinfo.city ? pinfo.city : 'nessuna')
+      + pinfo.weight + ' pietre</td><th>Citt&agrave;</th><td>' + (pinfo.city ? pinfo.city : 'nessuna')
       + '</td></tr>'
       + '<tr><th>Et&agrave;</th><td>' + pinfo.age + ' anni</td><th>Lingua</th><td>' + pinfo.lang + '</td></tr>'
       + '<tr><th>Nascita:</th><td colspan=3>' + pinfo.born + '</td></tr>'

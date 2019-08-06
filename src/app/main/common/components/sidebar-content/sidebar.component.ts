@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.createMenu();
   }
-  
+
   /* Private Method */
   private createMenu() {
     for (const item in baseNavigationSidebar) {

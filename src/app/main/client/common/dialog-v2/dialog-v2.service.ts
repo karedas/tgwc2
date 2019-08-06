@@ -13,7 +13,6 @@ import { InputService } from '../../components/input/input.service';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
-// import { CookieLawComponent } from '../../components/windows/cookie-law/cookie-law.component';
 
 @Injectable({
   providedIn: 'root'
@@ -148,24 +147,24 @@ export class DialogV2Service {
 
   // }
 
-  openNews(fromGame: boolean): MatDialogRef<NewsComponent, MatDialogConfig> {
+  // openNews(fromGame: boolean): MatDialogRef<NewsComponent, MatDialogConfig> {
 
-    const dialogID = 'news';
-    const config = new MatDialogConfig();
+  //   const dialogID = 'news';
+  //   const config = new MatDialogConfig();
 
-    config.id = dialogID;
-    config.disableClose = true;
-    config.width = '750px';
-    config.height = '600px';
-    config.minHeight = '400px';
-    config.backdropClass = fromGame ? '' : 'overlay-dark';
-    config.scrollStrategy = this.overlay.scrollStrategies.noop();
-    config.restoreFocus = true;
-    config.autoFocus = false;
+  //   config.id = dialogID;
+  //   config.disableClose = true;
+  //   config.width = '750px';
+  //   config.height = '600px';
+  //   config.minHeight = '400px';
+  //   config.backdropClass = fromGame ? '' : 'overlay-dark';
+  //   config.scrollStrategy = this.overlay.scrollStrategies.noop();
+  //   config.restoreFocus = true;
+  //   config.autoFocus = false;
 
-    const dialogRef = this.dialog.open(NewsComponent, config);
-    return dialogRef;
-  }
+  //   const dialogRef = this.dialog.open(NewsComponent, config);
+  //   return dialogRef;
+  // }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
 
@@ -415,7 +414,7 @@ export class DialogV2Service {
       const dialogRef = this.dialog.open(ShortcutsPanelComponent, config);
 
       // open shortcuts manager on link click.
-      dialogRef.componentInstance.onManagerCall.subscribe(
+      dialogRef.componentInstance.managerCall.subscribe(
         () => this.openControlPanel(2)
       );
 

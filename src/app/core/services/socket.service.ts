@@ -42,8 +42,7 @@ export class SocketService {
       this.socket.on(socketEvent.DISCONNECT, this.onDisconnect);
       this.socket.on(socketEvent.CONNECTERROR, this.onError);
       this.socket.on(socketEvent.RECONNECT, this.onReconnect );
-    } 
-    else if ( this.socket.disconnected ) {
+    } else if ( this.socket.disconnected ) {
       this.socket.connect();
     }
   }

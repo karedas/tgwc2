@@ -85,7 +85,7 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
         this.dialogRef.componentInstance.data = {
           hasError: true
-        }
+        };
       });
   }
 
@@ -131,8 +131,8 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
   /* Character Actions */
   onDisableChar(pgname: string): void {
     pgname = pgname.toUpperCase();
-    let confirm = prompt(`Attenzione, l\'operazione non potrà essere annullata. 
-      Se sei certo di questa scelta digita qui sotto "${pgname}" e premi Ok`,``);
+    const confirm = prompt(`Attenzione, l\'operazione non potrà essere annullata.
+      Se sei certo di questa scelta digita qui sotto "${pgname}" e premi Ok`, ``);
 
     if (confirm != null && confirm === pgname) {
       // DISABLE Character!!
