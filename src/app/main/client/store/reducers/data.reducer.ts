@@ -9,15 +9,13 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 export const reducer = createReducer(
   initialState,
-  on(heroAction, (state, { payload }) => ({...state, hero: payload })),
+  on(heroAction, (state, { payload }) => ({ ...state, hero: payload })),
   on(mapAction, (state, { map }) => ({ ...state, map: map })),
   on(skyAction, (state, { payload }) => ({ ...state, sky: payload })),
   on(editorAction, (state, { payload }) => ({ ...state, editor: payload })),
   on(genericTableAction, (state, { payload }) => ({ ...state, genericTable: payload })),
   on(worksListAction, (state, { payload }) => ({ ...state, workslist: payload })),
-  on(regionAction, (state, { payload }) => ({
-      ...state,
-      region: payload.region })),
+  on(regionAction, (state, { payload }) => ({ ...state, region: payload })),
   on(doorsAction, (state, { payload }) => ({ ...state, doors: payload })),
   on(roomAction, (state, { payload }) => ({ ...state, room: payload })),
   on(bookAction, (state, { payload }) => ({ ...state, book: payload })),
@@ -55,25 +53,22 @@ export const reducer = createReducer(
     return Object.assign({}, { objPers: payload });
   }),
   on(skillsAction, (state, { payload }) => {
-    return {
-      ...state, hero: {
-        skills: payload
-      }
-    };
+    return Object.assign({}, state, {
+      ...state.hero,
+      skills: payload
+    });
   }),
   on(inventoryAction, (state, { payload }) => {
-    return {
-      ...state, hero: {
-        inventory: payload
-      }
-    };
+    return Object.assign({}, state, {
+      ...state.hero,
+      inventory: payload
+    });
   }),
   on(equipAction, (state, { payload }) => {
-    return {
-      ...state, hero: {
-        equipment: payload
-      }
-    };
+    return Object.assign({}, state, {
+      ...state.hero,
+      equipment: payload
+    });
   })
 );
 
