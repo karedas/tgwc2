@@ -15,8 +15,8 @@ export const reducer = createReducer(
   on(editorAction, (state, { payload }) => ({ ...state, editor: payload })),
   on(genericTableAction, (state, { payload }) => ({ ...state, genericTable: payload })),
   on(worksListAction, (state, { payload }) => ({ ...state, workslist: payload })),
-  on(regionAction, (state, { payload }) => ({ 
-      ...state, 
+  on(regionAction, (state, { payload }) => ({
+      ...state,
       region: payload.region })),
   on(doorsAction, (state, { payload }) => ({ ...state, doors: payload })),
   on(roomAction, (state, { payload }) => ({ ...state, room: payload })),

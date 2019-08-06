@@ -18,14 +18,12 @@ declare let ga: Function;
   //   `,
   styles: [`
   :host {
+    padding-top: 36px;
     position: relative;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
     min-width: 0;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
   `]
 })
 
@@ -71,6 +69,6 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mediaQuery.removeListener(this._mobileQueryListener);
+    this.mediaQuery.removeEventListener('change', this._mobileQueryListener);
   }
 }

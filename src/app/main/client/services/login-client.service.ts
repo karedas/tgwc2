@@ -20,11 +20,11 @@ export class LoginClientService {
     this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
 
-  get isLoggedIn(): boolean {
+  get isInGame(): boolean {
     return <boolean>this.isLoggedInSubject.value;
   }
 
-  set isLoggedIn(value: boolean) {
+  set isInGame(value: boolean) {
     this.isLoggedInSubject.next(value);
   }
 
@@ -33,7 +33,7 @@ export class LoginClientService {
   }
 
   set replayMessage(what: any) {
-    if(!what) {
+    if (!what) {
       this.loginErrorMessage$.next('');
     } else if (loginClientErrors[what]) {
       this.loginErrorMessage$.next(loginClientErrors[what]);

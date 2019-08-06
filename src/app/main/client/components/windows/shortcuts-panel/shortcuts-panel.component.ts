@@ -13,7 +13,7 @@ import { ConfigService } from 'src/app/services/config.service';
 })
 export class ShortcutsPanelComponent implements OnInit, OnDestroy {
 
-  @Output() onManagerCall = new EventEmitter();
+  @Output() managerCall: EventEmitter<boolean> = new EventEmitter();
 
   totalShortcuts: Array<any>;
   cmdHoverId: number;
@@ -49,7 +49,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
   }
 
   openShortcutManager() {
-    this.onManagerCall.emit(true);
+    this.managerCall.emit(true);
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,15 @@
+
+/* Stepper */
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  color: white;
+}
+
+.mat-step-header .mat-step-label.mat-step-label-active {
+  color: white;
+}
+
+.mat-step-header .mat-step-icon {
+  background-color: rgba(0, 0, 0, 0.54);
+  color: rgba(255, 255, 255, 0.31);
+}

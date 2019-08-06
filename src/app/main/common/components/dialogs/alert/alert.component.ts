@@ -15,8 +15,4 @@ export class AlertComponent {
   ) {
     console.log(data);
   }
-
-  // onClose(): void {
-  //   this.dialogRef.close();
-  // }
 }

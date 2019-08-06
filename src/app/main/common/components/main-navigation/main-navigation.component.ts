@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { gameNavigationSideBar, NavigationItem } from '../navigation';
+import { User } from 'src/app/core/models/user.model';
 
 
 @Component({
@@ -24,9 +25,9 @@ export class MainNavigationComponent implements OnDestroy {
 
   readonly env = environment;
 
-  public loggedIn = null;
-  public userInGame = null;
-  public currentUser: any;
+  public userIsLoggedIn = false;
+  public userIsInGame = false;
+  public user: User;
   public charactersList: Observable<any>;
   public hamburgerStatus = false;
   // public gameItemsMenu:  NavigationItem[];
@@ -43,41 +44,41 @@ export class MainNavigationComponent implements OnDestroy {
     this.router.events
       .subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
-          this.setLoggedinUser();
+          this.setMenuContext();
         }
       });
-      
-    
-    this.charactersList = this.userService.getCharacters()
-      .pipe(map((char: Character) => {
-        return char.filter(c => c.status === 1);
-      }));
 
     this._unsubscribeAll = new Subject();
   }
 
-  private setLoggedinUser() {
+  private getCharactersList(): Observable<Character> {
+    return this.userService.getCharacters()
+      .pipe(map((char: Character) => {
+        return char.filter(c => c.status === 1);
+      }));
+  }
+
+  private setMenuContext() {
+    this.userIsLoggedIn = this.authService.userIsLoggedIn();
 
     // Global User Checking Online Status
-    const userStatus = this.authService.isLoggedIn();
-
-    if (userStatus) {
-      this.loggedIn = true;
-      this.currentUser = this.authService.currentUser;
+    if (this.userIsLoggedIn) {
+      this.user = this.authService.currentUser;
+      this.charactersList = this.getCharactersList();
     } else {
-      this.loggedIn = false;
-      this.currentUser = false;
+      this.user = null;
+      this.charactersList = null;
     }
 
     // set also if the user is loggedin with a character
-    if (this.userInGame = this.loginClientService.isLoggedIn) {
+    if (this.userIsInGame = this.loginClientService.isInGame) {
       this.makeGameMenu();
     }
   }
 
-  private isEnabled(value) {
-    return value.status === 1;
-  }
+  // private isEnabled(value) {
+  //   return value.status === 1;
+  // }
 
   private makeGameMenu() {
     for (const item in gameNavigationSideBar) {

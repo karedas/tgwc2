@@ -91,7 +91,6 @@ body[data-loginstatus=ready] {
 
 
 tg-main {
-  min-height: 600px;
   height: 100%;
   overflow: hidden;
   background: #0a0706 url($imgPath + '/background/default-bg.jpg') no-repeat top center;
@@ -100,7 +99,6 @@ tg-main {
   background-color: black;
   position: relative;
   display: block;
-  padding-top: 36px;
   box-sizing: border-box;
 }
 

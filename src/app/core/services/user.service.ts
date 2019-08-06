@@ -40,7 +40,7 @@ export class UserService extends ApiService {
   }
 
   public getCharacters(): Observable<any> {
-    if(!this.characters$) {
+    if (!this.characters$) {
       this.characters$ =  this.get('/profile/characters')
         .pipe(
           map(({ data: { chars } }: ApiResponse) => {

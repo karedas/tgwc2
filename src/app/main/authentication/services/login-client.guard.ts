@@ -33,7 +33,7 @@ export class LoginClientGuard implements CanActivate, CanActivateChild, CanLoad 
   }
 
   checkLogin(url: string): boolean {
-    if (this.loginClientService.isLoggedIn) {
+    if (this.loginClientService.isInGame) {
       return true;
     }
 

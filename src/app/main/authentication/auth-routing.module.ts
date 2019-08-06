@@ -42,14 +42,14 @@ const routes: Routes = [
         component: ResetPasswordComponent,
       },
       {
-        path: 'login-character',
-        component: LoginCharacterComponent
-      },
-      {
         path: '**',
         redirectTo: 'login'
       }
-    ],
+    ]
+  },
+  {
+    path: 'login-character',
+    component: LoginCharacterComponent,
   },
 ];
 

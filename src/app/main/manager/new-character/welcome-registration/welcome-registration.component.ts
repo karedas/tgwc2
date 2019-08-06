@@ -1,9 +1,6 @@
-import { Component,  ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/mergeMap';
 
 import { Subject } from 'rxjs';
 
@@ -14,18 +11,17 @@ import { Subject } from 'rxjs';
 })
 export class WelcomeRegistrationComponent implements OnDestroy {
 
-  @ViewChild('formEmail', { static: true}) formEmail: NgForm;
+  @ViewChild('formEmail', { static: true }) formEmail: NgForm;
 
   userEmail: string;
   emailProcessed = false;
 
   private _unsubscribeAll: Subject<any>;
 
-  constructor(
-    private router: Router,
-    ) {
-      this._unsubscribeAll = new Subject<any>();
-    }
+  constructor(private router: Router) {
+    this._unsubscribeAll = new Subject<any>();
+  }
+
   checkCodeActivation() {
     this.router.navigate(['/auth/registrazione/wizard']);
   }

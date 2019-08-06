@@ -88,7 +88,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((room: Room) => {
         this.typeDetail = 'room';
-        this.updateRoomBase(room)
+        this.updateRoomBase(room);
       });
 
     /** Object or Person Detail */

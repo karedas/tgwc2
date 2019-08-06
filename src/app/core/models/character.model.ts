@@ -13,7 +13,7 @@ export class Character implements Deserializable<Character> {
   status: number;
   txtrace: string;
   age: number;
-  
+
   filter(arg0: (char: any) => boolean): any {
     throw new Error('Method not implemented.');
   }
