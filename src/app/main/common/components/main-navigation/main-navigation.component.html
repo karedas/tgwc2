@@ -90,8 +90,9 @@
             </div>
 
             <mat-divider class="light"></mat-divider>
-            <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
-            <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button>
+            <button mat-list-item class="user-menu-button" [routerLink]="['/manager/dashboard']">La mia Dashboard</button>
+            <!-- <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
+            <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button> -->
             <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Logout</button>
           </mat-action-list>
 

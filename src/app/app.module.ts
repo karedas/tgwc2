@@ -46,7 +46,7 @@ export function tokenGetter() {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
-        strictStateSerializability: true,
+        strictStateSerializability: false,
         strictActionSerializability: true,
       },
     }),
