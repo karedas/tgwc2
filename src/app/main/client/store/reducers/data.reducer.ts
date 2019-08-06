@@ -26,29 +26,31 @@ export const reducer = createReducer(
   on(incomingData, (state, { payload }) => {
     return Object.assign({}, state, { base: [payload] });
   }),
-  on(updateStatusHero, (state, { payload }) => ({
-    ...state,
-    hero: {
-      status: {
-        drink: payload.drink,
-        food: payload.food,
-        hit: payload.healt,
-        move: payload.move,
-        msg: payload.msg
-      },
-      target: {
-        move: payload['enemymove'],
-        hit: payload['enemyhealt'],
-        icon: payload['enemyicon'],
-        name: payload['enemyname']
-      },
-      combat: payload.combat,
-      walk: payload.walk,
-      money: payload.money,
-      pietoso: payload.pietoso,
-      nosfodera: payload.nosfodera
-    }
-  })),
+  on(updateStatusHero, (state, { payload }) => {
+    return Object.assign({}, state, {
+      hero: {
+        ...state.hero,
+        status: {
+          drink: payload.drink,
+          food: payload.food,
+          hit: payload.healt,
+          move: payload.move,
+          msg: payload.msg
+        },
+        target: {
+          move: payload['enemymove'],
+          hit: payload['enemyhealt'],
+          icon: payload['enemyicon'],
+          name: payload['enemyname']
+        },
+        combat: payload.combat,
+        walk: payload.walk,
+        money: payload.money,
+        pietoso: payload.pietoso,
+        nosfodera: payload.nosfodera
+      }
+    })
+  }),
   on(objectAndPersonAction, (state, { payload }) => {
     return Object.assign({}, { objPers: payload });
   }),
