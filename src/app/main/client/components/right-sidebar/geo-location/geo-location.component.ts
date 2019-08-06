@@ -1,14 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy, Input, OnChanges } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 import { IRegion } from 'src/app/main/client/models/data/region.model';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getRegion } from 'src/app/main/client/store/selectors';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-import { takeUntil, map, catchError, switchMap } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Response } from 'selenium-webdriver/http';
-import { DomSanitizer } from '@angular/platform-browser';
+import { takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'tg-geo-location',
@@ -17,7 +14,6 @@ import { DomSanitizer } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('fadeInFadeOut', [
-      // ...
       state('in', style({
         opacity: 1,
       })),
@@ -43,9 +39,7 @@ export class GeoLocationComponent implements OnInit , OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
-  constructor(
-    private store: Store<DataState>,
-    ) {
+  constructor(private store: Store<DataState>) {
     this.region$ = this.store.pipe(select(getRegion));
     this._unsubscribeAll = new Subject<any>();
   }

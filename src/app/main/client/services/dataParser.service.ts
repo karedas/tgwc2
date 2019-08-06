@@ -114,14 +114,14 @@ export class DataParser {
     // Data Time
     data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, (time) => {
       const parse_time = JSON.parse(time.slice(10, -1));
-      // this.store.dispatch( DataActions.dataTimeAction({payload: parse_time}));
+      this.store.dispatch( DataActions.dataTimeAction({payload: parse_time}));
       return '';
     });
 
     // Region
     data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
       const region_parse = JSON.parse(region.slice(8, -1));
-      // this.store.dispatch(DataActions.regionAction({payload: region_parse}));
+      this.store.dispatch(DataActions.regionAction({payload: region_parse}));
       return '';
     });
 
@@ -129,7 +129,7 @@ export class DataParser {
      * DEPRECATED
      * Hide text (password) */
     data = data.replace(/&x\n*/gm, (msg) => {
-      // this.store.dispatch(GameActions.updateUIAction({payload: {inputVisible: false }}));
+      this.store.dispatch(GameActions.updateUIAction({payload: {inputVisible: false }}));
       return '';
     });
 
@@ -137,7 +137,7 @@ export class DataParser {
      * DEPRECATED(normal input)
      * */
     data = data.replace(/&e\n*/gm, () => {
-      // this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: true }}));
+      this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: true }}));
       return '';
     });
 
@@ -158,7 +158,7 @@ export class DataParser {
     // Audio
     data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
       const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      // this.store.dispatch(GameActions.audioAction({payload: audio_parse}));
+      this.store.dispatch(GameActions.audioAction({payload: audio_parse}));
       return '';
     });
 
@@ -193,7 +193,7 @@ export class DataParser {
 
     // Close the text editor
     data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      // this.store.dispatch( GameActions.closeTextEditorAction());
+      this.store.dispatch( GameActions.closeTextEditorAction());
       return '';
     });
 
@@ -231,7 +231,7 @@ export class DataParser {
     // List of commands
     data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
       const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      // this.store.dispatch( GameActions.showCommandsActions({payload: cmd_parse}));
+      this.store.dispatch( GameActions.showCommandsActions({payload: cmd_parse}));
       return '';
     });
 
@@ -299,14 +299,14 @@ export class DataParser {
     // Player info
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
       const info_parse = JSON.parse(info.slice(7, -1));
-      // this.store.dispatch( GameActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
+      this.store.dispatch( GameActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
       return '';
     });
 
     // Player status INLINE
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
       const status_parse = JSON.parse(status.slice(6, -1));
-      // this.store.dispatch( GameActions.showStatusBoxAction( {payload: {status: status_parse }}));
+      this.store.dispatch( GameActions.showStatusBoxAction( {payload: {status: status_parse }}));
       return '';
     });
 
@@ -327,7 +327,7 @@ export class DataParser {
     // Refresh command
     data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
       const rcommand_parse = JSON.parse(t.slice(9, -1));
-      // this.store.dispatch( GameActions.refreshCommandAction());
+      this.store.dispatch( GameActions.refreshCommandAction());
       console.log('refresh command', rcommand_parse);
       return '';
     });
