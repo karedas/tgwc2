@@ -94,19 +94,19 @@ export const navigationSidebar: NavigationItem[] = [
 ];
 
 export const gameNavigationSideBar: NavigationItem[] = [
-  {
-    id: 'dashboard',
-    title: 'Dashboard',
-    type: 'item',
-    icon: 'home',
-    url: '/manager/dashboard',
-  },
+  // {
+  //   id: 'dashboard',
+  //   title: 'Dashboard',
+  //   type: 'item',
+  //   icon: 'home',
+  //   url: '/manager/dashboard',
+  // },
 
-  {
-    id: 'Clan',
-    title: 'Clan',
-    type: 'group',
-    icon: 'ballot',
-    url: '/manager/clan',
-  },
+  // {
+  //   id: 'Clan',
+  //   title: 'Clan',
+  //   type: 'group',
+  //   icon: 'ballot',
+  //   url: '/manager/clan',
+  // },
 ];

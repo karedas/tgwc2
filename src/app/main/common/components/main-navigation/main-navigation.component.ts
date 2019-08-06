@@ -27,6 +27,7 @@ export class MainNavigationComponent implements OnDestroy {
 
   public userIsLoggedIn = false;
   public userIsInGame = false;
+  
   public user: User;
   public charactersList: Observable<any>;
   public hamburgerStatus = false;
