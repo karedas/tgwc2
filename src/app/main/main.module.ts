@@ -63,7 +63,7 @@ const routes: Routes = [
     MainNavigationModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('TG', baseReducer, { metaReducers: [clearState]}),
-    EffectsModule.forFeature([ClientEffects, DataEffects]),
+    EffectsModule.forFeature([ClientEffects]),
   ],
   exports: [
     MainComponent,

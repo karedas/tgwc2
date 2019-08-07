@@ -53,4 +53,12 @@ export class UserService extends ApiService {
 
     return this.characters$;
   }
+
+  public setDefaultCharacter(charData): Observable<any> {
+    let data = {
+      "uuid": charData.uuid,
+      "id_default_char": charData._id
+    };
+    return this.put('/profile/set-default-character', data)
+  }
 }

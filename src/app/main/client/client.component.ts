@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GameService } from './services/game.service';
-import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
 import { InputService } from './components/input/input.service';
 import { Subject } from 'rxjs';
 import { TGConfig } from './client-config';

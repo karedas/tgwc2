@@ -53,7 +53,11 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
       });
 
     this.userService.getCharacters().subscribe((result: Character[]) => {
-      this.charactersList = result;
+      this.charactersList = result.sort(function(a,b) {
+        if (a.is_default == true && !b.is_default) {
+          return -1;
+        } else return 1;
+      });
     });
   }
 
@@ -68,7 +72,6 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
   loginCharacter(name: string, secret: string, event: Event) {
     event.stopImmediatePropagation();
-
     const values = { name: name, secret: secret };
 
     this.openLoginDialog();
@@ -83,9 +86,9 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.dialogRef.componentInstance.data = {
-          hasError: true
-        };
+        // this.dialogRef.componentInstance.data = {
+        //   hasError: false
+        // };
       });
   }
 
@@ -107,6 +110,8 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
   private closeLoginDialog() {
     this.dialogRef.close();
   }
+
+
 
   // private getTotalEnabledChars(chars: any): number {
 
@@ -137,6 +142,10 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     if (confirm != null && confirm === pgname) {
       // DISABLE Character!!
     }
+  }
+
+  onSelectedPrimary(char) {
+    this.userService.setDefaultCharacter(char).subscribe();
   }
 
   ngOnDestroy(): void {

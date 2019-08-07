@@ -32,7 +32,6 @@ export class DataParser {
   ) {
 
     this._updateNeeded = new Subject<any>();
-
     // Subscribe to the shortcuts in Config
     this._configService.getConfig()
       .pipe(map((config: TGConfig) => config.shortcuts))
@@ -52,7 +51,7 @@ export class DataParser {
       try {
         this.parseForDisplay(data);
       } catch (err) {
-        console.log(err.message);
+        console.error(err);
       }
 
 
@@ -73,6 +72,7 @@ export class DataParser {
     }
   }
 
+     
   private preParseText(data: string): string {
     data = data.replace(/\r/gm, '');
     data = data.replace(/&!!/gm, '');
@@ -84,259 +84,47 @@ export class DataParser {
     return data;
   }
 
+
   private parseForDisplay(data: string): void {
+    
 
     // reset Dispatcher
     this.dispatcher = {};
-
     let pos: any;
 
-
-    // Player is logged in
-    data = data.replace(/&!logged"[^"]*"/gm, () => {
-      this.store.dispatch(GameActions.inGameAction());
-      return '';
-    });
-
-    // News (Deprecated)
-    data = data.replace(/&!news\{[\s\S]*?\}!/gm, (msg) => {
-      //  this.store.dispatch(new GameActions.NewsAction);
-      return '';
-    });
-
-    // Character base Data
-    data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, (pgdata) => {
-      const pgdata_parse = JSON.parse(pgdata.slice(8, -1));
-      this.store.dispatch(DataActions.heroAction({ payload: pgdata_parse }));
-      return '';
-    });
-
-    // Data Time
-    data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, (time) => {
-      const parse_time = JSON.parse(time.slice(10, -1));
-      this.store.dispatch( DataActions.dataTimeAction({payload: parse_time}));
-      return '';
-    });
-
-    // Region
-    data = data.replace(/&!region\{[\s\S]*?\}!/gm, (region) => {
-      const region_parse = JSON.parse(region.slice(8, -1));
-      this.store.dispatch(DataActions.regionAction({payload: region_parse}));
-      return '';
-    });
-
-    /* *
-     * DEPRECATED
-     * Hide text (password) */
-    data = data.replace(/&x\n*/gm, (msg) => {
-      this.store.dispatch(GameActions.updateUIAction({payload: {inputVisible: false }}));
-      return '';
-    });
-
-    /* *
-     * DEPRECATED(normal input)
-     * */
-    data = data.replace(/&e\n*/gm, () => {
-      this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: true }}));
-      return '';
-    });
-
-    // Sky picture
-    data = data.replace(/&o.\n*/gm, (sky) => {
-      const sky_parse = sky.charAt(2);
-      this.store.dispatch(DataActions.skyAction({ payload: sky_parse }));
-      return '';
-    });
-
-    // Doors Info
-    data = data.replace(/&d\d{6}\n*/gm, (doors) => {
-      const doors_parse = doors.substr(2, 6);
-      this.store.dispatch(DataActions.doorsAction({ payload: doors_parse }));
-      return '';
-    });
-
-    // Audio
-    data = data.replace(/&!au"[^"]*"\n*/gm, (audio) => {
-      const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-      this.store.dispatch(GameActions.audioAction({payload: audio_parse}));
-      return '';
-    });
-
-    // Auto Update Hero Status
-    data = data.replace(/&!st\{[\s\S]*?\}!/gm, (status) => {
-      const status_parse = JSON.parse(status.slice(4, -1));
-      this.store.dispatch(DataActions.updateStatusHero({ payload: status_parse }));
-      return '';
-    });
-
-    // Generic Update for Client Status and more
-    data = data.replace(/&!up"[^"]*"\n*/gm, (update) => {
-      const ud = update.slice(5, status.lastIndexOf('"')).split(',');
-      this.dispatcher.update = ud;
-      return '';
-    });
-
-    /**DEPRECATED
-     * Image in side frame (with gamma)*/
-    data = data.replace(/&!img"[^"]*"\n*/gm, (image) => {
-      const image_parse = image.slice(6, image.lastIndexOf('"')).split(',');
-      console.log('image in side frame with gamma:', image_parse);
-      return '';
-    });
-
-    // Image in side frame
-    data = data.replace(/&!im"[^"]*"\n*/gm, (image) => {
-      const image_parse = image.slice(5, image.lastIndexOf('"'));
-      console.log('image in side frame', image_parse);
-      return '';
-    });
-
-    // Close the text editor
-    data = data.replace(/&!ea"[^"]*"\n*/gm, (options) => {
-      this.store.dispatch( GameActions.closeTextEditorAction());
-      return '';
-    });
-
-    // Open the text editor
-    data = data.replace(/&!ed"[^"]*"\n*/gm, (options) => {
-
-      const options_parse = options.slice(5, options.lastIndexOf('"')).split(',');
-      const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
-
-      this.store.dispatch(DataActions.editorAction({
-        payload: {
-          maxChars: options_parse[0],
-          title: options_parse[1] ? options_parse[1] : ' ',
-          description: text ? text : ' '
-        }
-      }));
-
-      return '';
-    });
-
-    // Map data
-    data = data.replace(/&!map\{[\s\S]*?\}!/gm, (m) => {
-      const map_parse = <Map>JSON.parse(m.slice(5, -1));
-      this.store.dispatch(DataActions.mapAction({ map: map_parse }));
-      return '';
-    });
-
-    // Book
-    data = data.replace(/&!book\{[\s\S]*?\}!/gm, (book) => {
-      const b_parse = JSON.parse(book.slice(6, -1));
-      this.store.dispatch(DataActions.bookAction(b_parse));
-      return '';
-    });
-
-    // List of commands
-    data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, (cmd) => {
-      const cmd_parse = JSON.parse(cmd.slice(8, -1).replace(/"""/, '"\\""'));
-      this.store.dispatch( GameActions.showCommandsActions({payload: cmd_parse}));
-      return '';
-    });
-
-    // Generic page (title, text)
-    data = data.replace(/&!page\{[\s\S]*?\}!/gm, (p) => {
-      const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-      this.store.dispatch(DataActions.genericPageAction({ payload: page_parse }));
-      return '';
-    });
-
-    // Generic table (title, head, data)
-    data = data.replace(/&!table\{[\s\S]*?\}!/gm, (t) => {
-      const gtable_parse = JSON.parse(t.slice(7, -1));
-      this.store.dispatch(DataActions.genericTableAction({ payload: gtable_parse }));
-      return '';
-    });
-
-    // Inventory
-    data = data.replace(/&!inv\{[\s\S]*?\}!/gm, (inv) => {
-      const inv_parse = JSON.parse(inv.slice(5, -1));
-      this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse }));
-      return '';
-    });
-
-    // Room details
-    data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
-      this.dispatcher.room = JSON.parse(dtls.slice(6, -1));
-      return '';
-    });
-
-    // Person details
-    data = data.replace(/&!pers\{[\s\S]*?\}!/gm, (dtls) => {
-      this.dispatcher.pers = JSON.parse(dtls.slice(6, -1));
-      return '';
-    });
-
-    // Object details
-    data = data.replace(/&!obj\{[\s\S]*?\}!/gm, (dtls) => {
-      this.dispatcher.objpers = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
-      return '';
-    });
-
-    // Equipment
-    data = data.replace(/&!equip\{[\s\S]*?\}!/gm, (eq) => {
-      const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-      this.store.dispatch(DataActions.equipAction({ payload: eq_parse }));
-      return '';
-    });
-
-    // Workable lists
-    data = data.replace(/&!wklst\{[\s\S]*?\}!/gm, (wk) => {
-      const wk_parse = JSON.parse(wk.slice(7, -1));
-      this.store.dispatch(DataActions.worksListAction({ payload: wk_parse }));
-      return '';
-    });
-
-    // Skill list
-    data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, (skinfo) => {
-      const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-      this.store.dispatch(DataActions.skillsAction({ payload: skinfo_parse }));
-      return '';
-
-    });
-
-    // Player info
-    data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, (info) => {
-      const info_parse = JSON.parse(info.slice(7, -1));
-      this.store.dispatch( GameActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
-      return '';
-    });
-
-    // Player status INLINE
-    data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, (status) => {
-      const status_parse = JSON.parse(status.slice(6, -1));
-      this.store.dispatch( GameActions.showStatusBoxAction( {payload: {status: status_parse }}));
-      return '';
-    });
-
-    // // (New) Image Request Box
-    // data = data.replace(/&!imgreq\{[\s\S]*?\}!/gm, (imgreq) => {
-    //   imgreq = JSON.parse(imgreq.slice());
-    //   this.parseUiObject$.next({ imgreq, type: GameMode.NEWIMAGEREQUEST });
-    //   return '';
-    // });
-
-    // Selectable generic
-    data = data.replace(/&!select\{[\s\S]*?\}!/gm, (s) => {
-      s = JSON.parse(s.slice(8, -1));
-      console.log('selectable generic', s);
-      return '';
-    });
-
-    // Refresh command
-    data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, (t) => {
-      const rcommand_parse = JSON.parse(t.slice(9, -1));
-      this.store.dispatch( GameActions.refreshCommandAction());
-      console.log('refresh command', rcommand_parse);
-      return '';
-    });
-
-    // Pause scroll
-    data = data.replace(/&!crlf"[^"]*"/gm, () => {
-      // console.log('pause scroll?');
-      return '';
-    });
+    data = data.replace(/&!logged"[^"]*"/gm, this.logged.bind(this));
+    data = data.replace(/&!news\{[\s\S]*?\}!/gm, this.news.bind(this));
+    data = data.replace(/&!pgdata\{[\s\S]*?\}!/gm, this.characterData.bind(this));
+    data = data.replace(/&!datetime\{[\s\S]*?\}!/gm, this.dateTime.bind(this));
+    data = data.replace(/&!region\{[\s\S]*?\}!/gm, this.region.bind(this));
+    data = data.replace(/&x\n*/gm, this.hideInputChars.bind(this));
+    data = data.replace(/&e\n*/gm, this.showInputChars.bind(this));
+    data = data.replace(/&o.\n*/gm, this.skyPicture.bind(this));
+    data = data.replace(/&d\d{6}\n*/gm, this.doors.bind(this));
+    data = data.replace(/&!au"[^"]*"\n*/gm, this.audio.bind(this));
+    data = data.replace(/&!st\{[\s\S]*?\}!/gm, this.updateHeroStatus.bind(this));
+    data = data.replace(/&!up"[^"]*"\n*/gm,  this.clientUpdate.bind(this));
+    data = data.replace(/&!img"[^"]*"\n*/gm, this.imageInSideFrameWithGamma.bind(this));
+    data = data.replace(/&!im"[^"]*"\n*/gm, this.imageInSideFrame.bind(this));
+    data = data.replace(/&!ea"[^"]*"\n*/gm, this.closeTextEditor.bind(this));
+    data = data.replace(/&!ed"[^"]*"\n*/gm, this.openTextEditorWithData.bind(this));
+    data = data.replace(/&!map\{[\s\S]*?\}!/gm, this.map.bind(this));
+    data = data.replace(/&!book\{[\s\S]*?\}!/gm, this.book.bind(this));
+    data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, this.listOfCommands.bind(this));
+    data = data.replace(/&!page\{[\s\S]*?\}!/gm, this.genericPage.bind(this));
+    data = data.replace(/&!table\{[\s\S]*?\}!/gm, this.genericTable.bind(this));
+    data = data.replace(/&!inv\{[\s\S]*?\}!/gm, this.inventory.bind(this));
+    data = data.replace(/&!room\{[\s\S]*?\}!/gm, this.roomDetails.bind(this));
+    data = data.replace(/&!pers\{[\s\S]*?\}!/gm, this.personDetails.bind(this));
+    data = data.replace(/&!obj\{[\s\S]*?\}!/gm, this.objectDetails.bind(this));
+    data = data.replace(/&!equip\{[\s\S]*?\}!/gm, this.equipment.bind(this));
+    data = data.replace(/&!wklst\{[\s\S]*?\}!/gm, this.workableList.bind(this));
+    data = data.replace(/&!sklst\{[\s\S]*?\}!/gm, this.skillList.bind(this));
+    data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, this.playerInfo.bind(this));
+    data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, this.playerStatusInline.bind(this));
+    data = data.replace(/&!select\{[\s\S]*?\}!/gm, this.selectableGeneric.bind(this));
+    data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, this.refreshCommand.bind(this));
+    data = data.replace(/&!crlf"[^"]*"/gm, this.pauseScrollRequested.bind(this));
 
     // Clear message
     pos = data.lastIndexOf('&*');
@@ -344,56 +132,14 @@ export class DataParser {
       data = data.slice(pos + 2);
     }
 
-    // Filterable messages
-    data = data.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, (line, type, msg) => {
-      console.log('addFilterTag');
-      return '';
-    });
-
-    data = data.replace(/&!ce"[^"]*"/gm, (image) => {
-      const image_parse = image.slice(5, -1);
-      console.log('renderEmbeddedImage', image_parse);
-      return '';
-      // return renderEmbeddedImage(image_parse);
-    });
-
-    data = data.replace(/&!ulink"[^"]*"/gm, (link) => {
-      const link_parse = link.slice(8, -1).split(',');
-      console.log('render link', link_parse);
-      // return _.renderLink(link_parse[0], link_parse[1]);
-      return '';
-    });
-
+    data = data.replace(/&!m"(.*)"\{([\s\S]*?)\}!/gm, this.filterableMessage.bind(this));
+    data = data.replace(/&!ce"[^"]*"/gm, this.embeddedImage.bind(this));
+    data = data.replace(/&!ulink"[^"]*"/gm, this.textLink.bind(this));
     data = data.replace(/&!as"[^"]*"/gm, '');
-
-    data = data.replace(/&!(ad|a)?m"[^"]*"/gm, (mob) => {
-      const mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
-      const desc_parse = mob.slice(5).toString();
-
-      console.log('render mob..?', mob_parse, desc_parse);
-      // return _.renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
-      return '';
-    });
-
-    data = data.replace(/&!(ad|a)?o"[^"]*"/gm, (obj) => {
-      const obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
-      const desc_parse = obj.slice(5).toString();
-      console.log('render object...?', obj_parse, desc_parse);
-      // return _.renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
-      return '';
-    });
-
-    // Is God
-    data = data.replace(/&i/gm, () => {
-      this.dispatcher.isgod = true;
-      return '';
-    });
-
-    // Invisibility Level (only god);
-    data = data.replace(/&I\d/gm, (inv) => {
-      this.dispatcher.visibilLevel = parseInt(inv.substr(2, 3), 10);
-      return '';
-    });
+    data = data.replace(/&!(ad|a)?m"[^"]*"/gm, this.renderMob.bind(this));
+    data = data.replace(/&!(ad|a)?o"[^"]*"/gm, this.renderObject.bind(this));
+    data = data.replace(/&i/gm, this.isGod.bind(this));
+    data = data.replace(/&I\d/gm, this.invisibilityLevel.bind(this));
 
     /* \r is already removed at top */
 
@@ -402,7 +148,6 @@ export class DataParser {
       data = data.replace(/<p><\/p>/g, '');
       this.dispatcher['base'] = data;
     }
-
 
     // Execute
     if (Object.keys(this.dispatcher).length > 0) {
@@ -425,12 +170,9 @@ export class DataParser {
     if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']); }
   }
 
-
-
   private substShort(input: any): any {
 
     /* Split into arguments */
-
     const args = input.split(/\s+/);
     /* Get the shortcut index */
     const shortcut_key = args.shift();
@@ -448,14 +190,12 @@ export class DataParser {
     if (shortcut_cmd) {
       /* Use the shortcut text as command */
       input = shortcut_cmd['cmd'];
-
       if (/\$\d+/.test(input)) {
         /* Substitute the arguments */
         for (let arg = 0; arg < args.length; ++arg) {
           const rx = new RegExp('\\$' + (arg + 1), 'g');
           input = input.replace(rx, args[arg]);
         }
-
         /* Remove remaining letiables */
         input = input.replace(/\$\d+/g, '');
       } else {
@@ -463,19 +203,11 @@ export class DataParser {
       }
     }
 
-
     if (this.cmd_prefix.length > 0) {
       input = this.cmd_prefix + ' ' + input;
     }
-
     return input;
   }
-
-  private setUpdateNeeded(ud: any) {
-    this._updateNeeded.next(ud);
-  }
-
-
 
   removeColors(data: any) {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
@@ -494,7 +226,253 @@ export class DataParser {
     return res;
   }
 
-  get updateNeeded(): Observable<any> {
+  setUpdateNeeded(ud: any) {
+    this._updateNeeded.next(ud);
+  }
+
+  getUpdateNeeded(): Observable<any> {
     return this._updateNeeded.asObservable();
+  }
+
+
+  /** PARSERS LIST---------------------------------------------------- */
+
+  private logged(): string {
+    return '';
+    this.store.dispatch(GameActions.inGameAction());
+    return '';
+  }
+
+  private news( data: any): string {
+    this.store.dispatch(GameActions.inGameAction());
+    return '';
+  }
+
+  private characterData(data: any): string {
+    const pgdata_parse = JSON.parse(data.slice(8, -1));
+    this.store.dispatch(DataActions.heroAction({ payload: pgdata_parse }));
+    return '';
+  }
+
+  private dateTime(data: any): string {
+    const parse_time = JSON.parse(data.slice(10, -1));
+    this.store.dispatch( DataActions.dataTimeAction({payload: parse_time}));
+    return '';
+  }
+
+  private region(data): string  {
+    const region_parse = JSON.parse(data.slice(8, -1));
+    this.store.dispatch(DataActions.regionAction({ payload: region_parse}));
+    return '';
+  }
+  
+  private hideInputChars(): string {
+    this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: false }}));
+    return '';
+  }
+
+  private showInputChars(): string {
+    this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: true }}));
+    return '';
+  }
+
+  private skyPicture(sky: string): string {
+    const sky_parse = sky.charAt(2);
+    this.store.dispatch(DataActions.skyAction({ payload: sky_parse }));
+    return '';
+  }
+
+  private doors(doors): string {
+    const doors_parse = doors.substr(2, 6);
+    this.store.dispatch(DataActions.doorsAction({ payload: doors_parse }));
+    return '';
+  }
+
+  private audio(audio): string {
+    const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
+    this.store.dispatch(GameActions.audioAction({payload: audio_parse}));
+    return '';
+  }
+
+  private updateHeroStatus(status): string {
+    const status_parse = JSON.parse(status.slice(4, -1));
+    this.store.dispatch(DataActions.updateStatusHero({ payload: status_parse }));
+    return '';
+  }
+
+  private clientUpdate(up): string {
+    const ud = up.slice(5, status.lastIndexOf('"')).split(',');
+    this.dispatcher.update = ud;
+    return '';
+  }
+
+  private imageInSideFrameWithGamma(image: any): string {
+    const image_parse = image.slice(6, image.lastIndexOf('"')).split(',');
+    console.log('image in side frame with gamma:', image_parse);
+    return '';
+  }
+
+  private imageInSideFrame(image: any): string {
+    const image_parse = image.slice(5, image.lastIndexOf('"'));
+    console.log('image in side frame', image_parse);
+    return '';
+  }
+
+  private closeTextEditor(options?: any): string{
+    this.store.dispatch( DataActions.closeTextEditorAction());
+    return '';
+  }
+
+  private openTextEditorWithData(data: any): string {
+    const options_parse = data.slice(5, data.lastIndexOf('"')).split(',');
+    const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
+    this.store.dispatch(DataActions.editorAction({
+      payload: {
+        maxChars: options_parse[0],
+        title: options_parse[1] ? options_parse[1] : ' ',
+        description: text ? text : ' '
+      }
+    }));
+    return '';
+  }
+
+  private map(m: any): string {
+    const map_parse = <Map>JSON.parse(m.slice(5, -1));
+    this.store.dispatch(DataActions.mapAction({ map: map_parse }));
+    return '';
+  }
+
+  private book(book: any): string {
+    const b_parse = JSON.parse(book.slice(6, -1));
+    this.store.dispatch(DataActions.bookAction(b_parse));
+    return '';
+  }
+
+  private listOfCommands(cmds: any): string {
+    const cmd_parse = JSON.parse(cmds.slice(8, -1).replace(/"""/, '"\\""'));
+    this.store.dispatch( DataActions.showCommandsActions({payload: cmd_parse}));
+    return '';
+  }
+
+  private genericPage(p: any): string {
+    const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
+    this.store.dispatch(DataActions.genericPageAction({ payload: page_parse }));
+    return '';
+  }
+
+  private genericTable(t: any): string {
+    const gtable_parse = JSON.parse(t.slice(7, -1));
+    this.store.dispatch(DataActions.genericTableAction({ payload: gtable_parse }));
+    return '';
+  }
+
+  private inventory(inv: any): string {
+    const inv_parse = JSON.parse(inv.slice(5, -1));
+    this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse }));
+    return '';
+  }
+
+  private equipment(eq: any): string {
+    const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
+    this.store.dispatch(DataActions.equipAction({ payload: eq_parse }));
+    return '';
+  }
+
+  private roomDetails(dtls: any): string {
+    this.dispatcher.room = JSON.parse(dtls.slice(6, -1));
+    return '';
+  }
+
+  private personDetails(dtls: any): string {
+    this.dispatcher.pers = JSON.parse(dtls.slice(6, -1));
+    return '';
+  }
+
+  private objectDetails(dtls: any): string {
+    this.dispatcher.objpers = JSON.parse(dtls.slice(5, -1).replace(/\n/gm, ' '));
+    return '';
+  }
+
+  private workableList(wk: any): string {
+    const wk_parse = JSON.parse(wk.slice(7, -1));
+    this.store.dispatch(DataActions.worksListAction({ payload: wk_parse }));
+    return '';
+  }
+
+  private skillList(skinfo: any): string {
+    const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
+    this.store.dispatch(DataActions.skillsAction({ payload: skinfo_parse }));
+    return '';
+  }
+
+  private playerInfo(info: any): string {
+    const info_parse = JSON.parse(info.slice(7, -1));
+    this.store.dispatch( DataActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
+    return '';
+  }
+  private playerStatusInline(data: any): string {
+    const status_parse = JSON.parse(status.slice(6, -1));
+    this.store.dispatch( DataActions.showStatusBoxAction( {payload: {status: status_parse }}));
+    return '';
+  }
+
+  private selectableGeneric(s): string {
+    s = JSON.parse(s.slice(8, -1));
+    console.log('selectable generic', s);
+    return '';
+  }
+
+  private refreshCommand(t) {
+    const rcommand_parse = JSON.parse(t.slice(9, -1));
+    this.store.dispatch( DataActions.refreshCommandAction());
+    console.log('refresh command', rcommand_parse);
+    return '';
+  }
+
+  private pauseScrollRequested(): string {
+    return '';
+  }
+
+  private filterableMessage(...args: any): string {
+    console.log('addFilterTag', args[0], args[1], args[2])
+    return '';
+  }
+
+  private embeddedImage(image: any): string {
+    const image_parse = image.slice(5, -1);
+    console.log('renderEmbeddedImage', image_parse);
+    return '';
+  }
+
+  private textLink(link: any): string {
+      const link_parse = link.slice(8, -1).split(',');
+      console.log('render link', link_parse);
+      return '';
+  }
+
+  private renderMob(mob: any): string {
+    const mob_parse = mob.slice(mob.indexOf('"') + 1, -1).split(',');
+    const desc_parse = mob.slice(5).toString();
+    console.log('render mob..?', mob_parse, desc_parse);
+    // return _.renderMob(mob_parse[0], mob_parse[1], mob_parse[2], mob_parse[3], desc_parse, 'interact pers');
+    return '';
+  }
+
+  private renderObject(obj: any): string {
+    const obj_parse = obj.slice(obj.indexOf('"') + 1, -1).split(',');
+    const desc_parse = obj.slice(5).toString();
+    console.log('render object...?', obj_parse, desc_parse);
+    // return _.renderObject(obj_parse[0], obj_parse[1], obj_parse[2], obj_parse[3], desc_parse, 'interact obj');
+    return '';
+  }
+
+  private isGod(): string {
+    this.dispatcher.isgod = true;
+    return '';
+  }
+
+  private invisibilityLevel(inv: any): string {
+    this.dispatcher.visibilLevel = parseInt(inv.substr(2, 3), 10);
+    return '';
   }
 }
