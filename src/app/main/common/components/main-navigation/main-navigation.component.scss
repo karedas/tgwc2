@@ -66,17 +66,20 @@ tg-main-navigation {
     overflow: hidden;
   }
 
-  // header {
-  //   padding: 8px 16px;
-  //   height: 40px;
-  // }
-
   .tg-mainnav-item {
     display: none;
-    font-size: 11px;
+    font-size: 1em;
     vertical-align: middle;
     margin-right: 20px;
   }
+
+
+  .mat-menu-item {
+    font-size: 1em;
+    line-height: 1;
+    height: 40px;
+  }
+
 
   .mr0 {
     margin-right: 0!important;
@@ -85,7 +88,6 @@ tg-main-navigation {
   .m-right {
     margin-left: auto;
   }
-
 
   .hamburger-item {
     display: none;
@@ -103,6 +105,7 @@ tg-main-navigation {
   .tg-mainnav-item .mat-button {
     min-width: 0;
     padding: 0;
+    height: 100%;
   }
 
   .tg-mainnav-item a,
@@ -111,7 +114,7 @@ tg-main-navigation {
     text-transform: uppercase;
     color: #bdb3a3;
     transition: text-shadow .2s linear;
-    font-size: 11px;
+    font-size: 1em;
     line-height: 1;
 
     &:hover,
@@ -133,18 +136,6 @@ tg-main-navigation {
   }
 
 
-  .mat-menu-item.btn-logout {
-    background: #b50000;
-    text-transform: uppercase;
-    color: white;
-    border: 1px solid #565656;
-    box-shadow: inset 0px 0 6px black;
-
-    &:hover {
-      background: #d30000 !important;
-      color: white;
-    }
-  }
 
   @include layout-bp(lt-md) {
 
@@ -192,6 +183,7 @@ tg-main-navigation {
 .user-menu-item, .mat-menu-item {
   padding: 8px 16px;
   color: #bdb3a3;
+  font-size: 1em;
 
   a {
     color: #bdb3a3

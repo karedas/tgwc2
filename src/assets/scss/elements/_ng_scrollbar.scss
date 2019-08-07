@@ -29,6 +29,31 @@
     min-height: 100%;
   }
 
+ng-scrollbar.scrollbar-output {
+  --scrollbar-color: #1b1916;
+  --scrollbar-container-color: #1b1916;
+  --scrollbar-thumb-color: #695e50;
+  --scrollbar-thumb-hover-color: #796b58;
+  --scrollbar-border-radius: 10px;
+  --scrollbar-size: 6px;
+  --scrollbar-padding: 4px;
+  --scroll-view-margin: 0;
+  --scroll-view-color: transparent;
+  min-height: 100%;
+
+  .ng-scroll-view-container {
+    border-right: 1px solid #48433c;
+  }
+}
+
+
   ng-scrollbar.scrollbar-dialog .ng-scroll-view {
     max-height: 65vh;
+  }
+
+  ng-scrollbar .ng-scrollbar-thumb  {
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
   }

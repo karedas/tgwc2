@@ -14,7 +14,7 @@
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
-              <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
+              <ng-scrollbar class="scrollbar-output" [autoUpdate]="true" #scrollBar [shown]="'always'"
                 [disableOnBreakpoints]="false">
                 <div smoothScroll class="tg-output--history">
                   <div *ngIf="!output.length" class="no-output-notice">
@@ -63,7 +63,7 @@
 
   <div style="height: 100%; overflow:hidden;">
 
-    <ng-scrollbar class="scrollbar" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
+    <ng-scrollbar class="scrollbar-output" #scrollBar [shown]="'always'" [disableOnBreakpoints]="false">
       <div smoothScroll class="tg-output--history">
         <div *ngFor="let data of outputObservable | async; let i = index">
           <ng-container [ngSwitch]="data.type">

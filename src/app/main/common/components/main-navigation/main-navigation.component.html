@@ -29,7 +29,7 @@
 
 
     <!-- Game Menu -->
-    <div *ngIf="userIsInGame" fxFlex="1 1 100%" class="mr0">
+    <div *ngIf="userIsInGame" fxFlex="1 1 100%" fxHide.xs="true" class="mr0">
       <tg-game-menu></tg-game-menu>
     </div>
     <!-- End Game Menu-->
@@ -73,28 +73,29 @@
             <mat-divider class="light"></mat-divider>
             <!--  Characters List Fast Connector -->
             <mat-action-list dense>
+              <!-- 
             <div class="user-smart-chars" *ngIf="charactersList | async as chars">
-                <div mat-list-item class="smart-char" *ngFor="let char of chars" fxLayout="row"
-                  fxLayoutAlign="start center" (click)="loginCharacter(char.name)">
-                  <div class="smart-char-avatar">
-                    <ng-container *ngIf="char.image; else nocharImg">
-                      <img [src]="env.media_address + '/' + char.image" alt="{{char.name}}" />
-                    </ng-container>
-                  </div>
-                  <div class="smart-char-name">{{char.name}}</div>
+              <div mat-list-item class="smart-char" *ngFor="let char of chars" fxLayout="row"
+                fxLayoutAlign="start center" (click)="loginCharacter(char.name)">
+                <div class="smart-char-avatar">
+                  <ng-container *ngIf="char.image; else nocharImg">
+                    <img [src]="env.media_address + '/' + char.image" alt="{{char.name}}" />
+                  </ng-container>
                 </div>
-
+                <div class="smart-char-name">{{char.name}}</div>
+              </div>
+            </div> -->
               <ng-template #nocharImg>
                 <mat-icon>portrait</mat-icon>
               </ng-template>
-            </div>
 
-            <mat-divider class="light"></mat-divider>
-            <button mat-list-item class="user-menu-button" [routerLink]="['/manager/dashboard']">La mia Dashboard</button>
-            <!-- <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
+              <mat-divider class="light"></mat-divider>
+              <button mat-list-item class="user-menu-button" [routerLink]="['/manager/dashboard']">La mia
+                Dashboard</button>
+              <!-- <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
             <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button> -->
-            <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Logout</button>
-          </mat-action-list>
+              <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Logout</button>
+            </mat-action-list>
 
           </mat-menu>
 

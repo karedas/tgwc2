@@ -13,6 +13,8 @@ import { LoginClientGuard } from '../authentication/services/login-client.guard'
 import { DialogV2Module } from './common/dialog-v2/dialog-v2.module';
 import { OutputService } from './components/output/output.service';
 import { DialogV2Service } from './common/dialog-v2/dialog-v2.service';
+import { EffectsModule } from '@ngrx/effects';
+import { DataEffects } from './store/effects/data.effects';
 
 const clientRouting: Routes = [
   {
@@ -32,6 +34,7 @@ const clientRouting: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(clientRouting),
+    EffectsModule.forFeature([DataEffects]),
     DashboardModule,
     RightSidebarModule,
     OutputModule,

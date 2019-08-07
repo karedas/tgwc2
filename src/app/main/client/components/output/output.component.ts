@@ -196,11 +196,17 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onDragStart(event) {
+    this.outputService.toggleAutoScroll()
+  }
+
   onDragEnd(event) {
     // Store the Split size in the main config
+    this.outputService.toggleAutoScroll();
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });
+
   }
 
   ngOnDestroy() {

@@ -130,22 +130,6 @@ export class DialogV2Service {
     }
   }
 
-  // openCookieLaw(): MatDialogRef<CookieLawComponent, MatDialogConfig> {
-
-  //   const dialogID = 'cookielaw';
-  //   const config = new MatDialogConfig();
-
-  //   config.id = dialogID;
-  //   config.disableClose = true;
-  //   config.autoFocus = false;
-  //   config.width = '450px';
-  //   config.scrollStrategy = this.overlay.scrollStrategies.reposition();
-
-  //   const dialogRef = this.dialog.open(CookieLawComponent, config);
-
-  //   return dialogRef;
-
-  // }
 
   // openNews(fromGame: boolean): MatDialogRef<NewsComponent, MatDialogConfig> {
 

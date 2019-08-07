@@ -90,7 +90,8 @@ export class GameService {
         this.dataParserService.parse(data, this._tgConfig.log);
       });
 
-    this._upSubscription = this.dataParserService.updateNeeded.subscribe(this.updatePanels.bind(this));
+    this._upSubscription = this.dataParserService.getUpdateNeeded()
+      .subscribe(this.updatePanels.bind(this));
 
     // this.socketService.listen(socketEvent.DATA)
     //   .subscribe(data => {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { DialogV2Service } from '../../../../client/common/dialog-v2/dialog-v2.service';
+// import { DialogV2Service } from '../../../../client/common/dialog-v2/dialog-v2.service';
 import gitInfo from 'src/git-version.json';
 import { TGConfig } from '../../../../client/client-config';
 import { ConfigService } from 'src/app/services/config.service';
@@ -33,7 +33,7 @@ export class TgGameMenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private game: GameService,
-    private dialogV2Service: DialogV2Service,
+    // private dialogV2Service: DialogV2Service,
     private render: Renderer2,
     private audioService: AudioService,
     private _configService: ConfigService,
@@ -138,13 +138,13 @@ export class TgGameMenuComponent implements OnInit, OnDestroy {
         // this.dialogV2Service.openNews(true);
         break;
       case 'preferences':
-        this.dialogV2Service.openControlPanel();
+        // this.dialogV2Service.openControlPanel();
         break;
       case 'audio':
         this.audioService.toggleAudio();
         break;
       case 'log':
-        this.dialogV2Service.openLog();
+        // this.dialogV2Service.openLog();
         break;
       default:
         this.game.processCommands(what);

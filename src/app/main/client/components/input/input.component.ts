@@ -150,14 +150,10 @@ export class InputComponent implements OnInit, OnDestroy {
     this.game.setOutputSize();
   }
 
-  pauseScrollOutput() {
-    this.pauseScroll = this.outputService.toggleAutoScroll();
-  }
 
   sendCmd(cmd: string) {
     this.game.processCommands(cmd);
   }
-
 
 
   @HostListener('document:keypress', ['$event'])

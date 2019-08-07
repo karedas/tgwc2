@@ -34,7 +34,6 @@ export class ApiService {
         }),
         catchError(this.handleError)
       );
-
   }
 
   public get(url: string): Observable<any> {
@@ -50,6 +49,18 @@ export class ApiService {
         }),
         catchError(this.handleError.bind(this))
       );
+  }
+
+  public put(url: string, postData: any): Observable<any> {
+    const endpoint = this.buildUrl(url);
+    const headers = this.buildHeader();
+    return this.http.put(endpoint, JSON.stringify(postData), {headers})
+    .pipe(
+      map(response => {
+        return new ApiResponse(response);
+      }),
+      catchError(this.handleError)
+    );
   }
 
   private buildUrl(url: string): string {
