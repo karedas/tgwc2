@@ -9,7 +9,13 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 export const reducer = createReducer(
   initialState,
-  on(heroAction, (state, { payload }) => ({ ...state, hero: payload })),
+  on(heroAction,  (state, { payload }) => {
+    console.log(state, payload);
+    return Object.assign({}, state, {
+      hero: {
+        payload
+      }});
+  }),
   on(mapAction, (state, { map }) => ({ ...state, map: map })),
   on(skyAction, (state, { payload }) => ({ ...state, sky: payload })),
   on(editorAction, (state, { payload }) => ({ ...state, editor: payload })),

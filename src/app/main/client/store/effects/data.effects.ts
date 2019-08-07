@@ -127,9 +127,9 @@ export class DataEffects {
   showCharacterSheet$ = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SHOWCHARACTERSHEET),
     switchMap((res) => {
-      console.log(res);
       this.dialogV2Service.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
+        console.log('RES', res.payload[0]);
         return [
           DataActions.infoCharacterAction(),
           DataActions.heroAction(res.payload[0])
