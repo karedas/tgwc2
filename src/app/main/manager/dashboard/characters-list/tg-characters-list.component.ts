@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewEncapsulation, Output, EventEmitter, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
@@ -7,9 +7,10 @@ import { takeUntil, delay } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import { Router } from '@angular/router';
-import { MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialogConfig, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { AlertComponent } from 'src/app/main/common/components/dialogs/alert/alert.component';
 import { tgAnimations } from 'src/app/animations';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -19,15 +20,15 @@ import { tgAnimations } from 'src/app/animations';
   animations: [tgAnimations],
 })
 export class MyCharactersComponent implements OnInit, OnDestroy {
-
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
   @Output() goToManage = new EventEmitter();
   readonly env = environment;
   readonly ethnicity = ethnicity;
   readonly maxCharacter: number;
   readonly displayedColumns: string[] = ['image', 'name', 'actions', 'expand'];
-  expandedElement: [];
 
-  charactersList: Character[];
+  expandedElement: [];
+  charactersList: MatTableDataSource<Character[]>;
   enabledCharactersNumber: number;
   replayMessage: string;
 
@@ -52,12 +53,11 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
         this.updateReplayMessage(msg);
       });
 
-    this.userService.getCharacters().subscribe((result: Character[]) => {
-      this.charactersList = result.sort(function(a,b) {
-        if (a.is_default == true && !b.is_default) {
-          return -1;
-        } else return 1;
-      });
+    this.userService.getCharacters()
+      .subscribe( charslist => {
+        const cdata = this.sortCharacterList(charslist);
+
+        this.charactersList = new MatTableDataSource(cdata);
     });
   }
 
@@ -68,6 +68,14 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
         replayMessage: msg
       };
     }
+  }
+
+  private sortCharacterList(list): any {
+    return list.sort(function(a, b) {
+      if (a.is_default == true && !b.is_default) {
+        return -1;
+      } else { return 1; }
+    });
   }
 
   loginCharacter(name: string, secret: string, event: Event) {
@@ -85,14 +93,10 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
           this.redirectToClient();
           return;
         }
-
-        // this.dialogRef.componentInstance.data = {
-        //   hasError: false
-        // };
       });
   }
 
-  redirectToClient() {
+  private redirectToClient() {
     this.router.navigate(['/webclient'])
       .then(() => {
         this.closeLoginDialog();
@@ -113,39 +117,45 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
 
 
-  // private getTotalEnabledChars(chars: any): number {
+  /** Public  */
 
-  //   if (!chars)
-  //     return;
 
-  //   let count = 0;
-
-  //   for (let i = 0; i < chars.length; ++i) {
-  //     if (chars[i].status === 1)
-  //       count++;
-  //   }
-
-  //   return count;
-  // }
-
-  goToChractersManage(event) {
+  public goToChractersManage(event) {
     this.goToManage.emit();
   }
 
-
-  /* Character Actions */
-  onDisableChar(pgname: string): void {
+  public onDisableChar(pgname: string): void {
     pgname = pgname.toUpperCase();
     const confirm = prompt(`Attenzione, l\'operazione non potrà essere annullata.
       Se sei certo di questa scelta digita qui sotto "${pgname}" e premi Ok`, ``);
-
+      
     if (confirm != null && confirm === pgname) {
       // DISABLE Character!!
     }
   }
 
-  onSelectedPrimary(char) {
-    this.userService.setDefaultCharacter(char).subscribe();
+  public onSelectedPrimary(id: number) {
+    let cdata = this.charactersList.data;
+    for (let c in cdata) {
+      if(cdata[c]['id'] !== id ) {
+        cdata[c]['is_default'] = false;
+        cdata[c]['name'] = 'CULO';
+
+        console.log('if');
+      }
+      // if(this.charactersList[c].id !==  id) {
+      //   this.charactersList[c].is_default = false;
+      //   this.charactersList[c].name = 'ROTTO';
+      // }
+      else {
+        console.log('else');
+        //   this.userService.setDefaultCharacter(this.charactersList[c]).subscribe();
+        //   this.charactersList[c].is_default = true;
+        //   this.charactersList[c].name = 'CULO';
+      }
+    }
+    
+    this.charactersList.data = cdata;
   }
 
   ngOnDestroy(): void {

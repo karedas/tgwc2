@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable, timer } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({

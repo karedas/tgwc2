@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response.model';
-import { map, shareReplay, share, publishReplay, refCount } from 'rxjs/operators';
+import { map, shareReplay} from 'rxjs/operators';
 import { Character } from '../models/character.model';
 
 const CACHE_SIZE = 1;
@@ -54,11 +54,11 @@ export class UserService extends ApiService {
     return this.characters$;
   }
 
-  public setDefaultCharacter(charData): Observable<any> {
-    let data = {
-      "uuid": charData.uuid,
-      "id_default_char": charData._id
+  public setDefaultCharacter(charData: any){
+    const data = {
+      'uuid': charData.uuid,
+      'id_default_char': charData._id
     };
-    return this.put('/profile/set-default-character', data)
+    return this.put('/profile/set-default-character', data);
   }
 }

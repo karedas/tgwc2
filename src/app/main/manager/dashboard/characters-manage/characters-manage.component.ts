@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { VerifyCharacterService } from '../../services/verify-character.service';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { SocketService } from 'src/app/core/services/socket.service';
+import { FormGroup, FormControl } from '@angular/forms';
 import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validators/character-validations';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
@@ -29,15 +28,13 @@ export class CharactersManageComponent implements OnInit {
 
 
   // Private
-  private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private socketService: SocketService,
-    private verifyCharacterService: VerifyCharacterService,
+    // private formBuilder: FormBuilder,
+    // private socketService: SocketService,
+    // private verifyCharacterService: VerifyCharacterService,
     private userService: UserService
   ) {
-    this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {

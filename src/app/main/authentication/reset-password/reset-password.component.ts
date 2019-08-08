@@ -18,7 +18,6 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  private paramToken: any;
   public submitted = false;
   public frmNewPassword: FormGroup;
   public loginFailedError: string;
@@ -42,8 +41,8 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.paramToken = this.route.params.subscribe(params => {
-      this.token = params['token'];
+    this.route.params.subscribe(params => {
+        this.token = params['token'];
     });
   }
 

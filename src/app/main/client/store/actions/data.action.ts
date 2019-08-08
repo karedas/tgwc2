@@ -6,7 +6,6 @@ import { IWorks } from 'src/app/main/client/models/data/workslist.model';
 import { IBook } from 'src/app/main/client/models/data/book.model';
 import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
-import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { IRegion } from 'src/app/main/client/models/data/region.model';
 
 

@@ -1,7 +1,6 @@
 
 import gitInfo from 'src/git-version.json';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GameService } from 'src/app/main/client/services/game.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SocketService } from 'src/app/core/services/socket.service';
@@ -23,7 +22,6 @@ export class FooterComponent implements OnInit , OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private game: GameService,
     private socketService: SocketService,
     private router: Router
     ) {

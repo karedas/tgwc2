@@ -3,7 +3,7 @@ import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero } from 'src/app/main/client/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
-import { takeUntil, map, filter } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/main/client/models/data/hero.model';
 import { GameService } from 'src/app/main/client/services/game.service';

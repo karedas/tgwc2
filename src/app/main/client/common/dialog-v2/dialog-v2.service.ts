@@ -1,6 +1,5 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { NewsComponent } from '../../components/windows/news/news.component';
 import { EditorComponent } from '../../components/windows/editor/editor.component';
 import { ControlPanelComponent } from '../../components/windows/control-panel/control-panel.component';
 import { LoginSmartComponent } from '../../components/windows/login-smart/login-smart.component';

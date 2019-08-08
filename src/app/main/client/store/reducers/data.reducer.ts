@@ -53,7 +53,7 @@ export const reducer = createReducer(
         pietoso: payload.pietoso,
         nosfodera: payload.nosfodera
       }
-    })
+    });
   }),
   on(objectAndPersonAction, (state, { payload }) => {
     return Object.assign({}, { objPers: payload });

@@ -4,7 +4,6 @@ import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
 import { SplashScreenService } from './splashscreen.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-splashscreen',

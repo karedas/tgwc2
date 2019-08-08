@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { navigationSidebar, NavigationItem, baseNavigationSidebar } from '../navigation';
+import { NavigationItem, baseNavigationSidebar } from '../navigation';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.model';
-import { Navigation } from 'selenium-webdriver';
 
 @Component({
   selector: 'tg-sidebar',

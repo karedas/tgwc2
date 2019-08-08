@@ -23,7 +23,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     public dialog: MatDialog,
   ) {
-    
+
     this._unsubscribeAll = new Subject();
   }
 

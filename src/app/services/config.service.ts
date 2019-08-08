@@ -16,7 +16,7 @@ export class ConfigService {
     @Inject(TG_CONFIG) private _config
   ) {
     // set the default config from the user provided config (from forRoot)
-    this._defaultConfig = _config;
+    this._defaultConfig = this._config;
 
     this._init();
   }
@@ -91,7 +91,7 @@ export class ConfigService {
     // Get the value from the behavior subject
     let config = this._configSubject.getValue();
     // // Merge the new config
-    config = _.mergeWith(config, value,  (obj, src) => {
+    config = _.mergeWith(config, value,  (obj: any, src) => {
       if (_.isArray(src) && _.isEmpty(src)) {
         return src;
       } else if (_.isArray(src)) {

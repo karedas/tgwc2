@@ -2,7 +2,7 @@ import { Component, HostListener, Input, OnInit, OnDestroy } from '@angular/core
 import { GameService } from 'src/app/main/client/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
-import { getDoors, getUserLevel, getInvisibilityLevel } from 'src/app/main/client/store/selectors';
+import { getDoors, getInvisibilityLevel } from 'src/app/main/client/store/selectors';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

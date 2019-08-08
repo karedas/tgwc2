@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { GameService } from 'src/app/main/client/services/game.service';
+// import { GameService } from 'src/app/main/client/services/game.service';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { getSkills } from 'src/app/main/client/store/selectors';
@@ -18,7 +18,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private game: GameService,
+    // private game: GameService,
     private store: Store<DataState>
   ) {
 

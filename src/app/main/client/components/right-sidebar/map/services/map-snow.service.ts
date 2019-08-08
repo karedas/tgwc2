@@ -112,7 +112,6 @@ export class MapSnowService {
     this.tickHandler = setInterval(this.tick.bind(this), Math.floor(1000 / this.framerate));
   }
   public stopSnow() {
-    const _ = this;
     clearInterval(this.tickHandler);
   }
 }

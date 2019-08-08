@@ -72,7 +72,7 @@ export class DataParser {
     }
   }
 
-     
+
   private preParseText(data: string): string {
     data = data.replace(/\r/gm, '');
     data = data.replace(/&!!/gm, '');
@@ -86,7 +86,7 @@ export class DataParser {
 
 
   private parseForDisplay(data: string): void {
-    
+
 
     // reset Dispatcher
     this.dispatcher = {};
@@ -265,7 +265,7 @@ export class DataParser {
     this.store.dispatch(DataActions.regionAction({ payload: region_parse}));
     return '';
   }
-  
+
   private hideInputChars(): string {
     this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: false }}));
     return '';
@@ -318,7 +318,7 @@ export class DataParser {
     return '';
   }
 
-  private closeTextEditor(options?: any): string{
+  private closeTextEditor(options?: any): string {
     this.store.dispatch( DataActions.closeTextEditorAction());
     return '';
   }
@@ -434,7 +434,7 @@ export class DataParser {
   }
 
   private filterableMessage(...args: any): string {
-    console.log('addFilterTag', args[0], args[1], args[2])
+    console.log('addFilterTag', args[0], args[1], args[2]);
     return '';
   }
 
