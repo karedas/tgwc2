@@ -56,7 +56,6 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
     this.userService.getCharacters()
       .subscribe( charslist => {
         const cdata = this.sortCharacterList(charslist);
-
         this.charactersList = new MatTableDataSource(cdata);
     });
   }
@@ -137,25 +136,15 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
   public onSelectedPrimary(id: number) {
     let cdata = this.charactersList.data;
     for (let c in cdata) {
-      if(cdata[c]['id'] !== id ) {
-        cdata[c]['is_default'] = false;
-        cdata[c]['name'] = 'CULO';
-
-        console.log('if');
+      if(cdata[c]['id'] === id && !cdata[c]['is_default']) {
+        cdata[c]['is_default'] = true
+        this.userService.setDefaultCharacter(cdata[c]).subscribe();
       }
-      // if(this.charactersList[c].id !==  id) {
-      //   this.charactersList[c].is_default = false;
-      //   this.charactersList[c].name = 'ROTTO';
-      // }
       else {
-        console.log('else');
-        //   this.userService.setDefaultCharacter(this.charactersList[c]).subscribe();
-        //   this.charactersList[c].is_default = true;
-        //   this.charactersList[c].name = 'CULO';
+        cdata[c]['is_default'] = false;
       }
     }
-    
-    this.charactersList.data = cdata;
+    this.charactersList = new MatTableDataSource(this.sortCharacterList(cdata));
   }
 
   ngOnDestroy(): void {

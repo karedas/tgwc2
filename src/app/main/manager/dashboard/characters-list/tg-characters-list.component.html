@@ -22,7 +22,10 @@
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nome/Dettagli </th>
             <td mat-cell *matCellDef="let element">
-              <div class="ch-char-name tg-yellow"> {{element.name | capitalizeFirst}} </div>
+              <div class="ch-char-name tg-yellow">
+                <mat-icon *ngIf="element.is_default" color="tg-yellow" class="star-icon"
+                tooltip="Personaggio primario" placement="top" show-delay="500">star_rate</mat-icon>
+                {{element.name | capitalizeFirst}} </div>
               <div class="ch-char-ethnicity">{{element.race | getEthnicityByCode: element.ethnicity }}</div>
             </td>
           </ng-container>
