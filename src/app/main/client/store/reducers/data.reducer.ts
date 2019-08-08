@@ -10,10 +10,10 @@ import { createReducer, on, Action } from '@ngrx/store';
 export const reducer = createReducer(
   initialState,
   on(heroAction,  (state, { payload }) => {
-    console.log(state, payload);
     return Object.assign({}, state, {
       hero: {
-        payload
+        ...state.hero,
+        ...payload
       }});
   }),
   on(mapAction, (state, { map }) => ({ ...state, map: map })),
