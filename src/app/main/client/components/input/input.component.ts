@@ -124,6 +124,12 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*------  Buttons Actions */
+
+  pauseScrollOutput() {
+    this.pauseScroll = this.outputService.toggleAutoScroll();
+  }
+
   openShortCut() {
     this.dialogService.openShortcut();
   }
