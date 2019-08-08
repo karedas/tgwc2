@@ -72,7 +72,6 @@ export class MapService extends MapSnowService {
   }
 
   public drawCanvasMap(dataMap: any): void {
-    const _ = this;
 
     let xoff: number, yoff: number, xlim: number, ylim: number;
     // clip options

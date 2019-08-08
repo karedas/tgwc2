@@ -87,7 +87,7 @@ export class DataEffects {
     })
   );
 
-  
+
 
   // @Effect({ dispatch: false })
   // showNews$: Observable<boolean | Action> = this.actions$.pipe(
@@ -141,7 +141,7 @@ export class DataEffects {
   @Effect()
   showStatusInline$ = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SHOWSTATUSHERO),
-    switchMap((res) => { 
+    switchMap((res) => {
       return [ DataActions.heroAction(res.payload) ];
     }),
     tap(() => this.game.setStatusInline(true))

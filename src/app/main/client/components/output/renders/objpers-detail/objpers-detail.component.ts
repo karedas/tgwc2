@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { IObjPersDesc } from 'src/app/main/client/models/data/objpers.model';
-import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-objpers-detail',

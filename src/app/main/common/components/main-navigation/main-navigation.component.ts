@@ -1,14 +1,13 @@
 import { Component, Input, OnDestroy, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
-import { LoginService } from '../../../authentication/services/login.service';
 import { Subject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import { map } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { gameNavigationSideBar, NavigationItem } from '../navigation';
+import { gameNavigationSideBar } from '../navigation';
 import { User } from 'src/app/core/models/user.model';
 
 
@@ -27,7 +26,7 @@ export class MainNavigationComponent implements OnDestroy {
 
   public userIsLoggedIn = false;
   public userIsInGame = false;
-  
+
   public user: User;
   public charactersList: Observable<any>;
   public hamburgerStatus = false;
@@ -37,7 +36,6 @@ export class MainNavigationComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private loginService: LoginService,
     private router: Router,
     private loginClientService: LoginClientService,
     private userService: UserService

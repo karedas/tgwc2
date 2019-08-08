@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
 import { Action } from '@ngrx/store';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';

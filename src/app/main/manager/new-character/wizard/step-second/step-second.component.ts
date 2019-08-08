@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { HttpClient } from '@angular/common/http';
-import { RegistrationService } from '../../services/registration.service';
+// import { RegistrationService } from '../../services/registration.service';
 
 @Component({
   selector: 'tg-step-second',
@@ -22,7 +22,7 @@ export class StepSecondComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private registrationService: RegistrationService
+    // private registrationService: RegistrationService
   ) {
     this.frmStepSecond = this.fb.group({
       race_code: ['', Validators.required]

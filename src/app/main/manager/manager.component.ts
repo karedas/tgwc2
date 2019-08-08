@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { MediaMatcher, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MediaMatcher, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'tg-manager',

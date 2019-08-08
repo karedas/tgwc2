@@ -1,8 +1,8 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import * as fromSelectors from 'src/app/main/client/store/selectors';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Map } from 'src/app/main/client/models/data/map.model';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { takeUntil } from 'rxjs/operators';

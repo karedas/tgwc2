@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivate } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VcodeGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor() {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot): boolean {
     const params = route.params['token'];
     if (params) {
       return true;

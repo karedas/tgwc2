@@ -3,11 +3,7 @@ import { SocketService } from '../../../core/services/socket.service';
 import { socketEvent } from '../../../core/models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
-import { Observable, BehaviorSubject, timer, Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { switchMap } from 'rxjs/operators';
-
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/client/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
@@ -24,7 +20,6 @@ export class GameService {
   private _showStatus: BehaviorSubject<(boolean)>;
   private _dataSubscription: Subscription;
   private _upSubscription: Subscription;
-  private _outputAutoScroll: BehaviorSubject<boolean>;
   public serverStat: Observable<any>;
 
   public mouseIsOnMap = false;
@@ -53,7 +48,6 @@ export class GameService {
     private socketService: SocketService,
     private dataParserService: DataParser,
     private historyService: HistoryService,
-    private http: HttpClient,
     private _configService: ConfigService,
     public dialog: MatDialog,
     rendererFactory: RendererFactory2,
@@ -61,7 +55,6 @@ export class GameService {
     this.serverStat = new BehaviorSubject<any>(null);
     this._commandsList$ = new BehaviorSubject(null);
     this._showStatus = new BehaviorSubject(null);
-    this._outputAutoScroll = new BehaviorSubject(false);
 
     this.render = rendererFactory.createRenderer(null, null);
 

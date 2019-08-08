@@ -8,8 +8,9 @@
     "test.ts",
     "**/*.spec.ts"
   ],
-  // "angularCompilerOptions": {
-  //   "enableIvy": true,
-  //   "allowEmptyCodegenFiles": true
-  // }
+  "angularCompilerOptions": {
+    // "noUnusedLocals": false,
+    // "noUnusedParameters": false,
+    // "enableIvy": true,
+  }
 }

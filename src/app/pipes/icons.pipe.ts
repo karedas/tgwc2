@@ -31,7 +31,6 @@ export class IconsPipe implements PipeTransform {
   }
 
   tileBgPos(tilenum): string {
-    const _ = this;
     const tc = this.tileCoords(tilenum);
     return '-' + tc[0] + 'px -' + tc[1] + 'px';
   }

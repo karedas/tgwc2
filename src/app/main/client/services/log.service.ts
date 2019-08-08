@@ -166,29 +166,29 @@ export class LogService {
   }
 
 
-  private printPrompt(st) {
-    return '';
-  }
+  // private printPrompt(st) {
+  //   return '';
+  // }
 
-  private printDateTime(date) {
-    return `<p>Data: ${date.datestr} </p>`;
-  }
+  // private printDateTime(date) {
+  //   return `<p>Data: ${date.datestr} </p>`;
+  // }
 
-  private printRegion(region) {
-    let msg: string;
-    msg += '<p>';
-    msg += `Ti trovi in: ${region.name} (${region.type})<br>`;
-    msg += `Controllata da: ${region.clan_name}`;
-    msg += '</p>';
+  // private printRegion(region) {
+  //   let msg: string;
+  //   msg += '<p>';
+  //   msg += `Ti trovi in: ${region.name} (${region.type})<br>`;
+  //   msg += `Controllata da: ${region.clan_name}`;
+  //   msg += '</p>';
 
-    return msg;
-  }
+  //   return msg;
+  // }
 
-  private printPage(p) {
+  private printPage(p: any): any {
     return '<h3>' + p.title + '</h3><div>' + p.text.replace(/\n/gm, '<br>') + '</div>';
   }
 
-  private printTable(t) {
+  private printTable(t: any): any {
     let txt = '<table>';
 
     if (t.title && t.dialog === false) {
@@ -250,7 +250,7 @@ export class LogService {
       });
     }
 
-    txt += '</table>';
+    return txt += '</table>';
   }
 
   private printDetails(info, type) {

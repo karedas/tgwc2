@@ -1,5 +1,5 @@
 import { ClientState } from '../state/client.state';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { selectTGState } from '..';
 
 /******************* Base Search State ******************/

@@ -1,16 +1,17 @@
-<tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()" ></tg-main-navigation>
-<mat-sidenav-container>
+<tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
 
+<mat-sidenav-container>
+  
   <mat-sidenav mode="over" #navigationSidenav role="navigation" [fixedInViewport]="true" [fixedTopGap]="'30'">
     <tg-sidebar></tg-sidebar>
   </mat-sidenav>
-
+  
   <mat-sidenav-content>
     <ng-container *ngIf="isCookieAccepted">
       <router-outlet></router-outlet>
       <tg-footer></tg-footer>
     </ng-container>
-
   </mat-sidenav-content>
+
 </mat-sidenav-container>
 

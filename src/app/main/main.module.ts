@@ -22,7 +22,6 @@ import { StoreModule } from '@ngrx/store';
 import { baseReducer, clearState } from './client/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ClientEffects } from './client/store/effects/client.effects';
-import { DataEffects } from './client/store/effects/data.effects';
 
 const routes: Routes = [
   {

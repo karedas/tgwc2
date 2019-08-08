@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { tgAnimations } from 'src/app/animations';
-import { LoginService } from '../services/login.service';
+// import { LoginService } from '../services/login.service';
 import { HttpClient } from '@angular/common/http';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { environment } from 'src/environments/environment';
@@ -21,7 +21,7 @@ export class ForgotPasswordComponent implements OnInit {
 
 
   constructor(
-    private loginService: LoginService,
+    // private loginService: LoginService,
     private fb: FormBuilder,
     private http: HttpClient,
     ) {

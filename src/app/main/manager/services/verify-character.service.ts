@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SocketService, } from '../../../core/services/socket.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 
 
 @Injectable()
@@ -9,17 +7,17 @@ export class VerifyCharacterService {
 
   verifySubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(undefined);
 
-  private name: string;
-  private pwd: string;
+  // private name: string;
+  // private pwd: string;
 
   constructor(
-    private socketService: SocketService,
+    // private socketService: SocketService,
   ) {}
 
   public check(data: { characterName: string, characterPassword: string }): Observable<boolean> {
 
-    this.name = data.characterName;
-    this.pwd = data.characterPassword;
+    // this.name = data.characterName;
+    // this.pwd = data.characterPassword;
 
     // this.socketService.setHandleLoginData(this.name, this.pwd);
 

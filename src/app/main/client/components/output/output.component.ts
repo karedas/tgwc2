@@ -197,7 +197,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onDragStart(event) {
-    this.outputService.toggleAutoScroll()
+    this.outputService.toggleAutoScroll();
   }
 
   onDragEnd(event) {

@@ -1,8 +1,6 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { DataState } from '../state/data.state';
-import { selectTGState, TGState } from '..';
-
-
+import { selectTGState } from '..';
 
 /******************* Base Search State ******************/
 export const getDataState = createSelector(selectTGState, (state) => state.data);
