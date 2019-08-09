@@ -8,7 +8,7 @@
         <as-split #splitArea class="tg-output--splitter" [direction]="'horizontal'" (dragEnd)="onDragEnd($event)">
 
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
-            <div class="tg-error alert-inline" *ngIf="pauseScroll">
+            <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
               Autoscroll disattivato
             </div>
             <tg-status></tg-status>
@@ -58,7 +58,9 @@
 
 <ng-template #noextra>
 
-
+  <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
+    Autoscroll disattivato
+  </div>
   <tg-status></tg-status>
 
   <div style="height: 100%; overflow:hidden;">

@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
 import { SplashScreenService } from './splashscreen.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-splashscreen',
@@ -15,6 +16,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
 
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>(false);
 
+  enabled: boolean = true;
   splashScreenEl: any;
   player: AnimationPlayer;
   preloadPerc: any;
@@ -30,7 +32,6 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.splashScreenService.percentage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(amount => {

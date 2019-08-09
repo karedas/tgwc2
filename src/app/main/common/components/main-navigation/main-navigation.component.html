@@ -29,14 +29,17 @@
 
 
     <!-- Game Menu -->
-    <div *ngIf="userIsInGame" fxFlex="1 1 100%" fxHide.xs="true" class="mr0">
+    <div *ngIf="userIsInGame" fxFlex="1 1 100%" fxHide fxShow.gt-sm class="mr0">
       <tg-game-menu></tg-game-menu>
     </div>
     <!-- End Game Menu-->
 
     <!-- User Registration/Login Menu -->
     <ng-container *ngIf="!userIsLoggedIn && !userIsInGame; else userLoggedInMenu">
-      <div class="m-right user-side" fxFlex="0 1 0" fxLayoutAlign="flex-end" fxLayoutGap.gt-xs="20px"
+      <div class="m-right user-side" 
+        fxFlex="0 1 0" 
+        fxLayoutAlign="flex-end" 
+        fxLayoutGap.gt-xs="20px"
         fxLayoutGap.lt-sm="5px">
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
           <a [routerLink]="['/auth/login']" [routerLinkActive]="['active']" class="tg-yellow" fxHide

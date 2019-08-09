@@ -2,13 +2,17 @@ import { Component, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BreakpointObserver, Breakpoints, MediaMatcher, BreakpointState } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 declare let ga: Function;
 
 @Component({
   selector: 'tg-root',
   template: `
-  <tg-splashscreen id="splashscreen" (loaded)="onLoad($event)"></tg-splashscreen>
+  <tg-splashscreen 
+    *ngIf="!debug"
+    id="splashscreen"
+    (loaded)="onLoad($event)"></tg-splashscreen>
   <tg-main></tg-main>
   `,
   // <tg-main></tg-main>
@@ -29,6 +33,7 @@ declare let ga: Function;
 
 export class AppComponent implements OnDestroy {
 
+  debug: boolean = false;
   title = 'The Gate v2 WebClient';
   load = false;
   matcher: MediaQueryList;
@@ -43,6 +48,10 @@ export class AppComponent implements OnDestroy {
     private render: Renderer2,
     @Inject(DOCUMENT) private document: any
   ) {
+
+    if(!environment.production) {
+      this.debug = true;
+    }
 
     this.breakpointObserver
       .observe([Breakpoints.XSmall])

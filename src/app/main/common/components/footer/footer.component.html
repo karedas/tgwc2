@@ -7,7 +7,7 @@
           Server {{ serverStatusMessage === true ? 'online' : 'offline'}}
         </span>
         <ng-container *ngIf="serverStatusMessage">
-          - Utenti ora online: <span class="serverstatus--onlineuser">{{serverStat?.players.length || '0'}}</span>
+          - Utenti in gioco: <span class="serverstatus--onlineuser">{{serverStat?.players.length || '0'}}</span>
         </ng-container>
       </div>
     </div>

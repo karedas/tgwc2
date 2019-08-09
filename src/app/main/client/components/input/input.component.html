@@ -57,7 +57,7 @@
       <mat-icon>vertical_split</mat-icon>
     </button>
 
-    <button mat-icon-button
+    <button mat-icon-button *ngIf="!tgConfig.zen"
       tooltip="Apri/Chiudi Dashboard" show-delay="500" placement="top"
       type="button"
       class="tg-fnt-button"

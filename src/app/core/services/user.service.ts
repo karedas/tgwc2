@@ -54,7 +54,7 @@ export class UserService extends ApiService {
     return this.characters$;
   }
 
-  public setDefaultCharacter(charData: any){
+  public setDefaultCharacter(charData: any): Observable<any> {
     const data = {
       'uuid': charData.uuid,
       'id_default_char': charData._id
