@@ -47,6 +47,7 @@ export class MainComponent implements OnInit, OnDestroy {
     config.disableClose = true;
     config.autoFocus = false;
     config.width = '450px';
+    config.height = '250px';
     const dialogRef = this.dialog.open(CookieLawComponent, config);
     return dialogRef;
 

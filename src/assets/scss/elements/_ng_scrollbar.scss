@@ -1,4 +1,22 @@
 
+ng-scrollbar {
+  > .ng-scrollbar-wrapper{
+    position: static;
+  }
+}
+
+.scrollbar-dialog .ng-scroll-view {
+  max-height: 65vh;
+}
+
+.ng-scrollbar-thumb  {
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+
   ng-scrollbar.scrollbar {
     --scrollbar-color: transparent;
     --scrollbar-container-color: transparent;
@@ -45,15 +63,3 @@ ng-scrollbar.scrollbar-output {
     border-right: 1px solid #3a3530;
   }
 }
-
-
-  ng-scrollbar.scrollbar-dialog .ng-scroll-view {
-    max-height: 65vh;
-  }
-
-  ng-scrollbar .ng-scrollbar-thumb  {
-    cursor: grab;
-    &:active {
-      cursor: grabbing;
-    }
-  }

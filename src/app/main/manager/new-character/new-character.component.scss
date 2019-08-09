@@ -3,12 +3,18 @@
 @import 'abstract/sprites-mixins';
 
 :host {
-  min-height: 400px;
-  height: 100%;
-  margin-top: 24px;
   display: block;
+  width: 850px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  color: $base-text-color;
+  margin: 0 auto;
 }
 
+h1.newchar-title {
+  margin-bottom: 0;
+}
 
 .tg-newcharcter-content {
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;

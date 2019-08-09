@@ -2,13 +2,18 @@
   color: $base-text-color;
   padding: 0;
   background-color: rgba(255, 255, 255, 0.1);
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
+  }
+  &[disabled] {
+    opacity: .3;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }  
 
 .mat-primary .mat-pseudo-checkbox-checked{
-  background-color: $tg-brown;
+  background-color: $tg-green;
 }
 
 .mat-pseudo-checkbox {

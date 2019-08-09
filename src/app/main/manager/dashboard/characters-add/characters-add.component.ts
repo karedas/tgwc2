@@ -8,12 +8,12 @@ import { ethnicity } from 'src/assets/data/ethnicity/ethnicity.const';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
-  selector: 'tg-characters-manage',
-  templateUrl: './characters-manage.component.html',
+  selector: 'tg-characters-add',
+  templateUrl: './characters-add.component.html',
   providers: [VerifyCharacterService],
   encapsulation: ViewEncapsulation.None
 })
-export class CharactersManageComponent implements OnInit {
+export class CharactersAddComponent implements OnInit {
 
   readonly env = environment;
   readonly ethnicity = ethnicity;

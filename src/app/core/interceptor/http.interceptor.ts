@@ -16,10 +16,23 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     const token = this.authService.getToken();
     if (!token) {
-      return next.handle(request);
+      return next.handle(request)
+        // TODO: -`exception to avoid  connection refused`
+        // .pipe(
+        //   tap((event: HttpEvent<any>) => {
+        //     return next.handle(request);
+        //   }),
+        //   catchError((err: HttpErrorResponse) => {
+        //     if(err.status === 0) {
+        //       return throwError(err.message);
+        //     }
+        //   })
+        // );
     }
+
 
     request = request.clone({
       setHeaders: {
@@ -37,7 +50,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           }
         }),
         catchError((err: HttpErrorResponse) => {
-
           let errorMessage = '';
           if (err instanceof ErrorEvent) {
             if (err.error instanceof ErrorEvent) {
