@@ -4,7 +4,7 @@
   <div class="skill-list" fxLayout="column">
     <div style="overflow: hidden; height: 100%;">
       
-      <ng-scrollbar class="scrollbar" [autoUpdate]="true" [compact]="true"  [disableOnBreakpoints]="false">
+      <ng-scrollbar class="scrollbar" [visibility]="'compact'">
         <div class="skill-group" *ngFor="let skill of skills$ | async | keyvalue">
           <div class="skill-groupname"> {{skill.key}} </div>
           <div class="skill-subdetail-container">

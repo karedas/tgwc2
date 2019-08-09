@@ -13,7 +13,7 @@
         </div>
 
         <div fxLayout="column">
-          <ng-scrollbar class="scrollbar" [shown]="'always'" [compact]="true">
+          <ng-scrollbar class="scrollbar" [visibility]="'always'">
             <div class="eqinv-wrapper-list" fxLayout="column">
               
               <ng-container *ngFor="let item of inventory.list">
@@ -54,7 +54,7 @@
         </div>
 
         <div fxLayout="column">
-          <ng-scrollbar class="scrollbar" [shown]="'always'" [compact]="true">
+          <ng-scrollbar class="scrollbar" [visibility]="'always'">
             <div class="eqinv-wrapper-list" fxLayout="column">
 
               <ng-container *ngFor="let item of equip">

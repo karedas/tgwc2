@@ -16,8 +16,8 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off">
           </mat-form-field>
           
-          <ng-scrollbar class="scrollbar scrollbar-dialog" [autoUpdate]="true" #scrollBar [shown]="'always'"
-            [disableOnBreakpoints]="false">
+          <ng-scrollbar class="scrollbar scrollbar-dialog"  #scrollBar [visibility]="'always'"
+            >
 
             <table mat-table [dataSource]="dataSource" matSort>
 
