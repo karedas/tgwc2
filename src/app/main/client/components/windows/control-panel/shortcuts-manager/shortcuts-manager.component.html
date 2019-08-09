@@ -12,8 +12,8 @@
     </p>
   </ng-container>
 
-  <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
-  [disableOnBreakpoints]="false">
+  <ng-scrollbar class="scrollbar"  #scrollBar [visibility]="'always'"
+  >
   <div class="tg-shortcuts-all">
     <ng-container *ngIf="shortcuts">
       <div *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)">
@@ -92,8 +92,8 @@
     </form>
 
     <div class="tg-shortcut-iconslist" [ngClass]="{'open': iconsListOpenedStatus}">
-      <ng-scrollbar class="scrollbar" [autoUpdate]="true" #scrollBar [shown]="'always'"
-      [disableOnBreakpoints]="false">
+      <ng-scrollbar class="scrollbar"  #scrollBar [visibility]="'always'"
+      >
       <ng-container *ngIf="iconsListOpenedStatus">
 
         <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
