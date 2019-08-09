@@ -43,7 +43,7 @@ function generateSprites(done) {
       for (let i = 0, len = folders.length; i < len; i++) {
         let sprite_options = {
           imgName: folders[i] + '_sprite.png',
-          imgPath: '/assets/images/' + folders[i] + '/' + folders[i] + '_sprite.png',
+          imgPath: './assets/images/' + folders[i] + '/' + folders[i] + '_sprite.png',
           cssName: "_" + folders[i] + '/abstract/_sprite.scss',
           cssOpts: {
             functions: false
