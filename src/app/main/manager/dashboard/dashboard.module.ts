@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Role } from 'src/app/core/models/role';
 import { MatTabsModule, MatInputModule, MatProgressSpinnerModule, MatListModule } from '@angular/material';
-import { CharactersManageComponent } from './characters-manage/characters-manage.component';
+import { CharactersAddComponent } from './characters-add/characters-add.component';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
     DashboardComponent,
     ProfileComponent,
     MyCharactersComponent,
-    CharactersManageComponent
+    CharactersAddComponent
   ],
   imports: [
     MatProgressSpinnerModule,

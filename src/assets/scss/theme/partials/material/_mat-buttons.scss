@@ -56,13 +56,19 @@
 
   .mat-raised-button.mat-accent, .mat-flat-button.mat-accent {
     font-weight: normal;
-    background-image: linear-gradient(-180deg, #d69813, #a96f17 90%);
+    background-image: linear-gradient(-180deg, #efa60b, #8e5e16 90%);
     color: white;
   }
 
   .mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
     font-weight: normal;
     background-image: linear-gradient(-180deg, #d62a13, #710505 90%);
+    color: white;
+  }
+  
+  .mat-flat-button.mat-green, .mat-raised-button.mat-green, .mat-fab.mat-green, .mat-mini-fab.mat-green {
+    font-weight: normal;
+    background-image: linear-gradient(-180deg, #28a717, #193514 90%);
     color: white;
   }
 

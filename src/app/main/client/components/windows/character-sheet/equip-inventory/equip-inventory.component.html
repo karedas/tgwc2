@@ -15,7 +15,7 @@
         <div fxLayout="column">
           <ng-scrollbar class="scrollbar" [visibility]="'always'">
             <div class="eqinv-wrapper-list" fxLayout="column">
-              
+
               <ng-container *ngFor="let item of inventory.list">
                 <div fxFlex="1 0 auto" class="eqinv-item-wrap">
                   <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
@@ -30,7 +30,7 @@
                     {{item.wgt}} pt</div>
                 </div>
               </ng-container>
-              
+
             </div>
           </ng-scrollbar>
         </div>
@@ -82,7 +82,6 @@
     </ng-container>
   </div>
 </div>
-
 
 <ng-template #equipInvAction let-wprc="wprc" let-weight="weight">
   <div class="eqinv-totalweight" fxFlex="0 1 100%" fxFlex.gt-xs="0 1 auto">
