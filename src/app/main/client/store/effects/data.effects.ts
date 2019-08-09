@@ -124,22 +124,21 @@ export class DataEffects {
   );
 
   @Effect()
-  showCharacterSheet$ = this.actions$.pipe(
+  showCharacterSheet$: Observable<Action>  = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SHOWCHARACTERSHEET),
     switchMap((res) => {
       this.dialogV2Service.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
-        console.log('RES', res.payload[0]);
         return [
           DataActions.infoCharacterAction(),
-          DataActions.heroAction(res.payload[0])
+          DataActions.heroAction({payload: res.payload[0]})
         ];
       }
     }),
   );
 
   @Effect()
-  showStatusInline$ = this.actions$.pipe(
+  showStatusInline$: Observable<Action>  = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SHOWSTATUSHERO),
     switchMap((res) => {
       return [ DataActions.heroAction(res.payload) ];

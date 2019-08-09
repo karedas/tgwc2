@@ -7,6 +7,7 @@ import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { getHero } from 'src/app/main/client/store/selectors';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameService } from '../../../services/game.service';
+import { TGState } from '../../../store';
 
 @Component({
   selector: 'tg-character-sheet',
@@ -29,11 +30,12 @@ export class CharacterSheetComponent  {
   public openedTab = '';
 
   constructor(
-    private store: Store<DataState>,
+    private store: Store<TGState>,
     private game: GameService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    this.heroBase$ = this.store.pipe(select(getHero));
+    this.heroBase$ = this.store.pipe(select(getHero))
+    this.heroBase$.subscribe((c) => {console.log(c)});
   }
 
   switchPanel(tab: string, event: Event) {
