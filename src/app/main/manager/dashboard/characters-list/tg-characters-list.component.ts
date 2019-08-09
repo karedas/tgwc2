@@ -119,7 +119,7 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
   /** Public  */
 
 
-  public goToChractersManage(event) {
+  public goToChractersManage() {
     this.goToManage.emit();
   }
 
