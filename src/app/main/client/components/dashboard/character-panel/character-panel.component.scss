@@ -265,7 +265,7 @@
         margin-right: 58px;
         
         @include layout-bp(xs) {
-          margin-right: 2px;
+          margin-right: 0;
         }
       }
   

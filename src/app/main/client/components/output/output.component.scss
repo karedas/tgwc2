@@ -17,12 +17,6 @@
     transition: all .2s ease-out;
   }
 
-  .pause-scroll .o-container{
-    box-sizing: border-box;
-    box-shadow: inset 0 0 9px 0px red;
-    border:1px solid $tg-red;
-  }
-
   @include layout-bp(gt-md) {
     margin-bottom: 0;
   }
@@ -374,11 +368,13 @@ tg-text {
 
 .alert-inline {
   position: absolute;
-  top: 0;
+  top: 6px;
   left: 50%;
   z-index: 10;
   margin: 0;
   transform: translateX(-50%);
-  padding: 0.2em 1em;
+  padding: 0.2em 2em;
+  text-shadow: 0 0 8px red;
   color: white;
+  border-radius: 8px;
 }

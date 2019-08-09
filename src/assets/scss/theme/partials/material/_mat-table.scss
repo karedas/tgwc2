@@ -31,21 +31,22 @@
     tr:not(.detail-row).mat-row:hover td {
       background: rgba(39, 36, 33, 0.5);
     }
+  }
 
+  tr.mat-header-row {
+    height: 28px;
+  }
 
-    tr.detail-row {
-      height: 0;
-    }
+  tr.detail-row {
+    height: 0;
+  }
 
-    .element-row td {
-      border-bottom-width: 0;
-    }
+  .element-row td {
+    border-bottom-width: 0;
+  }
 
-    .element-detail {
-      overflow: hidden;
-      display: flex;
-      padding: 0px;
-    }
-    
-
+  .element-detail {
+    overflow: hidden;
+    display: flex;
+    padding: 0px;
   }

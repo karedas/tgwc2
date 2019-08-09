@@ -1,13 +1,13 @@
 mat-sidenav-container {
   background-color: transparent;
   height: 100%;
-
   mat-sidenav-content {
     display: flex;
     flex-direction: column;
   }
+}
 
-  mat-sidenav {
-    background-color: #171614;
-  }
+mat-sidenav {
+  min-width: 150px;
+  background-color: #171614;
 }
