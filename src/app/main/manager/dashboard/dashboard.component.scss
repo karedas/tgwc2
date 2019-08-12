@@ -73,8 +73,6 @@
 
   /* Disabled Row Char */
   tr.disabled td {
-    opacity: 0.4;
-    background-color: rgba(14, 14, 14, .2);
 
     .ch-char-name {
       color: white;
@@ -84,6 +82,24 @@
       color: #ababab;
     }
   }
+}
+
+
+tr.inactive {
+  opacity: .7;
+
+  .ch-char-name {
+    color: $base-text-color;
+  }
+
+  .char-status {
+    color: $base-text-color;
+  }
+}
+
+tr.suspended {
+  opacity: .7;
+  ;
 }
 
 /* Characters Manager */
@@ -97,19 +113,6 @@
   height: 18px;
   line-height: auto;
   vertical-align: middle;
-}
-
-tr.inactive {
-    opacity: .7;
-
-    .ch-char-name {
-      color:  $base-text-color;
-    }
-
-    .char-status {
-      color:  $base-text-color;
-    }
-
 }
 
 .no-characters-box {

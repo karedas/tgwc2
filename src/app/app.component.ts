@@ -15,11 +15,6 @@ declare let ga: Function;
     (loaded)="onLoad($event)"></tg-splashscreen>
   <tg-main></tg-main>
   `,
-  // <tg-main></tg-main>
-  // `,
-  // <tg-main *ngIf="load"></tg-main>
-  // template: `
-  //   `,
   styles: [`
   :host {
     padding-top: 36px;

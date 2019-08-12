@@ -2,11 +2,11 @@
 
   <div class="tg-registration-step" fxLayout>
 
-    <div class="tg-sidebar" fxFlex="1 1 150px">
+    <div class="tg-regsidebar" fxFlex="1 1 150px">
       
       <div *ngFor="let race of racesList; let idx = index;"
         matRipple 
-        class="tg-sidebar-item checkable"
+        class="tg-regsidebar-item checkable"
         [ngClass]="{'active': frmStepFirst.get('race').value === race.code}"
         (click)="setRace(race)">
         {{race.name}}

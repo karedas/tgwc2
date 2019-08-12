@@ -10,16 +10,15 @@ import { Router } from '@angular/router';
 import { MatDialogRef, MatDialogConfig, MatDialog, MatTableDataSource, MatSort } from '@angular/material';
 import { AlertComponent } from 'src/app/main/common/components/dialogs/alert/alert.component';
 import { tgAnimations } from 'src/app/animations';
-import { NgForm } from '@angular/forms';
 
 
 @Component({
   selector: 'tg-characters-list',
-  templateUrl: './tg-characters-list.component.html',
+  templateUrl: './characters-list.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: [tgAnimations],
 })
-export class MyCharactersComponent implements OnInit, OnDestroy {
+export class CharactersListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @Output() goToManage = new EventEmitter();
   readonly env = environment;
@@ -71,7 +70,7 @@ export class MyCharactersComponent implements OnInit, OnDestroy {
 
   private sortCharacterList(list): any {
     return list.sort(function(a, b) {
-      if (a.is_default == true && !b.is_default) {
+      if (a.is_default == true && !b.is_default && a.is_default === 0) {
         return -1;
       } else { return 1; }
     });

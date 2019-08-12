@@ -63,7 +63,7 @@
     }
   }
 
-  .tg-sidebar {
+  .tg-regsidebar {
     width: 150px;
     border-right: 1px solid rgba(255, 255, 255, 0.10);
     box-sizing: border-box;
@@ -72,12 +72,12 @@
     min-height: 400px;
     max-height: 600px;
 
-    .tg-sidebar-text {
+    .tg-regsidebar-text {
       padding: 0 1em;
     }
 
   }
-  .tg-sidebar-item {
+  .tg-regsidebar-item {
     cursor: pointer;
     padding: 1em 1.5em 1em 45px;
     border-bottom: 2px solid rgb(0, 0, 0);
@@ -121,7 +121,7 @@
     }
   }
 
-  .tg-sidebar-img {
+  .tg-regsidebar-img {
     flex: 0 0 65px;
     height: 65px;
     vertical-align: middle;
@@ -134,7 +134,7 @@
     }
   }
 
-  .tg-sidebar-item.checkable {
+  .tg-regsidebar-item.checkable {
     
     &:before {
       content: '';

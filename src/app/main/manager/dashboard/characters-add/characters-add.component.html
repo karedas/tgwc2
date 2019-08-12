@@ -2,12 +2,15 @@
   
   <div class="ch-block">
     <h3 class="tg-brown">Aggiungi un nuovo personaggio</h3>
+    <i class="tg-red">Funziona attualmente disabilitata</i>
+    <div class="opacize-5">
     <p>
       Segui la procedura guidata e crea il tuo personaggio <span class="tg-white">TheGate <span class="tg-brown">Mud</span></span>:
     </p>
-    <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']" id="addnewchar" color="green">
+    <button mat-raised-button [routerLink]="[ '/manager/nuovo-personaggio']" id="addnewchar" color="green"  [disabled]="true">
       Nuovo personaggio
     </button>
+   </div>
 
     <form name="verifyCharacterForm" 
       [formGroup]="verifyCharacterForm" 
@@ -25,8 +28,8 @@
       </mat-form-field>
 
       <mat-form-field class="i-fullwidth">
-        <input matInput placeholder="Password" type="password" formControlName="characterPassword">
-      </mat-form-field>
+        <input matInput placeholder="Parola segreta" type="password" formControlName="characterPassword">
+      </mat-form-field> <br/>
 
       <div class="tg-error-bold" *ngIf="apiError">
         Errore nell'aggiunta del personaggio. Forse non esiste.

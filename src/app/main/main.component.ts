@@ -50,7 +50,6 @@ export class MainComponent implements OnInit, OnDestroy {
     config.height = '250px';
     const dialogRef = this.dialog.open(CookieLawComponent, config);
     return dialogRef;
-
   }
 
    onCookieAccepted(status: boolean) {

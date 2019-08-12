@@ -14,10 +14,10 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      {
-        path: 'nuovo-personaggio',
-        loadChildren: () => import('./new-character/new-character.module').then(m => m.NewCharacterModule)
-      },
+      // {
+      //   path: 'nuovo-personaggio',
+      //   loadChildren: () => import('./new-character/new-character.module').then(m => m.NewCharacterModule)
+      // },
       // {
       //   path: 'administration',
       //   loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
