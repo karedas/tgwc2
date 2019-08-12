@@ -174,7 +174,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   private scrollPanelToBottom() {
     if (!this.pauseScroll) {
       setTimeout(() => {
-        this.scrollBar.scrollToBottom(0)
+        this.scrollBar.scrollToBottom();
       }, 50);
     }
   }

@@ -20,7 +20,6 @@ import { ConfigService } from 'src/app/services/config.service';
 export class ClientComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
-
   private _unsubscribeAll: Subject<any>;
 
   constructor(

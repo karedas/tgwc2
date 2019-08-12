@@ -1,26 +1,48 @@
 <div fxLayout="column" style="height: 100%">
   <!-- ######## Ability ########  -->
-  <h3>Abilità conosciute</h3>
   <div class="skill-list" fxLayout="column">
     <div style="overflow: hidden; height: 100%;">
-      
-      <ng-scrollbar class="scrollbar" [visibility]="'compact'">
-        <div class="skill-group" *ngFor="let skill of skills$ | async | keyvalue">
-          <div class="skill-groupname"> {{skill.key}} </div>
-          <div class="skill-subdetail-container">
-            <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" fxLayout="row">
-              <div class="skill-name" fxFlex="0 0 25%">
-                {{subskill.key}}
+
+      <ng-scrollbar class="scrollbar" [visibility]="'always'">
+
+        <mat-accordion class="skill-group" [displayMode]="flat" >
+          <mat-expansion-panel  *ngFor="let skill of skills$ | async | keyvalue; index as i; " [expanded]="i === 0">
+
+            <mat-expansion-panel-header class="skill-groupname" 
+              collapsedHeight="auto" 
+              expandedHeight="auto">
+              <mat-panel-title>
+                {{skill.key}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+            <div class="skill-subdetail-container" fxLayout="row wrap">
+
+              <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" fxFlex="0 1 100%"
+                fxLayoutAlign="start center">
+                  <div class="skill-name" fxFlex="0 1 50%">
+                    {{subskill.key}}
+                  </div>
+                  <div class="meter2" fxFlex="0 1 20%">
+                    <span [style.width.%]="subskill.value.prac"></span>
+                  </div>
+                  <div fxFlex="0 1 30%">
+                    Leggendario
+                  </div>
+                </div>
+                
               </div>
-              <div fxFlex="0 1 100%" class="meter2">
-                <span [style.width.%]="subskill.value.prac">
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+            </ng-template>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+        
       </ng-scrollbar>
-      
+
     </div>
   </div>
 </div>
+
+
+
