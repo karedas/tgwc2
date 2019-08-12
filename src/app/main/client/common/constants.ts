@@ -24,7 +24,7 @@ export const equip_positions_by_name = {
     'r_shoulder': 'Sulla spalla destra',
     'l_shoulder': 'Sulla spalla sinistra',
     'tied': 'Imprigionato'
-  };
+};
 
 export const pos_to_order = [
   { pos: 0, name: '' },
@@ -95,3 +95,10 @@ export const font_size_options = [
     class: 'xxxl'
   }
 ];
+
+export const skillValue = {
+  10: 'scarso',
+  20: 'buono',
+  50: 'ottimo',
+  100: 'eccellente'
+}

@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { getSkills } from 'src/app/main/client/store/selectors';
 import { takeUntil } from 'rxjs/operators';
+import { skillValue } from 'src/app/main/client/common/constants';
 
 @Component({
   selector: 'tg-skills',
@@ -13,8 +14,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SkillsComponent implements OnInit, OnDestroy {
 
+  readonly skillTextValue = skillValue;
   skills$: Observable<any>;
-
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -37,5 +38,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
+
 
 }

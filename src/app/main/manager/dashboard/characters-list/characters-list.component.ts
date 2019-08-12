@@ -70,7 +70,7 @@ export class CharactersListComponent implements OnInit, OnDestroy {
 
   private sortCharacterList(list): any {
     return list.sort(function(a, b) {
-      if (a.is_default == true && !b.is_default && a.is_default === 0) {
+      if (a.is_default == true && !b.is_default) {
         return -1;
       } else { return 1; }
     });
