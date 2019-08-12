@@ -1,52 +1,63 @@
- 
-  /* Table */
-  .mat-table.dark {
-    width: 100%;
+ /* Table */
+ .mat-table.dark {
+   width: 100%;
 
-    .mat-header-cell, .mat-footer-cell {
-      border-right: 1px solid black;
-      color: $base-text-color-dark;
-      background: #171311;
-      border-bottom-color: rgba(255, 255, 255, 0.12);
-      border-top: 1px solid rgba(255,255,255,0.12);
-      transition: background .2s ease-out;
-    }
+   .mat-header-cell,
+   .mat-footer-cell {
+     border-right: 1px solid black;
+     color: $base-text-color-dark;
+     background: #171311;
+     border-bottom-color: rgba(255, 255, 255, 0.12);
+     border-top: 1px solid rgba(255, 255, 255, 0.12);
+     transition: background .2s ease-out;
+   }
 
-    td.mat-cell {
-      color: $base-text-color;
-      font-size: 100%;
-      padding: 0 5px;
-    }
+   td.mat-cell {
+     color: $base-text-color;
+     font-size: 100%;
+     padding: 0 5px;
+   }
 
-    tr.mat-footer-row, tr.mat-row {
-      height: 28px;
-    }
+   tr.mat-footer-row,
+   tr.mat-row {
+     height: 28px;
+   }
 
-    tr.mat-row td {
-      background: rgba(0, 0, 0, 0.4);
-      transition: background-color .2s ease-out;
-      cursor: pointer;
-    }
+   tr.mat-row td {
+     background: rgba(0, 0, 0, 0.4);
+     transition: background-color .2s ease-out;
+     cursor: pointer;
+   }
 
-    tr:not(.detail-row).mat-row:hover td {
-      background: rgba(39, 36, 33, 0.5);
-    }
-  }
+   tr:not(.detail-row).mat-row:hover td {
+     background: rgba(39, 36, 33, 0.5);
+   }
+ }
 
-  tr.mat-header-row {
-    height: 28px;
-  }
+ tr.mat-header-row {
+   height: 28px;
+ }
 
-  tr.detail-row {
-    height: 0;
-  }
+ tr.detail-row {
+   height: 0;
+ }
 
-  .element-row td {
-    border-bottom-width: 0;
-  }
+ .element-row td {
+   border-bottom-width: 0;
+ }
 
-  .element-detail {
-    overflow: hidden;
-    display: flex;
-    padding: 0px;
-  }
+ .tg-btn-expand {
+   transition: transform .2s ease-out;
+ }
+
+ .expanded-row {
+   .tg-btn-expand {
+     transform: rotate(-180deg);
+   }
+ }
+
+ .element-detail {
+   overflow: hidden;
+   display: flex;
+   padding: 0px;
+ }

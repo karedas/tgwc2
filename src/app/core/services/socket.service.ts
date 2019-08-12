@@ -7,11 +7,6 @@ import * as ClientActions from 'src/app/main/client/store/actions/client.action'
 import { Store } from '@ngrx/store';
 import { TGState } from 'src/app/main/client/store';
 
-// export interface ISocketResponse {
-//   event: string
-//   data?: any
-// }
-
 export class SocketService {
 
   private socket: io;

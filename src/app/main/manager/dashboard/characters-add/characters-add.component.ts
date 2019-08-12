@@ -27,8 +27,6 @@ export class CharactersAddComponent implements OnInit {
   charactersList: Observable<any>;
 
 
-  // Private
-
   constructor(
     // private formBuilder: FormBuilder,
     // private socketService: SocketService,
@@ -42,8 +40,8 @@ export class CharactersAddComponent implements OnInit {
     this.charactersList = this.userService.getCharacters();
 
     this.verifyCharacterForm = new FormGroup({
-      characterName: new FormControl('karedas', UsernameValidation),
-      characterPassword: new FormControl('peppe', PasswordValidation),
+      characterName: new FormControl('', UsernameValidation),
+      characterPassword: new FormControl('', PasswordValidation),
     });
   }
 

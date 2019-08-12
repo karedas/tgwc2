@@ -1,11 +1,10 @@
-<form id="characters" #charactersListForm="ngForm">
+<form id="characters">
   <ng-container *ngIf="charactersList  as chars;">
     <div class="comp-content">
 
       <div class="table-responsive">
 
-        <table #charTable mat-table matSort [dataSource]="charactersList" 
-          multiTemplateDataRows 
+        <table #charTable mat-table matSort [dataSource]="charactersList" multiTemplateDataRows
           class="mat-table ch-table dark">
 
           <ng-container matColumnDef="image">
@@ -22,9 +21,9 @@
             <th mat-header-cell *matHeaderCellDef> Nome/Dettagli </th>
             <td mat-cell *matCellDef="let element">
               <div class="ch-char-name">
-                {{element.name | capitalizeFirst}} 
-                <mat-icon *ngIf="element.is_default" color="tg-yellow" class="star-icon"
-                tooltip="Personaggio primario" placement="top" show-delay="500">star_rate</mat-icon>
+                {{element.name | capitalizeFirst}}
+                <mat-icon *ngIf="element.is_default" color="tg-yellow" class="star-icon" tooltip="Personaggio primario"
+                  placement="top" show-delay="500">star_rate</mat-icon>
               </div>
               <div class="ch-char-ethnicity">{{element.race | getEthnicityByCode: element.ethnicity }}</div>
             </td>
@@ -34,23 +33,21 @@
             <th mat-header-cell *matHeaderCellDef> Azioni </th>
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button class="tg-button-thin" class="thin" color="green"
-                (click)="loginCharacter(element.name, element.secret, $event)" 
-                *ngIf="element.status === 1;">
+                (click)="loginCharacter(element.name, element.secret, $event)" *ngIf="element.status === 1;">
                 Connetti
               </button>
-              
-              <span *ngIf="element.status !== 1" class="char-status"> 
-                <ng-container [ngTemplateOutlet]="charStatus"
-                  [ngTemplateOutletContext]="{char: element}">
+
+              <span *ngIf="element.status !== 1" class="char-status">
+                <ng-container [ngTemplateOutlet]="charStatus" [ngTemplateOutletContext]="{char: element}">
                 </ng-container>
-               </span>
+              </span>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button>
+              <button mat-icon-button class="tg-btn-expand">
                 <mat-icon>expand_more</mat-icon>
               </button>
             </td>
@@ -66,15 +63,15 @@
                 <p><span class="tg-white">TGID</span>: {{element.id}}<br />
                   <span class="tg-white">Data creazione</span>: {{element.createdDate}}<br />
                   <span class="tg-white">Stato</span>:
-                   <ng-container [ngTemplateOutlet]="charStatus"
-                    [ngTemplateOutletContext]="{char: element}">
+                  <ng-container [ngTemplateOutlet]="charStatus" [ngTemplateOutletContext]="{char: element}">
                   </ng-container>
                 </p>
 
                 <section *ngIf="element.status !== 0">
                   <mat-divider class="light"></mat-divider><br />
-                  <mat-selection-list dense >
-                    <mat-list-option color="accent" [selected]="element.is_default" (click)="onSelectedPrimary(element.id)">
+                  <mat-selection-list dense>
+                    <mat-list-option color="accent" [selected]="element.is_default"
+                      (click)="onSelectedPrimary(element.id)">
                       Personaggio principale.
                     </mat-list-option>
                   </mat-selection-list>
@@ -88,8 +85,8 @@
                       Segnala un problema
                     </button>
                     <button mat-list-item (click)="tesT()" disabled>
-                      <mat-icon matListIcon >delete_outline</mat-icon>
-                      Rimuovi il personaggio da questo account 
+                      <mat-icon matListIcon>delete_outline</mat-icon>
+                      Rimuovi il personaggio da questo account
                     </button>
                     <button mat-list-item (click)="onDisableChar(element.name)" disabled class="tg-red">
                       <mat-icon matListIcon>cancel</mat-icon>
@@ -108,20 +105,16 @@
             </td>
           </ng-container>
 
-
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let element; columns: displayedColumns" class="element-row"
-            [ngClass]="{'inactive': element.status === 0,
+          <tr mat-row *matRowDef="let element; columns: displayedColumns" class="element-row" [ngClass]="{'inactive': element.status === 0,
+                        'suspended': element.status === 2,
                        'expanded-row': expandedElement === element}"
-            
             (click)="expandedElement = expandedElement === element ? null : element"></tr>
 
-          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
-            class="detail-row {{i}}"></tr>
-            
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row {{i}}"></tr>
+
           <tr mat-footer-row *matFooterRowDef="['charactersinfo']" class="second-footer-row"></tr>
-          
+
         </table>
       </div>
     </div>
@@ -129,14 +122,14 @@
 
 </form>
 <div class="no-characters-box comp-content comp-padd" fxLayout="column" fxLayoutAlign="start start">
-    <p *ngIf="!charactersList">Non possiedi un personaggio attivo.</p>
-    <button mat-raised-button color="accent" (click)="goToChractersManage()">
-      Crea o Aggiungi
-    </button>
-  </div>
+  <p *ngIf="!charactersList">Non possiedi un personaggio attivo.</p>
+  <button mat-raised-button color="accent" (click)="goToChractersManage()">
+    Crea o Aggiungi
+  </button>
+</div>
 
 <ng-template #charStatus let-char="char">
-    <span *ngIf="char.status === 2" class="char-status tg-brown">Sospeso</span>
-    <span *ngIf="char.status === 1" class="char-status tg-green">Attivo</span>
-    <span *ngIf="char.status === 0" class="char-status tg-red">Disabilitato</span>
+  <span *ngIf="char.status === 2" class="char-status tg-brown">Sospeso</span>
+  <span *ngIf="char.status === 1" class="char-status tg-green">Attivo</span>
+  <span *ngIf="char.status === 0" class="char-status tg-red">Disabilitato</span>
 </ng-template>
