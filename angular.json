@@ -117,14 +117,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "./src/assets/scss/client.scss",
-            ],
             "scripts": [],
             "assets": [
               "./src/favicon.ico",
               "./src/assets"
-            ]
+            ],
+            "styles": [
+              "./src/assets/scss/client.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/assets/scss"
+              ]
+            }
           }
         },
         "lint": {
