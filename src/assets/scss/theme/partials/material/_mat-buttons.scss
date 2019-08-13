@@ -78,3 +78,9 @@
   background-color: gray;
   background-image: linear-gradient(-180deg, #949494, #242424 90%);
 }
+
+.mat-flat-button, .mat-raised-button, .mat-fab.mat, .mat-mini-fab.mat {
+  &:active {
+    opacity: .5;
+  }
+}
