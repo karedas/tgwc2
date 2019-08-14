@@ -37,11 +37,11 @@ const routes: Routes = [
     path: 'novita',
     loadChildren: () => import('./pages/global-news/global-news.module').then(m => m.GlobalNewsModule),
   },
-  {
-    path: '',
-    redirectTo: 'manager',
-    pathMatch: 'full',
-  }
+  // {
+  //   path: '',
+  //   redirectTo: 'manager',
+  //   pathMatch: 'full',
+  // }
 ];
 
 @NgModule({
