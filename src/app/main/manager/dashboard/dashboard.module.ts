@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { CharactersListComponent } from './characters-list/characters-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,13 +12,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Role } from 'src/app/core/models/role';
 import { MatTabsModule, MatInputModule, MatProgressSpinnerModule, MatListModule } from '@angular/material';
 import { CharactersAddComponent } from './characters-add/characters-add.component';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '**',
     component: DashboardComponent,
+    data: {roles: [Role.Player] },
     canActivate: [AuthGuard],
-    data: {roles: [Role.Player] }
   }
 ];
 

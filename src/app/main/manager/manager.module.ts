@@ -3,6 +3,7 @@ import { ManagerComponent } from './manager.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NewCharacterModule } from './new-character/new-character.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 
 const routes: Routes = [
