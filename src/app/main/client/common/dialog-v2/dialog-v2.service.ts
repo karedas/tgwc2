@@ -26,12 +26,12 @@ export class DialogV2Service {
     public dialog: MatDialog,
     private inputService: InputService,
     public overlay: Overlay) {
-    this.render = rendererFactory.createRenderer(null, null);
-
+      this.render = rendererFactory.createRenderer(null, null);
+      
     dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       this.addDialogBehaviour(d);
     });
-
+    
   }
 
   getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {

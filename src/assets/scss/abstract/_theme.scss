@@ -5,6 +5,9 @@ $tg-theme-primary: mat-palette($mat-brown, 100);
 $tg-theme-accent : mat-palette($mat-amber, 400, 100, 400);
 $tg-theme-warn   : mat-palette($mat-red, A700);
 
+
+
+
 $tg-theme: mat-light-theme(
     $tg-theme-primary,
     $tg-theme-accent,
@@ -16,6 +19,10 @@ $general-typography: mat-typography-config(
   $font-family: '"Roboto", sans-serif',
   $body-2:        mat-typography-level(14px, 24px, 600)  
 );
+
+
+// Variables 
+$cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.8);
 
 
 

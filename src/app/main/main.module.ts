@@ -22,6 +22,8 @@ import { StoreModule } from '@ngrx/store';
 import { baseReducer, clearState } from './client/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ClientEffects } from './client/store/effects/client.effects';
+import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
+import { DialogV2Module } from './client/common/dialog-v2/dialog-v2.module';
 
 const routes: Routes = [
   {
@@ -59,6 +61,7 @@ const routes: Routes = [
     SharedModule,
     Error403Module,
     Auth2Module,
+    DialogV2Module,
     MainNavigationModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('TG', baseReducer, { metaReducers: [clearState]}),
@@ -72,6 +75,7 @@ const routes: Routes = [
     CookieLawComponent
   ],
   providers: [
+    DialogV2Service,
     SocketService,
     LoginClientService,
     GameService,

@@ -35,7 +35,6 @@ export class CharacterSheetComponent  {
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.heroBase$ = this.store.pipe(select(getHero))
-    this.heroBase$.subscribe((c) => {console.log(c)});
   }
 
   switchPanel(tab: string, event: Event) {

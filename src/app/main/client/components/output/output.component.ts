@@ -47,7 +47,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   private resizeID: any;
-  private outputTrimLines = 500;
+  private readonly outputTrimLines = 500;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -55,13 +55,14 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     private outputService: OutputService,
     private store: Store<DataState>,
     private game: GameService,
-    private _configService: ConfigService) {
-    this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
-    this._baseText$ = this.store.select(getDataBase);
-    this._roomBase$ = this.store.select(getRoomBase);
-    this._objOrPerson$ = this.store.select(getObjOrPerson);
-    this._genericPage$ = this.store.select(getGenericPage);
-    this._unsubscribeAll = new Subject();
+    private _configService: ConfigService) 
+    {
+      this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
+      this._baseText$ = this.store.select(getDataBase);
+      this._roomBase$ = this.store.select(getRoomBase);
+      this._objOrPerson$ = this.store.select(getObjOrPerson);
+      this._genericPage$ = this.store.select(getGenericPage);
+      this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
