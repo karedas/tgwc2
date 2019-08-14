@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class CookieLawComponent {
 
   @Output() iAcceptCookie: EventEmitter<boolean> = new EventEmitter();
-  showButton = false;
+  buttonDisabled = true;
 
   constructor(
     private dialogRef: MatDialogRef<CookieLawComponent>,

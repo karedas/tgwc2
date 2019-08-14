@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { AnimationBuilder, style, animate, AnimationPlayer } from '@angular/animations';
 import { SplashScreenService } from './splashscreen.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'tg-splashscreen',
@@ -12,32 +11,35 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./splashscreen.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SplashscreenComponent implements OnInit, OnDestroy {
+export class SplashscreenComponent implements AfterViewInit, OnDestroy {
 
+  // @ViewChild('splashscreen', {static: false}) elementRef: ElementRef;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>(false);
 
   enabled: boolean = true;
-  splashScreenEl: any;
   player: AnimationPlayer;
   preloadPerc: any;
+
+
+
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private _animationBuilder: AnimationBuilder,
     private splashScreenService: SplashScreenService,
+    private elementRef: ElementRef,
     @Inject(DOCUMENT) private _document: any
     ) {
-      this.splashScreenEl = this._document.body.querySelector('#splashscreen');
       this._unsubscribeAll = new Subject<any>();
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+
+
     this.splashScreenService.percentage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(amount => {
-        if (amount === 0) {
-          this.show();
-        }
+        // this.show();
         this.preloadPerc = Math.round(amount);
       });
 
@@ -47,43 +49,42 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
       .subscribe(status => {
         if (status === true) {
           this.hide();
-          this.preloadPerc = 0;
-          setTimeout(() => {
-            this.loaded.emit(true);
-          }, 450);
         }
       });
   }
+  
 
-  show(): void {
-    this.player = this._animationBuilder
-      .build([
-        style({
-          opacity: '1',
-          zIndex: '99999'
-        }),
-      ]).create(this.splashScreenEl);
-
-    setTimeout(() => {
-      this.player.play();
-    }, 0);
-  }
+  // show(): void {
+  //   let player: AnimationPlayer;
+  //   let animationFactory = this._animationBuilder
+  //     .build([
+  //       style({
+  //         zIndex: '999'
+  //       }),
+  //     ])
+      
+  //   player = animationFactory.create(this.elementRef.nativeElement);
+  //   player.play();
+  // }
+  
 
   hide(): void {
-    this.player =
+    let player: AnimationPlayer;
+    let animationFactory  = 
       this._animationBuilder
         .build([
-          style({ opacity: '1'}),
-          animate('100ms ease', style({
-            opacity: '0',
-            zIndex: '-10'
-          }))
-        ]).create(this.splashScreenEl);
+          style({ zIndex: '0'}),
+          animate('500ms ease', style({
+            opacity: 0,
+          })),
+        ])
 
+    player = animationFactory.create(this.elementRef.nativeElement);
+    player.play();
 
-    setTimeout(() => {
-      this.player.play();
-    }, 0);
+    player.onDone(() => {
+      this.loaded.emit(true);
+    });
 
   }
 
