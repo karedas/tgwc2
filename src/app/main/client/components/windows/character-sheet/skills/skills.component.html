@@ -5,7 +5,7 @@
 
       <ng-scrollbar class="scrollbar" [visibility]="'always'">
 
-        <mat-accordion class="skill-group" [displayMode]="flat" >
+        <mat-accordion class="skill-group" [displayMode]="'flat'" >
           <mat-expansion-panel  *ngFor="let skill of skills$ | async | keyvalue; index as i; " [expanded]="i === 0">
 
             <mat-expansion-panel-header class="skill-groupname" 

@@ -1,22 +1,17 @@
-import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation, Optional } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
-// import { DialogV2Service } from '../../../../client/common/dialog-v2/dialog-v2.service';
 import gitInfo from 'src/git-version.json';
 import { TGConfig } from '../../../../client/client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AudioService } from '../../../../client/components/audio/audio.service';
-
-// import { faFont } from '@fortawesome/free-solid-svg-icons';
-// import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-
+import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 
 @Component({
-
   selector: 'tg-game-menu',
   templateUrl: './tg-game-menu.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class TgGameMenuComponent implements OnInit, OnDestroy {
 
@@ -32,8 +27,8 @@ export class TgGameMenuComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
+    private dialogV2Service: DialogV2Service,
     private game: GameService,
-    // private dialogV2Service: DialogV2Service,
     private render: Renderer2,
     private audioService: AudioService,
     private _configService: ConfigService,
@@ -134,17 +129,17 @@ export class TgGameMenuComponent implements OnInit, OnDestroy {
       case 'disconnect':
         this.game.disconnectGame();
         break;
-      case 'news':
-        // this.dialogV2Service.openNews(true);
-        break;
+      // case 'news':
+      //   this.dialogV2Service.openNews(true);
+      //   break;
       case 'preferences':
-        // this.dialogV2Service.openControlPanel();
+        this.dialogV2Service.openControlPanel();
         break;
       case 'audio':
         this.audioService.toggleAudio();
         break;
       case 'log':
-        // this.dialogV2Service.openLog();
+        this.dialogV2Service.openLog();
         break;
       default:
         this.game.processCommands(what);

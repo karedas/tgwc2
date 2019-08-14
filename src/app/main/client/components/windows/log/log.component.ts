@@ -12,7 +12,7 @@ import { FileSaverService } from 'ngx-filesaver';
 })
 export class LogComponent implements OnInit, OnDestroy {
 
-  @ViewChild('logContentArea', {static: true}) logContentArea: ElementRef;
+  @ViewChild('logContentArea', { static: true }) logContentArea: ElementRef;
 
   logStorage = [];
   dateTime: string;
@@ -23,26 +23,38 @@ export class LogComponent implements OnInit, OnDestroy {
     private logService: LogService,
     private _FileSaverService: FileSaverService
   ) {
+
+    this.setDate();
     this._unsubscribeAll = new Subject<any>();
-    const d = new Date();
-    this.dateTime = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}, ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
   }
 
   ngOnInit() {
-   this.logService.log$
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe((log: any) => {
-      this.logStorage.push(log);
-    });
+    this.logService.getLog()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((log: any) => {
+        this.logStorage.push(log);
+      });
   }
 
+  private setDate() {
+    const d = this.logService.startLoggingDate();
+    this.dateTime = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()} - `;
+    this.dateTime += `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+  }
+
+
+  /** Public  */
+
+
   saveLog() {
-    const content =  this.logContentArea.nativeElement.innerHTML;
+    const content = this.logContentArea.nativeElement.innerHTML;
     this._FileSaverService.save(
-        content,
-        this.dateTime.replace(/\-|:/g, '_') + '_TG-LOG.html'
+      content,
+      this.dateTime.replace(/\-|:/g, '_') + '_TG-LOG.html'
     );
   }
+
+
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

@@ -8,22 +8,27 @@ import { equip_positions_by_name } from '../common/constants';
 })
 export class LogService {
 
+  date: Date;
   lineNumber = 0;
   log$: ReplaySubject<any> = new ReplaySubject<any>(500);
   logStorage = [];
 
   constructor() {
+
+    this.date = new Date();
     this.log$.pipe(
-      scan((acc, curr) => {
-        Object.assign({}, acc, curr);
-      }),
+      scan((acc, curr) =>  Object.assign({}, acc, curr))
     );
-    this.log$.asObservable();
   }
 
-  get log(): Observable<any> {
-    return this.log$;
+  getLog(): Observable<any> {
+    return this.log$.asObservable();
   }
+
+  startLoggingDate(): Date {
+    return this.date;
+  }
+  
 
 
   parseForLog(data: any) {

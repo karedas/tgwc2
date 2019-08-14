@@ -13,6 +13,5 @@ export class AlertComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
   ) {
-    console.log(data);
   }
 }

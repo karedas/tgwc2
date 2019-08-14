@@ -3,6 +3,7 @@ export const environment = {
   apiAddress: 'http://http://play.thegatemud.it/api',
   serverstatAddress: 'http://play.thegatemud.it/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
+  analytics_UAID: 'UA-122402371-1',
   socket : {
     url : 'http://play.thegatemud.it:3335',
     options : {
@@ -16,5 +17,4 @@ export const environment = {
       reconnectionAttempts: 'Infinity'
     }
   },
-  analytics_UAID: 'UA-122402371-1'
 };
