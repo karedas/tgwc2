@@ -6,12 +6,17 @@
     <tg-sidebar></tg-sidebar>
   </mat-sidenav>
       
-  <mat-sidenav-content>
-    <ng-container *ngIf="isCookieAccepted">
-      <router-outlet></router-outlet>
-      <tg-footer></tg-footer>
-    </ng-container>
-  </mat-sidenav-content>
 
-</mat-sidenav-container>
+  
+  <mat-sidenav-content>
+
+      <ng-container *ngIf="isCookieAccepted">
+        <router-outlet></router-outlet>
+        <tg-footer></tg-footer>
+      </ng-container>
+
+    </mat-sidenav-content>
+    
+    
+  </mat-sidenav-container>
 

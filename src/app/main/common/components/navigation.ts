@@ -2,7 +2,6 @@ export interface NavigationItem {
   id: string;
   title: string;
   type: 'item' | 'group' | 'collapsable';
-  translate?: string;
   icon?: string;
   hidden?: boolean;
   url?: string;
@@ -41,6 +40,7 @@ export const baseNavigationSidebar: NavigationItem[] = [
     type: 'item',
     icon: 'forum',
     externalUrl: true,
+    openInNewTab: true,
     url: 'http://forum.thegatemud.it'
   },
   {
@@ -74,13 +74,65 @@ export const navigationSidebar: NavigationItem[] = [
 ];
 
 export const gameNavigationSideBar: NavigationItem[] = [
-  // {
-  //   id: 'dashboard',
-  //   title: 'Dashboard',
-  //   type: 'item',
-  //   icon: 'home',
-  //   url: '/manager/dashboard',
-  // },
+  {
+    id: 'client',
+    title: 'Client',
+    type: 'item',
+    children: [
+      {
+        id: 'log',
+        title: 'Log di gioco',
+        type: 'item'
+      },
+      {
+        id: 'preferences',
+        title: 'Preferenze',
+        type: 'item'
+      },
+      {
+        id: 'disconnectCharacter',
+        title: 'Disconnetti personaggio',
+        type: 'item'
+      }
+    ]
+  },
+  {
+    id: 'game',
+    title: 'Gioco',
+    type: 'item',
+    children: [
+      {
+        id: 'openInfo',
+        title: 'Apri informazioni',
+        type: 'item'
+      },
+      {
+        id: 'openEquip',
+        title: 'Apri Equipaggiamento',
+        type: 'item'
+      },
+      {
+        id: 'openInventory',
+        title: 'Apri Inventario',
+        type: 'item'
+      },
+      {
+        id: 'showSkills',
+        title: 'Visualizza Abilità',
+        type: 'item'
+      },
+      {
+        id: 'changeCharDescription',
+        title: 'Cambia la descrizione personale',
+        type: 'item'
+      }
+    ]
+  },
+  {
+    id: 'guide',
+    title: 'Guida',
+    type: 'item',
+  },
 
   // {
   //   id: 'Clan',

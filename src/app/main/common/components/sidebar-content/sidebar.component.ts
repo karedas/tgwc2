@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NavigationItem, baseNavigationSidebar } from '../navigation';
+import { NavigationItem, baseNavigationSidebar, gameNavigationSideBar } from '../navigation';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.model';
 
@@ -11,7 +11,8 @@ import { User } from 'src/app/core/models/user.model';
 })
 export class SidebarComponent implements OnInit {
   public baseLinks: NavigationItem[] = [];
-  public items: NavigationItem[] = [];
+  public gameItems: NavigationItem[] = [];
+  public baseItems: NavigationItem[] = [];
   public selectedItem = 0;
   public currentUser: User;
 
@@ -27,9 +28,16 @@ export class SidebarComponent implements OnInit {
 
   /* Private Method */
   private createMenu() {
+    
+    for (const item in gameNavigationSideBar) {
+      if (gameNavigationSideBar.hasOwnProperty(item)) {
+        this.gameItems.push(gameNavigationSideBar[item]);
+      }
+    }
+    
     for (const item in baseNavigationSidebar) {
       if (baseNavigationSidebar.hasOwnProperty(item)) {
-        this.items.push(baseNavigationSidebar[item]);
+        this.baseItems.push(baseNavigationSidebar[item]);
       }
     }
   }

@@ -7,10 +7,10 @@ tg-sidebar {
   .mat-list-base .mat-list-item {
     color: $base-text-color;
     transition: background-color .2s ease-out;
-    font-size: 14px;
+    font-size: 1.2em;
 
     &.active, &:hover {
-      background-color: #675842;
+      // background-color: #675842;
       color: $base-text-color;
     }
   }
