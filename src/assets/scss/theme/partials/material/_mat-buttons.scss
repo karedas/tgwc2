@@ -80,6 +80,7 @@
 }
 
 .mat-flat-button, .mat-raised-button, .mat-fab.mat, .mat-mini-fab.mat {
+  transition: all .2s linear;
   &:active {
     opacity: .5;
   }

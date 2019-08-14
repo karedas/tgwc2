@@ -19,10 +19,7 @@ body {
   height: 100%;
   flex-direction: column;
   display: flex;
-  background: #0a0706 url($imgPath + '/background/default-bg.jpg') no-repeat top center;
-  background-size: 100% auto;
-  background-attachment: fixed;
-  background-color: black;
+  background-color: #0b0807;
 }
 
 body.size-xs {
@@ -99,6 +96,11 @@ tg-main {
   position: relative;
   display: block;
   box-sizing: border-box;
+  padding-top: 36px;
+  background: #0a0706 url($imgPath + '/background/default-bg.jpg') no-repeat top center;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-color: black;
 }
 
 .main-content {
