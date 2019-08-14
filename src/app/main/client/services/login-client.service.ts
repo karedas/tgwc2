@@ -62,7 +62,7 @@ export class LoginClientService {
   }
 
   logout() {
-    this.isLoggedInSubject.next(false);
+    this.isInGame = false;
   }
 
   reconnect() {
