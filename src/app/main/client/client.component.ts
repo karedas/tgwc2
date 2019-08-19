@@ -25,35 +25,30 @@ export class ClientComponent implements OnInit, OnDestroy {
   constructor(
     private _configService: ConfigService,
     private gameService: GameService,
-    // private dialogV2Service: DialogV2Service,
     private inputService: InputService) {
-      this._unsubscribeAll = new Subject<any>();
-      // this.openNews();
+    this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit(): void {
-
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
-
         this.tgConfig = config;
         this.gameService.sendToServer('');
         this.inputService.focus();
-
-        this.openNews();
-    });
+        // this.openNews();
+      });
   }
 
-  openNews() {
-    return;
-    if (this.tgConfig.news) {
-      // this.dialogV2Service.openNews(false);
-    } else {
-      this.gameService.sendToServer('');
-      this.inputService.focus();
-    }
-  }
+  // openNews() {
+  //   return;
+  //   if (this.tgConfig.news) {
+  //     // this.dialogV2Service.openNews(false);
+  //   } else {
+  //     this.gameService.sendToServer('');
+  //     this.inputService.focus();
+  //   }
+  // }
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

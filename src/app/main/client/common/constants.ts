@@ -101,4 +101,4 @@ export const skillValue = {
   20: 'buono',
   50: 'ottimo',
   100: 'eccellente'
-}
+};

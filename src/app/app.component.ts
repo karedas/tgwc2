@@ -11,7 +11,7 @@ declare let ga: Function;
   selector: 'tg-root',
   template: `
 
-  <tg-splashscreen 
+  <tg-splashscreen
     *ngIf="!debug"
     id="splashscreen"
     (loaded)="onLoad($event)"></tg-splashscreen>
@@ -30,9 +30,9 @@ declare let ga: Function;
 
 export class AppComponent implements OnDestroy {
 
-  debug: boolean = false;
+  debug = false;
   title = 'The Gate v2 WebClient';
-  
+
   assetsLoaded = false;
   matcher: MediaQueryList;
 
@@ -42,21 +42,21 @@ export class AppComponent implements OnDestroy {
   constructor(
     public mediaMatcher: MediaMatcher,
     private router: Router,
-    private  cookieService: CookieService,
+    private cookieService: CookieService,
     public breakpointObserver: BreakpointObserver,
     private render: Renderer2,
     @Inject(DOCUMENT) private document: any
   ) {
 
-    if(!environment.production) {
+    if (!environment.production) {
       this.debug = false;
     }
 
-      // subscribe to router events and send page views to Google Analytics
-      this.router.events
+    // subscribe to router events and send page views to Google Analytics
+    this.router.events
       .subscribe(event => {
         if (event instanceof NavigationEnd) {
-          if(this.cookieService.check('tgookieLaw')) {
+          if (this.cookieService.check('tgookieLaw')) {
             ga('set', 'page', event.urlAfterRedirects);
             ga('send', 'pageview');
           }

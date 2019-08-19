@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { CookieLawComponent } from "./cookie-law.component";
-import { NgScrollbarModule } from "ngx-scrollbar";
-import { MatCheckboxModule, MatDialogModule, MatDialogRef } from "@angular/material";
-import { CookieService } from "ngx-cookie-service";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CookieLawComponent } from './cookie-law.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { MatCheckboxModule, MatDialogModule, MatDialogRef } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 
 describe('CookieLawComponent', () => {
 
@@ -34,6 +34,6 @@ describe('CookieLawComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-  
+
 
 });

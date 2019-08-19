@@ -70,7 +70,7 @@ export class CharactersListComponent implements OnInit, OnDestroy {
 
   private sortCharacterList(list): any {
     return list.sort(function(a, b) {
-      if (a.is_default == true && !b.is_default) {
+      if (a.is_default === true && !b.is_default) {
         return -1;
       } else { return 1; }
     });
@@ -126,20 +126,19 @@ export class CharactersListComponent implements OnInit, OnDestroy {
     pgname = pgname.toUpperCase();
     const confirm = prompt(`Attenzione, l\'operazione non potrà essere annullata.
       Se sei certo di questa scelta digita qui sotto "${pgname}" e premi Ok`, ``);
-      
+
     if (confirm != null && confirm === pgname) {
       // DISABLE Character!!
     }
   }
 
   public onSelectedPrimary(id: number) {
-    let cdata = this.charactersList.data;
-    for (let c in cdata) {
-      if(cdata[c]['id'] === id && !cdata[c]['is_default']) {
-        cdata[c]['is_default'] = true
+    const cdata = this.charactersList.data;
+    for (const c in cdata) {
+      if (cdata[c]['id'] === id && !cdata[c]['is_default']) {
+        cdata[c]['is_default'] = true;
         this.userService.setDefaultCharacter(cdata[c]).subscribe();
-      }
-      else {
+      } else {
         cdata[c]['is_default'] = false;
       }
     }

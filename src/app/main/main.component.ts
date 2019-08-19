@@ -29,18 +29,16 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     if (this.cookieService.check('tgCookieLaw')) {
       this.router.navigate(['/manager']);
       this.start();
     } else {
-      this.openCookieLaw()
+      this.openCookieLaw();
     }
   }
 
 
   openCookieLaw() {
-
     const dialogID = 'cookielaw';
     const config = new MatDialogConfig();
     config.id = dialogID;

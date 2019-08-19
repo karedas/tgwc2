@@ -34,7 +34,7 @@ export class CharacterSheetComponent  {
     private game: GameService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    this.heroBase$ = this.store.pipe(select(getHero))
+    this.heroBase$ = this.store.pipe(select(getHero));
   }
 
   switchPanel(tab: string, event: Event) {

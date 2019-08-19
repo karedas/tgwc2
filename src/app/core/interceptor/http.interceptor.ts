@@ -19,7 +19,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
     const token = this.authService.getToken();
     if (!token) {
-      return next.handle(request)
+      return next.handle(request);
         // TODO: -`exception to avoid  connection refused`
         // .pipe(
         //   tap((event: HttpEvent<any>) => {

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, Output, EventEmitter, OnDestroy, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewEncapsulation, Output, EventEmitter,
+    OnDestroy, Inject, ElementRef, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
@@ -16,7 +17,7 @@ export class SplashscreenComponent implements AfterViewInit, OnDestroy {
   // @ViewChild('splashscreen', {static: false}) elementRef: ElementRef;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>(false);
 
-  enabled: boolean = true;
+  enabled = true;
   player: AnimationPlayer;
   preloadPerc: any;
 
@@ -52,7 +53,7 @@ export class SplashscreenComponent implements AfterViewInit, OnDestroy {
         }
       });
   }
-  
+
 
   // show(): void {
   //   let player: AnimationPlayer;
@@ -62,22 +63,22 @@ export class SplashscreenComponent implements AfterViewInit, OnDestroy {
   //         zIndex: '999'
   //       }),
   //     ])
-      
+
   //   player = animationFactory.create(this.elementRef.nativeElement);
   //   player.play();
   // }
-  
+
 
   hide(): void {
     let player: AnimationPlayer;
-    let animationFactory  = 
+    const animationFactory  =
       this._animationBuilder
         .build([
           style({ zIndex: '0'}),
           animate('500ms ease', style({
             opacity: 0,
           })),
-        ])
+        ]);
 
     player = animationFactory.create(this.elementRef.nativeElement);
     player.play();

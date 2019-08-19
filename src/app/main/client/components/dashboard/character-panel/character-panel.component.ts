@@ -24,17 +24,13 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   readonly env = environment;
 
   tgConfig: TGConfig;
-
   hero$: Observable<any>;
   hero_pos = hero_position;
-
   inCombat = false;
-
   // Hero Values
   heroImage = 'assets/images/interface/default_avatar.png';
   money = 0;
   moneyValue = '';
-
   // Enemy Target Values
   enemyHealt = 0;
   enemyMove = 0;
@@ -44,7 +40,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   activeMediaQuery = '';
 
   private watcherMedia: Subscription;
-
   private _unsubscribeAll: Subject<any>;
 
   constructor(

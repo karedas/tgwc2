@@ -55,8 +55,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     private outputService: OutputService,
     private store: Store<DataState>,
     private game: GameService,
-    private _configService: ConfigService) 
-    {
+    private _configService: ConfigService) {
       this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
       this._baseText$ = this.store.select(getDataBase);
       this._roomBase$ = this.store.select(getRoomBase);
