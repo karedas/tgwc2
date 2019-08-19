@@ -76,23 +76,6 @@ export class CharactersListComponent implements OnInit, OnDestroy {
     });
   }
 
-  loginCharacter(name: string, secret: string, event: Event) {
-    event.stopImmediatePropagation();
-    const values = { name: name, secret: secret };
-
-    this.openLoginDialog();
-    this.loginClientService.login(values)
-      .pipe(
-        delay(1000),
-        takeUntil(this._unsubscribeAll)
-      )
-      .subscribe((res) => {
-        if (res === true) {
-          this.redirectToClient();
-          return;
-        }
-      });
-  }
 
   private redirectToClient() {
     this.router.navigate(['/webclient'])
@@ -114,9 +97,25 @@ export class CharactersListComponent implements OnInit, OnDestroy {
   }
 
 
-
   /** Public  */
 
+  public loginCharacter(name: string, secret: string, event: Event) {
+    event.stopImmediatePropagation();
+    const values = { name: name, secret: secret };
+
+    this.openLoginDialog();
+    this.loginClientService.login(values)
+      .pipe(
+        delay(1000),
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe((res) => {
+        if (res === true) {
+          this.redirectToClient();
+          return;
+        }
+      });
+  }
 
   public goToChractersManage() {
     this.goToManage.emit();
@@ -130,6 +129,15 @@ export class CharactersListComponent implements OnInit, OnDestroy {
     if (confirm != null && confirm === pgname) {
       // DISABLE Character!!
     }
+  }
+
+  public onRemoveCharFromAccount(id: number) {
+    // this.userService
+    console.log(id);
+    this.userService.removeCharacterFromAccount(id)
+      .subscribe((res)  => {
+        console.log(res)
+      });
   }
 
   public onSelectedPrimary(id: number) {

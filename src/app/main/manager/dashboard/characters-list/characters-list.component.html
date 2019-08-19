@@ -68,7 +68,7 @@
                 </p>
 
                 <section *ngIf="element.status !== 0">
-                  <mat-divider class="light"></mat-divider><br />
+                  <mat-divider class="light"></mat-divider>
                   <mat-selection-list dense>
                     <mat-list-option color="accent" [selected]="element.is_default"
                       (click)="onSelectedPrimary(element.id)">
@@ -84,7 +84,7 @@
                       <mat-icon matListIcon>bug_report</mat-icon>
                       Segnala un problema
                     </button>
-                    <button mat-list-item (click)="tesT()" disabled>
+                    <button mat-list-item (click)="onRemoveCharFromAccount(element.id)">
                       <mat-icon matListIcon>delete_outline</mat-icon>
                       Rimuovi il personaggio da questo account
                     </button>

@@ -61,4 +61,9 @@ export class UserService extends ApiService {
     };
     return this.put('/profile/set-default-character', data);
   }
+
+  public removeCharacterFromAccount(id: number): Observable<any> {
+    const url = `/profile/remove-character/${id}`;
+    return this.delete(url);
+  }
 }
