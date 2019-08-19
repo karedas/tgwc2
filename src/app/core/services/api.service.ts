@@ -49,10 +49,22 @@ export class ApiService {
       );
   }
 
-  public put(url: string, postData: any): Observable<any> {
+  public put(url: string, ...param: any): Observable<any> {
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
-    return this.http.put(endpoint, JSON.stringify(postData), {headers})
+    return this.http.put(endpoint, JSON.stringify(param), {headers})
+    .pipe(
+      map(response => {
+        return new ApiResponse(response);
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  public delete(url: string, ...param: any): Observable<any> {
+    const endpoint = this.buildUrl(url);
+    const headers = this.buildHeader();
+    return this.http.delete(endpoint, {headers})
     .pipe(
       map(response => {
         return new ApiResponse(response);
