@@ -4,7 +4,6 @@ import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { PageNotFoundComponent } from './main/pages/errors/404/page-not-found.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'manager', pathMatch: 'full' },
   {
     path: '**',
     component: PageNotFoundComponent
@@ -20,7 +19,7 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes,
       {
-        enableTracing: false, 
+        enableTracing: false,
         preloadingStrategy: AppPreloadingStrategy,
       }
     )

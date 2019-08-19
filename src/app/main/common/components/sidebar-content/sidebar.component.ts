@@ -28,13 +28,13 @@ export class SidebarComponent implements OnInit {
 
   /* Private Method */
   private createMenu() {
-    
+
     for (const item in gameNavigationSideBar) {
       if (gameNavigationSideBar.hasOwnProperty(item)) {
         this.gameItems.push(gameNavigationSideBar[item]);
       }
     }
-    
+
     for (const item in baseNavigationSidebar) {
       if (baseNavigationSidebar.hasOwnProperty(item)) {
         this.baseItems.push(baseNavigationSidebar[item]);

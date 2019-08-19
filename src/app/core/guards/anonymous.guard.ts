@@ -14,11 +14,11 @@ export class AnonymousGuard implements CanActivate {
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     console.log('canactivate');
 
-    if(!this.cookieService.check('tgCookieLaw')) {
-      this.router.navigate(['/'])
+    if (!this.cookieService.check('tgCookieLaw')) {
+      this.router.navigate(['/']);
     }
 
-    /* Check if user is or not logged . 
+    /* Check if user is or not logged .
     // If is logged-in, diable the auth/* route.  */
     if ( !this.authService.userIsLoggedIn()) {
       return true;

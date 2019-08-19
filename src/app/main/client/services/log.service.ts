@@ -28,7 +28,7 @@ export class LogService {
   startLoggingDate(): Date {
     return this.date;
   }
-  
+
 
 
   parseForLog(data: any) {
