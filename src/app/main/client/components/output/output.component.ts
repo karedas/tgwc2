@@ -20,7 +20,7 @@ import { OutputService } from './output.service';
   styleUrls: ['./output.component.scss'],
 })
 
-export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OutputComponent implements AfterViewInit, OnDestroy {
 
   tgConfig: TGConfig;
 
@@ -64,8 +64,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit(): void {
-
+  ngAfterViewInit() {
     this.outputService.toggledAutoScroll
       .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
 
@@ -75,8 +74,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((config) => {
         this.tgConfig = config;
       });
-
-
 
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
@@ -99,16 +96,14 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this._genericPage$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(data => this.updateGenericPage(data));
-  }
 
-  ngAfterViewInit(): void {
+
     setTimeout(() => {
       this.setOutputSplit();
     });
   }
 
   private updateContent(content: any) {
-
     this.trimOutput();
     this.output.push(content);
     this.outputObservable.next(this.output);
@@ -174,9 +169,13 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   private scrollPanelToBottom() {
     if (!this.pauseScroll) {
       setTimeout(() => {
-        this.scrollBar.scrollToBottom();
+        this.scrollBar.update();
       }, 50);
     }
+  }
+
+  test() {
+    console.log('test');
   }
 
   @HostListener('window:resize', ['$event.target'])

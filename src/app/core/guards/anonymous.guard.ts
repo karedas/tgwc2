@@ -12,7 +12,6 @@ export class AnonymousGuard implements CanActivate {
   constructor(private authService: AuthService, private cookieService: CookieService, private router: Router) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('canactivate');
 
     if (!this.cookieService.check('tgCookieLaw')) {
       this.router.navigate(['/']);

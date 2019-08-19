@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationItem, baseNavigationSidebar, gameNavigationSideBar } from '../navigation';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.model';
+import { Router, Event, NavigationEnd } from '@angular/router';
+import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 @Component({
   selector: 'tg-sidebar',
@@ -14,12 +16,20 @@ export class SidebarComponent implements OnInit {
   public gameItems: NavigationItem[] = [];
   public baseItems: NavigationItem[] = [];
   public selectedItem = 0;
-  public currentUser: User;
+  public userIsInGame = false;
 
   constructor(
-    private authService: AuthService
+    private loginClientService: LoginClientService,
+    private router: Router
     ) {
-    this.currentUser = this.authService.currentUser;
+
+    this.router.events
+      .subscribe((event: Event) => {
+        if (event instanceof NavigationEnd) {
+          this.userIsInGame = this.loginClientService.isInGame;
+        }
+      });
+
   }
 
   ngOnInit() {

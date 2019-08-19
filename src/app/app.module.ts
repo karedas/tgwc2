@@ -55,10 +55,6 @@ export function tokenGetter() {
       maxAge: 25,
       logOnly: environment.production,
     }),
-
-    // TODO: I'll need to move out.
-    // AngularSplitModule.forRoot(),
-    /** --------------------- */
     MainModule,
     AppRoutingModule,
   ],
