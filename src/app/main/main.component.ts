@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CookieLawComponent } from './common/components/dialogs/cookie-law/cookie-law.component';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'tg-main',
@@ -30,15 +31,13 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.cookieService.check('tgCookieLaw')) {
-      this.router.navigate(['/manager']);
       this.start();
     } else {
       this.openCookieLaw();
     }
   }
 
-
-  openCookieLaw() {
+  private openCookieLaw() {
     const dialogID = 'cookielaw';
     const config = new MatDialogConfig();
     config.id = dialogID;
@@ -46,21 +45,17 @@ export class MainComponent implements OnInit, OnDestroy {
     config.autoFocus = false;
     config.width = '450px';
     config.height = '350px';
+
     const dialogRef = this.dialog.open(CookieLawComponent, config);
 
-    dialogRef.afterClosed()
-      .subscribe(() => {
-        this.router.navigate(['/manager']);
-        this.start();
-      });
+    dialogRef.afterClosed().subscribe(() => {
+      this.start();
+    });
   }
 
-  onCookieAccepted(status: boolean) {
-    this.isCookieAccepted = status;
-  }
-
-  start() {
+  private start() {
     this.isCookieAccepted = true;
+    this.router.navigate(['/manager']);
   }
 
   ngOnDestroy() {

@@ -3,23 +3,30 @@
 
 
 tg-sidebar {
-  
-  .mat-list-base .mat-list-item {
+
+  .mat-list-base .mat-list-item,
+  .mat-list-base[dense] .mat-list-item {
     color: $base-text-color;
     transition: background-color .2s ease-out;
-    font-size: 1.2em;
+    font-size: 1em;
 
-    &.active, &:hover {
+    &.active,
+    &:hover {
       // background-color: #675842;
       color: $base-text-color;
     }
   }
 
-  .menu-item-label, .mat-icon{ 
-    font-size: 20px;
+  .menu-item-label,
+  .mat-icon {
+    font-size: 16px;
     vertical-align: middle;
   }
-      
+
+  .mat-list-base.tg-sidelogin .mat-list-item {
+    color: $tg-yellow;
+  }
+
   // // Account Avatar
   // .tg-manager-avatar {
   //   width: 100%;
@@ -49,5 +56,10 @@ tg-sidebar {
 
   .sub-items {
     text-align: right;
+  }
+
+
+  .mat-divider {
+    border-top-color: rgba(255, 255, 255, 0.15);
   }
 }
