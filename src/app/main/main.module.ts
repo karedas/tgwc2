@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SplashScreenService } from './common/components/splashscreen/splashscreen.service';
 import { HelpComponent } from './pages/help/help.component';
 import { MatListModule, MatToolbarModule } from '@angular/material';
-import { SidebarComponent } from './common/components/sidebar-content/sidebar.component';
+import { SidenavContentComponent } from './common/components/sidenav-content/sidenav-content.component';
 import { SocketService } from '../core/services/socket.service';
 import { AlertComponent } from './common/components/dialogs/alert/alert.component';
 import { LoginClientService } from './client/services/login-client.service';
@@ -39,11 +39,6 @@ const routes: Routes = [
     path: 'novita',
     loadChildren: () => import('./pages/global-news/global-news.module').then(m => m.GlobalNewsModule),
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'manager',
-  //   pathMatch: 'full',
-  // }
 ];
 
 @NgModule({
@@ -51,7 +46,7 @@ const routes: Routes = [
     MainComponent,
     CookieLawComponent,
     AlertComponent,
-    SidebarComponent,
+    SidenavContentComponent,
     HelpComponent,
     FooterComponent
   ],

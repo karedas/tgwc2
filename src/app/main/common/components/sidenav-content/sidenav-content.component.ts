@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { NavigationItem, baseNavigationSidebar, gameNavigationSideBar } from '../navigation';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { User } from 'src/app/core/models/user.model';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 
 @Component({
-  selector: 'tg-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: 'tg-sidenav-content',
+  templateUrl: './sidenav-content.component.html',
+  styleUrls: ['./sidenav-content.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SidebarComponent implements OnInit {
+export class SidenavContentComponent implements OnInit {
+  @Output() itemClick: EventEmitter<any> = new EventEmitter<any>();
+  
   public baseLinks: NavigationItem[] = [];
   public gameItems: NavigationItem[] = [];
   public baseItems: NavigationItem[] = [];
@@ -29,7 +29,6 @@ export class SidebarComponent implements OnInit {
           this.userIsInGame = this.loginClientService.isInGame;
         }
       });
-
   }
 
   ngOnInit() {
@@ -52,6 +51,9 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  toggleSidenav() {
+    this.itemClick.emit();
+  }
 
   /* Public Method */
   selectItmeMenu(i) {
