@@ -6,7 +6,7 @@ import { EquipInventoryComponent } from './equip-inventory/equip-inventory.compo
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatExpansionModule } from '@angular/material';
+import { MatExpansionModule} from '@angular/material';
 
 @NgModule({
   declarations: [

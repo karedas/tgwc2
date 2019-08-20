@@ -2,6 +2,13 @@
 @import 'abstract/sprites';
 @import 'abstract/sprites-mixins';
 
+
+:host {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
 .skill-list {
   background: black;
   height: 100%;
@@ -98,4 +105,21 @@ mat-expansion-panel {
 .skillsep {
   color: #e6deb2;
   font-size: 2em;
+}
+
+
+
+.skills-actions-menu {
+  text-align: right;
+  border-top: rgba(255, 255, 255, .3);
+  
+  button {
+    transition: color .2s linear;
+    text-transform: uppercase;
+    font-size: .9em;
+  }
+  
+  button:hover {
+    color: white;
+  }
 }
