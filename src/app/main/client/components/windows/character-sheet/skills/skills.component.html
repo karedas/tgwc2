@@ -1,3 +1,4 @@
+
 <div fxLayout="column" style="height: 100%">
   <!-- ######## Ability ########  -->
   <div class="skill-list" fxLayout="column">
@@ -5,7 +6,7 @@
 
       <ng-scrollbar class="scrollbar" [visibility]="'always'">
 
-        <mat-accordion class="skill-group" [displayMode]="'flat'" >
+        <mat-accordion class="skill-group" [displayMode]="'flat'" multi="true" #skillAccordionContainer="matAccordion">
           <mat-expansion-panel  *ngFor="let skill of skills$ | async | keyvalue; index as i; " [expanded]="i === 0">
 
             <mat-expansion-panel-header class="skill-groupname" 
@@ -19,8 +20,10 @@
             <ng-template matExpansionPanelContent>
             <div class="skill-subdetail-container" fxLayout="row wrap">
 
-              <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" fxFlex="0 1 100%"
-                fxLayoutAlign="start center">
+              <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" 
+                fxFlex="0 1 100%"
+                fxLayoutAlign="start center"
+                fxLayoutGap="10px">
                   <div class="skill-name" fxFlex="0 1 50%">
                     {{subskill.key}}
                   </div>
@@ -28,7 +31,7 @@
                     <span [style.width.%]="subskill.value.prac"></span>
                   </div>
                   <div fxFlex="0 1 30%">
-                    Leggendario
+                    [VALORE]
                   </div>
                 </div>
                 
@@ -45,4 +48,7 @@
 </div>
 
 
-
+<div class="skills-actions-menu">
+  <button mat-button (click)="skillAccordionContainer.closeAll()">Comprimi tutto</button> 
+  <button mat-button (click)="skillAccordionContainer.openAll()">Espandi tutto</button>
+</div>
