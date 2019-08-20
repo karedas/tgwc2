@@ -2,7 +2,7 @@
   <!-- Game Sidebar Menu  -->
   <div *ngFor="let item of gameItems">
     <mat-list >
-      <mat-list-item role="listitem">
+      <mat-list-item role="listitem" (click)="child.function">
         <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
         <span class="nav-link-title">{{item.title}}</span>
         <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
@@ -15,7 +15,7 @@
     <mat-action-list *ngIf="item.children" dense>
       <!-- <mat-list-item dense class="sub-items"  *ngIf="item.children"> -->
       <mat-list-item *ngFor="let child of item.children" #dense>
-        <button mat-list-item>
+        <button mat-list-item (click)="child.function">
           {{child.title}}
         </button>
       </mat-list-item>
@@ -29,15 +29,21 @@
   <!-- Base Menu -->
   <mat-list-item *ngFor="let item of baseItems" class="sidebar-base-items" role="listitem">
     <!-- item.url -->  
-    <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" [ngClass]="{'active': selectedItem === index}"
-      [routerLink]="item.url ? item.url : null" [routerLinkActive]="active"
-      [target]="item.openInNewTab ? '_blank' : '_self'" (click)="selectItmeMenu(0)">
+    <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" 
+      (click)="toggleSidenav()"
+      [ngClass]="{'active': selectedItem === index}"
+      [routerLink]="item.url ? item.url : null"
+      [routerLinkActive]="active"
+      [target]="item.openInNewTab ? '_blank' : '_self'">
 
       <ng-container *ngTemplateOutlet="itemContent; context: {item: item}"></ng-container>
     </a>
     <!-- item.externalUrl -->
-    <a mat-line class="menu-item" [ngClass]="{'active': selectedItem === index}" *ngIf="item.url && item.externalUrl"
-      [href]="item.url" [target]="item.openInNewTab ? '_blank' : '_self'">
+    <a mat-line class="menu-item" *ngIf="item.url && item.externalUrl"
+      [ngClass]="{'active': selectedItem === index}"
+      [href]="item.url" 
+      [routerLinkActive]="active"
+      [target]="item.openInNewTab ? '_blank' : '_self'">
 
       <ng-container *ngTemplateOutlet="itemContent; context: {item: item}"></ng-container>
     </a>
@@ -56,6 +62,6 @@
 </ng-template>
 <mat-divider class="light"></mat-divider>
 <mat-action-list dense class="tg-sidelogin">
-  <mat-list-item>Login</mat-list-item>
-  <mat-list-item>Registrati</mat-list-item>
+  <a mat-list-item (click)="toggleSidenav()" [routerLink]="['auth/login']">Login</a>
+  <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/auth/signup']">Registrati</a>
 </mat-action-list>

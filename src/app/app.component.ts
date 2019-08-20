@@ -10,7 +10,6 @@ declare let ga: Function;
 @Component({
   selector: 'tg-root',
   template: `
-
   <tg-splashscreen
     *ngIf="!debug"
     id="splashscreen"
@@ -63,8 +62,6 @@ export class AppComponent implements OnDestroy {
         }
       });
 
-
-
     this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
@@ -74,8 +71,6 @@ export class AppComponent implements OnDestroy {
           this.render.removeClass(this.document.body, 'xs');
         }
       });
-
-
   }
 
   onLoad(event: boolean): void {
