@@ -9,7 +9,6 @@ export interface NavigationItem {
   exactMatch?: boolean;
   externalUrl?: boolean;
   openInNewTab?: boolean;
-  function?: any;
   badge?: {
     title?: string;
     translate?: string;
@@ -77,7 +76,7 @@ export const gameNavigationSideBar: NavigationItem[] = [
   {
     id: 'client',
     title: 'Client',
-    type: 'item',
+    type: 'group',
     children: [
       {
         id: 'log',
@@ -99,7 +98,7 @@ export const gameNavigationSideBar: NavigationItem[] = [
   {
     id: 'game',
     title: 'Gioco',
-    type: 'item',
+    type: 'group',
     children: [
       {
         id: 'openInfo',
@@ -129,9 +128,9 @@ export const gameNavigationSideBar: NavigationItem[] = [
     ]
   },
   {
-    id: 'guide',
-    title: 'Guida',
-    type: 'item',
+    id: 'help',
+    title: 'Aiuto',
+    type: 'group',
   },
 
   // {

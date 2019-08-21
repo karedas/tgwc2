@@ -1,19 +1,19 @@
-import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation, Optional } from '@angular/core';
+import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { GameService } from 'src/app/main/client/services/game.service';
 import gitInfo from 'src/git-version.json';
-import { TGConfig } from '../../../../client/client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { AudioService } from '../../../../client/components/audio/audio.service';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
+import { TGConfig } from 'src/app/main/client/client-config';
+import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 
 @Component({
-  selector: 'tg-game-menu',
-  templateUrl: './tg-game-menu.component.html',
+  selector: 'tg-game-items',
+  templateUrl: './game-items.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class TgGameMenuComponent implements OnInit, OnDestroy {
+export class TgGameItemsComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
 

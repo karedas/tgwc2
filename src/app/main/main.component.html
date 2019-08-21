@@ -1,9 +1,9 @@
-<tg-main-navigation [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-main-navigation>
+<tg-navbar [hidden]="!isCookieAccepted" (toggleSidenav)="navigationSidenav.toggle()"></tg-navbar>
 
 <mat-sidenav-container>
   
   <mat-sidenav mode="over" #navigationSidenav role="navigation" [fixedInViewport]="true" [fixedTopGap]="'30'">
-    <tg-sidenav-content (itemClick)="navigationSidenav.toggle()"></tg-sidenav-content>
+    <tg-sidenav (itemClick)="navigationSidenav.toggle()"></tg-sidenav>
   </mat-sidenav>
       
   <mat-sidenav-content>

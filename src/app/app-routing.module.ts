@@ -10,7 +10,6 @@ const routes: Routes = [
   }
 ];
 
-
 @NgModule({
   declarations: [
     PageNotFoundComponent
@@ -19,7 +18,7 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes,
       {
-        enableTracing: true,
+        enableTracing: false,
         preloadingStrategy: AppPreloadingStrategy,
       }
     )

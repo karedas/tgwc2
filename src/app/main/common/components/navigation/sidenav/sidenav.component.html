@@ -1,0 +1,74 @@
+<ng-container *ngIf="userIsInGame;">
+  <!-- Game Sidebar Menu  -->
+  <div *ngFor="let item of gameItems">
+
+    <mat-list >
+      <mat-list-item role="listitem" [ngClass]="{'group': item.type === 'group'}">
+        <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+        <span class="nav-link-title">{{item.title}}</span>
+        <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
+          [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
+          {{item.badge.title}}
+        </span>
+        <!-- Sub Menu -->
+      </mat-list-item>
+    </mat-list>
+
+    <mat-action-list *ngIf="item.children" dense>
+      <button mat-list-item  
+        *ngFor="let child of item.children" 
+        (click)="child.function">
+        {{child.title}}
+      </button>
+    </mat-action-list>
+
+  </div>
+  <!-- End Game Sidebar Menu -->
+</ng-container>
+
+
+<mat-nav-list *ngIf="!userIsInGame">
+  <!-- Base Menu -->
+  <div *ngFor="let item of baseItems">
+    <mat-list-item  role="listitem"
+      [ngClass]="{'group': item.type === 'group'}"
+      class="sidebar-base-items" role="listitem">
+      <!-- item.url -->  
+      <a mat-line class="menu-item" *ngIf="item.url && !item.externalUrl" 
+        (click)="toggleSidenav()"
+        [ngClass]="{'active': selectedItem === index}"
+        [routerLink]="item.url ? item.url : null"
+        [routerLinkActive]="active"
+        [target]="item.openInNewTab ? '_blank' : '_self'">
+
+        <ng-container *ngTemplateOutlet="itemContent; context: {item: item}"></ng-container>
+      </a>
+      <!-- item.externalUrl -->
+      <a mat-line class="menu-item" *ngIf="item.url && item.externalUrl"
+        [ngClass]="{'active': selectedItem === index}"
+        [href]="item.url" 
+        [routerLinkActive]="active"
+        [target]="item.openInNewTab ? '_blank' : '_self'">
+
+        <ng-container *ngTemplateOutlet="itemContent; context: {item: item}"></ng-container>
+      </a>
+    </mat-list-item>
+  </div>
+  <!-- End Base Menu -->
+</mat-nav-list>
+
+<ng-template #itemContent let-item="item">
+  <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+  <span class="nav-link-title">{{item.title}}</span>
+  <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
+    [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
+    {{item.badge.title}}
+  </span>
+  <!-- <mat-icon class="collapsable-arrow">keyboard_arrow_right</mat-icon> -->
+</ng-template>
+
+<mat-action-list dense class="tg-sidelogin" *ngIf="!userIsLoggedIn">
+  <mat-divider class="light"></mat-divider>
+  <a mat-list-item (click)="toggleSidenav()" [routerLink]="['auth/login']">Login</a>
+  <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/auth/signup']">Registrati</a>
+</mat-action-list>
