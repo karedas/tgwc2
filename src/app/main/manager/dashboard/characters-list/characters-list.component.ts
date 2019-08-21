@@ -132,7 +132,6 @@ export class CharactersListComponent implements OnInit, OnDestroy {
   }
 
   public onRemoveCharFromAccount(id: number) {
-    // this.userService
     this.userService.removeCharacterFromAccount(id)
       .subscribe((res)  => {
       });
