@@ -7,35 +7,37 @@ import { Role } from '../models/role';
 @Injectable()
 export class AuthService {
 
-  isLoginSubject = new BehaviorSubject<boolean>(this.userIsLoggedIn());
+  isLoginSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _isLoggedin: BehaviorSubject<boolean>;
 
 
   constructor(private jwtHelper: JwtHelperService) {
-    this._isLoggedin = new BehaviorSubject<any>(false);
+    this.isLoginSubject.next(this.userIsLoggedIn());
+    this._isLoggedin = new BehaviorSubject<boolean>(false);
   }
 
-  get currentUser() {
-    if ( !this.userIsLoggedIn() ) {
+  set currentUser(user: User) {}
+
+  get currentUser(): User {
+    if (!this.userIsLoggedIn()) {
       return null;
     }
     return new User().deserialize(JSON.parse(localStorage.getItem('user')));
   }
 
-  get isAdmin() {
+  public isAdmin() {
     return this.currentUser && this.hasPermission(Role.Administrator);
   }
 
-  private setUserLoggedinStatus(val: boolean) {
-    this._isLoggedin.next(val);
-  }
-
-  public getUserLoggedInStatus(): Observable<any> {
-    return this._isLoggedin.asObservable();
-  }
-
   public userIsLoggedIn(): boolean {
-    return !this.jwtHelper.isTokenExpired();
+    const isTokenExpired = this.jwtHelper.isTokenExpired();
+    if(!isTokenExpired) {
+      return true;
+    }
+    else {
+      this.removeAuthData();
+      return false;
+    }
   }
 
   public hasPermission(permission: string) {
@@ -65,11 +67,19 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  public getTokenExpirationDate(token: string): Date {
+    const decoded = this.jwtHelper.decodeToken(token);
+    if (decoded.exp === undefined) return null;
+
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
   public saveAuthData(token: string, user: User): void {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
     // Update the Observers
-    this.setUserLoggedinStatus(true);
     this.isLoginSubject.next(true);
   }
 
@@ -77,7 +87,6 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     // Update the Observers
-    this.setUserLoggedinStatus(false);
     this.isLoginSubject.next(false);
   }
 }

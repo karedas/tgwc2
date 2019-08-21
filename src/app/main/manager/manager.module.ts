@@ -3,7 +3,6 @@ import { ManagerComponent } from './manager.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NewCharacterModule } from './new-character/new-character.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -15,10 +14,6 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      // {
-      //   path: 'nuovo-personaggio',
-      //   loadChildren: () => import('./new-character/new-character.module').then(m => m.NewCharacterModule)
-      // },
       // {
       //   path: 'administration',
       //   loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)

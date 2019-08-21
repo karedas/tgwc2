@@ -24,7 +24,7 @@ export class ClientEffects {
     private audioService: AudioService,
     private loginClientService: LoginClientService,
     private router: Router,
-  ) {}
+  ) { }
 
 
   @Effect({ dispatch: false })
@@ -38,7 +38,7 @@ export class ClientEffects {
         this.game.reset();
       }
     }
-  ));
+    ));
 
   @Effect({ dispatch: false })
   onGameStatus$: Observable<any> = this.actions$.pipe(

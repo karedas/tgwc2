@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CookieLawComponent } from './common/components/dialogs/cookie-law/cookie-law.component';
 import { Router } from '@angular/router';
+import { AuthService } from '../core/services/auth.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private router: Router,
     private cookieService: CookieService,
     public dialog: MatDialog,
+    private authService: AuthService
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -50,12 +52,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(() => {
       this.start();
+      
     });
   }
 
   private start() {
     this.isCookieAccepted = true;
-    this.router.navigate(['/manager']);
+    if(this.authService.userIsLoggedIn) {
+      this.router.navigate(['/manager']);
+    }
+    else {
+      this.router.navigate(['/auth/login'])
+    }
+    
   }
 
   ngOnDestroy() {
