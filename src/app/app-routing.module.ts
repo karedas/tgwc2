@@ -19,7 +19,7 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes,
       {
-        enableTracing: false,
+        enableTracing: true,
         preloadingStrategy: AppPreloadingStrategy,
       }
     )

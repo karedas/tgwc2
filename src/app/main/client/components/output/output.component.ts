@@ -174,10 +174,6 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  test() {
-    console.log('test');
-  }
-
   @HostListener('window:resize', ['$event.target'])
   onResize() {
     clearInterval(this.resizeID);
