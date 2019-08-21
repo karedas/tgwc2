@@ -57,7 +57,6 @@ export class GameService {
     this._showStatus = new BehaviorSubject(null);
 
     this.render = rendererFactory.createRenderer(null, null);
-
     this.init();
   }
 

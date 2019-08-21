@@ -167,11 +167,9 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
   }
 
   private scrollPanelToBottom() {
-    if (!this.pauseScroll) {
-      setTimeout(() => {
-        this.scrollBar.update();
-      }, 50);
-    }
+    setTimeout(() => {
+      this.scrollBar.update();
+    }, 50);
   }
 
   @HostListener('window:resize', ['$event.target'])
