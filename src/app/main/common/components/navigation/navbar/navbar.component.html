@@ -30,7 +30,7 @@
 
     <!-- Game Menu -->
     <div *ngIf="userIsInGame" fxFlex="1 1 100%" fxHide fxShow.gt-sm class="mr0">
-      <tg-game-menu></tg-game-menu>
+      <tg-game-items></tg-game-items>
     </div>
     <!-- End Game Menu-->
 
@@ -64,11 +64,9 @@
           <span *ngIf="!user && userIsInGame" class="tg-green">SEI IN GIOCO</span>
 
           <mat-menu #menu="matMenu" class="mat-elevation-z4">
-
             <div class="user-menu-item">
               Salve <span class="tg-yellow">{{user.username | capitalizeFirst}}</span>
             </div>
-
             <mat-divider class="light"></mat-divider>
             <!--  Characters List Fast Connector -->
             <mat-action-list dense>

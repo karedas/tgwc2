@@ -2,7 +2,7 @@
 @import '~@angular/flex-layout/mq';
 
 
-tg-sidenav-content {
+tg-sidenav {
 
   .mat-list-base .mat-list-item,
   .mat-list-base[dense] .mat-list-item {
@@ -15,6 +15,13 @@ tg-sidenav-content {
       // background-color: #675842;
       text-decoration: none;
       color: $base-text-color;
+    }
+
+    &.group {
+      font-size: 1.2em;
+      font-weight: bold;
+      background-color: $tg-brown!important;
+      color: black!important;
     }
   }
 

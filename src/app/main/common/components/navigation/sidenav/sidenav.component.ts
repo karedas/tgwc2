@@ -2,30 +2,34 @@ import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@ang
 import { NavigationItem, baseNavigationSidebar, gameNavigationSideBar } from '../navigation';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-  selector: 'tg-sidenav-content',
-  templateUrl: './sidenav-content.component.html',
-  styleUrls: ['./sidenav-content.component.scss'],
+  selector: 'tg-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SidenavContentComponent implements OnInit {
+export class SidenavComponent implements OnInit {
   @Output() itemClick: EventEmitter<any> = new EventEmitter<any>();
   
   public baseLinks: NavigationItem[] = [];
   public gameItems: NavigationItem[] = [];
   public baseItems: NavigationItem[] = [];
   public selectedItem = 0;
+  public userIsLoggedIn: boolean;
   public userIsInGame = false;
 
   constructor(
     private loginClientService: LoginClientService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
     ) {
 
     this.router.events
       .subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
+          this.userIsLoggedIn = this.authService.userIsLoggedIn();
           this.userIsInGame = this.loginClientService.isInGame;
         }
       });
@@ -58,6 +62,10 @@ export class SidenavContentComponent implements OnInit {
   /* Public Method */
   selectItmeMenu(i) {
     this.selectedItem = i;
+  }
+
+  onActionClick(what: string) {
+    
   }
 
   isEnableFor(level: string): boolean {

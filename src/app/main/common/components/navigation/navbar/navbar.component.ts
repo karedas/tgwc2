@@ -7,17 +7,17 @@ import { LoginClientService } from 'src/app/main/client/services/login-client.se
 import { map } from 'rxjs/operators';
 import { Character } from 'src/app/core/models/character.model';
 import { UserService } from 'src/app/core/services/user.service';
-import { gameNavigationSideBar } from '../navigation';
 import { User } from 'src/app/core/models/user.model';
+import { gameNavigationSideBar } from '../navigation';
 
 
 @Component({
-  selector: 'tg-main-navigation',
-  templateUrl: './main-navigation.component.html',
-  styleUrls: ['./main-navigation.component.scss'],
+  selector: 'tg-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MainNavigationComponent implements OnDestroy {
+export class NavBarComponent implements OnDestroy {
 
   @Output() toggleSidenav = new EventEmitter<void>();
   @Input('active') active: string;

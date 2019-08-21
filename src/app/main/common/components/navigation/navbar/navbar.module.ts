@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { MainNavigationComponent } from './main-navigation.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatBadgeModule, MatToolbarModule, MatListModule } from '@angular/material';
-import { TgGameMenuComponent } from './game-menu/tg-game-menu.component';
+import { NavBarComponent } from './navbar.component';
+import { TgGameItemsComponent } from './game-items/game-itemscomponent';
 
 
 @NgModule({
   declarations: [
-    MainNavigationComponent,
-    TgGameMenuComponent
+    NavBarComponent,
+    TgGameItemsComponent
   ],
   imports: [
     SharedModule,
@@ -21,7 +21,7 @@ import { TgGameMenuComponent } from './game-menu/tg-game-menu.component';
     MatIconModule
   ],
   exports: [
-    MainNavigationComponent
+    NavBarComponent
   ]
 })
-export class MainNavigationModule { }
+export class NavBarModule { }
