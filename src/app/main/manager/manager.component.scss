@@ -21,15 +21,12 @@
     // padding-left: 13px;
 }
 
-// .tg-manager-wrgt { 
-// background: # url($imgPath + '/commons/maincontent-right-bg.jpg') repeat-y top right;
-// padding-right: 13px;
-// }
 
 ::ng-deep {
   h1 {
     font-size: 1.5em;
     margin: 0;
+    color: $tg-brown;
   }
   
   .comp-alert {
@@ -49,7 +46,7 @@
   }
   
   .comp-padd {
-    padding: 0 12px;
+    padding: 24px;
   }
   
   .comp-center {
