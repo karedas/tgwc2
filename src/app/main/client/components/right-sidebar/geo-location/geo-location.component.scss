@@ -7,7 +7,7 @@ tg-geo-location {
 	padding-top: 2px;
 	margin-top: auto;
 	flex:0 1 100%;
-	max-height: 275px;
+	max-height: 400px;
 }
 
 .tg-geolocal {
@@ -29,7 +29,7 @@ tg-geo-location {
 .tg-geolocal--imagecnt {
   border: 2px solid #4b3d2b;
   border-radius: 2px;
-  height: 143px;
+  height: 210px;
 	background: black;
 	position: relative;
 	z-index: 3;
@@ -109,7 +109,7 @@ tg-geo-location {
 	display: block;
 }
 
-@media  screen and (min-height: 800px) {
+@media  screen and (max-height: 800px) {
 	
 	.tg-geolocal--data  {
 		padding: 0;
