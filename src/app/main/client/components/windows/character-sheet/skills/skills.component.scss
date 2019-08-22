@@ -39,6 +39,7 @@ mat-expansion-panel {
       font-family: "Modern Antiqua", cursive;
     }
     
+    
     &:after {
       content: "";
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left!important;
@@ -61,6 +62,10 @@ mat-expansion-panel {
 .mat-expansion-panel {
   color: $base-text-color;
   font-family: "Modern Antiqua", cursive;
+}
+
+.mat-expansion-panel-content {
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
 }
 
 /* End Material Expansion Panel List */

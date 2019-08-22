@@ -356,7 +356,7 @@ export class DataParser {
 
   private genericPage(p: any): string {
     const page_parse = JSON.parse(p.slice(6, -1)); /* .replace(/\n/gm,' ') */
-    this.store.dispatch(DataActions.genericPageAction({ payload: page_parse }));
+    this.store.dispatch(DataActions.genericPageAction({ genericpage: page_parse }));
     return '';
   }
 
