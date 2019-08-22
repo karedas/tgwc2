@@ -6,6 +6,8 @@ tg-geo-location {
   background: url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
 	padding-top: 2px;
 	margin-top: auto;
+	flex:0 1 100%;
+	max-height: 275px;
 }
 
 .tg-geolocal {
@@ -107,7 +109,7 @@ tg-geo-location {
 	display: block;
 }
 
-@media  screen and (max-height: 800px) {
+@media  screen and (min-height: 800px) {
 	
 	.tg-geolocal--data  {
 		padding: 0;
