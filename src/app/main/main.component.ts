@@ -50,10 +50,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(CookieLawComponent, config);
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.start();
-      
-    });
+    dialogRef.afterClosed().subscribe(() => this.start());
   }
 
   private start() {

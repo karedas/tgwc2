@@ -3,7 +3,6 @@ import { MatSidenav } from '@angular/material';
 import { MediaMatcher, Breakpoints } from '@angular/cdk/layout';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'tg-manager',
   templateUrl: './manager.component.html',
@@ -18,7 +17,6 @@ export class ManagerComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
 
   constructor(
-    private http: HttpClient,
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef
   ) {
