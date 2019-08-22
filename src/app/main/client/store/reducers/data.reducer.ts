@@ -1,36 +1,31 @@
 import { initialState } from '../state/data.state';
-import {
-  incomingData, updateStatusHero, doorsAction, heroAction,
-  roomAction, objectAndPersonAction, mapAction, skyAction, editorAction, genericTableAction,
-  worksListAction, regionAction, skillsAction, inventoryAction,
-  equipAction, bookAction, dataTimeAction, genericPageAction
-} from '../actions/data.action';
+import * as DataAction from '../actions/data.action';
 import { createReducer, on, Action } from '@ngrx/store';
 
 export const reducer = createReducer(
   initialState,
-  on(heroAction,  (state, { payload }) => {
+  on(DataAction.heroAction,  (state, { payload }) => {
     return Object.assign({}, state, {
       hero: {
         ...state.hero,
         ...payload
       }});
   }),
-  on(mapAction, (state, { map }) => ({ ...state, map: map })),
-  on(skyAction, (state, { payload }) => ({ ...state, sky: payload })),
-  on(editorAction, (state, { payload }) => ({ ...state, editor: payload })),
-  on(genericTableAction, (state, { payload }) => ({ ...state, genericTable: payload })),
-  on(worksListAction, (state, { payload }) => ({ ...state, workslist: payload })),
-  on(regionAction, (state, { payload }) => ({ ...state, region: payload })),
-  on(doorsAction, (state, { payload }) => ({ ...state, doors: payload })),
-  on(roomAction, (state, { payload }) => ({ ...state, room: payload })),
-  on(bookAction, (state, { payload }) => ({ ...state, book: payload })),
-  on(dataTimeAction, (state, { payload }) => ({ ...state, gametime: payload })),
-  on(genericPageAction, (state, { payload }) => ({ genericpage: [payload] })),
-  on(incomingData, (state, { payload }) => {
+  on(DataAction.mapAction, (state, { map }) => ({ ...state, map: map })),
+  on(DataAction.skyAction, (state, { payload }) => ({ ...state, sky: payload })),
+  on(DataAction.editorAction, (state, { payload }) => ({ ...state, editor: payload })),
+  on(DataAction.genericTableAction, (state, { payload }) => ({ ...state, genericTable: payload })),
+  on(DataAction.worksListAction, (state, { payload }) => ({ ...state, workslist: payload })),
+  on(DataAction.regionAction, (state, { payload }) => ({ ...state, region: payload })),
+  on(DataAction.doorsAction, (state, { payload }) => ({ ...state, doors: payload })),
+  on(DataAction.roomAction, (state, { payload }) => ({ ...state, room: payload })),
+  on(DataAction.bookAction, (state, { payload }) => ({ ...state, book: payload })),
+  on(DataAction.dataTimeAction, (state, { payload }) => ({ ...state, gametime: payload })),
+  on(DataAction.genericPageAction, (state, { payload }) => ({ genericpage: [payload] })),
+  on(DataAction.incomingData, (state, { payload }) => {
     return Object.assign({}, state, { base: [payload] });
   }),
-  on(updateStatusHero, (state, { payload }) => {
+  on(DataAction.updateStatusHero, (state, { payload }) => {
     return Object.assign({}, state, {
       hero: {
         ...state.hero,
@@ -55,27 +50,27 @@ export const reducer = createReducer(
       }
     });
   }),
-  on(objectAndPersonAction, (state, { payload }) => {
+  on(DataAction.objectAndPersonAction, (state, { payload }) => {
     return Object.assign({}, { objPers: payload });
   }),
-  on(skillsAction, (state, { payload }) => {
-    return Object.assign({}, state, {
-      ...state.hero,
-      skills: payload
-    });
-  }),
-  on(inventoryAction, (state, { payload }) => {
-    return Object.assign({}, state, {
-      ...state.hero,
-      inventory: payload
-    });
-  }),
-  on(equipAction, (state, { payload }) => {
-    return Object.assign({}, state, {
-      ...state.hero,
-      equipment: payload
-    });
-  })
+  // on(DataAction.skillsAction, (state, { payload }) => {
+  //   return Object.assign({}, state, {
+  //     ...state.hero,
+  //     skills: payload
+  //   });
+  // }),
+  // on(DataAction.inventoryAction, (state, { payload }) => {
+  //   return Object.assign({}, state, {
+  //     ...state.hero,
+  //     inventory: payload
+  //   });
+  // }),
+  // on(DataAction.equipAction, (state, { payload }) => {
+  //   return Object.assign({}, state, {
+  //     ...state.hero,
+  //     equipment: payload
+  //   });
+  // })
 );
 
 

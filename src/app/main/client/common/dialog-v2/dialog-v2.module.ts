@@ -19,6 +19,7 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
 @NgModule({
   declarations: [
     NewsComponent,
+    ShortcutsPanelComponent,
     LoginSmartComponent,
     EditorComponent,
     BookComponent,

@@ -1,5 +1,5 @@
 <form id="characters">
-  <ng-container *ngIf="charactersList  as chars;">
+  <ng-container *ngIf="charactersList as chars;">
     <div class="comp-content">
 
       <div class="table-responsive">
@@ -99,11 +99,11 @@
           </ng-container>
 
           <!-- Information Footer -->
-          <ng-container matColumnDef="charactersinfo">
+          <!-- <ng-container matColumnDef="charactersinfo">
             <td mat-footer-cell *matFooterCellDef colspan="4">
-              Il numero massimo di personaggi attivi e utilizzabili è <span class="tg-red">2</span>.
+              Il numero massimo di personaggi che hai è <span class="tg-red">2</span>.
             </td>
-          </ng-container>
+          </ng-container> -->
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let element; columns: displayedColumns" class="element-row" [ngClass]="{'inactive': element.status === 0,
@@ -113,7 +113,7 @@
 
           <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row {{i}}"></tr>
 
-          <tr mat-footer-row *matFooterRowDef="['charactersinfo']" class="second-footer-row"></tr>
+          <!-- <tr mat-footer-row *matFooterRowDef="['charactersinfo']" class="second-footer-row"></tr> -->
 
         </table>
       </div>
@@ -121,6 +121,7 @@
   </ng-container>
 
 </form>
+
 <div class="no-characters-box comp-content comp-padd" fxLayout="column" fxLayoutAlign="start start">
   <p *ngIf="!charactersList">Non possiedi un personaggio attivo.</p>
   <button mat-raised-button color="accent" (click)="goToChractersManage()">
