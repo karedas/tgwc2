@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ClientComponent } from './client.component';
 import { FileSaverModule } from 'ngx-filesaver';
-import { ClientContainerComponent } from './components/client-container/client-container.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RightSidebarModule } from './components/right-sidebar/right-sidebar.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
@@ -26,7 +25,6 @@ const clientRouting: Routes = [
 @NgModule({
   declarations: [
     ClientComponent,
-    ClientContainerComponent,
     AudioComponent,
   ],
   imports: [

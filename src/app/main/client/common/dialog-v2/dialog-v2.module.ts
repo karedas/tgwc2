@@ -43,7 +43,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
     NewsComponent,
     LoginSmartComponent,
     EditorComponent,
-    // ControlPanelComponent,
     BookComponent,
     CommandsListComponent,
     GenericTableComponent,

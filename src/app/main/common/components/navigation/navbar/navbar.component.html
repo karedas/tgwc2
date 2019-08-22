@@ -61,9 +61,9 @@
             <span fxHide fxShow.gt-xs>{{user.username | capitalizeFirst}}</span>
           </button>
 
-          <span *ngIf="!user && userIsInGame" class="tg-green">SEI IN GIOCO</span>
+          <span *ngIf="!userIsLoggedIn && userIsInGame" class="tg-green">SEI IN GIOCO</span>
 
-          <mat-menu #menu="matMenu" class="mat-elevation-z4">
+          <mat-menu #menu="matMenu" class="mat-elevation-z4" *ngIf="userIsLoggedIn">
             <div class="user-menu-item">
               Salve <span class="tg-yellow">{{user.username | capitalizeFirst}}</span>
             </div>

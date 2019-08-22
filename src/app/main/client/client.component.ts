@@ -25,7 +25,8 @@ export class ClientComponent implements OnInit, OnDestroy {
   constructor(
     private _configService: ConfigService,
     private gameService: GameService,
-    private inputService: InputService) {
+    private inputService: InputService,
+    ) {
     this._unsubscribeAll = new Subject<any>();
   }
 
@@ -36,19 +37,8 @@ export class ClientComponent implements OnInit, OnDestroy {
         this.tgConfig = config;
         this.gameService.sendToServer('');
         this.inputService.focus();
-        // this.openNews();
       });
   }
-
-  // openNews() {
-  //   return;
-  //   if (this.tgConfig.news) {
-  //     // this.dialogV2Service.openNews(false);
-  //   } else {
-  //     this.gameService.sendToServer('');
-  //     this.inputService.focus();
-  //   }
-  // }
 
   ngOnDestroy() {
     this._unsubscribeAll.next();

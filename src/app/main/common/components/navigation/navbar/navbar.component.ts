@@ -24,14 +24,12 @@ export class NavBarComponent implements OnDestroy {
 
   readonly env = environment;
 
-  public userIsLoggedIn = false;
-  public userIsInGame = false;
+  public userIsLoggedIn: boolean = false;
+  public userIsInGame: boolean = false;
 
   public user: User;
   public charactersList: Observable<any>;
-  public hamburgerStatus = false;
-  // public gameItemsMenu:  NavigationItem[];
-
+  public hamburgerStatus: boolean = false;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -70,14 +68,15 @@ export class NavBarComponent implements OnDestroy {
     }
 
     // set also if the user is loggedin with a character
-    if (this.userIsInGame = this.loginClientService.isInGame) {
+    this.userIsInGame = this.loginClientService.isInGame;
+    if (this.userIsInGame) {
       this.makeGameMenu();
     }
   }
 
-  // private isEnabled(value) {
-  //   return value.status === 1;
-  // }
+  private isEnabled(value) {
+    return value.status === 1;
+  }
 
   private makeGameMenu() {
     for (const item in gameNavigationSideBar) {
