@@ -9,8 +9,8 @@
     "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
-    // "noUnusedLocals": false,
-    // "noUnusedParameters": false,
-    // "enableIvy": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "enableIvy": true,
   }
 }

@@ -22,7 +22,6 @@ import { MatExpansionModule} from '@angular/material';
     MatExpansionModule
   ],
   exports: [
-    CharacterSheetComponent
   ],
 })
 

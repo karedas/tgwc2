@@ -170,7 +170,6 @@ export class DialogV2Service {
     const dialogID = 'charactersheet';
 
     if (!this.dialog.getDialogById(dialogID)) {
-
       const config = new MatDialogConfig();
 
       config.id = dialogID;

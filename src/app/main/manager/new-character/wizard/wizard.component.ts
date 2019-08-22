@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-
 @Component({
   selector: 'tg-wizard',
   templateUrl: './wizard.component.html',
