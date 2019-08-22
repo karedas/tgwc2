@@ -24,7 +24,7 @@ export interface DataState {
     workslist?: IWorks;
     region?: IRegion;
     book?: IBook;
-    genericpage?: IGenericPage[];
+    genericpage?: IGenericPage;
 }
 
 export const initialState: DataState = {
