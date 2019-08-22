@@ -11,8 +11,6 @@ import { AudioComponent } from './components/audio/audio.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
 import { OutputService } from './components/output/output.service';
-import { EffectsModule } from '@ngrx/effects';
-import { DataEffects } from './store/effects/data.effects';
 
 const clientRouting: Routes = [
   {
@@ -32,7 +30,6 @@ const clientRouting: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(clientRouting),
-    EffectsModule.forFeature([DataEffects]),
     DashboardModule,
     RightSidebarModule,
     OutputModule,
