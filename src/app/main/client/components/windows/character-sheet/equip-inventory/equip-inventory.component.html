@@ -12,10 +12,9 @@
           <div fxFlex="0 0 20%" fxLayoutAlign="center center">Peso</div>
         </div>
 
-        <div fxLayout="column">
+        <div fxLayout="column" fxFlex="0 1 100%">
           <ng-scrollbar class="scrollbar" [visibility]="'always'">
             <div class="eqinv-wrapper-list" fxLayout="column">
-
               <ng-container *ngFor="let item of inventory.list">
                 <div fxFlex="1 0 auto" class="eqinv-item-wrap">
                   <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
@@ -53,7 +52,7 @@
           <div fxFlex="0 0 15%" fxLayoutAlign="center center">Peso</div>
         </div>
 
-        <div fxLayout="column">
+        <div fxLayout="column" fxFlex="0 1 100%">
           <ng-scrollbar class="scrollbar" [visibility]="'always'">
             <div class="eqinv-wrapper-list" fxLayout="column">
 

@@ -21,7 +21,7 @@ export const reducer = createReducer(
   on(DataAction.roomAction, (state, { payload }) => ({ ...state, room: payload })),
   on(DataAction.bookAction, (state, { payload }) => ({ ...state, book: payload })),
   on(DataAction.dataTimeAction, (state, { payload }) => ({ ...state, gametime: payload })),
-  on(DataAction.genericPageAction, (state, { payload }) => ({ genericpage: [payload] })),
+  on(DataAction.genericPageAction, (state, { genericpage }) => ({ ...state,  genericpage: [genericpage] })),
   on(DataAction.incomingData, (state, { payload }) => {
     return Object.assign({}, state, { base: [payload] });
   }),
@@ -53,24 +53,30 @@ export const reducer = createReducer(
   on(DataAction.objectAndPersonAction, (state, { payload }) => {
     return Object.assign({}, { objPers: payload });
   }),
-  // on(DataAction.skillsAction, (state, { payload }) => {
-  //   return Object.assign({}, state, {
-  //     ...state.hero,
-  //     skills: payload
-  //   });
-  // }),
-  // on(DataAction.inventoryAction, (state, { payload }) => {
-  //   return Object.assign({}, state, {
-  //     ...state.hero,
-  //     inventory: payload
-  //   });
-  // }),
-  // on(DataAction.equipAction, (state, { payload }) => {
-  //   return Object.assign({}, state, {
-  //     ...state.hero,
-  //     equipment: payload
-  //   });
-  // })
+  on(DataAction.skillsAction, (state, { payload }) => {
+    return Object.assign({}, state, {
+      hero: {
+        ...state.hero,
+        skills: payload
+      }
+    });
+  }),
+  on(DataAction.inventoryAction, (state, { payload }) => {
+    return Object.assign({}, state, {
+      hero: {
+        ...state.hero,
+        inventory: payload
+      },
+    });
+  }),
+  on(DataAction.equipAction, (state, { payload }) => {
+    return Object.assign({}, state, {
+      hero: {
+        ...state.hero,
+        equipment: payload
+      }
+    });
+  })
 );
 
 
