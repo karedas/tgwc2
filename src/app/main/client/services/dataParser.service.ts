@@ -162,7 +162,7 @@ export class DataParser {
     if (this.dispatcher['objpers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['objpers'] })); }
     if (this.dispatcher['room']) { this.store.dispatch(DataActions.roomAction({ payload: this.dispatcher['room'] })); }
     if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['pers'] })); }
-    // TODO UI (dont need order) :
+    // TODO UI dont need order, needs a difference architecture code architecture :
     if (this.dispatcher['visibilLevel']) {
       this.store.dispatch(GameActions.updateUIAction({ payload: { invLevel: this.dispatcher['visibilLevel'] } }));
     }

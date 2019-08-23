@@ -4,7 +4,9 @@
 
       <div class="table-responsive">
 
-        <table #charTable mat-table matSort [dataSource]="charactersList" multiTemplateDataRows
+        <table #charTable mat-table matSort [dataSource]="charactersList" 
+          *ngIf="charactersList"
+          multiTemplateDataRows
           class="mat-table ch-table dark">
 
           <ng-container matColumnDef="image">

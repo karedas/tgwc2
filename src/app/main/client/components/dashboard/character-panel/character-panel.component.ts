@@ -64,7 +64,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
         this.tgConfig = config;
       });
 
-    // TODO, MOVE IN APP ROOT COMPONENT
+    // TODO Move this in the root component
     this.watcherMedia = this.mediaObserver.asObservable()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((changes: MediaChange[]) => {

@@ -1,6 +1,6 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import * as _ from 'lodash';
+import { cloneDeep, mergeWith, isEmpty, isArray, merge} from 'lodash';
 
 export const TG_CONFIG = new InjectionToken('tgCustomConfig');
 
@@ -24,7 +24,7 @@ export class ConfigService {
 
   set config(value) {
     let config = this._configSubject.getValue();
-    config = _.merge({}, config, value);
+    config = merge({}, config, value);
     this._configSubject.next(config);
   }
 
@@ -44,7 +44,7 @@ export class ConfigService {
     let configInStorage = localStorage.getItem('config');
 
     // Set the config from the default config
-    this._configSubject = new BehaviorSubject(_.cloneDeep(this._defaultConfig));
+    this._configSubject = new BehaviorSubject( cloneDeep(this._defaultConfig));
 
     if (configInStorage) {
 
@@ -52,7 +52,7 @@ export class ConfigService {
 
       // Check Object keys architecture to avoid difference between code version
       if (this.compareConfigKeys(configInStorage)) {
-        config = _.cloneDeep(configInStorage);
+        config = cloneDeep(configInStorage);
         this._configSubject.next(config);
       } else {
 
@@ -91,10 +91,10 @@ export class ConfigService {
     // Get the value from the behavior subject
     let config = this._configSubject.getValue();
     // // Merge the new config
-    config = _.mergeWith(config, value,  (obj: any, src) => {
-      if (_.isArray(src) && _.isEmpty(src)) {
+    config = mergeWith(config, value,  (obj: any, src) => {
+      if (isArray(src) && isEmpty(src)) {
         return src;
-      } else if (_.isArray(src)) {
+      } else if (isArray(src)) {
         return src;
       }
     });
@@ -115,7 +115,7 @@ export class ConfigService {
 
   resetToDefaults(): void {
     // Set the config from the default config
-    this._configSubject.next(_.cloneDeep(this._defaultConfig));
+    this._configSubject.next(cloneDeep(this._defaultConfig));
   }
 
 }
