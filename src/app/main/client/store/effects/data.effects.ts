@@ -66,8 +66,9 @@ export class DataEffects {
   @Effect({ dispatch: false })
   openBook$: Observable<any | Action> = this.actions$.pipe(
     ofType(DataEvenType.BOOK),
-    tap((data: PayloadActionData) => {
-      this.dialogV2Service.openBook(data.payload, 0);
+    tap((data: any) => {
+      console.log(data);
+      this.dialogV2Service.openBook(data.book, 0);
     })
   );
 

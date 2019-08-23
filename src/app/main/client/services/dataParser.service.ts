@@ -344,7 +344,7 @@ export class DataParser {
 
   private book(book: any): string {
     const b_parse = JSON.parse(book.slice(6, -1));
-    this.store.dispatch(DataActions.bookAction(b_parse));
+    this.store.dispatch(DataActions.bookAction({book: b_parse}));
     return '';
   }
 
