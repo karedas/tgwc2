@@ -12,6 +12,7 @@ import { LoginClientGuard } from '../authentication/services/login-client.guard'
 import { OutputService } from './components/output/output.service';
 import { EffectsModule } from '@ngrx/effects';
 import { DataEffects } from './store/effects/data.effects';
+import { DispenserService } from './services/dispenser.service';
 
 const clientRouting: Routes = [
   {
@@ -41,7 +42,8 @@ const clientRouting: Routes = [
     ClientComponent,
   ],
   providers: [
-    OutputService
+    OutputService,
+    DispenserService
   ]
 })
 export class ClientModule {

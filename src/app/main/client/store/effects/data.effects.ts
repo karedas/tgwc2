@@ -116,9 +116,8 @@ export class DataEffects {
     ofType<PayloadActionData>(DataEvenType.SHOWCOMMANDS),
     map(action => action.payload),
     tap(cmds => {
-      this.game.setCommands(cmds);
       setTimeout(() => {
-        this.dialogV2Service.openCommandsList();
+        this.dialogV2Service.openCommandsList(cmds);
       });
     })
   );

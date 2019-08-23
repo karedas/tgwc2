@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { GameService } from '../../../services/game.service';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'tg-commands-list',
@@ -10,24 +11,29 @@ import { GameService } from '../../../services/game.service';
 
 })
 export class CommandsListComponent implements OnInit {
-  @Input('data') data: any;
+  // @Input('data') data: any;
   @ViewChild(NgScrollbar, {static: true}) scrollbar: NgScrollbar;
 
 
-  commands$: Observable<any>;
+  commandsList: any;
   title: string;
   groupOpen = 0;
 
-  constructor(private game: GameService) {
+  constructor(
+    private game: GameService, 
+    @Inject(MAT_DIALOG_DATA) public data) {
+    }
+    
+    ngOnInit() {
+      // this.commandsList = JSON.stringify(JSON.parse(this.data.cmds));
+      // console.log(this.commandsList);
+      console.log(this.data.cmds);
+      this.commandsList = this.data.cmds;
   }
 
-  ngOnInit() {
-    this.commands$ =  this.game.getCommands();
-  }
-
-  removeTitleObject(commands) {
-    delete commands.title;
-    return commands;
+  removeTitleObject(cmds)  {
+    delete cmds.title;
+    return cmds;
   }
 
   setOpenedGroup(index: number) {
