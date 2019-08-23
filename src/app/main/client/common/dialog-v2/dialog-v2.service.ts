@@ -280,6 +280,8 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
+      config.height = '100%';
+      config.maxHeight = '600px';
       config.width = '550px';
       config.hasBackdrop = false;
       config.restoreFocus = true;

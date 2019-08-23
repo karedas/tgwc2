@@ -25,9 +25,6 @@ export class CommandsListComponent implements OnInit {
     }
     
     ngOnInit() {
-      // this.commandsList = JSON.stringify(JSON.parse(this.data.cmds));
-      // console.log(this.commandsList);
-      console.log(this.data.cmds);
       this.commandsList = this.data.cmds;
   }
 
