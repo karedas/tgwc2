@@ -110,7 +110,7 @@ export class DataParser {
     data = data.replace(/&!ed"[^"]*"\n*/gm, this.openTextEditorWithData.bind(this));
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, this.map.bind(this));
     data = data.replace(/&!book\{[\s\S]*?\}!/gm, this.book.bind(this));
-    data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, this.listOfCommands.bind(this));
+    data = data.replace(/&!cmdlst\{[\s\S]*?\}!/gm, this.commandsList.bind(this));
     data = data.replace(/&!page\{[\s\S]*?\}!/gm, this.genericPage.bind(this));
     data = data.replace(/&!table\{[\s\S]*?\}!/gm, this.genericTable.bind(this));
     data = data.replace(/&!inv\{[\s\S]*?\}!/gm, this.inventory.bind(this));
@@ -348,7 +348,7 @@ export class DataParser {
     return '';
   }
 
-  private listOfCommands(cmds: any): string {
+  private commandsList(cmds: any): string {
     const cmd_parse = JSON.parse(cmds.slice(8, -1).replace(/"""/, '"\\""'));
     this.store.dispatch( DataActions.showCommandsActions({payload: cmd_parse}));
     return '';

@@ -203,7 +203,7 @@ export class DialogV2Service {
     }
   }
 
-  openCommandsList(): MatDialogRef<CommandsListComponent, MatDialogConfig> {
+  openCommandsList(cmds): MatDialogRef<CommandsListComponent, MatDialogConfig> {
 
     const dialogID = 'commandslist';
 
@@ -217,6 +217,9 @@ export class DialogV2Service {
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
+      config.data = {
+        cmds: cmds
+      }
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(CommandsListComponent, config);

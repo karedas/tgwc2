@@ -35,7 +35,7 @@ export class ClientEffects {
         this.loginClientService.logout();
         this.audioService.pauseAudio();
         // this.dialogV2Service.openSmartLogin();
-        this.game.reset();
+        this.game.resetUI();
       }
     }
     ));

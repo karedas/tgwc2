@@ -3,6 +3,7 @@ import { NavigationItem, baseNavigationSidebar, gameNavigationSideBar } from '..
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { DispenserService } from 'src/app/main/client/services/dispenser.service';
 
 @Component({
   selector: 'tg-sidenav',
@@ -23,7 +24,8 @@ export class SidenavComponent implements OnInit {
   constructor(
     private loginClientService: LoginClientService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dispenserService: DispenserService
     ) {
 
     this.router.events
@@ -65,7 +67,8 @@ export class SidenavComponent implements OnInit {
   }
 
   onActionClick(what: string) {
-    
+    this.dispenserService.do(what);
+    this.toggleSidenav();
   }
 
   isEnableFor(level: string): boolean {

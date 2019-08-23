@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { TGConfig } from 'src/app/main/client/client-config';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
+import { DispenserService } from 'src/app/main/client/services/dispenser.service';
 
 @Component({
   selector: 'tg-game-items',
@@ -27,11 +28,9 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private dialogV2Service: DialogV2Service,
-    private game: GameService,
     private render: Renderer2,
-    private audioService: AudioService,
     private _configService: ConfigService,
+    private dispenserService: DispenserService
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -122,31 +121,7 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
   }
 
   onItemClick(what: string) {
-
-    switch (what) {
-
-      // Client
-      case 'disconnect':
-        this.game.disconnectGame();
-        break;
-      // case 'news':
-      //   this.dialogV2Service.openNews(true);
-      //   break;
-      case 'preferences':
-        this.dialogV2Service.openControlPanel();
-        break;
-      case 'audio':
-        this.audioService.toggleAudio();
-        break;
-      case 'log':
-        this.dialogV2Service.openLog();
-        break;
-      default:
-        this.game.processCommands(what);
-        return false;
-    }
-
-
+    this.dispenserService.do(what);
   }
 
   ngOnDestroy(): void {

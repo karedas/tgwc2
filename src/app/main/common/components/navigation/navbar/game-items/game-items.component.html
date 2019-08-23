@@ -1,5 +1,22 @@
 <div class="tg-navbar--wrap" fxFlex="0 0 100%" fxLayout>
 
+  <!-- Game Menu -->
+  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button #button mat-button [matMenuTriggerFor]="gameMenu" #gameTrigger="matMenuTrigger"
+      (mouseenter)="buttonEnter(gameTrigger)" (mouseleave)="buttonLeave(gameTrigger, button)">Gioco</button>
+
+    <mat-menu #gameMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4">
+      <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(gameTrigger, button)">
+        <button mat-menu-item (click)="onItemClick('info')">Apri informazioni</button>
+        <button mat-menu-item (click)="onItemClick('equip')">Apri Equipaggiamento</button>
+        <button mat-menu-item (click)="onItemClick('inventario')">Apri Inventario</button>
+        <button mat-menu-item (click)="onItemClick('abilita')">Visualizza Abilità</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onItemClick('cambia desc')">Cambia la descrizione personale</button>
+      </div>
+    </mat-menu>
+  </div>
+  
   <!-- Client Menu -->
   <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button #button mat-button [matMenuTriggerFor]="clientMenu" #clientTrigger="matMenuTrigger"
@@ -19,23 +36,6 @@
     </mat-menu>
   </div>
 
-  <!-- Game Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
-    <button #button mat-button [matMenuTriggerFor]="gameMenu" #gameTrigger="matMenuTrigger"
-      (mouseenter)="buttonEnter(gameTrigger)" (mouseleave)="buttonLeave(gameTrigger, button)">Gioco</button>
-
-    <mat-menu #gameMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4">
-      <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(gameTrigger, button)">
-        <button mat-menu-item (click)="onItemClick('info')">Apri informazioni</button>
-        <button mat-menu-item (click)="onItemClick('equip')">Apri Equipaggiamento</button>
-        <button mat-menu-item (click)="onItemClick('inventario')">Apri Inventario</button>
-        <button mat-menu-item (click)="onItemClick('Abilita')">Visualizza Abilità</button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="onItemClick('cambia desc')">Cambia la descrizione personale</button>
-      </div>
-    </mat-menu>
-  </div>
-
   <!-- Guida  Menu -->
   <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button mat-button [matMenuTriggerFor]="guideMenu" #guideTrigger="matMenuTrigger"
@@ -44,7 +44,7 @@
       <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(guideTrigger, button)">
         <button mat-menu-item (click)="onItemClick('comandi')">Comandi di gioco</button>
         <button mat-menu-item (click)="onItemClick('server')">Statistiche Server</button>
-        <button mat-menu-item (click)="onItemClick('news')">Notizie</button>
+        <!-- <button mat-menu-item (click)="onItemClick('news')">Notizie</button> -->
       </div>
     </mat-menu>
   </div>

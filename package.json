@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "bundle-report": "webpack-bundle-analyzer dist/dev/stats.json"
+    "bundle-report": "webpack-bundle-analyzer dist/dev/stats-es2015.json"
   },
   "private": true,
   "dependencies": {
@@ -26,10 +26,6 @@
     "@angular/platform-browser-dynamic": "^8.2.3",
     "@angular/router": "^8.2.3",
     "@auth0/angular-jwt": "^3.0.0",
-    "@fortawesome/angular-fontawesome": "^0.5.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.21",
-    "@fortawesome/free-regular-svg-icons": "^5.10.1",
-    "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^8.2.0",
     "@ngrx/store": "^8.2.0",
@@ -57,7 +53,7 @@
     "ngx-scrollbar": "^5.0.0-beta.1",
     "ngx-socket-io": "^3.0.1",
     "normalize.css": "^8.0.1",
-    "rollbar": "^2.12.1",
+    "rollbar": "^2.12.2",
     "rxjs": "^6.5.2",
     "semver": "^6.3.0",
     "sentry": "^0.1.2",

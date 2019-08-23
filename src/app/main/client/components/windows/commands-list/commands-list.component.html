@@ -1,5 +1,4 @@
-
-<ng-container *ngIf="commands$ | async as cmds">
+<ng-container *ngIf="commandsList as cmds">
   <div class="b-ironlight-mini b-ironlight-thin tg-box" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
     <div class="tg-dialog-content-nopadding tg-shadow-inset">
 
@@ -9,25 +8,38 @@
           <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
         </button>
       </div>
+      <div class="tg-commands-list" matDialogContent>
+        <div fxLayout fxFlexFill>
 
-      <div class="tg-commands-list" fxLayout matDialogContent>
-        <div class="cmd-group" fxFlex="0 0 auto">
-          <div *ngFor="let group of (removeTitleObject(cmds)) | keyvalue ; let i = index" (click)="setOpenedGroup(i)"
-            class="cmd-group--item">
-            <span [ngClass]="{'active': i === groupOpen}">
-              {{group.key}}
-            </span>
+          <div class="cmd-group" fxFlex="0 0 auto">
+            <mat-action-list dense>
+  
+              <ng-container *ngFor="let item of cmds | keyvalue; let i = index;">
+                <button *ngIf="item.key !== 'title'"
+                  mat-list-item (click)="setOpenedGroup(i)"
+                  [ngClass]="{'active': i === groupOpen}">
+                  {{item.key | capitalizeFirst}}
+                </button>
+              </ng-container>
+  
+            </mat-action-list>
           </div>
-        </div>
-        <div class="cmd-values-container" fxFlex="1 0 0">
-          <ng-scrollbar class="scrollbar" #commandsScrollbar [visibility]="'always'">
-            <div *ngFor="let cmdvalue of (removeTitleObject(cmds)) | keyvalue; let ii = index" fxLayout="row wrap">
-              <div class="cmd-value " fxFlex="1 0 25%" *ngFor="let item of cmdvalue.value"
-                [ngClass]="{'showlist': ii === groupOpen}" (click)="sendCmd(item)">
-                {{item}}
-              </div>
-            </div>
-          </ng-scrollbar>
+  
+          <div class="cmd-values-container" fxFlex="1 0 0">
+            <ng-scrollbar class="scrollbar" #commandsScrollbar [visibility]="'always'" [appearance]="'standard'">
+  
+              <ng-container *ngFor="let item of cmds | keyvalue; let idOpenedGroup = index;">
+                <div [ngClass]="{'group-show': groupOpen === idOpenedGroup}" class="cmd-values-wrapper" fxLayout="row wrap">
+                  <div class="cmd-value" fxFlex="0 0 25%" *ngFor="let command of item.value"
+                    (click)="sendCmd(item)">
+                    {{command}}
+                  </div>
+                </div>
+              </ng-container>
+              
+            </ng-scrollbar>
+          </div>
+          
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ export interface NavigationItem {
   hidden?: boolean;
   url?: string;
   classes?: string;
+  do?: string
   exactMatch?: boolean;
   externalUrl?: boolean;
   openInNewTab?: boolean;
@@ -74,28 +75,6 @@ export const navigationSidebar: NavigationItem[] = [
 
 export const gameNavigationSideBar: NavigationItem[] = [
   {
-    id: 'client',
-    title: 'Client',
-    type: 'group',
-    children: [
-      {
-        id: 'log',
-        title: 'Log di gioco',
-        type: 'item'
-      },
-      {
-        id: 'preferences',
-        title: 'Preferenze',
-        type: 'item'
-      },
-      {
-        id: 'disconnectCharacter',
-        title: 'Disconnetti personaggio',
-        type: 'item'
-      }
-    ]
-  },
-  {
     id: 'game',
     title: 'Gioco',
     type: 'group',
@@ -103,27 +82,57 @@ export const gameNavigationSideBar: NavigationItem[] = [
       {
         id: 'openInfo',
         title: 'Apri informazioni',
-        type: 'item'
+        type: 'item',
+        do: 'info'
       },
       {
         id: 'openEquip',
         title: 'Apri Equipaggiamento',
-        type: 'item'
+        type: 'item',
+        do: 'equip'
       },
       {
         id: 'openInventory',
         title: 'Apri Inventario',
-        type: 'item'
+        type: 'item',
+        do: 'inventario'
       },
       {
         id: 'showSkills',
         title: 'Visualizza Abilità',
-        type: 'item'
+        type: 'item',
+        do: 'abilita'
       },
       {
         id: 'changeCharDescription',
         title: 'Cambia la descrizione personale',
-        type: 'item'
+        type: 'item',
+        do: 'cambia desc'
+      }
+    ]
+  },
+  {
+    id: 'client',
+    title: 'Client',
+    type: 'group',
+    children: [
+      {
+        id: 'log',
+        title: 'Log di gioco',
+        type: 'item',
+        do: 'log'
+      },
+      {
+        id: 'preferences',
+        title: 'Preferenze',
+        type: 'item',
+        do: 'preferences'
+      },
+      {
+        id: 'disconnectCharacter',
+        title: 'Disconnetti personaggio',
+        type: 'item',
+        do: 'disconnect'
       }
     ]
   },
@@ -131,6 +140,20 @@ export const gameNavigationSideBar: NavigationItem[] = [
     id: 'help',
     title: 'Aiuto',
     type: 'group',
+    children: [
+      {
+        id: 'commandslist',
+        title: 'Comandi',
+        type: 'item',
+        do: 'comandi'
+      },
+      {
+        id: 'serverStats',
+        title: 'Statistiche Server',
+        type: 'item',
+        do: 'server'
+      },
+    ]
   },
 
   // {

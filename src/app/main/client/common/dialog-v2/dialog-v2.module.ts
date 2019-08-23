@@ -15,6 +15,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ControlPanelModule } from '../../components/windows/control-panel/control-panel.module';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
+import { MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
     CharacterSheetModule,
     MatDialogModule,
     MatSliderModule,
+    MatListModule,
     ControlPanelModule
   ],
 

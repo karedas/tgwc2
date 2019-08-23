@@ -59,6 +59,6 @@ export const dataTimeAction = createAction(DataEvenType.DATE, props<{ payload: I
 export const genericPageAction = createAction(DataEvenType.GENERICPAGE, props<{ genericpage: IGenericPage }>());
 export const closeTextEditorAction = createAction(DataEvenType.CLOSETEXTEDITOR);
 export const refreshCommandAction = createAction(DataEvenType.REFRESH);
-export const showCommandsActions = createAction(DataEvenType.SHOWCOMMANDS, props<{payload: []}>());
+export const showCommandsActions = createAction(DataEvenType.SHOWCOMMANDS, props<{payload: any}>());
 export const showCharacterSheetActions = createAction(DataEvenType.SHOWCHARACTERSHEET, props<{payload: any}>());
 export const showStatusBoxAction = createAction(DataEvenType.SHOWSTATUSHERO, props<{payload: any}>());
