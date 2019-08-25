@@ -26,7 +26,6 @@
 }
 mat-expansion-panel {
   
-  
   mat-expansion-panel-header {
    
     padding: .5em 24px;
@@ -59,9 +58,15 @@ mat-expansion-panel {
   }
 }
 
+
+
 .mat-expansion-panel {
   color: $base-text-color;
   font-family: "Modern Antiqua", cursive;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 24px 0;
 }
 
 .mat-expansion-panel-content {
@@ -70,11 +75,6 @@ mat-expansion-panel {
 
 /* End Material Expansion Panel List */
 
-
-
-.skill-groupname, .skill-groupname:hover{
-
-}
 
 .skill-subdetail-container {
     padding: .5em 0;

@@ -273,6 +273,7 @@ export class LogService {
     }
 
     /* Print description */
+    // TODO: do not print if is the same description (maybe needs to do in parser?)
     if (info.desc) {
       if (info.desc.base) {
         res += info.desc.base;

@@ -8,7 +8,7 @@ import { Error403Module } from './pages/errors/403/error-403.module';
 import { CookieService } from 'ngx-cookie-service';
 import { SplashScreenService } from './common/components/splashscreen/splashscreen.service';
 import { HelpComponent } from './pages/help/help.component';
-import { MatListModule, MatToolbarModule } from '@angular/material';
+import { MatListModule, MatToolbarModule, MatInputModule } from '@angular/material';
 import { SocketService } from '../core/services/socket.service';
 import { AlertComponent } from './common/components/dialogs/alert/alert.component';
 import { LoginClientService } from './client/services/login-client.service';
@@ -48,7 +48,7 @@ const routes: Routes = [
     AlertComponent,
     SidenavComponent,
     HelpComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     MatListModule,

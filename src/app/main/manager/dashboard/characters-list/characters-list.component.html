@@ -1,11 +1,10 @@
 <form id="characters">
-  <ng-container *ngIf="charactersList as chars;">
+  <ng-container *ngIf="charactersList as chars">
     <div class="comp-content">
 
       <div class="table-responsive">
 
         <table #charTable mat-table matSort [dataSource]="charactersList" 
-          *ngIf="charactersList"
           multiTemplateDataRows
           class="mat-table ch-table dark">
 
@@ -125,7 +124,6 @@
 </form>
 
 <div class="no-characters-box comp-content comp-padd" fxLayout="column" fxLayoutAlign="start start">
-  <p *ngIf="!charactersList">Non possiedi un personaggio attivo.</p>
   <button mat-raised-button color="accent" (click)="goToChractersManage()">
     Crea o Aggiungi
   </button>

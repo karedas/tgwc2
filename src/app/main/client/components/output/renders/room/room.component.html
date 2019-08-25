@@ -80,7 +80,7 @@
   </div>
 
   <div style="height: 100%; overflow:hidden;">
-    <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'" *ngIf="type === 'room' || type === 'objPers'">
+    <ng-scrollbar class="scrollbar-output" #scrollBar *ngIf="type === 'room' || type === 'objPers'">
       
       <ng-container *ngIf="type === 'room'">
         <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"

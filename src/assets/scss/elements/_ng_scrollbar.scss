@@ -1,9 +1,9 @@
 
-ng-scrollbar {
-  > .ng-scrollbar-wrapper{
-    position: static;
-  }
-}
+// ng-scrollbar {
+//   > .ng-scrollbar-wrapper{
+//     position: static;
+//   }
+// }
 
 .scrollbar-dialog .ng-scroll-view {
   max-height: 65vh;
@@ -15,6 +15,7 @@ ng-scrollbar {
     cursor: grabbing;
   }
 }
+
 
 
   ng-scrollbar.scrollbar {
@@ -63,3 +64,9 @@ ng-scrollbar.scrollbar-output {
     border-right: 1px solid #3a3530;
   }
 }
+
+
+// Todo: Temp fix awaiting official fix by author
+// .ng-scroll-content {
+//   width: calc(100% + 18px);
+// }
