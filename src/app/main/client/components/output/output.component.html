@@ -15,9 +15,8 @@
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
               <ng-scrollbar class="scrollbar-output"  #scrollBar 
-                [visibility]="'always'" 
-                (updated)="!pauseScroll && scrollBar.scrollToBottom(0, 100)">
-                <div smoothScroll class="tg-output--history">
+                (updated)="!pauseScroll && scrollBar.scrollToBottom(0, 50)">
+                <div  class="tg-output--history" cdkscrollable smoothScroll>
                   <div *ngIf="!output.length" class="no-output-notice">
                     Scrivi qualcosa o semplicemente aspetta...
                   </div>
@@ -67,9 +66,8 @@
   <div style="height: 100%; overflow:hidden;">
 
     <ng-scrollbar class="scrollbar-output" #scrollBar
-      [visibility]="'always'" 
-      (updated)="!pauseScroll && scrollBar.scrollToBottom(0, 100)">
-      <div class="tg-output--history">
+      (updated)="!pauseScroll && scrollBar.scrollToBottom(0, 50)">
+      <div class="tg-output--history" cdkscrollable smoothScroll>
         <div *ngFor="let data of outputObservable | async; let i = index">
           <ng-container [ngSwitch]="data.type">
             <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>

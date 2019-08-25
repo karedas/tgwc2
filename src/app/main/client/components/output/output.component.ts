@@ -189,13 +189,10 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  onDragStart(event) {
-    this.outputService.toggleAutoScroll();
-  }
-
   onDragEnd(event) {
     // Store the Split size in the main config
-    this.outputService.toggleAutoScroll();
+    console.log('dragend');
+    this.scrollBar.scrollToBottom(0,50);
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });
