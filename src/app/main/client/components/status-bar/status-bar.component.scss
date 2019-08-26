@@ -1,35 +1,45 @@
 
+@import 'abstract/variables';
+
 // Status Bar Character
 .tg-status-bar {
-  color: #e0dbd0;
-  padding: 3px 6px;
-  border-bottom: 1px solid #5f5f5f;
-  background-color: #211f1d;
+  color: $base-text-color;
+  padding: 5px 10px;
+  border-bottom: 1px solid #433b3a;
+  background-color: #242e2f;
   font-size: 1em;
   text-transform: uppercase;
-  box-shadow: 0px 6px 15px 4px black;
+  box-shadow: 0px 0 15px 4px black inset;
   position: relative;
-  font-size: .8em;
+  font-size: .9em;
   z-index: 2;
   display: flex;
-  font-size: .8em;
+  font-size: .6em;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  .speed-position-badge {
+    margin-left: auto;
+  }
   
   .badge {
+    color: white;
     padding: 1px 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
-    margin: 0 12px 0 6px;
-    box-shadow: 0 2px 4px 2px black;
+    margin: 0 3px 0 6px;
     margin-top: -2px;
     transition: all ease-in-out .3s;
-    white-space: nowrap;
     cursor: pointer;
 
 
     &.badge-red {
-      background: #bb0000f0;
+      background: rgb(121, 15, 15);
+      box-shadow: 0 0 10px 0px rgb(187, 0, 0);
     }
     &.badge-violet {
-      background: #8000bbf0;
+      background: rgba(47, 37, 101, 1);
+      box-shadow: 0 0 10px 0px rgb(52, 38, 125);
     }
 
   }

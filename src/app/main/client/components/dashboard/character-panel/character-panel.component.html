@@ -78,14 +78,11 @@
                 </div>
                 <span class="tg-green">{{ walk | slice:0:3}}</span>
               </div>
-              <ng-container *ngIf="hero.combat; let combatSet">
+              <!-- <ng-container *ngIf="hero.combat; let combatSet"> -->
 
                 <!-- Combat: Difesa -->
-                <ng-template #combatDifTooltip>
-                  Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>
-                </ng-template>
-                <div class="status-combat-mod infostatus-block" [tooltip]="combatDifTooltip" show-delay="500"
-                  placement="top" content-type="template" fxLayout [ngClass]="{
+
+                <!-- <div class="status-combat-mod infostatus-block"  fxLayout [ngClass]="{
                     'mod-par-a': (combatSet?.mod == 'deflettere'),
                     'mod-par-s': (combatSet?.mod == 'parare'),
                     'mod-sch': (combatSet?.mod == 'schivare')
@@ -94,20 +91,21 @@
                     <i></i>
                   </div>
                   <span>{{combatSet.mod | slice:0:3}}</span>
-                </div>
+                </div> -->
 
                 <!-- Combat: Atteggiamento -->
-                <ng-template #combatAttTooltip>
+                <!-- <ng-template #combatAttTooltip>
                   Atteggiamento: <b class='tg-yellow'>{{combatSet.atteg}}</b>
-                </ng-template>
-                <div class="status-combat-attegg" [tooltip]="combatAttTooltip" show-delay="500" placement="top"
+                </ng-template> -->
+
+                <!-- <div class="status-combat-attegg" [tooltip]="combatAttTooltip" show-delay="500" placement="top"
                   content-type="template" fxLayout>
                   <div class="status-icon-box">
                     <i></i>
                   </div>
                   <span>{{combatSet.atteg | slice:0:3}}</span>
                 </div>
-              </ng-container>
+              </ng-container> -->
 
               <!-- Money -->
               <ng-template #moneyTooltip>
