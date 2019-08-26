@@ -35,7 +35,7 @@
             <td mat-cell *matCellDef="let element">
               <button mat-raised-button class="tg-button-thin" class="thin" color="green"
                 (click)="loginCharacter(element.name, element.secret, $event)" *ngIf="element.status === 1;">
-                Connetti
+                Entra
               </button>
 
               <span *ngIf="element.status !== 1" class="char-status">
