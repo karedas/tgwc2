@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { TGState } from '../store';
 import * as DataActions from '../store/actions/data.action';
-import * as GameActions from '../store/actions/client.action';
+import * as ClientActions from '../store/actions/client.action';
 
 import { Observable, Subject } from 'rxjs';
 import { LogService } from './log.service';
@@ -30,7 +30,6 @@ export class DataParser {
     private _configService: ConfigService,
     private logService: LogService
   ) {
-
     this._updateNeeded = new Subject<any>();
     // Subscribe to the shortcuts in Config
     this._configService.getConfig()
@@ -68,7 +67,7 @@ export class DataParser {
 
     } else if (len > 200000) {
       this.netData = '';
-      this.store.dispatch(GameActions.disconnectAction);
+      this.store.dispatch(ClientActions.disconnectAction());
     }
   }
 
@@ -164,9 +163,9 @@ export class DataParser {
     if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['pers'] })); }
     // TODO UI dont need order, needs a difference architecture code architecture :
     if (this.dispatcher['visibilLevel']) {
-      this.store.dispatch(GameActions.updateUIAction({ payload: { invLevel: this.dispatcher['visibilLevel'] } }));
+      this.store.dispatch(ClientActions.updateUIAction({ payload: { invLevel: this.dispatcher['visibilLevel'] } }));
     }
-    if (this.dispatcher['isgod']) { this.store.dispatch(GameActions.updateUIAction({ payload: { isGod: this.dispatcher['isgod'] } })); }
+    if (this.dispatcher['isgod']) { this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher['isgod'] } })); }
     if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']); }
   }
 
@@ -239,12 +238,12 @@ export class DataParser {
 
   private logged(): string {
     return '';
-    this.store.dispatch(GameActions.inGameAction());
+    this.store.dispatch(ClientActions.inGameAction());
     return '';
   }
 
   private news( data: any): string {
-    this.store.dispatch(GameActions.inGameAction());
+    this.store.dispatch(ClientActions.inGameAction());
     return '';
   }
 
@@ -267,12 +266,12 @@ export class DataParser {
   }
 
   private hideInputChars(): string {
-    this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: false }}));
+    this.store.dispatch(ClientActions.updateUIAction({ payload: {inputVisible: false }}));
     return '';
   }
 
   private showInputChars(): string {
-    this.store.dispatch(GameActions.updateUIAction({ payload: {inputVisible: true }}));
+    this.store.dispatch(ClientActions.updateUIAction({ payload: {inputVisible: true }}));
     return '';
   }
 
@@ -290,7 +289,7 @@ export class DataParser {
 
   private audio(audio): string {
     const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-    this.store.dispatch(GameActions.audioAction({payload: audio_parse}));
+    this.store.dispatch(ClientActions.audioAction({payload: audio_parse}));
     return '';
   }
 

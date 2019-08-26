@@ -112,8 +112,8 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
 
   navigateToHome() {
     this.dialogRef.close();
-    this.router.navigate(['auth/login']).then(() => {
-      this.store.dispatch(ClientActions.resetAction);
+    this.router.navigate(['/']).then(() => {
+      this.store.dispatch(ClientActions.resetAction());
     });
   }
 

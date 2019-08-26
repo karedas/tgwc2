@@ -15,7 +15,6 @@ export const environment = {
       resource: 'socket.io',
       transports: ['websocket'],
       reconnectionDelay: 1500,
-      reconnectionAttempts: 'Infinity'
     }
   }
 };

@@ -86,9 +86,12 @@
                 <mat-divider class="light"></mat-divider>
                 <button mat-list-item class="user-menu-button" [routerLink]="['/manager/dashboard']"
                   [disabled]="userIsInGame">La mia Dashboard</button>
+                <button mat-list-item class="user-menu-button" (click)="disconnectCharacter()" *ngIf="userIsInGame">
+                  Esci dal gioco.
+                </button>
                 <!-- <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Aiuto</button>
                       <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Preferenze</button> -->
-                <button mat-list-item class="user-menu-button" (click)="userOnLogout()">Logout</button>
+                <button mat-list-item class="user-menu-button" (click)="userOnLogout()" [disabled]="userIsInGame">Logout</button>
               </mat-action-list>
 
             </mat-menu>

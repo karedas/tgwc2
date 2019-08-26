@@ -63,6 +63,7 @@ export class LoginClientService {
 
   logout() {
     this.isInGame = false;
+    this.gameService.sendToServer('fine');
   }
 
   reconnect() {
@@ -156,6 +157,6 @@ export class LoginClientService {
 
   private onError(err: any) {
     this.replayMessage = err;
-    this.socketService.connect();
+    this.socketService.init();
   }
 }

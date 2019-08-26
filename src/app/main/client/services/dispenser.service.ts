@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GameService } from './game.service';
 import { DialogV2Service } from '../common/dialog-v2/dialog-v2.service';
 import { AudioService } from '../components/audio/audio.service';
+import { LoginClientService } from './login-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +12,15 @@ export class DispenserService {
   constructor(
     private gameService: GameService,
     private dialogV2Service: DialogV2Service,
+    private loginClientService: LoginClientService,
     private audioService: AudioService
-  ) { console.log('dispenser loaded'); }
+  ) { }
 
   do(what: string, ...args: any) {
-    console.log(what);
     switch (what) {
       case 'disconnect':
-        this.gameService.disconnect();
+        this.loginClientService.logout();
         break;
-      // case 'news':
-      //   this.dialogV2Service.openNews(true);
-      //   break;
       case 'preferences':
         this.dialogV2Service.openControlPanel();
         break;

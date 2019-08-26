@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { GameService } from './services/game.service';
 import { InputService } from './components/input/input.service';
 import { Subject } from 'rxjs';
@@ -26,11 +26,13 @@ export class ClientComponent implements OnInit, OnDestroy {
     private _configService: ConfigService,
     private gameService: GameService,
     private inputService: InputService,
+    private renderer: Renderer2
     ) {
     this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit(): void {
+    this.renderer.addClass(document.body, 'client-run');
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
@@ -39,8 +41,10 @@ export class ClientComponent implements OnInit, OnDestroy {
         this.inputService.focus();
       });
   }
+  
 
   ngOnDestroy() {
+    this.renderer.removeClass(document.body, 'client-run');
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
