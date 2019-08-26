@@ -9,12 +9,14 @@ import { TGState } from 'src/app/main/client/store';
 
 export class SocketService {
 
-  private socket: io;
+  private socket: any;
   connected = false;
+  connectedSubject: BehaviorSubject<boolean>;
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor( private store: Store<TGState>) {
-    this.connect();
+    this.connectedSubject =  new BehaviorSubject(false);
+    this.init();
   }
 
   get isConnected(): boolean {
@@ -23,27 +25,32 @@ export class SocketService {
 
   set isConnected(value: boolean) {
     this.connected = value;
+    this.connectedSubject.next(this.isConnected);
   }
 
+  connection(): Observable<boolean> {
+    return this.connectedSubject.asObservable();
+  }
 
   /** PUBLIC METHODS  */
 
-  public connect(): void {
-    if (!this.socket) {
+  public init(): void {
 
+    if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);
       // Adding basic Socket listeners
-      this.socket.on(socketEvent.CONNECT,  this.onConnect);
-      this.socket.on(socketEvent.DISCONNECT, this.onDisconnect);
-      this.socket.on(socketEvent.CONNECTERROR, this.onError);
-      this.socket.on(socketEvent.RECONNECT, this.onReconnect );
+      this.socket.on(socketEvent.CONNECT,  this.onConnect.bind(this));
+      this.socket.on(socketEvent.DISCONNECT, this.onDisconnect.bind(this));
+      this.socket.on(socketEvent.CONNECTERROR, this.onError.bind(this));
+      this.socket.on(socketEvent.RECONNECT, this.onReconnect.bind(this));
     } else if ( this.socket.disconnected ) {
       this.socket.connect();
     }
   }
 
+  // public connection(): Observable<boolean> {}
+
   public disconnect(): void {
-    this.store.dispatch(ClientActions.disconnectAction());
     this.socket.disconnect();
   }
 
@@ -79,17 +86,17 @@ export class SocketService {
     this.socket_error$.next(false);
   }
 
-  private onError(err) {
+  private onError() {
     this.connected = false;
     this.socket_error$.next(true);
     this.socket.connect();
   }
 
-  private onReconnect() {
-  }
+  private onReconnect() {}
 
   private onDisconnect() {
+    this.store.dispatch(ClientActions.disconnectAction());
     this.connected = false;
-    this.connect();
+    this.init();
   }
 }

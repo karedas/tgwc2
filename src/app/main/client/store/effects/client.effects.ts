@@ -8,6 +8,7 @@ import { AudioService } from 'src/app/main/client/components/audio/audio.service
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 
 
 export interface PayloadAction {
@@ -23,6 +24,7 @@ export class ClientEffects {
     private actions$: Actions,
     private audioService: AudioService,
     private loginClientService: LoginClientService,
+    private dialogV2Service: DialogV2Service,
     private router: Router,
   ) { }
 
@@ -32,9 +34,8 @@ export class ClientEffects {
     ofType(ClientEventType.DISCONNECT),
     tap((a) => {
       if (this.router.url === '/webclient') {
-        this.loginClientService.logout();
         this.audioService.pauseAudio();
-        // this.dialogV2Service.openSmartLogin();
+        this.dialogV2Service.openSmartLogin();
         this.game.resetUI();
       }
     }

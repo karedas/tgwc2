@@ -4,10 +4,8 @@ import { AppPreloadingStrategy } from './app.preloading-strategy';
 import { PageNotFoundComponent } from './main/pages/errors/404/page-not-found.component';
 
 const routes: Routes = [
-  {
-    path: '**',
-    component: PageNotFoundComponent
-  }
+  { path: '', redirectTo: 'manager', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth/login' }
 ];
 
 @NgModule({

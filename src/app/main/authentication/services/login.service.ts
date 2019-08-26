@@ -4,8 +4,6 @@ import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { map } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/services/api.service';
 import { User } from 'src/app/core/models/user.model';
-// import { HttpClient } from '@angular/common/http';
-// import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable({
   providedIn: 'root'

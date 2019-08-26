@@ -49,10 +49,11 @@ export class ApiService {
       );
   }
 
-  public put(url: string, ...param: any): Observable<any> {
+  public put(url: string, putData: any): Observable<any> {
+    
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
-    return this.http.put(endpoint, JSON.stringify(param), {headers})
+    return this.http.put(endpoint, JSON.stringify(putData), {headers})
     .pipe(
       map(response => {
         return new ApiResponse(response);

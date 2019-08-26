@@ -3,13 +3,12 @@ import { createAction, props } from '@ngrx/store';
 export enum ClientEventType {
   DISCONNECT = '[Client] User Disconnect',
   INGAME = '[Client] User In Game',
-  RESET = '[Client] Reset for New Login',
+  RESET = '[Client] Reset Store',
   UI = '[Client] Ui Updated',
   NEWS = '[Client] Show News',
   AUDIO = '[Client] Audio',
   UPDATENEEDED = '[Client] Update Needed Data',
 }
-
 
 export const disconnectAction = createAction(ClientEventType.DISCONNECT);
 export const inGameAction = createAction(ClientEventType.INGAME);

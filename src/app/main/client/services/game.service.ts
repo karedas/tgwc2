@@ -140,11 +140,6 @@ export class GameService {
         //   });
     }
 
-    public disconnect() {
-        this.sendToServer('fine');
-        this.socketService.disconnect();
-    }
-
     public resetUI() {
         this._dataSubscription.unsubscribe();
         this._upSubscription.unsubscribe();

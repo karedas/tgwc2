@@ -9,6 +9,7 @@ import { Character } from 'src/app/core/models/character.model';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/core/models/user.model';
 import { gameNavigationSideBar } from '../navigation';
+import { DispenserService } from 'src/app/main/client/services/dispenser.service';
 
 
 @Component({
@@ -26,16 +27,17 @@ export class NavBarComponent implements OnDestroy {
 
   public userIsLoggedIn: boolean = false;
   public userIsInGame: boolean = false;
-
   public user: User;
   public charactersList: Observable<any>;
   public hamburgerStatus: boolean = false;
+  
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private loginClientService: LoginClientService,
+    private dispenserService: DispenserService,
     private userService: UserService
   ) {
     this.router.events
@@ -93,6 +95,10 @@ export class NavBarComponent implements OnDestroy {
 
   loginCharacter(name) {
     this.loginClientService.login(name);
+  }
+
+  disconnectCharacter() {
+    this.dispenserService.do('disconnect');
   }
 
   ngOnDestroy(): void {

@@ -15,7 +15,6 @@ export const environment = {
       transports: ['websocket'],
       reconnectionDelay: 3000,
       reconnectionDelayMax : 5000,
-      reconnectionAttempts: 'Infinity'
     }
   }
 };
