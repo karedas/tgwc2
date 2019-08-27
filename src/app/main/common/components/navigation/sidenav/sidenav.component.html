@@ -38,7 +38,7 @@
         (click)="toggleSidenav()"
         [ngClass]="{'active': selectedItem === index}"
         [routerLink]="item.url ? item.url : null"
-        [routerLinkActive]="active"
+        [routerLinkActive]="['active']"
         [target]="item.openInNewTab ? '_blank' : '_self'">
 
         <ng-container *ngTemplateOutlet="itemContent; context: {item: item}"></ng-container>
@@ -47,7 +47,7 @@
       <a mat-line class="menu-item" *ngIf="item.url && item.externalUrl"
         [ngClass]="{'active': selectedItem === index}"
         [href]="item.url" 
-        [routerLinkActive]="active"
+        [routerLinkActive]="['active']"
         [target]="item.openInNewTab ? '_blank' : '_self'">
 
         <ng-container *ngTemplateOutlet="itemContent; context: {item: item}"></ng-container>

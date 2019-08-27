@@ -1,12 +1,15 @@
 
 @import 'abstract/variables';
 
+:host {
+  order:2;
+}
 // Status Bar Character
 .tg-status-bar {
   color: $base-text-color;
-  padding: 5px 10px;
-  border-bottom: 1px solid #433b3a;
-  background-color: #242e2f;
+  padding: 6px;
+  border-top: 1px solid #433b3a;
+  background-color: #252323;
   font-size: 1em;
   text-transform: uppercase;
   box-shadow: 0px 0 15px 4px black inset;
@@ -18,30 +21,55 @@
   font-weight: bold;
   letter-spacing: 1px;
 
-  .speed-position-badge {
+  .badges-left {
+
+  }
+  .badges-right {
     margin-left: auto;
   }
   
   .badge {
     color: white;
     padding: 1px 6px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
+    border: 1px solid rgb(80, 80, 80);
     margin: 0 3px 0 6px;
     margin-top: -2px;
-    transition: all ease-in-out .3s;
+    transition: all ease-in .2s;
     cursor: pointer;
+    line-height: 2em;
+    display: inline-block;
+    
+  }
+  
+  .sub-badge {
+    display: inline-block;
+    padding: 0 6px;
+    font-weight: bold;
+    height: 100%;
+  }
+  
+  .badge-black {
+    color: snow;
+    background: #2f2f2f;
+  }
 
-
-    &.badge-red {
-      background: rgb(121, 15, 15);
-      box-shadow: 0 0 10px 0px rgb(187, 0, 0);
+  .badge-red {
+    background: rgb(121, 15, 15);
+    &:hover {
+      box-shadow: 0 0 12px 2px #4e0f0f;
     }
-    &.badge-violet {
-      background: rgba(47, 37, 101, 1);
-      box-shadow: 0 0 10px 0px rgb(52, 38, 125);
+  }
+  .badge-violet {
+    background: rgba(47, 37, 101, 1);
+    &:hover {
+      box-shadow: 0 0 12px 2px #553fc7
+      ;
     }
+  }
 
+
+  .double-badge {
+    padding:0 0 0 6px;
   }
 
   .badge-icon {

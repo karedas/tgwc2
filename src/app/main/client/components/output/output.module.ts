@@ -11,7 +11,6 @@ import { AngularSplitModule } from 'angular-split';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
 import { StatusComponent } from './status/status.component';
-import { StatusBarComponent } from '../status-bar/status-bar.component';
 @NgModule({
   declarations: [
     ObjpersDetailComponent,
@@ -23,7 +22,6 @@ import { StatusBarComponent } from '../status-bar/status-bar.component';
     ContextMenuComponent,
     GenericPageComponent,
     StatusComponent,
-    StatusBarComponent
   ],
   imports: [
     CommonModule,
