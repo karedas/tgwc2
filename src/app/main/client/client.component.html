@@ -4,11 +4,13 @@
     <tg-output fxLayout fxFlex="1 1 100%" class="min-h-0"></tg-output>
     <!-- Hero Dashboard -->
     <tg-dashboard [ngClass]="{'top': 0 === tgConfig.characterPanelTopPosition}"></tg-dashboard>
+    <!-- Character Status Bar -->
+    <tg-status-bar></tg-status-bar>
+    <!-- Input User and commands bar -->
     <tg-input></tg-input>
   </div>
   <!-- Right Sidebar -->
   <tg-right-sidebar fxLayout fxFlex="0 0 auto" fxHide fxShow.gt-sm="true"></tg-right-sidebar>
-
 </div>
 
 <!-- AUDIO & MUSIC -->

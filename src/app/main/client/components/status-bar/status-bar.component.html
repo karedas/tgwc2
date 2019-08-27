@@ -1,34 +1,39 @@
 <div class="tg-status-bar" *ngIf="hero$ | async as hero">
-  <div 
-    matRipple
-    [tooltip]="combatDifTooltip" show-delay="500" placement="top" content-type="template">
-    <!-- Combat Strategies -->
-    Atteggiamento:
-    <span class="badge badge-red">
-      {{hero.combat.atteg}} <span>({{hero.combat.mod}})</span>
-    </span>
+  <div class="badges-left">
+    <div class="combat-badge" fxLayout>
+      <!-- Combat Strategies -->
+      Atteggiamento:
+      <span class="badge double-badge badge-red" [tooltip]="combatDifTooltip" show-delay="500" placement="top" content-type="template" matRipple>
+        {{hero.combat.atteg}} <span class="sub-badge badge-black">{{hero.combat.mod}}</span>
+      </span>
+      <ng-template #combatDifTooltip>
+          Atteggiamento: {{hero.combat.attegg}} | Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>
+      </ng-template>
+    </div>
   </div>
 
-  <!-- Various -->
-  <span class="badge badge-violet">Sei nascosto!</span>
+  <div class="badges-right" fxLayout>
 
-  <!-- Speed & Position -->
-  <div class="speed-position-badge">
-    Velocità: 
-    <span > Corsa | sei in piedi</span>
-    <div class="status-icon-box">
-      <i></i>
+    <div class="various-badge">
+      <span class="badge badge-violet">Sei nascosto!</span>
+    </div>
+  
+    <!-- Speed & Position -->
+    <div class="speed-position-badge">
+      Velocità: 
+      <span > Corsa | sei in piedi</span>
+      <div class="status-icon-box">
+        <i></i>
+      </div>
     </div>
 
   </div>
 
+  <!-- Various -->
   <ng-template #positionTooltip>
     <!-- Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b> -->
   </ng-template>
   
-  <ng-template #combatDifTooltip>
-      Atteggiamento: {{hero.combat.attegg}} | Difesa: <b class='tg-yellow'>{{combatSet.mod}}</b>
-  </ng-template>
 
 </div>
 

@@ -21,9 +21,12 @@ if (environment.production) {
 export class SentryErrorHandler implements ErrorHandler {
   constructor() {}
   handleError(error) {
-//     return;
-//     const eventId = Sentry.captureException(error.originalError || error);
-//     Sentry.showReportDialog({ eventId });
+    if(environment.production) {
+      const eventId = Sentry.captureException(error.originalError || error);
+      // Sentry.showReportDialog({ eventId });
+    }
+    else {}
+      console.error(error);
   }
 }
 

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, Output, EventEmitter,
-    OnDestroy, Inject, ElementRef, AfterViewInit } from '@angular/core';
+    OnDestroy, Inject, ElementRef, AfterViewInit, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
@@ -12,7 +12,7 @@ import { SplashScreenService } from './splashscreen.service';
   styleUrls: ['./splashscreen.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SplashscreenComponent implements AfterViewInit, OnDestroy {
+export class SplashscreenComponent implements OnInit, OnDestroy {
 
   // @ViewChild('splashscreen', {static: false}) elementRef: ElementRef;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>(false);
@@ -29,21 +29,18 @@ export class SplashscreenComponent implements AfterViewInit, OnDestroy {
     private _animationBuilder: AnimationBuilder,
     private splashScreenService: SplashScreenService,
     private elementRef: ElementRef,
+    private cdRef:ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: any
     ) {
       this._unsubscribeAll = new Subject<any>();
   }
 
-  ngAfterViewInit(): void {
-
-
+  ngOnInit(): void {
     this.splashScreenService.percentage
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(amount => {
-        // this.show();
         this.preloadPerc = Math.round(amount);
       });
-
 
     this.splashScreenService.status$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -53,7 +50,6 @@ export class SplashscreenComponent implements AfterViewInit, OnDestroy {
         }
       });
   }
-
 
   // show(): void {
   //   let player: AnimationPlayer;
