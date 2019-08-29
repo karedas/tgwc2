@@ -33,6 +33,7 @@ export interface IHero {
   ethn?: string;
   image?: string;
   conva?: string;
+  hidden?: boolean;
   combat?: any;
   walk?: string;
   title?: string;

@@ -4,15 +4,11 @@
 @import 'abstract/sprites-mixins';
 @import '~@angular/flex-layout/mq';
 
-// @import '~@angular/flex-layout/mq';
-@import '~@angular/flex-layout/mq';
-
 
 .tg-characterpanel {
   position: relative;
   background-repeat: no-repeat;
   background-position: top left;
-  margin-left: 3px;
   margin-right: 3px;
   background: url($imgPath + '/background/background-rock-dark.jpg') repeat top left;
 
@@ -23,17 +19,18 @@
   
   /* TG Character Side */
   .tg-character {
+    padding: 2px 0 0 0;
+    background:  url($imgPath + '/borders/border-002-tiny.png') top left repeat-x;
   
     .tg-characteravatar {
       cursor: pointer;
-      width: 78px;
-      height: 68px;
+      width: 80px;
+      height: 66px;
       box-sizing: border-box;
       overflow: hidden;
       position: relative;
       box-shadow: 0px 2px 11px 0 #000;
-      margin-top: 3px;
-      margin: auto 0 ;
+      margin: auto 0 0;
   
       .tg-avatar-wrap {
         border: 1px solid #705611;
@@ -55,18 +52,17 @@
       height: 100%;
       line-height: 18px;
       text-align: left;
-      font-family: 'Modern Antiqua', cursive;
       letter-spacing: 1px;
-      font-size: 13px;
+      font-size: .8em;
       width: 100%;
-      color: white;
+      color: $base-text-color;
       box-shadow: inset 0px -7px 15px black;
-      border-bottom: 1px solid #5f5c59;
-      padding: 1px 0;
+      padding: 2px 0;
     }
   
     .charName {
-      padding-left:  6px;
+      text-transform: uppercase;
+      padding-left:  4px;
       padding-right: 6px;
       margin-right: 1em;
     }
@@ -99,98 +95,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-  
-      .status-icon-box {
-        margin: auto;
-        width: 16px;
-        height: 16px;
-      }
-  
-      .status-walk, .status-combat-mod, .status-combat-attegg, .status-position {
-        i {
-          display: block;
-          margin: auto;
-          white-space: nowrap;
-          background-size: cover;
-          background-repeat:  no-repeat;
-          background-position: center center;
-          width: 100%;
-          height: 100%;
-        }
-      }
-  
-      /* MONEY */
-      .status-money i{
-        // background-image: url($imgPath + '/icons/_monete.svg');
-        display: block;
-        @include sprite($coins-ico-sprite);
-      }
-  
-      /* POSITION */
-      .status-position  {
-        color: white;
-        i {
-          background-image: url($imgPath + '/icons/_inpiedi.svg');
-        }
-        //Morto
-        &.pos-0 {
-          color: $tg-red;
-          i {
-          background-image: url($imgPath + '/icons/_morto.svg');
-          }
-        }
-        //bloccato
-        &.pos-2 {
-          color: $tg-yellow;
-          i {
-            background-image: url($imgPath + '/icons/_bloccato.svg');
-          }
-        }
-        //addormentato
-        &.pos-3 {
-          color: $tg-gray;
-          i {
-            background-image: url($imgPath + '/icons/_dormiente.svg');
-          }
-        }
-        //sdraiato
-        &.pos-4 {
-          color: $tg-brown;
-          i {
-            background-image: url($imgPath + '/icons/_sdraiato.svg');
-          }
-       }
-        //seduto
-        &.pos-5 {
-          color: $tg-lt-cyan;
-          i {
-            background-image: url($imgPath + '/icons/_seduto.svg');
-          }
-        }
-        //in piedi
-        &.pos-6 i{
-          background-image: url($imgPath + '/icons/_inpiedi.svg');
-        }
-      }
-  
-      /* WALK */
-      .status-walk{
-        &.walk-0 i{
-          background-image: url($imgPath + '/icons/0_passeggio.svg');
-        }
-        &.walk-1 i{
-          background-image: url($imgPath + '/icons/1_camminata.svg');
-        }
-        &.walk-2 i{
-          background-image: url($imgPath + '/icons/2_marcia.svg');
-        }
-        &.walk-3 i{
-          background-image: url($imgPath + '/icons/3_corsa.svg');
-        }
-        &.walk-4 i{
-          background-image: url($imgPath + '/icons/4_scatto.svg');
-        }
-      }
+
   
       // CONV
       .status-conva {
@@ -200,24 +105,7 @@
           display: block;
         }
       }
-  
-      // COMBATSET
-  
-      .status-combat-mod {
-        &.mod-par-a i{
-          background-image: url($imgPath + '/icons/c_parataA.svg');
-        }
-        &.mod-par-s i{
-          background-image: url($imgPath + '/icons/c_parataS.svg');
-        }
-        &.mod-sch i{
-          background-image: url($imgPath + '/icons/c_schivata.svg');
-        }
-      }
-      
-      .status-combat-attegg i{
-        background-image: url($imgPath + '/icons/_atteggiamento.svg');
-      }
+
     }
   
     
@@ -238,8 +126,7 @@
       flex: 1 1 100%;
       flex-direction: column;
       margin-top: auto;
-      margin-bottom: 2px;
-      padding: 4px 0 0 6px;
+      padding: 0 0 0 4px;
       
   
       .barcont {
@@ -262,35 +149,30 @@
         width: 50%;
         display: inline-block;
         text-align: left;
-        margin-right: 58px;
-        
+        margin-right: 4px;
         @include layout-bp(xs) {
           margin-right: 0;
         }
+
       }
   
       .tg-extrabars {
         width: 100%;
-        height: 18px;
+        height: 21px;
         margin-bottom: 2px;
       }
   
       .tg-statusbar-text {
         overflow: hidden;
         position: absolute;
-        right: -50px;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: 10px;
         color: $tg-white;
+        text-transform: uppercase;
   
         i {
           font-style: normal;
-        }
-
-        @include layout-bp(xs) {
-          width: 100%;
-          left: 0;
-          right: 0;
-          text-align: center;
         }
       }
   

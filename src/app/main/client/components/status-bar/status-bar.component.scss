@@ -1,75 +1,77 @@
-
 @import 'abstract/variables';
+@import '~@angular/flex-layout/mq';
+
 
 :host {
-  order:2;
+  order: 2;
+  margin: 0 4px;
+  background: #100f0d url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+  padding-left: 2px;
 }
+
 // Status Bar Character
 .tg-status-bar {
+  background:  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
+  padding-right: 2px;
   color: $base-text-color;
-  padding: 6px;
-  border-top: 1px solid #433b3a;
-  background-color: #252323;
   font-size: 1em;
   text-transform: uppercase;
-  box-shadow: 0px 0 15px 4px black inset;
   position: relative;
-  font-size: .9em;
+  font-size: 8px;
   z-index: 2;
   display: flex;
   font-size: .6em;
   font-weight: bold;
   letter-spacing: 1px;
+  
+  .tg-status-bar-wrap {
+    padding: 0 10px 0 6px;
+    width: 100%;
+    box-shadow: inset 0 0 6px 5px black;
+  }
 
   .badges-left {
-
+    .badge {
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
   }
   .badges-right {
     margin-left: auto;
+      .badge {
+      }
   }
-  
+
   .badge {
-    color: white;
-    padding: 1px 6px;
-    border: 1px solid rgb(80, 80, 80);
-    margin: 0 3px 0 6px;
-    margin-top: -2px;
-    transition: all ease-in .2s;
-    cursor: pointer;
-    line-height: 2em;
-    display: inline-block;
-    
+    padding: 3px 12px;
   }
-  
-  .sub-badge {
-    display: inline-block;
-    padding: 0 6px;
-    font-weight: bold;
-    height: 100%;
+
+  .badge:first-child {
+    padding-left: 0;
   }
-  
+
+  .badge-label {
+    padding-right: 4px;
+  }
+
   .badge-black {
     color: snow;
     background: #2f2f2f;
   }
 
   .badge-red {
-    background: rgb(121, 15, 15);
     &:hover {
-      box-shadow: 0 0 12px 2px #4e0f0f;
     }
   }
+
   .badge-violet {
-    background: rgba(47, 37, 101, 1);
+    color: #553fc7;
     &:hover {
-      box-shadow: 0 0 12px 2px #553fc7
-      ;
     }
   }
 
 
   .double-badge {
-    padding:0 0 0 6px;
+    padding: 0 0 0 6px;
   }
 
   .badge-icon {
@@ -83,6 +85,138 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    
+
   }
+}
+
+
+.status-icon-box {
+  display: inline-block;  
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+  
+.status-walk, .status-combat-mod, .status-combat-attegg, .status-position {
+  i {
+    display: block;
+    margin: auto;
+    white-space: nowrap;
+    background-size: cover;
+    background-repeat:  no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* POSITION */
+.status-position {
+  color: white;
+
+  i {
+    background-image: url($imgPath + '/icons/_inpiedi.svg');
+  }
+
+  //Morto
+  &.pos-0 {
+    color: $tg-red;
+
+    i {
+      background-image: url($imgPath + '/icons/_morto.svg');
+    }
+  }
+
+  //bloccato
+  &.pos-2 {
+    color: $tg-yellow;
+
+    i {
+      background-image: url($imgPath + '/icons/_bloccato.svg');
+    }
+  }
+
+  //addormentato
+  &.pos-3 {
+    color: $tg-gray;
+
+    i {
+      background-image: url($imgPath + '/icons/_dormiente.svg');
+    }
+  }
+
+  //sdraiato
+  &.pos-4 {
+    color: $tg-brown;
+
+    i {
+      background-image: url($imgPath + '/icons/_sdraiato.svg');
+    }
+  }
+
+  //seduto
+  &.pos-5 {
+    color: $tg-lt-cyan;
+
+    i {
+      background-image: url($imgPath + '/icons/_seduto.svg');
+    }
+  }
+
+  //in piedi
+  &.pos-6 i {
+    background-image: url($imgPath + '/icons/_inpiedi.svg');
+  }
+}
+
+/* WALK */
+.status-walk {
+  &.walk-0 i {
+    background-image: url($imgPath + '/icons/0_passeggio.svg');
+  }
+
+  &.walk-1 i {
+    background-image: url($imgPath + '/icons/1_camminata.svg');
+  }
+
+  &.walk-2 i {
+    background-image: url($imgPath + '/icons/2_marcia.svg');
+  }
+
+  &.walk-3 i {
+    background-image: url($imgPath + '/icons/3_corsa.svg');
+  }
+
+  &.walk-4 i {
+    background-image: url($imgPath + '/icons/4_scatto.svg');
+  }
+}
+
+
+// COMBATSET
+
+.status-combat-mod {
+  &.mod-par-a i {
+    background-image: url($imgPath + '/icons/c_parataA.svg');
+  }
+
+  &.mod-par-s i {
+    background-image: url($imgPath + '/icons/c_parataS.svg');
+  }
+
+  &.mod-sch i {
+    background-image: url($imgPath + '/icons/c_schivata.svg');
+  }
+}
+
+.status-combat-attegg i {
+  background-image: url($imgPath + '/icons/_atteggiamento.svg');
+}
+
+
+
+body.zen :host{
+  display: none!important;
 }

@@ -7,6 +7,7 @@ import { Action } from '@ngrx/store';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
 import * as DataActions from '../actions/data.action';
+import { InputService } from '../../components/input/input.service';
 
 export interface PayloadActionData {
   type: string;
@@ -18,6 +19,7 @@ export interface PayloadActionData {
 export class DataEffects {
   constructor(
     private actions$: Actions,
+    private inputService: InputService,
     private game: GameService,
     private dialogV2Service: DialogV2Service
   ) { }
@@ -109,7 +111,10 @@ export class DataEffects {
   @Effect({ dispatch: false })
   closeTextEditor: Observable<Action> = this.actions$.pipe(
     ofType(DataEvenType.CLOSETEXTEDITOR),
-    tap(() => this.dialogV2Service.dialog.getDialogById('editor').close())
+    tap(() => {
+      this.dialogV2Service.dialog.getDialogById('editor').close()
+      this.inputService.focus();
+    })
   );
 
   @Effect({ dispatch: false })

@@ -15,9 +15,8 @@
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
-              <ng-scrollbar class="scrollbar-output"  #scrollBar 
-                (updated)="!pauseScroll && scrollBar.scrollToBottom(0, 50)">
-                <div  class="tg-output--history" cdkscrollable smoothScroll>
+              <ng-scrollbar class="scrollbar-output"  #scrollBar>
+                <div  class="tg-output--history" cdkscrollable>
                   <div *ngIf="!output.length" class="no-output-notice">
                     Scrivi qualcosa o semplicemente aspetta...
                   </div>
@@ -25,7 +24,7 @@
 
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
-                      <tg-generic-page *ngSwitchCase="'genericpage'" [html]='data.content'></tg-generic-page>
+                      <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
                     </ng-container>
 
                   </ng-container>
@@ -39,6 +38,7 @@
               <div class="tg-output--extradetail">
                 <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extra"
                   [lastDescription]="lastRoomDescription" [type]="typeDetail"></tg-room>
+
               </div>
             </div>
           </as-split-area>
@@ -66,16 +66,15 @@
 
   <div style="height: 100%; overflow:hidden;">
 
-    <ng-scrollbar class="scrollbar-output" #scrollBar
-      (updated)="!pauseScroll && scrollBar.scrollToBottom(0, 50)">
-      <div class="tg-output--history" cdkscrollable smoothScroll>
+    <ng-scrollbar class="scrollbar-output" #scrollBar>
+      <div class="tg-output--history" cdkscrollable>
         <div *ngFor="let data of outputObservable | async; let i = index">
           <ng-container [ngSwitch]="data.type">
             <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
             <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
               [lastDescription]="lastRoomDescription"></tg-room>
-            <tg-objpers-detail *ngSwitchCase="'objpersdetail'" [html]="data.content"></tg-objpers-detail>
-            <tg-generic-page *ngSwitchCase="'genericpage'" [html]='data.content'></tg-generic-page>
+            <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
+            <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
           </ng-container>
         </div>
       </div>

@@ -26,9 +26,12 @@
 
   .info-textarea--container {
 
+    padding: 12px 0;
+
     .textarea {
       outline: none;
-      line-height: 1.2;
+      padding: 0 12px;
+      line-height: 1.3;
       border: none;
       resize: none;
       box-sizing: border-box;
@@ -36,7 +39,6 @@
       color: #d6d6d6;
       width: 100%;
       height: 100%;
-      padding: 0;
       margin: auto;
       color: #3a2e19;
     }

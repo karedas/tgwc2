@@ -25,19 +25,60 @@
 .tg-output--history,
 .tg-output--extradetail {
   width: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
   z-index: 2;
-  color: #d2d2d2; //  default color
+  color: $tg-gray; //  default color
   box-sizing: border-box;
-  font-size: 100%;
+  font-size: 90%;
 }
 
 
 .tg-output--history {
   width: 100%;
-  padding: 8px 8px 8px 8px;
+  padding: 0px 16px 0 4px;
   box-sizing: border-box;
+ 
+  &::ng-deep.tg-line{
+  
+    /* Double Columns style */
+    .list-50 {
+      width: 50%;
+      display: inline-block;
+      flex-direction: row;
+  
+      >div {
+        flex: 1 0 50%;
+      }
+    }
+  
+    .list-50-50 {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+  
+      >div {
+        flex: 1 0 50%;
+      }
+    }
+  
+    @include layout-bp(lt-md) {
+      .list-50 {
+        width: 100%;
+  
+        >div {
+          flex: 1 0 100% !important;
+        }
+      }
+  
+      .list-50-50 {
+        >div {
+          flex: 1 0 100% !important;
+        }
+      }
+    }
+  }
 }
+
 
 .tg-output--extradetail {
   height: 100%;
@@ -50,7 +91,7 @@ tg-text {
 
 ::ng-deep.tg-line {
   display: block;
-  padding-bottom: 1em;
+  padding-bottom: .5em;
   line-height: 1.2;
 
   &::first-letter {
@@ -133,17 +174,15 @@ tg-text {
   }
 
   .tg-room--title {
+    color: #ff7070;
     font-size: 1.2em;
-    font-family: "Modern Antiqua", cursive;
     margin-bottom: 2px;
-    color: #ec5563;
+    padding-top: 1em;
   }
 
   .tg-room--desc {
     flex-direction: column;
     line-height: 1.4;
-    padding-bottom: 0.5em;
-    margin-bottom: .5em;
   }
 
 
@@ -230,43 +269,7 @@ tg-text {
     color: $tg-lt-green;
   }
 
-
-  /* Double Columns style */
-  .list-50 {
-    width: 50%;
-    display: inline-block;
-    flex-direction: row;
-
-    >div {
-      flex: 1 0 50%;
-    }
-  }
-
-  .list-50-50 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    >div {
-      flex: 1 0 50%;
-    }
-  }
-
-  @include layout-bp(lt-md) {
-    .list-50 {
-      width: 100%;
-
-      >div {
-        flex: 1 0 100% !important;
-      }
-    }
-
-    .list-50-50 {
-      >div {
-        flex: 1 0 100% !important;
-      }
-    }
-  }
+  
 
   .size-qty {
     margin-right: 20px !important;
@@ -318,11 +321,10 @@ tg-text {
 
     .tg-room--title {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-      padding: 6px 4px;
+      padding: 0px 4px 0 0;
       color: #dbbf90;
-      text-shadow: 0 0 12px #dbbf90;
-      box-shadow: inset 0px 0px 20px 4px black;
-      font-size: 1.4em;
+      box-shadow: inset 0px 0px 6px 0px black;
+      font-size: 1em;
       overflow: hidden;
       display: flex;
 
@@ -355,7 +357,7 @@ tg-text {
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: 6px 1em .5em 4px;
+      margin: 4px .5em 0 0px;
 
       img {
         float: left;

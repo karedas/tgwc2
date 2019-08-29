@@ -122,7 +122,6 @@ export class DataParser {
     data = data.replace(/&!pginf\{[\s\S]*?\}!/gm, this.playerInfo.bind(this));
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, this.playerStatusInline.bind(this));
     data = data.replace(/&!select\{[\s\S]*?\}!/gm, this.selectableGeneric.bind(this));
-    data = data.replace(/&!refresh\{[\s\S]*?\}!/gm, this.refreshCommand.bind(this));
     data = data.replace(/&!crlf"[^"]*"/gm, this.pauseScrollRequested.bind(this));
 
     // Clear message
@@ -418,13 +417,6 @@ export class DataParser {
   private selectableGeneric(s): string {
     s = JSON.parse(s.slice(8, -1));
     console.log('selectable generic', s);
-    return '';
-  }
-
-  private refreshCommand(t) {
-    const rcommand_parse = JSON.parse(t.slice(9, -1));
-    this.store.dispatch( DataActions.refreshCommandAction());
-    console.log('refresh command', rcommand_parse);
     return '';
   }
 

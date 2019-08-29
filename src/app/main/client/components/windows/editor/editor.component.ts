@@ -63,7 +63,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this.gameService.sendToServer('##ce_abort');
-        this.dialog.close();
         this.inputService.focus();
       });
   }
@@ -92,13 +91,11 @@ export class EditorComponent implements OnInit, OnDestroy {
     }
 
     this.gameService.sendToServer('##ce_save');
-    this.dialog.close();
     this.inputService.focus();
   }
 
   onCancel(event: any) {
     this.gameService.sendToServer('##ce_abort');
-    this.dialog.close();
   }
 
   resetEditor() {

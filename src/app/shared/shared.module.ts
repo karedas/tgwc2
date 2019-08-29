@@ -19,7 +19,7 @@ import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.dire
 import { MatRadioModule } from '@angular/material/radio';
 import { IconsComponent } from '../main/client/common/icons/icons.component';
 import { HstatComponent } from '../main/client/common/hstat/hstat.component';
-import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatInputModule } from '@angular/material';
+import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatInputModule, MatExpansionModule } from '@angular/material';
 import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
@@ -61,6 +61,7 @@ import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@
     MatDialogModule,
     MatSidenavModule,
     MatRadioModule,
+    MatExpansionModule,
 
 
     ScrollingModule,

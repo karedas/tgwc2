@@ -13,6 +13,7 @@ import { OutputService } from './components/output/output.service';
 import { EffectsModule } from '@ngrx/effects';
 import { DataEffects } from './store/effects/data.effects';
 import { DispenserService } from './services/dispenser.service';
+import { StatusBarComponent } from './components/status-bar/status-bar.component';
 
 const clientRouting: Routes = [
   {
@@ -27,6 +28,7 @@ const clientRouting: Routes = [
   declarations: [
     ClientComponent,
     AudioComponent,
+    StatusBarComponent
   ],
   imports: [
     SharedModule,

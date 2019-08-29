@@ -46,12 +46,14 @@ export const reducer = createReducer(
         walk: payload.walk,
         money: payload.money,
         pietoso: payload.pietoso,
-        nosfodera: payload.nosfodera
+        position: payload.position,
+        nosfodera: payload.nosfodera,
+        hidden: payload.hidden
       }
     });
   }),
   on(DataAction.objectAndPersonAction, (state, { payload }) => {
-    return Object.assign({}, { objPers: payload });
+    return Object.assign({}, state, { objPers: payload });
   }),
   on(DataAction.skillsAction, (state, { payload }) => {
     return Object.assign({}, state, {

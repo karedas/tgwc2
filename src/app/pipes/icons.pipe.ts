@@ -27,7 +27,9 @@ export class IconsPipe implements PipeTransform {
     if (!icon) {
       icon = 416;
     }
-    return '<div class="tg-icon ico_' + icon + '" style="background-position:' + this.tileBgPos(icon) + '"></div>';
+    return `<div class="tg-icons">
+       <div class="tg-icon ico_'${icon}" style="background-position:${this.tileBgPos(icon)}"></div>
+    </div>`;
   }
 
   tileBgPos(tilenum): string {

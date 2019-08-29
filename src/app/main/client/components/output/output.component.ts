@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import * as fromSelectors from 'src/app/main/client/store/selectors';
@@ -20,13 +20,13 @@ import { OutputService } from './output.service';
   styleUrls: ['./output.component.scss'],
 })
 
-export class OutputComponent implements AfterViewInit, OnDestroy {
+export class OutputComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
 
   @ViewChild('scrollBar', {static: false}) scrollBar: NgScrollbar;
-  @ViewChild('mainOutputArea', {static: true}) mainOutputArea: ElementRef;
-  @ViewChild('splitArea', {static: true}) splitArea: SplitComponent;
+  @ViewChild('mainOutputArea', {static: false}) mainOutputArea: ElementRef;
+  @ViewChild('splitArea', {static: false}) splitArea: SplitComponent;
 
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
@@ -64,7 +64,7 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
       this._unsubscribeAll = new Subject();
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
     this.outputService.toggledAutoScroll
       .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
 
@@ -103,22 +103,18 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private updateContent(content: any) {
+  
+  private setContent(t: string, c: any): any {
+    const content =  Object.assign({}, { type: t, content: c });
     this.trimOutput();
     this.output.push(content);
     this.outputObservable.next(this.output);
     this.scrollPanelToBottom();
   }
 
-  private setContent(t: string, c: any): any {
-    return Object.assign({}, { type: t, content: c });
-  }
-
   private updateBaseText(base: string[]) {
-    if (base) {
-      const content = this.setContent('base', base[0]);
-      this.updateContent(content);
-    }
+    if (base) 
+      this.setContent('base', base[0]);
   }
 
   private updateRoomBase(room: Room) {
@@ -127,9 +123,7 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
         this.lastRoomDescription = room.desc['base'];
       }
 
-      const content = this.setContent('room', room);
-
-      this.updateContent(content);
+      this.setContent('room', room);
 
       if (this.game.client_update.room.version < room.ver) {
         this.game.client_update.room.version = room.ver;
@@ -140,10 +134,10 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
 
   private updateObjectOrPerson(elements: any) {
     if (elements) {
-      this.objPersDetail = elements;
-      const content = this.setContent('objpersdetail', this.objPersDetail);
 
-      this.updateContent(content);
+      this.typeDetail = 'objPersDetail';
+      this.objPersDetail = elements;
+      this.setContent(this.typeDetail, this.objPersDetail);
 
       // save last container if we need to update his view
       this.game.client_update.mrnContainer = elements.num;
@@ -154,9 +148,7 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
   private updateGenericPage(data: any) {
     if (!!data) {
       this.genericPage = data;
-      const content = this.setContent('genericpage', this.genericPage);
-
-      this.updateContent(content);
+      this.setContent('genericPage', this.genericPage);
     }
   }
 
@@ -168,8 +160,8 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.update();
-    }, 50);
+      this.scrollBar.scrollToBottom(0, 50)
+    }, 100);
   }
 
   @HostListener('window:resize', ['$event.target'])
@@ -191,7 +183,6 @@ export class OutputComponent implements AfterViewInit, OnDestroy {
 
   onDragEnd(event) {
     // Store the Split size in the main config
-    console.log('dragend');
     this.scrollBar.scrollToBottom(0,50);
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }

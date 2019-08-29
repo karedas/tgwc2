@@ -7,6 +7,42 @@
   opacity: .5;
 }
 
+.tg-icons, tg-icons {
+  margin: auto 2px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  box-sizing: content-box;
+  line-height: 16px;
+  position: relative;
+
+  .tg-icon {
+    background-image: url($imgPath + '/tiles.png');
+    background-repeat: no-repeat;
+    transform: scale(.5);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: -8px;
+    top: -8px;
+    margin: auto;
+  }
+  
+  &.squared {
+    @include sprite($base-square-sprite);
+    display: flex;
+  
+    .tg-icon {
+      top: -4px;
+      left: -4px;
+    }
+}
+
+
+}
+
 .tg-error {
   border: 1px solid #dc3545;
   color: $base-text-color;

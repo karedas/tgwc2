@@ -18,7 +18,7 @@ export class GameService {
     private _tgConfig: TGConfig;
     private _commandsList$: BehaviorSubject<any>;
     private _showStatus: BehaviorSubject<(boolean)>;
-    private _dataSubscription: Subscription;
+    // private _dataSubscription: Subscription;
     private _upSubscription: Subscription;
     public serverStat: Observable<any>;
 
@@ -141,7 +141,7 @@ export class GameService {
     }
 
     public resetUI() {
-        this._dataSubscription.unsubscribe();
+        // this._dataSubscription.unsubscribe();
         this._upSubscription.unsubscribe();
         this.clearUpdate();
     }
