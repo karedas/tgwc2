@@ -15,8 +15,8 @@
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
-              <ng-scrollbar class="scrollbar-output"  #scrollBar>
-                <div  class="tg-output--history" cdkscrollable>
+              <ng-scrollbar class="scrollbar-output"  #scrollBar cdkscrollable>
+                <div  class="tg-output--history" >
                   <div *ngIf="!output.length" class="no-output-notice">
                     Scrivi qualcosa o semplicemente aspetta...
                   </div>
@@ -29,6 +29,7 @@
 
                   </ng-container>
                 </div>
+                <div id="scrollerEnd" style="width: 100%; height:1px" #scrollerEnd></div>
               </ng-scrollbar>
             </div>
 
@@ -78,6 +79,7 @@
           </ng-container>
         </div>
       </div>
+      <div #scrollerEnd></div>
     </ng-scrollbar>
   </div>
 </ng-template>

@@ -25,6 +25,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   tgConfig: TGConfig;
 
   @ViewChild('scrollBar', {static: false}) scrollBar: NgScrollbar;
+  @ViewChild('scrollerEnd', {static: false}) scrollerEnd: ElementRef;
   @ViewChild('mainOutputArea', {static: false}) mainOutputArea: ElementRef;
   @ViewChild('splitArea', {static: false}) splitArea: SplitComponent;
 
@@ -160,7 +161,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.scrollToBottom(0, 50)
+      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 0, 50);
     }, 100);
   }
 
