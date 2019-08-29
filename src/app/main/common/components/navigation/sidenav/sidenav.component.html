@@ -67,8 +67,6 @@
   <!-- <mat-icon class="collapsable-arrow">keyboard_arrow_right</mat-icon> -->
 </ng-template>
 
-<mat-action-list dense class="tg-sidelogin" *ngIf="!userIsLoggedIn && !userIsInGame">
-  <mat-divider class="light"></mat-divider>
-  <a mat-list-item (click)="toggleSidenav()" [routerLink]="['auth/login']">Login</a>
-  <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/auth/signup']">Registrati</a>
+<mat-action-list dense class="tg-sidelogin" *ngIf="!userIsInGame">
+  <!-- <a mat-list-item (click)="toggleSidenav()" [routerLink]="['auth/login']">Crea</a> -->
 </mat-action-list>

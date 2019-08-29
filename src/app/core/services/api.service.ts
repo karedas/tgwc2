@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,7 +13,6 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    protected authService: AuthService,
   ) {
   }
 
@@ -78,7 +76,7 @@ export class ApiService {
     return environment.apiAddress + url;
   }
 
-  private buildHeader(additionalHeaders = []): HttpHeaders {
+  private buildHeader(): HttpHeaders {
 
     let headers = new HttpHeaders();
 
