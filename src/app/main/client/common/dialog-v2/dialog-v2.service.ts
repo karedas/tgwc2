@@ -160,6 +160,7 @@ export class DialogV2Service {
     config.height = '450px';
     config.restoreFocus = true;
     config.disableClose = false;
+    config.disableClose = true;
     config.hasBackdrop = true;
 
     const dialogRef = this.dialog.open(EditorComponent, config);

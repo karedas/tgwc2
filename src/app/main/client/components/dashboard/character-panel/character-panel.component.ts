@@ -10,7 +10,6 @@ import { GameService } from 'src/app/main/client/services/game.service';
 
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
-import { hero_position } from 'src/app/main/client/common/constants';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../../client-config';
 
@@ -25,7 +24,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
   hero$: Observable<any>;
-  hero_pos = hero_position;
   inCombat = false;
   // Hero Values
   heroImage = 'assets/images/interface/default_avatar.png';

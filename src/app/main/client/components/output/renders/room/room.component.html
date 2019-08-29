@@ -68,16 +68,21 @@
     </ng-container>
 
     <ng-container 
-      *ngIf="type ==='objPers' && html.desc">
+      *ngIf="type ==='objPersDetail' && html.desc">
       <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc.base"></div>
       <div class="tg-objperson--descdetail tg-green" [innerHtml]="(html.desc.details)  | capitalizeFirst | dataToHtml:true" *ngIf="html.desc.details"></div>
     </ng-container> 
 
   </div>
+
   <!-- ## Button Back to Previous  -->
-  <div class="tg-backdetail" *ngIf="html.where" (click)="onBackDetail(html.where.num)">
-    <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova&nbsp;<b>{{html.where.title}}</b></span>
-  </div>
+  <ng-container *ngIf="html.where">
+    <div class="tg-backdetail" (click)="onBackDetail(html.where.num)">
+      <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova&nbsp;<b>{{html.where.title}}</b></span>
+    </div>
+  </ng-container>
+  <!-- ## END Button Back to Previous  -->
+
 
   <div style="height: 100%; overflow:hidden;">
     <ng-scrollbar class="scrollbar-output" #scrollBar *ngIf="type === 'room' || type === 'objPers'">
@@ -87,7 +92,7 @@
           *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
       </ng-container>
 
-      <ng-container *ngIf="type === 'objPers'">
+      <ng-container *ngIf="type === 'objPersDetail'">
         <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont" *ngIf="html.eqcont || html.objcont; else nothing"></tg-objpers-container>
         <ng-template #nothing>
             <div class="tg-objperson--nothing">

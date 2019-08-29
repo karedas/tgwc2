@@ -25,7 +25,7 @@ export class CommandsListComponent implements OnInit {
     }
     
     ngOnInit() {
-      this.commandsList = this.data.cmds;
+      this.commandsList = this.removeTitleObject(JSON.parse(JSON.stringify(this.data.cmds)));
   }
 
   removeTitleObject(cmds)  {

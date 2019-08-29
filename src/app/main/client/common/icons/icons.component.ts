@@ -3,7 +3,6 @@ import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@
 @Component({
   selector: 'tg-icons',
   templateUrl: './icons.component.html',
-  styleUrls: ['./icons.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class IconsComponent implements OnChanges {
