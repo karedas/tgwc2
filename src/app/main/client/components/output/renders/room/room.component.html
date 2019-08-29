@@ -43,9 +43,6 @@
         <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span [innerHtml]="html.title | dataToHtml:true"></span>
       </ng-container>
 
-      <ng-template #extra_dirRoomtitle> 
-          Sposti lo sguardo {{(html.dir === 'basso' || html.dir === 'alto') ? 'in' : 'a' }}&nbsp;<span>{{html.dir}}</span>
-      </ng-template>
     </div>
 
     <!-- Image -->
@@ -107,3 +104,6 @@
 </ng-template>
 
 
+<ng-template #extra_dirRoomtitle> 
+    Sposti lo sguardo {{(html.dir === 'basso' || html.dir === 'alto') ? 'in' : 'a' }}&nbsp;<span>{{html.dir}}</span>
+</ng-template>
