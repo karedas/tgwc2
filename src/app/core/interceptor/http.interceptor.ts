@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
@@ -10,37 +9,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   injector: any;
 
   constructor(
-    private authService: AuthService,
     private router: Router) {
   }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    const token = this.authService.getToken();
-    if (!token) {
-      return next.handle(request);
-        // TODO: -`exception to avoid  connection refused`
-        // .pipe(
-        //   tap((event: HttpEvent<any>) => {
-        //     return next.handle(request);
-        //   }),
-        //   catchError((err: HttpErrorResponse) => {
-        //     if(err.status === 0) {
-        //       return throwError(err.message);
-        //     }
-        //   })
-        // );
-    }
-
-
-    request = request.clone({
-      setHeaders: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Accept': 'application/json',
-        'Authorization': `Token ${token}`,
-      },
-    });
 
     return next.handle(request)
       .pipe(

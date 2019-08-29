@@ -52,27 +52,6 @@ export const baseNavigationSidebar: NavigationItem[] = [
   },
 ];
 
-
-export const navigationSidebar: NavigationItem[] = [
-  {
-    id: 'dashboard',
-    title: 'Dashboard',
-    type: 'item',
-    icon: 'home',
-    url: '/manager/dashboard',
-    permission: 'read-dashboard'
-  },
-
-  {
-    id: 'Clan',
-    title: 'Clan',
-    type: 'group',
-    icon: 'ballot',
-    url: '/manager/clan',
-    permission: 'read-clan',
-  },
-];
-
 export const gameNavigationSideBar: NavigationItem[] = [
   {
     id: 'game',

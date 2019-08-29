@@ -1,11 +1,9 @@
 import { NgModule, Optional, SkipSelf, Injectable, ErrorHandler } from '@angular/core';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptor/http.interceptor';
 import { SharedModule } from '../shared/shared.module';
 import { ApiService } from './services/api.service';
-import { UserService } from './services/user.service';
 
 import * as Sentry from '@sentry/browser';
 import { environment } from 'src/environments/environment';
@@ -37,7 +35,6 @@ export class SentryErrorHandler implements ErrorHandler {
     SharedModule,
   ],
   declarations: [
-    // ManagerComponent
   ],
 })
 export class CoreModule {
@@ -53,9 +50,7 @@ export class CoreModule {
       return {
           ngModule: CoreModule,
           providers: [
-            UserService,
             ApiService,
-            AuthService,
             { provide: ErrorHandler, useClass: SentryErrorHandler },
             { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
           ]

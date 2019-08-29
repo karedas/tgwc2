@@ -27,10 +27,6 @@ import { SidenavComponent } from './common/components/navigation/sidenav/sidenav
 
 const routes: Routes = [
   {
-    path: 'manager',
-    loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule)
-  },
-  {
     path: 'webclient',
     loadChildren: () => import('./client/client.module').then( m => m.ClientModule),
     canLoad: [LoginClientGuard]
