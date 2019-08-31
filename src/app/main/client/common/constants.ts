@@ -55,16 +55,6 @@ export const pos_to_order = [
   25		// Tied
 ];
 
-export const hero_position = [
-  'morto',
-  'ferito mortalmente',
-  'bloccato',
-  'addormentato',
-  'sdraiato',
-  'seduto',
-  'in piedi'
-];
-
 export const font_size_options = [
   {
     name: 'Piccolissimo',
@@ -102,3 +92,40 @@ export const skillValue = {
   50: 'ottimo',
   100: 'eccellente'
 };
+
+// Do not change order list!
+export const hero_position = [
+  {msg: 'morto'},
+  {msg: 'ferito mortalmente'},
+  {msg: 'incosciente'},
+  {msg: 'addormentato', cmd: 'dormi'},
+  {msg: 'sdraiato', cmd: 'sdraia' },
+  {msg: 'seduto', cmd: 'siedi' },
+  {msg: 'in piedi', cmd: 'alza' },
+  {msg: 'sveglia', cmd: 'sveglia'}
+];
+
+
+export const hero_attitude = [
+  {msg: 'berserk', cmd: 'comb bers'},
+  {msg: 'aggressivo', cmd: 'comb agg'},
+  {msg: 'coraggioso', cmd: 'comb corag'},
+  {msg: 'normale', cmd: 'comb norm'},
+  {msg: 'cauto', cmd: 'comb caut'},
+  {msg: 'guardingo', cmd: 'comb guard'},
+  {msg: 'difensivo', cmd: 'comb dif'}
+]
+
+export const hero_defense = [
+  {msg: 'schivare', cmd: 'comb schiv'},
+  {msg: 'parare', cmd: 'comb para'},
+  {msg: 'deflettere', cmd: 'comb defle'}
+]
+
+export const hero_speed = [
+  {msg: 'passeggio', cmd:'velo pass'},
+  {msg: 'camminata', cmd:'velo cammin'},
+  {msg: 'marcia', cmd: 'velo marcia'},
+  {msg: 'corsa', cmd: 'velo corsa'},
+  {msg: 'scatto', cmd: 'velo scat'}
+]

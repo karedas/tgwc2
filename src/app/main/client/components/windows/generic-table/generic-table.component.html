@@ -16,10 +16,8 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off">
           </mat-form-field>
           
-          <ng-scrollbar class="scrollbar scrollbar-dialog"  #scrollBar [visibility]="'always'"
-            >
 
-            <table mat-table [dataSource]="dataSource" matSort>
+            <table mat-table [dataSource]="dataSource" matSort class="dark">
 
               <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
 
@@ -41,7 +39,7 @@
               <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 
             </table>
-          </ng-scrollbar>
+
           <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
 
         </div>

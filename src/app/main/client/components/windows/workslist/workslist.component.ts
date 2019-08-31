@@ -76,7 +76,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
 
     if (data) {
       data.forEach((d: any, i: number) => {
-        d.cmd = i;
+        d = Object.assign({id: i+1}, d);
         this.data.push(d);
       });
 
@@ -91,7 +91,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   onAction(index: number, event: Event) {
     event.preventDefault();
     if (index) {
-      this.game.processCommands(this.cmd + ' ' + (index + 1));
+      this.game.processCommands(this.cmd + ' ' + (index));
     }
   }
 

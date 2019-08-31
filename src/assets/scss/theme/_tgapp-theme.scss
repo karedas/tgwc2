@@ -14,6 +14,7 @@
   @import 'partials/material/mat-progressbar';
   @import 'partials/material/mat-dialog';
   @import 'partials/material/mat-stepper';
+  @import 'partials/material/mat-paginator';
   @import 'partials/common';
 
 
@@ -51,44 +52,6 @@
   .cdk-drag {
     // display: block;
     height: 100%;
-  }
-
-
-  /* Paginator */
-  .mat-paginator {
-    background: #0b0907;
-  }
-
-  .mat-paginator-page-size {
-    margin-right: auto;
-  }
-
-  .mat-paginator,
-  .mat-paginator-page-size .mat-select-trigger {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.54);
-  }
-
-  .mat-select-value {
-    color: rgba(255, 214, 0, 0.87);
-  }
-
-  .mat-select-row {
-    color: rgba(255, 255, 255, 0.54);
-  }
-
-  .mat-select-panel {
-    background: #0c0a08;
-    border: 1px solid #ffffff21;
-  }
-
-  .mat-option:hover:not(.mat-option-disabled),
-  .mat-option:focus:not(.mat-option-disabled) {
-    background-color: rgba(255, 255, 255, 0.04);
-  }
-
-  .mat-option-text {
-    color: #ece9e0;
   }
 
 

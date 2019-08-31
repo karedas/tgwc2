@@ -6,3 +6,10 @@
 .mat-menu-content {
 }
 
+.compact {
+  .mat-menu-item {
+    line-height: 24px;
+    height: 24px;
+  }
+}
+

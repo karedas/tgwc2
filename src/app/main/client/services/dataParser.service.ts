@@ -425,7 +425,7 @@ export class DataParser {
   }
 
   private filterableMessage(...args: any): string {
-    console.log('addFilterTag', args[0], args[1], args[2]);
+    // console.log('addFilterTag', args[0], args[1], args[2]);
     return '';
   }
 

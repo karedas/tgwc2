@@ -5,13 +5,24 @@
 :host {
   order: 2;
   margin: 0 2px;
-  background: #100f0d url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+  background: #080807  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
   padding-left: 2px;
+}
+
+.tg-status-bar--button {
+  line-height: normal;
+  text-transform: uppercase;
+  padding: 3px 12px;
+  font-size: 10px;
+
+  &.with-label {
+    padding: 3px 12px 3px 0;
+  }
 }
 
 // Status Bar Character
 .tg-status-bar {
-  background:  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
+  background: url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
   padding-right: 2px;
   color: $base-text-color;
   font-size: 1em;
@@ -23,12 +34,12 @@
   font-size: .6em;
   font-weight: bold;
   letter-spacing: 1px;
-  
+
   .tg-status-bar-wrap {
     padding: 0 10px 0 6px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     width: 100%;
-    box-shadow: inset 4px 4px 6px 2px black;
+    box-shadow: inset 0 0px 6px 2px black;
   }
 
   .badges-left {
@@ -36,14 +47,13 @@
       border-right: 1px solid rgba(255, 255, 255, 0.2);
     }
   }
+
   .badges-right {
     margin-left: auto;
-      .badge {
-      }
   }
 
   .badge {
-    padding: 3px 12px;
+    margin-right: 6px;
   }
 
   .badge:first-child {
@@ -51,25 +61,14 @@
   }
 
   .badge-label {
-    padding-right: 4px;
+    padding-right: 6px;
+    padding-left: 6px;
   }
 
   .badge-black {
     color: snow;
     background: #2f2f2f;
   }
-
-  .badge-red {
-    &:hover {
-    }
-  }
-
-  .badge-violet {
-    color: #553fc7;
-    &:hover {
-    }
-  }
-
 
   .double-badge {
     padding: 0 0 0 6px;
@@ -92,21 +91,24 @@
 
 
 .status-icon-box {
-  display: inline-block;  
+  display: inline-block;
   width: 16px;
   height: 16px;
   vertical-align: middle;
-  margin: 0 5px;
+  margin: 0 5px 0 0;
 }
 
-  
-.status-walk, .status-combat-mod, .status-combat-attegg, .status-position {
+
+.status-walk,
+.status-combat-mod,
+.status-combat-attegg,
+.status-position {
   i {
     display: block;
     margin: auto;
     white-space: nowrap;
     background-size: cover;
-    background-repeat:  no-repeat;
+    background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
     height: 100%;
@@ -218,6 +220,6 @@
 
 
 
-body.zen :host{
-  display: none!important;
+body.zen :host {
+  display: none !important;
 }

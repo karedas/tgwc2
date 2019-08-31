@@ -4,23 +4,41 @@
 
 //== combat Panel
 .tg-combatpanel {
-  // display: none;
-  min-width: 274px;
-  padding-left:6px;
+    // display: none;
+    min-width: 274px;
+    padding-left:3px;
+    background:  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+    
+    &.no-target {
+        .tg-enemyicon, .tg-enemy-m, .tg-enemy-h, .enemy-h-prc, .enemy-m-prc{
+            opacity: .5;
+        }
+    }
 
   .tg-combatpanel--wrap {
       text-align: center;
       height: 100%;
-      padding: 0 6px;
       display: flex;
       align-items: center;
       background-color:#0f0e0e;
+      position: relative;
+      &:after {
+          display: block;
+          position: absolute;
+          content: '';
+          top: 0; 
+          left: 0;
+          bottom: 0;
+          right: 0;
+          box-shadow: inset 0 0 20px 6px black;
+      }
   }
   
   .tg-combatpanel--box {
       position: relative;
       @include sprite($combatpanel-box-notarget-sprite);
       margin: 0 auto;
+      margin: 0 6px;
       background-repeat: no-repeat;
   }
 
@@ -97,7 +115,7 @@
   .enemy-h-prc {
       position: absolute;
       top: 20px;
-      right: 8px;
+      right: 14px;
       font-size: 9px;
       color: $tg-lt-red;
   }
@@ -105,7 +123,7 @@
   .enemy-m-prc {
       position: absolute;
       top: 34px;
-      right: 8px;
+      right: 14px;
       font-size: 9px;
       color: $tg-green;
   }

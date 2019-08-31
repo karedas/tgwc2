@@ -75,7 +75,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
             break;
         }
       });
-
     }
 
     // pupulate data
