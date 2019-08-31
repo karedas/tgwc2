@@ -8,7 +8,7 @@
 
 .info-description {
   background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
-  padding: 1em;
+  padding: 12px;
   color: #3a2e19;
 
   &:before {
@@ -57,7 +57,7 @@
 
 .info-base {
   position: relative;
-  padding: 2em 1.5em;
+  padding: 12px 24px;
   background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
 
   &:before {
@@ -76,7 +76,7 @@
 
 .info-stats {
   position: relative;
-  padding: 1.5em 1em;
+  padding: 24px 12px 0;
 
   &:before {
     content: '';

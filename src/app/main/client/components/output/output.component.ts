@@ -182,9 +182,13 @@ export class OutputComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDragStart(event) {
+  }
+
   onDragEnd(event) {
+    this.scrollBar.update();
+    this.scrollPanelToBottom();
     // Store the Split size in the main config
-    this.scrollBar.scrollToBottom(0,50);
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });

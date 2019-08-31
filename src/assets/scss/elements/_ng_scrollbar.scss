@@ -16,18 +16,16 @@
   }
 }
 
-
-
   ng-scrollbar.scrollbar {
-    --scrollbar-color: transparent;
-    --scrollbar-container-color: transparent;
-    --scrollbar-thumb-color: #332f25;
-    --scrollbar-thumb-hover-color: #4c4535;
     --scrollbar-border-radius: 0;
+    --scrollbar-padding: 4px;
+    --scrollbar-track-color: #1b150f;
+    --scrollbar-wrapper-color: transparent;
+    --scrollbar-thumb-color: #332f25;
     --scrollbar-size: 6px;
-    --scrollbar-padding: 2px;
-    --scroll-view-margin: 0;
-    --scroll-view-color: transparent;
+    --scrollbar-thumb-hover-color: #4c4535;
+    --scrollbar-viewport-margin: 0;
+    --scrollbar-hover-size: var(--scrollbar-size);
     min-height: 100%;
 
     // ng-scrollbar-y {
@@ -36,29 +34,32 @@
   }
 
   ng-scrollbar.scrollbar-light {
-    --scrollbar-color: transparent;
-    --scrollbar-container-color: #c3a87c;
-    --scrollbar-thumb-color: #332f25;
-    --scrollbar-thumb-hover-color: #4c4535;
     --scrollbar-border-radius: 0;
-    --scrollbar-size: 6px;
     --scrollbar-padding: 4px;
-    --scroll-view-margin: 0;
-    --scroll-view-color: transparent;
+    --scrollbar-track-color: transparent;
+    --scrollbar-wrapper-color: transparent;
+    --scrollbar-thumb-color: #332f25;
+    --scrollbar-size: 6px;
+    --scrollbar-thumb-hover-color: #4c4535;
+    --scrollbar-viewport-margin: 0;
+    --scrollbar-hover-size: var(--scrollbar-size);
+
     min-height: 100%;
   }
 
 ng-scrollbar.scrollbar-output {
-  --scrollbar-color: #1b1916;
-  --scrollbar-container-color: #1b1916;
-  --scrollbar-thumb-color: #695e50;
-  --scrollbar-thumb-hover-color: #796b58;
-  --scrollbar-border-radius: 10px;
-  --scrollbar-size: 6px;
+  --scrollbar-border-radius: 0;
   --scrollbar-padding: 2px;
-  --scroll-view-margin: 0;
-  --scroll-view-color: transparent;
+  --scrollbar-track-color: #1b150f;
+  --scrollbar-wrapper-color: transparent;
+  --scrollbar-thumb-color: #695e50;
+  --scrollbar-size: 6px;
+  --scrollbar-thumb-hover-color: #796b58;
+  --scrollbar-viewport-margin: 0;
+  --scrollbar-hover-size: var(--scrollbar-size);
   min-height: 100%;
+
+
 
   .ng-scroll-view-container {
     border-right: 1px solid #3a3530;

@@ -6,7 +6,7 @@
     <div class="tg-output-main" #mainOutputArea>
       <!-- Output Area -->
       <ng-container *ngIf="showExtraByViewport && tgConfig.output.extraArea.visible as extra; else noextra">
-        <as-split #splitArea class="tg-output--splitter" [direction]="'horizontal'" (dragEnd)="onDragEnd($event)">
+        <as-split #splitArea class="tg-output--splitter" [gutterSize]="5" [direction]="'horizontal'" (dragEnd)="onDragEnd($event)" (dargStart)="onDragStart($event)">
 
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
             <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
@@ -15,7 +15,7 @@
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
-              <ng-scrollbar class="scrollbar-output"  #scrollBar cdkscrollable>
+              <ng-scrollbar class="scrollbar-output"  #scrollBar cdkscrollable  [sensorDisabled]="true">
                 <div  class="tg-output--history" >
                   <div *ngIf="!output.length" class="no-output-notice">
                     Scrivi qualcosa o semplicemente aspetta...
@@ -29,7 +29,7 @@
 
                   </ng-container>
                 </div>
-                <div id="scrollerEnd" style="width: 100%; height:1px" #scrollerEnd></div>
+                <div id="scrollerEnd" #scrollerEnd></div>
               </ng-scrollbar>
             </div>
 

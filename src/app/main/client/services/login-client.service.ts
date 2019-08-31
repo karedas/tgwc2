@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
 import { SocketService } from 'src/app/core/services/socket.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 import { loginClientErrors } from '../../authentication/services/login-client-errors';
 import { GameService } from './game.service';

@@ -67,6 +67,7 @@ export class GameService {
         this._configService.config
             .subscribe((config: TGConfig) => {
                 this.setZenMode(config.zen);
+                this.setOutputSize(config.fontSize);
                 this._tgConfig = config;
             });
     }
@@ -248,6 +249,11 @@ export class GameService {
         const prefix = 'size-';
         let new_class: string;
         let old_class: string;
+        
+        if(size && !oldSize) {
+            this.render.addClass(document.body, prefix + font_size_options[size].class);
+            return;
+        }
 
         if (oldSize) {
             old_class = prefix + font_size_options[oldSize].class;
