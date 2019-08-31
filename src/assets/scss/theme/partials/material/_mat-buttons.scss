@@ -1,84 +1,107 @@
-
-.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
   &.thin {
     line-height: 28px;
   }
 }
 
-.mat-raised-button, .mat-flat-button {
+.mat-raised-button,
+.mat-flat-button {
   border-radius: 0;
 }
 
+.mat-menu-item:hover:not([disabled]),
+.mat-menu-item.cdk-program-focused:not([disabled]),
+.mat-menu-item.cdk-keyboard-focused:not([disabled]),
+.mat-menu-item-highlighted:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
 // Buttons
-  .mat-raised-button {
-    font-weight: 700;
-    line-height: 28px;
-  }
 
-  
-  .mat-button-wrapper {
-    height: 100%; 
-  }
-
-  .mat-stroked-button:not([disabled]) {
-    border-color: rgba(255, 255, 255, 0.16);
-  }
+.mat-raised-button {
+  font-weight: 700;
+  line-height: 28px;
+}
 
 
-  .mat-icon-button[disabled][disabled] {
-    color: rgba(249, 249, 249, 0.26);
-  }
+.mat-button-wrapper {
+  height: 100%;
+}
 
-  .mat-icon-button {
-    vertical-align: middle;  
-    &.small {
-  
+.mat-stroked-button:not([disabled]) {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+
+.mat-icon-button[disabled][disabled] {
+  color: rgba(249, 249, 249, 0.26);
+}
+
+.mat-icon-button {
+  vertical-align: middle;
+
+  &.small {
+
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+
+    .mat-icon {
+      font-size: 16px;
       width: 16px;
       height: 16px;
       line-height: 16px;
-  
-      .mat-icon {
-        font-size: 16px;
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
-      }
     }
   }
+}
 
 
-  .mat-raised-button, .mat-flat-button {
-    line-height: 30px;
-    font-weight: normal;
-    background-image: linear-gradient(-180deg, #ffffff, #909090 90%);
-    color: black;
-  }
+.mat-raised-button,
+.mat-flat-button {
+  line-height: 30px;
+  font-weight: normal;
+  background-image: linear-gradient(-180deg, #ffffff, #909090 90%);
+  color: black;
+}
 
-  .mat-raised-button.mat-accent, .mat-flat-button.mat-accent {
-    font-weight: normal;
-    background-image: linear-gradient(-180deg, #efa60b, #8e5e16 90%);
-    color: white;
-  }
+.mat-raised-button.mat-accent,
+.mat-flat-button.mat-accent {
+  font-weight: normal;
+  background-image: linear-gradient(-180deg, #efa60b, #8e5e16 90%);
+  color: white;
+}
 
-  .mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
-    font-weight: normal;
-    background-image: linear-gradient(-180deg, #d62a13, #710505 90%);
-    color: white;
-  }
-  
-  .mat-flat-button.mat-green, .mat-raised-button.mat-green, .mat-fab.mat-green, .mat-mini-fab.mat-green {
-    font-weight: normal;
-    background-image: linear-gradient(-180deg, #28a717, #193514 90%);
-    color: white;
-  }
+.mat-flat-button.mat-warn,
+.mat-raised-button.mat-warn,
+.mat-fab.mat-warn,
+.mat-mini-fab.mat-warn {
+  font-weight: normal;
+  background-image: linear-gradient(-180deg, #d62a13, #710505 90%);
+  color: white;
+}
+
+.mat-flat-button.mat-green,
+.mat-raised-button.mat-green,
+.mat-fab.mat-green,
+.mat-mini-fab.mat-green {
+  font-weight: normal;
+  background-image: linear-gradient(-180deg, #28a717, #193514 90%);
+  color: white;
+}
 
 
-.mat-raised-button[disabled]{
+.mat-raised-button[disabled] {
   opacity: .5;
   background-color: gray;
   background-image: linear-gradient(-180deg, #949494, #242424 90%);
 }
 
-.mat-flat-button, .mat-raised-button, .mat-fab.mat, .mat-mini-fab.mat {
+.mat-flat-button,
+.mat-raised-button,
+.mat-fab.mat,
+.mat-mini-fab.mat {
   transition: all .2s linear;
 }

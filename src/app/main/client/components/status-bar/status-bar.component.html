@@ -4,71 +4,97 @@
 
       <div class="badge" fxLayout fxLayoutAlign="center center">
 
-        <!-- Speed & Position -->
+        <!-- Speed -->
+
         <div class="badge-label">
-          Velocità:
+          Vel.
         </div>
-        <span class="status-icon-box status-walk" [ngClass]="{
+        <button mat-button [matMenuTriggerFor]="menuVelocita" class="tg-yellow with-label tg-status-bar--button">
+          <span class="status-icon-box status-walk" [ngClass]="{
             'walk-0': (hero.walk == 'passeggio'),
             'walk-1': (hero.walk == 'camminata'),
             'walk-2': (hero.walk == 'marcia'),
             'walk-3': (hero.walk == 'corsa'),
             'walk-4': (hero.walk == 'scatto')}">
-          <i></i>
-        </span>
-        <span class="tg-yellow">{{hero.walk}}</span>
+            <i></i>
+          </span>
+          {{hero.walk}}
+          </button>
+        <mat-menu #menuVelocita="matMenu" yPosition="above" class="compact">
+          <ng-container *ngFor="let speed of speedValue; let i = index;">
+            <button mat-menu-item *ngIf="speed.cmd" (click)="onClickButton(speed.cmd)"
+              [ngClass]="{'tg-yellow': (hero.walk === speed.msg)}">{{speed.msg}}</button>
+          </ng-container>
+        </mat-menu>
 
-      </div>
+        <!-- Position -->
 
-      <div class="badge" fxLayout fxLayoutAlign="center center">
         <div class="badge-label">
-          Stato:
+          Pos.
         </div>
-        <span class="status-icon-box status-position" [ngClass]="{
-            'pos-0': (hero.position === '0'),
-            'pos-2': (hero.position === '2'),
-            'pos-3': (hero.position === '3'),
-            'pos-4': (hero.position === '4'),
-            'pos-5': (hero.position === '5'),
-            'pos-6': (hero.position === '6')}">
-          <i></i>
-        </span>
-        <span class="tg-yellow">{{hero_pos[hero.position]}}</span>
+        <button mat-button [matMenuTriggerFor]="menuPosizione" class="tg-yellow with-label tg-status-bar--button">
+          <span class="status-icon-box status-position" [ngClass]="{
+        'pos-0': (hero.position === '0'),
+        'pos-2': (hero.position === '2'),
+        'pos-3': (hero.position === '3'),
+        'pos-4': (hero.position === '4'),
+        'pos-5': (hero.position === '5'),
+        'pos-6': (hero.position === '6')}">
+            <i></i>
+          </span>
+          {{positionValue[hero.position].msg}}</button>
+        <mat-menu #menuPosizione="matMenu" yPosition="above" class="compact">
+          <ng-container *ngFor="let position of positionValue; let i = index;">
+            <button mat-menu-item *ngIf="position.cmd" (click)="onClickButton(position.cmd)" class="capitalize"
+              [ngClass]="{'tg-yellow': (+hero.position === i)}">{{position.msg}}</button>
+          </ng-container>
+        </mat-menu>
+
       </div>
 
+
+
       <div class="badge" fxLayout fxLayoutAlign="center center">
-        <!-- Combat Strategies -->
+
+        <!-- Atteggiamento -->
+
         <div class="badge-label">
           Attegg.
         </div>
-        <span class="status-icon-box status-combat-attegg">
+        <button mat-button [matMenuTriggerFor]="menuAtteggiamento" class="tg-lt-red with-label tg-status-bar--button">
+          <span class="status-icon-box status-combat-attegg">
             <i></i>
           </span>
-        <span class="tg-yellow" [tooltip]="combatDifTooltip" show-delay="500" placement="top" content-type="template"
-          matRipple>
-          {{hero.combat.atteg}} </span>
-        <span class="status-icon-box status-combat-mod" [ngClass]="{
-          'mod-par-a': (hero?.combat.mod === 'deflettere'),
-          'mod-par-s': (hero?.combat.mod === 'parare'),
-          'mod-sch': (hero?.combat.mod === 'schivare')}">
-          <i></i>
-        </span>
-        <span class="tg-cyan">{{hero.combat.mod}}</span>
+          {{hero.combat.atteg}}
+        </button>
+        <mat-menu #menuAtteggiamento="matMenu" yPosition="above" class="compact">
+          <button mat-menu-item (click)="onClickButton(attitude.cmd)" class="capitalize"
+            *ngFor="let attitude of attitudeValue; let i = index;"
+            [ngClass]="{'tg-lt-red': (hero.combat.atteg === attitudeValue[i].msg)}">{{attitude.msg}}</button>
+        </mat-menu>
+
+
+        <!-- Difesa -->
+
+        <div class="badge-label">
+          Difesa
+        </div>
+        <button mat-button [matMenuTriggerFor]="menuDifesa" class="tg-cyan with-label tg-status-bar--button">
+          <span class="status-icon-box status-combat-mod" [ngClass]="{
+              'mod-par-a': (hero?.combat.mod === 'deflettere'),
+              'mod-par-s': (hero?.combat.mod === 'parare'),
+              'mod-sch': (hero?.combat.mod === 'schivare')}">
+            <i></i>
+          </span>
+          {{hero.combat.mod}}</button>
+        <mat-menu #menuDifesa="matMenu" yPosition="above" class="compact">
+          <button mat-menu-item (click)="onClickButton(defense.cmd)" class="capitalize" class="capitalize"
+            *ngFor="let defense of defenseValue; let i = index;"
+            [ngClass]="{'tg-cyan': (hero.combat.mod === defense.msg)}">{{defense.msg}}</button>
+        </mat-menu>
+
       </div>
+
     </div>
-
-    <div class="badges-right" fxLayout>
-    </div>
-
-    <ng-template #combatDifTooltip>
-      Atteggiamento: <b class="tg-red">{{hero.combat.atteg}}</b> <br> Difesa: <b
-        class='tg-yellow'>{{hero.combat.mod}}</b>
-    </ng-template>
-
-
-    <!-- Various -->
-    <ng-template #positionTooltip>
-      <!-- Sei <b class='tg-yellow'>{{hero_pos[hero.position] }}</b> -->
-    </ng-template>
   </div>
 </div>

@@ -55,6 +55,10 @@
               <ng-template #moneyTooltip>
                 I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>
               </ng-template> -->
+
+              <div class="right">
+                PT: <span class="tg-yellow">80</span> / <span>100</span>
+              </div>
             </div>
           </div>
 
@@ -89,17 +93,14 @@
         </div>
       </div>
       <!-- Combat Panel -->
-      <div class="tg-combatpanel" *ngIf="inCombat" fxFlex="0 0 auto" fxHide fxShow.gt-sm>
+      <div class="tg-combatpanel"[ngClass]="{'no-target': !inCombat}" fxFlex="0 0 auto" fxHide fxShow.gt-sm>
         <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon"
           [enemyName]="enemyName"></tg-combat-panel>
       </div>
 
-      <ng-container *ngIf="inCombat; else extraboardDisplayStandard">
-        <tg-extraboard fxLayout="column" fxFlex="0 0 auto" *ngIf="activeMediaQuery === 'xl'"></tg-extraboard>
-      </ng-container>
-      <ng-template #extraboardDisplayStandard>
+      <ng-container #extraboardDisplayStandard>
         <tg-extraboard fxLayout="column" fxFlex="0 0 auto" fxHide fxShow.gt-md></tg-extraboard>
-      </ng-template>
+      </ng-container>
 
     </div>
   </div>

@@ -10,18 +10,19 @@
   background-repeat: no-repeat;
   background-position: top left;
   margin-right: 2px;
-  background: #100f0d;
+  background: #0c0b0b;
 
   .tg-characterpanel-wrap {
     position: relative;
-    background:  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
+    background: url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
     z-index: 2;
     padding-right: 2px;
+    padding-top: 2px;
   }
-  
+
   /* TG Character Side */
   .tg-character {
-  
+
     .tg-characteravatar {
       cursor: pointer;
       width: 80px;
@@ -31,23 +32,35 @@
       position: relative;
       box-shadow: 0px 2px 11px 0 #000;
       margin: auto 0 0;
-  
-      .tg-avatar-wrap {
-        border: 1px solid #705611;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-  
+      
+    }
+    
+    .tg-avatar-wrap {
+      border: 1px solid #705611;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      
       img {
         max-height: 100%;
       }
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 0 0 6px 10px black;
+      }
     }
-  
+
     .tg-infochar {
       padding-right: 0;
     }
-  
+
     .tg-infocharname {
       height: 100%;
       line-height: 18px;
@@ -58,17 +71,17 @@
       color: $base-text-color;
       padding: 2px 0 0;
     }
-  
+
     .charName {
       text-shadow: 0 0 9px #f8fdda;
       text-transform: uppercase;
-      padding-left:  8px;
+      padding-left: 8px;
       color: #f1ebc2;
       padding-right: 0.5em;
     }
-  
+
     /* status icons */
-  
+
     .hero-infostatus {
       vertical-align: middle;
       display: inline-block;
@@ -77,18 +90,18 @@
       text-transform: uppercase;
       font-family: 'Roboto', sans-serif;
       font-size: 12px;
-  
-      > div {
+
+      >div {
         padding-right: 6px;
         margin: auto .5em auto;
         cursor: pointer;
       }
-  
+
       .infostatus-block {
         padding-left: 6px;
-        background:  url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
+        background: url($imgPath + '/borders/border-002-tiny-v.png') top left repeat-y;
       }
-  
+
       span {
         flex: 1;
         white-space: nowrap;
@@ -96,7 +109,15 @@
         text-overflow: ellipsis;
       }
 
-  
+      .right {
+        margin-left: auto;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        padding-left: 12px;
+        font-size: 0.9em;
+        padding-right: 12px;
+      }
+
+
       // CONV
       .status-conva {
         .status-icon-box i {
@@ -107,19 +128,20 @@
       }
 
     }
-  
-    
-      
+
+
+
     @include layout-bp(lt-sm) {
       .tg-infocharname {
         padding-left: 0;
       }
+
       .hero-infostatus {
         margin-left: 0;
         padding-left: 0;
       }
     }
-  
+
     // BARS
     .tg-meterbar {
       z-index: 2;
@@ -127,41 +149,40 @@
       flex-direction: column;
       margin-top: auto;
       padding: 0 0 0 4px;
-      
-  
+
+
       .barcont {
         box-sizing: border-box;
         border: 1px solid #5f5c59;
         padding: 2px 3px;
         position: relative;
-        background-color: #171614;
-        box-shadow: inset 0 0 5px 2px #423931;
         cursor: help;
       }
-  
+
       .barbig {
         height: 20px;
         margin-bottom: 4px;
       }
-  
+
       .barthin {
         height: 100%;
         width: 50%;
         display: inline-block;
         text-align: left;
         margin-right: 4px;
+
         @include layout-bp(xs) {
           margin-right: 0;
         }
 
       }
-  
+
       .tg-extrabars {
         width: 100%;
         height: 21px;
         margin-bottom: 2px;
       }
-  
+
       .tg-statusbar-text {
         overflow: hidden;
         position: absolute;
@@ -170,12 +191,12 @@
         font-size: 10px;
         color: $tg-white;
         text-transform: uppercase;
-  
+
         i {
           font-style: normal;
         }
       }
-  
+
       .barC {
         display: block;
         width: 0%;
@@ -183,33 +204,33 @@
         background-repeat: repeat-x;
         background-position: top left;
         transition: width .2s cubic-bezier(0.65, 0.05, 0.36, 1);
-  
+
         &.red {
           background-image: url($imgPath + '/bars/healt.jpg' );
         }
-  
+
         &.green {
           background-image: url($imgPath + '/bars/stamina.jpg' );
         }
-  
+
         &.orange {
           background-image: url($imgPath + '/bars/fame.jpg' );
         }
-  
+
         &.blue {
           background-image: url($imgPath + '/bars/sete.jpg' );
         }
       }
 
       @include layout-bp(xs) {
-       padding: 0;
-       margin-bottom: 0;
+        padding: 0;
+        margin-bottom: 0;
       }
     }
   }
 
 }
 
-body.zen :host{
-  display: none!important;
+body.zen :host {
+  display: none !important;
 }

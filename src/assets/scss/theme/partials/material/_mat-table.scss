@@ -1,12 +1,14 @@
  /* Table */
  .mat-table.dark {
    width: 100%;
+   background: transparent;
 
    .mat-header-cell,
    .mat-footer-cell {
      border-right: 1px solid black;
-     color: $base-text-color-dark;
-     background: #171311;
+     color: $base-text-color;
+     text-align: center;
+     background: #033744;
      border-bottom-color: rgba(255, 255, 255, 0.12);
      border-top: 1px solid rgba(255, 255, 255, 0.12);
      border-right: 0;
@@ -16,6 +18,13 @@
    td.mat-cell {
      color: $base-text-color;
      font-size: 100%;
+     border-left: 1px solid rgba(255, 255, 255, 0.1);
+     border-top: 1px solid rgba(255, 255, 255, 0.1);
+     text-align: center;
+   }
+
+   tr:first-child td{
+     border-top: none;
    }
 
    tr.mat-footer-row,
