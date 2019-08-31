@@ -9,18 +9,18 @@
   position: relative;
   background-repeat: no-repeat;
   background-position: top left;
-  margin-right: 3px;
-  background: url($imgPath + '/background/background-rock-dark.jpg') repeat top left;
+  margin-right: 2px;
+  background: #100f0d;
 
   .tg-characterpanel-wrap {
     position: relative;
+    background:  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
     z-index: 2;
+    padding-right: 2px;
   }
   
   /* TG Character Side */
   .tg-character {
-    padding: 2px 0 0 0;
-    background:  url($imgPath + '/borders/border-002-tiny.png') top left repeat-x;
   
     .tg-characteravatar {
       cursor: pointer;
@@ -57,12 +57,14 @@
       width: 100%;
       color: $base-text-color;
       box-shadow: inset 0px -7px 15px black;
-      padding: 2px 0;
+      padding: 2px 0 0;
     }
   
     .charName {
+      text-shadow: 0 0 9px #f8fdda;
       text-transform: uppercase;
       padding-left:  8px;
+      color: #f1ebc2;
       padding-right: 0.5em;
     }
   

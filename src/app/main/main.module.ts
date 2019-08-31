@@ -66,8 +66,8 @@ const routes: Routes = [
     CookieLawComponent
   ],
   providers: [
-    DialogV2Service,
     SocketService,
+    DialogV2Service,
     LoginClientService,
     GameService,
     DataParser,

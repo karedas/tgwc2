@@ -6,14 +6,14 @@
       (mouseenter)="buttonEnter(gameTrigger)" (mouseleave)="buttonLeave(gameTrigger, button)">Gioco</button>
 
     <mat-menu #gameMenu="matMenu" [overlapTrigger]="false" [hasBackdrop]="false" class="mat-elevation-z4">
-      <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(gameTrigger, button)">
-        <button mat-menu-item (click)="onItemClick('info')">Apri informazioni</button>
-        <button mat-menu-item (click)="onItemClick('equip')">Apri Equipaggiamento</button>
-        <button mat-menu-item (click)="onItemClick('inventario')">Apri Inventario</button>
-        <button mat-menu-item (click)="onItemClick('abilita')">Visualizza Abilità</button>
+      <mat-action-list dense (mouseenter)="menuenter()" (mouseleave)="menuLeave(gameTrigger, button)">
+        <button mat-list-item (click)="onItemClick('info')">Apri informazioni</button>
+        <button mat-list-item (click)="onItemClick('equip')">Apri Equipaggiamento</button>
+        <button mat-list-item (click)="onItemClick('inventario')">Apri Inventario</button>
+        <button mat-list-item (click)="onItemClick('abilita')">Visualizza Abilità</button>
         <mat-divider></mat-divider>
-        <button mat-menu-item (click)="onItemClick('cambia desc')">Cambia la descrizione personale</button>
-      </div>
+        <button mat-list-item (click)="onItemClick('cambia desc')">Cambia la descrizione personale</button>
+      </mat-action-list>
     </mat-menu>
   </div>
   
@@ -23,16 +23,17 @@
       (mouseenter)="buttonEnter(clientTrigger)" (mouseleave)="buttonLeave(clientTrigger, button)">Client</button>
 
     <mat-menu #clientMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4">
-      <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)">
-        <button mat-menu-item (click)="onItemClick('log')">Log di gioco</button>
-        <button mat-menu-item (click)="onItemClick('preferences')">
-          <mat-icon color="primary">settings</mat-icon>Preferenze
+      <mat-action-list dense (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)" >
+        <button mat-list-item (click)="onItemClick('log')">
+            <mat-icon color="primary" matListIcon>event_note</mat-icon>Log di gioco</button>
+        <button mat-list-item (click)="onItemClick('preferences')">
+          <mat-icon color="primary" matListIcon>settings</mat-icon>Preferenze
         </button>
         <mat-divider></mat-divider>
-        <button mat-menu-item (click)="onItemClick('disconnect')">
-          <mat-icon color="primary">exit_to_app</mat-icon>Disconnetti
+        <button mat-list-item (click)="onItemClick('disconnect')">
+          <mat-icon color="primary" matListIcon>exit_to_app</mat-icon>Disconnetti
         </button>
-      </div>
+      </mat-action-list>
     </mat-menu>
   </div>
 
@@ -41,10 +42,10 @@
     <button mat-button [matMenuTriggerFor]="guideMenu" #guideTrigger="matMenuTrigger"
       (mouseenter)="buttonEnter(guideTrigger)" (mouseleave)="buttonLeave(guideTrigger, button)">Guida</button>
     <mat-menu #guideMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4">
-      <div (mouseenter)="menuenter()" (mouseleave)="menuLeave(guideTrigger, button)">
-        <button mat-menu-item (click)="onItemClick('comandi')">Comandi di gioco</button>
-        <button mat-menu-item (click)="onItemClick('server')">Statistiche Server</button>
-      </div>
+      <mat-action-list dense (mouseenter)="menuenter()" (mouseleave)="menuLeave(guideTrigger, button)">
+        <button mat-list-item (click)="onItemClick('comandi')">Comandi di gioco</button>
+        <button mat-list-item (click)="onItemClick('server')">Statistiche Server</button>
+      </mat-action-list>
     </mat-menu>
   </div>
 

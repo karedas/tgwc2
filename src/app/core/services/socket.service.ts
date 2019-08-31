@@ -6,7 +6,9 @@ import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 import * as ClientActions from 'src/app/main/client/store/actions/client.action';
 import { Store } from '@ngrx/store';
 import { TGState } from 'src/app/main/client/store';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class SocketService {
 
   private socket: any;
