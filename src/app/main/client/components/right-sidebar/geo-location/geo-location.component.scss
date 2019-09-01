@@ -4,16 +4,16 @@
 
 tg-geo-location {
   background: url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
-	padding-top: 2px;
-	margin-top: auto;
-	flex:0 1 100%;
-	max-height: 300px;
+  padding-top: 2px;
+  margin-top: auto;
+  flex: 0 1 100%;
+  max-height: 276px;
 }
 
 .tg-geolocal {
   position: relative;
-	padding: 4px 4px 0px;
-	height: 100%;
+  padding: 4px 4px 0px;
+  height: 100%;
   background: #190f06 url($imgPath + "/background/bg-ironbrown.jpg") repeat;
 }
 
@@ -30,104 +30,108 @@ tg-geo-location {
   border: 2px solid #4b3d2b;
   border-radius: 2px;
   height: 210px;
-	background: black;
-	position: relative;
-	z-index: 3;
+  background: black;
+  position: relative;
+  z-index: 3;
 
   &:after,
   &:before {
     content: '';
-		display: block;
-		@include sprite($clip-img-region-sprite);
-		position: absolute;
-		z-index: 2;
+    display: block;
+    @include sprite($clip-img-region-sprite);
+    position: absolute;
+    z-index: 2;
     bottom: -20px;
-	}
-	
-	&:after {
+  }
+
+  &:after {
     left: 20px;
-	}
-	&:before {
-		right: 20px;
-	}
+  }
+
+  &:before {
+    right: 20px;
+  }
 }
 
 .tg-geolocal--image {
   background: url($imgPath + '/regions/base.jpg') no-repeat center center;
+  background-color: #130f0c;
   height: 100%;
-	width: 100%;
-	opacity: 0;
+  width: 100%;
+  opacity: 0;
 }
 
 .tg-geolocal--data {
-	position: relative;
-	z-index: 10;
-	margin: auto;
-	min-width: 70%;
-	padding: 22px 0;
+  position: relative;
+  z-index: 10;
+  margin: auto;
+  min-width: 70%;
+  padding: 12px 0;
 }
 
 .tg-geolocal--databox {
-	color: #9b8c7d;
-	text-align: center;
-	font-size: 13px;
-	width: 100%;
-	margin: auto;
+  color: #9b8c7d;
+  text-align: center;
+  font-size: 13px;
+  width: 100%;
+  margin: auto;
 
-	tg-icons {
-		width: 24px;
-		height: 24px;
-		line-height: 24px;
-		vertical-align: middle;
-		display: inline-block;
-	
-		.tg-icon {
-			transform: scale(.8);
-			left: -4px;
-			top: -4px;
-		}
-	}
+  tg-icons {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+
+    .tg-icon {
+      transform: scale(.8);
+      left: -4px;
+      top: -4px;
+    }
+  }
 
 }
 
-.tg-geolocal--region, .tg-geolocal--control {
-	margin-left: -16px;
-	font-size: 14px;
-	color: #aca49b;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 100%;
+.tg-geolocal--region,
+.tg-geolocal--control {
+  margin-left: -16px;
+  font-size: 11px;
+  color: #aca49b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-transform: uppercase;
 }
 
 .tg-geolocal--region:after {
-	content: '';
-	width: 40px;
-	height: 0;
-	border-top: 1px solid #593f29;
-	margin: .5em auto;
-	display: block;
+  content: '';
+  width: 40px;
+  height: 0;
+  border-top: 1px solid #4a4a4a;
+  margin: .5em auto;
+  display: block;
 }
 
-@media  screen and (max-height: 800px) {
-	
-	.tg-geolocal--data  {
-		padding: 0;
-	}
+@media screen and (max-height: 800px) {
 
-	.tg-geolocal--databox {
-		padding: 8px;
-	}
+  .tg-geolocal--data {
+    padding: 0;
+  }
 
-	.tg-geolocal--imagecnt {
-		display: none;
-	}
-	
-	.tg-geolocal--image{
-		opacity: 0;
-	}
+  .tg-geolocal--databox {
+    padding: 8px;
+  }
 
-	.tg-geolocal--region, .tg-geolocal--control {
-		font-size: 12px;
-	}
+  .tg-geolocal--imagecnt {
+    display: none;
+  }
+
+  .tg-geolocal--image {
+    opacity: 0;
+  }
+
+  .tg-geolocal--region,
+  .tg-geolocal--control {
+    font-size: 11px;
+  }
 }
