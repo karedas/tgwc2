@@ -25,13 +25,13 @@
     <mat-menu #clientMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4">
       <mat-action-list dense (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)" >
         <button mat-list-item (click)="onItemClick('log')">
-            <mat-icon color="primary" matListIcon>event_note</mat-icon>Log di gioco</button>
+          Log di gioco</button>
         <button mat-list-item (click)="onItemClick('preferences')">
-          <mat-icon color="primary" matListIcon>settings</mat-icon>Preferenze
+          Preferenze
         </button>
         <mat-divider></mat-divider>
-        <button mat-list-item (click)="onItemClick('disconnect')">
-          <mat-icon color="primary" matListIcon>exit_to_app</mat-icon>Disconnetti
+        <button mat-list-item (click)="onItemClick('disconnect')" class="tg-lt-red">
+          Disconnetti
         </button>
       </mat-action-list>
     </mat-menu>
