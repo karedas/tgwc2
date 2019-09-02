@@ -4,7 +4,6 @@
 
 :host {
   display: block;
-  width: 850px;
   max-width: 100%;
   box-sizing: border-box;
   color: $base-text-color;
@@ -16,14 +15,14 @@ h1.newchar-title {
   margin-bottom: 0;
 }
 
-.tg-newcharcter-content {
+.tg-newchar-content {
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
   z-index: 2;
   position: relative;
   color: #9b9285;
 }
 
-.tg-newcharcter-footer {
+.tg-newchar-footer {
   overflow: hidden;
   text-align: center;
   text-transform: uppercase;

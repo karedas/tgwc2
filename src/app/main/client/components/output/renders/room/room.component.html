@@ -78,7 +78,7 @@
       <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si trova&nbsp;<b>{{html.where.title}}</b></span>
     </div>
   </ng-container>
-  <ng-container *ngIf="!html.where && type ==='objPersDetail' ">
+  <ng-container *ngIf="!html.where && type ==='objPersDetail'">
     <div class="tg-backdetail" (click)="onBackDetail()">
       <span>Si trova qui&nbsp;<b>[guarda]</b></span>
     </div>
@@ -87,13 +87,12 @@
 
 
   <div style="height: 100%; overflow:hidden;">
-    <ng-scrollbar class="scrollbar-output" #scrollBar *ngIf="type === 'room' || type === 'objPers'">
+    <ng-scrollbar class="scrollbar-output" #scrollBar *ngIf="type === 'room' || type === 'objPersDetail'">
       
       <ng-container *ngIf="type === 'room'">
         <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"
           *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers"></tg-details-room>
       </ng-container>
-
       <ng-container *ngIf="type === 'objPersDetail'">
         <tg-objpers-container [objcont]="html?.objcont" [eqcont]="html?.eqcont" *ngIf="html.eqcont || html.objcont; else nothing"></tg-objpers-container>
         <ng-template #nothing>

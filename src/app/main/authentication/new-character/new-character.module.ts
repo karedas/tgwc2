@@ -20,12 +20,13 @@ import { MatInputModule } from '@angular/material';
 export const routes: Routes = [
 
   {
-    path: 'nuovo-personaggio',
+    path: '',
     component: NewCharacterComponent,
     children: [
       {
         path: 'benvenuto',
         component: WelcomeRegistrationComponent,
+        pathMatch: 'full'
       },
       {
         path: 'riepilogo',

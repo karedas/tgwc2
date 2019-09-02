@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { LoginClientService } from '../../client/services/login-client.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,8 @@ import { UsernameValidation, PasswordValidation } from '../../common/validators/
   selector: 'tg-login-character',
   templateUrl: './login-character.component.html',
   styleUrls: ['../auth.component.scss'],
-  animations: [tgAnimations]
+  animations: [tgAnimations],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginCharacterComponent implements OnInit {
 

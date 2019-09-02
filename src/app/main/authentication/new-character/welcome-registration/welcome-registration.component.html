@@ -1,7 +1,7 @@
 <div class="tg-welcomeregistration">
-  <div class="tg-welcomeregistration-content" [ngClass]="{'response': response}" fxLayout="row">
+  <div class="tg-welcomeregistration-content" [ngClass]="{'response': response === true}" fxLayout="row">
     <ng-container *ngIf="!emailProcessed; else response">
-      <div fxFlex="1 1 50%" class="tg-welcome-box">
+      <div fxFlex="1 1 50%" class="tg-welcome-box" fxLayout="column">
         <div class="tg-box-introtext">
           <h2>
             Voglio richiedere un codice
@@ -21,7 +21,7 @@
           <button mat-button class="tg-invia-btn" [disableRipple]="true">Invia</button>
         </form>
       </div>
-      <div fxFlex="1 1 50%" class="tg-welcome-box">
+      <div fxFlex="1 1 50%" class="tg-welcome-box" fxLayout="column">
         <div class="tg-box-introtext">
           <h2>
             Ho un codice personaggio

@@ -1,17 +1,11 @@
-<div class="tg-newchar">
-  <div class="tg-newchar--wrap"  [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
-    <h1 class="newchar-title">Nuovo personaggio!</h1>
-    <p>Prepara la tua nuova avventura nelle terre di Ikhari. Inizia da qui!</p>
-    <div class="b-ironlight-mini tg-box tg-shadow">
-      <div class="tg-newchar-content tg-shadow-inset">
-        <router-outlet></router-outlet>
-      </div>
-      <div class="tg-border-box">
-        <div class="tg-border tg-border-top"></div>
-        <div class="tg-border tg-border-left"></div>
-        <div class="tg-border tg-border-right"></div>
-        <div class="tg-border tg-border-bottom"></div>
-      </div>
+<div class="tg-newchar tg-auth-container" fxLayout="column wrap" fxLayoutAlign="center center">
+  <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
+    <div class="tg-base-logo big"></div>
+    <h1>Crea il tuo personaggio ed entra a far parte di <br>The Gate <span class="tg-brown">Mud</span></h1>
+  </div>
+  <div class="tg-newchar--wrap tg-shadow" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
+    <div class="tg-newchar-content tg-shadow-inset">
+      <router-outlet></router-outlet>
     </div>
     <div class="tg-newchar-footer">
     </div>

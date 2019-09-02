@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DataEffects } from './store/effects/data.effects';
 import { DispenserService } from './services/dispenser.service';
 import { StatusBarComponent } from './components/status-bar/status-bar.component';
+import { AutofocusInputbarDirective } from 'src/app/shared/directives/autofocus-inputbar.directive';
 
 const clientRouting: Routes = [
   {
@@ -28,7 +29,8 @@ const clientRouting: Routes = [
   declarations: [
     ClientComponent,
     AudioComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    AutofocusInputbarDirective
   ],
   imports: [
     SharedModule,

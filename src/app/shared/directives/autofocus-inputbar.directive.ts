@@ -18,6 +18,7 @@ export class AutofocusInputbarDirective {
       event.key !== 'ArrowLeft' &&
       event.key !== 'ArrowRight' &&
       event.key !== 'ArrowUp' &&
+      // ((!event.ctrlKey || !event.metaKey) && event.keyCode !== 67) &&
       !this.dialog.openDialogs.length
     ) {
       this.inputService.focus();
