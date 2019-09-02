@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'tg-welcome-registration',
   templateUrl: './welcome-registration.component.html',
-  styleUrls: ['./welcome-registration.component.scss']
+  styleUrls: ['./welcome-registration.component.scss'],
 })
 export class WelcomeRegistrationComponent implements OnDestroy {
 

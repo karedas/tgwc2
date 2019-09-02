@@ -1,6 +1,10 @@
 @import 'abstract/variables';
 /* Others */
 
+.tg-welcomeregistration {
+  width: 635px;
+}
+
 .tg-welcomeregistration-content {
   padding: 1em 0.5em;
   text-align: center;
@@ -11,18 +15,17 @@
   }
 }
 
-.tg-welcome-box,
 .tg-welcome-box {
   margin: 0 .5em;
   width: 300px;
   min-height: 300px;
-  border: 1px solid rgba(255, 255, 255, 0.20);
   padding: 1em 2em;
-  font-family: 'Modern Antiqua', cursive;
+  justify-content: space-between;
 }
 
 .tg-box-introtext {
   height: 80px;
+  
 }
 
 h2 {

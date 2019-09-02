@@ -15,7 +15,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AutofocusInputbarDirective } from './directives/autofocus-inputbar.directive';
 import { MatRadioModule } from '@angular/material/radio';
 import { IconsComponent } from '../main/client/common/icons/icons.component';
 import { HstatComponent } from '../main/client/common/hstat/hstat.component';
@@ -25,7 +24,6 @@ import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@
 @NgModule({
   declarations: [
     ClickStopPropagationDirective,
-    AutofocusInputbarDirective,
     IconsComponent,
     HstatComponent
   ],

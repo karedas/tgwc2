@@ -43,7 +43,7 @@ export class NavBarComponent implements OnDestroy {
   }
 
   userOnLogout() {
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['auth/login-character']);
   }
 
   loginCharacter(name) {

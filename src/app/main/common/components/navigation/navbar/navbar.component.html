@@ -16,22 +16,38 @@
     <ng-container *ngIf="!userIsInGame">
       <!-- Default Menu -->
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-        <a #button mat-button href="http://www.thegatemud.it" target="_blank" title="The Gate Mud HomePage">Home</a>
+        <a mat-button href="http://www.thegatemud.it" target="_blank" title="The Gate Mud HomePage">Home</a>
       </div>
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-        <a #button mat-button href="http://forum.thegatemud.it" target="_blank">Forum</a>
+        <a mat-button href="http://forum.thegatemud.it" target="_blank">Forum</a>
       </div>
       <div class="tg-mainnav-item" fxLayout fxHide fxShow.gt-sm fxLayoutAlign="center center">
-        <button #button mat-button [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</button>
+        <button mat-button [routerLink]="['/novita']" [routerLinkActive]="['active']">Novità</button>
       </div>
       <!-- End Default Menu -->
     </ng-container>
 
+    <!-- User Registration/Login Menu -->
+    <ng-container *ngIf="!userIsInGame; else userLoggedInMenu">
+      <div class="m-right user-side" fxHide fxShow.gt-xs fxFlex="0 1 0" fxLayoutAlign="flex-end"
+        fxLayoutGap.gt-xs="20px">
+        <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+          <button mat-button [routerLink]="['/auth/login-character']" [routerLinkActive]="['active']">Accedi</button>
+        </div>
+        <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
+          <button mat-button [routerLink]="['/auth/nuovo-personaggio/benvenuto']" [routerLinkActive]="['active']" class="tg-yellow">Nuovo personaggio</button>
+        </div>
+      </div>
+    </ng-container>
+
 
     <!-- Game Menu -->
-    <div *ngIf="userIsInGame" fxFlex="1 1 100%" fxHide fxShow.gt-sm class="mr0">
-      <tg-game-items></tg-game-items>
-    </div>
+    <ng-template #userLoggedInMenu>
+      <div fxFlex="1 1 100%" fxHide fxShow.gt-sm class="mr0">
+        <tg-game-items></tg-game-items>
+      </div>
+    </ng-template>
+    
     <!-- End Game Menu-->
   </mat-toolbar-row>
 </mat-toolbar>

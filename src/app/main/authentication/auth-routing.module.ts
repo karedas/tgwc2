@@ -12,8 +12,13 @@ const routes: Routes = [
         component: LoginCharacterComponent,
       },
       {
-        path: '**',
-        redirectTo: 'login-character'
+        path: 'nuovo-personaggio',
+        loadChildren: () => import('./new-character/new-character.module').then( m => m.NewCharacterModule),
+      },
+      {
+        path: '',
+        redirectTo: 'login-character',
+        pathMatch: 'full'
       }
     ]
   },

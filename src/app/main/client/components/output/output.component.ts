@@ -183,9 +183,11 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   onDragStart(event) {
+    this.scrollBar.sensorDisabled = true;
   }
 
   onDragEnd(event) {
+    this.scrollBar.sensorDisabled = false;
     this.scrollBar.update();
     this.scrollPanelToBottom();
     // Store the Split size in the main config

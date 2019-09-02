@@ -211,7 +211,7 @@ export class GameService {
     /* Ordfer Objects Persons or Objects list */
     public orderObjectsList(items: any): any {
         if (items && items.list) {
-            items.list.sort((a: any, b: any) => {
+            items['list'].slice().sort((a: any, b: any) => {
                 const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
                 const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
                 return <number>eq_pos_a - <number>eq_pos_b;

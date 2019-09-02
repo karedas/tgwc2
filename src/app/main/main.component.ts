@@ -53,7 +53,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private start() {
     this.isCookieAccepted = true;
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/auth/login-character'])
   }
 
   ngOnDestroy() {
