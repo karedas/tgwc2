@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { environment } from 'src/environments/environment';
 import { GameService } from 'src/app/main/client/services/game.service';

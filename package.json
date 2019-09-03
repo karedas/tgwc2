@@ -50,14 +50,15 @@
     "ngx-cookie-service": "^2.2.0",
     "ngx-filesaver": "^8.0.0",
     "ngx-logger": "^4.0.4",
-    "ngx-scrollbar": "^5.0.1",
+    "ngx-scrollbar": "^5.0.2",
     "ngx-socket-io": "^3.0.1",
     "normalize.css": "^8.0.1",
-    "rollbar": "^2.12.2",
+    "rollbar": "^2.12.3",
     "rxjs": "^6.5.2",
     "semver": "^6.3.0",
     "sentry": "^0.1.2",
     "socket.io": "^2.2.0",
+    "typescript": "^3.5.3",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
@@ -67,13 +68,13 @@
     "@angular/language-service": "^8.2.4",
     "@types/jasmine": "^3.4.0",
     "@types/jasminewd2": "~2.0.6",
-    "@types/node": "^12.7.2",
+    "@types/node": "^12.7.3",
     "@types/socket.io-client": "^1.4.32",
     "codelyzer": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^4.0.0",
-    "gulp-filelist": "^2.0.1",
+    "gulp-filelist": "^2.0.3",
     "gulp.spritesmith": "^6.10.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -85,7 +86,6 @@
     "protractor": "~5.4.2",
     "ts-node": "^8.3.0",
     "tslint": "~5.19.0",
-    "typescript": "^3.5.3",
     "webpack-bundle-analyzer": "^3.4.1"
   }
 }

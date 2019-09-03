@@ -68,10 +68,10 @@
                 <ng-container *ngFor="let item of equip">
                   <div fxFlex="1 0 auto" *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos"
                     class="eqinv-item-wrap">
-                    <div class="eqinv-item-position" fxFlex="0 0 30%" fxLayoutAlign="start center">
+                    <div class="eqinv-item-position" fxFlex="0 0 20%" fxLayoutAlign="start center">
                       <span class="tg-yellow">{{pos}}</span>
                     </div>
-                    <div class="eqinv-item" fxFlex="0 0 55%" fxLayoutAlign="start center">
+                    <div class="eqinv-item" fxFlex="0 0 65%" fxLayoutAlign="start center">
                       <tg-icons [icon]="item.icon"></tg-icons>
                       <tg-hstat [condprc]="item.condprc"></tg-hstat>
                       <span [innerHtml]="item.desc | dataToHtml"></span>

@@ -14,6 +14,7 @@ export interface TGConfig {
     },
     list_column_mode: boolean
   };
+  showEquipInventorySmart: boolean,
   characterPanel: boolean;
   characterPanelTopPosition: number;
   zen: boolean;
@@ -39,6 +40,7 @@ export const tgConfig: TGConfig = {
     },
     list_column_mode: true
   },
+  showEquipInventorySmart: true,
   characterPanel: true,
   characterPanelTopPosition: 1,
   zen: false,

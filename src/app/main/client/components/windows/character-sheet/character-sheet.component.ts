@@ -12,7 +12,6 @@ import { TGState } from '../../../store';
   selector: 'tg-character-sheet',
   templateUrl: './character-sheet.component.html',
   styleUrls: ['./character-sheet.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class CharacterSheetComponent  {
 
@@ -27,8 +26,6 @@ export class CharacterSheetComponent  {
   public heroTitle: string;
 
   public openedTab = '';
-
-  test: string = 'TEST CHE VA!!!!!!!!!!!!!!!!!';
 
   constructor(
     private store: Store<TGState>,

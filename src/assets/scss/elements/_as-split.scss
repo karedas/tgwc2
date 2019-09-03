@@ -12,4 +12,15 @@ as-split.tg-output--splitter {
 			background-image: none!important;
 		}
 	}
+	
+	&.as-vertical {
+		> .as-split-gutter {
+			border: 0;
+			background: url($imgPath + '/borders/border-002-tiny.png') top left repeat-x;
+			background-color: transparent;
+		}
+		.as-split-gutter-icon {
+			background-image: none!important;
+		}
+	}
 }

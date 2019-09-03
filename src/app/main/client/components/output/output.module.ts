@@ -11,6 +11,7 @@ import { AngularSplitModule } from 'angular-split';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
 import { StatusComponent } from './status/status.component';
+import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
 @NgModule({
   declarations: [
     ObjpersDetailComponent,
@@ -22,6 +23,7 @@ import { StatusComponent } from './status/status.component';
     ContextMenuComponent,
     GenericPageComponent,
     StatusComponent,
+    SmartEquipInventoryComponent,
   ],
   imports: [
     CommonModule,

@@ -109,7 +109,7 @@ export const gameNavigationSideBar: NavigationItem[] = [
       },
       {
         id: 'disconnectCharacter',
-        title: 'Disconnetti personaggio',
+        title: 'Disconnetti',
         type: 'item',
         do: 'disconnect'
       }
