@@ -71,11 +71,12 @@ export const reducer = createReducer(
       },
     });
   }),
-  on(DataAction.equipAction, (state, { payload }) => {
+  on(DataAction.equipAction, (state, { payload, dialog }) => {
     return Object.assign({}, state, {
       hero: {
         ...state.hero,
-        equipment: payload
+        equipment: payload,
+        dialog: dialog
       }
     });
   })

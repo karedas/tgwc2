@@ -20,8 +20,8 @@ export class GameService {
     private _showStatus: BehaviorSubject<(boolean)>;
     // private _dataSubscription: Subscription;
     private _upSubscription: Subscription;
-    public serverStat: Observable<any>;
 
+    public serverStat: Observable<any>;
     public mouseIsOnMap = false;
     public showExtraByViewport: boolean = undefined;
     public client_update = {
@@ -151,9 +151,9 @@ export class GameService {
     * @param val command value
     * @param isStored true or false if u need to watch history length)
     */
-    public processCommands(val: string, isStored: boolean = true) {
+    public processCommands(val: string, isStored: boolean = true, isDialog?: boolean) {
 
-        const cmds = this.dataParserService.parseInput(val);
+        const cmds = this.dataParserService.parseInput(val, isDialog);
 
         if (cmds) {
             /* check if cmd will be pushed in the history array */

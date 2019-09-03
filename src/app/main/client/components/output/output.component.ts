@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, ViewChild, OnInit, OnDestroy, ElementRef, HostListener, Input } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import * as fromSelectors from 'src/app/main/client/store/selectors';
 import { takeUntil } from 'rxjs/operators';
@@ -29,6 +29,10 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('mainOutputArea', {static: false}) mainOutputArea: ElementRef;
   @ViewChild('splitArea', {static: false}) splitArea: SplitComponent;
 
+  // Smart Equip/Inv
+    smartSizeArea: number | string;
+  //----------------
+
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
   pauseScroll = false;
@@ -40,7 +44,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   output = [];
   outputObservable = new BehaviorSubject([]);
-
+  
   lastRoomDescription = '';
   typeDetail: string;
   objPersDetail: any[];
@@ -62,6 +66,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       this._roomBase$ = this.store.select(getRoomBase);
       this._objOrPerson$ = this.store.select(getObjOrPerson);
       this._genericPage$ = this.store.select(getGenericPage);
+      
       this._unsubscribeAll = new Subject();
   }
 
@@ -97,6 +102,8 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._genericPage$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(data => this.updateGenericPage(data));
+
+
 
 
     setTimeout(() => {
@@ -161,7 +168,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 0, 20);
+      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 0, 50);
     }, 100);
   }
 
@@ -194,7 +201,11 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._configService.setConfig({
       output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
     });
+  }
 
+
+  toggleEquipInventorySplit(event) {
+    this.smartSizeArea = event ? '250' : '30' ;
   }
 
   ngOnDestroy() {

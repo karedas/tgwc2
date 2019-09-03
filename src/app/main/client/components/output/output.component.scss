@@ -37,39 +37,39 @@
   width: 100%;
   padding: 4px 16px 4px 4px;
   box-sizing: border-box;
- 
-  &::ng-deep.tg-line{
-  
+
+  &::ng-deep.tg-line {
+
     /* Double Columns style */
     .list-50 {
       width: 50%;
       display: inline-block;
       flex-direction: row;
-  
+
       >div {
         flex: 1 0 50%;
       }
     }
-  
+
     .list-50-50 {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-  
+
       >div {
         flex: 1 0 50%;
       }
     }
-  
+
     @include layout-bp(lt-md) {
       .list-50 {
         width: 100%;
-  
+
         >div {
           flex: 1 0 100% !important;
         }
       }
-  
+
       .list-50-50 {
         >div {
           flex: 1 0 100% !important;
@@ -114,7 +114,7 @@ tg-text {
   }
 }
 
-:host ::ng-deep {
+::ng-deep {
 
   p {
     margin-bottom: 0;
@@ -155,9 +155,10 @@ tg-text {
 
     }
 
-    b{
+    b {
       color: #5a945f;
     }
+
     &:hover b {
       color: $tg-yellow;
     }
@@ -233,14 +234,14 @@ tg-text {
     }
   }
 
-  
+
   .tg-objperson--title {
-    padding:1em 0;
+    padding: 1em 0;
     display: block;
   }
 
   .tg-objperson--nothing {
-    padding: 0 .5em ;
+    padding: 0 .5em;
     display: block;
     color: gray;
   }
@@ -268,7 +269,7 @@ tg-text {
     color: $tg-lt-green;
   }
 
-  
+
 
   .size-qty {
     margin-right: 20px !important;
@@ -280,7 +281,7 @@ tg-text {
     border: 1px solid #5f5c59;
     display: inline-block;
     position: relative;
-    
+
     span {
       font-size: 90%;
       min-width: 30px;
@@ -292,7 +293,7 @@ tg-text {
       min-width: 20px;
     }
 
-    
+
     &:after {
       content: '';
       display: block;
@@ -338,12 +339,13 @@ tg-text {
     }
 
     .tg-room--desc {
+      color: $base-text-color;
       padding: 0.5em 0.5em .2em 0;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
     }
 
-    
+
     .tg-objperson--descdetail {
       display: block;
       padding: 0 0 0.5em 0.2em;

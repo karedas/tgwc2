@@ -24,6 +24,7 @@ export class DataParser {
   // private shortcuts_map = {};
   private cmd_prefix = '';
   private _updateNeeded: Subject<any>;
+  isDialog: boolean = true;
 
   constructor(
     private store: Store<TGState>,
@@ -160,7 +161,7 @@ export class DataParser {
     if (this.dispatcher['objpers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['objpers'] })); }
     if (this.dispatcher['room']) { this.store.dispatch(DataActions.roomAction({ payload: this.dispatcher['room'] })); }
     if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['pers'] })); }
-    // TODO UI dont need order, needs a difference architecture code architecture :
+    // TODO UI dont need order, needs a difference architecture code :
     if (this.dispatcher['visibilLevel']) {
       this.store.dispatch(ClientActions.updateUIAction({ payload: { invLevel: this.dispatcher['visibilLevel'] } }));
     }
@@ -211,7 +212,9 @@ export class DataParser {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
   }
 
-  parseInput(input: any): any {
+  parseInput(input: any, isInDialog: boolean = true): any {
+
+    this.isDialog = isInDialog;
     /* Split input separated by ; */
     const inputs = input.split(/\s*;\s*/);
     let res = [];
@@ -366,13 +369,15 @@ export class DataParser {
 
   private inventory(inv: any): string {
     const inv_parse = JSON.parse(inv.slice(5, -1));
-    this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse }));
+    this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse, dialog: this.isDialog }));
+    this.isDialog = true;
     return '';
   }
 
   private equipment(eq: any): string {
     const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-    this.store.dispatch(DataActions.equipAction({ payload: eq_parse }));
+    this.store.dispatch(DataActions.equipAction({ payload: eq_parse, dialog: this.isDialog }));
+    this.isDialog = true;
     return '';
   }
 

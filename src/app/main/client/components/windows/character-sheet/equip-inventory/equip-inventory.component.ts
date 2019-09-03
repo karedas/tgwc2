@@ -12,7 +12,6 @@ import { InputService } from '../../../input/input.service';
   selector: 'tg-equip-inventory',
   templateUrl: './equip-inventory.component.html',
   styleUrls: ['./equip-inventory.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class EquipInventoryComponent implements OnInit, OnDestroy {
 

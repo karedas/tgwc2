@@ -12,6 +12,7 @@ import { InputService } from '../../components/input/input.service';
 export interface PayloadActionData {
   type: string;
   payload: any;
+  dialog?: any;
 }
 
 
@@ -47,7 +48,9 @@ export class DataEffects {
   equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
     switchMap((res) => {
+      if(res.dialog) {
         this.dialogV2Service.openCharacterSheet('equip');
+      }
         return [
           heroAction({payload: {equipment: res.payload}})
         ];
@@ -58,7 +61,9 @@ export class DataEffects {
   inventoryRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.INVENTORY),
     switchMap((res) => {
+      if(res.dialog) {
         this.dialogV2Service.openCharacterSheet('inventory');
+      }
         return [
           heroAction({payload: {inventory: res.payload}})
         ];
@@ -69,7 +74,6 @@ export class DataEffects {
   openBook$: Observable<any | Action> = this.actions$.pipe(
     ofType(DataEvenType.BOOK),
     tap((data: any) => {
-      console.log(data);
       this.dialogV2Service.openBook(data.book, 0);
     })
   );
