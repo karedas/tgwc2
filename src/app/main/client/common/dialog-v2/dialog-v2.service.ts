@@ -282,13 +282,12 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.height = '100%';
-      config.maxHeight = '600px';
+      config.height = '600px';
+      config.maxHeight = '100%';
       config.width = '550px';
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
-      config.panelClass = 'provaprova';
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
       config.data = bookData;
 
