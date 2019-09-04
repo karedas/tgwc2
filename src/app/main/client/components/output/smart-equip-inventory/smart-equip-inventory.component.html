@@ -44,7 +44,7 @@
                 <div class="eqinv-item" 
                   fxFlex="0 0 65%" 
                   fxLayoutAlign="flex-start center"
-                  tooltip="Guarda {{item.desc}}" placement="top" show-delay="500"
+                  tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="100"
                   (click)="interactElement(item)">
                   <tg-icons [icon]="item.icon"></tg-icons>
                   <tg-hstat [condprc]="item.condprc"></tg-hstat>
@@ -69,7 +69,11 @@
             <div fxLayout="column" fxFlex="0 1 100%">
               <div class="eqinv-wrapper-list" fxLayout="column">
                 <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of inventory">
-                  <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="flex-start center">
+                  <div class="eqinv-item" 
+                    fxFlex="0 0 60%" 
+                    fxLayoutAlign="flex-start center"
+                    tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="100"
+                    (click)="interactElement(item, true)">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
                     <span [innerHtml]="item.desc | dataToHtml"></span>
