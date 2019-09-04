@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSliderModule } from '@angular/material/slider';
 import { NewsComponent } from '../../components/windows/news/news.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginSmartComponent } from '../../components/windows/login-smart/login-smart.component';
@@ -15,7 +14,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ControlPanelModule } from '../../components/windows/control-panel/control-panel.module';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
-import { MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -36,8 +34,7 @@ import { MatListModule } from '@angular/material';
     DragDropModule,
     CharacterSheetModule,
     MatDialogModule,
-    MatSliderModule,
-    MatListModule,
+
     ControlPanelModule
   ],
 

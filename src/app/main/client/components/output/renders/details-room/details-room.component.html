@@ -15,10 +15,11 @@
 
   <div class="tg-persons" [ngClass]="{'list-50-50': personsClass50_50, 'list-50': personsClass50}">
     <ng-container *ngFor="let person of persons; let i=index">
-      <div class="tg-persons--line interact" [ngClass]="{'expandlist': person.sz, 'open': togglePanel[totalObjs.length + i]}" 
+      <div class="tg-persons--line interact"
+        [ngClass]="{'expandlist': person.sz, 'open': togglePanel[totalObjs.length + i]}" 
         (mousedown)="onExpand($event, person, totalObjs.length + i, person.sz)">
 
-        <tg-icons [icon]="person.icon" (mousedown)="onInteract($event, person)" 
+        <tg-icons [icon]="person.icon" (mousedown)="onInteract(person)" 
           tooltip="Guarda"
           placement="left"
           show-delay="500"></tg-icons>
@@ -34,7 +35,7 @@
       </div>
 
       <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[totalObjs.length + i]" fxLayout="column">
-        <div class="tg-persons--line" *ngFor="let sz of person.mrn; let indexSz=index" (mousedown)="onInteract($event, person, indexSz)"
+        <div class="tg-persons--line" *ngFor="let sz of person.mrn; let indexSz=index" (mousedown)="onInteract(person, indexSz)"
           tooltip="Guarda" 
           placement="left"
           show-delay="500">
@@ -64,7 +65,7 @@
         [ngClass]="{'expandlist': object.sz, 'open': togglePanel[i]}" 
         (mousedown)="onExpand($event, object, i, object.sz)">
 
-        <tg-icons [icon]="object.icon" (mousedown)="onInteract($event, object)" 
+        <tg-icons [icon]="object.icon" (mousedown)="onInteract(object)" 
           tooltip="Guarda" 
           placement="left"
           show-delay="500"></tg-icons>
@@ -86,7 +87,7 @@
           <tg-icons 
             tooltip="Guarda"
             [icon]="object.icon" 
-            (mousedown)="onInteract($event, object, indexSz)"></tg-icons>
+            (mousedown)="onInteract(object, indexSz)"></tg-icons>
           <tg-hstat [condprc]="object.condprc"></tg-hstat>
 
           <div class="tg-object--itemdesc" [innerHtml]="object.desc | dataToHtml" [attr.mrn]="object.mrn[indexSz]"></div>

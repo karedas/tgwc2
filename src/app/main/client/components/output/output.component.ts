@@ -203,7 +203,6 @@ export class OutputComponent implements OnInit, OnDestroy {
     });
   }
 
-
   toggleEquipInventorySplit(event) {
     this.smartSizeArea = event ? '250' : '30' ;
   }

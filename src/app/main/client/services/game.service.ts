@@ -63,7 +63,15 @@ export class GameService {
         return this._tgConfig;
     }
 
-    init() {
+    get extraIsEnabled(): boolean {
+        if (this._tgConfig.output.extraArea.visible && this.showExtraByViewport) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private init() {
         this._configService.config
             .subscribe((config: TGConfig) => {
                 this.setZenMode(config.zen);
@@ -72,7 +80,7 @@ export class GameService {
             });
     }
 
-    updatePanels(what: any) {
+    private updatePanels(what: any) {
         const now = Date.now();
 
         if (what[0] > this.client_update.inventory.version) {
@@ -98,7 +106,7 @@ export class GameService {
                 this.client_update.now = now;
             }
             // Update Extra Detail
-            if (this.client_update.room.needed && this.getExtraOutputVisibility() && !this.client_update.inContainer) {
+            if (this.client_update.room.needed && this.extraIsEnabled && !this.client_update.inContainer) {
                 this.sendToServer('@agg');
                 this.client_update.room.needed = false;
                 this.client_update.now = now;
@@ -106,15 +114,7 @@ export class GameService {
         }
     }
 
-    getExtraOutputVisibility(): boolean {
-        if (this._tgConfig.output.extraArea.visible && this.showExtraByViewport) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    clearUpdate() {
+    private clearUpdate() {
         this.client_update.inventory.version = -1;
         this.client_update.inventory.needed = false;
         this.client_update.equipment.version = -1;
@@ -123,10 +123,12 @@ export class GameService {
         this.client_update.room.needed = false;
     }
 
+
+    /** PUBLIC  */
+
     public start(initialData: any): void {
         // Perform Reset before start any Environments Stuff.
         this.dataParserService.parse(initialData, this._tgConfig.log);
-
         this.socketService.on(socketEvent.DATA,
             (data: any) => {
                 this.dataParserService.parse(data, this._tgConfig.log);
@@ -180,7 +182,7 @@ export class GameService {
       ---------------------------------------------------------------------------   */
 
     /* Commands List request */
-    // Todo needs Change for more performance and optimization
+    // TODO: needs Change for more performance and optimization
     public setCommands(cmds: any) {
         this._commandsList$.next(cmds);
     }
@@ -221,7 +223,6 @@ export class GameService {
 
         /* Order for personal Equipment  */
         if (items && typeof items.ver === 'number') {
-
             const cont = {
                 list: []
             };
@@ -249,8 +250,8 @@ export class GameService {
         const prefix = 'size-';
         let new_class: string;
         let old_class: string;
-        
-        if(size && !oldSize) {
+
+        if (size && !oldSize) {
             this.render.addClass(document.body, prefix + font_size_options[size].class);
             return;
         }
@@ -274,4 +275,28 @@ export class GameService {
 
         this._configService.setConfig({ fontSize: size });
     }
+
+
+    // Send request to server by element click
+    public interact(item: any, index?: number) {
+        /* If is not a List */
+        if (!item.sz) {
+            if (item.cntnum) {
+                this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
+            } else {
+                this.processCommands(`guarda &${item.mrn[0]}`);
+            }
+        }
+
+
+        /* Is a List */
+        if (item.sz) {
+            if (!item.cntnum && index >= 0) {
+                this.processCommands(`guarda &${item.mrn[index]}`);
+            } else if (item.cntnum && index >= 0) {
+                this.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`);
+            }
+        }
+    }
+
 }

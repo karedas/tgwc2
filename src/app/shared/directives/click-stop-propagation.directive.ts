@@ -1,7 +1,7 @@
 import {Directive, HostListener} from '@angular/core';
 
 @Directive({
-    selector: '[tgClickStopPropagation]'
+    selector: '[clickStopPropagation]'
 })
 export class ClickStopPropagationDirective {
     @HostListener('click', ['$event'])

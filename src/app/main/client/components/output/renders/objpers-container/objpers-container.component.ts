@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
 
 import { equip_positions_by_name } from 'src/app/main/client/common/constants';
-import { GameService } from 'src/app/main/client/services/game.service';
 import { OutputService } from '../../output.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-objpers-container',
@@ -23,7 +23,7 @@ export class ObjPersContainerComponent implements OnInit  {
 
   constructor(
     public outputService: OutputService,
-    private game: GameService
+    private gameService: GameService
     ) {
      const keysAndProperty = Object.keys( equip_positions_by_name );
      this.newListEquip = keysAndProperty.map((val, k) => {
@@ -34,7 +34,7 @@ export class ObjPersContainerComponent implements OnInit  {
   ngOnInit(): void {
 
     // this.eqcont.list =
-    this.eqcont = this.game.orderObjectsList(this.eqcont);
+    this.eqcont = this.gameService.orderObjectsList(this.eqcont);
 
     if (this.objcont) {
       this.populateToggleExpandable();
@@ -50,8 +50,8 @@ export class ObjPersContainerComponent implements OnInit  {
     }
   }
 
-  onInteract(event: Event, item: any, index: number, list?: boolean) {
-    this.outputService.interact(event, item, index);
+  onInteract(item: any, index: number, list?: boolean) {
+    this.gameService.interact(item, index);
   }
 
   onExpand(event: Event, item: any, index: number) {

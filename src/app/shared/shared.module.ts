@@ -18,14 +18,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
 import { IconsComponent } from '../main/client/common/icons/icons.component';
 import { HstatComponent } from '../main/client/common/hstat/hstat.component';
-import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatInputModule, MatExpansionModule } from '@angular/material';
-import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@angular/cdk-experimental/scrolling';
+import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatInputModule, MatExpansionModule, MatListModule } from '@angular/material';
+import { ScrollingModule } from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
   declarations: [
     ClickStopPropagationDirective,
-    IconsComponent,
-    HstatComponent
+    HstatComponent,
+    IconsComponent
   ],
   imports: [
     FlexLayoutModule.withConfig({
@@ -45,6 +45,7 @@ import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@
     TooltipModule,
     ClickStopPropagationDirective,
 
+    MatListModule,
     MatPaginatorModule,
     MatTableModule,
     MatTooltipModule,
@@ -63,7 +64,6 @@ import {ScrollingModule as ExperimentalScrollingModule, ScrollingModule} from '@
 
 
     ScrollingModule,
-    ExperimentalScrollingModule,
   ],
 })
 export class SharedModule {}
