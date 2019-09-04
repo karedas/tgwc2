@@ -4,15 +4,10 @@ import { Action, on, createReducer } from '@ngrx/store';
 
 export const reducer = createReducer(
   initialState,
-  on(inGameAction, state => ({
-      ...state,
-      inGame: true
-    })
-  ),
-  on(updateUIAction, (state, { payload }) => ({
-    ...state,
-    updateUI: payload
-  })),
+  on(inGameAction, state => ({ ...state, inGame: true })),
+  on(updateUIAction, (state, { payload }) => {
+    return Object.assign({}, state, payload );
+  }),
   on(audioAction, (state, { payload })  => ({ ...state, audio: payload}))
 );
 
