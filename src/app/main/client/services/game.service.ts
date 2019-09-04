@@ -278,12 +278,14 @@ export class GameService {
 
 
     // Send request to server by element click
-    public interact(item: any, index?: number) {
+    public interact(item: any, index?: number, mine?: boolean) {
         /* If is not a List */
         if (!item.sz) {
-            if (item.cntnum) {
+            if (item.cntnum && !mine) {
+                console.log(item.cntnum);
                 this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
             } else {
+                console.log(item);
                 this.processCommands(`guarda &${item.mrn[0]}`);
             }
         }

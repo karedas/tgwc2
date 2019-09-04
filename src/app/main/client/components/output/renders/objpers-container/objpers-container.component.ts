@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
 
 import { equip_positions_by_name } from 'src/app/main/client/common/constants';
@@ -9,7 +9,7 @@ import { GameService } from 'src/app/main/client/services/game.service';
   selector: 'tg-objpers-container',
   templateUrl: './objpers-container.component.html',
   styleUrls: ['./objpers-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ObjPersContainerComponent implements OnInit  {
 

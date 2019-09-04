@@ -63,7 +63,7 @@
     <ng-template #objectList let-objects>
       <ng-container *ngFor="let obj of objcont.list; let i=index">
         <div class="tg-objperson--line interact" [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
-          (mousedown)="onExpand($event, obj, i)" fxFlex="0 0 50%">
+          (mousedown)="onExpand($event, obj, i)" fxFlex="0 0 100%">
 
           <tg-icons [icon]="obj.icon" [attr.cntnum]="obj.cntnum" (mousedown)="onInteract(obj)" tooltip="Guarda"
             placement="left" show-delay="500">
@@ -78,14 +78,14 @@
           <div class="tg-objpers--itemdesc" [innerHtml]="obj.desc | dataToHtml | capitalizeFirst"></div>
         </div>
 
-        <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="row">
+        <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="column">
           <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
             <tg-icons [icon]="obj.icon" (mousedown)="onInteract(obj, indexSz)" tooltip="Guarda" placement="left"
               show-delay="500"></tg-icons>
 
             <tg-hstat [condprc]="sz.condprc"></tg-hstat>
 
-            <div class="tg-persons--itemdesc" [innerHtml]="(indexSz + 1)"></div>
+            <div class="tg-persons--itemdesc" [innerHtml]="obj.desc | dataToHtml"></div>
           </div>
         </div>
       </ng-container>
