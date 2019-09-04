@@ -1,5 +1,5 @@
 
-<div class="tg-shortcuts-area" fxFlexFill>
+<div class="tg-shortcuts-area" fxFlexFill fxFlex="0 0 100%">
 
   <h3 class="tg-control-panel--subtitle" style="margin-top:0;">Gestione Scorciatoie</h3>
   <ng-container *ngIf="!shortcuts.length">
@@ -12,8 +12,7 @@
     </p>
   </ng-container>
 
-  <ng-scrollbar class="scrollbar"  #scrollBar [visibility]="'always'"
-  >
+  <!-- <ng-scrollbar class="scrollbar"  #scrollBar [visibility]="'always'"> -->
   <div class="tg-shortcuts-all">
     <ng-container *ngIf="shortcuts">
       <div *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)">
@@ -58,7 +57,7 @@
       
         </ng-container>
       </div>
-    </ng-scrollbar>
+    <!-- </ng-scrollbar> -->
 
   <mat-divider></mat-divider>
   <button mat-raised-button color="accent" (click)="openNewShortcut()">Aggiungi</button>

@@ -82,7 +82,6 @@ export class GameService {
 
     private updatePanels(what: any) {
         const now = Date.now();
-
         if (what[0] > this.client_update.inventory.version) {
             this.client_update.inventory.needed = true;
         }
@@ -92,26 +91,38 @@ export class GameService {
         if (what[2] > this.client_update.room.version) {
             this.client_update.room.needed = true;
         }
-
         if (now > this.client_update.now) {
             // Update Inventory Panel
-            if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
-                this.sendToServer('@inv');
-                this.client_update.inventory.needed = false;
-                this.client_update.now = now;
-            }
+            this.upadteInventory(now);
             // Update Equipment panel
-            if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
-                this.sendToServer('@equip');
-                this.client_update.now = now;
-            }
+            this.upadteEquip(now);
             // Update Extra Detail
-            if (this.client_update.room.needed && this.extraIsEnabled && !this.client_update.inContainer) {
-                this.sendToServer('@agg');
-                this.client_update.room.needed = false;
-                this.client_update.now = now;
-            }
+            this.updateInfo(now);
         }
+    }
+
+    private upadteInventory(now) {
+        if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
+            this.sendToServer('@inv');
+            this.client_update.inventory.needed = false;
+            this.client_update.now = now;
+        }
+    }
+
+    private upadteEquip(now) {
+        if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
+            this.sendToServer('@equip');
+            this.client_update.now = now;
+        }
+    }
+
+    private updateInfo(now) {
+        if (this.client_update.room.needed && this.extraIsEnabled && !this.client_update.inContainer) {
+            this.sendToServer('@agg');
+            this.client_update.room.needed = false;
+            this.client_update.now = now;
+        }
+
     }
 
     private clearUpdate() {
@@ -282,10 +293,8 @@ export class GameService {
         /* If is not a List */
         if (!item.sz) {
             if (item.cntnum && !mine) {
-                console.log(item.cntnum);
                 this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
             } else {
-                console.log(item);
                 this.processCommands(`guarda &${item.mrn[0]}`);
             }
         }

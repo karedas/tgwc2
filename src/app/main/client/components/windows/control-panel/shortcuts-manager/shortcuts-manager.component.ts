@@ -45,7 +45,7 @@ export class ShortcutsManagerComponent implements OnInit {
 
     this._configService.getConfig()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts; });
+      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts;});
   }
 
   private resetForm() {

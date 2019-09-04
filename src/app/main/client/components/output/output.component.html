@@ -41,7 +41,7 @@
                   <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extra"
                     [lastDescription]="lastRoomDescription" [type]="typeDetail"></tg-room>
                 </as-split-area>
-                <as-split-area [size]="smartSizeArea">
+                <as-split-area [size]="smartSizeArea" [lockSize]="smartSizeArea ==='30'">
                   <tg-smart-equip-inventory (isCollapsed)="toggleEquipInventorySplit($event)"></tg-smart-equip-inventory>
                 </as-split-area>
               </as-split>

@@ -115,7 +115,6 @@ export class DialogV2Service {
     this.dialog.closeAll();
 
     const dialogID = 'smartlogin';
-    console.log('smart');
 
     if (!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
