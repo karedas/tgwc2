@@ -54,7 +54,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(equipment => {
         if (equipment !== undefined) {
-          console.log(equipment);
           this.equip = this.gameService.orderObjectsList(equipment);
         }
       });
@@ -63,7 +62,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(inventory => {
         if(inventory !== undefined) {
-          console.log(inventory);
           this.inventory = inventory.list;
         }
       });
@@ -86,7 +84,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   }
 
   interactElement(item, mine: boolean) {
-    console.log(item);
     this.gameService.interact(item, null, mine);
   }
 
