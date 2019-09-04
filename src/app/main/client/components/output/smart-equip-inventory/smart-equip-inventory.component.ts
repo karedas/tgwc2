@@ -17,6 +17,7 @@ import { delay } from 'rxjs/operators';
 })
 export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   @Output() isCollapsed = new EventEmitter();
+
   equip: any[] = [];
   inventory: any[] = [];
   tab: number = 1;
@@ -27,11 +28,9 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   private _inventory$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
-
-
   constructor(
     private store: Store<DataState>,
-    private game: GameService,
+    private gameService: GameService,
     private _configService: ConfigService
   ) {
     this.equipPositionValue = Object.entries(equip_positions_by_name);
@@ -43,8 +42,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this._configService.config
-      .pipe(
-        takeUntil(this._unsubscribeAll))
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
         setTimeout(() => {
           this.show = config.showEquipInventorySmart;
@@ -52,10 +50,12 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
         });
       });
     
-    this._equipment$.pipe(takeUntil(this._unsubscribeAll))
+    this._equipment$
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(equipment => {
         if (equipment !== undefined) {
-          this.equip = this.game.orderObjectsList(equipment);
+          console.log(equipment);
+          this.equip = this.gameService.orderObjectsList(equipment);
         }
       });
 
@@ -63,21 +63,17 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(inventory => {
         if(inventory !== undefined) {
+          console.log(inventory);
           this.inventory = inventory.list;
         }
       });
 
-    this.game.processCommands('equip', false, false);
-  }
-
-  ngOnDestroy() {
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
+    this.gameService.processCommands('equip', false, false);
   }
 
   onTabClick(cmd: string, tab: number) {
     this.tab = tab;
-    this.game.processCommands(cmd, false, false);
+    this.gameService.processCommands(cmd, false, false);
   }
 
   onCollapse() {
@@ -87,5 +83,15 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     this._configService.setConfig({
       showEquipInventorySmart: this.show
     });
+  }
+
+  interactElement(item) {
+    console.log(item);
+    this.gameService.interact(item);
+  }
+
+  ngOnDestroy() {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }

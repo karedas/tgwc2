@@ -24,31 +24,6 @@ export class OutputService {
     return this.autoScroll;
   }
 
-  // Send request to server by element click
-  interact(event: Event, item: any, index?: number) {
-
-    event.preventDefault();
-
-    /* If is not a List */
-    if (!item.sz) {
-      if (item.cntnum) {
-        this.game.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
-      } else {
-        this.game.processCommands(`guarda &${item.mrn[0]}`);
-      }
-    }
-
-
-    /* Is a List */
-    if (item.sz) {
-      if (!item.cntnum &&  index >= 0) {
-        this.game.processCommands(`guarda &${item.mrn[index]}`);
-      } else if (item.cntnum && index >= 0) {
-        this.game.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`);
-      }
-    }
-  }
-
   // Uncollapse/Collapse a collapsed Container
   isExpandeable(event: Event, item: any, index: number): boolean {
     event.preventDefault();
@@ -56,6 +31,4 @@ export class OutputService {
       return true;
     }
   }
-
-
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { RoomList } from 'src/app/main/client/models/data/room.model';
 import { OutputService } from '../../output.service';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-details-room',
@@ -26,7 +27,9 @@ export class DetailsRoomComponent implements OnInit {
   togglePanel: any = {};
 
 
-  constructor(public outputService: OutputService) {
+  constructor(
+    private outputService: OutputService,
+    private gameService: GameService) {
   }
 
   ngOnInit(): void {
@@ -69,8 +72,8 @@ export class DetailsRoomComponent implements OnInit {
     }
   }
 
-  onInteract(event: Event, item: any, index: number) {
-    this.outputService.interact(event, item, index);
+  onInteract(item: any, index: number) {
+    this.gameService.interact(item, index);
   }
 
   onExpand(event: Event, item: any, index: number) {

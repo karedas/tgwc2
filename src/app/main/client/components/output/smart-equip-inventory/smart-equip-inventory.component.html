@@ -1,6 +1,7 @@
 <div class="tg-smart-equipinv">
   <div fxLayout="column" fxFlex="0 1 100%">
     <div class="tg-smart-tabtitle" fxLayout="row" fxFlex="0 0 auto" fxLayoutGap="5px">
+     
       <ng-container *ngIf="show; else headerCollapsed">
         <div [ngClass]="{'active': tab === 1}">
           <button mat-button class="tg-smart-title" (click)="onTabClick('equipaggiamento', 1)">Equipaggiamento</button>
@@ -8,8 +9,8 @@
         <div [ngClass]="{'active': tab === 2}">
           <button mat-button class="tg-smart-title" (click)="onTabClick('inventario', 2)">Inventario</button>
         </div>
-        
       </ng-container>
+
       <ng-template #headerCollapsed>
         <div fxFlex="1 0 auto">
           <button mat-button class="tg-smart-title" (click)="onCollapse()" style="width: 100%">
@@ -21,9 +22,9 @@
       <button mat-icon-button aria-label="Apri / Chiudi" class="tg-smart-collapsebtn" (click)="onCollapse()">
         <mat-icon>{{show ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
       </button>
+
     </div>
     <div fxFlex="1 0 auto" class="equinv-container" *ngIf="show">
-
       <ng-scrollbar class="scrollbar" fxFlex="1 1 100%" fxFlexFill>
 
         <div class="eqinv-wrapper-list" fxLayout="column" *ngIf="equip && tab === 1">
@@ -40,7 +41,11 @@
                 <div class="eqinv-item-position" fxFlex="0 0 20%" fxLayoutAlign="flex-start center">
                   <span class="tg-yellow">{{pos}}</span>
                 </div>
-                <div class="eqinv-item" fxFlex="0 0 65%" fxLayoutAlign="flex-start center">
+                <div class="eqinv-item" 
+                  fxFlex="0 0 65%" 
+                  fxLayoutAlign="flex-start center"
+                  tooltip="Guarda {{item.desc}}" placement="top" show-delay="500"
+                  (click)="interactElement(item)">
                   <tg-icons [icon]="item.icon"></tg-icons>
                   <tg-hstat [condprc]="item.condprc"></tg-hstat>
                   <span [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></span>
@@ -77,10 +82,10 @@
                 </div>
               </div>
             </div>
-            
+
           </ng-container>
         </div>
-
+        
       </ng-scrollbar>
 
     </div>
