@@ -3,15 +3,15 @@ import { inGameAction, updateUIAction, audioAction } from '../actions/client.act
 import { Action, on, createReducer } from '@ngrx/store';
 
 export const reducer = createReducer(
-  initialState,
-  on(inGameAction, state => ({ ...state, inGame: true })),
-  on(updateUIAction, (state, { payload }) => {
-    return Object.assign({}, state, payload );
-  }),
-  on(audioAction, (state, { payload })  => ({ ...state, audio: payload}))
+    initialState,
+    on(inGameAction, state => ({ ...state, inGame: true })),
+    on(updateUIAction, (state, { payload }) => {
+        return Object.assign({}, state, payload);
+    }),
+    on(audioAction, (state, { payload }) => ({ ...state, audio: payload }))
 );
 
 
 export function clientReducer(state: ClientState | undefined, action: Action) {
-  return reducer(state, action);
+    return reducer(state, action);
 }

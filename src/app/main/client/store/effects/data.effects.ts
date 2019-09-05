@@ -39,7 +39,7 @@ export class DataEffects {
     switchMap((res) => {
       this.dialogV2Service.openCharacterSheet('skills');
       return [
-        heroAction({payload: {skills: res.payload}})
+        heroAction({ payload: { skills: res.payload } })
       ];
     })
   );
@@ -48,12 +48,12 @@ export class DataEffects {
   equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
     switchMap((res) => {
-      if(res.dialog) {
+      if (res.dialog) {
         this.dialogV2Service.openCharacterSheet('equip');
       }
-        return [
-          heroAction({payload: {equipment: res.payload}})
-        ];
+      return [
+        heroAction({ payload: { equipment: res.payload } })
+      ];
     }),
   );
 
@@ -61,12 +61,12 @@ export class DataEffects {
   inventoryRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.INVENTORY),
     switchMap((res) => {
-      if(res.dialog) {
+      if (res.dialog) {
         this.dialogV2Service.openCharacterSheet('inventory');
       }
-        return [
-          heroAction({payload: {inventory: res.payload}})
-        ];
+      return [
+        heroAction({ payload: { inventory: res.payload } })
+      ];
     }),
   );
 
@@ -133,24 +133,24 @@ export class DataEffects {
   );
 
   @Effect()
-  showCharacterSheet$: Observable<Action>  = this.actions$.pipe(
+  showCharacterSheet$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SHOWCHARACTERSHEET),
     switchMap((res) => {
       this.dialogV2Service.openCharacterSheet(res.payload[1]);
       if (res.payload[1] === 'info') {
         return [
           DataActions.infoCharacterAction(),
-          DataActions.heroAction({payload: res.payload[0]})
+          DataActions.heroAction({ payload: res.payload[0] })
         ];
       }
     }),
   );
 
   @Effect()
-  showStatusInline$: Observable<Action>  = this.actions$.pipe(
+  showStatusInline$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SHOWSTATUSHERO),
     switchMap((res) => {
-      return [ DataActions.heroAction(res.payload) ];
+      return [DataActions.heroAction(res.payload)];
     }),
     tap(() => this.game.setStatusInline(true))
   );

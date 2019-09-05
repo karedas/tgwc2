@@ -24,7 +24,7 @@ export class DataParser {
   // private shortcuts_map = {};
   private cmd_prefix = '';
   private _updateNeeded: Subject<any>;
-  isDialog: boolean = true;
+  isDialog: boolean = false;
 
   constructor(
     private store: Store<TGState>,
@@ -167,6 +167,9 @@ export class DataParser {
     }
     if (this.dispatcher['isgod']) { this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher['isgod'] } })); }
     if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']); }
+
+    this.isDialog = false;
+
   }
 
   private substShort(input: any): any {
@@ -239,13 +242,12 @@ export class DataParser {
   /** PARSERS LIST---------------------------------------------------- */
 
   private logged(): string {
-    return '';
     this.store.dispatch(ClientActions.inGameAction());
     return '';
   }
 
   private news( data: any): string {
-    this.store.dispatch(ClientActions.inGameAction());
+    // this.store.dispatch(ClientActions.inGameAction());
     return '';
   }
 
@@ -370,14 +372,12 @@ export class DataParser {
   private inventory(inv: any): string {
     const inv_parse = JSON.parse(inv.slice(5, -1));
     this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse, dialog: this.isDialog }));
-    this.isDialog = true;
     return '';
   }
 
   private equipment(eq: any): string {
     const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
     this.store.dispatch(DataActions.equipAction({ payload: eq_parse, dialog: this.isDialog }));
-    this.isDialog = true;
     return '';
   }
 
