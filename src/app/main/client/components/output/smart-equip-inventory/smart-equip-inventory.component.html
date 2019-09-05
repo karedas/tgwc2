@@ -13,7 +13,7 @@
 
       <ng-template #headerCollapsed>
         <div fxFlex="1 0 auto">
-          <button mat-button class="tg-smart-title" (click)="onCollapse()" style="width: 100%">
+          <button mat-button class="tg-smart-title tg-lt-yellow" (click)="onCollapse()" style="width: 100%">
             Mostra equipaggiamento e inventario 
           </button>
         </div>
@@ -28,7 +28,7 @@
       <ng-scrollbar class="scrollbar" fxFlex="1 1 100%" fxFlexFill>
 
         <div class="eqinv-wrapper-list" fxLayout="column" *ngIf="equip && tab === 1">
-          <ng-container *ngIf="equip.length > 0;">
+          <ng-container *ngIf="equip.length > 0; else noequip">
 
             <div class="eqinv-caption" fxLayout="row" fxFlex="0 0 auto">
               <div fxFlex="0 0 20%" fxLayoutAlign="flex-start center">Dove</div>
@@ -97,5 +97,8 @@
 </div>
 
 <ng-template #noinv>
-  <span class="no-items-notice">Non stai portando niente nel tuo inventario</span>
+  <span class="no-items-notice">Non hai niente nel tuo inventario!</span>
+</ng-template>
+<ng-template #noequip>
+  <span class="no-items-notice">Non indossi nulla!</span>
 </ng-template>
