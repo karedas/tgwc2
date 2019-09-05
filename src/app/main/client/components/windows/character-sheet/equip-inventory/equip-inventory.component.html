@@ -5,7 +5,7 @@
       <div class="inventory-list tg-shadow-inset" fxLayout="column" *ngIf="inventory$ | async; let inventory">
 
         <h3>Inventario</h3>
-
+        
         <ng-container *ngIf="inventory.list.length > 0; else noinv">
           <div class="eqinv-caption" fxLayout="row">
             <div fxFlex="0 0 60%" fxLayoutAlign="center center">Oggetto</div>
@@ -30,11 +30,10 @@
                     {{item.wgt}} pt</div>
                 </div>
 
-
-
               </div>
             </ng-scrollbar>
           </div>
+
         </ng-container>
 
         <ng-template #noinv>
@@ -49,7 +48,7 @@
 
 
     <ng-container *ngIf="openedSubTab == 'equip'">
-      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equipment$ | async; let equip$">
+      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equip | async; let equip$">
         <h3>
           Equipaggiamento
         </h3>

@@ -5,8 +5,8 @@
 
           <!-- Room Title -->
           <div class="tg-room--title">
-
-            <ng-container *ngIf="html.title; else dirRoomtitle">
+            
+            <ng-container *ngIf="html?.title; else dirRoomtitle">
               <div [innerHtml]="html.title |  dataToHtml:true"></div>
             </ng-container>
           </div>

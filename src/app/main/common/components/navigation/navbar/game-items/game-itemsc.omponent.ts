@@ -1,12 +1,9 @@
 import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { GameService } from 'src/app/main/client/services/game.service';
 import gitInfo from 'src/git-version.json';
 import { ConfigService } from 'src/app/services/config.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { TGConfig } from 'src/app/main/client/client-config';
-import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { DispenserService } from 'src/app/main/client/services/dispenser.service';
 
 @Component({

@@ -33,7 +33,7 @@ import { takeUntil} from 'rxjs/operators';
 export class GeoLocationComponent implements OnInit , OnDestroy {
 
   public changeState = 'out';
-  public regionImageUrl = 'assets/images/regions/base.jpg';
+  public regionImageUrl = 'assets/images/regions/0.jpg';
   public region$: Observable<IRegion>;
 
 

@@ -9,14 +9,14 @@ import { CapitalizeFirstPipe } from './capitalizeFirst.pipe';
     DataToHtmlPipe,
     IconsPipe,
     CapitalizeFirstPipe,
-    GetEthnicityByCodePipe
+    GetEthnicityByCodePipe,
   ],
   imports: [],
   exports: [
     IconsPipe,
     DataToHtmlPipe,
     CapitalizeFirstPipe,
-    GetEthnicityByCodePipe
+    GetEthnicityByCodePipe,
   ]
 })
 export class PipesModule { }

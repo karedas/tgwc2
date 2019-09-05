@@ -1,45 +1,39 @@
-
 <div fxLayout="column" style="height: 100%">
   <!-- ######## Ability ########  -->
   <div class="skill-list" fxLayout="column">
     <div style="overflow: hidden; height: 100%;">
 
       <ng-scrollbar class="scrollbar" [appearance]="'compact'">
-          <mat-accordion class="skill-group" [displayMode]="'flat'" multi="true" #skillAccordionContainer="matAccordion">
-            <mat-expansion-panel  *ngFor="let skill of skills$ | async | keyvalue; index as i; " [expanded]="i === 0">
-  
-              <mat-expansion-panel-header class="skill-groupname" 
-                collapsedHeight="auto" 
-                expandedHeight="auto">
-                <mat-panel-title>
-                  {{skill.key}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-  
-              <ng-template matExpansionPanelContent>
+        <mat-accordion class="skill-group" [displayMode]="'flat'" multi="true" #skillAccordionContainer="matAccordion">
+          <mat-expansion-panel *ngFor="let skill of skills$ | async | keyvalue; index as i; " [expanded]="i === 0">
+
+            <mat-expansion-panel-header class="skill-groupname" collapsedHeight="auto" expandedHeight="auto">
+              <mat-panel-title>
+                {{skill.key}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
               <div class="skill-subdetail-container" fxLayout="row wrap">
-  
-                <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" 
-                  fxFlex="0 1 100%"
-                  fxLayoutAlign="start center"
-                  fxLayoutGap="10px">
-                    <div class="skill-name" fxFlex="0 1 50%">
-                      {{subskill.key}}
-                    </div>
-                    <div class="meter2" fxFlex="0 1 50%">
-                      <span [style.width.%]="subskill.value.prac"></span>
-                    </div>
-                    <!-- <div fxFlex="0 1 30%">
-                      [VALORE]
-                    </div> -->
+
+                <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" fxFlex="0 1 100%"
+                  fxLayoutAlign="start center" fxLayoutGap="10px">
+                  <div class="skill-name" fxFlex="0 1 50%">
+                    {{subskill.key}}
                   </div>
-                  
+                  <div class="meter2" fxFlex="0 1 50%">
+                    <span [style.width.%]="heroSkillsValue.indexOf(subskill.value.prac) * 10"></span>
+                  </div>
+                  <div fxFlex="0 1 30%">
+                    {{subskill.value.prac}}
+                  </div>
                 </div>
-              </ng-template>
-  
-            </mat-expansion-panel>
-          </mat-accordion>
-        
+
+              </div>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
+
       </ng-scrollbar>
 
     </div>
@@ -48,6 +42,6 @@
 
 
 <div class="skills-actions-menu">
-  <button mat-button (click)="skillAccordionContainer.closeAll()">Comprimi tutto</button> 
+  <button mat-button (click)="skillAccordionContainer.closeAll()">Comprimi tutto</button>
   <button mat-button (click)="skillAccordionContainer.openAll()">Espandi tutto</button>
 </div>

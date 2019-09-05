@@ -48,7 +48,8 @@ export const reducer = createReducer(
         pietoso: payload.pietoso,
         position: payload.position,
         nosfodera: payload.nosfodera,
-        hidden: payload.hidden
+        hidden: payload.hidden,
+        wprc: payload.wprc
       }
     });
   }),

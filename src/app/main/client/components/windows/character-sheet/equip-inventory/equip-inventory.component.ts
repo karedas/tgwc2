@@ -17,10 +17,8 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
 
   equipPositionValue: {};
   equip_by_pos = pos_to_order;
-
   equipment$: Observable<any>;
   inventory$: Observable<any>;
-
   equip = [];
 
   @Input('subTab') openedSubTab = 'equip';
@@ -31,19 +29,21 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     private store: Store<DataState>,
     private game: GameService,
     private inputService: InputService
-     ) {
+  ) {
 
     this.equipment$ = this.store.pipe(select(getEquip));
     this.inventory$ = this.store.pipe(select(getInventory));
-
     this.equipPositionValue = Object.entries(equip_positions_by_name);
     this._unsubscribeAll = new Subject<any>();
-   }
+  }
 
   ngOnInit() {
 
-    this.inventory$.pipe(takeUntil(this._unsubscribeAll)).subscribe();
-    this.equipment$.pipe(takeUntil(this._unsubscribeAll))
+    this.inventory$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe();
+    this.equipment$
+      .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(equipment => {
         if (equipment !== undefined) {
           this.equip = this.game.orderObjectsList(equipment);
