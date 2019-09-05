@@ -1,15 +1,20 @@
-
-const { gitDescribe, gitDescribeSync } = require('git-describe');
-const { writeFileSync } = require('fs');
-const path = require('path');
-
+const {gitDescribe, gitDescribeSync} = require('git-describe');
  
-// Target working directory
-const gitInfo = gitDescribeSync();
 
-const info = gitDescribeSync(__dirname, {
+
+// Another example: working directory, use 16 character commit hash abbreviation
+const gitInfo = gitDescribeSync({
+    customArguments: ['--abbrev=16']
 });
-const infoJson = JSON.stringify(info, null, 2);
-
-console.log(gitInfo);
-writeFileSync(path.join(__dirname, '/src/git-version.json'), infoJson);
+ 
+// Asynchronous with promise
+gitDescribe(__dirname)
+    .then((gitInfo) => console.dir(gitInfo))
+    .catch((err) => console.error(err));
+ 
+// Asynchronous with node-style callback
+gitDescribe(__dirname, (err, gitInfo) => {
+    if (err)
+        return console.error(err);
+    console.dir(gitInfo);
+});
