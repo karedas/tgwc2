@@ -5,7 +5,7 @@
     <div class="tg-output-main" #mainOutputArea>
       <!-- Output Area -->
       <ng-container *ngIf="showExtraByViewport && tgConfig.output.extraArea.visible as extra; else noextra">
-        <as-split #splitArea class="tg-output--splitter" [gutterSize]="5" [direction]="'horizontal'"
+        <as-split #splitArea class="tg-output--splitter" [gutterSize]="11" [direction]="'horizontal'"
           (dragEnd)="onDragEnd($event)" (dargStart)="onDragStart($event)">
 
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">

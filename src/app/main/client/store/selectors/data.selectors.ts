@@ -84,6 +84,10 @@ function fetchGenericPage(state: DataState) {
   return state.genericpage;
 }
 
+function fetchDirectionNotify(state: DataState) {
+  return state.directionNotify;
+}
+
 /******************* Public API's ******************/
 export const getDataBase = createSelector(getDataState, fetchDataBase);
 export const getHero = createSelector(getDataState, fetchHero);
@@ -103,3 +107,4 @@ export const getEquip = createSelector(getDataState, fetchEquip);
 export const getInventory = createSelector(getDataState, fetchInventory);
 export const getDateTime = createSelector(getDataState, fetchDateTime);
 export const getGenericPage = createSelector(getDataState, fetchGenericPage);
+export const getDirectionNotify = createSelector(getDataState, fetchDirectionNotify);

@@ -64,8 +64,7 @@
           </div>
   
           <div class="tg-control-panel--option">
-            <mat-checkbox [(ngModel)]="tgConfig.news" (change)="onOptionChange($event, { news: $event.checked })">Non
-              mostrare le news al login</mat-checkbox>
+            <mat-checkbox [(ngModel)]="tgConfig.logSave" (change)="onOptionChange($event, { logSave: $event.checked })">Chiedi salvataggio log alla chiusura</mat-checkbox>
           </div>
   
           <p class="tg-lt-white"><u>Il salvataggio della configurazione viene applicato automaticamente ad ogni singola

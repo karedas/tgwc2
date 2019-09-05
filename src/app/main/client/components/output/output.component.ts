@@ -13,6 +13,8 @@ import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model'
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 import { OutputService } from './output.service';
+import { LoginClientService } from '../../services/login-client.service';
+import { inGameAction } from '../../store/actions/client.action';
 
 @Component({
   selector: 'tg-output',
@@ -59,9 +61,10 @@ export class OutputComponent implements OnInit, OnDestroy {
   constructor(
     private outputService: OutputService,
     private store: Store<DataState>,
+    private loginService: LoginClientService,
     private game: GameService,
     private _configService: ConfigService) {
-      this.lastRoom$ = this.store.select(fromSelectors.getRoomBase);
+      this.lastRoom$ = this.store.select(getRoomBase);
       this._baseText$ = this.store.select(getDataBase);
       this._roomBase$ = this.store.select(getRoomBase);
       this._objOrPerson$ = this.store.select(getObjOrPerson);
@@ -80,7 +83,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       .subscribe((config) => {
         this.tgConfig = config;
       });
-
+      
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
     this._baseText$

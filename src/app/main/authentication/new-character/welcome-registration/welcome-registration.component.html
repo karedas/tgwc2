@@ -18,7 +18,7 @@
               <div *ngIf="email.errors.required">Email non corretta</div>
             </div>
           </div>
-          <button mat-button class="tg-invia-btn" [disableRipple]="true">Invia</button>
+          <button mat-button class="tg-invia-btn" [disableRipple]="true" disabled>Invia</button>
         </form>
       </div>
       <div fxFlex="1 1 50%" class="tg-welcome-box" fxLayout="column">
@@ -35,7 +35,7 @@
             <input placeholder="Digita qui il tuo codice" type="text" class="form-control">
           </div>
   
-          <button mat-button class="tg-conferma-btn" [disableRipple]="true"
+          <button mat-button class="tg-conferma-btn" [disableRipple]="true" disabled
             (click)="checkCodeActivation()">Conferma</button>
         </form>
       </div>

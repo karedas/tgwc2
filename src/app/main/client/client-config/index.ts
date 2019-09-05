@@ -5,7 +5,7 @@ export interface TGConfig {
     musicVolume: number;
     soundVolume: number;
   };
-  news: boolean;
+  logSave: boolean;
   fontSize: number;
   output: {
     extraArea:  {
@@ -31,7 +31,7 @@ export const tgConfig: TGConfig = {
     musicVolume: 100,
     soundVolume: 70,
   },
-  news: true,
+  logSave: true,
   fontSize: 2,
   output: {
     extraArea: {

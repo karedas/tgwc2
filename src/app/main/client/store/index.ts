@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, MetaReducer, ActionReducer } from '@ngrx/store';
 import * as fromClient from './reducers/client.reducer';
 import * as fromData from './reducers/data.reducer';
 import { ClientState } from './state/client.state';
@@ -22,13 +22,20 @@ export const baseReducer: ActionReducerMap<TGState> = {
 
 export const selectTGState = createFeatureSelector<TGState>('TG');
 
-export function clearState(reducer: any) {
-  return (state, action) => {
+
+export function clearState(reducer: ActionReducer<any>): ActionReducer<any> {
+  return function(state, action) {
     if (action.type === ClientEventType.RESET) {
-      state = undefined;
+      state = {
+        client: undefined,
+        data: undefined
+      }
     }
     return reducer(state, action);
   };
 }
+
+export const metaReducers: MetaReducer<any>[] = [clearState];
+
 
 

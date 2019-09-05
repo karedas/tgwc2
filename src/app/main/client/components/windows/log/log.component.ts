@@ -57,6 +57,7 @@ export class LogComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
+    this.logStorage = [];
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }

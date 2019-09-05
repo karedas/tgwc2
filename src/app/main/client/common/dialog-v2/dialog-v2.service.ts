@@ -129,26 +129,6 @@ export class DialogV2Service {
     }
   }
 
-
-  // openNews(fromGame: boolean): MatDialogRef<NewsComponent, MatDialogConfig> {
-
-  //   const dialogID = 'news';
-  //   const config = new MatDialogConfig();
-
-  //   config.id = dialogID;
-  //   config.disableClose = true;
-  //   config.width = '750px';
-  //   config.height = '600px';
-  //   config.minHeight = '400px';
-  //   config.backdropClass = fromGame ? '' : 'overlay-dark';
-  //   config.scrollStrategy = this.overlay.scrollStrategies.noop();
-  //   config.restoreFocus = true;
-  //   config.autoFocus = false;
-
-  //   const dialogRef = this.dialog.open(NewsComponent, config);
-  //   return dialogRef;
-  // }
-
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
 
     const dialogID = 'editor';
@@ -184,7 +164,6 @@ export class DialogV2Service {
       config.data = {
         tab: detail
       };
-
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
       dialogRef.afterOpened().subscribe(() => {
