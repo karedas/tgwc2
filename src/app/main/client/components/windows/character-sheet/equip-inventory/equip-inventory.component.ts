@@ -49,39 +49,21 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
           this.equip = this.game.orderObjectsList(equipment);
         }
       });
-
-
-    this.resetUpdateBeforeProceed();
-
-    if (this.openedSubTab === 'equip') {
-      this.game.client_update.equipOpen = true;
-    }
-    if (this.openedSubTab === 'inventory') {
-      this.game.client_update.invOpen = true;
-    }
   }
 
   buttonClick(what: string, event: Event) {
 
-    this.resetUpdateBeforeProceed();
     this.inputService.focus();
 
     if (what === 'equip') {
       this.openedSubTab = what;
       this.game.processCommands('equip');
-      this.game.client_update.equipOpen  = true;
 
     }
     if (what === 'inventory') {
       this.openedSubTab = what;
       this.game.processCommands('inv');
-      this.game.client_update.invOpen = true;
     }
-  }
-
-  resetUpdateBeforeProceed() {
-    this.game.client_update.invOpen = false;
-    this.game.client_update.equipOpen  = false;
   }
 
   ngOnDestroy() {

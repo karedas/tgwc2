@@ -46,7 +46,7 @@ export class InputComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // Subscribe to config changes
     this._configService.config
@@ -71,11 +71,23 @@ export class InputComponent implements OnInit, OnDestroy {
       );
 
     // Listen focus Call from another component
-    this.inputService.isFocussed
+    this.inputService.isFocussed()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => {
         this.focus();
       });
+  }
+
+  
+  private moveCursorAtEnd(target) {
+    if (typeof target.selectionStart === 'number') {
+      target.selectionStart = target.selectionEnd = target.value.length;
+    } else if (typeof target.createTextRange !== 'undefined') {
+      this.focus();
+      const range = target.createTextRange();
+      range.collapse(false);
+      range.selec();
+    }
   }
 
   focus() {
@@ -84,7 +96,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   onEnter(event: any, val: string) {
     event.target.value = '';
-    this.game.processCommands(val, true);
+    this.sendCmd(val);
   }
 
   onUpKey(event: any) {
@@ -101,9 +113,7 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   onDownKey(event: any) {
-
     event.preventDefault();
-
     if (!this.game.mouseIsOnMap) {
       const cmd = this.historyService.getNext();
       if (cmd) {
@@ -113,15 +123,16 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
-  private moveCursorAtEnd(target) {
-    if (typeof target.selectionStart === 'number') {
-      target.selectionStart = target.selectionEnd = target.value.length;
-    } else if (typeof target.createTextRange !== 'undefined') {
-      this.focus();
-      const range = target.createTextRange();
-      range.collapse(false);
-      range.selec();
+  public sendCmd(cmd: string) {
+    
+    /* Check equipment/inventory dialog open request
+       TODO: Need better implementation */
+    if(['eq', '!eq', 'inv', '!inv'].indexOf(cmd) >= 0 ){
+      this.game.processCommands(cmd, false, true);
+    } else {
+      this.game.processCommands(cmd, true, false);
     }
+    
   }
 
   /*------  Buttons Actions */
@@ -156,18 +167,10 @@ export class InputComponent implements OnInit, OnDestroy {
     this.game.setOutputSize();
   }
 
-
-  sendCmd(cmd: string) {
-    this.game.processCommands(cmd);
-  }
-
-
   @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
-
     if (event.key === '!' && (this.ic.nativeElement.value).length === 0) {
       const l = this.historyService.cmd_history.length;
-
       if (l > 0) {
         this.game.processCommands(this.historyService.cmd_history[l - 1]);
       }

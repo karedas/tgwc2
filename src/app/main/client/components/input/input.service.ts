@@ -12,8 +12,8 @@ export class InputService {
     this._isFocussed = new BehaviorSubject(false);
   }
 
-  get isFocussed(): Observable<any> {
-    return this._isFocussed;
+  isFocussed(): Observable<any> {
+    return this._isFocussed.asObservable();
   }
 
   focus() {
