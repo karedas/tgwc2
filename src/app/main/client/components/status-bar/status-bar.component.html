@@ -100,13 +100,13 @@
       <div class="badge-text" 
         *ngIf="hero.wprc"  
         fxLayout fxLayoutAlign="center center" tooltip="Peso Trasportato" show-delay="500" placement="top">
-        PT:&nbsp;<b 
+        PT:&nbsp;<span 
           [ngClass]="
             { 'tg-green': +hero.wprc < 25,
               'tg-yellow': +hero.wprc >= 25 && hero.wprc < 75,
               'tg-brown': +hero.wprc >= 75 && hero.wprc < 85,
               'tg-red': +hero.wprc >= 85 }">
-          {{hero.wprc}} / 100 %</b>
+          {{hero.wprc}} / 100 %</span>
       </div>
     </div>
   </div>
