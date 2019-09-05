@@ -69,7 +69,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
 
   onTabClick(cmd: string, tab: number) {
     this.tab = tab;
-    this.gameService.sendToServer('@'+cmd);
+    this.gameService.processCommands('@'+cmd, false, false);
   }
 
   onCollapse() {
