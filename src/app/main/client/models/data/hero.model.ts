@@ -56,6 +56,7 @@ export interface IHero {
   pietoso?: string;
   position?: string;
   nosfodera?: string;
+  wprc?: number;
 }
 
 // export class Hero implements IHero {

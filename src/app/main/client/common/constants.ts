@@ -1,29 +1,29 @@
 export const equip_positions_by_name = {
-    'r_finger': 'Dito dx',
-    'l_finger': 'Dito sx',
-    'neck': 'Al collo',
-    'body': 'Sul corpo',
-    'head': 'In testa',
-    'legs': 'Sulle gambe',
-    'feet': 'Ai piedi',
-    'hands': 'Sulle mani',
-    'arms': 'Sulle braccia',
-    'around': 'Attorno al corpo',
-    'waist': 'In vita',
-    'r_wrist': 'Polso dx',
-    'l_wrist': 'Polso sx',
-    'r_hand': 'Mano dx',
-    'l_hand': 'Mano sx',
-    'back': 'Schiena',
-    'r_ear': 'Orecchio dx',
-    'l_ear': 'Orecchio sx',
-    'eyes': 'Sugli occhi',
-    'sheath': 'Nel fodero',
-    'belt': 'Alla cintura',
-    'over': 'A tracolla',
-    'r_shoulder': 'Spalla dx',
-    'l_shoulder': 'Spalla sx',
-    'tied': 'Imprigionato'
+  'r_finger': 'Dito dx',
+  'l_finger': 'Dito sx',
+  'neck': 'Al collo',
+  'body': 'Sul corpo',
+  'head': 'In testa',
+  'legs': 'Sulle gambe',
+  'feet': 'Ai piedi',
+  'hands': 'Sulle mani',
+  'arms': 'Sulle braccia',
+  'around': 'Attorno al corpo',
+  'waist': 'In vita',
+  'r_wrist': 'Polso dx',
+  'l_wrist': 'Polso sx',
+  'r_hand': 'Mano dx',
+  'l_hand': 'Mano sx',
+  'back': 'Schiena',
+  'r_ear': 'Orecchio dx',
+  'l_ear': 'Orecchio sx',
+  'eyes': 'Sugli occhi',
+  'sheath': 'Nel fodero',
+  'belt': 'Alla cintura',
+  'over': 'A tracolla',
+  'r_shoulder': 'Spalla dx',
+  'l_shoulder': 'Spalla sx',
+  'tied': 'Imprigionato'
 };
 
 export const pos_to_order = [
@@ -86,46 +86,55 @@ export const font_size_options = [
   }
 ];
 
-export const skillValue = {
-  10: 'scarso',
-  20: 'buono',
-  50: 'ottimo',
-  100: 'eccellente'
-};
 
 // Do not change order list!
 export const hero_position = [
-  {msg: 'morto'},
-  {msg: 'ferito mortalmente'},
-  {msg: 'incosciente'},
-  {msg: 'addormentato', cmd: 'dormi'},
-  {msg: 'sdraiato', cmd: 'sdraia' },
-  {msg: 'seduto', cmd: 'siedi' },
-  {msg: 'in piedi', cmd: 'alza' },
-  {msg: 'sveglia', cmd: 'sveglia'}
+  { msg: 'morto' },
+  { msg: 'ferito mortalmente' },
+  { msg: 'incosciente' },
+  { msg: 'addormentato', cmd: 'dormi' },
+  { msg: 'sdraiato', cmd: 'sdraia' },
+  { msg: 'seduto', cmd: 'siedi' },
+  { msg: 'in piedi', cmd: 'alza' },
+  { msg: 'sveglia', cmd: 'sveglia' }
 ];
 
 
 export const hero_attitude = [
-  {msg: 'berserk', cmd: 'comb bers'},
-  {msg: 'aggressivo', cmd: 'comb agg'},
-  {msg: 'coraggioso', cmd: 'comb corag'},
-  {msg: 'normale', cmd: 'comb norm'},
-  {msg: 'cauto', cmd: 'comb caut'},
-  {msg: 'guardingo', cmd: 'comb guard'},
-  {msg: 'difensivo', cmd: 'comb dif'}
+  { msg: 'berserk', cmd: 'comb bers' },
+  { msg: 'aggressivo', cmd: 'comb agg' },
+  { msg: 'coraggioso', cmd: 'comb corag' },
+  { msg: 'normale', cmd: 'comb norm' },
+  { msg: 'cauto', cmd: 'comb caut' },
+  { msg: 'guardingo', cmd: 'comb guard' },
+  { msg: 'difensivo', cmd: 'comb dif' }
 ]
 
 export const hero_defense = [
-  {msg: 'schivare', cmd: 'comb schiv'},
-  {msg: 'parare', cmd: 'comb para'},
-  {msg: 'deflettere', cmd: 'comb defle'}
+  { msg: 'schivare', cmd: 'comb schiv' },
+  { msg: 'parare', cmd: 'comb para' },
+  { msg: 'deflettere', cmd: 'comb defle' }
 ]
 
 export const hero_speed = [
-  {msg: 'passeggio', cmd:'velo pass'},
-  {msg: 'camminata', cmd:'velo cammin'},
-  {msg: 'marcia', cmd: 'velo marcia'},
-  {msg: 'corsa', cmd: 'velo corsa'},
-  {msg: 'scatto', cmd: 'velo scat'}
+  { msg: 'passeggio', cmd: 'velo pass' },
+  { msg: 'camminata', cmd: 'velo cammin' },
+  { msg: 'marcia', cmd: 'velo marcia' },
+  { msg: 'corsa', cmd: 'velo corsa' },
+  { msg: 'scatto', cmd: 'velo scat' }
+]
+
+
+export const hero_skills = [
+  'Incapace',
+  'Scarso',
+  'Sotto la media',
+  'Nella media',
+  'Sopra la media',
+  'Abile',
+  'Molto abile',
+  'Eccellente',
+  'Maestro',
+  'Eroico',
+  'Leggendario'
 ]

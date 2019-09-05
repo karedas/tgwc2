@@ -11,7 +11,6 @@ export const reducer = createReducer(
     on(audioAction, (state, { payload }) => ({ ...state, audio: payload }))
 );
 
-
 export function clientReducer(state: ClientState | undefined, action: Action) {
     return reducer(state, action);
 }

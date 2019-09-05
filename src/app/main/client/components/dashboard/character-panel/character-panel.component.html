@@ -27,8 +27,8 @@
         <div class="tg-infochar" fxLayout="column" fxFlex="1 0 auto">
 
           <!-- Character Name & Status -->
-          <div class="tg-infocharname" fxLayout="row" fxHide fxShow.gt-xs fxLayoutAlign="center center">
-            <span class="charName" fxHide fxShow.gt-sm>{{hero.name}}</span>
+          <div class="tg-infocharname" fxLayout="row" fxLayoutAlign="center center">
+            <span class="charName">{{hero.name}}</span>
 
             <ng-container *ngIf="hero.hidden === '1'">
                 <span class="tg-lt-magenta">( NASCOSTO! )</span>
@@ -57,7 +57,16 @@
               </ng-template> -->
 
               <div class="right">
-                PT: <span class="tg-yellow">80</span> / <span>100</span>
+                <div tooltip="Peso Trasportato" show-delay="500" placement="top">
+                  PT:
+                  <b 
+                    [ngClass]="
+                      { 'tg-green': +hero.wprc < 25,
+                        'tg-yellow': +hero.wprc >= 25 && hero.wprc < 75,
+                        'tg-brown': +hero.wprc >= 75 && hero.wprc < 85,
+                        'tg-red': +hero.wprc >= 85 }">
+                    {{hero.wprc}} / 100 %</b>
+                </div>
               </div>
             </div>
           </div>
