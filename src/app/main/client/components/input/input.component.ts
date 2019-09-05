@@ -124,11 +124,10 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   public sendCmd(cmd: string) {
-    
     /* Check equipment/inventory dialog open request
        TODO: Need better implementation */
-    if(['eq', '!eq', 'inv', '!inv'].indexOf(cmd) >= 0 ){
-      this.game.processCommands(cmd, false, true);
+    if(cmd.startsWith('eq') || cmd.startsWith('inv') || cmd.startsWith('info')){
+        this.game.processCommands(cmd, false, true);
     } else {
       this.game.processCommands(cmd, true, false);
     }

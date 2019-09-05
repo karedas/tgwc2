@@ -57,15 +57,8 @@
               </ng-template> -->
 
               <div class="right">
-                <div tooltip="Peso Trasportato" show-delay="500" placement="top">
-                  PT:
-                  <b 
-                    [ngClass]="
-                      { 'tg-green': +hero.wprc < 25,
-                        'tg-yellow': +hero.wprc >= 25 && hero.wprc < 75,
-                        'tg-brown': +hero.wprc >= 75 && hero.wprc < 85,
-                        'tg-red': +hero.wprc >= 85 }">
-                    {{hero.wprc}} / 100 %</b>
+                <div *ngIf="directionNotify$ | async as dir" @opacityDecade>
+                  Ti muovi verso <span class="tg-green">{{dir}}</span>
                 </div>
               </div>
             </div>

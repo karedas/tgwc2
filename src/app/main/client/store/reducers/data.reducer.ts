@@ -21,6 +21,7 @@ export const reducer = createReducer(
   on(DataAction.roomAction, (state, { payload }) => ({ ...state, room: payload })),
   on(DataAction.bookAction, (state, { book }) => ({ ...state, book: book })),
   on(DataAction.dataTimeAction, (state, { payload }) => ({ ...state, gametime: payload })),
+  on(DataAction.directionNotifyAction, (state, { payload }) => ({ ...state, directionNotify: payload })),
   on(DataAction.genericPageAction, (state, { genericpage }) => ({ ...state,  genericpage: genericpage })),
   on(DataAction.incomingData, (state, { payload }) => {
     return Object.assign({}, state, { base: [payload] });

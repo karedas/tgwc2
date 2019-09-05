@@ -48,12 +48,12 @@
 
 
     <ng-container *ngIf="openedSubTab == 'equip'">
-      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equip | async; let equip$">
+      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equip;">
         <h3>
           Equipaggiamento
         </h3>
 
-        <ng-container *ngIf="equip.length > 0; else noequip">
+        <ng-container>
           <div class="eqinv-caption" fxLayout="row" fxFlex="0 0 auto">
             <div fxFlex="0 0 30%" fxLayoutAlign="flex-end center">Dove</div>
             <div fxFlex="0 0 55%" fxLayoutAlign="center center">Oggetto</div>
@@ -90,7 +90,7 @@
 
 
         <ng-container [ngTemplateOutlet]="equipInvAction"
-          [ngTemplateOutletContext]="{wprc: equip$.wprc, weight: equip$.weight}">
+          [ngTemplateOutletContext]="{wprc: equip.wprc, weight: equip.weight}">
         </ng-container>
       </div>
     </ng-container>

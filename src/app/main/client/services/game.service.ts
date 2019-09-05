@@ -18,7 +18,6 @@ export class GameService {
     private _tgConfig: TGConfig;
     private _commandsList$: BehaviorSubject<any>;
     private _showStatus: BehaviorSubject<(boolean)>;
-    // private _dataSubscription: Subscription;
     private _upSubscription: Subscription;
 
     public serverStat: Observable<any>;
@@ -102,7 +101,7 @@ export class GameService {
     }
 
     private upadteInventory(now) {
-        if (this.client_update.inventory.needed && this.dialog.getDialogById('charactersheet') && this.client_update.invOpen) {
+        if (this.client_update.inventory.needed) {
             this.sendToServer('@inv');
             this.client_update.inventory.needed = false;
             this.client_update.now = now;
@@ -110,7 +109,7 @@ export class GameService {
     }
 
     private upadteEquip(now) {
-        if (this.client_update.equipment.needed && this.dialog.getDialogById('charactersheet') && this.client_update.equipOpen) {
+        if (this.client_update.equipment.needed) {
             this.sendToServer('@equip');
             this.client_update.now = now;
         }
@@ -148,14 +147,9 @@ export class GameService {
         this._upSubscription = this.dataParserService.getUpdateNeeded()
             .subscribe(this.updatePanels.bind(this));
 
-        // this._upSubscription = this.dataParserService.updateNeeded
-        //   .subscribe((up) => {
-        //     this.updatePanels(up);
-        //   });
     }
 
     public resetUI() {
-        // this._dataSubscription.unsubscribe();
         this._upSubscription.unsubscribe();
         this.clearUpdate();
     }

@@ -124,6 +124,7 @@ export class DataParser {
     data = data.replace(/&!pgst\{[\s\S]*?\}!/gm, this.playerStatusInline.bind(this));
     data = data.replace(/&!select\{[\s\S]*?\}!/gm, this.selectableGeneric.bind(this));
     data = data.replace(/&!crlf"[^"]*"/gm, this.pauseScrollRequested.bind(this));
+    data = data.replace(/&!dir"[^"]*"\n*/gm, this.directionNotify.bind(this));
 
     // Clear message
     pos = data.lastIndexOf('&*');
@@ -300,6 +301,12 @@ export class DataParser {
   private updateHeroStatus(status): string {
     const status_parse = JSON.parse(status.slice(4, -1));
     this.store.dispatch(DataActions.updateStatusHero({ payload: status_parse }));
+    return '';
+  }
+
+  private directionNotify(dir): string {
+    const dir_parse = JSON.parse(dir.slice(6, -1));
+    this.store.dispatch(DataActions.directionNotifyAction({ payload: dir_parse }));
     return '';
   }
 

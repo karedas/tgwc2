@@ -94,24 +94,6 @@ export class DataEffects {
     })
   );
 
-
-
-  // @Effect({ dispatch: false })
-  // showNews$: Observable<boolean | Action> = this.actions$.pipe(
-  //   ofType(ClientEventType.NEWS),
-  //   withLatestFrom(this.store.pipe(select(getInGameStatus))),
-  //   map(([action, status]) => {
-  //     console.log(status);
-  //     if (this.game.tgConfig.news) {
-  //       this.dialogV2Service.openNews(false);
-  //     } else {
-  //       this.game.sendToServer('');
-  //       this.inputService.focus();
-  //     }
-  //     return status;
-  //   }),ù
-  // );
-
   @Effect({ dispatch: false })
   closeTextEditor: Observable<Action> = this.actions$.pipe(
     ofType(DataEvenType.CLOSETEXTEDITOR),

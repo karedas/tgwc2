@@ -25,6 +25,7 @@ export interface DataState {
     region?: IRegion;
     book?: IBook;
     genericpage?: IGenericPage;
+    directionNotify: string
 }
 
 export const initialState: DataState = {
@@ -41,6 +42,7 @@ export const initialState: DataState = {
     workslist: undefined,
     region: undefined,
     book: undefined,
-    genericpage: undefined
+    genericpage: undefined,
+    directionNotify: ''
 };
 

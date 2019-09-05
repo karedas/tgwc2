@@ -8,7 +8,7 @@ import { Error403Module } from './pages/errors/403/error-403.module';
 import { CookieService } from 'ngx-cookie-service';
 import { SplashScreenService } from './common/components/splashscreen/splashscreen.service';
 import { HelpComponent } from './pages/help/help.component';
-import { MatListModule, MatToolbarModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material';
 import { SocketService } from '../core/services/socket.service';
 import { AlertComponent } from './common/components/dialogs/alert/alert.component';
 import { LoginClientService } from './client/services/login-client.service';
@@ -24,6 +24,7 @@ import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
 import { DialogV2Module } from './client/common/dialog-v2/dialog-v2.module';
 import { NavBarModule } from './common/components/navigation/navbar/navbar.module';
 import { SidenavComponent } from './common/components/navigation/sidenav/sidenav.component';
+import { LogService } from './client/services/log.service';
 
 const routes: Routes = [
   {
@@ -72,6 +73,7 @@ const routes: Routes = [
     DataParser,
     CookieService,
     SplashScreenService,
+    LogService
   ]
 })
 

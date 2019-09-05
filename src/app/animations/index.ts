@@ -1,35 +1,47 @@
 import {
   trigger, animate, style, group, query,
-  transition, animateChild, animation, useAnimation, state } from '@angular/animations';
+  transition, animateChild, animation, useAnimation, state
+} from '@angular/animations';
 
 const customAnimation = animation([
   style({
-      opacity  : '{{opacity}}',
-      transform: 'scale({{scale}}) translate3d({{x}}, {{y}}, {{z}})'
+    opacity: '{{opacity}}',
+    transform: 'scale({{scale}}) translate3d({{x}}, {{y}}, {{z}})'
   }),
   animate('{{duration}} {{delay}} cubic-bezier(0.0, 0.0, 0.2, 1)', style('*'))
 ], {
   params: {
-      duration: '200ms',
-      delay   : '0ms',
-      opacity : '0',
-      scale   : '1',
-      x       : '0',
-      y       : '0',
-      z       : '0'
+    duration: '200ms',
+    delay: '0ms',
+    opacity: '0',
+    scale: '1',
+    x: '0',
+    y: '0',
+    z: '0'
   }
 });
+
+const decadeOpacity = animation([
+  transition(':enter', [
+    style({ opacity: 1 }),
+  ]),
+  transition(':leave', [
+    animate('.3s', style({ opacity: 0 }))
+  ])
+]);
 
 
 export const tgAnimations = [
 
   trigger('detailExpand', [
-    state('collapsed', style({height: '0px', minHeight: '0'})),
-    state('expanded', style({height: '*'})),
+    state('collapsed', style({ height: '0px', minHeight: '0' })),
+    state('expanded', style({ height: '*' })),
     transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
   ]),
 
   trigger('animate', [transition('void => *', [useAnimation(customAnimation)])]),
+
+  trigger('opacityDecade', [transition('void  => *', [useAnimation(decadeOpacity)])]),
 
   trigger('routerTransitionFade', [
 

@@ -35,7 +35,8 @@ export enum DataEvenType {
     SHOWCOMMANDS = '[Data] Show Commands List',
     SHOWCHARACTERSHEET = '[Data] Show Character Sheet',
     SHOWSTATUSHERO = '[Data] Show Status Hero Inline',
-    REFRESH = '[Client] Refresh server command'
+    REFRESH = '[Client] Refresh server command',
+    DIRECTION = '[Client] Character Direction'
 }
 
 export const mapAction = createAction(DataEvenType.MAP, props<{ map: any }>());
@@ -62,3 +63,4 @@ export const refreshCommandAction = createAction(DataEvenType.REFRESH);
 export const showCommandsActions = createAction(DataEvenType.SHOWCOMMANDS, props<{payload: any}>());
 export const showCharacterSheetActions = createAction(DataEvenType.SHOWCHARACTERSHEET, props<{payload: any}>());
 export const showStatusBoxAction = createAction(DataEvenType.SHOWSTATUSHERO, props<{payload: any}>());
+export const directionNotifyAction = createAction(DataEvenType.DIRECTION, props<{payload: any}>())

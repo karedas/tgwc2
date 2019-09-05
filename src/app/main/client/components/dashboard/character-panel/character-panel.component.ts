@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
-import { getHero } from 'src/app/main/client/store/selectors';
+import { getHero, getDirectionNotify } from 'src/app/main/client/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -12,11 +12,13 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../../client-config';
+import { tgAnimations } from 'src/app/animations';
 
 @Component({
   selector: 'tg-character-panel',
   templateUrl: './character-panel.component.html',
-  styleUrls: ['./character-panel.component.scss']
+  styleUrls: ['./character-panel.component.scss'],
+  animations: [tgAnimations],
 })
 export class CharacterPanelComponent implements OnInit, OnDestroy {
 
@@ -24,6 +26,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
   hero$: Observable<any>;
+  directionNotify$: Observable<any>;
   inCombat = false;
   // Hero Values
   heroImage = 'assets/images/interface/default_avatar.png';
@@ -48,6 +51,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   ) {
 
     this.hero$ = this.store.pipe(select(getHero));
+    this.directionNotify$ = this.store.pipe(select(getDirectionNotify));
 
     this._unsubscribeAll = new Subject();
   }

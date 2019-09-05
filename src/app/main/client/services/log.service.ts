@@ -11,9 +11,9 @@ export class LogService {
   date: Date;
   lineNumber = 0;
   log$: ReplaySubject<any> = new ReplaySubject<any>(500);
-  logStorage = [];
 
-  constructor() {
+  constructor(
+  ) {
 
     this.date = new Date();
     this.log$.pipe(
@@ -21,15 +21,13 @@ export class LogService {
     );
   }
 
-  getLog(): Observable<any> {
+  public getLog(): Observable<any> {
     return this.log$.asObservable();
   }
 
   startLoggingDate(): Date {
     return this.date;
   }
-
-
 
   parseForLog(data: any) {
 

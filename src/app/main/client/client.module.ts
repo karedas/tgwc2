@@ -10,11 +10,11 @@ import { AudioComponent } from './components/audio/audio.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
 import { OutputService } from './components/output/output.service';
-import { EffectsModule } from '@ngrx/effects';
 import { DataEffects } from './store/effects/data.effects';
 import { DispenserService } from './services/dispenser.service';
 import { StatusBarComponent } from './components/status-bar/status-bar.component';
 import { AutofocusInputbarDirective } from 'src/app/shared/directives/autofocus-inputbar.directive';
+import { EffectsModule } from '@ngrx/effects';
 
 const clientRouting: Routes = [
   {
@@ -47,7 +47,7 @@ const clientRouting: Routes = [
   ],
   providers: [
     OutputService,
-    DispenserService
+    DispenserService,
   ]
 })
 export class ClientModule {

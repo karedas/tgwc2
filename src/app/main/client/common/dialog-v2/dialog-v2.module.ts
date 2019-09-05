@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NewsComponent } from '../../components/windows/news/news.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginSmartComponent } from '../../components/windows/login-smart/login-smart.component';
 import { EditorComponent } from '../../components/windows/editor/editor.component';
@@ -17,7 +16,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
 
 @NgModule({
   declarations: [
-    NewsComponent,
     ShortcutsPanelComponent,
     LoginSmartComponent,
     EditorComponent,
@@ -39,7 +37,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
   ],
 
   entryComponents: [
-    NewsComponent,
     LoginSmartComponent,
     EditorComponent,
     BookComponent,
