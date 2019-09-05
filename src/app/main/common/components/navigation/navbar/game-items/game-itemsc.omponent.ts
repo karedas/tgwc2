@@ -1,10 +1,10 @@
 import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation } from '@angular/core';
-import gitInfo from 'src/git-version.json';
 import { ConfigService } from 'src/app/services/config.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { TGConfig } from 'src/app/main/client/client-config';
 import { DispenserService } from 'src/app/main/client/services/dispenser.service';
+import { versions } from 'src/environments/versions';
 
 @Component({
   selector: 'tg-game-items',
@@ -20,7 +20,7 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
   isMatMenu2Open = false;
   prevButtonTrigger;
 
-  gitVersion = gitInfo.raw;
+  gitVersion = versions.tag;
 
   private _unsubscribeAll: Subject<any>;
 

@@ -10,3 +10,8 @@ ng build --prod
 #TODO
 ### Book ###
 Add user experience  to call page by number
+
+
+
+### Make revision ###
+ts-node -O '{\"module\": \"commonjs\"}' git.version.ts

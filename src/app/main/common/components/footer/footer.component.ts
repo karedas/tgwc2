@@ -1,10 +1,10 @@
 
-import gitInfo from 'src/git-version.json';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { Router, NavigationStart } from '@angular/router';
+import { versions } from 'src/environments/versions';
 
 @Component({
   selector: 'tg-footer',
@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit , OnDestroy {
 
   showFooter = true;
   serverStat: any;
-  gitVersion = gitInfo.tag;
+  gitVersion = versions.tag;
   serverStatusMessage: boolean;
 
   // Private
