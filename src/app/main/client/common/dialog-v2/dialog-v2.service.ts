@@ -156,7 +156,7 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '750px';
       config.maxWidth = '100%';
-      config.height = '650px';
+      config.height = '700px';
       config.hasBackdrop = false;
       config.autoFocus = false;
       config.disableClose = false;

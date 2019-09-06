@@ -9,9 +9,8 @@
       </div>
 
       <mat-dialog-content class="tg-character-content">
-        <div fxLayout="row" style="height: 100%">
+        <div fxLayout="row" style="min-height: 100%">
           <!-- ######## Info Main Character ########  -->
-
           <div class="info-main" fxLayout="column" fxFlex="1 1 auto" fxHide.xs="true">
            
             <div class="info-avatar tg-shadow">
@@ -44,13 +43,12 @@
 
           </div>
           
-          <div class="right-data" fxLayout="column" fxFlex="0 1 100%" style="height:100%;">
+          <div class="right-data" fxLayout="column" fxFlex="0 1 100%">
             <tg-info *ngIf="data.tab == 'info'" style="height: 100%;"></tg-info>
             <tg-equip-inventory *ngIf="data.tab == 'equip' || data.tab == 'inventory'" style="height:100%;"
               [subTab]="data.tab"></tg-equip-inventory>
             <tg-skills *ngIf="data.tab == 'skills'"></tg-skills>
           </div>
-          
         </div>
       </mat-dialog-content>
       

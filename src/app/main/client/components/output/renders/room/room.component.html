@@ -78,13 +78,13 @@
         <!-- ## Button Back to Previous  -->
         <ng-container *ngIf="html.where">
           <div class="tg-backdetail" (click)="onBackDetail(html.where.num)">
-            <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>Si
-              trova&nbsp;<b>{{html.where.title}}</b></span>
+            <tg-icons [icon]="html.where.icon" class="squared"></tg-icons> <span>
+              Si trova&nbsp;<b>{{html.where.title}}</b></span>
           </div>
         </ng-container>
         <ng-container *ngIf="!html.where && type ==='objPersDetail'">
           <div class="tg-backdetail" (click)="onBackDetail()">
-            <span>Si trova qui&nbsp;<b>[guarda]</b></span>
+            <span>Si trova&nbsp;<b>[nella stanza]</b></span>
           </div>
         </ng-container>
         <!-- ## END Button Back to Previous  -->
