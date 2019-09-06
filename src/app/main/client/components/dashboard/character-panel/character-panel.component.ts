@@ -3,7 +3,7 @@ import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero, getDirectionNotify } from 'src/app/main/client/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { takeUntil, filter, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/main/client/models/data/hero.model';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -27,14 +27,13 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
       transition('* <=> *', [
         style({ opacity: 0,  transform: 'translateX(-25px)' }),
         group([
-          animate('0.4s ease-out', style({
+          animate('0.2s ease-out', style({
             transform: 'translateX(0)',
             opacity: 1
           })),
-          style({
-            opacity: 0,
-            transform: 'translateX(-25px)'
-          })
+          animate('0.2s 1.5s', style({
+            opacity: 0
+          }))
         ])
       ]),
       // transition(':leave',
@@ -75,12 +74,17 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
     this.hero$ = this.store.pipe(select(getHero));
     this.directionNotify$ = this.store.pipe(select(getDirectionNotify))
-    this.directionNotify$.subscribe(c => {console.log(c)});
-
+   
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
+
+    //ONLY FOR TEST
+    this.directionNotify$.pipe(
+      takeUntil(this._unsubscribeAll),
+      distinctUntilChanged()
+    ).subscribe(dir => {console.log(`TGLOG: Ti stai muovendo verso ${dir}`)});
 
 
     // Subscribe to config changes

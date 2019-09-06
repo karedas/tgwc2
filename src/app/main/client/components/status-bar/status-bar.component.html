@@ -32,7 +32,9 @@
         <div class="badge-label">
           Pos.
         </div>
-        <button mat-button [matMenuTriggerFor]="menuPosizione" class="tg-yellow with-label tg-status-bar--button">
+        <button mat-button [matMenuTriggerFor]="menuPosizione"
+          *ngIf="hero.position"
+          class="tg-yellow with-label tg-status-bar--button">
           <span class="status-icon-box status-position" [ngClass]="{
         'pos-0': (hero.position === '0'),
         'pos-2': (hero.position === '2'),

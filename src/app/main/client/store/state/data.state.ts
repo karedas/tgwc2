@@ -25,7 +25,7 @@ export interface DataState {
     region?: IRegion;
     book?: IBook;
     genericpage?: IGenericPage;
-    directionNotify: string
+    directionNotify: string[]
 }
 
 export const initialState: DataState = {
@@ -46,6 +46,6 @@ export const initialState: DataState = {
     region: undefined,
     book: undefined,
     genericpage: undefined,
-    directionNotify: ''
+    directionNotify: ['']
 };
 
