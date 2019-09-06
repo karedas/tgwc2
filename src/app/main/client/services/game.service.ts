@@ -111,6 +111,7 @@ export class GameService {
     private upadteEquip(now) {
         if (this.client_update.equipment.needed) {
             this.sendToServer('@equip');
+            this.client_update.equipment.needed= false;
             this.client_update.now = now;
         }
     }

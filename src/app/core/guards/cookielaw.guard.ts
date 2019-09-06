@@ -15,7 +15,6 @@ export class CookielawGuard implements CanActivate, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('canActivate');
       return this.checkCookieLawConsent();
     }
 
@@ -23,7 +22,6 @@ export class CookielawGuard implements CanActivate, CanLoad {
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
       if(this.cookieService.check('tgCookieLaw')) {
-        console.log('canload');
         return true;
 
       }

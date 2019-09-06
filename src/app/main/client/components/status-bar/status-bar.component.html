@@ -65,33 +65,35 @@
           <span class="status-icon-box status-combat-attegg">
             <i></i>
           </span>
-          {{hero.combat.atteg}}
+          {{hero.combat?.atteg}}
         </button>
         <mat-menu #menuAtteggiamento="matMenu" yPosition="above" class="compact">
           <button mat-menu-item (click)="onClickButton(attitude.cmd)" class="capitalize"
             *ngFor="let attitude of attitudeValue; let i = index;"
-            [ngClass]="{'tg-lt-red': (hero.combat.atteg === attitudeValue[i].msg)}">{{attitude.msg}}</button>
+            [ngClass]="{'tg-lt-red': (hero.combat?.atteg === attitudeValue[i].msg)}">{{attitude.msg}}</button>
         </mat-menu>
 
 
         <!-- Difesa -->
-
-        <div class="badge-label">
-          Difesa
-        </div>
-        <button mat-button [matMenuTriggerFor]="menuDifesa" class="tg-cyan with-label tg-status-bar--button">
-          <span class="status-icon-box status-combat-mod" [ngClass]="{
-              'mod-par-a': (hero?.combat.mod === 'deflettere'),
-              'mod-par-s': (hero?.combat.mod === 'parare'),
-              'mod-sch': (hero?.combat.mod === 'schivare')}">
-            <i></i>
-          </span>
-          {{hero.combat.mod}}</button>
-        <mat-menu #menuDifesa="matMenu" yPosition="above" class="compact">
-          <button mat-menu-item (click)="onClickButton(defense.cmd)" class="capitalize" class="capitalize"
-            *ngFor="let defense of defenseValue; let i = index;"
-            [ngClass]="{'tg-cyan': (hero.combat.mod === defense.msg)}">{{defense.msg}}</button>
-        </mat-menu>
+        <ng-container *ngIf="hero.combat?.mod">
+          <div class="badge-label">
+            Difesa
+          </div>
+          <button mat-button [matMenuTriggerFor]="menuDifesa" class="tg-cyan with-label tg-status-bar--button">
+            <span class="status-icon-box status-combat-mod" [ngClass]="{
+                'mod-par-a': (hero.combat.mod === 'deflettere'),
+                'mod-par-s': (hero.combat.mod === 'parare'),
+                'mod-sch': (hero.combat.mod === 'schivare')}">
+              <i></i>
+            </span>
+            {{hero.combat.mod}}</button>
+          <mat-menu #menuDifesa="matMenu" yPosition="above" class="compact">
+            <button mat-menu-item (click)="onClickButton(defense.cmd)" class="capitalize" class="capitalize"
+              *ngFor="let defense of defenseValue; let i = index;"
+              [ngClass]="{'tg-cyan': (hero.combat.mod === defense.msg)}">{{defense.msg}}</button>
+          </mat-menu>
+        </ng-container>
+        
 
       </div>
 

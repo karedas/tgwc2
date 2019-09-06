@@ -4,9 +4,7 @@
       <!-- Character Detail -->
       <div class="tg-character" fxLayout="row" fxFlex="1 0 auto">
         <!-- Character Avatar -->
-        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()"
-         fxHide fxShow.gt-sm
-         matRipple>
+        <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm matRipple>
           <div class="tg-avatar-wrap">
             <ng-container *ngIf="hero.image; else heroImage">
               <img src="{{env.media_address + hero.image}}" alt="Avatar" />
@@ -31,9 +29,9 @@
             <span class="charName">{{hero.name}}</span>
 
             <ng-container *ngIf="hero.hidden === '1'">
-                <span class="tg-lt-magenta">( NASCOSTO! )</span>
+              <span class="tg-lt-magenta">( NASCOSTO! )</span>
             </ng-container>
-            
+
             <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
               <!-- Conva -->
               <ng-template #convaTooltip>
@@ -57,8 +55,18 @@
               </ng-template> -->
 
               <div class="right">
-                <div *ngIf="directionNotify$ | async as dir" @opacityDecade>
-                  Ti muovi verso <span class="tg-green">{{dir}}</span>
+                <div *ngIf="directionNotify$ | async as dir"  [@fadeOutSlow]="dir">
+                  <div class="dir-text">
+                    <ng-container *ngIf="dir !== 'stop'; else stop">
+                        Ti muovi verso
+                        <span class="tg-green">{{dir}}</span>
+                    </ng-container>
+                    <ng-template #stop>
+                      <span class="tg-lt-red">
+                        Non riesci ad andare oltre!
+                      </span>
+                    </ng-template>
+                </div>
                 </div>
               </div>
             </div>
@@ -95,7 +103,7 @@
         </div>
       </div>
       <!-- Combat Panel -->
-      <div class="tg-combatpanel"[ngClass]="{'no-target': !inCombat}" fxFlex="0 0 auto" fxHide fxShow.gt-sm>
+      <div class="tg-combatpanel" [ngClass]="{'no-target': !inCombat}" fxFlex="0 0 auto" fxHide fxShow.gt-sm>
         <tg-combat-panel [enemyHealt]="enemyHealt" [enemyMove]="enemyMove" [enemyIcon]="enemyIcon"
           [enemyName]="enemyName"></tg-combat-panel>
       </div>

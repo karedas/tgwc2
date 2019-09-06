@@ -12,14 +12,37 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../../client-config';
-import { tgAnimations } from 'src/app/animations';
+import { trigger, state, style, transition, animate, group } from '@angular/animations';
 
 @Component({
   selector: 'tg-character-panel',
   templateUrl: './character-panel.component.html',
   styleUrls: ['./character-panel.component.scss'],
-  animations: [tgAnimations],
+  animations: [
+    trigger('fadeOutSlow', [
+      state('*', style({
+        display: 'inline-block',
+        transform: 'translateX(-25px)', opacity: 0
+      })),
+      transition('* <=> *', [
+        style({ opacity: 0,  transform: 'translateX(-25px)' }),
+        group([
+          animate('0.4s ease-out', style({
+            transform: 'translateX(0)',
+            opacity: 1
+          })),
+          style({
+            opacity: 0,
+            transform: 'translateX(-25px)'
+          })
+        ])
+      ]),
+      // transition(':leave',
+      //   animate(600, style({opacity: 0})))
+    ])
+  ]
 })
+
 export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   readonly env = environment;
@@ -51,7 +74,8 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   ) {
 
     this.hero$ = this.store.pipe(select(getHero));
-    this.directionNotify$ = this.store.pipe(select(getDirectionNotify));
+    this.directionNotify$ = this.store.pipe(select(getDirectionNotify))
+    this.directionNotify$.subscribe(c => {console.log(c)});
 
     this._unsubscribeAll = new Subject();
   }

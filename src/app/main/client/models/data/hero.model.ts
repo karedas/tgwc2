@@ -3,6 +3,12 @@ export interface IHeroRace {
   code: string;
 }
 
+export interface IHeroCombat {
+  mod: string,
+  atteg: string
+  pietoso: string
+  nosfodera: string
+}
 export interface IStatus {
   drink?: number;
   food?: number;
@@ -23,6 +29,14 @@ export interface ISex {
   code: string;
 }
 
+export interface IInventory {
+  list: Array<any>
+  up: boolean
+  ver: number
+  weight: number
+  wprc: number
+}
+
 export interface IHero {
   name?: string;
   adjective?: string;
@@ -34,7 +48,7 @@ export interface IHero {
   image?: string;
   conva?: string;
   hidden?: boolean;
-  combat?: any;
+  combat?: IHeroCombat;
   walk?: string;
   title?: string;
   status?: IStatus;
@@ -42,7 +56,7 @@ export interface IHero {
   fede?: string;
   sex?: ISex;
   equipment?: [];
-  inventory?: [];
+  inventory?: IInventory[]
   target?: ITarget;
   lang?: string;
   weight?: string;
@@ -58,7 +72,3 @@ export interface IHero {
   nosfodera?: string;
   wprc?: number;
 }
-
-// export class Hero implements IHero {
-//   constructor() {}
-// }

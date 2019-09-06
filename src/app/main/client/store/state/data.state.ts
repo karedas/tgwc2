@@ -35,7 +35,10 @@ export const initialState: DataState = {
     doors: undefined,
     room: undefined,
     map: undefined,
-    hero: undefined,
+    hero: {
+        equipment: [],
+        inventory: []
+    },
     editor: undefined,
     objPers: undefined,
     genericTable: undefined,

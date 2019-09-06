@@ -21,15 +21,6 @@ const customAnimation = animation([
   }
 });
 
-const decadeOpacity = animation([
-  transition(':enter', [
-    style({ opacity: 1 }),
-  ]),
-  transition(':leave', [
-    animate('.3s', style({ opacity: 0 }))
-  ])
-]);
-
 
 export const tgAnimations = [
 
@@ -40,8 +31,6 @@ export const tgAnimations = [
   ]),
 
   trigger('animate', [transition('void => *', [useAnimation(customAnimation)])]),
-
-  trigger('opacityDecade', [transition('void  => *', [useAnimation(decadeOpacity)])]),
 
   trigger('routerTransitionFade', [
 

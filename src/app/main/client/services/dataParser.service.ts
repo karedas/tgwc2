@@ -106,7 +106,7 @@ export class DataParser {
     data = data.replace(/&!up"[^"]*"\n*/gm,  this.clientUpdate.bind(this));
     data = data.replace(/&!img"[^"]*"\n*/gm, this.imageInSideFrameWithGamma.bind(this));
     data = data.replace(/&!im"[^"]*"\n*/gm, this.imageInSideFrame.bind(this));
-    data = data.replace(/&!dir:"[^"]*"\n*/gm, this.directionNotify.bind(this));
+    data = data.replace(/&!dir"[^"]*"\n*/gm, this.directionNotify.bind(this));
     data = data.replace(/&!ea"[^"]*"\n*/gm, this.closeTextEditor.bind(this));
     data = data.replace(/&!ed"[^"]*"\n*/gm, this.openTextEditorWithData.bind(this));
     data = data.replace(/&!map\{[\s\S]*?\}!/gm, this.map.bind(this));
@@ -305,8 +305,7 @@ export class DataParser {
   }
 
   private directionNotify(dir): string {
-    const dir_parse = JSON.parse(dir.slice(7, -1));
-    console.log(dir_parse);
+    const dir_parse = dir.slice(6, -1);
     this.store.dispatch(DataActions.directionNotifyAction({ payload: dir_parse }));
     return '';
   }

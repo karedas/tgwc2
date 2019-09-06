@@ -10,6 +10,7 @@
 
       <mat-dialog-content class="tg-character-content">
         <div fxLayout="row" style="min-height: 100%">
+          
           <!-- ######## Info Main Character ########  -->
           <div class="info-main" fxLayout="column" fxFlex="1 1 auto" fxHide.xs="true">
            
@@ -49,6 +50,7 @@
               [subTab]="data.tab"></tg-equip-inventory>
             <tg-skills *ngIf="data.tab == 'skills'"></tg-skills>
           </div>
+          
         </div>
       </mat-dialog-content>
       

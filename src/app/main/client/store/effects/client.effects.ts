@@ -2,14 +2,12 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientEventType } from '../actions/client.action';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { LogService } from '../../services/log.service';
-import { ClientState } from '../state/client.state';
 
 
 export interface PayloadAction {
@@ -47,8 +45,8 @@ export class ClientEffects {
     ofType(ClientEventType.INGAME),
     tap(() => {
       console.log('TG-LOG: User logged-in game');
-      this.gameService.processCommands('equip', false, false);
-      this.gameService.processCommands('inventario', false, false);
+      // this.gameService.sendToServer('@equip');
+      // this.gameService.sendToServer('@inventario');
     })
   );
 
