@@ -160,7 +160,6 @@ export class GameService {
     * @param isStored true or false if u need to watch history length)
     */
     public processCommands(val: string, isStored: boolean = true, isDialog?: boolean) {
-
         const cmds = this.dataParserService.parseInput(val, isDialog);
 
         if (cmds) {
@@ -244,7 +243,7 @@ export class GameService {
                 }
             });
 
-            cont.list.sort((a, b) => {
+            cont.list.sort((a, b)   => {
                 const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
                 const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
                 return <number>eq_pos_a - <number>eq_pos_b;

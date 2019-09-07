@@ -216,7 +216,7 @@ export class DataParser {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
   }
 
-  parseInput(input: any, isInDialog: boolean = true): any {
+  parseInput(input: any, isInDialog: boolean = this.isDialog): any {
 
     this.isDialog = isInDialog;
     /* Split input separated by ; */
@@ -411,7 +411,7 @@ export class DataParser {
 
   private skillList(skinfo: any): string {
     const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-    this.store.dispatch(DataActions.skillsAction({ payload: skinfo_parse }));
+    this.store.dispatch(DataActions.skillsAction({ payload: skinfo_parse, dialog: this.isDialog}));
     return '';
   }
 

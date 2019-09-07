@@ -37,7 +37,10 @@ export class DataEffects {
   skillsRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.SKILLS),
     switchMap((res) => {
-      this.dialogV2Service.openCharacterSheet('skills');
+
+      if(res.dialog) {
+        this.dialogV2Service.openCharacterSheet('skills');
+      }
       return [
         heroAction({ payload: { skills: res.payload } })
       ];
@@ -48,6 +51,7 @@ export class DataEffects {
   equipRequest$: Observable<Action> = this.actions$.pipe(
     ofType<PayloadActionData>(DataEvenType.EQUIP),
     switchMap((res) => {
+
       if (res.dialog) {
         this.dialogV2Service.openCharacterSheet('equip');
       }
