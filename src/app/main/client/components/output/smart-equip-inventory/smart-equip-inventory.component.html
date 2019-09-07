@@ -26,7 +26,7 @@
 
     </div>
     <div fxFlex="1 0 auto" class="equinv-container" *ngIf="show">
-      <ng-scrollbar class="scrollbar" fxFlex="1 1 100%" fxFlexFill>
+      <ng-scrollbar class="scrollbar" fxFlex="1 1 100%" fxFlexFill >
 
         <div class="eqinv-wrapper-list" fxLayout="column" *ngIf="equip && tab === 1">
           <ng-container *ngIf="equip.length > 0; else noequip">
@@ -37,22 +37,28 @@
               <div fxFlex="0 0 15%" fxLayoutAlign="start center">Peso</div>
             </div>
 
-            <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of equip">
-              <div fxFlex="1 0 auto" *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos" class="eqinv-item-wrap">
-                <div class="eqinv-item-position" fxFlex="0 0 20%" fxLayoutAlign="flex-start center">
-                  <span class="tg-yellow">{{pos}}</span>
+            <div fxLayout="column" fxFlex="0 1 100%">
+                <div class="eqinv-wrapper-list" fxLayout="column">
+
+                  <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of equip">
+                    <div fxFlex="1 0 auto" *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos" class="eqinv-item">
+                      <div class="eqinv-item-position" fxFlex="0 0 20%" fxLayoutAlign="flex-start center">
+                        <span class="tg-yellow">{{pos}}</span>
+                      </div>
+                      <div class="eqinv-item" 
+                        fxFlex="0 0 65%" 
+                        fxLayoutAlign="flex-start center"
+                        tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0"
+                        (click)="interactElement(item)">
+                        <tg-icons [icon]="item.icon"></tg-icons>
+                        <tg-hstat [condprc]="item.condprc"></tg-hstat>
+                        <span [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></span>
+                      </div>
+                      <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="flex-start center">{{item.wgt}}pt</div>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="eqinv-item" 
-                  fxFlex="0 0 65%" 
-                  fxLayoutAlign="flex-start center"
-                  tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0"
-                  (click)="interactElement(item)">
-                  <tg-icons [icon]="item.icon"></tg-icons>
-                  <tg-hstat [condprc]="item.condprc"></tg-hstat>
-                  <span [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></span>
-                </div>
-                <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="flex-start center">{{item.wgt}}pt</div>
-              </div>
             </div>
 
           </ng-container>

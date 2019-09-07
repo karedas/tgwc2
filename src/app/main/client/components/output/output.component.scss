@@ -357,12 +357,13 @@ tg-text {
     }
 
     .tg-room--image {
-      max-width: 148px;
+      max-width: 40%;
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
       margin: 4px .5em 0 2px;
-
+      width: 190px;
+      
       img {
         float: left;
         max-width: 100%;

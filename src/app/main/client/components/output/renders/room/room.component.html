@@ -82,7 +82,7 @@
         </ng-container>
         <!-- ## END Button Back to Previous  -->
   
-        <div style="height: 100%; overflow:hidden;">
+        <div>
           <ng-container *ngIf="type === 'room'">
             <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"
               *ngIf="(html.perscont?.list.length > 0  || html.objcont?.list.length > 0); else noobjpers">

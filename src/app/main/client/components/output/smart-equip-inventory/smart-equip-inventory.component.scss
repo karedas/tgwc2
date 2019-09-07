@@ -50,6 +50,9 @@
 
 .eqinv-item-wrap {
     border-bottom: 1px solid #191616;
+    &:first-child {
+        padding-top: 12px;
+    }
 }
 
 .eqinv-item, .eqinv-item-weight, .eqinv-item-position, .eqinv-item-qty {
