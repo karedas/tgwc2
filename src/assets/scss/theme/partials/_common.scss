@@ -32,6 +32,7 @@
   
   &.squared {
     @include sprite($base-square-sprite);
+    width: 26px!important;
     display: flex;
   
     .tg-icon {
@@ -79,12 +80,16 @@
 }
 
 .tg-shadow-inout {
-  box-shadow:1px 0 6px 0px  black inset,   0px 5px 9px 2px black ; 
+  box-shadow: 0px -2px 9px 2px black inset, 0px 5px 9px 2px black; 
 }
 
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 

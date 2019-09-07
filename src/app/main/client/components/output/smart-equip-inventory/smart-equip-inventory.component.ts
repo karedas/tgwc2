@@ -67,7 +67,8 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       });
   }
 
-  onTabClick(cmd: string, tab: number) {
+  onTabClick(cmd: string, tab: number, event: Event) {
+    event.stopImmediatePropagation();
     this.tab = tab;
     this.gameService.processCommands('@'+cmd, false, false);
   }
@@ -82,6 +83,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   }
 
   interactElement(item, mine: boolean) {
+
     this.gameService.interact(item, null, mine);
   }
 

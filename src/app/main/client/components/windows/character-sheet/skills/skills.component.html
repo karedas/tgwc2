@@ -1,6 +1,7 @@
 <div fxLayout="column" style="height: 100%">
   <!-- ######## Ability ########  -->
   <div class="skill-list" fxLayout="column">
+      <h3 class="panel-title">Abilità principali</h3>
     <div style="overflow: hidden; height: 100%;">
 
       <ng-scrollbar class="scrollbar" [appearance]="'compact'">
@@ -18,13 +19,13 @@
 
                 <div class="skill-detail" *ngFor="let subskill of skill.value | keyvalue" fxFlex="0 1 100%"
                   fxLayoutAlign="start center" fxLayoutGap="10px">
-                  <div class="skill-name" fxFlex="0 1 50%">
+                  <div class="skill-name" fxFlex="0 1 40%">
                     {{subskill.key}}
                   </div>
-                  <div class="meter2" fxFlex="0 1 50%">
+                  <div class="meter2" fxFlex="0 1 35%">
                     <span [style.width.%]="heroSkillsValue.indexOf(subskill.value.prac) * 10"></span>
                   </div>
-                  <div fxFlex="0 1 30%">
+                  <div fxFlex="0 1 25%">
                     {{subskill.value.prac}}
                   </div>
                 </div>

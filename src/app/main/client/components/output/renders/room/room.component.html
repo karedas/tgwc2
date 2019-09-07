@@ -38,21 +38,17 @@
       <ng-scrollbar class="scrollbar-output" #scrollBar *ngIf="type === 'room' || type === 'objPersDetail'">
   
         <div class="tg-extraoutput--header">
-  
           <!-- Room Title -->
           <div class="tg-room--title">
             <ng-container *ngIf="html.title; else extra_dirRoomtitle">
               <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span
                 [innerHtml]="html.title | dataToHtml:true"></span>
             </ng-container>
-  
           </div>
-  
           <!-- Image -->
           <div class="tg-room--image" *ngIf="html.image">
             <img [src]="getRoomImage(html.image)" />
           </div>
-  
           <!-- Room Description -->
           <ng-container *ngIf="type === 'room'">
             <div class="tg-room--desc">
@@ -66,15 +62,12 @@
               </ng-template>
             </div>
           </ng-container>
-  
           <ng-container *ngIf="type ==='objPersDetail' && html.desc">
             <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc.base"></div>
             <div class="tg-objperson--descdetail tg-green"
               [innerHtml]="(html.desc.details)  | capitalizeFirst | dataToHtml:true" *ngIf="html.desc.details"></div>
           </ng-container>
-  
         </div>
-  
         <!-- ## Button Back to Previous  -->
         <ng-container *ngIf="html.where">
           <div class="tg-backdetail" (click)="onBackDetail(html.where.num)">
@@ -89,7 +82,6 @@
         </ng-container>
         <!-- ## END Button Back to Previous  -->
   
-  
         <div style="height: 100%; overflow:hidden;">
           <ng-container *ngIf="type === 'room'">
             <tg-details-room [objs]="html.objcont?.list" [persons]="html.perscont?.list"
@@ -101,7 +93,7 @@
               *ngIf="html.eqcont || html.objcont; else nothing"></tg-objpers-container>
             <ng-template #nothing>
               <div class="tg-objperson--nothing">
-                &#8618; Non sembra contenere&nbsp;<span class="tg-gray"> niente</span>.
+                &#8618; Non sembra contenere&nbsp;<span class="tg-gray">niente</span>.
               </div>
             </ng-template>
           </ng-container>
@@ -109,7 +101,6 @@
       </ng-scrollbar>
     </ng-container>
   </ng-template>
-
 
   <ng-template #extra_dirRoomtitle>
     Sposti lo sguardo {{(html.dir === 'basso' || html.dir === 'alto') ? 'in' : 'a' }}&nbsp;<span>{{html.dir}}</span>

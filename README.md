@@ -1,9 +1,9 @@
 # TG BUILD
 
-#Development
+# Development #
  ng build --configuration development --base-href /wclientv2/ --rebase-root-relative-css-urls true
 
-#Prod
+# Prod #
 ng build --prod
 
 

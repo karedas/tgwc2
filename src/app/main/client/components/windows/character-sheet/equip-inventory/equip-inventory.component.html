@@ -1,32 +1,35 @@
-<div style="height: 100%">
-  <!-- ######## Ability ########  -->
-  <div class="eqinv-container">
+<div fxLayout="column" style="height: 100%">
+  <!-- ######## Equip / Inventory ########  -->
+  <div class="eqinv-container" fxLayout="column">
     <ng-container *ngIf="openedSubTab == 'inventory'">
       <div class="inventory-list tg-shadow-inset" fxLayout="column" *ngIf="inventory$ | async; let inventory">
 
-        <h3>Inventario</h3>
+        <h3 class="panel-title">Inventario</h3>
         
         <ng-container *ngIf="inventory.list.length > 0; else noinv">
           <div class="eqinv-caption" fxLayout="row">
-            <div fxFlex="0 0 60%" fxLayoutAlign="center center">Oggetto</div>
-            <div fxFlex="0 0 20%" fxLayoutAlign="center center">Quantità</div>
-            <div fxFlex="0 0 20%" fxLayoutAlign="center center">Peso</div>
+            <div fxFlex="0 0 60%" fxLayoutAlign="start center">Oggetto</div>
+            <div fxFlex="0 0 20%" fxLayoutAlign="start center">Quantità</div>
+            <div fxFlex="0 0 20%" fxLayoutAlign="start center">Peso</div>
           </div>
 
           <div fxLayout="column" fxFlex="0 1 100%">
-            <ng-scrollbar class="scrollbar" [visibility]="'always'">
+            <ng-scrollbar class="scrollbar">
               <div class="eqinv-wrapper-list" fxLayout="column">
 
-                <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of inventory.list">
+                <div fxFlex="1 0 auto" 
+                  class="eqinv-item-wrap" 
+                  *ngFor="let item of inventory.list" 
+                  (click)="onInteract(item)">
                   <div class="eqinv-item" fxFlex="0 0 60%" fxLayoutAlign="start center">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
                     <span [innerHtml]="item.desc | dataToHtml"></span>
                   </div>
-                  <div class="eqinv-item-qty" fxFlex="0 0 20%" fxLayoutAlign="center center">
+                  <div class="eqinv-item-qty" fxFlex="0 0 20%" fxLayoutAlign="start center">
                     {{item.sz || '1'}}
                   </div>
-                  <div class="eqinv-item-weight" fxFlex="0 0 20%" fxLayoutAlign="center center">
+                  <div class="eqinv-item-weight" fxFlex="0 0 20%" fxLayoutAlign="start center">
                     {{item.wgt}} pt</div>
                 </div>
 
@@ -49,15 +52,15 @@
 
     <ng-container *ngIf="openedSubTab == 'equip'">
       <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equip;">
-        <h3>
+        <h3 class="panel-title">
           Equipaggiamento
         </h3>
 
-        <ng-container>
+        <ng-container *ngIf="equip">
           <div class="eqinv-caption" fxLayout="row" fxFlex="0 0 auto">
-            <div fxFlex="0 0 30%" fxLayoutAlign="flex-end center">Dove</div>
-            <div fxFlex="0 0 55%" fxLayoutAlign="center center">Oggetto</div>
-            <div fxFlex="0 0 15%" fxLayoutAlign="center center">Peso</div>
+            <div fxFlex="0 0 20%" fxLayoutAlign="start center">Dove</div>
+            <div fxFlex="0 0 65%" fxLayoutAlign="start center">Oggetto</div>
+            <div fxFlex="0 0 15%" fxLayoutAlign="start center">Peso</div>
           </div>
 
           <div fxLayout="column" fxFlex="0 1 100%">
@@ -65,8 +68,11 @@
               <div class="eqinv-wrapper-list" fxLayout="column">
 
                 <ng-container *ngFor="let item of equip">
-                  <div fxFlex="1 0 auto" *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos"
-                    class="eqinv-item-wrap">
+                  <div 
+                    fxFlex="1 0 auto" 
+                    *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos"
+                    class="eqinv-item-wrap"
+                    (click)="onInteract(item)">
                     <div class="eqinv-item-position" fxFlex="0 0 20%" fxLayoutAlign="start center">
                       <span class="tg-yellow">{{pos}}</span>
                     </div>
@@ -75,7 +81,7 @@
                       <tg-hstat [condprc]="item.condprc"></tg-hstat>
                       <span [innerHtml]="item.desc | dataToHtml"></span>
                     </div>
-                    <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="center center">{{item.wgt}}pt</div>
+                    <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="start center">{{item.wgt}}pt</div>
                   </div>
                 </ng-container>
 
@@ -87,10 +93,8 @@
         <ng-template #noequip>
           <span class="no-items-notice">Sei nudo/a!<br/>Forse è il caso di indossare qualcosa...</span>
         </ng-template>
-
-
         <ng-container [ngTemplateOutlet]="equipInvAction"
-          [ngTemplateOutletContext]="{wprc: equip.wprc, weight: equip.weight}">
+        [ngTemplateOutletContext]="{wprc: wprc, weight: weight}">
         </ng-container>
       </div>
     </ng-container>
@@ -109,7 +113,7 @@
       </div>
     </div>
     <div class="eqinv-totalweight-label" fxFlex="1 0 auto" fxLayoutAlign="flex-end center">
-      Ingombro:&nbsp;<span class="tg-red">{{wprc}} / 100 </span>
+      Ingombro:&nbsp;<span class="tg-lt-red">{{wprc}} / 100 </span>
       <span class="eqinv-totalweight-value" fxFlex="0 0 auto" fxLayoutAlign="center center">
         - Peso Totale:&nbsp;<b class="tg-brown">{{weight}} pt</b>
       </span>

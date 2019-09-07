@@ -22,13 +22,12 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
     trigger('fadeOutSlow', [
       state('*', style({
         display: 'inline-block',
-        transform: 'translateX(-25px)', opacity: 0
+        opacity: 0
       })),
       transition('* <=> *', [
-        style({ opacity: 0,  transform: 'translateX(-25px)' }),
+        style({ opacity: 0 }),
         group([
           animate('0.2s ease-out', style({
-            transform: 'translateX(0)',
             opacity: 1
           })),
           animate('0.2s 1.5s', style({

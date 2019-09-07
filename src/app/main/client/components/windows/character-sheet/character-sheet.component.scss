@@ -16,7 +16,7 @@
   }
 
   .info-main {
-    padding: 1em;
+    padding: 6px 8px 6px 4px;
     position: relative;
     background: #00000087 url($imgPath + '/borders/border-002-tiny-v.png') repeat-y right;
   }
@@ -26,7 +26,7 @@
     margin-top: auto;
 
     button {
-      margin: 0 auto 12px;
+      margin: 8px auto 0px;
       display: block;
       border: none;
       border-radius: 0;
@@ -115,6 +115,7 @@
   .info-nametitle {
     padding: 1em 0;
     text-align: center;
+    font-family: 'Modern Antiqua', cursive;
   }
 
   .info-name {
@@ -150,4 +151,17 @@
   .right-data {
     overflow: hidden;
   }
+}
+
+::ng-deep .panel-title {
+  color: #dad6c1;
+  font-size: 1em;
+  margin: 0;
+  text-align: center;
+  padding: 0.5em 0;
+  background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
+  box-shadow: inset 0px -5px 11px 0px black;
+  border-bottom: 1px solid #433b3a;
+  font-family: 'Modern Antiqua', cursive;
+  font-weight: normal;
 }

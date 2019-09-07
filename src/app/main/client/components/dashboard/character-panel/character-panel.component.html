@@ -29,7 +29,7 @@
             <span class="charName">{{hero.name}}</span>
 
             <ng-container *ngIf="hero.hidden === '1'">
-              <span class="tg-lt-magenta">( NASCOSTO! )</span>
+              <span class="tg-lt-magenta">(NASCOSTO!)</span>
             </ng-container>
 
             <div class="hero-infostatus" fxLayout fxFlex="1 0 auto" fxLayoutAlign="start center">
@@ -57,7 +57,7 @@
               <div class="right">
                 <div *ngIf="directionNotify$ | async as dir"  [@fadeOutSlow]="dir">
                   <div class="dir-text">
-                    <ng-container *ngIf="dir !== 'stop'; else stop">
+                    <ng-container *ngIf="dir != 'stop'; else stop">
                         Ti muovi verso
                         <span class="tg-green">{{dir}}</span>
                     </ng-container>

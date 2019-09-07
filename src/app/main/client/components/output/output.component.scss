@@ -144,8 +144,8 @@ tg-text {
       border: 1px solid #433b3a;
       border-top: 0;
       border-left: 0;
-      padding: 2px 8px 2px 9px;
-      color: #95ae97;
+      padding: 2px 8px 2px 6px;
+      color: $base-text-color;
       vertical-align: middle;
       display: flex;
       margin: 1px 0 2px;
@@ -156,6 +156,8 @@ tg-text {
     }
 
     b {
+      font-weight: normal;
+      text-decoration: underline;
       color: $tg-lt-yellow;
     }
 
@@ -314,16 +316,18 @@ tg-text {
     overflow: hidden;
     margin-left: 0;
     margin-right: 0;
+    padding-right: 6px;
     border-bottom: 1px solid #433b3a;
-    box-shadow: inset 0 -13px 65px 0px black;
+    box-shadow: inset 0px -5px 11px 0px black;
     background: url($imgPath + '/background/detaildesc-bg.jpg');
     flex: 0 0 auto;
 
     .tg-room--title {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
+      font-family: 'Modern Antiqua', cursive;
       padding: 0px 4px 0 0;
       color: #dbbf90;
-      box-shadow: inset 0px 0px 6px 0px black;
+      box-shadow: inset 0px -5px 11px 0px black;
       font-size: 1.2em;
       overflow: hidden;
       display: flex;
@@ -348,7 +352,7 @@ tg-text {
 
     .tg-objperson--descdetail {
       display: block;
-      padding: 0 0 0.5em 0.2em;
+      padding: 0 0 0.5em 0;
       line-height: 1.4;
     }
 
@@ -357,7 +361,7 @@ tg-text {
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: 4px .5em 0 0px;
+      margin: 4px .5em 0 2px;
 
       img {
         float: left;

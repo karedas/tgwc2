@@ -154,7 +154,7 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '750px';
+      config.width = '800px';
       config.maxWidth = '100%';
       config.height = '700px';
       config.hasBackdrop = false;

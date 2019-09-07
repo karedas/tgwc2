@@ -66,15 +66,15 @@
       line-height: 18px;
       text-align: left;
       letter-spacing: 1px;
-      font-size: .8em;
+      font-size: 1em;
       width: 100%;
       color: $base-text-color;
       padding: 2px 0 0;
     }
 
     .charName {
+      font-family: 'Modern Antiqua', cursive;
       text-shadow: 0 0 9px #f8fdda;
-      text-transform: uppercase;
       padding-left: 8px;
       color: #f1ebc2;
       padding-right: 0.5em;
@@ -92,7 +92,6 @@
       font-size: 12px;
 
       >div {
-        padding-right: 6px;
         margin: auto .5em auto;
         cursor: pointer;
       }
@@ -111,7 +110,6 @@
 
       .right {
         margin-left: auto;
-        border-left: 1px solid rgba(255, 255, 255, 0.2);
         padding-left: 12px;
         font-size: 0.9em;
       }
@@ -188,6 +186,7 @@
         left: 50%;
         transform: translateX(-50%);
         font-size: 10px;
+        white-space: nowrap;
         color: $tg-white;
         text-transform: uppercase;
 

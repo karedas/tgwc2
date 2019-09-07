@@ -47,7 +47,7 @@
           {{positionValue[hero.position].msg}}</button>
         <mat-menu #menuPosizione="matMenu" yPosition="above" class="compact">
           <ng-container *ngFor="let position of positionValue; let i = index;">
-            <button mat-menu-item *ngIf="position.cmd" (click)="onClickButton(position.cmd)" class="capitalize"
+            <button mat-menu-item *ngIf="position.cmd" (click)="onClickButton(position.cmd)" class="uppercase" style="font-size:.8em"
               [ngClass]="{'tg-yellow': (+hero.position === i)}">{{position.msg}}</button>
           </ng-container>
         </mat-menu>
@@ -70,7 +70,7 @@
           {{hero.combat?.atteg}}
         </button>
         <mat-menu #menuAtteggiamento="matMenu" yPosition="above" class="compact">
-          <button mat-menu-item (click)="onClickButton(attitude.cmd)" class="capitalize"
+          <button mat-menu-item (click)="onClickButton(attitude.cmd)" class="uppercase" style="font-size:.8em"
             *ngFor="let attitude of attitudeValue; let i = index;"
             [ngClass]="{'tg-lt-red': (hero.combat?.atteg === attitudeValue[i].msg)}">{{attitude.msg}}</button>
         </mat-menu>
@@ -90,13 +90,11 @@
             </span>
             {{hero.combat.mod}}</button>
           <mat-menu #menuDifesa="matMenu" yPosition="above" class="compact">
-            <button mat-menu-item (click)="onClickButton(defense.cmd)" class="capitalize" class="capitalize"
+            <button mat-menu-item (click)="onClickButton(defense.cmd)" class="uppercase" style="font-size:.8em"
               *ngFor="let defense of defenseValue; let i = index;"
               [ngClass]="{'tg-cyan': (hero.combat.mod === defense.msg)}">{{defense.msg}}</button>
           </mat-menu>
         </ng-container>
-        
-
       </div>
 
     </div>

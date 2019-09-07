@@ -94,7 +94,7 @@
   }
 
   &.btn-workcmd {
-    @include sprite($btn-lavora-sprite);
+    @include sprite($next_square-sprite);
 
     &:hover {
       @include sprite($btn-lavora-hover-sprite);
