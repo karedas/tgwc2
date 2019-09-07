@@ -36,6 +36,7 @@ export class ObjPersContainerComponent implements OnInit  {
     // this.eqcont.list =
     this.eqcont = this.gameService.orderObjectsList(this.eqcont);
 
+
     if (this.objcont) {
       this.populateToggleExpandable();
     }

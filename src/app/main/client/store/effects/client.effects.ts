@@ -45,8 +45,6 @@ export class ClientEffects {
     ofType(ClientEventType.INGAME),
     tap(() => {
       console.log('TG-LOG: User logged-in game');
-      // this.gameService.sendToServer('@equip');
-      // this.gameService.sendToServer('@inventario');
     })
   );
 

@@ -42,7 +42,7 @@
           <div class="tg-room--title">
             <ng-container *ngIf="html.title; else extra_dirRoomtitle">
               <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span
-                [innerHtml]="html.title | dataToHtml:true"></span>
+                [innerHtml]="html.title | dataToHtml:true | capitalizeFirst"></span>
             </ng-container>
           </div>
           <!-- Image -->

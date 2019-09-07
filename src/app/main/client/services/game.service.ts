@@ -218,20 +218,24 @@ export class GameService {
 
     /* Ordfer Objects Persons or Objects list */
     public orderObjectsList(items: any): any {
-        if (items && items.list) {
-            items['list'].slice().sort((a: any, b: any) => {
-                const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
-                const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
-                return <number>eq_pos_a - <number>eq_pos_b;
-            });
-            return items;
-        }
 
+        if(items && !items.hasOwnProperty('ver')){
+            let listItem = JSON.parse(JSON.stringify(items));
+    
+            listItem['list'].sort((a,b)  => {
+                const eq_pos_a = Object.keys(a.eq) ? a.eq[0] : 0;
+                const eq_pos_b = Object.keys(b.eq) ? b.eq[0] : 0;
+                return eq_pos_a- eq_pos_b;
+            });
+            
+            return listItem;
+
+        } else {
+            
         /* Order for personal Equipment  */
-        if (items && typeof items.ver === 'number') {
             const cont = {
                 list: []
-            };
+            }
 
             Object.keys(items).forEach((poskey: any, idbx: any) => {
                 const where = equip_positions_by_name[poskey];
@@ -241,8 +245,8 @@ export class GameService {
             });
 
             cont.list.sort((a, b) => {
-                const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[1]] : 0;
-                const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[1]] : 0;
+                const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
+                const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
                 return <number>eq_pos_a - <number>eq_pos_b;
             });
 

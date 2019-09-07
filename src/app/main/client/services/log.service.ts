@@ -77,6 +77,14 @@ export class LogService {
       return this.printTable(t);
     });
 
+    
+    // Direction 
+    data = data.replace(/&!dir"[^"]*"\n*/gm, (dir) => {
+      const dir_parse = dir.slice(6, -1);
+      this.printDirectionNotify(dir_parse);
+    });
+
+
     // Room details
     data = data.replace(/&!room\{[\s\S]*?\}!/gm, (dtls) => {
       dtls = JSON.parse(dtls.slice(6, -1));
@@ -186,6 +194,11 @@ export class LogService {
 
   //   return msg;
   // }
+
+  private printDirectionNotify(dir: any) {
+    return `<p>Ti muovi verso ${dir}</p>`
+  }
+
 
   private printPage(p: any): any {
     return '<h3>' + p.title + '</h3><div>' + p.text.replace(/\n/gm, '<br>') + '</div>';
