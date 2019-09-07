@@ -40,7 +40,7 @@
             <div fxLayout="column" fxFlex="0 1 100%">
                 <div class="eqinv-wrapper-list" fxLayout="column">
 
-                  <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of equip">
+                  <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of equip" (click)="interactElement(item)">
                     <div fxFlex="1 0 auto" *ngIf="equipPositionValue[(item.eq[0] - 1)][1]; let pos" class="eqinv-item">
                       <div class="eqinv-item-position" fxFlex="0 0 20%" fxLayoutAlign="flex-start center">
                         <span class="tg-yellow">{{pos}}</span>
@@ -48,8 +48,7 @@
                       <div class="eqinv-item" 
                         fxFlex="0 0 65%" 
                         fxLayoutAlign="flex-start center"
-                        tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0"
-                        (click)="interactElement(item)">
+                        tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0">
                         <tg-icons [icon]="item.icon"></tg-icons>
                         <tg-hstat [condprc]="item.condprc"></tg-hstat>
                         <span [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></span>
@@ -75,12 +74,11 @@
 
             <div fxLayout="column" fxFlex="0 1 100%">
               <div class="eqinv-wrapper-list" fxLayout="column">
-                <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of inventory">
+                <div fxFlex="1 0 auto" class="eqinv-item-wrap" *ngFor="let item of inventory" (click)="interactElement(item, true)">
                   <div class="eqinv-item" 
                     fxFlex="0 0 60%" 
                     fxLayoutAlign="flex-start center"
-                    tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0"
-                    (click)="interactElement(item, true)">
+                    tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
                     <span [innerHtml]="item.desc | dataToHtml"></span>

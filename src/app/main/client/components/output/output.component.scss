@@ -316,7 +316,7 @@ tg-text {
     overflow: hidden;
     margin-left: 0;
     margin-right: 0;
-    padding-right: 6px;
+    padding-right: 0;
     border-bottom: 1px solid #433b3a;
     box-shadow: inset 0px -5px 11px 0px black;
     background: url($imgPath + '/background/detaildesc-bg.jpg');
@@ -325,7 +325,7 @@ tg-text {
     .tg-room--title {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
       font-family: 'Modern Antiqua', cursive;
-      padding: 0px 4px 0 0;
+      padding: 0px 12px 0 0;
       color: #dbbf90;
       box-shadow: inset 0px -5px 11px 0px black;
       font-size: 1.2em;
@@ -344,11 +344,10 @@ tg-text {
 
     .tg-room--desc {
       color: $base-text-color;
-      padding: 0.5em 0.5em .2em 0;
+      padding: 0.5em 12px .2em 0;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
     }
-
 
     .tg-objperson--descdetail {
       display: block;

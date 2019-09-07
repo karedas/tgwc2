@@ -50,8 +50,14 @@
 
 .eqinv-item-wrap {
     border-bottom: 1px solid #191616;
+    cursor: pointer;
+    
     &:first-child {
-        padding-top: 12px;
+        margin-top: 12px;
+    }
+    
+    &:hover {
+        background-color: rgba(158, 158, 158, 0.1);
     }
 }
 
