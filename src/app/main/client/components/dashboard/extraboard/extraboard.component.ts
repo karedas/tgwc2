@@ -16,7 +16,7 @@ export class ExtraboardComponent {
 
 
   buttonClick(cmd: string) {
-    this.game.processCommands(cmd);
+    this.game.processCommands(cmd, true, true);
   }
 
   openPreferences() {

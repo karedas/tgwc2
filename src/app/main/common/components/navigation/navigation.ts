@@ -60,25 +60,25 @@ export const gameNavigationSideBar: NavigationItem[] = [
     children: [
       {
         id: 'openInfo',
-        title: 'Apri informazioni',
+        title: 'Informazioni',
         type: 'item',
         do: 'info'
       },
       {
         id: 'openEquip',
-        title: 'Apri Equipaggiamento',
+        title: 'Equipaggiamento',
         type: 'item',
         do: 'equip'
       },
       {
         id: 'openInventory',
-        title: 'Apri Inventario',
+        title: 'Inventario',
         type: 'item',
         do: 'inventario'
       },
       {
         id: 'showSkills',
-        title: 'Visualizza Abilità',
+        title: 'Abilità conosciute',
         type: 'item',
         do: 'abilita'
       },

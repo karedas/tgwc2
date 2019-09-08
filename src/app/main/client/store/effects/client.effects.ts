@@ -32,6 +32,10 @@ export class ClientEffects {
   onDisconnect: Observable<Action> = this.actions$.pipe(
     ofType(ClientEventType.DISCONNECT),
     tap((a) => {
+      const config = JSON.parse(localStorage.getItem('config'));
+      if(config.logSave) {
+        this.dialogV2Service.openLog();
+      }
       if (this.router.url === '/webclient') {
         this.audioService.pauseAudio();
         this.dialogV2Service.openSmartLogin();
@@ -47,17 +51,4 @@ export class ClientEffects {
       console.log('TG-LOG: User logged-in game');
     })
   );
-
-  @Effect({ dispatch: false })
-  disconnectAction$: Observable<any> = this.actions$.pipe(
-    ofType(ClientEventType.DISCONNECT),
-    tap(() => {
-      const config = JSON.parse(localStorage.getItem('config'));
-      if(config.logSave) {
-        this.dialogV2Service.openLog();
-      }
-      console.log('TG-LOG: User Disconnected');
-    })
-  );
-
 }

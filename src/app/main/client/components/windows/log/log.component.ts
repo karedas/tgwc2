@@ -14,7 +14,7 @@ export class LogComponent implements OnInit, OnDestroy {
 
   @ViewChild('logContentArea', { static: true }) logContentArea: ElementRef;
 
-  logStorage = [];
+  logStorage: any;
   dateTime: string;
 
   private _unsubscribeAll: Subject<any>;
@@ -32,7 +32,7 @@ export class LogComponent implements OnInit, OnDestroy {
     this.logService.getLog()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((log: any) => {
-        this.logStorage.push(log);
+        this.logStorage = log;
       });
   }
 

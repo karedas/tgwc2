@@ -22,7 +22,7 @@
           </button>
         <mat-menu #menuVelocita="matMenu" yPosition="above" class="compact">
           <ng-container *ngFor="let speed of speedValue; let i = index;">
-            <button mat-menu-item *ngIf="speed.cmd" (click)="onClickButton(speed.cmd)"
+            <button mat-menu-item *ngIf="speed.cmd" (click)="onClickButton(speed.cmd)" class="uppercase" style="font-size:.8em"
               [ngClass]="{'tg-yellow': (hero.walk === speed.msg)}">{{speed.msg}}</button>
           </ng-container>
         </mat-menu>

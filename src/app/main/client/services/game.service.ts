@@ -220,13 +220,14 @@ export class GameService {
 
         if(items && !items.hasOwnProperty('ver')){
             let listItem = JSON.parse(JSON.stringify(items));
-    
-            listItem['list'].sort((a,b)  => {
-                const eq_pos_a = Object.keys(a.eq) ? a.eq[0] : 0;
-                const eq_pos_b = Object.keys(b.eq) ? b.eq[0] : 0;
-                return eq_pos_a- eq_pos_b;
-            });
             
+            if(listItem.list) {
+                listItem['list'].sort((a,b)  => {
+                    const eq_pos_a = Object.keys(a.eq) ? a.eq[0] : 0;
+                    const eq_pos_b = Object.keys(b.eq) ? b.eq[0] : 0;
+                    return eq_pos_a- eq_pos_b;
+                });
+            }
             return listItem;
 
         } else {

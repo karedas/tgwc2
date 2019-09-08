@@ -3,9 +3,7 @@ import { MapSnowService } from './map-snow.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 export const images_path = './assets/images/';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class MapService extends MapSnowService {
 

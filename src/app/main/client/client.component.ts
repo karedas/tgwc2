@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { TGConfig } from './client-config';
 import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
+import { LogService } from './services/log.service';
 
 @Component({
   selector: 'tg-client',
@@ -14,7 +15,7 @@ import { ConfigService } from 'src/app/services/config.service';
       flex: 1;
       height: 100%;
     }
-  `]
+  `],
 })
 
 export class ClientComponent implements OnInit, OnDestroy {
@@ -26,7 +27,8 @@ export class ClientComponent implements OnInit, OnDestroy {
     private _configService: ConfigService,
     private gameService: GameService,
     private inputService: InputService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private logService: LogService
     ) {
     this._unsubscribeAll = new Subject<any>();
   }
@@ -37,6 +39,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
+        this.logService.resetLog();
         this.gameService.sendToServer('');
         this.inputService.focus();
       });

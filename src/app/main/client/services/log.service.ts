@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import { equip_positions_by_name } from '../common/constants';
 
@@ -10,11 +10,11 @@ export class LogService {
 
   date: Date;
   lineNumber = 0;
-  log$: ReplaySubject<any> = new ReplaySubject<any>(500);
+  log: any = [];
+  log$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(
   ) {
-
     this.date = new Date();
     this.log$.pipe(
       scan((acc, curr) =>  Object.assign({}, acc, curr))
@@ -23,6 +23,10 @@ export class LogService {
 
   public getLog(): Observable<any> {
     return this.log$.asObservable();
+  }
+
+  public resetLog() {
+    this.log = [];
   }
 
   startLoggingDate(): Date {
@@ -168,7 +172,8 @@ export class LogService {
       data = data.replace(/<p><\/p>/g, '');
 
       // Update the Observable Subject
-      this.log$.next({ l: ++this.lineNumber, d: data });
+      this.log.push({l: ++this.lineNumber, d: data });
+      this.log$.next(this.log);
     }
   }
 

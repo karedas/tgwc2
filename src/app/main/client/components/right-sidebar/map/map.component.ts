@@ -13,6 +13,9 @@ import { MapService } from './services/map.service';
   selector: 'tg-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
+  providers: [
+    MapService
+  ]
 })
 
 export class MapComponent implements OnDestroy, OnInit {
