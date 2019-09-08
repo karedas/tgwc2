@@ -6,6 +6,7 @@ import { GameService } from 'src/app/main/client/services/game.service';
 @Component({
   selector: 'tg-room',
   templateUrl: './room.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class RoomComponent implements OnInit {
   @Input() html: Room;

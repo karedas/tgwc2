@@ -29,7 +29,6 @@
   z-index: 2;
   color: $tg-gray; //  default color
   box-sizing: border-box;
-  font-size: 90%;
 }
 
 
@@ -187,6 +186,7 @@ tg-text {
   }
 
   .tg-room--desc {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     flex-direction: column;
     line-height: 1.4;
   }

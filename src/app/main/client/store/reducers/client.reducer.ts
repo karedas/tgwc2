@@ -4,7 +4,7 @@ import { Action, on, createReducer } from '@ngrx/store';
 
 export const reducer = createReducer(
     initialState,
-    on(inGameAction, state => ({ ...state, inGame: true })),
+    on(inGameAction, state => ({ ...state, inGame: !state.inGame })),
     on(updateUIAction, (state, { payload }) => {
         return Object.assign({}, state, payload);
     }),

@@ -1,5 +1,9 @@
 @import 'abstract/variables';
 
+:host {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .tg-smart-equipinv {
     height: 100%;
     color: $base-text-color;
@@ -68,5 +72,6 @@
 
     &:first-child {
         border-left: none;
+        padding-left: 2px;
     }
 }

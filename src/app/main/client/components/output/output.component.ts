@@ -1,11 +1,9 @@
 import { Component, ViewChild, OnInit, OnDestroy, ElementRef, HostListener, Input } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { DataState } from 'src/app/main/client/store/state/data.state';
-import * as fromSelectors from 'src/app/main/client/store/selectors';
+import { Store } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage } from 'src/app/main/client/store/selectors';
+import { getDataBase, getRoomBase, getObjOrPerson, getGenericPage, getInGameStatus } from 'src/app/main/client/store/selectors';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { SplitComponent } from 'angular-split';
@@ -13,8 +11,7 @@ import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model'
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 import { OutputService } from './output.service';
-import { LoginClientService } from '../../services/login-client.service';
-import { inGameAction } from '../../store/actions/client.action';
+import { TGState } from '../../store';
 
 @Component({
   selector: 'tg-output',
@@ -26,19 +23,20 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   tgConfig: TGConfig;
 
-  @ViewChild('scrollBar', {static: false}) scrollBar: NgScrollbar;
-  @ViewChild('scrollerEnd', {static: false}) scrollerEnd: ElementRef;
-  @ViewChild('mainOutputArea', {static: false}) mainOutputArea: ElementRef;
-  @ViewChild('splitArea', {static: false}) splitArea: SplitComponent;
+  @ViewChild('scrollBar', { static: false }) scrollBar: NgScrollbar;
+  @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
+  @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
+  @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
   // Smart Equip/Inv
-    smartSizeArea: number | string;
+  smartSizeArea: number | string;
   //----------------
 
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
   pauseScroll = false;
 
+  private _inGameStatus: Observable<any>;
   private _baseText$: Observable<any>;
   private _roomBase$: Observable<any>;
   private _objOrPerson$: Observable<any>;
@@ -46,7 +44,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   output = [];
   outputObservable = new BehaviorSubject([]);
-  
+
   lastRoomDescription = '';
   typeDetail: string;
   objPersDetail: any[];
@@ -60,20 +58,30 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   constructor(
     private outputService: OutputService,
-    private store: Store<DataState>,
-    private loginService: LoginClientService,
+    private store: Store<TGState>,
     private game: GameService,
     private _configService: ConfigService) {
-      this.lastRoom$ = this.store.select(getRoomBase);
-      this._baseText$ = this.store.select(getDataBase);
-      this._roomBase$ = this.store.select(getRoomBase);
-      this._objOrPerson$ = this.store.select(getObjOrPerson);
-      this._genericPage$ = this.store.select(getGenericPage);
-      
-      this._unsubscribeAll = new Subject();
+    this.lastRoom$ = this.store.select(getRoomBase);
+    this._inGameStatus = this.store.select(getInGameStatus);
+    this._baseText$ = this.store.select(getDataBase);
+    this._roomBase$ = this.store.select(getRoomBase);
+    this._objOrPerson$ = this.store.select(getObjOrPerson);
+    this._genericPage$ = this.store.select(getGenericPage);
+
+    this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
+
+    this._inGameStatus
+      .pipe( takeUntil(this._unsubscribeAll))
+      .subscribe((status) => {
+        if (status === false) {
+          this.output = [];
+        }
+      });
+
+
     this.outputService.toggledAutoScroll
       .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
 
@@ -83,12 +91,12 @@ export class OutputComponent implements OnInit, OnDestroy {
       .subscribe((config) => {
         this.tgConfig = config;
       });
-      
+
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
     this._baseText$
-      .pipe( takeUntil(this._unsubscribeAll))
-      .subscribe( (base: string[]) => this.updateBaseText(base));
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((base: string[]) => this.updateBaseText(base));
 
     this._roomBase$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -114,9 +122,9 @@ export class OutputComponent implements OnInit, OnDestroy {
     });
   }
 
-  
+
   private setContent(t: string, c: any): any {
-    const content =  Object.assign({}, { type: t, content: c });
+    const content = Object.assign({}, { type: t, content: c });
     this.trimOutput();
     this.output.push(content);
     this.outputObservable.next(this.output);
@@ -124,7 +132,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   private updateBaseText(base: string[]) {
-    if (base) 
+    if (base)
       this.setContent('base', base[0]);
   }
 
@@ -207,7 +215,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   toggleEquipInventorySplit(event) {
-    this.smartSizeArea = event ? '250' : '30' ;
+    this.smartSizeArea = event ? '250' : '30';
   }
 
   ngOnDestroy() {

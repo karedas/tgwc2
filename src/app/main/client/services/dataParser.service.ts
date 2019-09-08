@@ -420,7 +420,7 @@ export class DataParser {
     this.store.dispatch( DataActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
     return '';
   }
-  private playerStatusInline(data: any): string {
+  private playerStatusInline(status: any): string {
     const status_parse = JSON.parse(status.slice(6, -1));
     this.store.dispatch( DataActions.showStatusBoxAction( {payload: {status: status_parse }}));
     return '';

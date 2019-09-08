@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 export enum ClientEventType {
   DISCONNECT = '[Client] User Disconnect',
-  INGAME = '[Client] User In Game',
+  INGAME = '[Client] User InGame Status action',
   RESET = '[Client] Reset Store',
   UI = '[Client] Ui Updated',
   NEWS = '[Client] Show News',

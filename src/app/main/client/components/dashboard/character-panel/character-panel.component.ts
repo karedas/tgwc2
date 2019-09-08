@@ -79,13 +79,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    //ONLY FOR TEST
-    this.directionNotify$.pipe(
-      takeUntil(this._unsubscribeAll),
-      distinctUntilChanged()
-    ).subscribe(dir => {console.log(`TGLOG: Ti stai muovendo verso ${dir}`)});
-
-
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
