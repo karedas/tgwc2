@@ -215,7 +215,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   toggleEquipInventorySplit(event) {
-    this.smartSizeArea = event ? '250' : '37';
+    this.smartSizeArea = event ? '250' : '24';
   }
 
   ngOnDestroy() {
