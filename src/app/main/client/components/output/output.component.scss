@@ -313,7 +313,6 @@ tg-text {
   }
 
   .tg-extraoutput--header {
-    overflow: hidden;
     margin-left: 0;
     margin-right: 0;
     padding-right: 0;
@@ -324,7 +323,7 @@ tg-text {
 
     .tg-room--title {
       background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-      font-family: 'Modern Antiqua', cursive;
+      font-family: 'Modern Antiqua';
       padding: 0px 12px 0 0;
       color: #dbbf90;
       box-shadow: inset 0px -5px 11px 0px black;

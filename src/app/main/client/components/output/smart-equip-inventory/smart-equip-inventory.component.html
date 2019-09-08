@@ -1,19 +1,19 @@
 <div class="tg-smart-equipinv">
   <div fxLayout="column" fxFlex="0 1 100%">
     <div class="tg-smart-tabtitle" fxLayout="row" fxFlex="0 0 auto" fxLayoutGap="5px">
-        <div fxFlex="1 0 auto"  (click)="onCollapse()">
+      <div fxFlex="1 0 auto"  (click)="onCollapse()">
       <ng-container *ngIf="show; else headerCollapsed">
-        <div [ngClass]="{'active': tab === 1}">
+        <div [ngClass]="{'active': tab === 1}" fxFlex="0 0 auto" fxFlexAlign="center">
           <button mat-button class="tg-smart-title" (click)="onTabClick('equipaggiamento', 1, $event)">Equipaggiamento</button>
         </div>
-        <div [ngClass]="{'active': tab === 2}">
+        <div [ngClass]="{'active': tab === 2}" fxFlex="0 0 auto"  fxFlexAlign="center">
           <button mat-button class="tg-smart-title" (click)="onTabClick('inventario', 2, $event)">Inventario</button>
         </div>
       </ng-container>
     </div>
 
       <ng-template #headerCollapsed>
-        <div fxFlex="1 0 auto">
+        <div fxFlex="1 0 auto" fxFlexAlign="center">
           <button mat-button class="tg-smart-title tg-lt-yellow" style="width: 100%">
             Mostra equipaggiamento e inventario 
           </button>
@@ -51,7 +51,7 @@
                         tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0">
                         <tg-icons [icon]="item.icon"></tg-icons>
                         <tg-hstat [condprc]="item.condprc"></tg-hstat>
-                        <span [innerHtml]="item.desc | dataToHtml | capitalizeFirst"></span>
+                        <span [innerHtml]="item.desc | dataToHtml | capitalizeFirst" class="eqinv-item-text"></span>
                       </div>
                       <div class="eqinv-item-weight" fxFlex="0 0 15%" fxLayoutAlign="flex-start center">{{item.wgt}}pt</div>
                     </div>

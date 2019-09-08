@@ -14,27 +14,33 @@
     background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
     box-shadow: inset 0px -5px 11px 0px black;
     border-bottom: 1px solid #433b3a;
+    height: 24px;
+    max-height: 24px;
     cursor: pointer;
 
+
     .tg-smart-title {
-        font-family: 'Modern Antiqua', cursive;
-        padding: 0 12px 0 4px;
+        padding: 0 4px;
+        margin-right: 8px;
         height: 100%;
         border-radius: 0;
-        font-size: 1em;
-        box-sizing: content-box;
+        font-size: 1.1em;
         color: #dad6c1a8;
-        line-height: 1;
+        font-family: 'Modern Antiqua';
+        line-height: normal;
     }
 
     .tg-smart-collapsebtn {
-        line-height: 22px;
+        line-height: normal;
         height: 22px;
         width: 22px;
-        font-size: 22px;
-        padding:3px 6px;
-        box-sizing: content-box;
-        margin: 0 6px 0 auto;
+        margin: auto 6px auto auto;
+
+        .mat-icon {
+            line-height: 22px;
+            width: 22px;
+            height: 22px;
+        }
     }
 
     .active .tg-smart-title{
@@ -56,10 +62,6 @@
     border-bottom: 1px solid #191616;
     cursor: pointer;
     
-    &:first-child {
-        margin-top: 12px;
-    }
-    
     &:hover {
         background-color: rgba(158, 158, 158, 0.1);
     }
@@ -73,5 +75,11 @@
     &:first-child {
         border-left: none;
         padding-left: 2px;
+    }
+
+    .eqinv-item-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

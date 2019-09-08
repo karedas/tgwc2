@@ -104,7 +104,7 @@
         fxLayout fxLayoutAlign="center center" tooltip="Peso Trasportato" show-delay="500" placement="top">
         PT:&nbsp;<span 
           [ngClass]="
-            { 'tg-green': +hero.wprc < 25,
+            {'tg-green': +hero.wprc < 25,
               'tg-yellow': +hero.wprc >= 25 && hero.wprc < 75,
               'tg-brown': +hero.wprc >= 75 && hero.wprc < 85,
               'tg-red': +hero.wprc >= 85 }">

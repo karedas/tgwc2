@@ -6,7 +6,7 @@ tg-geo-location {
   background: url($imgPath + "/borders/border-002-tiny.png") repeat-x top left;
   padding-top: 2px;
   margin-top: auto;
-  flex: 0 1 100%;
+  flex: 0 1 388px;
 }
 
 .tg-geolocal {
@@ -94,7 +94,7 @@ tg-geo-location {
 .tg-geolocal--region,
 .tg-geolocal--control {
   margin-left: -16px;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #aca49b;
   overflow: hidden;
   text-overflow: ellipsis;
