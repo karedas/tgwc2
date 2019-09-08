@@ -81,7 +81,7 @@
                     tooltip="Guarda {{item.desc | dataToHtml}}" placement="top" show-delay="500" animation-duration="0">
                     <tg-icons [icon]="item.icon"></tg-icons>
                     <tg-hstat [condprc]="item.condprc"></tg-hstat>
-                    <span [innerHtml]="item.desc | dataToHtml"></span>
+                    <span [innerHtml]="item.desc | capitalizeFirst| dataToHtml"></span>
                   </div>
                   <div class="eqinv-item-qty" fxFlex="0 0 20%" fxLayoutAlign="flex-start center">
                     {{item.sz || '1'}}
