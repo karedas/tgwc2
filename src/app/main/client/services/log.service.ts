@@ -20,7 +20,6 @@ export class LogService {
     // this.log$.pipe(
     //   scan((acc, curr) =>  Object.assign({}, acc, curr))
     // );
-    console.log('che accade?');
   }
 
   public getLog(): Observable<any> {
@@ -28,7 +27,6 @@ export class LogService {
   }
 
   public resetLog() {
-    console.log('TG-LOG: Resetting Log');
     this.log = [];
   }
 
@@ -176,7 +174,6 @@ export class LogService {
 
       // Update the Observable Subject
       this.log.push({l: ++this.lineNumber, d: data });
-      console.log(this.log);
       this.log$.next(this.log);
     }
   }
@@ -205,7 +202,6 @@ export class LogService {
   // }
 
   private printDirectionNotify(dir: any) {
-    console.log(dir);
     return `<p>Ti muovi verso ${dir}</p>`
   }
 

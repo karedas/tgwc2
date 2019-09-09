@@ -50,7 +50,8 @@ export const reducer = createReducer(
         position: payload.position,
         nosfodera: payload.nosfodera,
         hidden: payload.hidden,
-        wprc: payload.wprc
+        wprc: payload.wprc,
+        conva: payload.conva
       }
     });
   }),

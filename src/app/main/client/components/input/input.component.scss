@@ -22,30 +22,11 @@
   box-sizing: border-box;
 
 
-  // &:after,
-  // &:before {
-  //   content: '';
-  //   display: block;
-  //   position: absolute;
-  //   top: 50%;
-  //   transform: translateY(-50%);
-  //   z-index: 2;
-  // }
-
-  // &:before {
-    //@include sprite($input-left-decoration-sprite);
-    // left: -10px;
-  // }
-
-  // &:after {
-    //@include sprite($input-right-decoration-sprite);
-    // right: -10px;
-  // }
-
   input[type="text"],
   input[type="password"] {
     width: 100%;
     background-color: $inputbackground;
+    color: $inputColor;
     border: none;
     z-index: 10;
     position: relative;
@@ -91,7 +72,7 @@
       height: 100%;
       padding:0 4px;
       color: #54544d;
-      border-right: 1px solid rgba(255, 255, 255, 0.15);
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 0;
       transition: all .2s ease-out;
       cursor: pointer;

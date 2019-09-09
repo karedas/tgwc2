@@ -230,7 +230,6 @@ export class GameService {
             return listItem;
 
         } else {
-
             /* Order for personal Equipment  */
             const cont = {
                 list: []

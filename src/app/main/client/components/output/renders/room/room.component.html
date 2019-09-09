@@ -37,7 +37,7 @@
     <ng-container *ngIf="html">
       <ng-scrollbar class="scrollbar-output" 
         #scrollBar 
-        *ngIf="type === 'room' || type === 'objPersDetail'" 
+        *ngIf="type === 'room' || type === 'objPersDetail'"
         [disabled]="draggingSplitArea"
         [ngClass]="{'disabled': draggingSplitArea}">
   
@@ -50,8 +50,8 @@
             </ng-container>
           </div>
           <!-- Image -->
-          <div class="tg-room--image" *ngIf="html.image">
-            <img [src]="getRoomImage(html.image)" />
+          <div class="tg-room--image" *ngIf="html.image" [hidden]="!imageLoaded">
+            <img [src]="getRoomImage(html.image)"  (load)="onImageLoad()" (error)="onImageNotLoad()"/>
           </div>
           <!-- Room Description -->
           <ng-container *ngIf="type === 'room'">

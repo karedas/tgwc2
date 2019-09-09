@@ -186,8 +186,8 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 0, 50);
-    }, 100);
+      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 200, 60);
+    }, 0);
   }
 
   private pauseAutoScrollBar(status: boolean) {
@@ -224,7 +224,6 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   onDragEnd(event, selector: string) {
-    this.scrollBar.sensorDisabled = false;
     this.scrollBar.update();
     this.scrollPanelToBottom();
     // Store the Split size in the main config

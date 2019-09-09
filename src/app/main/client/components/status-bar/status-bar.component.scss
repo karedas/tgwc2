@@ -67,6 +67,10 @@
     font-size: 10px;
     line-height: 22px;
     font-weight: normal;
+
+    @include layout-bp(lt-lg) {
+      display: none;
+    }
   }
 
   .badge-text {

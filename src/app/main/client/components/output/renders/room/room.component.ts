@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, ChangeDetectionStrategy, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { environment } from 'src/environments/environment';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -6,7 +6,7 @@ import { GameService } from 'src/app/main/client/services/game.service';
 @Component({
   selector: 'tg-room',
   templateUrl: './room.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class RoomComponent implements OnInit {
   @Input() html: Room;
@@ -16,8 +16,10 @@ export class RoomComponent implements OnInit {
   @Input() draggingSplitArea: boolean;
 
   inRoomContent: boolean;
+  imageLoaded: boolean;
 
-  constructor(private game: GameService) {
+  constructor(private game: GameService, private cd: ChangeDetectorRef) {
+    this.imageLoaded = false;
   }
 
   ngOnInit(): void {
@@ -28,7 +30,11 @@ export class RoomComponent implements OnInit {
         this.inRoomContent = false;
       }
     }
+
+    this.cd.markForCheck();
   }
+
+
 
   onBackDetail(num: number) {
     if (num) {
@@ -39,5 +45,14 @@ export class RoomComponent implements OnInit {
   getRoomImage(img: string ): string {
       const fullPathImage = environment.media_address + img;
       return fullPathImage;
+  }
+
+  onImageLoad() {
+    this.imageLoaded = true;
+  }
+  
+  onImageNotLoad() {
+    console.log('unloaded');
+    this.imageLoaded = false;
   }
 }

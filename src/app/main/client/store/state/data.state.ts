@@ -46,6 +46,6 @@ export const initialState: DataState = {
     region: undefined,
     book: undefined,
     genericpage: undefined,
-    directionNotify: ['']
+    directionNotify: undefined
 };
 

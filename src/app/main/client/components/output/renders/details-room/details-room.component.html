@@ -1,11 +1,12 @@
-<ng-container *ngIf="objs">
-
-  <ng-container *ngTemplateOutlet="withObjects"></ng-container>
-
-</ng-container>
 <ng-container *ngIf="persons">
 
   <ng-container *ngTemplateOutlet="withPersons"></ng-container>
+
+</ng-container>
+
+<ng-container *ngIf="objs">
+
+  <ng-container *ngTemplateOutlet="withObjects"></ng-container>
 
 </ng-container>
 
@@ -15,6 +16,7 @@
 
   <div class="tg-persons" [ngClass]="{'list-50-50': personsClass50_50, 'list-50': personsClass50}">
     <ng-container *ngFor="let person of persons; let i=index">
+
       <div class="tg-persons--line interact"
         [ngClass]="{'expandlist': person.sz, 'open': togglePanel[totalObjs.length + i]}" 
         (mousedown)="onExpand($event, person, totalObjs.length + i, person.sz)">

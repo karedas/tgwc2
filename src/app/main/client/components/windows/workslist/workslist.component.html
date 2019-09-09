@@ -66,50 +66,9 @@
             
           </table>
 
-        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 25]" showFirstLastButtons></mat-paginator>
 
       </div>
-          
-    <!-- Workslist content start -->
-      <!-- <p-table 
-            #worksTable
-            [value]="rows" 
-            [autoLayout]="true" 
-            [paginator]="true"
-            [rows]="currentPageLimit"
-            [rowHover]="true"
-            sortMode="multiple"
-            [reorderableColumns]="true">
-            <ng-template pTemplate="header" let-columns>
-              <th *ngFor="let col of cols" [pSortableColumn]="col.field">
-                  {{col.header}}
-                  <p-sortIcon [field]="col.field"></p-sortIcon>
-              </th>
-            </ng-template>
-
-            <ng-template pTemplate="body" let-work let-rowIndex="rowIndex">
-              <tr>
-                  <td>{{rowIndex + 1}}</td>
-                  <td>
-                    <tg-icons [icon]="work.icon"></tg-icons>
-                  </td>
-                  <td [ngClass]="
-                    {'tg-green': (work.diff == 'facile' || work.diff =='normale'),
-                    'tg-yellow': (work.diff == 'impegantiva' || work.diff =='difficile'),
-                    'tg-brown': (work.diff == 'molto difficile'),
-                    'tg-red': (work.diff == 'arduo' || work.diff == 'quasi impossibile' || work.diff == 'miracolo')}">
-                    {{work.diff}}
-                  </td>
-                  <td><div [ngClass]="work.cando === true ? 'cando' : 'cantdo'"></div></td>
-                  <td>{{work.desc}}</td>
-                  <td><button class="tg-button btn-workcmd" (click)="onAction(rowIndex, $event)">{{work.cmd}}</button></td>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="summary">
-              Visualizzati {{rows.length }} risultati
-            </ng-template>
-          </p-table> -->
-      <!-- Workslist content end -->
     </div>
   </div>
   <div class="tg-border-box">
