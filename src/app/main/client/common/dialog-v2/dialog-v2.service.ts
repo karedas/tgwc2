@@ -357,7 +357,6 @@ export class DialogV2Service {
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(LogComponent, config);
-      console.log(dialogRef);
 
       return dialogRef;
     } else {

@@ -28,9 +28,10 @@ export class ClientComponent implements OnInit, OnDestroy {
     private gameService: GameService,
     private inputService: InputService,
     private renderer: Renderer2,
-    private logService: LogService
     ) {
+  
     this._unsubscribeAll = new Subject<any>();
+
   }
 
   ngOnInit(): void {
@@ -39,10 +40,11 @@ export class ClientComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
-        this.logService.resetLog();
         this.gameService.sendToServer('');
         this.inputService.focus();
       });
+
+
   }
   
 

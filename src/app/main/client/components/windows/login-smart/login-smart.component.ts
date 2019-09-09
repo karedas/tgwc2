@@ -11,6 +11,7 @@ import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import * as ClientActions from '../../../store/actions/client.action';
+import { LogService } from '../../../services/log.service';
 
 @Component({
   selector: 'tg-login-smart',
@@ -37,6 +38,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     private store: Store<ClientState>,
     private router: Router,
     private dialogRef: MatDialogRef<LoginSmartComponent>,
+    private logService: LogService,
     private loginClientService: LoginClientService) {
 
     this.loginFormErrors = {
@@ -114,6 +116,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
     this.router.navigate(['/']).then(() => {
       this.store.dispatch(ClientActions.resetAction());
+      this.logService.resetLog();
     });
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import { equip_positions_by_name } from '../common/constants';
 
@@ -10,15 +10,17 @@ export class LogService {
 
   date: Date;
   lineNumber = 0;
-  log: any = [];
-  log$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  log: any;
+  log$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(
   ) {
     this.date = new Date();
-    this.log$.pipe(
-      scan((acc, curr) =>  Object.assign({}, acc, curr))
-    );
+    this.log = [];
+    // this.log$.pipe(
+    //   scan((acc, curr) =>  Object.assign({}, acc, curr))
+    // );
+    console.log('che accade?');
   }
 
   public getLog(): Observable<any> {
@@ -26,6 +28,7 @@ export class LogService {
   }
 
   public resetLog() {
+    console.log('TG-LOG: Resetting Log');
     this.log = [];
   }
 
@@ -85,7 +88,7 @@ export class LogService {
     // Direction 
     data = data.replace(/&!dir"[^"]*"\n*/gm, (dir) => {
       const dir_parse = dir.slice(6, -1);
-      this.printDirectionNotify(dir_parse);
+      return this.printDirectionNotify(dir_parse);
     });
 
 
@@ -173,6 +176,7 @@ export class LogService {
 
       // Update the Observable Subject
       this.log.push({l: ++this.lineNumber, d: data });
+      console.log(this.log);
       this.log$.next(this.log);
     }
   }
@@ -201,6 +205,7 @@ export class LogService {
   // }
 
   private printDirectionNotify(dir: any) {
+    console.log(dir);
     return `<p>Ti muovi verso ${dir}</p>`
   }
 

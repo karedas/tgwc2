@@ -383,3 +383,24 @@ tg-text {
   color: white;
   border-radius: 2px;
 }
+
+.placeholder-pause {
+  margin: 12px 0;
+  color: $tg-lt-red;
+  &:before {
+    content: '';
+    display: inline-block;
+    border-top: 1px dashed $tg-red;
+    height: 1px;
+    flex: 0 1 100%;
+    margin: auto 6px;
+  }
+  &:after {
+    content: '';
+    display: inline-block;
+    border-top: 1px dashed $tg-red;
+    height: 1px;
+    flex: 0 1 100%;
+    margin: auto 6px;
+  }
+}

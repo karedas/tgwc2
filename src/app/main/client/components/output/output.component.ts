@@ -192,12 +192,12 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private pauseAutoScrollBar(status: boolean) {
     this.pauseScroll = status;
-    this.latestLineBeforePause = this.output.length;
     // Adding placeholder for autoscroll last readed Line;
     if(this.pauseScroll) {
       this.setContent('pause', []);
+      this.latestLineBeforePause = this.output.length;
     } else {
-      delete this.output[this.latestLineBeforePause];
+      this.output.splice(this.latestLineBeforePause-1, 1);
     }
   };
 
