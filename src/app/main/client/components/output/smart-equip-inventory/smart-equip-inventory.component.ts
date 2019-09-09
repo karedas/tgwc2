@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from '../../../store/state/data.state';
@@ -16,6 +16,7 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./smart-equip-inventory.component.scss']
 })
 export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
+  @Input() draggingSplitArea: boolean;
 
   equip: any[] = [];
   inventory: any[] = [];

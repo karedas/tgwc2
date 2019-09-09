@@ -26,7 +26,11 @@
 
     </div>
     <div fxFlex="1 0 auto" class="equinv-container" *ngIf="show">
-      <ng-scrollbar class="scrollbar" fxFlex="1 1 100%" fxFlexFill >
+      <ng-scrollbar class="scrollbar" 
+        [ngClass]="{'disabled': draggingSplitArea}" 
+        [disabled]="draggingSplitArea" 
+        fxFlex="1 1 100%" 
+        fxFlexFill>
 
         <div class="eqinv-wrapper-list" fxLayout="column" *ngIf="equip && tab === 1">
           <ng-container *ngIf="equip.length > 0; else noequip">

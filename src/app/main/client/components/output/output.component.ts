@@ -30,6 +30,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
   // Smart Equip/Inv
+  draggingSplitArea: boolean = false;
   smartSizeArea: number | string;
   //----------------
 
@@ -92,7 +93,6 @@ export class OutputComponent implements OnInit, OnDestroy {
 
     this.outputService.toggledAutoScroll
       .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
-
 
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
@@ -204,6 +204,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   onDragStart() {
     // TODO disable ngx-scrollbar to improve performance
+    this.draggingSplitArea = true;
   }
 
   onDragEnd(event, selector: string) {
@@ -212,23 +213,23 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.scrollPanelToBottom();
     // Store the Split size in the main config
 
-    if(selector === 'output') {
+    if (selector === 'output') {
       this._configService.setConfig({
         output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
       });
     }
     else if (selector === 'equipinv') {
-      console.log(event);
       this._configService.setConfig({
         equipInventoryBox: { size: event.sizes[1] }
       });
     }
 
+    this.draggingSplitArea = false;
   }
 
   toggleEquipInventorySplit(event) {
     this._configService.setConfig({
-      equipInventoryBox: { visible: false}
+      equipInventoryBox: { visible: false }
     })
   }
 

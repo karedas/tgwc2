@@ -13,6 +13,7 @@ export class RoomComponent implements OnInit {
   @Input() type: string;
   @Input() withExtra: boolean;
   @Input() lastDescription: any = '';
+  @Input() draggingSplitArea: boolean;
 
   inRoomContent: boolean;
 

@@ -35,7 +35,11 @@
 
   <ng-template #extradetail>
     <ng-container *ngIf="html">
-      <ng-scrollbar class="scrollbar-output" #scrollBar *ngIf="type === 'room' || type === 'objPersDetail'">
+      <ng-scrollbar class="scrollbar-output" 
+        #scrollBar 
+        *ngIf="type === 'room' || type === 'objPersDetail'" 
+        [disabled]="draggingSplitArea"
+        [ngClass]="{'disabled': draggingSplitArea}">
   
         <div class="tg-extraoutput--header">
           <!-- Room Title -->

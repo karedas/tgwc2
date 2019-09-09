@@ -10,7 +10,7 @@ export class OutputService {
   @Output() toggledAutoScroll: EventEmitter<boolean> = new EventEmitter();
   autoScroll = false;
 
-  constructor(private game: GameService) {
+  constructor() {
   }
 
   // Stop the output AutoScroll Event

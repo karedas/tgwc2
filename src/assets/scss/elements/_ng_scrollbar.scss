@@ -16,6 +16,13 @@
   }
 }
 
+ng-scrollbar.scrollbar.disabled, ng-scrollbar.scrollbar-output.disabled  {
+  .ng-scroll-viewport {
+    overflow-y: hidden!important;
+    overflow-x: hidden!important;
+  }
+}
+
   ng-scrollbar.scrollbar {
     --scrollbar-border-radius: 0;
     --scrollbar-padding: 4px;
