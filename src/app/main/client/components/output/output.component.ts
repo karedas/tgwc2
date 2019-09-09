@@ -38,6 +38,8 @@ export class OutputComponent implements OnInit, OnDestroy {
   showExtraByViewport: boolean;
   pauseScroll = false;
 
+  private latestLineBeforePause
+
   private _inGameStatus: Observable<any>;
   private _baseText$: Observable<any>;
   private _roomBase$: Observable<any>;
@@ -92,7 +94,10 @@ export class OutputComponent implements OnInit, OnDestroy {
       });
 
     this.outputService.toggledAutoScroll
-      .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(
+        (pauseScroll: boolean) => this.pauseAutoScrollBar(pauseScroll)
+      );
 
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
@@ -116,9 +121,6 @@ export class OutputComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(data => this.updateGenericPage(data));
 
-
-
-
     setTimeout(() => {
       this.setOutputSplit();
     });
@@ -130,7 +132,10 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.trimOutput();
     this.output.push(content);
     this.outputObservable.next(this.output);
-    this.scrollPanelToBottom();
+
+    if(!this.pauseScroll) {
+      this.scrollPanelToBottom();
+    }
   }
 
   private updateBaseText(base: string[]) {
@@ -184,6 +189,17 @@ export class OutputComponent implements OnInit, OnDestroy {
       this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 0, 50);
     }, 100);
   }
+
+  private pauseAutoScrollBar(status: boolean) {
+    this.pauseScroll = status;
+    this.latestLineBeforePause = this.output.length;
+    // Adding placeholder for autoscroll last readed Line;
+    if(this.pauseScroll) {
+      this.setContent('pause', []);
+    } else {
+      delete this.output[this.latestLineBeforePause];
+    }
+  };
 
   @HostListener('window:resize', ['$event.target'])
   onResize() {

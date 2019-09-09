@@ -26,6 +26,12 @@
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
                       <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
+                      
+                      <ng-container *ngSwitchCase="'pause'">
+                        <p>PAUSA ------------------------</p>
+                        <!-- Pause scroll Place Holder -->
+                      </ng-container>
+
                     </ng-container>
 
                   </ng-container>
@@ -52,6 +58,7 @@
                     [draggingSplitArea]="draggingSplitArea"
                     [type]="typeDetail"></tg-room>
                 </as-split-area>
+
                 <as-split-area 
                   [size]="tgConfig.equipInventoryBox.visible ? tgConfig.equipInventoryBox.size : tgConfig.equipInventoryBox.sizeWhenClose" 
                   [lockSize]="smartSizeArea === tgConfig.equipInventoryBox.sizeWhenClose">
@@ -93,6 +100,10 @@
               [lastDescription]="lastRoomDescription"></tg-room>
             <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
             <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
+            <ng-container *ngSwitchCase="'pause'">
+                <p>PAUSA ------------------------</p>
+                <!-- Pause scroll Place Holder -->
+              </ng-container>
           </ng-container>
         </div>
       </div>

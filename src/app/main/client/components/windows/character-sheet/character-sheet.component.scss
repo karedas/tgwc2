@@ -115,7 +115,7 @@
   .info-nametitle {
     padding: 1em 0;
     text-align: center;
-    font-family: 'Modern Antiqua', cursive;
+    font-family: $modern-antiqua;
   }
 
   .info-name {
@@ -128,7 +128,7 @@
     line-height: 48px;
     align-items: center;
     text-shadow: 0 0 35px #a67322;
-    font-family: 'Modern Antiqua', cursive;
+    font-family: $modern-antiqua;
     
 
 
@@ -146,7 +146,7 @@
   .info-title {
     font-size: 15px;
     color: #85816a;
-    font-family: 'Modern Antiqua', cursive;
+    font-family: $modern-antiqua;
     text-transform: capitalize;
   }
 
@@ -166,5 +166,5 @@
   box-shadow: inset 0px -5px 11px 0px black;
   border-bottom: 1px solid #433b3a;
   font-weight: normal;
-  font-family: 'Modern Antiqua', cursive;
+  font-family: $modern-antiqua;
 }

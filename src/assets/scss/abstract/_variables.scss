@@ -25,12 +25,13 @@ $tg-lt-cyan: #00ffff;
 $tg-brown: #b18012;
 $tg-yellow: #ffe100;
 $tg-lt-yellow: #ddd06d;
-
-
-
-// Text
+//  TEXT
 $base-text-color: #bdb9b2;
 $base-text-color-light: #e6e0d7;
 $base-text-color-dark: #69645c;
 $base-text-color-hover: #d1cec8;
 
+// FONTS
+@import url('https://fonts.googleapis.com/css?family=Modern+Antiqua&display=swap');
+$modern-antiqua: 'Modern Antiqua';
+/********************/

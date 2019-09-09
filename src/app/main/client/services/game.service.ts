@@ -111,7 +111,7 @@ export class GameService {
     private upadteEquip(now) {
         if (this.client_update.equipment.needed) {
             this.sendToServer('@equip');
-            this.client_update.equipment.needed= false;
+            this.client_update.equipment.needed = false;
             this.client_update.now = now;
         }
     }
@@ -217,22 +217,21 @@ export class GameService {
 
     /* Ordfer Objects Persons or Objects list */
     public orderObjectsList(items: any): any {
-
-        if(items && !items.hasOwnProperty('ver')){
+        if (items && !items.hasOwnProperty('ver')) {
             let listItem = JSON.parse(JSON.stringify(items));
-            
-            if(listItem.list) {
-                listItem['list'].sort((a,b)  => {
+
+            if (listItem.list) {
+                listItem['list'].sort((a, b) => {
                     const eq_pos_a = Object.keys(a.eq) ? a.eq[0] : 0;
                     const eq_pos_b = Object.keys(b.eq) ? b.eq[0] : 0;
-                    return eq_pos_a- eq_pos_b;
+                    return eq_pos_a - eq_pos_b;
                 });
             }
             return listItem;
 
         } else {
-            
-        /* Order for personal Equipment  */
+
+            /* Order for personal Equipment  */
             const cont = {
                 list: []
             }
@@ -244,12 +243,11 @@ export class GameService {
                 }
             });
 
-            cont.list.sort((a, b)   => {
-                const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
-                const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
+            cont.list.sort((a, b) => {
+                const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[1]] : 0;
+                const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[1]] : 0;
                 return <number>eq_pos_a - <number>eq_pos_b;
             });
-
             return cont.list;
         }
     }

@@ -42,6 +42,13 @@
       transition: width 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
     }
 
+    .tg-meterbar-text {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
     .barC.red {
       background: url($imgPath + '/bars/healt.jpg') repeat-x left top;
     }
