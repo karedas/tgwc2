@@ -1,9 +1,13 @@
+.tg-log {
+}
+
 .tg-log-content {
   color: white;
-  font-size: 90%;
+  font-size: .9em;
   background: black;
+  font-family: 'Courier New', Courier, monospace;
   height: 100%;
-  color: #00ff21;
+  color: white;
 }
 
 .tg-log-date {
@@ -14,11 +18,11 @@
 }
 
 .tg-log-line {
-  padding: .5em 0;
+  padding: 3px 0;
 }
 
 .tg-log-linenumber {
-  padding: .5em .5em 0 0;
+  padding: 3px .5em 0 0;
   color: rgb(95, 95, 95);
   border-right: 1px solid #191919;
   max-width: 25px;

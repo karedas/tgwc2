@@ -121,7 +121,7 @@ export class DialogV2Service {
 
       config.id = dialogID;
       config.disableClose = true;
-      config.backdropClass = 'overlay-dark';
+      config.backdropClass = 'overlay-dark-throw';
 
       const dialogRef = this.dialog.open(LoginSmartComponent, config);
 
@@ -343,7 +343,7 @@ export class DialogV2Service {
     }
   }
 
-  openLog(...data: any): MatDialogRef<LogComponent, MatDialogConfig> {
+  openLog(): MatDialogRef<LogComponent, MatDialogConfig> {
 
     const dialogID = 'log';
     if (!this.dialog.getDialogById(dialogID)) {
@@ -353,9 +353,11 @@ export class DialogV2Service {
       config.width = '60%';
       config.height = '700px';
       config.hasBackdrop = false;
+      config.panelClass = 'minimal'
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(LogComponent, config);
+      console.log(dialogRef);
 
       return dialogRef;
     } else {

@@ -24,12 +24,15 @@ export class ClientEffects {
       ofType(ClientEventType.DISCONNECT),
       tap(() => {
         const config = JSON.parse(localStorage.getItem('config'));
-        if (config.logSave) {
-          this.dialogV2Service.openLog();
-        }
         if (this.router.url === '/webclient') {
+          //Stop Audio
           this.audioService.pauseAudio();
+          //Open the Smart Login Box
           this.dialogV2Service.openSmartLogin();
+          // If Log save is true: open Log Service Dialog
+          if (config.logSave) {
+            this.dialogV2Service.openLog();
+          }
           this.game.resetUI();
         }
         this.store.dispatch(inGameAction())
