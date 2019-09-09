@@ -37,13 +37,18 @@
           <as-split-area [size]="tgConfig.output.extraArea.size[1]">
             <div style="height: 100%; overflow:hidden;" fxLayout="column">
               <as-split direction="vertical" class="tg-output--splitter" [gutterSize]="5" [restrictMove]="true" unit="pixel">
+
                 <as-split-area size="*">
                   <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extra"
                     [lastDescription]="lastRoomDescription" [type]="typeDetail"></tg-room>
                 </as-split-area>
-                <as-split-area [size]="smartSizeArea" [lockSize]="smartSizeArea ==='30'">
+
+                <as-split-area 
+                  [size]="tgConfig.equipInventoryBox.size" 
+                  [lockSize]="smartSizeArea === tgConfig.equipInventoryBox.sizeWhenClose">
                   <tg-smart-equip-inventory (isCollapsed)="toggleEquipInventorySplit($event)"></tg-smart-equip-inventory>
                 </as-split-area>
+
               </as-split>
             </div>
           </as-split-area>

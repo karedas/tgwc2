@@ -24,6 +24,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   equipPositionValue: {};
   show: boolean = false;
 
+
   private _equipment$: Observable<any>;
   private _inventory$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
@@ -45,7 +46,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
         setTimeout(() => {
-          this.show = config.showEquipInventorySmart;
+          this.show = config.equipInventoryBox.visible;
           this.isCollapsed.emit(this.show);
         });
       });
@@ -78,7 +79,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     this.isCollapsed.emit(this.show)
     //store in the config
     this._configService.setConfig({
-      showEquipInventorySmart: this.show
+      equipInventoryBox: {visible: this.show}
     });
   }
 

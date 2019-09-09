@@ -14,7 +14,11 @@ export interface TGConfig {
     },
     list_column_mode: boolean
   };
-  showEquipInventorySmart: boolean,
+  equipInventoryBox: {
+    visible: boolean,
+    size: number | string
+    sizeWhenClose: number | string
+  }
   characterPanel: boolean;
   characterPanelTopPosition: number;
   zen: boolean;
@@ -40,12 +44,15 @@ export const tgConfig: TGConfig = {
     },
     list_column_mode: true
   },
-  showEquipInventorySmart: true,
+  equipInventoryBox: {
+    visible: true,
+    size: 250,
+    sizeWhenClose: 30
+  },
   characterPanel: true,
   characterPanelTopPosition: 1,
   zen: false,
   tablePageSize: 20,
   log: true,
-  // shortcuts: undefined
   shortcuts: [],
 };

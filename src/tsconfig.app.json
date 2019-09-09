@@ -11,6 +11,6 @@
   "angularCompilerOptions": {
     // "noUnusedLocals": false,
     // "noUnusedParameters": false,
-    // "enableIvy": true,
+    "enableIvy": true
   }
 }

@@ -12,6 +12,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 import { OutputService } from './output.service';
 import { TGState } from '../../store';
+import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
 
 @Component({
   selector: 'tg-output',
@@ -27,6 +28,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
   @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
+  @ViewChild(SmartEquipInventoryComponent,    { static: false }) smartEquipBox: SmartEquipInventoryComponent;
 
   // Smart Equip/Inv
   smartSizeArea: number | string;
@@ -61,6 +63,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     private store: Store<TGState>,
     private game: GameService,
     private _configService: ConfigService) {
+
     this.lastRoom$ = this.store.select(getRoomBase);
     this._inGameStatus = this.store.select(getInGameStatus);
     this._baseText$ = this.store.select(getDataBase);
@@ -72,25 +75,25 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    this._inGameStatus
-      .pipe( takeUntil(this._unsubscribeAll))
-      .subscribe((status) => {
-        if (status === false) {
-          this.output = [];
-        }
-      });
-
-
-    this.outputService.toggledAutoScroll
-      .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
-
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
       });
+
+
+    this._inGameStatus
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((status) => {
+        if (status === false) {
+          this.output = [];
+        }
+      });
+
+    this.outputService.toggledAutoScroll
+      .subscribe(pauseScroll => this.pauseScroll = pauseScroll);
+
 
     /* Check login status and if is disconnect cleaning the output messages */
     // Listen Base Text Data
