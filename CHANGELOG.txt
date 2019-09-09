@@ -1,0 +1,10 @@
+## Equip e Inventario (box seconda colonna): ##
+- Adesso, oltre allo stato di "chiuso/aperto", si salva anche l'altezza del box sul drag and drop così
+che quando chiudete/riaprite il medesimo box, o semplicemente sloggate e riloggate, mantenga l'ultima impostazione.
+(Salvato su Local Storage)
+
+## Barra Stati ##
+- Adesso dopo aver cliccato sulla voce (velocità/difesa/atteggiamento etc), si verrà riportati automaticamente sulla barra comandi
+
+## Vari ##
+- Aggiunto il numero revision al tag "versione" client, così da avere un'indicazione piu' scrupolosa di quale versione state guardando rispetto alla mia sub-release

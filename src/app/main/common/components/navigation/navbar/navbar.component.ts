@@ -1,11 +1,8 @@
 import { Component, Input, OnDestroy, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginClientService } from 'src/app/main/client/services/login-client.service';
-import { map } from 'rxjs/operators';
-import { Character } from 'src/app/core/models/character.model';
-import { gameNavigationSideBar } from '../navigation';
 import { DispenserService } from 'src/app/main/client/services/dispenser.service';
 
 

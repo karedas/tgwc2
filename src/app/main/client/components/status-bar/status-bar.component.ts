@@ -8,6 +8,7 @@ import { getHero } from '../../store/selectors';
 import { Store, select } from '@ngrx/store';
 import { DataState } from '../../store/state/data.state';
 import { GameService } from '../../services/game.service';
+import { InputService } from '../input/input.service';
 
 @Component({
   selector: 'tg-status-bar',
@@ -31,6 +32,7 @@ export class StatusBarComponent implements OnInit, OnDestroy  {
   constructor(
     private store: Store<DataState>,
     private gameService: GameService,
+    private inputService: InputService,
     private _configService: ConfigService
   ) { 
     this.hero$ = this.store.pipe(select(getHero));
@@ -50,6 +52,7 @@ export class StatusBarComponent implements OnInit, OnDestroy  {
   onClickButton(what: string, param?: string) {
     param = param ? ' ' + param.substring(0, 4) : '';
     this.gameService.processCommands(what + param);
+    this.inputService.focus();
   }
 
   ngOnDestroy() {

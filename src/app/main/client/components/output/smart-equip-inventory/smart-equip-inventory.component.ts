@@ -16,7 +16,6 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./smart-equip-inventory.component.scss']
 })
 export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
-  @Output() isCollapsed = new EventEmitter();
 
   equip: any[] = [];
   inventory: any[] = [];
@@ -47,7 +46,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .subscribe( (config: TGConfig ) => {
         setTimeout(() => {
           this.show = config.equipInventoryBox.visible;
-          this.isCollapsed.emit(this.show);
         });
       });
     
@@ -76,7 +74,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
 
   onCollapse() {
     this.show = !this.show
-    this.isCollapsed.emit(this.show)
     //store in the config
     this._configService.setConfig({
       equipInventoryBox: {visible: this.show}
@@ -84,7 +81,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   }
 
   interactElement(item, mine: boolean) {
-
     this.gameService.interact(item, null, mine);
   }
 

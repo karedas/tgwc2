@@ -28,7 +28,6 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
   @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
-  @ViewChild(SmartEquipInventoryComponent,    { static: false }) smartEquipBox: SmartEquipInventoryComponent;
 
   // Smart Equip/Inv
   smartSizeArea: number | string;
@@ -203,22 +202,34 @@ export class OutputComponent implements OnInit, OnDestroy {
     }
   }
 
-  onDragStart(event) {
-    this.scrollBar.sensorDisabled = true;
+  onDragStart() {
+    // TODO disable ngx-scrollbar to improve performance
   }
 
-  onDragEnd(event) {
+  onDragEnd(event, selector: string) {
     this.scrollBar.sensorDisabled = false;
     this.scrollBar.update();
     this.scrollPanelToBottom();
     // Store the Split size in the main config
-    this._configService.setConfig({
-      output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
-    });
+
+    if(selector === 'output') {
+      this._configService.setConfig({
+        output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
+      });
+    }
+    else if (selector === 'equipinv') {
+      console.log(event);
+      this._configService.setConfig({
+        equipInventoryBox: { size: event.sizes[1] }
+      });
+    }
+
   }
 
   toggleEquipInventorySplit(event) {
-    this.smartSizeArea = event ? '250' : '24';
+    this._configService.setConfig({
+      equipInventoryBox: { visible: false}
+    })
   }
 
   ngOnDestroy() {
