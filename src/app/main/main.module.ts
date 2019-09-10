@@ -24,8 +24,7 @@ import { NavBarModule } from './common/components/navigation/navbar/navbar.modul
 import { SidenavComponent } from './common/components/navigation/sidenav/sidenav.component';
 import { LogService } from './client/services/log.service';
 import { LoginClientService } from './authentication/services/login-client.service';
-import { Parser } from './client/services/parser.service';
-import { DataService } from './client/services/data.service';
+import { DataParser } from './client/services/dataParser.service';
 
 const routes: Routes = [
   {
@@ -74,8 +73,7 @@ const routes: Routes = [
     SplashScreenService,
     LogService,
 
-    DataService,
-    Parser,
+    DataParser,
     GameService,
   ]
 })
