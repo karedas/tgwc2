@@ -11,9 +11,7 @@ import { HelpComponent } from './pages/help/help.component';
 import { MatToolbarModule } from '@angular/material';
 import { SocketService } from '../core/services/socket.service';
 import { AlertComponent } from './common/components/dialogs/alert/alert.component';
-import { LoginClientService } from './client/services/login-client.service';
 import { GameService } from './client/services/game.service';
-import { DataParser } from './client/services/dataParser.service';
 import { LoginClientGuard } from './authentication/services/login-client.guard';
 import { FooterComponent } from './common/components/footer/footer.component';
 import { StoreModule } from '@ngrx/store';
@@ -25,6 +23,9 @@ import { DialogV2Module } from './client/common/dialog-v2/dialog-v2.module';
 import { NavBarModule } from './common/components/navigation/navbar/navbar.module';
 import { SidenavComponent } from './common/components/navigation/sidenav/sidenav.component';
 import { LogService } from './client/services/log.service';
+import { LoginClientService } from './authentication/services/login-client.service';
+import { Parser } from './client/services/parser.service';
+import { DataService } from './client/services/data.service';
 
 const routes: Routes = [
   {
@@ -69,11 +70,13 @@ const routes: Routes = [
     SocketService,
     DialogV2Service,
     LoginClientService,
-    GameService,
-    DataParser,
     CookieService,
     SplashScreenService,
-    LogService
+    LogService,
+
+    DataService,
+    Parser,
+    GameService,
   ]
 })
 

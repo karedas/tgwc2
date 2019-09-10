@@ -9,9 +9,9 @@ import { UsernameValidation, PasswordValidation } from 'src/app/main/common/vali
 import { takeUntil } from 'rxjs/operators';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { MatDialogRef } from '@angular/material/dialog';
-import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import * as ClientActions from '../../../store/actions/client.action';
 import { LogService } from '../../../services/log.service';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 
 @Component({
   selector: 'tg-login-smart',

@@ -28,8 +28,8 @@
                       <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
                       
                       <ng-container *ngSwitchCase="'pause'">
-                        <div class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
                         <!-- Pause scroll Place Holder -->
+                        <div class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
                       </ng-container>
 
                     </ng-container>
@@ -101,9 +101,9 @@
             <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
             <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
             <ng-container *ngSwitchCase="'pause'">
-                <p>PAUSA ------------------------</p>
-                <!-- Pause scroll Place Holder -->
-              </ng-container>
+              <!-- Pause scroll Place Holder -->
+              <div class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+            </ng-container>
           </ng-container>
         </div>
       </div>

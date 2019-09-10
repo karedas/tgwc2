@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { NavigationItem, baseNavigationSidebar, gameNavigationSideBar } from '../navigation';
 import { Router, Event, NavigationEnd } from '@angular/router';
-import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import { DispenserService } from 'src/app/main/client/services/dispenser.service';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 
 @Component({
   selector: 'tg-sidenav',

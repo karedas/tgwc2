@@ -2,8 +2,8 @@ import { Component, Input, OnDestroy, ViewEncapsulation, EventEmitter, Output } 
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { LoginClientService } from 'src/app/main/client/services/login-client.service';
 import { DispenserService } from 'src/app/main/client/services/dispenser.service';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 
 
 @Component({

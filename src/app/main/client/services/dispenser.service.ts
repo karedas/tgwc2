@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GameService } from './game.service';
 import { DialogV2Service } from '../common/dialog-v2/dialog-v2.service';
 import { AudioService } from '../components/audio/audio.service';
-import { LoginClientService } from './login-client.service';
+import { LoginClientService } from '../../authentication/services/login-client.service';
 
 @Injectable({
   providedIn: 'root'

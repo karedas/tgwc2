@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { LoginClientService } from '../../client/services/login-client.service';
 import { Router } from '@angular/router';
 import { tgAnimations } from 'src/app/animations';
 import { SocketService } from 'src/app/core/services/socket.service';
@@ -9,6 +8,7 @@ import { Subject } from 'rxjs';
 import { GoogleAnalyticsService } from 'src/app/services/google-analytics-service.service';
 import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { UsernameValidation, PasswordValidation } from '../../common/validators/character-validations';
+import { LoginClientService } from '../services/login-client.service';
 
 @Component({
   selector: 'tg-login-character',

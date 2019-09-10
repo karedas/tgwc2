@@ -3,7 +3,7 @@ import { SocketService } from 'src/app/core/services/socket.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { socketEvent } from 'src/app/core/models/socketEvent.enum';
 import { loginClientErrors } from '../../authentication/services/login-client-errors';
-import { GameService } from './game.service';
+import { GameService } from '../../client/services/game.service';
 
 @Injectable()
 export class LoginClientService {
@@ -15,7 +15,9 @@ export class LoginClientService {
   private name: string;
   private secret: string;
 
-  constructor(private socketService: SocketService, private gameService: GameService) {
+  constructor( 
+    private socketService: SocketService, 
+    private gameService: GameService ) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
     this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
