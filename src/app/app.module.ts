@@ -59,7 +59,6 @@ export function tokenGetter() {
     AppRoutingModule,
   ],
   exports: [
-    // AngularSplitModule
   ],
   providers: [
     AppPreloadingStrategy,

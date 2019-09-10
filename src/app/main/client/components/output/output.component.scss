@@ -27,7 +27,7 @@
   width: 100%;
   font-family: Verdana, Geneva, sans-serif;
   z-index: 2;
-  color: $tg-gray; //  default color
+  color: $output-base-color; //  default color
   box-sizing: border-box;
 }
 
@@ -343,7 +343,7 @@ tg-text {
 
     .tg-room--desc {
       color: $base-text-color;
-      padding: 0.5em 12px .2em 0;
+      padding: 3px 12px 0.2em 0;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
     }

@@ -7,6 +7,7 @@ import * as ClientActions from 'src/app/main/client/store/actions/client.action'
 import { Store } from '@ngrx/store';
 import { TGState } from 'src/app/main/client/store';
 import { Injectable } from '@angular/core';
+import { Route, ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class SocketService {
@@ -16,9 +17,10 @@ export class SocketService {
   connectedSubject: BehaviorSubject<boolean>;
   socket_error$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor( private store: Store<TGState>) {
+  constructor( private store: Store<TGState>, private route: ActivatedRoute) {
     this.connectedSubject =  new BehaviorSubject(false);
     this.init();
+
   }
 
   get isConnected(): boolean {
@@ -37,6 +39,7 @@ export class SocketService {
   /** PUBLIC METHODS  */
 
   public init(): void {
+
 
     if (!this.socket) {
       this.socket = io(environment.socket.url, environment.socket.options);

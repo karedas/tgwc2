@@ -1,4 +1,4 @@
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorIntl } from '@angular/material/';
 
 const italianRangeLabel = (page: number, pageSize: number, length: number) => {
   if (length === 0 || pageSize === 0) { return `0 di ${length}`; }
@@ -16,15 +16,11 @@ const italianRangeLabel = (page: number, pageSize: number, length: number) => {
 };
 
 
-export function getItalianPaginatorIntl(): MatPaginatorIntl {
-  const paginatorIntl = new MatPaginatorIntl();
-
-  paginatorIntl.itemsPerPageLabel = 'Risultati per pagina:';
-  paginatorIntl.nextPageLabel = 'Avanti';
-  paginatorIntl.lastPageLabel = 'Ultima pagina';
-  paginatorIntl.firstPageLabel = 'Prima pagina';
-  paginatorIntl.previousPageLabel = 'Precedente';
-  paginatorIntl.getRangeLabel = italianRangeLabel;
-
-  return paginatorIntl;
+export class getItalianPaginatorIntl extends MatPaginatorIntl  {
+  itemsPerPageLabel = 'Risultati per pagina:';
+  nextPageLabel = 'Avanti';
+  lastPageLabel = 'Ultima pagina';
+  firstPageLabel = 'Prima pagina';
+  previousPageLabel = 'Precedente';
+  getRangeLabel = italianRangeLabel;
 }

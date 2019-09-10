@@ -30,4 +30,5 @@ export interface Room {
   objcont: ObjAndPersonCont;
   perscont: ObjAndPersonCont;
   ver: number;
+  mv: any;
 }

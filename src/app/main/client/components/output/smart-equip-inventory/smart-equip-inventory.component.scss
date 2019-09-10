@@ -18,13 +18,16 @@
     max-height: 30px;
     cursor: pointer;
 
-
+    .tg-smart-btn-container {
+        height: 100%;
+    }
+    
     .tg-smart-title {
         padding: 0 4px;
         margin-right: 8px;
         height: 100%;
         border-radius: 0;
-        font-size: 1.1em;
+        font-size: 1.2em;
         color: #dad6c1a8;
         font-family: $modern-antiqua;
         line-height: normal;

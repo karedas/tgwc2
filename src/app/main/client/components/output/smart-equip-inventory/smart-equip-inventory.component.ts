@@ -17,7 +17,8 @@ import { delay } from 'rxjs/operators';
 })
 export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   @Input() draggingSplitArea: boolean;
-
+  
+  extended: boolean = false;
   equip: any[] = [];
   inventory: any[] = [];
   tab: number = 1;

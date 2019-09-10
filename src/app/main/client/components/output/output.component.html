@@ -11,7 +11,7 @@
 
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
             <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-              Autoscroll disattivato
+              Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
             </div>
             <tg-status></tg-status>
 
@@ -29,9 +29,9 @@
                       
                       <ng-container *ngSwitchCase="'pause'">
                         <!-- Pause scroll Place Holder -->
-                        <div class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+                        <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
                       </ng-container>
-
+                      
                     </ng-container>
 
                   </ng-container>
@@ -85,7 +85,7 @@
 <ng-template #noextra>
 
   <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-    Autoscroll disattivato
+      Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
   </div>
   <tg-status></tg-status>
 
@@ -102,7 +102,7 @@
             <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
             <ng-container *ngSwitchCase="'pause'">
               <!-- Pause scroll Place Holder -->
-              <div class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+              <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
             </ng-container>
           </ng-container>
         </div>

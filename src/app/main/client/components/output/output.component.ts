@@ -12,7 +12,6 @@ import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 import { OutputService } from './output.service';
 import { TGState } from '../../store';
-import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
 
 @Component({
   selector: 'tg-output',
@@ -26,6 +25,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   @ViewChild('scrollBar', { static: false }) scrollBar: NgScrollbar;
   @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
+  @ViewChild('pausePlaceholder', { static: false }) pausePlaceholder: ElementRef;
   @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
@@ -201,6 +201,11 @@ export class OutputComponent implements OnInit, OnDestroy {
     }
   };
 
+  goToPausePlaceHolder() {
+    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, 50, 50)
+  }
+
+
   @HostListener('window:resize', ['$event.target'])
   onResize() {
     clearInterval(this.resizeID);
@@ -208,6 +213,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       this.setOutputSplit();
     }, 500);
   }
+  
 
   setOutputSplit() {
     // Check if the Output area is over min-size to show split.
