@@ -29,34 +29,26 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
-  // Smart Equip/Inv
   draggingSplitArea: boolean = false;
   smartSizeArea: number | string;
-  //----------------
-
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
   pauseScroll = false;
-
-  private latestLineBeforePause
-
-  private _inGameStatus: Observable<any>;
-  private _baseText$: Observable<any>;
-  private _roomBase$: Observable<any>;
-  private _objOrPerson$: Observable<any>;
-  private _genericPage$: Observable<any>;
-
   output = [];
   outputObservable = new BehaviorSubject([]);
-
   lastRoomDescription = '';
   typeDetail: string;
   objPersDetail: any[];
   genericPage: IGenericPage;
 
-
-  private resizeID: any;
   private readonly outputTrimLines = 500;
+  private _inGameStatus: Observable<any>;
+  private _baseText$: Observable<any>;
+  private _roomBase$: Observable<any>;
+  private _objOrPerson$: Observable<any>;
+  private _genericPage$: Observable<any>;
+  private latestLineBeforePause: number;
+  private resizeID: any;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -133,7 +125,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.output.push(content);
     this.outputObservable.next(this.output);
 
-    if(!this.pauseScroll) {
+    if (!this.pauseScroll) {
       this.scrollPanelToBottom();
     }
   }
@@ -193,11 +185,11 @@ export class OutputComponent implements OnInit, OnDestroy {
   private pauseAutoScrollBar(status: boolean) {
     this.pauseScroll = status;
     // Adding placeholder for autoscroll last readed Line;
-    if(this.pauseScroll) {
+    if (this.pauseScroll) {
       this.setContent('pause', []);
       this.latestLineBeforePause = this.output.length;
     } else {
-      this.output.splice(this.latestLineBeforePause-1, 1);
+      this.output.splice(this.latestLineBeforePause - 1, 1);
     }
   };
 
@@ -213,7 +205,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       this.setOutputSplit();
     }, 500);
   }
-  
+
 
   setOutputSplit() {
     // Check if the Output area is over min-size to show split.
