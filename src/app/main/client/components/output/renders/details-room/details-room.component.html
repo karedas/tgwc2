@@ -18,8 +18,8 @@
     <ng-container *ngFor="let person of persons; let i=index">
 
       <div class="tg-persons--line interact"
-        [ngClass]="{'expandlist': person.sz, 'open': togglePanel[totalObjs.length + i]}" 
-        (mousedown)="onExpand($event, person, totalObjs.length + i, person.sz)">
+        [ngClass]="{'expandlist': person.sz, 'open': togglePanel[totalObjs + i]}" 
+        (mousedown)="onExpand($event, person, totalObjs + i)">
 
         <tg-icons [icon]="person.icon" (mousedown)="onInteract(person)" 
           tooltip="Guarda"
@@ -36,7 +36,7 @@
 
       </div>
 
-      <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[totalObjs.length + i]" fxLayout="column">
+      <div class="tg-expandedlist" *ngIf="person.sz && togglePanel[totalObjs + i]" fxLayout="column">
         <div class="tg-persons--line" *ngFor="let sz of person.mrn; let indexSz=index" (mousedown)="onInteract(person, indexSz)"
           tooltip="Guarda" 
           placement="left"
@@ -65,7 +65,7 @@
 
       <div class="tg-objects--line interact" 
         [ngClass]="{'expandlist': object.sz, 'open': togglePanel[i]}" 
-        (mousedown)="onExpand($event, object, i, object.sz)">
+        (mousedown)="onExpand($event, object, i)">
 
         <tg-icons [icon]="object.icon" (mousedown)="onInteract(object)" 
           tooltip="Guarda" 

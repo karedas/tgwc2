@@ -72,7 +72,7 @@ export class DetailsRoomComponent implements OnInit {
     }
   }
 
-  onInteract(item: any, index: number) {
+  onInteract(item: any, index?: number) {
     this.gameService.interact(item, index);
   }
 

@@ -14,7 +14,7 @@ export class WelcomeRegistrationComponent implements OnDestroy {
   @ViewChild('formEmail', { static: true }) formEmail: NgForm;
 
   userEmail: string;
-  emailProcessed = false;
+  emailProcessed: boolean = false;
 
   private _unsubscribeAll: Subject<any>;
 

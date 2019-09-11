@@ -44,7 +44,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
     this.inputService.focus();
   }
 
-  changeCmdLabel(val: number) {
+  changeCmdLabel(val?: number | any) {
     this.cmdHoverId = val;
   }
 

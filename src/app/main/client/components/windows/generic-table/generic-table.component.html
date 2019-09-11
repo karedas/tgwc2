@@ -27,8 +27,9 @@
                   <!-- Icon type -->
                   <tg-icons [icon]="element[column]" *ngIf="column === 'icona'"></tg-icons>
                   <!-- Ip Address type-->
-                  <a target="_blank"  *ngIf="column == 'ipaddr'"
-                  href="http://www.infosniper.net/index.php?ip_address= {{rowData[col.field]}}">{{element[column]}}</a>
+                  <a target="_blank"  
+                    *ngIf="column === 'ipaddr'"
+                    href="http://www.infosniper.net/index.php?ip_address= {{element[column]}}">{{element[column]}}</a>
                   <!-- Default Text type -->
                   <span [innerHtml]="element[column] | dataToHtml" *ngIf="element[column] && column !== 'icona' && column !=='ipaddr'"></span>
                 </td>

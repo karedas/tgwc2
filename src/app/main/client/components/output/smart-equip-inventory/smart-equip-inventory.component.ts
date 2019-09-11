@@ -82,7 +82,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  interactElement(item, mine: boolean) {
+  interactElement(item, mine?: boolean) {
     this.gameService.interact(item, null, mine);
   }
 

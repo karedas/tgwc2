@@ -1,9 +1,9 @@
-
-import { List} from 'immutable';
+import { Eqcont } from './objpers.model';
 
 
 export interface Desc {
   base: string;
+  details: string;
   repeatlast: boolean;
 }
 
@@ -24,11 +24,14 @@ export interface ObjAndPersonCont {
 }
 export interface Room {
   title: string;
-  desc: List<Desc>;
+  desc: Desc;
   icon: number;
   image: string;
   objcont: ObjAndPersonCont;
   perscont: ObjAndPersonCont;
   ver: number;
+  dir: string;
   mv: any;
+  where: any
+  eqcont: Eqcont
 }

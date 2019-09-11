@@ -34,7 +34,6 @@ import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     DragDropModule,
     CharacterSheetModule,
     MatDialogModule,
-
     ControlPanelModule
   ],
 

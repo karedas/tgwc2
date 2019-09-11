@@ -26,7 +26,7 @@ export interface IObjPersEqcont {
     list: Eqcont[];
 }
 
-export interface IObjPerson {
+export interface IObjectAndPerson {
     cmd1: any;
     cmd2: any;
     desc: IObjPersDesc;
@@ -35,4 +35,5 @@ export interface IObjPerson {
     icon: number;
     num: number;
     title: string;
+    where: any
 }

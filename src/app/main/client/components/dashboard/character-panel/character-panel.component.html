@@ -75,24 +75,24 @@
           <!-- Character Status Bars -->
           <div class="tg-meterbar" fxLayout="column" fxFlex="0 0 auto">
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" tooltip="Salute" show-delay="500" placement="top">
+              <div class="barcont barthin lft">
                 <span class="tg-statusbar-text">
                   Salute <i>{{ hero.status?.hit }}</i> / 100</span>
                 <span class="red barC healthbar" [style.width.%]="hero.status?.hit"></span>
               </div>
-              <div class="barcont barthin" tooltip="Fiato" show-delay="500" placement="top">
+              <div class="barcont barthin">
                 <span class="tg-statusbar-text">
                   Fiato <i>{{ hero.status?.move }}</i> / 100</span>
                 <span class="green barC movebar" [style.width.%]="hero.status?.move"></span>
               </div>
             </div>
             <div class="tg-extrabars" fxLayout="row">
-              <div class="barcont barthin lft" tooltip="Fame" show-delay="500" placement="top">
+              <div class="barcont barthin lft">
                 <span class="tg-statusbar-text">
                   Fame <i>{{ hero.status?.food }}</i> / 100</span>
                 <span class="orange barC hungrybar" [style.width.%]="hero.status?.food"></span>
               </div>
-              <div class="barcont barthin" tooltip="Sete" show-delay="500" placement="top">
+              <div class="barcont barthin">
                 <span class="tg-statusbar-text">
                   Sete <i>{{ hero.status?.drink}}</i> / 100</span>
                 <span class="blue barC thirstbar" [style.width.%]="hero.status?.drink"></span>

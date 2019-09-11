@@ -6,6 +6,8 @@
 # Prod #
 ng build --prod
 
+## Performance Stats ##
+source-map-explorer .\main-es2015.*.js
 
 #TODO
 ### Book ###

@@ -33,8 +33,7 @@ export class SentryErrorHandler implements ErrorHandler {
     HttpClientModule,
     SharedModule,
   ],
-  declarations: [
-  ],
+  declarations: [],
 })
 export class CoreModule {
 

@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { IObjPersDesc } from 'src/app/main/client/models/data/objpers.model';
+import { IObjPersDesc, IObjectAndPerson } from 'src/app/main/client/models/data/objpers.model';
 
 @Component({
   selector: 'tg-objpers-detail',
@@ -9,7 +9,8 @@ import { IObjPersDesc } from 'src/app/main/client/models/data/objpers.model';
 })
 export class ObjpersDetailComponent {
 
-  @Input() html: IObjPersDesc;
+  @Input() html: IObjectAndPerson;
 
-  constructor() { }
+  constructor() {
+   }
 }

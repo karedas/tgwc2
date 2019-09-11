@@ -48,7 +48,7 @@ export class ObjPersContainerComponent implements OnChanges  {
     }
   }
 
-  onInteract(item: any, index: number, list?: boolean) {
+  onInteract(item: any, index?: number) {
     this.gameService.interact(item, index);
   }
 

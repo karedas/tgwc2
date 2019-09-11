@@ -9,7 +9,7 @@ import { tgAnimations } from 'src/app/animations';
   encapsulation: ViewEncapsulation.None
 })
 export class NewCharacterComponent implements OnInit {
-
+  selectedRace: string;
   constructor() { }
 
   ngOnInit() {

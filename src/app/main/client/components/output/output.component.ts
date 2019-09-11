@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { NgScrollbar } from 'ngx-scrollbar';
@@ -68,7 +68,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Subscribe to config changes
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
@@ -198,16 +198,6 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, 50, 50);
   }
 
-
-  @HostListener('window:resize', ['$event.target'])
-  onResize() {
-    clearInterval(this.resizeID);
-    this.resizeID = setTimeout(() => {
-      this.setOutputSplit();
-    }, 500);
-  }
-
-
   setOutputSplit() {
     // Check if the Output area is over min-size to show split.
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
@@ -240,7 +230,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.draggingSplitArea = false;
   }
 
-  toggleEquipInventorySplit(event) {
+  toggleEquipInventorySplit() {
     this._configService.setConfig({
       equipInventoryBox: { visible: false }
     });
@@ -250,4 +240,14 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    clearInterval(this.resizeID);
+    this.resizeID = setTimeout(() => {
+      this.setOutputSplit();
+    }, 500);
+  }
+
 }

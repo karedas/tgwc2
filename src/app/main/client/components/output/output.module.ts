@@ -14,11 +14,11 @@ import { StatusComponent } from './status/status.component';
 import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
 @NgModule({
   declarations: [
+    OutputComponent,
     ObjpersDetailComponent,
     ObjPersContainerComponent,
     RoomComponent,
     TextComponent,
-    OutputComponent,
     DetailsRoomComponent,
     ContextMenuComponent,
     GenericPageComponent,

@@ -6,7 +6,7 @@
           <!-- Room Title -->
           <div class="tg-room--title">
             
-            <ng-container *ngIf="html?.title; else dirRoomtitle">
+            <ng-container *ngIf="html?.title; else extra_dirRoomtitle">
               <div [innerHtml]="html.title |  dataToHtml:true"></div>
             </ng-container>
           </div>
@@ -109,4 +109,8 @@
 
   <ng-template #extra_dirRoomtitle>
     Sposti lo sguardo {{(html.dir === 'basso' || html.dir === 'alto') ? 'in' : 'a' }}&nbsp;<span>{{html.dir}}</span>
+  </ng-template>
+
+  <ng-template #noobjpers>
+    Non vedi altro di particolare.
   </ng-template>

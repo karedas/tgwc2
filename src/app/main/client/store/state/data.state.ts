@@ -2,7 +2,7 @@ import { Map } from 'src/app/main/client/models/data/map.model';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { IEditor } from 'src/app/main/client/models/data/editor.model';
-import { IObjPerson } from 'src/app/main/client/models/data/objpers.model';
+import { IObjectAndPerson } from 'src/app/main/client/models/data/objpers.model';
 import { IGenericTable } from 'src/app/main/client/models/data/generictable.model';
 import { IWorks } from 'src/app/main/client/models/data/workslist.model';
 import { IRegion } from 'src/app/main/client/models/data/region.model';
@@ -19,7 +19,7 @@ export interface DataState {
     map?: Map;
     hero?: IHero;
     editor?: IEditor;
-    objPers?: IObjPerson;
+    objPers?: IObjectAndPerson;
     genericTable?: IGenericTable;
     workslist?: IWorks;
     region?: IRegion;

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Editor } from 'src/app/main/client/models/data/editor.model';
-import { IObjPerson } from 'src/app/main/client/models/data/objpers.model';
+import { IObjectAndPerson } from 'src/app/main/client/models/data/objpers.model';
 import { IGenericTable } from 'src/app/main/client/models/data/generictable.model';
 import { IWorks } from 'src/app/main/client/models/data/workslist.model';
 import { IBook } from 'src/app/main/client/models/data/book.model';
@@ -44,7 +44,7 @@ export const incomingData = createAction(DataEvenType.IN, props<{ payload: { mes
 export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO, props<{ payload: any }>());
 export const doorsAction = createAction(DataEvenType.DOORS, props<{ payload: any }>());
 export const roomAction = createAction(DataEvenType.ROOM, props<{ payload: any }>());
-export const objectAndPersonAction = createAction(DataEvenType.OBJPERSON, props<{ payload: IObjPerson }>());
+export const objectAndPersonAction = createAction(DataEvenType.OBJPERSON, props<{ payload: IObjectAndPerson }>());
 export const heroAction = createAction(DataEvenType.HERODATA, props<{ payload: any }>());
 export const skyAction = createAction(DataEvenType.SKY, props<{ payload: string }>());
 export const editorAction = createAction(DataEvenType.EDITOR, props<{ payload: Editor }>());

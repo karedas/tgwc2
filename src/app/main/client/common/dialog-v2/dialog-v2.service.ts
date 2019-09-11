@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, HostListener } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { EditorComponent } from '../../components/windows/editor/editor.component';
 import { ControlPanelComponent } from '../../components/windows/control-panel/control-panel.component';
@@ -30,12 +30,17 @@ export class DialogV2Service {
 
       dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       this.addDialogBehaviour(d);
+
+      this.render.listen('.cdk-overlay', 'click', (e) => {
+        console.log(e)
+      })
+
     });
 
   }
 
   getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
-    return dialogRef._overlayRef.overlayElement as HTMLElement;
+    return dialogRef['_overlayRef'].overlayElement as HTMLElement;
   }
 
 
@@ -164,9 +169,11 @@ export class DialogV2Service {
       config.data = {
         tab: detail
       };
+
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
       dialogRef.afterOpened().subscribe(() => {
+        console.log(this);
         // Keep focus on inputbar
         this.inputService.focus();
       });
