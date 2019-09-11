@@ -25,24 +25,17 @@ export class DialogV2Service {
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
     private inputService: InputService,
-    public overlay: Overlay) {
-      this.render = rendererFactory.createRenderer(null, null);
-
-      dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
+    public overlay: Overlay
+  ) {
+    this.render = rendererFactory.createRenderer(null, null);
+    dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       this.addDialogBehaviour(d);
-
-      this.render.listen('.cdk-overlay', 'click', (e) => {
-        console.log(e)
-      })
-
     });
-
   }
 
   getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
     return dialogRef['_overlayRef'].overlayElement as HTMLElement;
   }
-
 
   private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
 
@@ -173,7 +166,6 @@ export class DialogV2Service {
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
       dialogRef.afterOpened().subscribe(() => {
-        console.log(this);
         // Keep focus on inputbar
         this.inputService.focus();
       });
@@ -285,7 +277,7 @@ export class DialogV2Service {
 
       return dialogRef;
     } else {
-      this.dialog.getDialogById(dialogID).componentInstance.data =  bookData;
+      this.dialog.getDialogById(dialogID).componentInstance.data = bookData;
     }
   }
 

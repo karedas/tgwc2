@@ -52,7 +52,6 @@ export class RoomComponent implements OnInit {
   }
 
   onImageNotLoad() {
-    console.log('unloaded');
     this.imageLoaded = false;
   }
 }
