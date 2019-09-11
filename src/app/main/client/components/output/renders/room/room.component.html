@@ -12,7 +12,7 @@
           </div>
 
           <!-- Room Description -->
-          <div class="tg-room--desc tg-gray">
+          <div class="tg-room--desc">
             <ng-container *ngIf="html.desc.details; else regularDescBase">
               <div [innerHtml]="html.desc.details | dataToHtml:true | capitalizeFirst"></div>
               <div [innerHtml]="(html?.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>

@@ -16,7 +16,7 @@ import { LoginClientService } from 'src/app/main/authentication/services/login-c
 @Component({
   selector: 'tg-login-smart',
   templateUrl: './login-smart.component.html',
-  styleUrls: ['./login-smart.component.scss']
+  styleUrls: ['./login-smart.component.scss'],
 })
 export class LoginSmartComponent implements OnInit, OnDestroy {
 

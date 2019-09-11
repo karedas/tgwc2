@@ -7,20 +7,26 @@ as-split.tg-output--splitter {
 			border: 0;
 			background: url($imgPath + '/borders/border-002-tiny-v.png') center center repeat-y;
 			background-color: #171411;
+			box-sizing: border-box;
+			border-right: 1px solid rgba(255, 255, 255, 0.1);
+    		border-left: 1px solid rgba(255, 255, 255, 0.1);
 		}
 		.as-split-gutter-icon {
-			background-image: none!important;
+			opacity: .3;
 		}
 	}
 	
 	&.as-vertical {
 		> .as-split-gutter {
 			border: 0;
-			background: url($imgPath + '/borders/border-002-tiny.png') top left repeat-x;
+			background: url($imgPath + '/borders/border-002-tiny.png') center center repeat-x;
+			box-sizing: border-box;
 			background-color: #171411;
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 		}
 		.as-split-gutter-icon {
-			background-image: none!important;
+			opacity: .3;
 		}
 	}
 }

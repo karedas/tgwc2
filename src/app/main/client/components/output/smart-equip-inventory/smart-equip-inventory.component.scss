@@ -1,88 +1,82 @@
 @import 'abstract/variables';
 
 :host {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .tg-smart-equipinv {
-    height: 100%;
-    color: $base-text-color;
-    box-sizing: border-box;
+  height: 100%;
+  color: $base-text-color;
+  box-sizing: border-box;
 }
 
 .tg-smart-tabtitle {
-    background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-    box-shadow: inset 0px -5px 11px 0px black;
-    border-bottom: 1px solid #433b3a;
-    height: 30px;
-    max-height: 30px;
-    cursor: pointer;
+  background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
+  box-shadow: inset 0px -5px 11px 0px black;
+  border-bottom: 1px solid #433b3a;
+  height: 30px;
+  max-height: 30px;
+  cursor: pointer;
 
-    .tg-smart-btn-container {
-        height: 100%;
-    }
-    
-    .tg-smart-title {
-        padding: 0 4px;
-        margin-right: 8px;
-        height: 100%;
-        border-radius: 0;
-        font-size: 1.2em;
-        color: #dad6c1a8;
-        font-family: $modern-antiqua;
-        line-height: normal;
-    }
+  .tg-smart-btn-container {
+    height: 100%;
+  }
 
-    .tg-smart-collapsebtn {
-        line-height: normal;
-        height: 22px;
-        width: 22px;
-        margin: auto 6px auto auto;
+  .tg-smart-title {
+    padding: 0 4px;
+    margin-right: 8px;
+    height: 100%;
+    border-radius: 0;
+    font-size: 1.2em;
+    color: #dad6c1a8;
+    font-family: $modern-antiqua;
+    line-height: normal;
+  }
 
-        .mat-icon {
-            line-height: 22px;
-            width: 22px;
-            height: 22px;
-        }
-    }
+  .tg-smart-collapsebtn {
+    line-height: normal;
+    height: 22px;
+    width: 22px;
+    margin: auto 6px auto auto;
 
-    .active .tg-smart-title{
-        color: #dad6c1;
+    .mat-icon {
+      line-height: 22px;
+      width: 22px;
+      height: 22px;
     }
+  }
+
+  .active .tg-smart-title {
+    color: #dad6c1;
+  }
 }
 
-
-.eqinv-caption {
-    background-color: #0c0c0c;
-    color: white;
-    border-bottom: 1px solid #433b3a;
-    > div {
-        padding: 3px 4px;
-    }
-}
 
 .eqinv-item-wrap {
-    border-bottom: 1px solid #191616;
-    cursor: pointer;
-    
-    &:hover {
-        background-color: rgba(158, 158, 158, 0.1);
-    }
+  border-bottom: 1px solid #191616;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(158, 158, 158, 0.1);
+  }
 }
 
-.eqinv-item, .eqinv-item-weight, .eqinv-item-position, .eqinv-item-qty {
-    padding: 1px 4px;
-    line-height: 1;
-    border-left: 1px solid #191616;
+.eqinv-item,
+.eqinv-item-weight,
+.eqinv-item-position,
+.eqinv-item-qty {
+  padding: 1px 4px;
+  line-height: 1;
+  border-left: 1px solid #191616;
 
-    &:first-child {
-        border-left: none;
-        padding-left: 2px;
-    }
+  &:first-child {
+    border-left: none;
+    padding-left: 2px;
+  }
 
-    .eqinv-item-text {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+  .eqinv-item-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

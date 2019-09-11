@@ -74,7 +74,6 @@ export class AppComponent implements OnDestroy {
   }
 
   onLoad(event: boolean): void {
-    console.log(event);
     this.assetsLoaded = event;
   }
 

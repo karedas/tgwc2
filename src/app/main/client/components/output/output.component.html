@@ -5,12 +5,8 @@
     <div class="tg-output-main" #mainOutputArea *ngIf="$tgConfig | async as tgConfig">
       <ng-container *ngIf="showExtraByViewport && tgConfig.output.extraArea.visible as extra; else noextra">
 
-        <as-split class="tg-output--splitter"  
-          [gutterSize]="11" 
-          [direction]="'horizontal'"
-          (dragEnd)="onDragEnd($event, 'output')" 
-          (dragStart)="onDragStart()"
-          #splitArea>
+        <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'"
+          (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
 
           <!--  Main Output Area -->
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
@@ -22,8 +18,9 @@
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
-              
-              <ng-scrollbar class="scrollbar-output" [ngClass]="{'disabled': draggingSplitArea}" #scrollBar  [disabled]="draggingSplitArea">
+
+              <ng-scrollbar class="scrollbar-output" [ngClass]="{'disabled': draggingSplitArea}" #scrollBar
+                [disabled]="draggingSplitArea">
                 <div class="tg-output--history">
 
                   <div *ngIf="!output.length" class="no-output-notice">
@@ -34,7 +31,7 @@
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
                       <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
-                      
+
                       <ng-container *ngSwitchCase="'pause'">
                         <ng-container ngTemplateOutlet="pausePlaceholder">
                         </ng-container>
@@ -46,7 +43,7 @@
                 </div>
                 <div id="scrollerEnd" #scrollerEnd></div>
               </ng-scrollbar>
-              
+
             </div>
 
           </as-split-area>
@@ -54,26 +51,19 @@
           <!-- Extra Output Area -->
           <as-split-area [size]="tgConfig.output.extraArea.size[1]">
             <div style="height: 100%; overflow:hidden;" fxLayout="column">
-              <as-split class="tg-output--splitter" 
-                direction="vertical" 
-                [gutterSize]="5" 
-                [restrictMove]="true"
-                unit="pixel" 
-                (dragStart)="onDragStart()"
-                (dragEnd)="onDragEnd($event, 'equipinv')">
+              <as-split class="tg-output--splitter" direction="vertical" [gutterSize]="9" [restrictMove]="true"
+                unit="pixel" (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event)">
 
                 <as-split-area size="*">
-                  <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" 
-                    [withExtra]="extra"
-                    [lastDescription]="lastRoomDescription" 
-                    [draggingSplitArea]="draggingSplitArea"
-                    [type]="typeDetail"></tg-room>
+                  <tg-room [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" [withExtra]="extra"
+                    [lastDescription]="lastRoomDescription" [draggingSplitArea]="draggingSplitArea" [type]="typeDetail">
+                  </tg-room>
                 </as-split-area>
 
-                <as-split-area 
-                  [size]="tgConfig.equipInventoryBox.visible ? tgConfig.equipInventoryBox.size : tgConfig.equipInventoryBox.sizeWhenClose" 
+                <as-split-area
+                  [size]="tgConfig.equipInventoryBox.visible ? tgConfig.equipInventoryBox.size : tgConfig.equipInventoryBox.sizeWhenClose"
                   [lockSize]="smartSizeArea === tgConfig.equipInventoryBox.sizeWhenClose">
-                  <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea"></tg-smart-equip-inventory>
+                  <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea" [showAccordionView]="false"></tg-smart-equip-inventory>
                 </as-split-area>
 
               </as-split>
@@ -94,46 +84,59 @@
   </div>
 </div>
 
+
 <ng-template #noextra>
+  <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'"
+    (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitOutputArea>
 
-  <ng-container *ngIf="pauseScroll">
-    <ng-container *ngTemplateOutlet="pauseScroll"></ng-container>
-  </ng-container>
+    <as-split-area size="*">
+      <ng-container *ngIf="pauseScroll">
+        <ng-container *ngTemplateOutlet="pauseScroll"></ng-container>
+      </ng-container>
 
-  <tg-status></tg-status>
+      <tg-status></tg-status>
 
-  <div style="height: 100%; overflow:hidden;">
+      <div style="height: 100%; overflow:hidden;">
 
-    <ng-scrollbar class="scrollbar-output" #scrollBar>
-      <div class="tg-output--history" >
-        <div *ngFor="let data of outputObservable | async; let i = index">
+        <ng-scrollbar class="scrollbar-output" #scrollBar  [ngClass]="{'disabled': draggingSplitArea}" [disabled]="draggingSplitArea">
+          <div class="tg-output--history">
+            <div *ngFor="let data of outputObservable | async; let i = index">
 
-          <ng-container [ngSwitch]="data.type">
-            <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
-            <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
-              [lastDescription]="lastRoomDescription"></tg-room>
-            <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
-            <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
-            
-            <ng-container *ngSwitchCase="'pause'">
-              <ng-container ngTemplateOutlet="pausePlaceholder">
+              <ng-container [ngSwitch]="data.type">
+                <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
+                <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
+                  [lastDescription]="lastRoomDescription"></tg-room>
+                <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
+                <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
+
+                <ng-container *ngSwitchCase="'pause'">
+                  <ng-container ngTemplateOutlet="pausePlaceholder">
+                  </ng-container>
+                </ng-container>
+
               </ng-container>
-            </ng-container>
 
-          </ng-container>
-
-        </div>
+            </div>
+          </div>
+          <div #scrollerEnd class="scrollend" style="height: 100%; width: 100%; display:block;"></div>
+        </ng-scrollbar>
       </div>
-      <div #scrollerEnd class="scrollend" style="height: 100%; width: 100%; display:block;"></div>
-    </ng-scrollbar>
-  </div>
+    </as-split-area>
+
+    <as-split-area [size]="300">
+      <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea" [showAccordionView]="true"></tg-smart-equip-inventory>
+    </as-split-area>
+
+  </as-split>
+
 </ng-template>
 
 
 
 <ng-template #pauseScrollBadge>
   <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-    Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
+    Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()"
+      style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
   </div>
 </ng-template>
 
@@ -142,4 +145,3 @@
   <!-- Pause scroll Place Holder -->
   <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
 </ng-template>
-

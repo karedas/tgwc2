@@ -1,0 +1,54 @@
+.tg-objects-list {
+
+    color: $base-text-color;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    // Material Accordion 
+
+    
+    mat-expansion-panel-header {
+        font-size: 1em;
+        padding: 6px 12px 6px 12px;
+        border-bottom: 1px solid #433b3a;
+        box-shadow: inset 0px -5px 11px 0px black;
+        position: relative;
+        background: url($imgPath + '/background/blood_dark.jpg') repeat top left!important;
+
+        .mat-expansion-panel-header-title {
+            color: #dad6c1;
+            font-size: 1.2em;
+            font-weight: normal;
+            font-family: $modern-antiqua;
+        }
+    }
+
+    mat-expansion-panel {
+        color: $base-text-color;
+        .mat-expansion-panel-content {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1em;
+            font-weight: 100;
+        }
+
+        .mat-expansion-panel-body {
+            border-bottom: 1px solid #191616;
+            padding: 0;
+        }
+    }
+
+
+    // Caption
+
+    
+    .objlist-caption {
+        background-color: #0c0c0c;
+        color: white;
+        border-bottom: 1px solid #433b3a;
+        text-transform: uppercase;
+        font-size: .8em;
+    
+        >div {
+        padding: 3px 12px;
+        }
+    }
+}

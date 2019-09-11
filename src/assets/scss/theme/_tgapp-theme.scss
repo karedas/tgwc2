@@ -1,6 +1,5 @@
 .tg-app {
 
-  @import 'dialog';
   @import 'partials/material/mat-divider';
   @import 'partials/material/mat-expansion';
   @import 'partials/material/mat-menu';
@@ -15,8 +14,12 @@
   @import 'partials/material/mat-dialog';
   @import 'partials/material/mat-stepper';
   @import 'partials/material/mat-paginator';
+  
+  @import 'partials/dialog';
   @import 'partials/common';
 
+  /* Components */
+  @import 'partials/objects-list';
 
 
   .cdk-overlay-connected-position-bounding-box {
