@@ -11,7 +11,7 @@ declare let ga: Function;
   selector: 'tg-root',
   template: `
   <tg-splashscreen
-    *ngIf="!debug"
+    *ngIf="!debug && !assetsLoaded"
     id="splashscreen"
     (loaded)="onLoad($event)"></tg-splashscreen>
 
@@ -74,6 +74,7 @@ export class AppComponent implements OnDestroy {
   }
 
   onLoad(event: boolean): void {
+    console.log(event);
     this.assetsLoaded = event;
   }
 

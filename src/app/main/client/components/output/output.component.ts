@@ -21,7 +21,7 @@ import { TGState } from '../../store';
 
 export class OutputComponent implements OnInit, OnDestroy {
 
-  tgConfig: TGConfig;
+  $tgConfig: TGConfig;
 
   @ViewChild('scrollBar', { static: false }) scrollBar: NgScrollbar;
   @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
@@ -65,18 +65,12 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._objOrPerson$ = this.store.select(getObjOrPerson);
     this._genericPage$ = this.store.select(getGenericPage);
 
+    this.$tgConfig = this._configService.config;
+
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit() {
-    // Subscribe to config changes
-    this._configService.config
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config) => {
-        this.tgConfig = config;
-      });
-
-
     this._inGameStatus
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((status) => {

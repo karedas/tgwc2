@@ -2,45 +2,56 @@
   <div class="tg-box" fxFlex="100" fxLayout="column">
 
 
-    <div class="tg-output-main" #mainOutputArea>
-      <!-- Output Area -->
+    <div class="tg-output-main" #mainOutputArea *ngIf="$tgConfig | async as tgConfig">
       <ng-container *ngIf="showExtraByViewport && tgConfig.output.extraArea.visible as extra; else noextra">
 
-        <as-split #splitArea class="tg-output--splitter" [gutterSize]="11" [direction]="'horizontal'"
-          (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()">
+        <as-split class="tg-output--splitter"  
+          [gutterSize]="11" 
+          [direction]="'horizontal'"
+          (dragEnd)="onDragEnd($event, 'output')" 
+          (dragStart)="onDragStart()"
+          #splitArea>
 
+          <!--  Main Output Area -->
           <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
-            <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-              Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
-            </div>
+
+            <ng-container *ngIf="pauseScroll">
+              <ng-container *ngTemplateOutlet="pauseScroll"></ng-container>
+            </ng-container>
+
             <tg-status></tg-status>
 
             <div style="height: 100%; overflow:hidden;" class="o-container">
+              
               <ng-scrollbar class="scrollbar-output" [ngClass]="{'disabled': draggingSplitArea}" #scrollBar  [disabled]="draggingSplitArea">
                 <div class="tg-output--history">
+
                   <div *ngIf="!output.length" class="no-output-notice">
                     Scrivi qualcosa o semplicemente aspetta...
                   </div>
-                  <ng-container *ngFor="let data of output">
 
+                  <ng-container *ngFor="let data of output">
                     <ng-container [ngSwitch]="data.type">
                       <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
                       <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
                       
                       <ng-container *ngSwitchCase="'pause'">
-                        <!-- Pause scroll Place Holder -->
-                        <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+                        <ng-container ngTemplateOutlet="pausePlaceholder">
+                        </ng-container>
                       </ng-container>
-                      
                     </ng-container>
 
                   </ng-container>
+
                 </div>
                 <div id="scrollerEnd" #scrollerEnd></div>
               </ng-scrollbar>
+              
             </div>
 
           </as-split-area>
+
+          <!-- Extra Output Area -->
           <as-split-area [size]="tgConfig.output.extraArea.size[1]">
             <div style="height: 100%; overflow:hidden;" fxLayout="column">
               <as-split class="tg-output--splitter" 
@@ -68,6 +79,7 @@
               </as-split>
             </div>
           </as-split-area>
+
         </as-split>
 
       </ng-container>
@@ -84,9 +96,10 @@
 
 <ng-template #noextra>
 
-  <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-      Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
-  </div>
+  <ng-container *ngIf="pauseScroll">
+    <ng-container *ngTemplateOutlet="pauseScroll"></ng-container>
+  </ng-container>
+
   <tg-status></tg-status>
 
   <div style="height: 100%; overflow:hidden;">
@@ -94,20 +107,39 @@
     <ng-scrollbar class="scrollbar-output" #scrollBar>
       <div class="tg-output--history" >
         <div *ngFor="let data of outputObservable | async; let i = index">
+
           <ng-container [ngSwitch]="data.type">
             <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
             <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
               [lastDescription]="lastRoomDescription"></tg-room>
             <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
             <tg-generic-page *ngSwitchCase="'genericPage'" [html]='data.content'></tg-generic-page>
+            
             <ng-container *ngSwitchCase="'pause'">
-              <!-- Pause scroll Place Holder -->
-              <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+              <ng-container ngTemplateOutlet="pausePlaceholder">
+              </ng-container>
             </ng-container>
+
           </ng-container>
+
         </div>
       </div>
       <div #scrollerEnd class="scrollend" style="height: 100%; width: 100%; display:block;"></div>
     </ng-scrollbar>
   </div>
 </ng-template>
+
+
+
+<ng-template #pauseScrollBadge>
+  <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
+    Autoscroll disattivato - <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai al segnaposto</button>
+  </div>
+</ng-template>
+
+
+<ng-template #pausePlaceholder>
+  <!-- Pause scroll Place Holder -->
+  <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+</ng-template>
+
