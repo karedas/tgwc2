@@ -7,11 +7,11 @@ export class ApiResponse {
   private _errors: any;
 
   constructor(response: any) {
-    this.data = response['data'];
-    this.httpCode = response['http_code'];
-    this.success = response['success'];
-    this.status = response['status'];
-    this.errors = response['errors'];
+    this.data = response.data;
+    this.httpCode = response.http_code;
+    this.success = response.success;
+    this.status = response.status;
+    this.errors = response.errors;
   }
 
   get httpCode(): number {

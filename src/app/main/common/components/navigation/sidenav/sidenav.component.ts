@@ -12,7 +12,7 @@ import { LoginClientService } from 'src/app/main/authentication/services/login-c
 })
 export class SidenavComponent implements OnInit {
   @Output() itemClick: EventEmitter<any> = new EventEmitter<any>();
-  
+
   public gameItems: NavigationItem[] = [];
   public baseItems: NavigationItem[] = [];
   public selectedItem = 0;

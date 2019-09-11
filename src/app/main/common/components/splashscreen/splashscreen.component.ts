@@ -29,7 +29,7 @@ export class SplashscreenComponent implements OnInit, OnDestroy {
     private _animationBuilder: AnimationBuilder,
     private splashScreenService: SplashScreenService,
     private elementRef: ElementRef,
-    private cdRef:ChangeDetectorRef,
+    private cdRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private _document: any
     ) {
       this._unsubscribeAll = new Subject<any>();

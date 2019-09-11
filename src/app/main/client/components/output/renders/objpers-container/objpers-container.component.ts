@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ViewEncapsulation, SimpleChanges, OnChanges } from '@angular/core';
 import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
 
-import { equip_positions_by_name } from 'src/app/main/client/common/constants';
+import { equipPositionByName } from 'src/app/main/client/common/constants';
 import { OutputService } from '../../output.service';
 import { GameService } from 'src/app/main/client/services/game.service';
 
@@ -15,7 +15,7 @@ export class ObjPersContainerComponent implements OnChanges  {
 
   togglePanel: any = [];
 
-  equipPositionValue  = equip_positions_by_name;
+  equipPositionValue  = equipPositionByName;
   newListEquip: any[];
 
   @Input('eqcont') eqcont: IObjPersEqcont;
@@ -25,9 +25,9 @@ export class ObjPersContainerComponent implements OnChanges  {
     public outputService: OutputService,
     private gameService: GameService
     ) {
-     const keysAndProperty = Object.keys( equip_positions_by_name );
+     const keysAndProperty = Object.keys( equipPositionByName );
      this.newListEquip = keysAndProperty.map((val, k) => {
-        return equip_positions_by_name[keysAndProperty[k]];
+        return equipPositionByName[keysAndProperty[k]];
      } );
   }
 

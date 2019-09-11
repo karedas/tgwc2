@@ -4,7 +4,7 @@ import { socketEvent } from '../../../core/models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { equip_positions_by_name, pos_to_order, font_size_options } from 'src/app/main/client/common/constants';
+import { equipPositionByName, pos_to_order, font_size_options } from 'src/app/main/client/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { MatDialog } from '@angular/material/dialog';
@@ -218,10 +218,10 @@ export class GameService {
     /* Ordfer Objects Persons or Objects list */
     public orderObjectsList(items: any): any {
         if (items && !items.hasOwnProperty('ver')) {
-            let listItem = JSON.parse(JSON.stringify(items));
+            const listItem = JSON.parse(JSON.stringify(items));
 
             if (listItem.list) {
-                listItem['list'].sort((a, b) => {
+                listItem.list.sort((a, b) => {
                     const eq_pos_a = Object.keys(a.eq) ? a.eq[0] : 0;
                     const eq_pos_b = Object.keys(b.eq) ? b.eq[0] : 0;
                     return eq_pos_a - eq_pos_b;
@@ -233,10 +233,10 @@ export class GameService {
             /* Order for personal Equipment  */
             const cont = {
                 list: []
-            }
+            };
 
             Object.keys(items).forEach((poskey: any, idbx: any) => {
-                const where = equip_positions_by_name[poskey];
+                const where = equipPositionByName[poskey];
                 if (where) {
                     cont.list = cont.list.concat(items[poskey]);
                 }
@@ -245,7 +245,7 @@ export class GameService {
             cont.list.sort((a, b) => {
                 const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[1]] : 0;
                 const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[1]] : 0;
-                return <number>eq_pos_a - <number>eq_pos_b;
+                return (eq_pos_a as number) - (eq_pos_b as number);
             });
             return cont.list;
         }

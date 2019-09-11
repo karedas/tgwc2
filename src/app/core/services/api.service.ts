@@ -48,7 +48,7 @@ export class ApiService {
   }
 
   public put(url: string, putData: any): Observable<any> {
-    
+
     const endpoint = this.buildUrl(url);
     const headers = this.buildHeader();
     return this.http.put(endpoint, JSON.stringify(putData), {headers})

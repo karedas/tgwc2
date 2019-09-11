@@ -14,7 +14,7 @@ import { LogComponent } from '../../components/windows/log/log.component';
 import { ControlPanelModule } from '../../components/windows/control-panel/control-panel.module';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
 import { MatPaginatorIntl } from '@angular/material';
-import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
+import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { getItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     LogComponent,
     ShortcutsPanelComponent
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: getItalianPaginatorIntl}]
+  providers: [{ provide: MatPaginatorIntl, useClass: GetItalianPaginatorIntl}]
 })
 
 export class DialogV2Module { }

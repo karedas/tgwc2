@@ -71,7 +71,7 @@ export class ConfigService {
                 keys.push(key);
                 if (typeof obj[key] === 'object') {
                     const subkeys = this.getDeepKeys(obj[key]);
-                    keys = keys.concat(subkeys.map(function (subkey) {
+                    keys = keys.concat(subkeys.map(function(subkey) {
                         return key + '.' + subkey;
                     }));
                 }

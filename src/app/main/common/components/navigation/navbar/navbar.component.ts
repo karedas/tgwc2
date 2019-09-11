@@ -19,9 +19,9 @@ export class NavBarComponent implements OnDestroy {
 
   readonly env = environment;
 
-  public userIsInGame: boolean = false;
-  public hamburgerStatus: boolean = false;
-  
+  public userIsInGame = false;
+  public hamburgerStatus = false;
+
   private _unsubscribeAll: Subject<any>;
 
   constructor(

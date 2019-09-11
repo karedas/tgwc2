@@ -20,10 +20,10 @@ export class CommandsListComponent implements OnInit {
   groupOpen = 0;
 
   constructor(
-    private game: GameService, 
+    private game: GameService,
     @Inject(MAT_DIALOG_DATA) public data) {
     }
-    
+
     ngOnInit() {
       this.commandsList = this.removeTitleObject(JSON.parse(JSON.stringify(this.data.cmds)));
   }

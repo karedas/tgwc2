@@ -13,7 +13,7 @@ import { hero_skills } from 'src/app/main/client/common/constants';
 export class SkillsComponent implements OnInit, OnDestroy {
 
   readonly heroSkillsValue = hero_skills;
-  
+
   public skills$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 

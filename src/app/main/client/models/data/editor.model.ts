@@ -4,7 +4,7 @@ export interface IEditor {
     description: string;
 }
 
-  export class Editor implements IEditor {
+export class Editor implements IEditor {
     maxChars: any;
     title: string;
     description: string;

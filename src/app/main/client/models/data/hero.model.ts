@@ -4,10 +4,10 @@ export interface IHeroRace {
 }
 
 export interface IHeroCombat {
-  mod: string,
-  atteg: string
-  pietoso: string
-  nosfodera: string
+  mod: string;
+  atteg: string;
+  pietoso: string;
+  nosfodera: string;
 }
 export interface IStatus {
   drink?: number;
@@ -30,11 +30,11 @@ export interface ISex {
 }
 
 export interface IInventory {
-  list: Array<any>
-  up: boolean
-  ver: number
-  weight: number
-  wprc: number
+  list: Array<any>;
+  up: boolean;
+  ver: number;
+  weight: number;
+  wprc: number;
 }
 
 export interface IHero {
@@ -56,7 +56,7 @@ export interface IHero {
   fede?: string;
   sex?: ISex;
   equipment?: [];
-  inventory?: IInventory[]
+  inventory?: IInventory[];
   target?: ITarget;
   lang?: string;
   weight?: string;

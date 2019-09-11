@@ -28,7 +28,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   skillsRequest$ = createEffect(() =>
     this.actions$.pipe(
@@ -42,7 +42,7 @@ export class DataEffects {
         ];
       })
     )
-  )
+  );
 
   equipRequest$ = createEffect(() =>
     this.actions$.pipe(
@@ -56,7 +56,7 @@ export class DataEffects {
         ];
       }),
     )
-  )
+  );
 
   inventoryRequest$ = createEffect(() =>
     this.actions$.pipe(
@@ -70,7 +70,7 @@ export class DataEffects {
         ];
       }),
     )
-  )
+  );
 
   openBook$ = createEffect(() =>
     this.actions$.pipe(
@@ -80,7 +80,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   genericTable$ = createEffect(() =>
     this.actions$.pipe(
@@ -90,7 +90,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   worksList$ = createEffect(() =>
     this.actions$.pipe(
@@ -100,18 +100,18 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   closeTextEditor = createEffect(() =>
     this.actions$.pipe(
       ofType(DataEvenType.CLOSETEXTEDITOR),
       tap(() => {
-        this.dialogV2Service.dialog.getDialogById('editor').close()
+        this.dialogV2Service.dialog.getDialogById('editor').close();
         this.inputService.focus();
       })
     ),
     { dispatch: false }
-  )
+  );
 
   showCommands$ = createEffect(() =>
     this.actions$.pipe(
@@ -124,7 +124,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
 
   showCharacterSheet$ = createEffect(() =>
@@ -140,7 +140,7 @@ export class DataEffects {
         }
       })
     )
-  )
+  );
 
   showStatusInline$ = createEffect(() =>
     this.actions$.pipe(
@@ -150,7 +150,7 @@ export class DataEffects {
       }),
       tap(() => this.game.setStatusInline(true))
     ),
-  )
+  );
 
   refreshCommand$ = createEffect(() =>
     this.actions$.pipe(
@@ -160,9 +160,9 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
-  // refreshCommand$ = createEffect(() => 
+  // refreshCommand$ = createEffect(() =>
   //   this.actions$.pipe(),
   //   { dispatch: false }
   // )

@@ -36,7 +36,7 @@ export class StepThirdComponent {
     });
 
     this.frmStepThird.setValue({
-      culture: culture
+      culture
     });
   }
 }

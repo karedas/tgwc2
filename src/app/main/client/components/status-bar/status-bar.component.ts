@@ -19,7 +19,7 @@ export class StatusBarComponent implements OnInit, OnDestroy  {
 
   tgConfig: TGConfig;
   hero$: Observable<any>;
-  
+
   readonly speedValue = hero_speed;
   readonly positionValue = hero_position;
   readonly attitudeValue = hero_attitude;
@@ -28,15 +28,15 @@ export class StatusBarComponent implements OnInit, OnDestroy  {
 
 
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private store: Store<DataState>,
     private gameService: GameService,
     private inputService: InputService,
     private _configService: ConfigService
-  ) { 
+  ) {
     this.hero$ = this.store.pipe(select(getHero));
-    
+
     this._unsubscribeAll = new Subject();
   }
 

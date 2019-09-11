@@ -25,9 +25,9 @@ export class ClientEffects {
       tap(() => {
         const config = JSON.parse(localStorage.getItem('config'));
         if (this.router.url === '/webclient') {
-          //Stop Audio
+          // Stop Audio
           this.audioService.pauseAudio();
-          //Open the Smart Login Box
+          // Open the Smart Login Box
           this.dialogV2Service.openSmartLogin();
           // If Log save is true: open Log Service Dialog
           if (config.logSave) {
@@ -35,7 +35,7 @@ export class ClientEffects {
           }
           this.game.resetUI();
         }
-        this.store.dispatch(inGameAction())
+        this.store.dispatch(inGameAction());
       },
       )
     ),

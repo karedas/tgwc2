@@ -63,4 +63,4 @@ export const refreshCommandAction = createAction(DataEvenType.REFRESH);
 export const showCommandsActions = createAction(DataEvenType.SHOWCOMMANDS, props<{payload: any}>());
 export const showCharacterSheetActions = createAction(DataEvenType.SHOWCHARACTERSHEET, props<{payload: any}>());
 export const showStatusBoxAction = createAction(DataEvenType.SHOWSTATUSHERO, props<{payload: any}>());
-export const directionNotifyAction = createAction(DataEvenType.DIRECTION, props<{payload: any}>())
+export const directionNotifyAction = createAction(DataEvenType.DIRECTION, props<{payload: any}>());

@@ -24,7 +24,7 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
   pageSizeBase = 5;
   private data = [];
 
-  dataSource:  MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any>;
   columnsToDisplay: string[];
   resultsLength = 0;
   headerTitle = 'Lista Generica';

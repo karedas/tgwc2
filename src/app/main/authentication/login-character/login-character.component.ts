@@ -36,8 +36,8 @@ export class LoginCharacterComponent implements OnInit {
     private googleService: GoogleAnalyticsService
   ) {
     this.frmCharacterLogin = this.fb.group({
-      'name': ['', UsernameValidation],
-      'secret': ['', PasswordValidation]
+      name: ['', UsernameValidation],
+      secret: ['', PasswordValidation]
     });
 
     this._unsubscribeAll = new Subject();

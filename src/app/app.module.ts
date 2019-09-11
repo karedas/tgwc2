@@ -37,7 +37,7 @@ export function tokenGetter() {
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter
+        tokenGetter
       }
     }),
     TgConfigModule.forRoot(tgConfig),

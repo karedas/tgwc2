@@ -24,7 +24,7 @@ export class DataParser {
   // private shortcuts_map = {};
   private cmd_prefix = '';
   private _updateNeeded: Subject<any>;
-  isDialog: boolean = false;
+  isDialog = false;
 
   constructor(
     private store: Store<TGState>,
@@ -146,7 +146,7 @@ export class DataParser {
     if (data !== 'undefined' && data !== undefined && data !== '') {
       data = data.replace(/\n/gm, '<div class="breakline"></div>');
       data = data.replace(/<p><\/p>/g, '');
-      this.dispatcher['base'] = data;
+      this.dispatcher.base = data;
     }
 
     // Execute
@@ -158,16 +158,16 @@ export class DataParser {
   // Emit data Stored in the dispatcher to show then in the right Output Order
   private dispatchData() {
     // Output Messages
-    if (this.dispatcher['base']) { this.store.dispatch(DataActions.incomingData({ payload: this.dispatcher['base'] })); }
-    if (this.dispatcher['objpers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['objpers'] })); }
-    if (this.dispatcher['room']) { this.store.dispatch(DataActions.roomAction({ payload: this.dispatcher['room'] })); }
-    if (this.dispatcher['pers']) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher['pers'] })); }
+    if (this.dispatcher.base) { this.store.dispatch(DataActions.incomingData({ payload: this.dispatcher.base })); }
+    if (this.dispatcher.objpers) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher.objpers })); }
+    if (this.dispatcher.room) { this.store.dispatch(DataActions.roomAction({ payload: this.dispatcher.room })); }
+    if (this.dispatcher.pers) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher.pers })); }
     // TODO UI dont need order, needs a difference architecture code :
-    if (this.dispatcher['visibilLevel']) {
-      this.store.dispatch(ClientActions.updateUIAction({ payload: { invLevel: this.dispatcher['visibilLevel'] } }));
+    if (this.dispatcher.visibilLevel) {
+      this.store.dispatch(ClientActions.updateUIAction({ payload: { invLevel: this.dispatcher.visibilLevel } }));
     }
-    if (this.dispatcher['isgod']) { this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher['isgod'] } })); }
-    if (this.dispatcher['update']) { this.setUpdateNeeded(this.dispatcher['update']); }
+    if (this.dispatcher.isgod) { this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher.isgod } })); }
+    if (this.dispatcher.update) { this.setUpdateNeeded(this.dispatcher.update); }
 
     this.isDialog = false;
 
@@ -192,7 +192,7 @@ export class DataParser {
     /* Check if the shortcut is defined */
     if (shortcut_cmd) {
       /* Use the shortcut text as command */
-      input = shortcut_cmd['cmd'];
+      input = shortcut_cmd.cmd;
       if (/\$\d+/.test(input)) {
         /* Substitute the arguments */
         for (let arg = 0; arg < args.length; ++arg) {
@@ -347,7 +347,7 @@ export class DataParser {
   }
 
   private map(m: any): string {
-    const map_parse = <Map>JSON.parse(m.slice(5, -1));
+    const map_parse = JSON.parse(m.slice(5, -1)) as Map;
     this.store.dispatch(DataActions.mapAction({ map: map_parse }));
     return '';
   }

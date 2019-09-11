@@ -45,7 +45,7 @@ export class ShortcutsManagerComponent implements OnInit {
 
     this._configService.getConfig()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts;});
+      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts; });
   }
 
   private resetForm() {
@@ -89,10 +89,10 @@ export class ShortcutsManagerComponent implements OnInit {
         this.resetForm();
       } else if (this.isEdit) {
         this.saveEditableShortcut(alias, cmd);
-         this.resetForm();
+        this.resetForm();
       } else if (this.shortcuts.filter(x => x.alias === alias).length <= 0) {
         this.addShortcut(alias, cmd);
-       this.resetForm();
+        this.resetForm();
       } else {
         this.shortcutExistError = true;
       }
@@ -100,19 +100,19 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   private addShortcut(alias: string, cmd: string) {
-    this.shortcuts.push({ 'icon': this.scIcon, 'alias': alias, 'cmd': cmd });
-    this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts });
+    this.shortcuts.push({ icon: this.scIcon, alias, cmd });
+    this._configService.setConfig({ shortcuts: this.shortcuts } as TGConfig);
     this.closeNewShortcut();
   }
 
   private saveEditableShortcut(alias, cmd) {
     this.shortcuts[this.editableID] = {
       icon: this.scIcon,
-      alias: alias,
-      cmd: cmd
+      alias,
+      cmd
     };
 
-    this._configService.setConfig(<TGConfig>{ shortcuts: this.shortcuts });
+    this._configService.setConfig({ shortcuts: this.shortcuts } as TGConfig);
     this.closeNewShortcut();
     this.isEdit = false;
 

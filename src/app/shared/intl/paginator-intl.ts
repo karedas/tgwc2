@@ -16,7 +16,7 @@ const italianRangeLabel = (page: number, pageSize: number, length: number) => {
 };
 
 
-export class getItalianPaginatorIntl extends MatPaginatorIntl  {
+export class GetItalianPaginatorIntl extends MatPaginatorIntl {
   itemsPerPageLabel = 'Risultati per pagina:';
   nextPageLabel = 'Avanti';
   lastPageLabel = 'Ultima pagina';

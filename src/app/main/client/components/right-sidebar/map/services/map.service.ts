@@ -36,7 +36,7 @@ export class MapService extends MapSnowService {
 
     this.mapObject = map;
 
-    this.context = (<HTMLCanvasElement>this.mapObject.nativeElement).getContext('2d');
+    this.context = (this.mapObject.nativeElement as HTMLCanvasElement).getContext('2d');
     this.canvasWidth = this._maxMapWidth * this._mapTileWidth;
     this.canvasHeight = this._maxMapHeight * this._mapTileHeight;
 
@@ -191,7 +191,7 @@ export class MapService extends MapSnowService {
        maxHeight: this._maxMapHeight,
        maxWidth: this._maxMapWidth
      };
-    return size;
+     return size;
   }
 
   get displaySnow(): Observable<boolean>  {

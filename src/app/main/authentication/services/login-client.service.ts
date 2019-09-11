@@ -15,15 +15,15 @@ export class LoginClientService {
   private name: string;
   private secret: string;
 
-  constructor( 
-    private socketService: SocketService, 
+  constructor(
+    private socketService: SocketService,
     private gameService: GameService ) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
     this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
 
   get isInGame(): boolean {
-    return <boolean>this.isLoggedInSubject.value;
+    return this.isLoggedInSubject.value as boolean;
   }
 
   set isInGame(value: boolean) {

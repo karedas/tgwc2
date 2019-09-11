@@ -29,7 +29,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
-  draggingSplitArea: boolean = false;
+  draggingSplitArea = false;
   smartSizeArea: number | string;
   lastRoom$: Observable<any>;
   showExtraByViewport: boolean;
@@ -131,14 +131,15 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   private updateBaseText(base: string[]) {
-    if (base)
+    if (base) {
       this.setContent('base', base[0]);
+    }
   }
 
   private updateRoomBase(room: Room) {
     if (room) {
-      if (room.desc['base'] !== undefined && room.desc['base'] !== '') {
-        this.lastRoomDescription = room.desc['base'];
+      if (room.desc.base !== undefined && room.desc.base !== '') {
+        this.lastRoomDescription = room.desc.base;
       }
 
       this.setContent('room', room);
@@ -191,10 +192,10 @@ export class OutputComponent implements OnInit, OnDestroy {
     } else {
       this.output.splice(this.latestLineBeforePause - 1, 1);
     }
-  };
+  }
 
   goToPausePlaceHolder() {
-    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, 50, 50)
+    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, 50, 50);
   }
 
 
@@ -230,8 +231,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       this._configService.setConfig({
         output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
       });
-    }
-    else if (selector === 'equipinv') {
+    } else if (selector === 'equipinv') {
       this._configService.setConfig({
         equipInventoryBox: { size: event.sizes[1] }
       });
@@ -243,7 +243,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   toggleEquipInventorySplit(event) {
     this._configService.setConfig({
       equipInventoryBox: { visible: false }
-    })
+    });
   }
 
   ngOnDestroy() {

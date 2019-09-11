@@ -1,29 +1,29 @@
-export const equip_positions_by_name = {
-  'r_finger': 'Dito dx',
-  'l_finger': 'Dito sx',
-  'neck': 'Al collo',
-  'body': 'Sul corpo',
-  'head': 'In testa',
-  'legs': 'Sulle gambe',
-  'feet': 'Ai piedi',
-  'hands': 'Sulle mani',
-  'arms': 'Sulle braccia',
-  'around': 'Attorno al corpo',
-  'waist': 'In vita',
-  'r_wrist': 'Polso dx',
-  'l_wrist': 'Polso sx',
-  'r_hand': 'Mano dx',
-  'l_hand': 'Mano sx',
-  'back': 'Schiena',
-  'r_ear': 'Orecchio dx',
-  'l_ear': 'Orecchio sx',
-  'eyes': 'Sugli occhi',
-  'sheath': 'Nel fodero',
-  'belt': 'Alla cintura',
-  'over': 'A tracolla',
-  'r_shoulder': 'Spalla dx',
-  'l_shoulder': 'Spalla sx',
-  'tied': 'Imprigionato'
+export const equipPositionByName = {
+  r_finger: 'Dito dx',
+  l_finger: 'Dito sx',
+  neck: 'Al collo',
+  body: 'Sul corpo',
+  head: 'In testa',
+  legs: 'Sulle gambe',
+  feet: 'Ai piedi',
+  hands: 'Sulle mani',
+  arms: 'Sulle braccia',
+  around: 'Attorno al corpo',
+  waist: 'In vita',
+  r_wrist: 'Polso dx',
+  l_wrist: 'Polso sx',
+  r_hand: 'Mano dx',
+  l_hand: 'Mano sx',
+  back: 'Schiena',
+  r_ear: 'Orecchio dx',
+  l_ear: 'Orecchio sx',
+  eyes: 'Sugli occhi',
+  sheath: 'Nel fodero',
+  belt: 'Alla cintura',
+  over: 'A tracolla',
+  r_shoulder: 'Spalla dx',
+  l_shoulder: 'Spalla sx',
+  tied: 'Imprigionato'
 };
 
 export const pos_to_order = [
@@ -108,13 +108,13 @@ export const hero_attitude = [
   { msg: 'cauto', cmd: 'comb caut' },
   { msg: 'guardingo', cmd: 'comb guard' },
   { msg: 'difensivo', cmd: 'comb dif' }
-]
+];
 
 export const hero_defense = [
   { msg: 'schivare', cmd: 'comb schiv' },
   { msg: 'parare', cmd: 'comb para' },
   { msg: 'deflettere', cmd: 'comb defle' }
-]
+];
 
 export const hero_speed = [
   { msg: 'passeggio', cmd: 'velo pass' },
@@ -122,7 +122,7 @@ export const hero_speed = [
   { msg: 'marcia', cmd: 'velo marcia' },
   { msg: 'corsa', cmd: 'velo corsa' },
   { msg: 'scatto', cmd: 'velo scat' }
-]
+];
 
 
 export const hero_skills = [
@@ -137,4 +137,4 @@ export const hero_skills = [
   'Maestro',
   'Eroico',
   'Leggendario'
-]
+];

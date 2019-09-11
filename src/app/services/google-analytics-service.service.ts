@@ -14,10 +14,10 @@ export class GoogleAnalyticsService {
     eventValue: number = null) {
 
       ga('send', 'event', {
-        eventCategory: eventCategory,
-        eventLabel: eventLabel,
-        eventAction: eventAction,
-        eventValue: eventValue
+        eventCategory,
+        eventLabel,
+        eventAction,
+        eventValue
       });
   }
 }

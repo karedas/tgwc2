@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
 import { scan } from 'rxjs/operators';
-import { equip_positions_by_name } from '../common/constants';
+import { equipPositionByName } from '../common/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -82,8 +82,8 @@ export class LogService {
       return this.printTable(t);
     });
 
-    
-    // Direction 
+
+    // Direction
     data = data.replace(/&!dir"[^"]*"\n*/gm, (dir) => {
       const dir_parse = dir.slice(6, -1);
       return this.printDirectionNotify(dir_parse);
@@ -202,7 +202,7 @@ export class LogService {
   // }
 
   private printDirectionNotify(dir: any) {
-    return `<p>Ti muovi verso ${dir}</p>`
+    return `<p>Ti muovi verso ${dir}</p>`;
   }
 
 
@@ -335,12 +335,12 @@ export class LogService {
     let res = '';
     let eqcount = 0;
 
-    Object.keys(equip_positions_by_name).forEach((posname, idx) => {
+    Object.keys(equipPositionByName).forEach((posname, idx) => {
       const eqdata = eq[posname];
 
       if (eqdata) {
         eqdata.forEach((obj, idxx) => {
-          res += '<div>' + equip_positions_by_name[posname] + ': '
+          res += '<div>' + equipPositionByName[posname] + ': '
             + this.printDecoratedDescription('obj', obj.condprc, null, 1, obj.desc) + '</div>';
           eqcount++;
         });

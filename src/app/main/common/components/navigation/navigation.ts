@@ -6,7 +6,7 @@ export interface NavigationItem {
   hidden?: boolean;
   url?: string;
   classes?: string;
-  do?: string
+  do?: string;
   exactMatch?: boolean;
   externalUrl?: boolean;
   openInNewTab?: boolean;

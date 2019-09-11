@@ -11,7 +11,7 @@ export const reducer = createReducer(
         ...payload
       }});
   }),
-  on(DataAction.mapAction, (state, { map }) => ({ ...state, map: map })),
+  on(DataAction.mapAction, (state, { map }) => ({ ...state, map })),
   on(DataAction.skyAction, (state, { payload }) => ({ ...state, sky: payload })),
   on(DataAction.editorAction, (state, { payload }) => ({ ...state, editor: payload })),
   on(DataAction.genericTableAction, (state, { payload }) => ({ ...state, genericTable: payload })),
@@ -19,10 +19,10 @@ export const reducer = createReducer(
   on(DataAction.regionAction, (state, { payload }) => ({ ...state, region: payload })),
   on(DataAction.doorsAction, (state, { payload }) => ({ ...state, doors: payload })),
   on(DataAction.roomAction, (state, { payload }) => ({ ...state, room: payload })),
-  on(DataAction.bookAction, (state, { book }) => ({ ...state, book: book })),
+  on(DataAction.bookAction, (state, { book }) => ({ ...state, book })),
   on(DataAction.dataTimeAction, (state, { payload }) => ({ ...state, gametime: payload })),
   on(DataAction.directionNotifyAction, (state, { payload }) => ({ ...state, directionNotify: [payload] })),
-  on(DataAction.genericPageAction, (state, { genericpage }) => ({ ...state,  genericpage: genericpage })),
+  on(DataAction.genericPageAction, (state, { genericpage }) => ({ ...state,  genericpage })),
   on(DataAction.incomingData, (state, { payload }) => {
     return Object.assign({}, state, { base: [payload] });
   }),
@@ -38,10 +38,10 @@ export const reducer = createReducer(
           msg: payload.msg
         },
         target: {
-          move: payload['enemymove'],
-          hit: payload['enemyhealt'],
-          icon: payload['enemyicon'],
-          name: payload['enemyname']
+          move: payload.enemymove,
+          hit: payload.enemyhealt,
+          icon: payload.enemyicon,
+          name: payload.enemyname
         },
         combat: payload.combat,
         walk: payload.walk,
@@ -63,7 +63,7 @@ export const reducer = createReducer(
       hero: {
         ...state.hero,
         skills: payload,
-        dialog: dialog
+        dialog
       }
     });
   }),
@@ -80,7 +80,7 @@ export const reducer = createReducer(
       hero: {
         ...state.hero,
         equipment: payload,
-        dialog: dialog
+        dialog
       }
     });
   })

@@ -29,7 +29,7 @@ export function clearState(reducer: ActionReducer<any>): ActionReducer<any> {
       state = {
         client: undefined,
         data: undefined
-      }
+      };
     }
     return reducer(state, action);
   };

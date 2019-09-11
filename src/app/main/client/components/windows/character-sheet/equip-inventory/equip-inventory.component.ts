@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { getEquip, getInventory } from 'src/app/main/client/store/selectors';
-import { equip_positions_by_name, pos_to_order } from 'src/app/main/client/common/constants';
+import { equipPositionByName, pos_to_order } from 'src/app/main/client/common/constants';
 import { takeUntil } from 'rxjs/operators';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from '../../../input/input.service';
@@ -35,13 +35,13 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
 
     this.equipment$ = this.store.pipe(select(getEquip));
     this.inventory$ = this.store.pipe(select(getInventory));
-    this.equipPositionValue = Object.entries(equip_positions_by_name);
+    this.equipPositionValue = Object.entries(equipPositionByName);
     this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
 
-    this.inventory$.pipe(takeUntil(this._unsubscribeAll))
+    this.inventory$.pipe(takeUntil(this._unsubscribeAll));
 
     this.equipment$
       .pipe(takeUntil(this._unsubscribeAll))

@@ -8,7 +8,7 @@ export interface TGConfig {
   logSave: boolean;
   fontSize: number;
   output: {
-    extraArea:  {
+    extraArea: {
       visible: boolean,
       size: number[],
     },
@@ -18,7 +18,7 @@ export interface TGConfig {
     visible: boolean,
     size: number | string
     sizeWhenClose: number | string
-  }
+  };
   characterPanel: boolean;
   characterPanelTopPosition: number;
   zen: boolean;

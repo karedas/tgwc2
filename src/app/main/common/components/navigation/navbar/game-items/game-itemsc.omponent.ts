@@ -54,8 +54,8 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
       if (!this.isMatMenu2Open && !this.enteredButton) {
         this.isMatMenuOpen = false;
         trigger.closeMenu();
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-program-focused');
       } else {
         this.isMatMenuOpen = false;
       }
@@ -73,8 +73,8 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
         this.isMatMenuOpen = false;
         this.isMatMenu2Open = false;
         this.enteredButton = false;
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-program-focused');
       } else {
         this.isMatMenu2Open = false;
         trigger2.closeMenu();
@@ -105,12 +105,12 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if (this.enteredButton && !this.isMatMenuOpen) {
         trigger.closeMenu();
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-program-focused');
       } if (!this.isMatMenuOpen) {
         trigger.closeMenu();
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-focused');
-        this.render.removeClass(button['_elementRef'].nativeElement, 'cdk-program-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-focused');
+        this.render.removeClass(button._elementRef.nativeElement, 'cdk-program-focused');
       } else {
         this.enteredButton = false;
       }

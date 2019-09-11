@@ -28,9 +28,9 @@ export class MapSnowService {
     this.height = 0;
     this.numFlakes = null;
     this.flakes = [];
-    this.flake =  <HTMLCanvasElement>document.createElement('CANVAS');
+    this.flake =  (document.createElement('CANVAS') as HTMLCanvasElement);
     this.radHeight = 40;
-    this.contextSnow =  (<HTMLCanvasElement>snowElement.nativeElement).getContext('2d');
+    this.contextSnow =  (snowElement.nativeElement as HTMLCanvasElement).getContext('2d');
     this.width = snowElement.nativeElement.width;
     this.height = snowElement.nativeElement.height;
     this.numFlakes = Math.min(this.width, 300) * this.height / 400 * this.flakeNumberModifier;

@@ -29,7 +29,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     private inputService: InputService,
     private renderer: Renderer2,
     ) {
-  
+
     this._unsubscribeAll = new Subject<any>();
 
   }
@@ -46,7 +46,7 @@ export class ClientComponent implements OnInit, OnDestroy {
 
 
   }
-  
+
 
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'client-run');

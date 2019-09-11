@@ -22,7 +22,7 @@ export class AudioService {
     this.music = new Audio();
   }
 
-  set enable (value: boolean) {
+  set enable(value: boolean) {
     this._enable = value;
     this.sound.muted = !this._enable;
     this.music.muted = !this._enable;

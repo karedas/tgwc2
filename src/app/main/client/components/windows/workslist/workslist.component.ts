@@ -31,7 +31,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   pageSizeBase = 10;
-  dataSource:  MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any>;
   columnsToDisplay: string[] = ['id', 'icon', 'diff', 'cando', 'desc', 'cmd'];
   resultsLength = 0;
   headerTitle = '';
@@ -76,7 +76,7 @@ export class WorkslistComponent implements OnInit, OnDestroy {
 
     if (data) {
       data.forEach((d: any, i: number) => {
-        d = Object.assign({id: i+1}, d);
+        d = Object.assign({id: i + 1}, d);
         this.data.push(d);
       });
 

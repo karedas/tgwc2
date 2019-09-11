@@ -52,8 +52,8 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.smartLoginForm = this.formBuilder.group({
-      'username': ['', UsernameValidation],
-      'password': ['', PasswordValidation]
+      username: ['', UsernameValidation],
+      password: ['', PasswordValidation]
     });
 
     this.loginClientService.replayMessage

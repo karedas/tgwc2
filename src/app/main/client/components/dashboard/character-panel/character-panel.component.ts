@@ -72,8 +72,8 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   ) {
 
     this.hero$ = this.store.pipe(select(getHero));
-    this.directionNotify$ = this.store.pipe(select(getDirectionNotify))
-   
+    this.directionNotify$ = this.store.pipe(select(getDirectionNotify));
+
     this._unsubscribeAll = new Subject();
   }
 

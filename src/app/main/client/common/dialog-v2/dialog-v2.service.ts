@@ -28,14 +28,14 @@ export class DialogV2Service {
     public overlay: Overlay) {
       this.render = rendererFactory.createRenderer(null, null);
 
-    dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
+      dialog.afterOpened.subscribe((d: MatDialogRef<any>) => {
       this.addDialogBehaviour(d);
     });
 
   }
 
   getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
-    return <HTMLElement>dialogRef['_overlayRef'].overlayElement;
+    return dialogRef._overlayRef.overlayElement as HTMLElement;
   }
 
 
@@ -198,8 +198,8 @@ export class DialogV2Service {
       config.restoreFocus = true;
       config.autoFocus = false;
       config.data = {
-        cmds: cmds
-      }
+        cmds
+      };
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(CommandsListComponent, config);
@@ -230,13 +230,13 @@ export class DialogV2Service {
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       config.data = {
-        tab: tab
+        tab
       };
 
       const dialogRef = this.dialog.open(ControlPanelComponent, config);
       return dialogRef;
     } else {
-      this.dialog.getDialogById(dialogID).componentInstance.data = { tab: tab };
+      this.dialog.getDialogById(dialogID).componentInstance.data = { tab };
     }
   }
 
@@ -353,7 +353,7 @@ export class DialogV2Service {
       config.width = '60%';
       config.height = '700px';
       config.hasBackdrop = false;
-      config.panelClass = 'minimal'
+      config.panelClass = 'minimal';
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(LogComponent, config);
