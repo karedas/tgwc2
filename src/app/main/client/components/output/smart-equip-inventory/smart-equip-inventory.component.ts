@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { DataState } from '../../../store/state/data.state';
@@ -8,7 +8,6 @@ import { GameService } from '../../../services/game.service';
 import { equipPositionByName } from '../../../common/constants';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../../client-config';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'tg-smart-equip-inventory',
@@ -38,6 +37,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     this.equipPositionValue = Object.entries(equipPositionByName);
     this._equipment$ = this.store.pipe(select(getEquip));
     this._inventory$ = this.store.pipe(select(getInventory));
+
     this._unsubscribeAll = new Subject();
   }
 
