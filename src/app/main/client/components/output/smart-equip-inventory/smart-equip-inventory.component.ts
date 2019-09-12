@@ -12,7 +12,7 @@ import { TGConfig } from '../../../client-config';
 @Component({
   selector: 'tg-smart-equip-inventory',
   templateUrl: './smart-equip-inventory.component.html',
-  styleUrls: ['./smart-equip-inventory.component.scss']
+  styleUrls: ['./smart-equip-inventory.component.scss'],
 })
 export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   @Input() draggingSplitArea: boolean;

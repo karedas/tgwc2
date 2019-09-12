@@ -1,10 +1,14 @@
 import { Component, OnInit, Renderer2, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { TGConfig } from 'src/app/main/client/client-config';
 import { DispenserService } from 'src/app/main/client/services/dispenser.service';
 import { versions } from 'src/environments/versions';
+import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
+import { select, Store } from '@ngrx/store';
+import { getDateTime } from 'src/app/main/client/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 
 @Component({
   selector: 'tg-game-items',
@@ -22,13 +26,18 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
 
   gitVersion = versions.tag;
 
+  gameData$: Observable<IDateTime>;
+
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private render: Renderer2,
     private _configService: ConfigService,
-    private dispenserService: DispenserService
+    private dispenserService: DispenserService,
+    private store: Store<DataState>,
+
   ) {
+    this.gameData$ = this.store.pipe(select(getDateTime));
     this._unsubscribeAll = new Subject();
   }
 
@@ -60,26 +69,6 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
         this.isMatMenuOpen = false;
       }
     }, 80);
-  }
-
-  menu2enter() {
-    this.isMatMenu2Open = true;
-  }
-
-  menu2Leave(trigger1, trigger2, button) {
-    setTimeout(() => {
-      if (this.isMatMenu2Open) {
-        trigger1.closeMenu();
-        this.isMatMenuOpen = false;
-        this.isMatMenu2Open = false;
-        this.enteredButton = false;
-        this.render.removeClass(button._elementRef.nativeElement, 'cdk-focused');
-        this.render.removeClass(button._elementRef.nativeElement, 'cdk-program-focused');
-      } else {
-        this.isMatMenu2Open = false;
-        trigger2.closeMenu();
-      }
-    }, 100);
   }
 
   buttonEnter(trigger) {

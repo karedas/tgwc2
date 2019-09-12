@@ -21,7 +21,7 @@ import { TGState } from '../../store';
 
 export class OutputComponent implements OnInit, OnDestroy {
 
-  $tgConfig: TGConfig;
+  tgConfig: TGConfig;
 
   @ViewChild('scrollBar', { static: false }) scrollBar: NgScrollbar;
   @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
@@ -32,7 +32,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   draggingSplitArea = false;
   smartSizeArea: number | string;
   lastRoom$: Observable<any>;
-  showExtraByViewport: boolean;
+  showExtraByViewport: boolean = true;
   pauseScroll = false;
   output = [];
   outputObservable = new BehaviorSubject([]);
@@ -40,6 +40,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   typeDetail: string;
   objPersDetail: any[];
   genericPage: IGenericPage;
+
 
   private readonly outputTrimLines = 500;
   private _inGameStatus: Observable<any>;
@@ -65,12 +66,20 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._objOrPerson$ = this.store.select(getObjOrPerson);
     this._genericPage$ = this.store.select(getGenericPage);
 
-    this.$tgConfig = this._configService.config;
 
     this._unsubscribeAll = new Subject();
   }
-
+  
   ngOnInit() {
+    
+    this._configService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        if(config) {
+          this.tgConfig = config;
+        }
+      });
+
     this._inGameStatus
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((status) => {

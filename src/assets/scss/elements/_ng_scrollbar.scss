@@ -29,7 +29,7 @@ ng-scrollbar.scrollbar.disabled, ng-scrollbar.scrollbar-output.disabled  {
     --scrollbar-track-color: #1b150f;
     --scrollbar-wrapper-color: transparent;
     --scrollbar-thumb-color: #332f25;
-    --scrollbar-size: 6px;
+    --scrollbar-size: 8px;
     --scrollbar-thumb-hover-color: #4c4535;
     --scrollbar-viewport-margin: 0;
     --scrollbar-hover-size: var(--scrollbar-size);
@@ -46,7 +46,7 @@ ng-scrollbar.scrollbar.disabled, ng-scrollbar.scrollbar-output.disabled  {
     --scrollbar-track-color: transparent;
     --scrollbar-wrapper-color: transparent;
     --scrollbar-thumb-color: #332f25;
-    --scrollbar-size: 6px;
+    --scrollbar-size: 8px;
     --scrollbar-thumb-hover-color: #4c4535;
     --scrollbar-viewport-margin: 0;
     --scrollbar-hover-size: var(--scrollbar-size);
@@ -60,7 +60,7 @@ ng-scrollbar.scrollbar-output {
   --scrollbar-track-color: #1b150f;
   --scrollbar-wrapper-color: transparent;
   --scrollbar-thumb-color: #695e50;
-  --scrollbar-size: 6px;
+  --scrollbar-size: 8px;
   --scrollbar-thumb-hover-color: #796b58;
   --scrollbar-viewport-margin: 0;
   --scrollbar-hover-size: var(--scrollbar-size);

@@ -10,56 +10,8 @@
   box-sizing: border-box;
 }
 
-.tg-smart-tabtitle {
-  background: url($imgPath + '/background/blood_dark.jpg') repeat top left;
-  box-shadow: inset 0px -5px 11px 0px black;
-  border-bottom: 1px solid #433b3a;
-  height: 30px;
-  max-height: 30px;
-  cursor: pointer;
-
-  .tg-smart-btn-container {
-    height: 100%;
-  }
-
-  .tg-smart-title {
-    padding: 0 4px;
-    margin-right: 8px;
-    height: 100%;
-    border-radius: 0;
-    font-size: 1.2em;
-    color: #dad6c1a8;
-    font-family: $modern-antiqua;
-    line-height: normal;
-  }
-
-  .tg-smart-collapsebtn {
-    line-height: normal;
-    height: 22px;
-    width: 22px;
-    margin: auto 6px auto auto;
-
-    .mat-icon {
-      line-height: 22px;
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .active .tg-smart-title {
-    color: #dad6c1;
-  }
-}
 
 
-.eqinv-item-wrap {
-  border-bottom: 1px solid #191616;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(158, 158, 158, 0.1);
-  }
-}
 
 .eqinv-item,
 .eqinv-item-weight,
@@ -71,7 +23,7 @@
 
   &:first-child {
     border-left: none;
-    padding-left: 2px;
+    padding-left: 0;
   }
 
   .eqinv-item-text {

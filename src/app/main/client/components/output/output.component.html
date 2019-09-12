@@ -2,10 +2,10 @@
   <div class="tg-box" fxFlex="100" fxLayout="column">
 
 
-    <div class="tg-output-main" #mainOutputArea *ngIf="$tgConfig | async as tgConfig">
-      <ng-container *ngIf="showExtraByViewport && tgConfig.output.extraArea.visible as extra; else noextra">
+    <div class="tg-output-main" #mainOutputArea>
+      <ng-container *ngIf="tgConfig.output.extraArea.visible as extra; else noextra">
 
-        <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'"
+        <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'" 
           (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
 
           <!--  Main Output Area -->

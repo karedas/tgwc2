@@ -98,3 +98,9 @@
   width: 100%;
   clear:both;
 }
+
+.ellipsed {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

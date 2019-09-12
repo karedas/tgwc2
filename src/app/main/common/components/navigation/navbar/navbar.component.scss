@@ -182,7 +182,8 @@ tg-navbar {
 /* Badge Game Time*/
 .tg-game-time {
   display: inline-block;
-  font-size: 13px;
+  font-size: 11px;
+  text-transform: uppercase;
   margin: auto 0;
 
   span {
@@ -202,7 +203,7 @@ tg-navbar {
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    margin-right: 2px;
+    margin-right: 5px;
     position: relative;
 
     &:before {
@@ -232,5 +233,6 @@ tg-navbar {
     background: url(/assets/images/sky/alba.jpg); // Is a Test
     background-position: top left;
     box-shadow: inset 0 0 5px 0px black;
+    margin-top: -1px;
   }
 }

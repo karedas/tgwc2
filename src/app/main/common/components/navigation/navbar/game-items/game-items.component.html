@@ -55,13 +55,15 @@
     </mat-menu>
   </div>
 
-  <div class="m-right" fxLayout="row">
+  <div class="m-right" fxLayout="row" fxFlex="0 0 auto">
 
-    <div class="tg-game-time">
-      <span>
-        <b class="tg-llt-white">Giorno</b> 24
-        <b class="tg-llt-white">Mese</b> 10
-        <b class="tg-llt-white">Anno</b> 587
+
+
+    <div class="tg-game-time" *ngIf="gameData$ | async as time">
+      <span class="tg-yellow">
+        Giorno <b class="tg-llt-white">{{time.day}}</b>
+        Mese <b class="tg-llt-white">{{time.month}}</b>
+        Anno <b class="tg-llt-white">{{time.year}}</b>
       </span>
 
       <div class="time-icon"></div>
@@ -73,6 +75,6 @@
         {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
       </mat-icon>
     </button>
-    <span [attr.title]="gitVersion" class="tg-wcversion">v2</span>
+    <span [attr.title]="gitVersion" class="tg-wcversion" fxFlex="0 0 auto">v2</span>
   </div>
 </div>
