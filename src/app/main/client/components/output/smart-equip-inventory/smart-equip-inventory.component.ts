@@ -42,7 +42,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {

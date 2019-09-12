@@ -1,7 +1,9 @@
 <div class="tg-navbar--wrap" fxFlex="0 0 100%" fxLayout>
 
   <!-- Game Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div class="tg-mainnav-item" 
+  fxHide fxShow.gt-sm  
+  fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button #button mat-button [matMenuTriggerFor]="gameMenu" #gameTrigger="matMenuTrigger"
       (mouseenter)="buttonEnter(gameTrigger)" (mouseleave)="buttonLeave(gameTrigger, button)">Gioco</button>
 
@@ -16,14 +18,16 @@
       </mat-action-list>
     </mat-menu>
   </div>
-  
+
   <!-- Client Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div class="tg-mainnav-item" 
+  fxHide fxShow.gt-sm  
+  fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button #button mat-button [matMenuTriggerFor]="clientMenu" #clientTrigger="matMenuTrigger"
       (mouseenter)="buttonEnter(clientTrigger)" (mouseleave)="buttonLeave(clientTrigger, button)">Client</button>
 
     <mat-menu #clientMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4">
-      <mat-action-list dense (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)" >
+      <mat-action-list dense (mouseenter)="menuenter()" (mouseleave)="menuLeave(clientTrigger, button)">
         <button mat-list-item (click)="onItemClick('log')">
           Log di gioco</button>
         <button mat-list-item (click)="onItemClick('preferences')">
@@ -38,7 +42,9 @@
   </div>
 
   <!-- Guida  Menu -->
-  <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div class="tg-mainnav-item" 
+  fxHide fxShow.gt-sm  
+  fxLayout fxLayoutAlign="center center" fxLayoutGap="10px">
     <button mat-button [matMenuTriggerFor]="guideMenu" #guideTrigger="matMenuTrigger"
       (mouseenter)="buttonEnter(guideTrigger)" (mouseleave)="buttonLeave(guideTrigger, button)">Guida</button>
     <mat-menu #guideMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4">
@@ -49,12 +55,24 @@
     </mat-menu>
   </div>
 
-  <div class="m-right">
+  <div class="m-right" fxLayout="row">
+
+    <div class="tg-game-time">
+      <span>
+        <b class="tg-llt-white">Giorno</b> 24
+        <b class="tg-llt-white">Mese</b> 10
+        <b class="tg-llt-white">Anno</b> 587
+      </span>
+
+      <div class="time-icon"></div>
+      <div class="time-image"></div>
+    </div>
+
     <button mat-icon-button (click)="onItemClick('audio')">
       <mat-icon style="font-size: 18px;" color="primary">
-          {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
-        </mat-icon>
-      </button>
-    {{gitVersion}}
+        {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
+      </mat-icon>
+    </button>
+    <span [attr.title]="gitVersion" class="tg-wcversion">v2</span>
   </div>
 </div>

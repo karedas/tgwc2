@@ -173,7 +173,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, 200, 60);
+      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, {duration: 50});
     }, 0);
   }
 
@@ -189,7 +189,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   goToPausePlaceHolder() {
-    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, 50, 50);
+    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, { duration: 50});
   }
 
   setOutputSplit() {

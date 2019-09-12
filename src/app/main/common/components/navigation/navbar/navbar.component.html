@@ -1,17 +1,18 @@
 <mat-toolbar class="tg-mainnav">
   <mat-toolbar-row fxLayout="wrap" fxLayoutGap="20px">
 
+    <div class="tg-brand">
+      <a href="http://www.thegatemud.it" class="tg-base-logo">
+        <span>The Gate <i>Mud</i></span>
+      </a>
+    </div>
+
     <div class="hamburger-item">
       <button class="tg-mainnav-icon" mat-icon-button (click)="toggleSidenav.emit()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
 
-    <div class="tg-brand">
-      <a href="http://www.thegatemud.it" class="tg-base-logo">
-        <span>The Gate <i>Mud</i></span>
-      </a>
-    </div>
 
     <ng-container *ngIf="!userIsInGame">
       <!-- Default Menu -->
@@ -43,8 +44,8 @@
 
     <!-- Game Menu -->
     <ng-template #userLoggedInMenu>
-      <div fxFlex="1 1 100%" fxHide fxShow.gt-sm class="mr0">
-        <tg-game-items></tg-game-items>
+      <div fxFlex="1 1 100%" class="mr0">
+        <tg-game-items ></tg-game-items>
       </div>
     </ng-template>
     
