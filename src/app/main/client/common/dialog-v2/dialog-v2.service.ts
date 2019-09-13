@@ -34,7 +34,7 @@ export class DialogV2Service {
   }
 
   getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
-    return dialogRef['_overlayRef'].overlayElement as HTMLElement;
+    return dialogRef._overlayRef.overlayElement as HTMLElement;
   }
 
   private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
@@ -349,8 +349,9 @@ export class DialogV2Service {
 
       const config = new MatDialogConfig();
       config.id = dialogID;
-      config.width = '60%';
+      config.width = '850px';
       config.height = '700px';
+      config.maxWidth = '100%';
       config.hasBackdrop = false;
       config.panelClass = 'minimal';
       config.scrollStrategy = this.overlay.scrollStrategies.noop();

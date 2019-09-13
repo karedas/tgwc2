@@ -32,6 +32,6 @@ export interface Room {
   ver: number;
   dir: string;
   mv: any;
-  where: any
-  eqcont: Eqcont
+  where: any;
+  eqcont: Eqcont;
 }

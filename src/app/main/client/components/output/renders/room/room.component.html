@@ -12,14 +12,14 @@
           </div>
 
           <!-- Room Description -->
-          <div class="tg-room--desc">
+          <div class="tg-room--desc tg-llt-white">
             <ng-container *ngIf="html.desc.details; else regularDescBase">
               <div [innerHtml]="html.desc.details | dataToHtml:true | capitalizeFirst"></div>
               <div [innerHtml]="(html?.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
             </ng-container>
 
             <ng-template #regularDescBase>
-              <div class="tg-room--desc"
+              <div class="tg-room--desc tg-llt-white" 
                 [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
             </ng-template>
           </div>
@@ -55,7 +55,7 @@
           </div>
           <!-- Room Description -->
           <ng-container *ngIf="type === 'room'">
-            <div class="tg-room--desc">
+            <div class="tg-room--desc tg-llt-white">
               <ng-container *ngIf="html.desc.details; else extra_regularDescBase">
                 <div [innerHtml]="html.desc.details | dataToHtml: true"></div>
                 <div [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
@@ -67,7 +67,7 @@
             </div>
           </ng-container>
           <ng-container *ngIf="type ==='objPersDetail' && html.desc">
-            <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc" *ngIf="html.desc.base"></div>
+            <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc tg-llt-white" *ngIf="html.desc.base"></div>
             <div class="tg-objperson--descdetail tg-green"
               [innerHtml]="(html.desc.details)  | capitalizeFirst | dataToHtml:true" *ngIf="html.desc.details"></div>
           </ng-container>
@@ -98,7 +98,7 @@
               *ngIf="html.eqcont || html.objcont; else nothing"></tg-objpers-container>
             <ng-template #nothing>
               <div class="tg-objperson--nothing">
-                &#8618; Non sembra contenere&nbsp;<span class="tg-gray">niente</span>.
+                &#8618; <span>Non sembra contenere&nbsp;<span class="tg-gray">niente.</span></span>
               </div>
             </ng-template>
           </ng-container>

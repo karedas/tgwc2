@@ -17,15 +17,15 @@ export interface TGConfig {
   widgetRoom: {
     visible: boolean,
     size: number,
-  },
+  };
   widgetEquipInv: {
     visible: boolean,
     size: number | string
-  },
+  };
   widgetCombat: {
     visible: boolean,
     size: 50
-  },
+  };
   characterPanel: boolean;
   characterPanelTopPosition: number;
   zen: boolean;
@@ -47,7 +47,7 @@ export const tgConfig: TGConfig = {
   output: {
     extraArea: {
       visible: true,
-      size: [50,50]
+      size: [50, 50]
     },
     list_column_mode: true
   },

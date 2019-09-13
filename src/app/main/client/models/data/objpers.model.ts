@@ -35,5 +35,5 @@ export interface IObjectAndPerson {
     icon: number;
     num: number;
     title: string;
-    where: any
+    where: any;
 }

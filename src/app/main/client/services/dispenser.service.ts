@@ -23,7 +23,7 @@ export class DispenserService {
   do(what: string, ...args: any) {
     switch (what) {
       case 'disconnect': this.loginClientService.logout();
-        break;
+                         break;
       case 'preferences':
         this.dialogV2Service.openControlPanel();
         break;

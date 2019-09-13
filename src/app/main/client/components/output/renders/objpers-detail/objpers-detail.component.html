@@ -1,15 +1,20 @@
 <div class="tg-objperson" *ngIf="html">
-  <div class="tg-objperson--action">
-    <span class="tg-green">Esamini</span>&nbsp;<div class="tg-objperson--item_desc tg-yellow" [innerHtml]="html.title | dataToHtml | capitalizeFirst"></div>
+  <div class="tg-objperson--action" fxLayout="row wrap">
+    <span class="tg-green">Esamini</span>&nbsp;
     <tg-icons [icon]="html.icon" class="squared"></tg-icons>
+
+    <div class="tg-objperson--item_desc tg-yellow" [innerHtml]="html.title | dataToHtml | capitalizeFirst"></div>
     
     <ng-container *ngIf="html.where">
-      <div class="tg-objperson--where" [innerHtml]="'('+ html.where.title + ')'"></div>
+      <div class="tg-objperson--where">
+        &#8618;
+        <span [innerHtml]="html.where.title | capitalizeFirst" (click)="onInteract(html.where)"></span>
+      </div>
     </ng-container>
     
   </div>
   <ng-container *ngIf="html.desc">
-    <div class="tg-objperson--descbase" 
+    <div class="tg-objperson--descbase tg-llt-white" 
       [innerHtml]="html.desc.base | dataToHtml | capitalizeFirst"></div>
     <div class="tg-objperson--descdetail tg-green" 
       [innerHtml]="html.desc.details | capitalizeFirst | dataToHtml:true"></div>

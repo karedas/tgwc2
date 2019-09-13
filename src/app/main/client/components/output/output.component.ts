@@ -12,6 +12,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 import { OutputService } from './output.service';
 import { TGState } from '../../store';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 @Component({
   selector: 'tg-output',
@@ -32,7 +33,6 @@ export class OutputComponent implements OnInit, OnDestroy {
   draggingSplitArea = false;
   smartSizeArea: number | string;
   lastRoom$: Observable<any>;
-  showExtraByViewport: boolean;
   pauseScroll = false;
   output = [];
   outputObservable = new BehaviorSubject([]);
@@ -40,6 +40,8 @@ export class OutputComponent implements OnInit, OnDestroy {
   typeDetail: string;
   objPersDetail: any[];
   genericPage: IGenericPage;
+
+
 
 
   private readonly outputTrimLines = 500;
@@ -53,15 +55,15 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
-  //Todo move to service
+  // Todo move to service
   get haveWidgets() {
-    if(this.tgConfig.widgetRoom.visible){
+    if (this.tgConfig.widgetRoom.visible) {
       return true;
     }
-    if(this.tgConfig.widgetEquipInv.visible){
+    if (this.tgConfig.widgetEquipInv.visible) {
       return true;
     }
-    if(this.tgConfig.widgetCombat.visible) {
+    if (this.tgConfig.widgetCombat.visible) {
       return true;
     }
     return false;
@@ -70,6 +72,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     private outputService: OutputService,
     private store: Store<TGState>,
     private game: GameService,
+    public mediaObserver: MediaObserver,
     private _configService: ConfigService) {
 
     this.lastRoom$ = this.store.select(getRoomBase);
@@ -79,16 +82,15 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._objOrPerson$ = this.store.select(getObjOrPerson);
     this._genericPage$ = this.store.select(getGenericPage);
 
-
     this._unsubscribeAll = new Subject();
   }
-  
+
   ngOnInit() {
-    
+
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
-        if(config) {
+        if (config) {
           this.tgConfig = config;
         }
       });
@@ -214,9 +216,9 @@ export class OutputComponent implements OnInit, OnDestroy {
   setOutputSplit() {
     // Check if the Output area is over min-size to show split.
     if (this.mainOutputArea.nativeElement.offsetWidth < 639) {
-      this.showExtraByViewport = this.game.showExtraByViewport = false;
+      // this.showExtraByViewport = this.game.showExtraByViewport = false;
     } else {
-      this.showExtraByViewport = this.game.showExtraByViewport = true;
+      // this.showExtraByViewport = this.game.showExtraByViewport = true;
     }
   }
 
@@ -253,7 +255,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-  
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     clearInterval(this.resizeID);

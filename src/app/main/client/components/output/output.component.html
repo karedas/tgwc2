@@ -34,18 +34,20 @@
                       *ngSwitchCase="'base'" 
                       [html]="data.content"></tg-text>
 
-                      <ng-container *ngIf="!tgConfig.widgetRoom.visible">
+                      <ng-container *ngIf="!tgConfig.widgetRoom.visible || mediaObserver.isActive('xs')">
                         <tg-room 
                         *ngSwitchCase="'room'" 
                         [withExtra]="false" 
                         [html]="data.content"
                         [lastDescription]="lastRoomDescription"></tg-room>
+                        
+                        <tg-objpers-detail
+                          *ngSwitchCase="'objPersDetail'" 
+                          [html]="data.content"></tg-objpers-detail>
                       </ng-container>
                       
    
-                    <tg-objpers-detail 
-                      *ngSwitchCase="'objPersDetail'" 
-                      [html]="data.content"></tg-objpers-detail>
+
                     <tg-generic-page 
                       *ngSwitchCase="'genericPage'" 
                       [html]='data.content'></tg-generic-page>
@@ -65,9 +67,7 @@
 
         </as-split-area>
         <!-- ################ Extra Output Area ################ -->
-        <as-split-area [size]="tgConfig.output.extraArea.size[1]" [visible]="tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible">
-          <!-- <div style="height: 100%; overflow:hidden;" fxLayout="column"> -->
-
+        <as-split-area [size]="tgConfig.output.extraArea.size[1]" [visible]="(tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) && !mediaObserver.isActive('xs')">
           <as-split class="tg-output--splitter" direction="vertical" [gutterSize]="9"
             (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, 'widgets')">
 

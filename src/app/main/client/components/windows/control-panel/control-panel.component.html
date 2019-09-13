@@ -36,12 +36,6 @@
           </div>
   
           <div class="tg-control-panel--option">
-            <mat-checkbox [(ngModel)]="tgConfig.output.extraArea.visible"
-              (change)="onOptionChange($event, {output: {extraArea: {visible: $event.checked }}})"
-              [disabled]="tgConfig.zen">Visuale gioco a due colonne</mat-checkbox>
-          </div>
-  
-          <div class="tg-control-panel--option">
             <mat-checkbox [(ngModel)]="tgConfig.characterPanel"
               (change)="onOptionChange($event, { characterPanel: $event.checked })" [disabled]="tgConfig.zen">Mostra
               pannello personaggio</mat-checkbox>

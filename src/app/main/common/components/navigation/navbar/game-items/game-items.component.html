@@ -51,8 +51,8 @@
 
   <div class="m-right" fxLayout="row" fxFlex="0 0 auto">
 
-    <div class="tg-game-time menu-block" *ngIf="gameData$ | async as time">
-      <span class="tg-yellow" fxHide fxShow.gt-sm>
+    <div class="tg-game-time menu-block" *ngIf="gameData$ | async as time" fxHide fxShow.gt-sm>
+      <span class="tg-yellow" >
         Giorno <b class="tg-llt-white">{{time.day}}</b>
         Mese <b class="tg-llt-white">{{time.month}}</b>
         Anno <b class="tg-llt-white">{{time.year}}</b>

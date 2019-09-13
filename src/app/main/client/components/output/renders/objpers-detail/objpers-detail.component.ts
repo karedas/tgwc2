@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { IObjPersDesc, IObjectAndPerson } from 'src/app/main/client/models/data/objpers.model';
+import { IObjectAndPerson } from 'src/app/main/client/models/data/objpers.model';
+import { GameService } from 'src/app/main/client/services/game.service';
 
 @Component({
   selector: 'tg-objpers-detail',
@@ -11,6 +12,14 @@ export class ObjpersDetailComponent {
 
   @Input() html: IObjectAndPerson;
 
-  constructor() {
+  constructor(
+    private gameService: GameService
+  ) {
+   }
+
+   onInteract(where?: any) {
+    if (where) {
+      this.gameService.processCommands(`guarda &${where.num}`);
+    }
    }
 }

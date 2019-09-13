@@ -22,7 +22,7 @@ export class HeroEquipmentComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<DataState>,
     private gameService: GameService,
-  ) { 
+  ) {
     this.equipPositionValue = Object.entries(equipPositionByName);
     this._equipment$ = this.store.pipe(select(getEquip));
     this._unsubscribeAll = new Subject();
@@ -41,7 +41,7 @@ export class HeroEquipmentComponent implements OnInit, OnDestroy {
   interactElement(item, mine?: boolean) {
     this.gameService.interact(item, null, mine);
   }
-  
+
   ngOnDestroy() {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
