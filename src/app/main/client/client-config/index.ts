@@ -10,19 +10,20 @@ export interface TGConfig {
   output: {
     extraArea: {
       visible: boolean,
-      size: number,
+      size: number[],
     },
     list_column_mode: boolean
   };
-  widgetsRoom: {
+  widgetRoom: {
     visible: boolean
   },
-  widgetsEquipInv: {
+  widgetEquipInv: {
     visible: boolean,
     size: number | string
   },
   widgetCombat: {
-    visible: boolean
+    visible: boolean,
+    size: 50
   },
   characterPanel: boolean;
   characterPanelTopPosition: number;
@@ -45,19 +46,20 @@ export const tgConfig: TGConfig = {
   output: {
     extraArea: {
       visible: true,
-      size: 50
+      size: [50,50]
     },
     list_column_mode: true
   },
-  widgetsRoom: {
+  widgetRoom: {
     visible: true
   },
-  widgetsEquipInv: {
+  widgetEquipInv: {
     visible: true,
-    size: 250,
+    size: 50,
   },
   widgetCombat: {
-    visible: false
+    visible: false,
+    size: 50
   },
   characterPanel: true,
   characterPanelTopPosition: 1,

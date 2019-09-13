@@ -8,7 +8,7 @@
         (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
 
         <!--  ################ Main Output Area ################ -->
-        <as-split-area [size]="'*'" style="position:relative">
+        <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
           
           <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
             Autoscroll disattivato -
@@ -33,7 +33,8 @@
                     <tg-text 
                       *ngSwitchCase="'base'" 
                       [html]="data.content"></tg-text>
-                      <ng-container *ngIf="!tgConfig.output.widgetRoom">
+
+                      <ng-container *ngIf="!tgConfig.widgetRoom.visible">
                         <tg-room 
                         *ngSwitchCase="'room'" 
                         [withExtra]="false" 
@@ -64,14 +65,14 @@
 
         </as-split-area>
         <!-- ################ Extra Output Area ################ -->
-        <as-split-area [size]="tgConfig.output.extraArea.size" [visible]="haveWidgets">
+        <as-split-area [size]="tgConfig.output.extraArea.size[1]" [visible]="tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible">
           <!-- <div style="height: 100%; overflow:hidden;" fxLayout="column"> -->
 
-          <as-split class="tg-output--splitter" direction="vertical" [gutterSize]="9" [restrictMove]="true" unit="pixel"
-            (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, '')">
+          <as-split class="tg-output--splitter" direction="vertical" [gutterSize]="9"
+            (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, 'widgets')">
 
-            <as-split-area size="'*'">
-                <tg-room *ngIf="tgConfig.output.widgetRoom"
+            <as-split-area [size]="tgConfig.widgetRoom.size" [visible]="tgConfig.widgetRoom.visible" [order]="1">
+                <tg-room *ngIf="tgConfig.widgetRoom.visible"
                   [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" 
                   [withExtra]="true"
                   [lastDescription]="lastRoomDescription" 
@@ -81,10 +82,7 @@
 
             </as-split-area>
 
-            <as-split-area [size]="tgConfig.widgetsEquipInv.visible 
-                    ? tgConfig.widgetsEquipInv.size 
-                    : tgConfig.widgetsEquipInv.sizeWhenClose"
-              [lockSize]="smartSizeArea === tgConfig.widgetsEquipInv.sizeWhenClose">
+            <as-split-area  [visible]="tgConfig.widgetEquipInv.visible" [size]="tgConfig.widgetEquipInv.size" [order]="2">
 
               <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea"></tg-smart-equip-inventory>
 

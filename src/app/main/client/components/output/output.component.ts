@@ -55,10 +55,10 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   //Todo move to service
   get haveWidgets() {
-    if(this.tgConfig.widgetCombat.visible){
+    if(this.tgConfig.widgetRoom.visible){
       return true;
     }
-    if(this.tgConfig.widgetsEquipInv.visible){
+    if(this.tgConfig.widgetEquipInv.visible){
       return true;
     }
     if(this.tgConfig.widgetCombat.visible) {
@@ -233,9 +233,10 @@ export class OutputComponent implements OnInit, OnDestroy {
       this._configService.setConfig({
         output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
       });
-    } else if (selector === 'equipinv') {
+    } else if (selector === 'widgets') {
       this._configService.setConfig({
-        widgetsEquipInv: { size: event.sizes[1] }
+        widgetRoom: { size: event.sizes[0]},
+        widgetEquipInv: { size: event.sizes[1] }
       });
     }
 
@@ -244,7 +245,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   toggleEquipInventorySplit() {
     this._configService.setConfig({
-      widgetsEquipInv: { visible: false }
+      widgetEquipInv: { visible: false }
     });
   }
 

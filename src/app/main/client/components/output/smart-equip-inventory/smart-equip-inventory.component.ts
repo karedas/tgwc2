@@ -33,7 +33,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config: TGConfig) => {
         setTimeout(() => {
-          this.show = config.widgetsEquipInv.visible;
+          this.show = config.widgetEquipInv.visible;
         });
       });
   }
@@ -42,14 +42,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     event.stopImmediatePropagation();
     this.tab = tab;
     this.gameService.processCommands('@' + cmd, false, false);
-  }
-
-  onCollapse() {
-    this.show = !this.show;
-    // store in the config
-    this._configService.setConfig({
-      widgetsEquipInv: { visible: this.show }
-    });
   }
 
   ngOnDestroy() {

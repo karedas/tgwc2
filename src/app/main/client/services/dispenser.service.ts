@@ -17,7 +17,8 @@ export class DispenserService {
     private loginClientService: LoginClientService,
     private audioService: AudioService,
     private configService: ConfigService
-  ) { }
+  ) {
+   }
 
   do(what: string, ...args: any) {
     switch (what) {
@@ -37,6 +38,14 @@ export class DispenserService {
         break;
       case 'shortcuts':
         this.dialogV2Service.openShortcut();
+        break;
+      case 'widgetRoom':
+      case 'widgetEquipInv':
+      case 'widgetCombat':
+        this.tgConfig = this.gameService.tgConfig;
+        this.configService.setConfig({
+          [what]: { visible: !this.tgConfig[what].visible }
+        });
         break;
       default:
         this.gameService.processCommands(what);

@@ -10,7 +10,6 @@ import { equipPositionByName } from '../../common/constants';
 @Component({
   selector: 'tg-hero-equipment',
   templateUrl: './hero-equipment.component.html',
-  styleUrls: ['./hero-equipment.component.scss']
 })
 export class HeroEquipmentComponent implements OnInit, OnDestroy {
 

@@ -106,9 +106,14 @@ export class TgGameItemsComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  onItemClick(what: string) {
-    this.dispenserService.do(what);
+  onItemClick(what: string, event?:any, ...args:any) {
+    this.isMatMenuOpen = true;
+    if(what) {
+      this.dispenserService.do(what, args);
+    }
+    return false;
   }
+  
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next();

@@ -31,16 +31,6 @@
       <mat-icon>pause</mat-icon>
     </button>
 
-    <button
-      mat-icon-button fxHide fxShow.gt-xs
-      tooltip="Apri/Chiudi Dettagli" show-delay="500" placement="top"
-      type="button"
-      class="tg-fnt-button"
-      (mousedown)="toggleExtraOutput()"
-      [ngClass]="{'isActive': tgConfig.output.extraArea.visible}">
-      <mat-icon>vertical_split</mat-icon>
-    </button>
-
     <button mat-icon-button *ngIf="!tgConfig.zen"
       tooltip="Apri/Chiudi Dashboard" show-delay="500" placement="top"
       type="button"

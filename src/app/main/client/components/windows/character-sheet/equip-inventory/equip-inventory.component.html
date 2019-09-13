@@ -2,11 +2,13 @@
   <!-- ######## Equip / Inventory ########  -->
   <div class="eqinv-container" fxLayout="column">
     <ng-container *ngIf="subTab == 'inventory'">
-      <div class="inventory-list tg-shadow-inset" fxLayout="column" *ngIf="inventory$ | async; let inventory">
+      <div class="tg-objects-list tg-shadow-inset" fxLayout="column" *ngIf="inventory$ | async; let inventory">
+        <div class="tg-box-header active">
 
-        <h3 class="panel-title">Inventario</h3>
+          <h3 class="tg-box-title">Inventario</h3>
+        </div>
         
-        <tg-hero-inventory></tg-hero-inventory>
+        <tg-hero-inventory fxLayout="column"></tg-hero-inventory>
 
         <ng-container [ngTemplateOutlet]="equipInvAction"
           [ngTemplateOutletContext]="{wprc: inventory.wprc, weight: inventory.weight}">
@@ -16,10 +18,13 @@
 
 
     <ng-container *ngIf="subTab == 'equip'">
-      <div class="equip-list tg-shadow-inset" fxLayout="column" *ngIf="equip;">
-        <h3 class="panel-title"> Equipaggiamento </h3>
+      <div class="tg-objects-list tg-shadow-inset" fxLayout="column" *ngIf="equip;">
 
-        <tg-hero-equipment></tg-hero-equipment>
+        <div class="tg-box-header active">
+          <h3 class="tg-box-title"> Equipaggiamento </h3>
+        </div>
+
+        <tg-hero-equipment fxLayout="column"></tg-hero-equipment>
 
         <ng-container [ngTemplateOutlet]="equipInvAction"
         [ngTemplateOutletContext]="{wprc: wprc, weight: weight}">

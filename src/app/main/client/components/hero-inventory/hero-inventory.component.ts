@@ -9,7 +9,6 @@ import { GameService } from '../../services/game.service';
 @Component({
   selector: 'tg-hero-inventory',
   templateUrl: './hero-inventory.component.html',
-  styleUrls: ['./hero-inventory.component.scss']
 })
 export class HeroInventoryComponent implements OnInit, OnDestroy {
 

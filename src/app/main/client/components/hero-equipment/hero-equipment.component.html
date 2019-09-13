@@ -1,4 +1,4 @@
-<ng-container *ngIf="equipment; else noEquipment">
+<ng-container *ngIf="equipment.length; else noEquipment">
   <div class="objlist-caption" fxLayout="row" fxFlex="0 0 auto">
     <div fxFlex="0 0 20%" fxLayoutAlign="start center">Dove</div>
     <div fxFlex="0 0 65%" fxLayoutAlign="start center">Oggetto</div>
@@ -29,5 +29,7 @@
 
 
 <ng-template #noEquipment>
-  <span class="no-items-notice">Non indossi nulla!</span>
+  <div class="no-items-notice">
+    <span class="no-items-notice">Non indossi nulla!</span>
+  </div>
 </ng-template>

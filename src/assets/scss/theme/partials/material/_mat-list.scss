@@ -1,5 +1,4 @@
 .mat-subheader {
-  padding: 6px 0;
   margin: 0;
   color:  $tg-brown;
 }
@@ -23,6 +22,17 @@
 
 .mat-pseudo-checkbox {
   color: rgba(255,255,255,.5);
+}
+
+.mat-list-item-disabled {
+  background-color: transparent;
+  .mat-list-text {
+    color: #666!important;
+  }
+
+  .mat-pseudo-checkbox {
+    color: #666;
+  }
 }
 // .mat-selection-list, .mat-action-list {
 // }
