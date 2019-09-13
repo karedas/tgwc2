@@ -78,7 +78,6 @@ export class InputComponent implements OnInit, OnDestroy {
       });
   }
 
-
   private moveCursorAtEnd(target) {
     if (typeof target.selectionStart === 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
@@ -123,7 +122,7 @@ export class InputComponent implements OnInit, OnDestroy {
     }
   }
 
-  public sendCmd(cmd: string) {
+  sendCmd(cmd: string) {
     /* Check equipment/inventory dialog open request
        TODO: Need better implementation */
     if (cmd.startsWith('eq') || cmd.startsWith('inv') || cmd.startsWith('info') || cmd.startsWith('ab')) {
@@ -135,35 +134,26 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   /*------  Buttons Actions */
-
   pauseScrollOutput() {
     this.pauseScroll = this.outputService.toggleAutoScroll();
   }
 
-  openShortCut() {
-    this.dialogService.openShortcut();
-  }
-
-  toggleExtraOutput(event: Event) {
+  toggleExtraOutput() {
     this._configService.setConfig({
       output: { extraArea: { visible: !this.tgConfig.output.extraArea.visible } }
     });
   }
 
-  toggleCharacterPanel(event: Event) {
+  toggleCharacterPanel() {
     this._configService.setConfig({
       characterPanel: !this.tgConfig.characterPanel
     });
   }
 
-  toggleZen(event?: Event) {
+  toggleZen() {
     this._configService.setConfig({
       zen: !this.tgConfig.zen
     });
-  }
-
-  onFontSizeChange(): void {
-    this.game.setOutputSize();
   }
 
   @HostListener('document:keypress', ['$event'])

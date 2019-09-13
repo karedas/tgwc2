@@ -46,7 +46,9 @@
           
           <div class="right-data" fxLayout="column" fxFlex="0 1 100%">
             <tg-info *ngIf="data.tab == 'info'" style="height: 100%;"></tg-info>
-            <tg-equip-inventory *ngIf="data.tab == 'equip' || data.tab == 'inventory'" style="height:100%;"
+            <tg-equip-inventory 
+              *ngIf="data.tab == 'equip' || data.tab == 'inventory'" 
+              style="height:100%;"
               [subTab]="data.tab"></tg-equip-inventory>
             <tg-skills *ngIf="data.tab == 'skills'"></tg-skills>
           </div>

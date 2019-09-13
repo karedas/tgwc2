@@ -11,14 +11,6 @@ tg-navbar {
   border-bottom: 1px solid rgb(66, 62, 58);
   box-shadow: 0 3px 6px rgba(12, 8, 7, 1);
 
-  .mat-icon-button {
-    &.tg-mainnav-icon {
-      height: 32px;
-      line-height: 32px;
-    }
-
-  }
-
   .tg-brand {
     height: 100%;
     margin-right: 40px !important;
@@ -32,7 +24,7 @@ tg-navbar {
       height: 100%;
       margin: auto 0;
       display: inline-block;
-      background-position: left ;
+      background-position: left;
       background-size: 28px auto;
     }
 
@@ -73,34 +65,49 @@ tg-navbar {
     margin-right: 20px;
   }
 
-
   .mat-menu-item {
     font-size: 1em;
     line-height: 1;
     height: 40px;
   }
 
-
   .mr0 {
-    margin-right: 0!important;
+    margin-right: 0 !important;
   }
-  
+
   .m-right {
     margin-left: auto;
-  }
-
-  .hamburger-item {
-    display: none;
   }
 
   .mat-icon-button,
   .mat-button {
     mat-icon {
-      font-size: 20px;
+      color: $base-text-color-light;
       width: auto;
       height: auto;
     }
   }
+
+  .mat-icon.mat-primary{
+    color: #676767;
+    vertical-align: middle;
+  }
+
+  .mat-icon-button {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+
+    mat-icon {
+      font-size: 18px!important;
+    }
+        
+    &.active mat-icon, &:hover mat-icon {
+      color: $base-text-color-light;
+    }
+  }
+
 
   .tg-mainnav-item .mat-button {
     min-width: 0;
@@ -119,23 +126,46 @@ tg-navbar {
 
     &:hover,
     &.active {
-      color: rgb(189, 179, 163);
+      color: $tg-brown;
       text-shadow: 0 0 12px white;
     }
   }
 
-  .mat-icon,
-  .user-side {
-    color: #bdb3a3;
-    vertical-align: middle;
-  }
+  .hamburger-item {
+    display: none;
 
+    mat-icon {
+      font-size: 24px;
+      color: $base-text-color-light;
+    }
+  }
 
   .menu-label {
     padding: 6px 12px;
   }
 
+  .menu-block {
 
+    &:after,
+    &:before {
+      content: '';
+      display: inline-block;
+      max-height: 90%;
+      height: 20px;
+      vertical-align: middle;
+      width: 1px;
+      margin: 0 1.5em;
+      background: black;
+    }
+
+    &:before {
+      border-left: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    &:after {
+      border-left: 1px solid rgba(255, 255, 255, .1);
+    }
+  }
 
   @include layout-bp(lt-md) {
 
@@ -145,6 +175,7 @@ tg-navbar {
 
     .tg-brand {
       margin-right: 0 !important;
+
       a {
         margin: 0;
       }
@@ -197,6 +228,24 @@ tg-navbar {
     font-weight: normal;
   }
 
+  .time-image {
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 0;
+    width: 100px;
+    height: 18px;
+    display: inline-block;
+    border-radius: 5px;
+    vertical-align: middle;
+    background-size: contain;
+    background: url(/assets/images/sky/alba.jpg); // Is a Test
+    background-position: top left;
+    box-shadow: inset 0 0 5px 0px black;
+    margin-top: -1px;
+    cursor: pointer;
+  }
+
   .time-icon {
     display: inline-block;
     background: url($imgPath + '/sky/sun.png') no-repeat top left;
@@ -204,7 +253,8 @@ tg-navbar {
     height: 16px;
     vertical-align: middle;
     margin-right: 5px;
-    position: relative;
+    position: absolute;
+    left: 5%;
 
     &:before {
       content: '';
@@ -218,21 +268,5 @@ tg-navbar {
       left: 8px;
       box-shadow: 0 0 20px 8px #ffe000;
     }
-  }
-
-  .time-image {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-top: 0;
-    width: 100px;
-    height: 18px;
-    display: inline-block;
-    border-radius: 5px;
-    vertical-align: middle;
-    background-size: contain;
-    margin-right: 2em;
-    background: url(/assets/images/sky/alba.jpg); // Is a Test
-    background-position: top left;
-    box-shadow: inset 0 0 5px 0px black;
-    margin-top: -1px;
   }
 }

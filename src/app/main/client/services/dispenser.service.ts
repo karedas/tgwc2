@@ -3,23 +3,25 @@ import { GameService } from './game.service';
 import { DialogV2Service } from '../common/dialog-v2/dialog-v2.service';
 import { AudioService } from '../components/audio/audio.service';
 import { LoginClientService } from '../../authentication/services/login-client.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DispenserService {
+  tgConfig: any;
 
   constructor(
     private gameService: GameService,
     private dialogV2Service: DialogV2Service,
     private loginClientService: LoginClientService,
-    private audioService: AudioService
+    private audioService: AudioService,
+    private configService: ConfigService
   ) { }
 
   do(what: string, ...args: any) {
     switch (what) {
-      case 'disconnect':
-        this.loginClientService.logout();
+      case 'disconnect': this.loginClientService.logout();
         break;
       case 'preferences':
         this.dialogV2Service.openControlPanel();
@@ -30,7 +32,12 @@ export class DispenserService {
       case 'log':
         this.dialogV2Service.openLog();
         break;
-
+      case 'fontsize':
+        this.gameService.setOutputSize();
+        break;
+      case 'shortcuts':
+        this.dialogV2Service.openShortcut();
+        break;
       default:
         this.gameService.processCommands(what);
         return false;

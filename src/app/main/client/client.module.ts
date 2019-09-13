@@ -30,7 +30,7 @@ const clientRouting: Routes = [
     ClientComponent,
     AudioComponent,
     StatusBarComponent,
-    AutofocusInputbarDirective
+    AutofocusInputbarDirective,
   ],
   imports: [
     SharedModule,

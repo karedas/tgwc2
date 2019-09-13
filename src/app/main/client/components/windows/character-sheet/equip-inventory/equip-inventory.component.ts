@@ -14,6 +14,7 @@ import { InputService } from '../../../input/input.service';
   styleUrls: ['./equip-inventory.component.scss'],
 })
 export class EquipInventoryComponent implements OnInit, OnDestroy {
+  @Input('subTab') subTab = 'equip';
 
   equipPositionValue: {};
   equip_by_pos = pos_to_order;
@@ -23,7 +24,6 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
   weight: number;
   equip = [];
 
-  @Input('subTab') openedSubTab = 'equip';
 
   private _unsubscribeAll: Subject<any>;
 
@@ -59,12 +59,12 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
     this.inputService.focus();
 
     if (what === 'equip') {
-      this.openedSubTab = what;
+      this.subTab = what;
       this.gameService.processCommands('equip');
 
     }
     if (what === 'inventory') {
-      this.openedSubTab = what;
+      this.subTab = what;
       this.gameService.processCommands('inv');
     }
   }

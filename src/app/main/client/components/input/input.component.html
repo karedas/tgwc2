@@ -30,29 +30,13 @@
       [ngClass]="{'isActive': pauseScroll}">
       <mat-icon>pause</mat-icon>
     </button>
-    
-    <button mat-icon-button
-      tooltip="Scorciatoie" show-delay="500" placement="top"
-      type="button"
-      class="tg-fnt-button"
-      (mousedown)="openShortCut()">
-      <mat-icon>vpn_key</mat-icon>
-    </button>
-
-    <button mat-icon-button
-      tooltip="Aumenta/Diminuisci dimensioni testo" show-delay="500" placement="top"
-      type="button"
-      class="tg-fnt-button"
-      (mousedown)="onFontSizeChange()">
-      <mat-icon>format_size</mat-icon>
-    </button>
 
     <button
       mat-icon-button fxHide fxShow.gt-xs
       tooltip="Apri/Chiudi Dettagli" show-delay="500" placement="top"
       type="button"
       class="tg-fnt-button"
-      (mousedown)="toggleExtraOutput($event)"
+      (mousedown)="toggleExtraOutput()"
       [ngClass]="{'isActive': tgConfig.output.extraArea.visible}">
       <mat-icon>vertical_split</mat-icon>
     </button>
@@ -61,7 +45,7 @@
       tooltip="Apri/Chiudi Dashboard" show-delay="500" placement="top"
       type="button"
       class="tg-fnt-button"
-      (mousedown)="toggleCharacterPanel($event)"
+      (mousedown)="toggleCharacterPanel()"
       [ngClass]="{'isActive': tgConfig.characterPanel}">
       <mat-icon>face_outline</mat-icon>
     </button>
@@ -69,7 +53,7 @@
     <button mat-icon-button fxHide fxShow.gt-xs
       tooltip="Modalità Zen" placement="top" type="button"
       class="tg-fnt-button"
-      (mousedown)="toggleZen($event)"
+      (mousedown)="toggleZen()"
       [ngClass]="{'isActive': tgConfig.zen}">
       <mat-icon>aspect_ratio_outline</mat-icon>
     </button>

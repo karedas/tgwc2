@@ -27,6 +27,7 @@ import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     WorkslistComponent,
     LogComponent,
     ShortcutsPanelComponent,
+    CharacterSheetComponent
   ],
 
   imports: [

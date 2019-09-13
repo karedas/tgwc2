@@ -33,10 +33,12 @@
       <div class="m-right user-side" fxHide fxShow.gt-xs fxFlex="0 1 0" fxLayoutAlign="flex-end"
         fxLayoutGap.gt-xs="20px">
         <div class="tg-mainnav-item" fxLayout fxLayoutAlign="center center">
-          <button mat-button [routerLink]="['/auth/login-character']" [routerLinkActive]="['active']">Accedi</button>
+          <button mat-button [routerLink]="['/auth/login-character']" [routerLinkActive]="['active']"
+            class="tg-lt-white">Accedi</button>
         </div>
         <div class="tg-mainnav-item mr0" fxLayout fxLayoutAlign="center center">
-          <button mat-button [routerLink]="['/auth/nuovo-personaggio/benvenuto']" [routerLinkActive]="['active']" class="tg-brown">Nuovo</button>
+          <button mat-button [routerLink]="['/auth/nuovo-personaggio/benvenuto']" [routerLinkActive]="['active']"
+            class="tg-brown">Nuovo</button>
         </div>
       </div>
     </ng-container>
@@ -45,10 +47,10 @@
     <!-- Game Menu -->
     <ng-template #userLoggedInMenu>
       <div fxFlex="1 1 100%" class="mr0">
-        <tg-game-items ></tg-game-items>
+        <tg-game-items></tg-game-items>
       </div>
     </ng-template>
-    
+
     <!-- End Game Menu-->
   </mat-toolbar-row>
 </mat-toolbar>

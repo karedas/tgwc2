@@ -12,6 +12,8 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
 import { StatusComponent } from './status/status.component';
 import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
+import { HeroInventoryModule } from '../hero-inventory/hero-inventory.module';
+import { HeroEquipmentModule } from '../hero-equipment/hero-equipment.module';
 @NgModule({
   declarations: [
     OutputComponent,
@@ -28,7 +30,9 @@ import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equi
   imports: [
     CommonModule,
     SharedModule,
-    AngularSplitModule
+    AngularSplitModule,
+    HeroInventoryModule,
+    HeroEquipmentModule
   ],
   exports: [
     OutputComponent

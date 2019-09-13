@@ -32,7 +32,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   draggingSplitArea = false;
   smartSizeArea: number | string;
   lastRoom$: Observable<any>;
-  showExtraByViewport: boolean = true;
+  showExtraByViewport: boolean;
   pauseScroll = false;
   output = [];
   outputObservable = new BehaviorSubject([]);
@@ -116,9 +116,6 @@ export class OutputComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(data => this.updateGenericPage(data));
 
-    setTimeout(() => {
-      this.setOutputSplit();
-    });
   }
 
 
