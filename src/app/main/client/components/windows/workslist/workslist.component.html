@@ -18,12 +18,12 @@
           <table mat-table [dataSource]="dataSource" matSort class="dark">
             
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef>#</th>
+              <th mat-header-cell *matHeaderCellDef matSortDisabled >#</th>
               <td mat-cell *matCellDef="let element">{{element.id}}</td>
             </ng-container>
 
             <ng-container matColumnDef="icon">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Icona</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisabled>Icona</th>
               <td mat-cell *matCellDef="let element">
                   <tg-icons [icon]="element.icon"></tg-icons>
               </td>
@@ -40,7 +40,7 @@
             </ng-container>
 
             <ng-container matColumnDef="cando">
-              <th mat-header-cell *matHeaderCellDef>Puoi?</th>
+              <th mat-header-cell *matHeaderCellDef matSortDisabled>Puoi?</th>
               <td mat-cell *matCellDef="let element">
                   <div [ngClass]="element.cando === true ? 'cando' : 'cantdo'"></div>
               </td>
@@ -52,7 +52,7 @@
             </ng-container>
 
             <ng-container matColumnDef="cmd" >
-              <th mat-header-cell *matHeaderCellDef>Azione</th>
+              <th mat-header-cell *matHeaderCellDef matSortDisabled >Azione</th>
               <td mat-cell *matCellDef="let element">
                   <button class="tg-button btn-workcmd" (click)="onAction(element.id, $event)" 
                     matRipple 

@@ -18,7 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
 import { IconsComponent } from '../main/client/common/icons/icons.component';
 import { HstatComponent } from '../main/client/common/hstat/hstat.component';
-import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatInputModule, MatExpansionModule, MatListModule } from '@angular/material';
+import { MatRippleModule, MatTooltipModule, MatTableModule, MatPaginatorModule, MatInputModule, MatExpansionModule, MatListModule, MatSortModule } from '@angular/material';
 import { ScrollingModule } from '@angular/cdk-experimental/scrolling';
 
 @NgModule({
@@ -54,6 +54,7 @@ import { ScrollingModule } from '@angular/cdk-experimental/scrolling';
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
+    MatSortModule,
     MatButtonModule,
     MatMenuModule,
     MatDividerModule,

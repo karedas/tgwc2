@@ -15,7 +15,8 @@ export interface TGConfig {
     list_column_mode: boolean
   };
   widgetRoom: {
-    visible: boolean
+    visible: boolean,
+    size: number,
   },
   widgetEquipInv: {
     visible: boolean,
@@ -51,7 +52,8 @@ export const tgConfig: TGConfig = {
     list_column_mode: true
   },
   widgetRoom: {
-    visible: true
+    visible: true,
+    size: 50
   },
   widgetEquipInv: {
     visible: true,

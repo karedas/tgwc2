@@ -15,6 +15,10 @@
      transition: background .2s ease-out;
    }
 
+   .mat-sort-header-button {
+     margin: 0 auto;
+   }
+
    td.mat-cell {
      color: $base-text-color;
      font-size: 100%;

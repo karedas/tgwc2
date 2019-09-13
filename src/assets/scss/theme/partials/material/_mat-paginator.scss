@@ -12,20 +12,24 @@
   .mat-paginator,
   .mat-paginator-page-size .mat-select-trigger {
     font-size: 10px;
-    color: rgba(255, 255, 255, 0.54);
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .mat-select-value {
-    color: rgba(255, 214, 0, 0.87);
+    color: rgba(255, 214, 0, 0.90);
   }
 
   .mat-select-row {
-    color: rgba(255, 255, 255, 0.54);
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .mat-select-panel {
     background: #0c0a08;
     border: 1px solid #ffffff21;
+  }
+
+  .mat-select-arrow {
+    color: rgba(255,255,255,.5);
   }
 
   .mat-option:hover:not(.mat-option-disabled),
