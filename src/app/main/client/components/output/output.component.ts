@@ -53,6 +53,19 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private _unsubscribeAll: Subject<any>;
 
+  //Todo move to service
+  get haveWidgets() {
+    if(this.tgConfig.widgetCombat.visible){
+      return true;
+    }
+    if(this.tgConfig.widgetsEquipInv.visible){
+      return true;
+    }
+    if(this.tgConfig.widgetCombat.visible) {
+      return true;
+    }
+    return false;
+  }
   constructor(
     private outputService: OutputService,
     private store: Store<TGState>,
@@ -208,7 +221,6 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   onDragStart() {
-    // TODO disable ngx-scrollbar to improve performance
     this.draggingSplitArea = true;
   }
 
@@ -223,7 +235,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       });
     } else if (selector === 'equipinv') {
       this._configService.setConfig({
-        equipInventoryBox: { size: event.sizes[1] }
+        widgetsEquipInv: { size: event.sizes[1] }
       });
     }
 
@@ -232,7 +244,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   toggleEquipInventorySplit() {
     this._configService.setConfig({
-      equipInventoryBox: { visible: false }
+      widgetsEquipInv: { visible: false }
     });
   }
 
@@ -240,7 +252,6 @@ export class OutputComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
   
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
@@ -249,5 +260,4 @@ export class OutputComponent implements OnInit, OnDestroy {
       this.setOutputSplit();
     }, 500);
   }
-
 }

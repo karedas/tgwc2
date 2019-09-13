@@ -33,7 +33,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config: TGConfig) => {
         setTimeout(() => {
-          this.show = config.equipInventoryBox.visible;
+          this.show = config.widgetsEquipInv.visible;
         });
       });
   }
@@ -48,7 +48,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     this.show = !this.show;
     // store in the config
     this._configService.setConfig({
-      equipInventoryBox: { visible: this.show }
+      widgetsEquipInv: { visible: this.show }
     });
   }
 
