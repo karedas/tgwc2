@@ -35,12 +35,8 @@
         <ng-scrollbar class="scrollbar" [ngClass]="{'disabled': draggingSplitArea}" [disabled]="draggingSplitArea"
           fxFlex="1 1 100%" fxFlexFill>
 
-          <div class="objlist-wrapper-list">
             <tg-hero-equipment fxLayout="column" *ngIf="tab === 1"></tg-hero-equipment>
-          </div>
-          <div class="objlist-wrapper-list">
             <tg-hero-inventory fxLayout="column" *ngIf="tab === 2"></tg-hero-inventory>
-          </div>
 
         </ng-scrollbar>
       </div>

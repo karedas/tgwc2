@@ -88,10 +88,8 @@ mat-accordion {
 
 
 
-
-
 .skill-subdetail-container {
-  padding: 6px 0 0;
+  padding: 0 24px 0 12px;
 }
 
 .skill-name {
@@ -105,7 +103,10 @@ mat-accordion {
 }
 
 .skill-detail {
-  padding-bottom: 3px;
+  padding-top: 3px;
+  &:first-child {
+    padding-top: 0;
+  }
 }
 
 .meter2 {
@@ -113,7 +114,6 @@ mat-accordion {
   background: #0f0f0e;
   position: relative;
   padding: 2px;
-  margin: 0 0 auto;
 
   span {
     display: block;
@@ -128,7 +128,6 @@ mat-accordion {
 }
 
 .skillsep {
-  color: #e6deb2;
   font-size: 2em;
 }
 

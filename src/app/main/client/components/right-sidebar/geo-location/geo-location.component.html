@@ -11,18 +11,17 @@
           <ng-scrollbar class="scrollbar" >
             <div class="tg-geolocal--data" fxLayout="column" fxLayoutAlign="center center" fxFlex="0 1 auto">
               <div class="tg-geolocal--databox" fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="center center">
-                <span class="tg-geolocal--region" [ngClass]="
-                            {'tg-lt-green': region.type == 'pacifica',
-                              'tg-brown': region.type == 'selvaggia', 
-                              'tg-lt-red': region.type == 'guerra'}">
-                  <tg-icons [icon]="region.icon"></tg-icons> {{region.name}}
-                </span>
-                Controllata da
+                <span class="tg-geolocal--region tg-llt-white">{{region.name}}</span>
+                <span class="tg-geolocal--regiontype" [ngClass]="
+                {'tg-lt-green': region.type == 'pacifica',
+                  'tg-brown': region.type == 'selvaggia', 
+                  'tg-lt-red': region.type == 'guerra'}">({{region.type}})</span>
+
                 <span class="tg-geolocal--control tg-lt-yellow">
-                  <tg-icons [icon]="region.clan_icon"></tg-icons>
                   {{region.clan_name || "Landa selvaggia"}}
                 </span>
-  
+                <span>- Controllo territoriale -</span>
+                
               </div>
             </div>
           </ng-scrollbar>

@@ -20,7 +20,7 @@
 
   .tg-status-row {
     .tg-status-name {
-      padding:0.2em 1em .2em;
+      padding:0.2em .5em .2em;
     }
   }
 
@@ -44,6 +44,7 @@
 
     .tg-meterbar-text {
       position: absolute;
+      top: 0;
       left: 0;
       right: 0;
       text-align: center;

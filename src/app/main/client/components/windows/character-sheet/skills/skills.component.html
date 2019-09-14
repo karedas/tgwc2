@@ -1,7 +1,9 @@
 <div fxLayout="column" style="height: 100%">
   <!-- ######## Ability ########  -->
   <div class="skill-list" fxLayout="column">
-      <h3 class="panel-title">Abilità principali</h3>
+      <div class="tg-box-header active">
+        <h3 class="tg-box-title">Abilità principali</h3>
+      </div>
     <div style="overflow: hidden; height: 100%;">
 
       <ng-scrollbar class="scrollbar" [appearance]="'compact'">
@@ -25,7 +27,7 @@
                   <div class="meter2" fxFlex="0 1 35%">
                     <span [style.width.%]="heroSkillsValue.indexOf(subskill.value.prac) * 10"></span>
                   </div>
-                  <div fxFlex="0 1 25%" class="skill-prac">
+                  <div fxFlex="0 1 25%" class="skill-prac tg-llt-white">
                     {{subskill.value.prac}}
                   </div>
                 </div>

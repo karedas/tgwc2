@@ -1,3 +1,52 @@
+.tg-box-header {
+  line-height: 1;
+  font-size: 1em;
+  padding: 0;
+  border-bottom: 1px solid #433b3a;
+  box-shadow: inset 0px -5px 11px 0px black;
+  position: relative;
+  background: url($imgPath + '/background/blood_dark.jpg') repeat top left !important;
+
+  .tg-box-tab-container {
+    height: 100%;
+  }
+
+
+  .tg-box-title {
+    padding: 6px 8px;
+    margin-right: 12px;
+    border-radius: 0;
+    font-size: 1.2em;
+    color: #dad6c1a8;
+    font-family: $modern-antiqua;
+    line-height: normal;
+    margin-top: 0;
+    margin-bottom: 0;
+
+  }
+  h3 {
+    font-weight: normal;
+    color: #dad6c1!important;
+  }
+
+  .tg-box-collapsebtn {
+    line-height: normal;
+    height: 22px;
+    width: 22px;
+    margin: auto 6px auto auto;
+
+    .mat-icon {
+      line-height: 22px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .active .tg-box-title {
+    color: #dad6c1!important;
+  }
+}
+
 .tg-objects-list {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: $base-text-color;
@@ -6,54 +55,6 @@
   height: 100%;
 
 
-  .tg-box-header {
-    line-height: 1;
-    font-size: 1em;
-    padding: 0;
-    border-bottom: 1px solid #433b3a;
-    box-shadow: inset 0px -5px 11px 0px black;
-    position: relative;
-    background: url($imgPath + '/background/blood_dark.jpg') repeat top left !important;
-
-    .tg-box-tab-container {
-      height: 100%;
-    }
-
-
-    .tg-box-title {
-      padding: 6px 8px;
-      margin-right: 12px;
-      border-radius: 0;
-      font-size: 1.2em;
-      color: #dad6c1a8;
-      font-family: $modern-antiqua;
-      line-height: normal;
-      margin-top: 0;
-      margin-bottom: 0;
-
-    }
-    h3 {
-      font-weight: normal;
-      color: #dad6c1!important;
-    }
-
-    .tg-box-collapsebtn {
-      line-height: normal;
-      height: 22px;
-      width: 22px;
-      margin: auto 6px auto auto;
-
-      .mat-icon {
-        line-height: 22px;
-        width: 22px;
-        height: 22px;
-      }
-    }
-
-    .active .tg-box-title {
-      color: #dad6c1!important;
-    }
-  }
 
   .objlist-caption {
     background-color: #0c0c0c;
@@ -66,6 +67,10 @@
       padding: 3px 8px;
       line-height: 1;
     }
+  }
+
+  .objlist-wrapper-list {
+    padding: 6px 0;
   }
 
   .objlist-wrapper {

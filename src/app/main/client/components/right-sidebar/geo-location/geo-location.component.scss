@@ -66,21 +66,22 @@ tg-geo-location {
   margin: auto;
   min-width: 70%;
   padding: 12px 0;
+  height: 138px;
 }
 
 .tg-geolocal--databox {
   color: #9b8c7d;
   text-align: center;
-  font-size: 13px;
+  font-size: 11px;
   width: 100%;
   margin: auto;
 
   tg-icons {
     width: 24px;
     height: 24px;
+    margin: 4px auto;
     line-height: 24px;
-    vertical-align: middle;
-    display: inline-block;
+    display: block;
 
     .tg-icon {
       transform: scale(.8);
@@ -93,26 +94,23 @@ tg-geo-location {
 
 .tg-geolocal--region,
 .tg-geolocal--control {
-  margin-left: -16px;
-  font-size: 0.9em;
-  color: #aca49b;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 1em;
+  line-height: 1;
   width: 100%;
-  text-transform: uppercase;
 }
 
-.tg-geolocal--region:after {
+.tg-geolocal--regiontype:after {
   content: '';
   width: 40px;
   height: 0;
   border-top: 1px solid #4a4a4a;
-  margin: .5em auto;
+  margin: .5em auto 1em;
   display: block;
 }
 
-@media screen and (max-height: 800px) {
+@media screen and (max-height: 700px) {
 
+  
   .tg-geolocal--data {
     padding: 0;
   }
