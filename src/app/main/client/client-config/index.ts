@@ -20,11 +20,12 @@ export interface TGConfig {
   };
   widgetEquipInv: {
     visible: boolean,
-    size: number | string
+    size: number | string,
+    collapsed: boolean
   };
   widgetCombat: {
     visible: boolean,
-    size: 50
+    size: number
   };
   openEquipInvWidgets: boolean,
   characterPanel: boolean;
@@ -54,15 +55,16 @@ export const tgConfig: TGConfig = {
   },
   widgetRoom: {
     visible: true,
-    size: 50
+    size: undefined
   },
   widgetEquipInv: {
     visible: true,
-    size: 50,
+    size: 250,
+    collapsed: false
   },
   widgetCombat: {
     visible: false,
-    size: 50
+    size: undefined
   },
   openEquipInvWidgets: true,
   characterPanel: true,

@@ -7,6 +7,10 @@
   position: relative;
   background: url($imgPath + '/background/blood_dark.jpg') repeat top left !important;
 
+  &.collapsable {
+    cursor: pointer;
+  }
+
   .tg-box-tab-container {
     height: 100%;
   }
@@ -106,7 +110,6 @@
   }
 
 }
-
 
 .no-items-notice {
   padding: 12px 4px;

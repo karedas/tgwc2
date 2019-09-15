@@ -31,7 +31,6 @@ export class OutputComponent implements OnInit, OnDestroy {
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
   draggingSplitArea = false;
-  smartSizeArea: number | string;
   lastRoom$: Observable<any>;
   pauseScroll = false;
   output = [];
@@ -194,7 +193,7 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private scrollPanelToBottom() {
     setTimeout(() => {
-      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, {duration: 50});
+      this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, { duration: 50 });
     }, 0);
   }
 
@@ -210,7 +209,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   }
 
   goToPausePlaceHolder() {
-    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, { duration: 50});
+    this.scrollBar.scrollToElement(this.pausePlaceholder.nativeElement, { duration: 50 });
   }
 
   setOutputSplit() {
@@ -236,10 +235,12 @@ export class OutputComponent implements OnInit, OnDestroy {
         output: { extraArea: { size: [event.sizes[0], event.sizes[1]] } }
       });
     } else if (selector === 'widgets') {
-      this._configService.setConfig({
-        widgetRoom: { size: event.sizes[0]},
-        widgetEquipInv: { size: event.sizes[1] }
-      });
+      if (!this.tgConfig.widgetEquipInv.collapsed) {
+        this._configService.setConfig({
+          widgetRoom: { size: event.sizes[0] },
+          widgetEquipInv: { size: event.sizes[1] }
+        });
+      }
     }
 
     this.draggingSplitArea = false;

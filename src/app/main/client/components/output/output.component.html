@@ -67,11 +67,19 @@
 
         </as-split-area>
         <!-- ################ Extra Output Area ################ -->
-        <as-split-area [size]="tgConfig.output.extraArea.size[1]" [visible]="(tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) && !mediaObserver.isActive('xs')">
-          <as-split class="tg-output--splitter" direction="vertical" [gutterSize]="9"
+        <as-split-area 
+          [size]="tgConfig.output.extraArea.size[1]" 
+          [visible]="(tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) && !mediaObserver.isActive('xs')">
+          <as-split class="tg-output--splitter" 
+            [unit]="'pixel'" 
+            direction="vertical" 
+            [gutterSize]="9"
             (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, 'widgets')">
 
-            <as-split-area [size]="tgConfig.widgetRoom.size" [visible]="tgConfig.widgetRoom.visible" [order]="1">
+            <as-split-area              
+              [size]="tgConfig.widgetRoom.size ? tgConfig.widgetRoom.size : '*'" 
+              [visible]="tgConfig.widgetRoom.visible" 
+              [order]="1">
                 <tg-room *ngIf="tgConfig.widgetRoom.visible"
                   [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" 
                   [withExtra]="true"
@@ -82,7 +90,10 @@
 
             </as-split-area>
 
-            <as-split-area  [visible]="tgConfig.widgetEquipInv.visible" [size]="tgConfig.widgetEquipInv.size" [order]="2">
+            <as-split-area  [visible]="tgConfig.widgetEquipInv.visible" 
+              [size]="tgConfig.widgetEquipInv.collapsed ? 30 : tgConfig.widgetEquipInv.size" 
+              [lockSize]="tgConfig.widgetEquipInv.collapsed"
+              [order]="2">
 
               <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea"></tg-smart-equip-inventory>
 
