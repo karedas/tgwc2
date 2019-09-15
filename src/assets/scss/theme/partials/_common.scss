@@ -1,50 +1,15 @@
 @import 'abstract/variables';
+@import 'icons';
 
 
-
-.opacize-3{
+.opacize-3 {
   opacity: .3;
 }
-.opacize-5{
+
+.opacize-5 {
   opacity: .5;
 }
 
-.tg-icons, tg-icons {
-  margin: auto 2px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  min-width: 16px;
-  min-height: 16px;
-  box-sizing: content-box;
-  line-height: 16px;
-  position: relative;
-
-  .tg-icon {
-    background-image: url($imgPath + '/tiles.png');
-    background-repeat: no-repeat;
-    transform: scale(.5);
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    left: -8px;
-    top: -8px;
-    margin: auto;
-  }
-  
-  &.squared {
-    @include sprite($base-square-sprite);
-    width: 26px!important;
-    display: flex;
-  
-    .tg-icon {
-      top: -4px;
-      left: -4px;
-    }
-}
-
-
-}
 
 .tg-error {
   border: 1px solid #dc3545;
@@ -82,7 +47,7 @@
 }
 
 .tg-shadow-inout {
-  box-shadow: 0px -2px 9px 2px black inset, 0px 5px 9px 2px black; 
+  box-shadow: 0px -2px 9px 2px black inset, 0px 5px 9px 2px black;
 }
 
 
@@ -96,7 +61,7 @@
 
 .clear {
   width: 100%;
-  clear:both;
+  clear: both;
 }
 
 .ellipsed {

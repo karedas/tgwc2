@@ -139,7 +139,7 @@ tg-text {
     }
 
     span {
-      background-color: #1e180f;
+      background-color: #0c0c0c;
       border: 1px solid #433b3a;
       border-top: 0;
       border-left: 0;
@@ -328,7 +328,6 @@ tg-text {
       color: #ffe2ae;
       font-family: $modern-antiqua;
       padding: 0;
-      border-bottom: 1px solid #433b3a;
       box-shadow: inset 0px -5px 11px 0px black;
       position: relative;
       background: url(/assets/images/background/blood_dark.jpg) repeat top left !important;
@@ -352,17 +351,29 @@ tg-text {
 
     .tg-objperson--descdetail {
       display: block;
-      padding: 0 0 0.5em 0;
+      padding: 0 12px 6px 4px;
       line-height: 1.4;
     }
 
     .tg-room--image {
+      position: relative;
       max-width: 35%;
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: 4px .5em 0 2px;
+      margin: 3px 6px 3px 3px;
       width: 190px;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 0 0 20px 8px black;
+      }
       
       img {
         float: left;

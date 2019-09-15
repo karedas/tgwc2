@@ -158,6 +158,9 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
+    if(event.key ==='Enter') {
+      this.onEnter(event, this.ic.nativeElement.value);
+    }
     if (event.key === '!' && (this.ic.nativeElement.value).length === 0) {
       const l = this.historyService.cmd_history.length;
       if (l > 0) {

@@ -82,7 +82,7 @@ tg-navbar {
   .mat-icon-button,
   .mat-button {
     mat-icon {
-      color: $base-text-color-light;
+      color: $base-text-color;
       width: auto;
       height: auto;
     }
@@ -104,7 +104,7 @@ tg-navbar {
     }
         
     &.active mat-icon, &:hover mat-icon {
-      color: $base-text-color-light;
+      color: $base-text-color;
     }
   }
 
@@ -215,7 +215,7 @@ tg-navbar {
   display: inline-block;
   font-size: 11px;
   text-transform: uppercase;
-  margin: auto 0;
+  margin: auto auto auto 0;
 
   span {
     line-height: 1;
@@ -231,7 +231,7 @@ tg-navbar {
   .time-image {
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgb(146, 146, 146);
     border-top: 0;
     width: 100px;
     height: 18px;
@@ -239,8 +239,8 @@ tg-navbar {
     border-radius: 5px;
     vertical-align: middle;
     background-size: contain;
-    background: url(/assets/images/sky/alba.jpg); // Is a Test
-    background-position: top left;
+    background: url(/assets/images/sky/mezzogiorno.jpg); // Is a Test
+    background-position: bottom center;
     box-shadow: inset 0 0 5px 0px black;
     margin-top: -1px;
     cursor: pointer;
@@ -254,7 +254,7 @@ tg-navbar {
     vertical-align: middle;
     margin-right: 5px;
     position: absolute;
-    left: 5%;
+    left: 45%;
     top: 2px;
 
     &:before {
