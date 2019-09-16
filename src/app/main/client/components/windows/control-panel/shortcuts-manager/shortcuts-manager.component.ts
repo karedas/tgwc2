@@ -43,7 +43,7 @@ export class ShortcutsManagerComponent implements OnInit {
       scCmd: new FormControl(''),
     });
 
-    this._configService.getConfig()
+    this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts; });
   }

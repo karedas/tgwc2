@@ -24,7 +24,6 @@ export class DataParser {
   // private shortcuts_map = {};
   private cmd_prefix = '';
   private _updateNeeded: Subject<any>;
-  isDialog = false;
 
   constructor(
     private store: Store<TGState>,
@@ -33,7 +32,7 @@ export class DataParser {
   ) {
     this._updateNeeded = new Subject<any>();
     // Subscribe to the shortcuts in Config
-    this._configService.getConfig()
+    this._configService.config
       .pipe(map((config: TGConfig) => config.shortcuts))
       .subscribe((shortcuts) => { this.shortcuts = shortcuts; }
       );
@@ -168,9 +167,6 @@ export class DataParser {
     }
     if (this.dispatcher.isgod) { this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher.isgod } })); }
     if (this.dispatcher.update) { this.setUpdateNeeded(this.dispatcher.update); }
-
-    this.isDialog = false;
-
   }
 
   private substShort(input: any): any {
@@ -216,9 +212,8 @@ export class DataParser {
     return data.replace(/&[BRGYLMCWbrgylmcw-]/gm, '');
   }
 
-  parseInput(input: any, isInDialog: boolean = this.isDialog): any {
+  parseInput(input: any): any {
 
-    this.isDialog = isInDialog;
     /* Split input separated by ; */
     const inputs = input.split(/\s*;\s*/);
     let res = [];
@@ -378,13 +373,13 @@ export class DataParser {
 
   private inventory(inv: any): string {
     const inv_parse = JSON.parse(inv.slice(5, -1));
-    this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse, dialog: this.isDialog }));
+    this.store.dispatch(DataActions.inventoryAction({ payload: inv_parse }));
     return '';
   }
 
   private equipment(eq: any): string {
     const eq_parse = JSON.parse(eq.slice(7, -1).replace(/\n/gm, '<br>'));
-    this.store.dispatch(DataActions.equipAction({ payload: eq_parse, dialog: this.isDialog }));
+    this.store.dispatch(DataActions.equipAction({ payload: eq_parse }));
     return '';
   }
 
@@ -411,7 +406,7 @@ export class DataParser {
 
   private skillList(skinfo: any): string {
     const skinfo_parse = JSON.parse(skinfo.slice(7, -1));
-    this.store.dispatch(DataActions.skillsAction({ payload: skinfo_parse, dialog: this.isDialog}));
+    this.store.dispatch(DataActions.skillsAction({ payload: skinfo_parse }));
     return '';
   }
 

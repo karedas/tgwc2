@@ -8,18 +8,18 @@
         <div fxFlex="1 0 auto">
           <ng-container *ngIf="!collapsed; else headerCollapsed">
             <div 
-              [ngClass]="{'active': tab === 1}" 
+              [ngClass]="{'active': tab === 'equip'}" 
               fxFlex="0 0 auto" fxFlexAlign="center"
               class="tg-box-tab-container">
               <button mat-button class="tg-box-title"
-                (click)="onTabClick('equipaggiamento', 1, $event)">Equipaggiamento</button>
+                (click)="onTabClick('equipaggiamento', 'equip', $event)">Equipaggiamento</button>
             </div>
             <div 
-              [ngClass]="{'active': tab === 2}" 
+              [ngClass]="{'active': tab === 'inventory'}" 
               fxFlex="0 0 auto" fxFlexAlign="center"
               class="tg-box-tab-container">
               <button mat-button class="tg-box-title"
-                (click)="onTabClick('inventario', 2, $event)">Inventario</button>
+                (click)="onTabClick('inventario', 'inventory', $event)">Inventario</button>
             </div>
           </ng-container>
         </div>
@@ -41,8 +41,8 @@
         <ng-scrollbar class="scrollbar" [ngClass]="{'disabled': draggingSplitArea}" [disabled]="draggingSplitArea"
           fxFlex="1 1 100%" fxFlexFill>
 
-            <tg-hero-equipment fxLayout="column" *ngIf="tab === 1"></tg-hero-equipment>
-            <tg-hero-inventory fxLayout="column" *ngIf="tab === 2"></tg-hero-inventory>
+            <tg-hero-equipment fxLayout="column" *ngIf="tab === 'equip'"></tg-hero-equipment>
+            <tg-hero-inventory fxLayout="column" *ngIf="tab === 'inventory'"></tg-hero-inventory>
 
         </ng-scrollbar>
       </div>

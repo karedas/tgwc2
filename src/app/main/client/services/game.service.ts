@@ -7,7 +7,6 @@ import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { equipPositionByName, pos_to_order, font_size_options } from 'src/app/main/client/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
-import { MatDialog } from '@angular/material/dialog';
 
 @Injectable()
 
@@ -48,7 +47,6 @@ export class GameService {
         private dataParserService: DataParser,
         private historyService: HistoryService,
         private _configService: ConfigService,
-        public dialog: MatDialog,
         rendererFactory: RendererFactory2,
     ) {
         this.serverStat = new BehaviorSubject<any>(null);
@@ -159,8 +157,8 @@ export class GameService {
     * @param val command value
     * @param isStored true or false if u need to watch history length)
     */
-    public processCommands(val: string, isStored: boolean = true, isDialog?: boolean) {
-        const cmds = this.dataParserService.parseInput(val, isDialog);
+    public processCommands(val: string, isStored: boolean = true) {
+        const cmds = this.dataParserService.parseInput(val);
 
         if (cmds) {
             /* check if cmd will be pushed in the history array */

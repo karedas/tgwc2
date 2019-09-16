@@ -77,7 +77,7 @@
             (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, 'widgets')">
 
             <as-split-area              
-              [size]="tgConfig.widgetRoom.size ? tgConfig.widgetRoom.size : '*'" 
+              [size]="tgConfig.widgetRoom.size >= 0 ? tgConfig.widgetRoom.size : '*'" 
               [visible]="tgConfig.widgetRoom.visible" 
               [order]="1">
                 <tg-room *ngIf="tgConfig.widgetRoom.visible"

@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { DataEvenType, heroAction } from '../actions/data.action';
 import { switchMap, tap, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Action } from '@ngrx/store';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
 import * as DataActions from '../actions/data.action';
 import { InputService } from '../../components/input/input.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 export interface PayloadActionData {
   type: string;
   payload: any;
   dialog?: any;
 }
-
 
 @Injectable()
 export class DataEffects {
@@ -23,7 +21,7 @@ export class DataEffects {
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EDITOR),
-      tap((data) => {
+      tap(() => {
         this.dialogV2Service.openEditor();
       })
     ),
@@ -48,9 +46,10 @@ export class DataEffects {
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EQUIP),
       switchMap((res) => {
-        if (res.dialog) {
+        const config = this.configService.getConfig();
+        if (!config.widgetEquipInv.visible) {
           this.dialogV2Service.openCharacterSheet('equip');
-        }
+        } 
         return [
           heroAction({ payload: { equipment: res.payload } })
         ];
@@ -62,9 +61,10 @@ export class DataEffects {
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.INVENTORY),
       switchMap((res) => {
-        if (res.dialog) {
+        const config = this.configService.getConfig();
+        if (!config.widgetEquipInv.visible) {
           this.dialogV2Service.openCharacterSheet('inventory');
-        }
+        } 
         return [
           heroAction({ payload: { inventory: res.payload } })
         ];
@@ -148,7 +148,7 @@ export class DataEffects {
       switchMap((res) => {
         return [DataActions.heroAction(res.payload)];
       }),
-      tap(() => this.game.setStatusInline(true))
+      tap(() => this.gameService.setStatusInline(true))
     ),
   );
 
@@ -156,7 +156,7 @@ export class DataEffects {
     this.actions$.pipe(
       ofType(DataEvenType.REFRESH),
       tap(() => {
-        this.game.processCommands('info');
+        this.gameService.processCommands('info');
       })
     ),
     { dispatch: false }
@@ -171,7 +171,8 @@ export class DataEffects {
   constructor(
     private actions$: Actions,
     private inputService: InputService,
-    private game: GameService,
-    private dialogV2Service: DialogV2Service
+    private gameService: GameService,
+    private dialogV2Service: DialogV2Service,
+    private configService: ConfigService
   ) { }
 }

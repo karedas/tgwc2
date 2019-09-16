@@ -49,58 +49,58 @@
     </mat-menu>
   </div>
 
-  <div class="m-right" fxLayout="row" fxFlex="1 0 auto">
+  <div fxLayoutAlign.lt-sm="flex-end" fxLayoutAlign="space-between" fxLayout="row" fxFlex="1 0 auto">
 
-    <div class="tg-game-time menu-block" *ngIf="gameData$ | async as time" fxHide fxShow.gt-sm>
-      <span class="tg-yellow" >
-        Giorno <b class="tg-llt-white">{{time.day}}</b>
-        Mese <b class="tg-llt-white">{{time.month}}</b>
-        Anno <b class="tg-llt-white">{{time.year}}</b>
-      </span>
-      <div class="time-image" tooltip="E' {{time.datestr}}" placement="bottom" (click)="onItemClick('data')">
-        <div class="time-icon"></div>
+    <div class="m-left" fxLayout="row">
+      <div class="tg-game-time menu-block" *ngIf="gameData$ | async as time" fxHide fxShow.gt-xs>
+        <span class="tg-yellow" fxHide fxShow.gt-sm>
+          Giorno <b class="tg-llt-white">{{time.day}}</b>
+          Mese <b class="tg-llt-white">{{time.month}}</b>
+          Anno <b class="tg-llt-white">{{time.year}}</b>
+        </span>
+        <div class="time-image" tooltip="E' {{time.datestr}}" placement="bottom" (click)="onItemClick('data')">
+          <div class="time-icon"></div>
+        </div>
       </div>
-    </div>
-    
-    <!-- Split & Widget Manager -->
-    <div fxHide fxShow.gt-xs fxLayout fxLayoutAlign="center center">
-      <button mat-icon-button [matMenuTriggerFor]="widgetsMenu" #widgetsTrigger="matMenuTrigger"
-        (mouseenter)="buttonEnter(widgetsTrigger)" (mouseleave)="buttonLeave(widgetsTrigger, button)">
-        <mat-icon >vertical_split</mat-icon>
-      </button>
-      <mat-menu #widgetsMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4"> 
-        <mat-selection-list dense  (mouseleave)="menuLeave(widgetsTrigger, button)"  (mouseenter)="menuenter()">
+      <!-- Split & Widget Manager -->
+      <div fxHide fxShow.gt-xs fxLayout fxLayoutAlign="center center">
+        <button mat-icon-button [matMenuTriggerFor]="widgetsMenu" #widgetsTrigger="matMenuTrigger"
+          (mouseenter)="buttonEnter(widgetsTrigger)" (mouseleave)="buttonLeave(widgetsTrigger, button)">
+          <mat-icon>vertical_split</mat-icon>
+        </button>
+        <mat-menu #widgetsMenu="matMenu" [overlapTrigger]="false" hasBackdrop="false" class="mat-elevation-z4">
+          <mat-selection-list dense (mouseleave)="menuLeave(widgetsTrigger, button)" (mouseenter)="menuenter()">
             <h4 matSubheader>Widgets</h4>
-            <mat-list-option  (click)="$event.stopPropagation(); onItemClick('widgetRoom', $event)" role="'menuitemcheckbox'" [selected]="tgConfig.widgetRoom.visible">Dettagli Stanza</mat-list-option>
-            <mat-list-option  (click)="$event.stopPropagation(); onItemClick('widgetEquipInv', $event)" role="'menuitemcheckbox'" [selected]="tgConfig.widgetEquipInv.visible">Equip/Inventario</mat-list-option>
-            <mat-list-option  (click)="$event.stopPropagation(); onItemClick(null, $event)" role="'menuitemcheckbox'" [selected]="tgConfig.widgetCombat.visible" [disabled]="true">Combattimento</mat-list-option>
+            <mat-list-option (click)="$event.stopPropagation(); onItemClick('widgetRoom', $event)"
+              role="'menuitemcheckbox'" [selected]="tgConfig.widgetRoom.visible">Dettagli Stanza</mat-list-option>
+            <mat-list-option (click)="$event.stopPropagation(); onItemClick('widgetEquipInv', $event)"
+              role="'menuitemcheckbox'" [selected]="tgConfig.widgetEquipInv.visible">Equip/Inventario</mat-list-option>
+            <mat-list-option (click)="$event.stopPropagation(); onItemClick(null, $event)" role="'menuitemcheckbox'"
+              [selected]="tgConfig.widgetCombat.visible" [disabled]="true">Combattimento</mat-list-option>
           </mat-selection-list>
-      </mat-menu>
+        </mat-menu>
+      </div>
+      <button mat-icon-button (click)="onItemClick('shortcuts')">
+        <mat-icon color="primary" tooltip="Scorciatoie" show-delay="100" placement="bottom">
+          vpn_key
+        </mat-icon>
+      </button>
     </div>
 
-    <button mat-icon-button (click)="onItemClick('shortcuts')">
-      <mat-icon 
-        color="primary"  tooltip="Scorciatoie"
-        show-delay="100" placement="bottom">
-        vpn_key
-      </mat-icon>
-    </button>
-
-    <button mat-icon-button (click)="onItemClick('fontsize')">
-      <mat-icon 
-        color="primary" tooltip="Aumenta/Diminuisci dimensioni testo" show-delay="100"
-        placement="bottom">
-        format_size
-      </mat-icon>
-    </button>
-
-    <button [ngClass]="{'active': tgConfig.audio.enable}" mat-icon-button (click)="onItemClick('audio')"
-      tooltip="Attiva/Disattiva audio" show-delay="100"
-        placement="bottom">
-      <mat-icon color="primary" >
-        {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
-      </mat-icon>
-    </button>
-    <span [attr.title]="gitVersion" class="tg-wcversion" fxFlex="0 0 auto" fxHide fxShow.gt-sm>v2</span>
+    <div class="m-right">
+      <button mat-icon-button (click)="onItemClick('fontsize')">
+        <mat-icon color="primary" tooltip="Aumenta/Diminuisci dimensioni testo" show-delay="100" placement="bottom">
+          format_size
+        </mat-icon>
+      </button>
+      <button [ngClass]="{'active': tgConfig.audio.enable}" mat-icon-button (click)="onItemClick('audio')"
+        tooltip="Attiva/Disattiva audio" show-delay="100" placement="bottom">
+        <mat-icon color="primary">
+          {{tgConfig.audio.enable ? 'volume_up' : 'volume_off'}}
+        </mat-icon>
+      </button>
+      <span [attr.title]="gitVersion" class="tg-wcversion" fxFlex="0 0 auto" fxHide fxShow.gt-xs>v2</span>
+    </div>
   </div>
+
 </div>

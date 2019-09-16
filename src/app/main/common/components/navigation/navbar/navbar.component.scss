@@ -75,21 +75,17 @@ tg-navbar {
     margin-right: 0 !important;
   }
 
-  .m-right {
-    margin-left: auto;
-  }
-
   .mat-icon-button,
   .mat-button {
     mat-icon {
-      color: $base-text-color;
+      color: $tg-brown;
       width: auto;
       height: auto;
     }
   }
 
   .mat-icon.mat-primary{
-    color: #676767;
+    color: rgb(109, 109, 109);
     vertical-align: middle;
   }
 
@@ -102,9 +98,9 @@ tg-navbar {
     mat-icon {
       font-size: 18px!important;
     }
-        
-    &.active mat-icon, &:hover mat-icon {
-      color: $base-text-color;
+    
+    &:hover mat-icon, &.active mat-icon {
+      color: $tg-brown;
     }
   }
 

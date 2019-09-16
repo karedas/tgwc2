@@ -30,7 +30,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._configService.getConfig()
+    this._configService.config
       .pipe(
         takeUntil(this._unsubscribeAll),
         map((config: TGConfig) => config.shortcuts))

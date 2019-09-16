@@ -42,16 +42,16 @@ export class CharacterSheetComponent  {
 
     switch (tab) {
       case 'info':
-        this.game.processCommands('info', false, true);
+        this.game.processCommands('info', false);
         break;
       case 'equip':
-        this.game.processCommands('equip', false, true);
+        this.game.processCommands('equip', false);
         break;
       case 'inventory':
-        this.game.processCommands('inventario', false, true);
+        this.game.processCommands('inventario', false);
         break;
       case 'skills':
-        this.game.processCommands('abilita', false, true);
+        this.game.processCommands('abilita', false);
         break;
     }
   }

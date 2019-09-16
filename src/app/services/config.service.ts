@@ -1,6 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { cloneDeep, mergeWith, isEmpty, isArray, merge } from 'lodash';
+import { TGConfig } from '../main/client/client-config';
 
 export const TG_CONFIG = new InjectionToken('tgCustomConfig');
 
@@ -103,8 +104,8 @@ export class ConfigService {
         localStorage.setItem('config', JSON.stringify(config));
     }
 
-    getConfig(): Observable<any> {
-        return this._configSubject.asObservable();
+    getConfig(): TGConfig {
+        return this._configSubject.getValue();
     }
 
     resetToDefaults(): void {

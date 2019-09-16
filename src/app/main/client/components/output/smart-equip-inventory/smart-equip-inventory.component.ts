@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { GameService } from '../../../services/game.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../../client-config';
-
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'tg-smart-equip-inventory',
   templateUrl: './smart-equip-inventory.component.html',
@@ -12,7 +12,7 @@ import { TGConfig } from '../../../client-config';
 export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   @Input() draggingSplitArea: boolean;
 
-  tab = 1;
+  tab: string;
   collapsed = false;
 
   private _unsubscribeAll: Subject<any>;
@@ -26,18 +26,34 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._configService.config
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: TGConfig) => {
+      .pipe(
+        takeUntil(this._unsubscribeAll), 
+        map((config: TGConfig) => { return config.widgetEquipInv })
+      )
+      .subscribe((config: any) => {
         setTimeout(() => {
-          this.collapsed = config.widgetEquipInv.collapsed;
+          this.tab = config.selected;
+          this.collapsed = config.collapsed;
         });
       });
   }
 
-  onTabClick(cmd: string, tab: number, event: Event) {
+  setupEquipInventory(c: any) {
+    // Simply close if it is equal to the open tab
+    if (this.tab === c.selected) {
+      console.log(' equal to ' + this.tab)
+      this.collapsed = !c.collapsed;
+    } else {
+      // Select tab and show the Content.
+      this.tab = c.selected;
+      console.log('select ' + this.tab);
+    }
+  }
+
+  onTabClick(cmd: string, tab: string, event: Event) {
     event.stopImmediatePropagation();
     this.tab = tab;
-    this.gameService.processCommands('@' + cmd, false, false);
+    this.gameService.processCommands('@' + cmd, false);
   }
 
   onCollapse() {
@@ -47,6 +63,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       widgetEquipInv: { collapsed: this.collapsed }
     });
   }
+
 
 
   ngOnDestroy() {
