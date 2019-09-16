@@ -203,6 +203,7 @@ export class OutputComponent implements OnInit, OnDestroy {
     if (this.pauseScroll) {
       this.setContent('pause', []);
       this.latestLineBeforePause = this.output.length;
+      this.scrollPanelToBottom();
     } else {
       this.output.splice(this.latestLineBeforePause - 1, 1);
     }

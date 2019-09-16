@@ -49,9 +49,12 @@
     </mat-menu>
   </div>
 
-  <div fxLayoutAlign.lt-sm="flex-end" fxLayoutAlign="space-between" fxLayout="row" fxFlex="1 0 auto">
+  <div fxLayoutAlign="flex-end"fxLayout="row" fxFlex="1 0 auto">
 
-    <div class="m-left" fxLayout="row">
+    <!-- <div class="m-left" fxLayout="row">
+    </div>
+     -->
+    <div class="m-right">
       <div class="tg-game-time menu-block" *ngIf="gameData$ | async as time" fxHide fxShow.gt-xs>
         <span class="tg-yellow" fxHide fxShow.gt-sm>
           Giorno <b class="tg-llt-white">{{time.day}}</b>
@@ -75,8 +78,8 @@
               role="'menuitemcheckbox'" [selected]="tgConfig.widgetRoom.visible">Dettagli Stanza</mat-list-option>
             <mat-list-option (click)="$event.stopPropagation(); onItemClick('widgetEquipInv', $event)"
               role="'menuitemcheckbox'" [selected]="tgConfig.widgetEquipInv.visible">Equip/Inventario</mat-list-option>
-            <mat-list-option (click)="$event.stopPropagation(); onItemClick(null, $event)" role="'menuitemcheckbox'"
-              [selected]="tgConfig.widgetCombat.visible" [disabled]="true">Combattimento</mat-list-option>
+            <!-- <mat-list-option (click)="$event.stopPropagation(); onItemClick(null, $event)" role="'menuitemcheckbox'"
+              [selected]="tgConfig.widgetCombat.visible" [disabled]="true">Combattimento</mat-list-option> -->
           </mat-selection-list>
         </mat-menu>
       </div>
@@ -85,9 +88,6 @@
           vpn_key
         </mat-icon>
       </button>
-    </div>
-
-    <div class="m-right">
       <button mat-icon-button (click)="onItemClick('fontsize')">
         <mat-icon color="primary" tooltip="Aumenta/Diminuisci dimensioni testo" show-delay="100" placement="bottom">
           format_size

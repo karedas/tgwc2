@@ -50,8 +50,9 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   }
 
   changeFontSize(event: any) {
+    console.log('event', event.value);
     this.oldFontSize = this.tgConfig.fontSize;
-    this.gameService.setOutputSize(event.value, this.oldFontSize);
+    this.gameService.setOutputSize(event.value - 1 );
   }
 
   onOptionChange(event, value: any) {

@@ -12,6 +12,7 @@ import { InputService } from '../../components/input/input.service';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
+import { GameService } from '../../services/game.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class DialogV2Service {
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
     private inputService: InputService,
+    private gameService: GameService,
     public overlay: Overlay
   ) {
     this.render = rendererFactory.createRenderer(null, null);
@@ -165,10 +167,14 @@ export class DialogV2Service {
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
-      dialogRef.afterOpened().subscribe(() => {
-        // Keep focus on inputbar
-        this.inputService.focus();
-      });
+      dialogRef
+        .afterOpened().subscribe(() => {
+          // Keep focus on inputbar
+          this.inputService.focus();
+        })
+
+      dialogRef.afterClosed().subscribe(() => {
+      })
 
 
       return dialogRef;

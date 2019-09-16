@@ -32,22 +32,13 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
       )
       .subscribe((config: any) => {
         setTimeout(() => {
-          this.tab = config.selected;
-          this.collapsed = config.collapsed;
+          this.setupEquipInventory(config);
         });
       });
   }
 
-  setupEquipInventory(c: any) {
-    // Simply close if it is equal to the open tab
-    if (this.tab === c.selected) {
-      console.log(' equal to ' + this.tab)
-      this.collapsed = !c.collapsed;
-    } else {
-      // Select tab and show the Content.
+  private setupEquipInventory(c: any) {
       this.tab = c.selected;
-      console.log('select ' + this.tab);
-    }
   }
 
   onTabClick(cmd: string, tab: string, event: Event) {

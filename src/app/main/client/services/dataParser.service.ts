@@ -21,9 +21,11 @@ export class DataParser {
   private dispatcher: any = {};
   private netData = '';
   private shortcuts = [];
-  // private shortcuts_map = {};
   private cmd_prefix = '';
+
+  private inDialog: boolean;
   private _updateNeeded: Subject<any>;
+
 
   constructor(
     private store: Store<TGState>,

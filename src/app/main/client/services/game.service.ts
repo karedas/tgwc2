@@ -23,11 +23,11 @@ export class GameService {
     public mouseIsOnMap = false;
     public showExtraByViewport: boolean = undefined;
     public client_update = {
+        oldFontSizeClass: '',
         now: 0,
         mrnContainer: undefined,
         inContainer: false,
         invOpen: false,
-        equipOpen: false,
         inventory: {
             version: -1,
             needed: false
@@ -72,7 +72,7 @@ export class GameService {
         this._configService.config
             .subscribe((config: TGConfig) => {
                 this.setZenMode(config.zen);
-                this.setOutputSize(config.fontSize);
+                this.setOutputSize(config.fontSize, true);
                 this._tgConfig = config;
             });
     }
@@ -250,35 +250,35 @@ export class GameService {
     }
 
     /** Font Size Adjustement */
-    public setOutputSize(size?: number, oldSize?: number) {
-
+    public setOutputSize(size?: number, initSetup?: boolean) {
         const prefix = 'size-';
         let new_class: string;
         let old_class: string;
 
-        if (size && !oldSize) {
-            this.render.addClass(document.body, prefix + font_size_options[size].class);
+        // Initial Font-size set
+        if (size && initSetup) {
+            new_class = prefix + font_size_options[size].class;
+            this.render.addClass(document.body, new_class);
             return;
         }
 
-        if (oldSize) {
-            old_class = prefix + font_size_options[oldSize].class;
-        }
-        if (!size && this._tgConfig) {
-            size = (this._tgConfig.fontSize + 1) % font_size_options.length;
+        // Rolling on Font-size
+        if (this._tgConfig) {
+            if(!size) {
+                size = (this._tgConfig.fontSize + 1) % font_size_options.length;
+            }
+
             old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
             new_class = prefix + font_size_options[size].class;
-        } else {
-            new_class = prefix + font_size_options[size].class;
-        }
-
-        if (old_class) {
-
+            console.log(old_class, new_class);
             this.render.removeClass(document.body, old_class);
             this.render.addClass(document.body, new_class);
         }
 
+        console.log('SIZE: ', size)
         this._configService.setConfig({ fontSize: size });
+
+        
     }
 
 

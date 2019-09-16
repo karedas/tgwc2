@@ -417,3 +417,28 @@ tg-text {
     margin: auto 6px;
   }
 }
+
+.in-pause::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation: pulsing;
+  animation-iteration-count: infinite;
+  animation-duration: 1s
+}
+
+
+@keyframes pulsing {
+  0% {
+    border: 2px solid rgb(0, 0, 0);
+  }
+  50% {
+    border: 2px solid rgb(255, 13, 0);
+  }
+  100% {
+    border: 2px solid rgb(0, 0, 0);
+  }
+}

@@ -28,7 +28,6 @@ export interface TGConfig {
     visible: boolean,
     size: number
   };
-  openEquipInvWidgets: boolean,
   characterPanel: boolean;
   characterPanelTopPosition: number;
   zen: boolean;
@@ -68,7 +67,6 @@ export const tgConfig: TGConfig = {
     visible: false,
     size: -1
   },
-  openEquipInvWidgets: true,
   characterPanel: true,
   characterPanelTopPosition: 1,
   zen: false,

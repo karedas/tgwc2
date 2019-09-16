@@ -36,12 +36,6 @@
           </div>
 
           <div class="tg-control-panel--option">
-            <mat-checkbox [(ngModel)]="tgConfig.openEquipInvWidgets"
-              (change)="onOptionChange($event, {openEquipInvWidgets: $event.checked })">Apri Equipaggiamento e
-              Inventario in finestra ( su comando: equip / inventario)</mat-checkbox>
-          </div>
-
-          <div class="tg-control-panel--option">
             <mat-checkbox [(ngModel)]="tgConfig.characterPanel"
               (change)="onOptionChange($event, { characterPanel: $event.checked })" [disabled]="tgConfig.zen">Mostra
               pannello personaggio</mat-checkbox>

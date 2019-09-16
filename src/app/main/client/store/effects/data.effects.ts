@@ -32,9 +32,7 @@ export class DataEffects {
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.SKILLS),
       switchMap((res) => {
-        if (res.dialog) {
-          this.dialogV2Service.openCharacterSheet('skills');
-        }
+        this.dialogV2Service.openCharacterSheet('skills');
         return [
           heroAction({ payload: { skills: res.payload } })
         ];

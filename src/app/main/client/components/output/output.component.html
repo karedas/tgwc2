@@ -8,7 +8,10 @@
         (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
 
         <!--  ################ Main Output Area ################ -->
-        <as-split-area [size]="tgConfig.output.extraArea.size[0]" style="position:relative">
+        <as-split-area 
+          [size]="tgConfig.output.extraArea.size[0]"
+          [ngClass]="{'in-pause': pauseScroll}"
+          style="position:relative">
           
           <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
             Autoscroll disattivato 
