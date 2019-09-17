@@ -3,7 +3,7 @@ export interface ClientState  {
     inGame: boolean;
     isgod: number;
     invLevel: number;
-    track: string;
+    audio: string;
 }
 
 export const initialState: ClientState = {
@@ -11,5 +11,5 @@ export const initialState: ClientState = {
     inGame: false,
     isgod: undefined,
     invLevel: 0,
-    track: undefined,
+    audio: undefined,
 };

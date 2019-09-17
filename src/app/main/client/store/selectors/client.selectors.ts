@@ -15,7 +15,7 @@ function fetchInvisibilityLevel(state: ClientState) {
 }
 
 function fetchAudioTrack(state: ClientState) {
-  return state.track;
+  return state.audio;
 }
 
 function fetchInGame(state: ClientState) {

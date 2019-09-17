@@ -41,17 +41,19 @@ export class AudioService {
   }
 
   setAudio(src: string): void {
-    const mp3 = '.mp3';
-    const mid = '.mid';
-    const wav = '.wav';
-
-    /** Music Channel */
-    if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
-      this.setMusic(src);
-    } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
-      this.setMusic(src.replace(mid, mp3));
-    } else {
-      this.setSound(src.replace(wav, mp3));
+    if(!this._enable) {
+      const mp3 = '.mp3';
+      const mid = '.mid';
+      const wav = '.wav';
+  
+      /** Music Channel */
+      if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
+        this.setMusic(src);
+      } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
+        this.setMusic(src.replace(mid, mp3));
+      } else {
+        this.setSound(src.replace(wav, mp3));
+      }
     }
   }
 

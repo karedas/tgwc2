@@ -25,6 +25,7 @@ import { SidenavComponent } from './common/components/navigation/sidenav/sidenav
 import { LogService } from './client/services/log.service';
 import { LoginClientService } from './authentication/services/login-client.service';
 import { DataParser } from './client/services/dataParser.service';
+import { AudioService } from './client/components/audio/audio.service';
 
 const routes: Routes = [
   {
@@ -72,7 +73,7 @@ const routes: Routes = [
     CookieService,
     SplashScreenService,
     LogService,
-
+    AudioService,
     DataParser,
     GameService,
   ]

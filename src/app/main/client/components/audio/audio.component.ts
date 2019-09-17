@@ -10,7 +10,7 @@ import { TGConfig } from '../../client-config';
 
 @Component({
   selector: 'tg-audio',
-  template: ''
+  template: '',
 })
 export class AudioComponent implements OnInit, OnDestroy {
 
@@ -40,8 +40,9 @@ export class AudioComponent implements OnInit, OnDestroy {
       .pipe(
         filter(state => !!state ),
         takeUntil(this._unsubscribeAll))
-      .subscribe(track =>
-        this.audioService.setAudio(track)
+      .subscribe(audio => {
+        this.audioService.setAudio(audio)
+      }
       );
   }
 

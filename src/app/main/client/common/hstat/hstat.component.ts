@@ -17,9 +17,7 @@ export class HstatComponent implements OnChanges {
   }
 
   setHsStatBgPos() {
-    const pos = -13 * Math.floor(12 * (100 - this.condprc) / 100);
+    const pos = -13 * Math.floor(11 * (100 - this.condprc) / 100);
     this.bgPos = `0 ${pos}px`;
   }
-
-
 }
