@@ -229,6 +229,7 @@ export class DataParser {
   }
 
   setUpdateNeeded(ud: any) {
+    console.log(ud);
     this._updateNeeded.next(ud);
   }
 

@@ -58,12 +58,11 @@ export const reducer = createReducer(
   on(DataAction.objectAndPersonAction, (state, { payload }) => {
     return Object.assign({}, state, { objPers: payload });
   }),
-  on(DataAction.skillsAction, (state, { payload, dialog }) => {
+  on(DataAction.skillsAction, (state, { payload }) => {
     return Object.assign({}, state, {
       hero: {
         ...state.hero,
         skills: payload,
-        dialog
       }
     });
   }),
@@ -75,12 +74,11 @@ export const reducer = createReducer(
       },
     });
   }),
-  on(DataAction.equipAction, (state, { payload, dialog }) => {
+  on(DataAction.equipAction, (state, { payload }) => {
     return Object.assign({}, state, {
       hero: {
         ...state.hero,
         equipment: payload,
-        dialog
       }
     });
   })
