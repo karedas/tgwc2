@@ -14,7 +14,6 @@ import { TGState } from '../../../store';
   styleUrls: ['./character-sheet.component.scss'],
 })
 export class CharacterSheetComponent  {
-
   dialogID = 'charactersheet';
   closed = true;
   imagepath: string = environment.media_address;
@@ -39,6 +38,8 @@ export class CharacterSheetComponent  {
 
     event.stopPropagation();
     event.stopImmediatePropagation();
+
+    this.data.tab = tab;
 
     switch (tab) {
       case 'info':

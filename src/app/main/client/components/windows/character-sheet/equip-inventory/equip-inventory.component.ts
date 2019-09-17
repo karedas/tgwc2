@@ -60,12 +60,12 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
 
     if (what === 'equip') {
       this.subTab = what;
-      this.gameService.processCommands('equip');
+      this.gameService.processCommands('equip', false);
 
     }
     if (what === 'inventory') {
       this.subTab = what;
-      this.gameService.processCommands('inv');
+      this.gameService.processCommands('inv', false);
     }
   }
 

@@ -43,17 +43,6 @@
                   <i></i>
                 </div>
               </div>
-
-              <!-- Money -->
-
-              <!-- <div class="infostatus-block tg-yellow" fxLayout [tooltip]="moneyTooltip" show-delay="500"
-                placement="top" content-type="template" fxLayout>
-                I tuoi averi
-              </div>
-              <ng-template #moneyTooltip>
-                I tuoi averi: <b class='tg-yellow'>{{money}} {{moneyValue}}</b>
-              </ng-template> -->
-
               <div class="right">
                 <div *ngIf="directionNotify$ | async as dir"  [@fadeOutSlow]="dir">
                   <div class="dir-text">

@@ -175,11 +175,9 @@ export class DialogV2Service {
       dialogRef.afterClosed().subscribe(() => {
       })
 
-
       return dialogRef;
 
     } else {
-
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail };
       // Keep focus on inputbar
       this.inputService.focus();

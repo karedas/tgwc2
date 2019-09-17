@@ -35,8 +35,6 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
           }))
         ])
       ]),
-      // transition(':leave',
-      //   animate(600, style({opacity: 0})))
     ])
   ]
 })
@@ -103,39 +101,39 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       .subscribe((hero: IHero) => {
         if (hero) {
           this.setCombatPanel(hero.target);
-          this.setMoneyAmountLabel(hero.money);
+          // this.setMoneyAmountLabel(hero.money);
         }
       });
   }
 
-  setMoneyAmountLabel(money: any) {
+  // setMoneyAmountLabel(money: any) {
 
-    let dividend = 1;
-    money = parseInt(money, 10);
+  //   let dividend = 1;
+  //   money = parseInt(money, 10);
 
-    if (money < 10) {
-      this.moneyValue = 'mr';
-    }
-    if (money >= 10 && money < 100) {
-      this.moneyValue = 'ma';
-      dividend = 10;
+  //   if (money < 10) {
+  //     this.moneyValue = 'mr';
+  //   }
+  //   if (money >= 10 && money < 100) {
+  //     this.moneyValue = 'ma';
+  //     dividend = 10;
 
-    } else if (money >= 100 && money < 1000) {
-      dividend = 100;
-      this.moneyValue = 'mo';
-    } else if (money >= 1000) {
-      dividend = 1000;
-      this.moneyValue = 'mp';
-    }
+  //   } else if (money >= 100 && money < 1000) {
+  //     dividend = 100;
+  //     this.moneyValue = 'mo';
+  //   } else if (money >= 1000) {
+  //     dividend = 1000;
+  //     this.moneyValue = 'mp';
+  //   }
 
-    if (money > 0) {
-      money = parseFloat(money);
-      money = Math.round(money) / dividend;
-      money.toFixed(2).replace('.', ',');
-    }
+  //   if (money > 0) {
+  //     money = parseFloat(money);
+  //     money = Math.round(money) / dividend;
+  //     money.toFixed(2).replace('.', ',');
+  //   }
 
-    this.money = money;
-  }
+  //   this.money = money;
+  // }
 
   private setCombatPanel(target?: ITarget) {
 
