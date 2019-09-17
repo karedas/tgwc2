@@ -105,10 +105,4 @@ Nuova grafica e formattazione per la pagina di log.
 [*] comando "aggettivo lista" non mostrava niente per chi aveva bisogno di cambiare l'aggettivo. Adesso si potrà visualizzare la finestra con gli aggettivi possibili, selezionare quello desiderato e attivarlo.
 [*] Tutte le liste equip e inventario sono adesso cliccabili.
 [*] Ora se l'utente disattiva l'audio questo non verrà scaricato in background comunque.
-
-
-
-
-
-
-
+[*] Sistemato un errore su un'icona mancante nell'USURA. Se eri devastato non mostrava nulla.
