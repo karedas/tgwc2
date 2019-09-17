@@ -20,7 +20,7 @@
         </div>
 
         <!-- Generale -->
-        <div fxFlex="0 1 100%"  class="tg-control-panel--tabcontent" [ngClass]="{'active': 0 === tabOpen}" fxLayout="column">
+        <div fxFlex="0 1 100%"  class="tg-control-panel--tabcontent" [ngClass]="{'active': 0 === tabOpen}">
 
           <h3 class="tg-control-panel--subtitle" style="margin-top:0;">Client</h3>
 
@@ -30,7 +30,7 @@
             <mat-form-field>
               <mat-label>Dimensione Testo</mat-label>
               <mat-select required (selectionChange)="changeFontSize($event)" [value]="tgConfig.fontSize">
-                <mat-option *ngFor="let size of fontSizes; let idx = index" [value]="idx+1">{{size.name}}</mat-option>
+                <mat-option *ngFor="let size of fontSizes; let idx = index" [value]="idx">{{size.name}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>

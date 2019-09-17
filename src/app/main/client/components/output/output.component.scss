@@ -88,32 +88,32 @@ tg-text {
   display: block;
 }
 
-::ng-deep.tg-line {
-  display: block;
-  padding-bottom: .5em;
-  line-height: 1.2;
+:host::ng-deep {
 
-  &::first-letter {
-    text-transform: uppercase;
+  &.tg-line {
+    display: block;
+    padding-bottom: .5em;
+    line-height: 1.2;
+  
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  
+    &:first-of-type .room {
+      padding-top: .5em;
+    }
+  
+    br {
+      width: 100%;
+      clear: both;
+      height: 1px;
+    }
+  
+  
+    >span {
+      padding-top: 8px;
+    }
   }
-
-  &:first-of-type .room {
-    padding-top: .5em;
-  }
-
-  br {
-    width: 100%;
-    clear: both;
-    height: 1px;
-  }
-
-
-  >span {
-    padding-top: 8px;
-  }
-}
-
-::ng-deep {
 
   p {
     margin-bottom: 0;

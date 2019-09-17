@@ -14,7 +14,6 @@ import { ConfigService } from 'src/app/services/config.service';
   selector: 'tg-control-panel',
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class ControlPanelComponent implements OnInit, OnDestroy {
 
@@ -50,9 +49,7 @@ export class ControlPanelComponent implements OnInit, OnDestroy {
   }
 
   changeFontSize(event: any) {
-    console.log('event', event.value);
-    this.oldFontSize = this.tgConfig.fontSize;
-    this.gameService.setOutputSize(event.value - 1 );
+    this.gameService.setOutputSize(event.value);
   }
 
   onOptionChange(event, value: any) {

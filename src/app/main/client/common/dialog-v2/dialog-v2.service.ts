@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2, HostListener } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { EditorComponent } from '../../components/windows/editor/editor.component';
 import { ControlPanelComponent } from '../../components/windows/control-panel/control-panel.component';
@@ -26,7 +26,6 @@ export class DialogV2Service {
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
     private inputService: InputService,
-    private gameService: GameService,
     public overlay: Overlay
   ) {
     this.render = rendererFactory.createRenderer(null, null);
@@ -227,7 +226,9 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '750px';
+      config.width = '700px';
+      config.height = '700px';
+      config.maxHeight = '100%';
       config.maxWidth = '95vw';
       config.restoreFocus = true;
       config.autoFocus = false;

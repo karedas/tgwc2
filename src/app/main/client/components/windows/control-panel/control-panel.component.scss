@@ -2,37 +2,14 @@
 @import 'abstract/sprites-mixins';
 @import 'abstract/sprites';
 
-.tg-control-panel{
-  color: rgb(142, 142, 142);
-
-  .mat-divider {
-    margin: 1em 0;
-    width: 100%;
-    border-top-color: rgba(255, 255, 255, 0.188);
-  }
-
-  button {
-    margin: .2em;
-  }
-
-  .mat-radio-button {
-    margin: .2em 0;
-  }
-
-  .mat-label {
-    padding-bottom:  .5em;
-  }
-}
-
- 
-.tg-control-panel--tabcontent {
-  padding: 1em;
-}
+:host {
+  color: $base-text-color;
+} 
 
 .tg-control-panel--tab {
   background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
   text-transform: uppercase;
-  color: #bfbfbf;
+  color: $base-text-color;
   height: 100%;
 }
 
@@ -56,8 +33,10 @@
 .tg-control-panel--tabcontent {
   background-color: #00000082;
   display: none;
+  padding: 1em;
   min-height: 400px;
   position: relative;
+  padding: 1em;
 
   &.active {
     display: block;

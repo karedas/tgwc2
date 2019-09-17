@@ -254,31 +254,23 @@ export class GameService {
         const prefix = 'size-';
         let new_class: string;
         let old_class: string;
-
         // Initial Font-size set
-        if (size && initSetup) {
+        if (typeof size === 'number' && initSetup) {
             new_class = prefix + font_size_options[size].class;
             this.render.addClass(document.body, new_class);
             return;
         }
-
         // Rolling on Font-size
-        if (this._tgConfig) {
-            if(!size) {
-                size = (this._tgConfig.fontSize + 1) % font_size_options.length;
-            }
-
-            old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
-            new_class = prefix + font_size_options[size].class;
-            console.log(old_class, new_class);
-            this.render.removeClass(document.body, old_class);
-            this.render.addClass(document.body, new_class);
+        if(typeof size !== 'number') {
+            size = (this._tgConfig.fontSize + 1) % font_size_options.length;
         }
-
-        console.log('SIZE: ', size)
+        old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
+        new_class = prefix + font_size_options[size].class;
+        //Setting Class
+        this.render.removeClass(document.body, old_class);
+        this.render.addClass(document.body, new_class);
+        // Saving fontsize in localstorage
         this._configService.setConfig({ fontSize: size });
-
-        
     }
 
 
