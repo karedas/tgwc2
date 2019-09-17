@@ -7,7 +7,7 @@
           <div class="tg-room--title">
             
             <ng-container *ngIf="html?.title; else extra_dirRoomtitle">
-              <div [innerHtml]="html.title |  dataToHtml:true"></div>
+              <div [innerHtml]="html.title | dataToHtml:true | capitalizeFirst"></div>
             </ng-container>
           </div>
 
@@ -45,8 +45,8 @@
           <!-- Room Title -->
           <div class="tg-room--title">
             <ng-container *ngIf="html.title; else extra_dirRoomtitle">
-              <tg-icons [icon]="html.icon" class="squared"></tg-icons> <span
-                [innerHtml]="html.title | dataToHtml:true | capitalizeFirst"></span>
+              <tg-icons [icon]="html.icon" class="squared"></tg-icons>
+              <span [innerHtml]="html.title | capitalizeFirst | dataToHtml:true "></span>
             </ng-container>
           </div>
           <!-- Image -->

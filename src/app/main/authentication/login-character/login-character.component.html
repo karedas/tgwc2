@@ -1,30 +1,30 @@
 <div class="tg-auth-form" fxLayout="row wrap" fxLayoutAlign="center center">
 
-    <form [formGroup]="frmCharacterLogin" (ngSubmit)="login()">
-      <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
-        <div class="tg-base-logo big"></div>
-        <h1>Entra con il tuo personaggio su  <span class="tg-llt-white">The Gate <span class="tg-brown">Mud</span></span></h1>
-      </div>
-      <div class="tg-auth-form-body tg-shadow-inout" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
-  
-        <div class="form-field-group">
-          <label for="name">Nome Personaggio</label>
-          <input type="text" formControlName="name" class="input-block form-control" autofocus  autocomplete="off">
-        </div>
-  
-        <div class="form-field-group">
-          <label for="secret">Password</label>
-          <input type="password" formControlName="secret" class="input-block form-control" autocomplete="off">
-        </div>
-  
-        <div class="form-field-group">
-          <input type="submit" value="Accedi" name="submit" class="tg-submit-primary">
-          <!-- <div class="tg-error" *ngIf="loginFailedError">{{loginFailedError}}</div> -->
-        </div>
-      </div>
-      <div class="tg-loginstatus tg-lt-red" [innerHtml]="loginReplayMessage"></div>
+  <form [formGroup]="frmCharacterLogin" (ngSubmit)="login()">
+    <div class="tg-auth-form-header" [@animate]="{value:'*', params:{delay:'150ms', y:'56px'}}">
+      <div class="tg-base-logo big"></div>
+      <h1>Entra con il tuo personaggio su <span class="tg-llt-white">The Gate <span class="tg-brown">Mud</span></span>
+      </h1>
+    </div>
+    <div class="tg-auth-form-body tg-shadow-inout" [@animate]="{value:'*', params:{delay:'300ms', y:'56px'}}">
 
-    </form>
-    
-  </div>
-  
+      <div class="form-field-group">
+        <label for="name">Nome Personaggio</label>
+        <input type="text" formControlName="name" class="input-block form-control" autofocus autocomplete="off">
+      </div>
+
+      <div class="form-field-group">
+        <label for="secret">Password</label>
+        <input type="password" formControlName="secret" class="input-block form-control" autocomplete="off">
+      </div>
+
+      <div class="form-field-group">
+        <input type="submit" value="Accedi" name="submit" class="tg-submit-primary">
+        <!-- <div class="tg-error" *ngIf="loginFailedError">{{loginFailedError}}</div> -->
+      </div>
+    </div>
+    <div class="tg-loginstatus tg-lt-red" [innerHtml]="loginReplayMessage"></div>
+
+  </form>
+
+</div>

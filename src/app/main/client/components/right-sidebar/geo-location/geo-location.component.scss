@@ -79,7 +79,7 @@ tg-geo-location {
 
 .tg-geolocal--region,
 .tg-geolocal--control {
-  font-size: 1em;
+  font-size: 1.1em;
   line-height: 1;
   width: 100%;
 }
@@ -93,7 +93,7 @@ tg-geo-location {
   display: block;
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 750px) {
 
   
   .tg-geolocal--data {

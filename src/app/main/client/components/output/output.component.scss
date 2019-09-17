@@ -207,7 +207,6 @@ tg-text {
   .tg-objperson--line {
     display: flex;
     padding-right: 5px;
-    padding-bottom: .5em;
     user-select: none;
     margin-right: auto;
     box-sizing: border-box;
@@ -322,6 +321,7 @@ tg-text {
     flex: 0 0 auto;
 
     .tg-room--title {
+      top:0;
       min-height: 30px;
       display: flex;
       font-size: 1.2em;
@@ -329,7 +329,7 @@ tg-text {
       font-family: $modern-antiqua;
       padding: 0;
       box-shadow: inset 0px -5px 11px 0px black;
-      position: relative;
+      position: sticky;
       background: url(/assets/images/background/blood_dark.jpg) repeat top left !important;
 
       .squared {
@@ -427,7 +427,8 @@ tg-text {
   right: 0;
   animation: pulsing;
   animation-iteration-count: infinite;
-  animation-duration: 1s
+  animation-duration: 1s;
+  pointer-events: none;
 }
 
 

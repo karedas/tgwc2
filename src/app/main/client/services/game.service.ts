@@ -4,9 +4,11 @@ import { socketEvent } from '../../../core/models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { equipPositionByName, pos_to_order, font_size_options } from 'src/app/main/client/common/constants';
+import { pos_to_order, font_size_options, equipPositionByName } from 'src/app/main/client/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
+import { cloneDeep, some, isObject } from 'lodash';
+
 
 @Injectable()
 
@@ -115,7 +117,7 @@ export class GameService {
     }
 
     private updateInfo(now) {
-        if (this.client_update.room.needed && this.extraIsEnabled && !this.client_update.inContainer) {
+        if (this.client_update.room.needed && this.tgConfig.widgetEquipInv.visible && !this.client_update.inContainer) {
             this.sendToServer('@agg');
             this.client_update.room.needed = false;
             this.client_update.now = now;
@@ -214,38 +216,38 @@ export class GameService {
     }
 
     /* Ordfer Objects Persons or Objects list */
-    public orderObjectsList(items: any): any {
-        if (items && !items.hasOwnProperty('ver')) {
-            const listItem = JSON.parse(JSON.stringify(items));
+    public orderObjectsList(items: any, type?: string): any {
 
-            if (listItem.list) {
-                listItem.list.sort((a, b) => {
-                    const eq_pos_a = Object.keys(a.eq) ? a.eq[0] : 0;
-                    const eq_pos_b = Object.keys(b.eq) ? b.eq[0] : 0;
-                    return eq_pos_a - eq_pos_b;
+        let cont = cloneDeep(items);
+        if (cont.list) {
+            if (type == 'pers' || type == 'equip') {
+
+
+                cont.list.sort((a, b) => {
+                    const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
+                    const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
+                    return (eq_pos_a as number) - (eq_pos_b as number);
                 });
+
+                return cont;
+
             }
-            return listItem;
-
         } else {
-            /* Order for personal Equipment  */
-            const cont = {
-                list: []
-            };
-
-            Object.keys(items).forEach((poskey: any, idbx: any) => {
+            let concatList = [];
+            Object.keys(cont).forEach((poskey: any, idbx: any) => {
                 const where = equipPositionByName[poskey];
-                if (where) {
-                    cont.list = cont.list.concat(items[poskey]);
+                const eqData = cont[poskey];
+                if (some(eqData, isObject)) {
+                    eqData.sort((a,b) => { 
+                        const eq_pos_a = Object.keys(a.eq) ?  a.eq[1] : 0;
+                        const eq_pos_b = Object.keys(b.eq) ?  b.eq[1] : 0;
+                        return (eq_pos_b as number) - (eq_pos_a as number);
+
+                    });
+                    concatList.push(eqData[0]);
                 }
             });
-
-            cont.list.sort((a, b) => {
-                const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[1]] : 0;
-                const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[1]] : 0;
-                return (eq_pos_a as number) - (eq_pos_b as number);
-            });
-            return cont.list;
+            return concatList
         }
     }
 
@@ -261,7 +263,7 @@ export class GameService {
             return;
         }
         // Rolling on Font-size
-        if(typeof size !== 'number') {
+        if (typeof size !== 'number') {
             size = (this._tgConfig.fontSize + 1) % font_size_options.length;
         }
         old_class = prefix + font_size_options[this._tgConfig.fontSize].class;

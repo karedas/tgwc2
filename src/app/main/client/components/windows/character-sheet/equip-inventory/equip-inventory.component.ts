@@ -49,7 +49,7 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
         if (equipment !== undefined) {
           this.wprc = equipment.wprc;
           this.weight = equipment.weight;
-          this.equip = this.gameService.orderObjectsList(equipment);
+          this.equip = this.gameService.orderObjectsList(equipment, 'equip');
         }
       });
   }

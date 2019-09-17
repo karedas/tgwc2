@@ -38,6 +38,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   }
 
   private setupEquipInventory(c: any) {
+      this.collapsed = c.collapsed;
       this.tab = c.selected;
   }
 

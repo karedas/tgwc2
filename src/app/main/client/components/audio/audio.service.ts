@@ -41,7 +41,7 @@ export class AudioService {
   }
 
   setAudio(src: string): void {
-    if(!this._enable) {
+    if(this._enable) {
       const mp3 = '.mp3';
       const mid = '.mid';
       const wav = '.wav';

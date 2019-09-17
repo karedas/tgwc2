@@ -32,8 +32,7 @@ export class ObjPersContainerComponent implements OnChanges  {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.eqcont = this.gameService.orderObjectsList(this.eqcont);
-
+    this.eqcont = this.gameService.orderObjectsList(this.eqcont, 'pers');
     if (this.objcont) {
       this.populateToggleExpandable();
     }
