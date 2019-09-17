@@ -229,7 +229,6 @@ export class DataParser {
   }
 
   setUpdateNeeded(ud: any) {
-    console.log(ud);
     this._updateNeeded.next(ud);
   }
 
@@ -425,8 +424,8 @@ export class DataParser {
   }
 
   private selectableGeneric(s): string {
-    s = JSON.parse(s.slice(8, -1));
-    console.log('selectable generic', s);
+    const s_parse = JSON.parse(s.slice(8, -1));
+    this.store.dispatch( DataActions.selectableGenericAction({ payload: s_parse }));
     return '';
   }
 

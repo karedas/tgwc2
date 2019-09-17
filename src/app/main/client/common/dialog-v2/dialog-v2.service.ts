@@ -12,7 +12,7 @@ import { InputService } from '../../components/input/input.service';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
-import { GameService } from '../../services/game.service';
+import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class DialogV2Service {
     });
   }
 
-  getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
+  private getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
     return dialogRef['_overlayRef'].overlayElement as HTMLElement;
   }
 
@@ -246,10 +246,6 @@ export class DialogV2Service {
     }
   }
 
-  /**
-   *
-   * @param data  [0] IBook - [1] Index page from Param
-   */
   openBook(...data: any): MatDialogRef<BookComponent, MatDialogConfig> {
 
     const dialogID = 'book';
@@ -288,7 +284,7 @@ export class DialogV2Service {
     }
   }
 
-  openGenericTable(...data: any): MatDialogRef<GenericTableComponent, MatDialogConfig> {
+  openGenericTable(): MatDialogRef<GenericTableComponent, MatDialogConfig> {
 
     const dialogID = 'generictable';
 
@@ -303,9 +299,6 @@ export class DialogV2Service {
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
-      config.data = {
-        title: data[0]
-      };
 
       const dialogRef = this.dialog.open(GenericTableComponent, config);
 
@@ -320,7 +313,7 @@ export class DialogV2Service {
     }
   }
 
-  openWorksList(...data: any): MatDialogRef<WorkslistComponent, MatDialogConfig> {
+  openWorksList(): MatDialogRef<WorkslistComponent, MatDialogConfig> {
 
     const dialogID = 'workslist';
 
@@ -335,9 +328,6 @@ export class DialogV2Service {
       config.hasBackdrop = false;
       config.restoreFocus = true;
       config.autoFocus = false;
-      config.data = {
-        title: data[0]
-      };
 
       const dialogRef = this.dialog.open(WorkslistComponent, config);
       // Keep focus on inputbar
@@ -396,6 +386,27 @@ export class DialogV2Service {
       return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
+    }
+  }
+
+  openSelectableGeneric(data: any): MatDialogRef<SelectableGenericComponent, MatDialogConfig> {
+    const dialogID = 'selectable-generic';
+
+    if(!this.dialog.getDialogById(dialogID)) {
+      const config = new MatDialogConfig();
+
+      config.id = dialogID;
+      config.width = '500px';
+      config.height = '500px';
+      config.maxHeight = '100%';
+      config.autoFocus = false;
+      config.hasBackdrop = false;
+      config.data = data;
+      config.scrollStrategy = this.overlay.scrollStrategies.noop();
+
+      const dialogRef = this.dialog.open(SelectableGenericComponent, config);
+
+      return dialogRef;
     }
   }
 }

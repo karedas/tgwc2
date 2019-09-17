@@ -124,7 +124,6 @@ export class DataEffects {
     { dispatch: false }
   );
 
-
   showCharacterSheet$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.SHOWCHARACTERSHEET),
@@ -150,6 +149,16 @@ export class DataEffects {
     ),
   );
 
+  showSelectableGeneric = createEffect(() =>
+    this.actions$.pipe(
+      ofType<PayloadActionData>(DataEvenType.SELECTABLEGENERIC),
+      tap((res) => {
+        this.dialogV2Service.openSelectableGeneric(res.payload);
+      })
+    ),
+    { dispatch: false }
+  )
+
   refreshCommand$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DataEvenType.REFRESH),
@@ -159,12 +168,6 @@ export class DataEffects {
     ),
     { dispatch: false }
   );
-
-  // refreshCommand$ = createEffect(() =>
-  //   this.actions$.pipe(),
-  //   { dispatch: false }
-  // )
-
 
   constructor(
     private actions$: Actions,

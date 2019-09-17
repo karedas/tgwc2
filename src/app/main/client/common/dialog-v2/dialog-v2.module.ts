@@ -15,6 +15,7 @@ import { ControlPanelModule } from '../../components/windows/control-panel/contr
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
+import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     WorkslistComponent,
     LogComponent,
     ShortcutsPanelComponent,
-    CharacterSheetComponent
+    CharacterSheetComponent,
+    SelectableGenericComponent
   ],
 
   imports: [
@@ -47,7 +49,9 @@ import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
     WorkslistComponent,
     CharacterSheetComponent,
     LogComponent,
-    ShortcutsPanelComponent
+    ShortcutsPanelComponent,
+    SelectableGenericComponent
+
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: GetItalianPaginatorIntl}]
 })

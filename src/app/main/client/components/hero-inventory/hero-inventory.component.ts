@@ -12,7 +12,7 @@ import { GameService } from '../../services/game.service';
 })
 export class HeroInventoryComponent implements OnInit, OnDestroy {
 
-  inventory: any[] = [];
+  inventory: any = [];
   private _inventory$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
@@ -20,7 +20,9 @@ export class HeroInventoryComponent implements OnInit, OnDestroy {
     private store: Store<DataState>,
     private gameService: GameService,
   ) {
+    this.inventory = [];
     this._inventory$ = this.store.pipe(select(getInventory));
+
     this._unsubscribeAll = new Subject();
   }
 

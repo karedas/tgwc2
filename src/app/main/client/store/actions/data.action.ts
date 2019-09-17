@@ -11,7 +11,6 @@ import { IRegion } from 'src/app/main/client/models/data/region.model';
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
-    OUT = '[Data] Outgoing Data',
     LOGGED = '[Data] Player is Logged In',
     HERODATA = '[Data] Update Hero Data',
     AUTOUPDATESTATUSHERO = '[Data] Auto Update Hero Status',
@@ -36,7 +35,8 @@ export enum DataEvenType {
     SHOWCHARACTERSHEET = '[Data] Show Character Sheet',
     SHOWSTATUSHERO = '[Data] Show Status Hero Inline',
     REFRESH = '[Client] Refresh server command',
-    DIRECTION = '[Client] Character Direction'
+    DIRECTION = '[Client] Character Direction',
+    SELECTABLEGENERIC = '[Client] Selectable Generic'
 }
 
 export const mapAction = createAction(DataEvenType.MAP, props<{ map: any }>());
@@ -64,3 +64,4 @@ export const showCommandsActions = createAction(DataEvenType.SHOWCOMMANDS, props
 export const showCharacterSheetActions = createAction(DataEvenType.SHOWCHARACTERSHEET, props<{payload: any}>());
 export const showStatusBoxAction = createAction(DataEvenType.SHOWSTATUSHERO, props<{payload: any}>());
 export const directionNotifyAction = createAction(DataEvenType.DIRECTION, props<{payload: any}>());
+export const selectableGenericAction = createAction(DataEvenType.SELECTABLEGENERIC, props<{payload: any}>());
