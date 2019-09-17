@@ -9,6 +9,7 @@ tg-icons {
   box-sizing: content-box;
   line-height: 16px;
   position: relative;
+  vertical-align: middle;
 
   .tg-icon {
     background-image: url($imgPath + '/tiles.png');
