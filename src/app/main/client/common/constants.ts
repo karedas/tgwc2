@@ -117,11 +117,11 @@ export const hero_defense = [
 ];
 
 export const hero_speed = [
-  { msg: 'passeggio', cmd: 'velo pass' },
-  { msg: 'camminata', cmd: 'velo cammin' },
-  { msg: 'marcia', cmd: 'velo marcia' },
-  { msg: 'corsa', cmd: 'velo corsa' },
   { msg: 'scatto', cmd: 'velo scat' }
+  { msg: 'corsa', cmd: 'velo corsa' },
+  { msg: 'marcia', cmd: 'velo marcia' },
+  { msg: 'camminata', cmd: 'velo cammin' },
+  { msg: 'passeggio', cmd: 'velo pass' }
 ];
 
 
