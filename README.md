@@ -9,7 +9,6 @@ ng build --prod
 ## Performance Stats ##
 source-map-explorer .\main-es2015.*.js
 
-#TODO
 ### Book ###
 Add user experience  to call page by number
 
