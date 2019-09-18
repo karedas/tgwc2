@@ -82,12 +82,15 @@ export class GameService {
     private updatePanels(what: any) {
         const now = Date.now();
         if (what[0] > this.client_update.inventory.version) {
+            this.client_update.inventory.version = what[0];
             this.client_update.inventory.needed = true;
         }
         if (what[1] > this.client_update.equipment.version) {
+            this.client_update.equipment.version = what[1];
             this.client_update.equipment.needed = true;
         }
         if (what[2] > this.client_update.room.version) {
+            this.client_update.equipment.version = what[2];
             this.client_update.room.needed = true;
         }
         if (now > this.client_update.now) {
@@ -99,6 +102,7 @@ export class GameService {
             this.updateInfo(now);
         }
     }
+
 
     private upadteInventory(now) {
         if (this.client_update.inventory.needed) {
@@ -117,7 +121,7 @@ export class GameService {
     }
 
     private updateInfo(now) {
-        if (this.client_update.room.needed && this.tgConfig.widgetEquipInv.visible && !this.client_update.inContainer) {
+        if (this.client_update.room.needed && this.tgConfig.widgetRoom.visible && !this.client_update.inContainer) {
             this.sendToServer('@agg');
             this.client_update.room.needed = false;
             this.client_update.now = now;

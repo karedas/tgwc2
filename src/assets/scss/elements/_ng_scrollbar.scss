@@ -1,58 +1,35 @@
-
-// ng-scrollbar {
-//   > .ng-scrollbar-wrapper{
-//     position: static;
-//   }
-// }
-
 .scrollbar-dialog .ng-scroll-view {
   max-height: 65vh;
 }
 
-.ng-scrollbar-thumb  {
+.ng-scrollbar-thumb {
   cursor: grab;
+
   &:active {
     cursor: grabbing;
   }
 }
 
-ng-scrollbar.scrollbar.disabled, ng-scrollbar.scrollbar-output.disabled  {
+ng-scrollbar.scrollbar.disabled,
+ng-scrollbar.scrollbar-output.disabled {
   .ng-scroll-viewport {
-    overflow-y: hidden!important;
-    overflow-x: hidden!important;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
   }
 }
 
-  ng-scrollbar.scrollbar {
-    --scrollbar-border-radius: 0;
-    --scrollbar-padding: 4px;
-    --scrollbar-track-color: #1b150f;
-    --scrollbar-wrapper-color: transparent;
-    --scrollbar-thumb-color: #332f25;
-    --scrollbar-size: 8px;
-    --scrollbar-thumb-hover-color: #4c4535;
-    --scrollbar-viewport-margin: 0;
-    --scrollbar-hover-size: var(--scrollbar-size);
-    min-height: 100%;
-
-    // ng-scrollbar-y {
-    //   margin-right: 4px;
-    // }
-  }
-
-  ng-scrollbar.scrollbar-light {
-    --scrollbar-border-radius: 0;
-    --scrollbar-padding: 4px;
-    --scrollbar-track-color: transparent;
-    --scrollbar-wrapper-color: transparent;
-    --scrollbar-thumb-color: #332f25;
-    --scrollbar-size: 8px;
-    --scrollbar-thumb-hover-color: #4c4535;
-    --scrollbar-viewport-margin: 0;
-    --scrollbar-hover-size: var(--scrollbar-size);
-
-    min-height: 100%;
-  }
+ng-scrollbar.scrollbar {
+  --scrollbar-border-radius: 0;
+  --scrollbar-padding: 2px;
+  --scrollbar-track-color: #1b150f;
+  --scrollbar-wrapper-color: transparent;
+  --scrollbar-thumb-color: #332f25;
+  --scrollbar-size: 8px;
+  --scrollbar-thumb-hover-color: #4c4535;
+  --scrollbar-viewport-margin: 0;
+  --scrollbar-hover-size: var(--scrollbar-size);
+  min-height: 100%;
+}
 
 ng-scrollbar.scrollbar-output {
   --scrollbar-border-radius: 0;
@@ -65,16 +42,11 @@ ng-scrollbar.scrollbar-output {
   --scrollbar-viewport-margin: 0;
   --scrollbar-hover-size: var(--scrollbar-size);
   min-height: 100%;
-
-
-
   .ng-scroll-view-container {
     border-right: 1px solid #3a3530;
   }
 }
 
-
-// Todo: Temp fix awaiting official fix by author
-// .ng-scroll-content {
-//   width: calc(100% + 18px);
-// }
+ng-scrollbar.through {
+  --scrollbar-track-color: rgba(68, 62, 56, 0.4);
+}

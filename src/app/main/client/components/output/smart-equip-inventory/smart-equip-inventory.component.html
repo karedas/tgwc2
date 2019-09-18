@@ -38,12 +38,15 @@
       </div>
 
       <div fxFlex="1 0 auto" class="equinv-container" *ngIf="!collapsed">
-        <ng-scrollbar class="scrollbar" [ngClass]="{'disabled': draggingSplitArea}" [disabled]="draggingSplitArea"
-          fxFlex="1 1 100%" fxFlexFill>
-
+        <ng-scrollbar class="scrollbar-output through" 
+          [ngClass]="{'disabled': draggingSplitArea}" 
+          [disabled]="draggingSplitArea"
+          [visibility]="'always'" 
+          [appearance]="'standard'"
+          fxFlex="1 1 100%" 
+          fxFlexFill>
             <tg-hero-equipment fxLayout="column" *ngIf="tab === 'equip'"></tg-hero-equipment>
             <tg-hero-inventory fxLayout="column" *ngIf="tab === 'inventory'"></tg-hero-inventory>
-
         </ng-scrollbar>
       </div>
 

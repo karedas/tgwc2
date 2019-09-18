@@ -128,7 +128,6 @@ tg-text {
   }
 
   .tg-backdetail {
-
     cursor: pointer;
     display: flex;
     flex: 1 0 auto;
@@ -151,7 +150,6 @@ tg-text {
       place-content: center left;
       align-items: center;
       width: 100%;
-
     }
 
     b {
@@ -164,7 +162,6 @@ tg-text {
       color: $tg-yellow;
     }
   }
-
 
   .tg-icon {
     vertical-align: middle;
@@ -190,8 +187,6 @@ tg-text {
     flex-direction: column;
     line-height: 1.4;
   }
-
-
 
   /* LIST Mob & Object*/
   .tg-objects,
@@ -235,7 +230,6 @@ tg-text {
     }
   }
 
-
   .tg-objperson--title {
     padding: 0 0 .5em 0;
     display: block;
@@ -260,17 +254,13 @@ tg-text {
     }
   }
 
-
   .tg-objects--line {
     color: $tg-yellow;
-
   }
 
   .tg-persons--line {
     color: $tg-lt-green;
   }
-
-
 
   .size-qty {
     margin-right: 20px !important;
@@ -294,7 +284,6 @@ tg-text {
       min-width: 20px;
     }
 
-
     &:after {
       content: '';
       display: block;
@@ -304,11 +293,14 @@ tg-text {
       right: -16px;
       position: absolute;
     }
-
   }
 
   &.expandlist.open .size-qty:after {
     transform: rotate(90deg);
+  }
+
+  .tg-extraoutput-detailcontent {
+    padding-right: 17px;
   }
 
   .tg-extraoutput--header {
@@ -327,9 +319,10 @@ tg-text {
       font-size: 1.2em;
       color: #ffe2ae;
       font-family: $modern-antiqua;
-      padding: 0;
+      padding: 0 17px 0 0;
       box-shadow: inset 0px -5px 11px 0px black;
       position: sticky;
+      z-index: 10;
       background: url(/assets/images/background/blood_dark.jpg) repeat top left !important;
 
       .squared {
@@ -339,19 +332,18 @@ tg-text {
       >span {
         margin: auto 0;
       }
-
     }
 
     .tg-room--desc {
       color: $base-text-color;
-      padding: 3px 12px 0.2em 4px;
+      padding: 3px 17px 0.2em 4px;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
     }
 
     .tg-objperson--descdetail {
       display: block;
-      padding: 0 12px 6px 4px;
+      padding: 0 0 6px 4px;
       line-height: 1.4;
     }
 
