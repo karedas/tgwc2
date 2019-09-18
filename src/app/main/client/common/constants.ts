@@ -117,13 +117,12 @@ export const hero_defense = [
 ];
 
 export const hero_speed = [
-  { msg: 'scatto', cmd: 'velo scat' }
+  { msg: 'scatto', cmd: 'velo scat' },
   { msg: 'corsa', cmd: 'velo corsa' },
   { msg: 'marcia', cmd: 'velo marcia' },
   { msg: 'camminata', cmd: 'velo cammin' },
   { msg: 'passeggio', cmd: 'velo pass' }
 ];
-
 
 export const hero_skills = [
   'Incapace',
