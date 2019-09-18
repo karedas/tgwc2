@@ -1,6 +1,6 @@
 <div class="tg-character-card" *ngIf="heroBase$ | async as hero" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
   <div class="b-ironlight-mini tg-box">
-    <div class="tg-dialog-content-nopadding tg-shadow-inset" fxLayout="column">
+    <div class="tg-dialog-content tg-shadow-inset" fxLayout="column">
       <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
         {{hero.name}} - Scheda personale
         <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
@@ -8,13 +8,13 @@
         </button>
       </div>
 
-      <mat-dialog-content class="tg-character-content">
+      <mat-dialog-content class="tg-character-content no-padding">
         <div fxLayout="row" style="min-height: 100%">
           
           <!-- ######## Info Main Character ########  -->
           <div class="info-main" fxLayout="column" fxFlex="1 1 auto" fxHide.xs="true">
            
-            <div class="info-avatar tg-shadow">
+            <div class="info-avatar tg-shadow" (click)="openUploadAvatar();">
               <img id="infoimage" src="{{ imagepath + hero.image }}" *ngIf="hero.image" />
             </div>
 

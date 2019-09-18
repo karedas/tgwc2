@@ -1,5 +1,5 @@
 <div class="b-ironlight-mini tg-box" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="tg-dialog-content-nopadding tg-shadow-inset">
+  <div class="tg-dialog-content tg-shadow-inset">
     <div class="tg-dialog-title" cdkDragHandle>
       {{headerTitle}}
       <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
@@ -7,7 +7,7 @@
       </button>
     </div>
     <div class="tg-workslist">
-      <div fxLayout="column" matDialogContent>
+      <div fxLayout="column" matDialogContent class="no-padding">
 
         <mat-form-field class="tg-table--filter">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off">

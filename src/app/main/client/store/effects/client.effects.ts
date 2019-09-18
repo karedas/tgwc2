@@ -36,12 +36,21 @@ export class ClientEffects {
           this.game.resetUI();
         }
         this.store.dispatch(inGameAction());
-      },
-      )
+      })
     ),
     { dispatch: false }
   );
 
+
+  $uploadImage = createEffect(() => 
+    this.actions$.pipe(
+      ofType(ClientEventType.UPLOADAVATAR),
+      tap(() => {
+        this.dialogV2Service.openUploadAvatar();
+      })
+    ),
+    { dispatch: false }
+  );
 
   constructor(
     private game: GameService,

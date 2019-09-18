@@ -5,15 +5,13 @@ export enum ClientEventType {
   INGAME = '[Client] User InGame Status action',
   RESET = '[Client] Reset Store',
   UI = '[Client] Ui Updated',
-  NEWS = '[Client] Show News',
   AUDIO = '[Client] Audio',
-  UPDATENEEDED = '[Client] Update Needed Data',
+  UPLOADAVATAR = '[Client] Upload Avatar'
 }
 
 export const disconnectAction = createAction(ClientEventType.DISCONNECT);
 export const inGameAction = createAction(ClientEventType.INGAME);
 export const resetAction = createAction(ClientEventType.RESET);
-export const newsAction = createAction(ClientEventType.NEWS);
 export const updateUIAction = createAction(ClientEventType.UI, props<{payload: any}>());
 export const audioAction = createAction(ClientEventType.AUDIO, props<{payload: string}>());
-export const updateNeededAction = createAction(ClientEventType.UPDATENEEDED, props<{payload: any}>());
+export const uploadAvatarAction = createAction(ClientEventType.UPLOADAVATAR);

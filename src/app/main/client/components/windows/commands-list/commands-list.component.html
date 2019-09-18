@@ -1,6 +1,6 @@
 <ng-container *ngIf="commandsList as cmds">
   <div class="b-ironlight-mini b-ironlight-thin tg-box" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-    <div class="tg-dialog-content-nopadding tg-shadow-inset">
+    <div class="tg-dialog-content tg-shadow-inset">
 
       <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
         Lista Comandi
@@ -8,7 +8,7 @@
           <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
         </button>
       </div>
-      <mat-dialog-content class="tg-commands-list" matDialogContent>
+      <mat-dialog-content class="tg-commands-list no-padding">
         <div fxLayout fxFlexFill>
 
           <div class="cmd-group" fxFlex="0 0 auto">
@@ -27,7 +27,6 @@
   
           <div class="cmd-values-container" fxFlex="1 0 0">
             <ng-scrollbar class="scrollbar" #commandsScrollbar [visibility]="'always'" [appearance]="'standard'">
-  
               <ng-container *ngFor="let item of cmds | keyvalue; let idOpenedGroup = index;">
                 <div [ngClass]="{'group-show': groupOpen === idOpenedGroup}" class="cmd-values-wrapper" fxLayout="row wrap">
                   <div class="cmd-value" fxFlex="0 0 25%" *ngFor="let command of item.value"
@@ -36,7 +35,6 @@
                   </div>
                 </div>
               </ng-container>
-              
             </ng-scrollbar>
           </div>
           

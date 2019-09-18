@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { getHero } from 'src/app/main/client/store/selectors';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameService } from '../../../services/game.service';
 import { TGState } from '../../../store';
+import * as clientAction   from '../../../store/actions/client.action';
 
 @Component({
   selector: 'tg-character-sheet',
@@ -14,10 +15,8 @@ import { TGState } from '../../../store';
   styleUrls: ['./character-sheet.component.scss'],
 })
 export class CharacterSheetComponent  {
-  dialogID = 'charactersheet';
   closed = true;
   imagepath: string = environment.media_address;
-
   heroBase$: Observable<IHero>;
 
   public heroImageUrl: string;
@@ -55,5 +54,9 @@ export class CharacterSheetComponent  {
         this.game.processCommands('abilita', false);
         break;
     }
+  }
+
+  openUploadAvatar() {
+    this.store.dispatch(clientAction.uploadAvatarAction())
   }
 }
