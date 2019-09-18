@@ -167,7 +167,6 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private updateObjectOrPerson(elements: any) {
     if (elements) {
-
       this.typeDetail = 'objPersDetail';
       this.objPersDetail = elements;
       this.setContent(this.typeDetail, this.objPersDetail);

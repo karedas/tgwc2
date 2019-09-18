@@ -306,7 +306,7 @@ tg-text {
   }
 
   .tg-extraoutput-detailcontent {
-    padding-right: 28px;
+    padding-right: 32px;
   }
 
   .tg-extraoutput--header {
@@ -326,7 +326,7 @@ tg-text {
       font-size: 1.2em;
       color: #ffe2ae;
       font-family: $modern-antiqua;
-      padding: 0 28px 0 4px;
+      padding: 0 32px 0 4px;
       box-shadow: inset 0px -5px 11px 0 black;
       position: sticky;
       z-index: 10;
@@ -343,7 +343,7 @@ tg-text {
 
     .tg-room--desc {
       color: $base-text-color;
-      padding: 3px 28px 0.2em 4px;
+      padding: 3px 32px 0.2em 4px;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
     }
