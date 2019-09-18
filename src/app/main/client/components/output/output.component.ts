@@ -12,7 +12,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
 import { OutputService } from './output.service';
 import { TGState } from '../../store';
-import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { MediaObserver } from '@angular/flex-layout';
 
 @Component({
   selector: 'tg-output',
@@ -167,7 +167,6 @@ export class OutputComponent implements OnInit, OnDestroy {
 
   private updateObjectOrPerson(elements: any) {
     if (elements) {
-
       this.typeDetail = 'objPersDetail';
       this.objPersDetail = elements;
       this.setContent(this.typeDetail, this.objPersDetail);

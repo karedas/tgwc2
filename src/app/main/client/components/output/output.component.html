@@ -37,7 +37,7 @@
                       *ngSwitchCase="'base'" 
                       [html]="data.content"></tg-text>
 
-                      <ng-container *ngIf="!tgConfig.widgetRoom.visible || mediaObserver.isActive('xs')">
+                      <ng-container *ngIf="!tgConfig.widgetRoom.visible || mediaObserver.isActive('xs') || mediaObserver.isActive('sm')">
                         <tg-room 
                         *ngSwitchCase="'room'" 
                         [withExtra]="false" 
@@ -72,7 +72,8 @@
         <!-- ################ Extra Output Area ################ -->
         <as-split-area 
           [size]="tgConfig.output.extraArea.size[1]" 
-          [visible]="(tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) && !mediaObserver.isActive('xs')">
+          [visible]="(tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) 
+            && !mediaObserver.isActive('xs') && !mediaObserver.isActive('sm')">
           <as-split class="tg-output--splitter" 
             [unit]="'pixel'" 
             direction="vertical" 

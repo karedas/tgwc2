@@ -3,11 +3,14 @@ import { SocketService } from '../../../core/services/socket.service';
 import { socketEvent } from '../../../core/models/socketEvent.enum';
 import { DataParser } from './dataParser.service';
 import { HistoryService } from './history.service';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription, timer, interval } from 'rxjs';
 import { pos_to_order, font_size_options, equipPositionByName } from 'src/app/main/client/common/constants';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
 import { cloneDeep, some, isObject } from 'lodash';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { switchMap, timeInterval, flatMap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -49,6 +52,7 @@ export class GameService {
         private dataParserService: DataParser,
         private historyService: HistoryService,
         private _configService: ConfigService,
+        private http: HttpClient,
         rendererFactory: RendererFactory2,
     ) {
         this.serverStat = new BehaviorSubject<any>(null);
@@ -71,6 +75,9 @@ export class GameService {
     }
 
     private init() {
+        
+        this.loadServerStat();
+
         this._configService.config
             .subscribe((config: TGConfig) => {
                 this.setZenMode(config.zen);
@@ -78,6 +85,15 @@ export class GameService {
                 this._tgConfig = config;
             });
     }
+
+
+    private loadServerStat() {
+        this.serverStat = 
+            timer(0, 25000).pipe( 
+                switchMap(() =>  this.http.get(environment.serverstatAddress) )
+            );
+    }
+    
 
     private updatePanels(what: any) {
         const now = Date.now();

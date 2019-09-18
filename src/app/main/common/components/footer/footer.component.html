@@ -6,8 +6,8 @@
         <span class="serverstatus--txt" [ngClass]="{'server_on': serverStatusMessage }">
           Server {{ serverStatusMessage === true ? 'online' : 'offline'}}
         </span>
-        <ng-container *ngIf="serverStatusMessage">
-          - Utenti in gioco: <span class="serverstatus--onlineuser">{{serverStat?.players.length || '0'}}</span>
+        <ng-container *ngIf="serverStat | async  as stat">
+          - Utenti in gioco: <span class="serverstatus--onlineuser">{{stat?.players.length || '0'}}</span>
         </ng-container>
       </div>
     </div>
