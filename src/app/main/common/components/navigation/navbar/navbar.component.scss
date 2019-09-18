@@ -150,7 +150,7 @@ tg-navbar {
       height: 20px;
       vertical-align: middle;
       width: 2px;
-      margin: 0 .5em 0 1.5em;
+      margin: 0 12px 0 12px;
       background: black;
     }
 
@@ -217,7 +217,6 @@ tg-navbar {
     line-height: 1;
     display: inline-block;
     vertical-align: middle;
-    padding-right: 14px;
   }
 
   b {
@@ -259,7 +258,6 @@ tg-navbar {
       height: 2px;
       display: block;
       background: white;
-      position: absolute;
       position: relative;
       top: 8px;
       left: 8px;
