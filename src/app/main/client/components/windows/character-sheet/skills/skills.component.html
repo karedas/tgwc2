@@ -28,7 +28,11 @@
                     <span [style.width.%]="heroSkillsValue.indexOf(subskill.value.prac) * 10"></span>
                   </div>
                   <div fxFlex="0 1 25%" class="skill-prac tg-llt-white">
-                    {{subskill.value.prac}}
+                    {{subskill.value.prac}}  
+                    <ng-container *ngIf="subskill.value.auto">
+                     <b class="tg-lt-red" tooltip="Autodidatta" placement="left" show-delay="500">(A)</b>
+                    </ng-container>
+                    
                   </div>
                 </div>
 
