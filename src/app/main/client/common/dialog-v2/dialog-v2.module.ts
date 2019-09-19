@@ -16,7 +16,6 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
 import { MatPaginatorIntl } from '@angular/material';
 import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
 import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
-import { UploadAvatarModule } from '../../components/windows/upload-avatar/upload-avatar.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { UploadAvatarModule } from '../../components/windows/upload-avatar/uploa
   ],
 
   imports: [
-    UploadAvatarModule,
     SharedModule,
     DragDropModule,
     CharacterSheetModule,

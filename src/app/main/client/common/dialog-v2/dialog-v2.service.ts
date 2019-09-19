@@ -13,7 +13,6 @@ import { WorkslistComponent } from '../../components/windows/workslist/workslist
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
 import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
-import { UploadAvatarComponent } from '../../components/windows/upload-avatar/upload-avatar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -406,23 +405,6 @@ export class DialogV2Service {
 
       const dialogRef = this.dialog.open(SelectableGenericComponent, config);
 
-      return dialogRef;
-    }
-  }
-
-  openUploadAvatar(): MatDialogRef<UploadAvatarComponent, MatDialogConfig> {
-    const dialogID = 'upload-avatar';
-    if(!this.dialog.getDialogById(dialogID)) {
-      const config = new MatDialogConfig();
-
-      config.id = dialogID;
-      config.width = '700px';
-      config.height = '600px';
-      config.maxHeight = '100%';
-      config.closeOnNavigation  = false;
-      config.scrollStrategy = this.overlay.scrollStrategies.noop();
-
-      const dialogRef  = this.dialog.open(UploadAvatarComponent, config);
       return dialogRef;
     }
   }

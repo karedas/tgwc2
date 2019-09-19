@@ -40,18 +40,6 @@ export class ClientEffects {
     ),
     { dispatch: false }
   );
-
-
-  $uploadImage = createEffect(() => 
-    this.actions$.pipe(
-      ofType(ClientEventType.UPLOADAVATAR),
-      tap(() => {
-        this.dialogV2Service.openUploadAvatar();
-      })
-    ),
-    { dispatch: false }
-  );
-
   constructor(
     private game: GameService,
     private actions$: Actions,
