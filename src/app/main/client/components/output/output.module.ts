@@ -8,7 +8,6 @@ import { OutputComponent } from './output.component';
 import { DetailsRoomComponent } from './renders/details-room/details-room.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularSplitModule } from 'angular-split';
-import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
 import { StatusComponent } from './status/status.component';
 import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
@@ -22,7 +21,6 @@ import { HeroEquipmentModule } from '../hero-equipment/hero-equipment.module';
     RoomComponent,
     TextComponent,
     DetailsRoomComponent,
-    ContextMenuComponent,
     GenericPageComponent,
     StatusComponent,
     SmartEquipInventoryComponent,

@@ -52,7 +52,6 @@ export class StatusBarComponent implements OnInit, OnDestroy  {
   onClickButton(what: string, param?: string) {
     param = param ? ' ' + param.substring(0, 4) : '';
     this.gameService.processCommands(what + param);
-    this.inputService.focus();
   }
 
   ngOnDestroy() {

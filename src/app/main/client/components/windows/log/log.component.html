@@ -1,5 +1,5 @@
 <div class="tg-log" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="tg-dialog-content-nopadding" fxLayout="column">
+  <div class="tg-dialog-content" fxLayout="column">
 
     <div class="tg-dialog-title" cdkDragHandle>
       Log di Gioco
@@ -8,7 +8,7 @@
       </button>
     </div>
 
-    <div class="tg-log-content" matDialogContent>
+    <div class="tg-log-content no-padding" matDialogContent>
       <ng-scrollbar [appearance]="'compact'" class="scrollbar">
 
         <div class="tg-log-date">Data Inizio Log: {{dateTime}}</div>

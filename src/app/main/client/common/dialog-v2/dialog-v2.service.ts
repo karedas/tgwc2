@@ -166,12 +166,6 @@ export class DialogV2Service {
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
 
-      dialogRef
-        .afterOpened().subscribe(() => {
-          // Keep focus on inputbar
-          this.inputService.focus();
-        })
-
       dialogRef.afterClosed().subscribe(() => {
       })
 
@@ -179,9 +173,6 @@ export class DialogV2Service {
 
     } else {
       this.dialog.getDialogById(dialogID).componentInstance.data = { tab: detail };
-      // Keep focus on inputbar
-      this.inputService.focus();
-
     }
   }
 
@@ -205,11 +196,6 @@ export class DialogV2Service {
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
 
       const dialogRef = this.dialog.open(CommandsListComponent, config);
-
-      dialogRef.afterOpened().subscribe(() => {
-        // Keep focus on inputbar
-        this.inputService.focus();
-      });
 
       return dialogRef;
     }
@@ -270,12 +256,6 @@ export class DialogV2Service {
       config.data = bookData;
 
       const dialogRef = this.dialog.open(BookComponent, config);
-
-      dialogRef.afterOpened().subscribe(() => {
-        // Keep focus on inputbar
-        this.inputService.focus();
-      });
-
       return dialogRef;
     } else {
       this.dialog.getDialogById(dialogID).componentInstance.data = bookData;
@@ -300,11 +280,6 @@ export class DialogV2Service {
 
       const dialogRef = this.dialog.open(GenericTableComponent, config);
 
-      dialogRef.afterOpened().subscribe(() => {
-        // Keep focus on inputbar
-        this.inputService.focus();
-      });
-
       return dialogRef;
     } else {
       this.increaseZIndex(this.dialog.getDialogById(dialogID));
@@ -328,8 +303,6 @@ export class DialogV2Service {
       config.autoFocus = false;
 
       const dialogRef = this.dialog.open(WorkslistComponent, config);
-      // Keep focus on inputbar
-      this.inputService.focus();
 
       return dialogRef;
     } else {
@@ -370,6 +343,7 @@ export class DialogV2Service {
       config.id = dialogID;
       config.width = '288px';
       config.height = 'auto';
+      config.maxHeight = '100%';
       config.autoFocus = false;
       config.hasBackdrop = false;
       config.scrollStrategy = this.overlay.scrollStrategies.noop();

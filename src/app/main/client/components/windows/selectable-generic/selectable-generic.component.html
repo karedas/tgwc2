@@ -1,6 +1,6 @@
 <div class="tg-selectable" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
   <div class="b-ironlight-mini tg-box">
-    <div class="tg-dialog-content-nopadding tg-shadow-inset" fxLayout="column">
+    <div class="tg-dialog-content tg-shadow-inset" fxLayout="column">
       <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
         {{data.title}}
         <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
@@ -8,7 +8,7 @@
         </button>
       </div>
 
-      <mat-dialog-content>
+      <mat-dialog-content class="no-padding">
         <div fxLayout="column" fxFlexFill>
           <div class="tg-selectable-content">
             <p>{{data.desc}}</p>

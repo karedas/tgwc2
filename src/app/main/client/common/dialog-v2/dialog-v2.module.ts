@@ -29,7 +29,7 @@ import { SelectableGenericComponent } from '../../components/windows/selectable-
     LogComponent,
     ShortcutsPanelComponent,
     CharacterSheetComponent,
-    SelectableGenericComponent
+    SelectableGenericComponent,
   ],
 
   imports: [
@@ -50,7 +50,7 @@ import { SelectableGenericComponent } from '../../components/windows/selectable-
     CharacterSheetComponent,
     LogComponent,
     ShortcutsPanelComponent,
-    SelectableGenericComponent
+    SelectableGenericComponent,
 
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: GetItalianPaginatorIntl}]
