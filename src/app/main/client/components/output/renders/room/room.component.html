@@ -14,8 +14,8 @@
           <!-- Room Description -->
           <div class="tg-room--desc tg-llt-white">
             <ng-container *ngIf="html.desc.details; else regularDescBase">
-              <div [innerHtml]="html.desc.details | dataToHtml:true | capitalizeFirst"></div>
-              <div [innerHtml]="(html?.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
+              <div [innerHtml]="html.desc.details | dataToHtml:true | capitalizeFirst" class="tg-d-details"></div>
+              <div [innerHtml]="(html?.desc.base ? html.desc.base : lastDescription) | dataToHtml:true" class="tg-d-base"></div>
             </ng-container>
 
             <ng-template #regularDescBase>
@@ -57,8 +57,8 @@
             <ng-container *ngIf="type === 'room'">
               <div class="tg-room--desc tg-llt-white">
                 <ng-container *ngIf="html.desc.details; else extra_regularDescBase">
-                  <div [innerHtml]="html.desc.details | dataToHtml: true"></div>
-                  <div [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true"></div>
+                  <div [innerHtml]="html.desc.details | dataToHtml: true" class="tg-d-details"></div>
+                  <div [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml:true" class="tg-d-base"></div>
                 </ng-container>
 
                 <ng-template #extra_regularDescBase>
@@ -70,7 +70,7 @@
             <ng-container *ngIf="type ==='objPersDetail' && html.desc">
               <div [innerHtml]="html.desc.base | dataToHtml:true" class="tg-room--desc tg-llt-white"
                 *ngIf="html.desc.base"></div>
-              <div class="tg-objperson--descdetail tg-green"
+              <div class="tg-objperson--descdetail tg-green tg-d-details"
                 [innerHtml]="(html.desc.details)  | capitalizeFirst | dataToHtml:true" *ngIf="html.desc.details"></div>
             </ng-container>
 

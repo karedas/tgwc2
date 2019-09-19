@@ -1,6 +1,6 @@
 <div class="tg-status-bar" *ngIf="hero$ | async as hero" fxHide.xs='true'>
   <div class="tg-status-bar-wrap" fxLayout="row">
-    <div class="badges-left" fxLayout>
+    <div class="badges-left" fxLayout="row wrap" fxFlex="0 1 auto">
 
       <div class="badge" fxLayout fxLayoutAlign="center center">
 
@@ -82,7 +82,7 @@
             Difesa
           </div>
           <button mat-button [matMenuTriggerFor]="menuDifesa" class="tg-cyan with-label tg-status-bar--button">
-            <span class="status-icon-box status-combat-mod" [ngClass]="{
+            <span class="status-icon-box status-combat-mod" fxHide fxShow.gt-sm [ngClass]="{
                 'mod-par-a': (hero.combat.mod === 'deflettere'),
                 'mod-par-s': (hero.combat.mod === 'parare'),
                 'mod-sch': (hero.combat.mod === 'schivare')}">
@@ -98,7 +98,7 @@
       </div>
 
     </div>
-    <div class="badges-right">
+    <div class="badges-right" fxHide fxShow.gt-sm>
       <div class="badge-text" 
         *ngIf="hero.wprc"  
         fxLayout fxLayoutAlign="center center" tooltip="Peso Trasportato" show-delay="500" placement="top">
