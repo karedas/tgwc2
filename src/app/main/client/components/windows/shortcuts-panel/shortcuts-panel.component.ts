@@ -40,6 +40,7 @@ export class ShortcutsPanelComponent implements OnInit, OnDestroy {
   }
 
   sendCmd(event: any, cmd: string) {
+    event.preventDefault();
     this.game.processCommands(cmd);
     this.inputService.focus();
   }
