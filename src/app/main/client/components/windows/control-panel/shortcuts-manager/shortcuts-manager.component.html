@@ -70,6 +70,7 @@
 
     <!-- New Shortcut Form -->
 
+  </ng-scrollbar>
     <div class="tg-shortcut-new" [ngClass]="{ open: newShortcutOpenedStatus }">
       <form [formGroup]="newShortcutForm" (ngSubmit)="saveShortcut()" #f="ngForm">
         <div class="tg-shortcut-icon">
@@ -116,5 +117,4 @@
         </ng-scrollbar>
       </div>
     </div>
-  </ng-scrollbar>
 </div>
