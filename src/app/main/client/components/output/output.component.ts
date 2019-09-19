@@ -199,7 +199,7 @@ export class OutputComponent implements OnInit, OnDestroy {
   private scrollPanelToBottom() {
     setTimeout(() => {
       this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, {
-        duration: 50
+        duration: 80
       });
     }, 0);
   }
