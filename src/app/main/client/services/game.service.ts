@@ -1,4 +1,4 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from "@angular/core";
 import { SocketService } from '../../../core/services/socket.service';
 import { socketEvent } from '../../../core/models/socketEvent.enum';
 import { DataParser } from './dataParser.service';

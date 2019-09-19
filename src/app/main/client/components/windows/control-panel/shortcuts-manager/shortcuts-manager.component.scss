@@ -1,5 +1,8 @@
 @import 'abstract/variables';
 
+:host {
+  height: 100%;
+}
 
 .tg-shortcuts-area {
   height: 100%;
@@ -85,6 +88,7 @@
 }
 
 .tg-shortcuts-all {
+  margin-bottom: 24px;
   max-height: 400px;
 }
 

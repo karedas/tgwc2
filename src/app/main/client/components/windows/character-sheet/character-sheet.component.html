@@ -10,10 +10,10 @@
 
       <mat-dialog-content class="tg-character-content no-padding">
         <div fxLayout="row" style="min-height: 100%">
-          
+
           <!-- ######## Info Main Character ########  -->
           <div class="info-main" fxLayout="column" fxFlex="1 1 auto" fxHide.xs="true">
-           
+
             <div class="info-avatar tg-shadow" (click)="openUploadAvatar();">
               <img id="infoimage" src="{{ imagepath + hero.image }}" *ngIf="hero.image" />
             </div>
@@ -24,38 +24,34 @@
             </div>
 
             <nav class="info-menu flex-column">
-              
+
               <button class="btn-i-generale tg-button tg-shadow nav-item nav-link active"
-                (click)="data.tab !== 'info' && switchPanel('info', $event)"
-                [ngClass]="{'active': data.tab =='info'}"
+                (click)="data.tab !== 'info' && switchPanel('info', $event)" [ngClass]="{'active': data.tab =='info'}"
                 matRipple>Generalit&agrave;</button>
-              
+
               <button class="btn-i-equipinv tg-button tg-shadow nav-item nav-link"
                 (click)="(data.tab !== 'equip' && data.tab !== 'inventory') && switchPanel('equip', $event)"
-                [ngClass]="{'active': (data.tab == 'equip' || data.tab == 'inventory')}"
-                matRipple>Equip &amp; Inventario</button>
-              
+                [ngClass]="{'active': (data.tab == 'equip' || data.tab == 'inventory')}" matRipple>Equip &amp;
+                Inventario</button>
+
               <button class="btn-i-ability tg-button tg-shadow nav-item nav-link"
                 (click)="data.tab !== 'skills' && switchPanel('skills', $event)"
-                [ngClass]="{'active': data.tab =='skills'}"
-                matRipple>Abilità Personali</button>
+                [ngClass]="{'active': data.tab =='skills'}" matRipple>Abilità Personali</button>
 
             </nav>
 
           </div>
-          
+
           <div class="right-data" fxLayout="column" fxFlex="0 1 100%">
             <tg-info *ngIf="data.tab == 'info'" style="height: 100%;"></tg-info>
-            <tg-equip-inventory 
-              *ngIf="data.tab == 'equip' || data.tab == 'inventory'" 
-              style="height:100%;"
+            <tg-equip-inventory *ngIf="data.tab == 'equip' || data.tab == 'inventory'" style="height:100%;"
               [subTab]="data.tab"></tg-equip-inventory>
             <tg-skills *ngIf="data.tab == 'skills'"></tg-skills>
           </div>
-          
+
         </div>
       </mat-dialog-content>
-      
+
     </div>
     <div class="tg-border-box">
       <div class="tg-border tg-border-top"></div>
