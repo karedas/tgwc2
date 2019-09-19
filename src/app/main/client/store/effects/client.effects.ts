@@ -40,6 +40,7 @@ export class ClientEffects {
     ),
     { dispatch: false }
   );
+
   constructor(
     private game: GameService,
     private actions$: Actions,

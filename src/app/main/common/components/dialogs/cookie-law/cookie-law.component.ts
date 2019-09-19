@@ -24,8 +24,4 @@ export class CookieLawComponent {
     this.cookieService.set('tgCookieLaw', '1', 365, '/');
     this.dialogRef.close();
   }
-
-  onFocus() {
-  }
-
 }
