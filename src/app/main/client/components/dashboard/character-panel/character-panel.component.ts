@@ -3,7 +3,7 @@ import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero, getDirectionNotify } from 'src/app/main/client/store/selectors';
 import { Subject, Observable, Subscription } from 'rxjs';
-import { takeUntil, filter, distinctUntilChanged } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/main/client/models/data/hero.model';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -57,15 +57,12 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   enemyName = '';
   enemyIcon: number = null;
 
-  activeMediaQuery = '';
-
   private watcherMedia: Subscription;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private store: Store<DataState>,
     private game: GameService,
-    private mediaObserver: MediaObserver,
     private _configService: ConfigService
   ) {
 
@@ -82,15 +79,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {
         this.tgConfig = config;
-      });
-
-    // TODO Move this in the root component
-    this.watcherMedia = this.mediaObserver.asObservable()
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((changes: MediaChange[]) => {
-        changes.forEach(change => {
-          this.activeMediaQuery = change ? change.mqAlias : '';
-        });
       });
 
     this.hero$

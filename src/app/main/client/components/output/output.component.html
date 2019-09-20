@@ -1,31 +1,23 @@
-<div class="tg-output tg-box b-ironlight" fxFlex="1 1 100%" [ngClass]="{'pause-scroll': pauseScroll}">
+<div class="tg-output tg-box b-ironlight" fxFlex="1 1 100%" [ngClass]="{ 'pause-scroll': pauseScroll }">
   <div class="tg-box" fxFlex="100" fxLayout="column">
-
-
     <div class="tg-output-main" #mainOutputArea>
-
       <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'"
         (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
-
         <!--  ################ Main Output Area ################ -->
-        <as-split-area 
-          [size]="tgConfig.output.extraArea.size[0]"
-          [ngClass]="{'in-pause': pauseScroll}"
+        <as-split-area [size]="tgConfig.output.extraArea.size[0]" [ngClass]="{ 'in-pause': pauseScroll }"
           style="position:relative">
-          
           <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-            Autoscroll disattivato 
-            <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">Vai
-              al segnaposto</button>
+            Autoscroll disattivato
+            <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">
+              Vai al segnaposto
+            </button>
           </div>
 
           <tg-status></tg-status>
 
           <div style="height: 100%; overflow:hidden;" class="o-container">
-
-            <ng-scrollbar class="scrollbar-output" [ngClass]="{'disabled': draggingSplitArea}" #scrollBar
+            <ng-scrollbar class="scrollbar-output" [ngClass]="{ disabled: draggingSplitArea }" #scrollBar
               [disabled]="draggingSplitArea">
-
               <div class="tg-output--history">
                 <div *ngIf="!output.length" class="no-output-notice">
                   Scrivi qualcosa o semplicemente aspetta...
@@ -33,83 +25,62 @@
 
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">
-                    <tg-text 
-                      *ngSwitchCase="'base'" 
-                      [html]="data.content"></tg-text>
+                    <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
 
-                      <ng-container *ngIf="!tgConfig.widgetRoom.visible || mediaObserver.isActive('xs') || mediaObserver.isActive('sm')">
-                        <tg-room 
-                        *ngSwitchCase="'room'" 
-                        [withExtra]="false" 
-                        [html]="data.content"
+                    <ng-container *ngIf="
+                        !tgConfig.widgetRoom.visible ||
+                        mediaObserver.isActive('xs') ||
+                        mediaObserver.isActive('sm')">
+                      <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
                         [lastDescription]="lastRoomDescription"></tg-room>
-                        
-                        <tg-objpers-detail
-                          *ngSwitchCase="'objPersDetail'" 
-                          [html]="data.content"></tg-objpers-detail>
-                      </ng-container>
-                      
-   
 
-                    <tg-generic-page 
-                      *ngSwitchCase="'genericPage'" 
-                      [html]='data.content'></tg-generic-page>
-
-                    <ng-container *ngSwitchCase="'pause'">
-                      <div #pausePlaceholder class="placeholder-pause" fxLayout="row">SEGNAPOSTO</div>
+                      <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
                     </ng-container>
 
+                    <tg-generic-page *ngSwitchCase="'genericPage'" [html]="data.content"></tg-generic-page>
+
+                    <ng-container *ngSwitchCase="'pause'">
+                      <div #pausePlaceholder class="placeholder-pause" fxLayout="row">
+                        SEGNAPOSTO
+                      </div>
+                    </ng-container>
                   </ng-container>
                 </ng-container>
-
               </div>
               <div id="scrollerEnd" #scrollerEnd></div>
             </ng-scrollbar>
-
           </div>
-
         </as-split-area>
         <!-- ################ Extra Output Area ################ -->
-        <as-split-area 
-          [size]="tgConfig.output.extraArea.size[1]" 
-          [visible]="(tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) 
-            && !mediaObserver.isActive('xs') && !mediaObserver.isActive('sm')">
-          <as-split class="tg-output--splitter" 
-            [unit]="'pixel'" 
-            direction="vertical" 
-            [gutterSize]="9"
+        <as-split-area [size]="tgConfig.output.extraArea.size[1]" [visible]="
+            (tgConfig.widgetRoom.visible || tgConfig.widgetEquipInv.visible) &&
+            !mediaObserver.isActive('xs') &&
+            !mediaObserver.isActive('sm')
+          ">
+          <as-split class="tg-output--splitter" [unit]="'pixel'" direction="vertical" [gutterSize]="9"
             (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, 'widgets')">
-
-            <as-split-area              
-              [size]="tgConfig.widgetRoom.size >= 0 ? tgConfig.widgetRoom.size : '*'" 
-              [visible]="tgConfig.widgetRoom.visible" 
-              [order]="1">
-                <tg-room *ngIf="tgConfig.widgetRoom.visible"
-                  [html]="typeDetail ==='room' ? (lastRoom$ | async) : objPersDetail" 
-                  [withExtra]="true"
-                  [lastDescription]="lastRoomDescription" 
-                  [draggingSplitArea]="draggingSplitArea" 
-                  [type]="typeDetail">
-                </tg-room>
-
+            <as-split-area [size]="
+                tgConfig.widgetRoom.size >= 0 ? tgConfig.widgetRoom.size : '*'
+              " [visible]="tgConfig.widgetRoom.visible" [order]="1">
+              <tg-room *ngIf="tgConfig.widgetRoom.visible" [html]="
+                  typeDetail === 'room' ? (lastRoom$ | async) : objPersDetail
+                " [withExtra]="true" [lastDescription]="lastRoomDescription" [draggingSplitArea]="draggingSplitArea"
+                [type]="typeDetail">
+              </tg-room>
             </as-split-area>
 
-            <as-split-area  [visible]="tgConfig.widgetEquipInv.visible" 
-              [size]="tgConfig.widgetEquipInv.collapsed ? 30 : tgConfig.widgetEquipInv.size" 
-              [lockSize]="tgConfig.widgetEquipInv.collapsed"
-              [order]="2">
-
+            <as-split-area [visible]="tgConfig.widgetEquipInv.visible" [size]="
+                tgConfig.widgetEquipInv.collapsed
+                  ? 30
+                  : tgConfig.widgetEquipInv.size
+              " [lockSize]="tgConfig.widgetEquipInv.collapsed" [order]="2">
               <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea"></tg-smart-equip-inventory>
-
             </as-split-area>
-
           </as-split>
           <!-- </div> -->
         </as-split-area>
-
       </as-split>
     </div>
-
   </div>
   <div class="tg-border-box">
     <div class="tg-border tg-border-top"></div>

@@ -5,7 +5,6 @@ import { ObjPersContainerComponent } from './renders/objpers-container/objpers-c
 import { RoomComponent } from './renders/room/room.component';
 import { TextComponent } from './renders/text/text.component';
 import { OutputComponent } from './output.component';
-import { DetailsRoomComponent } from './renders/details-room/details-room.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularSplitModule } from 'angular-split';
 import { GenericPageComponent } from './renders/generic-page/generic-page.component';
@@ -13,6 +12,8 @@ import { StatusComponent } from './status/status.component';
 import { SmartEquipInventoryComponent } from './smart-equip-inventory/smart-equip-inventory.component';
 import { HeroInventoryModule } from '../hero-inventory/hero-inventory.module';
 import { HeroEquipmentModule } from '../hero-equipment/hero-equipment.module';
+import { RoomObjectsListComponent } from './renders/room-objects-list/room-objects-list.component';
+import { RoomPersonsListComponent } from './renders/room-persons-list/room-persons-list.component';
 @NgModule({
   declarations: [
     OutputComponent,
@@ -20,10 +21,11 @@ import { HeroEquipmentModule } from '../hero-equipment/hero-equipment.module';
     ObjPersContainerComponent,
     RoomComponent,
     TextComponent,
-    DetailsRoomComponent,
     GenericPageComponent,
     StatusComponent,
     SmartEquipInventoryComponent,
+    RoomObjectsListComponent,
+    RoomPersonsListComponent,
   ],
   imports: [
     CommonModule,

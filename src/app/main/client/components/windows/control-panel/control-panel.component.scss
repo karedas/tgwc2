@@ -4,22 +4,24 @@
 
 :host {
   color: $base-text-color;
-} 
+}
 
 .tg-control-panel--tab {
-  background:  #ffffff12  url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;;
+  background: #ffffff12 url($imgPath + '/borders/border-002-tiny-v.png') top right repeat-y;
+  ;
   text-transform: uppercase;
   color: $base-text-color;
   height: 100%;
 }
 
-.tg-control-panel-tabitem{
-  padding:1em;
+.tg-control-panel-tabitem {
+  padding: 1em;
   cursor: pointer;
-  background-color: none;
+  background-color: transparent;
   transition: background-color .1s linear;
 
-  &:hover, &.active{
+  &:hover,
+  &.active {
     color: white;
     background-color: rgba(255, 255, 255, 0.08);
   }
@@ -32,13 +34,16 @@
 
 .tg-control-panel--tabcontent {
   background-color: #00000082;
-  display: none;
   padding: 1em;
-  min-height: 400px;
   position: relative;
+  min-height: 400px;
   padding: 1em;
 
-  &.active {
+  .content {
+    display: none;
+  }
+
+  .content.active {
     display: block;
   }
 }
@@ -47,8 +52,8 @@
   padding-bottom: 1em;
 }
 
-.tg-control-panel--suboption{
-  padding:0;
+.tg-control-panel--suboption {
+  padding: 0;
 
   h4 {
     color: #bfbfbf;

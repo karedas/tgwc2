@@ -264,11 +264,8 @@ tg-text {
 
   .size-qty {
     margin-right: 20px !important;
-    background: #2a1f15;
     color: white;
     height: auto;
-    border-radius: 4px;
-    padding: 0px 4px;
     border: 1px solid #5f5c59;
     display: inline-block;
     position: relative;
@@ -300,6 +297,7 @@ tg-text {
   }
 
   .tg-extraoutput-detailcontent {
+    padding-top:12px;
     padding-right: 32px;
   }
 
