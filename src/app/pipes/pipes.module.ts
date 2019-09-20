@@ -3,6 +3,8 @@ import { DataToHtmlPipe } from './dataToHtml.pipe';
 import { IconsPipe } from './icons.pipe';
 import { GetEthnicityByCodePipe } from './get-ethnicity-by-code.pipe';
 import { CapitalizeFirstPipe } from './capitalizeFirst.pipe';
+import { AlphabeticalOrderPipe } from './alphabetical-order.pipe';
+import { QuantitySortPipe } from './quantity-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -10,6 +12,8 @@ import { CapitalizeFirstPipe } from './capitalizeFirst.pipe';
     IconsPipe,
     CapitalizeFirstPipe,
     GetEthnicityByCodePipe,
+    AlphabeticalOrderPipe,
+    QuantitySortPipe,
   ],
   imports: [],
   exports: [
@@ -17,6 +21,8 @@ import { CapitalizeFirstPipe } from './capitalizeFirst.pipe';
     DataToHtmlPipe,
     CapitalizeFirstPipe,
     GetEthnicityByCodePipe,
+    AlphabeticalOrderPipe,
+    QuantitySortPipe
   ]
 })
 export class PipesModule { }

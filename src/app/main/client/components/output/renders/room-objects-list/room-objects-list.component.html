@@ -1,0 +1,38 @@
+<div class="tg-objects" [ngClass]="{ 'list-50-50': objsClass50_50, 'list-50': objsClass50 }">
+  <ng-container *ngFor="let object of objects | quantitySort:'mrn'; let i = index">
+    <div
+      class="tg-objects--line interact"
+      [ngClass]="{ expandlist: object.sz, open: togglePanel[i] }"
+      (mousedown)="onExpand($event, object, i)">
+      <tg-icons
+        [icon]="object.icon"
+        (mousedown)="onInteract(object)"
+        tooltip="Guarda"
+        placement="left"
+        show-delay="500"
+      ></tg-icons>
+
+      <tg-hstat [condprc]="object.condprc" *ngIf="!object.sz; else quantity_3"></tg-hstat>
+
+      <ng-template #quantity_3>
+        <div class="size-qty">
+          <span>{{ object.sz }}</span>
+        </div>
+      </ng-template>
+      <div class="tg-objects--item_desc" [innerHtml]="object.desc | dataToHtml"></div>
+    </div>
+
+    <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="column">
+      <div class="tg-objects--line" *ngFor="let objMrn of object.mrn; let indexSz = index" placement="left">
+        <tg-icons tooltip="Guarda" [icon]="object.icon" (mousedown)="onInteract(object, indexSz)"></tg-icons>
+        <tg-hstat [condprc]="object.condprc"></tg-hstat>
+
+        <div class="tg-object--itemdesc" [innerHtml]="object.desc | dataToHtml" [attr.mrn]="object.mrn[indexSz]"></div>
+      </div>
+
+      <div class="tg-objects--line" *ngIf="object.sz - object.mrn.length > 0; let more">
+        Altri {{ object.sz - object.mrn.length }} ...
+      </div>
+    </div>
+  </ng-container>
+</div>

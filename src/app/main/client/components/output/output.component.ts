@@ -3,8 +3,7 @@ import {
   ViewChild,
   OnInit,
   OnDestroy,
-  ElementRef,
-  HostListener
+  ElementRef
 } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { takeUntil } from "rxjs/operators";
@@ -59,7 +58,6 @@ export class OutputComponent implements OnInit, OnDestroy {
   private _objOrPerson$: Observable<any>;
   private _genericPage$: Observable<any>;
   private latestLineBeforePause: number;
-  private resizeID: any;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -80,8 +78,8 @@ export class OutputComponent implements OnInit, OnDestroy {
     private outputService: OutputService,
     private store: Store<TGState>,
     private game: GameService,
-    public mediaObserver: MediaObserver,
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    public mediaObserver: MediaObserver
   ) {
     this.lastRoom$ = this.store.select(getRoomBase);
     this._inGameStatus = this.store.select(getInGameStatus);
@@ -144,7 +142,6 @@ export class OutputComponent implements OnInit, OnDestroy {
     this.trimOutput();
     this.output.push(content);
     this.outputObservable.next(this.output);
-
     if (!this.pauseScroll) {
       this.scrollPanelToBottom();
     }
@@ -245,12 +242,6 @@ export class OutputComponent implements OnInit, OnDestroy {
     }
 
     this.draggingSplitArea = false;
-  }
-
-  toggleEquipInventorySplit() {
-    this._configService.setConfig({
-      widgetEquipInv: { visible: false }
-    });
   }
 
   ngOnDestroy() {

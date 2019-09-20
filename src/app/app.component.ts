@@ -1,6 +1,6 @@
 import { Component, Inject, Renderer2, OnDestroy } from "@angular/core";
 import { Router, NavigationEnd } from '@angular/router';
-import { BreakpointObserver, Breakpoints, MediaMatcher, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
@@ -33,13 +33,7 @@ export class AppComponent implements OnDestroy {
   title = 'The Gate v2 WebClient';
 
   assetsLoaded = false;
-  matcher: MediaQueryList;
-
-  private mediaQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
-
   constructor(
-    public mediaMatcher: MediaMatcher,
     private router: Router,
     private cookieService: CookieService,
     public breakpointObserver: BreakpointObserver,
@@ -78,6 +72,5 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mediaQuery.removeEventListener('change', this._mobileQueryListener);
   }
 }

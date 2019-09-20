@@ -3,132 +3,212 @@
     <div class="tg-dialog-content tg-shadow-inset">
       <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
         Preferenze
-        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+        <button
+          mat-icon-button
+          class="tg-dialog--close"
+          [mat-dialog-close]="true"
+        >
           <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
         </button>
       </div>
       <mat-dialog-content class="no-padding">
         <div fxLayout="row" fxFlexFill>
           <div fxFlex="0 0 auto" class="tg-control-panel--tab">
-            <div class="tg-control-panel-tabitem" (click)="setTab(0)" matRipple [ngClass]="{ active: 0 === tabOpen }">
+            <div
+              class="tg-control-panel-tabitem"
+              (click)="setTab(0)"
+              matRipple
+              [ngClass]="{ active: 0 === tabOpen }"
+            >
               Generale
             </div>
-            <div class="tg-control-panel-tabitem" (click)="setTab(1)" matRipple [ngClass]="{ active: 1 === tabOpen }">
+            <div
+              class="tg-control-panel-tabitem"
+              (click)="setTab(1)"
+              matRipple
+              [ngClass]="{ active: 1 === tabOpen }"
+            >
               Audio
             </div>
-            <div class="tg-control-panel-tabitem" (click)="setTab(2)" matRipple [ngClass]="{ active: 2 === tabOpen }">
+            <div
+              class="tg-control-panel-tabitem"
+              (click)="setTab(2)"
+              matRipple
+              [ngClass]="{ active: 2 === tabOpen }"
+            >
               Scorciatoie
             </div>
           </div>
+          <div fxFlex="0 1 100%" class="tg-control-panel-tabcontent">
+            <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'">
+              <!-- Generale -->
+              <div class="content" [ngClass]="{ active: 0 === tabOpen }">
+                <h3 class="tg-control-panel--subtitle" style="margin-top:0;">
+                  Client
+                </h3>
 
-          <!-- Generale -->
-          <div fxFlex="0 1 100%" class="tg-control-panel--tabcontent" [ngClass]="{ active: 0 === tabOpen }">
-            <ng-scrollbar class="scrollbar" #scrollBar>
+                <mat-divider></mat-divider>
 
-              <h3 class="tg-control-panel--subtitle" style="margin-top:0;">
-                Client
-              </h3>
+                <div class="tg-control-panel--option">
+                  <mat-form-field>
+                    <mat-label>Dimensione Testo</mat-label>
+                    <mat-select
+                      required
+                      (selectionChange)="changeFontSize($event)"
+                      [value]="tgConfig.fontSize"
+                    >
+                      <mat-option
+                        *ngFor="let size of fontSizes; let idx = index"
+                        [value]="idx"
+                        >{{ size.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
 
-              <mat-divider></mat-divider>
+                <div class="tg-control-panel--option">
+                  <mat-checkbox
+                    [(ngModel)]="tgConfig.characterPanel"
+                    (change)="
+                      onOptionChange($event, { characterPanel: $event.checked })
+                    "
+                    [disabled]="tgConfig.zen"
+                    >Mostra pannello personaggio</mat-checkbox
+                  >
+                </div>
 
-              <div class="tg-control-panel--option">
-                <mat-form-field>
-                  <mat-label>Dimensione Testo</mat-label>
-                  <mat-select required (selectionChange)="changeFontSize($event)" [value]="tgConfig.fontSize">
-                    <mat-option *ngFor="let size of fontSizes; let idx = index" [value]="idx">{{ size.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <div class="tg-control-panel--option">
+                  <mat-label id="character-panel-radio-label"
+                    >Posizione del pannello personaggio</mat-label
+                  ><br />
+                  <mat-radio-group
+                    aria-labelledby="character-panel-radio-label"
+                    [(ngModel)]="tgConfig.characterPanelTopPosition"
+                    (change)="
+                      onOptionChange($event, {
+                        characterPanelTopPosition: $event.value
+                      })
+                    "
+                    [disabled]="tgConfig.zen || !tgConfig.characterPanel"
+                  >
+                    <mat-radio-button [value]="0" color="accent"
+                      >In alto</mat-radio-button
+                    >&nbsp;
+                    <mat-radio-button [value]="1" color="accent"
+                      >In Basso</mat-radio-button
+                    >
+                  </mat-radio-group>
+                </div>
+
+                <div class="tg-control-panel--option">
+                  <mat-checkbox
+                    [ngModel]="tgConfig.zen"
+                    (change)="onOptionChange($event, { zen: $event.checked })"
+                  >
+                    Modalità Zen</mat-checkbox
+                  >
+                </div>
+
+                <div class="tg-control-panel--option">
+                  <mat-checkbox
+                    [(ngModel)]="tgConfig.logSave"
+                    (change)="
+                      onOptionChange($event, { logSave: $event.checked })
+                    "
+                  >
+                    Chiedi salvataggio log alla chiusura</mat-checkbox
+                  >
+                </div>
+
+                <p class="tg-lt-white">
+                  <u
+                    >Il salvataggio della configurazione viene applicato
+                    automaticamente ad ogni singola modifica effettuata.</u
+                  >
+                </p>
+
+                <mat-divider></mat-divider>
+
+                <h3 class="tg-control-panel--subtitle">
+                  File di configurazione
+                </h3>
+                <p>
+                  Salva o carica il tuo file di configurazione che conterrà le
+                  tue preferenze per il client (scorciatoie incluse).
+                </p>
+
+                <button mat-raised-button (click)="saveConfig()">
+                  Scarica file</button
+                >&nbsp;
+
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="fileInput.click()"
+                >
+                  Carica file
+                </button>
+
+                <input
+                  hidden
+                  type="file"
+                  #fileInput
+                  (change)="uploadConfig($event)"
+                />
+
+                <p *ngIf="fileUploaded" class="tg-green">File Caricato!</p>
               </div>
 
-              <div class="tg-control-panel--option">
-                <mat-checkbox [(ngModel)]="tgConfig.characterPanel" (change)="
-                  onOptionChange($event, { characterPanel: $event.checked })
-                " [disabled]="tgConfig.zen">Mostra pannello personaggio</mat-checkbox>
+              <!-- Audio -->
+              <div class="content" [ngClass]="{ active: 1 === tabOpen }">
+                <div class="tg-control-panel--option">
+                  <mat-checkbox
+                    [(ngModel)]="tgConfig.audio.enable"
+                    (change)="onAudioChange($event, 'enable')"
+                  >
+                    Abilita effetti sonori e musica d'ambiente</mat-checkbox
+                  >
+                </div>
+                <div class="tg-control-panel--suboption">
+                  <h4>Volume Musica</h4>
+                  <mat-slider
+                    [disabled]="!tgConfig.audio.enable"
+                    [displayWith]="formatAudio"
+                    (input)="onAudioChange($event, 'music')"
+                    [thumbLabel]="true"
+                    class="tg-slider"
+                    max="100"
+                    min="1"
+                    value="{{ tgConfig.audio.musicVolume }}"
+                    step="1"
+                  >
+                  </mat-slider>
+                  {{ tgConfig.audio.musicVolume }}
+                </div>
+
+                <div class="tg-control-panel--suboption">
+                  <h4>Volume Suoni</h4>
+                  <mat-slider
+                    [disabled]="!tgConfig.audio.enable"
+                    [displayWith]="formatAudio"
+                    (input)="onAudioChange($event, 'sound')"
+                    [thumbLabel]="true"
+                    class="tg-slider"
+                    max="100"
+                    min="1"
+                    value="{{ tgConfig.audio.soundVolume }}"
+                    step="1"
+                  >
+                  </mat-slider>
+                  {{ tgConfig.audio.soundVolume }}
+                </div>
               </div>
 
-              <div class="tg-control-panel--option">
-                <mat-label id="character-panel-radio-label">Posizione del pannello personaggio</mat-label><br />
-                <mat-radio-group aria-labelledby="character-panel-radio-label"
-                  [(ngModel)]="tgConfig.characterPanelTopPosition" (change)="
-                  onOptionChange($event, {
-                    characterPanelTopPosition: $event.value
-                  })
-                " [disabled]="tgConfig.zen || !tgConfig.characterPanel">
-                  <mat-radio-button [value]="0" color="accent">In alto</mat-radio-button>&nbsp;
-                  <mat-radio-button [value]="1" color="accent">In Basso</mat-radio-button>
-                </mat-radio-group>
+              <!-- Shortcuts -->
+              <div class="content" [ngClass]="{ active: 2 === tabOpen }">
+                <tg-shortcuts-manager></tg-shortcuts-manager>
               </div>
-
-              <div class="tg-control-panel--option">
-                <mat-checkbox [ngModel]="tgConfig.zen" (change)="onOptionChange($event, { zen: $event.checked })">
-                  Modalità
-                  Zen</mat-checkbox>
-              </div>
-
-              <div class="tg-control-panel--option">
-                <mat-checkbox [(ngModel)]="tgConfig.logSave"
-                  (change)="onOptionChange($event, { logSave: $event.checked })">
-                  Chiedi salvataggio log alla chiusura</mat-checkbox>
-              </div>
-
-              <p class="tg-lt-white">
-                <u>Il salvataggio della configurazione viene applicato
-                  automaticamente ad ogni singola modifica effettuata.</u>
-              </p>
-
-              <mat-divider></mat-divider>
-
-              <h3 class="tg-control-panel--subtitle">File di configurazione</h3>
-              <p>
-                Salva o carica il tuo file di configurazione che conterrà le tue
-                preferenze per il client (scorciatoie incluse).
-              </p>
-
-              <button mat-raised-button (click)="saveConfig()">
-                Scarica file</button>&nbsp;
-
-              <button mat-raised-button color="accent" (click)="fileInput.click()">
-                Carica file
-              </button>
-
-              <input hidden type="file" #fileInput (change)="uploadConfig($event)" />
-
-              <p *ngIf="fileUploaded" class="tg-green">File Caricato!</p>
             </ng-scrollbar>
-          </div>
-
-          <!-- Audio -->
-          <div fxFlex="0 1 100%" class="tg-control-panel--tabcontent" [ngClass]="{ active: 1 === tabOpen }">
-            <ng-scrollbar class="scrollbar" #scrollBar>
-
-              <div class="tg-control-panel--option">
-                <mat-checkbox [(ngModel)]="tgConfig.audio.enable" (change)="onAudioChange($event, 'enable')">
-                  Abilita effetti sonori e musica d'ambiente</mat-checkbox>
-              </div>
-              <div class="tg-control-panel--suboption">
-                <h4>Volume Musica</h4>
-                <mat-slider [disabled]="!tgConfig.audio.enable" [displayWith]="formatAudio"
-                  (input)="onAudioChange($event, 'music')" [thumbLabel]="true" class="tg-slider" max="100" min="1"
-                  value="{{ tgConfig.audio.musicVolume }}" step="1">
-                </mat-slider>
-                {{ tgConfig.audio.musicVolume }}
-              </div>
-
-              <div class="tg-control-panel--suboption">
-                <h4>Volume Suoni</h4>
-                <mat-slider [disabled]="!tgConfig.audio.enable" [displayWith]="formatAudio"
-                  (input)="onAudioChange($event, 'sound')" [thumbLabel]="true" class="tg-slider" max="100" min="1"
-                  value="{{ tgConfig.audio.soundVolume }}" step="1">
-                </mat-slider>
-                {{ tgConfig.audio.soundVolume }}
-              </div>
-            </ng-scrollbar>
-          </div>
-
-          <!-- Shortcuts -->
-          <div fxFlex="1 0 auto" class="tg-control-panel--tabcontent" [ngClass]="{ active: 2 === tabOpen }">
-            <tg-shortcuts-manager></tg-shortcuts-manager>
           </div>
         </div>
       </mat-dialog-content>

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { TGConfig } from './client-config';
 import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
-import { LogService } from './services/log.service';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 @Component({
   selector: 'tg-client',
@@ -27,11 +27,10 @@ export class ClientComponent implements OnInit, OnDestroy {
     private _configService: ConfigService,
     private gameService: GameService,
     private inputService: InputService,
+    private mediaObserver: MediaObserver,
     private renderer: Renderer2,
     ) {
-
     this._unsubscribeAll = new Subject<any>();
-
   }
 
   ngOnInit(): void {
@@ -45,6 +44,22 @@ export class ClientComponent implements OnInit, OnDestroy {
       });
 
 
+      this.mediaObserver.media$
+      .pipe( takeUntil(this._unsubscribeAll))
+      .subscribe((change: MediaChange) => {
+        this.setViewByViewport(change);
+    });
+  }
+
+
+  
+  // Todo: Moving this in root place
+  private setViewByViewport(change: MediaChange) {
+    if ( change.mqAlias === 'xs' || change.mqAlias ==='sm') {
+     this.gameService.isSmallDevice = true;
+    } else {
+      this.gameService.isSmallDevice = false;
+    }
   }
 
 

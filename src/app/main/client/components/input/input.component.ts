@@ -178,9 +178,10 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @HostListener("document:keypress", ["$event"])
   onLastCommandSend(event: KeyboardEvent) {
+    const activeElement = document.activeElement.tagName;
     if(
       !this.dialogService.dialog.getDialogById('editor') &&
-      document.activeElement.tagName !== 'INPUT') {
+      activeElement !== 'INPUT' || activeElement !== 'TEXTAREA' ) {
       this.focus();
     }
 
