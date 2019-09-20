@@ -1,32 +1,25 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit
-} from "@angular/core";
-import { Store, select } from "@ngrx/store";
-import { Observable, Subject } from "rxjs";
-import { takeUntil, filter } from "rxjs/operators";
+import { Component, ViewChild, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil, filter } from 'rxjs/operators';
 
-import { TGState } from "src/app/main/client/store";
-import { getHero } from "src/app/main/client/store/selectors";
+import { TGState } from 'src/app/main/client/store';
+import { getHero } from 'src/app/main/client/store/selectors';
 
-import { HistoryService } from "src/app/main/client/services/history.service";
-import { GameService } from "src/app/main/client/services/game.service";
-import { InputService } from "./input.service";
-import { ConfigService } from "src/app/services/config.service";
-import { DialogV2Service } from "../../common/dialog-v2/dialog-v2.service";
-import { OutputService } from "../output/output.service";
+import { HistoryService } from 'src/app/main/client/services/history.service';
+import { GameService } from 'src/app/main/client/services/game.service';
+import { InputService } from './input.service';
+import { ConfigService } from 'src/app/services/config.service';
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
+import { OutputService } from '../output/output.service';
 
 @Component({
-  selector: "tg-input",
-  templateUrl: "./input.component.html",
-  styleUrls: ["./input.component.scss"]
+  selector: 'tg-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit, OnDestroy {
-  @ViewChild("inputCommand", { static: true }) ic: ElementRef;
+  @ViewChild('inputCommand', { static: true }) ic: ElementRef;
 
   tgConfig: any;
 
@@ -52,11 +45,9 @@ export class InputComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Subscribe to config changes
-    this._configService.config
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(config => {
-        this.tgConfig = config;
-      });
+    this._configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+      this.tgConfig = config;
+    });
 
     this._inCombat$
       .pipe(
@@ -64,7 +55,7 @@ export class InputComponent implements OnInit, OnDestroy {
         filter(state => !!state)
       )
       .subscribe(cc => {
-        if (cc.target && typeof cc.target.hit !== "undefined") {
+        if (cc.target && typeof cc.target.hit !== 'undefined') {
           this.inCombat = Object.keys(cc).length ? true : false;
         } else {
           this.inCombat = false;
@@ -81,9 +72,9 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   private moveCursorAtEnd(target) {
-    if (typeof target.selectionStart === "number") {
+    if (typeof target.selectionStart === 'number') {
       target.selectionStart = target.selectionEnd = target.value.length;
-    } else if (typeof target.createTextRange !== "undefined") {
+    } else if (typeof target.createTextRange !== 'undefined') {
       this.focus();
       const range = target.createTextRange();
       range.collapse(false);
@@ -96,7 +87,7 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   onEnter(event: any, val: string) {
-    event.target.value = "";
+    event.target.value = '';
     this.sendCmd(val);
   }
 
@@ -127,23 +118,23 @@ export class InputComponent implements OnInit, OnDestroy {
     /* Check equipment/inventory dialog open request
        TODO: Need better implementation */
 
-    if (cmd.startsWith("eq")) {
+    if (cmd.startsWith('eq')) {
       this.game.processCommands(cmd, false);
       this._configService.setConfig({
-        widgetEquipInv: { selected: "equip" }
+        widgetEquipInv: { selected: 'equip' }
       });
       return;
     }
 
-    if (cmd.startsWith("inv")) {
+    if (cmd.startsWith('inv')) {
       this.game.processCommands(cmd, false);
       this._configService.setConfig({
-        widgetEquipInv: { selected: "inventory" }
+        widgetEquipInv: { selected: 'inventory' }
       });
       return;
     }
 
-    if (cmd.startsWith("info") || cmd.startsWith("ab")) {
+    if (cmd.startsWith('info') || cmd.startsWith('ab')) {
       this.game.processCommands(cmd, false);
       return;
     }
@@ -176,28 +167,35 @@ export class InputComponent implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener("document:keypress", ["$event"])
+  @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
     const activeElement = document.activeElement.tagName;
-    if(
+    if (
       !this.dialogService.dialog.getDialogById('editor') &&
-      activeElement !== 'INPUT' || activeElement !== 'TEXTAREA' ) {
+      (activeElement !== 'INPUT' && activeElement !== 'TEXTAREA')
+    ) {
       this.focus();
     }
 
-    if (event.key === "Enter") {
-      this.onEnter(event, this.ic.nativeElement.value);
-    }
     if (
-      event.key === "!" &&
-      this.ic.nativeElement.value.length === 0 &&
-      !this.dialogService.dialog.getDialogById("editor")
+      !this.dialogService.dialog.getDialogById('editor') &&
+      (activeElement !== 'INPUT' && activeElement !== 'TEXTAREA')
     ) {
-      const l = this.historyService.cmd_history.length;
-      if (l > 0) {
-        this.game.processCommands(this.historyService.cmd_history[l - 1]);
+      if (event.key === 'Enter') {
+        this.onEnter(event, this.ic.nativeElement.value);
       }
-      return false;
+      if (
+        event.key === '!' &&
+        this.ic.nativeElement.value.length === 0 &&
+        !this.dialogService.dialog.getDialogById('editor')
+      ) {
+        const l = this.historyService.cmd_history.length;
+        if (l > 0) {
+          this.game.processCommands(this.historyService.cmd_history[l - 1]);
+        }
+
+        return false;
+      }
     }
   }
 
