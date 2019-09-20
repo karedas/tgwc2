@@ -1,9 +1,9 @@
-<div class="tg-persons" [ngClass]="{ 'list-50-50': personsClass50_50, 'list-50': personsClass50 }">
+<div class="tg-persons" [ngClass]="{ 'list-50-50': personsClass50_50, 'list-50': '' }">
   <ng-container *ngFor="let person of persons | quantitySort:'mrn'; let i = index">
     <div
       class="tg-persons--line interact"
       [ngClass]="{ expandlist: person.sz, open: togglePanel[i] }"
-      (mousedown)="onExpand($event, person, totalObjs + i)"
+      (mousedown)="onExpand($event, person, i)"
     >
       <tg-icons
         [icon]="person.icon"

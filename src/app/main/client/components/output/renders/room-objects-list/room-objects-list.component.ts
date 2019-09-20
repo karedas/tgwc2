@@ -13,7 +13,6 @@ export class RoomObjectsListComponent implements OnInit {
   @Input('objects') objects: RoomList[];
 
   totalObjs = 0;
-  objsClass50 = false;
   objsClass50_50 = false;
   togglePanel: any = {};
 

@@ -13,7 +13,6 @@ export class RoomPersonsListComponent implements OnInit {
   @Input('persons') persons: RoomList[];
   
   totalPersons = 0;
-  personsClass50 = false;
   personsClass50_50 = false;
   togglePanel: any = {};
 
