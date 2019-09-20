@@ -169,33 +169,32 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
-    const activeElement = document.activeElement.tagName;
+    const activeElement = document.activeElement;
     if (
-      !this.dialogService.dialog.getDialogById('editor') &&
-      (activeElement !== 'INPUT' && activeElement !== 'TEXTAREA')
+      (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') &&
+      activeElement.id !== 'inputcommand'
     ) {
+      return;
+    }
+
+    if(!this.ic.nativeElement.isFocussed) {
       this.focus();
     }
 
+    if (event.key === 'Enter') {
+      this.onEnter(event, this.ic.nativeElement.value);
+    }
     if (
-      !this.dialogService.dialog.getDialogById('editor') &&
-      (activeElement !== 'INPUT' && activeElement !== 'TEXTAREA')
+      event.key === '!' &&
+      this.ic.nativeElement.value.length === 0 &&
+      !this.dialogService.dialog.getDialogById('editor')
     ) {
-      if (event.key === 'Enter') {
-        this.onEnter(event, this.ic.nativeElement.value);
+      const l = this.historyService.cmd_history.length;
+      if (l > 0) {
+        this.game.processCommands(this.historyService.cmd_history[l - 1]);
       }
-      if (
-        event.key === '!' &&
-        this.ic.nativeElement.value.length === 0 &&
-        !this.dialogService.dialog.getDialogById('editor')
-      ) {
-        const l = this.historyService.cmd_history.length;
-        if (l > 0) {
-          this.game.processCommands(this.historyService.cmd_history[l - 1]);
-        }
 
-        return false;
-      }
+      return false;
     }
   }
 
