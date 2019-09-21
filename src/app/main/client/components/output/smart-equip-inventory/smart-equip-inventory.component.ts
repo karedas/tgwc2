@@ -35,7 +35,6 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.setupEquipInventory(config.equipinventory);
           this.roomIsVisible = config.room.visible;
-          console.log(this.roomIsVisible);
         });
       });
   }
