@@ -1,25 +1,28 @@
-
-  <div class="tg-objects-list">
-    <div fxLayout="column" fxFlex="0 1 100%">
-
-      <div class="tg-box-header collapsable" 
-        (click)="onCollapse()"
-        fxLayout="row" fxFlex="0 0 auto" fxLayoutGap="5px">
+<div class="tg-objects-list">
+  <div fxLayout="column" fxFlex="0 1 100%">
+    <ng-container *ngIf="roomIsVisible; else extendView">
+      <div class="tg-box-header collapsable" (click)="onCollapse()" fxLayout="row" fxFlex="0 0 auto" fxLayoutGap="5px">
         <div fxFlex="1 0 auto">
           <ng-container *ngIf="!collapsed; else headerCollapsed">
-            <div 
-              [ngClass]="{'active': tab === 'equip'}" 
-              fxFlex="0 0 auto" fxFlexAlign="center"
-              class="tg-box-tab-container">
-              <button mat-button class="tg-box-title"
-                (click)="onTabClick('equipaggiamento', 'equip', $event)">Equipaggiamento</button>
+            <div
+              [ngClass]="{ active: tab === 'equip' }"
+              fxFlex="0 0 auto"
+              fxFlexAlign="center"
+              class="tg-box-tab-container"
+            >
+              <button mat-button class="tg-box-title" (click)="onTabClick('equipaggiamento', 'equip', $event)">
+                Equipaggiamento
+              </button>
             </div>
-            <div 
-              [ngClass]="{'active': tab === 'inventory'}" 
-              fxFlex="0 0 auto" fxFlexAlign="center"
-              class="tg-box-tab-container">
-              <button mat-button class="tg-box-title"
-                (click)="onTabClick('inventario', 'inventory', $event)">Inventario</button>
+            <div
+              [ngClass]="{ active: tab === 'inventory' }"
+              fxFlex="0 0 auto"
+              fxFlexAlign="center"
+              class="tg-box-tab-container"
+            >
+              <button mat-button class="tg-box-title" (click)="onTabClick('inventario', 'inventory', $event)">
+                Inventario
+              </button>
             </div>
           </ng-container>
         </div>
@@ -31,26 +34,73 @@
             </button>
           </div>
         </ng-template>
-        <button mat-icon-button aria-label="Apri / Chiudi" class="tg-box-collapsebtn"
-          #collapsebutton>
-          <mat-icon>{{collapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}</mat-icon>
+        <button mat-icon-button aria-label="Apri / Chiudi" class="tg-box-collapsebtn" #collapsebutton>
+          <mat-icon>{{ collapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</mat-icon>
         </button>
       </div>
 
       <div fxFlex="1 0 auto" class="equinv-container" *ngIf="!collapsed">
-        <ng-scrollbar class="scrollbar-output through" 
-          [ngClass]="{'disabled': draggingSplitArea}" 
+        <ng-scrollbar
+          class="scrollbar-output through"
+          [ngClass]="{ disabled: draggingSplitArea }"
           [disabled]="draggingSplitArea"
-          [visibility]="'always'" 
+          [visibility]="'always'"
           [appearance]="'standard'"
-          fxFlex="1 1 100%" 
-          fxFlexFill>
-            <tg-hero-equipment fxLayout="column" *ngIf="tab === 'equip'"></tg-hero-equipment>
-            <tg-hero-inventory fxLayout="column" *ngIf="tab === 'inventory'"></tg-hero-inventory>
+          fxFlex="1 1 100%"
+          fxFlexFill
+        >
+          <tg-hero-equipment fxLayout="column" *ngIf="tab === 'equip'"></tg-hero-equipment>
+          <tg-hero-inventory fxLayout="column" *ngIf="tab === 'inventory'"></tg-hero-inventory>
         </ng-scrollbar>
       </div>
+    </ng-container>
 
-    </div>
+    <ng-template #extendView>
+      <div class="tg-box-header" fxLayout="row" fxFlex="0 0 auto">
+        <div fxFlex="1 0 auto">
+          <div fxFlex="0 0 auto" fxFlexAlign="center" class="tg-box-tab-container active">
+            <button mat-button class="tg-box-title" (click)="onTabClick('equipaggiamento', 'equip', $event)">
+              Equipaggiamento
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div fxFlex="1 0 auto" class="equinv-container">
+        <ng-scrollbar
+          class="scrollbar-output through"
+          [ngClass]="{ disabled: draggingSplitArea }"
+          [disabled]="draggingSplitArea"
+          [visibility]="'always'"
+          [appearance]="'standard'"
+          fxFlex="1 1 100%"
+          fxFlexFill
+        >
+          <tg-hero-equipment fxLayout="column"></tg-hero-equipment>
+        </ng-scrollbar>
+      </div>
+      <div class="tg-box-header" fxLayout="row" fxFlex="0 0 auto">
+        <div fxFlex="1 0 auto">
+          <div fxFlex="0 0 auto" fxFlexAlign="center" class="tg-box-tab-container active">
+            <button mat-button class="tg-box-title" (click)="onTabClick('inventario', 'inventory', $event)">
+              Inventario
+            </button>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="1 0 auto" class="equinv-container">
+        <ng-scrollbar
+          class="scrollbar-output through"
+          [ngClass]="{ disabled: draggingSplitArea }"
+          [disabled]="draggingSplitArea"
+          [visibility]="'always'"
+          [appearance]="'standard'"
+          fxFlex="1 1 100%"
+          fxFlexFill
+        >
+          <tg-hero-inventory fxLayout="column"></tg-hero-inventory>
+        </ng-scrollbar>
+      </div>
+    </ng-template>
   </div>
-
-
+</div>

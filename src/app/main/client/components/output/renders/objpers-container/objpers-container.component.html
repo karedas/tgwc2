@@ -61,7 +61,7 @@
     </ng-container>
 
     <ng-template #objectList let-objects>
-      <ng-container *ngFor="let obj of objcont.list  | quantitySort:'mrn'; let i=index">
+      <ng-container *ngFor="let obj of objcont.list | quantitySort:'mrn'; let i=index">
         <div class="tg-objperson--line interact" [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
           (mousedown)="onExpand($event, obj, i)" fxFlex="0 0 100%">
 
