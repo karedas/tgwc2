@@ -235,33 +235,36 @@ export class GameService {
 
   /* Ordfer Objects Persons or Objects list */
   public orderObjectsList(items: any, type?: string): any {
-    let cont = cloneDeep(items);
-    if (cont.list) {
-      if (type == "pers" || type == "equip") {
-        cont.list.sort((a, b) => {
-          const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
-          const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
-          return (eq_pos_a as number) - (eq_pos_b as number);
-        });
-
-        return cont;
-      }
-    } else {
-      let concatList = [];
-      Object.keys(cont).forEach((poskey: any, idbx: any) => {
-        const where = equipPositionByName[poskey];
-        const eqData = cont[poskey];
-        if (some(eqData, isObject)) {
-          eqData.sort((a, b) => {
-            const eq_pos_a = Object.keys(a.eq) ? a.eq[1] : 0;
-            const eq_pos_b = Object.keys(b.eq) ? b.eq[1] : 0;
-            return (eq_pos_b as number) - (eq_pos_a as number);
+    if(items) {
+      let cont = cloneDeep(items);
+      if (cont.list) {
+        if (type == "pers" || type == "equip") {
+          cont.list.sort((a, b) => {
+            const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
+            const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
+            return (eq_pos_a as number) - (eq_pos_b as number);
           });
-          concatList.push(eqData[0]);
+  
+          return cont;
         }
-      });
-      return concatList;
+      } else {
+        let concatList = [];
+        Object.keys(cont).forEach((poskey: any, idbx: any) => {
+          const eqData = cont[poskey];
+          if (some(eqData, isObject)) {
+            eqData.sort((a, b) => {
+              const eq_pos_a = Object.keys(a.eq) ? a.eq[1] : 0;
+              const eq_pos_b = Object.keys(b.eq) ? b.eq[1] : 0;
+              return (eq_pos_b as number) - (eq_pos_a as number);
+            });
+            concatList.push(eqData[0]);
+          }
+        });
+        return concatList;
+      }
     }
+
+    return items;
   }
 
   /** Font Size Adjustement */
