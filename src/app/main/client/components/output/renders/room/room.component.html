@@ -27,7 +27,7 @@
           </ng-template>
         </div>
 
-        <ng-container *ngIf="html.objcont?.list.length || html.perscont?.list.length; else noobjpers">
+        <ng-container *ngIf="html.objcont?.list.length || html.perscont?.list.length;">
           <tg-room-objects-list *ngIf="html.objcont?.list" [objects]="html.objcont?.list"></tg-room-objects-list>
           <tg-room-persons-list *ngIf="html.perscont?.list" [persons]="html.perscont?.list"></tg-room-persons-list>
         </ng-container>
