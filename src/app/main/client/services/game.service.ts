@@ -164,6 +164,7 @@ export class GameService {
   public start(initialData: any): void {
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.parse(initialData, this._tgConfig.log);
+    this.processCommands('', false);
     this.socketService.on(socketEvent.DATA, (data: any) => {
       this.dataParserService.parse(data, this._tgConfig.log);
     });

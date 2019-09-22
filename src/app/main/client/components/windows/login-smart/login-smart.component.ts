@@ -12,6 +12,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import * as ClientActions from '../../../store/actions/client.action';
 import { LogService } from '../../../services/log.service';
 import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'tg-login-smart',
@@ -39,6 +40,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialogRef: MatDialogRef<LoginSmartComponent>,
     private logService: LogService,
+    private gameService: GameService,
     private loginClientService: LoginClientService) {
 
     this.loginFormErrors = {
@@ -65,13 +67,13 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       });
   }
 
-  get username() {
-    return this.smartLoginForm.get('username');
-  }
+  // get username() {
+  //   return this.smartLoginForm.get('username');
+  // }
 
-  get password() {
-    return this.smartLoginForm.get('password');
-  }
+  // get password() {
+  //   return this.smartLoginForm.get('password');
+  // }
 
   // public login() {
 
@@ -102,8 +104,8 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   onReconnect() {
     this.store.dispatch(ClientActions.resetAction());
     this.loginClientService.reconnect();
-    // TODO: Wait OK from Server
     this.dialogRef.close();
+    this.gameService.processCommands('', false);
   }
 
   // toggle(event?: Event) {

@@ -2,7 +2,7 @@
   <div class="tg-status-bar-wrap" fxLayout="row">
     <div class="badges-left" fxLayout="row wrap" fxFlex="0 1 auto">
 
-      <div class="badge" fxLayout fxLayoutAlign="center center">
+      <div class="badge" fxLayout fxLayoutAlign="center center" *ngIf="hero?.walk">
 
         <!-- Speed -->
 
@@ -56,7 +56,7 @@
 
 
 
-      <div class="badge" fxLayout fxLayoutAlign="center center">
+      <div class="badge" fxLayout fxLayoutAlign="center center" *ngIf="hero.combat?.atteg">
 
         <!-- Atteggiamento -->
 

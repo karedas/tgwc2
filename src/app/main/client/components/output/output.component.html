@@ -19,10 +19,6 @@
             <ng-scrollbar class="scrollbar-output" [ngClass]="{ disabled: draggingSplitArea }" #scrollBar
               [disabled]="draggingSplitArea">
               <div class="tg-output--history">
-                <div *ngIf="!output.length" class="no-output-notice">
-                  Scrivi qualcosa o semplicemente aspetta...
-                </div>
-
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">
                     <tg-text *ngSwitchCase="'base'" [html]="data.content"></tg-text>
@@ -31,7 +27,7 @@
                         !tgConfig.widgetRoom.visible ||
                         mediaObserver.isActive('xs') ||
                         mediaObserver.isActive('sm')">
-                      <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data.content"
+                      <tg-room *ngSwitchCase="'room'" [withExtra]="false" [html]="data?.content"
                         [lastDescription]="lastRoomDescription"></tg-room>
 
                       <tg-objpers-detail *ngSwitchCase="'objPersDetail'" [html]="data.content"></tg-objpers-detail>
@@ -59,11 +55,12 @@
           ">
           <as-split class="tg-output--splitter" [unit]="'pixel'" direction="vertical" [gutterSize]="9"
             (dragStart)="onDragStart()" (dragEnd)="onDragEnd($event, 'widgets')">
+
             <as-split-area [size]="
                 tgConfig.widgetRoom.size >= 0 ? tgConfig.widgetRoom.size : '*'
               " [visible]="tgConfig.widgetRoom.visible" [order]="1">
-              <tg-room *ngIf="tgConfig.widgetRoom.visible" [html]="
-                  typeDetail === 'room' ? (lastRoom$ | async) : objPersDetail
+
+              <tg-room *ngIf="tgConfig.widgetRoom.visible" [html]="typeDetail === 'room' ? (lastRoom$ | async) : objPersDetail
                 " [withExtra]="true" [lastDescription]="lastRoomDescription" [draggingSplitArea]="draggingSplitArea"
                 [type]="typeDetail">
               </tg-room>
