@@ -198,7 +198,7 @@ export class OutputComponent implements OnInit, OnDestroy {
       this.scrollBar.scrollToElement(this.scrollerEnd.nativeElement, {
         duration: 80
       });
-    }, 0);
+    }, 30);
   }
 
   private pauseAutoScrollBar(status: boolean) {

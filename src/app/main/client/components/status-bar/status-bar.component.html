@@ -63,7 +63,10 @@
         <div class="badge-label">
           Attegg.
         </div>
-        <button mat-button [matMenuTriggerFor]="menuAtteggiamento" class="tg-lt-red with-label tg-status-bar--button">
+        <button 
+          *ngIf="hero.combat?.atteg" 
+          mat-button [matMenuTriggerFor]="menuAtteggiamento"
+          class="tg-lt-red with-label tg-status-bar--button">
           <span class="status-icon-box status-combat-attegg">
             <i></i>
           </span>

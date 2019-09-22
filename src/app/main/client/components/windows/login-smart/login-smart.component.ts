@@ -73,44 +73,47 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     return this.smartLoginForm.get('password');
   }
 
-  public login() {
-    if (this.smartLoginForm.invalid) {
-      return;
-    }
+  // public login() {
 
+  //   if (this.smartLoginForm.invalid) {
+  //     return;
+  //   }
 
-    const values = this.smartLoginForm.value;
+  //   this.store.dispatch(ClientActions.resetAction());
 
-    this.loginSubscription = this.loginClientService.login(values)
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((loginSuccess: boolean) => {
-        if (loginSuccess === true) {
-          this.dialogRef.close();
-        } else {
-          this.loginFailed = true;
-        }
-      }, (error) => {
-        if (error instanceof NotAuthorizeError) {
-          this.loginFailed = false;
-        }
-      });
-  }
+  //   const values = this.smartLoginForm.value;
+
+  //   this.loginSubscription = this.loginClientService.login(values)
+  //     .pipe(takeUntil(this._unsubscribeAll))
+  //     .subscribe((loginSuccess: boolean) => {
+  //       if (loginSuccess === true) {
+  //         this.dialogRef.close();
+  //       } else {
+  //         this.loginFailed = true;
+  //       }
+  //     }, (error) => {
+  //       if (error instanceof NotAuthorizeError) {
+  //         this.loginFailed = false;
+  //       }
+  //     });
+  // }
 
 
   onReconnect() {
+    this.store.dispatch(ClientActions.resetAction());
     this.loginClientService.reconnect();
     // TODO: Wait OK from Server
     this.dialogRef.close();
   }
 
-  toggle(event?: Event) {
+  // toggle(event?: Event) {
 
-    if (event) {
-      event.preventDefault();
-    }
+  //   if (event) {
+  //     event.preventDefault();
+  //   }
 
-    this.showForm = !this.showForm;
-  }
+  //   this.showForm = !this.showForm;
+  // }
 
   navigateToHome() {
     this.dialogRef.close();

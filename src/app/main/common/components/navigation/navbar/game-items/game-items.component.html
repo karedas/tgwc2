@@ -78,8 +78,6 @@
               role="'menuitemcheckbox'" [selected]="tgConfig.widgetRoom.visible">Dettagli Stanza</mat-list-option>
             <mat-list-option (click)="$event.stopPropagation(); onItemClick('widgetEquipInv', $event)"
               role="'menuitemcheckbox'" [selected]="tgConfig.widgetEquipInv.visible">Equip/Inventario</mat-list-option>
-            <!-- <mat-list-option (click)="$event.stopPropagation(); onItemClick(null, $event)" role="'menuitemcheckbox'"
-              [selected]="tgConfig.widgetCombat.visible" [disabled]="true">Combattimento</mat-list-option> -->
           </mat-selection-list>
         </mat-menu>
       </div>
