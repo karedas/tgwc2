@@ -3,7 +3,10 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptor/http.interceptor';
 import { SharedModule } from '../shared/shared.module';
-import { ApiService } from './services/api.service';
+
+import { ApolloModule } from 'apollo-angular';
+import { HttpLinkModule } from 'apollo-angular-link-http';
+
 
 import * as Sentry from '@sentry/browser';
 import { environment } from 'src/environments/environment';
@@ -31,6 +34,8 @@ export class SentryErrorHandler implements ErrorHandler {
 @NgModule({
   imports: [
     HttpClientModule,
+    ApolloModule,
+    HttpLinkModule,
     SharedModule,
   ],
   declarations: [],
@@ -48,7 +53,6 @@ export class CoreModule {
       return {
           ngModule: CoreModule,
           providers: [
-            ApiService,
             { provide: ErrorHandler, useClass: SentryErrorHandler },
             { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
           ]
