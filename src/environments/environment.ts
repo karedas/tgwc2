@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   name: '',
-  apiAddress: 'http://localhost:9595/api',
+  apiAddress: 'http://localhost:9595/graphql',
   serverstatAddress: 'http://play.thegatemud.it/serverstat',
   media_address: 'http://play.thegatemud.it/images/',
   analytics_UAID: 'UA-122402371-2',

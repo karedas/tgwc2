@@ -6,6 +6,10 @@ import { TGConfig } from './client-config';
 import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { Apollo } from 'apollo-angular';
+
+import { getHeroQuery } from '../../core/graphql/hero.query'
+import { LoginClientService } from '../authentication/services/login-client.service';
 
 @Component({
   selector: 'tg-client',
@@ -29,12 +33,29 @@ export class ClientComponent implements OnInit, OnDestroy {
     private inputService: InputService,
     private mediaObserver: MediaObserver,
     private renderer: Renderer2,
+    private loginService: LoginClientService,
+    private apollo: Apollo
     ) {
     this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit(): void {
     this.renderer.addClass(document.body, 'client-run');
+
+
+    // Api call
+    this.apollo
+      .watchQuery({
+        query: getHeroQuery,
+        variables: {
+          name: this.loginService.heroName
+        },
+      })
+      .valueChanges.subscribe(result => {
+        console.log(result);
+      });
+
+
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((config) => {

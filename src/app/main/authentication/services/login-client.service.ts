@@ -30,6 +30,14 @@ export class LoginClientService {
     this.isLoggedInSubject.next(value);
   }
 
+  get heroName(): string {
+    return this.name;
+  }
+
+  set heroName(value: string){
+    this.name = value;
+  }
+
   get replayMessage(): any {
     return this.loginErrorMessage$.asObservable();
   }
@@ -55,7 +63,7 @@ export class LoginClientService {
   /** ---- Public Methods ---- */
 
   login(data: { name: string, secret: string }): Observable<boolean> {
-    this.name = data.name;
+    this.heroName = data.name;
     this.secret = data.secret;
     this.replayMessage = 'Tentativo di connessione in corso...';
     this.setHandleLoginData();
@@ -69,7 +77,7 @@ export class LoginClientService {
   }
 
   reconnect() {
-    this.login({ name: this.name, secret: this.secret });
+    this.login({ name: this.heroName, secret: this.secret });
   }
 
   private setHandleLoginData() {
@@ -128,12 +136,12 @@ export class LoginClientService {
   }
 
   private onEnterLogin() {
-    const credentials = `login:${this.name},${this.secret}\n`;
+    const credentials = `login:${this.heroName},${this.secret}\n`;
     this.socketService.emit(socketEvent.DATA, credentials);
   }
 
   private onLoginOk(data: any) {
-    this.replayMessage = `Personaggio <b class="tg-yellow">${this.name}</b> trovato.`;
+    this.replayMessage = `Personaggio <b class="tg-yellow">${this.heroName}</b> trovato.`;
     this.completeHandShake(data);
   }
 
