@@ -2,7 +2,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { ClientEventType, inGameAction } from '../actions/client.action';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators';
+import { tap, mapTo } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
@@ -36,9 +36,9 @@ export class ClientEffects {
           this.game.resetUI();
         }
         this.store.dispatch(inGameAction());
-      })
+      }),
+      mapTo( inGameAction() )
     ),
-    { dispatch: false }
   );
 
   constructor(

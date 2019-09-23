@@ -2,7 +2,7 @@
   <div class="tg-status-bar-wrap" fxLayout="row">
     <div class="badges-left" fxLayout="row wrap" fxFlex="0 1 auto">
 
-      <div class="badge" fxLayout fxLayoutAlign="center center">
+      <div class="badge" fxLayout fxLayoutAlign="center center" *ngIf="hero?.walk">
 
         <!-- Speed -->
 
@@ -56,14 +56,17 @@
 
 
 
-      <div class="badge" fxLayout fxLayoutAlign="center center">
+      <div class="badge" fxLayout fxLayoutAlign="center center" *ngIf="hero.combat?.atteg">
 
         <!-- Atteggiamento -->
 
         <div class="badge-label">
           Attegg.
         </div>
-        <button mat-button [matMenuTriggerFor]="menuAtteggiamento" class="tg-lt-red with-label tg-status-bar--button">
+        <button 
+          *ngIf="hero.combat?.atteg" 
+          mat-button [matMenuTriggerFor]="menuAtteggiamento"
+          class="tg-lt-red with-label tg-status-bar--button">
           <span class="status-icon-box status-combat-attegg">
             <i></i>
           </span>

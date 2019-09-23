@@ -17,13 +17,13 @@ export class DispenserService {
     private loginClientService: LoginClientService,
     private audioService: AudioService,
     private configService: ConfigService
-  ) {
-   }
+  ) {}
 
   do(what: string, ...args: any) {
     switch (what) {
-      case 'disconnect': this.loginClientService.logout();
-                         break;
+      case 'disconnect':
+        this.loginClientService.logout();
+        break;
       case 'preferences':
         this.dialogV2Service.openControlPanel();
         break;
@@ -48,7 +48,9 @@ export class DispenserService {
         });
         break;
       default:
-        this.gameService.processCommands(what);
+        if (what) {
+          this.gameService.processCommands(what);
+        }
         return false;
     }
   }

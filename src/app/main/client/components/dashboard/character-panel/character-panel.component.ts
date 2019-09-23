@@ -57,7 +57,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   enemyName = '';
   enemyIcon: number = null;
 
-  private watcherMedia: Subscription;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -89,39 +88,9 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
       .subscribe((hero: IHero) => {
         if (hero) {
           this.setCombatPanel(hero.target);
-          // this.setMoneyAmountLabel(hero.money);
         }
       });
   }
-
-  // setMoneyAmountLabel(money: any) {
-
-  //   let dividend = 1;
-  //   money = parseInt(money, 10);
-
-  //   if (money < 10) {
-  //     this.moneyValue = 'mr';
-  //   }
-  //   if (money >= 10 && money < 100) {
-  //     this.moneyValue = 'ma';
-  //     dividend = 10;
-
-  //   } else if (money >= 100 && money < 1000) {
-  //     dividend = 100;
-  //     this.moneyValue = 'mo';
-  //   } else if (money >= 1000) {
-  //     dividend = 1000;
-  //     this.moneyValue = 'mp';
-  //   }
-
-  //   if (money > 0) {
-  //     money = parseFloat(money);
-  //     money = Math.round(money) / dividend;
-  //     money.toFixed(2).replace('.', ',');
-  //   }
-
-  //   this.money = money;
-  // }
 
   private setCombatPanel(target?: ITarget) {
 
@@ -150,7 +119,6 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.watcherMedia.unsubscribe();
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
