@@ -16,11 +16,9 @@ import { OutputService } from '../output/output.service';
 @Component({
   selector: 'tg-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  styleUrls: ['./input.component.scss']
 })
-
 export class InputComponent implements OnInit, OnDestroy {
-
   @ViewChild('inputCommand', { static: true }) ic: ElementRef;
 
   tgConfig: any;
@@ -40,38 +38,33 @@ export class InputComponent implements OnInit, OnDestroy {
     private dialogService: DialogV2Service,
     private _configService: ConfigService
   ) {
-
     this._inCombat$ = this.store.pipe(select(getHero));
 
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-
     // Subscribe to config changes
-    this._configService.config
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config) => {
-        this.tgConfig = config;
-      });
-
+    this._configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+      this.tgConfig = config;
+    });
 
     this._inCombat$
       .pipe(
         takeUntil(this._unsubscribeAll),
-        filter(state => !!state))
-      .subscribe(
-        (cc) => {
-          if (cc.target && typeof cc.target.hit !== 'undefined') {
-            this.inCombat = Object.keys(cc).length ? true : false;
-          } else {
-            this.inCombat = false;
-          }
+        filter(state => !!state)
+      )
+      .subscribe(cc => {
+        if (cc.target && typeof cc.target.hit !== 'undefined') {
+          this.inCombat = Object.keys(cc).length ? true : false;
+        } else {
+          this.inCombat = false;
         }
-      );
+      });
 
     // Listen focus Call from another component
-    this.inputService.isFocussed()
+    this.inputService
+      .isFocussed()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => {
         this.focus();
@@ -99,7 +92,6 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   onUpKey(event: any) {
-
     event.preventDefault();
 
     if (!this.game.mouseIsOnMap) {
@@ -126,27 +118,27 @@ export class InputComponent implements OnInit, OnDestroy {
     /* Check equipment/inventory dialog open request
        TODO: Need better implementation */
 
-    if(cmd.startsWith('eq')) {
+    if (cmd.startsWith('eq')) {
       this.game.processCommands(cmd, false);
       this._configService.setConfig({
-        widgetEquipInv: { selected: 'equip'}
+        widgetEquipInv: { selected: 'equip' }
       });
       return;
     }
 
-    if(cmd.startsWith('inv')) {
+    if (cmd.startsWith('inv')) {
       this.game.processCommands(cmd, false);
       this._configService.setConfig({
-        widgetEquipInv: { selected: 'inventory'}
+        widgetEquipInv: { selected: 'inventory' }
       });
       return;
     }
 
     if (cmd.startsWith('info') || cmd.startsWith('ab')) {
-        this.game.processCommands(cmd, false);
-        return;
-    } 
-    
+      this.game.processCommands(cmd, false);
+      return;
+    }
+
     this.game.processCommands(cmd, true);
   }
 
@@ -157,7 +149,9 @@ export class InputComponent implements OnInit, OnDestroy {
 
   toggleExtraOutput() {
     this._configService.setConfig({
-      output: { extraArea: { visible: !this.tgConfig.output.extraArea.visible } }
+      output: {
+        extraArea: { visible: !this.tgConfig.output.extraArea.visible }
+      }
     });
   }
 
@@ -175,14 +169,31 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keypress', ['$event'])
   onLastCommandSend(event: KeyboardEvent) {
-    if(event.key ==='Enter') {
+    const activeElement = document.activeElement;
+    if (
+      (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') &&
+      activeElement.id !== 'inputcommand'
+    ) {
+      return;
+    }
+
+    if(!this.ic.nativeElement.isFocussed) {
+      this.focus();
+    }
+
+    if (event.key === 'Enter') {
       this.onEnter(event, this.ic.nativeElement.value);
     }
-    if (event.key === '!' && (this.ic.nativeElement.value).length === 0) {
+    if (
+      event.key === '!' &&
+      this.ic.nativeElement.value.length === 0 &&
+      !this.dialogService.dialog.getDialogById('editor')
+    ) {
       const l = this.historyService.cmd_history.length;
       if (l > 0) {
         this.game.processCommands(this.historyService.cmd_history[l - 1]);
       }
+
       return false;
     }
   }

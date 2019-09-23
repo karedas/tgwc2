@@ -25,7 +25,7 @@
             </mat-action-list>
           </div>
   
-          <div class="cmd-values-container" fxFlex="1 0 0">
+          <div class="cmd-values-container" fxFlex="1 0 auto">
             <ng-scrollbar class="scrollbar" #commandsScrollbar [visibility]="'always'" [appearance]="'standard'">
               <ng-container *ngFor="let item of cmds | keyvalue; let idOpenedGroup = index;">
                 <div [ngClass]="{'group-show': groupOpen === idOpenedGroup}" class="cmd-values-wrapper" fxLayout="row wrap">

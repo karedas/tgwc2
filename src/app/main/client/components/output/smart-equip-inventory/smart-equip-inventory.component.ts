@@ -14,6 +14,7 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
 
   tab: string;
   collapsed = false;
+  roomIsVisible: boolean;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -28,11 +29,12 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
     this._configService.config
       .pipe(
         takeUntil(this._unsubscribeAll), 
-        map((config: TGConfig) => { return config.widgetEquipInv })
+        map((config: TGConfig) => { return { room: config.widgetRoom, equipinventory: config.widgetEquipInv }})
       )
       .subscribe((config: any) => {
         setTimeout(() => {
-          this.setupEquipInventory(config);
+          this.setupEquipInventory(config.equipinventory);
+          this.roomIsVisible = config.room.visible;
         });
       });
   }

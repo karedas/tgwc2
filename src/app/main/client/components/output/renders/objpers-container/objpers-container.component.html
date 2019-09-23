@@ -23,7 +23,7 @@
         {{eqcont.title | capitalizeFirst}}
       </div>
 
-      <div class="tg-objperson--line" fxFlex="1 1 100%" *ngFor="let item of eqcont.list; let i=index">
+      <div class="tg-objperson--line" fxFlex="1 1 100%" *ngFor="let item of eqcont.list | quantitySort:'mrn'; let i=index">
         <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum" (mousedown)="onInteract(item, i)"></tg-icons>
 
         <tg-hstat [condprc]="item.condprc"></tg-hstat>
@@ -61,7 +61,7 @@
     </ng-container>
 
     <ng-template #objectList let-objects>
-      <ng-container *ngFor="let obj of objcont.list; let i=index">
+      <ng-container *ngFor="let obj of objcont.list | quantitySort:'mrn'; let i=index">
         <div class="tg-objperson--line interact" [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
           (mousedown)="onExpand($event, obj, i)" fxFlex="0 0 100%">
 

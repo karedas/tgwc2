@@ -45,7 +45,7 @@ export class DataEffects {
       ofType<PayloadActionData>(DataEvenType.EQUIP),
       switchMap((res) => {
         const config = this.configService.getConfig();
-        if (!config.widgetEquipInv.visible && !res.payload.up) {
+        if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice ) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('equip');
         } 
         return [
@@ -60,7 +60,7 @@ export class DataEffects {
       ofType<PayloadActionData>(DataEvenType.INVENTORY),
       switchMap((res) => {
         const config = this.configService.getConfig();
-        if (!config.widgetEquipInv.visible && !res.payload.up) {
+        if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('inventory');
         } 
         return [
