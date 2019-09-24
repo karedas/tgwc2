@@ -1,68 +1,70 @@
 <div class="tg-shortcuts-area" fxFlex="1 0 auto">
-  <h3 class="tg-control-panel--subtitle" style="margin-top:0;">
-    Gestione Scorciatoie
-  </h3>
-  <ng-container *ngIf="!shortcuts.length">
-    <p class="tg-white">
-      Le scorciatoie sono un comodo modo per richiamare uno o più comandi concatenati attraverso un singolo nuovo
-      comando personale.<br />
-      Definisci qui un <span class="tg-yellow">il tuo comando</span> e scrivi cosa desideri eseguire.
-    </p>
-    <p>
-      Esempio 1: <span class="tg-green">"bistecca" </span>: (prendi bistecca tavolo; cuoci bistecca camino)<br />
-      Esempio 2: <span class="tg-green">"difenditi" </span>: (impugna spada; impugna scudo; combattimento difensivo;)
-    </p>
-  </ng-container>
-
-  <div class="tg-shortcuts-all">
-    <ng-container *ngIf="shortcuts">
-      <div *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)" fxLayout="column">
-        <div fxLayout="row" fxAlignItems="center center" class="tg-shortcut-headerlist">
-          <div fxFlex="1 1 10%">&nbsp;</div>
-          <div fxFlex="1 1 30%">Icona</div>
-          <div fxFlex="1 1 30%">Comando</div>
-          <div fxFlex="1 1 30%">Azione</div>
-        </div>
-        <div>
-          <div *ngFor="let sc of shortcuts; let isc = index" cdkDrag class="tg-shortcut-row">
-            <div fxFlex="1 1 10%">
-              <button mat-icon-button class="small" cdkDragHandle type="button">
-                <mat-icon aria-label="ordina">reorder</mat-icon>
-              </button>
-            </div>
-            <div fxFlex="1 1 30%">
-              <div class="tg-shortcut-icon">
-                <img src="assets/images/shortcuts/shortcut_{{ sc.icon }}.png" alt="" />
+  <div [hidden]="newShortcutOpenedStatus">
+    <h3 class="tg-control-panel--subtitle" style="margin-top:0;">
+      Gestione Scorciatoie
+    </h3>
+    <ng-container *ngIf="!shortcuts.length">
+      <p class="tg-white">
+        Le scorciatoie sono un comodo modo per richiamare uno o più comandi concatenati attraverso un singolo nuovo
+        comando personale.<br />
+        Definisci qui un <span class="tg-yellow">il tuo comando</span> e scrivi cosa desideri eseguire.
+      </p>
+      <p>
+        Esempio 1: <span class="tg-green">"bistecca" </span>: (prendi bistecca tavolo; cuoci bistecca camino)<br />
+        Esempio 2: <span class="tg-green">"difenditi" </span>: (impugna spada; impugna scudo; combattimento difensivo;)
+      </p>
+    </ng-container>
+  
+    <div class="tg-shortcuts-all" [hidden]="newShortcutOpenedStatus">
+      <ng-container *ngIf="shortcuts">
+        <div *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)" fxLayout="column">
+          <div fxLayout="row" fxAlignItems="center center" class="tg-shortcut-headerlist">
+            <div fxFlex="1 1 10%">&nbsp;</div>
+            <div fxFlex="1 1 30%">Icona</div>
+            <div fxFlex="1 1 30%">Comando</div>
+            <div fxFlex="1 1 30%">Azione</div>
+          </div>
+          <div>
+            <div *ngFor="let sc of shortcuts; let isc = index" cdkDrag class="tg-shortcut-row">
+              <div fxFlex="1 1 10%">
+                <button mat-icon-button class="small" cdkDragHandle type="button">
+                  <mat-icon aria-label="ordina">reorder</mat-icon>
+                </button>
               </div>
-            </div>
-            <div style="color: white;" fxFlex="1 1 30%">
-              {{ sc.alias }}
-            </div>
-            <div fxFlex="1 1 30%">
-              <button mat-icon-button class="small" (click)="onEditShortcut(isc, sc.icon, sc.alias, sc.cmd)">
-                <mat-icon aria-label="Modifica" matTooltip="Modifica">edit</mat-icon>
-              </button>
-              <button mat-icon-button class="small" (click)="deleteShortcut(sc.alias)" matTooltip="Elimina">
-                <mat-icon aria-label="Rimuovi">delete_forever</mat-icon>
-              </button>
-              <button mat-icon-button class="small" [matTooltip]="sc.cmd">
-                <mat-icon aria-label="Info">help</mat-icon>
-              </button>
+              <div fxFlex="1 1 30%">
+                <div class="tg-shortcut-icon">
+                  <img src="assets/images/shortcuts/shortcut_{{ sc.icon }}.png" alt="" />
+                </div>
+              </div>
+              <div style="color: white;" fxFlex="1 1 30%">
+                {{ sc.alias }}
+              </div>
+              <div fxFlex="1 1 30%">
+                <button mat-icon-button class="small" (click)="onEditShortcut(isc, sc.icon, sc.alias, sc.cmd)">
+                  <mat-icon aria-label="Modifica" matTooltip="Modifica">edit</mat-icon>
+                </button>
+                <button mat-icon-button class="small" (click)="deleteShortcut(sc.alias)" matTooltip="Elimina">
+                  <mat-icon aria-label="Rimuovi">delete_forever</mat-icon>
+                </button>
+                <button mat-icon-button class="small" [matTooltip]="sc.cmd">
+                  <mat-icon aria-label="Info">help</mat-icon>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <p class="tg-gray" *ngIf="!shortcuts.length">
-        Non hai ancora nessuna scorciatoia salvata
-      </p>
-    </ng-container>
+  
+        <p class="tg-gray" *ngIf="!shortcuts.length">
+          Non hai ancora nessuna scorciatoia salvata
+        </p>
+      </ng-container>
+    </div>
+  
+    <mat-divider></mat-divider>
+    <button mat-raised-button color="accent" (click)="openNewShortcut()">
+      Aggiungi
+    </button>
   </div>
-
-  <mat-divider></mat-divider>
-  <button mat-raised-button color="accent" (click)="openNewShortcut()">
-    Aggiungi
-  </button>
 
   <!-- New Shortcut Form -->
 

@@ -21,7 +21,7 @@
             </div>
           </div>
           <div fxFlex="0 1 100%" class="tg-control-panel--tabcontent">
-            <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'">
+            <ng-scrollbar class="scrollbar" #scrollBar>
               <!-- Generale -->
               <div class="content" [ngClass]="{ active: 0 === tabOpen }">
                 <h3 class="tg-control-panel--subtitle" style="margin-top:0;">
@@ -156,7 +156,7 @@
 
               <!-- Shortcuts -->
               <div class="content" [ngClass]="{ active: 2 === tabOpen }">
-                <tg-shortcuts-manager></tg-shortcuts-manager>
+                <tg-shortcuts-manager fxLayout="column"></tg-shortcuts-manager>
               </div>
             </ng-scrollbar>
           </div>
