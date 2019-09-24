@@ -33,10 +33,6 @@ const routes: Routes = [
     loadChildren: () => import('./client/client.module').then( m => m.ClientModule),
     canLoad: [LoginClientGuard]
   },
-  {
-    path: 'novita',
-    loadChildren: () => import('./pages/global-news/global-news.module').then(m => m.GlobalNewsModule),
-  },
 ];
 
 @NgModule({
