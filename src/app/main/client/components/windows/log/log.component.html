@@ -1,6 +1,5 @@
 <div class="tg-log" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
   <div class="tg-dialog-content" fxLayout="column">
-
     <div class="tg-dialog-title" cdkDragHandle>
       Log di Gioco
       <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
@@ -9,8 +8,8 @@
     </div>
 
     <div class="tg-log-content no-padding" matDialogContent>
+      
       <ng-scrollbar [appearance]="'compact'" class="scrollbar">
-
         <div class="tg-log-date">Data Inizio Log: {{dateTime}}</div>
         <div #logContentArea>
           <ng-container *ngFor="let log of logStorage">
@@ -20,14 +19,12 @@
             </div>
           </ng-container>
         </div>
-
       </ng-scrollbar>
+      
     </div>
-
     <div class="tg-log-action" mat-dialog-actions>
       <button mat-raised-button color="accent" (click)="saveLog()">Salva su File</button>
       <!-- <button mat-raised-button color="alert" (click)="resetLog()">Cancella Log</button> -->
     </div>
-
   </div>
 </div>

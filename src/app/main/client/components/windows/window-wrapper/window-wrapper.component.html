@@ -1,20 +1,22 @@
 <div class="tg-window" cdkDrag cdkDragRootElement=".cdk-overlay-pane" fxLayout="column">
-  <div class="b-ironlight-mini tg-box" fxLayout="column" fxFlex="1 1 100%" fxFlexFill>
+  <div class="b-ironlight-mini tg-box"
+    [ngClass]="{'b-thin': border === 'thin'}"
+    fxLayout="column"
+    fxFlex="1 1 100%"
+    fxFlexFill>
     
       <div cdkDragHandle mat-dialog-title *ngIf="!hideTitle">
-
         <ng-content select="title"></ng-content>
-
         <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
           <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
         </button>
-
       </div>
 
-      <mat-dialog-content class="tg-window-content no-padding" fxFlex="1 1 auto">
-
+      <mat-dialog-content
+        class="tg-window-content no-padding"
+        [ngClass]="{'no-padding': nopadding}"
+        fxFlex="1 1 auto">
         <ng-content select="content"></ng-content>
-
       </mat-dialog-content>
 
     <div class="tg-border-box">
