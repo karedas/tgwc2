@@ -168,7 +168,7 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:keypress', ['$event'])
-  onLastCommandSend(event: KeyboardEvent) {
+  onCommandEvent(event: KeyboardEvent) {
     const activeElement = document.activeElement;
     if (
       (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') &&
@@ -181,9 +181,6 @@ export class InputComponent implements OnInit, OnDestroy {
       this.focus();
     }
 
-    if (event.key === 'Enter') {
-      this.onEnter(event, this.ic.nativeElement.value);
-    }
     if (
       event.key === '!' &&
       this.ic.nativeElement.value.length === 0 &&

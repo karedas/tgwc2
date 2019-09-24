@@ -103,6 +103,7 @@ export class GameService {
       this.client_update.inventory.version = what[0];
       this.client_update.inventory.needed = true;
     }
+
     if (what[1] > this.client_update.equipment.version) {
       this.client_update.equipment.version = what[1];
       this.client_update.equipment.needed = true;
@@ -164,11 +165,10 @@ export class GameService {
   public start(initialData: any): void {
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.parse(initialData, this._tgConfig.log);
-    this.processCommands('', false);
     this.socketService.on(socketEvent.DATA, (data: any) => {
       this.dataParserService.parse(data, this._tgConfig.log);
     });
-
+        
     this._upSubscription = this.dataParserService
       .getUpdateNeeded()
       .subscribe(this.updatePanels.bind(this));
@@ -184,15 +184,17 @@ export class GameService {
    * @param isStored true or false if u need to watch history length)
    */
   public processCommands(val: string, isStored: boolean = true) {
-    const cmds = this.dataParserService.parseInput(val);
-
-    if (cmds) {
-      /* check if cmd will be pushed in the history array */
-      if (isStored) {
-        this.historyService.push(val);
-      }
-      for (let i = 0; i < cmds.length; i++) {
-        this.sendToServer(cmds[i]);
+    if(val) {
+      const cmds = this.dataParserService.parseInput(val);
+  
+      if (cmds) {
+        /* check if cmd will be pushed in the history array */
+        if (isStored) {
+          this.historyService.push(val);
+        }
+        for (let i = 0; i < cmds.length; i++) {
+          this.sendToServer(cmds[i]);
+        }
       }
     }
   }

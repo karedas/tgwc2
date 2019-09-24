@@ -115,7 +115,7 @@ export class CharacterPanelComponent implements OnInit, OnDestroy {
   }
 
   openInfo() {
-    this.game.processCommands('info');
+    this.game.processCommands('@info');
   }
 
   ngOnDestroy() {

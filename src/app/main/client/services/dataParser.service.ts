@@ -11,6 +11,7 @@ import { TGConfig } from '../client-config';
 import { ConfigService } from '../../../services/config.service';
 import { map } from 'rxjs/operators';
 import { Map } from '../models/data/map.model';
+import { GameService } from './game.service';
 
 @Injectable()
 
@@ -22,8 +23,7 @@ export class DataParser {
   private netData = '';
   private shortcuts = [];
   private cmd_prefix = '';
-
-  private inDialog: boolean;
+  
   private _updateNeeded: Subject<any>;
 
 
@@ -240,12 +240,12 @@ export class DataParser {
   /** PARSERS LIST---------------------------------------------------- */
 
   private logged(): string {
-    this.store.dispatch(ClientActions.inGameAction());
+    this.store.dispatch(ClientActions.inGameAction({payload: true}));
     return '';
   }
 
   private news( data: any): string {
-    // this.store.dispatch(ClientActions.inGameAction());
+    this.store.dispatch(ClientActions.inGameAction({payload: true}));
     return '';
   }
 
