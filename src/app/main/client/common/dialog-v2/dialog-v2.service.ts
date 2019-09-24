@@ -271,7 +271,7 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '700px';
+      config.width = '800px';
       config.height = 'auto';
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
       config.hasBackdrop = false;
@@ -295,7 +295,7 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '700px';
+      config.width = '800px';
       config.height = 'auto';
       config.scrollStrategy = this.overlay.scrollStrategies.noop();
       config.hasBackdrop = false;

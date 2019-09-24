@@ -61,7 +61,7 @@ export class DataParser {
         try {
           this.logService.parseForLog(data);
         } catch (err) {
-          console.log(err.message);
+          console.log(err);
         }
       }
 
