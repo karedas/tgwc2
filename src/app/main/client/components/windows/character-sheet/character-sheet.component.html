@@ -1,15 +1,14 @@
-<div class="tg-character-card" *ngIf="heroBase$ | async as hero" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="b-ironlight-mini tg-box">
-    <div class="tg-dialog-content tg-shadow-inset" fxLayout="column">
-      <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
-        {{hero.name}} - Scheda personale
-        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-        </button>
-      </div>
 
-      <mat-dialog-content class="tg-character-content no-padding">
-        <div fxLayout="row" style="min-height: 100%">
+<tg-window-wrapper 
+  *ngIf="heroBase$ | async as hero">
+
+  <ng-container ngProjectAs="title">
+    {{hero.name}} - Scheda personale
+  </ng-container>
+  
+  <ng-container ngProjectAs="content">
+
+      <div fxLayout="row" style="min-height: 100%">
 
           <!-- ######## Info Main Character ########  -->
           <div class="info-main" fxLayout="column" fxFlex="1 1 auto" fxHide.xs="true">
@@ -50,14 +49,7 @@
           </div>
 
         </div>
-      </mat-dialog-content>
 
-    </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
-  </div>
-</div>
+  </ng-container>
+
+</tg-window-wrapper>

@@ -12,7 +12,7 @@
               <!-- <button type="button" class="btn-newlogin tg-button" (click)="toggle()">Accedi con un personaggio diverso.</button> -->
               <button type="button" class="btn-backtohome tg-button" (click)="navigateToHome()">Torna alla Home</button>
             </div>
-            <form autocomplete="off" [formGroup]="smartLoginForm" *ngIf="showForm" (ngSubmit)="login()">
+            <!-- <form autocomplete="off" [formGroup]="smartLoginForm" *ngIf="showForm" (ngSubmit)="login()">
               <input [ngClass]="{'is-invalid': !username.valid && username.touched}" formControlName="username"
                 class="form-control" name="username" type="text" autocomplete="off" placeholder="Username" required>
               <input [ngClass]="{'is-invalid': !password.valid && password.touched}" formControlName="password"
@@ -20,7 +20,7 @@
               <button type="submit" class="form-control btn-loginwidget tg-button" value="accedi">Accedi</button>
               {{loginReplayMessage}}
               <span href="#" class="back-to-root" (click)="toggle()">Torna indietro</span>
-            </form>
+            </form> -->
           </mat-dialog-content>
         </div>
         <div class="tg-border-box">

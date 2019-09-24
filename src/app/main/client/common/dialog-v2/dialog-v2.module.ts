@@ -16,6 +16,7 @@ import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-pane
 import { MatPaginatorIntl } from '@angular/material';
 import { GetItalianPaginatorIntl } from 'src/app/shared/intl/paginator-intl';
 import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
+import { WindowWrapperModule } from '../../components/windows/window-wrapper/window-wrapper.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SelectableGenericComponent } from '../../components/windows/selectable-
     DragDropModule,
     CharacterSheetModule,
     MatDialogModule,
+    WindowWrapperModule,
     ControlPanelModule
   ],
 
