@@ -99,16 +99,15 @@ export class GameService {
 
   private updatePanels(what: any) {
     const now = Date.now();
-    if (what[0] > this.client_update.inventory.version) {
+    if (Number(what[0]) > this.client_update.inventory.version) {
       this.client_update.inventory.version = what[0];
       this.client_update.inventory.needed = true;
     }
-
-    if (what[1] > this.client_update.equipment.version) {
+    if (Number(what[1]) > this.client_update.equipment.version) {
       this.client_update.equipment.version = what[1];
       this.client_update.equipment.needed = true;
     }
-    if (what[2] > this.client_update.room.version) {
+    if (Number(what[2]) > this.client_update.room.version) {
       this.client_update.equipment.version = what[2];
       this.client_update.room.needed = true;
     }
@@ -171,7 +170,7 @@ export class GameService {
         
     this._upSubscription = this.dataParserService
       .getUpdateNeeded()
-      .subscribe(this.updatePanels.bind(this));
+      .subscribe((up) => this.updatePanels(up));
   }
 
   public resetUI() {
