@@ -42,7 +42,6 @@ export class DataEffects {
       ofType<PayloadActionData>(DataEvenType.EQUIP),
       tap((res) => {
         const config = this.configService.getConfig();
-        console.log('equiprequest');
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice ) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('equip');
         } 
@@ -55,7 +54,6 @@ export class DataEffects {
       ofType<PayloadActionData>(DataEvenType.INVENTORY),
       tap((res) => {
         const config = this.configService.getConfig();
-        console.log('inventoryrequest');
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('inventory');
         } 
