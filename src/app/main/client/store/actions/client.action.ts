@@ -10,7 +10,7 @@ export enum ClientEventType {
 }
 
 export const disconnectAction = createAction(ClientEventType.DISCONNECT);
-export const inGameAction = createAction(ClientEventType.INGAME);
+export const inGameAction = createAction(ClientEventType.INGAME, props<{payload: boolean}>());
 export const resetAction = createAction(ClientEventType.RESET);
 export const updateUIAction = createAction(ClientEventType.UI, props<{payload: any}>());
 export const audioAction = createAction(ClientEventType.AUDIO, props<{payload: string}>());

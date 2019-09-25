@@ -47,7 +47,7 @@
     "jw-angular-social-buttons": "^1.0.0",
     "lodash": "^4.17.15",
     "merge-stream": "^2.0.0",
-    "ng2-tooltip-directive": "^2.5.13",
+    "ng2-tooltip-directive": "^2.7.17",
     "ngx-cookie-service": "^2.2.0",
     "ngx-filesaver": "^8.0.0",
     "ngx-scrollbar": "^6.0.0",

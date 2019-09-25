@@ -75,30 +75,30 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
   //   return this.smartLoginForm.get('password');
   // }
 
-  // public login() {
+  public login() {
 
-  //   if (this.smartLoginForm.invalid) {
-  //     return;
-  //   }
+    if (this.smartLoginForm.invalid) {
+      return;
+    }
 
-  //   this.store.dispatch(ClientActions.resetAction());
+    this.store.dispatch(ClientActions.resetAction());
 
-  //   const values = this.smartLoginForm.value;
+    const values = this.smartLoginForm.value;
 
-  //   this.loginSubscription = this.loginClientService.login(values)
-  //     .pipe(takeUntil(this._unsubscribeAll))
-  //     .subscribe((loginSuccess: boolean) => {
-  //       if (loginSuccess === true) {
-  //         this.dialogRef.close();
-  //       } else {
-  //         this.loginFailed = true;
-  //       }
-  //     }, (error) => {
-  //       if (error instanceof NotAuthorizeError) {
-  //         this.loginFailed = false;
-  //       }
-  //     });
-  // }
+    this.loginSubscription = this.loginClientService.login(values)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((loginSuccess: boolean) => {
+        if (loginSuccess === true) {
+          this.dialogRef.close();
+        } else {
+          this.loginFailed = true;
+        }
+      }, (error) => {
+        if (error instanceof NotAuthorizeError) {
+          this.loginFailed = false;
+        }
+      });
+  }
 
 
   onReconnect() {

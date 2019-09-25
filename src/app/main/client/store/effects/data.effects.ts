@@ -31,43 +31,36 @@ export class DataEffects {
   skillsRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.SKILLS),
-      switchMap((res) => {
+      tap((res) => {
         this.dialogV2Service.openCharacterSheet('skills');
-        return [
-          heroAction({ payload: { skills: res.payload } })
-        ];
       })
-    )
+    ), { dispatch: false }
   );
 
   equipRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EQUIP),
-      switchMap((res) => {
+      tap((res) => {
         const config = this.configService.getConfig();
+        console.log('equiprequest');
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice ) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('equip');
         } 
-        return [
-          heroAction({ payload: { equipment: res.payload } })
-        ];
       }),
-    )
+    ), { dispatch: false }
   );
 
   inventoryRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.INVENTORY),
-      switchMap((res) => {
+      tap((res) => {
         const config = this.configService.getConfig();
+        console.log('inventoryrequest');
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('inventory');
         } 
-        return [
-          heroAction({ payload: { inventory: res.payload } })
-        ];
       }),
-    )
+    ), { dispatch: false }
   );
 
   openBook$ = createEffect(() =>

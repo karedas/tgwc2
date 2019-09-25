@@ -44,12 +44,12 @@ export class ClientComponent implements OnInit, OnDestroy {
         this.characterComponentPosition = characterPanelPosition;
       });
 
-
       this.mediaObserver.media$
       .pipe( takeUntil(this._unsubscribeAll))
       .subscribe((change: MediaChange) => {
         this.setViewByViewport(change);
     });
+
   }
 
 

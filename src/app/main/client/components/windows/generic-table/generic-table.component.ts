@@ -63,7 +63,6 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
     this.columnsToDisplay = [];
     this.data = [];
 
-
     if (dataTable.head) {
       dataTable.head.forEach((v: any, i: number) => {
         switch (typeof v) {
@@ -75,19 +74,31 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
             break;
         }
       });
+    } else {
+      dataTable.data.forEach((d: any,  idx) => {
+        this.columnsToDisplay.push(d[0]);
+      })
     }
 
     // pupulate data
     if (dataTable.data) {
-      dataTable.data.forEach((d: any) => {
-        const obj = {};
-
-        d.map((row: string, rowIndex: number) => {
-          obj[this.columnsToDisplay[rowIndex]] = row;
-        });
-
-        this.data.push(obj);
+      let obj = {};
+      dataTable.data.forEach((d: any, idx) => {
+        if(dataTable.head) {
+          obj = {};
+          d.map((row: string, rowIndex: number) => {
+              obj[this.columnsToDisplay[rowIndex]] = row;
+          });
+          this.data.push(obj);
+        }
+        else {
+          obj[d[0]] = d[1]
+        }
       });
+
+      if(!dataTable.head) {
+        this.data.push(obj);
+      }
     }
     this.dataSource = new MatTableDataSource(this.data);
 

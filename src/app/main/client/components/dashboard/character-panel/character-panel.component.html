@@ -37,7 +37,7 @@
               <ng-template #convaTooltip>
                 Sei <b class='tg-yellow'>convalescente!</b>
               </ng-template>
-              <div class="status-conva" *ngIf="hero.conva === '1'" fxLayout [tooltip]="convaTooltip" placement="top"
+              <div class="status-conva" *ngIf="hero.conva === '1'" fxLayout [tooltip]="convaTooltip" content-type="template" placement="top"
                 content-type="template" show-delay="500">
                 <div class="status-icon-box">
                   <i></i>
