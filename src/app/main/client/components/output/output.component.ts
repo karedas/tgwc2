@@ -206,10 +206,12 @@ export class OutputComponent implements OnInit, OnDestroy {
     // Adding placeholder for autoscroll last readed Line;
     if (this.pauseScroll) {
       this.setContent("pause", []);
-      this.latestLineBeforePause = this.output.length;
       this.scrollPanelToBottom();
     } else {
-      this.output.splice(this.latestLineBeforePause - 1, 1);
+      let indexOfPause = this.output.findIndex(function(element){
+        return element.type === 'pause'
+      })
+      this.output.splice(indexOfPause, 1);
     }
   }
 

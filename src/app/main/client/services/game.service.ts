@@ -108,10 +108,10 @@ export class GameService {
       this.client_update.equipment.needed = true;
     }
     if (what[2] > this.client_update.room.version) {
-      this.client_update.equipment.version = what[2];
+      this.client_update.room.version = what[2];
       this.client_update.room.needed = true;
     }
-    if (now > this.client_update.now + 1000) {
+    if (now > this.client_update.now) {
       // Update Inventory Panel
       this.upadteInventory(now);
       // Update Equipment panel
