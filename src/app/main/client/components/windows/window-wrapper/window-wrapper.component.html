@@ -1,4 +1,7 @@
-<div class="tg-window" cdkDrag cdkDragRootElement=".cdk-overlay-pane" fxLayout="column">
+<div class="tg-window" fxLayout="column"
+  cdkDrag 
+  cdkDragRootElement=".cdk-overlay-pane"
+  [cdkDragDisabled]="false">
   <div class="b-ironlight-mini tg-box"
     [ngClass]="{'b-thin': border === 'thin'}"
     fxLayout="column"
