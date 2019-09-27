@@ -2,12 +2,12 @@
   cdkDrag 
   cdkDragRootElement=".cdk-overlay-pane"
   [cdkDragDisabled]="false">
+  
   <div class="b-ironlight-mini tg-box"
     [ngClass]="{'b-thin': border === 'thin'}"
     fxLayout="column"
     fxFlex="1 1 100%"
     fxFlexFill>
-    
       <div cdkDragHandle mat-dialog-title *ngIf="!hideTitle">
         <ng-content select="title"></ng-content>
         <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
