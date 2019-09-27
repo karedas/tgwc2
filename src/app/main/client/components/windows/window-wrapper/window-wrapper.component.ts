@@ -8,7 +8,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 export class WindowWrapperComponent implements OnInit {
   @Input('hideTitle') hideTitle: boolean;
   @Input('border') border: string; 
-  @Input('padding') nopadding: boolean; 
+  @Input('nopadding') nopadding: boolean; 
   constructor() { 
   }
 

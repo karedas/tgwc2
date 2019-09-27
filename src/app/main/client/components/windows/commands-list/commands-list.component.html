@@ -6,7 +6,7 @@
     <div class="cmd-group" fxFlex="0 0 auto">
       <mat-action-list dense>
     
-        <ng-container *ngFor="let item of cmds | keyvalue; let i = index;">
+        <ng-container *ngFor="let item of commandsList | keyvalue; let i = index;">
           <button *ngIf="item.key !== 'title'"
             mat-list-item (click)="setOpenedGroup(i)"
             [ngClass]="{'active': i === groupOpen}">
@@ -19,7 +19,7 @@
     
     <div class="cmd-values-container" fxFlex="1 0 auto">
       <ng-scrollbar class="scrollbar" #commandsScrollbar [visibility]="'always'" [appearance]="'standard'">
-        <ng-container *ngFor="let item of cmds | keyvalue; let idOpenedGroup = index;">
+        <ng-container *ngFor="let item of commandsList | keyvalue; let idOpenedGroup = index;">
           <div [ngClass]="{'group-show': groupOpen === idOpenedGroup}" class="cmd-values-wrapper" fxLayout="row wrap">
             <div class="cmd-value" fxFlex="0 0 25%" *ngFor="let command of item.value"
               (click)="sendCmd(item)">
