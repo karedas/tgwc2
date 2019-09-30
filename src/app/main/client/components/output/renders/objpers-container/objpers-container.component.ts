@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
 import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
 
-import { equipPositionByName } from 'src/app/main/client/common/constants';
+import { equipPositionByName } from 'src/app/main/client/common/constants'; 
 import { OutputService } from '../../output.service';
 import { GameService } from 'src/app/main/client/services/game.service';
 

@@ -6,7 +6,7 @@
       (mousedown)="onExpand($event, object, i)">
       <tg-icons
         [icon]="object.icon"
-        (mousedown)="mouseup(object)"
+        (mousedown)="onInteract(object)"
         tooltip="Guarda"
         placement="left"
         show-delay="500"

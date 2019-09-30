@@ -65,7 +65,7 @@
         <div class="tg-objperson--line interact" [ngClass]="{'expandlist': obj.sz, 'open': togglePanel[i] }"
           (mousedown)="onExpand($event, obj, i)" fxFlex="0 0 100%">
 
-          <tg-icons [icon]="obj.icon" [attr.cntnum]="obj.cntnum" (mousedown)="mouseup(obj)" tooltip="Guarda"
+          <tg-icons [icon]="obj.icon" [attr.cntnum]="obj.cntnum" (mousedown)="onInteract(obj)" tooltip="Guarda"
             placement="left" show-delay="500">
           </tg-icons>
 
