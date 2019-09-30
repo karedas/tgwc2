@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { ClientState } from 'src/app/main/client/store/state/client.state';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../client-config';
+import { audioAction } from '../../store/actions/client.action';
 
 @Component({
   selector: 'tg-audio',
@@ -33,6 +34,7 @@ export class AudioComponent implements OnInit, OnDestroy {
       .subscribe( (config: TGConfig ) => {
         this.audioService.enable = config.audio.enable;
         this.audioService.soundVolume = config.audio.soundVolume / 100;
+        this.audioService.atmosphericVolume = config.audio.atmosphericVolume / 100;
         this.audioService.musicVolume = config.audio.musicVolume / 100;
       });
 
@@ -44,6 +46,9 @@ export class AudioComponent implements OnInit, OnDestroy {
         this.audioService.setAudio(audio)
       }
       );
+
+    this.store.dispatch(audioAction({ payload: 'rain-and-thunder-loop.mp3' }));
+
   }
 
   ngOnDestroy(): void {

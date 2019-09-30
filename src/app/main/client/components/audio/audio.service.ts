@@ -11,6 +11,7 @@ export class AudioService {
 
   public sound: HTMLAudioElement;
   public music: HTMLAudioElement;
+  public atmospheric: HTMLAudioElement;
   public _enable = false;
   public playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
 
@@ -20,12 +21,14 @@ export class AudioService {
   ) {
     this.sound = new Audio();
     this.music = new Audio();
+    this.atmospheric = new Audio();
   }
 
   set enable(value: boolean) {
     this._enable = value;
     this.sound.muted = !this._enable;
     this.music.muted = !this._enable;
+    this.atmospheric.muted = !this._enable;
   }
 
   get enable(): boolean {
@@ -34,6 +37,10 @@ export class AudioService {
 
   set soundVolume(value: number) {
     this.sound.volume = value;
+  }
+
+  set atmosphericVolume(value: number) {
+    this.atmospheric.volume = value;
   }
 
   set musicVolume(value: number) {
@@ -90,6 +97,20 @@ export class AudioService {
 
   public playSound(): void {
     this.sound.play();
+  }
+
+  public getAtmospheric(): HTMLAudioElement {
+    return this.atmospheric;
+  }
+
+  public setAtmospheric(src: string): void {
+
+    this.atmospheric.src = 'assets/audio/atmospheric' + src;
+    this.playAtmospheric();
+  }
+
+  public playAtmospheric(): void {
+    this.atmospheric.play();
   }
 
   public toggleAudio(): void {

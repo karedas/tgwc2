@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 import { ClientState } from '../state/client.state';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 
 
 export interface PayloadAction {
@@ -34,6 +35,7 @@ export class ClientEffects {
             this.dialogV2Service.openLog();
           }
           this.game.resetUI();
+          this.loginService.isInGame = false;
         }
       }),
       mapTo( inGameAction({payload: false}) )
@@ -58,6 +60,6 @@ export class ClientEffects {
     private audioService: AudioService,
     private dialogV2Service: DialogV2Service,
     private router: Router,
-    private store: Store<ClientState>
+    private loginService: LoginClientService
   ) { }
 }

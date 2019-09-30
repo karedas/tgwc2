@@ -4,6 +4,7 @@ export interface TGConfig {
     enable: boolean;
     musicVolume: number;
     soundVolume: number;
+    atmosphericVolume: number;
   };
   logSave: boolean;
   fontSize: number;
@@ -43,6 +44,7 @@ export const tgConfig: TGConfig = {
     enable: true,
     musicVolume: 100,
     soundVolume: 70,
+    atmosphericVolume: 70,
   },
   logSave: true,
   fontSize: 2,
