@@ -6,6 +6,7 @@
 
 .tg-shortcuts-area {
   height: 100%;
+  padding-right: 32px;
 }
 
 .field-full-width {
@@ -27,16 +28,10 @@
 .tg-shortcut-new {
   border: 1px solid rgba(255, 255, 255, 0.308);
   border-radius: 10px;
-  visibility: hidden;
   background: black;
   z-index: 100;
   padding: 1em;
   box-sizing: border-box;
-
-  &.open {
-    visibility: visible;
-    opacity: 1;
-  }
 
   .mat-form-field {
     width: 100%;

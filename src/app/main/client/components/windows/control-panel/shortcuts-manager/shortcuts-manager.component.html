@@ -67,8 +67,7 @@
   </div>
 
   <!-- New Shortcut Form -->
-
-  <div class="tg-shortcut-new" [ngClass]="{ open: newShortcutOpenedStatus }">
+  <div class="tg-shortcut-new" *ngIf="newShortcutOpenedStatus">
     <form [formGroup]="newShortcutForm" (ngSubmit)="saveShortcut()" #f="ngForm">
       <div class="tg-shortcut-icon">
         <img src="assets/images/shortcuts/shortcut_{{ scIcon }}.png" alt="" />
