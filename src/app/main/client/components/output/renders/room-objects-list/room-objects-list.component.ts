@@ -6,7 +6,6 @@ import { OutputService } from '../../output.service';
 @Component({
   selector: 'tg-room-objects-list',
   templateUrl: './room-objects-list.component.html',
-  styleUrls: ['./room-objects-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomObjectsListComponent implements OnInit {

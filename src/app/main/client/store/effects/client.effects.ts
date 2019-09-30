@@ -18,7 +18,6 @@ export interface PayloadAction {
 @Injectable()
 export class ClientEffects {
 
-
   onDisconnect$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadAction>(ClientEventType.DISCONNECT),

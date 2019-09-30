@@ -17,7 +17,7 @@
 
           <div style="height: 100%; overflow:hidden;" class="o-container">
             <ng-scrollbar class="scrollbar-output" [ngClass]="{ disabled: draggingSplitArea }" #scrollBar
-              [disabled]="draggingSplitArea">
+              [disabled]="draggingSplitArea" [visibility]="'always'">
               <div class="tg-output--history">
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">

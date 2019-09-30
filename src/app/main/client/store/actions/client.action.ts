@@ -6,7 +6,8 @@ export enum ClientEventType {
   RESET = '[Client] Reset Store',
   UI = '[Client] Ui Updated',
   AUDIO = '[Client] Audio',
-  UPLOADAVATAR = '[Client] Upload Avatar'
+  UPLOADAVATAR = '[Client] Upload Avatar',
+  NEWS = '[Data] News',
 }
 
 export const disconnectAction = createAction(ClientEventType.DISCONNECT);

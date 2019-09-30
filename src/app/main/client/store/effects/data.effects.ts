@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { DataEvenType, heroAction } from '../actions/data.action';
+import { DataEvenType } from '../actions/data.action';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
@@ -16,7 +16,6 @@ export interface PayloadActionData {
 
 @Injectable()
 export class DataEffects {
-
 
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
