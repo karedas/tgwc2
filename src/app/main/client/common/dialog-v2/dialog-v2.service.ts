@@ -341,7 +341,7 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '288px';
+      config.width = '338px';
       config.height = 'auto';
       config.maxHeight = '100%';
       config.autoFocus = false;

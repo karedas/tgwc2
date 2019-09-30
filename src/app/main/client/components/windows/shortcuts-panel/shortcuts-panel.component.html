@@ -1,4 +1,4 @@
-<tg-window-wrapper>
+<tg-window-wrapper [nopadding]="true">
   <ng-container ngProjectAs="title">Scorciatoie personali</ng-container>
   <ng-container ngProjectAs="content">
     <ng-container *ngIf="totalShortcuts.length > 0; else noShortcuts">
