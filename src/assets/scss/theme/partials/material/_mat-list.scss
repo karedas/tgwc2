@@ -34,5 +34,11 @@
     color: #666;
   }
 }
-// .mat-selection-list, .mat-action-list {
-// }
+
+.mat-list-base .mat-list-option {
+  font-size: 13px;
+}
+
+.mat-list-base .mat-list-item-content {
+  padding-left: 0!important;
+}

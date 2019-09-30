@@ -15,7 +15,6 @@ import { GameService } from '../../../services/game.service';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit, OnDestroy {
-
   public readonly dialogID: string = 'editor';
 
   editorRequest$: Observable<any>;
@@ -26,37 +25,39 @@ export class EditorComponent implements OnInit, OnDestroy {
   totalChars: number;
   maxChars: number;
 
-
   private maxLineLength = 80;
   private _unsubscribeAll: Subject<any>;
-
 
   constructor(
     private store: Store<DataState>,
     private inputService: InputService,
     public dialog: MatDialogRef<EditorComponent>,
-    private gameService: GameService) {
+    private gameService: GameService
+  ) {
     this._unsubscribeAll = new Subject<any>();
 
-    this.editorRequest$ = this.store.pipe(takeUntil(this._unsubscribeAll), select(getEditor));
+    this.editorRequest$ = this.store.pipe(
+      takeUntil(this._unsubscribeAll),
+      select(getEditor)
+    );
   }
 
   ngOnInit(): void {
-    this.editorRequest$.pipe(
-      takeUntil(this._unsubscribeAll)
-    ).subscribe(
-      (editorState: IEditor) => {
-        if (editorState !== undefined) {
-          this.description = editorState.description.replace(/\n/gm, ' ');
-          this.dialogTitle = editorState.title;
-          this.maxChars = editorState.maxChars;
+    this.editorRequest$.pipe(takeUntil(this._unsubscribeAll)).subscribe((editorState: IEditor) => {
+      if (editorState !== undefined) {
+        this.description = editorState.description.replace(/\n/gm, ' ');
+        this.dialogTitle = editorState.title;
+        this.maxChars = editorState.maxChars;
 
-          this.HeroName$ = this.store.pipe(select(getHero), map(hero => hero.name));
-        }
+        this.HeroName$ = this.store.pipe(
+          select(getHero),
+          map(hero => hero.name)
+        );
       }
-    );
+    });
 
-    this.dialog.keydownEvents()
+    this.dialog
+      .keydownEvents()
       .pipe(
         filter((e: KeyboardEvent) => e.code === 'Escape'),
         take(1)
@@ -66,15 +67,12 @@ export class EditorComponent implements OnInit, OnDestroy {
       });
   }
 
-
   onSave(descr: string) {
     const text = descr.split('\n');
 
     for (let l = 0; l < text.length; l++) {
-
       let remText = text[l];
       while (remText.length > 0) {
-
         let currline: any;
         const slicepos = remText.lastIndexOf(' ', this.maxLineLength);
 
