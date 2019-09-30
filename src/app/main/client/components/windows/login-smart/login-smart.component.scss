@@ -1,70 +1,76 @@
 @import 'abstract/variables';
 
-.tg-loginwidget {
-  text-align: center;
-  height: 100%;
-  background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-  padding-bottom: 1em;
+.tg-widgetlogin-status {
+  color: #dcdac8;
+  padding: 1em 0 0.5em;
+}
 
+.logout-avatar {
+  border: 1px solid #514e45;
+  margin-bottom: 1em;
+  margin: 0 auto 1em;
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+  display: block;
 
-  .tg-widgetlogin-status {
-    color: #dcdac8;
-    padding: 1em 0 0.5em;
-  }
-
-  .tg-loginpanel {
-    background-image: none;
-  }
-
-  h2,
-  .tg-newcharacter {
-    display: none;
-  }
-
-  .tg-widgetlogin-menu {
-    padding: .5em .5em 0;
-
-    .tg-button {
-      display: block;
-      margin: 0 auto .5em;
-    }
-  }
-
-  .form-control {
-    border: none;
-  }
-
-  input.form-control {
-    background: transparent;
-    border: 1px solid #443e37;
-    color: #dcdac8;
-    background: #110a04;
-    width: 90%;
-    margin: 0 auto .5em;
-    font-size: 14px;
-    padding: 0.5em 0.5em;
-  }
-
-  .back-to-root {
-    text-decoration: underline;
-    padding: 1.5em;
-    display: block;
-    font-size: 11px;
-    color: #dcdac8;
-    cursor: pointer;
-  }
-
-  .btn-loginwidget {
-    padding-bottom: 1em;
-  }
-
-  &.new {
-    .tg-widgetlogin-menu {
-      display: none;
-    }
-
-    form {
-      display: block;
-    }
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }
+
+.tg-loginpanel {
+  background-image: none;
+}
+
+h2,
+.tg-newcharacter {
+  display: none;
+}
+
+.tg-widgetlogin-menu {
+  padding: 0 .5em 1em;
+
+  .tg-button {
+    display: block;
+    margin: 0 auto .5em;
+  }
+}
+
+.form-control {
+  border: none;
+}
+
+input.form-control {
+  background: transparent;
+  border: 1px solid #443e37;
+  color: #dcdac8;
+  background: #110a04;
+  width: 90%;
+  margin: 0 auto .5em;
+  font-size: 14px;
+}
+
+.back-to-root {
+  text-decoration: underline;
+  padding: 1.5em;
+  display: block;
+  font-size: 11px;
+  color: #dcdac8;
+  cursor: pointer;
+}
+
+.btn-loginwidget {
+  padding-bottom: 1em;
+}
+
+// &.new {
+//   .tg-widgetlogin-menu {
+//     display: none;
+//   }
+
+//   form {
+//     display: block;
+//   }
+// }

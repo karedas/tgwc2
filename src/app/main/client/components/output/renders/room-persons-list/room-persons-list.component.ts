@@ -6,7 +6,6 @@ import { GameService } from 'src/app/main/client/services/game.service';
 @Component({
   selector: 'tg-room-persons-list',
   templateUrl: './room-persons-list.component.html',
-  styleUrls: ['./room-persons-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomPersonsListComponent implements OnInit {

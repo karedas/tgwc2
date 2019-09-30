@@ -4,7 +4,6 @@ import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getEditor, getHero } from 'src/app/main/client/store/selectors';
 import { takeUntil, map, filter, take } from 'rxjs/operators';
-import { InputService } from '../../input/input.service';
 import { IEditor } from 'src/app/main/client/models/data/editor.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { GameService } from '../../../services/game.service';
@@ -19,7 +18,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   editorRequest$: Observable<any>;
   HeroName$: Observable<string>;
-
   description = '';
   dialogTitle = '';
   totalChars: number;
@@ -30,7 +28,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private inputService: InputService,
     public dialog: MatDialogRef<EditorComponent>,
     private gameService: GameService
   ) {
