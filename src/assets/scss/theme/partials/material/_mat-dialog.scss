@@ -95,7 +95,7 @@ mat-dialog-content {
   z-index: 100;
   transition: opacity .1s linear;
   background: #190f06 url($imgPath + '/background/bg-ironbrown.jpg') repeat;
-
+  
   &.no-padding {
     padding: 0;
   }

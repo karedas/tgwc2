@@ -50,3 +50,7 @@ ng-scrollbar.scrollbar-output {
 ng-scrollbar.through {
   --scrollbar-track-color: rgba(68, 62, 56, 0.4);
 }
+
+ng-scrollbar .ng-scroll-content{
+  height: 100%;
+}

@@ -1,4 +1,4 @@
-<tg-window-wrapper *ngIf="heroBase$ | async as hero">
+<tg-window-wrapper *ngIf="heroBase$ | async as hero" [nopadding]="true">
   <ng-container ngProjectAs="title"> {{ hero.name }} - Scheda personale </ng-container>
 
   <ng-container ngProjectAs="content">
