@@ -6,7 +6,7 @@
       (mousedown)="onExpand($event, object, i)">
       <tg-icons
         [icon]="object.icon"
-        (mousedown)="onInteract(object)"
+        (mousedown)="mouseup(object)"
         tooltip="Guarda"
         placement="left"
         show-delay="500"
@@ -24,7 +24,7 @@
 
     <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="column">
       <div class="tg-objects--line" *ngFor="let objMrn of object.mrn; let indexSz = index" placement="left">
-        <tg-icons tooltip="Guarda" [icon]="object.icon" (mousedown)="onInteract(object, indexSz)"></tg-icons>
+        <tg-icons tooltip="Guarda" [icon]="object.icon" (mouseup)="onInteract(object, indexSz)"></tg-icons>
         <tg-hstat [condprc]="object.condprc"></tg-hstat>
 
         <div class="tg-object--itemdesc" [innerHtml]="object.desc | dataToHtml" [attr.mrn]="object.mrn[indexSz]"></div>

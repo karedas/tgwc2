@@ -7,21 +7,27 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AutofocusInputbarDirective {
   constructor(
-    private dialog: MatDialog,
     private inputService: InputService
   ) {
   }
 
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    if (event.key !== 'Escape' &&
-      event.key !== 'ArrowDown' &&
-      event.key !== 'ArrowLeft' &&
-      event.key !== 'ArrowRight' &&
-      event.key !== 'ArrowUp' &&
-      // ((!event.ctrlKey || !event.metaKey) && event.keyCode !== 67) &&
-      !this.dialog.openDialogs.length
+    const activeElement = document.activeElement;
+    if (
+      (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') &&
+      activeElement.id !== 'inputcommand'
     ) {
+      return;
+    }
+    if ( event.key !== 'Escape') {
       this.inputService.focus();
+    }
+
+    if(event.key === 'ArrowUp') {
+      this.inputService.getPreviousCmd();
+    }
+    if(event.key === 'ArrowDown') {
+      this.inputService.getNextCmd();
     }
   }
 }

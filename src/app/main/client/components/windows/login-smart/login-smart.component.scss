@@ -3,16 +3,17 @@
 .tg-widgetlogin-status {
   color: #dcdac8;
   padding: 1em 0 0.5em;
+  text-align: center;
 }
 
 .logout-avatar {
-  border: 1px solid #514e45;
+  border: 2px solid #514e45;
   margin-bottom: 1em;
   margin: 0 auto 1em;
   width: 50%;
   height: auto;
   overflow: hidden;
-  display: block;
+  display: flex;
 
   img {
     max-width: 100%;

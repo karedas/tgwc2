@@ -26,7 +26,6 @@ export class DialogV2Service {
   constructor(
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
-    private inputService: InputService,
     public overlay: Overlay
   ) {
     this.render = rendererFactory.createRenderer(null, null);
@@ -113,7 +112,6 @@ export class DialogV2Service {
   openBaseWindow(data: any, id?: string, disableClose = false): MatDialogRef<BaseWindowComponent, MatDialogConfig> {
     const dialogID = id ? id : 'base';
     let dialogRef = this.dialog.getDialogById(dialogID);
-    console.log(dialogRef);
     if(!dialogRef) {
       const config = new MatDialogConfig();
       config.id = dialogID;
@@ -354,7 +352,7 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '338px';
+      config.width = '352px';
       config.height = 'auto';
       config.maxHeight = '100%';
       config.autoFocus = false;

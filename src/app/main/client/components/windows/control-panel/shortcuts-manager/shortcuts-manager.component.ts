@@ -78,13 +78,10 @@ export class ShortcutsManagerComponent implements OnInit {
     if (alias && cmd) {
       if (!this.shortcuts.length) {
         this.addShortcut(alias, cmd);
-        this.resetForm();
       } else if (this.isEdit) {
         this.saveEditableShortcut(alias, cmd);
-        this.resetForm();
       } else if (this.shortcuts.filter(x => x.alias === alias).length <= 0) {
         this.addShortcut(alias, cmd);
-        this.resetForm();
       } else {
         this.shortcutExistError = true;
       }

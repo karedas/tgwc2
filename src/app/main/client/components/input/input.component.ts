@@ -25,16 +25,15 @@ export class InputComponent implements OnInit, OnDestroy {
 
   public inCombat = false;
   public pauseScroll = false;
-
   private _inCombat$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private game: GameService,
     private store: Store<TGState>,
-    private historyService: HistoryService,
     private inputService: InputService,
     private outputService: OutputService,
+    private historyService: HistoryService,
     private dialogService: DialogV2Service,
     private _configService: ConfigService
   ) {
@@ -44,9 +43,14 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.inputService.setInputRef(this.ic);
+
     // Subscribe to config changes
-    this._configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.tgConfig = config;
+    this._configService.config.pipe(
+      takeUntil(this._unsubscribeAll))
+      .subscribe(config => {
+        this.tgConfig = config;
     });
 
     this._inCombat$
@@ -61,29 +65,6 @@ export class InputComponent implements OnInit, OnDestroy {
           this.inCombat = false;
         }
       });
-
-    // Listen focus Call from another component
-    this.inputService
-      .isFocussed()
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(() => {
-        this.focus();
-      });
-  }
-
-  private moveCursorAtEnd(target) {
-    if (typeof target.selectionStart === 'number') {
-      target.selectionStart = target.selectionEnd = target.value.length;
-    } else if (typeof target.createTextRange !== 'undefined') {
-      this.focus();
-      const range = target.createTextRange();
-      range.collapse(false);
-      range.selec();
-    }
-  }
-
-  focus() {
-    this.ic.nativeElement.focus();
   }
 
   onEnter(event: any, val: string) {
@@ -93,25 +74,12 @@ export class InputComponent implements OnInit, OnDestroy {
 
   onUpKey(event: any) {
     event.preventDefault();
-
-    if (!this.game.mouseIsOnMap) {
-      const cmd = this.historyService.getPrevious();
-      if (cmd) {
-        event.target.value = cmd;
-        this.moveCursorAtEnd(event.target);
-      }
-    }
+    this.inputService.getPreviousCmd();
   }
 
   onDownKey(event: any) {
     event.preventDefault();
-    if (!this.game.mouseIsOnMap) {
-      const cmd = this.historyService.getNext();
-      if (cmd) {
-        event.target.value = cmd;
-        this.moveCursorAtEnd(event.target);
-      }
-    }
+    this.inputService.getNextCmd();
   }
 
   sendCmd(cmd: string) {
@@ -169,17 +137,6 @@ export class InputComponent implements OnInit, OnDestroy {
 
   @HostListener('document:keypress', ['$event'])
   onCommandEvent(event: KeyboardEvent) {
-    const activeElement = document.activeElement;
-    if (
-      (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') &&
-      activeElement.id !== 'inputcommand'
-    ) {
-      return;
-    }
-
-    if(!this.ic.nativeElement.isFocussed) {
-      this.focus();
-    }
 
     if (
       event.key === '!' &&
@@ -190,7 +147,6 @@ export class InputComponent implements OnInit, OnDestroy {
       if (l > 0) {
         this.game.processCommands(this.historyService.cmd_history[l - 1]);
       }
-
       return false;
     }
   }

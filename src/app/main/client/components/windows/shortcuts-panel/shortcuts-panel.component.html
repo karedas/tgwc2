@@ -22,16 +22,20 @@
         </ng-container>
       </div>
       <div matDialogActions class="tg-shortcuts-edit">
-        <button mat-stroked-button (click)="openShortcutManager()" color="accent">
-          modifica scorciatoie
+        <button mat-raised-button (click)="openShortcutManager()" color="accent">
+          Modifica scorciatoie
         </button>
       </div>
     </ng-container>
     <ng-template #noShortcuts>
-      <p class="no-shortcuts">
-        Non hai ancora nessuna scorciatoia salvata.<br />
-        <button mat-stroked-button (click)="openShortcutManager()" color="accent">Creane subito una</button>
-      </p>
+      <div class="no-shortcuts">
+        <p>
+          Non hai ancora nessuna scorciatoia salvata.
+        </p>
+        <p>
+          <button mat-raised-button (click)="openShortcutManager()" color="accent">Creane subito una</button>
+        </p>
+      </div>
     </ng-template>
   </ng-container>
 </tg-window-wrapper>

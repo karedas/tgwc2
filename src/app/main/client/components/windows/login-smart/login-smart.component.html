@@ -3,12 +3,12 @@
     <p class="tg-widgetlogin-status">
 
       <ng-container *ngIf="loggedHero.image">
-        <div class="logout-avatar tg-shadow">
+        <div class="logout-avatar">
           <img id="infoimage" [src]="imagepath + loggedHero.image" />
         </div>
       </ng-container>
       
-      <span class="tg-yellow">{{loggedHero.name}}</span> Sei stato disconnesso.
+      <span class="tg-yellow">{{loggedHero.name}}</span> sei stato disconnesso.
     </p>
     <div class="tg-widgetlogin-menu" *ngIf="!showForm" fxLayout="column">
       <button type="button" class="btn-reconnect tg-button" (click)="onReconnect()">

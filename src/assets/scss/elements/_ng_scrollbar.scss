@@ -52,5 +52,19 @@ ng-scrollbar.through {
 }
 
 ng-scrollbar .ng-scroll-content{
+  box-sizing: border-box;
   height: 100%;
 }
+
+ng-scrollbar .ng-scroll-offset{
+  padding: 12px 34px 12px 12px;
+}
+
+ng-scrollbar.bitpadding .ng-scroll-offset {
+  padding: 0 17px 0 12px;
+}
+
+ng-scrollbar.nopadding .ng-scroll-offset{
+  padding: 0 17px 0 0;
+}
+

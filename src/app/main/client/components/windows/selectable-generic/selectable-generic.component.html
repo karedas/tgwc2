@@ -4,10 +4,10 @@
   </ng-container>
   <ng-container ngProjectAs="content">
     <div fxLayout="column" style="height: 100%">
-      <div class="tg-selectable-content" fxFlex="1 1 auto%" fxFlexFill>
+      <div class="tg-selectable-content" fxFlex="0 0 auto">
         <p>{{data.desc}}</p>
       </div>
-      <div class="tg-selectable-content" fxFlex="1 1 auto" fxFlexFill>
+      <div class="tg-selectable-content" fxFlex="1 1 100%" fxFlexFill>
         <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'">
           <ng-container *ngIf="data.list">
             <mat-list #dense>
@@ -27,7 +27,7 @@
           </ng-container>
         </ng-scrollbar>
       </div>
-      <div class="tg-white tg-selectable-prefix" fxFlex="1 1 auto" fxFlexFill>
+      <div class="tg-white tg-selectable-prefix" fxFlex="0 1 auto">
         <p>
           {{data.prefix}} <span class="tg-yellow">{{selectedValueText}}</span>
         </p>

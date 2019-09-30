@@ -1,5 +1,5 @@
 <ng-container *ngIf="heroInfo$ | async as hero">
-  <ng-scrollbar class="scrollbar" [appearance]="'compact'">
+  <ng-scrollbar class="scrollbar bitpadding" [appearance]="'compact'">
     <div fxLayout="column" style="height: 100%;">
         <!-- Info Description -->
         <div class="info-description" fxFlex="0 1 100%" fxLayout="column">
@@ -8,7 +8,7 @@
 
             <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap" fxLayout="column">
               <div class="info-textarea--container" fxFlex="0 1 100%">
-                <ng-scrollbar class="scrollbar" #textAreaScrollbar>
+                <ng-scrollbar class="scrollbar nopadding" #textAreaScrollbar>
                   <div name="editor" cols="30" class="textarea" [innerHtml]="description | dataToHtml:true"></div>
                 </ng-scrollbar>
               </div>

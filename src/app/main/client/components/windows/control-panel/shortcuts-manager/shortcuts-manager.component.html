@@ -1,7 +1,7 @@
 <div class="tg-shortcuts-area" fxFlex="1 0 auto">
   <div [hidden]="newShortcutOpenedStatus">
-    <h3 class="tg-control-panel--subtitle" style="margin-top:0;">
-      Gestione Scorciatoie
+    <h3 class="tg-control-panel--subtitle">
+      Scorciatoie
     </h3>
     <ng-container *ngIf="!shortcuts.length">
       <p class="tg-white">
@@ -17,16 +17,16 @@
   
     <div class="tg-shortcuts-all" [hidden]="newShortcutOpenedStatus">
       <ng-container *ngIf="shortcuts">
-        <div *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)" fxLayout="column">
-          <div fxLayout="row" fxAlignItems="center center" class="tg-shortcut-headerlist">
+        <div *ngIf="shortcuts.length > 0" cdkDropList (cdkDropListDropped)="drop($event)" fxLayout="column" >
+          <div fxLayout="row" fxAlignItems="center center" class="tg-shortcut-headerlist" fxLayoutGap="10px">
             <div fxFlex="1 1 10%">&nbsp;</div>
             <div fxFlex="1 1 30%">Icona</div>
             <div fxFlex="1 1 30%">Comando</div>
             <div fxFlex="1 1 30%">Azione</div>
           </div>
           <div>
-            <div *ngFor="let sc of shortcuts; let isc = index" cdkDrag class="tg-shortcut-row">
-              <div fxFlex="1 1 10%">
+            <div *ngFor="let sc of shortcuts; let isc = index" cdkDrag cdkDragLockAxis="y" class="tg-shortcut-row" fxLayoutGap="10px">
+              <div fxFlex="1 1 10%" fxLayoutAlign="center center">
                 <button mat-icon-button class="small" cdkDragHandle type="button">
                   <mat-icon aria-label="ordina">reorder</mat-icon>
                 </button>
@@ -90,15 +90,15 @@
 
       <button mat-raised-button color="accent" type="submit">Salva</button>&nbsp;
       <button mat-raised-button color="warn" (click)="closeNewShortcut()" type="button">
-        Chiudi
+        Annulla
       </button>
     </form>
 
-    <div class="tg-shortcut-iconslist" [ngClass]="{ open: iconsListOpenedStatus }">
-      <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'">
+    <div class="tg-shortcut-iconslist" *ngIf="iconsListOpenedStatus">
+      <ng-scrollbar class="scrollbar bitpadding" #scrollBar [visibility]="'always'">
         <ng-container *ngIf="iconsListOpenedStatus">
           <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
-          <div class="tg-shortcut-icons--container" fxLayout="row wrap" *ngIf="iconsListOpenedStatus">
+          <div class="tg-shortcut-iconslist-container" fxLayout="row wrap">
             <div
               class="tg-shortcut-icon"
               fxFlex="1 1 32px"
@@ -109,8 +109,8 @@
             </div>
           </div>
           <mat-divider></mat-divider>
-          <button mat-raised-button (click)="openIconsList()" type="button">
-            Chiudi
+          <button mat-raised-button (click)="openIconsList()" color="warn" type="button">
+            Annulla
           </button>
         </ng-container>
       </ng-scrollbar>

@@ -4,6 +4,7 @@
 
 :host {
   color: $base-text-color;
+  
 }
 
 .tg-control-panel--tab {
@@ -27,36 +28,37 @@
   }
 }
 
-.tg-control-panel--subtitle {
-  color: $tg-yellow;
-  font-weight: normal;
-}
-
-.tg-control-panel--tabcontent {
-  background-color: #00000082;
-  padding: 1em;
-  position: relative;
-
-  .content {
-    display: none;
-  }
-
-  .content.active {
-    display: block;
-  }
-}
-
-.tg-control-panel--option {
-  padding-bottom: 1em;
-}
-
-.tg-control-panel--suboption {
-  padding: 0;
-
-  h4 {
-    color: #bfbfbf;
-    margin: 0;
-    font-size: 100%;
+:host ::ng-deep {
+  .tg-control-panel--subtitle {
     font-weight: normal;
   }
+  
+  .tg-control-panel--tabcontent {
+    background-color: #00000082;
+    position: relative;
+  
+    .content {
+      display: none;
+    }
+  
+    .content.active {
+      display: block;
+    }
+  }
+  
+  .tg-control-panel--option {
+    padding-bottom: 1em;
+  }
+  
+  .tg-control-panel--suboption {
+    padding: 0;
+  
+    h4 {
+      color: #bfbfbf;
+      margin: 0;
+      font-size: 100%;
+      font-weight: normal;
+    }
+  }
 }
+
