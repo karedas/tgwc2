@@ -3,10 +3,6 @@ import { TGConfig } from '../../../client-config';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSliderChange } from '@angular/material/slider';
-import { AudioService } from '../../audio/audio.service';
-import { font_size_options } from 'src/app/main/client/common/constants';
-import { GameService } from '../../../services/game.service';
 import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
