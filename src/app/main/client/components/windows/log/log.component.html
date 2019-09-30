@@ -1,16 +1,12 @@
-<div class="tg-log" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="tg-dialog-content" fxLayout="column">
-    <div class="tg-dialog-title" cdkDragHandle>
-      Log di Gioco
-      <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-        <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-      </button>
-    </div>
-
-    <div class="tg-log-content no-padding" matDialogContent>
-      
+<tg-window-wrapper [nopadding]="true" [border]="'thin'">
+  <ng-container ngProjectAs="title">
+    Log di Gioco
+  </ng-container>
+  <ng-container ngProjectAs="content">
+    
+    <div class="tg-log-content">
       <ng-scrollbar [appearance]="'compact'" class="scrollbar">
-        <div class="tg-log-date">Data Inizio Log: {{dateTime}}</div>
+        <div class="tg-log-date">Data Inizio Log: {{ dateTime }}</div>
         <div #logContentArea>
           <ng-container *ngFor="let log of logStorage">
             <div class="tg-log-line" fxLayout>
@@ -20,11 +16,12 @@
           </ng-container>
         </div>
       </ng-scrollbar>
-      
     </div>
+    
     <div class="tg-log-action" mat-dialog-actions>
       <button mat-raised-button color="accent" (click)="saveLog()">Salva su File</button>
       <!-- <button mat-raised-button color="alert" (click)="resetLog()">Cancella Log</button> -->
     </div>
-  </div>
-</div>
+    
+  </ng-container>
+</tg-window-wrapper>
