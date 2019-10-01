@@ -7,13 +7,9 @@ import { GameService } from '../../services/game.service';
   providedIn: 'root'
 })
 export class InputService {
-
   inputElement: ElementRef;
 
-  constructor(
-    private historyService: HistoryService,
-    private gameService: GameService
-  ) { }
+  constructor(private historyService: HistoryService, private gameService: GameService) {}
 
   setInputRef(ic) {
     this.inputElement = ic;
