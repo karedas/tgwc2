@@ -17,7 +17,7 @@ export class GeneralTabComponent implements OnInit, OnDestroy {
   fontSizes = font_size_options;
   oldFontSize: number;
   fileUploaded = false;
-  
+
   private _unsubscribeAll: Subject<any>;
 
 
@@ -36,7 +36,7 @@ export class GeneralTabComponent implements OnInit, OnDestroy {
       this.tgConfig = config;
     });
   }
-  
+
   onOptionChange(event, value: any) {
     this.configService.setConfig(value);
   }
@@ -44,7 +44,7 @@ export class GeneralTabComponent implements OnInit, OnDestroy {
   changeFontSize(event: any) {
     this.gameService.setOutputSize(event.value);
   }
-  
+
   saveConfig() {
     const conf = localStorage.getItem('config');
     this.fileSaverService.saveText(conf, 'tgconfig');

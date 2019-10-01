@@ -41,7 +41,7 @@ export class AudioComponent implements OnInit, OnDestroy {
         filter(state => !!state ),
         takeUntil(this._unsubscribeAll))
       .subscribe(audio => {
-        this.audioService.setAudio(audio)
+        this.audioService.setAudio(audio);
       }
       );
   }

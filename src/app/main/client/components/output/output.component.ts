@@ -105,10 +105,10 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Listen Mouse Scroll event to enable/disable pause.
     this.scrollBar.scrolled.subscribe((e) => {
-      let outputSize = 
-        this.mainOutputArea.nativeElement.offsetHeight + 
+      const outputSize =
+        this.mainOutputArea.nativeElement.offsetHeight +
         this.mainOutputArea.nativeElement.offsetWidth;
-        
+
       this.outputService.onMouseScroll(e.target.scrollTop, outputSize);
     });
   }

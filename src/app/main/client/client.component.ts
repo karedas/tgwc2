@@ -38,13 +38,13 @@ export class ClientComponent implements OnInit, OnDestroy {
     this._configService.config
       .pipe(
         takeUntil(this._unsubscribeAll),
-        map((config: TGConfig) => { return config.characterPanelTopPosition})
+        map((config: TGConfig) => config.characterPanelTopPosition)
         )
       .subscribe((characterPanelPosition) => {
         this.characterComponentPosition = characterPanelPosition;
       });
 
-      this.mediaObserver.media$
+    this.mediaObserver.media$
       .pipe( takeUntil(this._unsubscribeAll))
         .subscribe((change: MediaChange) => {
           this.setViewByViewport(change);
@@ -53,10 +53,10 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
-  
+
   // Todo: Moving this in root place
   private setViewByViewport(change: MediaChange) {
-    if ( change.mqAlias === 'xs' || change.mqAlias ==='sm') {
+    if ( change.mqAlias === 'xs' || change.mqAlias === 'sm') {
      this.gameService.isSmallDevice = true;
     } else {
       this.gameService.isSmallDevice = false;

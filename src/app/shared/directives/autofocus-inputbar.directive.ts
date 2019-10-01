@@ -13,21 +13,21 @@ export class AutofocusInputbarDirective {
 
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     const activeElement = document.activeElement;
-    if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA'){
-      if(activeElement.id !== 'inputcommand') {
+    if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+      if (activeElement.id !== 'inputcommand') {
         return;
       }
     }
     // Return back if user uses "CTRL" key
-    if(event.ctrlKey) {
+    if (event.ctrlKey) {
       return;
     }
 
     if ( event.key !== 'Escape') {
       this.inputService.focus();
-    } 
+    }
 
-    switch(event.key) {
+    switch (event.key) {
       case 'ArrowUp':
         this.inputService.getPreviousCmd();
         break;

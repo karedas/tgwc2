@@ -24,8 +24,8 @@ import { environment } from 'src/environments/environment';
 export class LoginSmartComponent implements OnInit, OnDestroy {
   readonly imagepath: string = environment.media_address;
   readonly dialogID: string = 'loginwidget';
-  
-  loggedHero: any
+
+  loggedHero: any;
   inGameState$: Observable<boolean>;
   showForm = false;
   smartLoginForm: FormGroup;
@@ -54,7 +54,7 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     .pipe(
       select(getHero)
     ).subscribe((hero) => {
-      this.loggedHero = {name: hero.name, image: hero.image}
+      this.loggedHero = {name: hero.name, image: hero.image};
     });
 
     this._unsubscribeAll = new Subject();

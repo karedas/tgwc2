@@ -1,4 +1,4 @@
-import { Component, Inject, Renderer2, OnDestroy } from "@angular/core";
+import { Component, Inject, Renderer2, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';

@@ -77,26 +77,25 @@ export class GenericTableComponent implements  OnInit, OnDestroy {
     } else {
       dataTable.data.forEach((d: any,  idx) => {
         this.columnsToDisplay.push(d[0]);
-      })
+      });
     }
 
     // pupulate data
     if (dataTable.data) {
       let obj = {};
       dataTable.data.forEach((d: any, idx) => {
-        if(dataTable.head) {
+        if (dataTable.head) {
           obj = {};
           d.map((row: string, rowIndex: number) => {
               obj[this.columnsToDisplay[rowIndex]] = row;
           });
           this.data.push(obj);
-        }
-        else {
-          obj[d[0]] = d[1]
+        } else {
+          obj[d[0]] = d[1];
         }
       });
 
-      if(!dataTable.head) {
+      if (!dataTable.head) {
         this.data.push(obj);
       }
     }

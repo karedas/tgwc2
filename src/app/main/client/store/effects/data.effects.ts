@@ -43,7 +43,7 @@ export class DataEffects {
         const config = this.configService.getConfig();
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice ) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('equip');
-        } 
+        }
       }),
     ), { dispatch: false }
   );
@@ -55,7 +55,7 @@ export class DataEffects {
         const config = this.configService.getConfig();
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('inventory');
-        } 
+        }
       }),
     ), { dispatch: false }
   );
@@ -95,7 +95,7 @@ export class DataEffects {
       ofType(DataEvenType.CLOSETEXTEDITOR),
       tap(() => {
         this.dialogV2Service.dialog.getDialogById('editor').close();
-        if(this.dialogV2Service.dialog.getDialogById('charactersheet')) {
+        if (this.dialogV2Service.dialog.getDialogById('charactersheet')) {
           this.gameService.processCommands('info');
         }
       })
@@ -149,7 +149,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   refreshCommand$ = createEffect(() =>
     this.actions$.pipe(

@@ -9,10 +9,10 @@ export class QuantitySortPipe implements PipeTransform {
     let orderedList: any;
 
     orderedList = list.slice().sort((a, b) => {
-      if(a[key].length > b[key].length) {
+      if (a[key].length > b[key].length) {
         return -1;
-      } 
-      if(a[key].length < b[key].length) {
+      }
+      if (a[key].length < b[key].length) {
         return 1;
       }
       return 0;

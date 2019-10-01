@@ -5,9 +5,9 @@ import { NgScrollbar } from 'ngx-scrollbar';
 @Injectable()
 export class ScrollbarOutputService {
   pause$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  containerSize: number = 0;
+  containerSize = 0;
 
-  private scrollTopBeforePause: number = 0;
+  private scrollTopBeforePause = 0;
 
   scrollPanelToBottom(scrollbarRef: NgScrollbar, scrollEnd: ElementRef) {
     if (scrollbarRef) {
@@ -31,7 +31,7 @@ export class ScrollbarOutputService {
   onMouseScroll(scrollTop, outputSizes?: number) {
     // Check if output container changes size after window.resize or split area width changes,
     // then reset the pause behaviour to prevent not wanted behaviour.
-    if(outputSizes !== this.containerSize) {
+    if (outputSizes !== this.containerSize) {
       this.containerSize = outputSizes;
       this.scrollTopBeforePause = 0;
     }

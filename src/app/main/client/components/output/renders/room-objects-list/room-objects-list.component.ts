@@ -15,8 +15,8 @@ export class RoomObjectsListComponent implements OnInit {
   objsClass50_50 = false;
   togglePanel: any = {};
 
-  constructor( 
-    private outputService: OutputService, 
+  constructor(
+    private outputService: OutputService,
     private gameService: GameService) {}
 
   ngOnInit() {

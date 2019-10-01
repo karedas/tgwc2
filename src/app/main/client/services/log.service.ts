@@ -244,20 +244,20 @@ export class LogService {
 
           switch (typeof h) {
             case 'object':
-              if(h) {
+              if (h) {
                 switch (h.type) {
                   case 'account':
                     txt += '<td><a target="_blank" href="/admin/accounts/' + elem + '">' + elem + '</a></td>';
                     break;
-  
+
                   case 'ipaddr':
                     txt += '<td><a target="_blank" href="http://www.infosniper.net/index.php?ip_address=' + elem + '">' + elem + '</a></td>';
                     break;
-  
+
                   // case "icon":
                   //   txt += '<td>'+ elem +'</td>';
                   //   break;
-  
+
                   default:
                     txt += '<td>' + elem + '</td>';
                     break;

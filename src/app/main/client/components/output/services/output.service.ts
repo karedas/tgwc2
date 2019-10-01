@@ -4,7 +4,7 @@ import { ScrollbarOutputService } from './scrollbar-output.service';
 @Injectable({
   providedIn: 'root'
 })
-export class OutputService extends ScrollbarOutputService{
+export class OutputService extends ScrollbarOutputService {
 
   // Uncollapse/Collapse a collapsed Container
   isExpandeable(event: Event, item: any, index: number): boolean {

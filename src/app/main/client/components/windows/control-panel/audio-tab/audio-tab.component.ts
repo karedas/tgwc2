@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
 export class AudioTabComponent implements OnInit, OnDestroy {
   tgConfig: TGConfig;
   private _unsubscribeAll: Subject<any>;
-  
+
   constructor(
     private audioService: AudioService,
     private configService: ConfigService

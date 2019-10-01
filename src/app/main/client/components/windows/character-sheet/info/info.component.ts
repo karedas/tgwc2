@@ -35,7 +35,7 @@ export class InfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.heroInfo$.pipe(
       takeUntil( this._unsubscribeAll )).subscribe(
-        (( hero: IHero ) => { this.parseDesc( hero.desc );}
+        (( hero: IHero ) => { this.parseDesc( hero.desc ); }
       ));
   }
 

@@ -35,7 +35,7 @@ export class DialogV2Service {
   }
 
   private getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
-    return dialogRef['_overlayRef'].overlayElement as HTMLElement;
+    return dialogRef._overlayRef.overlayElement as HTMLElement;
   }
 
   private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
@@ -112,7 +112,7 @@ export class DialogV2Service {
   openBaseWindow(data: any, id?: string, disableClose = false): MatDialogRef<BaseWindowComponent, MatDialogConfig> {
     const dialogID = id ? id : 'base';
     let dialogRef = this.dialog.getDialogById(dialogID);
-    if(!dialogRef) {
+    if (!dialogRef) {
       const config = new MatDialogConfig();
       config.id = dialogID;
       config.disableClose = disableClose;
@@ -375,7 +375,7 @@ export class DialogV2Service {
   openSelectableGeneric(data: any): MatDialogRef<SelectableGenericComponent, MatDialogConfig> {
     const dialogID = 'selectable-generic';
 
-    if(!this.dialog.getDialogById(dialogID)) {
+    if (!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
 
       config.id = dialogID;

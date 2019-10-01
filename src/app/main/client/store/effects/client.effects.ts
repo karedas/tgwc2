@@ -38,18 +38,18 @@ export class ClientEffects {
       mapTo( inGameAction({payload: false}) )
     ),
   );
-    
 
-  inGame$ = createEffect(() => 
+
+  inGame$ = createEffect(() =>
   this.actions$.pipe(
     ofType<PayloadAction>(ClientEventType.INGAME),
     tap((res) => {
-      if(res.payload === true) {
+      if (res.payload === true) {
         this.game.processCommands(' ', false);
       }
     })
-  ),{ dispatch: false }
-)
+  ), { dispatch: false }
+);
 
   constructor(
     private game: GameService,

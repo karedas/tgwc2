@@ -10,7 +10,7 @@ export class BaseWindowComponent implements OnInit {
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public data
-  ) { 
+  ) {
   }
 
   ngOnInit() {
