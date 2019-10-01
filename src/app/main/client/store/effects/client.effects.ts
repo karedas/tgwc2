@@ -2,14 +2,15 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { ClientEventType, inGameAction } from '../actions/client.action';
 import { Store } from '@ngrx/store';
-import { tap, mapTo } from 'rxjs/operators';
+import { tap, mapTo, map, concatMap, switchMap, filter } from 'rxjs/operators';
 import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
 import { ClientState } from '../state/client.state';
 import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
-
+import { PayloadActionData } from './data.effects';
+import { TGAudio } from '../../models/audio.model';
 
 export interface PayloadAction {
   type: string;
@@ -18,8 +19,6 @@ export interface PayloadAction {
 
 @Injectable()
 export class ClientEffects {
-
-
   onDisconnect$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadAction>(ClientEventType.DISCONNECT),
@@ -38,21 +37,37 @@ export class ClientEffects {
           this.loginService.isInGame = false;
         }
       }),
-      mapTo( inGameAction({payload: false}) )
-    ),
+      mapTo(inGameAction({ payload: false }))
+    )
   );
-    
 
-  inGame$ = createEffect(() => 
-  this.actions$.pipe(
-    ofType<PayloadAction>(ClientEventType.INGAME),
-    tap((res) => {
-      if(res.payload === true) {
-        this.game.processCommands(' ', false);
-      }
-    })
-  ),{ dispatch: false }
-)
+  inGame$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<PayloadAction>(ClientEventType.INGAME),
+        map(res => res.payload),
+        tap(ingame => {
+          if (ingame === true) {
+            this.game.processCommands(' ', false);
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  audio$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<PayloadAction>(ClientEventType.AUDIO),
+        map(action => action.payload),
+        filter(state => !!state ),
+        tap(( audio: TGAudio ) => {
+          console.log('go?');
+          this.audioService.setAudio({channel: 'atmospheric', track: 'rain-and-thunder-loop.mp3'});
+        })
+      ),
+    { dispatch: false }
+  );
 
   constructor(
     private game: GameService,
@@ -61,5 +76,5 @@ export class ClientEffects {
     private dialogV2Service: DialogV2Service,
     private router: Router,
     private loginService: LoginClientService
-  ) { }
+  ) {}
 }

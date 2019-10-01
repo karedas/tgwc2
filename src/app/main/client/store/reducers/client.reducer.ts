@@ -8,7 +8,6 @@ export const reducer = createReducer(
   on(updateUIAction, (state, { payload }) => {
     return Object.assign({}, state, payload);
   }),
-  on(audioAction, (state, { payload }) => ({ ...state, audio: payload }))
 );
 
 export function clientReducer(state: ClientState | undefined, action: Action) {

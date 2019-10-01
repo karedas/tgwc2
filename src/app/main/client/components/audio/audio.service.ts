@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TGConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';
+import { TGAudio } from '../../models/audio.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,7 @@ export class AudioService {
     this.sound = new Audio();
     this.music = new Audio();
     this.atmospheric = new Audio();
+    this.atmospheric.loop = true;
   }
 
   set enable(value: boolean) {
@@ -47,20 +49,27 @@ export class AudioService {
     this.music.volume = value;
   }
 
-  setAudio(src: string): void {
+  setAudio(audio: TGAudio): void {
     if(this._enable) {
       const mp3 = '.mp3';
       const mid = '.mid';
       const wav = '.wav';
   
-      /** Music Channel */
-      if (src.indexOf(mp3, src.length - mp3.length) !== -1) {
-        this.setMusic(src);
-      } else if (src.indexOf(mid, src.length - mid.length) !== -1) {
-        this.setMusic(src.replace(mid, mp3));
-      } else {
-        this.setSound(src.replace(wav, mp3));
-      }
+      /** Music && Sound Channel */
+      if(audio.channel === 'music') {
+        console.log('TGLOG: Sound and Music channel Starts')
+        if (audio.track.indexOf(mp3, audio.track.length - mp3.length) !== -1) {
+          this.setMusic(audio.track);
+        } else if (audio.track.indexOf(mid, audio.track.length - mid.length) !== -1) {
+          this.setMusic(audio.track.replace(mid, mp3));
+        } else {
+          this.setSound(audio.track.replace(wav, mp3));
+        }
+      } else if (audio.channel === 'atmospheric') {
+        console.log('TGLOG: Atmospheric Music channel starts')
+        this.setAtmospheric(audio.track);
+        /** Atmospheric Channel */
+      } 
     }
   }
 
@@ -105,7 +114,7 @@ export class AudioService {
 
   public setAtmospheric(src: string): void {
 
-    this.atmospheric.src = 'assets/audio/atmospheric' + src;
+    this.atmospheric.src = 'assets/audio/atmospherics/' + src;
     this.playAtmospheric();
   }
 

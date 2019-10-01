@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { TGAudio } from '../../models/audio.model';
 
 export enum ClientEventType {
   DISCONNECT = '[Client] User Disconnect',
@@ -13,5 +14,5 @@ export const disconnectAction = createAction(ClientEventType.DISCONNECT);
 export const inGameAction = createAction(ClientEventType.INGAME, props<{payload: boolean}>());
 export const resetAction = createAction(ClientEventType.RESET);
 export const updateUIAction = createAction(ClientEventType.UI, props<{payload: any}>());
-export const audioAction = createAction(ClientEventType.AUDIO, props<{payload: string}>());
+export const audioAction = createAction(ClientEventType.AUDIO, props<{payload: TGAudio}>());
 export const uploadAvatarAction = createAction(ClientEventType.UPLOADAVATAR);
