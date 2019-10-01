@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { GameService } from './services/game.service';
-import { InputService } from './components/input/input.service';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subject } from 'rxjs';
-import { TGConfig } from './client-config';
-import { takeUntil, map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
-import { MediaObserver, MediaChange } from '@angular/flex-layout';
+
+import { TGConfig } from './client-config';
+import { GameService } from './services/game.service';
 
 @Component({
   selector: 'tg-client',

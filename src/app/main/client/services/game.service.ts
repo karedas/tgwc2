@@ -1,26 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { SocketService } from '../../../core/services/socket.service';
+import { cloneDeep, isObject, some } from 'lodash';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { font_size_options, pos_to_order } from 'src/app/main/client/common/constants';
+import { environment } from 'src/environments/environment';
+
 import { socketEvent } from '../../../core/models/socketEvent.enum';
-import { DataParser } from './dataParser.service';
-import { HistoryService } from './history.service';
-import {
-  Observable,
-  BehaviorSubject,
-  Subscription,
-  timer,
-  interval
-} from 'rxjs';
-import {
-  pos_to_order,
-  font_size_options,
-  equipPositionByName
-} from 'src/app/main/client/common/constants';
+import { SocketService } from '../../../core/services/socket.service';
 import { ConfigService } from '../../../services/config.service';
 import { TGConfig } from '../client-config';
-import { cloneDeep, some, isObject } from 'lodash';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { switchMap, timeInterval, flatMap } from 'rxjs/operators';
+import { DataParser } from './dataParser.service';
+import { HistoryService } from './history.service';
 
 @Injectable()
 export class GameService {

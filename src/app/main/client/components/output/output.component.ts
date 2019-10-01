@@ -1,17 +1,18 @@
-import { Component, ViewChild, OnInit, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import { Store } from '@ngrx/store';
-import { takeUntil, filter } from 'rxjs/operators';
-import { NgScrollbar } from 'ngx-scrollbar';
-import { Observable, Subject, BehaviorSubject, pipe } from 'rxjs';
-import { GameService } from 'src/app/main/client/services/game.service';
-import { Room } from 'src/app/main/client/models/data/room.model';
 import { SplitComponent } from 'angular-split';
+import { NgScrollbar } from 'ngx-scrollbar';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
+import { Room } from 'src/app/main/client/models/data/room.model';
+import { GameService } from 'src/app/main/client/services/game.service';
+import * as dataSelector from 'src/app/main/client/store/selectors';
 import { ConfigService } from 'src/app/services/config.service';
+
 import { TGConfig } from '../../client-config';
 import { TGState } from '../../store';
-import { MediaObserver } from '@angular/flex-layout';
-import * as dataSelector from 'src/app/main/client/store/selectors';
 import { OutputService } from './services/output.service';
 
 @Component({
