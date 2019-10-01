@@ -7,9 +7,9 @@ import { GameService } from '../../../services/game.service';
   templateUrl: './selectable-generic.component.html',
   styleUrls: ['./selectable-generic.component.scss']
 })
-export class SelectableGenericComponent{
+export class SelectableGenericComponent {
   @ViewChildren('selectableList') selectableList: QueryList<MatSelectionList>;
-  selectedValueText: string = 'Nessuno';
+  selectedValueText = 'Nessuno';
   adjectiveShowed: string;
 
   constructor(
@@ -23,8 +23,8 @@ export class SelectableGenericComponent{
 
     if ($event.option.selected) {
       this.adjectiveShowed = '';
-      this.selectedValueText = $event.option.value['sel'];
-      this.adjectiveShowed = $event.option.value['show'];
+      this.selectedValueText = $event.option.value.sel;
+      this.adjectiveShowed = $event.option.value.show;
     }
 
     this.selectableList.forEach((selectList: MatSelectionList) => {
@@ -35,7 +35,7 @@ export class SelectableGenericComponent{
   }
 
   saveAdjective() {
-    if(this.data.cmd) {
+    if (this.data.cmd) {
       const cmd = this.data.cmd;
       this.gameService.sendToServer(cmd + ' ' + this.selectedValueText);
     }

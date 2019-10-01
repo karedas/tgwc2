@@ -16,8 +16,13 @@
           <tg-status></tg-status>
 
           <div style="height: 100%; overflow:hidden;" class="o-container">
-            <ng-scrollbar class="scrollbar-output" [ngClass]="{ disabled: draggingSplitArea }" #scrollBar
-              [disabled]="draggingSplitArea">
+            <ng-scrollbar 
+              #scrollBar
+              class="scrollbar-output" 
+              (reachedBottom)="onBottomReached()"
+              [ngClass]="{ disabled: draggingSplitArea }" 
+              [disabled]="draggingSplitArea"
+              [visibility]="'always'">
               <div class="tg-output--history">
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">
@@ -68,7 +73,7 @@
 
             <as-split-area [visible]="tgConfig.widgetEquipInv.visible" [size]="
                 tgConfig.widgetEquipInv.collapsed
-                  ? 30
+                  ? 32
                   : tgConfig.widgetEquipInv.size
               " [lockSize]="tgConfig.widgetEquipInv.collapsed" [order]="2">
               <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea"></tg-smart-equip-inventory>

@@ -1,0 +1,77 @@
+<h3 class="tg-control-panel--subtitle">
+  Client
+</h3>
+
+<mat-divider></mat-divider>
+
+<div class="tg-control-panel--option">
+  <mat-form-field>
+    <mat-label>Dimensione Testo</mat-label>
+    <mat-select required (selectionChange)="changeFontSize($event)" [value]="tgConfig.fontSize">
+      <mat-option *ngFor="let size of fontSizes; let idx = index" [value]="idx">{{ size.name }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="tg-control-panel--option">
+  <mat-checkbox
+    [(ngModel)]="tgConfig.characterPanel"
+    (change)="onOptionChange($event, { characterPanel: $event.checked })"
+    [disabled]="tgConfig.zen"
+    >Mostra pannello personaggio</mat-checkbox
+  >
+</div>
+
+<div class="tg-control-panel--option">
+  <mat-label id="character-panel-radio-label">Posizione del pannello personaggio</mat-label><br />
+  <mat-radio-group
+    aria-labelledby="character-panel-radio-label"
+    [(ngModel)]="tgConfig.characterPanelTopPosition"
+    (change)="
+      onOptionChange($event, {
+        characterPanelTopPosition: $event.value
+      })
+    "
+    [disabled]="tgConfig.zen || !tgConfig.characterPanel"
+  >
+    <mat-radio-button [value]="0" color="accent">In alto</mat-radio-button>&nbsp;
+    <mat-radio-button [value]="1" color="accent">In Basso</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<div class="tg-control-panel--option">
+  <mat-checkbox [ngModel]="tgConfig.zen" (change)="onOptionChange($event, { zen: $event.checked })">
+    Modalità Zen</mat-checkbox
+  >
+</div>
+
+<div class="tg-control-panel--option">
+  <mat-checkbox [(ngModel)]="tgConfig.logSave" (change)="onOptionChange($event, { logSave: $event.checked })">
+    Chiedi salvataggio log alla chiusura</mat-checkbox
+  >
+</div>
+
+<p class="tg-lt-white">
+  <u>Il salvataggio della configurazione viene applicato automaticamente ad ogni singola modifica effettuata.</u>
+</p>
+
+<mat-divider></mat-divider>
+
+<h3 class="tg-control-panel--subtitle">
+  File di configurazione
+</h3>
+<p>
+  Salva o carica il tuo file di configurazione che conterrà le tue preferenze per il client (scorciatoie incluse).
+</p>
+
+<button mat-raised-button (click)="saveConfig()">
+  Scarica file</button
+>&nbsp;
+
+<button mat-raised-button color="accent" (click)="fileInput.click()">
+  Carica file
+</button>
+
+<input hidden type="file" #fileInput (change)="uploadConfig($event)" />
+
+<p *ngIf="fileUploaded" class="tg-green">File Caricato!</p>

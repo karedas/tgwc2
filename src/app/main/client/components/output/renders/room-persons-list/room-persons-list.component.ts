@@ -1,22 +1,24 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { RoomList } from 'src/app/main/client/models/data/room.model';
-import { OutputService } from '../../output.service';
 import { GameService } from 'src/app/main/client/services/game.service';
+
+import { OutputService } from '../../services/output.service';
 
 @Component({
   selector: 'tg-room-persons-list',
   templateUrl: './room-persons-list.component.html',
-  styleUrls: ['./room-persons-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomPersonsListComponent implements OnInit {
   @Input('persons') persons: RoomList[];
-  
+
   totalPersons = 0;
   personsClass50_50 = false;
   togglePanel: any = {};
 
-  constructor(private outputService: OutputService, private gameService: GameService) {}
+  constructor(
+    private outputService: OutputService,
+    private gameService: GameService) {}
 
   ngOnInit() {
     this.getTotalByType();

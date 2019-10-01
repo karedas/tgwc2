@@ -1,0 +1,37 @@
+<h3 class="tg-control-panel--subtitle">
+  Audio
+</h3>
+<div class="tg-control-panel--option">
+    <mat-checkbox [(ngModel)]="tgConfig.audio.enable" (change)="onAudioChange($event, 'enable')">
+      Abilita effetti sonori e musica d'ambiente</mat-checkbox>
+  </div>
+  <div class="tg-control-panel--suboption">
+    <h4>Volume Musica</h4>
+    <mat-slider
+      [disabled]="!tgConfig.audio.enable"
+      [displayWith]="formatAudio"
+      (input)="onAudioChange($event, 'music')"
+      [thumbLabel]="true"
+      class="tg-slider"
+      max="100"
+      min="1"
+      value="{{ tgConfig.audio.musicVolume }}"
+      step="1">
+    </mat-slider>
+    {{ tgConfig.audio.musicVolume }}
+  </div>
+  <div class="tg-control-panel--suboption">
+    <h4>Volume Suoni</h4>
+    <mat-slider
+      [disabled]="!tgConfig.audio.enable"
+      [displayWith]="formatAudio"
+      (input)="onAudioChange($event, 'sound')"
+      [thumbLabel]="true"
+      class="tg-slider"
+      max="100"
+      min="1"
+      value="{{ tgConfig.audio.soundVolume }}"
+      step="1">
+    </mat-slider>
+    {{ tgConfig.audio.soundVolume }}
+  </div>

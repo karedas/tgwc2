@@ -1,23 +1,24 @@
-import { NgModule } from '@angular/core';
 import 'hammerjs';
-import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { AppPreloadingStrategy } from './app.preloading-strategy';
-import { GoogleAnalyticsService } from './services/google-analytics-service.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { tgConfig } from './main/client/client-config';
 import { SplashscreenComponent } from './main/common/components/splashscreen/splashscreen.component';
 import { MainModule } from './main/main.module';
-import { CoreModule } from './core/core.module';
-import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
-import { tgConfig } from './main/client/client-config';
+import { GoogleAnalyticsService } from './services/google-analytics-service.service';
 import { TgConfigModule } from './shared/tgconfig.module';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 
 
 export function tokenGetter() {

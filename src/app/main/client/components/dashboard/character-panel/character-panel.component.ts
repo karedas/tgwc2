@@ -2,14 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store, select } from '@ngrx/store';
 import { getHero, getDirectionNotify } from 'src/app/main/client/store/selectors';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IHero, ITarget } from 'src/app/main/client/models/data/hero.model';
 import { GameService } from 'src/app/main/client/services/game.service';
-
-import { MediaObserver, MediaChange } from '@angular/flex-layout';
-
 import { ConfigService } from 'src/app/services/config.service';
 import { TGConfig } from '../../../client-config';
 import { trigger, state, style, transition, animate, group } from '@angular/animations';

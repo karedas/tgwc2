@@ -1,12 +1,12 @@
 <div fxLayout="column" style="height: 100%">
   <!-- ######## Ability ########  -->
   <div class="skill-list" fxLayout="column">
-      <div class="tg-box-header active">
-        <h3 class="tg-box-title">Abilità principali</h3>
-      </div>
+    <div class="tg-box-header active">
+      <h3 class="tg-box-title">Abilità principali</h3>
+    </div>
     <div style="overflow: hidden; height: 100%;">
 
-      <ng-scrollbar class="scrollbar" [appearance]="'compact'">
+      <ng-scrollbar class="scrollbar nopadding" [appearance]="'compact'">
         <mat-accordion class="skill-group" [displayMode]="'flat'" multi="true" #skillAccordionContainer="matAccordion">
           <mat-expansion-panel *ngFor="let skill of skills$ | async | keyvalue; index as i; " [expanded]="i === 0">
 

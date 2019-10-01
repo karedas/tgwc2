@@ -1,47 +1,41 @@
-<div class="tg-shortcutpanel" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="b-ironlight-mini tg-box">
-    <div class="tg-dialog-content tg-shadow-inset">
-      <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
-        Scorciatoie
-        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+<tg-window-wrapper [nopadding]="true">
+  <ng-container ngProjectAs="title">Scorciatoie personali</ng-container>
+  <ng-container ngProjectAs="content">
+    <ng-container *ngIf="totalShortcuts.length > 0; else noShortcuts">
+      <div fxLayout="row wrap">
+        <div
+          *ngFor="let shortcut of totalShortcuts; let i = index"
+          fxFlex="1 1 32px"
+          class="tg-shortcut-icon"
+          matRipple
+          (click)="sendCmd($event, shortcut.alias)"
+          (mouseover)="changeCmdLabel(i)"
+          (mouseout)="changeCmdLabel('')"
+        >
+          <img src="assets/images/shortcuts/shortcut_{{ shortcut.icon }}.png" alt="" />
+        </div>
+      </div>
+      <div class="tg-shortcut-cmdlabel">
+        <ng-container *ngIf="totalShortcuts[cmdHoverId] && cmdHoverId >= 0">
+          <span class="tg-brown">Comando:</span>&nbsp;{{ totalShortcuts[cmdHoverId]?.alias }}, &nbsp;
+          <span class="tg-brown">Azione:</span>&nbsp;{{ totalShortcuts[cmdHoverId]?.cmd }}
+        </ng-container>
+      </div>
+      <div matDialogActions class="tg-shortcuts-edit">
+        <button mat-raised-button (click)="openShortcutManager()" color="accent">
+          Modifica scorciatoie
         </button>
       </div>
-      <mat-dialog-content class="no-padding">
-        <ng-container *ngIf="totalShortcuts.length > 0; else noShortcuts">
-          <div fxLayout="row wrap">
-            <div *ngFor="let shortcut of totalShortcuts; let i = index;" fxFlex="1 1 32px" class="tg-shortcut-icon"
-              matRipple (click)="sendCmd($event, shortcut.alias)" (mouseover)="changeCmdLabel(i)"
-              (mouseout)="changeCmdLabel('')">
-              <img src="assets/images/shortcuts/shortcut_{{shortcut.icon}}.png" alt="">
-            </div>
-          </div>
-          <div class="tg-shortcut-cmdlabel">
-            <ng-container *ngIf="totalShortcuts[cmdHoverId] &&  cmdHoverId >= 0">
-              <span class="tg-brown">Comando:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.alias}}, &nbsp; <span
-                class="tg-brown">Azione:</span>&nbsp;{{totalShortcuts[cmdHoverId]?.cmd}}
-            </ng-container>
-          </div>
-          <div matDialogActions class="tg-shortcuts-edit">
-            <button mat-stroked-button (click)="openShortcutManager()" color="accent">
-              modifica scorciatoie
-            </button>
-          </div>
-        </ng-container>
-      </mat-dialog-content>
-    </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
-  </div>
-</div>
-
-<ng-template #noShortcuts>
-  <p class="no-shortcuts">
-    Non hai ancora nessuna scorciatoia salvata.<br />
-    <button mat-stroked-button (click)="openShortcutManager()" color="accent">Creane subito una</button>
-  </p>
-</ng-template>
+    </ng-container>
+    <ng-template #noShortcuts>
+      <div class="no-shortcuts">
+        <p>
+          Non hai ancora nessuna scorciatoia salvata.
+        </p>
+        <p>
+          <button mat-raised-button (click)="openShortcutManager()" color="accent">Creane subito una</button>
+        </p>
+      </div>
+    </ng-template>
+  </ng-container>
+</tg-window-wrapper>

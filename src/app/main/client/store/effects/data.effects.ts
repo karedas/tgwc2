@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { DataEvenType, heroAction } from '../actions/data.action';
+import { DataEvenType } from '../actions/data.action';
 import { switchMap, tap, map } from 'rxjs/operators';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
@@ -16,7 +16,6 @@ export interface PayloadActionData {
 
 @Injectable()
 export class DataEffects {
-
 
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
@@ -44,7 +43,7 @@ export class DataEffects {
         const config = this.configService.getConfig();
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice ) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('equip');
-        } 
+        }
       }),
     ), { dispatch: false }
   );
@@ -56,7 +55,7 @@ export class DataEffects {
         const config = this.configService.getConfig();
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('inventory');
-        } 
+        }
       }),
     ), { dispatch: false }
   );
@@ -96,7 +95,9 @@ export class DataEffects {
       ofType(DataEvenType.CLOSETEXTEDITOR),
       tap(() => {
         this.dialogV2Service.dialog.getDialogById('editor').close();
-        this.inputService.focus();
+        if (this.dialogV2Service.dialog.getDialogById('charactersheet')) {
+          this.gameService.processCommands('info');
+        }
       })
     ),
     { dispatch: false }
@@ -148,7 +149,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   refreshCommand$ = createEffect(() =>
     this.actions$.pipe(

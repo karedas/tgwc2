@@ -14,7 +14,7 @@ export class ExtraboardComponent {
   @ViewChild('#shortcutOpen', {static: true}) shortcutLink: ElementRef;
 
   constructor(
-    private game: GameService, 
+    private game: GameService,
     private configService: ConfigService,
     private dialogService: DialogV2Service) { }
 
@@ -22,7 +22,7 @@ export class ExtraboardComponent {
   buttonClick(cmd: string) {
     this.game.processCommands(cmd, true);
 
-    if(cmd === 'inventario') {
+    if (cmd === 'inventario') {
       this.configService.setConfig({
         widgetEquipInv: { selected: 'inventory'}
       });
@@ -34,7 +34,7 @@ export class ExtraboardComponent {
           widgetEquipInv: { selected: 'equip'}
         });
         return;
-    } 
+    }
   }
 
   openPreferences() {

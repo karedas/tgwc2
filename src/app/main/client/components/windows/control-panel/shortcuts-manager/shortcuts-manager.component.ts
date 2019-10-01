@@ -9,14 +9,11 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'tg-shortcuts-manager',
   templateUrl: './shortcuts-manager.component.html',
-  styleUrls: ['./shortcuts-manager.component.scss'],
+  styleUrls: ['./shortcuts-manager.component.scss']
 })
 export class ShortcutsManagerComponent implements OnInit {
-
-  @ViewChild('f', {static: true}) myNgForm;
-
+  @ViewChild('f', { static: true }) myNgForm;
   totalIcons: any;
-
   shortcuts: any = [];
   iconsListOpenedStatus = false;
   newShortcutOpenedStatus = false;
@@ -28,24 +25,22 @@ export class ShortcutsManagerComponent implements OnInit {
   private isEdit = false;
   private _unsubscribeAll: Subject<any>;
 
-  constructor(
-    private _configService: ConfigService
-  ) {
-    this.totalIcons = Array(124).fill(0).map((x, i) => i);
-
+  constructor(private _configService: ConfigService) {
+    this.totalIcons = Array(124)
+      .fill(0)
+      .map((x, i) => i);
     this._unsubscribeAll = new Subject<any>();
   }
 
   ngOnInit() {
-
     this.newShortcutForm = new FormGroup({
       scAlias: new FormControl(''),
-      scCmd: new FormControl(''),
+      scCmd: new FormControl('')
     });
 
-    this._configService.config
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: TGConfig) => { this.shortcuts = config.shortcuts; });
+    this._configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe((config: TGConfig) => {
+      this.shortcuts = config.shortcuts;
+    });
   }
 
   private resetForm() {
@@ -53,7 +48,6 @@ export class ShortcutsManagerComponent implements OnInit {
     this.myNgForm.resetForm();
 
     this.isEdit = false;
-
   }
 
   openIconsList() {
@@ -74,7 +68,6 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   saveShortcut() {
-
     // reset error
     this.shortcutExistError = false;
 
@@ -83,16 +76,12 @@ export class ShortcutsManagerComponent implements OnInit {
 
     // check if Alias Shortcuts exists in the Array
     if (alias && cmd) {
-
       if (!this.shortcuts.length) {
         this.addShortcut(alias, cmd);
-        this.resetForm();
       } else if (this.isEdit) {
         this.saveEditableShortcut(alias, cmd);
-        this.resetForm();
       } else if (this.shortcuts.filter(x => x.alias === alias).length <= 0) {
         this.addShortcut(alias, cmd);
-        this.resetForm();
       } else {
         this.shortcutExistError = true;
       }
@@ -115,22 +104,17 @@ export class ShortcutsManagerComponent implements OnInit {
     this._configService.setConfig({ shortcuts: this.shortcuts } as TGConfig);
     this.closeNewShortcut();
     this.isEdit = false;
-
   }
 
   deleteShortcut(alias: string) {
-    const scUp =  this.shortcuts.filter(x => x.alias !== alias);
-    this._configService.setConfig({shortcuts: scUp});
+    const scUp = this.shortcuts.filter(x => x.alias !== alias);
+    this._configService.setConfig({ shortcuts: scUp });
   }
 
   onEditShortcut(idx: number, icon: number, alias: string, cmd: string) {
-
     this.isEdit = true;
-
     this.editableID = idx;
-
     this.scIcon = icon;
-
     this.newShortcutForm.setValue({
       scAlias: alias,
       scCmd: cmd
@@ -139,9 +123,13 @@ export class ShortcutsManagerComponent implements OnInit {
     this.openNewShortcut();
   }
 
-
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.shortcuts, event.previousIndex, event.currentIndex);
     this._configService.setConfig({ shortcuts: this.shortcuts });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
 }

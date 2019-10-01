@@ -37,7 +37,7 @@ export class HistoryService {
   }
 
   private getCmdByPosition(): string {
-    const cmd = this.cmd_history[this.cmd_history_pos] ? this.cmd_history[this.cmd_history_pos] : ' ';
+    const cmd = this.cmd_history[this.cmd_history_pos] ? this.cmd_history[this.cmd_history_pos] : '';
     return cmd;
   }
 

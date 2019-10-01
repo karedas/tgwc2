@@ -1,0 +1,32 @@
+<div class="tg-window" fxLayout="column"
+  cdkDrag 
+  cdkDragRootElement=".cdk-overlay-pane"
+  [cdkDragDisabled]="false">
+  
+  <div class="b-ironlight-mini tg-box"
+    [ngClass]="{'b-thin': border === 'thin'}"
+    fxLayout="column"
+    fxFlex="1 1 100%"
+    fxFlexFill>
+      <div cdkDragHandle mat-dialog-title *ngIf="!hideTitle">
+        <ng-content select="title"></ng-content>
+        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
+          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
+        </button>
+      </div>
+
+      <mat-dialog-content
+        class="tg-window-content tg-shadow-inset"
+        [ngClass]="{'no-padding': nopadding}"
+        fxFlex="1 1 auto">
+        <ng-content select="content"></ng-content>
+      </mat-dialog-content>
+
+    <div class="tg-border-box">
+      <div class="tg-border tg-border-top"></div>
+      <div class="tg-border tg-border-left"></div>
+      <div class="tg-border tg-border-right"></div>
+      <div class="tg-border tg-border-bottom"></div>
+    </div>
+  </div>
+</div>

@@ -1,58 +1,43 @@
-
-  <div class="b-ironlight-mini tg-box" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-    <div class="tg-dialog-content-nopadding tg-shadow-inset">
-      <!-- Generic Page Dialog Title -->
-      <div class="tg-dialog-title" cdkDragHandle>
-        {{headerTitle}}
-        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-        </button>
-      </div>
-
-      <div class="tg-generictable">
-        <div>
-          <!-- Saerch Filter -->
-          <mat-form-field class="tg-table--filter">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off">
-          </mat-form-field>
-          
-
-            <table mat-table [dataSource]="dataSource" matSort class="dark">
-
-              <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
-
-                <th mat-header-cell *matHeaderCellDef  mat-sort-header>
-                  <span [innerHtml]="column | dataToHtml"></span>
-                </th>
-
-                <td mat-cell *matCellDef="let element">
-                  <!-- Icon type -->
-                  <tg-icons [icon]="element[column]" *ngIf="column === 'icona'"></tg-icons>
-                  <!-- Ip Address type-->
-                  <a target="_blank"  
-                    *ngIf="column === 'ipaddr'"
-                    href="http://www.infosniper.net/index.php?ip_address= {{element[column]}}">{{element[column]}}</a>
-                  <!-- Default Text type -->
-                  <span [innerHtml]="element[column] | dataToHtml" *ngIf="element[column] && column !== 'icona' && column !=='ipaddr'"></span>
-                </td>
-
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="columnsToDisplay;  sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-
-            </table>
-
-          <mat-paginator [pageSize]="15" [pageSizeOptions]="[5, 10, 15, 25]" showFirstLastButtons></mat-paginator>
-
-        </div>
-        <!-- Generic Table content end -->
-      </div>
+<tg-window-wrapper [nopadding]="true">
+  <ng-container ngProjectAs="title">
+    {{ headerTitle }}
+  </ng-container>
+  <ng-container ngProjectAs="content">
+    <!-- Saerch Filter -->
+    <mat-form-field class="tg-table--filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cerca" autocomplete="off" />
+    </mat-form-field>
+    
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort class="dark">
+        <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span [innerHtml]="column | dataToHtml"></span>
+          </th>
+  
+          <td mat-cell *matCellDef="let element">
+            <!-- Icon type -->
+            <tg-icons [icon]="element[column]" *ngIf="column === 'icona'"></tg-icons>
+            <!-- Ip Address type-->
+            <a
+              target="_blank"
+              *ngIf="column === 'ipaddr'"
+              href="http://www.infosniper.net/index.php?ip_address= {{ element[column] }}"
+              >{{ element[column] }}</a
+            >
+            <!-- Default Text type -->
+            <span
+              [innerHtml]="element[column] | dataToHtml"
+              *ngIf="element[column] && column !== 'icona' && column !== 'ipaddr'"
+            ></span>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+      </table>
     </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
-  </div>
+
+    <mat-paginator [pageSize]="15" [pageSizeOptions]="[5, 10, 15, 25]" showFirstLastButtons></mat-paginator>
+  </ng-container>
+</tg-window-wrapper>

@@ -1,59 +1,45 @@
-<div class="tg-selectable" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="b-ironlight-mini tg-box">
-    <div class="tg-dialog-content tg-shadow-inset" fxLayout="column">
-      <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
-        {{data.title}}
-        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-        </button>
+<tg-window-wrapper [nopadding]="true">
+  <ng-container ngProjectAs="title">
+    {{data.title}}
+  </ng-container>
+  <ng-container ngProjectAs="content">
+    <div fxLayout="column" style="height: 100%">
+      <div class="tg-selectable-content" fxFlex="0 0 auto">
+        <p>{{data.desc}}</p>
       </div>
-
-      <mat-dialog-content class="no-padding">
-        <div fxLayout="column" fxFlexFill>
-          <div class="tg-selectable-content">
-            <p>{{data.desc}}</p>
-          </div>
-          <div class="tg-selectable-content" fxFlex="1 1 auto">
-            <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'">
-              <ng-container *ngIf="data.list">
-                <mat-list #dense>
-                  <ng-container *ngFor="let category of data.list | keyvalue">
-                    <h3 class="tg-lt-yellow tg-category-key">{{category.key}}</h3>
-    
-                    <mat-selection-list #selectableList (selectionChange)="onSelectionChange($event)">
-                      <mat-list-option 
-                        *ngFor="let adjective of category.value"
-                        [value]="adjective">
-                        {{adjective.sel | capitalizeFirst}}
-                      </mat-list-option>
-                    </mat-selection-list>
-    
-                  </ng-container>
-                </mat-list>
+      <div class="tg-selectable-content" fxFlex="1 1 100%" fxFlexFill>
+        <ng-scrollbar class="scrollbar" #scrollBar [visibility]="'always'">
+          <ng-container *ngIf="data.list">
+            <mat-list #dense>
+              <ng-container *ngFor="let category of data.list | keyvalue">
+                <h3 class="tg-lt-yellow tg-category-key">{{category.key}}</h3>
+  
+                <mat-selection-list #selectableList (selectionChange)="onSelectionChange($event)">
+                  <mat-list-option 
+                    *ngFor="let adjective of category.value"
+                    [value]="adjective">
+                    {{adjective.sel | capitalizeFirst}}
+                  </mat-list-option>
+                </mat-selection-list>
+  
               </ng-container>
-            </ng-scrollbar>
-          </div>
-          <div class="tg-white" class="tg-selectable-prefix">
-            <p>
-              {{data.prefix}} <span class="tg-yellow">{{selectedValueText}}</span>
-            </p>
-            <p>
-              Apparirai come: <span class="tg-yellow">{{adjectiveShowed}}</span>
-            </p>
-            <div>
-              <button clickStopPropagation type="button"
-              class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light"
-              (click)="saveAdjective()">Salva</button>
-            </div>
-          </div>
+            </mat-list>
+          </ng-container>
+        </ng-scrollbar>
+      </div>
+      <div class="tg-white tg-selectable-prefix" fxFlex="0 1 auto">
+        <p>
+          {{data.prefix}} <span class="tg-yellow">{{selectedValueText}}</span>
+        </p>
+        <p>
+          Apparirai come: <span class="tg-yellow">{{adjectiveShowed}}</span>
+        </p>
+        <div>
+          <button clickStopPropagation type="button"
+          class="tg-button tg-button-salva mr-auto ml-1 tg-shadow-light"
+          (click)="saveAdjective()">Salva</button>
         </div>
-      </mat-dialog-content>
+      </div>
     </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
-  </div>
-</div>
+  </ng-container>
+</tg-window-wrapper>

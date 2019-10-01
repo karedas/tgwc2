@@ -14,39 +14,29 @@ import { Map } from '../models/data/map.model';
 import { GameService } from './game.service';
 
 @Injectable()
-
 export class DataParser {
-
   tgConfig: TGConfig;
 
   private dispatcher: any = {};
   private netData = '';
   private shortcuts = [];
   private cmd_prefix = '';
-  
+
   private _updateNeeded: Subject<any>;
 
-
-  constructor(
-    private store: Store<TGState>,
-    private _configService: ConfigService,
-    private logService: LogService
-  ) {
+  constructor(private store: Store<TGState>, private _configService: ConfigService, private logService: LogService) {
     this._updateNeeded = new Subject<any>();
     // Subscribe to the shortcuts in Config
-    this._configService.config
-      .pipe(map((config: TGConfig) => config.shortcuts))
-      .subscribe((shortcuts) => { this.shortcuts = shortcuts; }
-      );
+    this._configService.config.pipe(map((config: TGConfig) => config.shortcuts)).subscribe(shortcuts => {
+      this.shortcuts = shortcuts;
+    });
   }
 
   parse(data: any, logEnabled?: boolean) {
-
     this.netData += data;
     const len = this.netData.length;
 
     if (this.netData.indexOf('&!!', len - 3) !== -1) {
-
       data = this.preParseText(this.netData.substr(0, len - 3));
 
       try {
@@ -55,9 +45,7 @@ export class DataParser {
         console.error(err);
       }
 
-
       if (logEnabled) {
-
         try {
           this.logService.parseForLog(data);
         } catch (err) {
@@ -66,13 +54,11 @@ export class DataParser {
       }
 
       this.netData = '';
-
     } else if (len > 200000) {
       this.netData = '';
       this.store.dispatch(ClientActions.disconnectAction());
     }
   }
-
 
   private preParseText(data: string): string {
     data = data.replace(/\r/gm, '');
@@ -85,10 +71,7 @@ export class DataParser {
     return data;
   }
 
-
   private parseForDisplay(data: string): void {
-
-
     // reset Dispatcher
     this.dispatcher = {};
     let pos: any;
@@ -104,7 +87,7 @@ export class DataParser {
     data = data.replace(/&d\d{6}\n*/gm, this.doors.bind(this));
     data = data.replace(/&!au"[^"]*"\n*/gm, this.audio.bind(this));
     data = data.replace(/&!st\{[\s\S]*?\}!/gm, this.updateHeroStatus.bind(this));
-    data = data.replace(/&!up"[^"]*"\n*/gm,  this.clientUpdate.bind(this));
+    data = data.replace(/&!up"[^"]*"\n*/gm, this.clientUpdate.bind(this));
     data = data.replace(/&!img"[^"]*"\n*/gm, this.imageInSideFrameWithGamma.bind(this));
     data = data.replace(/&!im"[^"]*"\n*/gm, this.imageInSideFrame.bind(this));
     data = data.replace(/&!dir"[^"]*"\n*/gm, this.directionNotify.bind(this));
@@ -159,20 +142,31 @@ export class DataParser {
   // Emit data Stored in the dispatcher to show then in the right Output Order
   private dispatchData() {
     // Output Messages
-    if (this.dispatcher.base) { this.store.dispatch(DataActions.incomingData({ payload: this.dispatcher.base })); }
-    if (this.dispatcher.objpers) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher.objpers })); }
-    if (this.dispatcher.room) { this.store.dispatch(DataActions.roomAction({ payload: this.dispatcher.room })); }
-    if (this.dispatcher.pers) { this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher.pers })); }
+    if (this.dispatcher.base) {
+      this.store.dispatch(DataActions.incomingData({ payload: this.dispatcher.base }));
+    }
+    if (this.dispatcher.objpers) {
+      this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher.objpers }));
+    }
+    if (this.dispatcher.room) {
+      this.store.dispatch(DataActions.roomAction({ payload: this.dispatcher.room }));
+    }
+    if (this.dispatcher.pers) {
+      this.store.dispatch(DataActions.objectAndPersonAction({ payload: this.dispatcher.pers }));
+    }
     // TODO UI dont need order, needs a difference architecture code :
     if (this.dispatcher.visibilLevel) {
       this.store.dispatch(ClientActions.updateUIAction({ payload: { invLevel: this.dispatcher.visibilLevel } }));
     }
-    if (this.dispatcher.isgod) { this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher.isgod } })); }
-    if (this.dispatcher.update) { this.setUpdateNeeded(this.dispatcher.update); }
+    if (this.dispatcher.isgod) {
+      this.store.dispatch(ClientActions.updateUIAction({ payload: { isGod: this.dispatcher.isgod } }));
+    }
+    if (this.dispatcher.update) {
+      this.setUpdateNeeded(this.dispatcher.update);
+    }
   }
 
   private substShort(input: any): any {
-
     /* Split into arguments */
     const args = input.split(/\s+/);
     /* Get the shortcut index */
@@ -215,7 +209,6 @@ export class DataParser {
   }
 
   parseInput(input: any): any {
-
     /* Split input separated by ; */
     const inputs = input.split(/\s*;\s*/);
     let res = [];
@@ -236,16 +229,18 @@ export class DataParser {
     return this._updateNeeded.asObservable();
   }
 
-
   /** PARSERS LIST---------------------------------------------------- */
 
   private logged(): string {
-    this.store.dispatch(ClientActions.inGameAction({payload: true}));
+    this.store.dispatch(ClientActions.inGameAction({ payload: true }));
     return '';
   }
 
-  private news( data: any): string {
-    this.store.dispatch(ClientActions.inGameAction({payload: true}));
+  private news(data: any): string {
+    this.store.dispatch(ClientActions.inGameAction({ payload: true }));
+    // DEPRECATED
+    // const news_parse = JSON.parse(data.slice(6, -1));
+    // this.store.dispatch(DataActions.genericPageAction({ genericpage: news_parse }));
     return '';
   }
 
@@ -257,23 +252,23 @@ export class DataParser {
 
   private dateTime(data: any): string {
     const parse_time = JSON.parse(data.slice(10, -1));
-    this.store.dispatch( DataActions.dataTimeAction({payload: parse_time}));
+    this.store.dispatch(DataActions.dataTimeAction({ payload: parse_time }));
     return '';
   }
 
-  private region(data): string  {
+  private region(data): string {
     const region_parse = JSON.parse(data.slice(8, -1));
-    this.store.dispatch(DataActions.regionAction({ payload: region_parse}));
+    this.store.dispatch(DataActions.regionAction({ payload: region_parse }));
     return '';
   }
 
   private hideInputChars(): string {
-    this.store.dispatch(ClientActions.updateUIAction({ payload: {inputVisible: false }}));
+    this.store.dispatch(ClientActions.updateUIAction({ payload: { inputVisible: false } }));
     return '';
   }
 
   private showInputChars(): string {
-    this.store.dispatch(ClientActions.updateUIAction({ payload: {inputVisible: true }}));
+    this.store.dispatch(ClientActions.updateUIAction({ payload: { inputVisible: true } }));
     return '';
   }
 
@@ -291,7 +286,7 @@ export class DataParser {
 
   private audio(audio): string {
     const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-    this.store.dispatch(ClientActions.audioAction({payload: audio_parse}));
+    this.store.dispatch(ClientActions.audioAction({ payload: audio_parse }));
     return '';
   }
 
@@ -331,20 +326,25 @@ export class DataParser {
   }
 
   private closeTextEditor(options?: any): string {
-    this.store.dispatch( DataActions.closeTextEditorAction());
+    this.store.dispatch(DataActions.closeTextEditorAction());
     return '';
   }
 
   private openTextEditorWithData(data: any): string {
     const options_parse = data.slice(5, data.lastIndexOf('"')).split(',');
-    const text = options_parse.slice(2).toString().replace(/\n/gm, ' ');
-    this.store.dispatch(DataActions.editorAction({
-      payload: {
-        maxChars: options_parse[0],
-        title: options_parse[1] ? options_parse[1] : ' ',
-        description: text ? text : ' '
-      }
-    }));
+    const text = options_parse
+      .slice(2)
+      .toString()
+      .replace(/\n/gm, ' ');
+    this.store.dispatch(
+      DataActions.editorAction({
+        payload: {
+          maxChars: options_parse[0],
+          title: options_parse[1] ? options_parse[1] : ' ',
+          description: text ? text : ' '
+        }
+      })
+    );
     return '';
   }
 
@@ -356,13 +356,13 @@ export class DataParser {
 
   private book(book: any): string {
     const b_parse = JSON.parse(book.slice(6, -1));
-    this.store.dispatch(DataActions.bookAction({book: b_parse}));
+    this.store.dispatch(DataActions.bookAction({ book: b_parse }));
     return '';
   }
 
   private commandsList(cmds: any): string {
     const cmd_parse = JSON.parse(cmds.slice(8, -1).replace(/"""/, '"\\""'));
-    this.store.dispatch( DataActions.showCommandsActions({payload: cmd_parse}));
+    this.store.dispatch(DataActions.showCommandsActions({ payload: cmd_parse }));
     return '';
   }
 
@@ -419,18 +419,18 @@ export class DataParser {
 
   private playerInfo(info: any): string {
     const info_parse = JSON.parse(info.slice(7, -1));
-    this.store.dispatch( DataActions.showCharacterSheetActions({payload: [info_parse, 'info']}));
+    this.store.dispatch(DataActions.showCharacterSheetActions({ payload: [info_parse, 'info'] }));
     return '';
   }
   private playerStatusInline(status: any): string {
     const status_parse = JSON.parse(status.slice(6, -1));
-    this.store.dispatch( DataActions.showStatusBoxAction( {payload: {status: status_parse }}));
+    this.store.dispatch(DataActions.showStatusBoxAction({ payload: { status: status_parse } }));
     return '';
   }
 
   private selectableGeneric(s): string {
     const s_parse = JSON.parse(s.slice(8, -1));
-    this.store.dispatch( DataActions.selectableGenericAction({ payload: s_parse }));
+    this.store.dispatch(DataActions.selectableGenericAction({ payload: s_parse }));
     return '';
   }
 
@@ -450,9 +450,9 @@ export class DataParser {
   }
 
   private textLink(link: any): string {
-      const link_parse = link.slice(8, -1).split(',');
-      console.log('render link', link_parse);
-      return '';
+    const link_parse = link.slice(8, -1).split(',');
+    console.log('render link', link_parse);
+    return '';
   }
 
   private renderMob(mob: any): string {
