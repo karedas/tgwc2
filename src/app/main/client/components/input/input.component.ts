@@ -11,7 +11,7 @@ import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from './input.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { OutputService } from '../output/output.service';
+import { OutputService } from '../output/services/output.service';
 
 @Component({
   selector: 'tg-input',
@@ -24,7 +24,7 @@ export class InputComponent implements OnInit, OnDestroy {
   tgConfig: any;
 
   public inCombat = false;
-  public pauseScroll = false;
+  public pauseScroll: Observable<boolean>;
   private _inCombat$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
@@ -38,7 +38,7 @@ export class InputComponent implements OnInit, OnDestroy {
     private _configService: ConfigService
   ) {
     this._inCombat$ = this.store.pipe(select(getHero));
-
+    this.pauseScroll = this.outputService.isScrollable();
     this._unsubscribeAll = new Subject();
   }
 
@@ -112,7 +112,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   /*------  Buttons Actions */
   pauseScrollOutput() {
-    this.pauseScroll = this.outputService.toggleAutoScroll();
+    this.outputService.toggleAutoScroll();
   }
 
   toggleExtraOutput() {

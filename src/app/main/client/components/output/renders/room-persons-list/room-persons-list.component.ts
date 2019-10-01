@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { RoomList } from 'src/app/main/client/models/data/room.model';
-import { OutputService } from '../../output.service';
 import { GameService } from 'src/app/main/client/services/game.service';
+import { OutputService } from '../../services/output.service';
 
 @Component({
   selector: 'tg-room-persons-list',
@@ -15,7 +15,9 @@ export class RoomPersonsListComponent implements OnInit {
   personsClass50_50 = false;
   togglePanel: any = {};
 
-  constructor(private outputService: OutputService, private gameService: GameService) {}
+  constructor( 
+    private outputService: OutputService, 
+    private gameService: GameService) {}
 
   ngOnInit() {
     this.getTotalByType();

@@ -46,8 +46,8 @@ export class ClientComponent implements OnInit, OnDestroy {
 
       this.mediaObserver.media$
       .pipe( takeUntil(this._unsubscribeAll))
-      .subscribe((change: MediaChange) => {
-        this.setViewByViewport(change);
+        .subscribe((change: MediaChange) => {
+          this.setViewByViewport(change);
     });
 
   }
