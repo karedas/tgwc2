@@ -231,7 +231,7 @@ export class GameService {
     if (items) {
       const cont = cloneDeep(items);
       if (cont.list) {
-        if (type == 'pers' || type == 'equip') {
+        if (type === 'pers' || type === 'equip') {
           cont.list.sort((a, b) => {
             const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
             const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
