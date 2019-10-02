@@ -35,7 +35,7 @@ export class DialogV2Service {
   }
 
   private getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
-    return dialogRef._overlayRef.overlayElement as HTMLElement;
+    return dialogRef['_overlayRef'].overlayElement as HTMLElement;
   }
 
   private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
