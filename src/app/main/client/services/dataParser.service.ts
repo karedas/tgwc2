@@ -303,7 +303,12 @@ export class DataParser {
   }
 
   private clientUpdate(up): string {
-    const ud = up.slice(5, status.lastIndexOf('"')).split(',');
+    const ud = up.slice(5, status.lastIndexOf('"'))
+      .split(',')
+      .map(value => {
+        let n = Number(value);
+        return n === 0 ? n : n || value;
+      });
     this.dispatcher.update = ud;
     return '';
   }

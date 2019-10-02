@@ -121,7 +121,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setContent('pause', []);
       this.latestLineBeforePause = this.output.length;
     } else {
-      this.output.splice(this.latestLineBeforePause - 1, 1);
+      let indexOfPause = this.output.findIndex(function(element){
+        return element.type === 'pause'
+      })
+      this.output.splice(indexOfPause, 1);
+      
       this.outputService.scrollPanelToBottom(this.scrollBar, this.scrollerEnd);
     }
   }

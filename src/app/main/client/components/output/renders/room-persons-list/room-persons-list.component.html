@@ -1,5 +1,5 @@
 <div class="tg-persons" [ngClass]="{ 'list-50-50': personsClass50_50, 'list-50': '' }">
-  <ng-container *ngFor="let person of persons | quantitySort:'mrn'; let i = index">
+  <ng-container *ngFor="let person of persons; let i = index">
     <div
       class="tg-persons--line interact"
       [ngClass]="{ expandlist: person.sz, open: togglePanel[i] }"
