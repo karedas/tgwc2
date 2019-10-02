@@ -17,8 +17,8 @@
 
           <div style="height: 100%; overflow:hidden;" class="o-container">
             <ng-scrollbar 
-              #scrollBar
               class="scrollbar-output" 
+              #scrollBar
               (reachedBottom)="onBottomReached()"
               [ngClass]="{ disabled: draggingSplitArea }" 
               [disabled]="draggingSplitArea"
