@@ -10,7 +10,7 @@
     fxFlexFill>
       <div cdkDragHandle mat-dialog-title *ngIf="!hideTitle">
         <ng-content select="title"></ng-content>
-        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true" *ngIf="titleclose">
+        <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true" *ngIf="!noclose">
           <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
         </button>
       </div>

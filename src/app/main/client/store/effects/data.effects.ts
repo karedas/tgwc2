@@ -20,7 +20,7 @@ export class DataEffects {
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EDITOR),
-      delay(1000),
+      delay(500),
       tap(() => {
         this.dialogV2Service.openEditor();
       })

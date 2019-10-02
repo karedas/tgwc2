@@ -138,7 +138,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this._baseText$.pipe(takeUntil(this._unsubscribeAll)).subscribe((base: string[]) => this.updateBaseText(base));
 
     this._roomBase$.pipe(takeUntil(this._unsubscribeAll)).subscribe((room: Room) => {
-      this.typeDetail = 'room';
       this.updateRoomBase(room);
     });
 
@@ -178,12 +177,18 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private updateRoomBase(room: Room) {
     if (room) {
+      if(room.mv && this.game.client_update.inContainer && this.tgConfig.widgetRoom.visible) {
+        return;
+      }
+      this.typeDetail = 'room';
+      //reset InContainer to show room and exit from detail
+      this.game.client_update.inContainer = false;
+
       if (room.desc.base !== undefined && room.desc.base !== '') {
         this.lastRoomDescription = room.desc.base;
       }
-
-      this.setContent('room', room);
-
+      this.setContent(this.typeDetail, room);
+      
       if (this.game.client_update.room.version < room.ver) {
         this.game.client_update.room.version = room.ver;
         this.game.client_update.room.needed = false;

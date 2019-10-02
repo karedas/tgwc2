@@ -129,6 +129,18 @@ export class GameService {
   }
 
   private updateInfo(now) {
+    // console.log(
+    //   this.client_update.room.needed &&
+    //   this.tgConfig.widgetRoom.visible &&
+    //   !this.isSmallDevice &&
+    //   !this.client_update.inContainer
+    // );
+    // console.log(
+    //   this.client_update.room.needed ,
+    //   this.tgConfig.widgetRoom.visible ,
+    //   !this.isSmallDevice ,
+    //   !this.client_update.inContainer
+    // )
     if (
       this.client_update.room.needed &&
       this.tgConfig.widgetRoom.visible &&
@@ -289,18 +301,18 @@ export class GameService {
     /* If is not a List */
     if (!item.sz) {
       if (item.cntnum && !mine) {
-        this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
+        this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`, false);
       } else {
-        this.processCommands(`guarda &${item.mrn[0]}`);
+        this.processCommands(`guarda &${item.mrn[0]}`, false);
       }
     }
 
     /* Is a List */
     if (item.sz) {
       if (!item.cntnum && index >= 0) {
-        this.processCommands(`guarda &${item.mrn[index]}`);
+        this.processCommands(`guarda &${item.mrn[index]}`, false);
       } else if (item.cntnum && index >= 0) {
-        this.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`);
+        this.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`, false);
       }
     }
   }

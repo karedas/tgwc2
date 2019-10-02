@@ -142,15 +142,13 @@ export class DialogV2Service {
   }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
-
-    const dialogID = 'editor';
+    let dialogID = 'editor';
     const config = new MatDialogConfig();
 
     config.id = dialogID;
     config.width = '500px';
     config.height = '450px';
     config.restoreFocus = true;
-    config.disableClose = false;
     config.disableClose = true;
     config.hasBackdrop = true;
 

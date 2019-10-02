@@ -9,7 +9,7 @@ export class WindowWrapperComponent implements OnInit {
   @Input('hideTitle') hideTitle: boolean;
   @Input('border') border: string;
   @Input('nopadding') nopadding: boolean;
-  @Input('titleclose') titleclose: boolean;
+  @Input('noclose') noclose: boolean;
   constructor() {
   }
 
