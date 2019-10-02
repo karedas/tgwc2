@@ -22,7 +22,8 @@
               (reachedBottom)="onBottomReached()"
               [ngClass]="{ disabled: draggingSplitArea }" 
               [disabled]="draggingSplitArea"
-              [visibility]="'always'">
+              [visibility]="'always'"
+              [appearance]="'standard'">
               <div class="tg-output--history">
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">

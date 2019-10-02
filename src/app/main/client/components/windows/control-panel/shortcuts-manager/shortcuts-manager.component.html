@@ -4,7 +4,7 @@
       Scorciatoie
     </h3>
 
-    <ng-container *ngIf="!shortcuts.length; shortcutsList">
+    <ng-container *ngIf="!shortcuts.length; else shortcutsList">
       <p class="tg-white">
         Le scorciatoie sono un comodo sistema che ti permette di eseguire una o più operazioni attraverso l'uso di un nuovo
         e personale comando da te inventato.
@@ -33,7 +33,7 @@
                   </button>
                 </div>
                 <div fxFlex="1 1 30%">
-                  <div class="tg-shortcut-icon">
+                  <div class="tg-shortcut-icon" (click)="onEditShortcut(isc, sc.icon, sc.alias, sc.cmd)">
                     <img src="assets/images/shortcuts/shortcut_{{ sc.icon }}.png" alt="" />
                   </div>
                 </div>
@@ -92,7 +92,7 @@
         </mat-form-field>
   
         <p *ngIf="shortcutExistError" class="tg-red">
-          Questo comando è già presente tra le tue scorciatoie: cambiarlo o cancellare la scorciatoia precedente.
+          Questo comando è già presente tra le tue scorciatoie: immetti un altro nome o cancella la scorciatoia precedente.
         </p>
   
         <button mat-raised-button color="accent" type="submit">Salva</button>&nbsp;
@@ -103,10 +103,9 @@
       <ng-container *ngIf="iconsListOpenedStatus">
         <!-- Icons List Panel  -->
         <div class="tg-shortcut-iconslist">
-          <ng-scrollbar class="scrollbar bitpadding" #scrollBar [visibility]="'always'">
-    
-            <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
+          <ng-scrollbar class="scrollbar bitpadding" #scrollBar [appearance]="'standard'">
             <div class="tg-shortcut-iconslist-container" fxLayout="row wrap">
+              <p fxFlex="1 1 100%">Seleziona un'icona come riferimento per la tua scorciatoia</p>
               <div
                 class="tg-shortcut-icon"
                 fxFlex="1 1 32px"
@@ -115,13 +114,13 @@
               >
                 <img src="assets/images/shortcuts/shortcut_{{ iconIndex + 1 }}.png" alt="" />
               </div>
+              <mat-divider fxFlex="1 1 100%" style="margin: 12px 0;"></mat-divider>
+    
+              <button mat-raised-button (click)="openIconsList()" color="warn" type="button">
+                Annulla
+              </button>
             </div>
   
-            <mat-divider></mat-divider>
-  
-            <button mat-raised-button (click)="openIconsList()" color="warn" type="button">
-              Annulla
-            </button>
     
           </ng-scrollbar>
         </div>

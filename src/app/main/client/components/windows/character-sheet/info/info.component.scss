@@ -2,15 +2,13 @@
 @import 'abstract/sprites';
 @import 'abstract/sprites-mixins';
 
-:host {
-  position: relative;
-}
 
 .info-description {
   background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
   padding: 0 0 18px;
   color: #3a2e19;
   margin-top: 12px;
+  padding: 0 12px 12px;
 
   &:before {
     content: '';
@@ -58,7 +56,7 @@
 
 .info-base {
   position: relative;
-  padding: 12px 0;
+  padding: 12px;
   background: url($imgPath + '/borders/border-002-tiny.png') repeat-x bottom;
 
   &:before {
@@ -77,7 +75,7 @@
 
 .info-stats {
   position: relative;
-  padding: 24px 0 0;
+  padding: 24px 12px 12px;
 
   &:before {
     content: '';
