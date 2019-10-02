@@ -3,7 +3,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TGConfig } from '../../../../client-config';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -12,7 +12,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./shortcuts-manager.component.scss']
 })
 export class ShortcutsManagerComponent implements OnInit {
-  @ViewChild('f', { static: true }) myNgForm;
+  @ViewChild('f', { static: false }) formRel: NgForm;
   totalIcons: any;
   shortcuts: any = [];
   iconsListOpenedStatus = false;
@@ -45,8 +45,7 @@ export class ShortcutsManagerComponent implements OnInit {
 
   private resetForm() {
     this.scIcon = 1;
-    this.myNgForm.resetForm();
-
+    this.formRel.reset();
     this.isEdit = false;
   }
 
@@ -64,6 +63,7 @@ export class ShortcutsManagerComponent implements OnInit {
   }
 
   closeNewShortcut() {
+    this.resetForm();
     this.newShortcutOpenedStatus = false;
   }
 

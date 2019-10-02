@@ -69,60 +69,64 @@
   </div>
 
   <!-- New Shortcut Form -->
-  <div class="tg-shortcut-new" *ngIf="newShortcutOpenedStatus">
-    <form [formGroup]="newShortcutForm" (ngSubmit)="saveShortcut()" #f="ngForm">
+  <ng-container *ngIf="newShortcutOpenedStatus">
 
-      <div class="tg-shortcut-icon">
-        <img src="assets/images/shortcuts/shortcut_{{ scIcon }}.png" alt="" />
-      </div>
-
-      <button mat-stroked-button (click)="openIconsList()" color="primary" type="button">
-        Cambia icona
-      </button>
-
-      <mat-form-field [floatLabel]="'never'" class="field-full-width">
-        <input matInput placeholder="Comando personale" formControlName="scAlias" required autocomplete="off" />
-        <mat-hint>Digita il comando personale che utilizzerai</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field [floatLabel]="'never'" class="field-full-width">
-        <textarea matInput placeholder="Comando/i" formControlName="scCmd" required autocomplete="off"></textarea>
-      </mat-form-field>
-
-      <p *ngIf="shortcutExistError" class="tg-red">
-        Questo comando è già presente tra le tue scorciatoie: cambiarlo o cancellare la scorciatoia precedente.
-      </p>
-
-      <button mat-raised-button color="accent" type="submit">Salva</button>&nbsp;
-      <button mat-raised-button color="warn" (click)="closeNewShortcut()" type="button">
-        Annulla
-      </button>
-    </form>
-
-    <div class="tg-shortcut-iconslist" *ngIf="iconsListOpenedStatus">
-      <ng-scrollbar class="scrollbar bitpadding" #scrollBar [visibility]="'always'">
-        <ng-container *ngIf="iconsListOpenedStatus">
-
-          <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
-          <div class="tg-shortcut-iconslist-container" fxLayout="row wrap">
-            <div
-              class="tg-shortcut-icon"
-              fxFlex="1 1 32px"
-              *ngFor="let iconIndex of totalIcons; let iconIndex"
-              (click)="setNewIcon(iconIndex + 1)"
-            >
-              <img src="assets/images/shortcuts/shortcut_{{ iconIndex + 1 }}.png" alt="" />
+    <div class="tg-shortcut-new">
+      <form [formGroup]="newShortcutForm" (ngSubmit)="saveShortcut()" #f="ngForm">
+  
+        <div class="tg-shortcut-icon" (click)="openIconsList()">
+          <img src="assets/images/shortcuts/shortcut_{{ scIcon }}.png" alt="" />
+        </div>
+  
+        <button mat-stroked-button (click)="openIconsList()" color="primary" type="button">
+          Cambia icona
+        </button>
+  
+        <mat-form-field [floatLabel]="'never'" class="field-full-width">
+          <input matInput placeholder="Comando personale" formControlName="scAlias" required autocomplete="off" />
+          <mat-hint>Digita il comando personale che utilizzerai</mat-hint>
+        </mat-form-field>
+  
+        <mat-form-field [floatLabel]="'never'" class="field-full-width">
+          <textarea matInput placeholder="Comando/i" formControlName="scCmd" required autocomplete="off"></textarea>
+        </mat-form-field>
+  
+        <p *ngIf="shortcutExistError" class="tg-red">
+          Questo comando è già presente tra le tue scorciatoie: cambiarlo o cancellare la scorciatoia precedente.
+        </p>
+  
+        <button mat-raised-button color="accent" type="submit">Salva</button>&nbsp;
+        <button mat-raised-button color="warn" (click)="closeNewShortcut()" type="button">
+          Annulla
+        </button>
+      </form>
+      <ng-container *ngIf="iconsListOpenedStatus">
+        <!-- Icons List Panel  -->
+        <div class="tg-shortcut-iconslist">
+          <ng-scrollbar class="scrollbar bitpadding" #scrollBar [visibility]="'always'">
+    
+            <p>Seleziona un'icona come riferimento per la tua scorciatoia</p>
+            <div class="tg-shortcut-iconslist-container" fxLayout="row wrap">
+              <div
+                class="tg-shortcut-icon"
+                fxFlex="1 1 32px"
+                *ngFor="let iconIndex of totalIcons; let iconIndex"
+                (click)="setNewIcon(iconIndex + 1)"
+              >
+                <img src="assets/images/shortcuts/shortcut_{{ iconIndex + 1 }}.png" alt="" />
+              </div>
             </div>
-          </div>
-
-          <mat-divider></mat-divider>
-
-          <button mat-raised-button (click)="openIconsList()" color="warn" type="button">
-            Annulla
-          </button>
-
-        </ng-container>
-      </ng-scrollbar>
+  
+            <mat-divider></mat-divider>
+  
+            <button mat-raised-button (click)="openIconsList()" color="warn" type="button">
+              Annulla
+            </button>
+    
+          </ng-scrollbar>
+        </div>
+      </ng-container>
+      
     </div>
-  </div>
+  </ng-container>
 </div>
