@@ -8,7 +8,6 @@ import { CommandsListComponent } from '../../components/windows/commands-list/co
 import { BookComponent } from '../../components/windows/book/book.component';
 import { GenericTableComponent } from '../../components/windows/generic-table/generic-table.component';
 import { Overlay } from '@angular/cdk/overlay';
-import { InputService } from '../../components/input/input.service';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
@@ -143,15 +142,13 @@ export class DialogV2Service {
   }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
-
-    const dialogID = 'editor';
+    let dialogID = 'editor';
     const config = new MatDialogConfig();
 
     config.id = dialogID;
     config.width = '500px';
     config.height = '450px';
     config.restoreFocus = true;
-    config.disableClose = false;
     config.disableClose = true;
     config.hasBackdrop = true;
 

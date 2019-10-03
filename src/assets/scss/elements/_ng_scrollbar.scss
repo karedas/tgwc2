@@ -28,43 +28,43 @@ ng-scrollbar.scrollbar {
   --scrollbar-thumb-hover-color: #796b58;
   --scrollbar-viewport-margin: 0;
   --scrollbar-hover-size: var(--scrollbar-size);
-  min-height: 100%;
 }
 
 ng-scrollbar.scrollbar-output {
   --scrollbar-border-radius: 0;
   --scrollbar-padding: 2px;
+  --scrollbar-viewport-margin: 0;
   --scrollbar-track-color: #1b150f;
   --scrollbar-wrapper-color: transparent;
   --scrollbar-thumb-color: #695e50;
   --scrollbar-size: 8px;
   --scrollbar-thumb-hover-color: #796b58;
-  --scrollbar-viewport-margin: 0;
   --scrollbar-hover-size: var(--scrollbar-size);
-  min-height: 100%;
-  .ng-scroll-view-container {
-    border-right: 1px solid #3a3530;
-  }
 }
 
 ng-scrollbar.through {
   --scrollbar-track-color: rgba(68, 62, 56, 0.4);
 }
 
-ng-scrollbar .ng-scroll-content{
-  box-sizing: border-box;
+
+ng-scrollbar .ng-scroll-content {
   height: 100%;
+  display: table;
+  padding-right: 0;
 }
 
-ng-scrollbar .ng-scroll-offset{
-  padding: 12px 34px 12px 12px;
+// ng-scrollbar .ng-scrollbar-wrapper[isverticallyscrollable=true],
+ng-scrollbar .ng-scrollbar-wrapper[disabled=true] {
+  .ng-scroll-content {
+    padding-right: 17px;
+    margin-right: -17px;
+  }
 }
 
-ng-scrollbar.bitpadding .ng-scroll-offset {
-  padding: 0 17px 0 12px;
+ng-scrollbar .ng-scrollbar-wrapper[visibility=always] {
+  padding-right: 12px;
 }
 
-ng-scrollbar.nopadding .ng-scroll-offset{
-  padding: 0 17px 0 0;
+[disabled=false][appearance=standard][verticalUsed=true] .ng-scroll-viewport {
+  padding-right: 17px;
 }
-

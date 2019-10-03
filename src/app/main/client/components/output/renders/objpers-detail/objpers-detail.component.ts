@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { IObjectAndPerson } from 'src/app/main/client/models/data/objpers.model';
 import { GameService } from 'src/app/main/client/services/game.service';
 
@@ -19,7 +19,7 @@ export class ObjpersDetailComponent {
 
    onInteract(where?: any) {
     if (where) {
-      this.gameService.processCommands(`guarda &${where.num}`);
+      this.gameService.processCommands(`guarda &${where.num}`, false);
     }
    }
 }

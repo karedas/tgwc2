@@ -57,6 +57,5 @@ export class ClientEffects {
     private audioService: AudioService,
     private dialogV2Service: DialogV2Service,
     private router: Router,
-    private store: Store<ClientState>
   ) { }
 }

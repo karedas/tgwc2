@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { DataToHtmlPipe } from './dataToHtml.pipe';
 import { IconsPipe } from './icons.pipe';
-import { GetEthnicityByCodePipe } from './get-ethnicity-by-code.pipe';
 import { CapitalizeFirstPipe } from './capitalizeFirst.pipe';
 import { AlphabeticalOrderPipe } from './alphabetical-order.pipe';
 import { QuantitySortPipe } from './quantity-sort.pipe';
@@ -11,7 +10,6 @@ import { QuantitySortPipe } from './quantity-sort.pipe';
     DataToHtmlPipe,
     IconsPipe,
     CapitalizeFirstPipe,
-    GetEthnicityByCodePipe,
     AlphabeticalOrderPipe,
     QuantitySortPipe,
   ],
@@ -20,7 +18,6 @@ import { QuantitySortPipe } from './quantity-sort.pipe';
     IconsPipe,
     DataToHtmlPipe,
     CapitalizeFirstPipe,
-    GetEthnicityByCodePipe,
     AlphabeticalOrderPipe,
     QuantitySortPipe
   ]

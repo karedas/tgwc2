@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { DataEvenType } from '../actions/data.action';
-import { switchMap, tap, map } from 'rxjs/operators';
+import { switchMap, tap, map, delay } from 'rxjs/operators';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
 import * as DataActions from '../actions/data.action';
@@ -20,6 +20,7 @@ export class DataEffects {
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EDITOR),
+      delay(500),
       tap(() => {
         this.dialogV2Service.openEditor();
       })

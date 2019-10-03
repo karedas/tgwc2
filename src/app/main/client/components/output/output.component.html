@@ -17,12 +17,13 @@
 
           <div style="height: 100%; overflow:hidden;" class="o-container">
             <ng-scrollbar 
-              #scrollBar
               class="scrollbar-output" 
+              #scrollBar
               (reachedBottom)="onBottomReached()"
               [ngClass]="{ disabled: draggingSplitArea }" 
               [disabled]="draggingSplitArea"
-              [visibility]="'always'">
+              [visibility]="'always'"
+              [appearance]="'standard'">
               <div class="tg-output--history">
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">

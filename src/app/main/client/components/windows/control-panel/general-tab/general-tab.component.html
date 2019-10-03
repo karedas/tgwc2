@@ -64,13 +64,16 @@
   Salva o carica il tuo file di configurazione che conterrà le tue preferenze per il client (scorciatoie incluse).
 </p>
 
-<button mat-raised-button (click)="saveConfig()">
-  Scarica file</button
->&nbsp;
+<div>
+  <button mat-raised-button (click)="saveConfig()">
+    Scarica file</button
+  >&nbsp;
+  
+  <button mat-raised-button color="accent" (click)="fileInput.click()">
+    Carica file
+  </button>
+</div>
 
-<button mat-raised-button color="accent" (click)="fileInput.click()">
-  Carica file
-</button>
 
 <input hidden type="file" #fileInput (change)="uploadConfig($event)" />
 
