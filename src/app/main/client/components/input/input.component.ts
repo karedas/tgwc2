@@ -11,7 +11,7 @@ import { GameService } from 'src/app/main/client/services/game.service';
 import { InputService } from './input.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { OutputService } from '../output/output.service';
+import { OutputService } from '../output/services/output.service';
 
 @Component({
   selector: 'tg-input',
@@ -24,29 +24,33 @@ export class InputComponent implements OnInit, OnDestroy {
   tgConfig: any;
 
   public inCombat = false;
-  public pauseScroll = false;
-
+  public pauseScroll: Observable<boolean>;
   private _inCombat$: Observable<any>;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private game: GameService,
     private store: Store<TGState>,
-    private historyService: HistoryService,
     private inputService: InputService,
     private outputService: OutputService,
+    private historyService: HistoryService,
     private dialogService: DialogV2Service,
     private _configService: ConfigService
   ) {
     this._inCombat$ = this.store.pipe(select(getHero));
-
+    this.pauseScroll = this.outputService.isScrollable();
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
+
+    this.inputService.setInputRef(this.ic);
+
     // Subscribe to config changes
-    this._configService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.tgConfig = config;
+    this._configService.config.pipe(
+      takeUntil(this._unsubscribeAll))
+      .subscribe(config => {
+        this.tgConfig = config;
     });
 
     this._inCombat$
@@ -61,29 +65,6 @@ export class InputComponent implements OnInit, OnDestroy {
           this.inCombat = false;
         }
       });
-
-    // Listen focus Call from another component
-    this.inputService
-      .isFocussed()
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(() => {
-        this.focus();
-      });
-  }
-
-  private moveCursorAtEnd(target) {
-    if (typeof target.selectionStart === 'number') {
-      target.selectionStart = target.selectionEnd = target.value.length;
-    } else if (typeof target.createTextRange !== 'undefined') {
-      this.focus();
-      const range = target.createTextRange();
-      range.collapse(false);
-      range.selec();
-    }
-  }
-
-  focus() {
-    this.ic.nativeElement.focus();
   }
 
   onEnter(event: any, val: string) {
@@ -93,25 +74,12 @@ export class InputComponent implements OnInit, OnDestroy {
 
   onUpKey(event: any) {
     event.preventDefault();
-
-    if (!this.game.mouseIsOnMap) {
-      const cmd = this.historyService.getPrevious();
-      if (cmd) {
-        event.target.value = cmd;
-        this.moveCursorAtEnd(event.target);
-      }
-    }
+    this.inputService.getPreviousCmd();
   }
 
   onDownKey(event: any) {
     event.preventDefault();
-    if (!this.game.mouseIsOnMap) {
-      const cmd = this.historyService.getNext();
-      if (cmd) {
-        event.target.value = cmd;
-        this.moveCursorAtEnd(event.target);
-      }
-    }
+    this.inputService.getNextCmd();
   }
 
   sendCmd(cmd: string) {
@@ -144,7 +112,7 @@ export class InputComponent implements OnInit, OnDestroy {
 
   /*------  Buttons Actions */
   pauseScrollOutput() {
-    this.pauseScroll = this.outputService.toggleAutoScroll();
+    this.outputService.toggleAutoScroll();
   }
 
   toggleExtraOutput() {
@@ -168,22 +136,8 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:keypress', ['$event'])
-  onLastCommandSend(event: KeyboardEvent) {
-    const activeElement = document.activeElement;
-    if (
-      (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') &&
-      activeElement.id !== 'inputcommand'
-    ) {
-      return;
-    }
+  onCommandEvent(event: KeyboardEvent) {
 
-    if(!this.ic.nativeElement.isFocussed) {
-      this.focus();
-    }
-
-    if (event.key === 'Enter') {
-      this.onEnter(event, this.ic.nativeElement.value);
-    }
     if (
       event.key === '!' &&
       this.ic.nativeElement.value.length === 0 &&
@@ -193,7 +147,6 @@ export class InputComponent implements OnInit, OnDestroy {
       if (l > 0) {
         this.game.processCommands(this.historyService.cmd_history[l - 1]);
       }
-
       return false;
     }
   }

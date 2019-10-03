@@ -1,5 +1,5 @@
 <ng-container *ngIf="heroInfo$ | async as hero">
-  <ng-scrollbar class="scrollbar" [appearance]="'compact'">
+  <ng-scrollbar class="scrollbar bitpadding" [appearance]="'compact'">
     <div fxLayout="column" style="height: 100%;">
         <!-- Info Description -->
         <div class="info-description" fxFlex="0 1 100%" fxLayout="column">
@@ -8,7 +8,7 @@
 
             <div fxFlex="100" style="z-index: 2;" class="info-textarea--wrap" fxLayout="column">
               <div class="info-textarea--container" fxFlex="0 1 100%">
-                <ng-scrollbar class="scrollbar" #textAreaScrollbar>
+                <ng-scrollbar class="scrollbar nopadding" #textAreaScrollbar>
                   <div name="editor" cols="30" class="textarea" [innerHtml]="description | dataToHtml:true"></div>
                 </ng-scrollbar>
               </div>
@@ -32,39 +32,39 @@
         <div class="info-base" fxLayout="row wrap" fxFlex="0 0 auto">
           <div fxFlex="1 0 50%" fxLayout="row wrap">
 
-            <div class="data-name" fxFlex="1 0 50%">Razza:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.race.name}}</div>
+            <div class="data-name" fxFlex="1 0 40%">Razza:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.race.name}}</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Cultura:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.cult}}</div>
+            <div class="data-name" fxFlex="1 0 40%">Cultura:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.cult}}</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Etnia:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.ethn}}</div>
+            <div class="data-name" fxFlex="1 0 40%">Etnia:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.ethn}}</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Citt&agrave;:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.city || 'Nessuna'}}</div>
+            <div class="data-name" fxFlex="1 0 40%">Citt&agrave;:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.city || 'Nessuna'}}</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Religione:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.relig || 'Nessuna'}} <br> (<span
+            <div class="data-name" fxFlex="1 0 40%">Religione:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.relig || 'Nessuna'}} <br> (<span
                 class="tg-yellow">{{ hero.fede }}</span>)</div>
 
           </div>
           <div fxFlex="1 0 50%" fxLayout="row wrap">
 
-            <div class="data-name" fxFlex="1 0 50%">Sesso:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.sex?.name}}</div>
+            <div class="data-name" fxFlex="1 0 40%">Sesso:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.sex?.name}}</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Età:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.age}} anni</div>
+            <div class="data-name" fxFlex="1 0 40%">Età:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.age}} anni</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Aggettivo:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.adjective || 'Nessuno'}}</div>
+            <div class="data-name" fxFlex="1 0 40%">Aggettivo:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.adjective || 'Nessuno'}}</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Peso:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.weight}} pietre</div>
+            <div class="data-name" fxFlex="1 0 40%">Peso:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.weight}} pietre</div>
 
-            <div class="data-name" fxFlex="1 0 50%">Altezza:</div>
-            <div class="tg-brown" fxFlex="1 0 50%">{{hero.height}} cm.</div>
+            <div class="data-name" fxFlex="1 0 40%">Altezza:</div>
+            <div class="tg-brown" fxFlex="1 0 60%">{{hero.height}} cm.</div>
 
           </div>
           <div fxFlex="1 0 100%" class="data-born">Sei nato il

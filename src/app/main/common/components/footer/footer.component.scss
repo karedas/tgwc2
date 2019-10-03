@@ -1,5 +1,6 @@
 
 @import 'abstract/variables';
+@import '~@angular/flex-layout/mq';
 
 
 :host {
@@ -16,14 +17,9 @@
   text-align: center;
 
   a {
-    color: #bdb3a3;
-  }
-+
-  a:hover {
-    color: $base-text-color-hover;
+    color: $tg-white;
   }
 }
-
 
 .tg-serverstatus {
   text-transform: uppercase;
@@ -57,4 +53,23 @@
   .serverstatus--onlineuser {
     color: #bdb3a3;
   }
+}
+
+a.discord-link {
+  color: #7289da!important;
+}
+
+.discord-icon {
+  vertical-align: middle;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url('https://discordapp.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg') no-repeat;
+  background-size: cover;
+}
+
+mat-divider {
+  border-top-color: rgba(134, 125, 110, 0.2);
+  flex: 1 1 50px;
+  margin: 1em auto;
 }

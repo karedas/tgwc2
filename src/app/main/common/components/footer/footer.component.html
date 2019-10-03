@@ -13,16 +13,26 @@
     </div>
   </div>
   <div fxLayout="row wrap">
-    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center flex-start">
+    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">
       <a href="http://www.thegatemud.it" target="_blank">Home</a>&nbsp;|&nbsp;
       <a href="https://it-it.facebook.com/TheGateMUD" target="_blank">Facebook</a>&nbsp;|&nbsp;
-      <a href="http://forum.thegatemud.it" target="_blank">Forum</a>
+      <a href="http://forum.thegatemud.it" target="_blank">Forum</a>&nbsp;|&nbsp;
+      <a href="https://discordapp.com/channels/508963829770878977/509021395905282081" 
+        class="discord-link" target="_blank">
+        <span class="discord-icon"></span>Discord (TheGate)</a>
     </div>
-    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center flex-start">
-      <span class="tg-version-name">Webclient [Public] Version {{ gitVersion }}
+    <div 
+    fxFlex.lt-md="100%" 
+    fxFlex.gt-sm="33.33" 
+    fxLayoutAlign="center center">
+      <div fxFlex="1 1 100%">
+        <mat-divider fxFlex="1 0 50px"></mat-divider>
+      </div>
+      <span class="tg-version-name">
+        <span class="tg-lt-white">Webclient Version</span> {{ gitVersion.tag }} 
       </span>
     </div>
-    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center flex-start">
+    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">
       &copy; 2013-2019 The Gate MUD
       <!-- &nbsp;|&nbsp; -->
       <!-- <a href="http://www.thegatemud.it/disclaimer-credits-the-gate-webclient" target="_blank">Credits and Disclaimer</a> -->

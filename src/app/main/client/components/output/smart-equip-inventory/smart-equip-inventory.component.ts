@@ -28,8 +28,8 @@ export class SmartEquipInventoryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._configService.config
       .pipe(
-        takeUntil(this._unsubscribeAll), 
-        map((config: TGConfig) => { return { room: config.widgetRoom, equipinventory: config.widgetEquipInv }})
+        takeUntil(this._unsubscribeAll),
+        map((config: TGConfig) => ({ room: config.widgetRoom, equipinventory: config.widgetEquipInv }))
       )
       .subscribe((config: any) => {
         setTimeout(() => {

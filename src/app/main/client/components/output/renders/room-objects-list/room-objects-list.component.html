@@ -1,5 +1,5 @@
 <div class="tg-objects" [ngClass]="{ 'list-50-50': objsClass50_50, 'list-50': ''}">
-  <ng-container *ngFor="let object of objects | quantitySort:'mrn'; let i = index">
+  <ng-container *ngFor="let object of objects; let i = index">
     <div
       class="tg-objects--line interact"
       [ngClass]="{ expandlist: object.sz, open: togglePanel[i] }"
@@ -24,7 +24,7 @@
 
     <div class="tg-expandedlist" *ngIf="object.sz && togglePanel[i]" fxLayout="column">
       <div class="tg-objects--line" *ngFor="let objMrn of object.mrn; let indexSz = index" placement="left">
-        <tg-icons tooltip="Guarda" [icon]="object.icon" (mousedown)="onInteract(object, indexSz)"></tg-icons>
+        <tg-icons tooltip="Guarda" [icon]="object.icon" (mouseup)="onInteract(object, indexSz)"></tg-icons>
         <tg-hstat [condprc]="object.condprc"></tg-hstat>
 
         <div class="tg-object--itemdesc" [innerHtml]="object.desc | dataToHtml" [attr.mrn]="object.mrn[indexSz]"></div>

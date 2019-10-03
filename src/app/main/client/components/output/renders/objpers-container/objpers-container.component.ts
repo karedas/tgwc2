@@ -1,9 +1,9 @@
-import { Component, Input, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
-import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
-
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { equipPositionByName } from 'src/app/main/client/common/constants';
-import { OutputService } from '../../output.service';
+import { IObjPersEqcont, IObjPersObjcont } from 'src/app/main/client/models/data/objpers.model';
 import { GameService } from 'src/app/main/client/services/game.service';
+
+import { OutputService } from '../../services/output.service';
 
 @Component({
   selector: 'tg-objpers-container',

@@ -66,7 +66,7 @@
         </div> -->
       </div>
       <!-- Split & Widget Manager -->
-      <div fxHide fxShow.gt-xs fxLayout fxLayoutAlign="center center">
+      <div fxHide fxShow.gt-sm fxLayout fxLayoutAlign="center center">
         <button mat-icon-button [matMenuTriggerFor]="widgetsMenu" #widgetsTrigger="matMenuTrigger"
           (mouseenter)="buttonEnter(widgetsTrigger)" (mouseleave)="buttonLeave(widgetsTrigger, button)">
           <mat-icon>vertical_split</mat-icon>
@@ -81,13 +81,13 @@
           </mat-selection-list>
         </mat-menu>
       </div>
-      <button mat-icon-button (click)="onItemClick('shortcuts')">
-        <mat-icon color="primary" tooltip="Scorciatoie" show-delay="100" placement="bottom">
+      <button mat-icon-button (click)="onItemClick('shortcuts')" tooltip="Scorciatoie" show-delay="100" placement="bottom">
+        <mat-icon color="primary">
           vpn_key
         </mat-icon>
       </button>
-      <button mat-icon-button (click)="onItemClick('fontsize')">
-        <mat-icon color="primary" tooltip="Aumenta/Diminuisci dimensioni testo" show-delay="100" placement="bottom">
+      <button mat-icon-button (click)="onItemClick('fontsize')" tooltip="Cambia dimensioni testo" show-delay="100" placement="bottom">
+        <mat-icon color="primary" >
           format_size
         </mat-icon>
       </button>

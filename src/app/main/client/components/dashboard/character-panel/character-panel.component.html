@@ -7,10 +7,10 @@
         <div class="tg-characteravatar b-ironlight" (mousedown)="openInfo()" fxHide fxShow.gt-sm matRipple>
           <div class="tg-avatar-wrap">
             <ng-container *ngIf="hero.image; else heroImage">
-              <img src="{{env.media_address + hero.image}}" alt="Avatar" />
+              <img [src]="env.media_address + hero.image" alt="Avatar" />
             </ng-container>
             <ng-template #heroImage>
-              <img src="assets/images/interface/default_avatar.png" alt="Avatar" />
+              <img [src]="'assets/images/interface/default_avatar.png'" alt="Avatar" />
             </ng-template>
 
           </div>
@@ -37,7 +37,7 @@
               <ng-template #convaTooltip>
                 Sei <b class='tg-yellow'>convalescente!</b>
               </ng-template>
-              <div class="status-conva" *ngIf="hero.conva === '1'" fxLayout [tooltip]="convaTooltip" placement="top"
+              <div class="status-conva" *ngIf="hero.conva === '1'" fxLayout [tooltip]="convaTooltip" content-type="template" placement="top"
                 content-type="template" show-delay="500">
                 <div class="status-icon-box">
                   <i></i>

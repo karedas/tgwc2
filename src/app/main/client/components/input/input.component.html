@@ -27,7 +27,7 @@
       type="button"
       class="tg-fnt-button"
       (mousedown)="pauseScrollOutput()"
-      [ngClass]="{'isActive': pauseScroll}">
+      [ngClass]="{'isActive': pauseScroll | async}">
       <mat-icon>pause</mat-icon>
     </button>
 

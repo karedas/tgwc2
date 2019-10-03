@@ -8,7 +8,7 @@
     <ng-container *ngIf="html.where">
       <div class="tg-objperson--where">
         &#8618;
-        <span [innerHtml]="html.where.title | capitalizeFirst" (click)="onInteract(html.where)"></span>
+        <span [innerHtml]="html.where.title | capitalizeFirst" (mouseup)="onInteract(html.where)"></span>
       </div>
     </ng-container>
     

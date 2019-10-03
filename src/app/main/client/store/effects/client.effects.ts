@@ -7,7 +7,7 @@ import { AudioService } from 'src/app/main/client/components/audio/audio.service
 import { Router } from '@angular/router';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { TGState } from '..';
+import { ClientState } from '../state/client.state';
 
 
 export interface PayloadAction {
@@ -18,10 +18,9 @@ export interface PayloadAction {
 @Injectable()
 export class ClientEffects {
 
-
   onDisconnect$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ClientEventType.DISCONNECT),
+      ofType<PayloadAction>(ClientEventType.DISCONNECT),
       tap(() => {
         const config = JSON.parse(localStorage.getItem('config'));
         if (this.router.url === '/webclient') {
@@ -35,11 +34,22 @@ export class ClientEffects {
           }
           this.game.resetUI();
         }
-        this.store.dispatch(inGameAction());
       }),
-      mapTo( inGameAction() )
+      mapTo( inGameAction({payload: false}) )
     ),
   );
+
+
+  inGame$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType<PayloadAction>(ClientEventType.INGAME),
+    tap((res) => {
+      if (res.payload === true) {
+        this.game.processCommands(' ', false);
+      }
+    })
+  ), { dispatch: false }
+);
 
   constructor(
     private game: GameService,
@@ -47,6 +57,5 @@ export class ClientEffects {
     private audioService: AudioService,
     private dialogV2Service: DialogV2Service,
     private router: Router,
-    private store: Store<TGState>
   ) { }
 }

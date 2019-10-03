@@ -32,8 +32,9 @@
 
 .tg-output--history {
   width: 100%;
-  padding: 4px 16px 4px 4px;
   box-sizing: border-box;
+  padding-left:6px;
+  padding-top:6px;
 
   &::ng-deep.tg-line {
     .list-50 {
@@ -188,7 +189,7 @@ tg-text {
   .tg-persons {
     display: flex;
     // padding-bottom: .5em;
-    padding-right: .5em;
+    padding-bottom: 6px;
     flex-direction: column;
   }
 
@@ -297,13 +298,11 @@ tg-text {
   }
 
   .tg-extraoutput-detailcontent {
-    padding-top:12px;
-    padding-right: 32px;
+    padding: 6px 28px 0 6px;
   }
 
   .tg-extraoutput--header {
     margin-left: 0;
-    margin-right: 0;
     padding-right: 0;
     border-bottom: 1px solid #433b3a;
     box-shadow: inset 0px -5px 11px 0px black;
@@ -335,7 +334,7 @@ tg-text {
 
     .tg-room--desc {
       color: $base-text-color;
-      padding: 3px 32px 0.2em 4px;
+      padding: 3px 34px 0.2em 6px;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
     }
@@ -348,7 +347,7 @@ tg-text {
 
     .tg-objperson--descdetail {
       display: block;
-      padding: 0 28px 6px 4px;
+      padding: 0 28px 6px 6px;
       line-height: 1.4;
     }
 
@@ -358,7 +357,7 @@ tg-text {
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: 3px 6px 3px 3px;
+      margin: 6px 6px 3px 6px;
       width: 190px;
 
       &:after {

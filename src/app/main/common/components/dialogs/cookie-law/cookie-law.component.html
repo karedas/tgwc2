@@ -1,7 +1,6 @@
-<div class="b-ironlight-mini tg-box">
-  <div class="tg-dialog-content tg-shadow-inset">
-    <div class="tg-cookielawcontent" matDialogContent>
-      <ng-scrollbar  #scrollBar class="scrollbar scrollbar-dialog" [visibility]="'always'" [appearance]="'standard'">
+<tg-window-wrapper [hideTitle]="true" [nopadding]="true">
+  <ng-container ngProjectAs="content">
+      <ng-scrollbar  #scrollBar class="scrollbar scrollbar-dialog bitpadding">
         <h4 class="tg-title">Informativa ai sensi dell'art. 13 del Codice della Privacy</h4>
         <p>Questo sito fa uso di cookie e "local storage" ai soli fini tecnici di permettere il salvataggio della
           propria configurazione e il riconoscimento dell'utente per il conseguente accesso automatico. Le
@@ -18,12 +17,5 @@
         </div>
           <button mat-raised-button (click)="onContinue()" color="accent" [disabled]="buttonDisabled">Continua</button>
       </ng-scrollbar>
-    </div>
-  </div>
-  <div class="tg-border-box">
-    <div class="tg-border tg-border-top"></div>
-    <div class="tg-border tg-border-left"></div>
-    <div class="tg-border tg-border-right"></div>
-    <div class="tg-border tg-border-bottom"></div>
-  </div>
-</div>
+  </ng-container>
+</tg-window-wrapper>

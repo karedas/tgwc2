@@ -41,13 +41,12 @@
 
       <div fxFlex="1 0 auto" class="equinv-container" *ngIf="!collapsed">
         <ng-scrollbar
-          class="scrollbar-output through"
+          class="scrollbar-output through nopadding"
           [ngClass]="{ disabled: draggingSplitArea }"
           [disabled]="draggingSplitArea"
           [visibility]="'always'"
           [appearance]="'standard'"
           fxFlex="1 1 100%"
-          fxFlexFill
         >
           <tg-hero-equipment fxLayout="column" *ngIf="tab === 'equip'"></tg-hero-equipment>
           <tg-hero-inventory fxLayout="column" *ngIf="tab === 'inventory'"></tg-hero-inventory>
@@ -68,7 +67,7 @@
 
       <div fxFlex="1 0 auto" class="equinv-container">
         <ng-scrollbar
-          class="scrollbar-output through"
+          class="scrollbar-output through nopadding"
           [ngClass]="{ disabled: draggingSplitArea }"
           [disabled]="draggingSplitArea"
           [visibility]="'always'"
@@ -90,7 +89,7 @@
       </div>
       <div fxFlex="1 0 auto" class="equinv-container">
         <ng-scrollbar
-          class="scrollbar-output through"
+          class="scrollbar-output through nopadding"
           [ngClass]="{ disabled: draggingSplitArea }"
           [disabled]="draggingSplitArea"
           [visibility]="'always'"

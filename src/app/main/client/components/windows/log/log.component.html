@@ -1,30 +1,29 @@
-<div class="tg-log" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="tg-dialog-content" fxLayout="column">
-    <div class="tg-dialog-title" cdkDragHandle>
-      Log di Gioco
-      <button mat-icon-button class="tg-dialog--close" [mat-dialog-close]="true">
-        <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-      </button>
-    </div>
-
-    <div class="tg-log-content no-padding" matDialogContent>
+<tg-window-wrapper [nopadding]="true" [border]="'thin'">
+  <ng-container ngProjectAs="title">
+    Log di Gioco
+  </ng-container>
+  <ng-container ngProjectAs="content">
+    
+    <div fxLayout="column" style="height: 100%">
+      <div class="tg-log-content" fxFlex="0 1 auto">
+        <ng-scrollbar [appearance]="'compact'" class="scrollbar">
+          <div class="tg-log-date">Data Inizio Log: {{ dateTime }}</div>
+          <div #logContentArea>
+            <ng-container *ngFor="let log of logStorage">
+              <div class="tg-log-line" fxLayout>
+                <div class="tg-log-linenumber" [attr.data-lognumber]="log.l"></div>
+                <div [innerHtml]="log.d | dataToHtml" class="tg-log-msg"></div>
+              </div>
+            </ng-container>
+          </div>
+        </ng-scrollbar>
+      </div>
       
-      <ng-scrollbar [appearance]="'compact'" class="scrollbar">
-        <div class="tg-log-date">Data Inizio Log: {{dateTime}}</div>
-        <div #logContentArea>
-          <ng-container *ngFor="let log of logStorage">
-            <div class="tg-log-line" fxLayout>
-              <div class="tg-log-linenumber" [attr.data-lognumber]="log.l"></div>
-              <div [innerHtml]="log.d | dataToHtml" class="tg-log-msg"></div>
-            </div>
-          </ng-container>
-        </div>
-      </ng-scrollbar>
-      
+      <div class="tg-log-action" mat-dialog-actions fxFlex="0 0 auto">
+        <button mat-raised-button color="accent" (click)="saveLog()">Salva su File</button>
+        <!-- <button mat-raised-button color="alert" (click)="resetLog()">Cancella Log</button> -->
+      </div>
     </div>
-    <div class="tg-log-action" mat-dialog-actions>
-      <button mat-raised-button color="accent" (click)="saveLog()">Salva su File</button>
-      <!-- <button mat-raised-button color="alert" (click)="resetLog()">Cancella Log</button> -->
-    </div>
-  </div>
-</div>
+    
+  </ng-container>
+</tg-window-wrapper>

@@ -1,26 +1,17 @@
-import { Injectable, Renderer2, RendererFactory2 } from "@angular/core";
-import { SocketService } from "../../../core/services/socket.service";
-import { socketEvent } from "../../../core/models/socketEvent.enum";
-import { DataParser } from "./dataParser.service";
-import { HistoryService } from "./history.service";
-import {
-  Observable,
-  BehaviorSubject,
-  Subscription,
-  timer,
-  interval
-} from "rxjs";
-import {
-  pos_to_order,
-  font_size_options,
-  equipPositionByName
-} from "src/app/main/client/common/constants";
-import { ConfigService } from "../../../services/config.service";
-import { TGConfig } from "../client-config";
-import { cloneDeep, some, isObject } from "lodash";
-import { environment } from "src/environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { switchMap, timeInterval, flatMap } from "rxjs/operators";
+import { HttpClient } from '@angular/common/http';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { cloneDeep, isObject, some } from 'lodash';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { font_size_options, pos_to_order } from 'src/app/main/client/common/constants';
+import { environment } from 'src/environments/environment';
+
+import { socketEvent } from '../../../core/models/socketEvent.enum';
+import { SocketService } from '../../../core/services/socket.service';
+import { ConfigService } from '../../../services/config.service';
+import { TGConfig } from '../client-config';
+import { DataParser } from './dataParser.service';
+import { HistoryService } from './history.service';
 
 @Injectable()
 export class GameService {
@@ -34,7 +25,7 @@ export class GameService {
   serverStat: Observable<any>;
   mouseIsOnMap = false;
   showExtraByViewport: boolean = undefined;
-  isSmallDevice: boolean
+  isSmallDevice: boolean;
   client_update = {
     now: 0,
     mrnContainer: undefined,
@@ -108,7 +99,7 @@ export class GameService {
       this.client_update.equipment.needed = true;
     }
     if (what[2] > this.client_update.room.version) {
-      this.client_update.equipment.version = what[2];
+      this.client_update.room.version = what[2];
       this.client_update.room.needed = true;
     }
     if (now > this.client_update.now) {
@@ -123,7 +114,7 @@ export class GameService {
 
   private upadteInventory(now) {
     if (this.client_update.inventory.needed) {
-      this.sendToServer("@inv");
+      this.sendToServer('@inv');
       this.client_update.inventory.needed = false;
       this.client_update.now = now;
     }
@@ -131,20 +122,32 @@ export class GameService {
 
   private upadteEquip(now) {
     if (this.client_update.equipment.needed) {
-      this.sendToServer("@equip");
+      this.sendToServer('@equip');
       this.client_update.equipment.needed = false;
       this.client_update.now = now;
     }
   }
 
   private updateInfo(now) {
+    // console.log(
+    //   this.client_update.room.needed &&
+    //   this.tgConfig.widgetRoom.visible &&
+    //   !this.isSmallDevice &&
+    //   !this.client_update.inContainer
+    // );
+    // console.log(
+    //   this.client_update.room.needed ,
+    //   this.tgConfig.widgetRoom.visible ,
+    //   !this.isSmallDevice ,
+    //   !this.client_update.inContainer
+    // )
     if (
       this.client_update.room.needed &&
       this.tgConfig.widgetRoom.visible &&
       !this.isSmallDevice &&
       !this.client_update.inContainer
     ) {
-      this.sendToServer("@agg");
+      this.sendToServer('@agg');
       this.client_update.room.needed = false;
       this.client_update.now = now;
     }
@@ -164,14 +167,13 @@ export class GameService {
   public start(initialData: any): void {
     // Perform Reset before start any Environments Stuff.
     this.dataParserService.parse(initialData, this._tgConfig.log);
-    this.processCommands('', false);
     this.socketService.on(socketEvent.DATA, (data: any) => {
       this.dataParserService.parse(data, this._tgConfig.log);
     });
 
     this._upSubscription = this.dataParserService
       .getUpdateNeeded()
-      .subscribe(this.updatePanels.bind(this));
+      .subscribe((up) => this.updatePanels(up));
   }
 
   public resetUI() {
@@ -184,21 +186,23 @@ export class GameService {
    * @param isStored true or false if u need to watch history length)
    */
   public processCommands(val: string, isStored: boolean = true) {
-    const cmds = this.dataParserService.parseInput(val);
+    if (val) {
+      const cmds = this.dataParserService.parseInput(val);
 
-    if (cmds) {
-      /* check if cmd will be pushed in the history array */
-      if (isStored) {
-        this.historyService.push(val);
-      }
-      for (let i = 0; i < cmds.length; i++) {
-        this.sendToServer(cmds[i]);
+      if (cmds) {
+        /* check if cmd will be pushed in the history array */
+        if (isStored) {
+          this.historyService.push(val);
+        }
+        for (let i = 0; i < cmds.length; i++) {
+          this.sendToServer(cmds[i]);
+        }
       }
     }
   }
 
   public sendToServer(cmd: string) {
-    this.socketService.emit("data", cmd);
+    this.socketService.emit('data', cmd);
   }
 
   /**  ---------------------------------------------------------------------------
@@ -228,28 +232,28 @@ export class GameService {
 
   public setZenMode(status: boolean) {
     if (status) {
-      this.render.addClass(document.body, "zen");
+      this.render.addClass(document.body, 'zen');
     } else {
-      this.render.removeClass(document.body, "zen");
+      this.render.removeClass(document.body, 'zen');
     }
   }
 
   /* Ordfer Objects Persons or Objects list */
   public orderObjectsList(items: any, type?: string): any {
-    if(items) {
-      let cont = cloneDeep(items);
+    if (items) {
+      const cont = cloneDeep(items);
       if (cont.list) {
-        if (type == "pers" || type == "equip") {
+        if (type === 'pers' || type === 'equip') {
           cont.list.sort((a, b) => {
             const eq_pos_a = Object.keys(a.eq) ? pos_to_order[a.eq[0]] : 0;
             const eq_pos_b = Object.keys(b.eq) ? pos_to_order[b.eq[0]] : 0;
             return (eq_pos_a as number) - (eq_pos_b as number);
           });
-  
+
           return cont;
         }
       } else {
-        let concatList = [];
+        const concatList = [];
         Object.keys(cont).forEach((poskey: any, idbx: any) => {
           const eqData = cont[poskey];
           if (some(eqData, isObject)) {
@@ -270,22 +274,22 @@ export class GameService {
 
   /** Font Size Adjustement */
   public setOutputSize(size?: number, initSetup?: boolean) {
-    const prefix = "size-";
+    const prefix = 'size-';
     let new_class: string;
     let old_class: string;
     // Initial Font-size set
-    if (typeof size === "number" && initSetup) {
+    if (typeof size === 'number' && initSetup) {
       new_class = prefix + font_size_options[size].class;
       this.render.addClass(document.body, new_class);
       return;
     }
     // Rolling on Font-size
-    if (typeof size !== "number") {
+    if (typeof size !== 'number') {
       size = (this._tgConfig.fontSize + 1) % font_size_options.length;
     }
     old_class = prefix + font_size_options[this._tgConfig.fontSize].class;
     new_class = prefix + font_size_options[size].class;
-    //Setting Class
+    // Setting Class
     this.render.removeClass(document.body, old_class);
     this.render.addClass(document.body, new_class);
     // Saving fontsize in localstorage
@@ -297,18 +301,18 @@ export class GameService {
     /* If is not a List */
     if (!item.sz) {
       if (item.cntnum && !mine) {
-        this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`);
+        this.processCommands(`guarda &${item.mrn[0]} &${item.cntnum}`, false);
       } else {
-        this.processCommands(`guarda &${item.mrn[0]}`);
+        this.processCommands(`guarda &${item.mrn[0]}`, false);
       }
     }
 
     /* Is a List */
     if (item.sz) {
       if (!item.cntnum && index >= 0) {
-        this.processCommands(`guarda &${item.mrn[index]}`);
+        this.processCommands(`guarda &${item.mrn[index]}`, false);
       } else if (item.cntnum && index >= 0) {
-        this.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`);
+        this.processCommands(`guarda &${item.mrn[index]} &${item.cntnum}`, false);
       }
     }
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { DataEvenType, heroAction } from '../actions/data.action';
-import { switchMap, tap, map } from 'rxjs/operators';
+import { DataEvenType } from '../actions/data.action';
+import { switchMap, tap, map, delay } from 'rxjs/operators';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
 import * as DataActions from '../actions/data.action';
@@ -17,10 +17,10 @@ export interface PayloadActionData {
 @Injectable()
 export class DataEffects {
 
-
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EDITOR),
+      delay(500),
       tap(() => {
         this.dialogV2Service.openEditor();
       })
@@ -31,43 +31,34 @@ export class DataEffects {
   skillsRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.SKILLS),
-      switchMap((res) => {
+      tap((res) => {
         this.dialogV2Service.openCharacterSheet('skills');
-        return [
-          heroAction({ payload: { skills: res.payload } })
-        ];
       })
-    )
+    ), { dispatch: false }
   );
 
   equipRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.EQUIP),
-      switchMap((res) => {
+      tap((res) => {
         const config = this.configService.getConfig();
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice ) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('equip');
-        } 
-        return [
-          heroAction({ payload: { equipment: res.payload } })
-        ];
+        }
       }),
-    )
+    ), { dispatch: false }
   );
 
   inventoryRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadActionData>(DataEvenType.INVENTORY),
-      switchMap((res) => {
+      tap((res) => {
         const config = this.configService.getConfig();
         if ((!config.widgetEquipInv.visible || this.gameService.isSmallDevice) && !res.payload.up) {
           this.dialogV2Service.openCharacterSheet('inventory');
-        } 
-        return [
-          heroAction({ payload: { inventory: res.payload } })
-        ];
+        }
       }),
-    )
+    ), { dispatch: false }
   );
 
   openBook$ = createEffect(() =>
@@ -105,7 +96,9 @@ export class DataEffects {
       ofType(DataEvenType.CLOSETEXTEDITOR),
       tap(() => {
         this.dialogV2Service.dialog.getDialogById('editor').close();
-        this.inputService.focus();
+        if (this.dialogV2Service.dialog.getDialogById('charactersheet')) {
+          this.gameService.processCommands('info');
+        }
       })
     ),
     { dispatch: false }
@@ -157,7 +150,7 @@ export class DataEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   refreshCommand$ = createEffect(() =>
     this.actions$.pipe(

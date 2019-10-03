@@ -57,6 +57,6 @@ export class CharacterSheetComponent  {
   }
 
   openUploadAvatar() {
-    this.store.dispatch(clientAction.uploadAvatarAction())
+    this.store.dispatch(clientAction.uploadAvatarAction());
   }
 }

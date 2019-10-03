@@ -1,12 +1,18 @@
 <tg-window-wrapper [hideTitle]="true">
   <ng-container ngProjectAs="content">
-    <div class="tg-widgetlogin-status">
-      Sei stato disconnesso.
-    </div>
+    <p class="tg-widgetlogin-status">
+
+      <ng-container *ngIf="loggedHero.image">
+        <div class="logout-avatar">
+          <img id="infoimage" [src]="imagepath + loggedHero.image" />
+        </div>
+      </ng-container>
+      
+      <span class="tg-yellow">{{loggedHero.name}}</span> sei stato disconnesso.
+    </p>
     <div class="tg-widgetlogin-menu" *ngIf="!showForm" fxLayout="column">
       <button type="button" class="btn-reconnect tg-button" (click)="onReconnect()">
         Riconnetti
-        <span></span>
       </button>
       <!-- <button type="button" class="btn-newlogin tg-button" (click)="toggle()">Accedi con un personaggio diverso.</button> -->
       <button type="button" class="btn-backtohome tg-button" (click)="navigateToHome()">Torna alla Home</button>

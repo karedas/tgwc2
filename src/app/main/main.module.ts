@@ -26,6 +26,7 @@ import { LogService } from './client/services/log.service';
 import { LoginClientService } from './authentication/services/login-client.service';
 import { DataParser } from './client/services/dataParser.service';
 import { AudioService } from './client/components/audio/audio.service';
+import { WindowWrapperModule } from './client/components/windows/window-wrapper/window-wrapper.module';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     Auth2Module,
     DialogV2Module,
     NavBarModule,
+    WindowWrapperModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('TG', baseReducer, { metaReducers: [clearState]}),
     EffectsModule.forFeature([ClientEffects]),
