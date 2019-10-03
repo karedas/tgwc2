@@ -21,8 +21,15 @@
         class="discord-link" target="_blank">
         <span class="discord-icon"></span>Discord (TheGate)</a>
     </div>
-    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">
-      <span class="tg-version-name">Webclient [Public] Version {{ gitVersion }}
+    <div 
+    fxFlex.lt-md="100%" 
+    fxFlex.gt-sm="33.33" 
+    fxLayoutAlign="center center">
+      <div fxFlex="1 1 100%">
+        <mat-divider fxFlex="1 0 50px"></mat-divider>
+      </div>
+      <span class="tg-version-name">
+        <span class="tg-lt-white">Webclient Version</span> {{ gitVersion.tag }} 
       </span>
     </div>
     <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">

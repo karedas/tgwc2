@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { Router, NavigationStart } from '@angular/router';
 import { versions } from 'src/environments/versions';
@@ -15,9 +15,8 @@ import { environment } from 'src/environments/environment';
 export class FooterComponent implements OnInit, OnDestroy {
   showFooter = true;
   serverStat: Observable<any>;
-  gitVersion = versions.tag;
+  gitVersion = versions;
   serverStatusMessage: boolean;
-
   // Private
   private _unsubscribeAll: Subject<any>;
 
