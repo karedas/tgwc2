@@ -76,3 +76,5 @@ export const tgConfig: TGConfig = {
   log: true,
   shortcuts: [],
 };
+
+

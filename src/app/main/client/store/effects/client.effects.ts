@@ -62,8 +62,7 @@ export class ClientEffects {
         map(action => action.payload),
         filter(state => !!state ),
         tap(( audio: TGAudio ) => {
-          console.log('go?');
-          this.audioService.setAudio({channel: 'atmospheric', track: 'rain-and-thunder-loop.mp3'});
+          this.audioService.setAudio({channel: audio.channel,  track: audio.track});
         })
       ),
     { dispatch: false }

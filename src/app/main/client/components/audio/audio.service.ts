@@ -3,27 +3,41 @@ import { BehaviorSubject } from 'rxjs';
 import { TGConfig } from '../../client-config';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGAudio } from '../../models/audio.model';
+const audioPath = 'assets/audio/';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AudioService {
-
   tgConfig: TGConfig;
 
-  public sound: HTMLAudioElement;
-  public music: HTMLAudioElement;
-  public atmospheric: HTMLAudioElement;
-  public _enable = false;
-  public playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
+  _enable: boolean = false;
+  playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
 
+  sound: HTMLAudioElement;
+  music: HTMLAudioElement;
+  // Atmospheric Channels
+  atmospheric: HTMLAudioElement;
+  atmosphericEcho: HTMLAudioElement;
 
-  constructor(
-    private _configService: ConfigService
-  ) {
+  echoInterval: any;
+
+  constructor(private _configService: ConfigService) {
+    this.setDefaultChannel();
+    this.setAtmosphericChannel();
+  }
+
+  private setDefaultChannel() {
     this.sound = new Audio();
     this.music = new Audio();
+  }
+
+  private setAtmosphericChannel() {
     this.atmospheric = new Audio();
     this.atmospheric.loop = true;
+    // echo
+    this.atmosphericEcho = new Audio();
+    this.atmosphericEcho.loop = true;
   }
 
   set enable(value: boolean) {
@@ -31,6 +45,7 @@ export class AudioService {
     this.sound.muted = !this._enable;
     this.music.muted = !this._enable;
     this.atmospheric.muted = !this._enable;
+    this.atmosphericEcho.muted = !this._enable;
   }
 
   get enable(): boolean {
@@ -50,14 +65,15 @@ export class AudioService {
   }
 
   setAudio(audio: TGAudio): void {
-    if(this._enable) {
+    if (this._enable) {
       const mp3 = '.mp3';
       const mid = '.mid';
       const wav = '.wav';
-  
-      /** Music && Sound Channel */
-      if(audio.channel === 'music') {
-        console.log('TGLOG: Sound and Music channel Starts')
+
+      /**
+       * Delivery to default Channel: Music + Sound Channel 
+       * or to Atmospheric Channel */
+      if (audio.channel === 'music') {
         if (audio.track.indexOf(mp3, audio.track.length - mp3.length) !== -1) {
           this.setMusic(audio.track);
         } else if (audio.track.indexOf(mid, audio.track.length - mid.length) !== -1) {
@@ -65,11 +81,19 @@ export class AudioService {
         } else {
           this.setSound(audio.track.replace(wav, mp3));
         }
-      } else if (audio.channel === 'atmospheric') {
-        console.log('TGLOG: Atmospheric Music channel starts')
+      } else if (audio.channel === 'atmospheric' && audio.track) {
+        if (audio.track === this.atmospheric.src) {
+          console.log('return same track')
+          return;
+        }
+        if (!audio.track) {
+          console.log('no track provided')
+          clearInterval(this.echoInterval);
+          return;
+        }
+
         this.setAtmospheric(audio.track);
-        /** Atmospheric Channel */
-      } 
+      }
     }
   }
 
@@ -78,7 +102,8 @@ export class AudioService {
   }
 
   public setMusic(src: string): void {
-    this.music.src = 'assets/audio/' + src;
+    this.music.src = audioPath + src;
+    this.music.load();
     this.playMusic();
   }
 
@@ -87,7 +112,6 @@ export class AudioService {
   }
 
   public pauseAudio(): void {
-
     this.music.pause();
     this.music.currentTime = 0;
     this.sound.pause();
@@ -99,8 +123,8 @@ export class AudioService {
   }
 
   public setSound(src: string): void {
-
-    this.sound.src = 'assets/audio/' + src;
+    this.sound.src = audioPath + src;
+    this.sound.load();
     this.playSound();
   }
 
@@ -113,19 +137,26 @@ export class AudioService {
   }
 
   public setAtmospheric(src: string): void {
-
-    this.atmospheric.src = 'assets/audio/atmospherics/' + src;
+    this.atmospheric.src = audioPath + 'atmospherics/' + src;
+    this.atmosphericEcho.src = this.atmospheric.src;
+    this.atmospheric.load();
     this.playAtmospheric();
   }
 
   public playAtmospheric(): void {
+    console.log('TGLOG: Atmospheric Music channel starts');
     this.atmospheric.play();
+    setTimeout(() => {
+      console.log('TGLOG: Atmospheric Echo Added');
+      console.log(this.atmosphericEcho.src);
+      this.atmosphericEcho.play();
+    }, 25000);
   }
 
   public toggleAudio(): void {
     // store in configuration
     this._configService.setConfig({
-      audio: {enable: this.enable = !this.enable}
+      audio: { enable: this.enable = !this.enable }
     });
   }
 }

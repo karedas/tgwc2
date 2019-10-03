@@ -5,11 +5,10 @@ import { TGConfig } from '../../client-config';
 import { AudioService } from './audio.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { TGAudio } from '../../models/audio.model';
 
 @Component({
   selector: 'tg-audio',
-  template: '',
+  template: ''
 })
 export class AudioComponent implements OnInit, OnDestroy {
 
@@ -23,7 +22,6 @@ export class AudioComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe( (config: TGConfig ) => {
