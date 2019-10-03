@@ -1,8 +1,6 @@
 <div class="tg-input tg-box b-ironlight tg-shadow">
   <input id="inputcommand" type="text" autofocus placeholder="Scrivi qualcosa" 
     #inputCommand (keydown.enter)="onEnter($event, inputCommand.value)" 
-    (keydown.arrowUp)="onUpKey($event)"
-    (keydown.arrowDown)="onDownKey($event)"
     autocomplete="off"
     name="sendinput"/>
   <div class="tg-inputcommand">

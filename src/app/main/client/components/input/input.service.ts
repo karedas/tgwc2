@@ -1,5 +1,4 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
 import { HistoryService } from '../../services/history.service';
 import { GameService } from '../../services/game.service';
 
