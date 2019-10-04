@@ -42,8 +42,7 @@ export class AudioComponent implements OnInit, OnDestroy {
         takeUntil(this._unsubscribeAll))
       .subscribe(audio => {
         this.audioService.setAudio(audio);
-      }
-      );
+      });
   }
 
   ngOnDestroy(): void {

@@ -84,7 +84,7 @@ tg-navbar {
     }
   }
 
-  .mat-icon.mat-primary{
+  .mat-icon.mat-primary {
     color: rgb(109, 109, 109);
     vertical-align: middle;
   }
@@ -96,10 +96,11 @@ tg-navbar {
     font-size: 18px;
 
     mat-icon {
-      font-size: 18px!important;
+      font-size: 18px !important;
     }
-    
-    &:hover mat-icon, &.active mat-icon {
+
+    &:hover mat-icon,
+    &.active mat-icon {
       color: $tg-brown;
     }
   }

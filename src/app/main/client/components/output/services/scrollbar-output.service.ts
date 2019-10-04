@@ -1,14 +1,16 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { NgScrollbar } from 'ngx-scrollbar';
+import { TGConfig } from '../../../client-config';
 
 @Injectable()
 export class ScrollbarOutputService {
+  
   pause$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   containerSize = 0;
+  contentchange: boolean;
 
   private scrollTopBeforePause = 0;
-
 
   resetScrollTopPause () {
     this.scrollTopBeforePause = -1;
@@ -33,7 +35,14 @@ export class ScrollbarOutputService {
     this.pause$.next(!this.pause$.value);
   }
 
-  onMouseScroll(scrollTop, outputSizes?: number) {
+  onMouseScroll(scrollTop: number, outputSizes?: number, widgetroom?: any) {
+    // If Widget room has been toggle, reset and return to avoid pause for incorrect 
+    // scrollTop value such as output size changes.
+    if(this.contentchange !== widgetroom) {
+      this.contentchange = !this.contentchange;
+      this.scrollTopBeforePause = 0;
+      return;
+    }
     // Check if output container changes size after window.resize or split area width changes,
     // then reset the pause behaviour to prevent not wanted behaviour.
     if (outputSizes !== this.containerSize) {

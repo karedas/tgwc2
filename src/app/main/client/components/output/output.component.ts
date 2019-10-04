@@ -45,8 +45,6 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   private _genericPage$: Observable<any>;
 
   private _unsubscribeAll: Subject<any>;
-  window: any;
-  document: any;
 
   // Todo move to service
   get haveWidgets() {
@@ -101,7 +99,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     // Listen Mouse Scroll event to enable/disable pause.
     this.scrollBar.scrolled.subscribe((e) => {
       const outputSize = this.mainOutputArea.nativeElement.offsetHeight + this.mainOutputArea.nativeElement.offsetWidth;
-      this.outputService.onMouseScroll(e.target.scrollTop, outputSize);
+      this.outputService.onMouseScroll(e.target.scrollTop, outputSize, this.tgConfig.widgetRoom.visible);
     });
   }
 

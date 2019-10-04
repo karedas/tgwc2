@@ -42,7 +42,7 @@ export class RoomPersonsListComponent implements OnInit {
   }
 
   onExpand(event: Event, item: any, index: number) {
-    if (this.outputService.isExpandeable(event, item, index)) {
+    if (this.outputService.isExpandeable(event, item)) {
       this.togglePanel[index] = !this.togglePanel[index];
     }
   }

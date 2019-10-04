@@ -52,7 +52,7 @@ export class ObjPersContainerComponent implements OnChanges  {
   }
 
   onExpand(event: Event, item: any, index: number) {
-    if (this.outputService.isExpandeable(event, item, index)) {
+    if (this.outputService.isExpandeable(event, item)) {
       this.togglePanel[index] = !this.togglePanel[index];
     }
   }
