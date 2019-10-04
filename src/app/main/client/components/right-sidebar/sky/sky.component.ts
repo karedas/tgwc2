@@ -32,7 +32,6 @@ export class SkyComponent implements OnDestroy {
 
   private addAtmosphericSound(sky) {
     switch(sky) {
-      case '1':
       case 'd':
       case 'e':
       case 'f':

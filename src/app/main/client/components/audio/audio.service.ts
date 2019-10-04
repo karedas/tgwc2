@@ -89,8 +89,9 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
-        if(audio.track === null) {
+        if(!audio.track && !this.atmospheric.paused) {
           this.stopAtmospheric();
+          clearInterval(this.echoInterval);
           return;
         }
         if (audio.track === this.atmospheric.src) {
@@ -142,9 +143,6 @@ export class AudioService {
 
 
   private stopAtmospheric() {
-    console.log('stop');
-    this.atmospheric.pause();
-    this.atmosphericEcho.pause();
     this.fadeOutVolume();
   }
 
@@ -156,24 +154,22 @@ export class AudioService {
   }
 
   private playAtmospheric(): void {
-    console.log('TGLOG: Atmospheric Music channel starts');
     this.atmospheric.play();
-    setTimeout(() => {
-      console.log(this.atmosphericEcho.src);
+    this.echoInterval = setTimeout(() => {
       this.atmosphericEcho.play();
     }, 25000);
   }
 
 
   private fadeOutVolume() {
-    if (this.atmospheric.volume !== 0) {
-      console.log(this.atmospheric.volume);
+    let vol = this.atmospheric.volume * 10;
+    if (this.atmospheric.volume > 0.1) {
       setTimeout(() => {
-        this.atmospheric.volume -= 0.1;
-        this.atmosphericEcho.volume -= 0.1;
-      }, 300);
-
-     this.fadeOutVolume();
+        vol =  ( vol - 1 ) / 10;
+        this.atmospheric.volume = vol;
+        this.atmosphericEcho.volume = vol;
+        this.fadeOutVolume();
+      }, 1000);
     }
 
     else {
@@ -181,6 +177,8 @@ export class AudioService {
       this.atmosphericEcho.currentTime = 0;
       this.atmospheric.volume = 1; //need dynamic config
       this.atmosphericEcho.volume = 1; //need dynamic config
+      this.atmospheric.pause();
+      this.atmosphericEcho.pause();
     }
   }
 
