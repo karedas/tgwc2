@@ -186,17 +186,15 @@ export class GameService {
    * @param isStored true or false if u need to watch history length)
    */
   public processCommands(val: string, isStored: boolean = true) {
-    if (val) {
-      const cmds = this.dataParserService.parseInput(val);
+    const cmds = this.dataParserService.parseInput(val);
 
-      if (cmds) {
-        /* check if cmd will be pushed in the history array */
-        if (isStored) {
-          this.historyService.push(val);
-        }
-        for (let i = 0; i < cmds.length; i++) {
-          this.sendToServer(cmds[i]);
-        }
+    if (cmds) {
+      /* check if cmd will be pushed in the history array */
+      if (isStored) {
+        this.historyService.push(val);
+      }
+      for (let i = 0; i < cmds.length; i++) {
+        this.sendToServer(cmds[i]);
       }
     }
   }
