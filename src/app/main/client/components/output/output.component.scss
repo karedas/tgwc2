@@ -380,39 +380,19 @@ tg-text {
   }
 }
 
-.alert-inline {
+.alert-pause {
   white-space: nowrap;
   position: absolute;
-  top: 6px;
-  left: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   margin: 0;
-  transform: translateX(-50%);
-  padding: 0.2em 2em;
+  padding: 6px 12px;
   text-shadow: 0 0 8px red;
   color: white;
-  border-radius: 2px;
-}
-
-.placeholder-pause {
-  margin: 12px 0;
-  color: $tg-lt-red;
-  &:before {
-    content: '';
-    display: inline-block;
-    border-top: 1px dashed $tg-red;
-    height: 1px;
-    flex: 0 1 100%;
-    margin: auto 6px;
-  }
-  &:after {
-    content: '';
-    display: inline-block;
-    border-top: 1px dashed $tg-red;
-    height: 1px;
-    flex: 0 1 100%;
-    margin: auto 6px;
-  }
+  border-radius: 0;
+  border: none;
 }
 
 .in-pause::after {

@@ -21,19 +21,14 @@ import { OutputService } from './services/output.service';
   styleUrls: ['./output.component.scss']
 })
 export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
-  tgConfig: TGConfig;
-
   @ViewChild('scrollBar', { static: false }) scrollBar: NgScrollbar;
   @ViewChild('scrollerEnd', { static: false }) scrollerEnd: ElementRef;
-  @ViewChild('pausePlaceholder', { static: false })
-  pausePlaceholder: ElementRef;
-
   @ViewChild('mainOutputArea', { static: false }) mainOutputArea: ElementRef;
   @ViewChild('splitArea', { static: false }) splitArea: SplitComponent;
 
+  tgConfig: TGConfig;
   draggingSplitArea = false;
   pauseScroll = false;
-
   output = [];
   lastRoom$: Observable<any>;
   outputObservable = new BehaviorSubject([]);
@@ -87,11 +82,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config) => {
-        if (config) {
-          this.tgConfig = config;
-        }
-      });
+      .subscribe((config: TGConfig) => this.tgConfig = config );
 
     this.addOutputSubscriptions();
   }
@@ -105,46 +96,21 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.outputService
       .isScrollable()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((pauseScroll: boolean) => this.pauseAutoScrollBar(pauseScroll));
+      .subscribe((pauseScroll: boolean) => this.pauseScroll = pauseScroll );
 
     // Listen Mouse Scroll event to enable/disable pause.
     this.scrollBar.scrolled.subscribe((e) => {
       const outputSize = this.mainOutputArea.nativeElement.offsetHeight + this.mainOutputArea.nativeElement.offsetWidth;
-
       this.outputService.onMouseScroll(e.target.scrollTop, outputSize);
     });
   }
 
-  private pauseAutoScrollBar(status: boolean) {
-    this.pauseScroll = status;
-    // Adding placeholder for autoscroll last readed Line;
-    if (this.pauseScroll) {
-      this.setContent('pause', []);
-    } else {
-      let indexOfPause = this.output.findIndex(function (element) {
-        return element.type === 'pause';
-      });
-      this.outputService.scrollPanelToBottom(this.scrollBar, this.scrollerEnd);
-      this.output.splice(indexOfPause, 1);
-    }
-  }
-
-  onBottomReached() {
-    this.outputService.resetScrollTopPause();
-    this.outputService.disablePause();
-  }
-
   private addOutputSubscriptions() {
+    this._baseText$.pipe(takeUntil(this._unsubscribeAll)).subscribe((base: string[]) => this.updateBaseText(base));
 
-    this._baseText$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((base: string[]) => this.updateBaseText(base));
-
-    this._roomBase$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((room: Room) => {
-        this.updateRoomBase(room);
-      });
+    this._roomBase$.pipe(takeUntil(this._unsubscribeAll)).subscribe((room: Room) => {
+      this.updateRoomBase(room);
+    });
 
     this._objOrPerson$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -185,6 +151,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       if (room.mv && this.game.client_update.inContainer && this.tgConfig.widgetRoom.visible) {
         return;
       }
+
       this.typeDetail = 'room';
       this.game.client_update.inContainer = false;
 
@@ -196,7 +163,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         this.game.client_update.room.version = room.ver;
         this.game.client_update.room.needed = false;
       }
-      
+
       this.setContent(this.typeDetail, room);
     }
   }
@@ -205,11 +172,11 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     if (elements) {
       this.typeDetail = 'objPersDetail';
       this.objPersDetail = elements;
-      this.setContent(this.typeDetail, this.objPersDetail);
-
       // save last container if we need to update his view
       this.game.client_update.mrnContainer = elements.num;
       this.game.client_update.inContainer = true;
+
+      this.setContent(this.typeDetail, this.objPersDetail);
     }
   }
 
@@ -226,14 +193,13 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  goToPausePlaceHolder() {
-    this.outputService.scrollToPlaceHolder(this.scrollBar, this.pausePlaceholder);
+  onBottomReached() {
+    this.outputService.resetScrollTopPause();
+    this.outputService.disablePause();
   }
 
-  onGutterClick(event) {
-    console.log(event);
-    console.log('');
-    return false;
+  togglePause() {
+    this.outputService.toggleAutoScroll();
   }
 
   onDragStart() {

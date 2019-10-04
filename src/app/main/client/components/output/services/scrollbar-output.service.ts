@@ -54,10 +54,4 @@ export class ScrollbarOutputService {
       this.pause$.next(false);
     }
   }
-
-  scrollToPlaceHolder(scrollbarRef: NgScrollbar, pausePlaceHolder: ElementRef) {
-    scrollbarRef.scrollToElement(pausePlaceHolder.nativeElement, {
-      duration: 50
-    });
-  }
 }
