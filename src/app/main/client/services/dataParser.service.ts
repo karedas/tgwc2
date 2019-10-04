@@ -291,7 +291,7 @@ export class DataParser {
 
   private audio(audio): string {
     const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-    this.store.dispatch(ClientActions.audioAction({payload: {channel: 'music', track: audio_parse }}));
+    this.store.dispatch(DataActions.audioAction({payload: {channel: 'music', track: audio_parse }}));
     return '';
   }
 

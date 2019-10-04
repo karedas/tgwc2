@@ -6,7 +6,6 @@ import { RightSidebarModule } from './components/right-sidebar/right-sidebar.mod
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
-import { AudioComponent } from './components/audio/audio.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
 import { OutputService } from './components/output/output.service';
@@ -28,7 +27,6 @@ const clientRouting: Routes = [
 @NgModule({
   declarations: [
     ClientComponent,
-    AudioComponent,
     StatusBarComponent,
     AutofocusInputbarDirective,
   ],

@@ -1,30 +1,31 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { MainComponent } from './main.component';
-import { Auth2Module } from './authentication/auth.module';
-import { Routes, RouterModule } from '@angular/router';
-import { CookieLawComponent } from './common/components/dialogs/cookie-law/cookie-law.component';
-import { Error403Module } from './pages/errors/403/error-403.module';
-import { CookieService } from 'ngx-cookie-service';
-import { SplashScreenService } from './common/components/splashscreen/splashscreen.service';
-import { HelpComponent } from './pages/help/help.component';
 import { MatToolbarModule } from '@angular/material';
-import { SocketService } from '../core/services/socket.service';
-import { AlertComponent } from './common/components/dialogs/alert/alert.component';
-import { GameService } from './client/services/game.service';
-import { LoginClientGuard } from './authentication/services/login-client.guard';
-import { FooterComponent } from './common/components/footer/footer.component';
-import { StoreModule } from '@ngrx/store';
-import { baseReducer, clearState } from './client/store';
+import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { ClientEffects } from './client/store/effects/client.effects';
-import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
+import { StoreModule } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
+import { SharedModule } from 'src/app/shared/shared.module';
+
+import { SocketService } from '../core/services/socket.service';
+import { Auth2Module } from './authentication/auth.module';
+import { LoginClientGuard } from './authentication/services/login-client.guard';
+import { LoginClientService } from './authentication/services/login-client.service';
 import { DialogV2Module } from './client/common/dialog-v2/dialog-v2.module';
+import { DialogV2Service } from './client/common/dialog-v2/dialog-v2.service';
+import { DataParser } from './client/services/dataParser.service';
+import { GameService } from './client/services/game.service';
+import { LogService } from './client/services/log.service';
+import { baseReducer, clearState } from './client/store';
+import { ClientEffects } from './client/store/effects/client.effects';
+import { AlertComponent } from './common/components/dialogs/alert/alert.component';
+import { CookieLawComponent } from './common/components/dialogs/cookie-law/cookie-law.component';
+import { FooterComponent } from './common/components/footer/footer.component';
 import { NavBarModule } from './common/components/navigation/navbar/navbar.module';
 import { SidenavComponent } from './common/components/navigation/sidenav/sidenav.component';
-import { LogService } from './client/services/log.service';
-import { LoginClientService } from './authentication/services/login-client.service';
-import { DataParser } from './client/services/dataParser.service';
+import { SplashScreenService } from './common/components/splashscreen/splashscreen.service';
+import { MainComponent } from './main.component';
+import { Error403Module } from './pages/errors/403/error-403.module';
+import { HelpComponent } from './pages/help/help.component';
 import { AudioService } from './client/components/audio/audio.service';
 
 const routes: Routes = [
@@ -73,9 +74,9 @@ const routes: Routes = [
     CookieService,
     SplashScreenService,
     LogService,
-    AudioService,
     DataParser,
     GameService,
+    AudioService
   ]
 })
 

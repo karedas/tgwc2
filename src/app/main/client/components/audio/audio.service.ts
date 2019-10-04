@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { TGConfig } from '../../client-config';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
+
+import { TGConfig } from '../../client-config';
 import { TGAudio } from '../../models/audio.model';
+
 const audioPath = 'assets/audio/';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AudioService {
   tgConfig: TGConfig;
-
   _enable: boolean = false;
   playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
 
@@ -19,12 +19,19 @@ export class AudioService {
   // Atmospheric Channels
   atmospheric: HTMLAudioElement;
   atmosphericEcho: HTMLAudioElement;
-
   echoInterval: any;
 
   constructor(private _configService: ConfigService) {
     this.setDefaultChannel();
     this.setAtmosphericChannel();
+
+    this._configService.config
+      .subscribe((config: TGConfig) => {
+        this.enable = config.audio.enable;
+        this.soundVolume = config.audio.soundVolume / 100;
+        this.atmosphericVolume = config.audio.atmosphericVolume / 100;
+        this.musicVolume = config.audio.musicVolume / 100;
+      });
   }
 
   private setDefaultChannel() {

@@ -1,5 +1,5 @@
 import { initialState, ClientState } from '../state/client.state';
-import { inGameAction, updateUIAction, audioAction } from '../actions/client.action';
+import { inGameAction, updateUIAction } from '../actions/client.action';
 import { Action, on, createReducer } from '@ngrx/store';
 
 export const reducer = createReducer(
