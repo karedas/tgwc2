@@ -28,7 +28,7 @@ export class MapService extends MapSnowService {
   private mapShadowTile: HTMLImageElement;
 
 
-  public prepareCanvas(map: ElementRef): void {
+  public prepareCanvas(map: ElementRef) {
     this.layerMap = new Array(this._maxMapHeight);
     for (let y = 0; y < this._maxMapHeight; ++y) {
       this.layerMap[y] = new Array(this._maxMapWidth);
@@ -36,7 +36,7 @@ export class MapService extends MapSnowService {
 
     this.mapObject = map;
 
-    this.context = (this.mapObject.nativeElement as HTMLCanvasElement).getContext('2d');
+    this.context = ( this.mapObject.nativeElement as HTMLCanvasElement).getContext('2d');
     this.canvasWidth = this._maxMapWidth * this._mapTileWidth;
     this.canvasHeight = this._maxMapHeight * this._mapTileHeight;
 
@@ -48,6 +48,7 @@ export class MapService extends MapSnowService {
 
     this.mapTileImg = new Image();
     this.mapTileImg.src = images_path + 'tiles.png';
+    // this.mapTileImg
 
     this.mapShadowImg[2] = new Image();
     this.mapShadowImg[2].src = images_path + 'interface/shadow1.png';
@@ -66,7 +67,15 @@ export class MapService extends MapSnowService {
   }
 
   public updateMap(dataMap: any): void {
-    this.drawCanvasMap(dataMap);
+    // if big tiles image is not ready go to onload event and wait load before draw,
+    // instead just draw the canvasmap.
+    if(this.mapTileImg.complete) {
+      this.drawCanvasMap(dataMap);
+    } else {
+      this.mapTileImg.onload = () => {
+        this.drawCanvasMap(dataMap);
+      }
+    }
   }
 
   public drawCanvasMap(dataMap: any): void {

@@ -44,7 +44,6 @@ export class MapComponent implements OnDestroy, OnInit {
   ) {
 
     this.map$ = this.store.select(fromSelectors.getMap);
-
     this.mapSize = this.mapService.mapSizes;
     this._unsubscribeAll = new Subject();
   }
