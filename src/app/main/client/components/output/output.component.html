@@ -2,9 +2,10 @@
   <div class="tg-box" fxFlex="100" fxLayout="column">
     <div class="tg-output-main" #mainOutputArea>
       <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'"
-        (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
+        (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()"  #splitArea>
         <!--  ################ Main Output Area ################ -->
-        <as-split-area [size]="tgConfig.output.extraArea.size[0]" [ngClass]="{ 'in-pause': pauseScroll }"
+        <as-split-area [size]="tgConfig.output.extraArea.size[0]" 
+          [ngClass]="{ 'in-pause': pauseScroll }"
           style="position:relative">
           <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
             Autoscroll disattivato
@@ -46,6 +47,7 @@
                         SEGNAPOSTO
                       </div>
                     </ng-container>
+
                   </ng-container>
                 </ng-container>
               </div>

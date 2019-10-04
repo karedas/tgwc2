@@ -9,6 +9,11 @@ export class ScrollbarOutputService {
 
   private scrollTopBeforePause = 0;
 
+
+  resetScrollTopPause () {
+    this.scrollTopBeforePause = -1;
+  }
+
   scrollPanelToBottom(scrollbarRef: NgScrollbar, scrollEnd: ElementRef) {
     if (scrollbarRef) {
       setTimeout(() => {
@@ -37,7 +42,7 @@ export class ScrollbarOutputService {
     }
     if (scrollTop > this.scrollTopBeforePause) {
       this.scrollTopBeforePause = scrollTop;
-    } else if (scrollTop < this.scrollTopBeforePause - 100) {
+    } else if (scrollTop < this.scrollTopBeforePause - 150) {
       if (!this.pause$.value) {
         this.pause$.next(true);
       }

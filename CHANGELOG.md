@@ -10,11 +10,13 @@ semplicemente scrollando
 [*] [Miglioria]: Adesso se durante i viaggi e gli spostamenti guardarete qualcosa (un contenitore, un mob, un altro giocatore, un oggetto o una direzione), la vista si terrà aperta sul dettaglio senza tornare fastidiosamente sulla vista stanza ad ogni cambio di casella. Per annullare questa condizione vi basterà dare un nuovo comando "guarda". Occhio alle buche!
 [*] Il pannello "personaggio disconesso" ora mostra anche l'immagine del personaggio (se l'avete) e il suo nome.
 [*] Il click del mouse sul "guarda" oggetti/mob/personaggi dall'icona associata si azionerà adesso sul "rilascio" del click anziché al primo tocco, così da evitare una troppa tempestività nel comando.
+[*] [Fix] Dopo aver guardato un contenitore o qualcosa/qualcuno, il widget stanza smetteva di auto aggiornarsi, dovrebbe essere stato (speriamo) corretto.
 [*] [Fix] Sistemato un errore al logut che erroneamente manteneva i comandi di gioco nella barra di navigazione anzichè ritornare alla versione di default (pagina login).
 [*] [Fix]: La descrizione personaggio nella scheda personaggio (info) mostra adesso la modifica immediatamente dopo che questa è stata modificata. Prima si doveva chiudere e riaprire la scheda o digitare di nuovo il comando "info".
 [*] [Fix]: Pannello scorciatoie: Apportati diversi fix al layout dei pannelli sia a quello di modifica e aggiunta , che a quello della lista a icone per l'utilizzo rapido. E' stato corretto inoltre un errore nella lista [b]icone-scorciatoie [/b] per il quale dopo l'ultimo aggiornamento aveva smesso di aprirsi.
 [*] [Fix] L'icona "attiva/disattiva" si mostrava anche quando non era possibile usarli per le dimensioni ridotte del browser. L'errore è stato corretto.
 [*] [Fix] Il tooltip "Dimensione font" appare ora correttamente sopra il suo pulsante anziché essere sparato sull'estrema sinistra del client.
+[*] [Fix At Personam] Comando architetti "edi lista". Il giocatore Raziel (si solo lui :-p ) probabilmente non poteva usare il comando "edificio lista" per via di un errore nei dati che il server spediva. Corretto!
 [*] Rimossa la pagina delle novità e il link nella barra di navigazione. Questa ritornerà all'interno del nuovo sito.
 [*] Ottimizzate tutte le finestre (dialog e modal) del gioco e corretti numerosi bug nel codice.
 [/list]
