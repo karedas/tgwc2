@@ -88,37 +88,38 @@ export class AudioService {
         } else {
           this.setSound(audio.track.replace(wav, mp3));
         }
-      } else if (audio.channel === 'atmospheric' && audio.track) {
+      } else if (audio.channel === 'atmospheric') {
+        if(audio.track === null) {
+          this.stopAtmospheric();
+          return;
+        }
         if (audio.track === this.atmospheric.src) {
-          console.log('return same track')
           return;
         }
         if (!audio.track) {
-          console.log('no track provided')
           clearInterval(this.echoInterval);
           return;
         }
-
         this.setAtmospheric(audio.track);
       }
     }
   }
 
-  public getMusic(): HTMLAudioElement {
+  private getMusic(): HTMLAudioElement {
     return this.music;
   }
 
-  public setMusic(src: string): void {
+  private setMusic(src: string): void {
     this.music.src = audioPath + src;
     this.music.load();
     this.playMusic();
   }
 
-  public playMusic(): void {
+  private playMusic(): void {
     this.music.play();
   }
 
-  public pauseAudio(): void {
+  private pauseAudio(): void {
     this.music.pause();
     this.music.currentTime = 0;
     this.sound.pause();
@@ -129,35 +130,58 @@ export class AudioService {
     return this.sound;
   }
 
-  public setSound(src: string): void {
+  private setSound(src: string): void {
     this.sound.src = audioPath + src;
     this.sound.load();
     this.playSound();
   }
 
-  public playSound(): void {
+  private playSound(): void {
     this.sound.play();
   }
 
-  public getAtmospheric(): HTMLAudioElement {
-    return this.atmospheric;
+
+  private stopAtmospheric() {
+    console.log('stop');
+    this.atmospheric.pause();
+    this.atmosphericEcho.pause();
+    this.fadeOutVolume();
   }
 
-  public setAtmospheric(src: string): void {
+  private setAtmospheric(src: string): void {
     this.atmospheric.src = audioPath + 'atmospherics/' + src;
     this.atmosphericEcho.src = this.atmospheric.src;
     this.atmospheric.load();
     this.playAtmospheric();
   }
 
-  public playAtmospheric(): void {
+  private playAtmospheric(): void {
     console.log('TGLOG: Atmospheric Music channel starts');
     this.atmospheric.play();
     setTimeout(() => {
-      console.log('TGLOG: Atmospheric Echo Added');
       console.log(this.atmosphericEcho.src);
       this.atmosphericEcho.play();
     }, 25000);
+  }
+
+
+  private fadeOutVolume() {
+    if (this.atmospheric.volume !== 0) {
+      console.log(this.atmospheric.volume);
+      setTimeout(() => {
+        this.atmospheric.volume -= 0.1;
+        this.atmosphericEcho.volume -= 0.1;
+      }, 300);
+
+     this.fadeOutVolume();
+    }
+
+    else {
+      this.atmospheric.currentTime = 0;
+      this.atmosphericEcho.currentTime = 0;
+      this.atmospheric.volume = 1; //need dynamic config
+      this.atmosphericEcho.volume = 1; //need dynamic config
+    }
   }
 
   public toggleAudio(): void {

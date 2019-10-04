@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { getSky } from 'src/app/main/client/store/selectors';
 import { DataState } from 'src/app/main/client/store/state/data.state';
+import { audioAction } from '../../../store/actions/data.action';
 
 @Component({
   selector: 'tg-sky',
@@ -24,7 +25,26 @@ export class SkyComponent implements OnDestroy {
       )
       .subscribe(sky => {
         this.skyValue = sky;
+        console.log(this.skyValue);
+        this.addAtmosphericSound(this.skyValue);
       });
+  }
+
+  private addAtmosphericSound(sky) {
+    switch(sky) {
+      case '1':
+      case 'd':
+      case 'e':
+      case 'f':
+      case 'p':
+      case 'r':
+      case 's':
+          this.store.dispatch(audioAction({payload: {channel: 'atmospheric', track: 'rain-and-thunder-loop.mp3' }}));
+        break;
+      default:
+          this.store.dispatch(audioAction({payload: {channel: 'atmospheric', track: null }}));
+        break;;
+    }
   }
 
   ngOnDestroy() {

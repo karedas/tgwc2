@@ -88,7 +88,6 @@ export class InputComponent implements OnInit, OnDestroy {
 
   onEnter(event: any, val: string) {
     event.target.value = '';
-    console.log(val);
     this.sendCmd(val);
   }
 
