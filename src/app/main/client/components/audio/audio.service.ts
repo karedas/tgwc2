@@ -29,7 +29,7 @@ export class AudioService {
       .subscribe((config: TGConfig) => {
         this.enable = config.audio.enable;
         this.soundVolume = config.audio.soundVolume / 100;
-        this.atmosphericVolume = config.audio.atmosphericVolume / 100;
+        this.atmosphericVolume = 70 / 100;
         this.musicVolume = config.audio.musicVolume / 100;
       });
   }
@@ -150,7 +150,9 @@ export class AudioService {
     this.atmospheric.src = audioPath + 'atmospherics/' + src;
     this.atmosphericEcho.src = this.atmospheric.src;
     this.atmospheric.load();
-    this.playAtmospheric();
+    this.atmospheric.onloadstart = () => {
+      this.playAtmospheric();
+    }
   }
 
   private playAtmospheric(): void {
