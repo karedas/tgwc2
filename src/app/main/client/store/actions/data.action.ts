@@ -7,11 +7,13 @@ import { IBook } from 'src/app/main/client/models/data/book.model';
 import { IDateTime } from 'src/app/main/client/models/data/dateTime.model';
 import { IGenericPage } from 'src/app/main/client/models/data/genericpage.model';
 import { IRegion } from 'src/app/main/client/models/data/region.model';
+import { TGAudio } from '../../models/audio.model';
 
 
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
     LOGGED = '[Data] Player is Logged In',
+    AUDIO = '[Data] Audio',
     HERODATA = '[Data] Update Hero Data',
     AUTOUPDATESTATUSHERO = '[Data] Auto Update Hero Status',
     ROOM = '[Data] Room Update',
@@ -34,13 +36,14 @@ export enum DataEvenType {
     SHOWCOMMANDS = '[Data] Show Commands List',
     SHOWCHARACTERSHEET = '[Data] Show Character Sheet',
     SHOWSTATUSHERO = '[Data] Show Status Hero Inline',
-    REFRESH = '[Client] Refresh server command',
-    DIRECTION = '[Client] Character Direction',
-    SELECTABLEGENERIC = '[Client] Selectable Generic'
+    REFRESH = '[Data] Refresh server command',
+    DIRECTION = '[Data] Character Direction',
+    SELECTABLEGENERIC = '[Data] Selectable Generic'
 }
 
 export const mapAction = createAction(DataEvenType.MAP, props<{ map: any }>());
 export const incomingData = createAction(DataEvenType.IN, props<{ payload: { message: string } }>());
+export const audioAction = createAction(DataEvenType.AUDIO, props<{payload: TGAudio}>());
 export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO, props<{ payload: any }>());
 export const doorsAction = createAction(DataEvenType.DOORS, props<{ payload: any }>());
 export const roomAction = createAction(DataEvenType.ROOM, props<{ payload: any }>());

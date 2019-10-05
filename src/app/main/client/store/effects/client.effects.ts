@@ -1,14 +1,12 @@
-import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { ClientEventType, inGameAction } from '../actions/client.action';
-import { Store } from '@ngrx/store';
-import { tap, mapTo } from 'rxjs/operators';
-import { AudioService } from 'src/app/main/client/components/audio/audio.service';
 import { Router } from '@angular/router';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, mapTo, tap } from 'rxjs/operators';
+import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
-import { ClientState } from '../state/client.state';
 
+import { DialogV2Service } from '../../common/dialog-v2/dialog-v2.service';
+import { ClientEventType, inGameAction } from '../actions/client.action';
 
 export interface PayloadAction {
   type: string;
@@ -17,16 +15,12 @@ export interface PayloadAction {
 
 @Injectable()
 export class ClientEffects {
-
-
   onDisconnect$ = createEffect(() =>
     this.actions$.pipe(
       ofType<PayloadAction>(ClientEventType.DISCONNECT),
       tap(() => {
         const config = JSON.parse(localStorage.getItem('config'));
         if (this.router.url === '/webclient') {
-          // Stop Audio
-          this.audioService.pauseAudio();
           // Open the Smart Login Box
           this.dialogV2Service.openSmartLogin();
           // If Log save is true: open Log Service Dialog
@@ -34,30 +28,32 @@ export class ClientEffects {
             this.dialogV2Service.openLog();
           }
           this.game.resetUI();
+          this.loginService.isInGame = false;
         }
       }),
-      mapTo( inGameAction({payload: false}) )
-    ),
+      mapTo(inGameAction({ payload: false }))
+    )
   );
-    
 
-  inGame$ = createEffect(() => 
-  this.actions$.pipe(
-    ofType<PayloadAction>(ClientEventType.INGAME),
-    tap((res) => {
-      if(res.payload === true) {
-        this.game.processCommands(' ', false);
-      }
-    })
-  ),{ dispatch: false }
-)
+  inGame$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<PayloadAction>(ClientEventType.INGAME),
+        map(res => res.payload),
+        tap(ingame => {
+          if (ingame === true) {
+            this.game.processCommands(' ', false);
+          }
+        })
+      ),
+    { dispatch: false }
+  );
 
   constructor(
     private game: GameService,
     private actions$: Actions,
-    private audioService: AudioService,
     private dialogV2Service: DialogV2Service,
     private router: Router,
-    private store: Store<ClientState>
-  ) { }
+    private loginService: LoginClientService
+  ) {}
 }

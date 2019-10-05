@@ -1,5 +1,5 @@
 import { initialState, ClientState } from '../state/client.state';
-import { inGameAction, updateUIAction, audioAction } from '../actions/client.action';
+import { inGameAction, updateUIAction } from '../actions/client.action';
 import { Action, on, createReducer } from '@ngrx/store';
 
 export const reducer = createReducer(
@@ -8,7 +8,6 @@ export const reducer = createReducer(
   on(updateUIAction, (state, { payload }) => {
     return Object.assign({}, state, payload);
   }),
-  on(audioAction, (state, { payload }) => ({ ...state, audio: payload }))
 );
 
 export function clientReducer(state: ClientState | undefined, action: Action) {
