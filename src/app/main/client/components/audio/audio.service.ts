@@ -26,13 +26,12 @@ export class AudioService {
     this.setDefaultChannel();
     this.setAtmosphericChannel();
 
-    this._configService.config
-      .subscribe((config: TGConfig) => {
-        this.enable = config.audio.enable;
-        this.soundVolume = config.audio.soundVolume / 100;
-        this.atmosphericVolume = 70 / 100;
-        this.musicVolume = config.audio.musicVolume / 100;
-      });
+    this._configService.config.subscribe((config: TGConfig) => {
+      this.enable = config.audio.enable;
+      this.soundVolume = config.audio.soundVolume / 100;
+      this.atmosphericVolume = 70 / 100;
+      this.musicVolume = config.audio.musicVolume / 100;
+    });
   }
 
   private setDefaultChannel() {
@@ -77,9 +76,9 @@ export class AudioService {
       const mp3 = '.mp3';
       const mid = '.mid';
       const wav = '.wav';
-      
+
       /**
-       * Delivery to default Channel: Music + Sound Channel 
+       * Delivery to default Channel: Music + Sound Channel
        * or to Atmospheric Channel */
       if (audio.channel === 'music') {
         if (audio.track.indexOf(mp3, audio.track.length - mp3.length) !== -1) {
@@ -90,11 +89,10 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
-
         if (audio.track === this.atmospheric.src) {
           return;
-        } 
-        if(!audio.track && !this.atmospheric.paused) {
+        }
+        if (!audio.track && !this.atmospheric.paused) {
           this.fadeOutVolume();
           return;
         }
@@ -148,26 +146,23 @@ export class AudioService {
     this.atmosphericEcho.src = this.atmospheric.src;
     this.atmospheric.load();
     this.atmospheric.onloadstart = () => {
-      
       this.atmospheric.play();
       this.echoInterval = setTimeout(() => {
         this.atmosphericEcho.play();
       }, 25000);
-      
-    }
+    };
   }
 
   private fadeOutVolume() {
     let vol = this.atmospheric.volume * 10;
     if (this.atmospheric.volume > 0.1) {
       this.fadeInterval = setTimeout(() => {
-        vol =  ( vol - 1 ) / 10;
+        vol = (vol - 1) / 10;
         this.atmospheric.volume = vol;
         this.atmosphericEcho.volume = vol;
         this.fadeOutVolume();
       }, 1000);
-    }
-    else {
+    } else {
       this.resetAtmospheric();
     }
   }
