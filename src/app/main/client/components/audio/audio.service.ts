@@ -20,6 +20,7 @@ export class AudioService {
   atmospheric: HTMLAudioElement;
   atmosphericEcho: HTMLAudioElement;
   echoInterval: any;
+  fadeInterval: any;
 
   constructor(private _configService: ConfigService) {
     this.setDefaultChannel();
@@ -72,11 +73,11 @@ export class AudioService {
   }
 
   setAudio(audio: TGAudio): void {
-    if (this._enable) {
+    if (this._enable && audio.channel) {
       const mp3 = '.mp3';
       const mid = '.mid';
       const wav = '.wav';
-
+      
       /**
        * Delivery to default Channel: Music + Sound Channel 
        * or to Atmospheric Channel */
@@ -89,19 +90,20 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
-        if(!audio.track && !this.atmospheric.paused) {
-          this.stopAtmospheric();
-          clearInterval(this.echoInterval);
-          return;
-        }
+
         if (audio.track === this.atmospheric.src) {
+          return;
+        } 
+        if(!audio.track && !this.atmospheric.paused) {
+          this.fadeOutVolume();
           return;
         }
         if (!audio.track) {
-          clearInterval(this.echoInterval);
           return;
         }
-        this.setAtmospheric(audio.track);
+
+        this.resetAtmospheric();
+        this.playAtmospheric(audio.track);
       }
     }
   }
@@ -141,47 +143,44 @@ export class AudioService {
     this.sound.play();
   }
 
-
-  private stopAtmospheric() {
-    this.fadeOutVolume();
-  }
-
-  private setAtmospheric(src: string): void {
+  private playAtmospheric(src: string): void {
     this.atmospheric.src = audioPath + 'atmospherics/' + src;
     this.atmosphericEcho.src = this.atmospheric.src;
     this.atmospheric.load();
     this.atmospheric.onloadstart = () => {
-      this.playAtmospheric();
+      
+      this.atmospheric.play();
+      this.echoInterval = setTimeout(() => {
+        this.atmosphericEcho.play();
+      }, 25000);
+      
     }
   }
-
-  private playAtmospheric(): void {
-    this.atmospheric.play();
-    this.echoInterval = setTimeout(() => {
-      this.atmosphericEcho.play();
-    }, 25000);
-  }
-
 
   private fadeOutVolume() {
     let vol = this.atmospheric.volume * 10;
     if (this.atmospheric.volume > 0.1) {
-      setTimeout(() => {
+      this.fadeInterval = setTimeout(() => {
         vol =  ( vol - 1 ) / 10;
         this.atmospheric.volume = vol;
         this.atmosphericEcho.volume = vol;
         this.fadeOutVolume();
       }, 1000);
     }
-
     else {
-      this.atmospheric.currentTime = 0;
-      this.atmosphericEcho.currentTime = 0;
-      this.atmospheric.volume = 1; //need dynamic config
-      this.atmosphericEcho.volume = 1; //need dynamic config
-      this.atmospheric.pause();
-      this.atmosphericEcho.pause();
+      this.resetAtmospheric();
     }
+  }
+
+  private resetAtmospheric() {
+    clearInterval(this.echoInterval);
+    clearInterval(this.fadeInterval);
+    this.atmospheric.currentTime = 0;
+    this.atmosphericEcho.currentTime = 0;
+    this.atmospheric.volume = 1; //need dynamic config
+    this.atmosphericEcho.volume = 1; //need dynamic config
+    this.atmospheric.pause();
+    this.atmosphericEcho.pause();
   }
 
   public toggleAudio(): void {

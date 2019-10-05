@@ -25,7 +25,6 @@ export class SkyComponent implements OnDestroy {
       )
       .subscribe(sky => {
         this.skyValue = sky;
-        console.log(this.skyValue);
         this.addAtmosphericSound(this.skyValue);
       });
   }
