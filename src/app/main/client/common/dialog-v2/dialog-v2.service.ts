@@ -13,6 +13,7 @@ import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
 import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
 import { BaseWindowComponent } from '../../components/windows/base-window/base-window.component';
+import { ITGDialog } from '../../models/dialog.model';
 
 @Injectable({
   providedIn: 'root'
@@ -108,7 +109,7 @@ export class DialogV2Service {
    * DIALOGS LIST
    */
 
-  openBaseWindow(data: any, id?: string, disableClose = false): MatDialogRef<BaseWindowComponent, MatDialogConfig> {
+  openBaseWindow(data: ITGDialog, id?: string, disableClose = false): MatDialogRef<BaseWindowComponent, MatDialogConfig> {
     const dialogID = id ? id : 'base';
     let dialogRef = this.dialog.getDialogById(dialogID);
     if (!dialogRef) {
