@@ -238,7 +238,6 @@ export class GameService {
 
   /* Ordfer Objects Persons or Objects list */
   public orderObjectsList(items: any, type?: string): any {
-    console.log(items);
     if (items) {
       const cont = cloneDeep(items);
       if (cont.list) {
