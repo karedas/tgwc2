@@ -1,21 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { DataEvenType } from '../actions/data.action';
-import { switchMap, tap, map, delay } from 'rxjs/operators';
+import { DataEvenType, heroAction } from '../actions/data.action';
+import { switchMap, tap, map, filter } from 'rxjs/operators';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
 import * as DataActions from '../actions/data.action';
 import { InputService } from '../../components/input/input.service';
 import { ConfigService } from 'src/app/services/config.service';
+import { TGAudio } from '../../models/audio.model';
+import { AudioService } from '../../components/audio/audio.service';
 
 export interface PayloadActionData {
   type: string;
   payload: any;
-  dialog?: any;
 }
 
 @Injectable()
 export class DataEffects {
+
+  audio$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<PayloadActionData>(DataEvenType.AUDIO),
+        map(action => action.payload),
+        filter(state => !!state ),
+        tap(( audio: TGAudio ) => {
+          this.audioService.setAudio({channel: audio.channel,  track: audio.track});
+        })
+      ),
+    { dispatch: false }
+  );
+
 
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
@@ -167,6 +182,7 @@ export class DataEffects {
     private inputService: InputService,
     private gameService: GameService,
     private dialogV2Service: DialogV2Service,
+    private audioService: AudioService,
     private configService: ConfigService
   ) { }
 }
