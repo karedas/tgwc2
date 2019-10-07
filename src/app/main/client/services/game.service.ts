@@ -238,6 +238,7 @@ export class GameService {
 
   /* Ordfer Objects Persons or Objects list */
   public orderObjectsList(items: any, type?: string): any {
+    console.log(items);
     if (items) {
       const cont = cloneDeep(items);
       if (cont.list) {
@@ -260,9 +261,15 @@ export class GameService {
               const eq_pos_b = Object.keys(b.eq) ? b.eq[1] : 0;
               return (eq_pos_b as number) - (eq_pos_a as number);
             });
+
             concatList.push(eqData[0]);
+            // add item in same equip position
+            if(eqData[1]) {
+              concatList.push(eqData[1]);
+            }
           }
         });
+
         return concatList;
       }
     }
