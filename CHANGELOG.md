@@ -3,8 +3,7 @@
 [list]
 [*] [Novità]: Adesso potrete mettere in pausa la finestra di output principale in maniera piu' immediata. Posizionate il mouse al di sopra della finestrra e scrollate
 il mouse verso l'alto così da attivare auromaticamente la pausa. Viceversa, scrollando verso il basso (all'ultimo rigo della finestra) la pausa si disattiverà. 
-Il tasto "metti in pausa" rimane e funziona sia per notifica che per attivare la pausa sul click del medesimo e senza quindi cambiare il comportamento fino ad ora esistito.
-E' stato rimosso però il "segnalibro pausa" in quanto creava dei "glitch" quando la pausa veniva disattivata.
+Il tasto "metti in pausa" rimane e funziona sia per notifica che per attivare la pausa sul click del medesimo e senza quindi cambiare il comportamento fino ad ora esistito. E' stato rimosso però il "segnalibro pausa" in quanto creava dei "glitch" quando la pausa veniva disattivata.
 [*] [Novità]: Adesso le frecce della tastiera "sopra" e "sotto" che richiamano i precedenti comandi funzioneranno anche se non avete selezionata la barra dei comandi. Ovunque avrete il mouse, eccetto che sulla mappa nel caso usiate le frecce per spostare il personaggio, richiamerà le funzioni di cui sopra.
 [*] [Migliogira] Adesso potete selezionare e copiare i testi presenti nel client con le combinazioni di tasti classici (Ctrl + C per copiare e Ctrl + V per incollare su Windows, Cmd ⌘ + C per copiare e Cmd ⌘ + V per incollare sui sistemi Macintosh).
 [*] [Miglioria]: Adesso se durante i viaggi e gli spostamenti guardarete qualcosa (un contenitore, un mob, un altro giocatore, un oggetto o una direzione), la vista si terrà aperta sul dettaglio senza tornare fastidiosamente sulla vista stanza ad ogni cambio di casella. Per annullare questa condizione vi basterà dare un nuovo comando "guarda". Occhio alle buche!
@@ -19,6 +18,7 @@ E' stato rimosso però il "segnalibro pausa" in quanto creava dei "glitch" quand
 [*] [Fix] L'icona "attiva/disattiva" widgets nella barra comandi si mostrava anche quando non era possibile usarli dato che venivano nascosti per le dimensioni ridotte del browser. L'errore è stato corretto.
 [*] [Fix] Il tooltip "Dimensione font" appare ora correttamente sopra il suo pulsante anziché essere sparato sull'estremo margine sinistro del client.
 [*] [Fix At Personam] Comando architetti "edi lista". Il giocatore Raziel (si solo lui :-p ) probabilmente non poteva usare il comando "edificio lista" per via di un errore nei dati che il server spediva. Corretto!
+[*] Aggiunto link alle ultime novità nel login.
 [*] Cambiato l'orientamento dell'icona del widget "equip e inventario" sui due stati "aperto / chiuso".
 [*] Rimossa la pagina delle novità e il link nella barra di navigazione. Questa ritornerà all'interno del nuovo sito.
 [*] Ottimizzate tutte le finestre (dialog e modal) del gioco e corretti numerosi bug nel codice.
