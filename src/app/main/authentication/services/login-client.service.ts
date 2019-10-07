@@ -74,7 +74,7 @@ export class LoginClientService {
 
   private setHandleLoginData() {
     this.resetHandler();
-    this.socketService.on(socketEvent.LOGIN,
+    this.socketService.on(socketEvent.AUTH,
       (data: any) => this.handleLoginData(data));
     this.socketService.emit(socketEvent.LOGINREQUEST);
   }
@@ -86,7 +86,7 @@ export class LoginClientService {
   }
 
   private resetHandler() {
-    this.socketService.removeListener(socketEvent.LOGIN);
+    this.socketService.removeListener(socketEvent.AUTH);
     this.socketService.removeListener(socketEvent.DATA);
   }
 
@@ -128,8 +128,11 @@ export class LoginClientService {
   }
 
   private onEnterLogin() {
-    const credentials = `login:${this.name},${this.secret}\n`;
-    this.socketService.emit(socketEvent.DATA, credentials);
+    const credentials = {
+      user: this.name, 
+      pwd: this.secret
+    }
+    this.socketService.emit(socketEvent.LOGIN, credentials);
   }
 
   private onLoginOk(data: any) {
@@ -138,7 +141,7 @@ export class LoginClientService {
   }
 
   private completeHandShake(data) {
-    this.socketService.off(socketEvent.LOGIN);
+    this.socketService.off(socketEvent.AUTH);
     this.isLoggedInSubject.next(true);
     this.gameService.start(data);
 
