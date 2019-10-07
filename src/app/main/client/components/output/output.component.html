@@ -9,7 +9,7 @@
           style="position:relative">
           <div class="tg-error alert-pause mat-elevation-z10" *ngIf="pauseScroll">
             <span class="tg-lt-white">&#9646; Autoscroll disattivato </span> -  
-            <span class="resume-btn"><u>Riprendi</u></span>
+            <span class="resume-btn" (click)="resumeScroll()"><u>Riprendi</u></span>
           </div>
 
           <tg-status></tg-status>

@@ -196,8 +196,9 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.outputService.disablePause();
   }
 
-  togglePause() {
-    this.outputService.toggleAutoScroll();
+  resumeScroll() {
+    this.outputService.scrollPanelToBottom(this.scrollBar, this.scrollerEnd);
+    
   }
 
   onDragStart() {
