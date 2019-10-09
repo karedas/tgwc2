@@ -30,7 +30,6 @@ tg-navbar {
 
     span {
       font-size: 11px;
-      text-transform: uppercase;
       color: #e8e3d2;
 
       i {
@@ -115,7 +114,6 @@ tg-navbar {
   .tg-mainnav-item a,
   .tg-mainnav-item .mat-button {
     text-decoration: none;
-    text-transform: uppercase;
     color: #bdb3a3;
     transition: text-shadow .2s linear;
     font-size: 1em;
@@ -211,7 +209,6 @@ tg-navbar {
 .tg-game-time {
   display: inline-block;
   font-size: 11px;
-  text-transform: uppercase;
   margin: auto auto auto 0;
 
   span {
