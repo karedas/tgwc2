@@ -11,7 +11,6 @@ import { TGConfig } from '../client-config';
 import { ConfigService } from '../../../services/config.service';
 import { map } from 'rxjs/operators';
 import { Map } from '../models/data/map.model';
-import { GameService } from './game.service';
 
 @Injectable()
 export class DataParser {
@@ -471,7 +470,7 @@ export class DataParser {
     return '';
   }
 
-  private isGod(): string {
+  private isGod(d): string {
     this.dispatcher.isgod = true;
     return '';
   }
