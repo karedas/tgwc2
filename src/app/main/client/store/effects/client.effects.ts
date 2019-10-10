@@ -25,7 +25,6 @@ export class ClientEffects {
         map(action => action.payload),
         filter(state => !!state ),
         tap(( audio: TGAudio ) => {
-          console.log(audio);
           this.audioService.setAudio({channel: audio.channel,  track: audio.track});
         })
       ),

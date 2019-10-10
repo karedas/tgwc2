@@ -18,6 +18,7 @@ export class AudioService {
   sound: HTMLAudioElement;
   music: HTMLAudioElement;
   // Atmospheric Channels
+  atmosphericTrack: string;
   atmospheric: HTMLAudioElement;
   atmosphericEcho: HTMLAudioElement;
   echoInterval: any;
@@ -89,8 +90,7 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
-        console.log('audio channel');
-        if (audio.track === this.atmospheric.src) {
+        if (audio.track === this.atmosphericTrack) {
           return;
         }
         if (!audio.track && !this.atmospheric.paused) {
@@ -107,35 +107,22 @@ export class AudioService {
     }
   }
 
-  // setAtmospheric(terrain, phenom ) {
-  //   // Set track by value comes from map type:
-  //   // Terrain = Terrain type
-  //   // phenom = rain, fog, snow etc
-  //   console.log(terrain, phenom);
-  // }
-
   setAtmospheric(map: IMap): string | null {
     // Terrain Check
-    console.log(map.data[0][24]);
-    console.log(map.f);
-    console.log(map.s);
-    console.log(map.r);
     if (map.r) {
-      console.log('TGLOG: Start Rain Atmospheric Audio');
-      return;
+      return 'rain-and-thunder-loop.mp3';
     }
 
     // Audio Terrain case
-
-    switch (map.data[0][24]) {
-      case 59:
-        console.log('TGLOG: Start Test Atmospheric Audio');
-        // Todo: Set in a imported constant (?);
-        return 'rain-and-thunder-loop.mp3';
+    switch (map.data[0][40]) {
+      case 31: // scogliera
+      case 34: // mare
+      case 61: // nave
+      case 16: // spiaggia
+      case 35: // oceano
+      return 'sea-beach.mp3';
       default:
-        console.log('TGLOG: Stop Atmopsheric Audio');
         return null;
-        break;
 
   
     }
@@ -178,7 +165,8 @@ export class AudioService {
   }
 
   private playAtmospheric(src: string): void {
-    this.atmospheric.src = audioPath + 'atmospherics/' + src;
+    this.atmosphericTrack = src;
+    this.atmospheric.src = audioPath + 'atmospherics/' + this.atmosphericTrack;
     this.atmosphericEcho.src = this.atmospheric.src;
     this.atmospheric.load();
     this.atmospheric.onloadstart = () => {
@@ -206,6 +194,7 @@ export class AudioService {
   private resetAtmospheric() {
     clearInterval(this.echoInterval);
     clearInterval(this.fadeInterval);
+    this.atmosphericTrack = null;
     this.atmospheric.currentTime = 0;
     this.atmosphericEcho.currentTime = 0;
     this.atmospheric.volume = 1; //need dynamic config

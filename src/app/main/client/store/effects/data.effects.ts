@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { DataEvenType, heroAction } from '../actions/data.action';
-import { switchMap, tap, map, filter, combineLatest } from 'rxjs/operators';
+import { switchMap, tap, map, filter, combineLatest, mapTo } from 'rxjs/operators';
 import { DialogV2Service } from 'src/app/main/client/common/dialog-v2/dialog-v2.service';
 import { GameService } from '../../services/game.service';
 import * as DataActions from '../actions/data.action';
@@ -9,6 +9,7 @@ import { InputService } from '../../components/input/input.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGAudio } from '../../models/audio.model';
 import { AudioService } from '../../components/audio/audio.service';
+import { audioAction } from '../actions/client.action';
 
 export interface PayloadActionData {
   type: string;
@@ -22,12 +23,12 @@ export class DataEffects {
     () => 
       this.actions$.pipe(
         ofType<any>(DataEvenType.MAP),
-        map(action => action.map ),
-        tap((map) => {
-          this.audioService.setAtmospheric(map);
-        })
+        map(action => {
+           const track = this.audioService.setAtmospheric(action.map);
+           return audioAction({payload: {channel: 'atmospheric', track: track }});
+        }),
       ),
-      { dispatch: false }
+      
   )
 
   openEditor$ = createEffect(() =>
