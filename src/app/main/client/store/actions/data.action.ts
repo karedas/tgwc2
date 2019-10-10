@@ -13,7 +13,6 @@ import { TGAudio } from '../../models/audio.model';
 export enum DataEvenType {
     IN = '[Data] Incoming Data',
     LOGGED = '[Data] Player is Logged In',
-    AUDIO = '[Data] Audio',
     HERODATA = '[Data] Update Hero Data',
     AUTOUPDATESTATUSHERO = '[Data] Auto Update Hero Status',
     ROOM = '[Data] Room Update',
@@ -43,7 +42,6 @@ export enum DataEvenType {
 
 export const mapAction = createAction(DataEvenType.MAP, props<{ map: any }>());
 export const incomingData = createAction(DataEvenType.IN, props<{ payload: { message: string } }>());
-export const audioAction = createAction(DataEvenType.AUDIO, props<{payload: TGAudio}>());
 export const updateStatusHero = createAction(DataEvenType.AUTOUPDATESTATUSHERO, props<{ payload: any }>());
 export const doorsAction = createAction(DataEvenType.DOORS, props<{ payload: any }>());
 export const roomAction = createAction(DataEvenType.ROOM, props<{ payload: any }>());

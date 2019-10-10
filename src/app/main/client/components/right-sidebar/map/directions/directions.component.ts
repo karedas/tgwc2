@@ -60,9 +60,9 @@ export class DirectionsComponent implements OnInit, OnDestroy {
       let cmd: string;
 
       // Go to Dir or open The Door with Left Click
-      if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '3') {
+      if (!this.invisibilityLevel  && this.dirStatus[dir] === '3') {
         cmd = `apri ${this.dirNames[dir]}`;
-      } else if (this.invisibilityLevel === 0 && this.dirStatus[dir] === '4') {
+      } else if (!this.invisibilityLevel && this.dirStatus[dir] === '4') {
         cmd = 'sblocca ' + this.dirNames[dir];
       } else {
         cmd = this.dirNames[dir];
