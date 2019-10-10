@@ -17,6 +17,7 @@ export interface PayloadActionData {
 
 @Injectable()
 export class DataEffects {
+  
   atmospheric$ = createEffect(
     () => 
       this.actions$.pipe(

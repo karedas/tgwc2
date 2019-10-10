@@ -89,6 +89,7 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
+        console.log('audio channel');
         if (audio.track === this.atmospheric.src) {
           return;
         }
@@ -113,7 +114,7 @@ export class AudioService {
   //   console.log(terrain, phenom);
   // }
 
-  setAtmospheric(map: IMap) {
+  setAtmospheric(map: IMap): string | null {
     // Terrain Check
     console.log(map.data[0][24]);
     console.log(map.f);
@@ -125,22 +126,18 @@ export class AudioService {
     }
 
     // Audio Terrain case
+
     switch (map.data[0][24]) {
       case 59:
         console.log('TGLOG: Start Test Atmospheric Audio');
-        this.store.dispatch(
-          audioAction({
-            payload: {
-              channel: 'atmospheric',
-              track: 'rain-and-thunder-loop.mp3'
-            }
-          })
-        );
-        break;
+        // Todo: Set in a imported constant (?);
+        return 'rain-and-thunder-loop.mp3';
       default:
         console.log('TGLOG: Stop Atmopsheric Audio');
-        this.store.dispatch(audioAction({ payload: { channel: 'atmospheric', track: null } }));
+        return null;
         break;
+
+  
     }
     // Set track by value comes from map type:
   }
