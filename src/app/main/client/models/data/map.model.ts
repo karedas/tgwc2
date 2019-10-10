@@ -3,8 +3,11 @@ export interface TileMap {
   1?: (number)[] | null;
 }
 
-export interface Map {
+export interface IMap {
   d: number;
   l: number;
   data: TileMap;
+  s?: any;
+  f?: any;
+  r?: any;
 }

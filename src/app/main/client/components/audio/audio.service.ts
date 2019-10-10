@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { ConfigService } from 'src/app/services/config.service';
 
 import { TGConfig } from '../../client-config';
 import { TGAudio } from '../../models/audio.model';
+import { IMap } from '../../models/data/map.model';
+import { Store } from '@ngrx/store';
+import { TGState } from '../../store';
+import { audioAction } from '../../store/actions/client.action';
 
 const audioPath = 'assets/audio/';
 
@@ -12,34 +14,34 @@ const audioPath = 'assets/audio/';
 export class AudioService {
   tgConfig: TGConfig;
   _enable: boolean = false;
-  playerStatus: BehaviorSubject<string> = new BehaviorSubject<string>('paused');
 
   sound: HTMLAudioElement;
   music: HTMLAudioElement;
   // Atmospheric Channels
+  atmosphericTrack: string;
   atmospheric: HTMLAudioElement;
   atmosphericEcho: HTMLAudioElement;
   echoInterval: any;
   fadeInterval: any;
 
-  constructor(private _configService: ConfigService) {
-    this.setDefaultChannel();
-    this.setAtmosphericChannel();
+  constructor(private _configService: ConfigService, private store: Store<TGState>) {
+    this.createDefaultChannel();
+    this.createAtmosphericChannel();
 
     this._configService.config.subscribe((config: TGConfig) => {
       this.enable = config.audio.enable;
       this.soundVolume = config.audio.soundVolume / 100;
-      this.atmosphericVolume = 70 / 100;
+      this.atmosphericVolume = config.audio.musicVolume / 100;
       this.musicVolume = config.audio.musicVolume / 100;
     });
   }
 
-  private setDefaultChannel() {
+  private createDefaultChannel() {
     this.sound = new Audio();
     this.music = new Audio();
   }
 
-  private setAtmosphericChannel() {
+  private createAtmosphericChannel() {
     this.atmospheric = new Audio();
     this.atmospheric.loop = true;
     // echo
@@ -47,12 +49,12 @@ export class AudioService {
     this.atmosphericEcho.loop = true;
   }
 
-  set enable(value: boolean) {
-    this._enable = value;
-    this.sound.muted = !this._enable;
-    this.music.muted = !this._enable;
-    this.atmospheric.muted = !this._enable;
-    this.atmosphericEcho.muted = !this._enable;
+  set enable(enabled: boolean) {
+    this._enable = enabled;
+    this.sound.muted = !enabled;
+    this.music.muted = !enabled;
+    this.atmospheric.muted = !enabled;
+    this.atmosphericEcho.muted = !enabled;
   }
 
   get enable(): boolean {
@@ -72,11 +74,10 @@ export class AudioService {
   }
 
   setAudio(audio: TGAudio): void {
-    if (this._enable && audio.channel) {
+    if (this.enable && audio.channel) {
       const mp3 = '.mp3';
       const mid = '.mid';
       const wav = '.wav';
-
       /**
        * Delivery to default Channel: Music + Sound Channel
        * or to Atmospheric Channel */
@@ -89,7 +90,7 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
-        if (audio.track === this.atmospheric.src) {
+        if (audio.track === this.atmosphericTrack) {
           return;
         }
         if (!audio.track && !this.atmospheric.paused) {
@@ -104,6 +105,28 @@ export class AudioService {
         this.playAtmospheric(audio.track);
       }
     }
+  }
+
+  setAtmospheric(map: IMap): string | null {
+    // Terrain Check
+    if (map.r) {
+      return 'rain-and-thunder-loop.mp3';
+    }
+
+    // Audio Terrain case
+    switch (map.data[0][40]) {
+      case 31: // scogliera
+      case 34: // mare
+      case 61: // nave
+      case 16: // spiaggia
+      case 35: // oceano
+      return 'sea-beach.mp3';
+      default:
+        return null;
+
+  
+    }
+    // Set track by value comes from map type:
   }
 
   private getMusic(): HTMLAudioElement {
@@ -142,7 +165,8 @@ export class AudioService {
   }
 
   private playAtmospheric(src: string): void {
-    this.atmospheric.src = audioPath + 'atmospherics/' + src;
+    this.atmosphericTrack = src;
+    this.atmospheric.src = audioPath + 'atmospherics/' + this.atmosphericTrack;
     this.atmosphericEcho.src = this.atmospheric.src;
     this.atmospheric.load();
     this.atmospheric.onloadstart = () => {
@@ -170,6 +194,7 @@ export class AudioService {
   private resetAtmospheric() {
     clearInterval(this.echoInterval);
     clearInterval(this.fadeInterval);
+    this.atmosphericTrack = null;
     this.atmospheric.currentTime = 0;
     this.atmosphericEcho.currentTime = 0;
     this.atmospheric.volume = 1; //need dynamic config

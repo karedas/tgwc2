@@ -27,6 +27,7 @@ import { MainComponent } from './main.component';
 import { Error403Module } from './pages/errors/403/error-403.module';
 import { HelpComponent } from './pages/help/help.component';
 import { AudioService } from './client/components/audio/audio.service';
+import { DataEffects } from './client/store/effects/data.effects';
 
 const routes: Routes = [
   {
@@ -58,7 +59,7 @@ const routes: Routes = [
     NavBarModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('TG', baseReducer, { metaReducers: [clearState]}),
-    EffectsModule.forFeature([ClientEffects]),
+    EffectsModule.forFeature([ClientEffects, DataEffects]),
   ],
   exports: [
     MainComponent,

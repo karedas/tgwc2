@@ -9,5 +9,5 @@ export const initialState: ClientState = {
     time: new Date(),
     inGame: false,
     isgod: undefined,
-    invLevel: 0,
+    invLevel: undefined,
 };

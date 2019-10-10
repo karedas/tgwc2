@@ -169,15 +169,14 @@ export class MapService extends MapSnowService {
       this._showRain.next(false);
     }
 
+    // Snow
     if (dataMap.s) {
       setTimeout(() => {
-        // Start Snow effect
         this._showSnow.next(true);
         this.startSnow();
       }, 100);
     } else {
       setTimeout(() => {
-        // Stop Snow effect
         this._showSnow.next(false);
         this.stopSnow();
       }, 100);
