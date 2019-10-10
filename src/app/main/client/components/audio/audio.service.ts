@@ -31,7 +31,7 @@ export class AudioService {
     this._configService.config.subscribe((config: TGConfig) => {
       this.enable = config.audio.enable;
       this.soundVolume = config.audio.soundVolume / 100;
-      this.atmosphericVolume = config.audio.musicVolume / 100;
+      this.atmosphericVolume = config.audio.atmosphericVolume / 100;
       this.musicVolume = config.audio.musicVolume / 100;
     });
   }
@@ -90,6 +90,7 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
+        console.log(audio.track, this.atmosphericTrack);
         if (audio.track === this.atmosphericTrack) {
           return;
         }
@@ -121,6 +122,8 @@ export class AudioService {
       case 16: // spiaggia
       case 35: // oceano
       return 'sea-beach.mp3';
+        // Todo: Set in a imported constant (?);
+        // return 'rain-and-thunder-loop.mp3';
       default:
         return null;
 
@@ -178,6 +181,7 @@ export class AudioService {
   }
 
   private fadeOutVolume() {
+    this.atmosphericTrack = null;
     let vol = this.atmospheric.volume * 10;
     if (this.atmospheric.volume > 0.1) {
       this.fadeInterval = setTimeout(() => {
@@ -194,7 +198,6 @@ export class AudioService {
   private resetAtmospheric() {
     clearInterval(this.echoInterval);
     clearInterval(this.fadeInterval);
-    this.atmosphericTrack = null;
     this.atmospheric.currentTime = 0;
     this.atmosphericEcho.currentTime = 0;
     this.atmospheric.volume = 1; //need dynamic config
