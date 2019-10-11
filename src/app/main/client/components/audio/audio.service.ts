@@ -31,7 +31,7 @@ export class AudioService {
     this._configService.config.subscribe((config: TGConfig) => {
       this.enable = config.audio.enable;
       this.soundVolume = config.audio.soundVolume / 100;
-      this.atmosphericVolume = config.audio.atmosphericVolume / 100;
+      this.atmosphericVolume = config.audio.musicVolume / 100;
       this.musicVolume = config.audio.musicVolume / 100;
     });
   }
@@ -90,7 +90,6 @@ export class AudioService {
           this.setSound(audio.track.replace(wav, mp3));
         }
       } else if (audio.channel === 'atmospheric') {
-        console.log(audio.track, this.atmosphericTrack);
         if (audio.track === this.atmosphericTrack) {
           return;
         }
