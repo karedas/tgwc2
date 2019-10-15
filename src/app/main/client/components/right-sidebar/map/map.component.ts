@@ -87,9 +87,6 @@ export class MapComponent implements OnDestroy, OnInit {
     }, 100);
   }
 
-
-
-
   onMouseEvent() {
     this.isOnMap = (this.game.mouseIsOnMap = !this.game.mouseIsOnMap);
   }
