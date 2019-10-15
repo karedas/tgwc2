@@ -40,8 +40,8 @@ export class MapService extends MapSnowService {
 
   private setGradients() {
     this.canvasShadowGradient = this.cx.createLinearGradient(0, 0, 0, 18);
-    this.canvasShadowGradient.addColorStop(0, 'rgba(0, 0, 0, .7)');
-    this.canvasShadowGradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.3)');
+    this.canvasShadowGradient.addColorStop(0, 'rgba(0, 0, 0, .4)');
+    this.canvasShadowGradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.2)');
     this.canvasShadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0.1)');
   }
 
