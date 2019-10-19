@@ -24,13 +24,13 @@
       (mouseenter)="onWatcher('w-sudest')" (mouseout)="leaveWatcher()" (mousedown)="watchToDir('sudest')"></div>
     </div>
     <!-- end Watch Action -->
-    <div class="rain" *ngIf="showRain"></div>
-    <div class="fog" *ngIf="showFog"></div>
+    <div class="rain" *ngIf="showRain  | async"></div>
+    <div class="fog" *ngIf="showFog  | async"></div>
     <canvas class="tg-map-main"
       width="{{mapSize.maxWidth * mapSize.tileWidth}}" 
       height="{{mapSize.maxHeight * mapSize.tileHeight}}" #map>
     </canvas>
-    <canvas [ngClass]="{'run': showSnow}" class="canvas-snow" 
+    <canvas [ngClass]="{'run': showSnow | async}" class="canvas-snow" 
       #snow></canvas>
   </div>
 </div>

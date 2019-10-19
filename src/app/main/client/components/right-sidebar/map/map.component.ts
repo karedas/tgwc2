@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import * as fromSelectors from 'src/app/main/client/store/selectors';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store } from '@ngrx/store';
@@ -18,15 +18,15 @@ import { MapService } from './services/map.service';
   ]
 })
 
-export class MapComponent implements OnDestroy, OnInit {
+export class MapComponent implements OnDestroy, AfterViewInit {
 
   @ViewChild('map', {static: true}) map: ElementRef;
   @ViewChild('snow', {static: true}) snow: ElementRef;
 
   public mapSize: any;
-  public showSnow: boolean;
-  public showRain: boolean;
-  public showFog: boolean;
+  public showSnow: Observable<boolean>;
+  public showRain: Observable<boolean>;
+  public showFog: Observable<boolean>;
 
 
   private _unsubscribeAll: Subject<any>;
@@ -44,35 +44,19 @@ export class MapComponent implements OnDestroy, OnInit {
   ) {
 
     this.map$ = this.store.select(fromSelectors.getMap);
+    this.showRain = this.mapService.displayRain;
+    this.showFog = this.mapService.displayFog;
+    this.showSnow = this.mapService.displaySnow;
 
     this.mapSize = this.mapService.mapSizes;
     this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.mapService.prepareCanvas(this.map);
     this.mapService.prepareSnowCanvas(this.snow);
-
-    // Rain
-    this.mapService.displayRain
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((visible) => {
-        this.showRain = visible;
-      });
     // Snow
-    this.mapService.displaySnow
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((visible) => {
-        this.showSnow = visible;
-      });
-    // Fog
-    this.mapService.displayFog
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((visible) => {
-        this.showFog = visible;
-      });
-
-
+  
     setTimeout(() => {
       this.map$
       .pipe(
