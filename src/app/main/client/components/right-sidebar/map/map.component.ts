@@ -59,9 +59,8 @@ export class MapComponent implements OnDestroy, AfterViewInit {
   
     setTimeout(() => {
       this.map$
-      .pipe(
-        takeUntil(this._unsubscribeAll))
-      .subscribe(
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(
           (map: IMap) => {
             if (map !== undefined) {
               this.mapService.updateMap(map);

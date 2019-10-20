@@ -8,10 +8,7 @@ export const images_path = './assets/images/';
 const tileGraphicsToLoad = [
   'tiles.png',
   'mapobj/shadowtile.png',
-  'mapobj/shadow1.png',
-  'mapobj/shadow2.png',
-  'mapobj/shadow3.png',
-  'mapobj/tile2map.png'
+  'mapobj/tiles2.jpg'
 ];
 
 @Injectable()
@@ -30,7 +27,6 @@ export class MapService extends MapSnowService {
   private readonly xTotalTiles = 9;
   private readonly yTotalTiles = 9;
 
-  private tileGraphicsLoaded = 0;
   private tileImage: HTMLImageElement[] = [];
   private mapShadowImg: HTMLImageElement[] = [];
   private canvasWidth: number;
@@ -57,14 +53,14 @@ export class MapService extends MapSnowService {
     this.canvasHeight = this.xTotalTiles * this.mapTileHeight;
 
     this.setGradients();
+    
+    this.cx.save();
 
     this.cx.beginPath();
+    this.cx.fillStyle = "black";
     this.cx.arc(this.canvasWidth / 2, this.canvasHeight / 2, this.canvasWidth / 2, 0, Math.PI * 2, false);
     this.cx.clip();
-    this.cx.save();
-    this.cx.fillStyle = "black";
     this.cx.fill();
-    this.cx.save();
   }
   
   public updateMap(dataMap: any): void {
@@ -73,9 +69,6 @@ export class MapService extends MapSnowService {
 
     this.mapShadowImg[1] = new Image();
     this.mapShadowImg[1].src = images_path + 'mapobj/shadow2.png';
-
-    this.mapShadowImg[0] = new Image();
-    this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
 
     this.mapShadowImg[0] = new Image();
     this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
@@ -95,7 +88,7 @@ export class MapService extends MapSnowService {
     let xlim = xoff + dataMap.d;
     let ylim = yoff + dataMap.d;
     // Clear the Canvas
-    this.cx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+    // this.cx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     /* Cycle on every layers */
     // for(let layer = 59; layer < 2; layer++) {
     for (let layer = 0; layer < dataMap.data.length; layer++) {
@@ -128,14 +121,14 @@ export class MapService extends MapSnowService {
           let image: HTMLImageElement;
           let tpos: any = [];
           if (tileProsp) {
-            image = this.tileImage[5];
+            image = this.tileImage[2];
             tpos[0] = tileProsp[0];
             tpos[1] = tileProsp[1];
           } else {
             image = this.tileImage[0];
             tpos = this.tileCoords(tilenum);
           }
-
+          console.log(image);
           this.cx.drawImage(
             image,
             tpos[0],
