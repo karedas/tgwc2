@@ -8,7 +8,8 @@ export const images_path = './assets/images/';
 const tileGraphicsToLoad = [
   'tiles.png',
   'mapobj/shadowtile.png',
-  'mapobj/tiles2.jpg'
+  'mapobj/wall_sprite.png',
+  'mapobj/terrain.png'
 ];
 
 @Injectable()
@@ -35,8 +36,8 @@ export class MapService extends MapSnowService {
 
   private setGradients() {
     this.canvasShadowGradient = this.cx.createLinearGradient(0, 0, 0, 18);
-    this.canvasShadowGradient.addColorStop(0, 'rgba(0, 0, 0, .5)');
-    this.canvasShadowGradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.3)');
+    this.canvasShadowGradient.addColorStop(0, 'rgba(0, 0, 0, .6)');
+    this.canvasShadowGradient.addColorStop(0.6, 'rgba(0, 0, 0, 0.4)');
     this.canvasShadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0.1)');
   }
 
@@ -61,22 +62,23 @@ export class MapService extends MapSnowService {
     this.cx.arc(this.canvasWidth / 2, this.canvasHeight / 2, this.canvasWidth / 2, 0, Math.PI * 2, false);
     this.cx.clip();
     this.cx.fill();
-  }
-  
-  public updateMap(dataMap: any): void {
+
     this.mapShadowImg[2] = new Image();
     this.mapShadowImg[2].src = images_path + 'mapobj/shadow1.png';
-
+  
     this.mapShadowImg[1] = new Image();
     this.mapShadowImg[1].src = images_path + 'mapobj/shadow2.png';
-
+  
     this.mapShadowImg[0] = new Image();
     this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
-
+  
     for (var i = 0; i < tileGraphicsToLoad.length; i++) {
       this.tileImage[i] = new Image();
       this.tileImage[i].src = '/assets/images/' + tileGraphicsToLoad[i];
     }
+  }
+  
+  public updateMap(dataMap: any): void {
     this.drawCanvasMap(dataMap);
     this.addEnvironmentCanvas(dataMap);
   }
@@ -120,15 +122,20 @@ export class MapService extends MapSnowService {
           let tileProsp = this.getProspectiveTile(layer, tilenum, y, x);
           let image: HTMLImageElement;
           let tpos: any = [];
-          if (tileProsp) {
+
+          if(tilenum === 1) {
+            // Temporary
+            image = this.tileImage[3];
+            tpos[0] = 0;
+            tpos[1] = 0;
+          } else if (tileProsp) {
             image = this.tileImage[2];
-            tpos[0] = tileProsp[0];
-            tpos[1] = tileProsp[1];
+            tpos[0] = tileProsp[0] * this.mapTileWidth;
+            tpos[1] = tileProsp[1] * this.mapTileHeight;
           } else {
             image = this.tileImage[0];
             tpos = this.tileCoords(tilenum);
           }
-          console.log(image);
           this.cx.drawImage(
             image,
             tpos[0],
@@ -165,55 +172,66 @@ export class MapService extends MapSnowService {
   private getProspectiveTile(l, tilenum, y, x): any | null {
     let aroundTiles = this.gettilesList(l, y, x);
     let tpos = null;
-    if (!walls.around.includes(tilenum) || doors.includes(tilenum)) 
-      return;
-
+    // if (!walls.around.includes(tilenum) || doors.includes(tilenum)) 
+    //   return;
+    if(!walls.allowed.includes(tilenum)) return;
+    
+    console.log(aroundTiles);
     for (let i = 0; i < walls.tiles.length; i++) {
       if (
-        aroundTiles['n'] === undefined &&
-        walls.around.includes(aroundTiles['e']) === walls.tiles[i].e &&
-        walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
-        walls.around.includes(aroundTiles['w']) === walls.tiles[i].w
-      ) {
-        tpos = walls.tiles[i].cords;
-        break;
-      }
-      if (
-        aroundTiles['e'] === undefined &&
-        walls.around.includes(aroundTiles['w']) === walls.tiles[i].w &&
-        walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
-        walls.around.includes(aroundTiles['n']) === walls.tiles[i].n
-      ) {
-        tpos = walls.tiles[i].cords;
-        break;
-      }
-      if (
-        aroundTiles['w'] === undefined &&
-        walls.around.includes(aroundTiles['n']) === walls.tiles[i].n &&
-        walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
-        walls.around.includes(aroundTiles['e']) === walls.tiles[i].e
-      ) {
-        tpos = walls.tiles[i].cords;
-        break;
-      }
-      if (
-        aroundTiles['s'] === undefined &&
-        walls.around.includes(aroundTiles['w']) === walls.tiles[i].w &&
-        walls.around.includes(aroundTiles['n']) === walls.tiles[i].n &&
-        walls.around.includes(aroundTiles['e']) === walls.tiles[i].e ) {
-        tpos = walls.tiles[i].cords;
+        walls.tiles[i]['n'].includes(aroundTiles['n']) &&
+        walls.tiles[i]['e'].includes(aroundTiles['e']) &&
+        walls.tiles[i]['s'].includes(aroundTiles['s']) &&
+        walls.tiles[i]['w'].includes(aroundTiles['w'])) {
+        tpos = walls.tiles[i].pos;
         break;
       }
 
-      if (
-        walls.around.includes(aroundTiles['n']) === walls.tiles[i].n &&
-        walls.around.includes(aroundTiles['e']) === walls.tiles[i].e &&
-        walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
-        walls.around.includes(aroundTiles['w']) === walls.tiles[i].w
-        ) {
-        tpos = walls.tiles[i].cords;
-        break;
-      }
+      // if (
+      //   aroundTiles['n'] === undefined &&
+      //   walls.around.includes(aroundTiles['e']) === walls.tiles[i].e &&
+      //   walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
+      //   walls.around.includes(aroundTiles['w']) === walls.tiles[i].w
+      // ) {
+      //   tpos = walls.tiles[i].cords;
+      //   break;
+      // }
+      // if (
+      //   aroundTiles['e'] === undefined &&
+      //   walls.around.includes(aroundTiles['w']) === walls.tiles[i].w &&
+      //   walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
+      //   walls.around.includes(aroundTiles['n']) === walls.tiles[i].n
+      // ) {
+      //   tpos = walls.tiles[i].cords;
+      //   break;
+      // }
+      // if (
+      //   aroundTiles['w'] === undefined &&
+      //   walls.around.includes(aroundTiles['n']) === walls.tiles[i].n &&
+      //   walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
+      //   walls.around.includes(aroundTiles['e']) === walls.tiles[i].e
+      // ) {
+      //   tpos = walls.tiles[i].cords;
+      //   break;
+      // }
+      // if (
+      //   aroundTiles['s'] === undefined &&
+      //   walls.around.includes(aroundTiles['w']) === walls.tiles[i].w &&
+      //   walls.around.includes(aroundTiles['n']) === walls.tiles[i].n &&
+      //   walls.around.includes(aroundTiles['e']) === walls.tiles[i].e ) {
+      //   tpos = walls.tiles[i].cords;
+      //   break;
+      // }
+
+      // if (
+      //   walls.around.includes(aroundTiles['n']) === walls.tiles[i].n &&
+      //   walls.around.includes(aroundTiles['e']) === walls.tiles[i].e &&
+      //   walls.around.includes(aroundTiles['s']) === walls.tiles[i].s &&
+      //   walls.around.includes(aroundTiles['w']) === walls.tiles[i].w
+      //   ) {
+      //   tpos = walls.tiles[i].cords;
+      //   break;
+      // }
     }
     return tpos;
   }
