@@ -24,4 +24,3 @@ function fetchInGame(state: ClientState) {
 export const getInGameStatus = createSelector(getClientState, fetchInGame);
 export const getUserLevel = createSelector (getClientState, fetchUserLevel);
 export const getInvisibilityLevel = createSelector(getClientState, fetchInvisibilityLevel);
-// export const getAudioTrack = createSelector(getClientState, fetchAudioTrack);

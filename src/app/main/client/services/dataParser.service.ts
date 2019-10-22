@@ -10,7 +10,7 @@ import { LogService } from './log.service';
 import { TGConfig } from '../client-config';
 import { ConfigService } from '../../../services/config.service';
 import { map } from 'rxjs/operators';
-import { Map } from '../models/data/map.model';
+import { IMap } from '../models/data/map.model';
 
 @Injectable()
 export class DataParser {
@@ -235,11 +235,8 @@ export class DataParser {
     return '';
   }
 
-  private news(data: any): string {
-    this.store.dispatch(ClientActions.inGameAction({ payload: true }));
-    // DEPRECATED
-    // const news_parse = JSON.parse(data.slice(6, -1));
-    // this.store.dispatch(DataActions.genericPageAction({ genericpage: news_parse }));
+  private news( data: any): string {
+    this.store.dispatch(ClientActions.inGameAction({payload: true}));
     return '';
   }
 
@@ -285,7 +282,7 @@ export class DataParser {
 
   private audio(audio): string {
     const audio_parse = audio.slice(5, audio.lastIndexOf('"'));
-    this.store.dispatch(DataActions.audioAction({payload: {channel: 'music', track: audio_parse }}));
+    this.store.dispatch(ClientActions.audioAction({payload: {channel: 'music', track: audio_parse }}));
     return '';
   }
 
@@ -348,7 +345,7 @@ export class DataParser {
   }
 
   private map(m: any): string {
-    const map_parse = JSON.parse(m.slice(5, -1)) as Map;
+    const map_parse = JSON.parse(m.slice(5, -1)) as IMap;
     this.store.dispatch(DataActions.mapAction({ map: map_parse }));
     return '';
   }

@@ -1,5 +1,6 @@
-<div class="tg-shortcuts-area" fxFlex="1 0 auto">
-  <div [hidden]="newShortcutOpenedStatus">
+<div class="tg-shortcuts-area" fxFlex="1 0 100%">
+  <div [hidden]="newShortcutOpenedStatus" fxFlexFill>
+    
     <h3 class="tg-control-panel--subtitle">
       Scorciatoie
     </h3>
@@ -61,11 +62,11 @@
       </div>
     </ng-template>
     
-  
-    <mat-divider></mat-divider>
-    <button mat-raised-button color="accent" (click)="openNewShortcut()">
-      Aggiungi
-    </button>
+    <div class="tg-brn-container-footer">
+      <button mat-raised-button color="accent" (click)="openNewShortcut()">
+        Aggiungi
+      </button>
+    </div>
   </div>
 
   <!-- New Shortcut Form -->

@@ -3,7 +3,7 @@ import * as fromSelectors from 'src/app/main/client/store/selectors';
 import { DataState } from 'src/app/main/client/store/state/data.state';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { Map } from 'src/app/main/client/models/data/map.model';
+import { IMap } from 'src/app/main/client/models/data/map.model';
 import { GameService } from 'src/app/main/client/services/game.service';
 import { takeUntil } from 'rxjs/operators';
 import { MapService } from './services/map.service';
@@ -35,7 +35,7 @@ export class MapComponent implements OnDestroy, OnInit {
   public isOnWatcher = false;
   public isOnDirection: string;
 
-  map$: Observable<Map>;
+  map$: Observable<IMap>;
 
   constructor(
     private store: Store<DataState>,
@@ -77,7 +77,7 @@ export class MapComponent implements OnDestroy, OnInit {
       .pipe(
         takeUntil(this._unsubscribeAll))
       .subscribe(
-          (map: Map) => {
+          (map: IMap) => {
             if (map !== undefined) {
               this.mapService.updateMap(map);
             }
@@ -85,9 +85,6 @@ export class MapComponent implements OnDestroy, OnInit {
         );
     }, 100);
   }
-
-
-
 
   onMouseEvent() {
     this.isOnMap = (this.game.mouseIsOnMap = !this.game.mouseIsOnMap);

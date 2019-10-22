@@ -9,6 +9,7 @@ import { InputService } from '../../components/input/input.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { TGAudio } from '../../models/audio.model';
 import { AudioService } from '../../components/audio/audio.service';
+import { audioAction } from '../actions/client.action';
 
 export interface PayloadActionData {
   type: string;
@@ -17,20 +18,18 @@ export interface PayloadActionData {
 
 @Injectable()
 export class DataEffects {
-
-  audio$ = createEffect(
-    () =>
+  
+  atmospheric$ = createEffect(
+    () => 
       this.actions$.pipe(
-        ofType<PayloadActionData>(DataEvenType.AUDIO),
-        map(action => action.payload),
-        filter(state => !!state ),
-        tap(( audio: TGAudio ) => {
-          this.audioService.setAudio({channel: audio.channel,  track: audio.track});
-        })
+        ofType<any>(DataEvenType.MAP),
+        map(action => {
+           const track = this.audioService.setAtmospheric(action.map);
+           return audioAction({payload: {channel: 'atmospheric', track: track }});
+        }),
       ),
-    { dispatch: false }
-  );
-
+      
+  )
 
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
@@ -184,5 +183,6 @@ export class DataEffects {
     private dialogV2Service: DialogV2Service,
     private audioService: AudioService,
     private configService: ConfigService
-  ) { }
+  ) { 
+  }
 }

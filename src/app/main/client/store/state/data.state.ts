@@ -1,4 +1,4 @@
-import { Map } from 'src/app/main/client/models/data/map.model';
+import { IMap } from 'src/app/main/client/models/data/map.model';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { Room } from 'src/app/main/client/models/data/room.model';
 import { IEditor } from 'src/app/main/client/models/data/editor.model';
@@ -16,7 +16,7 @@ export interface DataState {
     sky?: string;
     doors?: any;
     room?: Room;
-    map?: Map;
+    map?: IMap;
     hero?: IHero;
     editor?: IEditor;
     objPers?: IObjectAndPerson;

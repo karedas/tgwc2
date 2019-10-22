@@ -8,7 +8,7 @@ import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
-import { DataEffects } from './store/effects/data.effects';
+import { OutputService } from './components/output/output.service';
 import { DispenserService } from './services/dispenser.service';
 import { StatusBarComponent } from './components/status-bar/status-bar.component';
 import { AutofocusInputbarDirective } from 'src/app/shared/directives/autofocus-inputbar.directive';
@@ -33,7 +33,6 @@ const clientRouting: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(clientRouting),
-    EffectsModule.forFeature([DataEffects]),
     DashboardModule,
     RightSidebarModule,
     OutputModule,
