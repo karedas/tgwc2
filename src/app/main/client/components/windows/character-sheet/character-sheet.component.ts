@@ -56,6 +56,6 @@ export class CharacterSheetComponent  {
   }
 
   openUploadAvatar() {
-    alert("Funzione non ancora implementata");
+    alert('Funzione non ancora implementata');
   }
 }

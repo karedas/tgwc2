@@ -13,7 +13,7 @@ const audioPath = 'assets/audio/';
 @Injectable()
 export class AudioService {
   tgConfig: TGConfig;
-  _enable: boolean = false;
+  _enable = false;
 
   sound: HTMLAudioElement;
   music: HTMLAudioElement;
@@ -126,7 +126,7 @@ export class AudioService {
       default:
         return null;
 
-  
+
     }
     // Set track by value comes from map type:
   }
@@ -199,8 +199,8 @@ export class AudioService {
     clearInterval(this.fadeInterval);
     this.atmospheric.currentTime = 0;
     this.atmosphericEcho.currentTime = 0;
-    this.atmospheric.volume = 1; //need dynamic config
-    this.atmosphericEcho.volume = 1; //need dynamic config
+    this.atmospheric.volume = 1; // need dynamic config
+    this.atmosphericEcho.volume = 1; // need dynamic config
     this.atmospheric.pause();
     this.atmosphericEcho.pause();
   }

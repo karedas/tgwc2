@@ -263,7 +263,7 @@ export class GameService {
 
             concatList.push(eqData[0]);
             // add item in same equip position
-            if(eqData[1]) {
+            if (eqData[1]) {
               concatList.push(eqData[1]);
             }
           }
@@ -301,7 +301,7 @@ export class GameService {
   }
 
   // Send request to server by element click
-  public interact(item: any, index?: number, mine?: boolean) {
+  public interact(item: any, index: number = 0, mine?: boolean) {
     /* If is not a List */
     if (!item.sz) {
       if (item.cntnum && !mine) {

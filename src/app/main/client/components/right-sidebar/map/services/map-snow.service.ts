@@ -28,9 +28,9 @@ export class MapSnowService {
     this.height = 0;
     this.numFlakes = null;
     this.flakes = [];
-    this.flake =  (document.createElement('CANVAS') as HTMLCanvasElement);
+    this.flake = (document.createElement('CANVAS') as HTMLCanvasElement);
     this.radHeight = 40;
-    this.contextSnow =  (snowElement.nativeElement as HTMLCanvasElement).getContext('2d');
+    this.contextSnow = (snowElement.nativeElement as HTMLCanvasElement).getContext('2d');
     this.width = snowElement.nativeElement.width;
     this.height = snowElement.nativeElement.height;
     this.numFlakes = Math.min(this.width, 300) * this.height / 400 * this.flakeNumberModifier;
@@ -65,7 +65,7 @@ export class MapSnowService {
       // calculate changes to snowflake
       const posX_a = this.flakes[x].x + Math.sin(this.flakes[x].yMod + this.flakes[x].y / this.radHeight);
       const posX_b = (5 - this.flakes[x].size) * this.flakes[x].waveSize * (1 - this.flakes[x].size);
-      posX =  posX_a * posX_b;
+      posX = posX_a * posX_b;
       // bigger flakes are nearer to screen, thus they fall faster to create 3d effect
       this.flakes[x].y += this.flakes[x].size * this.fallSpeedModifier;
 

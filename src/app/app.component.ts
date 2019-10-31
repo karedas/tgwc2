@@ -41,6 +41,7 @@ export class AppComponent implements OnDestroy {
     @Inject(DOCUMENT) private document: any
   ) {
 
+
     if (!environment.production) {
       this.debug = false;
     }

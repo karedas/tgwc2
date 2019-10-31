@@ -18,18 +18,18 @@ export interface PayloadActionData {
 
 @Injectable()
 export class DataEffects {
-  
+
   atmospheric$ = createEffect(
-    () => 
+    () =>
       this.actions$.pipe(
         ofType<any>(DataEvenType.MAP),
         map(action => {
            const track = this.audioService.setAtmospheric(action.map);
-           return audioAction({payload: {channel: 'atmospheric', track: track }});
+           return audioAction({payload: {channel: 'atmospheric', track }});
         }),
       ),
-      
-  )
+
+  );
 
   openEditor$ = createEffect(() =>
     this.actions$.pipe(
@@ -183,6 +183,6 @@ export class DataEffects {
     private dialogV2Service: DialogV2Service,
     private audioService: AudioService,
     private configService: ConfigService
-  ) { 
+  ) {
   }
 }

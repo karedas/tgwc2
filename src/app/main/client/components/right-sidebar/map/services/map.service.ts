@@ -29,7 +29,6 @@ export class MapService extends MapSnowService {
   private readonly xTotalTiles = 9;
   private readonly yTotalTiles = 9;
 
-  private tileGraphicsLoaded = 0;
   private tileImage: HTMLImageElement[] = [];
   private canvasWidth: number;
   private canvasHeight: number;
@@ -56,24 +55,24 @@ export class MapService extends MapSnowService {
     // this.mapTileImg
 
     this.mapShadowImg[2] = new Image();
-    this.mapShadowImg[2].src = images_path + 'interface/shadow1.png';
+    this.mapShadowImg[2].src = images_path + 'mapobj/shadow1.png';
 
     this.mapShadowImg[1] = new Image();
-    this.mapShadowImg[1].src = images_path + 'interface/shadow2.png';
+    this.mapShadowImg[1].src = images_path + 'mapobj/shadow2.png';
 
     this.mapShadowImg[0] = new Image();
-    this.mapShadowImg[0].src = images_path + 'interface/shadow3.png';
+    this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
 
     this.mapShadowImg[0] = new Image();
-    this.mapShadowImg[0].src = images_path + 'interface/shadow3.png';
+    this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
 
     this.mapShadowTile = new Image();
-    this.mapShadowTile.src = images_path + 'interface/shadowtile.png';
+    this.mapShadowTile.src = images_path + 'mapobj/shadowtile.png';
 
-	for (var i = 0; i < tileGraphicsToLoad.length; i++) {
-	  this.tileImage[i] = new Image();
-	  this.tileImage[i].src = '/assets/images/' + tileGraphicsToLoad[i];
-	}
+    for (let i = 0; i < tileGraphicsToLoad.length; i++) {
+      this.tileImage[i] = new Image();
+      this.tileImage[i].src = '/assets/images/' + tileGraphicsToLoad[i];
+    }
 
     this.mapObject = map;
 
@@ -89,19 +88,19 @@ export class MapService extends MapSnowService {
     this.cx.clip();
     this.cx.fill();
 
-    
+
   }
 
   public updateMap(dataMap: any): void {
-      this.drawCanvasMap(dataMap);
-      this.addEnvironmentCanvas(dataMap);
+    this.drawCanvasMap(dataMap);
+    this.addEnvironmentCanvas(dataMap);
   }
 
   public drawCanvasMap(dataMap: any): void {
-    let xoff: number = (this.xTotalTiles - dataMap.d) / 2;
-    let yoff: number = (this.yTotalTiles - dataMap.d) / 2;
-    let xlim = xoff + dataMap.d;
-    let ylim = yoff + dataMap.d;
+    const xoff: number = (this.xTotalTiles - dataMap.d) / 2;
+    const yoff: number = (this.yTotalTiles - dataMap.d) / 2;
+    const xlim = xoff + dataMap.d;
+    const ylim = yoff + dataMap.d;
     // Clear the Canvas
     this.cx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     /* Cycle on every layers */

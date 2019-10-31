@@ -302,7 +302,7 @@ export class DataParser {
     const ud = up.slice(5, status.lastIndexOf('"'))
       .split(',')
       .map(value => {
-        let n = Number(value);
+        const n = Number(value);
         return n === 0 ? n : n || value;
       });
     this.dispatcher.update = ud;

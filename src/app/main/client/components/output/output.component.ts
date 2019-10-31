@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { Store } from '@ngrx/store';
 import { SplitComponent } from 'angular-split';
@@ -80,7 +80,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this._configService.config
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: TGConfig) => this.tgConfig = config );
+      .subscribe((config: TGConfig) => this.tgConfig = config);
 
     this.addOutputSubscriptions();
   }
@@ -94,7 +94,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
     this.outputService
       .isScrollable()
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((pauseScroll: boolean) => this.pauseScroll = pauseScroll );
+      .subscribe((pauseScroll: boolean) => this.pauseScroll = pauseScroll);
 
     // Listen Mouse Scroll event to enable/disable pause.
     this.scrollBar.scrolled.subscribe((e) => {
@@ -198,7 +198,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   resumeScroll() {
     this.outputService.scrollPanelToBottom(this.scrollBar, this.scrollerEnd);
-    
+
   }
 
   onDragStart() {

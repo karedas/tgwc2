@@ -17,7 +17,7 @@ export interface PayloadAction {
 
 @Injectable()
 export class ClientEffects {
-  
+
   audio$ = createEffect(
     () =>
       this.actions$.pipe(

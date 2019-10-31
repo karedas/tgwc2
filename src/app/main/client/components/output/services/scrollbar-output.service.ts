@@ -5,14 +5,14 @@ import { TGConfig } from '../../../client-config';
 
 @Injectable()
 export class ScrollbarOutputService {
-  
+
   pause$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   containerSize = 0;
   contentchange: boolean;
 
   private scrollTopBeforePause = 0;
 
-  resetScrollTopPause () {
+  resetScrollTopPause() {
     this.scrollTopBeforePause = -1;
   }
 
@@ -36,9 +36,9 @@ export class ScrollbarOutputService {
   }
 
   onMouseScroll(scrollTop: number, outputSizes?: number, widgetroom?: any) {
-    // If Widget room has been toggle, reset and return to avoid pause for incorrect 
+    // If Widget room has been toggle, reset and return to avoid pause for incorrect
     // scrollTop value such as output size changes.
-    if(this.contentchange !== widgetroom) {
+    if (this.contentchange !== widgetroom) {
       this.contentchange = !this.contentchange;
       this.scrollTopBeforePause = 0;
       return;

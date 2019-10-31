@@ -35,7 +35,7 @@ export class DialogV2Service {
   }
 
   private getOverlayElement(dialogRef: MatDialogRef<any>): HTMLElement {
-    return dialogRef['_overlayRef'].overlayElement as HTMLElement;
+    return dialogRef._overlayRef.overlayElement as HTMLElement;
   }
 
   private addDialogBehaviour(dialogRef: MatDialogRef<any>) {
@@ -143,7 +143,7 @@ export class DialogV2Service {
   }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
-    let dialogID = 'editor';
+    const dialogID = 'editor';
     const config = new MatDialogConfig();
 
     config.id = dialogID;
@@ -220,7 +220,7 @@ export class DialogV2Service {
 
       config.id = dialogID;
       config.width = '700px';
-      config.height = '700px';
+      config.height = '600px';
       config.maxHeight = '100%';
       config.maxWidth = '95vw';
       config.restoreFocus = true;
