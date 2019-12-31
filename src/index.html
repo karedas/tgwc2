@@ -1,42 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="it">
 
 <head>
-  <base href="/">
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="description" content="The Gate MUD è un gioco di ruolo online gratuito (davvero!) che ti permetterà di vivere straordinarie avventure in un dettagliato mondo virtuale di ambientazione fantasy. Prendendo le parti di un abitante della terra di Ikhari, potrai forgiare la sua storia con le tue gesta!">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="description"
+    content="The Gate MUD è un gioco di ruolo online gratuito (davvero!) che ti permetterà di vivere straordinarie avventure in un dettagliato mondo virtuale di ambientazione fantasy. Prendendo le parti di un abitante della terra di Ikhari, potrai forgiare la sua storia con le tue gesta!" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="mudgame, Application web, client, fantasy" />
+  <meta name="theme-color" content="#b18012" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <p class="browserupgrade">
+        Stai usando un browser <strong>datato e obsoleto</strong>. Perfavore
+        <a href="https://browsehappy.com/">aggiorna il tuo browser</a> per migliorare l'esperienza e la tua sicurezza.
+      </p>
     <![endif]-->
-    
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <title>The Gate Mud Game - Webclient</title>
 </head>
 
-<body ng-app="TGWebClient" class="tg-app">
+<body ng-app="TGWebClient" class="tg-app" role="application">
   <tg-root></tg-root>
 
   <!-- Google Analytics -->
   <script>
     (function (i, s, o, g, r, a, m) {
       i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
+      (i[r] =
+        i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        }),
+        (i[r].l = 1 * new Date());
+      (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
       a.async = 1;
       a.src = g;
-      m.parentNode.insertBefore(a, m)
+      m.parentNode.insertBefore(a, m);
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-122402371-2', 'auto');
   </script>
+  <noscript>
+    <div class="no-script">
+      <div class="title align-center">Impossibile visualizzare questa pagina</div>
+      <div class="desc align-center">Consentire al browser di eseguire JavaScript.</div>
+      <div class="icon align-center"></div>
+    </div>
+  </noscript>
   <!-- End Google Analytics-->
-  
 </body>
-
 </html>

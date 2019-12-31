@@ -14,9 +14,6 @@
     }
 }
 
-.tg-shortcuts-conflink {
-}
-
 .tg-shortcut-cmdlabel {
     line-height: 14px;
     height: 13px;
@@ -29,6 +26,7 @@
     white-space: nowrap;
     color: #8e8e8e;
     padding: 0.5em .5em;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 
     span {
         color: #8e8e8e;
@@ -40,14 +38,13 @@
     padding: .5em .5em;
     text-align: center;
     min-height: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 
     button {
         margin:  1em  auto 0;
         line-height: 28px;
         font-size: 12px;
     }
-
-    border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .no-shortcuts {

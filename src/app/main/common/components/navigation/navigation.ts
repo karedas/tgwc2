@@ -43,13 +43,6 @@ export const baseNavigationSidebar: NavigationItem[] = [
     openInNewTab: true,
     url: 'http://forum.thegatemud.it'
   },
-  {
-    id: 'news',
-    title: 'Novità',
-    type: 'item',
-    icon: 'library_books',
-    url: '/novita',
-  },
 ];
 
 export const gameNavigationSideBar: NavigationItem[] = [

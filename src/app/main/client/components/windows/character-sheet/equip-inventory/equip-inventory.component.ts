@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { DataState } from 'src/app/main/client/store/state/data.state';
-import { getEquip, getInventory } from 'src/app/main/client/store/selectors';
-import { equipPositionByName, pos_to_order } from 'src/app/main/client/common/constants';
 import { takeUntil } from 'rxjs/operators';
+import { equipPositionByName, pos_to_order } from 'src/app/main/client/common/constants';
 import { GameService } from 'src/app/main/client/services/game.service';
-import { InputService } from '../../../input/input.service';
+import { getEquip, getInventory } from 'src/app/main/client/store/selectors';
+import { DataState } from 'src/app/main/client/store/state/data.state';
 
 @Component({
   selector: 'tg-equip-inventory',
@@ -30,7 +29,6 @@ export class EquipInventoryComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<DataState>,
     private gameService: GameService,
-    private inputService: InputService
   ) {
 
     this.equipment$ = this.store.pipe(select(getEquip));

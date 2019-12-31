@@ -40,11 +40,12 @@
 <ng-template #extradetail>
   <ng-container *ngIf="html">
     <ng-scrollbar
-      class="scrollbar-output through"
+      class="scrollbar-output through nopadding"
       #scrollBar
       *ngIf="type === 'room' || type === 'objPersDetail'"
       [disabled]="draggingSplitArea"
       [visibility]="'always'"
+      [appearance]="'standard'"
       [ngClass]="{ disabled: draggingSplitArea }"
     >
       <div class="tg-extraoutput--header">
@@ -64,10 +65,6 @@
           <div class="tg-room--desc tg-llt-white">
             <ng-container *ngIf="html.desc.details; else extra_regularDescBase">
               <div [innerHtml]="html.desc.details | dataToHtml: true" class="tg-d-details"></div>
-              <div
-                [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml: true"
-                class="tg-d-base"
-              ></div>
             </ng-container>
 
             <ng-template #extra_regularDescBase>

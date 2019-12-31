@@ -1,5 +1,4 @@
 .tg-app {
-
   @import 'partials/material/mat-divider';
   @import 'partials/material/mat-expansion';
   @import 'partials/material/mat-menu';
@@ -15,24 +14,21 @@
   @import 'partials/material/mat-stepper';
   @import 'partials/material/mat-paginator';
   @import 'partials/material/mat-slider';
-  
-  @import 'partials/dialog';
+  @import 'partials/material/mat-drag';
+
   @import 'partials/common';
 
   /* Components */
   @import 'partials/objects-list';
 
-
   .cdk-overlay-connected-position-bounding-box {
     z-index: 9999;
   }
-
 
   /* Border */
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: white;
   }
-
 
   /* Hint */
 
@@ -40,25 +36,19 @@
     color: rgba(255, 255, 255, 0.54);
   }
 
-
   /*checkbox */
   .mat-checkbox-frame {
     background: #5d5d5d;
   }
 
-
-
   .mat-checkbox-checkmark-path {
     stroke: black !important;
   }
-
 
   .cdk-drag {
     // display: block;
     height: 100%;
   }
-
-
 
   /* filter */
   .tg-table--filter {
@@ -72,8 +62,6 @@
       color: white;
     }
   }
-
-
 
   /* Select */
   .mat-form-field-label {

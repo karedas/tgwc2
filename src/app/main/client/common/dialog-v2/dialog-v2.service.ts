@@ -8,11 +8,12 @@ import { CommandsListComponent } from '../../components/windows/commands-list/co
 import { BookComponent } from '../../components/windows/book/book.component';
 import { GenericTableComponent } from '../../components/windows/generic-table/generic-table.component';
 import { Overlay } from '@angular/cdk/overlay';
-import { InputService } from '../../components/input/input.service';
 import { WorkslistComponent } from '../../components/windows/workslist/workslist.component';
 import { LogComponent } from '../../components/windows/log/log.component';
 import { ShortcutsPanelComponent } from '../../components/windows/shortcuts-panel/shortcuts-panel.component';
 import { SelectableGenericComponent } from '../../components/windows/selectable-generic/selectable-generic.component';
+import { BaseWindowComponent } from '../../components/windows/base-window/base-window.component';
+import { ITGDialog } from '../../models/dialog.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,6 @@ export class DialogV2Service {
   constructor(
     rendererFactory: RendererFactory2,
     public dialog: MatDialog,
-    private inputService: InputService,
     public overlay: Overlay
   ) {
     this.render = rendererFactory.createRenderer(null, null);
@@ -109,10 +109,24 @@ export class DialogV2Service {
    * DIALOGS LIST
    */
 
+  openBaseWindow(data: ITGDialog, id?: string, disableClose = false): MatDialogRef<BaseWindowComponent, MatDialogConfig> {
+    const dialogID = id ? id : 'base';
+    let dialogRef = this.dialog.getDialogById(dialogID);
+    if (!dialogRef) {
+      const config = new MatDialogConfig();
+      config.id = dialogID;
+      config.disableClose = disableClose;
+      config.height = 'auto';
+      config.maxWidth = '500px';
+      config.data = data;
+      dialogRef = this.dialog.open(BaseWindowComponent, config);
+      return dialogRef;
+    }
+    return dialogRef;
+  }
+
   openSmartLogin(): MatDialogRef<LoginSmartComponent, MatDialogConfig> {
-
     this.dialog.closeAll();
-
     const dialogID = 'smartlogin';
 
     if (!this.dialog.getDialogById(dialogID)) {
@@ -129,7 +143,6 @@ export class DialogV2Service {
   }
 
   openEditor(data?: any): MatDialogRef<EditorComponent, MatDialogConfig> {
-
     const dialogID = 'editor';
     const config = new MatDialogConfig();
 
@@ -137,7 +150,6 @@ export class DialogV2Service {
     config.width = '500px';
     config.height = '450px';
     config.restoreFocus = true;
-    config.disableClose = false;
     config.disableClose = true;
     config.hasBackdrop = true;
 
@@ -165,9 +177,6 @@ export class DialogV2Service {
       };
 
       const dialogRef = this.dialog.open(CharacterSheetComponent, config);
-
-      dialogRef.afterClosed().subscribe(() => {
-      })
 
       return dialogRef;
 
@@ -211,7 +220,7 @@ export class DialogV2Service {
 
       config.id = dialogID;
       config.width = '700px';
-      config.height = '700px';
+      config.height = '600px';
       config.maxHeight = '100%';
       config.maxWidth = '95vw';
       config.restoreFocus = true;
@@ -341,7 +350,7 @@ export class DialogV2Service {
       const config = new MatDialogConfig();
 
       config.id = dialogID;
-      config.width = '288px';
+      config.width = '352px';
       config.height = 'auto';
       config.maxHeight = '100%';
       config.autoFocus = false;
@@ -364,7 +373,7 @@ export class DialogV2Service {
   openSelectableGeneric(data: any): MatDialogRef<SelectableGenericComponent, MatDialogConfig> {
     const dialogID = 'selectable-generic';
 
-    if(!this.dialog.getDialogById(dialogID)) {
+    if (!this.dialog.getDialogById(dialogID)) {
       const config = new MatDialogConfig();
 
       config.id = dialogID;

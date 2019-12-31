@@ -2,22 +2,27 @@
   <div class="tg-box" fxFlex="100" fxLayout="column">
     <div class="tg-output-main" #mainOutputArea>
       <as-split class="tg-output--splitter" [gutterSize]="9" [direction]="'horizontal'"
-        (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()" #splitArea>
+        (dragEnd)="onDragEnd($event, 'output')" (dragStart)="onDragStart()"  #splitArea>
         <!--  ################ Main Output Area ################ -->
-        <as-split-area [size]="tgConfig.output.extraArea.size[0]" [ngClass]="{ 'in-pause': pauseScroll }"
+        <as-split-area [size]="tgConfig.output.extraArea.size[0]" 
+          [ngClass]="{ 'in-pause': pauseScroll }"
           style="position:relative">
-          <div class="tg-error alert-inline mat-elevation-z10" *ngIf="pauseScroll">
-            Autoscroll disattivato
-            <button mat-button (click)="goToPausePlaceHolder()" style="text-decoration: underline; font-size: 1em;">
-              Vai al segnaposto
-            </button>
+          <div class="tg-error alert-pause mat-elevation-z10" *ngIf="pauseScroll">
+            <span class="tg-lt-white">&#9646; Autoscroll disattivato </span> -  
+            <span class="resume-btn" (click)="resumeScroll()"><u>Riprendi</u></span>
           </div>
 
           <tg-status></tg-status>
 
           <div style="height: 100%; overflow:hidden;" class="o-container">
-            <ng-scrollbar class="scrollbar-output" [ngClass]="{ disabled: draggingSplitArea }" #scrollBar
-              [disabled]="draggingSplitArea">
+            <ng-scrollbar 
+              class="scrollbar-output" 
+              #scrollBar
+              (reachedBottom)="onBottomReached()"
+              [ngClass]="{ disabled: draggingSplitArea }" 
+              [disabled]="draggingSplitArea"
+              [visibility]="'always'"
+              [appearance]="'standard'">
               <div class="tg-output--history">
                 <ng-container *ngFor="let data of output">
                   <ng-container [ngSwitch]="data.type">
@@ -34,12 +39,6 @@
                     </ng-container>
 
                     <tg-generic-page *ngSwitchCase="'genericPage'" [html]="data.content"></tg-generic-page>
-
-                    <ng-container *ngSwitchCase="'pause'">
-                      <div #pausePlaceholder class="placeholder-pause" fxLayout="row">
-                        SEGNAPOSTO
-                      </div>
-                    </ng-container>
                   </ng-container>
                 </ng-container>
               </div>
@@ -68,7 +67,7 @@
 
             <as-split-area [visible]="tgConfig.widgetEquipInv.visible" [size]="
                 tgConfig.widgetEquipInv.collapsed
-                  ? 30
+                  ? 32
                   : tgConfig.widgetEquipInv.size
               " [lockSize]="tgConfig.widgetEquipInv.collapsed" [order]="2">
               <tg-smart-equip-inventory [draggingSplitArea]="draggingSplitArea"></tg-smart-equip-inventory>

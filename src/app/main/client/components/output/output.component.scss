@@ -32,8 +32,10 @@
 
 .tg-output--history {
   width: 100%;
-  padding: 4px 16px 4px 4px;
   box-sizing: border-box;
+  padding-left:6px;
+  padding-top:6px;
+  padding-right: 24px;
 
   &::ng-deep.tg-line {
     .list-50 {
@@ -188,7 +190,6 @@ tg-text {
   .tg-persons {
     display: flex;
     // padding-bottom: .5em;
-    padding-right: .5em;
     padding-bottom: 6px;
     flex-direction: column;
   }
@@ -298,13 +299,11 @@ tg-text {
   }
 
   .tg-extraoutput-detailcontent {
-    padding-top:12px;
-    padding-right: 32px;
+    padding: 6px 28px 0 6px;
   }
 
   .tg-extraoutput--header {
     margin-left: 0;
-    margin-right: 0;
     padding-right: 0;
     border-bottom: 1px solid #433b3a;
     box-shadow: inset 0px -5px 11px 0px black;
@@ -336,20 +335,14 @@ tg-text {
 
     .tg-room--desc {
       color: $base-text-color;
-      padding: 3px 32px 0.2em 4px;
+      padding: 3px 34px 0.2em 6px;
       line-height: 1.4;
       border-top: 1px solid #433b3a;
-    }
-    
-
-    .tg-d-details {
-      background: rgba(0, 0, 0, 0.6);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .tg-objperson--descdetail {
       display: block;
-      padding: 0 28px 6px 4px;
+      padding: 0 28px 6px 6px;
       line-height: 1.4;
     }
 
@@ -359,7 +352,7 @@ tg-text {
       border: 1px solid #60482b;
       padding: 2px;
       float: left;
-      margin: 3px 6px 3px 3px;
+      margin: 6px 6px 3px 6px;
       width: 190px;
 
       &:after {
@@ -381,39 +374,19 @@ tg-text {
   }
 }
 
-.alert-inline {
+.alert-pause {
   white-space: nowrap;
   position: absolute;
-  top: 6px;
-  left: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   margin: 0;
-  transform: translateX(-50%);
-  padding: 0.2em 2em;
+  padding: 6px 12px;
   text-shadow: 0 0 8px red;
   color: white;
-  border-radius: 2px;
-}
-
-.placeholder-pause {
-  margin: 12px 0;
-  color: $tg-lt-red;
-  &:before {
-    content: '';
-    display: inline-block;
-    border-top: 1px dashed $tg-red;
-    height: 1px;
-    flex: 0 1 100%;
-    margin: auto 6px;
-  }
-  &:after {
-    content: '';
-    display: inline-block;
-    border-top: 1px dashed $tg-red;
-    height: 1px;
-    flex: 0 1 100%;
-    margin: auto 6px;
-  }
+  border-radius: 0;
+  border: none;
 }
 
 .in-pause::after {
@@ -427,6 +400,10 @@ tg-text {
   animation-iteration-count: infinite;
   animation-duration: 1s;
   pointer-events: none;
+}
+
+.resume-btn {
+  cursor: pointer;
 }
 
 

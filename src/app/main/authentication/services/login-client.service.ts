@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { SocketService } from 'src/app/core/services/socket.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { socketEvent } from 'src/app/core/models/socketEvent.enum';
-import { loginClientErrors } from '../../authentication/services/login-client-errors';
-import { GameService } from '../../client/services/game.service';
+import {Injectable} from '@angular/core';
+import {SocketService} from 'src/app/core/services/socket.service';
+import {Observable, BehaviorSubject} from 'rxjs';
+import {socketEvent} from 'src/app/core/models/socketEvent.enum';
+import {loginClientErrors} from '../../authentication/services/login-client-errors';
+import {GameService} from '../../client/services/game.service';
 
 @Injectable()
 export class LoginClientService {
-
   _redirectUrl: string;
 
   private isLoggedInSubject: BehaviorSubject<boolean>;
@@ -17,7 +16,8 @@ export class LoginClientService {
 
   constructor(
     private socketService: SocketService,
-    private gameService: GameService ) {
+    private gameService: GameService
+  ) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
     this.loginErrorMessage$ = new BehaviorSubject<string>('');
   }
@@ -54,12 +54,11 @@ export class LoginClientService {
 
   /** ---- Public Methods ---- */
 
-  login(data: { name: string, secret: string }): Observable<boolean> {
+  login(data: {name: string; secret: string}): Observable<boolean> {
     this.name = data.name;
     this.secret = data.secret;
     this.replayMessage = 'Tentativo di connessione in corso...';
     this.setHandleLoginData();
-
     return this.isLoggedInSubject.asObservable();
   }
 
@@ -69,36 +68,36 @@ export class LoginClientService {
   }
 
   reconnect() {
-    this.login({ name: this.name, secret: this.secret });
+    this.socketService.disconnect();
+    this.login({name: this.name, secret: this.secret});
   }
 
   private setHandleLoginData() {
     this.resetHandler();
-    this.socketService.on(socketEvent.LOGIN,
-      (data: any) => this.handleLoginData(data));
+    this.socketService.on(socketEvent.AUTH, (data: any) =>
+      this.handleLoginData(data)
+    );
     this.socketService.emit(socketEvent.LOGINREQUEST);
   }
 
   /** ---- Private Methods ---- */
   private oob() {
     const when = new Date().getTime();
-    this.socketService.emit(socketEvent.OOB, { itime: when.toString(16) });
+    this.socketService.emit(socketEvent.OOB, {itime: when.toString(16)});
   }
 
   private resetHandler() {
-    this.socketService.removeListener(socketEvent.LOGIN);
+    this.socketService.removeListener(socketEvent.AUTH);
     this.socketService.removeListener(socketEvent.DATA);
   }
 
   private handleLoginData(data: any) {
-
     if (data.indexOf('&!connmsg{') === 0) {
       const end = data.indexOf('}!');
       const rep = JSON.parse(data.slice(9, end + 1));
 
       if (rep.msg) {
         switch (rep.msg) {
-
           case socketEvent.READY:
             this.oob();
             break;
@@ -128,8 +127,11 @@ export class LoginClientService {
   }
 
   private onEnterLogin() {
-    const credentials = `login:${this.name},${this.secret}\n`;
-    this.socketService.emit(socketEvent.DATA, credentials);
+    const credentials = {
+      user: this.name,
+      pwd: this.secret
+    };
+    this.socketService.emit(socketEvent.LOGIN, credentials);
   }
 
   private onLoginOk(data: any) {
@@ -138,10 +140,9 @@ export class LoginClientService {
   }
 
   private completeHandShake(data) {
-    this.socketService.off(socketEvent.LOGIN);
+    this.socketService.off(socketEvent.AUTH);
     this.isLoggedInSubject.next(true);
     this.gameService.start(data);
-
   }
 
   private onShutDown() {

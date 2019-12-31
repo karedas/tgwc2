@@ -28,16 +28,13 @@ import { Error403Module } from './pages/errors/403/error-403.module';
 import { HelpComponent } from './pages/help/help.component';
 import { AudioService } from './client/components/audio/audio.service';
 import { DataEffects } from './client/store/effects/data.effects';
+import { WindowWrapperModule } from './client/components/windows/window-wrapper/window-wrapper.module';
 
 const routes: Routes = [
   {
     path: 'webclient',
     loadChildren: () => import('./client/client.module').then( m => m.ClientModule),
     canLoad: [LoginClientGuard]
-  },
-  {
-    path: 'novita',
-    loadChildren: () => import('./pages/global-news/global-news.module').then(m => m.GlobalNewsModule),
   },
 ];
 
@@ -57,6 +54,7 @@ const routes: Routes = [
     Auth2Module,
     DialogV2Module,
     NavBarModule,
+    WindowWrapperModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('TG', baseReducer, { metaReducers: [clearState]}),
     EffectsModule.forFeature([ClientEffects, DataEffects]),

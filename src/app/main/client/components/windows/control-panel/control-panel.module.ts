@@ -10,11 +10,16 @@ import { MatSliderModule } from '@angular/material/slider';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSelectModule, MatInputModule } from '@angular/material';
+import { WindowWrapperModule } from '../window-wrapper/window-wrapper.module';
+import { GeneralTabComponent } from './general-tab/general-tab.component';
+import { AudioTabComponent } from './audio-tab/audio-tab.component';
 
 @NgModule({
   declarations: [
     ControlPanelComponent,
-    ShortcutsManagerComponent
+    ShortcutsManagerComponent,
+    GeneralTabComponent,
+    AudioTabComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +31,8 @@ import { MatSelectModule, MatInputModule } from '@angular/material';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    DragDropModule
+    DragDropModule,
+    WindowWrapperModule
   ],
   entryComponents: [
     ControlPanelComponent

@@ -20,8 +20,8 @@ import { MapService } from './services/map.service';
 
 export class MapComponent implements OnDestroy, OnInit {
 
-  @ViewChild('map', {static: true}) map: ElementRef;
-  @ViewChild('snow', {static: true}) snow: ElementRef;
+  @ViewChild('map', { static: true }) map: ElementRef;
+  @ViewChild('snow', { static: true }) snow: ElementRef;
 
   public mapSize: any;
   public showSnow: boolean;
@@ -44,7 +44,6 @@ export class MapComponent implements OnDestroy, OnInit {
   ) {
 
     this.map$ = this.store.select(fromSelectors.getMap);
-
     this.mapSize = this.mapService.mapSizes;
     this._unsubscribeAll = new Subject();
   }
@@ -75,9 +74,9 @@ export class MapComponent implements OnDestroy, OnInit {
 
     setTimeout(() => {
       this.map$
-      .pipe(
-        takeUntil(this._unsubscribeAll))
-      .subscribe(
+        .pipe(
+          takeUntil(this._unsubscribeAll))
+        .subscribe(
           (map: IMap) => {
             if (map !== undefined) {
               this.mapService.updateMap(map);

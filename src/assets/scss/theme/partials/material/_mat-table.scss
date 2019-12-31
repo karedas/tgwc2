@@ -13,10 +13,33 @@
      border-top: 1px solid rgba(255, 255, 255, 0.12);
      border-right: 0;
      transition: background .2s ease-out;
+
+     &:first-of-type {
+       padding-left: 0;
+     }
+     &:last-of-type {
+       padding-right: 0;
+     }
    }
 
    .mat-sort-header-button {
      margin: 0 auto;
+   }
+
+   .mat-sort-header-container {
+     position: relative;
+     padding: 0 18px;
+   }
+
+   .mat-sort-header-arrow {
+     position: absolute;
+     right: 3px;
+     margin: 0;
+   }
+
+
+   tr.mat-header-row {
+     height: 28px;
    }
 
    td.mat-cell {
@@ -25,9 +48,11 @@
      border-left: 1px solid rgba(255, 255, 255, 0.1);
      border-top: 1px solid rgba(255, 255, 255, 0.1);
      text-align: center;
+     padding-left: 18px;
+     padding-right: 18px;
    }
 
-   tr:first-child td{
+   tr:first-child td {
      border-top: none;
    }
 
@@ -47,8 +72,9 @@
    }
  }
 
- tr.mat-header-row {
-   height: 28px;
+ .table-responsive {
+   overflow-x: auto;
+   display: block;
  }
 
  tr.detail-row {

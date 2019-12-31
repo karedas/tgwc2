@@ -29,7 +29,6 @@ export class MapService extends MapSnowService {
   private readonly xTotalTiles = 9;
   private readonly yTotalTiles = 9;
 
-  private tileGraphicsLoaded = 0;
   private tileImage: HTMLImageElement[] = [];
   private canvasWidth: number;
   private canvasHeight: number;
@@ -51,6 +50,30 @@ export class MapService extends MapSnowService {
       this.layerMap[y] = new Array(this.yTotalTiles);
     }
 
+    this.mapTileImg = new Image();
+    this.mapTileImg.src = images_path + 'tiles.png';
+    // this.mapTileImg
+
+    this.mapShadowImg[2] = new Image();
+    this.mapShadowImg[2].src = images_path + 'mapobj/shadow1.png';
+
+    this.mapShadowImg[1] = new Image();
+    this.mapShadowImg[1].src = images_path + 'mapobj/shadow2.png';
+
+    this.mapShadowImg[0] = new Image();
+    this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
+
+    this.mapShadowImg[0] = new Image();
+    this.mapShadowImg[0].src = images_path + 'mapobj/shadow3.png';
+
+    this.mapShadowTile = new Image();
+    this.mapShadowTile.src = images_path + 'mapobj/shadowtile.png';
+
+    for (let i = 0; i < tileGraphicsToLoad.length; i++) {
+      this.tileImage[i] = new Image();
+      this.tileImage[i].src = '/assets/images/' + tileGraphicsToLoad[i];
+    }
+
     this.mapObject = map;
 
     this.cx = (this.mapObject.nativeElement as HTMLCanvasElement).getContext('2d');
@@ -65,33 +88,19 @@ export class MapService extends MapSnowService {
     this.cx.clip();
     this.cx.fill();
 
-    
+
   }
 
   public updateMap(dataMap: any): void {
-    if (this.tileGraphicsLoaded !== tileGraphicsToLoad.length) {
-      for (var i = 0; i < tileGraphicsToLoad.length; i++) {
-        this.tileImage[i] = new Image();
-        this.tileImage[i].src = '/assets/images/' + tileGraphicsToLoad[i];
-        this.tileImage[i].onload = () => {
-          this.tileGraphicsLoaded++;
-          if (this.tileGraphicsLoaded === tileGraphicsToLoad.length) {
-            this.drawCanvasMap(dataMap);
-            this.addEnvironmentCanvas(dataMap);
-          }
-        };
-      }
-    } else {
-      this.drawCanvasMap(dataMap);
-      this.addEnvironmentCanvas(dataMap);
-    }
+    this.drawCanvasMap(dataMap);
+    this.addEnvironmentCanvas(dataMap);
   }
 
   public drawCanvasMap(dataMap: any): void {
-    let xoff: number = (this.xTotalTiles - dataMap.d) / 2;
-    let yoff: number = (this.yTotalTiles - dataMap.d) / 2;
-    let xlim = xoff + dataMap.d;
-    let ylim = yoff + dataMap.d;
+    const xoff: number = (this.xTotalTiles - dataMap.d) / 2;
+    const yoff: number = (this.yTotalTiles - dataMap.d) / 2;
+    const xlim = xoff + dataMap.d;
+    const ylim = yoff + dataMap.d;
     // Clear the Canvas
     this.cx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     /* Cycle on every layers */

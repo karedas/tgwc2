@@ -4,6 +4,7 @@ import { DialogV2Service } from '../common/dialog-v2/dialog-v2.service';
 import { AudioService } from '../components/audio/audio.service';
 import { LoginClientService } from '../../authentication/services/login-client.service';
 import { ConfigService } from 'src/app/services/config.service';
+import { OutputService } from '../components/output/services/output.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class DispenserService {
     private dialogV2Service: DialogV2Service,
     private loginClientService: LoginClientService,
     private audioService: AudioService,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {}
 
   do(what: string, ...args: any) {

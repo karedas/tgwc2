@@ -15,6 +15,7 @@ import { WelcomeRegistrationComponent } from './welcome-registration/welcome-reg
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NewCharacterComponent } from './new-character.component';
 import { MatInputModule } from '@angular/material';
+import { GetEthnicityByCodePipe } from 'src/app/pipes/get-ethnicity-by-code.pipe';
 
 
 export const routes: Routes = [
@@ -61,13 +62,14 @@ export const routes: Routes = [
     SummaryRegistrationComponent,
     WizardComponent,
     WelcomeRegistrationComponent,
+    GetEthnicityByCodePipe
 
   ],
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
     MatStepperModule,
-    MatInputModule
+    MatInputModule,
   ],
   exports: [
     RouterModule

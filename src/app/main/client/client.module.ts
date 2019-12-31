@@ -8,10 +8,10 @@ import { OutputModule } from './components/output/output.module';
 import { InputModule } from './components/input/input.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginClientGuard } from '../authentication/services/login-client.guard';
-import { OutputService } from './components/output/output.service';
 import { DispenserService } from './services/dispenser.service';
 import { StatusBarComponent } from './components/status-bar/status-bar.component';
 import { AutofocusInputbarDirective } from 'src/app/shared/directives/autofocus-inputbar.directive';
+import { OutputService } from './components/output/services/output.service';
 
 const clientRouting: Routes = [
   {

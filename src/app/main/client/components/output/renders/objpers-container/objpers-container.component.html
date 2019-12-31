@@ -24,7 +24,7 @@
       </div>
 
       <div class="tg-objperson--line" fxFlex="1 1 100%" *ngFor="let item of eqcont.list; let i=index">
-        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum" (mousedown)="onInteract(item, i)"></tg-icons>
+        <tg-icons [icon]="item.icon" [attr.cntnum]="item.cntnum" (mouseup)="onInteract(item, i)"></tg-icons>
 
         <tg-hstat [condprc]="item.condprc"></tg-hstat>
 
@@ -80,7 +80,7 @@
 
         <div class="tg-expandedlist" *ngIf="obj.sz && togglePanel[i]" fxLayout="column">
           <div class="tg-objperson--line" *ngFor="let sz of obj.mrn; let indexSz=index">
-            <tg-icons [icon]="obj.icon" (mousedown)="onInteract(obj, indexSz)" tooltip="Guarda" placement="left"
+            <tg-icons [icon]="obj.icon" (mouseup)="onInteract(obj, indexSz)" tooltip="Guarda" placement="left"
               show-delay="500"></tg-icons>
 
             <tg-hstat [condprc]="sz.condprc"></tg-hstat>

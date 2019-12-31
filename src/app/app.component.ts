@@ -1,9 +1,9 @@
-import { Component, Inject, Renderer2, OnDestroy } from "@angular/core";
-import { Router, NavigationEnd } from '@angular/router';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
-import { environment } from 'src/environments/environment';
+import { Component, Inject, OnDestroy, Renderer2 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 declare let ga: Function;
 
@@ -40,6 +40,7 @@ export class AppComponent implements OnDestroy {
     private render: Renderer2,
     @Inject(DOCUMENT) private document: any
   ) {
+
 
     if (!environment.production) {
       this.debug = false;

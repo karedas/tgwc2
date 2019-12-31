@@ -3,11 +3,11 @@
     <div
       class="tg-persons--line interact"
       [ngClass]="{ expandlist: person.sz, open: togglePanel[i] }"
-      (mousedown)="onExpand($event, person, i)"
+      (mouseup)="onExpand($event, person, i)"
     >
       <tg-icons
         [icon]="person.icon"
-        (mousedown)="onInteract(person)"
+        (mouseup)="onInteract(person)"
         tooltip="Guarda"
         placement="left"
         show-delay="500"
@@ -28,7 +28,7 @@
       <div
         class="tg-persons--line"
         *ngFor="let sz of person.mrn; let indexSz = index"
-        (mousedown)="onInteract(person, indexSz)"
+        (mouseup)="onInteract(person, indexSz)"
         tooltip="Guarda"
         placement="left"
         show-delay="500"

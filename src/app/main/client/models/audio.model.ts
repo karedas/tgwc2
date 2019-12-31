@@ -1,4 +1,4 @@
 export class TGAudio {
-  channel: string = 'music';
+  channel = 'music';
   track: string | null;
 }

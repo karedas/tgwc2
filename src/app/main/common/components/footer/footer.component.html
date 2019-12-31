@@ -1,5 +1,5 @@
 <!-- Copyright and Usefull Links -->
-<div class="tg-footer" fxLayout="column" fxFlex="0 0 100%" *ngIf="showFooter">
+<div class="tg-footer" fxLayout="column wrap" fxFlex="0 0 100%" *ngIf="showFooter">
   <div fxLayout="row">
     <div fxFlex="100">
       <div class="tg-serverstatus">
@@ -12,7 +12,10 @@
       </div>
     </div>
   </div>
-  <div fxLayout="row wrap">
+  <div fxLayout="row wrap" fxLayoutAlign="start">
+    <div class="new-version-link" fxFlex="1 1 100%" fxLayoutAlign="center center">
+        Ultime notizie: <a href="https://forum.thegatemud.it/viewtopic.php?f=51&t=2258&start=10" target="a_blank">Client patch 2.0.1.8 </a><i class="newversion-icon"></i>
+    </div>
     <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">
       <a href="http://www.thegatemud.it" target="_blank">Home</a>&nbsp;|&nbsp;
       <a href="https://it-it.facebook.com/TheGateMUD" target="_blank">Facebook</a>&nbsp;|&nbsp;
@@ -21,8 +24,13 @@
         class="discord-link" target="_blank">
         <span class="discord-icon"></span>Discord (TheGate)</a>
     </div>
-    <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">
-      <span class="tg-version-name">Webclient [Public] Version {{ gitVersion }}
+    <div
+    fxLayout="column"
+    fxFlex.lt-md="100%" 
+    fxFlex.gt-sm="33.33" 
+    fxLayoutAlign="center center">
+      <span class="tg-version-name">
+        <span >Webclient Version</span> {{ gitVersion.tag }} 
       </span>
     </div>
     <div fxFlex.lt-md="100%" fxFlex.gt-sm="33.33" fxLayoutAlign="center center">

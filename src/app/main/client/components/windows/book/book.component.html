@@ -1,71 +1,48 @@
-<div class="tg-book" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
-  <div class="b-ironlight-mini b-ironlight-thin tg-box">
-    <div class="tg-dialog-content tg-shadow-inset" fxLayout="column">
-
-      <div class="tg-dialog-title" cdkDragHandle mat-dialog-title>
-        {{data.desc}}
-        <button mat-icon-button [mat-dialog-close]="true" class="tg-dialog--close">
-          <mat-icon aria-label="Chiudi la finestra">close</mat-icon>
-        </button>
-      </div>
-
-      <mat-dialog-content class="no-padding"> 
-        <div class="b-paper tg-box">
-          <div class="tg-book-inset" fxLayout="column" fxFlexFill>
-
-            <ng-scrollbar class="scrollbar" *ngIf="data.pages.length !== 0; else noPage">
-              <ng-container *ngFor="let page of data.pages; let i=index">
-
-                <div class="page" [attr.pagenumber]="i" *ngIf="openedIndexPage == i">
-
-                  <div class="tg-book-title" *ngIf="data.title && i === 0">
-                    {{data.title | capitalizeFirst}}
-                  </div>
-
-                  <div *ngIf="data?.pages[i].title">
-                    <b>{{data.pages[i].title | capitalizeFirst}}</b>
-                  </div>
-
-                  <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml:true:false"></div>
-
-                  <i class="tg-book-language" *ngIf="page.language">
-                    (C'è scritto qualcosa in {{page.language}})
-                  </i>
-
-
-                </div>
-              </ng-container>
-            </ng-scrollbar>
-
-            <ng-template #noPage>
-              <!-- No Pages -->
-              <div class="tg-book-pagetext">Non ci sono Pagine</div>
-            </ng-template>
-
-            <div class="tg-book-pager" *ngIf="data?.pages.length > 1" fxLayout>
-              <div class="pager-btns">
-                <button (click)="previousPage()">Dietro</button>
-                <button (click)="nextPage()">Avanti</button>
+<tg-window-wrapper [border]="'thin'" [nopadding]="true">
+  <ng-container ngProjectAs="title">
+    {{ data.desc }}
+  </ng-container>
+  <ng-container ngProjectAs="content">
+    <div class="b-paper tg-box">
+      <div class="tg-book-inset" fxLayout="column" fxFlexFill>
+        <ng-scrollbar class="scrollbar" *ngIf="data.pages.length !== 0; else noPage">
+          <ng-container *ngFor="let page of data.pages; let i = index">
+            <div class="page" [attr.pagenumber]="i" *ngIf="openedIndexPage == i">
+              <div class="tg-book-title" *ngIf="data.title && i === 0">
+                {{ data.title | capitalizeFirst }}
               </div>
-              {{openedIndexPage + 1}} di {{data.pages.length }} pagine
-            </div>
 
+              <div *ngIf="(data?.pages)[i].title">
+                <b>{{ data.pages[i].title | capitalizeFirst }}</b>
+              </div>
+
+              <div class="tg-book-pagetext" [innerHtml]="page.text | dataToHtml: true:false"></div>
+
+              <i class="tg-book-language" *ngIf="page.language"> (C'è scritto qualcosa in {{ page.language }}) </i>
+            </div>
+          </ng-container>
+        </ng-scrollbar>
+
+        <ng-template #noPage>
+          <!-- No Pages -->
+          <div class="tg-book-pagetext">Non ci sono Pagine</div>
+        </ng-template>
+
+        <div class="tg-book-pager" *ngIf="data?.pages.length > 1" fxLayout>
+          <div class="pager-btns">
+            <button (click)="previousPage()">Dietro</button>
+            <button (click)="nextPage()">Avanti</button>
           </div>
-          <div class="tg-border-box">
-            <div class="tg-border tg-border-top"></div>
-            <div class="tg-border tg-border-left"></div>
-            <div class="tg-border tg-border-right"></div>
-            <div class="tg-border tg-border-bottom"></div>
-            <div class="tg-border tg-border-area"></div>
-          </div>
+          {{ openedIndexPage + 1 }} di {{ data.pages.length }} pagine
         </div>
-      </mat-dialog-content>
+      </div>
+      <div class="tg-border-box">
+        <div class="tg-border tg-border-top"></div>
+        <div class="tg-border tg-border-left"></div>
+        <div class="tg-border tg-border-right"></div>
+        <div class="tg-border tg-border-bottom"></div>
+        <div class="tg-border tg-border-area"></div>
+      </div>
     </div>
-    <div class="tg-border-box">
-      <div class="tg-border tg-border-top"></div>
-      <div class="tg-border tg-border-left"></div>
-      <div class="tg-border tg-border-right"></div>
-      <div class="tg-border tg-border-bottom"></div>
-    </div>
-  </div>
-</div>
+  </ng-container>
+</tg-window-wrapper>

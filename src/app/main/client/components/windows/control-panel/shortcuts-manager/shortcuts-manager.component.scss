@@ -19,33 +19,32 @@
 }
 
 .tg-control-panel--subtitle {
-  color: $tg-yellow;
   font-weight: normal;
 }
+
 
 .tg-shortcut-iconslist,
 .tg-shortcut-new {
   border: 1px solid rgba(255, 255, 255, 0.308);
   border-radius: 10px;
-  visibility: hidden;
   background: black;
   z-index: 100;
-  padding: 1em;
   box-sizing: border-box;
-
-  &.open {
-    visibility: visible;
-    opacity: 1;
-  }
 
   .mat-form-field {
     width: 100%;
   }
 }
 
+.tg-shortcut-iconslist-container {
+  padding: 12px;
+}
+
 /* Form New Shortcut */
 
 .tg-shortcut-new {
+  margin-top: 1em;
+  padding: 12px;
   button {
     font-size: 100%;
   }
@@ -69,9 +68,12 @@
 .tg-shortcut-iconslist {
   border: 0;
 	border-radius: 0;
-	padding: 0;
   background-color: rgba(0, 0, 0, 0.90);
-
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
 }
 
 .tg-shortcut-headerlist {
@@ -101,7 +103,15 @@
 	img {
 		max-width: 100%;
 		max-height: 100%;
-	}
+  }
+
+}
+
+.tg-brn-container-footer {
+  position: sticky;
+  bottom: 0;
+  background: black;
+  padding: 12px;
 }
 
 

@@ -84,7 +84,6 @@ export const reducer = createReducer(
   })
 );
 
-
 export function dataReducer(state = initialState, action: Action) {
   return reducer(state, action);
 }

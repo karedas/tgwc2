@@ -1,58 +1,65 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { ClientState } from 'src/app/main/client/store/state/client.state';
-import { Router } from '@angular/router';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UsernameValidation, PasswordValidation } from 'src/app/main/common/validators/character-validations';
-import { takeUntil } from 'rxjs/operators';
-import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
 import { MatDialogRef } from '@angular/material/dialog';
-import * as ClientActions from '../../../store/actions/client.action';
-import { LogService } from '../../../services/log.service';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { LoginClientService } from 'src/app/main/authentication/services/login-client.service';
+import { PasswordValidation, UsernameValidation } from 'src/app/main/common/validators/character-validations';
+import { NotAuthorizeError } from 'src/app/shared/errors/not-authorize.error';
+import { environment } from 'src/environments/environment';
+
 import { GameService } from '../../../services/game.service';
+import { LogService } from '../../../services/log.service';
+import { TGState } from '../../../store';
+import * as ClientActions from '../../../store/actions/client.action';
+import { getHero } from '../../../store/selectors';
+
 
 @Component({
   selector: 'tg-login-smart',
   templateUrl: './login-smart.component.html',
-  styleUrls: ['./login-smart.component.scss'],
+  styleUrls: ['./login-smart.component.scss']
 })
 export class LoginSmartComponent implements OnInit, OnDestroy {
+  readonly imagepath: string = environment.media_address;
+  readonly dialogID: string = 'loginwidget';
 
-  public readonly dialogID: string = 'loginwidget';
-  public inGameState$: Observable<boolean>;
-  public showForm = false;
-
+  loggedHero: any;
+  inGameState$: Observable<boolean>;
+  showForm = false;
   smartLoginForm: FormGroup;
   loginFormErrors: any;
-  loginFailed: boolean; 1;
+  loginFailed: boolean;
+  1;
   loginSubscription: Subscription;
-
   loginReplayMessage: string;
 
   private _unsubscribeAll: Subject<any>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<ClientState>,
+    private store: Store<TGState>,
     private router: Router,
     private dialogRef: MatDialogRef<LoginSmartComponent>,
     private logService: LogService,
     private gameService: GameService,
-    private loginClientService: LoginClientService) {
-
+    private loginClientService: LoginClientService
+  ) {
     this.loginFormErrors = {
       username: {},
       password: {}
     };
 
+    this.store.pipe(select(getHero)).subscribe(hero => {
+      this.loggedHero = {name: hero.name, image: hero.image};
+    });
+
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-
     this.smartLoginForm = this.formBuilder.group({
       username: ['', UsernameValidation],
       password: ['', PasswordValidation]
@@ -67,55 +74,40 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
       });
   }
 
-  // get username() {
-  //   return this.smartLoginForm.get('username');
-  // }
-
-  // get password() {
-  //   return this.smartLoginForm.get('password');
-  // }
-
   public login() {
-
     if (this.smartLoginForm.invalid) {
       return;
     }
 
     this.store.dispatch(ClientActions.resetAction());
-
     const values = this.smartLoginForm.value;
 
-    this.loginSubscription = this.loginClientService.login(values)
+    this.loginSubscription = this.loginClientService
+      .login(values)
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((loginSuccess: boolean) => {
-        if (loginSuccess === true) {
-          this.dialogRef.close();
-        } else {
-          this.loginFailed = true;
+      .subscribe(
+        (loginSuccess: boolean) => {
+          if (loginSuccess === true) {
+            this.dialogRef.close();
+          } else {
+            this.loginFailed = true;
+          }
+        },
+        error => {
+          if (error instanceof NotAuthorizeError) {
+            this.loginFailed = false;
+          }
         }
-      }, (error) => {
-        if (error instanceof NotAuthorizeError) {
-          this.loginFailed = false;
-        }
-      });
+      );
   }
-
 
   onReconnect() {
+    this.dialogRef.close();
     this.store.dispatch(ClientActions.resetAction());
     this.loginClientService.reconnect();
-    this.dialogRef.close();
+    // TODO mouve out
     this.gameService.processCommands('', false);
   }
-
-  // toggle(event?: Event) {
-
-  //   if (event) {
-  //     event.preventDefault();
-  //   }
-
-  //   this.showForm = !this.showForm;
-  // }
 
   navigateToHome() {
     this.dialogRef.close();
@@ -125,10 +117,8 @@ export class LoginSmartComponent implements OnInit, OnDestroy {
     });
   }
 
-
   ngOnDestroy() {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-
 }

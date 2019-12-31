@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IHero } from 'src/app/main/client/models/data/hero.model';
 import { DataState } from 'src/app/main/client/store/state/data.state';
@@ -12,9 +12,8 @@ import { map, takeUntil } from 'rxjs/operators';
   selector: 'tg-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InfoComponent implements AfterViewInit, OnDestroy {
+export class InfoComponent implements OnInit, OnDestroy {
 
   @ViewChild(NgScrollbar, {static: false}) textAreaScrollbar: NgScrollbar;
 
@@ -25,7 +24,7 @@ export class InfoComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private store: Store<DataState>,
-    private game: GameService
+    private game: GameService,
   ) {
 
     this.heroInfo$ = this.store.pipe(select(getHero));
@@ -33,13 +32,11 @@ export class InfoComponent implements AfterViewInit, OnDestroy {
 
    }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.heroInfo$.pipe(
-      takeUntil(this._unsubscribeAll),
-      map(( hero: IHero ) => {
-        this.parseDesc(hero.desc);
-        this.textAreaScrollbar.update();
-      })).subscribe();
+      takeUntil( this._unsubscribeAll )).subscribe(
+        (( hero: IHero ) => { this.parseDesc( hero.desc ); }
+      ));
   }
 
 

@@ -32,7 +32,6 @@ export class StatusBarComponent implements OnInit, OnDestroy  {
   constructor(
     private store: Store<DataState>,
     private gameService: GameService,
-    private inputService: InputService,
     private _configService: ConfigService
   ) {
     this.hero$ = this.store.pipe(select(getHero));

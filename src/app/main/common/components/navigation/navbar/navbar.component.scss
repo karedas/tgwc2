@@ -29,7 +29,7 @@ tg-navbar {
     }
 
     span {
-      font-size: 11px;
+      font-size: 1em;
       text-transform: uppercase;
       color: #e8e3d2;
 
@@ -37,7 +37,6 @@ tg-navbar {
         font-style: normal;
         color: $tg-brown;
       }
-
     }
   }
 
@@ -84,7 +83,7 @@ tg-navbar {
     }
   }
 
-  .mat-icon.mat-primary{
+  .mat-icon.mat-primary {
     color: rgb(109, 109, 109);
     vertical-align: middle;
   }
@@ -96,10 +95,11 @@ tg-navbar {
     font-size: 18px;
 
     mat-icon {
-      font-size: 18px!important;
+      font-size: 18px !important;
     }
-    
-    &:hover mat-icon, &.active mat-icon {
+
+    &:hover mat-icon,
+    &.active mat-icon {
       color: $tg-brown;
     }
   }
@@ -114,7 +114,6 @@ tg-navbar {
   .tg-mainnav-item a,
   .tg-mainnav-item .mat-button {
     text-decoration: none;
-    text-transform: uppercase;
     color: #bdb3a3;
     transition: text-shadow .2s linear;
     font-size: 1em;
@@ -210,7 +209,6 @@ tg-navbar {
 .tg-game-time {
   display: inline-block;
   font-size: 11px;
-  text-transform: uppercase;
   margin: auto auto auto 0;
 
   span {

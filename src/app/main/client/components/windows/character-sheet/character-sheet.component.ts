@@ -7,7 +7,6 @@ import { getHero } from 'src/app/main/client/store/selectors';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GameService } from '../../../services/game.service';
 import { TGState } from '../../../store';
-import * as clientAction   from '../../../store/actions/client.action';
 
 @Component({
   selector: 'tg-character-sheet',
@@ -57,6 +56,6 @@ export class CharacterSheetComponent  {
   }
 
   openUploadAvatar() {
-    this.store.dispatch(clientAction.uploadAvatarAction())
+    alert('Funzione non ancora implementata');
   }
 }
