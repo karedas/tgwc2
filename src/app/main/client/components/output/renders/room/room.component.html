@@ -14,7 +14,8 @@
           <ng-container *ngIf="html.desc.details; else regularDescBase">
             <div [innerHtml]="html.desc.details | dataToHtml: true | capitalizeFirst" class="tg-d-details"></div>
             <div
-              [innerHtml]="(html?.desc.base ? html.desc.base : lastDescription) | dataToHtml: true"
+              *ngIf="!html.dir"
+              [innerHtml]="(html.desc.base ? html.desc.base : lastDescription) | dataToHtml: true"
               class="tg-d-base"
             ></div>
           </ng-container>
