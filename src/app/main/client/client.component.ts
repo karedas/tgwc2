@@ -13,6 +13,7 @@ import { GameService } from './services/game.service';
   styles: [`
     :host {
       flex: 1;
+      height: 100%;
     }
   `],
 })
