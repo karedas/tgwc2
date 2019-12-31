@@ -110,10 +110,10 @@
               <div
                 class="tg-shortcut-icon"
                 fxFlex="1 1 32px"
-                *ngFor="let iconIndex of totalIcons; let iconIndex"
-                (click)="setNewIcon(iconIndex + 1)"
+                *ngFor="let iconIdx of totalIcons; let iconIndex"
+                (click)="setNewIcon(iconIdx + 1)"
               >
-                <img src="assets/images/shortcuts/shortcut_{{ iconIndex + 1 }}.png" alt="" />
+                <img src="assets/images/shortcuts/shortcut_{{ iconIdx + 1 }}.png" alt="" />
               </div>
               <mat-divider fxFlex="1 1 100%" style="margin: 12px 0;"></mat-divider>
     
