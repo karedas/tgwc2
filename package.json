@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve ",
+    "start": "ng serve",
     "build": "gulp generate-sprites && gulp generate-assetslist && ng build --prod",
     "buildev": "gulp generate-sprites && gulp generate-assetslist && ng build --configuration development",
     "test": "ng test",
