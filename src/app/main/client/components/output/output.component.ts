@@ -101,7 +101,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
       .isScrollable()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((pauseScroll: boolean) => (this.pauseScroll = pauseScroll));
-
+/*
     // Listen Mouse Scroll event to enable/disable pause.
     this.scrollBar.scrolled.pipe(delay(250)).subscribe(e => {
       const outputSize =
@@ -113,7 +113,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
         outputSize,
         this.tgConfig.widgetRoom.visible
       );
-    });
+    });*/
   }
 
   private addOutputSubscriptions() {
@@ -221,6 +221,7 @@ export class OutputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   resumeScroll() {
     this.outputService.scrollPanelToBottom(this.scrollBar, this.scrollerEnd);
+    this.pauseScroll = !this.pauseScroll;
   }
 
   onDragStart() {
